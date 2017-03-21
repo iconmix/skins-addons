@@ -1,3 +1,0 @@
-# jarvis
-
-METROPOLICON (KODI JARVIS)

@@ -1,3 +1,0 @@
-# IconMix
-
-IconMix ( KODI KRYPTON)
