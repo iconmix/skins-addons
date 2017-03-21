@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+	<include name="Viewtype_Poster_Large_FixedVertical">
+		<control type="group">
+			<visible>Control.IsVisible(554)</visible>
+			<!-- Browser -->
+			<control type="fixedlist" id="554">
+				<viewtype label="$LOCALIZE[31808]">bigwrap</viewtype> -->
+				<onup>550</onup>
+				<ondown>550</ondown>
+				<visible>!Skin.HasSetting(NoViewPosterLargeWrap)</visible>
+				<include>PosterLargeViewCommon_BrowserVertical</include>
+			</control>
+	
+			<include>ScrollBar_Horizontal</include>
+		</control>
+	</include>
+</includes>

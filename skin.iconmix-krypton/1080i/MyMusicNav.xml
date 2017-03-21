@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="502">
+	<onload>RunScript(script.iconmixtools,backend=True)</onload>-->
+	<views>55,509,905,58,559,511,510,513,514,552,551,906</views>
+	<defaultcontrol always="true">55</defaultcontrol>
+	<controls>
+		<control type="group">
+		<!-- <include>Global_Background</include> -->
+		<include>Global_Background_Fanart</include>
+		<control type="image">
+			<posx>0</posx>
+			<posy>815</posy>
+			<width>1920</width>
+			<height>265</height>
+			<colordiffuse>BackgroundColor</colordiffuse>
+			<texture>fondflaggris.png</texture>
+			<colordiffuse>BackgroundColor</colordiffuse>
+			<visible>!Skin.HasSetting(CacheFond)</visible>
+		</control>
+		<control type="group">
+			<animation type="Conditional" condition="Control.HasFocus(1999)" reversible="true">
+				<effect type="fade" start="100" end="0" time="500"  />
+			</animation>
+		<!--	<include>Object_InfoLines</include> -->
+		<include>Viewtype_Banner</include>			<!-- 511 -->
+		<include>Viewtype_BannerWall</include>			<!-- 514 -->
+		<include>Viewtype_BannerV</include>			<!-- 513 -->
+		<include>Viewtype_BannerPoster</include>		<!-- 510 -->
+		<include>Viewtype_List</include>
+		<include>Viewtype_LowList</include>
+		<include>Viewtype_Gallery_Square</include>
+		<include>Viewtype_Panel_Square</include>
+		<include>Viewtype_TallGenre</include>
+		<include>Viewtype_Poster_Large_Fixed</include>		<!-- 552 -->
+		<include>Viewtype_Poster_Large_Wrap</include>		<!-- 551 -->
+		<include>Viewtype_ListCurved</include> <!-- 906 -->
+		<!-- <include>Global_ContextFilter</include> -->
+		</control>
+
+		<!-- lecture ou affichage -->
+		<control type="grouplist" id="7003">
+			<posx>100</posx>
+			<posy>-100</posy>
+			<control type="button">
+				<visible>!Container.Content(genres)</visible>
+				<onfocus>PlayMedia($ESCINFO[Container(1994).ListItem.Path],true)</onfocus>
+			</control>
+			<control type="button">
+				<visible>Container.Content(genres)</visible>
+				<onfocus>ActivateWindow(Music,musicdb://artists/$INFO[Container(1999).ListItem.DBID])</onfocus>
+			</control>
+		</control>
+
+
+		<!--------------------------------------------------ARTISTES------------------------------------------------------ -->
+		
+		<include>focusboitiers</include>
+		
+		<control type="group">
+			<posy>15</posy>
+			<posx>-15</posx>
+		<control type="list" id="1999">
+			
+			<width>1790</width>
+			<onfocus condition="Skin.HasSetting(MusicAucun)">SetFocus(55)</onfocus>
+			<focusposition>0</focusposition>
+			<onclick>SetFocus(7003)</onclick>				
+			<movement>9</movement>
+			<description>Widget Lists</description>
+			<include condition="!Skin.HasSetting(MusicTexte)+!Skin.HasSetting(MusicAucun)">HorizVert</include>
+			<include condition="Skin.HasSetting(MusicTexte)|Skin.HasSetting(MusicAucun)">VertHoriz</include>
+			<content>musicdb://artists/$INFO[ListItem.DBID]</content>
+			
+			<include>VueElementsBoitiers</include>	
+		<!--   <visible>[!Skin.HasSetting(MusicTexte)+!Skin.HasSetting(MusicAucun)]|Skin.HasSetting(MusicBoitier)|Skin.HasSetting(MusicDiscArt)</visible>
+		-->
+			
+			<visible>Container.Content(artists)</visible>
+			<visible>!Container.OnNext</visible>
+			<visible>!Container.OnPrevious</visible>
+		</control>
+		</control>
+
+
+		<!--------------------------------------------------GENRES------------------------------------------------------ -->
+			<control type="group">
+				<posy>15</posy>
+				<posx>-15</posx>
+				<control type="list" id="1999">
+				
+					<width>1790</width>
+					<onfocus condition="Skin.HasSetting(MusicGenreAucun)">SetFocus(55)</onfocus>
+					<focusposition>0</focusposition>
+					<onclick>SetFocus(7003)</onclick>				
+					<movement>9</movement>
+					<description>Widget Lists</description>
+					<include condition="!Skin.HasSetting(MusicGenreTexte)+!Skin.HasSetting(MusicGenreAucun)">HorizVert</include>
+					<include condition="Skin.HasSetting(MusicGenreTexte)|Skin.HasSetting(MusicGenreAucun)">VertHoriz</include>
+					<content>musicdb://genres/$INFO[ListItem.DBID]</content>
+					
+					<include>VueElementsBoitiers</include>	
+					
+					<visible>Container.Content(genres)</visible>
+					<visible>!Container.OnNext</visible>
+					<visible>!Container.OnPrevious</visible>
+				</control>
+			</control>
+	
+
+		<!---------------------------------------------------------------------------------------------------------------- -->
+<control type="group">
+			<width>570</width>
+			<height>88</height>
+			<posy>-140</posy>
+			<posx>-180</posx>
+			<visible>[Container.Content(Genres)|Container.Content(artists)]+Control.HasFocus(1999)</visible>
+			<animation type="Visible">
+				<effect type="rotate" center="0,88" end="27" time="1" />
+				<effect type="slide" end="90,280" time="1" delay="50" />
+			</animation>
+			<control type="image">
+				<texture>frames/genrestag.png</texture>
+				<aspectratio>stretch</aspectratio>
+				
+			</control>
+			<control type="fadelabel">
+				<width>390</width>
+				<posx>55</posx>
+				<posy>3</posy>
+				<aligny>center</aligny>
+				<align>center</align>
+				<font>impact</font>
+				<textcolor>black</textcolor>
+				<label>$INFO[ListItem.Label]</label>
+				<scrollout>true</scrollout>
+				 <scroll>true</scroll>
+			</control>
+			<control type="fadelabel">
+				<width>390</width>
+				<posx>52</posx>
+				<aligny>center</aligny>
+				<align>center</align>
+				<font>impact</font>
+				<textcolor>white</textcolor>
+				<label>$INFO[ListItem.Label]</label>
+				 <scroll>true</scroll>
+				 <scrollout>true</scrollout>
+			</control>
+		</control>
+
+		<!-- liste des chansons dans pochette-->
+		<control type="group">
+			<posx>421</posx>
+			<posy>-5</posy>
+			<visible>[Control.HasFocus(1999)+!Container(1999).OnPrevious+!Container(1999).OnNext]</visible>
+			<animation effect="fade" start="0"  end="100" time="100" delay="3000" reversible="false">Visible</animation>
+		
+			
+			
+			<control type="image" >
+				<posx>35</posx>
+				<posy>315</posy>
+				<width>480</width>
+				<height>473</height>
+				<texture>frames/cdcasexupback.png</texture>
+				<aspectratio scalediffuse="true">stretch</aspectratio>				
+			</control>
+		
+
+			<control type="list" id="1994">
+				<visible>Container.Content(artists)</visible>
+				<posx>45</posx>
+				<posy>324</posy>
+				<width>460</width>
+				<height>450</height>
+				<autoscroll time="2300">true</autoscroll>
+
+				<itemgap>0</itemgap>
+				<orientation>vertical</orientation>
+				<itemlayout width="460" height="28">
+					<control type="label">
+						<font>impactsongs</font>
+						<align>left</align>
+						<label>[COLOR=grey]$INFO[ListItem.TrackNumber]-[/COLOR][I]$INFO[ListItem.Title][/I]</label>
+					</control>
+				</itemlayout>
+				<focusedlayout width="460" height="28">
+					<control type="label">
+						<align>left</align>
+						<font>impactsongs</font>
+						<label>[COLOR=grey]$INFO[ListItem.TrackNumber]-[/COLOR][I]$INFO[ListItem.Title][/I]</label>
+					</control>
+				</focusedlayout>
+				<content>musicdb://albums/$INFO[Container(1999).ListItem.DBID]</content>
+			</control>
+			<control type="list" id="1994">
+				<visible>Container.Content(genres)</visible>
+				<posx>45</posx>
+				<posy>324</posy>
+				<width>460</width>
+				<height>450</height>
+				<autoscroll time="2300">true</autoscroll>
+				<itemgap>0</itemgap>
+				<orientation>vertical</orientation>
+				<itemlayout width="460" height="28">
+					<control type="label">
+						<font>impactsongs</font>
+						<align>center</align>
+						<label>[COLOR=grey][I]$INFO[ListItem.Title][/I][/COLOR]</label>
+					</control>
+				</itemlayout>
+				<focusedlayout width="460" height="28">
+					<control type="label">
+						<align>center</align>
+						<font>impactsongs</font>
+						<label>[COLOR=grey][I]$INFO[ListItem.Title][/I][/COLOR]</label>
+					</control>
+				</focusedlayout>
+
+				<content>musicdb://artists/$INFO[Container(1999).ListItem.DBID]</content>
+			</control>
+
+		</control>
+
+		<control type="list" id="1997">
+			<include>Animation_HiddenByInfo</include>
+			<posx>400</posx>
+			<posy>923</posy>
+			<width>970</width>
+			<height>150</height>
+			<align>center</align>
+			<autoscroll time="2500">true</autoscroll>
+			<itemgap>0</itemgap>
+			<visible>Container.Content(albums)</visible>
+			<orientation>vertical</orientation>
+			<itemlayout width="970" height="25">
+				<control type="label">
+					<font>METF_DialogLargeBold</font>
+					<align>center</align>
+					<label>$INFO[ListItem.Title]</label>
+				</control>
+			</itemlayout>
+			<focusedlayout width="970" height="25">
+				<control type="label">
+					<align>center</align>
+					<font>METF_DialogLargeBold</font>
+					<label>$INFO[ListItem.Title]</label>
+				</control>
+			</focusedlayout>
+			<content>musicdb://albums/$INFO[ListItem.DBID]</content>
+		</control>
+
+
+		<control type="group">
+			<visible>[Container.Content(albums)|Container.Content(songs)]+[Skin.HasSetting(MusicBoitier)|Skin.HasSetting(MusicDiscArt)]</visible>
+			<control type="image">
+				<posy>665</posy>
+				<width>600</width>
+				<left>1300</left>
+				<height>190</height>
+				<aspectratio>keep</aspectratio>
+				<fadetime>400</fadetime>
+				<bordersize>10</bordersize>
+				<bordertexture border="8">frames/flou.png</bordertexture>
+				<texture background="true" >$VAR[MusicArt]</texture>
+				<align>center</align>
+			</control>
+
+		</control>
+		<include>Global_AddonInfo</include>
+		<include>Global_ScrollOffsetLabel</include>
+
+		<!-- Navigation Menu -->
+		<control type="group">
+			<posx>960</posx>
+			<posy>450</posy>
+			<control type="image">
+				<width>500</width>
+				<height>200</height>
+				<texture>frames/Menu_Glass2b.png</texture>
+			<colordiffuse>DialogBackgroundColor</colordiffuse>
+			</control>
+			<include>Animation_NavMenu</include>
+			<!--<include>NavMenuBackground</include>-->
+			<visible>ControlGroup(7002).HasFocus|ControlGroup(7000).HasFocus(2001)|ControlGroup(7000).HasFocus(2002)</visible>
+			<animation type="Visible" reversible="true">
+				<effect type="zoom" center="960,450" start="0" end="100" time="1000" tween="bounce" easy="out" />
+			</animation>
+			
+			<control type="grouplist" id="7002">
+				<posx>30</posx>
+				<posy>15</posy>
+				<width>440</width>
+				<height>190</height>
+				<itemgap>1</itemgap>
+				<onleft>7000</onleft>
+				<onback>7000</onback>
+				<onup>7002</onup>
+				<ondown>7002</ondown>
+				<orientation>vertical</orientation>
+				<control type="radiobutton" id="1000">
+					<visible>Container.Content(artists)</visible>
+					<include>BoutonCommun</include>
+					<label>$LOCALIZE[31903]</label>
+					<selected>Skin.HasSetting(MusicBoitier)</selected>
+					<onclick>Skin.SetBool(MusicBoitier)</onclick>
+					<onclick condition="Skin.HasSetting(MusicDiscArt)">Skin.Reset(MusicDiscArt)</onclick>
+					<onclick condition="Skin.HasSetting(MusicTexte)">Skin.Reset(MusicTexte)</onclick>
+					<onclick condition="Skin.HasSetting(MusicAucun)">Skin.Reset(MusicAucun)</onclick>
+					<onclick>ReloadSkin()</onclick>
+				</control>
+				<control type="radiobutton" id="1001">
+					<include>BoutonCommun</include>
+					<visible>Container.Content(artists)</visible>
+
+					<label>$LOCALIZE[31904]</label>
+					<selected>Skin.HasSetting(MusicDiscArt)</selected>
+					<onclick>Skin.SetBool(MusicDiscArt)</onclick>
+					<onclick condition="Skin.HasSetting(MusicBoitier)">Skin.Reset(MusicBoitier)</onclick>
+					<onclick condition="Skin.HasSetting(MusicTexte)">Skin.Reset(MusicTexte)</onclick>
+					<onclick condition="Skin.HasSetting(MusicAucun)">Skin.Reset(MusicAucun)</onclick>
+					<onclick>ReloadSkin()</onclick>
+				</control>
+				<control type="radiobutton" id="1002">
+					<visible>Container.Content(artists)</visible>
+					<include>BoutonCommun</include>
+					<label>$LOCALIZE[31905]</label>
+					<selected>Skin.HasSetting(MusicTexte)</selected>
+					<onclick>Skin.SetBool(MusicTexte)</onclick>
+					<onclick condition="Skin.HasSetting(MusicBoitier)">Skin.Reset(MusicBoitier)</onclick>
+					<onclick condition="Skin.HasSetting(MusicDiscArt)">Skin.Reset(MusicDiscArt)</onclick>
+					<onclick condition="Skin.HasSetting(MusicAucun)">Skin.Reset(MusicAucun)</onclick>
+					<onclick>ReloadSkin()</onclick>
+				</control>
+				<control type="radiobutton" id="1003">
+					<visible>Container.Content(artists)</visible>
+					<include>BoutonCommun</include>
+					<label>$LOCALIZE[31906]</label>
+					<selected>Skin.HasSetting(MusicAucun)|[!Skin.HasSetting(MusicTexte)+!Skin.HasSetting(MusicBoitier)+!Skin.HasSetting(MusicDiscArt)]</selected>
+					<onclick>Skin.SetBool(MusicAucun)</onclick>
+					<onclick condition="Skin.HasSetting(MusicBoitier)">Skin.Reset(MusicBoitier)</onclick>
+					<onclick condition="Skin.HasSetting(MusicDiscArt)">Skin.Reset(MusicDiscArt)</onclick>
+					<onclick condition="Skin.HasSetting(MusicTexte)">Skin.Reset(MusicTexte)</onclick>
+					<onclick>ReloadSkin()</onclick>
+				</control>
+
+
+				<control type="radiobutton" id="1004">
+					<visible>Container.Content(genres)</visible>
+					<include>BoutonCommun</include>
+					<label>$LOCALIZE[31903]</label>
+					<selected>Skin.HasSetting(MusicGenreBoitier)</selected>
+					<onclick>Skin.SetBool(MusicGenreBoitier)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreDiscArt)">Skin.Reset(MusicGenreDiscArt)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreTexte)">Skin.Reset(MusicGenreTexte)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreAucun)">Skin.Reset(MusicGenreAucun)</onclick>
+					<onclick>ReloadSkin()</onclick>
+				</control>
+				<control type="radiobutton" id="1005">
+					<visible>Container.Content(genres)</visible>
+					<include>BoutonCommun</include>
+					<label>$LOCALIZE[31904]</label>
+					<selected>Skin.HasSetting(MusicGenreDiscArt)</selected>
+					<onclick>Skin.SetBool(MusicGenreDiscArt)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreBoitier)">Skin.Reset(MusicGenreBoitier)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreTexte)">Skin.Reset(MusicGenreTexte)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreAucun)">Skin.Reset(MusicGenreAucun)</onclick>
+					<onclick>ReloadSkin()</onclick>
+				</control>
+				<control type="radiobutton" id="1006">
+					<visible>Container.Content(genres)</visible>
+					<include>BoutonCommun</include>
+					<label>$LOCALIZE[31905]</label>
+					<selected>Skin.HasSetting(MusicGenreTexte)</selected>
+					<onclick>Skin.SetBool(MusicGenreTexte)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreBoitier)">Skin.Reset(MusicGenreBoitier)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreDiscArt)">Skin.Reset(MusicGenreDiscArt)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreAucun)">Skin.Reset(MusicGenreAucun)</onclick>
+					<onclick>ReloadSkin()</onclick>
+				</control>
+				<control type="radiobutton" id="1007">
+					<visible>Container.Content(genres)</visible>
+					<include>BoutonCommun</include>
+					<label>$LOCALIZE[31906]</label>
+					<selected>Skin.HasSetting(MusicGenreAucun)|[!Skin.HasSetting(MusicGenreTexte)+!Skin.HasSetting(MusicGenreBoitier)+!Skin.HasSetting(MusicGenreDiscArt)]</selected>
+					<onclick>Skin.SetBool(MusicGenreAucun)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreBoitier)">Skin.Reset(MusicGenreBoitier)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreDiscArt)">Skin.Reset(MusicGenreDiscArt)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreTexte)">Skin.Reset(MusicGenreTexte)</onclick>
+					<onclick>ReloadSkin()</onclick>
+				</control>
+
+			</control>
+		</control>
+
+		<control type="group">
+			<posx>440</posx>
+			<posy>65</posy>
+			<control type="image">
+				<width>500</width>
+				<height>550</height>
+					<texture>frames/Menu_Glass2b.png</texture>
+			<colordiffuse>DialogBackgroundColor</colordiffuse>
+			</control>
+			<include>Animation_NavMenu</include>
+			<!--<include>NavMenuBackground</include>-->
+			<control type="grouplist" id="7000">
+				<posx>30</posx>
+				<posy>15</posy>
+				<width>440</width>
+				<height>520</height>
+				<itemgap>1</itemgap>
+				<onleft>55</onleft>
+				<onback>55</onback>
+				<onright condition="ControlGroup(7000).HasFocus(2001)|ControlGroup(7000).HasFocus(2002)">7002</onright>
+				<onright>55</onright>
+				<onup>7000</onup>
+				<ondown>7000</ondown>
+				<orientation>vertical</orientation>
+				<visible allowhiddenfocus="true">ControlGroup(7000).HasFocus|ControlGroup(7002).HasFocus</visible>
+				<animation type="Conditional" condition="ControlGroup(7002).HasFocus" reversible="false">
+				<effect type="fade" start="100" end="70" time="10" />
+			</animation>
+				<control type="button" id="2099">
+					<description>View</description>
+					<include>BoutonCommun</include>
+					<label>$LOCALIZE[629]:$INFO[Container.Viewmode]</label>
+					
+					<onclick>XBMC.RunScript(script.skin.helper.service,action=setview)</onclick>
+				</control>
+				<control type="button" id="3">
+					<description>Sort</description>
+					<include>BoutonCommun</include>
+					<label>-</label>
+					
+				</control>
+				<control type="togglebutton" id="4">
+					<description>Ascending/Descending</description>
+					<include>BoutonCommun</include>
+					<label>584</label>
+					<altlabel>585</altlabel>
+					
+				</control>
+				<control type="edit" id="19">
+					<description>Filter</description>
+					<include>BoutonCommun</include>
+					<label>587</label>
+					
+					<visible>[Container.CanFilterAdvanced + Skin.HasSetting(SimpleMediaFilter)] | Container.CanFilter</visible>
+				</control>
+				<control type="radiobutton" id="98">
+					<description>Advanced Filter</description>
+					<include>BoutonCommun</include>
+					<label>587</label>
+					
+					<selected>Container.Filtered</selected>
+					<onclick>right</onclick>
+					<onclick>Filter</onclick>
+					<visible>Container.CanFilterAdvanced + !Skin.HasSetting(SimpleMediaFilter)</visible>
+				</control>
+				<control type="button" id="8">
+					<description>Search</description>
+					<include>BoutonCommun</include>
+					<label>137</label>
+					
+				</control>
+				<control type="radiobutton" id="16">
+					<description>PartyMode</description>
+					<include>BoutonCommun</include>
+					<label>589</label>
+					
+				</control>
+				<control type="togglebutton" id="20">
+					<description>Update Library</description>
+					<include>BoutonCommun</include>
+					<label>653</label>
+					<altlabel>13353</altlabel>
+					
+					<usealttexture>library.isscanningmusic</usealttexture>
+					
+				</control>
+				<control type="togglebutton" id="200">
+					<description>Clean Library</description>
+					<include>BoutonCommun</include>
+					<label>700</label>
+					
+					<usealttexture>library.isscanningmusic</usealttexture>
+					
+					<onclick>CleanLibrary(music)</onclick>
+					<visible>!library.isscanningmusic</visible>
+				</control>
+				<include>Nav_NowPlaying</include>
+				<!-- -->
+
+				<control type="button" id="2001">
+					<include>BoutonCommun</include>
+					
+					<label>[I]$LOCALIZE[31908][/I]  >></label>
+					
+					<onclick>SetFocus(7002)</onclick>
+					<visible>Container.Content(artists)</visible>
+				</control>
+				<control type="button" id="2002">
+					<include>BoutonCommun</include>
+					
+					<label>[I]$LOCALIZE[31907][/I]  >></label>
+					
+					<onclick>SetFocus(7002)</onclick>
+					<visible>Container.Content(genres)</visible>
+				</control>
+			</control>
+		</control>
+		<!-- --
+		<control type="label">
+				<posx>10</posx>
+				<posy>10</posy>
+				<width>1600</width>
+				<label>1999:$INFO[Container(1999).NumItems][CR]TestEnd:$INFO[Window(10025).Property(DurationTools)]TestEnd:$INFO[Window(10025).Property(DurationToolsEnd)][CR]Title:$INFO[ListItem.Title][CR]Label:$INFO[ListItem.Label][CR]Label2:$INFO[ListItem.Label2][CR]DBType:$INFO[ListItem.DBType][CR]Content:$INFO[Container.Content][CR]Content:$INFO[Container.FolderPath][CR]Duration:$INFO[ListItem.Duration]</label>
+			</control>-->
+
+		<include>LabelFlagsCommon</include>
+		<include>AnimationVoletsHorizontaux</include>
+		</control>
+		<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
+	</controls>
+</window>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+	<include name="commontexture">
+		<top>60</top>	
+		<left>20</left>	
+		<width>260</width>
+		<height>393</height>
+	</include>
+
+	<include name="ViewType_Vitrine">
+		<!-- 3dreflect -->
+		<control type="image">
+				<top>500</top>
+				<left>-10</left>
+				<width>3000</width>
+				<height>300</height>
+				<texture background="true" >frames/ocean.png</texture>
+				<aspectratio scalediffuse="false">stretch</aspectratio>
+				<include>AnimationCacheNonSelect</include>
+		
+				<colordiffuse>90909090</colordiffuse>
+				<visible>Control.IsVisible(584)</visible>
+			<!---->
+				<animation effect="rotatey" center="0" start="0" end="-8" time="500" condition="true">Conditional</animation>
+		</control>
+		<control type="group">
+			<posy>120</posy>
+			
+			<visible>Control.IsVisible(584)</visible>
+			<!---->
+			<animation effect="rotatey" center="30" start="0" end="-8" time="500" condition="true">Conditional</animation>
+			
+			<control type="group">
+				<control type="wraplist" id="584">
+					<posx>30</posx>
+					<posy>0</posy>
+					<width>3000</width>
+					<height>665</height>
+					<include condition="!Skin.HasSetting(ViewLockdown)">OnUp7000</include>
+
+<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,up,Home)</onfocus>
+<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,down,Home)</onfocus>
+
+
+					<ondown>60</ondown>
+					<viewtype label="31825">wrap</viewtype>
+					<pagecontrol>60</pagecontrol>
+					<orientation>horizontal</orientation>
+					<scrolltime>250</scrolltime>
+					<focusposition>0</focusposition>
+					<visible>Container.Content(musicvideos) | Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons)</visible>
+					
+					<itemlayout height="700" width="330">
+						<control type="group">
+						<control type="group">
+						<!--	<animation effect="rotatey" center="150" start="0" end="-35" time="500" condition="true">Conditional</animation>-->
+							
+						
+							<control type="image">
+								<include>commontexture</include>
+								<texture background="true" fallback="DefaultThumb.png">$INFO[ListItem.Art(poster)]</texture>
+								<aspectratio scalediffuse="false">stretch</aspectratio>
+							</control>
+							<control type="image">
+								<top>23</top>		
+								<width>287</width>
+								<height>443</height>
+								<texture background="true">frames/bcover3.png</texture>
+								<aspectratio scalediffuse="false">stretch</aspectratio>
+							</control>
+							<control type="group">								
+								<visible>String.Contains(ListItem.DBTYPE,set) | Container.Content(movies) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
+								<control type="image">
+									<top>27</top>
+									<left>115</left>
+									<width>60</width>
+									<height>35</height>								
+									<texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture>
+									<aspectratio>keep</aspectratio>
+									<colordiffuse>MediaFlagDiffuse</colordiffuse>					
+								</control>	
+								<control type="group">
+									<top>40</top>
+									<left>195</left>
+									<include>OverlayProgress</include>
+								</control>								
+							</control>
+						</control>
+						
+						
+						<control type="group">
+						<!--<animation type="Conditional" condition="true">
+								<effect type="rotatex" center="450,10"  end="60" reversible="false"/>
+							</animation>
+						-->
+							<control type="image">
+								<top>468</top>
+								
+								<aligny>top</aligny>
+								<include>commontexture</include>
+								<texture background="true" fallback="DefaultThumb.png" flipy="true" diffuse="frames/reflect_poster2.png" >$INFO[ListItem.Art(poster)]</texture>
+								<aspectratio scalediffuse="true">stretch</aspectratio>
+								<colordiffuse>A0FFFFFF</colordiffuse>
+							</control>
+							<control type="image">
+								<top>463</top>		
+								<width>287</width>
+								<height>433</height>
+								<texture background="true" flipy="true" diffuse="frames/reflect_poster2.png">frames/bcover3.png</texture>
+								<aspectratio scalediffuse="false">stretch</aspectratio>
+								<colordiffuse>A0FFFFFF</colordiffuse>
+							</control>
+							
+						</control>
+						<include>AnimationCacheNonSelect</include>
+			</control>
+						</itemlayout>
+					<focusedlayout height="600" width="360">
+						<include>ActiveClearArt</include>
+						
+						<control type="group">
+							
+							<animation type="Focus">
+								<effect type="rotatey" center="30" start="-8" end="8" time="500" reversible="false"/>
+								<effect type="zoom" start="100" end="120" time="500"  reversible="false"/>
+								<effect type="slide"  end="0,50" time="500"  reversible="false"/>
+								
+							</animation>
+							<animation type="UnFocus">
+								<effect type="zoom" start="120" end="100" time="100"  reversible="false"/>
+								<effect type="rotatey" center="30" start="8" end="0" time="100" reversible="false"/>	
+								
+							</animation>
+				<control type="group"> <!-- sorti disque -->
+				
+					<visible>Control.hasFocus(584)</visible>
+					<animation type="Focus">
+						<effect type="slide" start="-20" end="220" time="800" delay="1500" reversible="false"/>	
+						<effect type="slide"  start="0" end="-240" time="800" delay="9500" reversible="false"/>
+					</animation>
+					<!--<animation effect="slide" end="-400" time="1" delay="0" reversible="false">UnFocus</animation> -->
+					<animation effect="slide" end="-400" time="1" delay="0" reversible="false" condition="Container.OnNext()|Container.OnPrevious()">Conditional</animation>
+					<control type="group">
+						<visible>!String.Contains(ListItem.DBTYPE,set)</visible>					
+						<control type="image">
+							<left>65</left>
+							<top>180</top>
+							<width>250</width>
+							<height>250</height>
+							<aspectratio>keep</aspectratio>						
+							<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Art(discart)]</texture>				
+							<!-- <animation effect="slide"   end="105" time="800" delay="500" >Focus</animation>	 -->
+							<animation effect="rotate"  center="auto" end="-360" time="1000" delay="1300" reversible="false">Focus</animation>					
+						</control>
+						<control type="image">
+							<left>65</left>
+							<top>180</top>
+							<width>250</width>
+							<height>250</height>	
+							<aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
+							<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
+							<animation effect="rotate"  center="auto" end="-360" time="1000" delay="1300" reversible="false">Focus</animation>			
+							<visible>String.IsEmpty(ListItem.Art(discart))</visible>
+						</control>						
+					</control>
+					
+					
+				
+				</control>
+				<control type="image">
+					<include>commontexture</include>
+					<texture background="true" fallback="DefaultThumb.png">$INFO[ListItem.Art(poster)]</texture>							
+					<aspectratio scalediffuse="false">stretch</aspectratio>
+				</control>
+				
+				<control type="image">
+					<top>23</top>		
+					<width>287</width>
+					<height>443</height>
+					<texture background="true">frames/bcover3.png</texture>
+					<aspectratio scalediffuse="false">stretch</aspectratio>
+				</control>
+				<control type="group">								
+						<visible>String.Contains(ListItem.DBTYPE,set) | Container.Content(movies) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
+						<control type="image">
+							<top>27</top>
+							<left>115</left>
+							<width>60</width>
+							<height>35</height>								
+							<texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture>
+							<aspectratio>keep</aspectratio>
+							<colordiffuse>MediaFlagDiffuse</colordiffuse>					
+						</control>
+						<control type="group">
+							<top>40</top>
+							<left>195</left>
+							<include>OverlayProgress</include>
+						</control>						
+				</control>
+			</control>
+						</focusedlayout>
+				</control>
+			</control>
+			<!--<include>PosterViewCommon_Details</include>-->
+			<include>ScrollBar_Horizontal</include>
+		</control>
+	</include>
+
+
+
+</includes>

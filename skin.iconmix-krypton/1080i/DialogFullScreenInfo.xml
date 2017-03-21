@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="142">
+	<controls>
+	<!-- affiche à la pression d'info -->
+		<!-- <include>OSD_Player_Banner</include> -->
+		<control type="group">
+			<include>OsdAnimation</include>
+		<include>OSD_Player_Details</include>
+		<control type="group">
+			<top>-150</top>
+			<include>OSD_Progress_Bar2</include>
+			
+			<include>OSD_Player_Time</include>
+			<control type="group">
+				<left>0</left>
+				<top>20</top>
+			<include>MediaInfo2</include>
+			</control>
+		</control>
+		</control>
+		<include>OsdHorloge</include>
+		<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
+	</controls>
+</window>
