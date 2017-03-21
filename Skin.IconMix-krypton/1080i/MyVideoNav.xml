@@ -2,7 +2,7 @@
 <window id="10025">
 	<onload>RunScript(script.tv.show.next.aired,backend=True)</onload>-->
 	<!---->
-	 <onload condition="String.IsEmpty(Window(Home).property(IconMixToolsbackend))">RunScript(script.IconMixTools,backend=True)</onload>--> 
+	 <onload condition="String.IsEmpty(Window(Home).property(iconmixtoolsbackend))">RunScript(script.iconmixtools,backend=True)</onload>--> 
 	<onload>SetProperty(SetTitle,,Home) </onload>
 	<onunload>SetProperty(SetTitle,,Home) </onunload>
 	<onload>SetProperty(MovieSagaTitle,,Home)</onload>
@@ -192,7 +192,7 @@
 			</control>
 			</focusedlayout>
 
-			<content sortby="year" sortorder="ascending">plugin://script.IconMixTools/?action=tvdiffusion</content>
+			<content sortby="year" sortorder="ascending">plugin://script.iconmixtools/?action=tvdiffusion</content>
 			<width>1920</width>
 
 
@@ -643,7 +643,7 @@
 						<label>[I]$LOCALIZE[31925][/I]</label>
 
 						<onclick>Close</onclick>
-						<onclick>RunScript(script.IconMixTools)</onclick>
+						<onclick>RunScript(script.iconmixtools)</onclick>
 						<include>VisibleIfMovieSet</include>
 					</control>
 					<control type="button" id="2005">
@@ -651,7 +651,7 @@
 						<include>BoutonCommun</include>
 						<label>[I]$LOCALIZE[31927][/I]</label>
 						<onclick>Close</onclick>
-						<onclick>RunScript(script.IconMixTools)</onclick>
+						<onclick>RunScript(script.iconmixtools)</onclick>
 						<visible>Container.Content(tvshows)+Skin.HasSetting(CheckSeries)+!Control.HasFocus(5051)+!Control.HasFocus(1998)</visible>
 					</control>
 				</control>
@@ -664,7 +664,7 @@
 				<posy>2</posy>
 				<posx>0</posx>
 
-				<visible>Container.Content(episodes)+!String.IsEmpty(ListItem.TVShowTitle)+!String.IsEmpty(Window(Home).Property(IconMixEpSa))</visible>
+				<visible>Container.Content(episodes)+!String.IsEmpty(ListItem.TVShowTitle)+!String.IsEmpty(Window(Home).Property(iconmixEpSa))</visible>
 
 				<control type="image">
 					<texture>frames/genrestag.png</texture>
@@ -685,7 +685,7 @@
 					<font>PlotFont36</font>
 					<textcolor>white</textcolor>
 					<shadowcolor>ff000000</shadowcolor>
-					<label>[B]$INFO[ListItem.TVShowTitle][/B] - $LOCALIZE[31761] $INFO[ListItem.Season] - [I][COLOR=yellow]($INFO[Container.NumItems]$INFO[Window(Home).Property(IconMixEpSa),/,] $LOCALIZE[20360])[/COLOR][/I]</label>
+					<label>[B]$INFO[ListItem.TVShowTitle][/B] - $LOCALIZE[31761] $INFO[ListItem.Season] - [I][COLOR=yellow]($INFO[Container.NumItems]$INFO[Window(Home).Property(iconmixEpSa),/,] $LOCALIZE[20360])[/COLOR][/I]</label>
 					<scroll>true</scroll>
 					<scrollout>true</scrollout>
 				</control>
@@ -913,7 +913,7 @@
 	<control type="label">
 	<posx>700</posx>
 
-	<label>Trailer:$INFO[ListItem.Trailer][CR][CR]TVshow:$INFO[ListItem.TVShowTitle][CR]Status:$INFO[Container(1999).ListItem.PlayCount][CR]dureefin:$INFO[Window(10000).Property(DurationToolsEnd)][CR]1=$INFO[Container(1999).ListItem.Label2][CR]NbItems1999=$INFO[Container(1999).NumItems][CR]Tag=$INFO[Container(1999).ListItem.Writer][CR]Saga duration=$INFO[Window(Home).Property(SagaDuration)][CR]Fanart dir=$INFO[Window(Home).Property(IconMixExtraFanart)][CR]Label:$INFO[Container(1999).ListItem.Label][CR]file1999:$INFO[Container(1999).ListItem.FileNameAndPath][CR]ID1999:$INFO[Container(1999).ListItem.DBID][CR]Label2:$INFO[Container(1999).ListItem.Set][CR]Language Kodi:$INFO[System.Language][CR]Type:$INFO[Container(1999).Content][CR]Nb items:$INFO[Container(1999).NumItems][CR]Type1999=$INFO[Container(1999).ListItem.DBTYPE][CR]SETID=$INFO[ListItem.SetId][CR]ID=$INFO[ListItem.DBID][CR]IMDB=$INFO[ListItem.IMDBNumber][CR]Type=$INFO[ListItem.DBTYPE][CR]saison=$INFO[ListItem.Season][CR]NbEpSa=$INFO[Window(Home).Property(IconMixEpSa)][CR][CR]Saga complète=$INFO[Window(Home).Property(IconMixSaga)][CR]Saga Poster=$INFO[Window(Home).Property(IconMixSagaPoster)][CR]Saga Fanart=$INFO[Window(Home).Property(IconMixSagaFanart)][CR]NbSeason=$INFO[ListItem.Property(TotalSeasons)][CR]Resolution=$INFO[ListItem.VideoResolution][CR]Content:$INFO[Container.Content][CR]$INFO[Container.FolderPath][CR]$INFO[Container.FolderName][CR]Duration=$INFO[Container(1999).ListItem.Duration][CR]$INFO[ListItem.FileNameAndPath][CR]$INFO[ListItem.Path]</label>
+	<label>Trailer:$INFO[ListItem.Trailer][CR][CR]TVshow:$INFO[ListItem.TVShowTitle][CR]Status:$INFO[Container(1999).ListItem.PlayCount][CR]dureefin:$INFO[Window(10000).Property(DurationToolsEnd)][CR]1=$INFO[Container(1999).ListItem.Label2][CR]NbItems1999=$INFO[Container(1999).NumItems][CR]Tag=$INFO[Container(1999).ListItem.Writer][CR]Saga duration=$INFO[Window(Home).Property(SagaDuration)][CR]Fanart dir=$INFO[Window(Home).Property(iconmixExtraFanart)][CR]Label:$INFO[Container(1999).ListItem.Label][CR]file1999:$INFO[Container(1999).ListItem.FileNameAndPath][CR]ID1999:$INFO[Container(1999).ListItem.DBID][CR]Label2:$INFO[Container(1999).ListItem.Set][CR]Language Kodi:$INFO[System.Language][CR]Type:$INFO[Container(1999).Content][CR]Nb items:$INFO[Container(1999).NumItems][CR]Type1999=$INFO[Container(1999).ListItem.DBTYPE][CR]SETID=$INFO[ListItem.SetId][CR]ID=$INFO[ListItem.DBID][CR]IMDB=$INFO[ListItem.IMDBNumber][CR]Type=$INFO[ListItem.DBTYPE][CR]saison=$INFO[ListItem.Season][CR]NbEpSa=$INFO[Window(Home).Property(iconmixEpSa)][CR][CR]Saga complète=$INFO[Window(Home).Property(iconmixSaga)][CR]Saga Poster=$INFO[Window(Home).Property(iconmixSagaPoster)][CR]Saga Fanart=$INFO[Window(Home).Property(iconmixSagaFanart)][CR]NbSeason=$INFO[ListItem.Property(TotalSeasons)][CR]Resolution=$INFO[ListItem.VideoResolution][CR]Content:$INFO[Container.Content][CR]$INFO[Container.FolderPath][CR]$INFO[Container.FolderName][CR]Duration=$INFO[Container(1999).ListItem.Duration][CR]$INFO[ListItem.FileNameAndPath][CR]$INFO[ListItem.Path]</label>
 	</control>
 
 

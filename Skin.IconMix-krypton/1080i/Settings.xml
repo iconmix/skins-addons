@@ -273,7 +273,7 @@
 			<posy>1050</posy>
 			<font>lcdsongs</font>
 			<textcolor>yellow</textcolor>
-			<label>Version : $INFO[System.AddonVersion(skin.IconMix-krypton)]</label>
+			<label>Version : $INFO[System.AddonVersion(skin.iconmix-krypton)]</label>
 		</control>
 		<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
 	</controls>

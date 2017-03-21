@@ -90,7 +90,7 @@
 				<effect type="slide"  start="0,0" end="450,0" time="1" delay="1" reversible="false"/>
 				<effect type="fade"  start="0" end="100" time="100" delay="1" reversible="false"/>
 			</animation>
-			<visible>[[[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[StringCompare(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.IconMixTools)+!String.StartsWith(ListItem.Label,..)</visible>
+			<visible>[[[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[StringCompare(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Label,..)</visible>
 			<control type="image">
 				<top>60</top>
 				<left>30</left>
@@ -127,10 +127,10 @@
 				<align>left</align>
 				<itemgap>1</itemgap>
 				<orientation>horizontal</orientation>
-				<visible>[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.IconMixTools)+!String.StartsWith(ListItem.Label,..)</visible>
+				<visible>[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Label,..)</visible>
 				<autoscroll delay="4000" repeat="5000" time="5000">!Control.HasFocus(1998)+!Control.HasFocus(5051)+!IsEmpty(Window(Home).Property(ActeurVideoReset))</autoscroll>-->
 				<pagecontrol>60</pagecontrol>
-				<content>plugin://script.IconMixTools/?action=getcast&casttype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]</content>
+				<content>plugin://script.iconmixtools/?action=getcast&casttype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]</content>
 				<resetonlabelchange>true</resetonlabelchange>
 				<itemlayout width="75">
 					<control type="image">
@@ -539,7 +539,7 @@
 					<preloaditems>6</preloaditems>
 					<onleft>5051</onleft>
 					<onright>5051</onright>
-					<onclick>RunScript(script.IconMixTools,trailer=True)</onclick>
+					<onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
 					<onback>SetProperty(ActeurVideoReset,1,Home)</onback>
 					<onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
 					<onback>Action(firstpage)</onback>
@@ -1715,8 +1715,8 @@
 	</control>
 </include>
 <variable name="ActeursContent">
-	<value condition="!IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.IconMixTools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]&local="oui"</value>
-	<value condition="IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.IconMixTools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]</value>
+	<value condition="!IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]&local="oui"</value>
+	<value condition="IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]</value>
 
 </variable>
 <variable name="doublonvar">
@@ -2627,7 +2627,7 @@
 	<effect type="fade"  start="0" end="100" time="100" delay="1" reversible="false"/>
 	</animation>
 
-	<visible>[[Container.Content(tvshows)+!Skin.HasSetting(HideTvCast)]|[StringCompare(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.IconMixTools)+!String.StartsWith(ListItem.Label,..)</visible>
+	<visible>[[Container.Content(tvshows)+!Skin.HasSetting(HideTvCast)]|[StringCompare(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Label,..)</visible>
 	<control type="image">
 	<left>30</left>
 	<width>326</width>
@@ -2647,11 +2647,11 @@
 	<align>left</align>
 	<itemgap>1</itemgap>
 	<orientation>horizontal</orientation>
-	<visible>[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.IconMixTools)+!String.StartsWith(ListItem.Label,..)</visible>
+	<visible>[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Label,..)</visible>
 
 	<autoscroll delay="4000" repeat="5000" time="5000">IntegerGreaterThan(Container(20001).NumItems,4)</autoscroll>
 	<pagecontrol>60</pagecontrol>
-	<content>plugin://script.IconMixTools/?action=getcast&casttype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]</content>
+	<content>plugin://script.iconmixtools/?action=getcast&casttype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]</content>
 	<resetonlabelchange>true</resetonlabelchange>
 	<itemlayout width="75">
 	<control type="image">

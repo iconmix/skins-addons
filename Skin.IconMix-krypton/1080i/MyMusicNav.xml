@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window id="502">
-	<onload>RunScript(script.IconMixTools,backend=True)</onload>-->
+	<onload>RunScript(script.iconmixtools,backend=True)</onload>-->
 	<views>55,509,905,58,559,511,510,513,514,552,551,906</views>
 	<defaultcontrol always="true">55</defaultcontrol>
 	<controls>

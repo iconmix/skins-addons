@@ -57,14 +57,14 @@
 					<orientation>vertical</orientation>
 
 
-					<onleft condition="!IsEmpty(Window(12003).Property(showgenre))+System.HasAddon(script.IconMixTools)+[Control.HasFocus(5005)|Control.HasFocus(5001)]">5001</onleft>
-					<onleft condition="!IsEmpty(Window(12003).Property(showsaga))+System.HasAddon(script.IconMixTools)+[Control.HasFocus(5006)|Control.HasFocus(5002)]">5002</onleft>
+					<onleft condition="!IsEmpty(Window(12003).Property(showgenre))+System.HasAddon(script.iconmixtools)+[Control.HasFocus(5005)|Control.HasFocus(5001)]">5001</onleft>
+					<onleft condition="!IsEmpty(Window(12003).Property(showsaga))+System.HasAddon(script.iconmixtools)+[Control.HasFocus(5006)|Control.HasFocus(5002)]">5002</onleft>
 					<onleft condition="!IsEmpty(ListItem.Director)">13</onleft>
 					<onleft condition="IsEmpty(ListItem.Director]+IntegerGreaterThan(Container(50).NumItems,0)+!Container(1998).IsUpdating">50</onleft>
 
 
-					<!--	<onleft condition="!System.HasAddon(script.IconMixTools)+![Control.HasFocus(5005)|Control.HasFocus(5001)]">50</onleft>
-					<onleft condition="System.HasAddon(script.IconMixTools)+![Control.HasFocus(5005)|Control.HasFocus(5001)]">501</onleft>
+					<!--	<onleft condition="!System.HasAddon(script.iconmixtools)+![Control.HasFocus(5005)|Control.HasFocus(5001)]">50</onleft>
+					<onleft condition="System.HasAddon(script.iconmixtools)+![Control.HasFocus(5005)|Control.HasFocus(5001)]">501</onleft>
 					-->
 
 					<!-- Play -->
@@ -133,7 +133,7 @@
 						<onfocus>SetProperty(showsaga,,12003)</onfocus>
 						<onclick>setfocus(5001)</onclick>
 						<label>-</label>
-						<visible>!IsEmpty(ListItem.Genre)+System.HasAddon(script.IconMixTools)+!String.StartsWith(ListItem.Filenameandpath,plugin:)+[Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(musicvideos)]</visible>
+						<visible>!IsEmpty(ListItem.Genre)+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Filenameandpath,plugin:)+[Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(musicvideos)]</visible>
 					</control>
 					<control type="button" id="5006">
 						<description>Extras</description>
@@ -145,7 +145,7 @@
 						<onfocus>SetProperty(showgenre,,12003)</onfocus>
 						<onclick>setfocus(5002)</onclick>
 						<label>-</label>
-						<visible>!IsEmpty(ListItem.SetId)+System.HasAddon(script.IconMixTools)+!String.StartsWith(ListItem.Filenameandpath,plugin:)+[Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(musicvideos)]</visible>
+						<visible>!IsEmpty(ListItem.SetId)+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Filenameandpath,plugin:)+[Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(musicvideos)]</visible>
 					</control>
 					<!-- Refresh -->
 					<control type="button" id="6">
@@ -369,7 +369,7 @@
 				<align>left</align>
 				<font>METF_InfoTextLarger</font>
 				<textcolor>MediaDetailsEpisodes</textcolor>
-				<label>Total dans la saison $INFO[ListItem.Season] : $INFO[Window(Home).Property(IconMixEpSa)]</label>
+				<label>Total dans la saison $INFO[ListItem.Season] : $INFO[Window(Home).Property(iconmixEpSa)]</label>
 				<visible>Container.Content(episodes)</visible>
 				</control>
 				-->
@@ -552,7 +552,7 @@
 		</control>
 		<!-------------------------------------GENRES ET SAGAS------------------------------------------------------------------------->
 		<control type="group" id="5000">
-			<visible>System.HasAddon(script.IconMixTools)+[[!IsEmpty(ListItem.Genre)+!IsEmpty(Window(12003).Property(showgenre))]|[!IsEmpty(ListItem.SetId)+!IsEmpty(Window(12003).Property(showsaga))]]</visible>
+			<visible>System.HasAddon(script.iconmixtools)+[[!IsEmpty(ListItem.Genre)+!IsEmpty(Window(12003).Property(showgenre))]|[!IsEmpty(ListItem.SetId)+!IsEmpty(Window(12003).Property(showsaga))]]</visible>
 			<animation effect="zoom" center="730,743" start="0" end="100" time="300" >Visible</animation>
 			<animation effect="zoom" center="730,743" start="100" end="0" time="300" >Hidden</animation>
 
@@ -751,7 +751,7 @@
 				</control>
 			</focusedlayout>
 
-			<content>plugin://script.IconMixTools/?action=getgenre&genre=$INFO[ListItem.Genre]&genretype=$INFO[ListItem.DBTYPE]&title=$INFO[ListItem.Title]</content>
+			<content>plugin://script.iconmixtools/?action=getgenre&genre=$INFO[ListItem.Genre]&genretype=$INFO[ListItem.DBTYPE]&title=$INFO[ListItem.Title]</content>
 
 
 		</control>
@@ -1079,9 +1079,9 @@
 		<animation type="Conditional" condition="Container(505).IsUpdating">
 		<effect type="fade"  start="100" end="10" time="500" delay="100" reversible="true"/>
 	</animation>
-		<!-- <visible>System.HasAddon(script.IconMixTools)+!SubString(ListItem.FilenameAndPath,plugin:)</visible>
+		<!-- <visible>System.HasAddon(script.iconmixtools)+!SubString(ListItem.FilenameAndPath,plugin:)</visible>
 
-		<content sortby="year" sortorder="descending">plugin://script.IconMixTools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is50]</content>
+		<content sortby="year" sortorder="descending">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is50]</content>
 		<include>Roles</include>
 	</control>
 </control>

@@ -316,7 +316,7 @@
 			<posy>1050</posy>
 			<font>lcdsongs</font>
 			<textcolor>yellow</textcolor>
-			<label>Version : $INFO[System.AddonVersion(skin.IconMix-jarvis)]</label>
+			<label>Version : $INFO[System.AddonVersion(skin.iconmix-jarvis)]</label>
 		</control>
 		<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
 	</controls>

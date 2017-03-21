@@ -77,25 +77,25 @@
 <variable name="contentdvinfo">
 	<!--  -->
 	
-	<value condition="System.HasAddon(script.IconMixTools)+Skin.HasSetting(SagaManquant)">plugin://script.IconMixTools/?action=getsaga&id=$INFO[ListItem.setid])</value> -->
+	<value condition="System.HasAddon(script.iconmixtools)+Skin.HasSetting(SagaManquant)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.setid])</value> -->
 	<value>videodb://movies/sets/$INFO[ListItem.setid]</value> 	 
 	<!--
-	<value condition="Skin.HasSetting(SagaManquant)+StringCompare(ListItem.DBTYPE,set)">plugin://script.IconMixTools/?action=getsaga&id=$INFO[ListItem.DBID]</value> 
+	<value condition="Skin.HasSetting(SagaManquant)+StringCompare(ListItem.DBTYPE,set)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.DBID]</value> 
 	<value></value>
 	-->
 </variable>
 <variable name="contentsaga">
 	<!--  -->
 	
-	<value condition="System.HasAddon(script.IconMixTools)+Skin.HasSetting(SagaManquant)">plugin://script.IconMixTools/?action=getsaga&id=$INFO[ListItem.DBID]</value> -->
+	<value condition="System.HasAddon(script.iconmixtools)+Skin.HasSetting(SagaManquant)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.DBID]</value> -->
 	<value>videodb://movies/sets/$INFO[ListItem.DBID]</value> 	 
 	<!--
-	<value condition="Skin.HasSetting(SagaManquant)+StringCompare(ListItem.DBTYPE,set)">plugin://script.IconMixTools/?action=getsaga&id=$INFO[ListItem.DBID]</value> 
+	<value condition="Skin.HasSetting(SagaManquant)+StringCompare(ListItem.DBTYPE,set)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.DBID]</value> 
 	<value></value>
 	-->
 </variable>
 <variable name="fanartdialogvideoinfo">
-	<value condition="IsEmpty(Window(Home).Property(IconMixExtraFanart))+!String.Contains(Container.FolderPath,plugin) + [ Container.Content(movies) |Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)">$INFO[ListItem.Path,,/extrafanart/]</value>
+	<value condition="IsEmpty(Window(Home).Property(iconmixExtraFanart))+!String.Contains(Container.FolderPath,plugin) + [ Container.Content(movies) |Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)">$INFO[ListItem.Path,,/extrafanart/]</value>
 	
 </variable>
 
@@ -104,8 +104,8 @@
 	<value condition="[SubString(Container(1999).Content,artist)|[SubString(Container(1999).Content,genres)+Window.IsActive(10502)]]+IntegerGreaterThan(Container(1999).NumItems,1)"> [I]( $INFO[Container(1999).NumItems] $LOCALIZE[133] )[/I]</value>
 	<value condition="[SubString(Container(1999).Content,artist)|[SubString(Container(1999).Content,genres)+Window.IsActive(10502)]]+!IntegerGreaterThan(Container(1999).NumItems,1)"> [I]( $INFO[Container(1999).NumItems] $LOCALIZE[557] )[/I]</value>
 	
-	<value condition="[SubString(Container(1999).Content,movie)|[SubString(Container(1999).Content,genres)+Window.IsActive(10025)]]+IntegerGreaterThan(Container(1999).NumItems,1)"> [I]( $INFO[Window(Home).Property(IconMixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[342] )[/I]</value>
-	<value condition="[SubString(Container(1999).Content,movie)|[SubString(Container(1999).Content,genres)+Window.IsActive(10025)]]+!IntegerGreaterThan(Container(1999).NumItems,1)"> [I]( $INFO[Window(Home).Property(IconMixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[20338] )[/I]</value>
+	<value condition="[SubString(Container(1999).Content,movie)|[SubString(Container(1999).Content,genres)+Window.IsActive(10025)]]+IntegerGreaterThan(Container(1999).NumItems,1)"> [I]( $INFO[Window(Home).Property(iconmixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[342] )[/I]</value>
+	<value condition="[SubString(Container(1999).Content,movie)|[SubString(Container(1999).Content,genres)+Window.IsActive(10025)]]+!IntegerGreaterThan(Container(1999).NumItems,1)"> [I]( $INFO[Window(Home).Property(iconmixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[20338] )[/I]</value>
 	<value></value>
 
 </variable>	
@@ -220,9 +220,9 @@
 		<value condition="[[StringCompare(Container.Content,genres) +Window.IsActive(10502)]]+IntegerGreaterThan(Container(1999).NumItems,1)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Container(1999).NumItems] $LOCALIZE[133] )[/I][/COLOR]</value>
 	  <value condition="[[StringCompare(Container.Content,genres) +Window.IsActive(10502)]]+!IntegerGreaterThan(Container(1999).NumItems,1)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Container(1999).NumItems] $LOCALIZE[557] )[/I][/COLOR]</value>
 	
-	<value condition="StringCompare(ListItem.DBTYPE,set) +IntegerGreaterThan(Container(1999).NumItems,0)+StringCompare(Window(Home).Property(IconMixSaga),complet)">$INFO[ListItem.Label] [COLOR=yellow][I]( $LOCALIZE[31898] )[/I][/COLOR]</value>
-	<value condition="StringCompare(ListItem.DBTYPE,set) +IntegerGreaterThan(Container(1999).NumItems,1)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Window(Home).Property(IconMixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[342] )[/I][/COLOR]</value>
-	<value condition="StringCompare(ListItem.DBTYPE,set) +IntegerGreaterThan(Container(1999).NumItems,0)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Window(Home).Property(IconMixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[20338] )[/I][/COLOR]</value>
+	<value condition="StringCompare(ListItem.DBTYPE,set) +IntegerGreaterThan(Container(1999).NumItems,0)+StringCompare(Window(Home).Property(iconmixSaga),complet)">$INFO[ListItem.Label] [COLOR=yellow][I]( $LOCALIZE[31898] )[/I][/COLOR]</value>
+	<value condition="StringCompare(ListItem.DBTYPE,set) +IntegerGreaterThan(Container(1999).NumItems,1)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Window(Home).Property(iconmixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[342] )[/I][/COLOR]</value>
+	<value condition="StringCompare(ListItem.DBTYPE,set) +IntegerGreaterThan(Container(1999).NumItems,0)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Window(Home).Property(iconmixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[20338] )[/I][/COLOR]</value>
 	
   <value condition="[StringCompare(ListItem.DBTYPE,genre) +Window.IsActive(10025)]+IntegerGreaterThan(Container(1999).NumItems,1)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Container(1999).NumItems] $LOCALIZE[342] )[/I][/COLOR]</value>
 	<value condition="[StringCompare(ListItem.DBTYPE,genre) +Window.IsActive(10025)]+!IntegerGreaterThan(Container(1999).NumItems,1)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Container(1999).NumItems] $LOCALIZE[20338] )[/I][/COLOR]</value>
@@ -257,9 +257,9 @@
 	</variable>	
 	<variable name="GlobalFanart">		
 		<value condition="Window.IsActive(pictures) + IsEmpty(ListItem.Art(fanart)) + [StringCompare(ListItem.FileExtension,png) | StringCompare(ListItem.FileExtension,jpg) | StringCompare(ListItem.FileExtension,jpeg) | StringCompare(ListItem.FileExtension,bmp) | StringCompare(ListItem.FileExtension,gif) | StringCompare(ListItem.FileExtension,ico) | StringCompare(ListItem.FileExtension,tif) | StringCompare(ListItem.FileExtension,tiff) | StringCompare(ListItem.FileExtension,tga) | StringCompare(ListItem.FileExtension,pcx) | StringCompare(ListItem.FileExtension,cbz) | StringCompare(ListItem.FileExtension,zip) | StringCompare(ListItem.FileExtension,cbr) | StringCompare(ListItem.FileExtension,rar) | StringCompare(ListItem.FileExtension,m3u)]">$INFO[listitem.filenameandpath]</value>
-		<value condition="!Control.IsVisible(1999)+Skin.HasSetting(Enable_ExtraFanart)+!IsEmpty(Window(Home).Property(IconMixExtraFanart))+!SubString(Window(Home).Property(IconMixExtraFanart),plugin)+!SubString(Container.FolderPath,plugin)">$INFO[Window(Home).Property(IconMixExtraFanart)]</value>	
-		<value condition="Control.IsVisible(1999)+!IsEmpty(Window(Home).Property(IconMixExtraFanart))">$INFO[Container(1999).ListItem.Path,,extrafanart/]</value>
-		<value condition="!IsEmpty(Window(Home).Property(IconMixExtraFanart))+Skin.HasSetting(Enable_ExtraFanart)">$INFO[Window(Home).Property(IconMixExtraFanart)]</value>
+		<value condition="!Control.IsVisible(1999)+Skin.HasSetting(Enable_ExtraFanart)+!IsEmpty(Window(Home).Property(iconmixExtraFanart))+!SubString(Window(Home).Property(iconmixExtraFanart),plugin)+!SubString(Container.FolderPath,plugin)">$INFO[Window(Home).Property(iconmixExtraFanart)]</value>	
+		<value condition="Control.IsVisible(1999)+!IsEmpty(Window(Home).Property(iconmixExtraFanart))">$INFO[Container(1999).ListItem.Path,,extrafanart/]</value>
+		<value condition="!IsEmpty(Window(Home).Property(iconmixExtraFanart))+Skin.HasSetting(Enable_ExtraFanart)">$INFO[Window(Home).Property(iconmixExtraFanart)]</value>
 		<value condition="Control.IsVisible(1999)+!IsEmpty(Container(1999).ListItem.Art(fanart))">$INFO[Container(1999).ListItem.Art(fanart)]</value>	
 		<value condition="!IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
 		<value condition="Window.IsVisible(502)">special://skin/extras/backgrounds/music.jpg</value>
