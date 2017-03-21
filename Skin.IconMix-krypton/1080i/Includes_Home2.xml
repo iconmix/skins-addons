@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+	<!-- Home2 Icons -->
+	
+	<include name="HomeStatsPosition2">
+		<posx>26</posx>
+		<posy>560</posy>
+		<width>220</width>
+		<height>416</height>
+	</include>
+	<include name="HomeStatsDetails2">
+		<width>120</width>
+		<height>24</height>
+		<align>left</align>
+		<aligny>center</aligny>
+		<font>METF_HomeStatsText</font>
+		<textcolor>HomeStatsCategory</textcolor>
+	</include>
+	<include name="HomeStatsDetailsNumber2">
+		<width>60</width>
+		<height>24</height>
+		<align>right</align>
+		<aligny>center</aligny>
+		<font>METF_HomeStatsText</font>
+		<textcolor>HomeStatsNumber</textcolor>
+	</include>
+	
+	<include name="OsdMusicHome">
+			<control type="group" id="9044">
+			<visible>Player.HasAudio + System.IdleTime(8)</visible>
+			<animation effect="fade" end="100" time="840">Visible</animation>
+			<control type="group">
+				<animation effect="zoom" center="860,920" start="95" end="105" time="1500" pulse="true" condition="Player.Paused">Conditional</animation>
+			<control type="fadelabel" >
+				<posy>920</posy>
+				<width>1920</width>
+				<height>225</height>
+				<align>center</align>
+				<label>$VAR[HomePlayerTime]</label>
+				<font>chicken75</font>
+				<textcolor>white</textcolor>	
+				<visible>!Player.Paused</visible>							
+			</control>
+			<control type="fadelabel" >
+				<posy>920</posy>
+				<width>1920</width>
+				<height>225</height>
+				<align>center</align>
+				<label>PAUSE</label>
+				<font>chicken75</font>
+				<textcolor>white</textcolor>
+				<visible>Player.Paused</visible>			
+				
+			</control>
+			</control>
+			<control type="image">
+				<posy>870</posy>
+				<width>600</width>
+				<left>20</left>
+				<height>190</height>
+				<aspectratio>keep</aspectratio>
+				<fadetime>400</fadetime>
+				<texture background="true" diffuse="shine.png">$INFO[Window(Home).Property(SkinHelper.Player.Music.Banner)]</texture>
+				<align>center</align>
+			</control>
+			<control type="image">
+				<posy>870</posy>
+				<width>600</width>
+				<left>20</left>
+				<height>190</height>
+				<aspectratio>keep</aspectratio>
+				<fadetime>400</fadetime>
+				<texture background="true" diffuse="shine.png">$INFO[Window(Home).Property(SkinHelper.Player.Music.Thumb)]</texture>
+				<align>center</align>
+				<visible>String.IsEmpty(Window(Home).Property(SkinHelper.Player.Music.Banner))</visible>
+			</control>
+			<control type="fadelabel">
+				<left>1300</left>
+				<posy>945</posy>
+				<align>left</align>
+				<width>600</width>
+				<scrollout>true</scrollout>
+				<pauseatend>1800</pauseatend>
+				<scrollspeed>40</scrollspeed>
+				<scroll>true</scroll>
+				<font>chicken</font>
+				<label>[COLOR=grey][B]$INFO[MusicPlayer.AlbumArtist,,-][/B][/COLOR][I]$INFO[MusicPlayer.Title][/I]</label>
+				<textcolor>yellow</textcolor>
+			</control>
+		
+		</control>
+		
+	</include>
+
+	<include name="Home2_Texte">
+		<include>HomeDeck</include>
+		<control type="group">
+			<animation effect="slide" start="0" end="0,-200" center="auto" time="500" condition="Control.HasFocus(9001)">Conditional</animation>
+		<animation effect="fade" start="100" end="50"  time="500" condition="Control.HasFocus(9001)">Conditional</animation>
+			<control type="image">
+				<posx>0</posx>
+				<posy>900</posy>
+				<width>1920</width>
+				<height>140</height>
+				<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+				<colordiffuse>F0101010</colordiffuse>
+				<visible>!system.getbool(lookandfeel.enablerssfeeds)</visible>
+			</control>
+			<control type="image">
+				<posx>0</posx>
+				<posy>900</posy>
+				<width>1920</width>
+				<height>190</height>
+				<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+				<colordiffuse>F0101010</colordiffuse>
+				<visible>system.getbool(lookandfeel.enablerssfeeds)</visible>
+			</control>
+			<include>OsdMusicHome</include>
+		<control type="label" id="9003">
+			<posy>-200</posy>
+			<label>$VAR[Wd1Visible]</label>
+		</control>
+			<!-- Main Menu -->
+			<control type="wraplist" id="9000">
+				<animation effect="slide" start="0" end="0,600" center="auto" time="500" condition="Player.HasAudio + System.IdleTime(8)">Conditional</animation>
+				<posx>250</posx>
+				<posy>900</posy>
+				<height>250</height>
+				<width>1500</width>
+				
+				<onup condition="!String.IsEmpty(Control.GetLabel(9003))">9022</onup>	
+			<onup condition="String.IsEmpty(Control.GetLabel(9003))">9023</onup>	
+				<ondown>9001</ondown>
+				<onleft>9000</onleft>
+				<onright>9000</onright>
+				
+	
+				<viewtype>list</viewtype>
+				<orientation>horizontal</orientation>
+				<focusposition>1</focusposition>
+				<defaultcontrol>1</defaultcontrol>
+				<movement>6</movement>
+				<scrolltime>200</scrolltime>
+				<preloaditems>2</preloaditems>
+				<include>Animation_OpenCloseFade</include>
+				<include>Animation_FadedByMenu</include>
+				<itemlayout width="400" height="120">
+				
+					<control type="label">
+						<width>300</width>
+						<posy>25</posy>
+						<height>40</height>
+						<align>center</align>
+						<label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+						<font>lcdn</font>
+						<textcolor>SubmenuText</textcolor>
+					</control>				
+				</itemlayout>
+				<focusedlayout width="400" height="120">	
+					<control type="label">
+						<width>300</width>
+						<posy>25</posy>
+						<height>40</height>
+						<align>center</align>
+						<label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+						<animation effect="zoom" start="80" end="130" center="auto" time="300" condition="true">Conditional</animation>
+						<font>lcdn</font>
+						<textcolor>yellow</textcolor>
+					</control>
+					<control type="image">
+						<posx>140</posx>
+						<posy>10</posy>
+						<width>20</width>
+						<height>20</height>
+						<texture>ArrowUp.png</texture>
+						<colordiffuse>HelpArrowDiffuse</colordiffuse>
+						<visible>!Control.HasFocus(9001) + ![Control.HasFocus(8000) | Control.HasFocus(80001) | Control.HasFocus(8002) | Control.HasFocus(8003)| Control.HasFocus(8008)] + [!String.IsEmpty(Container(9000).ListItem.Property(widget))|!String.IsEmpty(Container(9000).ListItem.Property(widget.2))]</visible>
+						
+	
+					</control>
+					<control type="image">
+						<posx>140</posx>
+						<posy>105</posy>
+						<width>20</width>
+						<height>20</height>
+						<texture>ArrowDown.png</texture>
+						<colordiffuse>HelpArrowDiffuse</colordiffuse>
+						<visible>!Control.HasFocus(9001) + ![Control.HasFocus(8000) | Control.HasFocus(80001) | Control.HasFocus(8002) | Control.HasFocus(8003)] + String.Contains(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
+					</control>
+				</focusedlayout>
+				<content>
+					<include>skinshortcuts-mainmenu</include>
+				</content>
+			</control>
+		</control>
+			<!-- Frames for submenus -->
+		<control type="group">
+			<posy>920</posy>
+			<posx>380</posx>		
+				
+			<control type="group">
+				<include>Animation_Submenu</include>
+				<visible>Control.HasFocus(9001)</visible>				
+				<control type="image">
+					<posx>-45</posx>
+					<posy>10</posy>
+					<width>1123</width>
+					<height>100</height>
+					<texture>frames/ClassicFrame_Background.png</texture>
+					<colordiffuse>C0606060</colordiffuse>
+	
+				</control>
+				<control type="image">
+					<posx>-70</posx>
+					<width>1170</width>
+					<height>120</height>
+					<texture>frames/banner_frame2.png</texture>
+					<colordiffuse>FrameBackgroundDiffuse</colordiffuse>	
+				</control>
+			</control>
+	
+			<!-- Submenus -->
+			<control type="list" id="9001">
+				<visible allowhiddenfocus="true">Control.HasFocus(9001) + ![Control.HasFocus(8000) | Control.HasFocus(80001) | Control.HasFocus(8002) | Control.HasFocus(8003)]</visible>
+				<posx>5</posx>
+				<posy>20</posy>
+				<width>1050</width>
+				<height>80</height>
+				<align>center</align>
+				<onup>9000</onup>
+				<ondown>9000</ondown>
+				<onleft>9001</onleft>
+				<onright>9001</onright>
+				<orientation>horizontal</orientation>
+				<defaultcontrol always="true">1</defaultcontrol>
+				<scrolltime tween="sine" easing="out">240</scrolltime>
+				<include>Animation_Submenu</include>
+				<itemlayout width="300" height="70">
+					
+					<control type="label">
+						<left>10</left>
+						<top>10</top>
+						<width>290</width>
+						<height>20</height>
+						<align>center</align>
+						<label>$INFO[ListItem.Label]</label>
+						<font>lcdnsub</font>
+						<textcolor>SubmenuText</textcolor>
+					</control>
+				</itemlayout>
+				<focusedlayout width="300" height="70">
+				
+					<control type="label">
+						<animation effect="zoom" start="90" end="135" center="auto" time="500" condition="true">Conditional</animation>
+						<top>10</top>
+						<left>10</left>
+						<width>290</width>
+						<height>30</height>
+						<align>center</align>
+						<label>$INFO[ListItem.Label]</label>
+						<font>lcdnsub</font>
+						<textcolor>yellow</textcolor>
+					</control>	
+				</focusedlayout>
+				<content>
+					<include>skinshortcuts-submenu</include>
+				</content>
+			</control>
+			
+		</control>
+	</include>
+	
+	<include name="Home2_Icons">
+		<include>HomeDeck</include>
+		<control type="group">
+		<animation effect="slide" start="0" end="0,-200" center="auto" time="500" condition="Control.HasFocus(9001)">Conditional</animation>
+		<animation effect="fade" start="100" end="50"  time="500" condition="Control.HasFocus(9001)">Conditional</animation>
+		
+
+		<control type="image">
+			<posx>0</posx>
+			<posy>900</posy>
+			<width>1920</width>
+			<height>140</height>
+			<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+			<colordiffuse>F0101010</colordiffuse>
+			<visible>!system.getbool(lookandfeel.enablerssfeeds)</visible>
+		</control>
+		<control type="image">
+			<posx>0</posx>
+			<posy>900</posy>
+			<width>1920</width>
+			<height>190</height>
+			<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+			<colordiffuse>F0101010</colordiffuse>
+			<visible>system.getbool(lookandfeel.enablerssfeeds)</visible>
+		</control>
+		
+		<include>OsdMusicHome</include>
+		
+		<control type="label" id="9003">
+			<posy>-1000</posy>
+			<label>$VAR[Wd1Visible]</label>
+		</control>
+	
+		<!-- Main Menu -->
+		
+		<control type="wraplist" id="9000">
+		<animation effect="slide" start="0" end="0,600" center="auto" time="500" condition="Player.HasAudio + System.IdleTime(8)">Conditional</animation>
+			<posx>250</posx>
+			<posy>900</posy>
+			<height>250</height>
+			<width>1400</width>		
+			<onfocus condition="String.EndsWith(Window(Weather).Property(Current.FanartCode),na)">Weather.Refresh</onfocus>
+			
+			<onup condition="!String.IsEmpty(Control.GetLabel(9003))">9022</onup>	
+			<onup condition="String.IsEmpty(Control.GetLabel(9003))">9023</onup>	
+			
+			<ondown>9001</ondown>
+			<onleft>9000</onleft>
+			<onright>9000</onright>
+			
+
+			<viewtype>list</viewtype>
+			<orientation>horizontal</orientation>
+			<focusposition>2</focusposition>
+			<defaultcontrol >1</defaultcontrol>
+			<movement>6</movement>
+			<scrolltime>200</scrolltime>
+			<preloaditems>2</preloaditems>
+			<include>Animation_OpenCloseFade</include>
+			<include>Animation_FadedByMenu</include>
+			<itemlayout width="300" height="120">
+			
+				<control type="label">
+					<width>190</width>
+					<posy>95</posy>
+					<height>20</height>
+					<align>center</align>
+					<label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+					<font>METF_WeatherOutlookWeekend</font>
+					<textcolor>SubmenuText</textcolor>
+					<visible>Skin.HasSetting(ShowIconLabel)</visible>
+				</control>
+	
+				<control type="image">
+					<posy>10</posy>
+					<posx>55</posx>
+					<width>80</width>
+					<height>80</height>
+					<texture>$INFO[ListItem.Icon]</texture>
+					<aspectratio aligny="bottom">stretch</aspectratio>
+					<visible>Skin.HasSetting(ShowIconLabel)</visible>
+				</control>
+				<control type="image">
+					<posy>30</posy>
+					<posx>55</posx>
+					<width>80</width>
+					<height>80</height>
+					<texture>$INFO[ListItem.Icon]</texture>
+					<aspectratio aligny="bottom">stretch</aspectratio>
+					<visible>!Skin.HasSetting(ShowIconLabel)</visible>
+				</control>
+			</itemlayout>
+			<focusedlayout width="300" height="120">	
+				<control type="image">
+	
+					<posy>10</posy>
+					<posx>35</posx>
+					<width>150</width>
+					<height>150</height>
+					<aligny>top</aligny>
+					<align>center</align>
+					<texture>$INFO[ListItem.Icon]</texture>
+					<aspectratio>stretch</aspectratio>
+				</control>
+				<control type="image">
+					<posx>10</posx>
+					<posy>25</posy>
+					<width>20</width>
+					<height>20</height>
+					<texture>ArrowUp.png</texture>
+					<colordiffuse>HelpArrowDiffuse</colordiffuse>
+					<visible>!Control.HasFocus(9001) + [!String.IsEmpty(Container(9000).ListItem.Property(widget))|!String.IsEmpty(Container(9000).ListItem.Property(widget.2))]</visible>
+					
+
+				</control>
+				<control type="image">
+					<posx>10</posx>
+					<posy>80</posy>
+					<width>20</width>
+					<height>20</height>
+					<texture>ArrowDown.png</texture>
+					<colordiffuse>HelpArrowDiffuse</colordiffuse>
+					<visible>!Control.HasFocus(9001) + String.Contains(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
+				</control>
+			</focusedlayout>
+			<content>
+				<include>skinshortcuts-mainmenu</include>
+			</content>
+		</control>
+	</control>
+	
+		<!-- Frames for submenus -->
+		<control type="group">
+			<posy>825</posy>
+			<posx>580</posx>		
+				
+			<control type="group">
+				<include>Animation_Submenu</include>
+				<visible>Control.HasFocus(9001)</visible>				
+				<control type="image">
+					<posx>15</posx>
+					<posy>20</posy>
+					<width>673</width>
+					<height>210</height>
+					<texture>frames/ClassicFrame_Background.png</texture>
+					<colordiffuse>C0606060</colordiffuse>
+	
+				</control>
+				<control type="image">
+					<width>700</width>
+					<height>250</height>
+					<texture>frames/banner_frame2.png</texture>
+					<colordiffuse>FrameBackgroundDiffuse</colordiffuse>	
+				</control>
+			</control>
+	
+			<!-- Submenus -->
+			<control type="list" id="9001">
+				<visible allowhiddenfocus="true">Control.HasFocus(9001) + ![Control.HasFocus(8000) | Control.HasFocus(80001) | Control.HasFocus(8002) | Control.HasFocus(8003)]</visible>
+				<posx>25</posx>
+				<posy>50</posy>
+				<width>650</width>
+				<height>210</height>
+				<align>center</align>
+				<onup>9000</onup>
+				<ondown>9000</ondown>
+				<onleft>9001</onleft>
+				<onright>9001</onright>
+				<orientation>horizontal</orientation>
+				<defaultcontrol always="true">1</defaultcontrol>
+				<scrolltime tween="sine" easing="out">240</scrolltime>
+				<include>Animation_Submenu</include>
+				<itemlayout width="200" height="200">
+					<control type="image">
+						<posx>60</posx>
+						<width>80</width>
+						<height>80</height>
+						<aligny>center</aligny>
+						<texture>$INFO[ListItem.Icon]</texture>
+						<aspectratio>stretch</aspectratio>
+						<visible>Skin.HasSetting(ShowIconLabel)</visible>
+					</control>
+						<control type="image">
+						<posx>90</posx>
+						<width>80</width>
+						<height>80</height>
+						<aligny>center</aligny>
+						<texture>$INFO[ListItem.Icon]</texture>
+						<aspectratio>stretch</aspectratio>
+						<visible>!Skin.HasSetting(ShowIconLabel)</visible>
+					</control>
+					<control type="label">
+						<top>130</top>
+						<width>200</width>
+						<height>20</height>
+						<align>center</align>
+						<label>$INFO[ListItem.Label]</label>
+						<font>METF_WeatherOutlookWeekend</font>
+						<textcolor>SubmenuText</textcolor>
+						<visible>Skin.HasSetting(ShowIconLabel)</visible>
+					</control>
+				</itemlayout>
+				<focusedlayout width="200" height="200">
+					<control type="image">
+						<posx>40</posx>
+						<width>120</width>
+						<height>120</height>
+						<aligny>center</aligny>
+						<texture>$INFO[ListItem.Icon]</texture>
+						<aspectratio>stretch</aspectratio>
+					</control>
+					<control type="label">
+						<top>130</top>
+						<width>200</width>
+						<height>30</height>
+						<align>center</align>
+						<label>$INFO[ListItem.Label]</label>
+						<font>METF_PlotText</font>
+						<visible>Skin.HasSetting(ShowIconLabel)</visible>
+						<textcolor>yellow</textcolor>
+					</control>	
+				</focusedlayout>
+				<content>
+					<include>skinshortcuts-submenu</include>
+				</content>
+			</control>
+			
+		</control>
+		<!-- Shared Home Stats/Media Totals 
+		<control type="label">
+			<posx>200</posx>
+			<posy>50</posy>
+			<label>$INFO[Container(9000).ListItem.Property(labelID)]</label>
+
+		</control>		
+		<include>HomeStats</include>-->
+	</include>
+</includes>

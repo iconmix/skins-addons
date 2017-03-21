@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+	<include name="Viewtype_MurFilms">
+		<control type="group">
+			<visible>Control.IsVisible(585)</visible>
+			<!-- Browser -->
+			<control type="panel" id="585">
+				<viewtype label="31826">icon</viewtype>
+				<posx>25</posx>
+				<posy>45</posy>
+				<width>1910</width>
+				<height>770</height>
+				<scrolltime>100</scrolltime>
+				<orientation>vertical</orientation>
+				<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
+
+<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
+<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
+
+
+				<onright>60</onright>
+				<pagecontrol>60</pagecontrol>
+				<preloaditems>2</preloaditems>
+				<include>Animation_ZoomInZoomOut</include>
+				<include>Animation_HiddenByInfo</include>
+				<include>Animation_FadedByMenu</include>
+				<include>Animation_OpenCloseFade</include>
+				<itemlayout width="170" height="257">
+					<control type="group">
+					<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>160</width>
+							<height>240</height>
+							<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Art(poster)]</texture>
+							<aspectratio scalediffuse="true">stretch</aspectratio>
+						</control>
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>160</width>
+							<height>240</height>
+							<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
+							<aspectratio scalediffuse="true">keep</aspectratio>
+							<visible>String.IsEmpty(ListItem.Art(poster))</visible>
+						</control>
+						<control type="image">
+								<posx>0</posx>
+							<posy>0</posy>
+							<width>160</width>
+							<height>240</height>
+								<texture border="-17">showcase_shadow.png</texture>
+							</control>
+					<include>ShowTotalTvEp</include>
+					<include>AnimationCacheNonSelect</include>
+			</control>
+				</itemlayout>
+				<focusedlayout width="170" height="257">
+					<include>ActiveClearArt</include>
+					<control type="group">
+					<animation type="Focus" reversible="false">
+						<effect type="zoom" center="auto" start="100" end="130" time="200" tween="sine" easing="inout" />
+						<effect type="rotatey" center="85" start="0" end="360" time="2000" tween="bounce" easing="out"/>
+					</animation>
+						<animation reversible="true" effect="zoom" center="auto" start="130" end="100" time="200" tween="sine" easing="inout">unfocus</animation>
+						
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>160</width>
+							<height>240</height>
+							<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Art(poster)]</texture>
+							<aspectratio scalediffuse="true">stretch</aspectratio>
+						</control>
+						<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>160</width>
+							<height>240</height>
+							<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
+							<aspectratio scalediffuse="true">keep</aspectratio>
+							<visible>String.IsEmpty(ListItem.Art(poster))</visible>
+						</control>
+						<control type="image">
+								<posx>0</posx>
+							<posy>0</posy>
+							<width>160</width>
+							<height>240</height>
+								<texture border="-17">showcase_shadow.png</texture>
+							</control>
+						
+					</control>
+				</focusedlayout> 
+			</control>
+			
+			
+		
+			<!-- Browser label and flags -->
+			
+			<include>ScrollBar_Vertical</include>
+		</control>
+	</include>
+</includes>

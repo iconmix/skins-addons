@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="dialog" id="8888" >
+	<onunload>ClearProperty(AdditionalInfo)</onunload>
+	<onload>ClearProperty(AdditionalInfo)</onload>
+	<onload>SetFocus(7033)</onload>
+	<defaultcontrol always="true">7033</defaultcontrol>
+	<controls>
+		<control type="list" id="999">
+			<posx>630</posx>
+			<posy>0</posy>
+			<itemlayout />
+			<focusedlayout />
+		</control>
+		
+		<control type="group">
+			<posx>75</posx>
+			<posy>10</posy>
+
+			<!-- FOND -->
+			<control type="image">
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>1750</width>
+				<height>960</height>
+				<texture>frames/fondinfo.png</texture>
+				<aspectratio scalediffuse="false">stretch</aspectratio>
+			</control>
+			
+			<control type="button" id="7051">
+				<texturefocus>-</texturefocus>
+				<texturenofocus>-</texturenofocus>
+				<onfocus>SetFocus(300)</onfocus>
+			</control>
+			<control type="button" id="5">
+				<label>-</label>
+				<font>-</font>
+				<onfocus>SetFocus(998)</onfocus>
+			</control>
+			<control type="button" id="7050">
+				<texturefocus>-</texturefocus>
+				<texturenofocus>-</texturenofocus>
+				<onfocus>ClearProperty(AdditionalInfo)</onfocus>
+				<onfocus>SetFocus(7033)</onfocus>
+			</control>
+			<!-- Titre et diverses infos -->
+			<control type="group">
+				<posx>50</posx>
+				<posy>0</posy>
+				<include>Animation_FadedByMenu</include>
+				<include>Animation_CommonFade</include>
+				<include>Animation_OpenCloseFade</include>
+				<!-- Title -->
+				<control type="fadelabel">
+					<posy>20</posy>
+					<width>970</width>
+					<height>30</height>
+					<aligny>center</aligny>
+					<scrollout>false</scrollout>
+					<pauseatend>200</pauseatend>
+					<scrollspeed>20</scrollspeed>
+					<font>METF_TitleTextLarge</font>
+					<textcolor>TextNF</textcolor>
+					<label>$INFO[Container(999).ListItem.Label]</label>
+					<!-- Title was overlapping progress dialog.  this is probably not the best way to fix this, but it works.-->
+					<visible>!Container.Content(episodes)</visible>
+				</control>
+				<control type="fadelabel">
+					<posy>20</posy>
+					<width>970</width>
+					<height>30</height>
+					<aligny>center</aligny>
+					<scrollout>false</scrollout>
+					<pauseatend>200</pauseatend>
+					<scrollspeed>20</scrollspeed>
+					<font>METF_TitleTextLarge</font>
+					<textcolor>TextNF</textcolor>
+					<label>$INFO[Container(999).ListItem.Season]x$INFO[Container(999).ListItem.Episode]$INFO[Container(999).ListItem.Title,. ]</label>
+					<!-- Title was overlapping progress dialog.  this is probably not the best way to fix this, but it works.-->
+					<visible>Container.Content(episodes)</visible>
+				</control>
+				<!-- Tagline -->
+				<control type="label">
+					<posy>55</posy>
+					<width>840</width>
+					<height>36</height>
+					<align>left</align>
+					<aligny>center</aligny>
+					<font>METF_PlotTextMedium</font>
+					<textcolor>TextNF</textcolor>
+					<label>$INFO[Container(999).ListItem.Tagline]</label>
+					<visible>!String.IsEmpty(Container(999).ListItem.Tagline) + !Container.Content(episodes)</visible>
+				</control>
+				<!-- Genre -->
+				<control type="label">
+					<posy>630</posy>
+					<width>515</width>
+					<height>30</height>
+					<align>left</align>
+					<aligny>center</aligny>
+					<font>METF_InfoText</font>
+					<textcolor>MediaDetailsGenre</textcolor>
+				<label>$INFO[Container(999).ListItem.Genre]</label>
+					<visible>!String.IsEmpty(Container(999).ListItem.Genre) + !Container.Content(episodes)</visible>
+				</control>
+				<!-- Episode Air Date -->
+				<control type="label">
+					<posy>650</posy>
+					<width>515</width>
+					<height>30</height>
+					<align>left</align>
+					<aligny>center</aligny>
+					<font>METF_InfoTextLarger</font>
+					<textcolor>MediaDetailsInfo</textcolor>
+					<label>$LOCALIZE[20416] $INFO[Container(999).ListItem.Premiered]</label>
+					<visible>!String.IsEmpty(Container(999).ListItem.Premiered) + Container.Content(episodes)</visible>
+				</control>
+				<!-- TVShows Number of Episodes -->
+				<control type="label">
+					<posy>740</posy>
+					<width>840</width>
+					<height>36</height>
+					<align>left</align>
+					<aligny>center</aligny>
+					<font>METF_InfoTextLarger</font>
+					<textcolor>MediaDetailsEpisodes</textcolor>
+					<label>$INFO[Container(999).ListItem.Property(TotalEpisodes)] $LOCALIZE[20360]</label>
+					<visible>Container.Content(tvshows)</visible>
+				</control>
+				<!-- Episode Watched Status -->
+				<control type="label">
+					<posy>780</posy>
+					<width>840</width>
+					<height>36</height>
+					<align>left</align>
+					<aligny>center</aligny>
+					<font>METF_InfoTextLarger</font>
+					<textcolor>MediaDetailsEpisodes</textcolor>
+					<label>$LOCALIZE[16102]</label>
+					<visible>Container.Content(episodes) + String.IsEqual(Container(999).ListItem.Overlay,OverlayWatched.png)</visible>
+				</control>
+				<!-- MPAA Long Description
+				<control type="group">
+					<posy>680</posy>
+					<control type="textbox">
+						<width>515</width>
+						<height>47</height>
+						<align>left</align>
+						<font>METF_MPAA</font>
+						<textcolor>MPAADescription</textcolor>
+						<label>$INFO[Container(999).ListItem.mpaa]</label>
+						<visible>!ControlGroup(7033).HasFocus(7) + Container.Content(movies) + !String.IsEmpty(Container(999).ListItem.mpaa) + !Skin.HasSetting(ShowVideoPath)</visible>
+					</control>
+					<control type="fadelabel">
+						<width>515</width>
+						<height>47</height>
+						<align>left</align>
+						<scroll>true</scroll>
+						<scrollout>false</scrollout>
+						<pauseatend>1000</pauseatend>
+						<font>METF_MPAA</font>
+						<textcolor>MPAADescription</textcolor>
+						<label>$INFO[Container(999).ListItem.FilenameAndPath]</label>
+						<visible>!ControlGroup(7033).HasFocus(7) + !String.Contains(Container(999).ListItem.FilenameAndPath," ") + [Container.Content(movies) | Container.Content(videos) | Container.Content(episodes) | Container.Content(MusicVideos)] + Skin.HasSetting(ShowVideoPath)</visible>
+					</control>
+					<control type="textbox">
+						<width>515</width>
+						<height>47</height>
+						<align>left</align>
+						<font>METF_MPAA</font>
+						<textcolor>MPAADescription</textcolor>
+						<label>$INFO[Container(999).ListItem.FilenameAndPath]</label>
+						<visible>!ControlGroup(7033).HasFocus(7) + String.Contains(Container(999).ListItem.FilenameAndPath," ") + [Container.Content(movies) | Container.Content(videos) | Container.Content(episodes) | Container.Content(MusicVideos)] + Skin.HasSetting(ShowVideoPath)</visible>
+					</control>
+					 
+					<control type="label">
+						<width>515</width>
+						<height>60</height>
+						<align>left</align>
+						<font>METF_InfoText</font>
+						<textcolor>TextNF</textcolor>
+						<label>[COLOR=MediaDetailsInfo]$LOCALIZE[31427]:[/COLOR]$INFO[Window(Home).Property(NextAired.NextTitle),,[CR]]($INFO[Window(Home).Property(NextAired.NextDate)])</label>
+						<visible>!ControlGroup(7033).HasFocus(7) + Container.Content(TVShows) + !String.IsEmpty(Window(Home).Property(NextAired.NextDate))</visible>
+					</control>
+				</control>
+				-->
+				
+				
+			</control>
+			
+			
+		<!-- group 1 -->
+			<control type="group">
+				<posx>360</posx>
+				<posy>0</posy>
+				<include>Animation_FadedByMenu</include>
+				<include>Animation_CommonFade</include>
+				<include>Animation_OpenCloseFade</include>
+							
+				<!-- TV Show Status -->
+				<control type="group">
+					<posx>1000</posx>
+					<posy>160</posy>
+			
+					<control type="label">
+						<width>300</width>
+						<height>24</height>
+						<align>center</align>
+						<aligny>center</aligny>
+						<font>METF_CastText</font>
+						<textcolor>TextNF</textcolor>
+						<label>$INFO[Container(999).ListItem.Director]</label>
+						<visible>!Control.IsVisible(998) + ![Container.Content(tvshows) | Container.Content(seasons)]</visible>
+					</control>
+			
+					<control type="label">
+						<width>340</width>
+						<height>24</height>
+						<align>center</align>
+						<aligny>center</aligny>
+						<font>METF_CastText</font>
+						<textcolor>TextNF</textcolor>
+						<label>$VAR[TVShowStatus]</label>
+						<visible>!Control.IsVisible(998) + [Container.Content(tvshows) | Container.Content(seasons)]</visible>
+					</control>
+				</control>
+				
+				
+				<control type="group">
+					<posx>1000</posx>
+					<posy>210</posy>
+					<visible>!Control.IsVisible(998)</visible>
+					<control type="textbox">
+						<posx>0</posx>
+						<posy>30</posy>
+						<width>300</width>
+						<height>140</height>
+						<align>center</align>
+						<font>METF_CastText</font>
+						<textcolor>TextNF</textcolor>
+						<label>$INFO[Container(999).ListItem.Cast]</label>
+						<visible>!Control.IsVisible(998)+IntegerGreaterThan(Container(998).NumItems,0)</visible>
+					</control>
+					<control type="label">
+						<posx>0</posx>
+						<posy>160</posy>
+						<width>340</width>
+						<height>25</height>
+						<align>center</align>
+						<aligny>center</aligny>
+						<font>METF_HelpText</font>
+						<textcolor>HelpText</textcolor>
+						<label>$LOCALIZE[31407]</label>
+						<visible>!Control.IsVisible(998) + !Skin.HasSetting(HideHelpText)</visible>
+					</control>
+				</control>
+				<control type="textbox">
+					<posx>60</posx>
+					<posy>138</posy>
+					<width>900</width>
+					<height>450</height>
+					<align>justify</align>
+					<font>METF_PlotText</font>
+					<textcolor>TextNF</textcolor>
+					<label>$INFO[Container(999).ListItem.Plot]</label>
+					<include condition="!Skin.HasSetting(AutoScrollFast)">AutoScrollLong</include>
+					<include condition="Skin.HasSetting(AutoScrollFast)">AutoScrollLongFast</include>
+					<visible>!Control.IsVisible(998)</visible>
+				</control>
+				
+				<control type="panel" id="300">
+					<posx>980</posx>
+					<posy>115</posy>
+					<width>340</width>
+					<height>300</height>
+					<onup>300</onup>
+					<ondown>7050</ondown>
+					<onleft>7050</onleft>
+					<onright>7050</onright>
+					<orientation>vertical</orientation>
+					<visible>!Control.IsVisible(998)</visible>
+
+					<itemlayout height="80" width="340">
+						<control type="label">
+							<top>0</top>
+							<width>340</width>
+							<height>48</height>
+							<align>center</align>
+							<aligny>top</aligny>
+							<font>METF_CastText</font>
+							<textcolor>MediaDetailsInfo</textcolor>
+							<label>$INFO[ListItem.Label]</label>
+						</control>
+					</itemlayout>
+					<focusedlayout height="80" width="340">
+						<control type="image">
+							<top>0</top>
+							<width>340</width>
+							<height>44</height>
+							<texture border="4">ButtonFo.png</texture>
+							<visible>Control.HasFocus(300)</visible>
+						</control>
+						<control type="label">
+							<top>0</top>
+							<width>340</width>
+							<height>48</height>
+							<align>center</align>
+							<aligny>top</aligny>
+							<font>METF_CastText</font>
+							<textcolor>MediaDetailsInfo</textcolor>
+							<label>$INFO[ListItem.Label]</label>
+						</control>
+					</focusedlayout>
+					<content>
+						<item>
+							<label>$LOCALIZE[31471]</label>
+							<onclick>noop</onclick>
+							<visible>Container.Content(episodes) | Container.Content(tvshows) | Container.Content(seasons)</visible>
+						</item>
+						<item>
+							<label>$LOCALIZE[20339]</label>
+							<!--<onclick>SendClick(8888,13)</onclick>-->
+							<onclick>noop</onclick>
+							<visible>![Container.Content(episodes) | Container.Content(tvshows) | Container.Content(seasons)]</visible>
+						</item>
+						<item>
+							<!-- acteur -->
+							<label>$LOCALIZE[344]</label>
+							<onclick>SetProperty(AdditionalInfo, cast)</onclick>
+							<visible>IntegerGreaterThan(Container(998).NumItems,0)</visible>
+							<onclick>SetFocus(5)</onclick>
+						</item>
+					</content>
+				</control>
+
+				
+				<control type="group">
+					<visible>!Control.HasFocus(300) + !Control.HasFocus(7033) + !Control.HasFocus(7050) + !Control.HasFocus(7051) + Control.IsVisible(998)</visible>
+					<posx>130</posx>
+					<posy>108</posy>
+					<width>900</width>
+					<height>30</height>
+				
+					<control type="label">
+						<font>METF_CastText</font>
+						<align>left</align>
+						<textcolor>HelpText</textcolor>
+						<label>*$LOCALIZE[344]</label>
+					</control>
+					<control type="label">
+						<font>METF_CastText</font>
+						<align>right</align>
+						<textcolor>HelpText</textcolor>
+						<label>$LOCALIZE[38033]</label>
+					</control>
+				</control>
+				
+				<control type="panel" id="998">
+					<posx>70</posx>
+					<posy>158</posy>
+					<width>1100</width>
+					<height>330</height>
+					<onleft>7050</onleft>
+					<onright>7050</onright>
+					<onup>998</onup>
+					<ondown>998</ondown>
+					<viewtype label="">list</viewtype>
+					<visible>!Control.HasFocus(300) + !Control.HasFocus(7033) + !Control.HasFocus(7050) + !Control.HasFocus(7051) + String.IsEqual(Window.Property(AdditionalInfo),cast)</visible>
+					<pagecontrol>-</pagecontrol>
+					<scrolltime>0</scrolltime>
+					<orientation>vertical</orientation>
+					<itemlayout height="30" width="1000">
+						<control type="label">
+							<posx>0</posx>
+							<posy>0</posy>
+							<height>24</height>
+							<align>left</align>
+							<aligny>center</aligny>
+							<font>METF_CastText</font>
+							<textcolor>TextNF</textcolor>
+							<label>$INFO[ListItem.Label]</label>
+						</control>
+						<control type="label">
+							<posx>0</posx>
+							<posy>0</posy>
+							<height>30</height>
+							<align>right</align>
+							<aligny>center</aligny>
+							<font>METF_CastText</font>
+							<textcolor>TextNF</textcolor>
+							<label>$INFO[ListItem.Label2]</label>
+						</control>
+					</itemlayout>
+					<focusedlayout height="24" width="1000">
+						<control type="label">
+							<posx>0</posx>
+							<posy>0</posy>
+							<height>24</height>
+							<align>left</align>
+							<aligny>center</aligny>
+							<font>METF_CastText</font>
+							<textcolor>TextFO</textcolor>
+							<scrollspeed>30</scrollspeed>
+							<label>[B]$INFO[ListItem.Label][/B]</label>
+						</control>
+						<control type="label">
+							<posx>0</posx>
+							<posy>0</posy>
+							<align>right</align>
+							<aligny>center</aligny>
+							<font>METF_CastText</font>
+							<textcolor>TextFO</textcolor>
+							<scrollspeed>30</scrollspeed>
+							<label>[B]$INFO[ListItem.Label2][/B]</label>
+						</control>
+					</focusedlayout>
+				</control>
+				
+				
+				<control type="group">
+					<posx>1100</posx>
+					<posy>138</posy>
+					<control type="image">
+						<width>252</width>
+						<height>327</height>
+						<texture>frames/ClassicFrame_Background.png</texture>
+						<aspectratio align="center" aligny="center">stretch</aspectratio>
+						<visible>Control.IsVisible(998)</visible>
+					</control>
+					<control type="image">
+						<description>Actor image</description>						
+						<width>246</width>
+						<height>327</height>
+						<texture>$INFO[Container(998).Listitem.Icon]</texture>
+						<aspectratio align="center" aligny="center">scale</aspectratio>
+						<visible>Control.IsVisible(998)</visible>
+					</control>
+					<control type="image">
+						<posx>-8</posx>
+						<posy>-16</posy>
+						<width>270</width>
+						<height>375</height>
+						<texture background="true">frames/ClassicFrame_PosterSmall.png</texture>
+						<aspectratio scalediffuse="false">scale</aspectratio>
+						<visible>Control.IsVisible(998)</visible>
+					</control>
+				</control>
+			</control>
+			
+			<!-- group 1 -->
+			
+			<!-- Year and Duration -->
+			<control type="grouplist">
+				<posx>1050</posx>
+				<posy>23</posy>
+				<width>620</width>
+				<height>60</height>
+				<align>right</align>
+				<itemgap>10</itemgap>
+				<orientation>horizontal</orientation>
+				<include>Animation_FadedByMenu</include>
+				<include>Animation_CommonFade</include>
+				<include>Animation_OpenCloseFade</include>
+				<!-- Country -->
+				<control type="label">
+					<width min="25" max="380">auto</width>
+					<height>30</height>
+					<aligny>center</aligny>
+					<font>METF_MediaDetailsSmall</font>
+					<textcolor>MediaDetailsYear</textcolor>
+					<label>$INFO[Container(999).ListItem.Country]</label>
+					<visible>!String.IsEmpty(Container(999).ListItem.Country) + [Container.Content(tvshows) | Container.Content(movies) | Container.Content(MusicVideos)]</visible>
+				</control>
+				<!-- Bullet -->
+				<control type="image">
+					<include>ViewDetailsBullet</include>
+					<visible>!String.IsEmpty(ListItem.Country) + [Container.Content(tvshows) | Container.Content(movies) | Container.Content(MusicVideos)]</visible>
+				</control>
+				<!-- Year -->
+				<control type="label">
+					<width min="25" max="220">auto</width>
+					<height>30</height>
+					<aligny>center</aligny>
+					<font>METF_MediaDetailsSmall</font>
+					<textcolor>MediaDetailsYear</textcolor>
+					<label>$INFO[Container(999).ListItem.Year]</label>
+					<visible>!String.IsEmpty(Container(999).ListItem.Year) + [Container.Content(tvshows) | Container.Content(movies) | Container.Content(MusicVideos)]</visible>
+				</control>
+				<!-- Bullet -->
+				<control type="image">
+					<include>ViewDetailsBullet</include>
+					<visible>![Container(999).String.IsEmpty(ListItem.Year) | String.IsEmpty(ListItem.Duration)] + [Container.Content(movies) | Container.Content(MusicVideos)]</visible>
+				</control>
+				<control type="image">
+			<width>40</width>
+			<height>30</height>
+			<aligny>center</aligny>
+			<texture>chrono.png</texture>
+			<aspectratio>keep</aspectratio>
+			<visible>!String.IsEmpty(Container(999).ListItem.Duration) + !String.Contains(Container(999).ListItem.Duration,min) + ![String.Contains(ListItem.DBTYPE,song) |Container.Content(tvshows) | Container.Content(seasons)]</visible>
+		</control>
+		
+		
+				<!-- Duration 	-->
+				<control type="label">
+					<width min="25" max="220">auto</width>
+					<height>30</height>
+					<aligny>center</aligny>
+					<font>METF_MediaDetailsSmall</font>
+					<textcolor>MediaDetailsDuration</textcolor>
+					<label>: $INFO[Container(999).ListItem.Duration] min</label>
+				</control>
+		
+			</control>
+		
+			<!-- Control Buttons -->
+		
+			<control type="grouplist" id="7033">
+				<include>VideoInfoButtonText</include>
+				<itemgap>10</itemgap>
+				<align>center</align>
+				<orientation>horizontal</orientation>
+				<onleft>7033</onleft>
+				<onright>7033</onright>
+				<onup>7051</onup> 
+				<ondown>Close</ondown>
+				<ondown>SetFocus(55)</ondown>				
+				<!-- Play -->
+				<control type="button" id="8">
+					<include>VideoInfoButton</include>
+					<texturenofocus>buttons/button_play.png</texturenofocus>
+					<texturefocus>buttons/button_playFO.png</texturefocus>
+					<visible>!IsEmpty(Container(999).ListItem.Property(DBTYPE))+!Container.Content(TVShows)</visible>
+					<include>Animation_ButtonFocus</include>
+				</control>
+				<!-- Play -->
+				<control type="button" id="888">
+					<include>VideoInfoButton</include>
+					<texturenofocus>buttons/button_Browse.png</texturenofocus>
+					<texturefocus>buttons/button_BrowseFO.png</texturefocus>
+					<visible>[IsEmpty(Container(999).ListItem.Property(DBTYPE))|Container.Content(TVShows)]+String.IsEmpty(Window(Home).Property(WidgetActif))</visible>
+					<include>Animation_ButtonFocus</include>
+					<onclick>SendClick(8)</onclick>
+				</control>
+				<control type="button" id="889">
+					<include>VideoInfoButton</include>
+					<texturenofocus>buttons/button_Browse.png</texturenofocus>
+					<texturefocus>buttons/button_BrowseFO.png</texturefocus>
+					<visible>[IsEmpty(Container(999).ListItem.Property(DBTYPE))|Container.Content(TVShows)]+!String.IsEmpty(Window(Home).Property(WidgetActif))+String.IsEmpty(Container(999).ListItem.FilenameAndPath)</visible>
+					<include>Animation_ButtonFocus</include>
+					<onclick>Action(close)</onclick>
+					<onclick>ActivateWindow(videos,$INFO[Window(Home).Property(WidgetActif)],return)</onclick>
+				</control>
+				<control type="button" id="890">
+					<include>VideoInfoButton</include>
+					<texturenofocus>buttons/button_Browse.png</texturenofocus>
+					<texturefocus>buttons/button_BrowseFO.png</texturefocus>
+					<visible>[IsEmpty(Container(999).ListItem.Property(DBTYPE))|Container.Content(TVShows)]+!String.IsEmpty(Window(Home).Property(WidgetActif))+!String.IsEmpty(ListItem.FilenameAndPath)</visible>
+					<include>Animation_ButtonFocus</include>
+					<onclick>SendClick(8)</onclick>
+				</control>
+				
+				
+				<!-- Cinema Experience -->
+				<control type="button" id="19">
+					<include>VideoInfoButton</include>
+					<texturenofocus>buttons/button_cinema.png</texturenofocus>
+					<texturefocus>buttons/button_cinemaFO.png</texturefocus>
+					<onclick>Playlist.Clear</onclick>
+					<onclick>Dialog.Close(MovieInformation)</onclick>
+					<onclick>RunScript(script.cinema.experience)</onclick>
+					<include>Animation_ButtonFocus</include>
+					<visible>Container.Content(movies) + system.hasaddon(script.cinema.experience) + !String.Contains(Container.FolderPath,plugin)</visible>
+				</control>
+				<!-- Trailer -->
+				<control type="button" id="11">
+					<include>VideoInfoButton</include>
+					<texturenofocus>buttons/button_trailer.png</texturenofocus>
+					<texturefocus>buttons/button_trailerFO.png</texturefocus>
+					<include>Animation_ButtonFocus</include>
+					<onclick>Action(Close)</onclick>
+					<onclick>PlayMedia($ESCINFO[Container(999).ListItem.Trailer])</onclick>
+					<visible>!String.IsEmpty(Container(999).ListItem.Trailer)</visible>
+				</control>
+				<!-- Choose Art -->
+				<control type="button" id="10">
+					<include>VideoInfoButton</include>
+					<texturenofocus>buttons/button_fanart.png</texturenofocus>
+					<texturefocus>buttons/button_fanartFO.png</texturefocus>
+					<include>Animation_ButtonFocus</include>
+					<visible>!String.StartsWith(Container(999).ListItem.Filenameandpath,plugin://)</visible>
+				</control>
+				<!-- Artwork Downloader Button -->
+				<control type="button" id="20">
+					<include>VideoInfoButton</include>
+					<texturenofocus>osd/osd_button_channel_previous_nf.png</texturenofocus>
+					<texturefocus>osd/osd_button_channel_previous_fo.png</texturefocus>
+				<onclick condition="Container.Content(tvshows)">RunScript(script.artwork.downloader, mode=gui, mediatype=tvshow, dbid=$INFO[Container(999).ListItem.Property(DBID)])</onclick>
+					<onclick condition="Container.Content(movies)">RunScript(script.artwork.downloader, mode=gui, mediatype=movie, dbid=$INFO[Container(999).ListItem.Property(DBID)])</onclick>
+							<include>Animation_ButtonFocus</include>
+					<visible>System.HasAddon(script.artwork.downloader) + [Container.Content(movies) | Container.Content(tvshows)]</visible>
+				</control>
+				<!-- Video Extras -->
+				<control type="button" id="21">
+					<description>Extras</description>
+					<include>VideoInfoButton</include>
+					<texturenofocus>buttons/button_videoextras.png</texturenofocus>
+					<texturefocus>buttons/button_videoextrasFO.png</texturefocus>
+					<include>Animation_ButtonFocus</include>
+					<onclick>RunScript(script.videoextras,display,"$INFO[ListItem.FilenameAndPath]")</onclick>
+					<label>$INFO[System.AddonTitle(script.videoextras)]</label>
+					<visible>System.HasAddon(script.videoextras)</visible>
+					<visible>!String.StartsWith(Container(999).ListItem.Filenameandpath,plugin://)+Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(musicvideos)</visible>
+				</control>
+				<!-- Refresh -->
+				<control type="button" id="6">
+					<include>VideoInfoButton</include>
+					<texturenofocus>buttons/button_refresh.png</texturenofocus>
+					<texturefocus>buttons/button_refreshFO.png</texturefocus>
+					<include>Animation_ButtonFocus</include>
+					<visible>!String.StartsWith(Container(999).ListItem.Filenameandpath,plugin://)</visible>
+				</control>
+			</control>
+		
+		    <!-- Control Button Text -->
+			<control type="group">
+				<control type="label">
+					<description>Play</description>
+					<include>VideoInfoButtonLabel</include>
+					<label>$LOCALIZE[208]</label>
+					<visible>ControlGroup(7033).HasFocus(8)</visible>
+				</control>
+				<control type="label">
+					<description>Play</description>
+					<include>VideoInfoButtonLabel</include>
+					<label>Liste</label>
+					<visible>ControlGroup(7033).HasFocus(888)</visible>
+				</control>
+				<control type="label">
+					<description>Play</description>
+					<include>VideoInfoButtonLabel</include>
+					<label>Voir</label>
+					<visible>ControlGroup(7033).HasFocus(889)</visible>
+				</control>
+				<control type="label">
+					<description>Play</description>
+					<include>VideoInfoButtonLabel</include>
+					<label>B.A.</label>
+					<visible>ControlGroup(7033).HasFocus(890)</visible>
+				</control>
+				<control type="label">
+					<description>Cinema Experience</description>
+					<include>VideoInfoButtonLabel</include>
+					<label>$LOCALIZE[31408]</label>
+					<visible>ControlGroup(7033).HasFocus(19)</visible>
+				</control>
+				<control type="label">
+					<description>Extra Artwork Downloader</description>
+					<include>VideoInfoButtonLabel</include>
+					<label>$LOCALIZE[31126]</label>
+					<visible>ControlGroup(7033).HasFocus(20)</visible>
+				</control>
+				<control type="label">
+					<description>Video Extras</description>
+					<include>VideoInfoButtonLabel</include>
+					<label>$INFO[System.AddonTitle(script.videoextras)]</label>
+					<visible>ControlGroup(7033).HasFocus(21)</visible>
+				</control>
+				<control type="label">
+					<description>Trailer</description>
+					<include>VideoInfoButtonLabel</include>
+					<label>$LOCALIZE[20410]</label>
+					<visible>ControlGroup(7033).HasFocus(11)</visible>
+				</control>
+				<control type="label">
+					<description>Choose Art</description>
+					<include>VideoInfoButtonLabel</include>
+					<label>$LOCALIZE[13511]</label>
+					<visible>ControlGroup(7033).HasFocus(10)</visible>
+				</control>
+				<control type="label">
+					<description>Refresh</description>
+					<include>VideoInfoButtonLabel</include>
+					<label>$LOCALIZE[184]</label>
+					<visible>ControlGroup(7033).HasFocus(6)</visible>
+				</control>
+				<control type="label">
+					<description>Set rating</description>
+					<include>VideoInfoButtonLabel</include>
+					<label>$LOCALIZE[38023]</label>
+					<visible>ControlGroup(7033).HasFocus(7)</visible>
+				</control>
+			</control>
+		  
+		<!-- poster et fanart-->
+			<control type="group">
+				<posx>35</posx>
+				<posy>115</posy>
+				<control type="group">
+					<include>Animation_FadedByMenu</include>
+					<include>Animation_CommonFade</include>
+					<include>Animation_OpenCloseFade</include>
+					<!-- <visible>[Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes) | Container.Content(MusicVideos)]</visible>-->
+					<!-- Default Poster Image -->
+					<control type="image">
+						<width>360</width>
+						<height>500</height>
+						<texture background="true" fallback="DefaultThumb.png">$INFO[Container(999).ListItem.Art(poster)]</texture>
+						<aspectratio scalediffuse="false">stretch</aspectratio>
+						<animation effect="zoom" center="auto" start="40" end="100" time="400" tween="cubic" easing="inout">WindowOpen</animation>
+						<animation effect="fade" start="0" end="0" time="0">WindowClose</animation>
+						<visible>!Container.Content(seasons) + !Container.Content(episodes) + !Container.Content(MusicVideos)</visible>
+					</control>
+					<!-- Poster Image for TV Show Seasons and Episodes -->
+					<control type="image">
+						<width>360</width>
+						<height>500</height>
+						<texture background="true" fallback="DefaultThumb.png">$INFO[Container(999).ListItem.Art(poster)]</texture>
+						<aspectratio scalediffuse="false">stretch</aspectratio>
+						<animation effect="zoom" center="auto" start="40" end="100" time="400" tween="cubic" easing="inout">WindowOpen</animation>
+						<animation effect="fade" start="0" end="0" time="0">WindowClose</animation>
+						<visible>Container.Content(seasons) | Container.Content(episodes)</visible>
+					</control>
+					<!-- Poster Image for Music Videos -->
+					<control type="image">
+						<posx>-2</posx>
+						<posy>2</posy>
+						<width>275</width>
+						<height>275</height>
+						<texture background="true" fallback="DefaultThumb.png">$INFO[Container(999).ListItem.Icon]</texture>
+						<aspectratio scalediffuse="false">stretch</aspectratio>
+						<animation effect="zoom" center="auto" start="40" end="100" time="400" tween="cubic" easing="inout">WindowOpen</animation>
+						<animation effect="fade" start="0" end="0" time="0">WindowClose</animation>
+						<visible>Container.Content(MusicVideos)</visible>
+					</control>
+					<!-- Frame for poster (except for Music Videos) -->
+					<control type="image">
+						<posx>-18</posx>
+						<posy>-23</posy>
+						<width>398</width>
+						<height>554</height>
+						<texture>frames/ClassicFrame_Poster.png</texture>
+						<aspectratio scalediffuse="false">stretch</aspectratio>
+						<animation effect="zoom" center="auto" start="40" end="100" time="400" tween="cubic" easing="inout">WindowOpen</animation>
+						<animation effect="fade" start="0" end="0" time="0">WindowClose</animation>
+						<visible>!Container.Content(MusicVideos)</visible>
+					</control>
+					<!-- Frame for poster (for Music Videos) -->
+					<control type="image">
+						<posx>-18</posx>
+						<posy>-13</posy>
+						<width>309</width>
+						<height>309</height>
+						<texture>frames/ClassicFrame_Poster.png</texture>
+						<aspectratio scalediffuse="false">stretch</aspectratio>
+						<animation effect="zoom" center="auto" start="40" end="100" time="400" tween="cubic" easing="inout">WindowOpen</animation>
+						<animation effect="fade" start="0" end="0" time="0">WindowClose</animation>
+						<visible>Container.Content(MusicVideos)</visible>
+					</control>
+				</control>
+							
+				
+			</control>
+			<!--<include>Global_ContextFilter</include>-->
+			<include>GlobalBackgroundVideoInfo</include>
+			<!--
+			<control type="group">
+				<posy>-50</posy>
+				<posx>0</posx>
+				<include condition="!Skin.HasSetting(Hide_MediaFlags)">MediaInfo</include>
+				<include condition="!Skin.HasSetting(Hide_ExtraMediaFlags)">MediaInfo2Saga</include>
+			</control>
+			<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
+-->
+				
+		</control>
+         
+	</controls>
+	
+</window>
