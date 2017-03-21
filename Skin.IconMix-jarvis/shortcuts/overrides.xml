@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<overrides>
+	<backgrounddefault labelID="pictures">special://skin/extras/backgrounds/pictures.jpg</backgrounddefault>
+	<backgrounddefault labelID="music">special://skin/extras/backgrounds/music.jpg</backgrounddefault>
+	<backgrounddefault labelID="movies">special://skin/extras/backgrounds/movies.jpg</backgrounddefault>
+	<backgrounddefault labelID="musicvideos">special://skin/extras/backgrounds/musicvideos.jpg</backgrounddefault>
+	<backgrounddefault labelID="tvshows">special://skin/extras/backgrounds/tvshows.jpg</backgrounddefault>
+	<backgrounddefault labelID="livetv">special://skin/extras/backgrounds/livetv.jpg</backgrounddefault>
+	<backgrounddefault labelID="videos">special://skin/extras/backgrounds/videos.jpg</backgrounddefault>
+	<backgrounddefault labelID="programs">special://skin/extras/backgrounds/programs.jpg</backgrounddefault>
+	<backgrounddefault labelID="settings">special://skin/extras/backgrounds/settings.jpg</backgrounddefault>
+	<backgrounddefault labelID="power">special://skin/extras/backgrounds/shutdown.jpg</backgrounddefault>
+	<backgrounddefault labelID="weather">$VAR[Weather_Fanart]</backgrounddefault>
+	<!-- Widgets -->
+
+	<!-- Recently Added, Recommended, and Random -->
+	<widget  target="tvshows" type="video" icon="logos/tsna-logo.png" condition="System.HasAddon(script.tv.show.next.aired)" label="Tv Shows Next Aired" path="plugin://script.skin.helper.service/?action=nextairedtvshows&amp;reload=$INFO[Window(Home).Property(widgetreload-tvshows)]">NAired</widget>
+	<widget  target="tvshows" type="video" icon="logos/tsna-logo.png" condition="System.HasAddon(script.tv.show.next.aired)" label="UnAired Episodes" path="plugin://script.skin.helper.service/?action=unairedepisodes&amp;reload=$INFO[Window(Home).Property(widgetreload2)]">NAired</widget>
+	<widget  target="tvshows" type="video" icon="logos/tsna-logo.png" condition="System.HasAddon(script.tv.show.next.aired)" label="Next Aired Episodes" path="plugin://script.skin.helper.service/?action=nextairedepisodes&amp;reload=$INFO[Window(Home).Property(widgetreload2)]">NAired</widget>
+	
+	
+	
+	<!-- <widget type="programs" condition="System.HasAddon(plugin.video.allocine)" label="Allociné">Allocine2</widget> 
+	<widget label="Widgets Skinhelper" type="32010">||BROWSE||script.skin.helper.service/?action=widgets&amp;path=skinplaylists,librarydataprovider,scriptwidgets,extendedinfo,smartshortcuts</widget>
+-->
+	<widget type="video" icon="logos/ldp-logo.png" label="Films récemment ajoutés" path="videodb://recentlyaddedmovies/">LibraryRecentlyAddedMovies</widget>
+	<widget target="tvshows" type="video" icon="logos/ldp-logo.png" label="Episodes récemment ajoutés" path="videodb://recentlyaddedepisodes/">LibraryRecentlyAddedEpisodes</widget>
+	<widget target="music" type="music" icon="logos/ldp-logo.png" label="Albums récemment ajoutés" path="musicdb://recentlyaddedalbums/">LibraryRecentlyAddedAlbums</widget>
+	<widget type="video" icon="logos/ldp-logo.png" label="Recently Added Music Videos (Built-in)" path="videodb://recentlyaddedmusicvideos/">LibraryRecentlyAddedMusicVideos</widget>
+	<widget target="music" type="music" icon="logos/ldp-logo.png" label="Recently Played Albums (Built-in)" path="musicdb://recentlyplayedalbums/">LibraryRecentlyPlayedAlbums</widget>
+	
+	<widget type="video" icon="logos/ldp-logo.png" label="Recently Added Movies" path="plugin://service.library.data.provider?type=recentmovies&amp;reload=$INFO[Window(Home).Property(recentmovies)]">LDPRecentlyAddedMovies</widget>
+	<widget type="video" icon="logos/ldp-logo.png" label="Recommended Movies" path="plugin://service.library.data.provider?type=recommendedmovies&amp;reload=$INFO[Window(Home).Property(recommendedmovies)]">LDPRecommendedMovies</widget>
+	<widget type="video" icon="logos/ldp-logo.png" label="Random Movies" path="plugin://service.library.data.provider?type=randommovies&amp;reload=$INFO[Window.Property(randommovies)]">LDPRandomMovies</widget>
+	<widget target="tvshows" type="video" icon="logos/ldp-logo.png" label="Recently Added Episodes" path="plugin://service.library.data.provider?type=recentepisodes&amp;reload=$INFO[Window.Property(recentepisodes)]">LDPRecentlyAddedEpisodes</widget>
+	<widget target="tvshows" type="video" icon="logos/ldp-logo.png" label="Recommended Episodes" path="plugin://service.library.data.provider?type=recommendedepisodes&amp;reload=$INFO[Window.Property(recommendedepisodes)]">LDPRecommendedEpisodes</widget>
+	<widget target="tvshows" type="video" icon="logos/ldp-logo.png" label="Random Episodes" path="plugin://service.library.data.provider?type=randomepisodes&amp;reload=$INFO[Window.Property(randomepisodes)]">LDPRandomEpisodes</widget>
+	<widget type="video" icon="logos/ldp-logo.png" label="Recently Added Videos" path="plugin://service.library.data.provider?type=recentvideos&amp;reload=$INFO[Window.Property(recentvideos)]">LDPRecentlyAddedVideos</widget>
+	<widget target="music" type="music" icon="logos/ldp-logo.png" label="Recently Added Albums" path="plugin://service.library.data.provider?type=recentalbums&amp;reload=$INFO[Window.Property(recentalbums)]">LDPRecentlyAddedAlbums</widget>
+	<widget target="music" type="music" icon="logos/ldp-logo.png" label="Recommended Albums" path="plugin://service.library.data.provider?type=recommendedalbums&amp;reload=$INFO[Window.Property(recommendedalbums)]">LDPRecommendedAlbums</widget>
+	<widget target="music" type="music" icon="logos/ldp-logo.png" label="Random Albums" path="plugin://service.library.data.provider?type=randomalbums&amp;reload=$INFO[Window.Property(randomalbums)]">LDPRandomAlbums</widget>
+	<widget target="music" type="music" icon="logos/ldp-logo.png" label="Random Songs" path="plugin://service.library.data.provider?type=randomsongs&amp;reload=$INFO[Window.Property(randomsongs)]">LDPRandomSongs</widget>
+
+	<!-- Extended Info Script -->
+	<widget type="video" label="Rotten Tomatoes (In Theaters)" path="plugin://script.extendedinfo?info=intheatermovies">InTheaterMovies</widget>
+	<widget type="video" label="Rotten Tomatoes (Coming Soon)" path="plugin://script.extendedinfo?info=comingsoonmovies">ComingSoonMovies</widget>
+	<widget type="video" label="Rotten Tomatoes (Opening)" path="plugin://script.extendedinfo?info=openingmovies">OpeningMovies</widget>
+	<widget type="video" label="Rotten Tomatoes (Box Office)" path="plugin://script.extendedinfo?info=boxofficemovies">BoxOfficeMovies</widget>
+	<widget type="video" label="Rotten Tomatoes (Top 10 Rentals)" path="plugin://script.extendedinfo?info=toprentalmovies">TopRentalMovies</widget>
+	<widget type="video" label="Rotten Tomatoes (Current DVD Releases)" path="plugin://script.extendedinfo?info=currentdvdmovies">CurrentDVDMovies</widget>
+	<widget type="video" label="Rotten Tomatoes (New DVD Releases)" path="plugin://script.extendedinfo?info=newdvdmovies">NewDVDMovies</widget>
+	<widget type="video" label="Rotten Tomatoes (Upcoming DVD Releases)" path="plugin://script.extendedinfo?info=upcomingdvdmovies">UpcomingDVDMovies</widget>
+	
+	<widget type="video" icon="logos/tmdb2-logo.png" label="The MovieDB (In Cinemas)" path="plugin://script.extendedinfo?info=incinemas">InCinemasMovies</widget>
+	<widget type="video" icon="logos/tmdb2-logo.png"  label="The MovieDB (Upcoming Movies)" path="plugin://script.extendedinfo?info=upcoming">UpcomingMovies</widget>
+	<widget type="video" icon="logos/tmdb2-logo.png"  label="The MovieDB (Popular Movies)" path="plugin://script.extendedinfo?info=popularmovies">PopularMovies</widget>
+	<widget type="video" icon="logos/tmdb2-logo.png"  label="The MovieDB (Top Rated Movies)" path="plugin://script.extendedinfo?info=topratedmovies">TopRatedMovies</widget>
+	<widget target="tvshows" type="video" icon="logos/tmdb2-logo.png"  label="The MovieDB (Popular TV Shows)" path="plugin://script.extendedinfo?info=populartvshows">PopularTVShows</widget>
+	<widget target="tvshows" type="video" icon="logos/tmdb2-logo.png"  label="The MovieDB (Top Rated TV Shows)" path="plugin://script.extendedinfo?info=topratedtvshows">TopRatedTVShows</widget>
+	<widget target="tvshows" type="video" icon="logos/tmdb2-logo.png"  label="The MovieDB (On Air TV Shows)" path="plugin://script.extendedinfo?info=onairtvshows">OnAirTVShows</widget>
+	<widget target="tvshows" type="video" icon="logos/tmdb2-logo.png"  label="The MovieDB (Airing Today TV Shows)" path="plugin://script.extendedinfo?info=airingtodaytvshows">AiringTodayTVShows</widget>
+	
+	
+	<widget type="video" label="Trakt.tv (Trending Movies)" path="plugin://script.extendedinfo?info=trendingmovies">TrendingMovies</widget>
+	<widget target="tvshows" type="video" label="Trakt.tv (Trending TV Shows)" path="plugin://script.extendedinfo?info=trendingshows">TrendingTVShows</widget>
+	<widget target="tvshows" type="video" label="Trakt.tv (Airing TV Shows)" path="plugin://script.extendedinfo?info=airingepisodes">AiringEpisodes</widget>
+	<widget target="tvshows" type="video" label="Trakt.tv (Premiere TV Shows)" path="plugin://script.extendedinfo?info=premiereepisodes">PremiereEpisodes</widget>
+		<widget type="pictures" label="Random XKCD Comics" path="plugin://script.extendedinfo?info=xkcd">XKCD</widget>
+
+
+	<!-- Videos -->
+
+	<!-- PVR -->
+	<widget type="video" label="31611">PVR</widget>
+
+	<!-- Music -->
+
+	<!-- System -->
+	<widget type="system" label="130">SystemInfo</widget>
+	<!-- Programs -->
+	<widget type="programs" label="1043" path="addons://sources/executable/">LibraryAddons</widget>
+
+	<!-- Favourites -->
+	<widget type="favourites" label="1036" path="favourites://">LibraryFavourites</widget>
+
+	<!-- Weather -->
+	<widget type="weather" label="10508">WeatherForecast</widget>
+
+	<!-- Playlists -->
+	<widgetPlaylists>True</widgetPlaylists>
+
+	<!-- Settings -->
+	<warn heading="750" message="31732">ActivateWindow(Settings)</warn>
+	<forcesettings>false</forcesettings>
+
+	<!-- Default widgets -->
+	<widgetdefault defaultID="movies">LibraryRecentlyAddedMovies</widgetdefault>
+	<widgetdefault defaultID="tvshows">LibraryRecentlyAddedEpisodes</widgetdefault>
+	<widgetdefault defaultID="music">LDPRandomAlbums</widgetdefault>
+	<widgetdefault defaultID="musicvideos">LibraryRecentlyAddedMusicVideos</widgetdefault>
+	<widgetdefault defaultID="weather">WeatherForecast</widgetdefault>
+	<widgetdefault defaultID="settings">SystemInfo</widgetdefault>
+
+	<!-- available backgrounds -->
+	<backgroundBrowse default="">True</backgroundBrowse>
+    
+    <background label="smartshortcuts">||BROWSE||plugin://script.skin.helper.service/?action=backgrounds</background>    
+	  <background label="smartshortcuts">||BROWSE||special://skin/extras/backgrounds</background>
+	
+		<background label="8">$VAR[Weather_Fanart]</background>
+		<background label="::PLAYLIST::">Playlist.FanartList</background>
+		<background label="Widget 1" condition="StringCompare(Window.Property(groupname),mainmenu)" >WDF1.jpg</background>
+		<background label="Widget 2" condition="StringCompare(Window.Property(groupname),mainmenu)">WDF2.jpg</background>
+	<!--
+	<backgrounddefault defaultID="movies">$INFO[Window(Home).Property(SkinHelper.AllMoviesBackground)]</backgrounddefault>
+	<propertydefault defaultID="movies" property="backgroundName">$ADDON[script.skin.helper.service 32039]</propertydefault>
+	<backgrounddefault defaultID="tvshows">$INFO[Window(Home).Property(SkinHelper.AllTvShowsBackground)]</backgrounddefault>
+	<propertydefault defaultID="tvshows" property="backgroundName">$ADDON[script.skin.helper.service 32043]</propertydefault>
+	
+	<backgrounddefault defaultID="music">$INFO[Window(Home).Property(SkinHelper.AllMusicBackground)]</backgrounddefault>
+	<propertydefault defaultID="music" property="backgroundName">$ADDON[script.skin.helper.service 32048]</propertydefault>
+	<backgrounddefault defaultID="musicvideos">$INFO[Window(Home).Property(SkinHelper.AllMusicVideosBackground)]</backgrounddefault>
+	<propertydefault defaultID="musicvideos" property="backgroundName">$ADDON[script.skin.helper.service 32047]</propertydefault>
+	<backgrounddefault defaultID="pictures">$INFO[Window(Home).Property(SkinHelper.PicturesBackground)]</backgrounddefault>
+	<propertydefault defaultID="pictures" property="backgroundName">$ADDON[script.skin.helper.service 32046]</propertydefault>
+	<backgrounddefault defaultID="videos">$INFO[Window(Home).Property(SkinHelper.GlobalFanartBackground)]</backgrounddefault>
+	<propertydefault defaultID="videos" property="backgroundName">$ADDON[script.skin.helper.service 32038]</propertydefault>
+	<backgrounddefault defaultID="weather">resource://resource.images.weatherfanart.multi/$INFO[Window(Weather).Property(Day0.FanartCode)]</backgrounddefault>
+	<backgrounddefault defaultID="livetv">$INFO[Window(Home).Property(SkinHelper.PvrBackground)]</backgrounddefault>
+	-->
+	<!-- Thumbnails (Home2 icons, also specified in shortcuts/mainmenu.DATA.xml) -->
+	<thumbnail label="32032">Aicons/playdisc.png</thumbnail>
+	<thumbnail label="342">Aicons/movies.png</thumbnail>
+	<thumbnail label="20343">Aicons/tvshows.png</thumbnail>
+	<thumbnail label="10006">Aicons/videos.png</thumbnail>
+	<thumbnail label="31334">Aicons/trailers.png</thumbnail>
+	<thumbnail label="32022">Aicons/livetv.png</thumbnail>
+	<thumbnail label="10005">Aicons/music.png</thumbnail>
+	<thumbnail label="20389">Aicons/musicvideos.png</thumbnail>
+	<thumbnail label="32087">Aicons/radio.png</thumbnail>
+	<thumbnail label="10002">Aicons/pictures.png</thumbnail>
+	<thumbnail label="10001">Aicons/programs.png</thumbnail>
+	<thumbnail label="12600">Aicons/weather.png</thumbnail>
+	<thumbnail label="1036">Aicons/favourites.png</thumbnail>
+	<thumbnail label="137">Aicons/search.png</thumbnail>
+	<thumbnail label="10004">Aicons/settings.png</thumbnail>
+	<thumbnail label="13005">Aicons/shutdown.png</thumbnail>
+	
+	
+	<propertySettings property="backgroundplayliststyle" buttonID="1008" showNone="false" title="$LOCALIZE[31916]" />
+	<property property="backgroundplayliststyle" label="31914">X1</property>
+	<property property="backgroundplayliststyle" label="31915">X2</property>
+	<propertydefault property="backgroundplayliststyle">X2</propertydefault>
+	<!-- Widget Style 1 -->
+	
+	<propertySettings toggle="widgetShow" buttonID="1003" title="Widget show" />
+	<propertydefault property="widgetShow"></propertydefault>
+	<propertySettings toggle="widgetShowH" buttonID="1004" title="Widget show" />
+	<propertydefault property="widgetShowH"></propertydefault>
+	
+<propertySettings property="widgetSortOrder" buttonID="1005" showNone="false" title="$LOCALIZE[581]" />
+		<property property="widgetSortOrder" label="584">ascending</property>
+	<property property="widgetSortOrder" label="585">descending</property>
+	<propertydefault property="widgetSortOrder">ascending</propertydefault>
+
+	
+	
+	<propertySettings property="widgetStyle" buttonID="1001" showNone="false" title="$LOCALIZE[31738]" />
+	<property property="widgetStyle" label="31736">List</property>
+	<property property="widgetStyle" label="31737">Panel</property>
+	<propertydefault property="widgetStyle">Panel</propertydefault>
+
+<propertySettings property="widgetSort" buttonID="1002" showNone="false" title="$LOCALIZE[31739]" />
+<property property="widgetSort" label="31740">name</property>
+<property property="widgetSort" label="31741">date</property>
+<property property="widgetSort" label="31742">size</property>
+<property property="widgetSort" label="31743">file</property>
+<property property="widgetSort" label="31744">path</property>
+<!--<property property="widgetSort" label="31745">drivetype</property> -->
+<property property="widgetSort" label="31746">title</property>
+<!--<property property="widgetSort" label="31747">tracknumber</property> -->
+<property property="widgetSort" label="31748">time</property>
+<property property="widgetSort" label="31749" condition="StringCompare(Container(211).ListItem.Property(widgetTarget),music)">artist</property>
+<property property="widgetSort" label="31750" condition="StringCompare(Container(211).ListItem.Property(widgetTarget),music)">album</property>
+<property property="widgetSort" label="31751" condition="StringCompare(Container(211).ListItem.Property(widgetTarget),music)">albumtype</property>
+<property property="widgetSort" label="31752">genre</property>
+<property property="widgetSort" label="31753">country</property>
+<property property="widgetSort" label="31754">year</property>
+<property property="widgetSort" label="31755" condition="!StringCompare(Container(211).ListItem.Property(widgetTarget),music)">rating</property>
+<property property="widgetSort" label="31756" condition="!StringCompare(Container(211).ListItem.Property(widgetTarget),music)">votes</property>
+<property property="widgetSort" label="31757" condition="!StringCompare(Container(211).ListItem.Property(widgetTarget),music)">top250</property>
+<!--<property property="widgetSort" label="31758">programcount</property>
+<property property="widgetSort" label="31759">playlistorder</property>-->
+<property property="widgetSort" label="31760" condition="StringCompare(Container(211).ListItem.Property(widgetTarget),tvshows)">episodenumber</property>
+<property property="widgetSort" label="31761" condition="StringCompare(Container(211).ListItem.Property(widgetTarget),tvshows)">season</property>
+<property property="widgetSort" label="31762" condition="StringCompare(Container(211).ListItem.Property(widgetTarget),tvshows)">numberofepisodes</property>
+<property property="widgetSort" label="31763" condition="StringCompare(Container(211).ListItem.Property(widgetTarget),tvshows)">numberofwatchedepisodes</property>
+<property property="widgetSort" label="31764" condition="StringCompare(Container(211).ListItem.Property(widgetTarget),tvshows)">tvshowstatus</property>
+<property property="widgetSort" label="31765" condition="StringCompare(Container(211).ListItem.Property(widgetTarget),tvshows)">tvshowtitle</property>
+<!--<property property="widgetSort" label="31766">sorttitle</property>
+<property property="widgetSort" label="31767">productioncode</property>-->
+<property property="widgetSort" label="31768" condition="!StringCompare(Container(211).ListItem.Property(widgetTarget),music)">mpaa</property>
+<property property="widgetSort" label="31769" condition="!StringCompare(Container(211).ListItem.Property(widgetTarget),music)">videoresolution</property>
+<!--<property property="widgetSort" label="31770">videocodec</property>
+<property property="widgetSort" label="31771">videoaspectratio</property>-->
+<property property="widgetSort" label="31772">audiochannels</property>
+<!--<property property="widgetSort" label="31773">audiocodec</property>-->
+<property property="widgetSort" label="31774" condition="!StringCompare(Container(211).ListItem.Property(widgetTarget),music)">audiolanguage</property>
+<property property="widgetSort" label="31775" condition="!StringCompare(Container(211).ListItem.Property(widgetTarget),music)">subtitlelanguage</property>
+<property property="widgetSort" label="31776" condition="!StringCompare(Container(211).ListItem.Property(widgetTarget),music)">studio</property>
+<property property="widgetSort" label="31777">dateadded</property>
+<property property="widgetSort" label="31778">lastplayed</property>
+<property property="widgetSort" label="31782">random</property>
+<!--<property property="widgetSort" label="31779">playcount</property>
+<property property="widgetSort" label="31780">listeners</property>
+<property property="widgetSort" label="31781">bitrate</property>
+<property property="widgetSort" label="31783">channel</property>
+<property property="widgetSort" label="31784">channelnumber</property>
+<property property="widgetSort" label="31785">datetaken</property>-->
+<property property="widgetSort" label="31786"></property>
+	<!-- Widget Style 2 -->
+		<propertySettings toggle="widgetShow.2" buttonID="2003" title="Widget show" />
+	<propertydefault property="widgetShow.2"></propertydefault>
+	<propertySettings toggle="widgetShowH.2" buttonID="2004" title="Widget show" />
+	<propertydefault property="widgetShowH.2"></propertydefault>
+	
+	<propertySettings property="widgetStyle.2" buttonID="2001" showNone="false" title="$LOCALIZE[31738]" />
+		<property property="widgetStyle.2" label="31736">List</property>
+	<property property="widgetStyle.2" label="31737">Panel</property>
+	<propertydefault property="widgetStyle.2">Panel</propertydefault>
+	
+	<propertySettings property="widgetSortOrder.2" buttonID="2005" showNone="false" title="$LOCALIZE[581]" />
+		<property property="widgetSortOrder.2" label="584">ascending</property>
+	<property property="widgetSortOrder.2" label="585">descending</property>
+	<propertydefault property="widgetSortOrder.2">ascending</propertydefault>
+	
+<propertySettings property="widgetSort.2" buttonID="2002" showNone="false" title="$LOCALIZE[31739]" />
+<property property="widgetSort.2" label="31740">name</property>
+<property property="widgetSort.2" label="31741">date</property>
+<property property="widgetSort.2" label="31742">size</property>
+<property property="widgetSort.2" label="31743">file</property>
+<property property="widgetSort.2" label="31744">path</property>
+<!--<property property="widgetSort.2" label="31745">drivetype</property> -->
+<property property="widgetSort.2" label="31746">title</property>
+<!--<property property="widgetSort.2" label="31747">tracknumber</property> -->
+<property property="widgetSort.2" label="31748">time</property>
+<property property="widgetSort.2" label="31749" condition="StringCompare(Container(211).ListItem.Property(widgetTarget.2),music)">artist</property>
+<property property="widgetSort.2" label="31750" condition="StringCompare(Container(211).ListItem.Property(widgetTarget.2),music)">album</property>
+<property property="widgetSort.2" label="31751" condition="StringCompare(Container(211).ListItem.Property(widgetTarget.2),music)">albumtype</property>
+<property property="widgetSort.2" label="31752">genre</property>
+<property property="widgetSort.2" label="31753">country</property>
+<property property="widgetSort.2" label="31754">year</property>
+<property property="widgetSort.2" label="31755" condition="!StringCompare(Container(211).ListItem.Property(widgetTarget.2),music)">rating</property>
+<property property="widgetSort.2" label="31756" condition="!StringCompare(Container(211).ListItem.Property(widgetTarget.2),music)">votes</property>
+<property property="widgetSort.2" label="31757" condition="!StringCompare(Container(211).ListItem.Property(widgetTarget.2),music)">top250</property>
+<!--<property property="widgetSort.2" label="31758">programcount</property>
+<property property="widgetSort.2" label="31759">playlistorder</property>-->
+<property property="widgetSort.2" label="31760" condition="StringCompare(Container(211).ListItem.Property(widgetTarget.2),tvshows)">episodenumber</property>
+<property property="widgetSort.2" label="31761" condition="StringCompare(Container(211).ListItem.Property(widgetTarget.2),tvshows)">season</property>
+<property property="widgetSort.2" label="31762" condition="StringCompare(Container(211).ListItem.Property(widgetTarget.2),tvshows)">numberofepisodes</property>
+<property property="widgetSort.2" label="31763" condition="StringCompare(Container(211).ListItem.Property(widgetTarget.2),tvshows)">numberofwatchedepisodes</property>
+<property property="widgetSort.2" label="31764" condition="StringCompare(Container(211).ListItem.Property(widgetTarget.2),tvshows)">tvshowstatus</property>
+<property property="widgetSort.2" label="31765" condition="StringCompare(Container(211).ListItem.Property(widgetTarget.2),tvshows)">tvshowtitle</property>
+<!--<property property="widgetSort.2" label="31766">sorttitle</property>
+<property property="widgetSort.2" label="31767">productioncode</property>-->
+<property property="widgetSort.2" label="31768" condition="!StringCompare(Container(211).ListItem.Property(widgetTarget.2),music)">mpaa</property>
+<property property="widgetSort.2" label="31769" condition="!StringCompare(Container(211).ListItem.Property(widgetTarget.2),music)">videoresolution</property>
+<!--<property property="widgetSort.2" label="31770">videocodec</property>
+<property property="widgetSort.2" label="31771">videoaspectratio</property>-->
+<property property="widgetSort.2" label="31772">audiochannels</property>
+<!--<property property="widgetSort.2" label="31773">audiocodec</property>-->
+<property property="widgetSort.2" label="31774" condition="!StringCompare(Container(211).ListItem.Property(widgetTarget.2),music)">audiolanguage</property>
+<property property="widgetSort.2" label="31775" condition="!StringCompare(Container(211).ListItem.Property(widgetTarget.2),music)">subtitlelanguage</property>
+<property property="widgetSort.2" label="31776" condition="!StringCompare(Container(211).ListItem.Property(widgetTarget.2),music)">studio</property>
+<property property="widgetSort.2" label="31777">dateadded</property>
+<property property="widgetSort.2" label="31778">lastplayed</property>
+<property property="widgetSort.2" label="31782">random</property>
+<!--<property property="widgetSort.2" label="31779">playcount</property>
+<property property="widgetSort.2" label="31780">listeners</property>
+<property property="widgetSort.2" label="31781">bitrate</property>
+<property property="widgetSort.2" label="31783">channel</property>
+<property property="widgetSort.2" label="31784">channelnumber</property>
+<property property="widgetSort.2" label="31785">datetaken</property>-->
+<property property="widgetSort.2" label="31786"></property>
+	
+</overrides>

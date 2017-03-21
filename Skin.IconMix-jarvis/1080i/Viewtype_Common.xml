@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+	<include name="VuePosterChoix">
+		<control type="label" id="1010">
+			<posy>-1000</posy>
+			<label>$VAR[VisibleViewMode]</label>
+			<width>1</width>
+			<height>1</height>
+		</control>
+
+		<!-- pochette -->
+		<control type="group">
+			<visible>!StringCompare(Control.GetLabel(1010),3)+!Container.Content(Genres)</visible>
+			<control type="image">
+				<posx>20</posx>
+				<posy>21</posy>
+				<width>286</width>
+				<height>412</height>
+				<bordersize>9</bordersize>
+				<bordertexture border="9" colordiffuse="FFFFFFFF">landscapeinfo.png</bordertexture>
+				<texture background="true" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>!IsEmpty(ListItem.Title)</visible>
+			</control>
+			<control type="image">
+				<posx>20</posx>
+				<posy>21</posy>
+				<width>286</width>
+				<height>412</height>
+				<bordersize>9</bordersize>
+				<bordertexture border="9" colordiffuse="FFFFFFFF">landscapeinfo.png</bordertexture>
+				<texture background="true">$INFO[ListItem.Icon]</texture>
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>IsEmpty(ListItem.Title)+!Container.Content(genres)</visible>
+			</control>
+			<control type="image">
+				<posx>20</posx>
+				<posy>21</posy>
+				<width>286</width>
+				<height>412</height>
+				<bordersize>9</bordersize>
+				<bordertexture border="9" colordiffuse="FFFFFFFF">landscapeinfo.png</bordertexture>
+				<texture fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
+			</control>
+			<control type="group">
+				<visible>StringCompare(Control.GetLabel(1010),2)+!Container.Content(Genres)</visible>
+				<control type="image">
+					<description>Glass overlay</description>
+					<posx>17</posx>
+					<posy>-9</posy>
+					<width>292</width>
+					<height>442</height>
+					<texture>$VAR[Boitier_SelonResolution]</texture>
+					
+				</control>
+			
+			</control>
+		</control>
+
+		<!-- arrondies -->
+		<control type="group">
+			<visible>StringCompare(Control.GetLabel(1010),3)|Container.Content(Genres)</visible>
+			<control type="image">
+				<posx>20</posx>
+				<posy>21</posy>
+				<width>286</width>
+				<height>412</height>
+
+				<texture background="true" diffuse="showcase_matte.png" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
+
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>!IsEmpty(ListItem.Title)</visible>
+			</control>
+			<control type="image">
+				<posx>20</posx>
+				<posy>21</posy>
+				<width>286</width>
+				<height>412</height>
+
+				<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>IsEmpty(ListItem.Title)+!Container.Content(genres)</visible>
+			</control>
+			<control type="image">
+				<posx>20</posx>
+				<posy>21</posy>
+				<width>286</width>
+				<height>412</height>
+
+				<texture background="true" diffuse="showcase_matte.png" fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
+			</control>
+
+			<control type="image">
+				<description>Glass overlay</description>
+				<posx>0</posx>
+				<posy>0</posy>
+				<width>326</width>
+				<height>452</height>
+				<texture>showcase_noshadow.png</texture>
+			</control>
+		</control>
+
+	</include>
+
+	<include name="VuePosterChoixLarge">
+		<control type="label" id="1010">
+			<posy>-1000</posy>
+			<label>$VAR[VisibleViewMode]</label>
+			<width>1</width>
+			<height>1</height>
+		</control>
+
+		<!-- pochette -->
+		<control type="group">
+			<posy>10</posy>
+			<visible>!StringCompare(Control.GetLabel(1010),3)+!Container.Content(Genres)</visible>
+			<control type="image">
+				<posx>40</posx>
+				<posy>41</posy>
+				<width>386</width>
+				<height>562</height>
+				<bordersize>9</bordersize>
+				<bordertexture border="13" colordiffuse="FFFFFFFF">landscapeinfo.png</bordertexture>
+				<texture background="true" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
+				<!-- <colordiffuse>80A0A0A0</colordiffuse> -->
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>!IsEmpty(ListItem.Title)</visible>
+			</control>
+			<control type="image">
+				<posx>40</posx>
+				<posy>41</posy>
+				<width>386</width>
+				<height>562</height>
+				<bordersize>9</bordersize>
+				<bordertexture border="13" colordiffuse="FFFFFFFF">landscapeinfo.png</bordertexture>
+				<texture background="true">$INFO[ListItem.Icon]</texture>
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>IsEmpty(ListItem.Title)+!Container.Content(genres)</visible>
+			</control>
+			<control type="image">
+				<posx>40</posx>
+				<posy>41</posy>
+				<width>386</width>
+				<height>562</height>
+				<bordersize>9</bordersize>
+				<bordertexture border="13" colordiffuse="FFFFFFFF">landscapeinfo.png</bordertexture>
+				<texture fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
+			</control>
+			<control type="group">
+				<visible>StringCompare(Control.GetLabel(1010),2)+!Container.Content(Genres)</visible>
+				<control type="image">
+					<description>Glass overlay</description>
+					<posx>37</posx>
+					<posy>-7</posy>
+					<width>392</width>
+					<height>610</height>
+					<texture>$VAR[Boitier_SelonResolution]</texture>
+					
+				</control>
+				
+			</control>
+		</control>
+
+		<!-- arrondies -->
+		<control type="group">
+			<posy>10</posy>
+			<visible>StringCompare(Control.GetLabel(1010),3)|Container.Content(Genres)</visible>
+			<control type="image">
+				<posx>40</posx>
+				<posy>41</posy>
+				<width>386</width>
+				<height>562</height>
+				<texture background="true" diffuse="showcase_matte.png" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>!IsEmpty(ListItem.Title)</visible>
+			</control>
+			<control type="image">
+				<posx>40</posx>
+				<posy>41</posy>
+				<width>386</width>
+				<height>562</height>
+				<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>IsEmpty(ListItem.Title)+!Container.Content(genres)</visible>
+			</control>
+			<control type="image">
+				<posx>40</posx>
+				<posy>41</posy>
+				<width>386</width>
+				<height>562</height>
+				<texture background="true" diffuse="showcase_matte.png" fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
+			</control>
+
+			<control type="image">
+				<description>Glass overlay</description>
+				<posx>30</posx>
+				<posy>31</posy>
+				<width>406</width>
+				<height>582</height>
+				<texture>showcase_noshadow.png</texture>
+
+			</control>
+		</control>
+
+	</include>
+	<include name="PosterViewCommon_Details">
+		<!-- Browser label and flags -->
+		<control type="group">
+			<include>Animation_OpenCloseFade</include>
+			<include>Animation_FadedByMenu</include>
+			<include>Animation_HiddenByInfo</include>
+			<visible>!IsEmpty(ListItem.Title)</visible>	
+			
+			<!-- Tagline -->
+			<control type="textbox">
+				<posx>400</posx>
+				<posy>10</posy>
+				<width>700</width>
+				<height>70</height>
+				<align>left</align>
+				<font>METF_PlotText</font>
+				<textcolor>TextNF</textcolor>
+				<label>$INFO[ListItem.Tagline]</label>
+				<!---<visible>Container.Content(movies) + !IsEmpty(ListItem.Tagline) + !Skin.HasSetting(Hide_MovieTagline)</visible> -->
+			</control>
+		</control>
+			<!-- Browser label and flags -->
+		
+	</include>
+<!------------------------------------------------------------------------------------------------------------->
+<variable name="artistbanner">
+	<value>http://localhost:52307/getmusicart&amp;artist=$INFO[Listitem.Artist]&amp;type=banner&amp;</value>	
+</variable>
+<variable name="artistlogo">
+	<value>http://localhost:52307/getmusicart&amp;artist=$INFO[Listitem.Artist]&amp;type=clearlogo</value>
+</variable>
+
+<include name="BannerViewCommon_Browser">
+	
+		<itemlayout width="560" height="120">
+			<control type="group">
+			<control type="image">
+				<posx>12</posx>
+				<posy>15</posy>
+				<width>502</width>
+				<height>96</height>
+				<texture>frames/banner_diffuse.png</texture>
+				<colordiffuse>FrameBackgroundDiffuse</colordiffuse>
+				
+			</control>
+			<!--
+	<control type="label">
+			<top>20</top>
+			<left>18</left>
+			<width>480</width>
+			<align>center</align>
+			<label>$INFO[ListItem.Label]</label>
+			<font>lcdn</font>
+			<visible>Container.Content(artists)</visible>
+		</control>
+		-->
+	<control type="image">
+				<posx>12</posx>
+				<posy>15</posy>
+				<width>502</width>
+				<height>96</height>
+				<texture background="true" diffuse="frames/banner_diffuse.png">$INFO[ListItem.Thumb]</texture>	
+				<aspectratio scalediffuse="true">scale</aspectratio>
+				<colordiffuse>FFFFFFFF</colordiffuse>
+				<visible>Container.Content(artists)</visible>
+			</control>
+		<control type="image">
+				<posx>12</posx>
+				<posy>15</posy>
+				<width>502</width>
+				<height>96</height>
+				<texture background="true" diffuse="frames/banner_diffuse.png">$VAR[artistlogo]</texture>	
+				<aspectratio scalediffuse="true">keep</aspectratio>
+				<colordiffuse>FFFFFFFF</colordiffuse>
+				<visible>Container.Content(artists)</visible>
+			</control>
+			
+			
+			<control type="image">
+				<posx>12</posx>
+				<posy>15</posy>
+				<width>502</width>
+				<height>96</height>
+				<texture background="true" diffuse="frames/banner_diffuse.png">$VAR[artistbanner]</texture>	
+				<colordiffuse>FFFFFFFF</colordiffuse>
+				<aspectratio scalediffuse="true">keep</aspectratio>
+				<visible>Container.Content(artists)</visible>
+			</control>
+			
+			
+		
+		
+			<control type="image">
+				<posx>12</posx>
+				<posy>15</posy>
+				<width>502</width>
+				<height>96</height>
+				<texture background="true" fallback="default_banner.png" diffuse="frames/banner_diffuse.png">$INFO[ListItem.Art(banner)]</texture>
+				<aspectratio scalediffuse="true">stretch</aspectratio>
+				<visible>Container.Content(tvshows)+!IsEmpty(ListItem.Title)</visible>
+			</control>
+			<control type="image">
+				<posx>4</posx>
+				<posy>7</posy>
+				<width>518</width>
+				<height>114</height>
+				<texture background="true">frames/banner_frame2.png</texture>
+				<aspectratio scalediffuse="true">stretch</aspectratio>
+			</control>
+			<control type="image">
+				<posx>354</posx>
+				<posy>52</posy>
+				<width>38</width>
+				<height>38</height>
+				<texture>$INFO[ListItem.Overlay]</texture>
+				<colordiffuse>WatchedOverlay</colordiffuse>
+				<visible>!Skin.HasSetting(HideTVWatchedOverlays)</visible>
+			</control>
+			<control type="group">
+				<left>0</left>
+				<top>0</top>
+				<include>ShowTotalTvEp</include>		
+			</control>
+			<include>AnimationCacheNonSelect</include>
+			</control>
+		</itemlayout>
+		
+		<focusedlayout width="560" height="120">
+			<include>ActiveClearArt</include>
+			<control type="group">
+				<animation reversible="false" effect="zoom" center="auto" start="100" end="135" time="200" tween="bounce" >focus</animation>
+				<animation reversible="false" effect="zoom" center="auto" start="135" end="100" time="200" tween="bounce" >unfocus</animation>
+			<control type="image">
+				<posx>12</posx>
+				<posy>15</posy>
+				<width>502</width>
+				<height>96</height>
+				<texture>frames/banner_diffuse.png</texture>
+				<colordiffuse>FrameBackgroundDiffuse</colordiffuse>
+			</control>
+			<!--
+	<control type="label">
+			<top>20</top>
+			<left>18</left>
+			<width>480</width>
+			<align>center</align>
+			<label>$INFO[ListItem.Label]</label>
+			<font>lcdn</font>
+			<visible>Container.Content(artists)</visible>
+		</control>
+		-->
+	<control type="image">
+				<posx>12</posx>
+				<posy>15</posy>
+				<width>502</width>
+				<height>96</height>
+				<texture background="true" diffuse="frames/banner_diffuse.png">$INFO[ListItem.Thumb]</texture>	
+				<aspectratio scalediffuse="true">scale</aspectratio>
+				<colordiffuse>FFFFFFFF</colordiffuse>
+				<visible>Container.Content(artists)</visible>
+			</control>
+		<control type="image">
+				<posx>12</posx>
+				<posy>15</posy>
+				<width>502</width>
+				<height>96</height>
+				<texture background="true" diffuse="frames/banner_diffuse.png">$VAR[artistlogo]</texture>	
+				<aspectratio scalediffuse="true">keep</aspectratio>
+				<colordiffuse>FFFFFFFF</colordiffuse>
+				<visible>Container.Content(artists)</visible>
+			</control>
+			
+			
+			<control type="image">
+				<posx>12</posx>
+				<posy>15</posy>
+				<width>502</width>
+				<height>96</height>
+				<texture background="true" diffuse="frames/banner_diffuse.png">$VAR[artistbanner]</texture>	
+				<colordiffuse>FFFFFFFF</colordiffuse>
+				<aspectratio scalediffuse="true">keep</aspectratio>
+				<visible>Container.Content(artists)</visible>
+			</control>
+			
+			
+			<control type="image">
+				<posx>12</posx>
+				<posy>15</posy>
+				<width>502</width>
+				<height>96</height>
+				<texture background="true" fallback="default_banner.png" diffuse="frames/banner_diffuse.png">$INFO[ListItem.Art(banner)]</texture>				
+				<aspectratio scalediffuse="true">stretch</aspectratio>
+				<visible>Container.Content(tvshows)+!IsEmpty(ListItem.Title)</visible>
+			</control>
+			<control type="image">
+				<posx>4</posx>
+				<posy>7</posy>
+				<width>518</width>
+				<height>114</height>
+				<texture background="true">frames/banner_frame2.png</texture>
+				
+				<aspectratio scalediffuse="true">stretch</aspectratio>
+			</control>
+			<control type="image">
+				<posx>354</posx>
+				<posy>52</posy>
+				<width>38</width>
+				<height>38</height>
+				<texture>$INFO[ListItem.Overlay]</texture>
+				<colordiffuse>WatchedOverlay</colordiffuse>
+				<visible>!Skin.HasSetting(HideTVWatchedOverlays)</visible>
+				
+			</control>	
+			<control type="group">
+				<left>0</left>
+				<top>0</top>
+			<include>ShowTotalTvEp</include>		
+			</control>
+			</control>
+		</focusedlayout>
+	</include>
+	<!------------------------------------------------------------------------------------------------------------->
+
+	
+	<include name="PosterVeryLargeViewCommon_Browser">
+		<posx>-250</posx>
+		<posy>10</posy>
+		<height>800</height>
+		<width>2250</width>
+		
+		<include condition="!Skin.HasSetting(ViewLockdown)">OnUp7000</include>
+		<!-- <ondown>60</ondown>-->
+		<orientation>horizontal</orientation>
+		<scrolltime>200</scrolltime>
+		<!-- XXX: Causes left-most item to 'blink' out instead of smoothly scrolling off (sometimes...)
+		<preloaditems>2</preloaditems>-->
+		<pagecontrol>60</pagecontrol>
+		<include>Animation_FadedByMenu</include>
+		<include>Animation_OpenCloseFade</include>
+		<include>Animation_HiddenByInfo</include>
+		<itemlayout width="480" height="620">
+			<control type="group">
+				<posx>-10</posx>
+				<posy>160</posy>
+				<include>VuePosterChoixLarge</include>
+				<!-- Unfocused Item - Watched Overlay -->
+				
+				<control type="group">
+					<posx>330</posx>
+					<posy>582</posy>
+					<include>OverlayProgress</include>
+				</control>
+				<control type="group">
+					<left>28</left>
+					<top>30</top>
+					<include>ShowTotalTvEp</include>		
+				</control>
+			<include>AnimationCacheNonSelect</include>
+			</control>
+		</itemlayout>
+		<focusedlayout width="530" height="720">
+			<include>ActiveClearArt</include>
+			<!-- Focused Item Poster -->
+			<control type="group">
+				<animation type="Focus" reversible="false">
+					<effect type="zoom" center="0,520" start="100" end="125" time="150" tween="sine" easing="inout" delay="50" />
+					<effect type="rotatey" center="150" end="-15" time="300" delay="250" />
+				</animation>
+				
+				<posx>-10</posx>
+				<posy>120</posy>
+				<width>435</width>
+					<height>608</height>
+				<include>VuePosterChoixLarge</include>
+				<!-- Unfocused Item - Watched Overlay -->
+				
+				<control type="group">
+					<posx>330</posx>
+					<posy>582</posy>
+					<include>OverlayProgress</include>
+				</control>
+				
+			</control>
+			<control type="group">
+			<left>130</left>
+			<include>PosterViewCommon_Details</include>
+			</control>
+		</focusedlayout>
+		
+	</include>
+	
+
+	
+	<include name="PosterLargeViewCommon_Browser">
+		<posx>50</posx>
+		<posy>240</posy>
+		<height>600</height>
+		<width>2000</width>
+		<include condition="!Skin.HasSetting(ViewLockdown)">OnUp7000</include>
+		<!-- <ondown>60</ondown>-->
+		<orientation>horizontal</orientation>
+		<scrolltime>200</scrolltime>
+		<!-- XXX: Causes left-most item to 'blink' out instead of smoothly scrolling off (sometimes...)
+		<preloaditems>2</preloaditems>-->
+		<pagecontrol>60</pagecontrol>
+		<include>Animation_FadedByMenu</include>
+		<include>Animation_OpenCloseFade</include>
+		<include>Animation_HiddenByInfo</include>
+		<itemlayout width="340" height="420">
+			<control type="group">
+				<posx>-10</posx>
+				<posy>130</posy>
+				<!-- Unfocused Item - Poster -->
+				<include>VuePosterChoix</include>
+				<!-- Unfocused Item - Watched Overlay -->
+				
+				<control type="group">
+					<posx>220</posx>
+					<posy>402</posy>
+					<include>OverlayProgress</include>
+				</control>
+				<control type="group">
+					<left>28</left>
+					<top>30</top>
+					<include>ShowTotalTvEp</include>		
+				</control>
+			<include>AnimationCacheNonSelect</include>
+			</control>
+		</itemlayout>
+		<focusedlayout width="380" height="520">
+			<include>ActiveClearArt</include>
+			<!-- Focused Item Poster -->
+			<control type="group">
+				<animation type="Focus" reversible="false">
+					<effect type="zoom" center="0,520" start="100" end="130" time="150" tween="sine" easing="inout" delay="50" />
+					<effect type="rotatey" center="150" end="-15" time="300" delay="250" />
+				</animation>
+				<posx>-20</posx>
+				<posy>120</posy>
+				<width>285</width>
+					<height>408</height>
+				<include>VuePosterChoix</include>
+				<!-- Unfocused Item - Watched Overlay -->
+				
+				<control type="group">
+					<posx>220</posx>
+					<posy>402</posy>
+					<include>OverlayProgress</include>
+				</control>
+				
+			</control>
+			<include>PosterViewCommon_Details</include>
+		</focusedlayout>
+		
+	</include>
+	
+	<include name="PosterLargeViewCommon_BrowserVertical">
+		<posx>20</posx>
+		<posy>-40</posy>
+		<height>860</height>
+		<width>1900</width>
+		
+		<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
+		<!-- <ondown>60</ondown>-->
+		<orientation>vertical</orientation>
+		<focusposition>2</focusposition>
+		<scrolltime>200</scrolltime>
+		<!-- XXX: Causes left-most item to 'blink' out instead of smoothly scrolling off (sometimes...)
+		<preloaditems>2</preloaditems>-->
+		<pagecontrol>60</pagecontrol>
+		<include>Animation_FadedByMenu</include>
+		<include>Animation_OpenCloseFade</include>
+		<include>Animation_HiddenByInfo</include>
+		
+		<itemlayout width="300" height="210">
+			<control type="group">
+				<posx>-10</posx>
+				<posy>9</posy>
+				<!-- Unfocused Item - Poster -->
+				<control type="image">
+					<posx>20</posx>
+					<posy>21</posy>
+					<width>118</width>
+					<height>181</height>
+					<texture colordiffuse="A0A0A0A0"  background="true" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
+					<!-- <colordiffuse>80A0A0A0</colordiffuse> -->
+					<aspectratio scalediffuse="false">stretch</aspectratio>
+					<visible>!IsEmpty(ListItem.Title)</visible>
+				</control>
+				<control type="image">
+					<posx>20</posx>
+					<posy>21</posy>
+					<width>118</width>
+					<height>181</height>
+					<texture colordiffuse="A0A0A0A0" background="true">$INFO[ListItem.Icon]</texture>
+					<aspectratio scalediffuse="false">keep</aspectratio>
+					<visible>IsEmpty(ListItem.Title)+!Container.Content(genres)</visible>
+			</control>
+			<control type="image">
+					<posx>20</posx>
+					<posy>21</posy>
+					<width>118</width>
+					<height>181</height>
+					<texture colordiffuse="A0A0A0A0"  fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
+				<aspectratio scalediffuse="false">keep</aspectratio>
+				<visible>IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
+			</control>
+				<!-- Unfocused Item - Frame -->
+				<control type="image">
+					<posx>20</posx>
+					<posy>21</posy>
+					<width>118</width>
+					<height>181</height>
+					<texture>frames/ClassicFrameGlass_Vertical.png</texture>
+					<aspectratio scalediffuse="false">stretch</aspectratio>
+					<colordiffuse>GlassDiffuse</colordiffuse>
+					<visible>!IsEmpty(ListItem.Title)</visible>
+				</control>
+				<control type="image">
+				<posx>10</posx>
+				<posy>10</posy>				
+					<width>142</width>
+					<height>204</height>
+					<texture>frames/ClassicFrame_PosterSmall.png</texture>
+					<aspectratio scalediffuse="false">stretch</aspectratio>
+					<visible>!IsEmpty(ListItem.Title)</visible>
+				</control>
+				<!-- Unfocused Item - Watched Overlay -->
+				
+				<!-- Unfocused Item - Watched Overlay for In-Progress Items -->
+				<control type="group">
+					<posx>30</posx>
+					<posy>185</posy>
+					<include>OverlayProgress</include>
+				</control>
+				<control type="group">
+				<left>28</left>
+				<top>30</top>
+			<include>ShowTotalTvEp</include>		
+			</control>
+			<include>AnimationCacheNonSelect</include>
+			</control>
+		</itemlayout>
+		<focusedlayout width="1800" height="210">
+			<include>ActiveClearArt</include>
+		<control type="group">
+				<posx>-10</posx>
+				<posy>9</posy>
+				<!-- Unfocused Item - Poster -->
+				<control type="image">
+					<posx>20</posx>
+					<posy>21</posy>
+					<width>118</width>
+					<height>181</height>
+					<texture background="true" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
+					<!-- <colordiffuse>80A0A0A0</colordiffuse> -->
+					<aspectratio scalediffuse="false">stretch</aspectratio>
+					<visible>!IsEmpty(ListItem.Title)</visible>
+				</control>
+				<control type="image">
+					<posx>20</posx>
+					<posy>21</posy>
+					<width>118</width>
+					<height>181</height>
+					<texture background="true">$INFO[ListItem.Icon]</texture>
+					<aspectratio scalediffuse="false">keep</aspectratio>
+					<visible>IsEmpty(ListItem.Title)+!Container.Content(genres)</visible>
+			</control>
+			<control type="image">
+					<posx>20</posx>
+					<posy>21</posy>
+					<width>118</width>
+					<height>181</height>
+					<texture fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
+				<aspectratio scalediffuse="false">keep</aspectratio>
+				<visible>IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
+			</control>
+				<!-- Unfocused Item - Frame -->
+				<control type="image">
+					<posx>20</posx>
+					<posy>21</posy>
+					<width>118</width>
+					<height>181</height>
+					<texture>frames/ClassicFrameGlass_Vertical.png</texture>
+					<aspectratio scalediffuse="false">stretch</aspectratio>
+					<colordiffuse>GlassDiffuse</colordiffuse>
+					<visible>!IsEmpty(ListItem.Title)</visible>
+				</control>
+				<control type="image">
+				<posx>10</posx>
+				<posy>10</posy>				
+					<width>142</width>
+					<height>204</height>
+					<texture >frames/ClassicFrame_PosterSmall.png</texture>
+					<aspectratio scalediffuse="false">stretch</aspectratio>
+					<visible>!IsEmpty(ListItem.Title)</visible>
+				</control>
+				<!-- Unfocused Item - Watched Overlay -->
+				
+				<!-- Unfocused Item - Watched Overlay for In-Progress Items -->
+				<control type="group">
+					<posx>30</posx>
+					<posy>185</posy>
+					<include>OverlayProgress</include>
+				</control>
+			</control>
+			<!--
+		<control type="image">	
+					<posy>-40</posy>
+					<posx>45</posx>
+					<width>1820</width>
+					<height>200</height>
+					<texture>blue-lineF.png</texture>
+					<aspectratio>stretch</aspectratio>				 
+				</control>
+				-->
+			<control type="group">			
+				<posx>1440</posx>
+				<posy>-350</posy>
+					<animation effect="rotatey" center="1600" start="0" end="35" time="500" condition="true">Conditional</animation>
+				<control type="image">
+				<posx>13</posx>
+					<posy>27</posy>
+					<width>340</width>
+					<height>493</height>
+					<texture background="true" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
+					<aspectratio scalediffuse="false">stretch</aspectratio>
+					<visible>!IsEmpty(ListItem.Title)</visible>
+				</control>
+				<control type="image">
+				<posx>13</posx>
+					<posy>27</posy>
+				<width>340</width>
+					<height>493</height>					
+					<texture background="true">$INFO[ListItem.Icon]</texture>
+					<aspectratio scalediffuse="false">keep</aspectratio>
+					<visible>IsEmpty(ListItem.Title)</visible>
+				</control>
+				<control type="image">
+					<posx>-2</posx>
+					<posy>6</posy>
+					<width>371</width>
+					<height>535</height>
+					<colordiffuse>80A0A0A0</colordiffuse>
+					<texture>frames/ClassicFrame_PosterMedium.png</texture>
+					<aspectratio>stretch</aspectratio>
+					<visible>!IsEmpty(ListItem.Title)</visible>
+				</control>	
+				<control type="textbox">
+					<posx>-50</posx>
+					<posy>540</posy>
+					<width>440</width>
+					<height>70</height>
+					<align>center</align>
+					<font>PlotFont</font>
+					<textcolor>yellow</textcolor>
+					<label>$INFO[ListItem.Tagline]</label>
+					<!---<visible>Container.Content(movies) + !IsEmpty(ListItem.Tagline) + !Skin.HasSetting(Hide_MovieTagline)</visible> -->
+				</control>
+			</control>		
+			
+		</focusedlayout>
+	</include>
+	
+	
+	<include name="PosterLargeViewCommon_Details">
+		<!-- Browser label and flags -->
+		
+	</include>
+	<!------------------------------------------------------------------------------------------------------------->
+	
+	
+</includes>

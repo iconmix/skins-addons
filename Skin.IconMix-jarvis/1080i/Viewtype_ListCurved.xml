@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+	<include name="Viewtype_ListCurved">
+		<control type="group">
+			<visible>Control.IsVisible(906)</visible>
+			<!-- Browser 
+			<control type="label">
+				<label>***$INFO[Window(Home).Property(MoviePlayerArt)]</label>
+			</control>-->
+			<control type="list" id="906">
+				<animation type="Conditional" condition="Window.IsActive(addoninformation)">
+					<effect type="zoom" time="600" center="640,360" start="100" end="50" tween="cubic" easing="out" />
+					<effect type="fade" time="400" start="100" end="0" />
+				</animation>
+			<!-- --		<content >videodb://tvshows/titles/41/-2/?tvshowid=41</content>
+				
+							<animation effect="rotatey" center="1600" start="0" end="15" time="500" condition="true">Conditional</animation> -->
+
+				<posx>300</posx>
+				<posy>60</posy>
+				<height>770</height>
+				<width>1650</width>
+				<onup>906</onup>
+				<ondown>906</ondown>
+				<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
+				<onright>60</onright>
+				<scrolltime>160</scrolltime>
+				<viewtype label="31832">list</viewtype>
+				<orientation>vertical</orientation>
+				<preloaditems>2</preloaditems>
+				<aligny>top</aligny>
+				<pagecontrol>60</pagecontrol>
+				<include>Animation_OpenCloseFade</include>
+				<include>Animation_FadedByMenu</include>
+				<include>Animation_HiddenByInfo</include>
+				<itemlayout height="35">
+					<!-- List Line Item Divider --
+					<control type="image">
+						<posx>5</posx>
+						<posy>33</posy>
+						<width>1500</width>
+						<height>2</height>
+						<aligny>center</aligny>
+						<texture>VideoInfoLine.png</texture>
+						<colordiffuse>FilesDividerDiffuse</colordiffuse>
+					</control>
+					<!-- Items in Video Library -->
+					<control type="label">
+						<posx>85</posx>
+						<posy>-2</posy>
+						<width>1500</width>
+						<height>35</height>
+						<aligny>center</aligny>
+						<font>METF_TitleText</font>
+						<textcolor>TextNF</textcolor>
+						<selectedcolor>TextFO</selectedcolor>
+						<label>$VAR[ListItemTitle]</label>
+						<scroll>false</scroll>
+						<visible>Window.IsActive(10025)</visible>
+					</control>
+			
+					
+					<!-- Watched Overlay for Items in Video Library -->
+					
+					<!-- Watched Overlay for In-Progress Items in Video Library -->
+					<control type="group">
+					<posx>7</posx>
+					<posy>10</posy>
+					<include>OverlayProgress</include>
+				</control>	
+					<!-- Items in Music Library -->
+					<control type="label">
+						<posx>85</posx>
+						<posy>-2</posy>
+						<width>1500</width>
+						<height>35</height>
+						<aligny>center</aligny>
+						<font>METF_TitleText</font>
+						<textcolor>TextNF</textcolor>
+						<selectedcolor>TextFO</selectedcolor>
+						<label>$INFO[ListItem.Label]</label>
+						<scroll>false</scroll>
+						<visible>Window.IsActive(502)</visible>
+					</control>
+					<!-- Items NOT in Video or Music Library -->
+					<control type="label">
+						<posx>85</posx>
+						<posy>-2</posy>
+						<width>1500</width>
+						<height>35</height>
+						<aligny>center</aligny>
+						<font>METF_TitleText</font>
+						<textcolor>TextNF</textcolor>
+						<selectedcolor>TextFO</selectedcolor>
+						<label>$VAR[ListItemTitle]</label>
+						<scroll>false</scroll>
+						<visible>!Window.IsActive(10025) + !Window.IsActive(502)</visible>
+					</control>
+					<!-- Watched Overlay for Items NOT in Video Library -->
+					<control type="image">
+						<posx>4</posx>
+						<posy>5</posy>
+						<width>24</width>
+						<height>24</height>
+						<texture>$INFO[ListItem.Overlay]</texture>
+						<colordiffuse>WatchedOverlay</colordiffuse>
+						<visible>!Window.IsActive(10025) + StringCompare(ListItem.Overlay,OverlayWatched.png)</visible>
+					</control>
+					<!-- Addon Progress/state -->
+					<control type="label">
+						<posx>630</posx>
+						<posy>-2</posy>
+						<width>220</width>
+						<height>35</height>
+						<align>right</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Property(Addon.Status)]</label>
+						<font>METF_InfoText</font>
+						<textcolor>MediaDetailsEpisodes</textcolor>
+						<visible>Window.IsActive(addonbrowser)</visible>
+					</control>
+					
+					<!-- Episode Count for TVShows                  -->
+					<control type="label">
+						<posx>730</posx>
+						<posy>-2</posy>
+						<width>120</width>
+						<height>35</height>
+						<align>right</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Property(NumEpisodes)] $LOCALIZE[20360]</label>
+						<font>METF_InfoText</font>
+						<textcolor>MediaDetailsEpisodes</textcolor>
+						<visible>Container.Content(tvshows) + !IsEmpty(ListItem.Property(NumEpisodes))</visible>
+					</control>
+					<!-- Episode Count for Seasons -->
+					<control type="label">
+						<posx>730</posx>
+						<posy>-2</posy>
+						<width>120</width>
+						<height>35</height>
+						<align>right</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Property(NumEpisodes)] $LOCALIZE[20360]</label>
+						<font>METF_InfoText</font>
+						<textcolor>MediaDetailsEpisodes</textcolor>
+						<visible>[Container.Content(seasons) + !IsEmpty(ListItem.Property(NumEpisodes))] + !IsEmpty(ListItem.Property(UnWatchedEpisodes))</visible>
+					</control>
+					<!-- Star Rating -->
+					<control type="group">
+						<!-- XXX: temporarily commented out for videos until I figure out exactly how I'd like to implement this
+						<visible>!Window.IsActive(10025) | [Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes)]]</visible>
+						<include>VisibleIfNotMovieSet</include>
+						-->
+						<visible>!Window.IsActive(10025) + !SubString(Container.FolderPath,plugin)</visible>
+						<control type="label">
+							<posx>775</posx>
+							<posy>-2</posy>
+							<width>45</width>
+							<height>35</height>
+							<align>right</align>
+							<aligny>center</aligny>
+							<label>$INFO[ListItem.Rating]</label>
+							<font>METF_InfoText</font>
+							<textcolor>TextNF</textcolor>
+							<visible>!IsEmpty(ListItem.Rating)</visible>
+						</control>
+						<control type="image">
+							<posx>772</posx>
+							<posy>6</posy>
+							<width>20</width>
+							<height>20</height>
+							<texture>Star.png</texture>
+							<colordiffuse>FFFFFFFF</colordiffuse>
+							<visible>!IsEmpty(ListItem.Rating)</visible>
+						</control>
+					</control>
+				</itemlayout>
+				
+				<!-------------------------------------------------------------------------------------------------------->
+				<focusedlayout height="180">
+					<include>ActiveClearArt</include>
+					<!-- List Line Item Divider -->
+					<control type="group">
+				  	<control type="image">
+						<posx>1235</posx>
+						<posy>-18</posy>
+						<width>370</width>
+						<height>200</height>
+						<fadetime>100</fadetime>
+						<texture background="true" diffuse="frames/image5.png">$INFO[ListItem.Icon]</texture>
+						<aspectratio scalediffuse="true">keep</aspectratio>
+						<visible>!SubString(ListItem.Icon,default)+[Container.Content(episodes)|Container.Content(albums)]</visible>
+					</control>
+					<control type="image">
+						<posx>1240</posx>
+						<posy>-18</posy>
+						<width>370</width>
+						<height>206</height>
+						<fadetime>100</fadetime>
+						<texture background="true" diffuse="frames/image5.png">$INFO[ListItem.Art(fanart)]</texture>
+						<aspectratio scalediffuse="false">stretch</aspectratio>
+						<visible>!SubString(ListItem.Art(fanart),default)+!Container.Content(episodes)+!Container.Content(albums)</visible>
+					</control>
+						<control type="image">
+						<posx>-10</posx>
+						<posy>-20</posy>
+						<width>1620</width>
+						<height>210</height>
+						<fadetime>100</fadetime>
+						
+			
+				<texture>frames/banner_frame2t.png</texture>
+						<aspectratio scalediffuse="false">stretch</aspectratio>
+						<visible>[!IsEmpty(ListItem.Title) | !IsEmpty(ListItem.Label)] + [!SubString(ListItem.Art(fanart),default)|!SubString(ListItem.Icon,default)]</visible>
+					</control>
+					
+					
+						
+					<!-- line --
+					<control type="image">
+						<posx>5</posx>
+						<posy>33</posy>
+						<width>1500</width>
+						<height>2</height>
+						<aligny>center</aligny>
+						<texture>VideoInfoLine.png</texture>
+						<colordiffuse>FilesDividerDiffuse</colordiffuse>
+					</control>
+					<!-- Focus Bar --
+					<control type="image">
+						<posx>0</posx>
+						<posy>0</posy>
+						<width>1500</width>
+						<height>33</height>
+						<aligny>center</aligny>
+						<texture>FocusLine.png</texture>
+						<colordiffuse>FocusBar</colordiffuse>
+					</control>
+					<!-- Items in Video Library -->
+					<control type="label">
+						<posx>55</posx>
+						<posy>55</posy>
+						<width>1200</width>
+						<height>35</height>
+						<aligny>center</aligny>
+						<scrollout>false</scrollout>
+						<pauseatend>1800</pauseatend>
+						<scrollspeed>40</scrollspeed>
+						<scroll>true</scroll>
+						<font>impact</font>
+						<textcolor>FocusBarText</textcolor>
+						<selectedcolor>FocusBarText</selectedcolor>
+						<label>$VAR[ListItemTitle]</label>
+						<visible>Window.IsActive(10025)|Window.IsActive(502)</visible>
+					</control>
+
+					
+					<!-- Watched Overlay -->
+					
+					<!-- Watched Overlay for In-Progress Items in Video Library -->
+					<control type="group">
+					<posx>47</posx>
+					<posy>120</posy>
+					<include>OverlayProgress</include>
+					</control>
+					<!-- Items in Music Library -->
+		
+					<!-- Watched Overlay for Items NOT in Video Library -->
+					<control type="image">
+						<posx>4</posx>
+						<posy>5</posy>
+						<width>24</width>
+						<height>24</height>
+						<texture>$INFO[ListItem.Overlay]</texture>
+						<colordiffuse>WatchedOverlay</colordiffuse>
+						<visible>!Window.IsActive(10025) + StringCompare(ListItem.Overlay,OverlayWatched.png)</visible>
+					</control>
+					<!-- Addon Progress/state -->
+					<control type="label">
+						<posx>630</posx>
+						<posy>-2</posy>
+						<width>220</width>
+						<height>35</height>
+						<align>right</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Property(Addon.Status)]</label>
+						<font>METF_InfoText</font>
+						<textcolor>MediaDetailsEpisodes</textcolor>
+						<visible>Window.IsActive(addonbrowser)</visible>
+					</control>
+					
+					<!-- Episode Count for TVShows -->
+					<control type="label">
+						<posx>730</posx>
+						<posy>90</posy>
+						<width>120</width>
+						<height>35</height>
+						<align>right</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Property(NumEpisodes)] $LOCALIZE[20360]</label>
+						<font>METF_InfoText</font>
+						<textcolor>MediaDetailsEpisodes</textcolor>
+						<visible>Container.Content(tvshows) + !IsEmpty(ListItem.Property(NumEpisodes))</visible>
+					</control>
+					<!-- Episode Count for Seasons -->
+					<control type="label">
+						<posx>730</posx>
+						<posy>-2</posy>
+						<width>120</width>
+						<height>35</height>
+						<align>right</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Property(NumEpisodes)] $LOCALIZE[20360]</label>
+						<font>METF_InfoText</font>
+						<textcolor>MediaDetailsEpisodes</textcolor>
+						<visible>[Container.Content(seasons) + !IsEmpty(ListItem.Property(NumEpisodes))] + !IsEmpty(ListItem.Property(UnWatchedEpisodes))</visible>
+					</control>
+					<!-- Star Rating -->
+					<control type="group">
+						<!-- XXX: temporarily commented out for videos until I figure out exactly how I'd like to implement this
+						<visible>!Window.IsActive(10025) | [Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes)]]</visible>
+						<include>VisibleIfNotMovieSet</include>
+						-->
+						<visible>!Window.IsActive(10025) + !SubString(Container.FolderPath,plugin)</visible>
+						<control type="label">
+							<posx>775</posx>
+							<posy>-2</posy>
+							<width>45</width>
+							<height>35</height>
+							<align>right</align>
+							<aligny>center</aligny>
+							<label>$INFO[ListItem.Rating]</label>
+							<font>METF_InfoText</font>
+							<textcolor>TextNF</textcolor>
+							<visible>!IsEmpty(ListItem.Rating)</visible>
+						</control>
+						<control type="image">
+							<posx>772</posx>
+							<posy>6</posy>
+							<width>20</width>
+							<height>20</height>
+							<texture>Star.png</texture>
+							<colordiffuse>$VAR[RatingColor]</colordiffuse>
+							<visible>!IsEmpty(ListItem.Rating)</visible>
+						</control>
+					</control>
+			
+			
+			</control>
+				</focusedlayout>
+			</control>
+			<!-- Thumbnails -->
+
+			<!-- Sets button -->
+			<control type="button" id="997">
+				<onup>906</onup>
+				<ondown>906</ondown>
+				<onleft>906</onleft>
+				<onright>998</onright>
+				<description>sets</description>
+				<posx>745</posx>
+				<posy>5</posy>
+				<width>32</width>
+				<height>24</height>
+				<label>-</label>
+				<onclick>ActivateWindow(10025,"videodb://movies/sets/$INFO[ListItem.SetId]/?setid=$INFO[ListItem.SetId]",return)</onclick>
+				<visible>Window.IsActive(10025) + !Container.Content(sets) + !IsEmpty(ListItem.Set)</visible>
+			</control>			
+			<!-- Browser label and flags -->
+		
+
+			
+			<!-- Scroll Bar -->
+			<control type="scrollbar" id="998">
+				<include>Animation_OpenCloseFade</include>
+				<include>Animation_FadedByMenu</include>
+				<posx>1270</posx>
+				<posy>128</posy>
+				<width>22</width>
+				<height>376</height>
+				<visible allowhiddenfocus="true">Control.HasFocus(998) | Container.Scrolling</visible>
+				<texturesliderbackground>-</texturesliderbackground>
+				<textureslidernib>ScrollBarV_Nib_Focus.png</textureslidernib>
+				<textureslidernibfocus>ScrollBarV_Nib_Focus.png</textureslidernibfocus>
+				<onleft>997</onleft>
+				<onright>noop</onright>
+				<showonepage>true</showonepage>
+				<orientation>vertical</orientation>
+				<animation effect="fade" start="0" end="100" time="400" condition="Control.HasFocus(998) | Container.Scrolling">Conditional</animation>
+			</control>
+		</control>
+	</include>
+</includes>
