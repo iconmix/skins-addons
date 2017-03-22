@@ -108,7 +108,7 @@
 						<include>Animation_ButtonFocus</include>
 						<onfocus>SetProperty(showsaga,,12003)</onfocus>
 						<onfocus>SetProperty(showgenre,,12003)</onfocus>
-						<visible>!String.StartsWith(ListItem.Filenameandpath,plugin:)</visible>
+						<visible>!SubString(ListItem.Filenameandpath,plugin:)</visible>
 					</control>
 					<!-- Artwork Downloader Button -->
 					<control type="button" id="20">
@@ -133,7 +133,7 @@
 						<onfocus>SetProperty(showsaga,,12003)</onfocus>
 						<onclick>setfocus(5001)</onclick>
 						<label>-</label>
-						<visible>!IsEmpty(ListItem.Genre)+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Filenameandpath,plugin:)+[Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(musicvideos)]</visible>
+						<visible>!IsEmpty(ListItem.Genre)+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Filenameandpath,plugin:)+[Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(musicvideos)]</visible>
 					</control>
 					<control type="button" id="5006">
 						<description>Extras</description>
@@ -145,7 +145,7 @@
 						<onfocus>SetProperty(showgenre,,12003)</onfocus>
 						<onclick>setfocus(5002)</onclick>
 						<label>-</label>
-						<visible>!IsEmpty(ListItem.SetId)+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Filenameandpath,plugin:)+[Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(musicvideos)]</visible>
+						<visible>!IsEmpty(ListItem.SetId)+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Filenameandpath,plugin:)+[Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(musicvideos)]</visible>
 					</control>
 					<!-- Refresh -->
 					<control type="button" id="6">
@@ -155,7 +155,7 @@
 						<include>Animation_ButtonFocus</include>
 						<onfocus>SetProperty(showsaga,,12003)</onfocus>
 						<onfocus>SetProperty(showgenre,,12003)</onfocus>
-						<visible>!String.StartsWith(ListItem.Filenameandpath,plugin:)</visible>
+						<visible>!SubString(ListItem.Filenameandpath,plugin:)</visible>
 					</control>
 
 					<control type="button" id="600">
@@ -780,108 +780,6 @@
 			<orientation>horizontal</orientation>
 			<preloaditems>0</preloaditems>
 
-			<!--	<itemlayout width="203" height="280">
-			<control type="group">
-			<control type="image">
-			<width>195</width>
-			<height>240</height>
-			<aspectratio scalediffuse="true"  align="center" aligny="center">keep</aspectratio>
-			<bordersize>2</bordersize>
-			<texture diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
-			<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
-			</control>
-			<control type="image">
-
-			<top>237</top>
-			<width>195</width>
-			<height>240</height>
-			<aspectratio scalediffuse="true"  align="center" aligny="top">keep</aspectratio>
-			<bordersize>2</bordersize>
-			<texture  flipy="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
-			<colordiffuse>A0FFFFFF</colordiffuse>
-
-			</control>
-
-			</control>
-
-			<control type="group">
-			<posy>100</posy>
-			<posx>-30</posx>
-			<height>50</height>
-
-			<control type="label">
-			<width>250</width>
-			<posx>7</posx>
-			<aligny>center</aligny>
-			<align>center</align>
-			<font>lcdep</font>
-			<textcolor>red</textcolor>
-			<label>$LOCALIZE[31917][CR]$INFO[ListItem.Writer,( , )]</label>
-			<angle>49</angle>
-			</control>
-			<visible>StringCompare(ListItem.Label2,manquant)</visible>
-			</control>
-			</itemlayout>
-
-			<focusedlayout width="203" height="280">
-			<control type="group">
-			<animation type="Focus" reversible="false">
-			<effect type="zoom" center="90,10" start="98" end="115" time="500" tween="bounce" easy="out"  />
-
-
-			</animation>
-			<control type="image">
-			<width>195</width>
-			<height>240</height>
-			<aspectratio scalediffuse="true" align="center" aligny="top">keep</aspectratio>
-			<texture>$INFO[ListItem.Icon]</texture>
-			<bordersize>8</bordersize>
-			<bordertexture border="8">landscape.png</bordertexture>
-			<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
-
-			<visible>Control.HasFocus(5002)</visible>
-			</control>
-			<control type="group">
-			<posy>100</posy>
-			<posx>-30</posx>
-			<height>50</height>
-
-			<control type="label">
-			<width>250</width>
-			<posx>7</posx>
-			<aligny>center</aligny>
-			<align>center</align>
-			<font>lcdep</font>
-			<textcolor>yellow</textcolor>
-			<label>$LOCALIZE[31917][CR]$INFO[ListItem.Writer,( , )]</label>
-			<angle>49</angle>
-			</control>
-			<visible>StringCompare(ListItem.Label2,manquant)</visible>
-			</control>
-			</control>
-			<control type="image">
-			<width>195</width>
-			<height>240</height>
-			<aspectratio scalediffuse="true"  align="center" aligny="top">keep</aspectratio>
-			<bordersize>2</bordersize>
-			<texture diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
-			<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
-
-			<visible>!Control.HasFocus(5002)</visible>
-			</control>
-			<control type="image">
-			<top>237</top>
-			<width>195</width>
-			<height>240</height>
-			<aspectratio scalediffuse="true"  align="center" flipy="true" aligny="top">keep</aspectratio>
-			<bordersize>2</bordersize>
-			<texture flipy="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
-			<colordiffuse>A0FFFFFF</colordiffuse>
-			<visible>!Control.HasFocus(5002)</visible>
-			</control>
-
-			</focusedlayout>
-			-->
 			<include>VueElementsBoitiersInfo</include>
 
 			<content>$VAR[contentdvinfo]</content>
@@ -917,43 +815,7 @@
 
 			<aspectratio aligny="center">scale</aspectratio>
 		</control>
-		<!--
-		<control type="label">
-		<width min="25" max="380">auto</width>
-		<height>30</height>
-		<aligny>center</aligny>
-		<font>METF_MediaDetailsSmall</font>
-		<textcolor>MediaDetailsYear</textcolor>
-		<label>$INFO[ListItem.Country]</label>
-		<visible>!IsEmpty(ListItem.Country) + [Container.Content(tvshows) | Container.Content(movies) | Container.Content(MusicVideos)]</visible>
-		</control>
-		-->
-		<!-- Bullet --
-		<control type="image">
-		<include>ViewDetailsBullet</include>
-		<visible>!IsEmpty(ListItem.Country) + [Container.Content(tvshows) | Container.Content(movies) | Container.Content(MusicVideos)]</visible>
-		</control>
-		<!-- Year --
-		<control type="label">
-		<width min="25" max="220">auto</width>
-		<height>30</height>
-		<aligny>center</aligny>
-		<font>METF_MediaDetailsSmall</font>
-		<textcolor>MediaDetailsYear</textcolor>
-		<label>$INFO[ListItem.Year]</label>
-		<visible>!IsEmpty(ListItem.Year) + [Container.Content(tvshows) | Container.Content(movies) | Container.Content(MusicVideos)]</visible>
-		</control>
-		<!-- Bullet -->
-		<!--		<control type="image">
-		<include>ViewDetailsBullet</include>
-		<visible>![IsEmpty(ListItem.Year) | IsEmpty(ListItem.Duration)] + [Container.Content(movies) | Container.Content(MusicVideos)]</visible>
-		</control>
-
-
-		s
-
-		<include>chronotools</include> -->
-
+	
 	</control>
 </control>
 
@@ -1008,84 +870,6 @@
 
 </control>
 
-<!------------------ roles -----------------------
-<control type="group">
-	<top>-500</top>
-	<left>10</left>
-	<align>left</align>
-	<width>1900</width>
-	<height>480</height>
-	<animation type="Conditional" condition="Control.HasFocus(505)">
-		<effect type="slide"  start="0,0" end="0,890" time="500" delay="1" reversible="false"/>
-	</animation>
-
-	<control type="image">
-
-		<posx>0</posx>
-		<posy>0</posy>
-
-		<colordiffuse>BackgroundColor</colordiffuse>
-		<bordersize>8</bordersize>
-		<bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
-
-		<texture>frames/fondinfogris.png</texture>
-		<aspectratio scalediffuse="false">stretch</aspectratio>
-	</control>
-			<control type="group">
-			
-			<top>-200</top>
-			<control type="image">
-				<description>Actor image</description>
-				<posy>10</posy>
-				<posx>5</posx>
-				<align>center</align>
-				<width>175</width>
-				<height>220</height>
-				<texture fallback="DefaultActor.png">$INFO[Container(50).Listitem.Icon]</texture>
-				<aspectratio align="center" aligny="center">keep</aspectratio>
-			</control>
-			<control type="image">
-				<align>center</align>
-				<width>185</width>
-				<height>245</height>
-				<texture>frames/ClassicFrame_Poster.png</texture>
-				<aspectratio align="center" aligny="center">keep</aspectratio>
-			</control>
-		</control>
-	<control type="label">
-		<top>5</top>
-		<width>1685</width>
-		<align>center</align>
-		<font>impact</font>
-		<label>[COLOR=yellow]$VAR[Is50][/COLOR]</label>
-		<visible>Container(505).IsUpdating</visible>
-	</control>
-	<control type="label">
-		<top>5</top>
-		<width>1685</width>
-		<align>center</align>
-		<font>impact</font>
-		<label>[COLOR=yellow]$VAR[Is50][/COLOR] [I][COLOR=white]($INFO[Container(505).CurrentItem]/$INFO[Container(505).NumItems])[/I][/COLOR]</label>
-		<visible>!Container(505).IsUpdating</visible>
-	</control>
-	<control type="list" id="505">
-		<top>60</top>
-		<left>20</left>
-		<width>1865</width>
-		<onleft>505</onleft>
-		<onright>505</onright>
-		<onup>7003</onup>
-		<ondown>50</ondown>
-		<animation type="Conditional" condition="Container(505).IsUpdating">
-		<effect type="fade"  start="100" end="10" time="500" delay="100" reversible="true"/>
-	</animation>
-		<!-- <visible>System.HasAddon(script.iconmixtools)+!SubString(ListItem.FilenameAndPath,plugin:)</visible>
-
-		<content sortby="year" sortorder="descending">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is50]</content>
-		<include>Roles</include>
-	</control>
-</control>
--->
 <include>PanelActeurs</include>
 <include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
 
