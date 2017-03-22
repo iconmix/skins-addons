@@ -118,7 +118,7 @@
 				<texture>frames/ocean.png</texture>
 				<colordiffuse>C0101010</colordiffuse>
 
-				<visible>[[String.StartsWith(ListItem.DBTYPE,set)+Skin.HasSetting(SagaClearArt)]|[Skin.HasSetting(GenreClearArt)+Container.Content(Genres)]]+!Skin.HasSetting(CacheFond)</visible>
+				<visible>[[SubString(ListItem.DBTYPE,set)+Skin.HasSetting(SagaClearArt)]|[Skin.HasSetting(GenreClearArt)+Container.Content(Genres)]]+!Skin.HasSetting(CacheFond)</visible>
 			</control>
 
 
@@ -174,7 +174,7 @@
 			</control>
 			<!---------------------------------------------------------------------------------------------------------------- --
 			<control type="group">
-			<visible>String.StartsWith(ListItem.DBTYPE,episode)</visible>
+			<visible>SubString(ListItem.DBTYPE,episode)</visible>
 			<control type="list" id="1998">
 			<description>Widget Lists</description>
 			<itemlayout width="100" height="60">
@@ -704,7 +704,7 @@
 					<effect type="slide" end="1460,898" time="0" tween="quadratic" />
 					<effect type="rotate" center="0,88" end="45" time="1" />
 				</animation>
-				<visible>[[Container.Content(Genres)|Container.Content(movies)|Container.Content(tvshows)]+Control.HasFocus(1999)]|[[String.StartsWith(Container.FolderPath,videodb://movies/genres)|String.StartsWith(Container.FolderPath,videodb://tvshows/genres)]+[Container.Content(tvshows)|Container.Content(movies)]]</visible>
+				<visible>[[Container.Content(Genres)|Container.Content(movies)|Container.Content(tvshows)]+Control.HasFocus(1999)]|[[SubString(Container.FolderPath,videodb://movies/genres)|SubString(Container.FolderPath,videodb://tvshows/genres)]+[Container.Content(tvshows)|Container.Content(movies)]]</visible>
 
 				<!--<animation type="Visible">
 				<effect type="rotate" center="0,88" end="27" time="1" />
@@ -715,7 +715,7 @@
 				<aspectratio>stretch</aspectratio>
 			</control>
 			<control type="group">
-				<visible>[!String.StartsWith(Container.FolderPath,videodb://movies/genres)+!String.StartsWith(Container.FolderPath,videodb://tvshows/genres)]|Container.Content(genres)|Control.HasFocus(1999)</visible>
+				<visible>[!SubString(Container.FolderPath,videodb://movies/genres)+!SubString(Container.FolderPath,videodb://tvshows/genres)]|Container.Content(genres)|Control.HasFocus(1999)</visible>
 				<control type="group">
 					<left>30</left>
 					<visible>Skin.HasSetting(CacheFond)</visible>
@@ -772,7 +772,7 @@
 			</control>
 
 			<control type="group">
-				<visible>!Container.Content(Genres)+[String.StartsWith(Container.FolderPath,videodb://movies/genres)|String.StartsWith(Container.FolderPath,videodb://tvshows/genres)]+!Control.HasFocus(1999)</visible>
+				<visible>!Container.Content(Genres)+[SubString(Container.FolderPath,videodb://movies/genres)|SubString(Container.FolderPath,videodb://tvshows/genres)]+!Control.HasFocus(1999)</visible>
 				<control type="fadelabel">
 					<width>390</width>
 					<posx>50</posx>
@@ -807,7 +807,7 @@
 				<effect type="fade" start="100" end="15" time="500"  />
 			</animation>
 			<posy>-990</posy> -->
-			<visible>!String.StartsWith(ListItem.Label,..)</visible>
+			<visible>!SubString(ListItem.Label,..)</visible>
 
 			<control type="group">
 				<top>135</top>
