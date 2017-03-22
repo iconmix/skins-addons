@@ -60,7 +60,7 @@
 					<onleft condition="!String.IsEmpty(Window(12003).Property(showgenre))+System.HasAddon(script.iconmixtools)+[Control.HasFocus(5005)|Control.HasFocus(5001)]">5001</onleft>
 					<onleft condition="!String.IsEmpty(Window(12003).Property(showsaga))+System.HasAddon(script.iconmixtools)+[Control.HasFocus(5006)|Control.HasFocus(5002)]">5002</onleft>
 					<onleft condition="!String.IsEmpty(ListItem.Director)">13</onleft>
-					<onleft condition="String.IsEmpty(ListItem.Director]+Integer.IsGreater(Container(50).NumItems,0)+!Container(1998).IsUpdating">50</onleft>
+					<onleft condition="String.IsEmpty(ListItem.Director)+Integer.IsGreater(Container(50).NumItems,0)+!Container(1998).IsUpdating">50</onleft>
 
 
 					<!--	<onleft condition="!System.HasAddon(script.iconmixtools)+![Control.HasFocus(5005)|Control.HasFocus(5001)]">50</onleft>
