@@ -1679,7 +1679,7 @@ msgid "Large Poster wrap"
 msgstr ""
 
 msgctxt "#31831"
-msgid "Banner wall"
+msgid "Banner Wall"
 msgstr ""
 
 msgctxt "#31832"
@@ -1843,4 +1843,5 @@ msgstr ""
 msgctxt "#32005"
 msgid "Show end time after duration"
 msgstr ""
+
 

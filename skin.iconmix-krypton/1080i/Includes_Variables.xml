@@ -78,8 +78,8 @@
 <variable name="contentdvinfo">
 	<!--  -->
 	
-	<value condition="System.HasAddon(script.iconmixtools)+Skin.HasSetting(SagaManquant)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.setid]</value> -->
-	<value>videodb://movies/sets/$INFO[ListItem.setid]</value> 	 
+	<value condition="System.HasAddon(script.iconmixtools)+Skin.HasSetting(SagaManquant)+String.StartsWith(ListItem.DBTYPE,set)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.setid]</value> -->
+	<value condition="String.StartsWith(ListItem.DBTYPE,set)">videodb://movies/sets/$INFO[ListItem.setid]</value> 	 
 	<!--
 	<value condition="Skin.HasSetting(SagaManquant)+String.IsEqual(ListItem.DBTYPE,set)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.DBID]</value> 
 	<value></value>
@@ -88,8 +88,9 @@
 <variable name="contentsaga">
 	<!--  -->
 	
-	<value condition="System.HasAddon(script.iconmixtools)+Skin.HasSetting(SagaManquant)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.DBID]</value> -->
-	<value>videodb://movies/sets/$INFO[ListItem.DBID]</value> 	 
+	<value condition="System.HasAddon(script.iconmixtools)+Skin.HasSetting(SagaManquant)+String.StartsWith(ListItem.DBTYPE,set)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.DBID]</value> -->
+	<value condition="String.StartsWith(ListItem.DBTYPE,set)">videodb://movies/sets/$INFO[ListItem.DBID]</value> 	
+	<value></value> 
 	<!--
 	<value condition="Skin.HasSetting(SagaManquant)+String.IsEqual(ListItem.DBTYPE,set)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.DBID]</value> 
 	<value></value>

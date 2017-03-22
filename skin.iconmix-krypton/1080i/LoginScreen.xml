@@ -139,7 +139,7 @@
 						<height>204</height>
 						<fadetime>200</fadetime>
 						<aspectratio>stretch</aspectratio>
-						<texture>frames/ClassicFrame_Background.png</texture>
+						<texture>frames/ClassicFrame_background.png</texture>
 					</control>
 					<control type="image">
 						<posx>33</posx>
@@ -167,7 +167,7 @@
 						<width>204</width>
 						<height>204</height>
 						<aspectratio>stretch</aspectratio>
-						<texture>frames/ClassicFrame_Background.png</texture>
+						<texture>frames/ClassicFrame_background.png</texture>
 						<animation reversible="false" effect="zoom" center="auto" start="100" end="115" time="200" tween="sine" easing="inout">focus</animation>
 						<animation reversible="false" effect="zoom" center="auto" start="115" end="100" time="200" tween="sine" easing="inout">unfocus</animation>
 					</control>

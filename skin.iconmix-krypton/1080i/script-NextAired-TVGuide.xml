@@ -35,7 +35,7 @@
 			<posy>0</posy>
 			<height>820</height>
 			<aspectratio>scale</aspectratio>
-			<texture fallback="background.jpg">$INFO[Skin.String(CustomBackground)]</texture>
+			<texture fallback="background.png">$INFO[Skin.String(CustomBackground)]</texture>
 			<colordiffuse>BackgroundColor</colordiffuse>
 		</control>
 		<control type="group">

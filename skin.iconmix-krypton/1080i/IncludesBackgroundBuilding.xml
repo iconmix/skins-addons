@@ -10,7 +10,7 @@
 			<posx>200</posx>
 			<posy>200</posy>
 			
-			<texture>background.jpg</texture>
+			<texture>background.png</texture>
 		</control>
 		<posy>-200</posy>
 		<posx>-200</posx>
@@ -422,7 +422,7 @@
 				<width>1920</width>
 				<height>1080</height>
 				<visible>!Control.HasFocus(9000)|[Control.HasFocus(9000)+!String.Contains(Container(9000).ListItem.Property(background),WDF1)+!String.Contains(Container(9000).ListItem.Property(background),WDF2)]</visible>
-				<imagepath background="true" fallback="background.jpg">$VAR[backgroundVar]</imagepath>
+				<imagepath background="true" fallback="background.png">$VAR[backgroundVar]</imagepath>
 				<aspectratio>scale</aspectratio>
 				<fadetime>450</fadetime>
 				<include condition="Skin.String(BackgroundDiffuseColor) + !Skin.String(BackgroundDiffuseColor, None)">bgColorDiffuse</include>

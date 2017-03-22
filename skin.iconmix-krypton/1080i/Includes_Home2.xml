@@ -102,7 +102,7 @@
 				<posy>900</posy>
 				<width>1920</width>
 				<height>140</height>
-				<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+				<texture diffuse="shine.png">frames/ClassicFrame_background.png</texture>
 				<colordiffuse>F0101010</colordiffuse>
 				<visible>!system.getbool(lookandfeel.enablerssfeeds)</visible>
 			</control>
@@ -111,7 +111,7 @@
 				<posy>900</posy>
 				<width>1920</width>
 				<height>190</height>
-				<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+				<texture diffuse="shine.png">frames/ClassicFrame_background.png</texture>
 				<colordiffuse>F0101010</colordiffuse>
 				<visible>system.getbool(lookandfeel.enablerssfeeds)</visible>
 			</control>
@@ -206,7 +206,7 @@
 					<posy>10</posy>
 					<width>1123</width>
 					<height>100</height>
-					<texture>frames/ClassicFrame_Background.png</texture>
+					<texture>frames/ClassicFrame_background.png</texture>
 					<colordiffuse>C0606060</colordiffuse>
 	
 				</control>
@@ -282,7 +282,7 @@
 			<posy>900</posy>
 			<width>1920</width>
 			<height>140</height>
-			<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+			<texture diffuse="shine.png">frames/ClassicFrame_background.png</texture>
 			<colordiffuse>F0101010</colordiffuse>
 			<visible>!system.getbool(lookandfeel.enablerssfeeds)</visible>
 		</control>
@@ -291,7 +291,7 @@
 			<posy>900</posy>
 			<width>1920</width>
 			<height>190</height>
-			<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+			<texture diffuse="shine.png">frames/ClassicFrame_background.png</texture>
 			<colordiffuse>F0101010</colordiffuse>
 			<visible>system.getbool(lookandfeel.enablerssfeeds)</visible>
 		</control>
@@ -414,7 +414,7 @@
 					<posy>20</posy>
 					<width>673</width>
 					<height>210</height>
-					<texture>frames/ClassicFrame_Background.png</texture>
+					<texture>frames/ClassicFrame_background.png</texture>
 					<colordiffuse>C0606060</colordiffuse>
 	
 				</control>

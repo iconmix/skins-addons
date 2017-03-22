@@ -14,7 +14,7 @@
 				<posy>480</posy>
 				<width>1920</width>
 				<height>170</height>
-				<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+				<texture diffuse="shine.png">frames/ClassicFrame_background.png</texture>
 				<include>AnimationCacheNonSelect</include>
 			
 				<colordiffuse>90101010</colordiffuse>
@@ -117,7 +117,7 @@
 			<posy>0</posy>
 			<width>330</width>
 			<height>820</height>
-			<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+			<texture diffuse="shine.png">frames/ClassicFrame_background.png</texture>
 			<include>AnimationCacheNonSelect</include>
 		
 			<colordiffuse>90101010</colordiffuse>

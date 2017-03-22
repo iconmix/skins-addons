@@ -223,7 +223,7 @@
 						<width>680</width>
 						<height>900</height>
 
-						<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+						<texture diffuse="shine.png">frames/ClassicFrame_background.png</texture>
 						<colordiffuse>A0101010</colordiffuse>
 					</control>
 					<control type="textbox" id="15" >

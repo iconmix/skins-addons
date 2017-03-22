@@ -1,3 +1,5 @@
-# ICONMIX
+# ICONMIXTOOLS
 
-(Tools for my skin )
+
+Fonctions supplémentaires pour mon Skin IconMix
+(Tools for my skin ICONMIX )

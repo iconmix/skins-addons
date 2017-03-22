@@ -11,8 +11,8 @@
 	</animation>
 	<controls>
 		<control type="group">
-			<posx>320</posx>
-			<posy>150</posy>
+			<posx>560</posx>
+			<posy>390</posy>
 			<control type="image">
 				<description>Background Panel</description>
 				<width>800</width>

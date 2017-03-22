@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <includes>
-	<include file="defaults.xml" />
-	<include file="Includes_Variables.xml" />
-	<include file="Includes_MediaOverlay.xml" />
-	<include file="Includes_Home2.xml" />
-	<include file="Includes_HomeDeck.xml" />
-	<include file="script-skinshortcuts-includes.xml"/>
-	<include file="IncludesBackgroundBuilding.xml" />
-	<include file="Includes_MediaFlags.xml" />
-	<include file="Includes_MediaFlags2.xml" />
-	<include file="Includes_Animations.xml" />
-	<include file="Viewtype_Common.xml" />
+<include file="defaults.xml" />
+<include file="Includes_Variables.xml" />
+<include file="Includes_MediaOverlay.xml" />
+<include file="Includes_Home2.xml" />
+<include file="Includes_HomeDeck.xml" />
+<include file="script-skinshortcuts-includes.xml"/>
+<include file="IncludesBackgroundBuilding.xml" />
+<include file="Includes_MediaFlags.xml" />
+<include file="Includes_MediaFlags2.xml" />
+<include file="Includes_Animations.xml" />
+<include file="Viewtype_Common.xml" />
 <include file="Viewtype_Banner.xml" />			<!-- 511,513 -->
 <include file="Viewtype_BannerPoster.xml" />		<!-- 510 -->
 <include file="Viewtype_FanartPleinEcran.xml" />		<!-- 512 -->
@@ -90,7 +90,7 @@
 				<effect type="slide"  start="0,0" end="450,0" time="1" delay="1" reversible="false"/>
 				<effect type="fade"  start="0" end="100" time="100" delay="1" reversible="false"/>
 			</animation>
-			<visible>[[[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[StringCompare(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Label,..)</visible>
+			<visible>[[[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[StringCompare(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..)</visible>
 			<control type="image">
 				<top>60</top>
 				<left>30</left>
@@ -127,7 +127,7 @@
 				<align>left</align>
 				<itemgap>1</itemgap>
 				<orientation>horizontal</orientation>
-				<visible>[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Label,..)</visible>
+				<visible>[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..)</visible>
 				<autoscroll delay="4000" repeat="5000" time="5000">!Control.HasFocus(1998)+!Control.HasFocus(5051)+!IsEmpty(Window(Home).Property(ActeurVideoReset))</autoscroll>-->
 				<pagecontrol>60</pagecontrol>
 				<content>plugin://script.iconmixtools/?action=getcast&casttype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]</content>
@@ -204,34 +204,11 @@
 					<effect type="fade"  start="0" end="100"  time="1000" delay="2000" reversible="true"/>
 				</animation>
 				<visible>!Control.HasFocus(1998)+!Control.HasFocus(5051)</visible>
-				<control type="group">
-					<visible>!Skin.HasSetting(CacheFond)</visible>
-					<control type="image">
+				<control type="image">
 						<width>30</width>
 						<height>30</height>
-						<texture>ArrowDown.png</texture>
+						<texture>Arrow$INFO[Window(Home).Property(ActeurDirection)].png</texture>
 					</control>
-					<control type="image">
-						<top>25</top>
-						<width>30</width>
-						<height>30</height>
-						<texture>Info.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>Skin.HasSetting(CacheFond)</visible>
-					<control type="image">
-						<top>25</top>
-						<width>30</width>
-						<height>30</height>
-						<texture>ArrowUp.png</texture>
-					</control>
-					<control type="image">
-						<width>30</width>
-						<height>30</height>
-						<texture>Info.png</texture>
-					</control>
-				</control>
 			</control>
 		</control>
 
@@ -246,145 +223,20 @@
 				<effect type="slide"  start="0,0" end="0,1900" time="500" delay="1" reversible="false"/>
 			</animation>
 
-			<control type="group">
-				<!--<animation type="Conditional" condition="!Control.HasFocus(5051)">
-					<effect type="fade"  start="100" end="0" time="1" delay="1" reversible="true"/>
-				</animation>
-				-->
-				<control type="group">
-					<top>480</top>
-					<width>1500</width>
-					<left>200</left>
-					<control type="image">
-						<height>60</height>
-						<colordiffuse>BackgroundColor</colordiffuse>
-						<bordersize>8</bordersize>
-						<bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
-
-						<texture>frames/fondinfogris.png</texture>
-						<aspectratio scalediffuse="false">stretch</aspectratio>
-					</control>
-					<control type="label"> <!---- vidéo sélectionnée -->
-						<top>5</top>
-						<font>PlotFont36</font>
-
-						<height>80</height>
-						<align>center</align>
-						<label>[COLOR=yellow]$INFO[Container(5051).ListItem.Label][/COLOR]</label>
-					</control>
-					<control type="image">
-					<top>-2</top>
-					<align>left</align>
-					<left>-1480</left>
-					<height>60</height>
-					<texture>acteurs/films.png</texture>
-					<aspectratio>keep</aspectratio>
-					<visible>StringCompare(Container(5051).ListItem.Writer,movie)</visible>
-				</control>
-				<control type="image">
-					<top>-2</top>
-					<left>-1480</left>
-					<height>60</height>
-					<align>left</align>
-					<texture>acteurs/series.png</texture>
-					<aspectratio>keep</aspectratio>
-					<visible>!StringCompare(Container(5051).ListItem.Writer,movie)</visible>
-				</control>
-				</control>
-				<control type="image">
-
-					<posx>0</posx>
-					<posy>0</posy>
-
-					<colordiffuse>BackgroundColor</colordiffuse>
-					<bordersize>8</bordersize>
-					<bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
-
-					<texture>frames/fondinfogris.png</texture>
-					<aspectratio scalediffuse="false">stretch</aspectratio>
-				</control>
-				<control type="group">
-					<posy>-160</posy>
-					<posx>1700</posx>
-					<width>175</width>
-					<height>220</height>
-					<control type="image">
-						<align>center</align>
-						<texture>acteurs/films.png</texture>
-						<aspectratio align="center" aligny="center">keep</aspectratio>
-						<visible>SubString(ListItem.DBTYPE,movie)</visible>
-					</control>
-					<control type="image">
-						<texture>acteurs/series.png</texture>
-						<aspectratio align="center" aligny="center">keep</aspectratio>
-						<visible>!SubString(ListItem.DBTYPE,movie)</visible>
-					</control>
-				</control>
-				<control type="group">
-					<posy>-30</posy>
-					<posx>1780</posx>
-					<width>70</width>
-					<height>70</height>
-					<control type="group">
-						<visible>!IsEmpty(Window(Home).Property(ActeurVideoLocal))</visible>
-						<control type="image">
-							<texture>acteurs/local.png</texture>
-							<aspectratio>keep</aspectratio>
-						</control>
-						<control type="image">
-							<top>60</top>
-							<left>65</left>
-							<texture>acteurs/tmdb.png</texture>
-							<aspectratio>keep</aspectratio>
-							<width>40</width>
-							<height>40</height>
-						</control>
-					</control>
-					<control type="group">
-						<visible>IsEmpty(Window(Home).Property(ActeurVideoLocal))</visible>
-						<control type="image">
-							<texture>acteurs/tmdb.png</texture>
-							<aspectratio>keep</aspectratio>
-						</control>
-						<control type="image">
-							<texture>acteurs/local.png</texture>
-							<top>60</top>
-							<left>65</left>
-							<width>40</width>
-							<height>40</height>
-							<aspectratio>keep</aspectratio>
-						</control>
-					</control>
-				</control>
-				<control type="group">
-					<visible>!Container(5051).IsUpdating</visible>
-					<posy>5</posy>
-					<posx>1850</posx>
-					<width>30</width>
-					<height>30</height>
-					<animation type="Conditional" loop="true" condition="true">
-						<effect type="fade"  start="0" end="100"  time="1000" delay="1000" reversible="false"/>
-					</animation>
-					<control type="image">
-						<align>center</align>
-						<texture>ArrowDown.png</texture>
-					</control>
-				</control>
-			</control>
+			
 
 			<control type="group">
-				<control type="group">
-					<top>-190</top>
+				<control type="group"> <!-- panel acteurs -->
+					<top>-180</top>
 					<left>10</left>
 					<height>290</height>
-					<!-- <visible>!SubString(Container(1998).Listitem.Icon,default)</visible> -->
-
-					<control type="group"> <!-- panel acteurs -->
+					<control type="group"> 
 						<width>660</width>
 						<control type="grouplist"> <!-- acteurs suivants -->
 							<orientation>horizontal</orientation>
 							<animation type="Conditional" condition="Control.HasFocus(5051)">
-								<effect type="fade"  start="100" end="60"  time="10"  reversible="false"/>
+								<!-- <effect type="fade"  start="100" end="60"  time="10"  reversible="false"/> -->
+								<effect type="slide"   end="0,200"  time="250"  reversible="true"/>
 							</animation>
 							<top>-85</top>
 							<left>165</left>
@@ -443,62 +295,202 @@
 								<visible>IntegerGreaterThan(Container(1998).NumItems,8)</visible>
 								<texture   fallback="DefaultActor.png">$INFO[Container(1998).Listitem(8).Icon]</texture>
 							</control>
+						</control>					
+					</control>
+				</control>
+				<control type="group">				
+				
+					<control type="group"><!-- fond panneau et titre -->
+						<visible>Control.HasFocus(5051)</visible> 
+						<animation type="Visible">
+
+					<!-- <effect type="zoom" center="850,30" start="10" end="100" time="400" easy="out" tween="bounce" delay="1" reversible="false"/> -->
+					<effect type="slide"  end="0,100" time="500" easy="out" tween="bounce" delay="1" reversible="false"/> -->
+				</animation>
+						<top>380</top>
+						<width>1500</width>
+						<left>200</left>
+						<control type="image">
+							<height>60</height>
+							<colordiffuse>BackgroundColor</colordiffuse>
+							<bordersize>8</bordersize>
+							<bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
+
+							<texture>frames/fondinfogris.png</texture>
+							<aspectratio scalediffuse="false">stretch</aspectratio>
+						</control>
+						<control type="label"> <!---- vidéo sélectionnée -->
+							<top>5</top>
+							<font>PlotFont36</font>
+
+							<height>80</height>
+							<align>center</align>
+							<label>[COLOR=yellow]$INFO[Container(5051).ListItem.Label] [I][COLOR=white]$INFO[Container(5051).ListItem.Year,(,)][/COLOR][/I][/COLOR]</label>
+						</control>
+						<control type="image">
+						<top>-2</top>
+						<align>left</align>
+						<left>-1480</left>
+						<height>60</height>
+						<texture>acteurs/films.png</texture>
+						<aspectratio>keep</aspectratio>
+						<visible>StringCompare(Container(5051).ListItem.Writer,movie)</visible>
+					</control>
+					<control type="image">
+						<top>-2</top>
+						<left>-1480</left>
+						<height>60</height>
+						<align>left</align>
+						<texture>acteurs/series.png</texture>
+						<aspectratio>keep</aspectratio>
+						<visible>!StringCompare(Container(5051).ListItem.Writer,movie)</visible>
+					</control>
+					</control>
+					
+					<control type="image"> <!-- fond -->
+
+						<posx>0</posx>
+						<posy>0</posy>
+
+						<colordiffuse>BackgroundColor</colordiffuse>
+						<bordersize>8</bordersize>
+						<bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
+
+						<texture>frames/fondinfogris.png</texture>
+						<aspectratio scalediffuse="false">stretch</aspectratio>
+					</control>
+					<control type="group"> <!-- acteur focus -->
+						<top>-190</top>
+						<left>10</left>
+						<height>290</height>
+
+						<control type="group"> 
+							<width>660</width>
+							
+							<control type="group"> 
+								<width>190</width>
+								<control type="image">
+									<align>center</align>
+									<posy>10</posy>
+									<posx>5</posx>
+									<height>220</height>
+									<width>175</width>
+									<texture fallback="DefaultActor.png">$INFO[Container(1998).ListItem.Icon]</texture>
+									<aspectratio scalediffuse="true" align="center" >keep</aspectratio>
+								</control>
+								<control type="image">
+									<align>center</align>
+									<width>185</width>
+									<height>245</height>
+									<texture>frames/ClassicFrame_Poster.png</texture>
+									<aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
+								</control>
+							</control>
 						</control>
 
-						<control type="group"> <!-- acteur focus -->
-							<width>190</width>
-							<control type="image">
+
+
+						<control type="group">
+							<top>205</top>
+							<left>175</left>
+							<width>30</width>
+							<height>30</height>
+							<control type="group">
+								<visible>[!Container(5051).IsUpdating+Control.HasFocus(1998)]|Control.HasFocus(5051)</visible>
+								<animation type="Conditional" loop="true" condition="true">
+									<effect type="fade"  start="0" end="100"  time="1000" delay="2000" reversible="false"/>
+								</animation>
+								<control type="image">
+									<align>center</align>
+									<texture>ArrowUp.png</texture>
+									<colordiffuse>FF00FFFF</colordiffuse>
+									<visible>Control.HasFocus(5051)</visible>
+								</control>
+								<control type="image">
+									<align>center</align>
+									<texture>ArrowDown.png</texture>
+									<visible>Control.HasFocus(1998)+!Container(5051).IsUpdating</visible>
+								</control>
+							</control>
+							<!--<control type="image">
 								<align>center</align>
-								<posy>10</posy>
-								<posx>5</posx>
-								<height>220</height>
-								<width>175</width>
-								<texture fallback="DefaultActor.png">$INFO[Container(1998).ListItem.Icon]</texture>
-								<aspectratio scalediffuse="true" align="center" >keep</aspectratio>
+								<width>40</width>
+								<height>40</height>
+								<texture>sablier.gif</texture>
+								<visible>Container(5051).IsUpdating+!Control.HasFocus(5051)</visible>
+								
+							</control>
+	-->
+						</control>
+					</control>
+					<control type="group"> <!-- type local ou tmdb -->
+						<posy>-160</posy>
+						<posx>1700</posx>
+						<width>175</width>
+						<height>220</height>
+						<control type="image">
+							<align>center</align>
+							<texture>acteurs/films.png</texture>
+							<aspectratio align="center" aligny="center">keep</aspectratio>
+							<visible>SubString(ListItem.DBTYPE,movie)</visible>
+						</control>
+						<control type="image">
+							<texture>acteurs/series.png</texture>
+							<aspectratio align="center" aligny="center">keep</aspectratio>
+							<visible>!SubString(ListItem.DBTYPE,movie)</visible>
+						</control>
+					</control>
+					<control type="group">
+						<posy>-30</posy>
+						<posx>1780</posx>
+						<width>70</width>
+						<height>70</height>
+						<control type="group">
+							<visible>!IsEmpty(Window(Home).Property(ActeurVideoLocal))</visible>
+							<control type="image">
+								<texture>acteurs/local.png</texture>
+								<aspectratio>keep</aspectratio>
 							</control>
 							<control type="image">
-								<align>center</align>
-								<width>185</width>
-								<height>245</height>
-								<texture>frames/ClassicFrame_Poster.png</texture>
-								<aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
+								<top>60</top>
+								<left>65</left>
+								<texture>acteurs/tmdb.png</texture>
+								<aspectratio>keep</aspectratio>
+								<width>40</width>
+								<height>40</height>
+								<visible>Control.HasFocus(5051)</visible>
+							</control>
+						</control>
+						<control type="group">
+							<visible>IsEmpty(Window(Home).Property(ActeurVideoLocal))</visible>
+							<control type="image">
+								<texture>acteurs/tmdb.png</texture>
+								<aspectratio>keep</aspectratio>
+							</control>
+							<control type="image">
+								<texture>acteurs/local.png</texture>
+								<top>60</top>
+								<left>65</left>
+								<width>40</width>
+								<height>40</height>
+								<visible>Control.HasFocus(5051)</visible>
+								<aspectratio>keep</aspectratio>
 							</control>
 						</control>
 					</control>
-
-
-
 					<control type="group">
-						<top>205</top>
-						<left>175</left>
+						<visible>!Container(5051).IsUpdating+Control.HasFocus(5051)</visible>
+						<posy>5</posy>
+						<posx>1850</posx>
 						<width>30</width>
 						<height>30</height>
-						<control type="group">
-							<visible>[!Container(5051).IsUpdating+Control.HasFocus(1998)]|Control.HasFocus(5051)</visible>
-							<animation type="Conditional" loop="true" condition="true">
-								<effect type="fade"  start="0" end="100"  time="1000" delay="2000" reversible="false"/>
-							</animation>
-							<control type="image">
-								<align>center</align>
-								<texture>ArrowUp.png</texture>
-								<colordiffuse>FF00FFFF</colordiffuse>
-								<visible>Control.HasFocus(5051)</visible>
-							</control>
-							<control type="image">
-								<align>center</align>
-								<texture>ArrowDown.png</texture>
-								<visible>Control.HasFocus(1998)+!Container(5051).IsUpdating</visible>
-							</control>
-						</control>
-						<!--<control type="image">
+						<animation type="Conditional" loop="true" condition="true">
+							<effect type="fade"  start="0" end="100"  time="1000" delay="1000" reversible="false"/>
+						</animation>
+						<control type="image">
 							<align>center</align>
-							<width>40</width>
-							<height>40</height>
-							<texture>sablier.gif</texture>
-							<visible>Container(5051).IsUpdating+!Control.HasFocus(5051)</visible>
-							
+							<texture>ArrowDown.png</texture>
 						</control>
--->
 					</control>
 				</control>
 				<control type="image">
@@ -511,25 +503,30 @@
 				</control>
 				<control type="label">
 					<top>5</top>
-					<width>1685</width>
-					<align>center</align>
+					<left>225</left>
+					<width>1440</width>
+					<align>left</align>
 					<font>impact</font>
 					<label>[COLOR=yellow]$VAR[Is1998][/COLOR]</label>
-					<visible>Container(5051).IsUpdating|!Control.HasFocus(5051)</visible>
+					<!-- <visible>Container(5051).IsUpdating|!Control.HasFocus(5051)</visible> -->
 				</control>
 				<control type="label">
-					<top>5</top>
-					<width>1685</width>
-					<align>center</align>
-					<font>impact</font>
-					<label>[COLOR=yellow]$VAR[Is1998][/COLOR] [I][COLOR=white]($INFO[Container(5051).CurrentItem]/$INFO[Container(5051).NumItems])[/I][/COLOR]</label>
+					<top>10</top>
+					<left>260</left>
+					<width>1450</width>
+					<align>right</align>
+					<font>lcdnsub</font>
+					<textcolor>lightblue</textcolor>
+					
+					<label>$INFO[Container(5051).CurrentItem]/$INFO[Container(5051).NumItems]</label>
 					<visible>!Container(5051).IsUpdating+Control.HasFocus(5051)</visible>
 				</control>
 
-				<control type="list" id="5051">
+				<control type="fixedlist" id="5051">
 					<top>60</top>
 					<left>20</left>
 					<width>1800</width>
+					<align>center</align>
 					  -->
 					<!--<onclick>ActivateWindow(10035,return)</onclick>-->
 					<onfocus>SetProperty(ActeurVideoReset,,Home)</onfocus>
@@ -539,6 +536,7 @@
 					<preloaditems>6</preloaditems>
 					<onleft>5051</onleft>
 					<onright>5051</onright>
+					<focusposition>2</focusposition>
 					<onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
 					<onback>SetProperty(ActeurVideoReset,1,Home)</onback>
 					<onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
@@ -641,27 +639,27 @@
 </include>
 <include name="Roles">
 	<orientation>horizontal</orientation>
-	<itemlayout height="380" width="305">
+	<itemlayout height="380" width="350">
 		<control type="group">
 			<top>5</top>
-			<width>285</width>
-			<control type="label">
-
-				<height>24</height>
+			<left>10</left>
+			<width>330</width>
+			<control type="textbox">
+				<height>80</height>
 				<align>center</align>
 				<aligny>center</aligny>
 				<font>comic24</font>
-				<textcolor>grey</textcolor>
+				<textcolor>lightgrey</textcolor>
 				<label>$INFO[ListItem.Label]</label>
 			</control>
 			<control type="label">
-				<top>30</top>
+				<top>325</top>
 				<height>30</height>
 				<align>center</align>
 				<aligny>center</aligny>
 				<font>comic24</font>
 				<textcolor>grey</textcolor>
-				<label>$INFO[ListItem.Year]</label>
+				<label>[I]$INFO[ListItem.Year][/I]</label>
 			</control>
 			<control type="label">
 				<posy>355</posy>
@@ -669,7 +667,7 @@
 				<align>center</align>
 				<aligny>center</aligny>
 				<font>comic24</font>
-				<textcolor>grey</textcolor>
+				<textcolor>lightgrey</textcolor>
 				<label>[I]$INFO[ListItem.Label2][/I]</label>
 			</control>
 		</control>
@@ -677,7 +675,7 @@
 
 		<control type="group">
 			<description>Actor image</description>
-			<posy>65</posy>
+			<posy>85</posy>
 			<posx>5</posx>
 			<control type="image">
 				<align>center</align>
@@ -706,45 +704,52 @@
 		</control>
 
 	</itemlayout>
-	<focusedlayout height="380" width="305">
+	<focusedlayout height="380" width="400">
+		<!--	-->
 		<control type="group">
+			
 			<top>5</top>
-			<width>285</width>
-			<control type="label">
-
-				<height>24</height>
+			<left>35</left>
+			<width>330</width>
+			
+			<control type="textbox">
+				<height>80</height>
 				<align>center</align>
 				<aligny>center</aligny>
 				<font>comic24</font>
-				<textcolor>yellow</textcolor>
+				<textcolor>lightgrey</textcolor>
 				<label>$INFO[ListItem.Label]</label>
+				<visible>!Control.HasFocus(5051)+!Control.HasFocus(505)</visible>
 			</control>
 			<control type="label">
-				<top>30</top>
+				<top>325</top>
 				<height>30</height>
 				<align>center</align>
 				<aligny>center</aligny>
 				<font>comic24</font>
-				<textcolor>yellow</textcolor>
-				<label>$INFO[ListItem.Year]</label>
+				<textcolor>grey</textcolor>
+				<label>[I]$INFO[ListItem.Year][/I]</label>
+				<visible>!Control.HasFocus(5051)+!Control.HasFocus(505)</visible>
 			</control>
 			<control type="label">
-				<posy>355</posy>
+				<posy>365</posy>
+				<left>10</left>
+				<width>330</width>
 				<height>30</height>
 				<align>center</align>
 				<aligny>center</aligny>
 				<font>comic24</font>
-				<textcolor>yellow</textcolor>
+				<textcolor>grey</textcolor>
 				<label>[I]$INFO[ListItem.Label2][/I]</label>
 			</control>
 		</control>
 
 		<control type="group">
 			<animation type="Conditional" condition="Control.HasFocus(5051)|Control.HasFocus(505)">
-				<effect type="zoom"  center="132,0" start="100" end="115" time="5" delay="1" reversible="true"/>
+				<effect type="zoom"  center="175,250" start="100" end="150" time="5" delay="1" reversible="true"/>
 			</animation>
 			<description>Actor image</description>
-			<posy>65</posy>
+			<posy>85</posy>
 			<posx>5</posx>
 			<control type="image">
 				<align>center</align>
@@ -762,6 +767,7 @@
 				<texture>acteurs/films.png</texture>
 				<aspectratio>keep</aspectratio>
 				<visible>StringCompare(ListItem.Writer,movie)+Control.IsVisible(5055)</visible>
+				<visible>!Control.HasFocus(5051)+!Control.HasFocus(505)</visible>
 			</control>
 			<control type="image">
 				<posy>-10</posy>
@@ -770,7 +776,9 @@
 				<texture>acteurs/series.png</texture>
 				<aspectratio>keep</aspectratio>
 				<visible>!StringCompare(ListItem.Writer,movie)+!Control.IsVisible(5055)</visible>
+				<visible>!Control.HasFocus(5051)+!Control.HasFocus(505)</visible>
 			</control>
+			
 		</control>
 
 	</focusedlayout>
@@ -965,7 +973,7 @@
 
 	<control type="image">
 		<include>Dimensions_Fullscreen</include>
-		<texture background="true" fallback="background.jpg">$VAR[backgroundVar]</texture>
+		<texture background="true" fallback="background.png">$VAR[backgroundVar]</texture>
 		<colordiffuse>BackgroundColor</colordiffuse>
 	</control>
 
@@ -1011,14 +1019,14 @@
 		<timeperimage>6000</timeperimage>
 		<randomize>true</randomize>
 		<imagepath background="true" diffuse="diffuse_fanart.png">$INFO[ListItem.Path,,../extrafanart/]</imagepath>
-		<visible>!String.StartsWith(Container.FolderPath,plugin) + [Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
+		<visible>!SubString(Container.FolderPath,plugin) + [Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
 	</control>
 	<control type="multiimage" id="7998">
 		<include>Thumb_Background_Fanart_Common</include>
 		<timeperimage>6000</timeperimage>
 		<randomize>true</randomize>
 		<imagepath background="true" diffuse="diffuse_fanart.png">$INFO[ListItem.Path,,/extrafanart/]</imagepath>
-		<visible>!IsEmpty(ListItem.label)+!String.StartsWith(Container.FolderPath,plugin) + [Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
+		<visible>!IsEmpty(ListItem.label)+!SubString(Container.FolderPath,plugin) + [Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
 	</control>
 	<control type="image">
 		<include>Thumb_Background_Fanart_Common</include>
@@ -1116,7 +1124,7 @@
 		<include condition="Window.IsActive(home)">HomePosContext</include>
 		<control type="image">
 			<include>Dimensions_Fullscreen</include>
-			<texture background="true" fallback="background.jpg" diffuse="diffuse_fanart.png">$INFO[Skin.String(CustomBackground)]</texture>
+			<texture background="true" fallback="background.png" diffuse="diffuse_fanart.png">$INFO[Skin.String(CustomBackground)]</texture>
 			<colordiffuse>GlobalContextColour</colordiffuse>
 			<visible>ControlGroup(7001).HasFocus | ControlGroup(7000).HasFocus | Window.IsActive(yesnodialog) | Window.IsActive(contextmenu) | Window.IsActive(contentsettings) | Window.IsActive(favourites) | Window.IsActive(mediasource) | Window.IsActive(addonsettings) | Window.IsActive(okdialog) | Window.IsActive(pictureinfo) | Window.IsActive(songinformation)</visible>
 			<animation effect="fade" start="0" end="100" time="200">Visible</animation>
@@ -1129,7 +1137,7 @@
 			<posy>840</posy>
 			<width>320</width>
 			<height>200</height>
-			<texture background="true" diffuse="showcase_matte.png">frames/ClassicFrame_Background.png</texture>
+			<texture background="true" diffuse="showcase_matte.png">frames/ClassicFrame_background.png</texture>
 			<colordiffuse>70202020</colordiffuse>
 		</control>
 		<control type="image">
@@ -2627,7 +2635,7 @@
 	<effect type="fade"  start="0" end="100" time="100" delay="1" reversible="false"/>
 	</animation>
 
-	<visible>[[Container.Content(tvshows)+!Skin.HasSetting(HideTvCast)]|[StringCompare(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Label,..)</visible>
+	<visible>[[Container.Content(tvshows)+!Skin.HasSetting(HideTvCast)]|[StringCompare(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..)</visible>
 	<control type="image">
 	<left>30</left>
 	<width>326</width>
@@ -2647,7 +2655,7 @@
 	<align>left</align>
 	<itemgap>1</itemgap>
 	<orientation>horizontal</orientation>
-	<visible>[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Label,..)</visible>
+	<visible>[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..)</visible>
 
 	<autoscroll delay="4000" repeat="5000" time="5000">IntegerGreaterThan(Container(20001).NumItems,4)</autoscroll>
 	<pagecontrol>60</pagecontrol>
@@ -2968,7 +2976,7 @@
 			<control type="image">
 				<width>500</width>
 				<height>230</height>
-				<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+				<texture diffuse="shine.png">frames/ClassicFrame_background.png</texture>
 				<colordiffuse>A0101010</colordiffuse>
 				<visible>IntegerGreaterThan(Container(8885).NumPages,0)</visible>
 			</control>
@@ -2992,9 +3000,9 @@
 			<visible>Control.HasFocus(1999)|[IntegerGreaterThan(Container(8885).NumPages,1)+System.IdleTime(2)+Skin.HasSetting(ShowLargePlot)]</visible>
 		</control>
 		<control type="group" id="7780">
-			<!-- <visible>IntegerGreaterThan(Container(8885).NumPages,1)+!Control.HasFocus(1999)+!Skin.HasSetting(Hide_Plot) + [Container.Content(Movies)|  Container.Content(TVShows) | Container.Content(Seasons) | Container.Content(Episodes) | Container.Content(MusicVideos) | Container.Content(Artists) | String.StartsWith(Container.FolderPath,plugin)]</visible> -->
+			<!-- <visible>IntegerGreaterThan(Container(8885).NumPages,1)+!Control.HasFocus(1999)+!Skin.HasSetting(Hide_Plot) + [Container.Content(Movies)|  Container.Content(TVShows) | Container.Content(Seasons) | Container.Content(Episodes) | Container.Content(MusicVideos) | Container.Content(Artists) | SubString(Container.FolderPath,plugin)]</visible> -->
 			<visible>!Skin.HasSetting(Hide_Plot)</visible>
-			<visible>Control.HasFocus(1999)| [IntegerGreaterThan(Container(8885).NumPages,1)+Skin.HasSetting(ShowLargePlot) + [Container.Content(Movies)|  Container.Content(TVShows) | Container.Content(Seasons) | Container.Content(Episodes) | Container.Content(MusicVideos) | Container.Content(Artists) | Container.Content(Albums) |Container.Content(Genres) |String.StartsWith(Container.FolderPath,plugin)|Container.Content(Addons)]]</visible>
+			<visible>Control.HasFocus(1999)| [IntegerGreaterThan(Container(8885).NumPages,1)+Skin.HasSetting(ShowLargePlot) + [Container.Content(Movies)|  Container.Content(TVShows) | Container.Content(Seasons) | Container.Content(Episodes) | Container.Content(MusicVideos) | Container.Content(Artists) | Container.Content(Albums) |Container.Content(Genres) |SubString(Container.FolderPath,plugin)|Container.Content(Addons)]]</visible>
 			<include>Animation_FadedByMenu</include>
 			<include>Animation_OpenCloseFade</include>
 			<include>Animation_HiddenByInfo</include>
@@ -3047,7 +3055,7 @@
 	<control type="image">
 		<width>500</width>
 		<height>230</height>
-		<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+		<texture diffuse="shine.png">frames/ClassicFrame_background.png</texture>
 		<colordiffuse>A0101010</colordiffuse>
 	</control>
 	<!--<control type="image">
@@ -3344,7 +3352,7 @@
 
 
 	<control type="label">
-		<width min="25" max="350">auto</width>
+		<width min="25" max="450">auto</width>
 		<height>30</height>
 		<aligny>center</aligny>
 		<font>METF_MediaDetailsSmall</font>
@@ -4953,10 +4961,10 @@
 			</control>
 		</control>
 		<control type="group">
-			<visible>!String.StartsWith(Player.FolderPath,http)</visible>
+			<visible>!SubString(Player.FolderPath,http)</visible>
 			<!-- TV Show Poster / Logo / Clearart -->
 			<control type="group">
-				<visible>VideoPlayer.Content(Episodes) + !String.StartsWith(VideoPlayer.Cover,default) + !Skin.HasSetting(Enable_OSDClearArt)</visible>
+				<visible>VideoPlayer.Content(Episodes) + !SubString(VideoPlayer.Cover,default) + !Skin.HasSetting(Enable_OSDClearArt)</visible>
 				<control type="image">
 					<description>TV Show Thumbnail</description>
 					<posx>40</posx>
@@ -5001,7 +5009,7 @@
 			</control>
 			<!-- Movie Poster -->
 			<control type="group">
-				<visible>VideoPlayer.Content(Movies) + !String.StartsWith(VideoPlayer.Cover,default)</visible>
+				<visible>VideoPlayer.Content(Movies) + !SubString(VideoPlayer.Cover,default)</visible>
 				<!--<control type="label">
 				<posx>20</posx>
 				<label>***$INFO[Window(Home).Property(MoviePlayerArt)]</label>
@@ -5039,7 +5047,7 @@
 				<bordertexture border="6">frames/thumb_border.png</bordertexture>
 				<bordersize>6</bordersize>
 				<texture diffuse="frames/EpisodeMatte.png">$INFO[VideoPlayer.Cover]</texture>
-				<visible>VideoPlayer.Content(MusicVideos) + !String.StartsWith(VideoPlayer.Cover,default)</visible>
+				<visible>VideoPlayer.Content(MusicVideos) + !SubString(VideoPlayer.Cover,default)</visible>
 			</control>
 			<!-- LiveTV Channel Icon -->
 			<control type="image">
@@ -5054,7 +5062,7 @@
 			</control>
 		</control>
 		<control type="group">
-			<visible>String.StartsWith(Player.FolderPath,http)</visible>
+			<visible>SubString(Player.FolderPath,http)</visible>
 			<!-- Default Thumbnail -->
 			<control type="image">
 				<description>Default Thumbnail</description>
@@ -5066,7 +5074,7 @@
 				<bordertexture border="6">frames/thumb_border.png</bordertexture>
 				<bordersize>6</bordersize>
 				<texture diffuse="frames/EpisodeMatte.png">$INFO[VideoPlayer.Cover]</texture>
-				<visible>!String.StartsWith(VideoPlayer.Cover,default)</visible>
+				<visible>!SubString(VideoPlayer.Cover,default)</visible>
 			</control>
 		</control>
 		<include>OSD_PLayer_Plot</include>
@@ -5215,7 +5223,7 @@
 			<posx>1546</posx>
 			<width>320</width>
 			<height>150</height>
-			<texture background="true" diffuse="showcase_matte.png">frames/ClassicFrame_Background.png</texture>
+			<texture background="true" diffuse="showcase_matte.png">frames/ClassicFrame_background.png</texture>
 			<colordiffuse>70202020</colordiffuse>
 		</control>
 		<control type="image">
@@ -5456,11 +5464,11 @@
 	<aligny>bottom</aligny>
 </include>
 <include name="VisibleIfNotMovieSet">
-	<visible>!String.StartsWith(ListItem.DBTYPE,set)</visible>
+	<visible>!SubString(ListItem.DBTYPE,set)</visible>
 </include>
 <include name="VisibleIfMovieSet">
 	<!--<visible>Container.Content(movies) + IsEmpty(listitem.Genre) + IsEmpty(ListItem.VideoResolution)</visible>-->
-	<visible>String.StartsWith(ListItem.DBTYPE,set)</visible>
+	<visible>SubString(ListItem.DBTYPE,set)</visible>
 </include>
 <include name="ShowTotalTvEp">
 	<control type="group">

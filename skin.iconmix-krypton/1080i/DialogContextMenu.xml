@@ -46,14 +46,52 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
-
 					<label>$LOCALIZE[629]: $INFO[Container.Viewmode]</label>
-
 					<onclick>XBMC.RunScript(script.skin.helper.service,action=setview)</onclick>
 				</control>
+						<control type="button" id="2100">
+						<!-- <include>SettingsLabelElements</include> -->
+						<onleft>Dialog.Close(contextmenu)</onleft>
+					<onright>Dialog.Close(contextmenu)</onright>
+					<left>-</left>
+					<top>-</top>
+					<width>340</width>
+					<height>35</height>
+					<font>METF_DialogLarge</font>
+					<align>center</align>
+					<aligny>center</aligny>
+					<textcolor>TextNF</textcolor>
+					<focusedcolor>DialogTextFO</focusedcolor>
+					<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
+						<label>[I]$LOCALIZE[31925][/I]</label>
+
+						<onclick>Close</onclick>
+						<onclick>RunScript(script.iconmixtools)</onclick>
+						<include>VisibleIfMovieSet</include>
+					</control>
+					<control type="button" id="2101">
+						<!-- <include>SettingsLabelElements</include> -->
+						<onleft>Dialog.Close(contextmenu)</onleft>
+					<onright>Dialog.Close(contextmenu)</onright>
+					<left>-</left>
+					<top>-</top>
+					<width>340</width>
+					<height>35</height>
+					<font>METF_DialogLarge</font>
+					<align>center</align>
+					<aligny>center</aligny>
+					<textcolor>TextNF</textcolor>
+					<focusedcolor>DialogTextFO</focusedcolor>
+					<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
+						<label>[I]$LOCALIZE[31927][/I]</label>
+						<onclick>Close</onclick>
+						<onclick>RunScript(script.iconmixtools)</onclick>
+						<visible>Container.Content(tvshows)+Skin.HasSetting(CheckSeries)+!Control.HasFocus(5051)+!Control.HasFocus(1998)</visible>
+					</control>
 				
 				
 		</control>
+
 		<control type="button" id="1000">
 			<description>button template</description>
 			<onleft>Dialog.Close(contextmenu)</onleft>

@@ -74,11 +74,12 @@
 	<include name="FadelabelPauseAtEnd90">
 		<pauseatend>90000</pauseatend>
 	</include>
+
 <variable name="contentdvinfo">
 	<!--  -->
 	
-	<value condition="System.HasAddon(script.iconmixtools)+Skin.HasSetting(SagaManquant)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.setid])</value> -->
-	<value>videodb://movies/sets/$INFO[ListItem.setid]</value> 	 
+	<value condition="System.HasAddon(script.iconmixtools)+Skin.HasSetting(SagaManquant)+SubString(ListItem.DBTYPE,set)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.setid]</value> -->
+	<value condition="SubString(ListItem.DBTYPE,set)">videodb://movies/sets/$INFO[ListItem.setid]</value> 	 
 	<!--
 	<value condition="Skin.HasSetting(SagaManquant)+StringCompare(ListItem.DBTYPE,set)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.DBID]</value> 
 	<value></value>
@@ -87,15 +88,16 @@
 <variable name="contentsaga">
 	<!--  -->
 	
-	<value condition="System.HasAddon(script.iconmixtools)+Skin.HasSetting(SagaManquant)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.DBID]</value> -->
-	<value>videodb://movies/sets/$INFO[ListItem.DBID]</value> 	 
+	<value condition="System.HasAddon(script.iconmixtools)+Skin.HasSetting(SagaManquant)+SubString(ListItem.DBTYPE,set)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.DBID]</value> -->
+	<value condition="SubString(ListItem.DBTYPE,set)">videodb://movies/sets/$INFO[ListItem.DBID]</value> 	
+	<value></value> 
 	<!--
 	<value condition="Skin.HasSetting(SagaManquant)+StringCompare(ListItem.DBTYPE,set)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.DBID]</value> 
 	<value></value>
 	-->
 </variable>
 <variable name="fanartdialogvideoinfo">
-	<value condition="IsEmpty(Window(Home).Property(iconmixExtraFanart))+!String.Contains(Container.FolderPath,plugin) + [ Container.Content(movies) |Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)">$INFO[ListItem.Path,,/extrafanart/]</value>
+	<value condition="IsEmpty(Window(Home).Property(iconmixExtraFanart))+!SubString(Container.FolderPath,plugin) + [ Container.Content(movies) |Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)">$INFO[ListItem.Path,,/extrafanart/]</value>
 	
 </variable>
 
@@ -106,7 +108,6 @@
 	
 	<value condition="[SubString(Container(1999).Content,movie)|[SubString(Container(1999).Content,genres)+Window.IsActive(10025)]]+IntegerGreaterThan(Container(1999).NumItems,1)"> [I]( $INFO[Window(Home).Property(iconmixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[342] )[/I]</value>
 	<value condition="[SubString(Container(1999).Content,movie)|[SubString(Container(1999).Content,genres)+Window.IsActive(10025)]]+!IntegerGreaterThan(Container(1999).NumItems,1)"> [I]( $INFO[Window(Home).Property(iconmixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[20338] )[/I]</value>
-	<value></value>
 
 </variable>	
 	
@@ -179,8 +180,8 @@
 -->
  		<value>$INFO[Container(211).ListItem.Property(backgroundName)]</value>
 	</variable>
-
-<variable name="pochettemusic">
+	
+	<variable name="pochettemusic">
 		
 		<value condition="!SubString(ListItem.Icon,Default)">$INFO[ListItem.Icon]</value>
 		
@@ -201,10 +202,12 @@
 		<value condition="IntegerGreaterThan(ListItem.Season,0)">$INFO[ListItem.Season,S0,]</value>
 	</variable>
 
-<variable name="ListItemTitle">
 
+<variable name="ListItemTitle">
+	
 		<value condition="Container.Content(artists) | Container.Content(albums) | Container.Content(songs)">$INFO[ListItem.Label]</value>		
 		<value condition="Container.Content(episodes)|[SubString(Container.FolderPath,plugin)+IsEmpty(Container.Content)+!IsEmpty(ListItem.Title)]">$VAR[Seasonnum]$VAR[episodenum]$INFO[ListItem.Title]</value>
+		
 		<value condition="Container.Content(tvshows)+!IsEmpty(ListItem.TVShowTitle)">$INFO[ListItem.TVShowTitle]</value>
 		<value condition="!IsEmpty(ListItem.Label)+StringCompare(ListItem.DBTYPE,set)">[I]$INFO[ListItem.Label][/I]</value>
 		<value condition="!IsEmpty(ListItem.Label)">$INFO[ListItem.Label]</value>
@@ -212,20 +215,20 @@
 		<value></value>
 	</variable>
 
-	<variable name="ListItemInfoTitle">
+		<variable name="ListItemInfoTitle">
 	
-		<value condition="Control.HasFocus(1999)+StringCompare(Container(1999).ListItem.Label2,manquant)+!IsEmpty(Container(1999).ListItem.Label)">[I]$INFO[Container(1999).ListItem.Label] [COLOR=red]$INFO[Container(1999).ListItem.Writer, ( , )][/COLOR][/I]</value>
-		<value condition="Control.HasFocus(1999)+!IsEmpty(Container(1999).ListItem.Label)+!IsEmpty(Container(1999).ListItem.Year)">$INFO[Container(1999).ListItem.Label] [I][COLOR=yellow]$INFO[Container(1999).ListItem.Year, ( , )][/COLOR][/I]</value>
+		<value condition="Control.HasFocus(1999)+StringCompare(Container(1999).ListItem.Label2,manquant)+!IsEmpty(Container(1999).ListItem.Label)">[I]$INFO[Container(1999).ListItem.Label] $INFO[Container(1999).ListItem.Writer,( , )][/I]</value>
+		<value condition="Control.HasFocus(1999)+!IsEmpty(Container(1999).ListItem.Label)+!IsEmpty(Container(1999).ListItem.Year)">$INFO[Container(1999).ListItem.Label] [I]$INFO[Container(1999).ListItem.Year,( , )][/I]</value>
 	
 		<value condition="[[StringCompare(Container.Content,genres) +Window.IsActive(10502)]]+IntegerGreaterThan(Container(1999).NumItems,1)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Container(1999).NumItems] $LOCALIZE[133] )[/I][/COLOR]</value>
 	  <value condition="[[StringCompare(Container.Content,genres) +Window.IsActive(10502)]]+!IntegerGreaterThan(Container(1999).NumItems,1)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Container(1999).NumItems] $LOCALIZE[557] )[/I][/COLOR]</value>
-	
-	<value condition="StringCompare(ListItem.DBTYPE,set) +IntegerGreaterThan(Container(1999).NumItems,0)+StringCompare(Window(Home).Property(iconmixSaga),complet)">$INFO[ListItem.Label] [COLOR=yellow][I]( $LOCALIZE[31898] )[/I][/COLOR]</value>
+		<value condition="StringCompare(ListItem.DBTYPE,set) +IntegerGreaterThan(Container(1999).NumItems,0)+StringCompare(Window(Home).Property(iconmixSaga),complet)">$INFO[ListItem.Label] [COLOR=yellow][I]( $LOCALIZE[31898] )[/I][/COLOR]</value>
+
 	<value condition="StringCompare(ListItem.DBTYPE,set) +IntegerGreaterThan(Container(1999).NumItems,1)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Window(Home).Property(iconmixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[342] )[/I][/COLOR]</value>
-	<value condition="StringCompare(ListItem.DBTYPE,set) +IntegerGreaterThan(Container(1999).NumItems,0)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Window(Home).Property(iconmixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[20338] )[/I][/COLOR]</value>
-	
+	<value condition="StringCompare(ListItem.DBTYPE,set) +!IntegerGreaterThan(Container(1999).NumItems,1)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Window(Home).Property(iconmixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[20338] )[/I][/COLOR]</value>
   <value condition="[StringCompare(ListItem.DBTYPE,genre) +Window.IsActive(10025)]+IntegerGreaterThan(Container(1999).NumItems,1)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Container(1999).NumItems] $LOCALIZE[342] )[/I][/COLOR]</value>
 	<value condition="[StringCompare(ListItem.DBTYPE,genre) +Window.IsActive(10025)]+!IntegerGreaterThan(Container(1999).NumItems,1)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Container(1999).NumItems] $LOCALIZE[20338] )[/I][/COLOR]</value>
+
 
 		<value condition="Container.Content(artists) | Container.Content(albums) | Container.Content(songs)">$INFO[ListItem.Label]</value>		
 		<value condition="Container.Content(episodes)|[SubString(Container.FolderPath,plugin)+IsEmpty(Container.Content)+!IsEmpty(ListItem.Title)]">$VAR[Seasonnum]$VAR[episodenum]$INFO[ListItem.Title]</value>
@@ -763,16 +766,16 @@
 	</variable>
 	
 	<variable name="CheckRating">
-		<value condition="String.StartsWith(ListItem.Rating,1.)">LeftRating/rating1.png</value>
-		<value condition="String.StartsWith(ListItem.Rating,2.)">LeftRating/rating2.png</value>
-		<value condition="String.StartsWith(ListItem.Rating,3.)">LeftRating/rating3.png</value>
-		<value condition="String.StartsWith(ListItem.Rating,4.)">LeftRating/rating4.png</value>
-		<value condition="String.StartsWith(ListItem.Rating,5.)">LeftRating/rating5.png</value>
-		<value condition="String.StartsWith(ListItem.Rating,6.)">LeftRating/rating6.png</value>
-		<value condition="String.StartsWith(ListItem.Rating,7.)">LeftRating/rating7.png</value>
-		<value condition="String.StartsWith(ListItem.Rating,8.)">LeftRating/rating8.png</value>
-		<value condition="String.StartsWith(ListItem.Rating,9.)">LeftRating/rating9.png</value>
-		<value condition="String.StartsWith(ListItem.Rating,10.)">LeftRating/rating10.png</value>			
+		<value condition="SubString(ListItem.Rating,1.)">LeftRating/rating1.png</value>
+		<value condition="SubString(ListItem.Rating,2.)">LeftRating/rating2.png</value>
+		<value condition="SubString(ListItem.Rating,3.)">LeftRating/rating3.png</value>
+		<value condition="SubString(ListItem.Rating,4.)">LeftRating/rating4.png</value>
+		<value condition="SubString(ListItem.Rating,5.)">LeftRating/rating5.png</value>
+		<value condition="SubString(ListItem.Rating,6.)">LeftRating/rating6.png</value>
+		<value condition="SubString(ListItem.Rating,7.)">LeftRating/rating7.png</value>
+		<value condition="SubString(ListItem.Rating,8.)">LeftRating/rating8.png</value>
+		<value condition="SubString(ListItem.Rating,9.)">LeftRating/rating9.png</value>
+		<value condition="SubString(ListItem.Rating,10.)">LeftRating/rating10.png</value>			
 		<value>LeftRating/rating10.png</value>	
 	</variable>
 	<variable name="MediaFlag_MPAA">
@@ -913,8 +916,7 @@
 		<value condition="!IsEmpty(VideoPlayer.Year) + [!IsEmpty(VideoPlayer.Artist) | !IsEmpty(VideoPlayer.Album)] + VideoPlayer.Content(MusicVideos)">$INFO[VideoPlayer.Artist]$INFO[VideoPlayer.Album, - ]$INFO[VideoPlayer.Year, (,)]</value>
 		<value condition="IsEmpty(VideoPlayer.Year) + [!IsEmpty(VideoPlayer.Artist) | !IsEmpty(VideoPlayer.Album)] + VideoPlayer.Content(MusicVideos)">$INFO[VideoPlayer.Artist]$INFO[VideoPlayer.Album, - ]</value>
 		<value condition="SubString(Player.ChapterName,00:)+IntegerGreaterThan(Player.ChapterCount,1) + !VideoPlayer.Content(LiveTV)">$INFO[Player.Chapter,$LOCALIZE[21396]: ]$INFO[Player.ChapterCount, / ]</value>
-	<value condition="IntegerGreaterThan(Player.ChapterCount,1) + !VideoPlayer.Content(LiveTV)">$INFO[Player.Chapter,$LOCALIZE[21396]: ]$INFO[Player.ChapterCount, / ]$INFO[Player.ChapterName,[COLOR=TitleText] - (,)[/COLOR]]</value> -->
-
+		<value condition="IntegerGreaterThan(Player.ChapterCount,1) + !VideoPlayer.Content(LiveTV)">$INFO[Player.Chapter,$LOCALIZE[21396]: ]$INFO[Player.ChapterCount, / ]$INFO[Player.ChapterName,[COLOR=TitleText] - (,)[/COLOR]]</value>
 		<value>$INFO[VideoPlayer.Tagline]</value>
 	</variable>
 	<variable name="GoPlaylist">
@@ -1114,6 +1116,7 @@
 		<value condition="[Container.Content(Movies)|Container.Content(sets)]+Control.IsVisible(555)">$INFO[Skin.String(555Vue)]</value>
 		<value condition="[Container.Content(Movies)|Container.Content(sets)]+Control.IsVisible(556)">$INFO[Skin.String(556Vue)]</value>
 		<value condition="[Container.Content(Movies)|Container.Content(sets)]+Control.IsVisible(512)">$INFO[Skin.String(512Vue)]</value>
+		
 		
 		<value condition="Container.Content(TvShows)+Control.IsVisible(504)">$INFO[Skin.String(504VueTvShows)]</value>
 		<value condition="Container.Content(TvShows)+Control.IsVisible(550)">$INFO[Skin.String(550VueTvShows)]</value>

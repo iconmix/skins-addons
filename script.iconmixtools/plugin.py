@@ -154,7 +154,7 @@ class Main:
                     Titre=xbmc.getLocalizedString( 20343 )
                    
                    if Unique: 
-                     Unique=__language__( 32507 )+" ["+xbmc.getInfoLabel("ListItem.Label")+"]"
+                     Unique=__language__( 32507 )+" [COLOR=yellow]["+utils.try_decode(xbmc.getInfoLabel("ListItem.Label"))+"][/COLOR]"
                      ret=dialog.select(Titre, [__language__( 32502 )+Titre, __language__( 32503 )+Titre,Unique])
                    else:
                      ret=dialog.select(Titre, [__language__( 32502 )+Titre, __language__( 32503 )+Titre])
@@ -195,12 +195,11 @@ class Main:
                           
                           Pos=int(xbmc.getInfoLabel("Container(1998).CurrentItem"))-1
                           Pos5051=int(xbmc.getInfoLabel("Container(5051).CurrentItem"))-1
-                          ret=dialogC.select("[COLOR=yellow]"+Titre+"[/COLOR][I] "+xbmc.getLocalizedString( 20410 )+"[/I]", ListeNomTrailer)
+                          #ret=dialogC.select("[COLOR=yellow]"+Titre+"[/COLOR][I] "+xbmc.getLocalizedString( 20410 )+"[/I]", ListeNomTrailer)
+                          ret=dialogC.select("[I]"+xbmc.getLocalizedString( 20410 )+"[/I]", ListeNomTrailer)
                           #utils.logMsg('Liste trailers choisie: ' + str(ret),0)
                           if ret<len(ListeTrailer) and ret>=0:
                               #utils.logMsg('Liste trailers choisie: ' + str(ListeTrailer[ret]["key"]),0)
-                              
-                              #xbmc.executebuiltin('PlayMedia("https://www.youtube.com/watch?v=%s")' %(str(ListeTrailer[ret]["key"])))
                               xbmc.executebuiltin('PlayMedia(plugin://plugin.video.youtube/play/?video_id=%s)' %(ListeTrailer[ret]["key"]))
                           else:   
                               self.windowhome.setProperty('ActeurVideoReset','')

@@ -1411,7 +1411,7 @@ msgstr ""
 
 msgctxt "#31822"
 msgid "Gallery Square"
-msgstr ""
+msgstr "Mur de Vignettes"
 
 msgctxt "#31823"
 msgid "Panel Square"
@@ -1605,3 +1605,4 @@ msgstr "Afficher le widget météo en plein écran"
 msgctxt "#32005"
 msgid "Show end time after duration"
 msgstr "Montrer l'heure de fin après la durée"
+

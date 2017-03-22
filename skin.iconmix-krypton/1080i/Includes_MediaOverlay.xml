@@ -27,7 +27,7 @@
 					<control type="image">									
 						<width>320</width>
 						<height>300</height>
-						<texture background="true" diffuse="showcase_matte.png">frames/ClassicFrame_Background.png</texture>
+						<texture background="true" diffuse="showcase_matte.png">frames/ClassicFrame_background.png</texture>
 						<colordiffuse>70202020</colordiffuse>
 					</control>
 					<control type="image">									

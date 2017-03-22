@@ -79,7 +79,7 @@
 					<posy>113</posy>
 					<width>558</width>
 					<height>372</height>
-					<texture>frames/ClassicFrame_Background.png</texture>
+					<texture>frames/ClassicFrame_background.png</texture>
 					<colordiffuse>FrameBackgroundDiffuse</colordiffuse>
 					<aspectratio scalediffuse="false">stretch</aspectratio>
 				</control>

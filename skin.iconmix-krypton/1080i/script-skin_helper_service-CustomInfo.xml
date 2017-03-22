@@ -422,7 +422,7 @@
 					<control type="image">
 						<width>252</width>
 						<height>327</height>
-						<texture>frames/ClassicFrame_Background.png</texture>
+						<texture>frames/ClassicFrame_background.png</texture>
 						<aspectratio align="center" aligny="center">stretch</aspectratio>
 						<visible>Control.IsVisible(998)</visible>
 					</control>

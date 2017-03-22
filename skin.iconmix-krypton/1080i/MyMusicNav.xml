@@ -15,7 +15,7 @@
 			<colordiffuse>BackgroundColor</colordiffuse>
 			<texture>fondflaggris.png</texture>
 			<colordiffuse>BackgroundColor</colordiffuse>
-			<visible>!Skin.HasSetting(CacheFond)</visible>
+			<!--<visible>!Skin.HasSetting(CacheFond)</visible> -->
 		</control>
 		<control type="group">
 			<animation type="Conditional" condition="Control.HasFocus(1999)" reversible="true">

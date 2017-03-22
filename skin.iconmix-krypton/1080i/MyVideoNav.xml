@@ -825,12 +825,14 @@
 				<left>50</left>
 				<include>ClearLogoArt</include>
 			</control>
+			
 			<control type="image">
 				<posy>2030</posy>
 				<width>1920</width>
 				<height>20</height>
 				<texture>black-back2.png</texture>
 				<aspectratio>stretch</aspectratio>
+				<visible>!String.IsEmpty(Control.GetLabel(2222))</visible>
 			</control>
 			<control type="fadelabel" id="2222">
 				<resetonlabelchange>true</resetonlabelchange>
@@ -863,6 +865,7 @@
 				<scrollout>false</scrollout>
 				<visible>!Skin.HasSetting(Hide_Plot)+!Skin.HasSetting(ShowLargePlot)</visible>
 			</control>
+			
 
 			<!-- Title -->
 			<control type="fadelabel">

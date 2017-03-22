@@ -114,7 +114,7 @@
 					<posy>66</posy>
 					<width>600</width>
 					<height>338</height>
-					<texture>frames/ClassicFrame_Background.png</texture>
+					<texture>frames/ClassicFrame_background.png</texture>
 					<colordiffuse>FrameBackgroundDiffuse</colordiffuse>
 					<aspectratio scalediffuse="false">stretch</aspectratio>
 						<visible>!String.IsEmpty(ListItem.Title)</visible>

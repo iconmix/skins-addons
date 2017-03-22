@@ -9,7 +9,6 @@
 			<thumb>Aicons/movies.png</thumb>
 			<property name="labelID">films</property>
 			<property name="defaultID">films</property>
-			<property name="translatedPath">::PLAYLIST&gt;Videos::</property>
 			<property name="background">WDF1.jpg</property>
 			<property name="backgroundName">Widget 1</property>
 			<property name="widgetStyle">Panel</property>
@@ -18,7 +17,7 @@
 			<property name="widgetType">video</property>
 			<property name="widgetTarget" />
 			<property name="widgetPath">videodb://recentlyaddedmovies/</property>
-			<property name="widgetSort">title</property>
+			<property name="widgetStyle.2">List</property>
 			<onclick>ActivateWindow(Videos,special://profile/playlists/video/FILMS.xsp,return)</onclick>
 			<property name="path">ActivateWindow(Videos,special://profile/playlists/video/FILMS.xsp,return)</property>
 			<property name="list">special://profile/playlists/video/FILMS.xsp</property>
@@ -38,19 +37,17 @@
 			<property name="background">WDF2.jpg</property>
 			<property name="backgroundName">Widget 2</property>
 			<property name="widgetStyle">Panel</property>
-			<property name="widget.2">LibraryRecentlyAddedEpisodes</property>
-			<property name="widgetName.2">Récents</property>
-			<property name="widgetType.2">video</property>
-			<property name="widgetTarget.2" />
-			<property name="widgetPath.2">videodb://recentlyaddedepisodes/</property>
-			<property name="widgetStyle.2">List</property>
 			<property name="widget">NAired</property>
-			<property name="widgetName">Prochainement</property>
+			<property name="widgetName">prochainement</property>
 			<property name="widgetType">video</property>
 			<property name="widgetTarget">tvshows</property>
 			<property name="widgetPath">plugin://script.skin.helper.service/?action=nextairedtvshows&amp;reload=$INFO[Window(Home).Property(widgetreload-tvshows)]</property>
-			<property name="widgetSort.2">name</property>
-			<property name="widgetSort" />
+			<property name="widgetStyle.2">Panel</property>
+			<property name="widget.2">LibraryRecentlyAddedEpisodes</property>
+			<property name="widgetName.2">Episodes récemment ajoutés</property>
+			<property name="widgetType.2">video</property>
+			<property name="widgetTarget.2">tvshows</property>
+			<property name="widgetPath.2">videodb://recentlyaddedepisodes/</property>
 			<visible>Library.HasContent(TVShows)</visible>
 			<onclick>ActivateWindow(Videos,library://video/tvshows/titles.xml/,return)</onclick>
 			<property name="path">ActivateWindow(Videos,library://video/tvshows/titles.xml/,return)</property>
@@ -68,19 +65,19 @@
 			<thumb>Aicons/music.png</thumb>
 			<property name="labelID">musique</property>
 			<property name="defaultID">music</property>
-			<property name="background">$INFO[Window(Home).Property(SkinHelper.AllMusicBackground)]</property>
-			<property name="backgroundName">Arrière-plans artistes aléatoires</property>
-			<property name="widget.2">LDPRandomAlbums</property>
-			<property name="widgetName.2">Aléatoires</property>
-			<property name="widgetType.2">music</property>
-			<property name="widgetTarget.2" />
-			<property name="widgetPath.2">plugin://service.library.data.provider?type=randomalbums&amp;reload=$INFO[Window.Property(randomalbums)]</property>
-			<property name="widgetStyle.2">Panel</property>
 			<property name="widget">Addon</property>
 			<property name="widgetName">Radios</property>
-			<property name="widgetType">songs</property>
-			<property name="widgetTarget">music</property>
+			<property name="widgetType">mixed</property>
 			<property name="widgetPath">plugin://plugin.audio.radio_de/stations/my/?reload=$INFO[Window(Home).Property(widgetreload)]</property>
+			<property name="widgetTarget">music</property>
+			<property name="background">WDF2.jpg</property>
+			<property name="backgroundName">Widget 2</property>
+			<property name="widgetStyle.2">Panel</property>
+			<property name="widget.2">LDPRandomAlbums</property>
+			<property name="widgetName.2">Albums</property>
+			<property name="widgetType.2">music</property>
+			<property name="widgetTarget.2">music</property>
+			<property name="widgetPath.2">plugin://service.library.data.provider?type=randomalbums&amp;reload=$INFO[Window.Property(randomalbums)]</property>
 			<property name="widgetStyle">Panel</property>
 			<visible>Library.HasContent(Music)</visible>
 			<onclick>ActivateWindow(music,library://music/artists.xml/,return)</onclick>
@@ -100,12 +97,10 @@
 			<property name="labelID">weather</property>
 			<property name="defaultID">weather</property>
 			<property name="widget">WeatherForecast</property>
-			<property name="widgetName">Prévisions météo</property>
+			<property name="widgetName">10508</property>
 			<property name="widgetType">weather</property>
-			<property name="widgetTarget" />
-			<property name="widgetPath" />
 			<property name="background">$VAR[Weather_Fanart]</property>
-			<property name="backgroundName">Météo</property>
+			<property name="backgroundName">8</property>
 			<onclick>ActivateWindow(Weather,return)</onclick>
 			<property name="path">ActivateWindow(Weather,return)</property>
 			<property name="list">Weather</property>
@@ -123,11 +118,6 @@
 			<property name="labelID">videos</property>
 			<property name="defaultID">videos</property>
 			<property name="background">special://skin/extras/backgrounds/videos.jpg</property>
-			<property name="backgroundName">videos</property>
-			<property name="widgetStyle">List</property>
-			<property name="widgetStyle.2">List</property>
-			<property name="widgetSort.2">date</property>
-			<property name="widgetSortOrder.2">descending</property>
 			<onclick>ActivateWindow(Videos,return)</onclick>
 			<property name="path">ActivateWindow(Videos,return)</property>
 			<property name="list">Videos</property>
@@ -144,21 +134,10 @@
 			<thumb>Aicons/settings.png</thumb>
 			<property name="labelID">settings</property>
 			<property name="defaultID">settings</property>
-			<property name="background">special://skin/extras/backgrounds/settings.jpg</property>
-			<property name="backgroundName">settings</property>
 			<property name="widget">SystemInfo</property>
-			<property name="widgetName">Informations Système</property>
+			<property name="widgetName">130</property>
 			<property name="widgetType">system</property>
-			<property name="widgetTarget" />
-			<property name="widgetPath" />
-			<property name="widgetStyle.2">Panel</property>
-			<property name="widget.2">LibraryAddons</property>
-			<property name="widgetName.2">Programmes</property>
-			<property name="widgetType.2">programs</property>
-			<property name="widgetTarget.2" />
-			<property name="widgetPath.2">addons://sources/executable/</property>
-			<property name="widgetStyle">Panel</property>
-			<property name="widgetShow">True</property>
+			<property name="background">special://skin/extras/backgrounds/settings.jpg</property>
 			<onclick>ActivateWindow(Settings)</onclick>
 			<property name="path">ActivateWindow(Settings)</property>
 			<property name="list">Settings</property>
@@ -175,8 +154,6 @@
 			<thumb />
 			<property name="labelID">quitter</property>
 			<property name="defaultID">shutdown</property>
-			<property name="background">special://skin/extras/backgrounds/shutdown.jpg</property>
-			<property name="backgroundName">shutdown</property>
 			<onclick>ShutDown</onclick>
 			<property name="path">ShutDown</property>
 			<property name="list">ShutDown</property>
@@ -201,7 +178,6 @@
 			<property name="backgroundName">(Liste de lecture Vidéo) 3D</property>
 			<property name="backgroundPlaylist">special://profile/playlists/video/3D.xsp</property>
 			<property name="backgroundPlaylistName">(Liste de lecture Vidéo) 3D</property>
-			<property name="backgroundplayliststyle">X2</property>
 			<onclick>ActivateWindow(Videos,special://profile/playlists/video/3D.xsp,return)</onclick>
 			<property name="path">ActivateWindow(Videos,special://profile/playlists/video/3D.xsp,return)</property>
 			<property name="list">special://profile/playlists/video/3D.xsp</property>
@@ -222,6 +198,7 @@
 			<property name="backgroundName">(Liste de lecture Vidéo) SAGAS</property>
 			<property name="backgroundPlaylist">special://profile/playlists/video/SAGAS.xsp</property>
 			<property name="backgroundPlaylistName">(Liste de lecture Vidéo) SAGAS</property>
+			<property name="backgroundplayliststyle">X2</property>
 			<onclick>ActivateWindow(Videos,special://profile/playlists/video/SAGAS.xsp,return)</onclick>
 			<property name="path">ActivateWindow(Videos,special://profile/playlists/video/SAGAS.xsp,return)</property>
 			<property name="list">special://profile/playlists/video/SAGAS.xsp</property>
@@ -238,11 +215,6 @@
 			<thumb>C:\medias\Aicons\animations.png</thumb>
 			<property name="labelID">animations</property>
 			<property name="defaultID">animations</property>
-			<property name="background">Playlist.FanartList</property>
-			<property name="backgroundName">(Liste de lecture Vidéo) ANIMATIONS</property>
-			<property name="backgroundPlaylist">special://profile/playlists/video/ANIMATIONS.xsp</property>
-			<property name="backgroundPlaylistName">(Liste de lecture Vidéo) ANIMATIONS</property>
-			<property name="backgroundplayliststyle">X2</property>
 			<onclick>ActivateWindow(Videos,special://profile/playlists/video/ANIMATIONS.xsp,return)</onclick>
 			<property name="path">ActivateWindow(Videos,special://profile/playlists/video/ANIMATIONS.xsp,return)</property>
 			<property name="list">special://profile/playlists/video/ANIMATIONS.xsp</property>
@@ -259,9 +231,6 @@
 			<thumb>Aicons/favourites.png</thumb>
 			<property name="labelID">genres</property>
 			<property name="defaultID" />
-			<property name="translatedPath">ActivateWindow(Videos,"library://video/movies/genres.xml/",return)</property>
-			<property name="background">$INFO[Window(Home).Property(SkinHelper.GlobalFanartBackground)]</property>
-			<property name="backgroundName">Arrière-plan média global</property>
 			<visible>[Library.HasContent(Movies)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),films)</visible>
 			<onclick>ActivateWindow(Videos,"library://video/movies/genres.xml/",return)</onclick>
 			<property name="path">ActivateWindow(Videos,"library://video/movies/genres.xml/",return)</property>
@@ -279,7 +248,6 @@
 			<thumb />
 			<property name="labelID">sagas--0</property>
 			<property name="defaultID" />
-			<property name="translatedPath">ActivateWindow(Videos,"library://video/movies/sets.xml/",return)</property>
 			<visible>[Library.HasContent(MovieSets)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),films)</visible>
 			<onclick>ActivateWindow(Videos,"library://video/movies/sets.xml/",return)</onclick>
 			<property name="path">ActivateWindow(Videos,"library://video/movies/sets.xml/",return)</property>
@@ -313,7 +281,6 @@
 			<thumb />
 			<property name="labelID">genres</property>
 			<property name="defaultID" />
-			<property name="translatedPath">ActivateWindow(Videos,"library://video/tvshows/genres.xml/",return)</property>
 			<visible>[Library.HasContent(TVShows)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),series)</visible>
 			<onclick>ActivateWindow(Videos,"library://video/tvshows/genres.xml/",return)</onclick>
 			<property name="path">ActivateWindow(Videos,"library://video/tvshows/genres.xml/",return)</property>
@@ -331,7 +298,6 @@
 			<thumb />
 			<property name="labelID">genres</property>
 			<property name="defaultID" />
-			<property name="translatedPath">ActivateWindow(Music,"library://music/genres.xml/",return)</property>
 			<visible>[Library.HasContent(Music)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),musique)</visible>
 			<onclick>ActivateWindow(Music,"library://music/genres.xml/",return)</onclick>
 			<property name="path">ActivateWindow(Music,"library://music/genres.xml/",return)</property>
@@ -349,7 +315,6 @@
 			<thumb />
 			<property name="labelID">132</property>
 			<property name="defaultID">132</property>
-			<property name="translatedPath">ActivateWindow(music,library://music/albums.xml/,return)</property>
 			<visible>[Library.HasContent(Music)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),musique)</visible>
 			<onclick>ActivateWindow(music,library://music/albums.xml/,return)</onclick>
 			<property name="path">ActivateWindow(music,library://music/albums.xml/,return)</property>
@@ -415,7 +380,6 @@
 			<thumb>image://C%3A%5CUsers%5CHTPC%5CAppData%5CRoaming%5CKodi%5Caddons%5Cplugin.video.youtube%5Cresources%5Cmedia%5Cnew_uploads.png/</thumb>
 			<property name="labelID">plugin.video.youtube/special/new_uploaded_videos_tv/</property>
 			<property name="defaultID">plugin.video.youtube/special/new_uploaded_videos_tv/</property>
-			<property name="translatedPath">ActivateWindow(Videos,"plugin://plugin.video.youtube/special/new_uploaded_videos_tv/",return)</property>
 			<onclick>ActivateWindow(Videos,"plugin://plugin.video.youtube/special/new_uploaded_videos_tv/",return)</onclick>
 			<property name="path">ActivateWindow(Videos,"plugin://plugin.video.youtube/special/new_uploaded_videos_tv/",return)</property>
 			<property name="list">plugin://plugin.video.youtube/special/new_uploaded_videos_tv/</property>
@@ -474,10 +438,6 @@
 			<property name="isSubmenu">True</property>
 		</item>
 	</include>
-	<include />
-	<include name="skinshortcuts-submenu-1" />
-	<include />
-	<include name="skinshortcuts-submenu-2" />
 	<include name="skinshortcuts-group-films">
 		<item id="1">
 			<property name="id">$NUMBER[1]</property>
@@ -492,7 +452,6 @@
 			<property name="backgroundName">(Liste de lecture Vidéo) 3D</property>
 			<property name="backgroundPlaylist">special://profile/playlists/video/3D.xsp</property>
 			<property name="backgroundPlaylistName">(Liste de lecture Vidéo) 3D</property>
-			<property name="backgroundplayliststyle">X2</property>
 			<onclick>ActivateWindow(Videos,special://profile/playlists/video/3D.xsp,return)</onclick>
 			<property name="path">ActivateWindow(Videos,special://profile/playlists/video/3D.xsp,return)</property>
 			<property name="list">special://profile/playlists/video/3D.xsp</property>
@@ -513,6 +472,7 @@
 			<property name="backgroundName">(Liste de lecture Vidéo) SAGAS</property>
 			<property name="backgroundPlaylist">special://profile/playlists/video/SAGAS.xsp</property>
 			<property name="backgroundPlaylistName">(Liste de lecture Vidéo) SAGAS</property>
+			<property name="backgroundplayliststyle">X2</property>
 			<onclick>ActivateWindow(Videos,special://profile/playlists/video/SAGAS.xsp,return)</onclick>
 			<property name="path">ActivateWindow(Videos,special://profile/playlists/video/SAGAS.xsp,return)</property>
 			<property name="list">special://profile/playlists/video/SAGAS.xsp</property>
@@ -529,11 +489,6 @@
 			<thumb>C:\medias\Aicons\animations.png</thumb>
 			<property name="labelID">animations</property>
 			<property name="defaultID">animations</property>
-			<property name="background">Playlist.FanartList</property>
-			<property name="backgroundName">(Liste de lecture Vidéo) ANIMATIONS</property>
-			<property name="backgroundPlaylist">special://profile/playlists/video/ANIMATIONS.xsp</property>
-			<property name="backgroundPlaylistName">(Liste de lecture Vidéo) ANIMATIONS</property>
-			<property name="backgroundplayliststyle">X2</property>
 			<onclick>ActivateWindow(Videos,special://profile/playlists/video/ANIMATIONS.xsp,return)</onclick>
 			<property name="path">ActivateWindow(Videos,special://profile/playlists/video/ANIMATIONS.xsp,return)</property>
 			<property name="list">special://profile/playlists/video/ANIMATIONS.xsp</property>
@@ -550,9 +505,6 @@
 			<thumb>Aicons/favourites.png</thumb>
 			<property name="labelID">genres</property>
 			<property name="defaultID" />
-			<property name="translatedPath">ActivateWindow(Videos,"library://video/movies/genres.xml/",return)</property>
-			<property name="background">$INFO[Window(Home).Property(SkinHelper.GlobalFanartBackground)]</property>
-			<property name="backgroundName">Arrière-plan média global</property>
 			<visible>Library.HasContent(Movies)</visible>
 			<onclick>ActivateWindow(Videos,"library://video/movies/genres.xml/",return)</onclick>
 			<property name="path">ActivateWindow(Videos,"library://video/movies/genres.xml/",return)</property>
@@ -570,7 +522,6 @@
 			<thumb />
 			<property name="labelID">sagas--0</property>
 			<property name="defaultID" />
-			<property name="translatedPath">ActivateWindow(Videos,"library://video/movies/sets.xml/",return)</property>
 			<visible>Library.HasContent(MovieSets)</visible>
 			<onclick>ActivateWindow(Videos,"library://video/movies/sets.xml/",return)</onclick>
 			<property name="path">ActivateWindow(Videos,"library://video/movies/sets.xml/",return)</property>
@@ -594,7 +545,6 @@
 			<property name="backgroundName">(Liste de lecture Vidéo) 3D</property>
 			<property name="backgroundPlaylist">special://profile/playlists/video/3D.xsp</property>
 			<property name="backgroundPlaylistName">(Liste de lecture Vidéo) 3D</property>
-			<property name="backgroundplayliststyle">X2</property>
 			<onclick>ActivateWindow(Videos,special://profile/playlists/video/3D.xsp,return)</onclick>
 			<property name="path">ActivateWindow(Videos,special://profile/playlists/video/3D.xsp,return)</property>
 			<property name="list">special://profile/playlists/video/3D.xsp</property>
@@ -615,6 +565,7 @@
 			<property name="backgroundName">(Liste de lecture Vidéo) SAGAS</property>
 			<property name="backgroundPlaylist">special://profile/playlists/video/SAGAS.xsp</property>
 			<property name="backgroundPlaylistName">(Liste de lecture Vidéo) SAGAS</property>
+			<property name="backgroundplayliststyle">X2</property>
 			<onclick>ActivateWindow(Videos,special://profile/playlists/video/SAGAS.xsp,return)</onclick>
 			<property name="path">ActivateWindow(Videos,special://profile/playlists/video/SAGAS.xsp,return)</property>
 			<property name="list">special://profile/playlists/video/SAGAS.xsp</property>
@@ -631,11 +582,6 @@
 			<thumb>C:\medias\Aicons\animations.png</thumb>
 			<property name="labelID">animations</property>
 			<property name="defaultID">animations</property>
-			<property name="background">Playlist.FanartList</property>
-			<property name="backgroundName">(Liste de lecture Vidéo) ANIMATIONS</property>
-			<property name="backgroundPlaylist">special://profile/playlists/video/ANIMATIONS.xsp</property>
-			<property name="backgroundPlaylistName">(Liste de lecture Vidéo) ANIMATIONS</property>
-			<property name="backgroundplayliststyle">X2</property>
 			<onclick>ActivateWindow(Videos,special://profile/playlists/video/ANIMATIONS.xsp,return)</onclick>
 			<property name="path">ActivateWindow(Videos,special://profile/playlists/video/ANIMATIONS.xsp,return)</property>
 			<property name="list">special://profile/playlists/video/ANIMATIONS.xsp</property>
@@ -652,9 +598,6 @@
 			<thumb>Aicons/favourites.png</thumb>
 			<property name="labelID">genres</property>
 			<property name="defaultID" />
-			<property name="translatedPath">ActivateWindow(Videos,"library://video/movies/genres.xml/",return)</property>
-			<property name="background">$INFO[Window(Home).Property(SkinHelper.GlobalFanartBackground)]</property>
-			<property name="backgroundName">Arrière-plan média global</property>
 			<visible>[Library.HasContent(Movies)] + String.IsEqual(Window(10000).Property(submenuVisibility),films)</visible>
 			<onclick>ActivateWindow(Videos,"library://video/movies/genres.xml/",return)</onclick>
 			<property name="path">ActivateWindow(Videos,"library://video/movies/genres.xml/",return)</property>
@@ -672,7 +615,6 @@
 			<thumb />
 			<property name="labelID">sagas--0</property>
 			<property name="defaultID" />
-			<property name="translatedPath">ActivateWindow(Videos,"library://video/movies/sets.xml/",return)</property>
 			<visible>[Library.HasContent(MovieSets)] + String.IsEqual(Window(10000).Property(submenuVisibility),films)</visible>
 			<onclick>ActivateWindow(Videos,"library://video/movies/sets.xml/",return)</onclick>
 			<property name="path">ActivateWindow(Videos,"library://video/movies/sets.xml/",return)</property>
@@ -681,18 +623,6 @@
 			<property name="group">films</property>
 			<property name="isSubmenu">True</property>
 		</item>
-	</include>
-	<include name="skinshortcuts-group-films-1">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-alt-films-1">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-films-2">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-alt-films-2">
-		<description>No items</description>
 	</include>
 	<include name="skinshortcuts-group-series">
 		<item id="1">
@@ -720,7 +650,6 @@
 			<thumb />
 			<property name="labelID">genres</property>
 			<property name="defaultID" />
-			<property name="translatedPath">ActivateWindow(Videos,"library://video/tvshows/genres.xml/",return)</property>
 			<visible>Library.HasContent(TVShows)</visible>
 			<onclick>ActivateWindow(Videos,"library://video/tvshows/genres.xml/",return)</onclick>
 			<property name="path">ActivateWindow(Videos,"library://video/tvshows/genres.xml/",return)</property>
@@ -756,7 +685,6 @@
 			<thumb />
 			<property name="labelID">genres</property>
 			<property name="defaultID" />
-			<property name="translatedPath">ActivateWindow(Videos,"library://video/tvshows/genres.xml/",return)</property>
 			<visible>[Library.HasContent(TVShows)] + String.IsEqual(Window(10000).Property(submenuVisibility),series)</visible>
 			<onclick>ActivateWindow(Videos,"library://video/tvshows/genres.xml/",return)</onclick>
 			<property name="path">ActivateWindow(Videos,"library://video/tvshows/genres.xml/",return)</property>
@@ -765,18 +693,6 @@
 			<property name="group">series</property>
 			<property name="isSubmenu">True</property>
 		</item>
-	</include>
-	<include name="skinshortcuts-group-series-1">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-alt-series-1">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-series-2">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-alt-series-2">
-		<description>No items</description>
 	</include>
 	<include name="skinshortcuts-group-musique">
 		<item id="1">
@@ -788,7 +704,6 @@
 			<thumb />
 			<property name="labelID">genres</property>
 			<property name="defaultID" />
-			<property name="translatedPath">ActivateWindow(Music,"library://music/genres.xml/",return)</property>
 			<visible>Library.HasContent(Music)</visible>
 			<onclick>ActivateWindow(Music,"library://music/genres.xml/",return)</onclick>
 			<property name="path">ActivateWindow(Music,"library://music/genres.xml/",return)</property>
@@ -806,7 +721,6 @@
 			<thumb />
 			<property name="labelID">132</property>
 			<property name="defaultID">132</property>
-			<property name="translatedPath">ActivateWindow(music,library://music/albums.xml/,return)</property>
 			<visible>Library.HasContent(Music)</visible>
 			<onclick>ActivateWindow(music,library://music/albums.xml/,return)</onclick>
 			<property name="path">ActivateWindow(music,library://music/albums.xml/,return)</property>
@@ -826,7 +740,6 @@
 			<thumb />
 			<property name="labelID">genres</property>
 			<property name="defaultID" />
-			<property name="translatedPath">ActivateWindow(Music,"library://music/genres.xml/",return)</property>
 			<visible>[Library.HasContent(Music)] + String.IsEqual(Window(10000).Property(submenuVisibility),musique)</visible>
 			<onclick>ActivateWindow(Music,"library://music/genres.xml/",return)</onclick>
 			<property name="path">ActivateWindow(Music,"library://music/genres.xml/",return)</property>
@@ -844,7 +757,6 @@
 			<thumb />
 			<property name="labelID">132</property>
 			<property name="defaultID">132</property>
-			<property name="translatedPath">ActivateWindow(music,library://music/albums.xml/,return)</property>
 			<visible>[Library.HasContent(Music)] + String.IsEqual(Window(10000).Property(submenuVisibility),musique)</visible>
 			<onclick>ActivateWindow(music,library://music/albums.xml/,return)</onclick>
 			<property name="path">ActivateWindow(music,library://music/albums.xml/,return)</property>
@@ -854,34 +766,10 @@
 			<property name="isSubmenu">True</property>
 		</item>
 	</include>
-	<include name="skinshortcuts-group-musique-1">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-alt-musique-1">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-musique-2">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-alt-musique-2">
-		<description>No items</description>
-	</include>
 	<include name="skinshortcuts-group-weather">
 		<description>No items</description>
 	</include>
 	<include name="skinshortcuts-group-alt-weather">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-weather-1">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-alt-weather-1">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-weather-2">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-alt-weather-2">
 		<description>No items</description>
 	</include>
 	<include name="skinshortcuts-group-videos">
@@ -942,7 +830,6 @@
 			<thumb>image://C%3A%5CUsers%5CHTPC%5CAppData%5CRoaming%5CKodi%5Caddons%5Cplugin.video.youtube%5Cresources%5Cmedia%5Cnew_uploads.png/</thumb>
 			<property name="labelID">plugin.video.youtube/special/new_uploaded_videos_tv/</property>
 			<property name="defaultID">plugin.video.youtube/special/new_uploaded_videos_tv/</property>
-			<property name="translatedPath">ActivateWindow(Videos,"plugin://plugin.video.youtube/special/new_uploaded_videos_tv/",return)</property>
 			<onclick>ActivateWindow(Videos,"plugin://plugin.video.youtube/special/new_uploaded_videos_tv/",return)</onclick>
 			<property name="path">ActivateWindow(Videos,"plugin://plugin.video.youtube/special/new_uploaded_videos_tv/",return)</property>
 			<property name="list">plugin://plugin.video.youtube/special/new_uploaded_videos_tv/</property>
@@ -1009,7 +896,6 @@
 			<thumb>image://C%3A%5CUsers%5CHTPC%5CAppData%5CRoaming%5CKodi%5Caddons%5Cplugin.video.youtube%5Cresources%5Cmedia%5Cnew_uploads.png/</thumb>
 			<property name="labelID">plugin.video.youtube/special/new_uploaded_videos_tv/</property>
 			<property name="defaultID">plugin.video.youtube/special/new_uploaded_videos_tv/</property>
-			<property name="translatedPath">ActivateWindow(Videos,"plugin://plugin.video.youtube/special/new_uploaded_videos_tv/",return)</property>
 			<onclick>ActivateWindow(Videos,"plugin://plugin.video.youtube/special/new_uploaded_videos_tv/",return)</onclick>
 			<property name="path">ActivateWindow(Videos,"plugin://plugin.video.youtube/special/new_uploaded_videos_tv/",return)</property>
 			<property name="list">plugin://plugin.video.youtube/special/new_uploaded_videos_tv/</property>
@@ -1018,34 +904,10 @@
 			<property name="isSubmenu">True</property>
 		</item>
 	</include>
-	<include name="skinshortcuts-group-videos-1">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-alt-videos-1">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-videos-2">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-alt-videos-2">
-		<description>No items</description>
-	</include>
 	<include name="skinshortcuts-group-settings">
 		<description>No items</description>
 	</include>
 	<include name="skinshortcuts-group-alt-settings">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-settings-1">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-alt-settings-1">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-settings-2">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-alt-settings-2">
 		<description>No items</description>
 	</include>
 	<include name="skinshortcuts-group-quitter">
@@ -1151,18 +1013,6 @@
 			<property name="group">quitter</property>
 			<property name="isSubmenu">True</property>
 		</item>
-	</include>
-	<include name="skinshortcuts-group-quitter-1">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-alt-quitter-1">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-quitter-2">
-		<description>No items</description>
-	</include>
-	<include name="skinshortcuts-group-alt-quitter-2">
-		<description>No items</description>
 	</include>
 	<include name="skinshortcuts-template-widget1Fanart">
 		<include condition="String.IsEqual(System.ProfileName,Master user)">skinshortcuts-template-widget1Fanart-Master user</include>
@@ -1418,7 +1268,7 @@
 							</animation>
 						</control>
 					</focusedlayout>
-					<content sortby="title" sortorder="" target="">videodb://recentlyaddedmovies/</content>
+					<content sortby="" sortorder="" target="">videodb://recentlyaddedmovies/</content>
 				</control>
 			</control>
 		</control>
@@ -1946,8 +1796,8 @@
 							<width>40</width>
 							<height>40</height>
 							<aspectratio>keep</aspectratio>
-							<texture>ArrowLeftWD.png</texture>
-							<visible>!String.IsEmpty(Container(9000).ListItem.Property(widget.2))+!Container(80112).IsUpdating+Integer.IsGreater(Container(80112).NumItems,0)</visible>
+							<texture>ArrowDownWD.png</texture>
+							<visible>!String.IsEmpty(Container(9000).ListItem.Property(widget))+!Container(80112).IsUpdating+Integer.IsGreater(Container(80112).NumItems,0)</visible>
 						</control>
 					</control>
 					<control type="fadelabel">
@@ -1983,90 +1833,70 @@
 			<control type="group">
 				<top>0</top>
 				<control type="group">
-					<posx>-270</posx>
+					<posx>-265</posx>
 					<posy>-10</posy>
 					<control type="image">
 						<posy>-8</posy>
 						<width>220</width>
 						<height>260</height>
-						<aspectratio align="center" aligny="center">keep</aspectratio>
 						<aspectratio align="center" aligny="center" scalediffuse="true">keep</aspectratio>
 						<bordersize>2</bordersize>
 						<texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVarList80212]</texture>
-					</control>
-					<control type="image">
-						<posx>830</posx>
-						<width>350</width>
-						<height>300</height>
-						<aspectratio align="center" aligny="center">keep</aspectratio>
-						<texture diffuse="frames/EpisodeMatte.png">$VAR[HomeWidgetArtList80212]</texture>
+						<visible>[!Control.HasFocus(80212)+!Skin.HasSetting(ShowFullWidgets)]+String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
 					</control>
 				</control>
 				<control id="80212" type="list">
-					<posx>-70</posx>
-					<posy>0</posy>
-					<width>630</width>
-					<height>240</height>
-					<onright>9000</onright>
-					<onunfocus>SetProperty(WidgetActifFanart,,Home)</onunfocus>
-					<onleft condition="Integer.IsGreater(Container(80112).NumItems,0)">9022</onleft>
-					<onleft>9000</onleft>
-					<onback>9000</onback>
-					<autoscroll delay="8000" repeat="10000" time="10000">Skin.HasSetting(AutoRotateWidget)+!Control.HasFocus(80212)</autoscroll>
-					<viewtype>list</viewtype>
-					<orientation>vertical</orientation>
-					<top>0</top>
-					<left>0</left>
+					<top>-5</top>
+					<left>-265</left>
 					<width>1200</width>
 					<height>255</height>
-					<orientation>vertical</orientation>
+					<onunfocus>SetProperty(WidgetActifFanart,,Home)</onunfocus>
+					<ondown condition="Integer.IsGreater(Container(80112).NumItems,0)">9022</ondown>
+					<ondown>9000</ondown>
+					<onup>9000</onup>
+					<onback>9000</onback>
+					<orientation>horizontal</orientation>
 					<preloaditems>2</preloaditems>
-					<scrolltime>300</scrolltime>
-					<itemlayout height="30" width="620">
-						<control type="label">
-							<posx>10</posx>
-							<posy>-6</posy>
-							<width>620</width>
-							<height>28</height>
-							<align>left</align>
-							<aligny>center</aligny>
-							<scrollout>false</scrollout>
-							<scrollspeed>20</scrollspeed>
-							<font>METF_RecentlyAddedListText</font>
-							<textcolor>yellow</textcolor>
-							<label>$VAR[GlobalWidgetLabel2]</label>
+					<autoscroll delay="8000" repeat="10000" time="10000">Skin.HasSetting(AutoRotateWidget)+!Control.HasFocus(80212)</autoscroll>
+					<itemlayout height="255" width="203">
+						<control type="image">
+							<width>180</width>
+							<height>240</height>
+							<aspectratio align="center" aligny="center" scalediffuse="true">keep</aspectratio>
+							<bordersize>2</bordersize>
+							<texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVar]</texture>
+							<animation condition="System.IdleTime(1)+Control.HasFocus(80212)" reversible="false" type="Conditional">
+								<effect center="90,120" easy="out" end="80" start="100" time="500" tween="bounce" type="zoom" />
+							</animation>
+							<visible>!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Control.HasFocus(80212)|Skin.HasSetting(ShowFullWidgets)</visible>
 						</control>
 					</itemlayout>
-					<focusedlayout height="30" width="550">
+					<focusedlayout height="255" width="203">
 						<control type="button">
 							<onfocus condition="Control.HasFocus(80212)">SetProperty(WidgetActifFanart,$INFO[Container(80212).ListItem.Art(fanart)],Home)</onfocus>
 						</control>
 						<control type="image">
-							<posx>0</posx>
-							<posy>-6</posy>
-							<width>620</width>
-							<height>28</height>
-							<aligny>center</aligny>
-							<texture>FocusLine.png</texture>
-							<colordiffuse>FocusBar</colordiffuse>
+							<width>180</width>
+							<height>240</height>
+							<aspectratio align="center" aligny="center" scalediffuse="true">keep</aspectratio>
+							<bordersize>2</bordersize>
+							<texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVar]</texture>
+							<visible>!Control.HasFocus(80212)+[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Skin.HasSetting(ShowFullWidgets)]</visible>
+						</control>
+						<control type="image">
+							<width>180</width>
+							<height>240</height>
+							<aspectratio align="center" aligny="center" scalediffuse="true">keep</aspectratio>
+							<texture>$VAR[HomeWidgetPosterVar]</texture>
+							<bordersize>8</bordersize>
+							<bordertexture border="8">landscape.png</bordertexture>
+							<animation reversible="false" type="Focus">
+								<effect center="90,120" easy="out" end="110" start="98" time="500" tween="bounce" type="zoom" />
+							</animation>
 							<visible>Control.HasFocus(80212)</visible>
 						</control>
-						<control type="label">
-							<posx>10</posx>
-							<posy>-6</posy>
-							<width>620</width>
-							<height>28</height>
-							<align>left</align>
-							<aligny>center</aligny>
-							<scrollout>false</scrollout>
-							<pauseatend>600</pauseatend>
-							<scrollspeed>20</scrollspeed>
-							<font>METF_RecentlyAddedListText</font>
-							<textcolor>white</textcolor>
-							<label>[B]$VAR[GlobalWidgetLabel2][/B]</label>
-						</control>
 					</focusedlayout>
-					<content sortby="name" sortorder="" target="">videodb://recentlyaddedepisodes/</content>
+					<content sortby="" sortorder="" target="tvshows">videodb://recentlyaddedepisodes/</content>
 				</control>
 			</control>
 		</control>
@@ -2229,170 +2059,7 @@
 							<visible>Control.HasFocus(80213)</visible>
 						</control>
 					</focusedlayout>
-					<content sortby="" sortorder="" target="">plugin://service.library.data.provider?type=randomalbums&amp;reload=$INFO[Window.Property(randomalbums)]</content>
-				</control>
-			</control>
-		</control>
-		<control type="group">
-			<visible>String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),settings)</visible>
-			<animation condition="[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Control.HasFocus(80216)|Skin.HasSetting(ShowFullWidgets)]+!Container(80216).IsUpdating" delay="150" effect="slide" end="-1620,0" start="0,0" time="350" tween="cubic">Conditional</animation>
-			<animation condition="Control.HasFocus(80216)+!Container(80216).IsUpdating" delay="150" effect="slide" end="0,-50" time="350" tween="cubic">Conditional</animation>
-			<animation condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(80216)+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH.2)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))" delay="150" effect="slide" end="-270,0" start="0,0" time="350" tween="cubic">Conditional</animation>
-			<control type="group">
-				<visible>Integer.IsGreater(Container(80216).NumItems,0)</visible>
-				<include>FondWidget</include>
-				<control type="label">
-					<posx>-268</posx>
-					<posy>-20</posy>
-					<width>250</width>
-					<height>25</height>
-					<align>left</align>
-					<scrollspeed>30</scrollspeed>
-					<scroll>true</scroll>
-					<angle>270</angle>
-					<label>[B]$INFO[Container(9000).ListItem.Property(widgetName.2)][/B]</label>
-					<visible>!Skin.HasSetting(ShowFullWidgets)+!Control.HasFocus(80216)+String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
-					<shadowcolor>ff000000</shadowcolor>
-				</control>
-				<control type="label">
-					<posx>-348</posx>
-					<posy>-70</posy>
-					<width>1370</width>
-					<height>30</height>
-					<textcolor>black</textcolor>
-					<align>center</align>
-					<font>comic36</font>
-					<scrollspeed>30</scrollspeed>
-					<scroll>true</scroll>
-					<label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B]$VAR[HWidgetLabel80216]</label>
-					<visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(80216)|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
-				</control>
-				<control type="label">
-					<posx>-344</posx>
-					<posy>-68</posy>
-					<width>1370</width>
-					<height>30</height>
-					<textcolor>yellow</textcolor>
-					<align>center</align>
-					<font>comic36</font>
-					<scrollspeed>30</scrollspeed>
-					<scroll>true</scroll>
-					<label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B][COLOR=white]$VAR[HWidgetLabel80216][/COLOR]</label>
-					<visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(80216)|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
-				</control>
-				<control type="group">
-					<posx>-150</posx>
-					<posy>260</posy>
-					<visible>Control.HasFocus(80216)</visible>
-					<include>FondWidgetInfo</include>
-					<control type="group">
-						<posy>5</posy>
-						<control type="image">
-							<posx>-45</posx>
-							<width>40</width>
-							<height>40</height>
-							<aspectratio>keep</aspectratio>
-							<texture>ArrowDownWD.png</texture>
-							<visible>!String.IsEmpty(Container(9000).ListItem.Property(widget))+!Container(80116).IsUpdating+Integer.IsGreater(Container(80116).NumItems,0)</visible>
-						</control>
-					</control>
-					<control type="fadelabel">
-						<posx>10</posx>
-						<posy>4</posy>
-						<width>895</width>
-						<height>60</height>
-						<align>center</align>
-						<aligny>center</aligny>
-						<scroll>true</scroll>
-						<scrollspeed>30</scrollspeed>
-						<font>METF_HomeMenu</font>
-						<textcolor>yellow</textcolor>
-						<label>$VAR[GlobalWidgetLabel80216]</label>
-						<visible>!IsEqual(Container(9000).ListItem.Property(widget.2),NAired)</visible>
-					</control>
-					<control type="fadelabel">
-						<posx>10</posx>
-						<width>895</width>
-						<height>60</height>
-						<align>center</align>
-						<aligny>center</aligny>
-						<textcolor>yellow</textcolor>
-						<font>METF_HomeMenu</font>
-						<scrollspeed>30</scrollspeed>
-						<scroll>true</scroll>
-						<label>[I][B]$INFO[Container(80216).ListItem.TVShowTitle][CR][COLOR=NowPlayingTitle]($INFO[Container(80216).ListItem.Property(NextDay)])[/COLOR] - S$INFO[Container(80216).ListItem.Property(NextSeasonNumber)]E$INFO[Container(80216).ListItem.Property(NextEpisodeNumber)] : $INFO[Container(80216).ListItem.Property(NextTitle)][/B][/I]</label>
-						<visible>IsEqual(Container(9000).ListItem.Property(widget.2),NAired)</visible>
-						<shadowcolor>ff000000</shadowcolor>
-					</control>
-				</control>
-			</control>
-			<control type="group">
-				<top>0</top>
-				<control type="group">
-					<posx>-265</posx>
-					<posy>-10</posy>
-					<control type="image">
-						<posy>-8</posy>
-						<width>220</width>
-						<height>260</height>
-						<aspectratio align="center" aligny="center" scalediffuse="true">keep</aspectratio>
-						<bordersize>2</bordersize>
-						<texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVarList80216]</texture>
-						<visible>[!Control.HasFocus(80216)+!Skin.HasSetting(ShowFullWidgets)]+String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
-					</control>
-				</control>
-				<control id="80216" type="list">
-					<top>-5</top>
-					<left>-265</left>
-					<width>1200</width>
-					<height>255</height>
-					<onunfocus>SetProperty(WidgetActifFanart,,Home)</onunfocus>
-					<ondown condition="Integer.IsGreater(Container(80116).NumItems,0)">9022</ondown>
-					<ondown>9000</ondown>
-					<onup>9000</onup>
-					<onback>9000</onback>
-					<orientation>horizontal</orientation>
-					<preloaditems>2</preloaditems>
-					<autoscroll delay="8000" repeat="10000" time="10000">Skin.HasSetting(AutoRotateWidget)+!Control.HasFocus(80216)</autoscroll>
-					<itemlayout height="255" width="203">
-						<control type="image">
-							<width>180</width>
-							<height>240</height>
-							<aspectratio align="center" aligny="center" scalediffuse="true">keep</aspectratio>
-							<bordersize>2</bordersize>
-							<texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVar]</texture>
-							<animation condition="System.IdleTime(1)+Control.HasFocus(80216)" reversible="false" type="Conditional">
-								<effect center="90,120" easy="out" end="80" start="100" time="500" tween="bounce" type="zoom" />
-							</animation>
-							<visible>!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Control.HasFocus(80216)|Skin.HasSetting(ShowFullWidgets)</visible>
-						</control>
-					</itemlayout>
-					<focusedlayout height="255" width="203">
-						<control type="button">
-							<onfocus condition="Control.HasFocus(80216)">SetProperty(WidgetActifFanart,$INFO[Container(80216).ListItem.Art(fanart)],Home)</onfocus>
-						</control>
-						<control type="image">
-							<width>180</width>
-							<height>240</height>
-							<aspectratio align="center" aligny="center" scalediffuse="true">keep</aspectratio>
-							<bordersize>2</bordersize>
-							<texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVar]</texture>
-							<visible>!Control.HasFocus(80216)+[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Skin.HasSetting(ShowFullWidgets)]</visible>
-						</control>
-						<control type="image">
-							<width>180</width>
-							<height>240</height>
-							<aspectratio align="center" aligny="center" scalediffuse="true">keep</aspectratio>
-							<texture>$VAR[HomeWidgetPosterVar]</texture>
-							<bordersize>8</bordersize>
-							<bordertexture border="8">landscape.png</bordertexture>
-							<animation reversible="false" type="Focus">
-								<effect center="90,120" easy="out" end="110" start="98" time="500" tween="bounce" type="zoom" />
-							</animation>
-							<visible>Control.HasFocus(80216)</visible>
-						</control>
-					</focusedlayout>
-					<content sortby="" sortorder="" target="">addons://sources/executable/</content>
+					<content sortby="" sortorder="" target="music">plugin://service.library.data.provider?type=randomalbums&amp;reload=$INFO[Window.Property(randomalbums)]</content>
 				</control>
 			</control>
 		</control>

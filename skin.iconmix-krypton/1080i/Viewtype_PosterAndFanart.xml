@@ -229,7 +229,7 @@
 							<posy>21</posy>
 							<width>646</width>
 							<height>362</height>
-							<texture>frames/ClassicFrame_Background.png</texture>
+							<texture>frames/ClassicFrame_background.png</texture>
 							<aspectratio scalediffuse="false">stretch</aspectratio>
 							<colordiffuse>FrameBackgroundDiffuse</colordiffuse>
 							<visible>!String.IsEmpty(ListItem.Title) + Skin.HasSetting(NoSegmentedFanart)</visible>

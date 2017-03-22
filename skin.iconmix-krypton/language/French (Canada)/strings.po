@@ -54,7 +54,7 @@ msgstr "N/D"
 
 msgctxt "#31011"
 msgid "IconMix"
-msgstr "Métropolis"
+msgstr ""
 
 msgctxt "#31012"
 msgid "Increase Star Rating"
@@ -718,7 +718,7 @@ msgstr "Défilement d'affiches, large"
 
 msgctxt "#31431"
 msgid "Click to reset IconMix to defaults"
-msgstr "Cliquer pour réinitialiser Métropolis aux valeurs par défaut"
+msgstr "Cliquer pour réinitialiser IconMixaux valeurs par défaut"
 
 msgctxt "#31432"
 msgid "Visualization Background: Ken Burns effect"

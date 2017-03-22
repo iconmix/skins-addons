@@ -2377,7 +2377,7 @@
 					<width>615</width>
 					<height>359</height>
 					<texture colordiffuse="$VAR[ColorDiffuseVar]">common/black.png</texture>
-					<bordertexture border="15">home/nowplaying/OverlayDialogBackground.png</bordertexture>
+					<bordertexture border="15">home/nowplaying/OverlayDialogbackground.png</bordertexture>
 					<bordersize>15</bordersize>
 				</control>
 				<control type="videowindow">

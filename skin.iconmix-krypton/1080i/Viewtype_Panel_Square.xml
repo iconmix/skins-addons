@@ -33,7 +33,7 @@
 						<posy>25</posy>
 						<width>205</width>
 						<height>205</height>
-						<texture>frames/ClassicFrame_Background.png</texture>
+						<texture>frames/ClassicFrame_background.png</texture>
 						<colordiffuse>FrameBackgroundDiffuse</colordiffuse>
 						<visible>!String.Contains(ListItem.Icon,default) + !String.IsEmpty(ListItem.Icon)</visible>
 					</control>
@@ -58,7 +58,7 @@
 						<posy>242</posy>
 						<width>220</width>
 						<height>33</height>
-						<texture>frames/ClassicFrame_Background.png</texture>
+						<texture>frames/ClassicFrame_background.png</texture>
 						<colordiffuse>90101010</colordiffuse>
 					</control>
 					<control type="image">
@@ -92,7 +92,7 @@
 							<posy>25</posy>
 							<width>205</width>
 							<height>205</height>
-							<texture>frames/ClassicFrame_Background.png</texture>
+							<texture>frames/ClassicFrame_background.png</texture>
 							<colordiffuse>FrameBackgroundDiffuse</colordiffuse>
 							<visible>!String.Contains(ListItem.Icon,default) + !String.IsEmpty(ListItem.Icon)</visible>
 						</control>
@@ -117,7 +117,7 @@
 						<posy>242</posy>
 						<width>220</width>
 						<height>33</height>
-						<texture>frames/ClassicFrame_Background.png</texture>
+						<texture>frames/ClassicFrame_background.png</texture>
 						<colordiffuse>90101010</colordiffuse>
 					</control>
 					<control type="image">
