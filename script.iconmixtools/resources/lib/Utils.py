@@ -1319,10 +1319,13 @@ def ModeVues(content_type=None, current_view=None):
                 if (("all" in mediatypes or content_type.lower() in mediatypes) and
                     (not "!" + content_type.lower() in mediatypes)):
                     image = "special://skin/extras/viewthumbs/%s.jpg" % viewid
-                    Elements = xbmcgui.ListItem(label=label, iconImage=image,label2="selectionnevue")
-                    Elements.setProperty("viewid", viewid)
-                    Elements.setProperty("icon", image)
-                    ListeVues.append(Elements)
+                    if KODI_VERSION>16: 
+                         Elements = xbmcgui.ListItem(label=label, iconImage=image,label2="selectionnevue")
+                         Elements.setProperty("viewid", viewid)
+                         Elements.setProperty("icon", image)
+                         ListeVues.append(Elements)
+                    else: 
+                         ListeVues.append(label)
                     choixpossibles.append(str(viewid))
         dialogC = xbmcgui.Dialog()
         result=dialogC.select(xbmc.getLocalizedString(629), ListeVues)
