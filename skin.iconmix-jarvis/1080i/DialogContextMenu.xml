@@ -16,80 +16,111 @@
 		<origin x="440" y="120" />
 	</coordinates>
 	<controls>
+
 		<control type="image" id="999">
 			<description>background image</description>
 			<posx>0</posx>
 			<posy>0</posy>
-			<width>400</width>
+			<width>550</width>
 			<height>730</height>
 			<texture>frames/Menu_Glass2b.png</texture>
 			<colordiffuse>DialogBackgroundColor</colordiffuse>
 		</control>
 		<control type="grouplist" id="996">
 			<description>grouplist for context buttons</description>
-			<left>30</left>
-			<top>30</top>
-			<width>340</width>
+			<left>50</left>
+			<top>35</top>
+			<width>450</width>
 			<height max="670">auto</height>
-			<itemgap>2</itemgap>	
+			<itemgap>2</itemgap>
 			<control type="button" id="2099">
-					<description>button template</description>
-					<onleft>Dialog.Close(contextmenu)</onleft>
-					<onright>Dialog.Close(contextmenu)</onright>
-					<left>-</left>
-					<top>-</top>
-					<width>340</width>
-					<height>35</height>
-					<font>METF_DialogLarge</font>
-					<align>center</align>
-					<aligny>center</aligny>
-					<textcolor>TextNF</textcolor>
-					<focusedcolor>DialogTextFO</focusedcolor>
-					<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
-					<label>$LOCALIZE[629]: $INFO[Container.Viewmode]</label>
-					<onclick>XBMC.RunScript(script.skin.helper.service,action=setview)</onclick>
-				</control>
-						<control type="button" id="2100">
-						<!-- <include>SettingsLabelElements</include> -->
-						<onleft>Dialog.Close(contextmenu)</onleft>
-					<onright>Dialog.Close(contextmenu)</onright>
-					<left>-</left>
-					<top>-</top>
-					<width>340</width>
-					<height>35</height>
-					<font>METF_DialogLarge</font>
-					<align>center</align>
-					<aligny>center</aligny>
-					<textcolor>TextNF</textcolor>
-					<focusedcolor>DialogTextFO</focusedcolor>
-					<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
-						<label>[I]$LOCALIZE[31925][/I]</label>
+				<description>button template</description>
+				<onleft>Dialog.Close(contextmenu)</onleft>
+				<onright>Dialog.Close(contextmenu)</onright>
+				<left>-</left>
+				<top>-</top>
+				<height>35</height>
+				<font>METF_DialogLarge</font>
+				<align>center</align>
+				<textcolor>TextNF</textcolor>
+				<focusedcolor>DialogTextFO</focusedcolor>
+				<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
+				<label>$LOCALIZE[629]: $INFO[Container.Viewmode]</label>
+				<onclick>RunScript(script.iconmixtools,setview=True)</onclick>
+			</control>
+			<control type="button" id="2100">
+				<!-- SAGA -->
+				<onleft>Dialog.Close(contextmenu)</onleft>
+				<onright>Dialog.Close(contextmenu)</onright>
+				<left>-</left>
+				<top>-</top>
+				<height>35</height>
+				<font>METF_DialogLarge</font>
+				<align>center</align>
+				<textcolor>TextNF</textcolor>
+				<focusedcolor>DialogTextFO</focusedcolor>
+				<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
+				<label>[I]$LOCALIZE[31925][/I]</label>
 
-						<onclick>Close</onclick>
-						<onclick>RunScript(script.iconmixtools)</onclick>
-						<include>VisibleIfMovieSet</include>
-					</control>
-					<control type="button" id="2101">
-						<!-- <include>SettingsLabelElements</include> -->
-						<onleft>Dialog.Close(contextmenu)</onleft>
-					<onright>Dialog.Close(contextmenu)</onright>
-					<left>-</left>
-					<top>-</top>
-					<width>340</width>
-					<height>35</height>
-					<font>METF_DialogLarge</font>
-					<align>center</align>
-					<aligny>center</aligny>
-					<textcolor>TextNF</textcolor>
-					<focusedcolor>DialogTextFO</focusedcolor>
-					<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
-						<label>[I]$LOCALIZE[31927][/I]</label>
-						<onclick>Close</onclick>
-						<onclick>RunScript(script.iconmixtools)</onclick>
-						<visible>Container.Content(tvshows)+Skin.HasSetting(CheckSeries)+!Control.HasFocus(5051)+!Control.HasFocus(1998)</visible>
-					</control>
-				
-				
+				<onclick>Close</onclick>
+				<onclick>RunScript(script.iconmixtools)</onclick>
+				<include>VisibleIfMovieSet</include>
+			</control>
+			<control type="button" id="2101">
+				<!-- SERIES -->
+				<onleft>Dialog.Close(contextmenu)</onleft>
+				<onright>Dialog.Close(contextmenu)</onright>
+				<left>-</left>
+				<top>-</top>
+				<height>35</height>
+				<font>METF_DialogLarge</font>
+				<align>center</align>
+				<aligny>center</aligny>
+				<textcolor>TextNF</textcolor>
+				<focusedcolor>DialogTextFO</focusedcolor>
+				<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
+				<label>[I]$LOCALIZE[31927][/I]</label>
+				<onclick>Close</onclick>
+				<onclick>RunScript(script.iconmixtools)</onclick>
+				<visible>Container.Content(tvshows)+Skin.HasSetting(CheckSeries)+!Control.HasFocus(5051)+!Control.HasFocus(1998)</visible>
+			</control>
+			<control type="button" id="2102">
+				<!-- <include>SettingsLabelElements</include> -->
+				<onleft>Dialog.Close(contextmenu)</onleft>
+				<onright>Dialog.Close(contextmenu)</onright>
+				<left>-</left>
+				<top>-</top>
+				<height>35</height>
+				<font>METF_DialogLarge</font>
+				<align>center</align>
+				<aligny>center</aligny>
+				<textcolor>TextNF</textcolor>
+				<focusedcolor>DialogTextFO</focusedcolor>
+				<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
+				<label>$LOCALIZE[31931]</label>
+				<onclick>Dialog.Close(contextmenu)</onclick>
+				<onclick>SetFocus(1999)</onclick>
+				<visible>SubString(ListItem.DBTYPE,set)</visible>
+			</control>
+			<control type="button" id="2103">
+				<!-- <include>SettingsLabelElements</include> -->
+				<onleft>Dialog.Close(contextmenu)</onleft>
+				<onright>Dialog.Close(contextmenu)</onright>
+				<left>-</left>
+				<top>-</top>
+				<height>35</height>
+				<font>METF_DialogLarge</font>
+				<align>center</align>
+				<aligny>center</aligny>
+				<textcolor>TextNF</textcolor>
+				<focusedcolor>DialogTextFO</focusedcolor>
+				<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
+				<label>$LOCALIZE[31930]</label>
+				<onclick>Dialog.Close(contextmenu)</onclick>
+				<onclick>SetFocus(1998)</onclick>
+				<visible>!SubString(ListItem.DBTYPE,set)+Window.IsVisible(10025)</visible>
+			</control>
+
 		</control>
 
 		<control type="button" id="1000">
@@ -98,7 +129,7 @@
 			<onright>Dialog.Close(contextmenu)</onright>
 			<left>-</left>
 			<top>-</top>
-			<width>340</width>
+			<width>450</width>
 			<height>35</height>
 			<font>METF_DialogLarge</font>
 			<align>center</align>

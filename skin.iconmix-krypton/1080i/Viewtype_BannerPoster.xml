@@ -10,16 +10,10 @@
 				<posy>50</posy>
 				<height>730</height>
 				<width>1400</width>
-				<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
-
-<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
-<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
-
-
-				<onup>510</onup>
-				<ondown>510</ondown>
-				<onright>61</onright>
-				<pagecontrol>61</pagecontrol>
+				<ondown>Action(firstpage)</ondown>
+				<onup>Action(lastpage)</onup>
+				<onright>510</onright>
+				<onleft>510</onleft>
 				<orientation>vertical</orientation>
 				<preloaditems>2</preloaditems>
 				<scrolltime>200</scrolltime>

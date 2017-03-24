@@ -78,18 +78,7 @@
 		<control type="label">
 		<label>Label:$INFO[Control.GetLabel(2525)]</label>
 		</control>
-		<control type="label">
-		<label>1:$INFO[Window(Home).Property(SkinHelper.ListItemAudioStreams.0)]</label>
-		</control>
-		<control type="label">
-		<label>2:$INFO[Window(Home).Property(SkinHelper.ListItemAudioStreams.1)]</label>
-		</control>
-		<control type="label">
-		<label>3:$INFO[Window(Home).Property(SkinHelper.ListItemAudioStreams.0.Language)]</label>
-		</control>
-		<control type="label">
-		<label>4:$INFO[Window(Home).Property(SkinHelper.ListItemAudioStreams.1.Language)]</label>
-		</control>
+			
 		<control type="label">
 		<label>xx-$INFO[ListItem.Property(SubtitleLanguage.1)]</label>
 		</control>

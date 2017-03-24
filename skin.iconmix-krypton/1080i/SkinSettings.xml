@@ -2,8 +2,9 @@
 <window>
 	<defaultcontrol>9000</defaultcontrol>
 	<onunload>RunScript(script.skinshortcuts,type=buildxml&amp;mainmenuID=9000&amp;levels=0)</onunload>
-	<onload condition="!Skin.HasSetting(MenuIcon)+!Skin.HasSetting(MenuTexte)">Skin.ToggleSetting(MenuTexte)</onload> <!-- default to Icon menu -->
-	<onload condition="Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuTexte)">Skin.ToggleSetting(MenuTexte)</onload> <!-- default to Icon menu -->
+	<onload condition="!Skin.HasSetting(MenuIconVertical)+!Skin.HasSetting(MenuIcon)+!Skin.HasSetting(MenuTexte)">Skin.ToggleSetting(MenuTexte)</onload> <!-- default to Icon menu -->
+	<onload condition="[Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuTexte)]">Skin.ToggleSetting(MenuTexte)</onload> <!-- default to Icon menu -->
+	<onload condition="[Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuIconVertical)]">Skin.ToggleSetting(MenuIconVertical)</onload> <!-- default to Icon menu -->
 
 	<controls>
 		
@@ -231,32 +232,42 @@
 						<include>SettingsLabel</include>
 						<label>$LOCALIZE[31061]</label>
 						<onclick>Skin.ToggleSetting(MenuTexte)</onclick>
-						<onclick>Skin.ToggleSetting(MenuIcon)</onclick>
+						<onclick condition="Skin.HasSetting(MenuIconVertical)">Skin.ToggleSetting(MenuIconVertical)</onclick>
+						<onclick condition="Skin.HasSetting(MenuIcon)">Skin.ToggleSetting(MenuIcon)</onclick>
 						<selected>Skin.HasSetting(MenuTexte)</selected>
 					</control>
 					<control type="radiobutton" id="202">
 						<include>SettingsLabel</include>
 						<label>$LOCALIZE[31062]</label>
 						<onclick>Skin.ToggleSetting(MenuIcon)</onclick>
-						<onclick>Skin.ToggleSetting(MenuTexte)</onclick>
+						<onclick condition="Skin.HasSetting(MenuIconVertical)">Skin.ToggleSetting(MenuIconVertical)</onclick>
+						<onclick condition="Skin.HasSetting(MenuTexte)">Skin.ToggleSetting(MenuTexte)</onclick>
 						<selected>Skin.HasSetting(MenuIcon)</selected>
 					</control>
 					<control type="radiobutton" id="203">
 						<include>SettingsLabel</include>
+						<label>$LOCALIZE[31065]</label>
+						<onclick>Skin.ToggleSetting(MenuIconVertical)</onclick>
+						<onclick condition="Skin.HasSetting(MenuTexte)">Skin.ToggleSetting(MenuTexte)</onclick>
+						<onclick condition="Skin.HasSetting(MenuIcon)">Skin.ToggleSetting(MenuIcon)</onclick>
+						<selected>Skin.HasSetting(MenuIconVertical)</selected>
+					</control>
+					<control type="radiobutton" id="204">
+						<include>SettingsLabel</include>
 						<label>$LOCALIZE[31063]</label>
 						<onclick>Skin.ToggleSetting(ShowIconLabel)</onclick>						
 						<selected>Skin.HasSetting(ShowIconLabel)</selected>
-						<visible>Skin.HasSetting(MenuIcon)</visible>
+						<visible>Skin.HasSetting(MenuIcon)|Skin.HasSetting(MenuIconVertical)</visible>
 					</control> 
 					
 					
-					<control type="button" id="204">
+					<control type="button" id="205">
 						<include>SettingsLabel</include>
 						<label>$LOCALIZE[10035] $LOCALIZE[33061]</label>
 						<onclick>RunScript(script.skinshortcuts,type=resetall)</onclick>
 					</control>
 		<!-- WIDGETS -->
-					<control type="image" id="205">
+					<control type="image" id="206">
 						<include>Settings_Line</include>
 					</control>
 					
@@ -445,14 +456,7 @@
 					</control>
 					
 				
-					 <!--
-            <control type="button" id="31750">
-                <include>SettingsLabel</include>
-                <label>$LOCALIZE[31039]</label>
-                <label2>$INFO[skin.string(SkinHelper.RandomFanartDelay.label)]</label2>
-                <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=SkinHelper.RandomFanartDelay,header=Delay fanart)</onclick>            
-            </control>
-            -->
+					 
             <!--background randomize-->
             <control type="radiobutton" id="31747">
                 <include>SettingsLabel</include>

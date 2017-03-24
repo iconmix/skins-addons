@@ -7,7 +7,11 @@
 			<posx>500</posx>
 			<posy>300</posy>
 			<width>800</width>
-			<height>450</height>			
+			<height>450</height>	
+			<animation type="Conditional" condition="StringCompare(Container(3).ListItem.Label2,plein)|StringCompare(Container(6).ListItem.Label2,plein)" reversible="false">
+						<effect type="slide" end="-450" time="10" />
+						<!-- <effect type="rotatey" center="0,240" end="-20" time="10" /> -->
+					</animation>		
 			<control type="image">
 				<texture background="true" >frames/Dialog_GlassActeur.png</texture>
 				<colordiffuse>BackgroundColor</colordiffuse>
@@ -20,11 +24,32 @@
 					<posy>20</posy>
 					<width>350</width>
 					<fadetime>100</fadetime>
+					<animation type="Conditional" condition="StringCompare(Container(6).ListItem.Label2,selectionnevue)" reversible="false">
+						<effect type="zoom" center="760,220" end="200" time="10" />
+						<effect type="rotatey" center="0,0" end="20" time="10" />
+						<effect type="slide" end="70" time="10" />
+					</animation>
 					<aspectratio align="left" aligny="center">keep</aspectratio>
 					<texture fallback="DefaultThumb.png">$INFO[Container(6).ListItem.Icon]</texture>
 					<bordersize>8</bordersize>
 					<bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
 					<visible>!IsEmpty(Container(6).ListItem.Icon)</visible>
+				</control>
+				<control type="image">
+					<posx>760</posx>
+					<posy>20</posy>
+					<width>350</width>
+					<animation type="Conditional" condition="StringCompare(Container(3).ListItem.Label2,selectionnevue)" reversible="false">
+						<effect type="zoom" center="760,220" end="200" time="10" />
+						<effect type="rotatey" center="0,0" end="20" time="10" />
+						<effect type="slide" end="70" time="10" />
+					</animation>
+					<fadetime>100</fadetime>
+					<aspectratio align="left" aligny="center">keep</aspectratio>
+					<texture fallback="DefaultThumb.png">$INFO[Container(3).ListItem.Icon]</texture>
+					<bordersize>8</bordersize>
+					<bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
+					<visible>!IsEmpty(Container(3).ListItem.Icon)</visible>
 				</control>
 
 				
@@ -51,7 +76,6 @@
 					<ondown>3</ondown>
 					<itemlayout height="38" width="730">
 						<control type="label">
-							<posx>20</posx>
 							<width>730</width>
 							<height>38</height>
 							<textcolor>SettingsDetail</textcolor>
@@ -64,7 +88,6 @@
 					</itemlayout>
 					<focusedlayout height="38" width="730">
 						<control type="image">
-							<posx>20</posx>
 							<posy>0</posy>
 							<width>730</width>
 							<height>38</height>
@@ -74,7 +97,6 @@
 							<visible>Control.HasFocus(3)</visible>
 						</control>
 						<control type="label">
-							<posx>20</posx>
 							<posy>0</posy>
 							<width>730</width>
 							<height>38</height>
@@ -144,11 +166,11 @@
 				<texturenofocus colordiffuse="FF7F7F7F">buttons/obtenirplus.png</texturenofocus>
 				<align>right</align>
 				<aligny>center</aligny>
-        <onright condition="!IsEmpty(Container(6).ListItem.Label)">6</onright>
+        <onright condition="!String.IsEmpty(Container(6).ListItem.Label)">6</onright>
 				<onright>3</onright>
 				<onup>7</onup>
 				<ondown>7</ondown>
-				<visible>IntegerGreaterThan(Container(6).NumItems,0)</visible>
+				<visible>Integer.IsGreater(Container(6).NumItems,0)</visible>
 			</control>
 
 			<control type="button" id="7">
@@ -165,7 +187,7 @@
 				<texturenofocus colordiffuse="FF7F7F7F">buttons/cancel.png</texturenofocus>
 				<align>right</align>
 				<aligny>center</aligny>
-				<onright condition="!IsEmpty(Container(6).ListItem.Label)">6</onright>
+				<onright condition="!String.IsEmpty(Container(6).ListItem.Label)">6</onright>
 				<onright>3</onright>
 				<onup>5</onup>
 				<ondown>5</ondown>

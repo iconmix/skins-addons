@@ -9,16 +9,11 @@
 				<posx>25</posx>
 				<posy>45</posy>
 				<width>1910</width>
-				<height>770</height>
+				<height>775</height>
 				<scrolltime>100</scrolltime>
 				<orientation>vertical</orientation>
-				<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
-
-<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
-<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
-
-
-				<onright>60</onright>
+				<onleft>Action(lastpage)</onleft>
+				<onright>Action(firstpage)</onright>
 				<pagecontrol>60</pagecontrol>
 				<preloaditems>2</preloaditems>
 				<include>Animation_ZoomInZoomOut</include>

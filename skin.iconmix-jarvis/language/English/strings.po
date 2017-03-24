@@ -176,6 +176,10 @@ msgctxt "#31064"
 msgid "Main menu settings"
 msgstr ""
 
+msgctxt "#31065"
+msgid "Vertical Icons View"
+msgstr ""
+
 msgctxt "#31070"
 msgid "Films récemment ajoutés"
 msgstr ""
@@ -1817,7 +1821,13 @@ msgctxt "#31929"
 msgid "Hide Movies casting"
 msgstr ""
 
+msgctxt "#31930"
+msgid "Access to casting"
+msgstr ""
 
+msgctxt "#31931"
+msgid "Access to movieset details"
+msgstr ""
 
 
 msgctxt "#32000"

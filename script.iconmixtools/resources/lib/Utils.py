@@ -10,6 +10,7 @@ import _strptime
 import time
 import unicodedata
 import urlparse
+from xml.dom.minidom import parse
 import json
     
 try:
@@ -1263,6 +1264,73 @@ def get_externalID(itemId=None,ismovie=None):
 #https://api.themoviedb.org/3/tv/48866/season/1?api_key=67158e2af1624020e34fd893c881b019&language=en-US
 #48866 id chez themoviedb
 #1 : numero de saison
+
+def VueActuelle(containerprefix=""):
+    contenu= ""
+    if xbmc.getCondVisibility("Container.Content(episodes)"):
+        contenu= "episodes"
+    elif xbmc.getCondVisibility("Container.Content(movies) + !substring(Container.FolderPath,setid=)"):
+        contenu= "movies"
+    elif xbmc.getCondVisibility("[Container.Content(sets) | StringCompare(Container.Folderpath,videodb://movies/sets/)] + !substring(Container.FolderPath,setid=)"):
+        contenu= "sets"
+    elif xbmc.getCondVisibility("substring(Container.FolderPath,setid=)"):
+        contenu= "setmovies"
+    elif xbmc.getCondVisibility("!IsEmpty(Container.Content) + !StringCompare(Container.Content,pvr)"):
+        contenu= xbmc.getInfoLabel("Container.Content")
+    elif xbmc.getCondVisibility("Container.Content(tvshows)"):
+        contenu= "tvshows"
+    elif xbmc.getCondVisibility("Container.Content(seasons)"):
+        contenu= "seasons"
+    elif xbmc.getCondVisibility("Container.Content(musicvideos)"):
+        contenu= "musicvideos"
+    elif xbmc.getCondVisibility("Container.Content(songs) | StringCompare(Container.FolderPath,musicdb://singles/)"):
+        contenu= "songs"
+    elif xbmc.getCondVisibility("Container.Content(artists)"):
+        contenu= "artists"
+    elif xbmc.getCondVisibility("Container.Content(albums)"):
+        contenu= "albums"
+    elif xbmc.getCondVisibility("Window.IsActive(MyPVRChannels.xml) | Window.IsActive(MyPVRGuide.xml) | Window.IsActive(MyPVRSearch.xml) | Window.IsActive(pvrguideinfo)"):
+        contenu= "tvchannels"
+    elif xbmc.getCondVisibility("Window.IsActive(MyPVRRecordings.xml) | Window.IsActive(MyPVRTimers.xml) | Window.IsActive(pvrrecordinginfo)"):
+        contenu= "tvrecordings"
+    elif xbmc.getCondVisibility("Window.IsActive(programs) | Window.IsActive(addonbrowser)"):
+        contenu= "addons"
+    elif xbmc.getCondVisibility("Window.IsActive(pictures)"):
+        contenu= "pictures"
+    elif xbmc.getCondVisibility("Container.Content(genres)"):
+        contenu= "genres"
+    elif xbmc.getCondVisibility("Container.Content(files)"):
+        contenu= "files"
+    
+    return contenu
+
+def ModeVues(content_type=None, current_view=None):
+        label = ""
+        ListeVues = [] 
+        choixpossibles=[] 
+        views_file = xbmc.translatePath('special://skin/extras/views.xml').decode("utf-8")
+        if xbmcvfs.exists(views_file):
+            doc = parse(views_file)
+            listing = doc.documentElement.getElementsByTagName('view')
+            for view in listing:
+                label = xbmc.getLocalizedString(int(view.attributes['languageid'].nodeValue))
+                viewid = view.attributes['value'].nodeValue
+                mediatypes = view.attributes['type'].nodeValue.lower().split(",")
+                if (("all" in mediatypes or content_type.lower() in mediatypes) and
+                    (not "!" + content_type.lower() in mediatypes)):
+                    image = "special://skin/extras/viewthumbs/%s.jpg" % viewid
+                    Elements = xbmcgui.ListItem(label=label, iconImage=image,label2="selectionnevue")
+                    Elements.setProperty("viewid", viewid)
+                    Elements.setProperty("icon", image)
+                    ListeVues.append(Elements)
+                    choixpossibles.append(str(viewid))
+        dialogC = xbmcgui.Dialog()
+        result=dialogC.select(xbmc.getLocalizedString(629), ListeVues)
+        if result>=0:
+            vue = str(choixpossibles[result])
+            xbmc.executebuiltin("Container.SetViewMode(%s)" % vue)            
+                  	  
+        	  
 
 # --------------------------------------------------------------------------------------------------
     

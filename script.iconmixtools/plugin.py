@@ -121,6 +121,7 @@ class Main:
         #utils.logMsg("params: %s" % params,0)
         self.backend = params.get( 'backend', False )
         self.trailer = params.get( 'trailer', False )
+        self.setview = params.get( 'setview', False )
 
         
         # don't run if already in backend
@@ -132,14 +133,14 @@ class Main:
                 xbmc.executebuiltin("SetProperty(IconMixToolsbackend,true,home)")
                 self.run_backend()
             
-            if not self.backend and xbmc.getCondVisibility("Window.IsVisible(10000)"):
+            if not self.trailer and not self.backend and not self.setview and xbmc.getCondVisibility("Window.IsVisible(10000)"):
                    dialogC = xbmcgui.Dialog()
                    ret=dialogC.select("IconMixTools", [__language__( 32505 )+xbmc.getLocalizedString( 20434 ), __language__( 32505 )+xbmc.getLocalizedString( 20343 )])
                    if ret==0: saga="1"
                    if ret==1: saga="2"
                    
             
-            if not self.trailer and not self.backend and ( xbmc.getInfoLabel("ListItem.DBTYPE")=="set" or xbmc.getInfoLabel("ListItem.DBTYPE")=="tvshow" or saga!=""):
+            if not self.trailer and not self.backend and not self.setview and ( xbmc.getInfoLabel("ListItem.DBTYPE")=="set" or xbmc.getInfoLabel("ListItem.DBTYPE")=="tvshow" or saga!=""):
                    if saga=="":
                      Unique="ok"
                    else:
@@ -169,7 +170,7 @@ class Main:
                     if saga: utils.UpdateSagas(xbmc.getInfoLabel("ListItem.DBID"))
                     else : utils.UpdateSeries(xbmc.getInfoLabel("ListItem.IMDBNumber"))
                          
-            if self.trailer and not self.backend:
+            if self.trailer :
                 utils.logMsg('recherche trailers',0)
                 TypeVideo=xbmc.getInfoLabel("Container(5051).ListItem.Writer")
                 if not xbmc.getInfoLabel("Container(5051).ListItem.Mpaa"):
@@ -208,13 +209,16 @@ class Main:
                 else: 
                     dialog=xbmcgui.Dialog()
                     dialog.notification('IconMixTools', Titre+": "+__language__( 32506 ), "acteurs/arfffff.png", 3000)
+                    
+            if self.setview:
+                 #Container.SetViewMode(id)
+                 content_type = utils.VueActuelle()
+                 if not content_type:
+                        content_type = "files"
+                 current_view = xbmc.getInfoLabel("Container.Viewmode").decode("utf-8")
+                 utils.ModeVues(content_type, current_view)
 
-                              
-                  
-			     
-          
-			
-			     
+  		     
        	         
 			    
 
@@ -262,7 +266,7 @@ class Main:
         
         utils.logMsg('Service en cours...',0)
         while not self._stop:
-            if not xbmc.getCondVisibility("Container.Scrolling"):
+            if (xbmc.getCondVisibility("Window.IsVisible(10025)") or xbmc.getCondVisibility("Window.IsVisible(10502)")) and not xbmc.getCondVisibility("Window.IsVisible(10000)") and not xbmc.getCondVisibility("Container.Scrolling"):
                 if xbmc.getCondVisibility("Control.HasFocus(1999)"):
                     #self.xx1999=self.winid.getControl(1999)
                     #self.xx1999.reset()
@@ -337,7 +341,9 @@ class Main:
                           
                     
             xbmc.sleep(200)
-            if not xbmc.getCondVisibility("Window.IsVisible(10025)") and not xbmc.getCondVisibility("Window.IsVisible(10502)") and not xbmc.getCondVisibility("Window.IsVisible(10000)"):
+            
+            #if not xbmc.getCondVisibility("Window.IsVisible(10025)") and not xbmc.getCondVisibility("Window.IsVisible(10502)") and not xbmc.getCondVisibility("Window.IsVisible(10000)"):
+            if xbmc.getCondVisibility("Player.HasMedia"):
                 utils.logMsg('service IconMixTools fini.',0)
                 self.windowhome.clearProperty('DurationTools')
                 self.windowhome.clearProperty('DurationToolsEnd')

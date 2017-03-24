@@ -425,7 +425,7 @@
 					<include>BoutonCommun</include>
 					<label>$LOCALIZE[629]:$INFO[Container.Viewmode]</label>
 					
-					<onclick>XBMC.RunScript(script.skin.helper.service,action=setview)</onclick>
+					<onclick>RunScript(script.iconmixtools,setview=True)</onclick>
 				</control>
 				<control type="button" id="3">
 					<description>Sort</description>

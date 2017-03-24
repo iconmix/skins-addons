@@ -47,6 +47,8 @@
 <include file="IncludesBackgroundBuilding.xml" />
 <include file="IncludesVideoLyrics.xml" />
 
+
+
 <include name="BoutonCommun">
 	<width>440</width>
 	<height>40</height>

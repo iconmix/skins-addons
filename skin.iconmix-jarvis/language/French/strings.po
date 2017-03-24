@@ -139,16 +139,19 @@ msgstr "Vue texte"
 
 msgctxt "#31062"
 msgid "Icons View"
-msgstr "Vue Icones"
+msgstr "Vue Icones Horizontale"
 
 msgctxt "#31063"
 msgid "Show Icons label"
-msgstr "Afficher l'intitulé"
+msgstr "Afficher l'intitulé des icônes"
 
 msgctxt "#31064"
 msgid "Main menu settings"
 msgstr "Personnaliser le menu principal"
 
+msgctxt "#31065"
+msgid "Vertical Icons View"
+msgstr "Vue Icones Verticale"
 
 msgctxt "#31108"
 msgid "Enable Debug Mode"
@@ -1581,6 +1584,17 @@ msgstr "Masquer les acteurs des séries"
 msgctxt "#31929"
 msgid "Hide Movies casting"
 msgstr "Masquer les acteurs des films"
+
+msgctxt "#31930"
+msgid "Access to casting"
+msgstr "Accéder aux acteurs"
+
+
+msgctxt "#31931"
+msgid "Access to movieset details"
+msgstr "Accéder aux éléments de la saga"
+
+
 
 msgctxt "#32000"
 msgid "Horizontal panel animation on windows close"

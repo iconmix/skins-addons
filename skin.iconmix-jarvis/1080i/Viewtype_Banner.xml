@@ -11,11 +11,10 @@
 				<posy>280</posy>
 				<height>370</height>
 				<width>1800</width>
-				<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
-				<ondown>511</ondown>
-				<onup>511</onup>
-				<onright>61</onright>
-				<pagecontrol>61</pagecontrol>
+				<ondown>Action(firstpage)</ondown>
+				<onup>Action(lastpage)</onup>
+				<onright>511</onright>
+				<onleft>511</onleft>
 				
 				<orientation>vertical</orientation>
 				<preloaditems>2</preloaditems>
@@ -67,11 +66,11 @@
 				<posy>-30</posy>
 				<height>720</height>
 				<width>1800</width>
-				<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
-				<ondown>514</ondown>
-				<onup>514</onup>
-				<onright>61</onright>
-				<pagecontrol>61</pagecontrol>
+				<ondown>Action(firstpage)</ondown>
+				<onup>Action(lastpage)</onup>
+				<onright>514</onright>
+				<onleft>514</onleft>
+
 				
 				<orientation>vertical</orientation>
 				<preloaditems>2</preloaditems>
