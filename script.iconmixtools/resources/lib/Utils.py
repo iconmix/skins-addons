@@ -44,7 +44,7 @@ def logMsg(msg, level = 1):
         else:
             xbmc.log("IconMixTools addon --> " + msg, level=xbmc.LOGNOTICE)
 def logfile(msg):
-     with io.open("d:\kodifuck.log", 'w+', encoding='utf8') as outfile: 
+     with io.open("d:\kodifuck2.log", 'w+', encoding='utf8') as outfile: 
                       str_ = msg
                       outfile.write(to_unicode(str_))
            
