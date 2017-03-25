@@ -85,7 +85,7 @@
 				<visible>Container.Content(tvshows)+Skin.HasSetting(CheckSeries)+!Control.HasFocus(5051)+!Control.HasFocus(1998)</visible>
 			</control>
 			<control type="button" id="2102">
-				<!-- <include>SettingsLabelElements</include> -->
+				<!-- Accéder à la saga -->
 				<onleft>Dialog.Close(contextmenu)</onleft>
 				<onright>Dialog.Close(contextmenu)</onright>
 				<left>-</left>
@@ -103,7 +103,7 @@
 				<visible>String.Contains(ListItem.DBTYPE,set)</visible>
 			</control>
 			<control type="button" id="2103">
-				<!-- <include>SettingsLabelElements</include> -->
+				<!-- Accéder aux acteurs -->
 				<onleft>Dialog.Close(contextmenu)</onleft>
 				<onright>Dialog.Close(contextmenu)</onright>
 				<left>-</left>
@@ -118,7 +118,8 @@
 				<label>$LOCALIZE[31930]</label>
 				<onclick>Dialog.Close(contextmenu)</onclick>
 				<onclick>SetFocus(1998)</onclick>
-				<visible>!String.Contains(ListItem.DBTYPE,set)+Window.IsVisible(10025)</visible>
+				<visible>[String.Contains(ListItem.DBTYPE,video)|String.Contains(ListItem.DBTYPE,movie)|String.Contains(ListItem.DBTYPE,episode)|String.Contains(ListItem.DBTYPE,tvshow)]+Window.IsVisible(10025)</visible>
+
 			</control>
 
 		</control>

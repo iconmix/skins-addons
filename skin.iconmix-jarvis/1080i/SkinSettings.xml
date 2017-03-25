@@ -770,6 +770,13 @@
 						<onclick>Skin.ToggleSetting(HideMovieCast)</onclick>
 						<selected>Skin.HasSetting(HideMovieCast)</selected>
 					</control>
+						<control type="radiobutton" id="808">
+						<include>SettingsLabel</include>
+						<label>$LOCALIZE[31932]</label>
+						<onclick>Skin.ToggleSetting(HideMovieTvCastEmpty)</onclick>
+						<selected>Skin.HasSetting(HideMovieTvCastEmpty)</selected>
+						<visible>!Skin.HasSetting(HideMovieCast)|!Skin.HasSetting(HideTvCast)</visible>
+					</control>
 					
 					<!--
 					<control type="radiobutton" id="805">

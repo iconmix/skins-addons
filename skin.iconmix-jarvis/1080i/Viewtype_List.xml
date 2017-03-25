@@ -486,7 +486,10 @@
 				<height>440</height>
 				<fadetime>100</fadetime>
 				<aspectratio align="right" aligny="center">keep</aspectratio>
-				<texture>$INFO[ListItem.Icon]</texture>
+				<!-- <texture>$INFO[ListItem.Icon]</texture> -->
+				<bordersize>8</bordersize>
+				<bordertexture border="8">frames/acteur2.png</bordertexture>
+				<texture>$VAR[PosterThumb]</texture>
 				<visible>[!Container.Content(movies) + !Container.Content(sets) + !Container.Content(tvshows) + !Container.Content(seasons) + !Container.Content(episodes) + !Container.Content(genres) + !Container.Content(studios)]</visible>
 			</control>
 			<control type="image">

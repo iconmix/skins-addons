@@ -260,6 +260,7 @@
 	</variable>	
 	<variable name="GlobalFanart">		
 		<value condition="Window.IsActive(pictures) + IsEmpty(ListItem.Art(fanart)) + [StringCompare(ListItem.FileExtension,png) | StringCompare(ListItem.FileExtension,jpg) | StringCompare(ListItem.FileExtension,jpeg) | StringCompare(ListItem.FileExtension,bmp) | StringCompare(ListItem.FileExtension,gif) | StringCompare(ListItem.FileExtension,ico) | StringCompare(ListItem.FileExtension,tif) | StringCompare(ListItem.FileExtension,tiff) | StringCompare(ListItem.FileExtension,tga) | StringCompare(ListItem.FileExtension,pcx) | StringCompare(ListItem.FileExtension,cbz) | StringCompare(ListItem.FileExtension,zip) | StringCompare(ListItem.FileExtension,cbr) | StringCompare(ListItem.FileExtension,rar) | StringCompare(ListItem.FileExtension,m3u)]">$INFO[listitem.filenameandpath]</value>
+		<value condition="!Window.IsVisible(10025)+!Window.IsVisible(502)+!Window.IsVisible(home)">background.jpg</value>
 		<value condition="!Control.IsVisible(1999)+Skin.HasSetting(Enable_ExtraFanart)+!IsEmpty(Window(Home).Property(iconmixExtraFanart))+!SubString(Window(Home).Property(iconmixExtraFanart),plugin)+!SubString(Container.FolderPath,plugin)">$INFO[Window(Home).Property(iconmixExtraFanart)]</value>	
 		<value condition="Control.IsVisible(1999)+!IsEmpty(Window(Home).Property(iconmixExtraFanart))">$INFO[Container(1999).ListItem.Path,,extrafanart/]</value>
 		<value condition="!IsEmpty(Window(Home).Property(iconmixExtraFanart))+Skin.HasSetting(Enable_ExtraFanart)">$INFO[Window(Home).Property(iconmixExtraFanart)]</value>
@@ -838,9 +839,14 @@
 		<value>flags/Rating/NoRating.png</value>
 	</variable>
 	<variable name="PosterThumb">
+		<value condition="!IsEmpty(Window(10000).Property(IconMixDirector))">$INFO[Window(10000).Property(IconMixDirector)]</value>
 		<value condition="!IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
 		<value condition="!IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(season.poster)]</value>
 		<value>$INFO[ListItem.Icon]</value>
+	</variable>
+	<variable name="bandeauactreal">
+		<value condition="Container.Content(actors)">$LOCALIZE[344]</value>
+		<value condition="Container.Content(directors)">$LOCALIZE[20348]</value>
 	</variable>
 	<variable name="VideoMusicGenres">
 		<value condition="[Window.IsActive(502) | [Window.IsActive(10025) + SubString(Container.FolderPath,videodb://musicvideos/)]]">musicgenres/$INFO[ListItem.Label].jpg</value>

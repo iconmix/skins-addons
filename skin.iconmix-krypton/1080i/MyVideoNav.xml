@@ -24,6 +24,7 @@
 
 		<control type="group">
 			<include>Animation_HiddenByInfo</include>
+			
 
 			<control type="group">
 				<animation type="Conditional" condition="Control.HasFocus(5051)|Control.HasFocus(1998)" reversible="true">
@@ -80,6 +81,7 @@
 				<animation type="Conditional" condition="Control.HasFocus(5051)|Control.HasFocus(1998)" reversible="true">
 					<effect type="fade" start="100" end="15" time="500"  />
 				</animation>
+				<include>Animation_FadedByMenu</include>
 
 				<include>ClearLogoArt</include>
 				<control type="image">
@@ -117,6 +119,7 @@
 				<aspectratio>stretch</aspectratio>
 				<texture>frames/ocean.png</texture>
 				<colordiffuse>C0101010</colordiffuse>
+				<include>Animation_FadedByMenu</include>
 
 				<visible>[[String.StartsWith(ListItem.DBTYPE,set)+Skin.HasSetting(SagaClearArt)]|[Skin.HasSetting(GenreClearArt)+Container.Content(Genres)]]+!Skin.HasSetting(CacheFond)</visible>
 			</control>
@@ -130,6 +133,7 @@
 				<animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
 					<effect type="slide" end="0,-835" time="0"  />
 				</animation>
+				<include>Animation_FadedByMenu</include>
 				<align>center</align>
 				<onfocus condition="Skin.HasSetting(SagaAucun)">SetFocus(55)</onfocus>
 				<description>Widget Lists</description>
@@ -155,6 +159,7 @@
 				<animation type="Conditional" condition="!Container(1999).IsUpdating" reversible="false">
 					<effect type="slide" end="2000" time="1" delay="100" />
 				</animation>
+				<include>Animation_FadedByMenu</include>
 				<onfocus condition="Skin.HasSetting(GenreAucun)">SetFocus(55)</onfocus>
 				<description>Widget Lists</description>
 				<content>$INFO[Container.FolderPath]$INFO[ListItem.DBID]</content>
@@ -169,6 +174,31 @@
 
 
 				<visible>Container.Content(genres)</visible>
+				<visible>!Container.OnNext</visible>
+				<visible>!Container.OnPrevious</visible>
+			</control>
+			<!----------------------------------------REALISATEURS/ACTEURS------------------------------------------------------------------------ -->
+				<control type="list" id="1999">
+				<left>-2000</left>
+				<include>Animation_FadedByMenu</include>
+				<animation type="Conditional" condition="!Container(1999).IsUpdating" reversible="false">
+					<effect type="slide" end="2000" time="1" delay="100" />
+				</animation>
+				<onfocus condition="Skin.HasSetting(directorAucun)">SetFocus(55)</onfocus>
+				<description>Widget Lists</description>
+				<content>$INFO[Container.FolderPath]$INFO[ListItem.DBID]</content>
+				<width>1920</width>
+				<animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
+					<effect type="slide" end="0,-835" time="0"  />
+				</animation>
+				<include condition="!Skin.HasSetting(directorTexte)+!Skin.HasSetting(directorAucun)">HorizVert</include>
+				<include condition="Skin.HasSetting(directorTexte)|Skin.HasSetting(directorAucun)">VertHoriz</include>
+
+				<include>VueElementsBoitiers</include>
+
+
+				<visible>Container.Content(directors)|Container.Content(actors)</visible>
+				<visible>!String.IsEmpty(ListItem.DBID)</visible>
 				<visible>!Container.OnNext</visible>
 				<visible>!Container.OnPrevious</visible>
 			</control>
@@ -211,7 +241,7 @@
 				</control>
 				<include>Animation_NavMenu</include>
 				<!--<include>NavMenuBackground</include>-->
-				<visible>ControlGroup(7002).HasFocus|ControlGroup(7000).HasFocus(2001)|ControlGroup(7000).HasFocus(2002)</visible>
+				<visible>ControlGroup(7002).HasFocus|ControlGroup(7000).HasFocus(2001)|ControlGroup(7000).HasFocus(2002)|ControlGroup(7000).HasFocus(2003)</visible>
 				<animation type="Visible" reversible="true">
 					<effect type="zoom" center="960,450" start="0" end="100" time="1000" tween="bounce" easy="out" />
 				</animation>
@@ -232,11 +262,11 @@
 					<orientation>vertical</orientation>
 
 
-
+<!-- SAGAS -->
 					<control type="radiobutton" id="1000">
 						<include>VisibleIfMovieSet</include>
 						<include>BoutonCommun</include>
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<label>$LOCALIZE[31903]</label>
 						<selected>Skin.HasSetting(SagaBoitier)</selected>
 						<onclick>Skin.ToggleSetting(SagaBoitier)</onclick>
@@ -248,7 +278,7 @@
 					</control>
 					<control type="radiobutton" id="1001">
 						<include>BoutonCommun</include>
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<include>VisibleIfMovieSet</include>
 						<label>$LOCALIZE[31904]</label>
 						<selected>Skin.HasSetting(SagaDisc)</selected>
@@ -262,7 +292,7 @@
 					<control type="radiobutton" id="1002">
 						<include>BoutonCommun</include>
 						<include>VisibleIfMovieSet</include>
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<label>$LOCALIZE[31899]</label>
 						<selected>Skin.HasSetting(SagaClearArt)</selected>
 						<onclick>Skin.ToggleSetting(SagaClearArt)</onclick>
@@ -275,7 +305,7 @@
 					<control type="radiobutton" id="1003">
 						<include>VisibleIfMovieSet</include>
 						<include>BoutonCommun</include>
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<label>$LOCALIZE[31905]</label>
 						<selected>Skin.HasSetting(SagaTexte)</selected>
 						<onclick>Skin.ToggleSetting(SagaTexte)</onclick>
@@ -288,7 +318,7 @@
 					<control type="radiobutton" id="1004">
 						<include>VisibleIfMovieSet</include>
 						<include>BoutonCommun</include>
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<label>$LOCALIZE[31906]</label>
 						<selected>Skin.HasSetting(SagaAucun)|[!Skin.HasSetting(SagaClearArt)+!Skin.HasSetting(SagaTexte)+!Skin.HasSetting(SagaBoitier)+!Skin.HasSetting(SagaDisc)]</selected>
 						<onclick>Skin.ToggleSetting(SagaAucun)</onclick>
@@ -299,11 +329,11 @@
 						<onclick>ReloadSkin()</onclick>
 					</control>
 
-					<!------------------------- GENRES ---------------------------->
+<!------------------------- GENRES ---------------------------->
 					<control type="radiobutton" id="1000">
 						<visible>Container.Content(Genres)</visible>
 						<include>BoutonCommun</include>
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<label>$LOCALIZE[31903]</label>
 						<selected>Skin.HasSetting(GenreBoitier)</selected>
 						<onclick>Skin.ToggleSetting(GenreBoitier)</onclick>
@@ -314,7 +344,7 @@
 						<onclick>ReloadSkin()</onclick>
 					</control>
 					<control type="radiobutton" id="1001">
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<include>BoutonCommun</include>
 						<visible>Container.Content(Genres)</visible>
 						<label>$LOCALIZE[31904]</label>
@@ -328,7 +358,7 @@
 					</control>
 					<control type="radiobutton" id="1002">
 						<visible>Container.Content(Genres)</visible>
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<include>BoutonCommun</include>
 						<label>$LOCALIZE[31899]</label>
 						<selected>Skin.HasSetting(GenreClearArt)</selected>
@@ -341,7 +371,7 @@
 					</control>
 					<control type="radiobutton" id="1003">
 						<visible>Container.Content(Genres)</visible>
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<include>BoutonCommun</include>
 						<label>$LOCALIZE[31905]</label>
 						<selected>Skin.HasSetting(GenreTexte)</selected>
@@ -355,7 +385,7 @@
 					<control type="radiobutton" id="1004">
 						<visible>Container.Content(Genres)</visible>
 						<include>BoutonCommun</include>
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<label>$LOCALIZE[31906]</label>
 						<selected>Skin.HasSetting(GenreAucun)|[!Skin.HasSetting(GenreClearArt)+!Skin.HasSetting(GenreTexte)+!Skin.HasSetting(GenreBoitier)+!Skin.HasSetting(GenreDisc)]</selected>
 						<onclick>Skin.ToggleSetting(GenreAucun)</onclick>
@@ -366,6 +396,73 @@
 						<onclick>ReloadSkin()</onclick>
 					</control>
 
+<!------------------------------------------------>
+					<!------------------------- GENRES ---------------------------->
+					<control type="radiobutton" id="1000">
+						<visible>Container.Content(directors)|Container.Content(actors)</visible>
+						<include>BoutonCommun</include>
+						
+						<label>$LOCALIZE[31903]</label>
+						<selected>Skin.HasSetting(directorBoitier)</selected>
+						<onclick>Skin.ToggleSetting(directorBoitier)</onclick>
+						<onclick condition="Skin.HasSetting(directorDisc)">Skin.ToggleSetting(directorDisc)</onclick>
+						<onclick condition="Skin.HasSetting(directorTexte)">Skin.ToggleSetting(directorTexte)</onclick>
+						<onclick condition="Skin.HasSetting(directorAucun)">Skin.ToggleSetting(directorAucun)</onclick>
+						<onclick condition="Skin.HasSetting(directorClearArt)">Skin.ToggleSetting(directorClearArt)</onclick>
+						<onclick>ReloadSkin()</onclick>
+					</control>
+					<control type="radiobutton" id="1001">
+						
+						<include>BoutonCommun</include>
+						<visible>Container.Content(directors)|Container.Content(actors)</visible>
+						<label>$LOCALIZE[31904]</label>
+						<selected>Skin.HasSetting(directorDisc)</selected>
+						<onclick>Skin.ToggleSetting(directorDisc)</onclick>
+						<onclick condition="Skin.HasSetting(directorBoitier)">Skin.ToggleSetting(directorBoitier)</onclick>
+						<onclick condition="Skin.HasSetting(directorTexte)">Skin.ToggleSetting(directorTexte)</onclick>
+						<onclick condition="Skin.HasSetting(directorAucun)">Skin.ToggleSetting(directorAucun)</onclick>
+						<onclick condition="Skin.HasSetting(directorClearArt)">Skin.ToggleSetting(directorClearArt)</onclick>
+						<onclick>ReloadSkin()</onclick>
+					</control>
+					<control type="radiobutton" id="1002">
+						<visible>Container.Content(directors)|Container.Content(actors)</visible>
+						
+						<include>BoutonCommun</include>
+						<label>$LOCALIZE[31899]</label>
+						<selected>Skin.HasSetting(directorClearArt)</selected>
+						<onclick>Skin.ToggleSetting(directorClearArt)</onclick>
+						<onclick condition="Skin.HasSetting(directorBoitier)">Skin.ToggleSetting(directorBoitier)</onclick>
+						<onclick condition="Skin.HasSetting(directorDisc)">Skin.ToggleSetting(directorDisc)</onclick>
+						<onclick condition="Skin.HasSetting(directorAucun)">Skin.ToggleSetting(directorAucun)</onclick>
+						<onclick condition="Skin.HasSetting(directorTexte)">Skin.ToggleSetting(directorTexte)</onclick>
+						<onclick>ReloadSkin()</onclick>
+					</control>
+					<control type="radiobutton" id="1003">
+						<visible>Container.Content(directors)|Container.Content(actors)</visible>
+						
+						<include>BoutonCommun</include>
+						<label>$LOCALIZE[31905]</label>
+						<selected>Skin.HasSetting(directorTexte)</selected>
+						<onclick>Skin.ToggleSetting(directorTexte)</onclick>
+						<onclick condition="Skin.HasSetting(directorBoitier)">Skin.ToggleSetting(directorBoitier)</onclick>
+						<onclick condition="Skin.HasSetting(directorDisc)">Skin.ToggleSetting(directorDisc)</onclick>
+						<onclick condition="Skin.HasSetting(directorAucun)">Skin.ToggleSetting(directorAucun)</onclick>
+						<onclick condition="Skin.HasSetting(directorClearArt)">Skin.ToggleSetting(directorClearArt)</onclick>
+						<onclick>ReloadSkin()</onclick>
+					</control>
+					<control type="radiobutton" id="1004">
+						<visible>Container.Content(directors)|Container.Content(actors)</visible>
+						<include>BoutonCommun</include>
+						
+						<label>$LOCALIZE[31906]</label>
+						<selected>Skin.HasSetting(directorAucun)|[!Skin.HasSetting(directorClearArt)+!Skin.HasSetting(directorTexte)+!Skin.HasSetting(directorBoitier)+!Skin.HasSetting(directorDisc)]</selected>
+						<onclick>Skin.ToggleSetting(directorAucun)</onclick>
+						<onclick condition="Skin.HasSetting(directorBoitier)">Skin.ToggleSetting(directorBoitier)</onclick>
+						<onclick condition="Skin.HasSetting(directorDisc)">Skin.ToggleSetting(directorDisc)</onclick>
+						<onclick condition="Skin.HasSetting(directorTexte)">Skin.ToggleSetting(directorTexte)</onclick>
+						<onclick condition="Skin.HasSetting(directorClearArt)">Skin.ToggleSetting(directorClearArt)</onclick>
+						<onclick>ReloadSkin()</onclick>
+					</control>
 
 
 
@@ -386,7 +483,7 @@
 				</control>
 				<include>Animation_NavMenu</include>
 				<!--<include>NavMenuBackground</include>-->
-				<visible>ControlGroup(7008).HasFocus|ControlGroup(7000).HasFocus(2003)</visible>
+				<visible>ControlGroup(7008).HasFocus|ControlGroup(7000).HasFocus(2008)</visible>
 				<animation type="Visible" reversible="true">
 					<effect type="zoom" center="960,450" start="0" end="100" time="1000" tween="bounce" easy="out" />
 				</animation>
@@ -410,7 +507,7 @@
 					<ondown>7008</ondown>
 					<orientation>vertical</orientation>
 					<control type="radiobutton" id="1000">
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<label>$LOCALIZE[31911]</label>
 						<include>BoutonCommun</include>
 						<selected>String.IsEqual(Control.GetLabel(1010),1)</selected>
@@ -418,7 +515,7 @@
 						<visible>Container.Content(Movies)|Container.Content(sets)</visible>
 					</control>
 					<control type="radiobutton" id="1001">
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<include>BoutonCommun</include>
 
 						<label>$LOCALIZE[31912]</label>
@@ -427,7 +524,7 @@
 						<visible>Container.Content(Movies)|Container.Content(sets)</visible>
 					</control>
 					<control type="radiobutton" id="1002">
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<include>BoutonCommun</include>
 						<label>$LOCALIZE[31913]</label>
 						<selected>String.IsEqual(Control.GetLabel(1010),3)</selected>
@@ -437,7 +534,7 @@
 
 
 					<control type="radiobutton" id="1000">
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<include>BoutonCommun</include>
 						<label>$LOCALIZE[31911]</label>
 						<selected>String.IsEqual(Control.GetLabel(1010),1)</selected>
@@ -445,7 +542,7 @@
 						<visible>Container.Content(TvShows)</visible>
 					</control>
 					<control type="radiobutton" id="1001">
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<include>BoutonCommun</include>
 
 						<label>$LOCALIZE[31912]</label>
@@ -456,7 +553,7 @@
 					</control>
 					<control type="radiobutton" id="1002">
 						<include>BoutonCommun</include>
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<label>$LOCALIZE[31913]</label>
 						<selected>String.IsEqual(Control.GetLabel(1010),3)</selected>
 						<onclick>Skin.SetString($VAR[VisibleView]VueTvShows,3)</onclick>
@@ -466,7 +563,7 @@
 
 					<control type="radiobutton" id="1000">
 						<include>BoutonCommun</include>
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<label>$LOCALIZE[31911]</label>
 						<selected>String.IsEqual(Control.GetLabel(1010),1)</selected>
 						<onclick>Skin.SetString($VAR[VisibleView]Vueepisodes,1)</onclick>
@@ -475,7 +572,7 @@
 					</control>
 					<control type="radiobutton" id="1001">
 						<include>BoutonCommun</include>
-						<!-- <include>SettingsLabelElements</include> -->
+						
 
 						<label>$LOCALIZE[31912]</label>
 						<selected>String.IsEqual(Control.GetLabel(1010),2)</selected>
@@ -485,7 +582,7 @@
 					</control>
 					<control type="radiobutton" id="1002">
 						<include>BoutonCommun</include>
-						<!-- <include>SettingsLabelElements</include> -->
+						
 						<label>$LOCALIZE[31913]</label>
 						<selected>String.IsEqual(Control.GetLabel(1010),3)</selected>
 						<onclick>Skin.SetString($VAR[VisibleView]Vueepisodes,3)</onclick>
@@ -517,8 +614,8 @@
 					<onleft>55</onleft>
 					<onback>Action(firstpage)</onback>
 					<onback>55</onback>
-					<onright condition="ControlGroup(7000).HasFocus(2001)|ControlGroup(7000).HasFocus(2002)">7002</onright>
-					<onright condition="ControlGroup(7000).HasFocus(2003)">7008</onright>
+					<onright condition="ControlGroup(7000).HasFocus(2001)|ControlGroup(7000).HasFocus(2002)|ControlGroup(7000).HasFocus(2003)">7002</onright>
+					<onright condition="ControlGroup(7000).HasFocus(2008)">7008</onright>
 					<onright>55</onright>
 					<onup>7000</onup>
 					<ondown>7000</ondown>
@@ -614,22 +711,27 @@
 					<include>Nav_NowPlaying</include>
 
 					<control type="button" id="2001">
-						<!-- <include>SettingsLabelElements</include> -->
+						<!-- Choix elements SAGAS -->
 						<include>BoutonCommun</include>
-						<label>[I]$LOCALIZE[31909][/I]  >></label>
-
+						<label>[I]$LOCALIZE[31909][/I]</label>
 						<onclick>SetFocus(7002)</onclick>
 						<include>VisibleIfMovieSet</include>
 					</control>
 					<control type="button" id="2002">
-						<!-- <include>SettingsLabelElements</include> -->
+						<!-- Choix elements GENRES -->
 						<include>BoutonCommun</include>
 						<label>[I]$LOCALIZE[31907][/I]  >></label>
-
 						<onclick>SetFocus(7002)</onclick>
 						<visible>Container.Content(genres)</visible>
 					</control>
 					<control type="button" id="2003">
+						<!-- Choix elements REALISATEURS -->
+						<include>BoutonCommun</include>
+						<label>[I]$LOCALIZE[31933][/I]  >></label>
+						<onclick>SetFocus(7002)</onclick>
+						<visible>Container.Content(directors)|Container.Content(actors)</visible>
+					</control>
+					<control type="button" id="2008">
 						<!-- <include>SettingsLabelElements</include> -->
 						<include>BoutonCommun</include>
 						<label>[I]$LOCALIZE[31910][/I]  >></label>
@@ -637,7 +739,7 @@
 						<onclick>SetFocus(7008)</onclick>
 						<visible>[Container.Content(sets)|Container.Content(movies)|Container.Content(tvshows)|Container.Content(episodes)]+[Control.IsVisible(550)|Control.IsVisible(551)|Control.IsVisible(552)|Control.IsVisible(555)|Control.IsVisible(556)|Control.IsVisible(504)|Control.IsVisible(512)]+!Control.HasFocus(5051)+!Control.HasFocus(1998)</visible>
 					</control>
-					<control type="button" id="2004">
+					<control type="button" id="2009">
 						<!-- <include>SettingsLabelElements</include> -->
 						<include>BoutonCommun</include>
 						<label>[I]$LOCALIZE[31925][/I]</label>
@@ -646,7 +748,7 @@
 						<onclick>RunScript(script.iconmixtools)</onclick>
 						<include>VisibleIfMovieSet</include>
 					</control>
-					<control type="button" id="2005">
+					<control type="button" id="2010">
 						<!-- <include>SettingsLabelElements</include> -->
 						<include>BoutonCommun</include>
 						<label>[I]$LOCALIZE[31927][/I]</label>
@@ -692,7 +794,7 @@
 			</control>
 
 
-			<control type="group"> <!-- bandeau --->
+			<control type="group"> <!-- bandeau genre--->
 				<width>700</width>
 				<height>88</height>
 				<posy>130</posy>
@@ -797,6 +899,89 @@
 					<scrollout>true</scrollout>
 				</control>
 			</control>
+
+		</control>
+				
+				
+				<control type="group"> <!-- bandeau acteurs/realisateurs--->
+				<width>700</width>
+				<height>88</height>
+				<posy>130</posy>
+				<posx>-90</posx>
+				<animation type="Conditional" condition="!Skin.HasSetting(CacheFond)">
+					<effect type="rotate" center="0,88" end="20" time="1" />
+				</animation>
+				<animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
+					<effect type="slide" end="1460,898" time="0" tween="quadratic" />
+					<effect type="rotate" center="0,88" end="45" time="1" />
+				</animation>
+				<visible>[Container.Content(actors)|Container.Content(directors)]</visible>
+
+				<!--<animation type="Visible">
+				<effect type="rotate" center="0,88" end="27" time="1" />
+				<effect type="slide" end="90,280" time="1" delay="50" />
+			</animation>-->
+			<control type="image">
+				<texture>frames/genrestag.png</texture>
+				<aspectratio>stretch</aspectratio>
+			</control>
+			<control type="group">
+				<control type="group">
+					<left>30</left>
+					<visible>Skin.HasSetting(CacheFond)</visible>
+					<control type="fadelabel">
+						<width>550</width>
+						<posx>40</posx>
+						<posy>12</posy>
+						<aligny>center</aligny>
+						<align>center</align>
+						<font>impact</font>
+						<textcolor>black</textcolor>
+						<label>$VAR[bandeauactreal]</label>
+						<scrollout>true</scrollout>
+						<scroll>true</scroll>
+					</control>
+					<control type="fadelabel">
+						<width>550</width>
+						<posx>43</posx>
+						<aligny>center</aligny>
+						<align>center</align>
+						<font>impact</font>
+						<textcolor>white</textcolor>
+						<label>$VAR[bandeauactreal]</label>
+						<scroll>true</scroll>
+						<scrollout>true</scrollout>
+					</control>
+				</control>
+				<control type="group">
+					<visible>!Skin.HasSetting(CacheFond)</visible>
+					<control type="fadelabel">
+						<width>550</width>
+						<posx>40</posx>
+						<posy>12</posy>
+						<aligny>center</aligny>
+						<align>center</align>
+						<font>impact</font>
+						<textcolor>black</textcolor>
+						<label>$VAR[bandeauactreal]</label>
+						<scrollout>true</scrollout>
+						<scroll>true</scroll>
+					</control>
+					<control type="fadelabel">
+						<width>550</width>
+						<posx>43</posx>
+						<aligny>center</aligny>
+						<align>center</align>
+						<font>impact</font>
+						<textcolor>white</textcolor>
+						<label>$VAR[bandeauactreal]</label>
+						<scroll>true</scroll>
+						<scrollout>true</scrollout>
+					</control>
+				</control>
+			</control>
+
+			
 
 		</control>
 

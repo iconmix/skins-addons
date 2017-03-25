@@ -367,6 +367,7 @@
 
 
 	<variable name="backgroundVar">
+		<value condition="!Window.IsVisible(10025)+!Window.IsVisible(502)+!Window.IsVisible(home)">background.jpg</value>
 		<value condition="Control.HasFocus(9000)+[String.Contains(Container(9000).ListItem.Property(background),WDF1)|String.Contains(Container(9000).ListItem.Property(background),WDF2)]"></value>
 		<value condition="Integer.IsGreater(Container(8080).NumItems,0)"></value>
 		<value condition="Window.IsVisible(Home)+!Control.HasFocus(9000)+!Control.HasFocus(9001)+!String.IsEqual(Container(9000).ListItem.Property(widgetType),weather)+!String.IsEqual(Container(9000).ListItem.Property(widgetType),system)+!IsEmpty(Window(Home).Property(WidgetActifFanart))">$INFO[Window(Home).Property(WidgetActifFanart)]</value>

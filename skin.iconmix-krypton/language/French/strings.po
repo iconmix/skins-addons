@@ -1594,7 +1594,13 @@ msgctxt "#31931"
 msgid "Access to movieset details"
 msgstr "Accéder aux éléments de la saga"
 
+msgctxt "#31932"
+msgid "Hide actor without thumb"
+msgstr "Masquer les acteurs sans portrait"
 
+msgctxt "#31933"
+msgid "Directors/Actors Details"
+msgstr "Détails en vue Réalisateurs/Acteurs"
 
 msgctxt "#32000"
 msgid "Horizontal panel animation on windows close"

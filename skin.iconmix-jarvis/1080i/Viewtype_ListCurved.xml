@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 	<include name="Viewtype_ListCurved">
+		<include>Animation_FadedByMenu</include>
 		<control type="group">
 			<visible>Control.IsVisible(906)</visible>
 			<!-- Browser 
@@ -31,19 +32,9 @@
 				<aligny>top</aligny>
 				<pagecontrol>60</pagecontrol>
 				<include>Animation_OpenCloseFade</include>
-				<include>Animation_FadedByMenu</include>
 				<include>Animation_HiddenByInfo</include>
 				<itemlayout height="35">
-					<!-- List Line Item Divider --
-					<control type="image">
-						<posx>5</posx>
-						<posy>33</posy>
-						<width>1500</width>
-						<height>2</height>
-						<aligny>center</aligny>
-						<texture>VideoInfoLine.png</texture>
-						<colordiffuse>FilesDividerDiffuse</colordiffuse>
-					</control>
+				
 					<!-- Items in Video Library -->
 					<control type="label">
 						<posx>85</posx>
@@ -58,10 +49,7 @@
 						<scroll>false</scroll>
 						<visible>Window.IsActive(10025)</visible>
 					</control>
-			
-					
-					<!-- Watched Overlay for Items in Video Library -->
-					
+								
 					<!-- Watched Overlay for In-Progress Items in Video Library -->
 					<control type="group">
 					<posx>7</posx>
@@ -148,11 +136,7 @@
 					</control>
 					<!-- Star Rating -->
 					<control type="group">
-						<!-- XXX: temporarily commented out for videos until I figure out exactly how I'd like to implement this
-						<visible>!Window.IsActive(10025) | [Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes)]]</visible>
-						<include>VisibleIfNotMovieSet</include>
-						-->
-						<visible>!Window.IsActive(10025) + !SubString(Container.FolderPath,plugin)</visible>
+							<visible>!Window.IsActive(10025) + !SubString(Container.FolderPath,plugin)</visible>
 						<control type="label">
 							<posx>775</posx>
 							<posy>-2</posy>
@@ -192,6 +176,7 @@
 						<aspectratio scalediffuse="true">keep</aspectratio>
 						<visible>!SubString(ListItem.Icon,default)+[Container.Content(episodes)|Container.Content(albums)]</visible>
 					</control>
+					
 					<control type="image">
 						<posx>1240</posx>
 						<posy>-18</posy>
@@ -202,41 +187,18 @@
 						<aspectratio scalediffuse="false">stretch</aspectratio>
 						<visible>!SubString(ListItem.Art(fanart),default)+!Container.Content(episodes)+!Container.Content(albums)</visible>
 					</control>
-						<control type="image">
+					<control type="image">
 						<posx>-10</posx>
 						<posy>-20</posy>
 						<width>1620</width>
 						<height>210</height>
 						<fadetime>100</fadetime>
-						
-			
-				<texture>frames/banner_frame2t.png</texture>
+				    <texture>frames/banner_frame2t.png</texture>
 						<aspectratio scalediffuse="false">stretch</aspectratio>
 						<visible>[!IsEmpty(ListItem.Title) | !IsEmpty(ListItem.Label)] + [!SubString(ListItem.Art(fanart),default)|!SubString(ListItem.Icon,default)]</visible>
 					</control>
+							
 					
-					
-						
-					<!-- line --
-					<control type="image">
-						<posx>5</posx>
-						<posy>33</posy>
-						<width>1500</width>
-						<height>2</height>
-						<aligny>center</aligny>
-						<texture>VideoInfoLine.png</texture>
-						<colordiffuse>FilesDividerDiffuse</colordiffuse>
-					</control>
-					<!-- Focus Bar --
-					<control type="image">
-						<posx>0</posx>
-						<posy>0</posy>
-						<width>1500</width>
-						<height>33</height>
-						<aligny>center</aligny>
-						<texture>FocusLine.png</texture>
-						<colordiffuse>FocusBar</colordiffuse>
-					</control>
 					<!-- Items in Video Library -->
 					<control type="label">
 						<posx>55</posx>
@@ -351,6 +313,20 @@
 				</focusedlayout>
 			</control>
 			<!-- Thumbnails -->
+			<control type="image">
+				<posx>5</posx>
+				<posy>250</posy>
+				<width>300</width>
+				<height>440</height>
+				<fadetime>100</fadetime>
+				<aspectratio align="right" aligny="center">keep</aspectratio>
+				<!-- <texture>$INFO[ListItem.Icon]</texture> -->
+				<texture>$VAR[posterthumb]</texture>
+				<aspectratio scalediffuse="true" align="center" >keep</aspectratio>
+				<bordersize>8</bordersize>
+				<bordertexture border="8">frames/acteur2.png</bordertexture>
+				<visible>[Container.Content(directors)|Container.Content(actors)]</visible>
+			</control>
 
 			<!-- Sets button -->
 			<control type="button" id="997">

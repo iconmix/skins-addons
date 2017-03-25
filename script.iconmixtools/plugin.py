@@ -247,35 +247,18 @@ class Main:
         self.windowhome.clearProperty('IconMixExtraFanart') 
         self.windowhome.clearProperty('IconMixEpSa')
         self.windowhome.clearProperty('IconMixSaga')
-        """
-        con = sqlite3.connect('c:/Users/HTPC/AppData/Roaming/Kodi/userdata/Database/MyVideos107.db')
-        cursor = con.cursor()
-        #cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-        #cursor.execute("SELECT strSet FROM sets;")
         
-        # tables = version, bookmark, settings, stacktimes, genre, genre_link, country, country_link, movie, actor, actor_link, 
-        #          director_link, writer_link, path, files, tvshow, episode, tvshowlinkpath, movielinktvshow, studio, studio_link, 
-        #          musicvideo, streamdetails, sets, seasons, art, tag, tag_link, rating, uniqueid
-        
-        #utils.logMsg('backend Sql SETS='+str(cursor.fetchall()),0)
-        
-        cursor.execute("SELECT c00 FROM movie WHERE idSet='%d';" %(int(xbmc.getInfoLabel("ListItem.DBID"))))
-        utils.logMsg('backend Sql SET %s=' %(xbmc.getInfoLabel("ListItem.DBID"))+str(cursor.fetchall()),0)
-        con.close()
-        """
         
         utils.logMsg('Service en cours...',0)
         while not self._stop:
             if (xbmc.getCondVisibility("Window.IsVisible(10025)") or xbmc.getCondVisibility("Window.IsVisible(10502)")) and not xbmc.getCondVisibility("Window.IsVisible(10000)") and not xbmc.getCondVisibility("Container.Scrolling"):
                 if xbmc.getCondVisibility("Control.HasFocus(1999)"):
-                    #self.xx1999=self.winid.getControl(1999)
-                    #self.xx1999.reset()
-                    #if self.xx1999: utils.logMsg('Getcontrol OK :  '+xbmc.getInfoLabel("Container(1999).ListItem.DBID"),0)
                     self.selecteditem = xbmc.getInfoLabel("Container(1999).ListItem.Label")
                     self.DBTYPE=xbmc.getInfoLabel("Container(1999).ListItem.DBTYPE")                    
                 else : 
                     self.selecteditem = xbmc.getInfoLabel("ListItem.DBID")
-                    self.DBTYPE=xbmc.getInfoLabel("ListItem.DBTYPE")                    
+                    self.DBTYPE=xbmc.getInfoLabel("ListItem.DBTYPE")  
+                    utils.logMsg('Type :'+str(self.DBTYPE),0)                  
                 if not self.selecteditem :
                     self.windowhome.clearProperty('IconMixExtraFanart')
                     #self.windowhome.clearProperty('IconMixEpSa')
@@ -328,8 +311,13 @@ class Main:
                                      self.TvShow=TvSh
                                      self.TvSeason=TvSe
                                else : self.windowhome.clearProperty('IconMixEpSa')
+                          if self.DBTYPE=="director":
+                               #utils.logMsg('Directeurs.',0)
+                               self.windowhome.setProperty('IconMixDirector',str(utils.getRealisateur(xbmc.getInfoLabel("ListItem.DBID"),realisateur=xbmc.getInfoLabel("ListItem.label"))))
+                              
                           else : 
                               self.windowhome.clearProperty('IconMixEpSa')
+                              self.windowhome.clearProperty('IconMixDirector')
                               self.TvShow=""
                               self.TvSeason=""
                       else : 

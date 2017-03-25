@@ -1829,6 +1829,14 @@ msgctxt "#31931"
 msgid "Access to movieset details"
 msgstr ""
 
+msgctxt "#31932"
+msgid "Hide actor without thumb"
+msgstr ""
+
+
+msgctxt "#31933"
+msgid "Directors/Actors Details"
+msgstr ""
 
 msgctxt "#32000"
 msgid "Horizontal panel animation on windows close"

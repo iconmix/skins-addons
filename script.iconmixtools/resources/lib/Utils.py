@@ -1011,7 +1011,8 @@ def getFilmsTv(DbType=None,Acteur=None):
     ActeurCache={}
     ActeurSave=1
     #logMsg("Resultat  Filmographie --> " + str(Acteur)+"/"+str(DbType),0)  
-    if DbType and Acteur!="None":        
+    if DbType and Acteur!="None": 
+        Acteur=try_decode(Acteur)       
         query_url = "https://api.themoviedb.org/3/search/person?api_key=67158e2af1624020e34fd893c881b019&language=%s&query=%s&page=1&include_adult=false" % (xbmc.getInfoLabel("System.Language").encode("utf-8"),unicodedata.normalize('NFKD', Acteur.split("(")[0]).encode('ascii','xmlcharrefreplace'))
         response = urllib.urlopen(query_url)
         #logMsg("URL --> " + str(query_url),0)
@@ -1117,8 +1118,63 @@ def getFilmsTv(DbType=None,Acteur=None):
                                  xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeRoles)
                                       
                               
-    xbmcplugin.endOfDirectory(int(sys.argv[1]))            
+    xbmcplugin.endOfDirectory(int(sys.argv[1])) 
+               
+def getRealisateur(DbId=None,realisateur=None):
+    allInfo = []
+    realisateurId=""
+    savepath=""     
+    
+    if DbId and realisateur!="None": 
+        #logMsg("DBID et Real --> " + str(DbId)+"/"+str(realisateur),0)     
+        savepath=ADDON_DATA_PATH+"/realisateurs/realisateur"+str(DbId)+".jpg"
+        if xbmcvfs.exists(savepath):
+             #logMsg("retour existant --> " + str(savepath),0)
+             return(savepath)
+        else:
             
+             savepath="DefaultActor.png"
+             realisateur=try_decode(realisateur)
+             query_url = "https://api.themoviedb.org/3/search/person?api_key=67158e2af1624020e34fd893c881b019&language=%s&query=%s&page=1&include_adult=false" % (xbmc.getInfoLabel("System.Language").encode("utf-8"),unicodedata.normalize('NFKD', realisateur.split("(")[0]).encode('ascii','xmlcharrefreplace'))
+             response = urllib.urlopen(query_url)
+             #logMsg("URL --> " + str(query_url),0)
+             try:
+                 str_response = response.read().decode('utf-8')
+             except :
+                 str_response=''
+                 logMsg("Resultat  URL introuvable --> " + str(query_url),0)
+
+             if str_response :
+                 try:
+                     json_data = json.loads(str_response)
+                 except:
+                     json_data=""
+                     logMsg("Resultat  URL vide --> " + str(query_url),0)
+            
+                     
+             if json_data:
+                 
+                 allInfo=json_data.get("results")
+                 if allInfo:
+                    for item in json_data.get("results"):
+                      #logMsg("Resultat  realisateur --> " + str(item),0)
+                      Poster=item.get("profile_path")
+                      if Poster: 
+                         Poster="http://image.tmdb.org/t/p/original"+str(Poster)
+                         query_url=Poster
+                         try:                           
+                           savepath=ADDON_DATA_PATH+"/realisateurs/realisateur"+str(DbId)+".jpg"
+                           erreur=DirStru(savepath)
+                           #logMsg("URL --> " + str(query_url),0)
+                           urllib.urlretrieve(query_url,savepath)
+                           break 
+                         except :
+                           str_response=''
+                           savepath="DefaultActor.png"
+                           logMsg("Resultat  URL introuvable --> " + str(query_url),0)
+             return(savepath)            
+                           
+                   
 def getTrailer(ID=None,DbType=None):
      Donnees=[]
      ListeTrailer=[]
@@ -1307,11 +1363,14 @@ def VueActuelle(containerprefix=""):
 def ModeVues(content_type=None, current_view=None):
         label = ""
         ListeVues = [] 
-        choixpossibles=[] 
+        choixpossibles=[]
+         
         views_file = xbmc.translatePath('special://skin/extras/views.xml').decode("utf-8")
         if xbmcvfs.exists(views_file):
             doc = parse(views_file)
             listing = doc.documentElement.getElementsByTagName('view')
+            VueActuelle=try_decode(xbmc.getInfoLabel("Container.Viewmode"))
+            
             for view in listing:
                 label = xbmc.getLocalizedString(int(view.attributes['languageid'].nodeValue))
                 viewid = view.attributes['value'].nodeValue
@@ -1323,15 +1382,25 @@ def ModeVues(content_type=None, current_view=None):
                          Elements = xbmcgui.ListItem(label=label, iconImage=image,label2="selectionnevue")
                          Elements.setProperty("viewid", viewid)
                          Elements.setProperty("icon", image)
-                         ListeVues.append(Elements)
+                         if VueActuelle==try_decode(label):
+                              ListeVues.insert(0,Elements) 
+                         else :
+                              ListeVues.append(Elements)
                     else: 
-                         ListeVues.append(label)
-                    choixpossibles.append(str(viewid))
+                         if VueActuelle==try_decode(label):
+                              ListeVues.insert(0,label)
+                         else:
+                              ListeVues.append(label)
+                    if VueActuelle==try_decode(label):
+                         choixpossibles.insert(0,str(viewid))
+                    else:
+                         choixpossibles.append(str(viewid))
         dialogC = xbmcgui.Dialog()
-        result=dialogC.select(xbmc.getLocalizedString(629), ListeVues)
-        if result>=0:
-            vue = str(choixpossibles[result])
-            xbmc.executebuiltin("Container.SetViewMode(%s)" % vue)            
+        if ListeVues:
+            result=dialogC.select(xbmc.getLocalizedString(629), ListeVues)
+            if result>=0:
+                 vue = str(choixpossibles[result])
+                 xbmc.executebuiltin("Container.SetViewMode(%s)" % vue)            
                   	  
         	  
 

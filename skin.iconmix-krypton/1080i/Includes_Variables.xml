@@ -260,6 +260,7 @@
 	</variable>	
 	<variable name="GlobalFanart">		
 		<value condition="Window.IsActive(pictures) + String.IsEmpty(ListItem.Art(fanart)) + [String.IsEqual(ListItem.FileExtension,png) | String.IsEqual(ListItem.FileExtension,jpg) | String.IsEqual(ListItem.FileExtension,jpeg) | String.IsEqual(ListItem.FileExtension,bmp) | String.IsEqual(ListItem.FileExtension,gif) | String.IsEqual(ListItem.FileExtension,ico) | String.IsEqual(ListItem.FileExtension,tif) | String.IsEqual(ListItem.FileExtension,tiff) | String.IsEqual(ListItem.FileExtension,tga) | String.IsEqual(ListItem.FileExtension,pcx) | String.IsEqual(ListItem.FileExtension,cbz) | String.IsEqual(ListItem.FileExtension,zip) | String.IsEqual(ListItem.FileExtension,cbr) | String.IsEqual(ListItem.FileExtension,rar) | String.IsEqual(ListItem.FileExtension,m3u)]">$INFO[listitem.filenameandpath]</value>
+		<value condition="!Window.IsVisible(10025)+!Window.IsVisible(502)+!Window.IsVisible(home)">background.jpg</value>
 		<value condition="!Control.IsVisible(1999)+Skin.HasSetting(Enable_ExtraFanart)+!String.IsEmpty(Window(Home).Property(iconmixExtraFanart))+!String.Contains(Window(Home).Property(iconmixExtraFanart),plugin)+!String.Contains(Container.FolderPath,plugin)">$INFO[Window(Home).Property(iconmixExtraFanart)]</value>	
 		<value condition="Control.IsVisible(1999)+!String.IsEmpty(Window(Home).Property(iconmixExtraFanart))">$INFO[Container(1999).ListItem.Path,,extrafanart/]</value>
 		<value condition="!String.IsEmpty(Window(Home).Property(iconmixExtraFanart))+Skin.HasSetting(Enable_ExtraFanart)">$INFO[Window(Home).Property(iconmixExtraFanart)]</value>
@@ -768,9 +769,15 @@
 		<value>flags/Rating/NoRating.png</value>
 	</variable>
 	<variable name="PosterThumb">
+				<value condition="!IsEmpty(Window(10000).Property(IconMixDirector))">$INFO[Window(10000).Property(IconMixDirector)]</value>
+
 		<value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(season.poster)]</value>
 		<value>$INFO[ListItem.Icon]</value>
+	</variable>
+	<variable name="bandeauactreal">
+		<value condition="Container.Content(actors)">$LOCALIZE[344]</value>
+		<value condition="Container.Content(directors)">$LOCALIZE[20348]</value>
 	</variable>
 	<variable name="VideoMusicGenres">
 		<value condition="[Window.IsActive(502) | [Window.IsActive(10025) + String.Contains(Container.FolderPath,videodb://musicvideos/)]]">musicgenres/$INFO[ListItem.Label].jpg</value>
