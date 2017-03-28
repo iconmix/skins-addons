@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window id="106">
-	<defaultcontrol>1000</defaultcontrol>
+	<!--<defaultcontrol>1000</defaultcontrol>-->
+	<onload>setfocus(2099)</onload> -->
 	<animation type="WindowOpen" reversible="false">
-		<effect type="zoom" start="80" end="100" center="auto" easing="out" tween="back" time="300" />
+		<!-- <effect type="zoom" start="80" end="100" center="auto" easing="out" tween="back" time="300" /> -->
+		<effect type="slide" end="540" easing="out" tween="back" time="300" />
 		<effect type="fade" start="0" end="100" time="300" />
 	</animation>
 	<animation type="WindowClose" reversible="false">
-		<effect type="zoom" start="100" end="80" center="auto" easing="in" tween="back" time="300" />
+		<!-- <effect type="zoom" start="100" end="80" center="auto" easing="in" tween="back" time="300" /> -->
+		<effect type="slide" end="0" easing="out" tween="back" time="300" />
 		<effect type="fade" start="100" end="0" time="300" />
 	</animation>
 	<coordinates>
 		<system>1</system>
 		<posx>0</posx>
 		<posy>0</posy>
-		<origin x="440" y="120" />
+		<origin x="-500" y="120" />
 	</coordinates>
+	
 	<controls>
 
 		<control type="image" id="999">
@@ -22,7 +26,7 @@
 			<posx>0</posx>
 			<posy>0</posy>
 			<width>550</width>
-			<height>730</height>
+			<height>740</height>
 			<texture>frames/Menu_Glass2b.png</texture>
 			<colordiffuse>DialogBackgroundColor</colordiffuse>
 		</control>
@@ -99,10 +103,28 @@
 				<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
 				<label>$LOCALIZE[31931]</label>
 				<onclick>Dialog.Close(contextmenu)</onclick>
-				<onclick>SetFocus(1999)</onclick>
+				<onclick>SetFocus(1999,0)</onclick>
 				<visible>SubString(ListItem.DBTYPE,set)</visible>
 			</control>
 			<control type="button" id="2103">
+				<!-- Accéder à la saga -->
+				<onleft>Dialog.Close(contextmenu)</onleft>
+				<onright>Dialog.Close(contextmenu)</onright>
+				<left>-</left>
+				<top>-</top>
+				<height>35</height>
+				<font>METF_DialogLarge</font>
+				<align>center</align>
+				<aligny>center</aligny>
+				<textcolor>TextNF</textcolor>
+				<focusedcolor>DialogTextFO</focusedcolor>
+				<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
+				<label>$LOCALIZE[31934]</label>
+				<onclick>Dialog.Close(contextmenu)</onclick>
+				<onclick>SetFocus(1999,0)</onclick>
+				<visible>Window.IsVisible(10502)+Container.Content(artists)</visible>
+			</control>
+			<control type="button" id="2104">
 				<!-- Accéder aux acteurs -->
 				<onleft>Dialog.Close(contextmenu)</onleft>
 				<onright>Dialog.Close(contextmenu)</onright>
@@ -117,11 +139,49 @@
 				<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
 				<label>$LOCALIZE[31930]</label>
 				<onclick>Dialog.Close(contextmenu)</onclick>
-				<onclick>SetFocus(1998)</onclick>
+				<onclick>SetFocus(1998,0)</onclick>
 				<visible>[SubString(ListItem.DBTYPE,video)|SubString(ListItem.DBTYPE,movie)|SubString(ListItem.DBTYPE,episode)|SubString(ListItem.DBTYPE,tvshow)]+Window.IsVisible(10025)</visible>
-			</control>
 
+			</control>
+			<control type="button" id="2105">
+				<onleft>Dialog.Close(contextmenu)</onleft>
+				<onright>Dialog.Close(contextmenu)</onright>
+				<left>-</left>
+				<top>-</top>
+				<height>35</height>
+				<font>METF_DialogLarge</font>
+				<align>center</align>
+				<aligny>center</aligny>
+				<textcolor>TextNF</textcolor>
+				<focusedcolor>DialogTextFO</focusedcolor>
+				<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
+						<description>Update Library</description>
+						<label>653</label>
+						<onclick condition="Window.IsVisible(10025)">UpdateLibrary(video)</onclick>
+						<onclick condition="Window.IsVisible(10502)">UpdateLibrary(music)</onclick>
+						<visible>![library.isscanningvideo]+![library.isscanningmusic]</visible>
+					</control>
+
+					<control type="button" id="2106">
+						<onleft>Dialog.Close(contextmenu)</onleft>
+				<onright>Dialog.Close(contextmenu)</onright>
+				<left>-</left>
+				<top>-</top>
+				<height>35</height>
+				<font>METF_DialogLarge</font>
+				<align>center</align>
+				<aligny>center</aligny>
+				<textcolor>TextNF</textcolor>
+				<focusedcolor>DialogTextFO</focusedcolor>
+				<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
+						<description>Clean Library</description>
+						<label>700</label>
+						<onclick condition="Window.IsVisible(10025)">CleanLibrary(video)</onclick>
+						<onclick condition="Window.IsVisible(10502)">CleanLibrary(music)</onclick>
+						<visible>![library.isscanningvideo]+![library.isscanningmusic]</visible>
+					</control>
 		</control>
+
 
 		<control type="button" id="1000">
 			<description>button template</description>

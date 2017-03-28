@@ -289,7 +289,7 @@
 				<posx>10</posx>
 				<posy>700</posy>
 				<width>1600</width>
-				<label>DBID=$INFO[Container(50).ListItem.DBID][CR]Type=$INFO[ListItem.DBTYPE][CR]Folder:$INFO[Container(50).ListItem.FolderPath][CR]Serie:$INFO[ListItem.TVShowTitle]</label>
+				<label>NbItems5001:$INFO[Container(5001).NumItems][CR]NbItems5002:$INFO[Container(5002).NumItems][CR]DBID=$INFO[Container(50).ListItem.DBID][CR]SetID=$INFO[ListItem.SetID][CR]Type=$INFO[ListItem.DBTYPE][CR]Folder:$INFO[Container(50).ListItem.FolderPath][CR]Serie:$INFO[ListItem.TVShowTitle]</label>
 			</control>-->
 
 			<control type="label">
@@ -917,43 +917,7 @@
 
 			<aspectratio aligny="center">scale</aspectratio>
 		</control>
-		<!--
-		<control type="label">
-		<width min="25" max="380">auto</width>
-		<height>30</height>
-		<aligny>center</aligny>
-		<font>METF_MediaDetailsSmall</font>
-		<textcolor>MediaDetailsYear</textcolor>
-		<label>$INFO[ListItem.Country]</label>
-		<visible>!String.IsEmpty(ListItem.Country) + [Container.Content(tvshows) | Container.Content(movies) | Container.Content(MusicVideos)]</visible>
-		</control>
-		-->
-		<!-- Bullet --
-		<control type="image">
-		<include>ViewDetailsBullet</include>
-		<visible>!String.IsEmpty(ListItem.Country) + [Container.Content(tvshows) | Container.Content(movies) | Container.Content(MusicVideos)]</visible>
-		</control>
-		<!-- Year --
-		<control type="label">
-		<width min="25" max="220">auto</width>
-		<height>30</height>
-		<aligny>center</aligny>
-		<font>METF_MediaDetailsSmall</font>
-		<textcolor>MediaDetailsYear</textcolor>
-		<label>$INFO[ListItem.Year]</label>
-		<visible>!String.IsEmpty(ListItem.Year) + [Container.Content(tvshows) | Container.Content(movies) | Container.Content(MusicVideos)]</visible>
-		</control>
-		<!-- Bullet -->
-		<!--		<control type="image">
-		<include>ViewDetailsBullet</include>
-		<visible>![String.IsEmpty(ListItem.Year) | String.IsEmpty(ListItem.Duration)] + [Container.Content(movies) | Container.Content(MusicVideos)]</visible>
-		</control>
-
-
-		s
-
-		<include>chronotools</include> -->
-
+	
 	</control>
 </control>
 
@@ -1008,84 +972,7 @@
 
 </control>
 
-<!------------------ roles -----------------------
-<control type="group">
-	<top>-500</top>
-	<left>10</left>
-	<align>left</align>
-	<width>1900</width>
-	<height>480</height>
-	<animation type="Conditional" condition="Control.HasFocus(505)">
-		<effect type="slide"  start="0,0" end="0,890" time="500" delay="1" reversible="false"/>
-	</animation>
 
-	<control type="image">
-
-		<posx>0</posx>
-		<posy>0</posy>
-
-		<colordiffuse>BackgroundColor</colordiffuse>
-		<bordersize>8</bordersize>
-		<bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
-
-		<texture>frames/fondinfogris.png</texture>
-		<aspectratio scalediffuse="false">stretch</aspectratio>
-	</control>
-			<control type="group">
-			
-			<top>-200</top>
-			<control type="image">
-				<description>Actor image</description>
-				<posy>10</posy>
-				<posx>5</posx>
-				<align>center</align>
-				<width>175</width>
-				<height>220</height>
-				<texture fallback="DefaultActor.png">$INFO[Container(50).Listitem.Icon]</texture>
-				<aspectratio align="center" aligny="center">keep</aspectratio>
-			</control>
-			<control type="image">
-				<align>center</align>
-				<width>185</width>
-				<height>245</height>
-				<texture>frames/ClassicFrame_Poster.png</texture>
-				<aspectratio align="center" aligny="center">keep</aspectratio>
-			</control>
-		</control>
-	<control type="label">
-		<top>5</top>
-		<width>1685</width>
-		<align>center</align>
-		<font>impact</font>
-		<label>[COLOR=yellow]$VAR[Is50][/COLOR]</label>
-		<visible>Container(505).IsUpdating</visible>
-	</control>
-	<control type="label">
-		<top>5</top>
-		<width>1685</width>
-		<align>center</align>
-		<font>impact</font>
-		<label>[COLOR=yellow]$VAR[Is50][/COLOR] [I][COLOR=white]($INFO[Container(505).CurrentItem]/$INFO[Container(505).NumItems])[/I][/COLOR]</label>
-		<visible>!Container(505).IsUpdating</visible>
-	</control>
-	<control type="list" id="505">
-		<top>60</top>
-		<left>20</left>
-		<width>1865</width>
-		<onleft>505</onleft>
-		<onright>505</onright>
-		<onup>7003</onup>
-		<ondown>50</ondown>
-		<animation type="Conditional" condition="Container(505).IsUpdating">
-		<effect type="fade"  start="100" end="10" time="500" delay="100" reversible="true"/>
-	</animation>
-		<!-- <visible>System.HasAddon(script.iconmixtools)+!String.Contains(ListItem.FilenameAndPath,plugin:)</visible>
-
-		<content sortby="year" sortorder="descending">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is50]</content>
-		<include>Roles</include>
-	</control>
-</control>
--->
 <include>PanelActeurs</include>
 <include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
 

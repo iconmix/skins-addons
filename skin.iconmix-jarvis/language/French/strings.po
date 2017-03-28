@@ -1602,6 +1602,10 @@ msgctxt "#31933"
 msgid "Directors/Actors Details"
 msgstr "Détails en vue Réalisateurs/Acteurs"
 
+msgctxt "#31934"
+msgid "Access to Artist Details"
+msgstr "Accéder aux éléments de l'artiste"
+
 msgctxt "#32000"
 msgid "Horizontal panel animation on windows close"
 msgstr "Animation à la fermeture des fenêtres"

@@ -1838,6 +1838,10 @@ msgctxt "#31933"
 msgid "Directors/Actors Details"
 msgstr ""
 
+msgctxt "#31934"
+msgid "Access to Artist Details"
+msgstr ""
+
 msgctxt "#32000"
 msgid "Horizontal panel animation on windows close"
 msgstr ""

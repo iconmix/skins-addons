@@ -46,6 +46,7 @@
 <include file="Viewtype_Disc.xml" />		<!-- 586,587 -->
 <include file="IncludesBackgroundBuilding.xml" />
 <include file="IncludesVideoLyrics.xml" />
+<include file="VueExperimentale.xml" />
 
 <include name="BoutonCommun">
 	<width>440</width>
@@ -77,7 +78,6 @@
 	<control type="group">
 		<control type="group"> <!-- acteurs -->
 			<include>Animation_FadedByMenu</include>
-
 			<animation type="Conditional" condition="Control.HasFocus(5051)|Control.HasFocus(1998)|Window.IsVisible(movieinformation)">
 				<effect type="fade"  start="100" end="0" time="5" delay="1" reversible="true"/>
 			</animation>
@@ -130,7 +130,7 @@
 				<visible>[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)|String.IsEqual(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Label,..)</visible>
 				<autoscroll delay="4000" repeat="5000" time="5000">!Control.HasFocus(1998)+!Control.HasFocus(5051)+!String.IsEmpty(Window(Home).Property(ActeurVideoReset))</autoscroll>-->
 				<pagecontrol>60</pagecontrol>
-				<content>plugin://script.iconmixtools/?action=getcast&casttype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]</content>
+				<content>$VAR[contentPanelActeurs]</content>
 				<resetonlabelchange>true</resetonlabelchange>
 				<itemlayout width="75">
 					<control type="image">
@@ -1722,11 +1722,7 @@
 		<visible>Integer.IsGreater(ListItem.PlayCount,1)</visible>
 	</control>
 </include>
-<variable name="ActeursContent">
-	<value condition="!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]&local="oui"</value>
-	<value condition="String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]</value>
 
-</variable>
 <variable name="doublonvar">
 	<value condition="Integer.IsGreater(ListItem.PlayCount,1)">[COLOR=yellow]$INFO[ListItem.PlayCount, (x,)][/COLOR]</value>
 </variable>
@@ -2562,23 +2558,21 @@
 				<visible>[Container.Content(tvshows)|Container.Content(episodes)]+!String.IsEmpty(Window(Home).Property(NextAired.NextDate))</visible>
 			</control>
 			<control type="group">
-				<posy>115</posy>
-				<posx>-150</posx>
+				<posy>80</posy>
+				<posx>20</posx>
 				<align>center</align>
-
 				<control type="image">
 					<top>-5</top>
 					<width>40</width>
 					<height>40</height>
-
 					<aspectratio>stretch</aspectratio>
 					<texture>flags/explorer.png</texture>
 				</control>
 				<control type="fadelabel">
 					<left>60</left>
-					<width>1090</width>
+					<width>935</width>
 					<height>40</height>
-
+					<align>left</align>
 					<scroll>true</scroll>
 					<scrollout>false</scrollout>
 					<pauseatend>5000</pauseatend>

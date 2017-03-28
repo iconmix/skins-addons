@@ -289,7 +289,7 @@
 				<posx>10</posx>
 				<posy>700</posy>
 				<width>1600</width>
-				<label>DBID=$INFO[Container(50).ListItem.DBID][CR]Type=$INFO[ListItem.DBTYPE][CR]Folder:$INFO[Container(50).ListItem.FolderPath][CR]Serie:$INFO[ListItem.TVShowTitle]</label>
+				<label>NbItems5001:$INFO[Container(5001).NumItems][CR]NbItems5002:$INFO[Container(5002).NumItems][CR]DBID=$INFO[Container(50).ListItem.DBID][CR]SetID=$INFO[ListItem.SetID][CR]Type=$INFO[ListItem.DBTYPE][CR]Folder:$INFO[Container(50).ListItem.FolderPath][CR]Serie:$INFO[ListItem.TVShowTitle]</label>
 			</control>-->
 
 			<control type="label">
@@ -780,6 +780,108 @@
 			<orientation>horizontal</orientation>
 			<preloaditems>0</preloaditems>
 
+			<!--	<itemlayout width="203" height="280">
+			<control type="group">
+			<control type="image">
+			<width>195</width>
+			<height>240</height>
+			<aspectratio scalediffuse="true"  align="center" aligny="center">keep</aspectratio>
+			<bordersize>2</bordersize>
+			<texture diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
+			<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+			</control>
+			<control type="image">
+
+			<top>237</top>
+			<width>195</width>
+			<height>240</height>
+			<aspectratio scalediffuse="true"  align="center" aligny="top">keep</aspectratio>
+			<bordersize>2</bordersize>
+			<texture  flipy="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
+			<colordiffuse>A0FFFFFF</colordiffuse>
+
+			</control>
+
+			</control>
+
+			<control type="group">
+			<posy>100</posy>
+			<posx>-30</posx>
+			<height>50</height>
+
+			<control type="label">
+			<width>250</width>
+			<posx>7</posx>
+			<aligny>center</aligny>
+			<align>center</align>
+			<font>lcdep</font>
+			<textcolor>red</textcolor>
+			<label>$LOCALIZE[31917][CR]$INFO[ListItem.Writer,( , )]</label>
+			<angle>49</angle>
+			</control>
+			<visible>StringCompare(ListItem.Label2,manquant)</visible>
+			</control>
+			</itemlayout>
+
+			<focusedlayout width="203" height="280">
+			<control type="group">
+			<animation type="Focus" reversible="false">
+			<effect type="zoom" center="90,10" start="98" end="115" time="500" tween="bounce" easy="out"  />
+
+
+			</animation>
+			<control type="image">
+			<width>195</width>
+			<height>240</height>
+			<aspectratio scalediffuse="true" align="center" aligny="top">keep</aspectratio>
+			<texture>$INFO[ListItem.Icon]</texture>
+			<bordersize>8</bordersize>
+			<bordertexture border="8">landscape.png</bordertexture>
+			<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+
+			<visible>Control.HasFocus(5002)</visible>
+			</control>
+			<control type="group">
+			<posy>100</posy>
+			<posx>-30</posx>
+			<height>50</height>
+
+			<control type="label">
+			<width>250</width>
+			<posx>7</posx>
+			<aligny>center</aligny>
+			<align>center</align>
+			<font>lcdep</font>
+			<textcolor>yellow</textcolor>
+			<label>$LOCALIZE[31917][CR]$INFO[ListItem.Writer,( , )]</label>
+			<angle>49</angle>
+			</control>
+			<visible>StringCompare(ListItem.Label2,manquant)</visible>
+			</control>
+			</control>
+			<control type="image">
+			<width>195</width>
+			<height>240</height>
+			<aspectratio scalediffuse="true"  align="center" aligny="top">keep</aspectratio>
+			<bordersize>2</bordersize>
+			<texture diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
+			<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+
+			<visible>!Control.HasFocus(5002)</visible>
+			</control>
+			<control type="image">
+			<top>237</top>
+			<width>195</width>
+			<height>240</height>
+			<aspectratio scalediffuse="true"  align="center" flipy="true" aligny="top">keep</aspectratio>
+			<bordersize>2</bordersize>
+			<texture flipy="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
+			<colordiffuse>A0FFFFFF</colordiffuse>
+			<visible>!Control.HasFocus(5002)</visible>
+			</control>
+
+			</focusedlayout>
+			-->
 			<include>VueElementsBoitiersInfo</include>
 
 			<content>$VAR[contentdvinfo]</content>
@@ -869,6 +971,7 @@
 </control>
 
 </control>
+
 
 <include>PanelActeurs</include>
 <include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>

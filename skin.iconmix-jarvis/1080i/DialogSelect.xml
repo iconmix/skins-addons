@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window type="dialog" >
 	<defaultcontrol always="true">3</defaultcontrol>
-	
+
 	<controls>
 		<control type="group">
 			<posx>500</posx>
 			<posy>300</posy>
 			<width>800</width>
-			<height>450</height>	
+			<height>450</height>
 			<animation type="Conditional" condition="StringCompare(Container(3).ListItem.Label2,plein)|StringCompare(Container(6).ListItem.Label2,plein)" reversible="false">
-						<effect type="slide" end="-450" time="10" />
-						<!-- <effect type="rotatey" center="0,240" end="-20" time="10" /> -->
-					</animation>		
+				<effect type="slide" end="-450" time="10" />
+				<!-- <effect type="rotatey" center="0,240" end="-20" time="10" /> -->
+			</animation>
 			<control type="image">
 				<texture background="true" >frames/Dialog_GlassActeur.png</texture>
 				<colordiffuse>BackgroundColor</colordiffuse>
@@ -52,7 +52,7 @@
 					<visible>!IsEmpty(Container(3).ListItem.Icon)</visible>
 				</control>
 
-				
+
 				<control type="label" id="1">
 					<description>Line 1</description>
 					<posx>20</posx>
@@ -66,6 +66,7 @@
 					<label>[B]13406[/B]</label>
 				</control>
 
+
 				<control type="list" id="3">
 					<posx>20</posx>
 					<posy>100</posy>
@@ -75,36 +76,64 @@
 					<onup>3</onup>
 					<ondown>3</ondown>
 					<itemlayout height="38" width="730">
+
 						<control type="label">
-							<width>730</width>
-							<height>38</height>
 							<textcolor>SettingsDetail</textcolor>
+							<left>35</left>
 							<font>comic20</font>
-							<align>center</align>
+							<align>left</align>
 							<aligny>center</aligny>
 							<focusedcolor>ButtonText</focusedcolor>
 							<label>$INFO[ListItem.Label]</label>
 						</control>
+						<control type="image">
+							<aligny>center</aligny>
+							<width>30</width>
+							<texture>buttons/repertoireferme.png</texture>
+							<aspectratio>keep</aspectratio>
+							<visible>SubString(ListItem.Label,>,right)</visible>
+						</control>
+						<control type="image">
+							<aligny>center</aligny>
+							<width>30</width>
+							<texture>buttons/checkvide.png</texture>
+							<aspectratio>keep</aspectratio>
+							<visible>!SubString(ListItem.Label,>,right)</visible>
+						</control>
+
 					</itemlayout>
 					<focusedlayout height="38" width="730">
+
 						<control type="image">
-							<posy>0</posy>
-							<width>730</width>
-							<height>38</height>
 							<align>left</align>
 							<aligny>center</aligny>
 							<texture>ButtonFo.png</texture>
 							<visible>Control.HasFocus(3)</visible>
 						</control>
+						<control type="image">
+							<aligny>center</aligny>
+							<width>30</width>
+							<texture>buttons/repertoireouvert.png</texture>
+							<aspectratio>keep</aspectratio>
+							<visible>Control.HasFocus(3)</visible>
+							<visible>SubString(ListItem.Label,>,right)</visible>
+						</control>
+						<control type="image">
+							<aligny>center</aligny>
+							<width>30</width>
+							<texture>buttons/checkok.png</texture>
+							<aspectratio>keep</aspectratio>
+							<visible>!SubString(ListItem.Label,>,right)</visible>
+						</control>
+
 						<control type="label">
-							<posy>0</posy>
-							<width>730</width>
-							<height>38</height>
 							<textcolor>ButtonText</textcolor>
 							<font>comic20</font>
-							<align>center</align>
+							<left>35</left>
+							<align>left</align>
 							<aligny>center</aligny>
 							<focusedcolor>ButtonText</focusedcolor>
+							<!--- <label>$INFO[ListItem.Label] ($INFO[ListItem.Label2])</label> -->
 							<label>$INFO[ListItem.Label]</label>
 						</control>
 					</focusedlayout>
@@ -121,14 +150,29 @@
 					<itemlayout height="38" width="730">
 
 						<control type="label">
-
 							<textcolor>SettingsDetail</textcolor>
+							<left>35</left>
 							<font>comic20</font>
-							<align>center</align>
+							<align>left</align>
 							<aligny>center</aligny>
 							<focusedcolor>ButtonText</focusedcolor>
 							<label>$INFO[ListItem.Label]</label>
 						</control>
+						<control type="image">
+							<aligny>center</aligny>
+							<width>30</width>
+							<texture>buttons/repertoireferme.png</texture>
+							<aspectratio>keep</aspectratio>
+							<visible>SubString(ListItem.Label,>,right)</visible>
+						</control>
+						<control type="image">
+							<aligny>center</aligny>
+							<width>30</width>
+							<texture>buttons/checkvide.png</texture>
+							<aspectratio>keep</aspectratio>
+							<visible>!SubString(ListItem.Label,>,right)</visible>
+						</control>
+
 					</itemlayout>
 					<focusedlayout height="38" width="730">
 
@@ -138,10 +182,27 @@
 							<texture>ButtonFo.png</texture>
 							<visible>Control.HasFocus(6)</visible>
 						</control>
+						<control type="image">
+							<aligny>center</aligny>
+							<width>30</width>
+							<texture>buttons/repertoireouvert.png</texture>
+							<aspectratio>keep</aspectratio>
+							<visible>Control.HasFocus(6)</visible>
+							<visible>SubString(ListItem.Label,>,right)</visible>
+						</control>
+						<control type="image">
+							<aligny>center</aligny>
+							<width>30</width>
+							<texture>buttons/checkok.png</texture>
+							<aspectratio>keep</aspectratio>
+							<visible>!SubString(ListItem.Label,>,right)</visible>
+						</control>
+
 						<control type="label">
 							<textcolor>ButtonText</textcolor>
 							<font>comic20</font>
-							<align>center</align>
+							<left>35</left>
+							<align>left</align>
 							<aligny>center</aligny>
 							<focusedcolor>ButtonText</focusedcolor>
 							<!--- <label>$INFO[ListItem.Label] ($INFO[ListItem.Label2])</label> -->
@@ -166,7 +227,7 @@
 				<texturenofocus colordiffuse="FF7F7F7F">buttons/obtenirplus.png</texturenofocus>
 				<align>right</align>
 				<aligny>center</aligny>
-        <onright condition="!String.IsEmpty(Container(6).ListItem.Label)">6</onright>
+				<onright condition="!String.IsEmpty(Container(6).ListItem.Label)">6</onright>
 				<onright>3</onright>
 				<onup>7</onup>
 				<ondown>7</ondown>
@@ -203,7 +264,7 @@
 		<include>Global_Weather</include>-->
 		<!--<include>Global_Time</include>
 		<include>Global_MediaOverlay</include>
-		<include>Setting_Heading</include>-->
-		<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
+		<include>Setting_Heading</include>
+		<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>-->
 	</controls>
 </window>

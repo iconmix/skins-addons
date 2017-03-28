@@ -12,6 +12,7 @@ import unicodedata
 import urlparse
 from xml.dom.minidom import parse
 import json
+import sqlite3
     
 try:
     to_unicode = unicode
@@ -282,14 +283,14 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None):
                   str_response = response.read().decode('utf-8')
                except :
                   str_response=''
-                  logMsg("Resultat  URL introuvable --> " + str(query_url),0)
+                  logMsg("Resultat  URL introuvable 1" + str(query_url),0)
 
                if str_response :
                     try : 
                          json_data = json.loads(str_response)
                     except:
                          json_data=""
-                         logMsg("Resultat  URL vide --> " + str(query_url),0)
+                         logMsg("Resultat  URL vide 1--> " + str(query_url),0)
                if json_data:
                   Rspcollection=json_data.get("belongs_to_collection")
                   if Rspcollection: IDcollection=Rspcollection["id"]
@@ -302,14 +303,14 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None):
                        str_response = response.read().decode('utf-8')
                      except :
                        str_response=''
-                       logMsg("Resultat  URL introuvable --> " + str(query_url),0)
+                       logMsg("Resultat  URL introuvable 2--> " + str(query_url),0)
 
                      if str_response :
                        try : 
                               json_data = json.loads(str_response)
                        except:
                               json_data=""
-                              logMsg("Resultat  URL vide --> " + str(query_url),0)
+                              logMsg("Resultat  URL vide 2--> " + str(query_url),0)
                        #logMsg("Resultat sortie  Collection--> " + str(json_data),0)
                        if json_data:
                          Rspcollection=json_data.get("parts")
@@ -565,14 +566,14 @@ def getallepisodesetacteurs(ItemIdx=None,KodiId=None,savepath=None,NbKodi=None,S
            str_response = response.read().decode('utf-8')
          except :
            str_response=''
-           logMsg("Resultat  URL introuvable --> " + str(query_url),0)
+           logMsg("Resultat  URL introuvable 3--> " + str(query_url),0)
 
          if str_response :
           try:
             json_data = json.loads(str_response)
           except:
             json_data=""
-            logMsg("Resultat  URL vide --> " + str(query_url),0)
+            logMsg("Resultat  URL vide 3--> " + str(query_url),0)
          else: 
           if cpt>0: break
           
@@ -597,13 +598,13 @@ def getallepisodesetacteurs(ItemIdx=None,KodiId=None,savepath=None,NbKodi=None,S
                                str_responseCasting = responseCasting.read().decode('utf-8')
                               except :
                                str_responseCasting=''
-                               #logMsg("Resultat  URL introuvable --> " + str(query_url),0)
+                               #logMsg("Resultat  URL introuvable 4--> " + str(query_url),0)
                               if str_responseCasting:
                                    try :
                                         json_data = json.loads(str_responseCasting) 
                                    except:
                                         json_data=""
-                                        logMsg("Resultat  URL vide --> " + str(query_url),0)
+                                        logMsg("Resultat  URL vide 4--> " + str(query_url),0)
                                    if (json_data):
                                         EpisodesEtcasting["cast"]=json_data.get("cast")
                                         logMsg("Resultat  CAST --> " + str(json_data),0)
@@ -686,14 +687,14 @@ def getallepisodes(ItemIdx=None,KodiId=None,savepath=None,NbKodi=None,ShowBusy=N
            str_response = response.read().decode('utf-8')
          except :
            str_response=''
-           logMsg("Resultat  URL introuvable --> " + str(query_url),0)
+           logMsg("Resultat  URL introuvable 5--> " + str(query_url),0)
 
          if str_response :
           try:
             json_data = json.loads(str_response)
           except:
             json_data=""
-            logMsg("Resultat  URL vide --> " + str(query_url),0)
+            logMsg("Resultat  URL vide 5--> " + str(query_url),0)
          else:
          	json_data=""
           
@@ -1020,14 +1021,14 @@ def getFilmsTv(DbType=None,Acteur=None):
             str_response = response.read().decode('utf-8')
         except :
             str_response=''
-            logMsg("Resultat  URL introuvable --> " + str(query_url),0)
+            logMsg("Resultat  URL introuvable 6",0)
 
         if str_response :
             try:
                 json_data = json.loads(str_response)
             except:
                 json_data=""
-                logMsg("Resultat  URL vide --> " + str(query_url),0)
+                logMsg("Resultat  URL vide 6--> " + str(query_url),0)
        
                 
         if json_data:
@@ -1050,15 +1051,15 @@ def getFilmsTv(DbType=None,Acteur=None):
                                           str_response = response.read().decode('utf-8')
                                         except :
                                           str_response=''
-                                          logMsg("Resultat  URL introuvable --> " + str(query_url),0)
+                                          logMsg("Resultat  URL introuvable 7 --> " + str(query_url),0)
 
                                         if str_response :
-                                          logMsg("Chercher acteur OK--> " + str(ActeurId),0)
+                                          #logMsg("Chercher acteur OK--> " + str(ActeurId),0)
                                           try:
                                               json_data = json.loads(str_response)
                                           except:
                                               json_data=""
-                                              logMsg("Resultat  URL vide --> " + str(query_url),0)
+                                              logMsg("Resultat  URL vide 7--> " + str(query_url),0)
                                               
                                         #if json_data:
                                              #logMsg("Recuperer acteur OK--> " + str(ActeurId)+"/"+str(json_data),0)
@@ -1120,14 +1121,14 @@ def getFilmsTv(DbType=None,Acteur=None):
                               
     xbmcplugin.endOfDirectory(int(sys.argv[1])) 
                
-def getRealisateur(DbId=None,realisateur=None):
+def getRealisateur(CheminType="",DbId=None,realisateur=None):
     allInfo = []
     realisateurId=""
     savepath=""     
     
-    if DbId and realisateur!="None": 
+    if DbId and realisateur: 
         #logMsg("DBID et Real --> " + str(DbId)+"/"+str(realisateur),0)     
-        savepath=ADDON_DATA_PATH+"/realisateurs/realisateur"+str(DbId)+".jpg"
+        savepath=ADDON_DATA_PATH+"/"+CheminType+"s/"+CheminType+str(DbId)+".jpg"
         if xbmcvfs.exists(savepath):
              #logMsg("retour existant --> " + str(savepath),0)
              return(savepath)
@@ -1142,14 +1143,14 @@ def getRealisateur(DbId=None,realisateur=None):
                  str_response = response.read().decode('utf-8')
              except :
                  str_response=''
-                 logMsg("Resultat  URL introuvable --> " + str(query_url),0)
+                 logMsg("Resultat  URL introuvable 8 ",0)
 
              if str_response :
                  try:
                      json_data = json.loads(str_response)
                  except:
                      json_data=""
-                     logMsg("Resultat  URL vide --> " + str(query_url),0)
+                     logMsg("Resultat  URL vide 8--> " + str(query_url),0)
             
                      
              if json_data:
@@ -1163,7 +1164,7 @@ def getRealisateur(DbId=None,realisateur=None):
                          Poster="http://image.tmdb.org/t/p/original"+str(Poster)
                          query_url=Poster
                          try:                           
-                           savepath=ADDON_DATA_PATH+"/realisateurs/realisateur"+str(DbId)+".jpg"
+                           savepath=ADDON_DATA_PATH+"/"+CheminType+"s/"+CheminType+str(DbId)+".jpg"
                            erreur=DirStru(savepath)
                            #logMsg("URL --> " + str(query_url),0)
                            urllib.urlretrieve(query_url,savepath)
@@ -1171,7 +1172,7 @@ def getRealisateur(DbId=None,realisateur=None):
                          except :
                            str_response=''
                            savepath="DefaultActor.png"
-                           logMsg("Resultat  URL introuvable --> " + str(query_url),0)
+                           logMsg("Resultat  URL introuvable 9--> " + str(query_url),0)
              return(savepath)            
                            
                    
@@ -1192,14 +1193,14 @@ def getTrailer(ID=None,DbType=None):
                str_response = response.read().decode('utf-8')
           except :
                str_response=''
-               logMsg("Resultat  URL introuvable --> " + str(query_url),0)
+               logMsg("Resultat  URL introuvable 10--> " + str(query_url),0)
           if str_response :
                try : 
                 json_data = json.loads(str_response)
                 Donnees=json_data.get("results")
                except:
                 json_data=""
-                logMsg("Resultat  URL vide --> " + str(query_url),0)
+                logMsg("Resultat  URL vide 10--> " + str(query_url),0)
           if DbType!="movie":
                query_url ="https://api.themoviedb.org/3/tv/%s/videos?api_key=67158e2af1624020e34fd893c881b019&language=en" % (ID.encode("utf-8"))
           else:
@@ -1210,14 +1211,14 @@ def getTrailer(ID=None,DbType=None):
                str_response = response.read().decode('utf-8')
           except :
                str_response=''
-               logMsg("Resultat  URL introuvable --> " + str(query_url),0)
+               logMsg("Resultat  URL introuvable 11--> " + str(query_url),0)
           if str_response :
                try : 
                 json_data = json.loads(str_response)
                 Donnees=Donnees+json_data.get("results")
                except:
                 json_data=""
-                logMsg("Resultat  URL vide --> " + str(query_url),0)
+                logMsg("Resultat  URL vide 11--> " + str(query_url),0)
           
           if Donnees:
                #logMsg("Resultat  URL vide --> " + str(Donnees),0)
@@ -1250,13 +1251,13 @@ def getRuntime(itemId=None,TypeID=None):
        str_response = response.read().decode('utf-8')
       except :
        str_response=''
-       logMsg("Resultat  URL introuvable --> " + str(query_url),0)
+       logMsg("Resultat  URL introuvable 12--> " + str(query_url),0)
       if str_response :
           try : 
                json_data = json.loads(str_response)
           except:
                json_data=""
-               logMsg("Resultat  URL vide --> " + str(query_url),0)
+               logMsg("Resultat  URL vide 12--> " + str(query_url),0)
     
     # dump response data in a readable format
       if json_data:
@@ -1283,13 +1284,13 @@ def get_externalID(itemId=None,ismovie=None):
         str_response = response.read().decode('utf-8')
    except :
         str_response=''
-        logMsg("Resultat  URL introuvable --> " + str(query_url),0)
+        logMsg("Resultat  URL introuvable 13",0)
    if str_response :
       try : 
                json_data = json.loads(str_response)
       except:
                json_data=""
-               logMsg("Resultat  URL vide --> " + str(query_url),0)
+               logMsg("Resultat  URL vide 13",0)
       
       if json_data:
          if ismovie!="movie": 
@@ -1494,3 +1495,21 @@ def try_decode(text, encoding="utf-8"):
         return text
  
 
+def sql_read(itemID=None):
+     
+     #con = sqlite3.connect('c:/Users/HTPC/AppData/Roaming/Kodi/userdata/Database/MyVideos107.db')
+     con = sqlite3.connect('c:/Users/Thierry/AppData/Roaming/Kodi/userdata/Database/MyVideos99.db') 
+     cursor = con.cursor()
+     #cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+     #cursor.execute("SELECT strSet FROM sets;")
+
+     # tables = version, bookmark, settings, stacktimes, genre, genre_link, country, country_link, movie, actor, actor_link, 
+     #          director_link, writer_link, path, files, tvshow, episode, tvshowlinkpath, movielinktvshow, studio, studio_link, 
+     #          musicvideo, streamdetails, sets, seasons, art, tag, tag_link, rating, uniqueid
+
+     #utils.logMsg('backend Sql SETS='+str(cursor.fetchall()),0)
+
+     cursor.execute("SELECT * FROM actor WHERE actor_id='%d';" %(int(itemID)))
+     logMsg('backend Sql SET %s=' %(str(itemID))+str(cursor.fetchall()),0)
+     con.close()
+      

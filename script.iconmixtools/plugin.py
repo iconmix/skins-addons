@@ -247,6 +247,8 @@ class Main:
         self.windowhome.clearProperty('IconMixExtraFanart') 
         self.windowhome.clearProperty('IconMixEpSa')
         self.windowhome.clearProperty('IconMixSaga')
+        self.windowhome.clearProperty('IconMixDirector')
+        self.windowhome.clearProperty('IconMixActor')
         
         
         utils.logMsg('Service en cours...',0)
@@ -258,7 +260,7 @@ class Main:
                 else : 
                     self.selecteditem = xbmc.getInfoLabel("ListItem.DBID")
                     self.DBTYPE=xbmc.getInfoLabel("ListItem.DBTYPE")  
-                    utils.logMsg('Type :'+str(self.DBTYPE),0)                  
+                    #utils.logMsg('Type :'+str(self.DBTYPE),0)                  
                 if not self.selecteditem :
                     self.windowhome.clearProperty('IconMixExtraFanart')
                     #self.windowhome.clearProperty('IconMixEpSa')
@@ -300,26 +302,35 @@ class Main:
                                TvSh=xbmc.getInfoLabel("ListItem.TVShowTitle") 
                                TvSe=xbmc.getInfoLabel("ListItem.Season")
                                TvId=xbmc.getInfoLabel("ListItem.DBID")
-                               #utils.logMsg('Saison episodes = DBID:['+str(TvSh)+"/"+str(TvSe)+"]"+ xbmc.getInfoLabel("ListItem.DBID")+' Saison :'+xbmc.getInfoLabel("ListItem.Season")+' IMDnumber :'+xbmc.getInfoLabel("ListItem.IMDBNumber") ,0)
+                              # utils.logMsg('Saison episodes = DBID:['+str(TvSh)+"/"+str(TvSe)+"]"+ xbmc.getInfoLabel("ListItem.DBID")+' Saison :'+xbmc.getInfoLabel("ListItem.Season")+' IMDnumber :'+xbmc.getInfoLabel("ListItem.IMDBNumber") ,0)
                                #self.EpSa=utils.getepisodes("tt"+xbmc.getInfoLabel("ListItem.IMDBNumber"),xbmc.getInfoLabel("ListItem.Season"))
                                if TvId and TvSe and TvSh :
                                  if TvSe!=self.TvSeason or TvSh!=self.TvShow : 
                                    self.windowhome.clearProperty('IconMixEpSa')
                                    self.EpSa=utils.getepisodes(TvId,int(TvSe),xbmc.getInfoLabel("ListItem.DBTYPE"))
                                    if self.EpSa>0: 
+                                     #utils.logMsg('Saison episodes = DBID:['+str(TvSh)+"/"+str(TvSe)+"]"+ xbmc.getInfoLabel("ListItem.DBID")+' Saison :'+xbmc.getInfoLabel("ListItem.Season")+' IMDnumber :'+xbmc.getInfoLabel("ListItem.IMDBNumber") ,0)
+
                                      self.windowhome.setProperty('IconMixEpSa',str(self.EpSa))
                                      self.TvShow=TvSh
                                      self.TvSeason=TvSe
+                                   else:
+                                        self.windowhome.clearProperty('IconMixEpSa')
+                                        self.TvShow=""
+                                        self.TvSeason=""
                                else : self.windowhome.clearProperty('IconMixEpSa')
-                          if self.DBTYPE=="director":
+                          if (self.DBTYPE=="director" or self.DBTYPE=="actor") and "Default" in xbmc.getInfoLabel("ListItem.Icon") :
                                #utils.logMsg('Directeurs.',0)
-                               self.windowhome.setProperty('IconMixDirector',str(utils.getRealisateur(xbmc.getInfoLabel("ListItem.DBID"),realisateur=xbmc.getInfoLabel("ListItem.label"))))
+                               #utils.sql_read(xbmc.getInfoLabel("ListItem.DBID"))
+                               if self.DBTYPE=="director":
+                                   self.windowhome.setProperty('IconMixDirector',str(utils.getRealisateur('realisateur',xbmc.getInfoLabel("ListItem.DBID"),realisateur=xbmc.getInfoLabel("ListItem.label"))))
+                               else:
+                                   self.windowhome.setProperty('IconMixDirector',str(utils.getRealisateur('acteur',xbmc.getInfoLabel("ListItem.DBID"),realisateur=xbmc.getInfoLabel("ListItem.label"))))
                               
                           else : 
-                              self.windowhome.clearProperty('IconMixEpSa')
+                              
                               self.windowhome.clearProperty('IconMixDirector')
-                              self.TvShow=""
-                              self.TvSeason=""
+                              
                       else : 
                          self.windowhome.clearProperty('IconMixEpSa')
                          self.TvShow=""

@@ -510,12 +510,12 @@
 				</control>
 			</control>
 		</control>
-		<!-- --
+		<!-- -->
 		<control type="label">
 				<posx>10</posx>
 				<posy>10</posy>
 				<width>1600</width>
-				<label>1999:$INFO[Container(1999).NumItems][CR]TestEnd:$INFO[Window(10025).Property(DurationTools)]TestEnd:$INFO[Window(10025).Property(DurationToolsEnd)][CR]Title:$INFO[ListItem.Title][CR]Label:$INFO[ListItem.Label][CR]Label2:$INFO[ListItem.Label2][CR]DBType:$INFO[ListItem.DBType][CR]Content:$INFO[Container.Content][CR]Content:$INFO[Container.FolderPath][CR]Duration:$INFO[ListItem.Duration]</label>
+				<label>1999:$INFO[Container(1999).NumItems][CR]Title:$INFO[ListItem.Title][CR]Label:$INFO[ListItem.Label][CR]Label2:$INFO[ListItem.Label2][CR]DBType:$INFO[ListItem.DBType][CR]Content:$INFO[Container.Content][CR]Folder:$INFO[Container.FolderPath][CR]</label>
 			</control>-->
 
 		<include>LabelFlagsCommon</include>

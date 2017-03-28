@@ -66,7 +66,7 @@
 					<label>[B]13406[/B]</label>
 				</control>
 
-				<control type="list" id="3">
+			<control type="list" id="3">
 					<posx>20</posx>
 					<posy>100</posy>
 					<width>730</width>
@@ -75,42 +75,70 @@
 					<onup>3</onup>
 					<ondown>3</ondown>
 					<itemlayout height="38" width="730">
+
 						<control type="label">
-							<width>730</width>
-							<height>38</height>
 							<textcolor>SettingsDetail</textcolor>
+							<left>35</left>
 							<font>comic20</font>
-							<align>center</align>
+							<align>left</align>
 							<aligny>center</aligny>
 							<focusedcolor>ButtonText</focusedcolor>
 							<label>$INFO[ListItem.Label]</label>
 						</control>
+						<control type="image">
+							<aligny>center</aligny>
+							<width>30</width>
+							<texture>buttons/repertoireferme.png</texture>
+							<aspectratio>keep</aspectratio>
+							<visible>SubString(ListItem.Label,>,right)</visible>
+						</control>
+						<control type="image">
+							<aligny>center</aligny>
+							<width>30</width>
+							<texture>buttons/checkvide.png</texture>
+							<aspectratio>keep</aspectratio>
+							<visible>!SubString(ListItem.Label,>,right)</visible>
+						</control>
+
 					</itemlayout>
 					<focusedlayout height="38" width="730">
+
 						<control type="image">
-							<posy>0</posy>
-							<width>730</width>
-							<height>38</height>
 							<align>left</align>
 							<aligny>center</aligny>
 							<texture>ButtonFo.png</texture>
 							<visible>Control.HasFocus(3)</visible>
 						</control>
+						<control type="image">
+							<aligny>center</aligny>
+							<width>30</width>
+							<texture>buttons/repertoireouvert.png</texture>
+							<aspectratio>keep</aspectratio>
+							<visible>Control.HasFocus(3)</visible>
+							<visible>SubString(ListItem.Label,>,right)</visible>
+						</control>
+						<control type="image">
+							<aligny>center</aligny>
+							<width>30</width>
+							<texture>buttons/checkok.png</texture>
+							<aspectratio>keep</aspectratio>
+							<visible>!SubString(ListItem.Label,>,right)</visible>
+						</control>
+
 						<control type="label">
-							<posy>0</posy>
-							<width>730</width>
-							<height>38</height>
 							<textcolor>ButtonText</textcolor>
 							<font>comic20</font>
-							<align>center</align>
+							<left>35</left>
+							<align>left</align>
 							<aligny>center</aligny>
 							<focusedcolor>ButtonText</focusedcolor>
+							<!--- <label>$INFO[ListItem.Label] ($INFO[ListItem.Label2])</label> -->
 							<label>$INFO[ListItem.Label]</label>
 						</control>
 					</focusedlayout>
 				</control>
 
-				<control type="list" id="6">
+			<control type="list" id="6">
 					<posx>20</posx>
 					<posy>100</posy>
 					<width>730</width>
@@ -121,14 +149,29 @@
 					<itemlayout height="38" width="730">
 
 						<control type="label">
-
 							<textcolor>SettingsDetail</textcolor>
+							<left>35</left>
 							<font>comic20</font>
-							<align>center</align>
+							<align>left</align>
 							<aligny>center</aligny>
 							<focusedcolor>ButtonText</focusedcolor>
 							<label>$INFO[ListItem.Label]</label>
 						</control>
+						<control type="image">
+							<aligny>center</aligny>
+							<width>30</width>
+							<texture>buttons/repertoireferme.png</texture>
+							<aspectratio>keep</aspectratio>
+							<visible>SubString(ListItem.Label,>,right)</visible>
+						</control>
+						<control type="image">
+							<aligny>center</aligny>
+							<width>30</width>
+							<texture>buttons/checkvide.png</texture>
+							<aspectratio>keep</aspectratio>
+							<visible>!SubString(ListItem.Label,>,right)</visible>
+						</control>
+
 					</itemlayout>
 					<focusedlayout height="38" width="730">
 
@@ -138,10 +181,27 @@
 							<texture>ButtonFo.png</texture>
 							<visible>Control.HasFocus(6)</visible>
 						</control>
+						<control type="image">
+							<aligny>center</aligny>
+							<width>30</width>
+							<texture>buttons/repertoireouvert.png</texture>
+							<aspectratio>keep</aspectratio>
+							<visible>Control.HasFocus(6)</visible>
+							<visible>SubString(ListItem.Label,>,right)</visible>
+						</control>
+						<control type="image">
+							<aligny>center</aligny>
+							<width>30</width>
+							<texture>buttons/checkok.png</texture>
+							<aspectratio>keep</aspectratio>
+							<visible>!SubString(ListItem.Label,>,right)</visible>
+						</control>
+
 						<control type="label">
 							<textcolor>ButtonText</textcolor>
 							<font>comic20</font>
-							<align>center</align>
+							<left>35</left>
+							<align>left</align>
 							<aligny>center</aligny>
 							<focusedcolor>ButtonText</focusedcolor>
 							<!--- <label>$INFO[ListItem.Label] ($INFO[ListItem.Label2])</label> -->
