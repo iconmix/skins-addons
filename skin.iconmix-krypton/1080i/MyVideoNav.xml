@@ -981,8 +981,8 @@
 
 		</control>
 
-		<!-- <include condition="Skin.HasSetting(CacheFond)">vueexperimentale</include> -->
-		<include>vueexperimentale</include>
+		 <include condition="Skin.HasSetting(CacheFond)">vueexperimentale</include> 
+		<!--<include>vueexperimentale</include>-->
 
 		<!------------------------------------------------- ACTEURS et ROLES---------------------------------------->
 	<include>PanelActeurs</include>
