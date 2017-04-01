@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window id="2006">
-	<!---- apparait à INFO quand lecture en cours Musique-->
-	<!--
-	<onload>AlarmClock(MusicInfoRotation,ActivateWindow(1156),00:15,silent,loop)</onload>
-	<onunload>CancelAlarm(MusicInfoRotation,true)</onunload>
-	-->
-	<!-- <onload condition="Skin.HasSetting(VisBgArtistSlideshow)">RunScript(script.artistslideshow)</onload> -->
 	<onload condition="System.HasAddon(script.artistslideshow)">RunScript(script.artistslideshow, daemon=True)</onload>
-	<!-- <onload condition="Skin.HasSetting(LyricPath)">RunScript(Skin.String(LyricPath))</onload> 
-	<onload condition="Skin.HasSetting(LyricPathActive)+!String.IsEmpty(Skin.String(LyricPath))">RunScript($INFO[Skin.String(LyricPath)])</onload>-->
 	<defaultcontrol>-</defaultcontrol>
 	<controls>
 
@@ -44,7 +36,8 @@
 
 		<control type="group">
 			<posy>360</posy>
-			<visible>Player.ShowInfo + !Window.IsVisible(musicosd)</visible>
+			<!-- <visible>Player.ShowInfo + !Window.IsVisible(musicosd)</visible> -->
+			<visible>!Window.IsVisible(musicosd)+[Skin.HasSetting(MusicSongInfoOverlay)|Player.ShowInfo]</visible>
 			<animation type="Visible">
 				<effect type="fade" time="200" start="0" end="100" />
 				<effect type="slide" time="600" start="0,151" end="0,0" easing="out" tween="cubic" />
@@ -53,8 +46,6 @@
 				<effect type="fade" time="200" start="100" end="0" />
 				<effect type="slide" time="600" start="0,0" end="0,151" easing="out" tween="cubic" />
 			</animation>
-			<!--<animation effect="slide" start="0,0" end="0,300" time="600" tween="cubic" easing="out" delay="8000" condition="!Control.IsVisible(1555)+System.IdleTime(2)" >Conditional</animation>-->
-
 			<control type="image">
 				<posx>0</posx>
 				<posy>460</posy>
@@ -116,9 +107,6 @@
 				<visible>String.IsEmpty(Window(Home).Property(SkinHelper.Player.Music.ArtistThumb))|String.IsEmpty(Window(Home).Property(SkinHelper.Player.Music.Banner))</visible>
 			</control>
 
-
-
-
 			<control type="fadelabel">
 				<posx>330</posx>
 				<posy>575</posy> <!-- -103 -->
@@ -131,44 +119,7 @@
 				<textcolor>80C2C4C3</textcolor>
 			</control>
 
-
-
 			<!---------- ----------------------->
-			<!-- telex debug --
-			<control type="label">
-			<posx>324</posx>
-			<posy>300</posy>
-			<width>650</width>
-			<height>24</height>
-			<align>center</align>
-			<aligny>center</aligny>
-			<font>METF_TitleTextLarge</font>
-			<label>*$INFO[Control.GetLabel(14)]*</label>
-			<textcolor>80C2C4C3</textcolor>
-			</control>
-			<control type="label">
-			<posx>324</posx>
-			<posy>350</posy>
-			<width>650</width>
-			<height>24</height>
-			<align>center</align>
-			<aligny>center</aligny>
-			<font>METF_TitleTextLarge</font>
-			<label>*$INFO[Container(15).NumPages]*</label>
-			<textcolor>80C2C4C3</textcolor>
-			</control>
-			<control type="label">
-			<posx>324</posx>
-			<posy>380</posy>
-			<width>650</width>
-			<height>24</height>
-			<align>center</align>
-			<aligny>center</aligny>
-			<font>METF_TitleTextLarge</font>
-			<label>*$INFO[Container(15).CurrentPage]*</label>
-			<textcolor>80C2C4C3</textcolor>
-			</control>
-			-->
 			<control type="label" id="1555">
 				<posx>324</posx>
 				<posy>380</posy>
@@ -180,7 +131,6 @@
 				<label></label>
 				<visible>String.StartsWith(Control.GetLabel(14),0)|Container(15).HasNext| [Integer.IsGreater(MusicPlayer.Time,1) + !Integer.IsGreater(MusicPlayer.Time,11)]</visible>
 			</control>
-
 
 			<!--- --------------------------------------------->
 
@@ -255,7 +205,6 @@
 				<visible>!String.IsEmpty(Window(Home).Property(SkinHelper.Player.Music.ArtistThumb))</visible>
 			</control>
 
-
 			<control type="fadelabel">
 				<posx>330</posx>
 				<posy>612</posy>
@@ -268,7 +217,6 @@
 				<font>lcdtime</font>
 				<label>[COLOR=white]$INFO[MusicPlayer.Title][/COLOR]</label>
 			</control>
-
 
 			<control type="fadelabel">
 				<posx>332</posx>
@@ -384,29 +332,6 @@
 			<!--<include>Global_Time</include>-->
 			<include>NextTracksPlaylist_Content</include>
 		</control>
-		<!--
-		<control type="group">
-			<visible>Player.ShowInfo + Skin.HasSetting(ShowMusicTime) + ![Window.IsVisible(musicosd) | Window.IsVisible(seekbar)]</visible>
-			<animation type="WindowOpen" reversible="false">
-				<effect type="fade" end="100" time="0" />
-				<effect type="fade" end="100" delay="280" tween="cubic" time="240" />
-				<effect type="slide" start="600,0" end="0" delay="280" tween="cubic" time="560" />
-			</animation>
-			<control type="group">
-
-				<visible>Player.ShowInfo + !Window.IsVisible(musicosd)</visible>
-				<animation type="Visible">
-					<effect type="fade" time="200" start="0" end="100" />
-					<effect type="slide" time="600" start="0,151" end="0,0" easing="out" tween="cubic" />
-				</animation>
-				<animation type="Hidden">
-					<effect type="fade" time="200" start="100" end="0" />
-					<effect type="slide" time="600" start="0,0" end="0,151" easing="out" tween="cubic" />
-				</animation>
-				<include>NextTracksPlaylist_Content</include>
-			</control>
-
-		</control>
-		-->
+		
 	</controls>
 </window>

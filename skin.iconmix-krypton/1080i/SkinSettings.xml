@@ -795,14 +795,14 @@
 					<control type="image" id="902">
 						<include>Settings_Line</include>
 					</control>
-				
+				-->
 					<control type="radiobutton" id="903">
 						<include>SettingsLabel</include>
 						<label>$LOCALIZE[31057]</label>
 						<onclick>Skin.ToggleSetting(MusicSongInfoOverlay)</onclick>
 						<selected>Skin.HasSetting(MusicSongInfoOverlay)</selected>
 					</control>
-					-->
+					
 			
 					
 					

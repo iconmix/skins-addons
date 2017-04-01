@@ -611,7 +611,7 @@
 <control type="group"> <!-- multi langues -->
 	<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1))+!String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
 
-	<width>290</width>
+	<width>350</width>
 	<height>80</height>
 
 
@@ -2385,6 +2385,9 @@
 </include>
 <include name="MediaInfoGroup2">
 	<control type="group">
+		<width>1920</width>
+		<posx>0</posx>
+		<align>center</align>
 		<include>Animation_FadedByMenu</include>
 				<include>Animation_CommonFade</include>
 				<visible>!String.Contains(Container.FolderPath,plugin)</visible>
@@ -2392,9 +2395,11 @@
 				<include>VisibleIfNotMovieSet</include> 
 		<!-- Video Resolution -->
 			<control type="grouplist"> <!-- resolution +  Aspect-->
-				<posx>500</posx>
+				<!-- <posx>500</posx> -->
 				<posy>1005</posy>
-				<width>750</width>
+				<posx>-150</posx>
+				<width>1920</width>
+				<!--<width>950</width> -->
 				<height>150</height>
 				<align>center</align>
 				<itemgap>2</itemgap>
@@ -2819,6 +2824,7 @@
 				</control>
 
 			</control>
+			
 	<control type="grouplist">
 		<posx>500</posx>
 		<posy>935</posy>

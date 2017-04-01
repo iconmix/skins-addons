@@ -65,8 +65,9 @@ def setJSON(method,params):
     return jsonobject
 
 # ------------------------------------SAGAS--------------------------------------------------------------    
-  
-def CheckSaga(itemId=None):
+
+    
+def CheckSaga(itemId=None,Statique=None):
     allMovies = []
     TitreSaga=""
     TitreKodi=""
@@ -113,11 +114,12 @@ def CheckSaga(itemId=None):
        savepath=ADDON_DATA_PATH+"/collections/saga"+str(itemId).encode("utf-8")
       
        
-       xbmcplugin.setContent(int(sys.argv[1]), 'movies')
+       if not Statique:
+          xbmcplugin.setContent(int(sys.argv[1]), 'movies')
        savepath=ADDON_DATA_PATH+"/collections/saga"+str(itemId).encode("utf-8")
        
        json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"movies": {"properties":["title","genre","year","rating","director","trailer","tagline","plot","plotoutline","originaltitle","lastplayed","playcount","writer","studio","mpaa","cast","country","imdbnumber","runtime","set","showlink","streamdetails","top250","votes","fanart","thumbnail","file","sorttitle","resume","setid","dateadded","tag","art"]} }' %(int(itemId)))
-    #logMsg("VideoLibrary.GetMovieSetDetails  --> "+str(json_result),0)
+       #logMsg("VideoLibrary.GetMovieSetDetails  --> "+str(json_result),0)
 
        for item in json_result.get("movies"): 
           ImdbItem.append(item.get("imdbnumber"))
@@ -125,59 +127,65 @@ def CheckSaga(itemId=None):
        for valeur in ImdbItem:
           Compteur[valeur] += 1
 
-       #logMsg("Imdbitem  --> "+str(Compteur["tt0078748"])+"/"+str(ImdbItem)+"/"+str(Compteur),0)  
    
     
        for item in json_result.get("movies"):
-          #txx = xbmcgui.ListItem(label=item["label"],label2=item["set"],iconImage=item["thumbnail"]) 
-          txx = xbmcgui.ListItem(item["label"]) 
+          txx = xbmcgui.ListItem(label=item["label"],path=item["file"])
           
-          
-          #properties = item.get("extraproperties",{})
-         #logMsg("item  --> "+str(item.get("runtime"))+"/"+str(item.get("duration"))+"/"+str(item.get("movieid"))+"/"+str(properties),0)
+        
           item["DBID"]=item.get("movieid")          
-              
-          Audio=item["streamdetails"]["audio"]
-          i=0
-          if Audio:
-            while i<len(Audio):
-              txx.addStreamInfo('audio', Audio[i])
-              i=i+1
-            #logMsg("audio  --> "+str(Audio),0)
-            
-          Audio=item["streamdetails"]["video"]
-          i=0
-          if Audio:
-            while i<len(Audio):
-              txx.addStreamInfo('video', Audio[i])
-              i=i+1
-            #logMsg("video  --> "+str(Audio),0)
           
-          Audio=item["streamdetails"]["subtitle"]
-          i=0
+    
+          Audio=item["streamdetails"]["audio"]
+          i=1
           if Audio:
-            while i<len(Audio):
-              txx.addStreamInfo('subtitle', Audio[i])
-              i=i+1
-            #logMsg("subtitle  --> "+str(Audio),0)
+               #wvideonav = xbmcgui.Window(10025)
+               #wvideonav.getControl(999)
+               
+               for AudioElement in Audio:
+                    txx.setProperty('AudioLanguage.%d' %(i), AudioElement["language"])
+                    txx.setProperty('AudioChannels.%d' %(i), str(AudioElement["channels"]))
+                    txx.setProperty('AudioCodec.%d' %(i), AudioElement["codec"])
+                    
+                    i=i+1
+    
+           
+          Video=item["streamdetails"]["video"]
+          i=0
+          Codec=""
+          if Video:
+            for VideoItem in Video:
+               txx.setProperty('VideoCodec', VideoItem["codec"]) 
+               
+               
+          Subtitles=item["streamdetails"]["subtitle"]
+          i=1
+          
+          if Subtitles:
+               for SubtitleElement in Subtitles:
+                    txx.setProperty('SubtitleLanguage.%d' %(i), SubtitleElement["language"])                     
+                    i=i+1
                    
             
-          TitreKodi=item["set"]
+          #TitreKodi=item["set"]
+          txx.setProperty('__ID__', str(item["DBID"]))
+          txx.setProperty('doublons',str(Compteur[item.get("imdbnumber")]))
           
           if item.get("art"):
-                txx.setArt( item.get("art")) 
-          txx.setInfo("video", {"dbid": item["movieid"],"playcount":Compteur[item.get("imdbnumber")],"title": item["title"],"mediatype": "movie","genre": item["genre"],"year": item["year"],"plot": item["plot"],"plotoutline": item["plotoutline"],"originaltitle": item["originaltitle"]}) 
+                txx.setArt( item.get("art"))
+          txx.setIconImage(item["thumbnail"]) 
+          txx.setInfo("video", {"dbid": str(item["movieid"]),"duration": item["runtime"], "title": item["title"],"mediatype": "movie","genre": item["genre"],"year": item["year"],"plot": item["plot"],"plotoutline": item["plotoutline"],"originaltitle": item["originaltitle"]}) 
           NbKodi=NbKodi+1
           if int(Compteur[item.get("imdbnumber")])>0:
              NbKodiValide=NbKodiValide+1
-             ListeItem.append([item["file"],txx,True])
+             if not Statique:
+               ListeItem.append([item["file"],txx,True])
+             else:
+               ListeItem.append(txx)
              
           if int(Compteur[item.get("imdbnumber")])>1:
-              #logMsg("Imdbitem  --> "+str(Compteur[item.get("imdbnumber")]),0)
-              #logMsg("Imdbitem doublon --> "+item.get("imdbnumber"),0)  
               Compteur[item.get("imdbnumber")]=0
-              #logMsg("Imdbitem  --> "+str(Compteur[item.get("imdbnumber")]),0)
-         
+              
        if not xbmcvfs.exists(savepath):
       #mise à jour !!!
       #logMsg("telex Appel SAGA update : --> "  + str(itemId),0)
@@ -215,20 +223,28 @@ def CheckSaga(itemId=None):
               #logMsg("Resultat  date sortie --> "+str(DateSortie)+"/"+str(nowX)+"/"+str(nowX2),0)
            else :
               nowX2=nowX  
-           if nowX2<=nowX:            
+           if nowX2<=nowX :            
               txx = xbmcgui.ListItem(label=item.get("title"),label2="manquant",iconImage="http://image.tmdb.org/t/p/original"+item.get("poster_path")) 
               fanart=item.get("backdrop_path")
               if fanart:
                   txx.setArt({"fanart":"http://image.tmdb.org/t/p/original"+fanart})
               txx.setInfo("video", {"title": item.get("title"),"year": item.get("release_date"),"writer": DateSortie,"plot": item.get("overview"),"originaltitle": item.get("originaltitle")})        
               txx.setProperty('dbtype', 'movie')
-              ListeItem.append(["",txx,True])
+              if not Statique:
+                 ListeItem.append([item["file"],txx,True])
+              else:
+                 ListeItem.append(txx)
               #xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url="", listitem=txx, isFolder=False)   
     #else: logMsg("SAGA VIDE ",0) 
-    xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeItem)
     if NbKodiValide==len(ListeItem): WINDOW.setProperty('IconMixSaga','complet')
+    if not Statique:
+          xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeItem)
+          xbmcplugin.endOfDirectory(handle=int(sys.argv[1]))
+    else:
+          return ListeItem
+    
     #logMsg("SAGA -> "+"["+str(itemId)+"] : "+str(len(ListeItem))+"="+str(ListeItem),0)           
-    xbmcplugin.endOfDirectory(handle=int(sys.argv[1]))
+    
     #logMsg("Temps passe recherche:"+str(time.time()-start),0)    
   
     
@@ -277,7 +293,7 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None):
        
       if itemId:
                query_url = "https://api.themoviedb.org/3/movie/%s?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (itemId.encode("utf-8"),xbmc.getInfoLabel("System.Language").encode("utf-8"))
-               logMsg("Query URL   --> " + str(query_url),0)
+               #logMsg("Query URL   --> " + str(query_url),0)
                response = urllib.urlopen(query_url)
                try:
                   str_response = response.read().decode('utf-8')
@@ -908,8 +924,9 @@ def getGenre(genrex=None,genretypex=None,origtitle=None):
                  #xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url="", listitem=txx, isFolder=False)
   xbmcplugin.addDirectoryItems(int(sys.argv[1]), genrelist) 
   xbmcplugin.endOfDirectory(int(sys.argv[1]))
-       
-def getCasting(Castingtypex=None,itemId=None):
+  
+
+def getCasting(Castingtypex=None,itemId=None,Statique=None):
   allCast = []
   item = {}
   Casting = []
@@ -941,13 +958,18 @@ def getCasting(Castingtypex=None,itemId=None):
                  if imageacteur:
                     txx = xbmcgui.ListItem(label=name,iconImage=imageacteur,label2=Test.get("role"))
                  
-                    ListeActeur.append(["",txx,True])
+                    if not Statique:
+                         ListeActeur.append(["",txx,True])
+                    else:
+                         ListeActeur.append(txx)
                  #xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url="", listitem=txx, isFolder=False)
-                 
-  xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeActeur)       
-  xbmcplugin.endOfDirectory(int(sys.argv[1])) 
+  if not Statique:
+     xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeActeur)
+     xbmcplugin.endOfDirectory(int(sys.argv[1]))
+  else:
+     return ListeActeur 
   
-def getFilmsParActeur(ActeurType=None,Acteur=None):
+def getFilmsParActeur(ActeurType=None,Acteur=None,Statique=None):
   Donnees = []
   item = {}
   Casting = []
@@ -993,14 +1015,19 @@ def getFilmsParActeur(ActeurType=None,Acteur=None):
                  IdVideo=str(Item.get("imdbnumber"))                 
                  txx.setArt( Item.get("art")) 
                  txx.setInfo("video", {"Mpaa": Item.get("imdbnumber"),"title": Titre,"year": Item.get("year"),"writer":TypeVideo,"trailer":Item.get("trailer")})
-                 ListeVideos.append([Item.get("file"),txx,False])
-                 
-  xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeVideos)       
-  xbmcplugin.endOfDirectory(int(sys.argv[1])) 
+                 if not Statique:
+                     ListeVideos.append([Item.get("file"),txx,False])
+                 else:
+                     ListeVideos.append(txx)
+  if not Statique:               
+     xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeVideos)       
+     xbmcplugin.endOfDirectory(int(sys.argv[1])) 
+  else:
+     return ListeVideos
   
   
   
-def getFilmsTv(DbType=None,Acteur=None):
+def getFilmsTv(DbType=None,Acteur=None,Statique=None):
     allInfo = []
     item = {}
     Casting = []
@@ -1105,7 +1132,11 @@ def getFilmsTv(DbType=None,Acteur=None):
                                                     txx.setInfo("video", {"title": name,"year": Annee,"originaltitle": item.get("original_title"),"writer":typemedia,"trailer":item.get("id")})        
                                                     #else : txx.setInfo("video", {"title": item.get("name"),"year": item.get("first_air_date"),"originaltitle": item.get("original_name")})        
                                                     #logMsg("Resultat  Role --> " + str(name)+"/"+str(Poster)+"/"+str(item.get("character")),0)
-                                                    ListeRoles.append(["",txx,True])
+                                                    if not Statique:
+                                                       ListeRoles.append(["",txx,True])
+                                                    else :
+                                                       ListeRoles.append(txx)
+                                                    
                                  #logMsg("Resultat  Roles Global--> " + str(ListeRoles),0)
                                          if ActeurSave>0:
                                               erreur=DirStru(savepath)
@@ -1115,11 +1146,15 @@ def getFilmsTv(DbType=None,Acteur=None):
                                               ActeurCache["nom"]=unicodedata.normalize('NFKD', Acteur.split("(")[0]).encode('ascii','xmlcharrefreplace')
                                               with io.open(savepath, 'w+', encoding='utf8') as outfile: 
      	                                        str_ = json.dumps(ActeurCache,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
-     	                                        outfile.write(to_unicode(str_))      
-                                 xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeRoles)
+     	                                        outfile.write(to_unicode(str_)) 
+     	                                        
+                                 if not Statique:     
+                                    xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeRoles)
                                       
-                              
-    xbmcplugin.endOfDirectory(int(sys.argv[1])) 
+    if not Statique:
+        xbmcplugin.endOfDirectory(int(sys.argv[1])) 
+    else:
+        return(ListeRoles)
                
 def getRealisateur(CheminType="",DbId=None,realisateur=None):
     allInfo = []

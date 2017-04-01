@@ -130,7 +130,7 @@
 				<visible>[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)|String.IsEqual(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Label,..)</visible>
 				<autoscroll delay="4000" repeat="5000" time="5000">!Control.HasFocus(1998)+!Control.HasFocus(5051)+!String.IsEmpty(Window(Home).Property(ActeurVideoReset))</autoscroll>-->
 				<pagecontrol>60</pagecontrol>
-				<content>$VAR[contentPanelActeurs]</content>
+				<!-- <content>$VAR[contentPanelActeurs]</content> -->
 				<resetonlabelchange>true</resetonlabelchange>
 				<itemlayout width="75">
 					<control type="image">
@@ -555,7 +555,8 @@
 					<animation type="Conditional" condition="Container(5051).IsUpdating">
 						<effect type="fade"  start="100" end="10" time="500" delay="100" reversible="true"/>
 					</animation>
-					<content sortby="year" sortorder="descending">$VAR[ActeursContent]</content>
+					<!-- -->
+					<content sortby="year" sortorder="descending">$VAR[ActeursContent]</content> 
 					<include>Roles</include>
 				</control>
 			</control>
@@ -1268,7 +1269,7 @@
 	<control type="group">
 		<posy>300</posy>
 		<posx>-600</posx>
-		<visible>Window.IsActive(502)+Control.HasFocus(1999)+!Container(1999).OnPrevious+!Container(1999).OnNext+[[Container.Content(genres)+!Skin.HasSetting(MusicGenreAucun)]|[Container.Content(artists)+!Skin.HasSetting(MusicAucun)]]</visible>
+		<visible>Window.IsActive(502)+Control.HasFocus(1999)+!Container(1999).OnPrevious+!Container(1999).OnNext+[[Container.Content(genres)+!Skin.HasSetting(MusicGenreDetailsAucun)]|[Container.Content(artists)+!Skin.HasSetting(MusicAucun)]]</visible>
 		<animation type="Visible">
 
 
@@ -1369,17 +1370,19 @@
 	<onback>55</onback>
 	<movement>6</movement>
 	<height>177</height>
+	<width>1920</width>
 	<align>center</align>
 	<posx>410</posx>
-
 	<posy>890</posy>
-
+  <orientation>vertical</orientation>
+  <itemgap>10</itemgap>
 </include>
 
 <include name="HorizVert">
 	<posy>850</posy>
 	<posx>25</posx>
-	<height>240</height>
+	<height>260</height>
+	<width>1920</width>
 	<onup>Action(firstpage)</onup>
 	<onup>55</onup>
 	<ondown condition="Control.HasFocus(1999)">Action(firstpage)</ondown>
@@ -1389,7 +1392,7 @@
 	<onright>1999</onright>
 	<onback>Action(firstpage)</onback>
 	<onback>55</onback>
-	<movement>6</movement>
+	<movement>9</movement>
 	<orientation>horizontal</orientation>
 </include>
 
@@ -1426,7 +1429,7 @@
 
 <include name="VueElementsBoitiersInfo">
 
-	<itemlayout width="180" height="240" condition="!Skin.HasSetting(SagaClearArt)+!Skin.HasSetting(SagaDisc)">
+	<itemlayout width="180" height="240" condition="!Skin.HasSetting(SagaDetailsClearArt)+!Skin.HasSetting(SagaDetailsDisc)">
 		<control type="group">
 
 			<control type="image">
@@ -1464,7 +1467,7 @@
 
 
 	</itemlayout>
-	<focusedlayout width="180" height="240" condition="!Skin.HasSetting(SagaClearArt)+!Skin.HasSetting(SagaDisc)">
+	<focusedlayout width="180" height="240" condition="!Skin.HasSetting(SagaDetailsClearArt)+!Skin.HasSetting(SagaDetailsDisc)">
 		<control type="group">
 
 			<animation type="focus">
@@ -1506,7 +1509,7 @@
 
 	</focusedlayout>
 
-	<itemlayout width="240" height="280" condition="Skin.HasSetting(SagaClearArt)">
+	<itemlayout width="240" height="280" condition="Skin.HasSetting(SagaDetailsClearArt)">
 		<control type="group">
 			<posy>15</posy>
 			<control type="image">
@@ -1555,7 +1558,7 @@
 		</control>
 		<include>ManqueAlAppel</include>
 	</itemlayout>
-	<focusedlayout width="240" height="280" condition="Skin.HasSetting(SagaClearArt)">
+	<focusedlayout width="240" height="280" condition="Skin.HasSetting(SagaDetailsClearArt)">
 
 		<control type="group">
 			<posy>15</posy>
@@ -1614,7 +1617,7 @@
 
 	</focusedlayout>
 
-	<itemlayout    width="200" height="240" condition="Skin.HasSetting(SagaDisc)">
+	<itemlayout    width="200" height="240" condition="Skin.HasSetting(SagaDetailsDisc)">
 		<control type="group">
 
 			<control type="image">
@@ -1642,7 +1645,7 @@
 		</control>
 
 	</itemlayout>
-	<focusedlayout width="200" height="240" condition="Skin.HasSetting(SagaDisc)">
+	<focusedlayout width="200" height="240" condition="Skin.HasSetting(SagaDetailsDisc)">
 		<control type="group">
 
 			<animation type="focus">
@@ -1701,7 +1704,7 @@
 		<height>50</height>
 		<texture>flags/flag_frame2.png</texture>
 		<aspectratio >stretch</aspectratio>
-		<visible>Integer.IsGreater(ListItem.PlayCount,1)+!Integer.IsGreater(ListItem.PlayCount,9)</visible>
+		<visible>Integer.IsGreater(ListItem.Property(doublons),1)+!Integer.IsGreater(ListItem.Property(doublons),9)</visible>
 	</control>
 	<control type="image">
 		<posx>105</posx>
@@ -1710,7 +1713,7 @@
 		<height>50</height>
 		<texture>flags/flag_frame2.png</texture>
 		<aspectratio >stretch</aspectratio>
-		<visible>Integer.IsGreater(ListItem.PlayCount,1)+Integer.IsGreater(ListItem.PlayCount,9)</visible>
+		<visible>Integer.IsGreater(ListItem.Property(doublons),1)+Integer.IsGreater(ListItem.Property(doublons),9)</visible>
 	</control>
 	<control type="label">
 		<posx>68</posx>
@@ -1718,13 +1721,13 @@
 		<font>doublon</font>
 		<width>90</width>
 		<align>right</align>
-		<label>[COLOR=yellow]x$INFO[ListItem.PlayCount][/COLOR]</label>
-		<visible>Integer.IsGreater(ListItem.PlayCount,1)</visible>
+		<label>[COLOR=yellow]x$INFO[ListItem.Property(doublons)][/COLOR]</label>
+		<visible>Integer.IsGreater(ListItem.Property(doublons),1)</visible>
 	</control>
 </include>
 
 <variable name="doublonvar">
-	<value condition="Integer.IsGreater(ListItem.PlayCount,1)">[COLOR=yellow]$INFO[ListItem.PlayCount, (x,)][/COLOR]</value>
+	<value condition="Integer.IsGreater(ListItem.Property(doublons),1)">[COLOR=yellow]$INFO[ListItem.Property(doublons), (x,)][/COLOR]</value>
 </variable>
 <variable name="Is50">
 	<value condition="Control.HasFocus(50)|Control.HasFocus(505)">$INFO[Container(50).ListItem.Label]</value>
@@ -1741,22 +1744,22 @@
 
 	<autoscroll time="6000">!Control.HasFocus(1999)</autoscroll>
 <!-- TEXTE-->
-	<itemlayout width="970" height="25" condition="[Window.IsActive(10025)+[[Skin.HasSetting(GenreTexte)+Container.Content(Genres)] |[Skin.HasSetting(directorTexte)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(SagaTexte)+!Container.Content(Genres)+![Container.Content(directors)|Container.Content(actors)]]]]| [Window.IsActive(502)+[[Skin.HasSetting(MusicGenreTexte)+Container.Content(Genres)] | [Skin.HasSetting(MusicTexte)+!Container.Content(Genres)]]]">
-
+	<itemlayout width="970" height="30" condition="[Window.IsActive(10025)+[[Skin.HasSetting(GenreDetailsTexte)+Container.Content(Genres)] |[Skin.HasSetting(directorTexte)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(SagaDetailsTexte)+String.IsEqual(ListItem.DBTYPE,set)]]]| [Window.IsActive(502)+[[Skin.HasSetting(MusicGenreDetailsTexte)+Container.Content(Genres)] | [Skin.HasSetting(MusicTexte)+!Container.Content(Genres)]]]">
+	
 		<control type="label">
 			<align>center</align>
 			<font>comic24</font>
 			<label>$INFO[ListItem.Label]$VAR[doublonvar]</label>
-			<visible>!StringCompare(ListItem.Label2,manquant)</visible>
+			<visible>!String.IsEqual(ListItem.Label2,manquant)</visible>
 		</control>
 		<control type="label">
 			<align>center</align>
 			<font>comic24</font>
 			<label>[COLOR=red][I]$INFO[ListItem.Label][/I][/COLOR]</label>
-			<visible>StringCompare(ListItem.Label2,manquant)</visible>
+			<visible>String.IsEqual(ListItem.Label2,manquant)</visible>
 		</control>
 	</itemlayout>
-	<focusedlayout width="970" height="25" condition="[Window.IsActive(10025)+[[Skin.HasSetting(GenreTexte)+Container.Content(Genres)] |[Skin.HasSetting(directorTexte)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(SagaTexte)+!Container.Content(Genres)+![Container.Content(directors)|Container.Content(actors)]]]]| [Window.IsActive(502)+[[Skin.HasSetting(MusicGenreTexte)+Container.Content(Genres)] | [Skin.HasSetting(MusicTexte)+!Container.Content(Genres)]]]">
+	<focusedlayout width="970" height="30" condition="[Window.IsActive(10025)+[[Skin.HasSetting(GenreDetailsTexte)+Container.Content(Genres)] |[Skin.HasSetting(directorTexte)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(SagaDetailsTexte)+String.IsEqual(ListItem.DBTYPE,set)]]]| [Window.IsActive(502)+[[Skin.HasSetting(MusicGenreDetailsTexte)+Container.Content(Genres)] | [Skin.HasSetting(MusicTexte)+!Container.Content(Genres)]]]">
 		<include>boitiersmusicanim</include>
 		<control type="group">
 
@@ -1766,14 +1769,14 @@
 				<align>center</align>
 				<font>comic24</font>
 				<label>$INFO[ListItem.Label]$VAR[doublonvar]</label>
-				<visible>!StringCompare(ListItem.Label2,manquant)</visible>
+				<visible>!String.IsEqual(ListItem.Label2,manquant)</visible>
 			</control>
 			<control type="label">
 				<visible>!Control.HasFocus(1999)</visible>
 				<align>center</align>
 				<font>comic24</font>
 				<label>[COLOR=red][I]$INFO[ListItem.Label][/I][/COLOR]</label>
-				<visible>StringCompare(ListItem.Label2,manquant)</visible>
+				<visible>String.IsEqual(ListItem.Label2,manquant)</visible>
 			</control>
 
 			<control type="label">
@@ -1781,21 +1784,21 @@
 				<align>center</align>
 				<font>comic24</font>
 				<label>[I][COLOR=yellow]$INFO[ListItem.Label][/COLOR][/I]$VAR[doublonvar]</label>
-				<visible>!StringCompare(ListItem.Label2,manquant)</visible>
+				<visible>!String.IsEqual(ListItem.Label2,manquant)</visible>
 
 			</control>
 			<control type="label">
 				<visible>Control.HasFocus(1999)</visible>
 				<align>center</align>
 				<font>comic24</font>
-				<label>[I][COLOR=red]$INFO[ListItem.Label][/COLOR][/I]</label>
-				<visible>StringCompare(ListItem.Label2,manquant)</visible>
+				<label>[I][COLOR=blue]$INFO[ListItem.Label][/COLOR][/I]</label>
+				<visible>String.IsEqual(ListItem.Label2,manquant)</visible>
 			</control>
 		</control>
 	</focusedlayout>
 
 <!-- BOITIERS-->
-	<itemlayout width="180" height="240" condition="[[Skin.HasSetting(SagaBoitier)+Container.Content(Genres)] |[Skin.HasSetting(directorBoitier)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(GenreBoitier)+!Container.Content(Genres)+![Container.Content(directors)|Container.Content(actors)]]]+Window.IsActive(10025)">
+	<itemlayout width="180" height="240" condition="[[Skin.HasSetting(SagaDetailsBoitier)+String.IsEqual(ListItem.DBTYPE,set)] | [Skin.HasSetting(directorBoitier)+[Container.Content(directors)|Container.Content(actors)]] |[Skin.HasSetting(GenreDetailsBoitier)+Container.Content(Genres)]]+Window.IsActive(10025)">
 		<control type="group">
 
 			<posy>30</posy>
@@ -1816,7 +1819,7 @@
 				<aspectratio align="center">stretch</aspectratio>
 				<bordersize>2</bordersize>
 				<texture diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+				<animation effect="fade" end="50" condition="String.IsEqual(ListItem.Label2,manquant)">Conditional</animation>
 			</control>
 
 
@@ -1836,22 +1839,16 @@
 		<include>doublon</include>
 
 	</itemlayout>
-	<focusedlayout width="180" height="240" condition="[[Skin.HasSetting(SagaBoitier)+Container.Content(Genres)] |[Skin.HasSetting(directorBoitier)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(GenreBoitier)+!Container.Content(Genres)+![Container.Content(directors)|Container.Content(actors)]]]+Window.IsActive(10025)">
+	<focusedlayout width="180" height="240" condition="[[Skin.HasSetting(SagaDetailsBoitier)+String.IsEqual(ListItem.DBTYPE,set)] | [Skin.HasSetting(directorBoitier)+[Container.Content(directors)|Container.Content(actors)]] |[Skin.HasSetting(GenreDetailsBoitier)+Container.Content(Genres)]]+Window.IsActive(10025)">
 		<control type="group">
+
 			<posy>30</posy>
-
-			<animation type="focus">
-
-				<effect type="zoom" center="100" start="100" end="90" time="400" easy="out" tween="bounce" delay="1" reversible="false"/>
-				<effect type="zoom" center="100" end="0" time="400" delay="1500" reversible="false"/>
-
-			</animation>
 			<control type="image">
 				<posx>0</posx>
 				<posy>-2</posy>
 				<width>180</width>
 				<height>212</height>
-				<texture border="10">frames/casefondbleu.png</texture>
+				<texture border="10" diffuse="showcase_matte.png">frames/casefondbleu.png</texture>
 				<aspectratio align="center">stretch</aspectratio>
 
 			</control>
@@ -1863,26 +1860,28 @@
 				<aspectratio align="center">stretch</aspectratio>
 				<bordersize>2</bordersize>
 				<texture diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+				<animation effect="fade" end="50" condition="String.IsEqual(ListItem.Label2,manquant)">Conditional</animation>
 			</control>
+
+
 			<control type="image">
 				<description>Glass overlay</description>
 				<posx></posx>
 				<posy>-2</posy>
 				<width>180</width>
 				<height>212</height>
-				<texture border="10">frames/case1.png</texture>
+				<texture border="10" diffuse="showcase_matte.png">frames/case1.png</texture>
 				<aspectratio align="center">stretch</aspectratio>
-
 			</control>
 
+
 			<include>ManqueAlAppel</include>
-			<include>doublon</include>
 		</control>
+		<include>doublon</include>
 
 	</focusedlayout>
 <!-- CLEARART-->
-	<itemlayout width="240" height="280" condition="[[Skin.HasSetting(SagaClearArt)+Container.Content(Genres)] |[Skin.HasSetting(directorClearArt)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(GenreClearArt)+!Container.Content(Genres)+![Container.Content(directors)|Container.Content(actors)]]]+Window.IsActive(10025)">
+	<itemlayout width="240" height="280" condition="[[Skin.HasSetting(SagaDetailsClearArt)+String.IsEqual(ListItem.DBTYPE,set)] | [Skin.HasSetting(directorClearArt)+[Container.Content(directors)|Container.Content(actors)]] |[Skin.HasSetting(GenreDetailsClearArt)+Container.Content(Genres)]]+Window.IsActive(10025)">
 
 		<control type="image">
 			<left>0</left>
@@ -1914,7 +1913,7 @@
 			<bordersize>2</bordersize>
 			<bordertexture>frames/cdart-mask.png</bordertexture>
 			<animation effect="fade" end="50" condition="true">Conditional</animation>
-			<visible>StringCompare(ListItem.Label2,manquant)</visible>
+			<visible>String.IsEqual(ListItem.Label2,manquant)</visible>
 		</control>
 		<control type="image">
 			<left>0</left>
@@ -1926,13 +1925,13 @@
 			<bordersize>2</bordersize>
 			<colordiffuse>70FFFFFF</colordiffuse>
 			<visible>!Skin.HasSetting(CacheFond)</visible>
-			<visible>StringCompare(ListItem.Label2,manquant)</visible>
+			<visible>String.IsEqual(ListItem.Label2,manquant)</visible>
 		</control>
 		<include>doublon</include>
 
 		<include>ManqueAlAppel</include>
 	</itemlayout>
-	<focusedlayout width="240" height="280" condition="[[Skin.HasSetting(SagaClearArt)+Container.Content(Genres)] |[Skin.HasSetting(directorClearArt)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(GenreClearArt)+!Container.Content(Genres)+![Container.Content(directors)|Container.Content(actors)]]]+Window.IsActive(10025)">
+	<focusedlayout width="240" height="280" condition="[[Skin.HasSetting(SagaDetailsClearArt)+String.IsEqual(ListItem.DBTYPE,set)] | [Skin.HasSetting(directorClearArt)+[Container.Content(directors)|Container.Content(actors)]] |[Skin.HasSetting(GenreDetailsClearArt)+Container.Content(Genres)]]+Window.IsActive(10025)">
 
 		<control type="group">
 			<animation type="focus">
@@ -1973,7 +1972,7 @@
 				<bordersize>2</bordersize>
 				<bordertexture>frames/cdart-mask.png</bordertexture>
 				<animation effect="fade" end="50" condition="true">Conditional</animation>
-				<visible>StringCompare(ListItem.Label2,manquant)</visible>
+				<visible>String.IsEqual(ListItem.Label2,manquant)</visible>
 			</control>
 			<control type="image">
 				<left>0</left>
@@ -1985,7 +1984,7 @@
 				<bordersize>2</bordersize>
 				<colordiffuse>70FFFFFF</colordiffuse>
 				<visible>!Skin.HasSetting(CacheFond)</visible>
-				<visible>StringCompare(ListItem.Label2,manquant)</visible>
+				<visible>String.IsEqual(ListItem.Label2,manquant)</visible>
 			</control>
 			<include>doublon</include>
 
@@ -1994,7 +1993,7 @@
 
 	</focusedlayout>
 <!-- DISQUES-->
-	<itemlayout    width="200" height="240" condition="[Window.IsActive(10025)+[[Skin.HasSetting(SagaDisc)+Container.Content(Genres)] |[Skin.HasSetting(directorDisc)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(GenreDisc)+!Container.Content(Genres)+![Container.Content(directors)|Container.Content(actors)]]]]|[Window.IsActive(502)+[[Skin.HasSetting(MusicDiscArt)+!Container.Content(Genres)]|[Skin.HasSetting(MusicGenreDiscArt)+Container.Content(Genres)]]]">
+	<itemlayout    width="200" height="240" condition="[[Skin.HasSetting(SagaDetailsDisc)+String.IsEqual(ListItem.DBTYPE,set)] | [Skin.HasSetting(directorDisc)+[Container.Content(directors)|Container.Content(actors)]] |[Skin.HasSetting(GenreDetailsDisc)+Container.Content(Genres)]]+Window.IsActive(10025)">
 		<control type="group">
 
 			<control type="image">
@@ -2004,7 +2003,7 @@
 				<height>170</height>
 				<aspectratio>keep</aspectratio>
 				<texture background="true">$INFO[ListItem.Art(discart)]</texture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+				<animation effect="fade" end="50" condition="String.IsEqual(ListItem.Label2,manquant)">Conditional</animation>
 			</control>
 			<control type="image">
 				<left>0</left>
@@ -2013,10 +2012,10 @@
 				<height>170</height>
 				<aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
 				<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+				<animation effect="fade" end="50" condition="String.IsEqual(ListItem.Label2,manquant)">Conditional</animation>
 				<bordersize>2</bordersize>
 				<bordertexture>frames/cdart-mask.png</bordertexture>
-				<visible>IsEmpty(ListItem.Art(discart))</visible>
+				<visible>String.IsEmpty(ListItem.Art(discart))</visible>
 			</control>
 			<include>doublon</include>
 
@@ -2024,7 +2023,7 @@
 		</control>
 
 	</itemlayout>
-	<focusedlayout width="200" height="240" condition="[Window.IsActive(10025)+[[Skin.HasSetting(SagaDisc)+Container.Content(Genres)] |[Skin.HasSetting(directorDisc)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(GenreDisc)+!Container.Content(Genres)+![Container.Content(directors)|Container.Content(actors)]]]]|[Window.IsActive(502)+[[Skin.HasSetting(MusicDiscArt)+!Container.Content(Genres)]|[Skin.HasSetting(MusicGenreDiscArt)+Container.Content(Genres)]]]">
+	<focusedlayout width="200" height="240" condition="[[Skin.HasSetting(SagaDetailsDisc)+String.IsEqual(ListItem.DBTYPE,set)] | [Skin.HasSetting(directorDisc)+[Container.Content(directors)|Container.Content(actors)]] |[Skin.HasSetting(GenreDetailsDisc)+Container.Content(Genres)]]+Window.IsActive(10025)">
 		<control type="group">
 
 			<animation type="focus">
@@ -2040,7 +2039,7 @@
 				<height>170</height>
 				<aspectratio>keep</aspectratio>
 				<texture background="true">$INFO[ListItem.Art(discart)]</texture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+				<animation effect="fade" end="50" condition="String.IsEqual(ListItem.Label2,manquant)">Conditional</animation>
 			</control>
 			<control type="image">
 				<left>0</left>
@@ -2051,8 +2050,8 @@
 				<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
 				<bordersize>2</bordersize>
 				<bordertexture>frames/cdart-mask.png</bordertexture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
-				<visible>IsEmpty(ListItem.Art(discart))</visible>
+				<animation effect="fade" end="50" condition="String.IsEqual(ListItem.Label2,manquant)">Conditional</animation>
+				<visible>String.IsEmpty(ListItem.Art(discart))</visible>
 			</control>
 			<control type="image">
 				<description>Glass overlay</description>
@@ -2073,7 +2072,7 @@
 
 	</focusedlayout>
 <!-- MUSIQUE-->
-	<itemlayout width="180" height="240" condition="Window.IsActive(502)+[[Skin.HasSetting(MusicBoitier)+!Container.Content(Genres)]|[Skin.HasSetting(MusicGenreBoitier)+Container.Content(Genres)]]">
+	<itemlayout width="180" height="240" condition="Window.IsActive(502)+[[Skin.HasSetting(MusicBoitier)+!Container.Content(Genres)]|[Skin.HasSetting(MusicGenreDetailsBoitier)+Container.Content(Genres)]]">
 		<control type="image">
 			<posx>10</posx>
 			<posy>50</posy>
@@ -2099,7 +2098,7 @@
 			<aspectratio>scale</aspectratio>
 		</control>
 	</itemlayout>
-	<focusedlayout width="180" height="240" condition="Window.IsActive(502)+[[Skin.HasSetting(MusicBoitier)+!Container.Content(Genres)]|[Skin.HasSetting(MusicGenreBoitier)+Container.Content(Genres)]]">
+	<focusedlayout width="180" height="240" condition="Window.IsActive(502)+[[Skin.HasSetting(MusicBoitier)+!Container.Content(Genres)]|[Skin.HasSetting(MusicGenreDetailsBoitier)+Container.Content(Genres)]]">
 		<control type="group">
 			<animation type="focus">
 
@@ -5414,7 +5413,7 @@
 	<fadetime>1000</fadetime>
 </include>
 
-<!-- XXX: Names are too generic.  Used only in MyMusicPlaylist.xml -->
+
 <include name="WindowMenuButton">
 	<posx>0</posx>
 	<posy>30</posy>

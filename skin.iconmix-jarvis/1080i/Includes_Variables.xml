@@ -222,6 +222,13 @@
 		<value></value>
 	</variable>
 
+	<variable name="TvFilm1999">
+		<value condition="IntegerGreaterThan(Container(1999).NumItems,1)+StringCompare(Container(1999).ListItem.DBTYPE,movie)">$LOCALIZE[342]</value>
+		<value condition="!IntegerGreaterThan(Container(1999).NumItems,1)+StringCompare(Container(1999).ListItem.DBTYPE,movie)">$LOCALIZE[20338]</value>
+    <value condition="IntegerGreaterThan(Container(1999).NumItems,1)+StringCompare(Container(1999).ListItem.DBTYPE,tvshow)">$LOCALIZE[20343]</value>
+		<value condition="!IntegerGreaterThan(Container(1999).NumItems,1)+StringCompare(Container(1999).ListItem.DBTYPE,tvshow)">$LOCALIZE[20364]</value>
+
+	</variable>
 	<variable name="ListItemInfoTitle">
 
 		<value condition="Control.HasFocus(1999)+StringCompare(Container(1999).ListItem.Label2,manquant)+!IsEmpty(Container(1999).ListItem.Label)">[I]$INFO[Container(1999).ListItem.Label] $INFO[Container(1999).ListItem.Writer,( , )][/I]</value>
@@ -233,8 +240,7 @@
 
 		<value condition="StringCompare(ListItem.DBTYPE,set) +IntegerGreaterThan(Container(1999).NumItems,1)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Window(Home).Property(iconmixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[342] )[/I][/COLOR]</value>
 		<value condition="StringCompare(ListItem.DBTYPE,set) +!IntegerGreaterThan(Container(1999).NumItems,1)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Window(Home).Property(iconmixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[20338] )[/I][/COLOR]</value>
-		<value condition="[StringCompare(ListItem.DBTYPE,genre) +Window.IsActive(10025)]+IntegerGreaterThan(Container(1999).NumItems,1)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Container(1999).NumItems] $LOCALIZE[342] )[/I][/COLOR]</value>
-		<value condition="[StringCompare(ListItem.DBTYPE,genre) +Window.IsActive(10025)]+!IntegerGreaterThan(Container(1999).NumItems,1)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Container(1999).NumItems] $LOCALIZE[20338] )[/I][/COLOR]</value>
+		<value condition="[StringCompare(ListItem.DBTYPE,genre) +Window.IsActive(10025)]">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Container(1999).NumItems] $VAR[TvFilm1999] )[/I][/COLOR]</value>
 
 
 		<value condition="Container.Content(artists) | Container.Content(albums) | Container.Content(songs)">$INFO[ListItem.Label]</value>
@@ -680,11 +686,12 @@
 	<!-- -->
 	<variable name="MediaFlag_VideoCodecSet">
 		<value condition="SubString(Container(1999).ListItem.DBTYPE,set)">flags/Source/set.png</value>
-		<value condition="IsEmpty(Container(1999).ListItem.VideoCodec)+[!Container(1999).ListItem.IsStereoscopic + !SubString(Container(1999).ListItem.filename,3d)] + [SubString(Container(1999).ListItem.filename,bluray) | SubString(Container(1999).ListItem.filename,blu-ray) | SubString(Container(1999).ListItem.filename,.mt2s) | SubString(Container(1999).ListItem.filename,.bdmv) | SubString(Container(1999).ListItem.filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bluray.png</value>
-		<value condition="IsEmpty(Container(1999).ListItem.VideoCodec)+[Container(1999).ListItem.IsStereoscopic | SubString(Container(1999).ListItem.filename,3d)] +  [SubString(Container(1999).ListItem.filename,bluray) | SubString(Container(1999).ListItem.filename,blu-ray) | SubString(Container(1999).ListItem.filename,.mt2s) | SubString(Container(1999).ListItem.filename,.bdmv) | SubString(Container(1999).ListItem.filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bd3d.png</value>
-		<value condition="IsEmpty(Container(1999).ListItem.VideoCodec)+!SubString(Container(1999).ListItem.Filename,dvd)+[SubString(Container(1999).ListItem.Filename,.iso) | SubString(Container(1999).ListItem.Filename,.bdmv)]">flags/Source/bluray.png</value>
-		<value condition="IsEmpty(Container(1999).ListItem.VideoCodec)+[SubString(Container(1999).ListItem.Filename,dvd) | SubString(Container(1999).ListItem.Filename,.ifo)]">flags/Source/dvd.png</value>
+		<value condition="[IsEmpty(Container(1999).ListItem.Property(VideoCodec))+IsEmpty(Container(1999).ListItem.VideoCodec)]+[!Container(1999).ListItem.IsStereoscopic + !SubString(Container(1999).ListItem.filename,3d)] + [SubString(Container(1999).ListItem.filename,bluray) | SubString(Container(1999).ListItem.filename,blu-ray) | SubString(Container(1999).ListItem.filename,.mt2s) | SubString(Container(1999).ListItem.filename,.bdmv) | SubString(Container(1999).ListItem.filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bluray.png</value>
+		<value condition="[IsEmpty(Container(1999).ListItem.Property(VideoCodec))+IsEmpty(Container(1999).ListItem.VideoCodec)]+[Container(1999).ListItem.IsStereoscopic | SubString(Container(1999).ListItem.filename,3d)] +  [SubString(Container(1999).ListItem.filename,bluray) | SubString(Container(1999).ListItem.filename,blu-ray) | SubString(Container(1999).ListItem.filename,.mt2s) | SubString(Container(1999).ListItem.filename,.bdmv) | SubString(Container(1999).ListItem.filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bd3d.png</value>
+		<value condition="[IsEmpty(Container(1999).ListItem.Property(VideoCodec))+IsEmpty(Container(1999).ListItem.VideoCodec)]+!SubString(Container(1999).ListItem.Filename,dvd)+[SubString(Container(1999).ListItem.Filename,.iso) | SubString(Container(1999).ListItem.Filename,.bdmv)]">flags/Source/bluray.png</value>
+		<value condition="[IsEmpty(Container(1999).ListItem.Property(VideoCodec))+IsEmpty(Container(1999).ListItem.VideoCodec)]+[SubString(Container(1999).ListItem.Filename,dvd) | SubString(Container(1999).ListItem.Filename,.ifo)]">flags/Source/dvd.png</value>
 
+		<value condition="!IsEmpty(Container(1999).ListItem.Property(VideoCodec))">$INFO[Container(1999).ListItem.Property(VideoCodec),flags/VideoCodec/,.png]</value>
 		<value>$INFO[Container(1999).ListItem.VideoCodec,flags/VideoCodec/,.png]</value>
 	</variable>
 	-->

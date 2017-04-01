@@ -3,7 +3,8 @@
 	<defaultcontrol>9000</defaultcontrol>
 	<onunload>RunScript(script.skinshortcuts,type=buildxml&amp;mainmenuID=9000&amp;levels=0)</onunload>
 	<onload condition="!Skin.HasSetting(MenuIconVertical)+!Skin.HasSetting(MenuIcon)+!Skin.HasSetting(MenuTexte)">Skin.ToggleSetting(MenuTexte)</onload> <!-- default to Icon menu -->
-	<onload condition="Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuTexte)">Skin.ToggleSetting(MenuTexte)</onload> <!-- default to Icon menu -->
+	<onload condition="[Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuTexte)]">Skin.ToggleSetting(MenuTexte)</onload> <!-- default to Icon menu -->
+	<onload condition="[Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuIconVertical)]">Skin.ToggleSetting(MenuIconVertical)</onload> <!-- default to Icon menu -->
 
 	<controls>
 		
@@ -421,10 +422,10 @@
 						<label>$LOCALIZE[32001]</label>
 						<label2>$INFO[Skin.String(CacheNonSelectDelai),, s]</label2>
 						<onclick condition="IsEmpty(Skin.String(CacheNonSelectDelai))">Skin.SetString(CacheNonSelectDelai,3)</onclick>
-                <onclick condition="Stringcompare(Skin.String(CacheNonSelectDelai),9)">Skin.SetString(CacheNonSelectDelai,)</onclick>
-                <onclick condition="Stringcompare(Skin.String(CacheNonSelectDelai),7)">Skin.SetString(CacheNonSelectDelai,9)</onclick>
-                <onclick condition="Stringcompare(Skin.String(CacheNonSelectDelai),5)">Skin.SetString(CacheNonSelectDelai,7)</onclick>
-                <onclick condition="Stringcompare(Skin.String(CacheNonSelectDelai),3)">Skin.SetString(CacheNonSelectDelai,5)</onclick>
+                <onclick condition="StringCompare(Skin.String(CacheNonSelectDelai),9)">Skin.SetString(CacheNonSelectDelai,)</onclick>
+                <onclick condition="StringCompare(Skin.String(CacheNonSelectDelai),7)">Skin.SetString(CacheNonSelectDelai,9)</onclick>
+                <onclick condition="StringCompare(Skin.String(CacheNonSelectDelai),5)">Skin.SetString(CacheNonSelectDelai,7)</onclick>
+                <onclick condition="StringCompare(Skin.String(CacheNonSelectDelai),3)">Skin.SetString(CacheNonSelectDelai,5)</onclick>
 						
 					</control>
 					<control type="image" id="540">
@@ -445,24 +446,17 @@
                 <label>$LOCALIZE[31039]</label>
 						<label2>$INFO[Skin.String(SkinHelper.RandomFanartDelay),, s]</label2>
 						<onclick condition="IsEmpty(Skin.String(SkinHelper.RandomFanartDelay))">Skin.SetString(SkinHelper.RandomFanartDelay,5)</onclick>
-            <onclick condition="Stringcompare(Skin.String(SkinHelper.RandomFanartDelay),30)">Skin.SetString(SkinHelper.RandomFanartDelay,)</onclick>
-            <onclick condition="Stringcompare(Skin.String(SkinHelper.RandomFanartDelay),15)">Skin.SetString(SkinHelper.RandomFanartDelay,30)</onclick>
-            <onclick condition="Stringcompare(Skin.String(SkinHelper.RandomFanartDelay),10)">Skin.SetString(SkinHelper.RandomFanartDelay,15)</onclick>
-            <onclick condition="Stringcompare(Skin.String(SkinHelper.RandomFanartDelay),8)">Skin.SetString(SkinHelper.RandomFanartDelay,10)</onclick>
-             <onclick condition="Stringcompare(Skin.String(SkinHelper.RandomFanartDelay),6)">Skin.SetString(SkinHelper.RandomFanartDelay,8)</onclick>
-              <onclick condition="Stringcompare(Skin.String(SkinHelper.RandomFanartDelay),5)">Skin.SetString(SkinHelper.RandomFanartDelay,6)</onclick>
+            <onclick condition="StringCompare(Skin.String(SkinHelper.RandomFanartDelay),30)">Skin.SetString(SkinHelper.RandomFanartDelay,)</onclick>
+            <onclick condition="StringCompare(Skin.String(SkinHelper.RandomFanartDelay),15)">Skin.SetString(SkinHelper.RandomFanartDelay,30)</onclick>
+            <onclick condition="StringCompare(Skin.String(SkinHelper.RandomFanartDelay),10)">Skin.SetString(SkinHelper.RandomFanartDelay,15)</onclick>
+            <onclick condition="StringCompare(Skin.String(SkinHelper.RandomFanartDelay),8)">Skin.SetString(SkinHelper.RandomFanartDelay,10)</onclick>
+             <onclick condition="StringCompare(Skin.String(SkinHelper.RandomFanartDelay),6)">Skin.SetString(SkinHelper.RandomFanartDelay,8)</onclick>
+              <onclick condition="StringCompare(Skin.String(SkinHelper.RandomFanartDelay),5)">Skin.SetString(SkinHelper.RandomFanartDelay,6)</onclick>
 						<visible>Skin.HasSetting(Enable_ExtraFanart)</visible>
 					</control>
 					
 				
-					 <!--
-            <control type="button" id="31750">
-                <include>SettingsLabel</include>
-                <label>$LOCALIZE[31039]</label>
-                <label2>$INFO[skin.string(SkinHelper.RandomFanartDelay.label)]</label2>
-                <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=SkinHelper.RandomFanartDelay,header=Delay fanart)</onclick>            
-            </control>
-            -->
+					 
             <!--background randomize-->
             <control type="radiobutton" id="31747">
                 <include>SettingsLabel</include>
@@ -758,7 +752,7 @@
 						<onclick>Skin.ToggleSetting(ShowFilePath)</onclick>
 						<selected>Skin.HasSetting(ShowFilePath)</selected>
 					</control>
-							<control type="radiobutton" id="806">
+						<control type="radiobutton" id="806">
 						<include>SettingsLabel</include>
 						<label>$LOCALIZE[31928]</label>
 						<onclick>Skin.ToggleSetting(HideTvCast)</onclick>
@@ -770,7 +764,7 @@
 						<onclick>Skin.ToggleSetting(HideMovieCast)</onclick>
 						<selected>Skin.HasSetting(HideMovieCast)</selected>
 					</control>
-						<control type="radiobutton" id="808">
+								<control type="radiobutton" id="808">
 						<include>SettingsLabel</include>
 						<label>$LOCALIZE[31932]</label>
 						<onclick>Skin.ToggleSetting(HideMovieTvCastEmpty)</onclick>
@@ -778,177 +772,6 @@
 						<visible>!Skin.HasSetting(HideMovieCast)|!Skin.HasSetting(HideTvCast)</visible>
 					</control>
 					
-					<!--
-					<control type="radiobutton" id="805">
-						<include>SettingsLabel</include>
-						<label>$LOCALIZE[31474]</label>
-						<onclick>Skin.ToggleSetting(OneButtonSubtitles)</onclick>
-						<onclick>Skin.SetString(DefaultOSD,714)</onclick>
-						<onclick>ReloadSkin()</onclick>
-						<selected>Skin.HasSetting(OneButtonSubtitles)</selected>
-					</control>
-					<control type="label" id="806">
-						<posx>0</posx>
-						<posy>0</posy>
-						<width>775</width>
-						<height>30</height>
-						<align>left</align>
-						<aligny>center</aligny>
-						<include>SettingsLabel</include>
-						<label>$LOCALIZE[31475]</label>
-						<visible>!Skin.String(OneButtonSubtitles)</visible>
-					</control>
-					<control type="grouplist" id="807">
-						<left>0</left>
-						<top>0</top>
-						<width>780</width>
-						<height>70</height>
-						<itemgap>0</itemgap>
-						<orientation>horizontal</orientation>
-						<onleft>9000</onleft>
-						<onright>9000</onright>
-						<onup>9006</onup>
-						<ondown>9006</ondown>
-						<visible>!Skin.String(OneButtonSubtitles)</visible>
-						<control type="image" id="808">
-							<height>60</height>
-							<width>60</width>
-							<texture>blank.png</texture>
-						</control>
-						<control type="button" id="809">
-							<description>Playlists</description>
-							<include>Animation_ButtonFocus</include>
-							<height>60</height>
-							<width>60</width>
-							<texturefocus>osd/osd_button_playlist_fo.png</texturefocus>
-							<texturenofocus>osd/osd_button_playlist_nf.png</texturenofocus>
-							<include condition="SubString(Skin.String(DefaultOSD),711)">OSDdiffuse</include>
-							<onclick>Skin.SetString(DefaultOSD,711)</onclick>
-							<onclick>ReloadSkin()</onclick>
-						</control>
-						<control type="button" id="810">
-							<description>Bookmarks</description>
-							<include>Animation_ButtonFocus</include>
-							<height>60</height>
-							<width>60</width>
-							<texturefocus>osd/osd_button_book_fo.png</texturefocus>
-							<texturenofocus>osd/osd_button_book_nf.png</texturenofocus>
-							<include condition="SubString(Skin.String(DefaultOSD),712)">OSDdiffuse</include>
-							<onclick>Skin.SetString(DefaultOSD,712)</onclick>
-							<onclick>ReloadSkin()</onclick>
-						</control>
-						<control type="button" id="811">
-							<description>OSD Subtitles</description>
-							<include>Animation_ButtonFocus</include>
-							<height>60</height>
-							<width>60</width>
-							<texturefocus>osd/osd_button_sub_fo.png</texturefocus>
-							<texturenofocus>osd/osd_button_sub_nf.png</texturenofocus>
-							<include condition="SubString(Skin.String(DefaultOSD),714)">OSDdiffuse</include>
-							<onclick>Skin.SetString(DefaultOSD,714)</onclick>
-							<onclick>ReloadSkin()</onclick>
-						</control>
-						<control type="button" id="812">
-							<description>Previous</description>
-							<include>Animation_ButtonFocus</include>
-							<height>60</height>
-							<width>60</width>
-							<texturefocus>osd/osd_button_prev_fo.png</texturefocus>
-							<texturenofocus>osd/osd_button_prev_nf.png</texturenofocus>
-							<include condition="SubString(Skin.String(DefaultOSD),79)">OSDdiffuse</include>
-							<onclick>Skin.SetString(DefaultOSD,79)</onclick>
-							<onclick>ReloadSkin()</onclick>
-						</control>
-						<control type="button" id="813">
-							<description>Rewind</description>
-							<include>Animation_ButtonFocus</include>
-							<height>60</height>
-							<width>60</width>
-							<texturefocus>osd/osd_button_rew_fo.png</texturefocus>
-							<texturenofocus>osd/osd_button_rew_nf.png</texturenofocus>
-							<include condition="SubString(Skin.String(DefaultOSD),73)">OSDdiffuse</include>
-							<onclick>Skin.SetString(DefaultOSD,73)</onclick>
-							<onclick>ReloadSkin()</onclick>
-						</control>
-						<control type="button" id="814">
-							<description>Stop</description>
-							<include>Animation_ButtonFocus</include>
-							<height>60</height>
-							<width>60</width>
-							<texturefocus>osd/osd_button_stop_fo.png</texturefocus>
-							<texturenofocus>osd/osd_button_stop_nf.png</texturenofocus>
-							<include condition="SubString(Skin.String(DefaultOSD),75)">OSDdiffuse</include>
-							<onclick>Skin.SetString(DefaultOSD,75)</onclick>
-							<onclick>ReloadSkin()</onclick>
-						</control>
-						<control type="button" id="815">
-							<description>Play</description>
-							<include>Animation_ButtonFocus</include>
-							<height>60</height>
-							<width>60</width>
-							<texturefocus>osd/osd_button_pause_fo.png</texturefocus>
-							<texturenofocus>osd/osd_button_pause_nf.png</texturenofocus>
-							<include condition="SubString(Skin.String(DefaultOSD),74)">OSDdiffuse</include>
-							<onclick>Skin.SetString(DefaultOSD,74)</onclick>
-							<onclick>ReloadSkin()</onclick>
-						</control>
-						<control type="button" id="816">
-							<description>Forward</description>
-							<include>Animation_ButtonFocus</include>
-							<height>60</height>
-							<width>60</width>
-							<texturefocus>osd/osd_button_ff_fo.png</texturefocus>
-							<texturenofocus>osd/osd_button_ff_nf.png</texturenofocus>
-							<include condition="SubString(Skin.String(DefaultOSD),76)">OSDdiffuse</include>
-							<onclick>Skin.SetString(DefaultOSD,76)</onclick>
-							<onclick>ReloadSkin()</onclick>
-						</control>
-						<control type="button" id="817">
-							<description>Next</description>
-							<include>Animation_ButtonFocus</include>
-							<height>60</height>
-							<width>60</width>
-							<texturefocus>osd/osd_button_next_fo.png</texturefocus>
-							<texturenofocus>osd/osd_button_next_nf.png</texturenofocus>
-							<include condition="SubString(Skin.String(DefaultOSD),710)">OSDdiffuse</include>
-							<onclick>Skin.SetString(DefaultOSD,710)</onclick>
-							<onclick>ReloadSkin()</onclick>
-						</control>
-						<control type="button" id="818">
-							<description>Repeat</description>
-							<include>Animation_ButtonFocus</include>
-							<height>60</height>
-							<width>60</width>
-							<texturefocus>osd/osd_button_repeat_fo.png</texturefocus>
-							<texturenofocus>osd/osd_button_repeat_nf.png</texturenofocus>
-							<include condition="SubString(Skin.String(DefaultOSD),801)">OSDdiffuse</include>
-							<onclick>Skin.SetString(DefaultOSD,801)</onclick>
-							<onclick>ReloadSkin()</onclick>
-						</control>
-						<control type="button" id="819">
-							<description>Video Settings</description>
-							<include>Animation_ButtonFocus</include>
-							<height>60</height>
-							<width>60</width>
-							<texturefocus>osd/osd_button_settings_fo.png</texturefocus>
-							<texturenofocus>osd/osd_button_settings_nf.png</texturenofocus>
-							<include condition="SubString(Skin.String(DefaultOSD),713)">OSDdiffuse</include>
-							<onclick>Skin.SetString(DefaultOSD,713)</onclick>
-							<onclick>ReloadSkin()</onclick>
-						</control>
-						<control type="button" id="820">
-							<description>Audio Settings</description>
-							<include>Animation_ButtonFocus</include>
-							<height>60</height>
-							<width>60</width>
-							<texturefocus>osd/osd_button_audio_fo.png</texturefocus>
-							<texturenofocus>osd/osd_button_audio_nf.png</texturenofocus>
-							<include condition="SubString(Skin.String(DefaultOSD),800)">OSDdiffuse</include>
-							<onclick>Skin.SetString(DefaultOSD,800)</onclick>
-							<onclick>ReloadSkin()</onclick>
-						</control>
-					</control>
-					-->
 				</control>
 
 				<!-- Music Settings -->
@@ -972,14 +795,14 @@
 					<control type="image" id="902">
 						<include>Settings_Line</include>
 					</control>
-				
+				-->
 					<control type="radiobutton" id="903">
 						<include>SettingsLabel</include>
 						<label>$LOCALIZE[31057]</label>
 						<onclick>Skin.ToggleSetting(MusicSongInfoOverlay)</onclick>
 						<selected>Skin.HasSetting(MusicSongInfoOverlay)</selected>
 					</control>
-					-->
+					
 			
 					
 					

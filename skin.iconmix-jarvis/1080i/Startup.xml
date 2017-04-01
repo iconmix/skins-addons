@@ -4,7 +4,10 @@
 	
 	<onload>Skin.SetBool(SmartShortcuts.playlists)</onload> <!-- pour skinhelperservice -->
 	<onload>Skin.SetBool(SmartShortcuts.favorites)</onload>
-
+  <onload condition="!Skin.HasSetting(SagaDetailsDisc)+!Skin.HasSetting(SagaDetailsTexte)+!Skin.HasSetting(SagaDetailsAucun)+!Skin.HasSetting(SagaDetailsClearArt)+!Skin.HasSetting(SagaDetailsBoitier)">Skin.ToggleSetting(SagaDetailsBoitier)</onload>
+	<onload condition="!Skin.HasSetting(GenreDetailsDisc)+!Skin.HasSetting(GenreDetailsTexte)+!Skin.HasSetting(GenreDetailsAucun)+!Skin.HasSetting(GenreDetailsClearArt)+!Skin.HasSetting(GenreDetailsBoitier)">Skin.ToggleSetting(GenreDetailsBoitier)</onload>
+	<onload condition="!Skin.HasSetting(directorDisc)+!Skin.HasSetting(directorTexte)+!Skin.HasSetting(directorAucun)+!Skin.HasSetting(directorClearArt)+!Skin.HasSetting(directorBoitier)">Skin.ToggleSetting(directorBoitier)</onload>
+	
 	<onload>SetProperty(WidgetActifFanart,,Home)</onload>
 	<onload>SetProperty(VideoOsdOn,0,Home)</onload>
 

@@ -151,7 +151,7 @@ msgid "Enable Video/Album Art overlay"
 msgstr ""
 
 msgctxt "#31057"
-msgid "Enable Song Info text overlay"
+msgid "Enable permanent Song Info"
 msgstr ""
 
 #empty strings from id 31058 to 31059

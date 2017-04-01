@@ -57,54 +57,74 @@
 		<include>focusboitiers</include>
 		
 		<control type="group">
-			<posy>15</posy>
 			<posx>-15</posx>
-		<control type="list" id="1999">
+			<top>10</top>
+			<visible>!Container.OnNext</visible>
+			<visible>!Container.OnPrevious</visible>
+		<control type="list" id="1999">			
+				<onfocus condition="Skin.HasSetting(MusicAucun)">SetFocus(55)</onfocus>
+			<focusposition>0</focusposition>
+			<onclick>SetFocus(7003)</onclick>	
+						
+			<movement>9</movement>
+			<description>Widget Lists</description>
+			<include>HorizVert</include>
+			<content>musicdb://artists/$INFO[ListItem.DBID]</content>			
+			<include>VueElementsBoitiers</include>	
+			<visible>!Skin.HasSetting(MusicTexte)</visible>
+			<visible>Container.Content(artists)</visible>
 			
-			<width>1790</width>
-			<onfocus condition="Skin.HasSetting(MusicAucun)">SetFocus(55)</onfocus>
+		</control>
+		<control type="list" id="1999">			
+				<onfocus condition="Skin.HasSetting(MusicAucun)">SetFocus(55)</onfocus>
 			<focusposition>0</focusposition>
 			<onclick>SetFocus(7003)</onclick>				
 			<movement>9</movement>
+			
 			<description>Widget Lists</description>
-			<include condition="!Skin.HasSetting(MusicTexte)+!Skin.HasSetting(MusicAucun)">HorizVert</include>
-			<include condition="Skin.HasSetting(MusicTexte)|Skin.HasSetting(MusicAucun)">VertHoriz</include>
-			<content>musicdb://artists/$INFO[ListItem.DBID]</content>
-			
+			<include>VertHoriz</include>
+			<content>musicdb://artists/$INFO[ListItem.DBID]</content>			
 			<include>VueElementsBoitiers</include>	
-		<!--   <visible>[!Skin.HasSetting(MusicTexte)+!Skin.HasSetting(MusicAucun)]|Skin.HasSetting(MusicBoitier)|Skin.HasSetting(MusicDiscArt)</visible>
-		-->
-			
+			<visible>Skin.HasSetting(MusicTexte)</visible>
 			<visible>Container.Content(artists)</visible>
-			<visible>!Container.OnNext</visible>
-			<visible>!Container.OnPrevious</visible>
+			
 		</control>
 		</control>
 
 
 		<!--------------------------------------------------GENRES------------------------------------------------------ -->
-			<control type="group">
-				<posy>15</posy>
-				<posx>-15</posx>
-				<control type="list" id="1999">
-				
-					<width>1790</width>
-					<onfocus condition="Skin.HasSetting(MusicGenreAucun)">SetFocus(55)</onfocus>
-					<focusposition>0</focusposition>
-					<onclick>SetFocus(7003)</onclick>				
-					<movement>9</movement>
-					<description>Widget Lists</description>
-					<include condition="!Skin.HasSetting(MusicGenreTexte)+!Skin.HasSetting(MusicGenreAucun)">HorizVert</include>
-					<include condition="Skin.HasSetting(MusicGenreTexte)|Skin.HasSetting(MusicGenreAucun)">VertHoriz</include>
-					<content>musicdb://genres/$INFO[ListItem.DBID]</content>
-					
-					<include>VueElementsBoitiers</include>	
-					
-					<visible>Container.Content(genres)</visible>
-					<visible>!Container.OnNext</visible>
-					<visible>!Container.OnPrevious</visible>
-				</control>
-			</control>
+				<control type="group">
+			<posx>-15</posx>
+			<top>10</top>
+			<visible>!Container.OnNext</visible>
+			<visible>!Container.OnPrevious</visible>
+		<control type="list" id="1999">			
+			<onfocus condition="Skin.HasSetting(MusicGenreAucun)">SetFocus(55)</onfocus>
+			<focusposition>0</focusposition>
+			<onclick>SetFocus(7003)</onclick>				
+			<movement>9</movement>
+			<description>Widget Lists</description>
+			<include>HorizVert</include>
+			<content>musicdb://genres/$INFO[ListItem.DBID]</content>			
+			<include>VueElementsBoitiers</include>	
+			<visible>!Skin.HasSetting(MusicGenreTexte)</visible>
+			<visible>Container.Content(genres)</visible>
+		</control>
+		<control type="list" id="1999">			
+			<onfocus condition="Skin.HasSetting(MusicGenreAucun)">SetFocus(55)</onfocus>
+			<focusposition>0</focusposition>
+			<onclick>SetFocus(7003)</onclick>				
+			<movement>9</movement>
+			<description>Widget Lists</description>
+			<include>VertHoriz</include>
+			<content>musicdb://genres/$INFO[ListItem.DBID]</content>			
+			<include>VueElementsBoitiers</include>	
+			<visible>Skin.HasSetting(MusicGenreTexte)</visible>
+			<visible>Container.Content(genres)</visible>
+			
+		</control>
+		</control>
+
 	
 
 		<!---------------------------------------------------------------------------------------------------------------- -->
@@ -307,7 +327,7 @@
 					<onclick condition="Skin.HasSetting(MusicDiscArt)">Skin.Reset(MusicDiscArt)</onclick>
 					<onclick condition="Skin.HasSetting(MusicTexte)">Skin.Reset(MusicTexte)</onclick>
 					<onclick condition="Skin.HasSetting(MusicAucun)">Skin.Reset(MusicAucun)</onclick>
-					<onclick>ReloadSkin()</onclick>
+					<onclick>SetFocus(55)</onclick>
 				</control>
 				<control type="radiobutton" id="1001">
 					<include>BoutonCommun</include>
@@ -319,7 +339,7 @@
 					<onclick condition="Skin.HasSetting(MusicBoitier)">Skin.Reset(MusicBoitier)</onclick>
 					<onclick condition="Skin.HasSetting(MusicTexte)">Skin.Reset(MusicTexte)</onclick>
 					<onclick condition="Skin.HasSetting(MusicAucun)">Skin.Reset(MusicAucun)</onclick>
-					<onclick>ReloadSkin()</onclick>
+					<onclick>SetFocus(55)</onclick>
 				</control>
 				<control type="radiobutton" id="1002">
 					<visible>Container.Content(artists)</visible>
@@ -330,7 +350,7 @@
 					<onclick condition="Skin.HasSetting(MusicBoitier)">Skin.Reset(MusicBoitier)</onclick>
 					<onclick condition="Skin.HasSetting(MusicDiscArt)">Skin.Reset(MusicDiscArt)</onclick>
 					<onclick condition="Skin.HasSetting(MusicAucun)">Skin.Reset(MusicAucun)</onclick>
-					<onclick>ReloadSkin()</onclick>
+					<onclick>SetFocus(55)</onclick>
 				</control>
 				<control type="radiobutton" id="1003">
 					<visible>Container.Content(artists)</visible>
@@ -341,7 +361,7 @@
 					<onclick condition="Skin.HasSetting(MusicBoitier)">Skin.Reset(MusicBoitier)</onclick>
 					<onclick condition="Skin.HasSetting(MusicDiscArt)">Skin.Reset(MusicDiscArt)</onclick>
 					<onclick condition="Skin.HasSetting(MusicTexte)">Skin.Reset(MusicTexte)</onclick>
-					<onclick>ReloadSkin()</onclick>
+					<onclick>SetFocus(55)</onclick>
 				</control>
 
 
@@ -354,7 +374,7 @@
 					<onclick condition="Skin.HasSetting(MusicGenreDiscArt)">Skin.Reset(MusicGenreDiscArt)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreTexte)">Skin.Reset(MusicGenreTexte)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreAucun)">Skin.Reset(MusicGenreAucun)</onclick>
-					<onclick>ReloadSkin()</onclick>
+					<onclick>SetFocus(55)</onclick>
 				</control>
 				<control type="radiobutton" id="1005">
 					<visible>Container.Content(genres)</visible>
@@ -365,7 +385,7 @@
 					<onclick condition="Skin.HasSetting(MusicGenreBoitier)">Skin.Reset(MusicGenreBoitier)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreTexte)">Skin.Reset(MusicGenreTexte)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreAucun)">Skin.Reset(MusicGenreAucun)</onclick>
-					<onclick>ReloadSkin()</onclick>
+					<onclick>SetFocus(55)</onclick>
 				</control>
 				<control type="radiobutton" id="1006">
 					<visible>Container.Content(genres)</visible>
@@ -376,7 +396,7 @@
 					<onclick condition="Skin.HasSetting(MusicGenreBoitier)">Skin.Reset(MusicGenreBoitier)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreDiscArt)">Skin.Reset(MusicGenreDiscArt)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreAucun)">Skin.Reset(MusicGenreAucun)</onclick>
-					<onclick>ReloadSkin()</onclick>
+					<onclick>SetFocus(55)</onclick>
 				</control>
 				<control type="radiobutton" id="1007">
 					<visible>Container.Content(genres)</visible>
@@ -387,7 +407,7 @@
 					<onclick condition="Skin.HasSetting(MusicGenreBoitier)">Skin.Reset(MusicGenreBoitier)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreDiscArt)">Skin.Reset(MusicGenreDiscArt)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreTexte)">Skin.Reset(MusicGenreTexte)</onclick>
-					<onclick>ReloadSkin()</onclick>
+					<onclick>SetFocus(55)</onclick>
 				</control>
 
 			</control>
@@ -510,7 +530,7 @@
 				</control>
 			</control>
 		</control>
-		<!-- -->
+		<!-- --
 		<control type="label">
 				<posx>10</posx>
 				<posy>10</posy>

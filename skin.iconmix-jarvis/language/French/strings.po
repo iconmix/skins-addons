@@ -126,8 +126,8 @@ msgid "Enable Video/Album Art overlay"
 msgstr "Afficher en incrustation les illustrations des vidéos/albums"
 
 msgctxt "#31057"
-msgid "Enable Song Info text overlay"
-msgstr "Activer les informations de la chanson en surimpression"
+msgid "Enable permanent Song Info"
+msgstr "Activer les informations de la chanson en permanence"
 
 msgctxt "#31060"
 msgid "Show Recently Added Items"
