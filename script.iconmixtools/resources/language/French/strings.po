@@ -40,3 +40,7 @@ msgstr "Pas de bandes-annonces trouvées"
 msgctxt "#32507"
 msgid "Update only "
 msgstr "Mettre à jour uniquement "
+
+msgctxt "#32508"
+msgid "Searching trailers... "
+msgstr "Recherche de bande-annonces..."

@@ -7,7 +7,7 @@
 			<posx>500</posx>
 			<posy>300</posy>
 			<width>800</width>
-			<height>450</height>
+			<height>490</height>
 			<animation type="Conditional" condition="StringCompare(Container(3).ListItem.Label2,plein)|StringCompare(Container(6).ListItem.Label2,plein)" reversible="false">
 				<effect type="slide" end="-450" time="10" />
 				<!-- <effect type="rotatey" center="0,240" end="-20" time="10" /> -->
@@ -33,7 +33,7 @@
 					<texture fallback="DefaultThumb.png">$INFO[Container(6).ListItem.Icon]</texture>
 					<bordersize>8</bordersize>
 					<bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
-					<visible>!IsEmpty(Container(6).ListItem.Icon)</visible>
+					<visible>!IsEmpty(Container(6).ListItem.Icon)+!Substring(Container(6).ListItem.Icon,default)</visible>
 				</control>
 				<control type="image">
 					<posx>760</posx>
@@ -49,7 +49,7 @@
 					<texture fallback="DefaultThumb.png">$INFO[Container(3).ListItem.Icon]</texture>
 					<bordersize>8</bordersize>
 					<bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
-					<visible>!IsEmpty(Container(3).ListItem.Icon)</visible>
+					<visible>!IsEmpty(Container(3).ListItem.Icon)+!Substring(Container(3).ListItem.Icon,default)</visible>
 				</control>
 
 
@@ -58,7 +58,7 @@
 					<posx>20</posx>
 					<posy>55</posy>
 					<width>730</width>
-					<height>38</height>
+					<height>76</height>
 					<font>comic24</font>
 					<textcolor>lightgreen</textcolor>
 					<align>center</align>
@@ -69,10 +69,11 @@
 
 				<control type="list" id="3">
 					<posx>20</posx>
-					<posy>100</posy>
+					<posy>140</posy>
 					<width>730</width>
 					<height>300</height>
 					<onleft>7</onleft>
+					<onright>5</onright>
 					<onup>3</onup>
 					<ondown>3</ondown>
 					<itemlayout height="38" width="730">
@@ -141,10 +142,11 @@
 
 				<control type="list" id="6">
 					<posx>20</posx>
-					<posy>100</posy>
+					<posy>140</posy>
 					<width>730</width>
 					<height>300</height>
 					<onleft>7</onleft>
+					<onright>5</onright>
 					<onup>6</onup>
 					<ondown>6</ondown>
 					<itemlayout height="38" width="730">
@@ -215,8 +217,8 @@
 
 			<control type="button" id="5">
 				<description>Default Addon Button</description>
-				<posx>5</posx>
-				<posy>390</posy>
+				<posx>740</posx>
+				<posy>22</posy>
 				<width>50</width>
 				<height>50</height>
 				<font>METF_TitleTextMedium</font>
@@ -227,19 +229,36 @@
 				<texturenofocus colordiffuse="FF7F7F7F">buttons/obtenirplus.png</texturenofocus>
 				<align>right</align>
 				<aligny>center</aligny>
-				<onright condition="!String.IsEmpty(Container(6).ListItem.Label)">6</onright>
-				<onright>3</onright>
-				<onup>7</onup>
-				<ondown>7</ondown>
-				<visible>Integer.IsGreater(Container(6).NumItems,0)</visible>
+				<onleft condition="!IsEmpty(Container(6).ListItem.Label)">6</onleft>
+				<onleft>3</onleft>				
+				<visible>IntegerGreaterThan(Container(6).NumItems,0)</visible> 
+			</control>
+			<control type="button" id="5">
+				<description>Default Addon Button</description>
+				<posx>740</posx>
+				<posy>22</posy>
+				<width>50</width>
+				<height>50</height>
+				<font>METF_TitleTextMedium</font>
+				<colordiffuse>00FFFFFF</colordiffuse>
+				<textcolor>00FFFFFF</textcolor>
+				<focusedcolor>00FFFFFF</focusedcolor>
+				<texturefocus colordiffuse="FFFFFFFF">buttons/ok.png</texturefocus>
+				<texturenofocus colordiffuse="FF7F7F7F">buttons/ok.png</texturenofocus>
+				<align>right</align>
+				<aligny>center</aligny>
+				<onleft condition="!IsEmpty(Container(6).ListItem.Label)">6</onleft>
+				<onleft>3</onleft>
+				
+				 <visible>!IntegerGreaterThan(Container(6).NumItems,0)</visible> 
 			</control>
 
 			<control type="button" id="7">
 				<description>Cancel button</description>
 				<posx>5</posx>
-				<posy>15</posy>
-				<width>50</width>
-				<height>50</height>
+				<posy>22</posy>
+				<width>53</width>
+				<height>53</height>
 				<font>METF_TitleTextMedium</font>
 				<colordiffuse>00FFFFFF</colordiffuse>
 				<textcolor>00FFFFFF</textcolor>
@@ -248,10 +267,9 @@
 				<texturenofocus colordiffuse="FF7F7F7F">buttons/cancel.png</texturenofocus>
 				<align>right</align>
 				<aligny>center</aligny>
-				<onright condition="!String.IsEmpty(Container(6).ListItem.Label)">6</onright>
+				<onright condition="!IsEmpty(Container(6).ListItem.Label)">6</onright>
 				<onright>3</onright>
-				<onup>5</onup>
-				<ondown>5</ondown>
+				
 				<!-- <onclick>Close</onclick> -->
 				<info>.</info>
 				<label>.</label>

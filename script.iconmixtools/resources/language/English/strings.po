@@ -39,3 +39,7 @@ msgstr ""
 msgctxt "#32507"
 msgid "Update only "
 msgstr ""
+
+msgctxt "#32508"
+msgid "Searching trailers... "
+msgstr ""

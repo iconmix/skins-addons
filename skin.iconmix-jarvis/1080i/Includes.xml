@@ -779,6 +779,7 @@
 				<visible>!StringCompare(ListItem.Writer,movie)+!Control.IsVisible(5055)</visible>
 				<visible>!Control.HasFocus(5051)+!Control.HasFocus(505)</visible>
 			</control>
+		
 			
 		</control>
 
@@ -1269,7 +1270,7 @@
 	<control type="group">
 		<posy>300</posy>
 		<posx>-600</posx>
-		<visible>Window.IsActive(502)+Control.HasFocus(1999)+!Container(1999).OnPrevious+!Container(1999).OnNext+[[Container.Content(genres)+!Skin.HasSetting(MusicGenreDetailsAucun)]|[Container.Content(artists)+!Skin.HasSetting(MusicAucun)]]</visible>
+		<visible>Window.IsActive(502)+Control.HasFocus(2999)+!Container(1999).OnPrevious+!Container(1999).OnNext+[[Container.Content(genres)+!Skin.HasSetting(MusicGenreDetailsAucun)]|[Container.Content(artists)+!Skin.HasSetting(MusicAucun)]]</visible>
 		<animation type="Visible">
 
 
@@ -1360,14 +1361,7 @@
 -->
 
 <include name="VertHoriz">
-	<onup>1999</onup>
-	<ondown>1999</ondown>
-	<onleft>Action(firstpage)</onleft>
-	<onleft>55</onleft>
-	<onright>Action(firstpage)</onright>
-	<onright>55</onright>
-	<onback>Action(firstpage)</onback>
-	<onback>55</onback>
+
 	<movement>6</movement>
 	<height>177</height>
 	<width>1920</width>
@@ -1383,16 +1377,7 @@
 	<posx>25</posx>
 	<height>260</height>
 	<width>1920</width>
-	<onup>Action(firstpage)</onup>
-	<onup>55</onup>
-	<ondown condition="Control.HasFocus(1999)">Action(firstpage)</ondown>
-	<onfocus condition="!Control.HasFocus(1999)">Action(firstpage)</onfocus>
-	<ondown>55</ondown>
-	<onleft>1999</onleft>
-	<onright>1999</onright>
-	<onback>Action(firstpage)</onback>
-	<preloaditems>6</preloaditems>
-	<onback>55</onback>
+	
 	<movement>9</movement>
 	<orientation>horizontal</orientation>
 </include>
@@ -1411,7 +1396,7 @@
 			<align>center</align>
 			<font>lcdep</font>
 			<textcolor>black</textcolor>
-			<label>$LOCALIZE[31917][CR]$INFO[ListItem.Writer,( , )]</label>
+			<label>$LOCALIZE[31917][CR]$INFO[ListItem.Property(DateSortie),( , )]</label>
 			<angle>49</angle>
 		</control>
 		<control type="label">
@@ -1421,10 +1406,10 @@
 			<align>center</align>
 			<font>lcdep</font>
 			<textcolor>yellow</textcolor>
-			<label>$LOCALIZE[31917][CR]$INFO[ListItem.Writer,( , )]</label>
+			<label>$LOCALIZE[31917][CR]$INFO[ListItem.Property(DateSortie),( , )]</label>
 			<angle>49</angle>
 		</control>
-		<visible>StringCompare(ListItem.Label2,manquant)</visible>
+		<visible>!IsEmpty(ListItem.Property(DateSortie))</visible>
 	</control>
 </include>
 
@@ -1450,7 +1435,7 @@
 				<aspectratio align="center">stretch</aspectratio>
 				<bordersize>2</bordersize>
 				<texture diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+				<animation effect="fade" end="50" condition="!IsEmpty(ListItem.Property(DateSortie))">Conditional</animation>
 			</control>
 
 
@@ -1471,7 +1456,8 @@
 	<focusedlayout width="180" height="240" condition="!Skin.HasSetting(SagaDetailsClearArt)+!Skin.HasSetting(SagaDetailsDisc)">
 		<control type="group">
 
-			<animation type="focus">
+			<!-- <animation type="focus"> -->
+			<animation type="Conditional" condition="Control.HasFocus(5002)">
 
 				<effect type="zoom" center="100" start="100" end="110" time="400" easy="out" tween="bounce" delay="1" reversible="false"/>
 
@@ -1493,7 +1479,7 @@
 				<aspectratio align="center">stretch</aspectratio>
 				<bordersize>2</bordersize>
 				<texture diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+				<animation effect="fade" end="50" condition="!IsEmpty(ListItem.Property(DateSortie))">Conditional</animation>
 			</control>
 			<control type="image">
 				<description>Glass overlay</description>
@@ -1507,7 +1493,7 @@
 			</control>
 			<include>ManqueAlAppel</include>
 		</control>
-
+		
 	</focusedlayout>
 
 	<itemlayout width="240" height="280" condition="Skin.HasSetting(SagaDetailsClearArt)">
@@ -1542,7 +1528,7 @@
 				<bordersize>2</bordersize>
 				<bordertexture>frames/cdart-mask.png</bordertexture>
 				<animation effect="fade" end="50" condition="true">Conditional</animation>
-				<visible>StringCompare(ListItem.Label2,manquant)</visible>
+				<visible>!IsEmpty(ListItem.Property(DateSortie))</visible>
 			</control>
 			<control type="image">
 				<left>0</left>
@@ -1554,7 +1540,7 @@
 				<bordersize>2</bordersize>
 				<colordiffuse>70FFFFFF</colordiffuse>
 
-				<visible>StringCompare(ListItem.Label2,manquant)</visible>
+				<visible>!IsEmpty(ListItem.Property(DateSortie))</visible>
 			</control>
 		</control>
 		<include>ManqueAlAppel</include>
@@ -1563,7 +1549,8 @@
 
 		<control type="group">
 			<posy>15</posy>
-			<animation type="focus">
+			<!-- <animation type="focus"> -->
+			<animation type="Conditional" condition="Control.HasFocus(5002)">
 
 				<effect type="zoom" center="100" start="100" end="110" time="400" easy="out" tween="bounce" delay="1" reversible="false"/>
 
@@ -1599,7 +1586,7 @@
 				<bordersize>2</bordersize>
 				<bordertexture>frames/cdart-mask.png</bordertexture>
 				<animation effect="fade" end="50" condition="true">Conditional</animation>
-				<visible>StringCompare(ListItem.Label2,manquant)</visible>
+				<visible>!IsEmpty(ListItem.Property(DateSortie))</visible>
 			</control>
 			<control type="image">
 				<left>0</left>
@@ -1611,7 +1598,7 @@
 				<bordersize>2</bordersize>
 				<colordiffuse>70FFFFFF</colordiffuse>
 
-				<visible>StringCompare(ListItem.Label2,manquant)</visible>
+				<visible>!IsEmpty(ListItem.Property(DateSortie))</visible>
 			</control>
 			<include>ManqueAlAppel</include>
 		</control>
@@ -1628,7 +1615,7 @@
 				<height>170</height>
 				<aspectratio>keep</aspectratio>
 				<texture background="true">$INFO[ListItem.Art(discart)]</texture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+				<animation effect="fade" end="50" condition="!IsEmpty(ListItem.Property(DateSortie))">Conditional</animation>
 			</control>
 			<control type="image">
 				<left>0</left>
@@ -1637,7 +1624,7 @@
 				<height>170</height>
 				<aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
 				<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+				<animation effect="fade" end="50" condition="!IsEmpty(ListItem.Property(DateSortie))">Conditional</animation>
 				<bordersize>2</bordersize>
 				<bordertexture>frames/cdart-mask.png</bordertexture>
 				<visible>IsEmpty(ListItem.Art(discart))</visible>
@@ -1649,7 +1636,8 @@
 	<focusedlayout width="200" height="240" condition="Skin.HasSetting(SagaDetailsDisc)">
 		<control type="group">
 
-			<animation type="focus">
+			<!-- <animation type="focus"> -->
+			<animation type="Conditional" condition="Control.HasFocus(5002)">
 
 				<effect type="zoom" center="100" start="100" end="110" time="400" easy="out" tween="bounce" delay="1" reversible="false"/>
 
@@ -1661,7 +1649,7 @@
 				<height>170</height>
 				<aspectratio>keep</aspectratio>
 				<texture background="true">$INFO[ListItem.Art(discart)]</texture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+				<animation effect="fade" end="50" condition="!IsEmpty(ListItem.Property(DateSortie))">Conditional</animation>
 			</control>
 			<control type="image">
 				<left>0</left>
@@ -1672,7 +1660,7 @@
 				<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
 				<bordersize>2</bordersize>
 				<bordertexture>frames/cdart-mask.png</bordertexture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+				<animation effect="fade" end="50" condition="!IsEmpty(ListItem.Property(DateSortie))">Conditional</animation>
 				<visible>IsEmpty(ListItem.Art(discart))</visible>
 			</control>
 			<control type="image">
@@ -1684,7 +1672,7 @@
 				<texture border="2" >frames/cdart-maskFO.png</texture>
 				<aspectratio align="center">keep</aspectratio>
 
-				<visible>Control.HasFocus(1999)</visible>
+				<visible>Control.HasFocus(2999)</visible>
 			</control>
 			<include>ManqueAlAppel</include>
 		</control>
@@ -1738,12 +1726,19 @@
 	<value condition="Control.HasFocus(1998)|Control.HasFocus(5051)">$INFO[Container(1998).ListItem.Label]</value>
 	<value></value>
 </variable>
+
+<include name="AnimationFocus1999">
+	<animation type="Conditional" condition="Control.HasFocus(2999)" reversible="true">
+					<effect type="zoom" center="auto" start="100" end="80" time="100"  />
+				</animation>
+</include>
+
 <include name="VueElementsBoitiers">
 
 
 	<!-- <include>delayfanartinc</include> -->
 
-	<autoscroll time="6000">!Control.HasFocus(1999)</autoscroll>
+	<autoscroll time="6000">!Control.HasFocus(2999)</autoscroll>
 <!-- TEXTE-->
 	<itemlayout width="970" height="30" condition="[Window.IsActive(10025)+[[Skin.HasSetting(GenreDetailsTexte)+Container.Content(Genres)] |[Skin.HasSetting(directorTexte)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(SagaDetailsTexte)+StringCompare(ListItem.DBTYPE,set)]]]| [Window.IsActive(502)+[[Skin.HasSetting(MusicGenreDetailsTexte)+Container.Content(Genres)] | [Skin.HasSetting(MusicTexte)+!Container.Content(Genres)]]]">
 	
@@ -1751,13 +1746,13 @@
 			<align>center</align>
 			<font>comic24</font>
 			<label>$INFO[ListItem.Label]$VAR[doublonvar]</label>
-			<visible>!StringCompare(ListItem.Label2,manquant)</visible>
+			<visible>!!IsEmpty(ListItem.Property(DateSortie))</visible>
 		</control>
 		<control type="label">
 			<align>center</align>
 			<font>comic24</font>
 			<label>[COLOR=red][I]$INFO[ListItem.Label][/I][/COLOR]</label>
-			<visible>StringCompare(ListItem.Label2,manquant)</visible>
+			<visible>!IsEmpty(ListItem.Property(DateSortie))</visible>
 		</control>
 	</itemlayout>
 	<focusedlayout width="970" height="30" condition="[Window.IsActive(10025)+[[Skin.HasSetting(GenreDetailsTexte)+Container.Content(Genres)] |[Skin.HasSetting(directorTexte)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(SagaDetailsTexte)+StringCompare(ListItem.DBTYPE,set)]]]| [Window.IsActive(502)+[[Skin.HasSetting(MusicGenreDetailsTexte)+Container.Content(Genres)] | [Skin.HasSetting(MusicTexte)+!Container.Content(Genres)]]]">
@@ -1766,34 +1761,34 @@
 
 			<width>970</width>
 			<control type="label">
-				<visible>!Control.HasFocus(1999)</visible>
+				<visible>!Control.HasFocus(2999)</visible>
 				<align>center</align>
 				<font>comic24</font>
 				<label>$INFO[ListItem.Label]$VAR[doublonvar]</label>
-				<visible>!StringCompare(ListItem.Label2,manquant)</visible>
+				<visible>!!IsEmpty(ListItem.Property(DateSortie))</visible>
 			</control>
 			<control type="label">
-				<visible>!Control.HasFocus(1999)</visible>
+				<visible>!Control.HasFocus(2999)</visible>
 				<align>center</align>
 				<font>comic24</font>
 				<label>[COLOR=red][I]$INFO[ListItem.Label][/I][/COLOR]</label>
-				<visible>StringCompare(ListItem.Label2,manquant)</visible>
+				<visible>!IsEmpty(ListItem.Property(DateSortie))</visible>
 			</control>
 
 			<control type="label">
-				<visible>Control.HasFocus(1999)</visible>
+				<visible>Control.HasFocus(2999)</visible>
 				<align>center</align>
 				<font>comic24</font>
 				<label>[I][COLOR=yellow]$INFO[ListItem.Label][/COLOR][/I]$VAR[doublonvar]</label>
-				<visible>!StringCompare(ListItem.Label2,manquant)</visible>
+				<visible>!!IsEmpty(ListItem.Property(DateSortie))</visible>
 
 			</control>
 			<control type="label">
-				<visible>Control.HasFocus(1999)</visible>
+				<visible>Control.HasFocus(2999)</visible>
 				<align>center</align>
 				<font>comic24</font>
 				<label>[I][COLOR=blue]$INFO[ListItem.Label][/COLOR][/I]</label>
-				<visible>StringCompare(ListItem.Label2,manquant)</visible>
+				<visible>!IsEmpty(ListItem.Property(DateSortie))</visible>
 			</control>
 		</control>
 	</focusedlayout>
@@ -1801,17 +1796,17 @@
 <!-- BOITIERS-->
 	<itemlayout width="180" height="240" condition="[[Skin.HasSetting(SagaDetailsBoitier)+StringCompare(ListItem.DBTYPE,set)] | [Skin.HasSetting(directorBoitier)+[Container.Content(directors)|Container.Content(actors)]] |[Skin.HasSetting(GenreDetailsBoitier)+Container.Content(Genres)]]+Window.IsActive(10025)">
 		<control type="group">
-
+			<include>AnimationFocus1999</include>
 			<posy>30</posy>
 			<control type="image">
 				<posx>0</posx>
 				<posy>-2</posy>
 				<width>180</width>
 				<height>212</height>
-				<texture border="10" diffuse="showcase_matte.png">frames/casefondbleu.png</texture>
+				<texture backgrount="true"  border="10" diffuse="showcase_matte.png">frames/casefondbleu.png</texture>
 				<aspectratio align="center">stretch</aspectratio>
-
 			</control>
+			
 			<control type="image">
 				<posx>20</posx>
 				<posy>8</posy>
@@ -1819,10 +1814,9 @@
 				<height>190</height>
 				<aspectratio align="center">stretch</aspectratio>
 				<bordersize>2</bordersize>
-				<texture diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+				<texture backgrount="true"  diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
+				<animation effect="fade" end="50" condition="!IsEmpty(ListItem.Property(DateSortie))">Conditional</animation>
 			</control>
-
 
 			<control type="image">
 				<description>Glass overlay</description>
@@ -1830,10 +1824,9 @@
 				<posy>-2</posy>
 				<width>180</width>
 				<height>212</height>
-				<texture border="10" diffuse="showcase_matte.png">frames/case1.png</texture>
+				<texture backgrount="true"  border="10" diffuse="showcase_matte.png">frames/case1.png</texture>
 				<aspectratio align="center">stretch</aspectratio>
 			</control>
-
 
 			<include>ManqueAlAppel</include>
 		</control>
@@ -1842,16 +1835,14 @@
 	</itemlayout>
 	<focusedlayout width="180" height="240" condition="[[Skin.HasSetting(SagaDetailsBoitier)+StringCompare(ListItem.DBTYPE,set)] | [Skin.HasSetting(directorBoitier)+[Container.Content(directors)|Container.Content(actors)]] |[Skin.HasSetting(GenreDetailsBoitier)+Container.Content(Genres)]]+Window.IsActive(10025)">
 		<control type="group">
-
 			<posy>30</posy>
 			<control type="image">
 				<posx>0</posx>
 				<posy>-2</posy>
 				<width>180</width>
 				<height>212</height>
-				<texture border="10" diffuse="showcase_matte.png">frames/casefondbleu.png</texture>
+				<texture backgrount="true"  border="10" diffuse="showcase_matte.png">frames/casefondbleu.png</texture>
 				<aspectratio align="center">stretch</aspectratio>
-
 			</control>
 			<control type="image">
 				<posx>20</posx>
@@ -1860,37 +1851,34 @@
 				<height>190</height>
 				<aspectratio align="center">stretch</aspectratio>
 				<bordersize>2</bordersize>
-				<texture diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+				<texture backgrount="true"  diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
+				<animation effect="fade" end="50" condition="!IsEmpty(ListItem.Property(DateSortie))">Conditional</animation>
 			</control>
-
-
 			<control type="image">
 				<description>Glass overlay</description>
 				<posx></posx>
 				<posy>-2</posy>
 				<width>180</width>
 				<height>212</height>
-				<texture border="10" diffuse="showcase_matte.png">frames/case1.png</texture>
+				<texture backgrount="true"  border="10" diffuse="showcase_matte.png">frames/case1.png</texture>
 				<aspectratio align="center">stretch</aspectratio>
 			</control>
-
-
 			<include>ManqueAlAppel</include>
 		</control>
 		<include>doublon</include>
-
+		
 	</focusedlayout>
 <!-- CLEARART-->
 	<itemlayout width="240" height="280" condition="[[Skin.HasSetting(SagaDetailsClearArt)+StringCompare(ListItem.DBTYPE,set)] | [Skin.HasSetting(directorClearArt)+[Container.Content(directors)|Container.Content(actors)]] |[Skin.HasSetting(GenreDetailsClearArt)+Container.Content(Genres)]]+Window.IsActive(10025)">
-
+   <control type="group">
+		<include>AnimationFocus1999</include>
 		<control type="image">
 			<left>0</left>
 			<top>10</top>
 			<width>200</width>
 			<height>200</height>
 			<aspectratio>keep</aspectratio>
-			<texture background="true">$VAR[ListClearartClear]</texture>
+			<texture backgrount="true"  background="true">$VAR[ListClearartClear]</texture>
 		</control>
 		<control type="image">
 			<left>0</left>
@@ -1899,7 +1887,7 @@
 			<height>120</height>
 			<aligny>top</aligny>
 
-			<texture background="true" flipy="true" diffuse="frames/reflect_poster2.png" >$VAR[ListClearartClear]</texture>
+			<texture backgrount="true"  background="true" flipy="true" diffuse="frames/reflect_poster2.png" >$VAR[ListClearartClear]</texture>
 			<aspectratio scalediffuse="true">stretch</aspectratio>
 			<colordiffuse>70FFFFFF</colordiffuse>
 			<visible>!Skin.HasSetting(CacheFond)</visible>
@@ -1910,11 +1898,11 @@
 			<width>120</width>
 			<height>120</height>
 			<aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
-			<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
+			<texture backgrount="true"  background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
 			<bordersize>2</bordersize>
 			<bordertexture>frames/cdart-mask.png</bordertexture>
 			<animation effect="fade" end="50" condition="true">Conditional</animation>
-			<visible>StringCompare(ListItem.Label2,manquant)</visible>
+			<visible>!IsEmpty(ListItem.Property(DateSortie))</visible>
 		</control>
 		<control type="image">
 			<left>0</left>
@@ -1922,12 +1910,13 @@
 			<width>120</width>
 			<height>120</height>
 			<aspectratio scalediffuse="true"  aligny="center">stretch</aspectratio>
-			<texture background="true" flipy="true" diffuse="frames/cdart-mask_reflect.png">$INFO[ListItem.Icon]</texture>
+			<texture backgrount="true"  background="true" flipy="true" diffuse="frames/cdart-mask_reflect.png">$INFO[ListItem.Icon]</texture>
 			<bordersize>2</bordersize>
 			<colordiffuse>70FFFFFF</colordiffuse>
 			<visible>!Skin.HasSetting(CacheFond)</visible>
-			<visible>StringCompare(ListItem.Label2,manquant)</visible>
+			<visible>!IsEmpty(ListItem.Property(DateSortie))</visible>
 		</control>
+	</control>
 		<include>doublon</include>
 
 		<include>ManqueAlAppel</include>
@@ -1935,12 +1924,7 @@
 	<focusedlayout width="240" height="280" condition="[[Skin.HasSetting(SagaDetailsClearArt)+StringCompare(ListItem.DBTYPE,set)] | [Skin.HasSetting(directorClearArt)+[Container.Content(directors)|Container.Content(actors)]] |[Skin.HasSetting(GenreDetailsClearArt)+Container.Content(Genres)]]+Window.IsActive(10025)">
 
 		<control type="group">
-			<animation type="focus">
-
-				<effect type="zoom" center="100" start="100" end="90" time="400" easy="out" tween="bounce" delay="1" reversible="false"/>
-				<effect type="zoom" center="100" end="0" time="400" delay="1500" reversible="false"/>
-
-			</animation>
+			
 
 			<control type="image">
 				<left>0</left>
@@ -1948,7 +1932,7 @@
 				<width>200</width>
 				<height>200</height>
 				<aspectratio>keep</aspectratio>
-				<texture background="true">$VAR[ListClearartClear]</texture>
+				<texture backgrount="true"  background="true">$VAR[ListClearartClear]</texture>
 
 			</control>
 			<control type="image">
@@ -1958,7 +1942,7 @@
 				<height>120</height>
 				<aligny>top</aligny>
 
-				<texture background="true" flipy="true" diffuse="frames/reflect_poster2.png" >$VAR[ListClearartClear]</texture>
+				<texture backgrount="true"  background="true" flipy="true" diffuse="frames/reflect_poster2.png" >$VAR[ListClearartClear]</texture>
 				<aspectratio scalediffuse="true">stretch</aspectratio>
 				<colordiffuse>70FFFFFF</colordiffuse>
 				<visible>!Skin.HasSetting(CacheFond)</visible>
@@ -1969,11 +1953,11 @@
 				<width>120</width>
 				<height>120</height>
 				<aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
-				<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
+				<texture backgrount="true"  background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
 				<bordersize>2</bordersize>
 				<bordertexture>frames/cdart-mask.png</bordertexture>
 				<animation effect="fade" end="50" condition="true">Conditional</animation>
-				<visible>StringCompare(ListItem.Label2,manquant)</visible>
+				<visible>!IsEmpty(ListItem.Property(DateSortie))</visible>
 			</control>
 			<control type="image">
 				<left>0</left>
@@ -1981,11 +1965,11 @@
 				<width>120</width>
 				<height>120</height>
 				<aspectratio scalediffuse="true"  aligny="center">stretch</aspectratio>
-				<texture background="true" flipy="true" diffuse="frames/cdart-mask_reflect.png">$INFO[ListItem.Icon]</texture>
+				<texture backgrount="true"  background="true" flipy="true" diffuse="frames/cdart-mask_reflect.png">$INFO[ListItem.Icon]</texture>
 				<bordersize>2</bordersize>
 				<colordiffuse>70FFFFFF</colordiffuse>
 				<visible>!Skin.HasSetting(CacheFond)</visible>
-				<visible>StringCompare(ListItem.Label2,manquant)</visible>
+				<visible>!IsEmpty(ListItem.Property(DateSortie))</visible>
 			</control>
 			<include>doublon</include>
 
@@ -1996,15 +1980,15 @@
 <!-- DISQUES-->
 	<itemlayout    width="200" height="240" condition="[[Skin.HasSetting(SagaDetailsDisc)+StringCompare(ListItem.DBTYPE,set)] | [Skin.HasSetting(directorDisc)+[Container.Content(directors)|Container.Content(actors)]] |[Skin.HasSetting(GenreDetailsDisc)+Container.Content(Genres)]]+Window.IsActive(10025)">
 		<control type="group">
-
+			<include>AnimationFocus1999</include>
 			<control type="image">
 				<left>0</left>
 				<top>40</top>
 				<width>170</width>
 				<height>170</height>
 				<aspectratio>keep</aspectratio>
-				<texture background="true">$INFO[ListItem.Art(discart)]</texture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+				<texture backgrount="true"  background="true">$INFO[ListItem.Art(discart)]</texture>
+				<animation effect="fade" end="50" condition="!IsEmpty(ListItem.Property(DateSortie))">Conditional</animation>
 			</control>
 			<control type="image">
 				<left>0</left>
@@ -2012,8 +1996,8 @@
 				<width>170</width>
 				<height>170</height>
 				<aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
-				<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+				<texture backgrount="true"  background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
+				<animation effect="fade" end="50" condition="!IsEmpty(ListItem.Property(DateSortie))">Conditional</animation>
 				<bordersize>2</bordersize>
 				<bordertexture>frames/cdart-mask.png</bordertexture>
 				<visible>IsEmpty(ListItem.Art(discart))</visible>
@@ -2027,20 +2011,15 @@
 	<focusedlayout width="200" height="240" condition="[[Skin.HasSetting(SagaDetailsDisc)+StringCompare(ListItem.DBTYPE,set)] | [Skin.HasSetting(directorDisc)+[Container.Content(directors)|Container.Content(actors)]] |[Skin.HasSetting(GenreDetailsDisc)+Container.Content(Genres)]]+Window.IsActive(10025)">
 		<control type="group">
 
-			<animation type="focus">
-
-				<effect type="zoom" center="100" start="100" end="90" time="400" easy="out" tween="bounce" delay="1" reversible="false"/>
-				<effect type="zoom" center="100" end="0" time="400" delay="1500" reversible="false"/>
-
-			</animation>
+			
 			<control type="image">
 				<left>0</left>
 				<top>40</top>
 				<width>170</width>
 				<height>170</height>
 				<aspectratio>keep</aspectratio>
-				<texture background="true">$INFO[ListItem.Art(discart)]</texture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+				<texture backgrount="true"  background="true">$INFO[ListItem.Art(discart)]</texture>
+				<animation effect="fade" end="50" condition="!IsEmpty(ListItem.Property(DateSortie))">Conditional</animation>
 			</control>
 			<control type="image">
 				<left>0</left>
@@ -2048,10 +2027,10 @@
 				<width>170</width>
 				<height>170</height>
 				<aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
-				<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
+				<texture backgrount="true"  background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
 				<bordersize>2</bordersize>
 				<bordertexture>frames/cdart-mask.png</bordertexture>
-				<animation effect="fade" end="50" condition="StringCompare(ListItem.Label2,manquant)">Conditional</animation>
+				<animation effect="fade" end="50" condition="!IsEmpty(ListItem.Property(DateSortie))">Conditional</animation>
 				<visible>IsEmpty(ListItem.Art(discart))</visible>
 			</control>
 			<control type="image">
@@ -2060,10 +2039,10 @@
 				<posy>40</posy>
 				<width>170</width>
 				<height>170</height>
-				<texture border="2" >frames/cdart-maskFO.png</texture>
+				<texture backgrount="true"  border="2" >frames/cdart-maskFO.png</texture>
 				<aspectratio align="center">keep</aspectratio>
 
-				<visible>Control.HasFocus(1999)</visible>
+				<visible>Control.HasFocus(2999)</visible>
 			</control>
 			<include>doublon</include>
 
@@ -2074,6 +2053,8 @@
 	</focusedlayout>
 <!-- MUSIQUE-->
 	<itemlayout width="180" height="240" condition="Window.IsActive(502)+[[Skin.HasSetting(MusicBoitier)+!Container.Content(Genres)]|[Skin.HasSetting(MusicGenreDetailsBoitier)+Container.Content(Genres)]]">
+		<control type="group">
+			<include>AnimationFocus1999</include>
 		<control type="image">
 			<posx>10</posx>
 			<posy>50</posy>
@@ -2098,15 +2079,11 @@
 			<texture fallback="DefaultThumb.png">$VAR[pochettemusic]</texture>
 			<aspectratio>scale</aspectratio>
 		</control>
+		</control>
 	</itemlayout>
 	<focusedlayout width="180" height="240" condition="Window.IsActive(502)+[[Skin.HasSetting(MusicBoitier)+!Container.Content(Genres)]|[Skin.HasSetting(MusicGenreDetailsBoitier)+Container.Content(Genres)]]">
 		<control type="group">
-			<animation type="focus">
-
-				<effect type="zoom" center="100" start="100" end="90" time="400" easy="out" tween="bounce" delay="1" reversible="false"/>
-				<effect type="zoom" center="100" end="0" time="400" delay="1500" reversible="false"/>
-
-			</animation>
+			
 
 			<control type="image">
 				<posx>10</posx>
@@ -2281,7 +2258,7 @@
 <include name="focusboitiers">
 	<include>boitiersmusicanim</include>
 	<control type="group">
-		<visible>!Window.IsActive(502)+Control.HasFocus(1999)</visible>
+		<visible>!Window.IsActive(502)+Control.HasFocus(2999)</visible>
 
 		<posx>-480</posx>
 		<posy>260</posy>
@@ -2295,7 +2272,7 @@
 
 		<control type="group">
 			<posx>-20</posx>
-			<!--	<visible>Control.HasFocus(1999)+!Container(1999).OnNext+!Container(1999).OnPrevious</visible>
+			<!--	<visible>Control.HasFocus(2999)+!Container(1999).OnNext+!Container(1999).OnPrevious</visible>
 			slide du fond + disc --->
 			<animation type="Conditional" condition="!Container(1999).OnNext+!Container(1999).OnPrevious">
 				<!-- <effect type="slide"  end="0,-570" time="300" delay="1000" reversible="false"/> -->
@@ -2310,7 +2287,26 @@
 				<texture>frames/back_1080p.png</texture>
 				<aspectratio>keep</aspectratio>
 			</control>
-
+			
+			<control type="label">
+				<top>23</top>
+				<left>158</left>
+				<font>comic24</font>				
+				<width>290</width>
+				<align>center</align>
+				<label>[COLOR=grey][B]$INFO[Container(1999).ListItem.Year,,][/B][/COLOR]</label>
+			
+			</control>
+			<control type="label">
+				<top>20</top>
+				<left>155</left>
+				<font>comic24</font>				
+				<width>290</width>
+				<align>center</align>
+				<label>[B]$INFO[Container(1999).ListItem.Year,,][/B]</label>
+			
+			</control>
+			
 			<control type="image">
 				<top>50</top>
 				<left>229</left>
@@ -2320,6 +2316,8 @@
 				<aspectratio>keep</aspectratio>
 				<colordiffuse>MediaFlagDiffuse</colordiffuse>
 			</control>
+		
+			
 
 
 			<include>drapeauxlangues</include>
@@ -2344,6 +2342,9 @@
 					<animation effect="rotate"  center="auto" end="-360" time="700" delay="2500" condition="!Container(1999).OnNext+!Container(1999).OnPrevious" reversible="false">Conditonal</animation>
 
 				</control>
+				
+				
+
 				<control type="image">
 
 					<aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
@@ -2355,9 +2356,10 @@
 					<animation effect="rotate"  center="auto" end="-360" time="700" delay="2500" condition="!Container(1999).OnNext+!Container(1999).OnPrevious" reversible="false">Conditonal</animation>
 
 				</control>
-
+				
 			</control>
 		</control>
+		
 		<control type="image">
 			<posx>0</posx>
 			<posy>0</posy>
@@ -2384,7 +2386,7 @@
 			<aspectratio align="center">stretch</aspectratio>
 			<bordersize>2</bordersize>
 			<texture>showcase_matte2-manquant.png</texture>
-			<visible>StringCompare(Container(1999).ListItem.Label2,manquant)</visible>
+			<visible>!IsEmpty(Container(1999).ListItem.Property(DateSortie))</visible>
 		</control>
 		<control type="group">
 			<posy>165</posy>
@@ -2410,7 +2412,7 @@
 				<label>$LOCALIZE[31917]</label>
 				<angle>49</angle>
 			</control>
-			<visible>StringCompare(Container(1999).ListItem.Label2,manquant)</visible>
+			<visible>!IsEmpty(Container(1999).ListItem.Property(DateSortie))</visible>
 		</control>
 
 		<control type="image">
@@ -2433,7 +2435,7 @@
 			<font>impactsongs</font>
 			<textcolor>yellow</textcolor>
 		</control>
-
+		
 
 
 
@@ -2511,7 +2513,7 @@
 				<include>Animation_OpenCloseFade</include>
 				<posx>62</posx>
 				<posy>264</posy>
-				<visible>Window.IsActive(502)+!Control.HasFocus(1999)</visible>
+				<visible>Window.IsActive(502)+!Control.HasFocus(2999)</visible>
 				<!-- Album Genre -->
 				<control type="label">
 					<width>380</width>
@@ -2555,7 +2557,7 @@
 				<textcolor>TextNF</textcolor>
 				<label>[COLOR=MediaDetailsInfo]$LOCALIZE[31427] [COLOR=NowPlayingTitle]($INFO[Window(Home).Property(NextAired.NextDate)])[/COLOR] :[COLOR=white] $INFO[Window(Home).Property(NextAired.NextTitle)][I]$INFO[Window(Home).Property(NextAired.NextSeasonNumber), (S,]$INFO[Window(Home).Property(NextAired.NextEpisodeNumber),E,)][/I][/COLOR]</label>
 
-				<visible>[Container.Content(tvshows)|Container.Content(episodes)]+!IsEmpty(Window(Home).Property(NextAired.NextDate))+!Skin.HasSetting(ShowFilePath)</visible>
+				<visible>[Container.Content(tvshows)|Container.Content(episodes)]+!IsEmpty(Window(Home).Property(NextAired.NextDate))</visible>
 			</control>
 			<control type="group">
 				<posy>80</posy>
@@ -2598,7 +2600,7 @@
 				<height>80</height>
 				<itemgap>10</itemgap>
 				<align>center</align>
-				<visible>!Control.HasFocus(1999)</visible>
+				<visible>!Control.HasFocus(2999)</visible>
 				<orientation>horizontal</orientation>
 				<include>ViewDetailsGenreYearDurEpsUnwatched</include>
 				<include>VisibleIfNotMovieSet</include>
@@ -2936,7 +2938,7 @@
 			<include>Animation_FadedByMenu</include>
 			<include>Animation_OpenCloseFade</include>
 			<include>Animation_HiddenByInfo</include>
-			<animation type="Conditional" condition="[Control.HasFocus(1999)|IntegerGreaterThan(Container(8885).NumPages,1)]+Skin.HasSetting(ShowLargePlot)" reversible="false">
+			<animation type="Conditional" condition="[Control.HasFocus(2999)|IntegerGreaterThan(Container(8885).NumPages,1)]+Skin.HasSetting(ShowLargePlot)" reversible="false">
 				<effect type="fade"  end="0" time="700" />
 			</animation>
 
@@ -2978,13 +2980,13 @@
 		<control type="label" id="5556">
 			<posx>-100</posx>
 			<label>ooo</label>
-			<!--  <visible>Control.HasFocus(1999)|[IntegerGreaterThan(Container(8885).NumPages,1)+[[System.IdleTime(3)+StringCompare(Skin.String(CacheNonSelectDelai),3)]|[System.IdleTime(5)+StringCompare(Skin.String(CacheNonSelectDelai),5)]|[System.IdleTime(7)+StringCompare(Skin.String(CacheNonSelectDelai),7)]|[System.IdleTime(9)+StringCompare(Skin.String(CacheNonSelectDelai),9)]]]</visible> -->
-			<visible>Control.HasFocus(1999)|[IntegerGreaterThan(Container(8885).NumPages,1)+System.IdleTime(2)+Skin.HasSetting(ShowLargePlot)]</visible>
+			<!--  <visible>Control.HasFocus(2999)|[IntegerGreaterThan(Container(8885).NumPages,1)+[[System.IdleTime(3)+StringCompare(Skin.String(CacheNonSelectDelai),3)]|[System.IdleTime(5)+StringCompare(Skin.String(CacheNonSelectDelai),5)]|[System.IdleTime(7)+StringCompare(Skin.String(CacheNonSelectDelai),7)]|[System.IdleTime(9)+StringCompare(Skin.String(CacheNonSelectDelai),9)]]]</visible> -->
+			<visible>Control.HasFocus(2999)|[IntegerGreaterThan(Container(8885).NumPages,1)+System.IdleTime(2)+Skin.HasSetting(ShowLargePlot)]</visible>
 		</control>
 		<control type="group" id="7780">
-			<!-- <visible>IntegerGreaterThan(Container(8885).NumPages,1)+!Control.HasFocus(1999)+!Skin.HasSetting(Hide_Plot) + [Container.Content(Movies)|  Container.Content(TVShows) | Container.Content(Seasons) | Container.Content(Episodes) | Container.Content(MusicVideos) | Container.Content(Artists) | SubString(Container.FolderPath,plugin)]</visible> -->
+			<!-- <visible>IntegerGreaterThan(Container(8885).NumPages,1)+!Control.HasFocus(2999)+!Skin.HasSetting(Hide_Plot) + [Container.Content(Movies)|  Container.Content(TVShows) | Container.Content(Seasons) | Container.Content(Episodes) | Container.Content(MusicVideos) | Container.Content(Artists) | SubString(Container.FolderPath,plugin)]</visible> -->
 			<visible>!Skin.HasSetting(Hide_Plot)</visible>
-			<visible>Control.HasFocus(1999)| [IntegerGreaterThan(Container(8885).NumPages,1)+Skin.HasSetting(ShowLargePlot) + [Container.Content(Movies)|  Container.Content(TVShows) | Container.Content(Seasons) | Container.Content(Episodes) | Container.Content(MusicVideos) | Container.Content(Artists) | Container.Content(Albums) |Container.Content(Genres) |SubString(Container.FolderPath,plugin)|Container.Content(Addons)]]</visible>
+			<visible>Control.HasFocus(2999)| [IntegerGreaterThan(Container(8885).NumPages,1)+Skin.HasSetting(ShowLargePlot) + [Container.Content(Movies)|  Container.Content(TVShows) | Container.Content(Seasons) | Container.Content(Episodes) | Container.Content(MusicVideos) | Container.Content(Artists) | Container.Content(Albums) |Container.Content(Genres) |SubString(Container.FolderPath,plugin)|Container.Content(Addons)]]</visible>
 			<include>Animation_FadedByMenu</include>
 			<include>Animation_OpenCloseFade</include>
 			<include>Animation_HiddenByInfo</include>
@@ -3255,7 +3257,7 @@
 			<aligny>center</aligny>
 			<texture>chrono.png</texture>
 			<aspectratio>stretch</aspectratio>
-			<visible>Control.HasFocus(1999)|Container.Content(songs)</visible>
+			<visible>Control.HasFocus(2999)|Container.Content(songs)</visible>
 		</control>
 		<control type="label">
 			<left>10</left>
@@ -3289,7 +3291,7 @@
 			<aligny>center</aligny>
 			<texture>chronoend.png</texture>
 			<aspectratio>stretch</aspectratio>
-			<visible>Control.HasFocus(1999)|Container.Content(songs)</visible>
+			<visible>Control.HasFocus(2999)|Container.Content(songs)</visible>
 		</control>
 		<control type="label">
 			<left>10</left>

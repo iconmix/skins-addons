@@ -112,6 +112,7 @@
 					<description>Reload Skin</description>
 					<include>SettingsShutdownMenu</include>
 					<label>$LOCALIZE[20183]</label>
+					<onclick>SetProperty(iconmixtoolsbackend,,Home)</onclick>
 					<onclick>ReloadSkin()</onclick>
 					
 				</control>

@@ -17,7 +17,7 @@
 			<property name="widgetType">video</property>
 			<property name="widgetTarget" />
 			<property name="widgetPath">videodb://recentlyaddedmovies/</property>
-			<property name="widgetStyle.2">List</property>
+			<property name="widgetStyle.2">Panel</property>
 			<onclick>ActivateWindow(Videos,special://profile/playlists/video/FILMS.xsp,return)</onclick>
 			<property name="path">ActivateWindow(Videos,special://profile/playlists/video/FILMS.xsp,return)</property>
 			<property name="list">special://profile/playlists/video/FILMS.xsp</property>
@@ -256,6 +256,44 @@
 			<property name="group">films</property>
 			<property name="isSubmenu">True</property>
 		</item>
+		<item id="6">
+			<property name="id">$NUMBER[6]</property>
+			<property name="mainmenuid">1</property>
+			<label>Réalisateurs</label>
+			<label2>Vidéos</label2>
+			<icon>DefaultShortcut.png</icon>
+			<thumb />
+			<property name="labelID">realisateurs</property>
+			<property name="defaultID" />
+			<property name="translatedPath">ActivateWindow(Videos,"library://video/movies/directors.xml/",return)</property>
+			<property name="background">special://skin/extras/backgrounds/programs.jpg</property>
+			<property name="backgroundName">programs</property>
+			<visible>[Library.HasContent(Movies)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),films)</visible>
+			<onclick>ActivateWindow(Videos,"library://video/movies/directors.xml/",return)</onclick>
+			<property name="path">ActivateWindow(Videos,"library://video/movies/directors.xml/",return)</property>
+			<property name="list">library://video/movies/directors.xml/</property>
+			<visible>String.IsEqual(System.ProfileName,Master user)</visible>
+			<property name="group">films</property>
+			<property name="isSubmenu">True</property>
+		</item>
+		<item id="7">
+			<property name="id">$NUMBER[7]</property>
+			<property name="mainmenuid">1</property>
+			<label>Acteurs</label>
+			<label2>Vidéos</label2>
+			<icon>DefaultShortcut.png</icon>
+			<thumb />
+			<property name="labelID">acteurs</property>
+			<property name="defaultID" />
+			<property name="translatedPath">ActivateWindow(Videos,"library://video/movies/actors.xml/",return)</property>
+			<visible>[Library.HasContent(Movies)] + String.IsEqual(Container(9000).ListItem.Property(submenuVisibility),films)</visible>
+			<onclick>ActivateWindow(Videos,"library://video/movies/actors.xml/",return)</onclick>
+			<property name="path">ActivateWindow(Videos,"library://video/movies/actors.xml/",return)</property>
+			<property name="list">library://video/movies/actors.xml/</property>
+			<visible>String.IsEqual(System.ProfileName,Master user)</visible>
+			<property name="group">films</property>
+			<property name="isSubmenu">True</property>
+		</item>
 		<item id="1">
 			<property name="id">$NUMBER[1]</property>
 			<property name="mainmenuid">2</property>
@@ -438,6 +476,10 @@
 			<property name="isSubmenu">True</property>
 		</item>
 	</include>
+	<include />
+	<include name="skinshortcuts-submenu-1" />
+	<include />
+	<include name="skinshortcuts-submenu-2" />
 	<include name="skinshortcuts-group-films">
 		<item id="1">
 			<property name="id">$NUMBER[1]</property>
@@ -526,6 +568,44 @@
 			<onclick>ActivateWindow(Videos,"library://video/movies/sets.xml/",return)</onclick>
 			<property name="path">ActivateWindow(Videos,"library://video/movies/sets.xml/",return)</property>
 			<property name="list">library://video/movies/sets.xml/</property>
+			<visible>String.IsEqual(System.ProfileName,Master user)</visible>
+			<property name="group">films</property>
+			<property name="isSubmenu">True</property>
+		</item>
+		<item id="6">
+			<property name="id">$NUMBER[6]</property>
+			<property name="mainmenuid">1</property>
+			<label>Réalisateurs</label>
+			<label2>Vidéos</label2>
+			<icon>DefaultShortcut.png</icon>
+			<thumb />
+			<property name="labelID">realisateurs</property>
+			<property name="defaultID" />
+			<property name="translatedPath">ActivateWindow(Videos,"library://video/movies/directors.xml/",return)</property>
+			<property name="background">special://skin/extras/backgrounds/programs.jpg</property>
+			<property name="backgroundName">programs</property>
+			<visible>Library.HasContent(Movies)</visible>
+			<onclick>ActivateWindow(Videos,"library://video/movies/directors.xml/",return)</onclick>
+			<property name="path">ActivateWindow(Videos,"library://video/movies/directors.xml/",return)</property>
+			<property name="list">library://video/movies/directors.xml/</property>
+			<visible>String.IsEqual(System.ProfileName,Master user)</visible>
+			<property name="group">films</property>
+			<property name="isSubmenu">True</property>
+		</item>
+		<item id="7">
+			<property name="id">$NUMBER[7]</property>
+			<property name="mainmenuid">1</property>
+			<label>Acteurs</label>
+			<label2>Vidéos</label2>
+			<icon>DefaultShortcut.png</icon>
+			<thumb />
+			<property name="labelID">acteurs</property>
+			<property name="defaultID" />
+			<property name="translatedPath">ActivateWindow(Videos,"library://video/movies/actors.xml/",return)</property>
+			<visible>Library.HasContent(Movies)</visible>
+			<onclick>ActivateWindow(Videos,"library://video/movies/actors.xml/",return)</onclick>
+			<property name="path">ActivateWindow(Videos,"library://video/movies/actors.xml/",return)</property>
+			<property name="list">library://video/movies/actors.xml/</property>
 			<visible>String.IsEqual(System.ProfileName,Master user)</visible>
 			<property name="group">films</property>
 			<property name="isSubmenu">True</property>
@@ -623,6 +703,56 @@
 			<property name="group">films</property>
 			<property name="isSubmenu">True</property>
 		</item>
+		<item id="6">
+			<property name="id">$NUMBER[6]</property>
+			<property name="mainmenuid">1</property>
+			<label>Réalisateurs</label>
+			<label2>Vidéos</label2>
+			<icon>DefaultShortcut.png</icon>
+			<thumb />
+			<property name="labelID">realisateurs</property>
+			<property name="defaultID" />
+			<property name="translatedPath">ActivateWindow(Videos,"library://video/movies/directors.xml/",return)</property>
+			<property name="background">special://skin/extras/backgrounds/programs.jpg</property>
+			<property name="backgroundName">programs</property>
+			<visible>[Library.HasContent(Movies)] + String.IsEqual(Window(10000).Property(submenuVisibility),films)</visible>
+			<onclick>ActivateWindow(Videos,"library://video/movies/directors.xml/",return)</onclick>
+			<property name="path">ActivateWindow(Videos,"library://video/movies/directors.xml/",return)</property>
+			<property name="list">library://video/movies/directors.xml/</property>
+			<visible>String.IsEqual(System.ProfileName,Master user)</visible>
+			<property name="group">films</property>
+			<property name="isSubmenu">True</property>
+		</item>
+		<item id="7">
+			<property name="id">$NUMBER[7]</property>
+			<property name="mainmenuid">1</property>
+			<label>Acteurs</label>
+			<label2>Vidéos</label2>
+			<icon>DefaultShortcut.png</icon>
+			<thumb />
+			<property name="labelID">acteurs</property>
+			<property name="defaultID" />
+			<property name="translatedPath">ActivateWindow(Videos,"library://video/movies/actors.xml/",return)</property>
+			<visible>[Library.HasContent(Movies)] + String.IsEqual(Window(10000).Property(submenuVisibility),films)</visible>
+			<onclick>ActivateWindow(Videos,"library://video/movies/actors.xml/",return)</onclick>
+			<property name="path">ActivateWindow(Videos,"library://video/movies/actors.xml/",return)</property>
+			<property name="list">library://video/movies/actors.xml/</property>
+			<visible>String.IsEqual(System.ProfileName,Master user)</visible>
+			<property name="group">films</property>
+			<property name="isSubmenu">True</property>
+		</item>
+	</include>
+	<include name="skinshortcuts-group-films-1">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-alt-films-1">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-films-2">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-alt-films-2">
+		<description>No items</description>
 	</include>
 	<include name="skinshortcuts-group-series">
 		<item id="1">
@@ -693,6 +823,18 @@
 			<property name="group">series</property>
 			<property name="isSubmenu">True</property>
 		</item>
+	</include>
+	<include name="skinshortcuts-group-series-1">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-alt-series-1">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-series-2">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-alt-series-2">
+		<description>No items</description>
 	</include>
 	<include name="skinshortcuts-group-musique">
 		<item id="1">
@@ -766,10 +908,34 @@
 			<property name="isSubmenu">True</property>
 		</item>
 	</include>
+	<include name="skinshortcuts-group-musique-1">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-alt-musique-1">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-musique-2">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-alt-musique-2">
+		<description>No items</description>
+	</include>
 	<include name="skinshortcuts-group-weather">
 		<description>No items</description>
 	</include>
 	<include name="skinshortcuts-group-alt-weather">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-weather-1">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-alt-weather-1">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-weather-2">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-alt-weather-2">
 		<description>No items</description>
 	</include>
 	<include name="skinshortcuts-group-videos">
@@ -904,10 +1070,34 @@
 			<property name="isSubmenu">True</property>
 		</item>
 	</include>
+	<include name="skinshortcuts-group-videos-1">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-alt-videos-1">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-videos-2">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-alt-videos-2">
+		<description>No items</description>
+	</include>
 	<include name="skinshortcuts-group-settings">
 		<description>No items</description>
 	</include>
 	<include name="skinshortcuts-group-alt-settings">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-settings-1">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-alt-settings-1">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-settings-2">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-alt-settings-2">
 		<description>No items</description>
 	</include>
 	<include name="skinshortcuts-group-quitter">
@@ -1013,6 +1203,18 @@
 			<property name="group">quitter</property>
 			<property name="isSubmenu">True</property>
 		</item>
+	</include>
+	<include name="skinshortcuts-group-quitter-1">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-alt-quitter-1">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-quitter-2">
+		<description>No items</description>
+	</include>
+	<include name="skinshortcuts-group-alt-quitter-2">
+		<description>No items</description>
 	</include>
 	<include name="skinshortcuts-template-widget1Fanart">
 		<include condition="String.IsEqual(System.ProfileName,Master user)">skinshortcuts-template-widget1Fanart-Master user</include>
