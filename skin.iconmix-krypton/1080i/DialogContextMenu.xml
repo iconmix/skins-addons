@@ -32,9 +32,9 @@
 		</control>
 		<control type="grouplist" id="996">
 			<description>grouplist for context buttons</description>
-			<left>50</left>
+			<left>30</left>
 			<top>35</top>
-			<width>450</width>
+			<width>490</width>
 			<height max="670">auto</height>
 			<itemgap>2</itemgap>
 			<control type="button" id="2099">
@@ -140,7 +140,7 @@
 				<label>$LOCALIZE[31930]</label>
 				<onclick>Dialog.Close(contextmenu)</onclick>
 				<onclick>SetFocus(1998,0)</onclick>
-				<visible>[String.Contains(ListItem.DBTYPE,video)|String.Contains(ListItem.DBTYPE,movie)|String.Contains(ListItem.DBTYPE,episode)|String.Contains(ListItem.DBTYPE,tvshow)]+Window.IsVisible(10025)</visible>
+				<visible>[String.Contains(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]|[!Skin.HasSetting(HideTvCast)+[String.Contains(ListItem.DBTYPE,episode)|String.Contains(ListItem.DBTYPE,tvshow)]]+Window.IsVisible(10025)</visible>
 
 			</control>
 			<control type="button" id="2105">
@@ -189,7 +189,7 @@
 			<onright>Dialog.Close(contextmenu)</onright>
 			<left>-</left>
 			<top>-</top>
-			<width>450</width>
+			<width>490</width>
 			<height>35</height>
 			<font>METF_DialogLarge</font>
 			<align>center</align>

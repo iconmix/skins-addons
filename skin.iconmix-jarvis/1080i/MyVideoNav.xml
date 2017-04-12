@@ -139,7 +139,7 @@
 				<colordiffuse>C0101010</colordiffuse>
 				<include>Animation_FadedByMenu</include>
 
-				<visible>[[SubString(ListItem.DBTYPE,set)+Skin.HasSetting(SagaDetailsClearArt)]|[Skin.HasSetting(GenreDetailsClearArt)+Container.Content(Genres)]]+!Skin.HasSetting(CacheFond)</visible>
+				<visible>[[Substring(ListItem.DBTYPE,set)+Skin.HasSetting(SagaDetailsClearArt)]|[Skin.HasSetting(GenreDetailsClearArt)+Container.Content(Genres)]]+!Skin.HasSetting(CacheFond)</visible>
 			</control>
 
 		<control type="group">
@@ -836,7 +836,7 @@
 					<effect type="slide" end="1460,898" time="0" tween="quadratic" />
 					<effect type="rotate" center="0,88" end="45" time="1" />
 				</animation>
-				<visible>[[Container.Content(Genres)|Container.Content(movies)|Container.Content(tvshows)]+Control.HasFocus(2999)]|[[SubString(Container.FolderPath,videodb://movies/genres)|SubString(Container.FolderPath,videodb://tvshows/genres)]+[Container.Content(tvshows)|Container.Content(movies)]]</visible>
+				<visible>[[Container.Content(Genres)|Container.Content(movies)|Container.Content(tvshows)]+Control.HasFocus(2999)]|[[Substring(Container.FolderPath,videodb://movies/genres)|Substring(Container.FolderPath,videodb://tvshows/genres)]+[Container.Content(tvshows)|Container.Content(movies)]]</visible>
 
 				<!--<animation type="Visible">
 				<effect type="rotate" center="0,88" end="27" time="1" />
@@ -847,7 +847,7 @@
 				<aspectratio>stretch</aspectratio>
 			</control>
 			<control type="group">
-				<visible>[!SubString(Container.FolderPath,videodb://movies/genres)+!SubString(Container.FolderPath,videodb://tvshows/genres)]|Container.Content(genres)|Control.HasFocus(2999)</visible>
+				<visible>[!Substring(Container.FolderPath,videodb://movies/genres)+!Substring(Container.FolderPath,videodb://tvshows/genres)]|Container.Content(genres)|Control.HasFocus(2999)</visible>
 				<control type="group">
 					<left>30</left>
 					<visible>Skin.HasSetting(CacheFond)</visible>
@@ -904,7 +904,7 @@
 			</control>
 
 			<control type="group">
-				<visible>!Container.Content(Genres)+[SubString(Container.FolderPath,videodb://movies/genres)|SubString(Container.FolderPath,videodb://tvshows/genres)]+!Control.HasFocus(2999)</visible>
+				<visible>!Container.Content(Genres)+[Substring(Container.FolderPath,videodb://movies/genres)|Substring(Container.FolderPath,videodb://tvshows/genres)]+!Control.HasFocus(2999)</visible>
 				<control type="fadelabel">
 					<width>390</width>
 					<posx>50</posx>
@@ -1029,7 +1029,7 @@
 		<control type="label">
 	<posx>700</posx>
 
-	<label>Vertical:$INFO[Window(Home).Property(IconMixVerticalNavigation)][CR]Icon:$INFO[ListItem.Icon][CR]Trailer:$INFO[ListItem.Trailer][CR][CR]TVshow:$INFO[ListItem.TVShowTitle][CR]IconMixDirector:$INFO[Window(10000).Property(IconMixDirector)][CR]ID=$INFO[ListItem.DBID][CR]SETID=$INFO[ListItem.setID][CR]IMDB=$INFO[ListItem.IMDBNumber][CR]Type=$INFO[ListItem.DBTYPE][CR]Content:$INFO[Container.Content][CR]$INFO[Container.FolderPath][CR]FolderName:$INFO[Container.FolderName][CR]$INFO[ListItem.FileNameAndPath][CR]$INFO[ListItem.Path][CR]ID1999=$INFO[Container(1999).ListItem.DBID][CR]TYPE1999=$INFO[Container(1999).ListItem.DBTYPE][CR]NB1999=$INFO[Container(1999).NumItems][CR]IMDB1999=$INFO[Container(1999).ListItem.Property(IMDBNumber)][CR]TMDB1999=$INFO[Container(1999).ListItem.Property(TMDBNumber)][CR]ID1999C=$INFO[Container(1999).ListItem.Property(DBID)][CR][CR]$INFO[Container(1999).ListItem.FileNameAndPath]</label>
+	<label>Vertical:$INFO[Window(Home).Property(IconMixVerticalNavigation)][CR]Icon:$INFO[ListItem.Icon][CR]Trailer:$INFO[ListItem.Trailer][CR][CR]TVshow:$INFO[ListItem.TVShowTitle][CR]IconMixDirector:$INFO[Window(10000).Property(IconMixDirector)][CR]ID=$INFO[ListItem.DBID][CR]SETID=$INFO[ListItem.setID][CR]IMDB=$INFO[ListItem.IMDBNumber][CR]Type=$INFO[ListItem.DBTYPE][CR]Content:$INFO[Container.Content][CR]$INFO[Container.FolderPath][CR]FolderName:$INFO[Container.FolderName][CR]$INFO[ListItem.FileNameAndPath][CR]$INFO[ListItem.Path][CR]ID1999=$INFO[Container(1999).ListItem.DBID][CR]TYPE1999=$INFO[Container(1999).ListItem.DBTYPE][CR]NB1999=$INFO[Container(1999).NumItems][CR]IMDB1999=$INFO[Container(1999).ListItem.Property(IMDBNumber)][CR]TMDB1999=$INFO[Container(1999).ListItem.Property(TMDBNumber)][CR]ID1999C=$INFO[Container(1999).ListItem.Property(DBID)][CR]$INFO[Container(1999).ListItem.FileNameAndPath][CR]ID1998=$INFO[Container(1998).ListItem.Property(DBID)]</label>
 	</control>
 
 

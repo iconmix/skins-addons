@@ -84,7 +84,6 @@ class Main:
                 Id=xbmc.getInfoLabel("ListItem.DBID")              
                 utils.getCasting(castingtype,Id)
                 
-                #utils.logMsg("Temps passe GETCAST :"+"["+str(Id)+"]["+str(castingtype)+"]:"+str(time.time()-start),0) 
                 
              if action == "GETTVFILMACTEUR":
                 Id=params.get("id",None)
@@ -92,13 +91,12 @@ class Main:
                 infotype=params.get("infotype",None)
                 if infotype: infotype = infotype[0]
                 KodiLocal=params.get("local",None)
-                start = time.time()                           
                 if not KodiLocal: 
-                    utils.getFilmsTv(infotype,Id)
-                    #utils.logMsg("Temps passe GETTVFILMACTEUR TMDB:"+str(time.time()-start),0)
+                    utils.getFilmsTv(infotype,Id.encode('utf8'))
                 else:
+                    utils.logMsg("getFilmsParActeur :"+xbmc.getInfoLabel("ListItem.DBTYPE"),0) 
                     utils.getFilmsParActeur(xbmc.getInfoLabel("ListItem.DBTYPE"),Id)
-                    #utils.logMsg("Temps passe GETTVFILMACTEUR LOCAL:"+str(time.time()-start),0)
+                    
                 
                 
              if action == "TVDIFFUSION":
@@ -369,7 +367,8 @@ class Main:
                                ListeRole=self.GetControl(self.windowvideoinf,5051)
                                
                                
-                            #ACTEURS   
+                            #ACTEURS  
+                             
                             if ListeActeurs:
                               ListeItemx=utils.getCasting(self.DBTYPE,self.selecteditem,1)
                              # utils.logMsg('utils.getCastingList ->'+str(len(ListeItemx)),0)
@@ -380,7 +379,8 @@ class Main:
                                         #ListeActeurs.setStaticContent(ListeItemx)
                                         ListeActeurs.addItem(itemX)                                   
                               status=""
-                            """  
+                            """
+                            #roles  
                             if ListeRole:
                               KodiLocal=self.windowhome.getProperty('ActeurVideoLocal')                                                      
                               if not KodiLocal: 
@@ -397,7 +397,7 @@ class Main:
                                         ListeRole.addItem(itemX)                                   
                               status=""
                              # utils.logMsg('windowvideonav.getControl(1998) fin',0)
-                          """    
+                            """  
                           #SAGAS
                           if (self.DBTYPE=="set" or MiseAjour=="2") and not status=="1":
                             status="1"

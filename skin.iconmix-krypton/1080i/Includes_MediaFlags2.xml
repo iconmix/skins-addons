@@ -168,7 +168,7 @@
 			</control>
 		</control>
 		<control type="group">
-			<visible>!StringCompare(ListItem.Label,..)</visible>
+			<visible>!String.IsEqual(ListItem.Label,..)</visible>
 			<width>85</width>
 			<height>93</height>
 			<control type="image">
@@ -1061,711 +1061,34 @@
 	<orientation>horizontal</orientation>
 </include>
 
-<include name="MediaInfoGroup">
 
-	<control type="grouplist" id="9902">
-		<posx>0</posx>
-		<posy>990</posy>
-		<width>450</width>
-		<height>900</height>
-		<align>left</align>
-		<itemgap>2</itemgap>
-		<orientation>vertical</orientation>
+<include name="MediaInfoGroup2">
+	<control type="group">
+		<width>1920</width>
+		<posx>-70</posx>
+		<align>center</align>
 		<include>Animation_FadedByMenu</include>
-		<include>Animation_CommonFade</include>
-
-		<visible>!String.Contains(Container.FolderPath,plugin)</visible>
-		<visible>Container.Content(movies)| Container.Content(tvshows) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
-		<!-- <include>VisibleIfNotMovieSet</include> -->
-
-		<!-- Star Rating (or Game Genre when in Advanced Launcher addon) -->
-		<control type="grouplist"> <!-- chrono + studio -->
-			<include>Horizlist</include>
-			<control type="group"> <!-- chrono -->
-				<width>135</width>
-				<height>120</height>
-				<control type="image">
-					<width>156</width>
-					<height>81</height>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<texture>flags/flag_frame.png</texture>
-				</control>
-				<control type="image">
-					<top>7</top>
-					<left>15</left>
-					<width>110</width>
-					<height>70</height>
-					<texture>$VAR[chronotoolstexture]</texture>
-					<aspectratio>scale</aspectratio>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-
-				</control>
-				<control type="group">
-					<top>8</top>
-					<left>23</left>
-					<include>chronotoolsV</include>
-				</control>
-				<visible>!String.IsEmpty(ListItem.Duration)|[Skin.HasSetting(Show_HeureFin)+!String.IsEmpty(Window(10000).Property(DurationTools))]</visible>
-				<visible>!Container.Content(seasons)+!Container.Content(tvshows)</visible>
-			</control>
-
-
-			<control type="group"> <!-- studio -->
-				<width>118</width>
-				<height>120</height>
-				<align>center</align>
-				<!-- <visible>!String.IsEmpty(Control.GetLabel(2525))</visible> -->
-				<control type="image">
-					<width>135</width>
-					<height>81</height>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<texture>flags/flag_frame.png</texture>
-				</control>
-				<control type="image">
-					<top>3</top>
-					<width>130</width>
-					<height>70</height>
-					<aspectratio align="center" aligny="center">keep</aspectratio>
-					<texture fallback="flags\default-studio.png">resource://resource.images.studios.coloured/$INFO[ListItem.Studio].png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-
-				</control>
-			</control>
-			<control type="group">
-				<visible>!String.IsEmpty(ListItem.Year)+Container.Content(tvshows)</visible>
-				<width>135</width>
-				<height>120</height>
-				<control type="image">
-					<width>156</width>
-					<height>81</height>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<texture>flags/flag_frame.png</texture>
-				</control>
-
-
-				<control type="label">
-					<width min="25" max="200">auto</width>
-					<posx>30</posx>
-					<posy>10</posy>
-					<height>50</height>
-					<aligny>center</aligny>
-					<font>chicken</font>
-					<textcolor>white</textcolor>
-					<label>[I]$INFO[ListItem.Year][/I]</label>
-				</control>
-			</control>
-		</control>
-		<control type="grouplist"> <!-- rating + MPAA -->
-			<include>Horizlist</include>
-
-			<!-- année -->
-			<control type="group">
-				<visible>!String.IsEmpty(ListItem.Year)+!Container.Content(tvshows)</visible>
-				<width>135</width>
-				<height>120</height>
-				<control type="image">
-					<width>156</width>
-					<height>81</height>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<texture>flags/flag_frame.png</texture>
-				</control>
-
-
-				<control type="label">
-					<width min="25" max="200">auto</width>
-					<posx>30</posx>
-					<posy>10</posy>
-					<height>50</height>
-					<aligny>center</aligny>
-					<font>chicken</font>
-					<textcolor>white</textcolor>
-					<label>[I]$INFO[ListItem.Year][/I]</label>
-				</control>
-			</control>
-			<control type="group">
-				<visible>!StringCompare(ListItem.Label,..)</visible>
-				<width>90</width>
-				<height>93</height>
-				<control type="image">
-					<include>MediaFlagsVarsSquare</include>
-					<texture>Star.png</texture>
-					<aspectratio>stretch</aspectratio>
-					<colordiffuse>RatingStarDiffuse</colordiffuse>
-					<visible>!String.Contains(Container.FolderPath,advanced.launcher)</visible>
-				</control>
-				<control type="label">
-					<posy>15</posy>
-					<include>MediaFlagsVarsSquare</include>
-					<align>center</align>
-					<aligny>center</aligny>
-					<label>$VAR[StarRating]</label>
-					<textcolor>yellow</textcolor>
-					<font>METF_StarRating</font>
-					<visible>!String.Contains(Container.FolderPath,advanced.launcher)</visible>
-				</control>
-				<control type="image">
-					<include>MediaFlagsVarsSquare</include>
-					<texture>special://skin/extras/games/genres/$INFO[ListItem.Genre,,.png]</texture>
-					<aspectratio>stretch</aspectratio>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<visible>!String.IsEmpty(ListItem.Genre) + String.Contains(Container.FolderPath,advanced.launcher)</visible>
-				</control>
-				<control type="image">
-					<posx>2</posx>
-					<width>99</width>
-					<height>81</height>
-					<texture>flags/flag_frame.png</texture>
-					<aspectratio>stretch</aspectratio>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-			</control>
-			<control type="group">
-				<width>105</width>
-				<height>93</height>
-				<visible>Container.Content(movies) | Container.Content(episodes)| Container.Content(tvshows) | Container.Content(MusicVideos)</visible>
-				<visible>!String.IsEmpty(ListItem.Mpaa)</visible>
-				<control type="image">
-					<posx>10</posx>
-					<posy>8</posy>
-					<width>60</width>
-					<height>60</height>
-					<aspectratio>keep</aspectratio>
-					<texture fallback="flags/default.png">$VAR[MPAATexture]</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-				<control type="image">
-					<posx>-2</posx>
-					<width>90</width>
-					<height>81</height>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<texture>flags/flag_frame.png</texture>
-				</control>
-
-			</control>
-		</control>
-
-
-		<control type="grouplist"> <!-- année +  -->
-			<include>Horizlist</include>
-
-			<!-- codec -->
-			<control type="group">
-				<width>135</width>
-				<height>80</height>
-				<visible>Container.Content(movies) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
-				<visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
-				<control type="image">
-					<include>MediaFlagsVarsWide</include>
-					<texture fallback="flags/default.png">$VAR[VarFlagSource]</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-				<control type="image">
-					<width>156</width>
-					<height>81</height>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<texture>flags/flag_frame.png</texture>
-				</control>
-
-			</control>
-			<control type="group">
-				<visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
-				<width>135</width>
-				<height>80</height>
-				<control type="image">
-					<include>MediaFlagsVarsWide</include>
-					<texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-				<control type="image">
-					<width>156</width>
-					<height>81</height>
-					<texture>flags/flag_frame.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-
-			</control>
-			<!-- Video 3D (sbs/tab) -->
-			<control type="group">
-				<visible>String.Contains(ListItem.StereoscopicMode,split_) | String.Contains(ListItem.StereoscopicMode,anaglyph_)|String.Contains(listitem.filename,.3D.)</visible>
-				<width>135</width>
-				<height>80</height>
-				<control type="image">
-					<include>MediaFlagsVarsWide</include>
-					<!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dSBS.png</texture>-->
-					<texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<visible>String.Contains(listitem.filename,.sbs.) | String.Contains(ListItem.StereoscopicMode,split_horizontal)</visible>
-				</control>
-				<control type="image">
-					<include>MediaFlagsVarsWide</include>
-					<!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dTAB.png</texture>-->
-					<texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<visible>String.Contains(listitem.filename,.tab.) | String.Contains(ListItem.StereoscopicMode,split_vertical)</visible>
-				</control>
-				<control type="image">
-					<include>MediaFlagsVarsWide</include>
-					<texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<visible>!String.Contains(listitem.filename,.tab.)+!String.Contains(listitem.filename,.sbs.)+!String.Contains(ListItem.StereoscopicMode,split_)</visible>
-				</control>
-				<control type="image">
-					<width>156</width>
-					<height>81</height>
-					<texture>flags/flag_frame.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-
-			</control>
-		</control>
-
-
-
+				<include>Animation_CommonFade</include>
+				<visible>!String.Contains(Container.FolderPath,plugin)</visible>
+				<visible>!String.Contains(ListItem.Label,..)+[Container.Content(movies)| Container.Content(tvshows) | Container.Content(episodes) | Container.Content(MusicVideos)]</visible>
+				<include>VisibleIfNotMovieSet</include> 
 		<!-- Video Resolution -->
-		<control type="grouplist"> <!-- resolution +  Aspect-->
-			<include>Horizlist</include>
-			<control type="group">
-				<visible>!String.IsEmpty(ListItem.VideoResolution)</visible>
-				<width>135</width>
-				<height>120</height>
-				<control type="image">
-					<include>MediaFlagsVarsWide</include>
-					<texture fallback="flags/default.png">$INFO[ListItem.VideoResolution,flags/VideoResolution/,.png]</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-				<control type="image">
-					<width>156</width>
-					<height>81</height>
-					<texture>flags/flag_frame.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
+			
+			
+	<control type="grouplist"> <!-- 1ere ligne-->
+		<!-- <posx>500</posx> -->
+		<posy>935</posy>
+		<height>150</height>
+		<align>center</align>
+		<itemgap>-20</itemgap>
+		<orientation>horizontal</orientation>
+		
 
-			</control>
-
-			<!-- Video Aspect -->
-			<control type="group">
-				<visible>!String.IsEmpty(ListItem.VideoAspect)</visible>
-				<width>135</width>
-				<height>80</height>
-				<control type="image">
-					<include>MediaFlagsVarsWide</include>
-					<texture fallback="flags/VideoAspect/default.png">$INFO[ListItem.VideoAspect,flags/VideoAspect/,.png]</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-				<control type="image">
-					<width>156</width>
-					<height>81</height>
-					<texture>flags/flag_frame.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-
-			</control>
-		</control>
-
-
-
-		<!-- Subtitles Flag-->
-		<!-- Hors lecture uniquement -->
-
-		<control type="grouplist"> <!-- Video Codec + 3D-->
-			<include>Horizlist</include>
-			<control type="group">
-				<width>135</width>
-				<height>80</height>
-				<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
-				<control type="image">
-					<posx>2</posx>
-					<width>156</width>
-					<height>81</height>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<texture>flags/flag_frame.png</texture>
-				</control>
-
-				<control type="image">
-					<visible>String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
-					<posx>20</posx>
-					<include>MediaFlagsVarsWide</include>
-					<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.1)].png</texture>
-					<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
-					<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-				</control>
-				<control type="image">
-					<visible>String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
-					<posx>20</posx>
-					<include>MediaFlagsVarsWide</include>
-					<texture background="true" >flags/cc.png</texture>
-					<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
-					<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-				</control>
-				<control type="group">
-					<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
-					<control type="image">
-						<posx>18</posx>
-						<posy>8</posy>
-						<width>60</width>
-						<height>30</height>
-						<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.1)].png</texture>
-						<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>18</posx>
-						<posy>8</posy>
-						<width>60</width>
-						<height>30</height>
-						<texture background="true" >flags/cc.png</texture>
-						<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>82</posx>
-						<width>60</width>
-						<posy>8</posy>
-						<height>30</height>
-						<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.2)].png</texture>
-						<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>82</posx>
-						<width>60</width>
-						<posy>8</posy>
-						<height>30</height>
-						<texture background="true" >flags/cc.png</texture>
-						<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>18</posx>
-						<posy>42</posy>
-						<width>60</width>
-						<height>30</height>
-						<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.3)].png</texture>
-						<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.3))</visible>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>18</posx>
-						<posy>42</posy>
-						<width>60</width>
-						<height>30</height>
-						<texture background="true" >flags/cc.png</texture>
-						<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.3))</visible>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>82</posx>
-						<posy>42</posy>
-						<width>60</width>
-						<height>30</height>
-						<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.4)].png</texture>
-						<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.4))</visible>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>82</posx>
-						<posy>42</posy>
-						<width>60</width>
-						<height>30</height>
-						<texture background="true" >flags/cc.png</texture>
-						<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.4))</visible>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-				</control>
-
-			</control>
-
-			<control type="group"> <!-- une seule langue -->
-				<width>135</width>
-				<height>80</height>
-				<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1)) + String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
-				<control type="image">
-					<posx>2</posx>
-					<width>156</width>
-					<height>81</height>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<texture>flags/flag_frame.png</texture>
-				</control>
-				<control type="image" id="7770">
-					<visible>String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
-					<posx>18</posx>
-					<posy>25</posy>
-					<width>60</width>
-					<height>30</height>
-					<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.1)].png</texture>
-					<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1))</visible>
-					<aspectratio aligny="center">scale</aspectratio>
-				</control>
-
-				<control type="group">
-
-					<posx>85</posx>
-					<posy>10</posy>
-					<width>60</width>
-					<height>30</height>
-					<control type="image">
-						<posx>-7</posx>
-						<posy>0</posy>
-						<width>57</width>
-						<height>30</height>
-						<texture>flags/flag_frame2.png</texture>
-						<colordiffuse>A0FFFFFF</colordiffuse>
-						<aspectratio>scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>0</posx>
-						<posy>1</posy>
-						<width>50</width>
-						<heigth>30</heigth>
-						<texture background="true" >$INFO[ListItem.Property(AudioChannels.1),flags/AudioChannels/,chOverlay.png]</texture>
-						<aspectratio>scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>-7</posx>
-						<posy>30</posy>
-						<width>57</width>
-						<height>28</height>
-						<texture>flags/flag_frame2.png</texture>
-						<colordiffuse>A0FFFFFF</colordiffuse>
-						<aspectratio>scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>-5</posx>
-						<posy>30</posy>
-						<width>50</width>
-						<height>30</height>
-						<texture >$VAR[MediaFlag_AudioCodec]</texture>
-						<colordiffuse>MediaFlagDiffuse</colordiffuse>
-						<aspectratio>scale</aspectratio>
-					</control>
-				</control>
-			</control>
-
-			<control type="group"> <!-- multi langues -->
-				<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1))+!String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
-
-				<width>290</width>
-				<height>80</height>
-
-
-				<control type="image">
-					<posx>-10</posx>
-					<width>332</width>
-					<height>81</height>
-					<texture>flags/flag_frame.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
-				</control>
-
-				<control type="image">
-					<posx>-5</posx>
-					<width>252</width>
-					<height>81</height>
-					<texture>flags/flag_frame.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.3))+String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
-				</control>
-				<control type="image">
-					<posx>0</posx>
-					<width>172</width>
-					<height>81</height>
-					<texture>flags/flag_frame.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.2))+String.IsEmpty(ListItem.Property(AudioLanguage.4))+String.IsEmpty(ListItem.Property(AudioLanguage.3))</visible>
-				</control>
-
-
-				<control type="group"> <!-- language 1 -->
-					<width>60</width>
-					<height>65</height>
-					<posx>20</posx>
-					<control type="image">
-						<posx>0</posx>
-						<width>60</width>
-						<height>30</height>
-						<include>MediaFlagsVarsWide</include>
-						<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.1)].png</texture>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>30</posx>
-						<posy>10</posy>
-						<width>25</width>
-						<height>21</height>
-						<texture>flags/flag_frame2.png</texture>
-						<aspectratio >stretch</aspectratio>
-					</control>
-					<control type="image">
-						<posx>30</posx>
-						<posy>10</posy>
-						<width>22</width>
-						<height>18</height>
-						<texture background="true" >$INFO[ListItem.Property(AudioChannels.1),flags/AudioChannels/,chOverlay.png]</texture>
-						<aspectratio>scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>0</posx>
-						<posy>40</posy>
-						<width>60</width>
-						<height>30</height>
-						<include>MediaFlagsVarsWide</include>
-						<texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.1),flags/AudioCodec/,.png]</texture>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-				</control>
-
-				<control type="group"> <!-- language 2 -->
-					<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
-					<width>60</width>
-					<height>65</height>
-					<posx>85</posx>
-					<control type="image">
-						<posx>0</posx>
-						<width>60</width>
-						<height>30</height>
-						<include>MediaFlagsVarsWide</include>
-						<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.2)].png</texture>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>30</posx>
-						<posy>10</posy>
-						<width>25</width>
-						<height>21</height>
-						<texture>flags/flag_frame2.png</texture>
-						<aspectratio >stretch</aspectratio>
-					</control>
-					<control type="image">
-						<posx>30</posx>
-						<posy>10</posy>
-						<width>22</width>
-						<height>18</height>
-						<texture background="true" >$INFO[ListItem.Property(AudioChannels.2),flags/AudioChannels/,chOverlay.png]</texture>
-						<aspectratio>scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>0</posx>
-						<posy>40</posy>
-						<width>60</width>
-						<height>30</height>
-						<include>MediaFlagsVarsWide</include>
-						<texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.2),flags/AudioCodec/,.png]</texture>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-				</control>
-				<control type="group"> <!-- language 3 -->
-					<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.3))</visible>
-					<width>60</width>
-					<height>65</height>
-					<posx>155</posx>
-					<control type="image">
-						<posx>0</posx>
-						<width>60</width>
-						<height>30</height>
-						<include>MediaFlagsVarsWide</include>
-						<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.3)].png</texture>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>30</posx>
-						<posy>10</posy>
-						<width>25</width>
-						<height>21</height>
-						<texture>flags/flag_frame2.png</texture>
-						<aspectratio >stretch</aspectratio>
-					</control>
-					<control type="image">
-						<posx>30</posx>
-						<posy>10</posy>
-						<width>22</width>
-						<height>18</height>
-						<texture background="true" >$INFO[ListItem.Property(AudioChannels.3),flags/AudioChannels/,chOverlay.png]</texture>
-						<aspectratio>scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>0</posx>
-						<posy>40</posy>
-						<width>60</width>
-						<height>30</height>
-						<include>MediaFlagsVarsWide</include>
-						<texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.3),flags/AudioCodec/,.png]</texture>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-				</control>
-				<control type="group"> <!-- language 4 -->
-					<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
-					<width>60</width>
-					<height>65</height>
-					<posx>225</posx>
-					<control type="image">
-						<posx>0</posx>
-						<width>60</width>
-						<height>30</height>
-						<include>MediaFlagsVarsWide</include>
-						<texture fallback="flags/defaultsound.png" background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.4)].png</texture>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>30</posx>
-						<posy>10</posy>
-						<width>25</width>
-						<height>21</height>
-						<texture>flags/flag_frame2.png</texture>
-						<aspectratio >stretch</aspectratio>
-					</control>
-					<control type="image">
-						<posx>30</posx>
-						<posy>10</posy>
-						<width>22</width>
-						<height>18</height>
-						<texture background="true" >$INFO[ListItem.Property(AudioChannels.4),flags/AudioChannels/,chOverlay.png]</texture>
-						<aspectratio>scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>0</posx>
-						<posy>40</posy>
-						<width>60</width>
-						<height>30</height>
-						<include>MediaFlagsVarsWide</include>
-						<texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.4),flags/AudioCodec/,.png]</texture>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-				</control>
-			</control>
-
-		</control>
-
-
-	</control>
-
-
-</include>
-<include name="MediaInfoGroup3">
-
-	<control type="grouplist" id="9902">
-		<posx>0</posx>
-		<posy>835</posy>
-		<width>700</width>
-		<height>900</height>
-		<align>left</align>
-		<itemgap>2</itemgap>
-		<orientation>vertical</orientation>
-		<include>Animation_FadedByMenu</include>
-		<include>Animation_CommonFade</include>
-
-		<visible>!String.Contains(Container.FolderPath,plugin)</visible>
-		<visible>Container.Content(movies)| Container.Content(tvshows) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
-		<include>VisibleIfNotMovieSet</include> -->
-
-		<!-- Star Rating (or Game Genre when in Advanced Launcher addon) -->
-		<control type="grouplist"> <!-- chrono + studio +année -->
-			<include>Horizlist</include>
 			<control type="group"> <!-- chrono -->
-				<width>135</width>
-				<height>120</height>
+				<width>156</width>
+			  <height>80</height>
 				<control type="image">
-					<width>156</width>
-					<height>81</height>
+					
 					<colordiffuse>MediaFlagDiffuse</colordiffuse>
 					<texture>flags/flag_frame.png</texture>
 				</control>
@@ -1790,20 +1113,17 @@
 
 
 			<control type="group"> <!-- studio -->
-				<width>118</width>
-				<height>120</height>
+				<width>156</width>
+					<height>80</height>
 				<align>center</align>
 				<!-- <visible>!String.IsEmpty(Control.GetLabel(2525))</visible> -->
 				<control type="image">
-					<width>135</width>
-					<height>81</height>
+					
 					<colordiffuse>MediaFlagDiffuse</colordiffuse>
 					<texture>flags/flag_frame.png</texture>
 				</control>
 				<control type="image">
-					<top>3</top>
-					<width>130</width>
-					<height>70</height>
+					<top>3</top>					
 					<aspectratio align="center" aligny="center">keep</aspectratio>
 					<texture fallback="flags\default-studio.png">resource://resource.images.studios.coloured/$INFO[ListItem.Studio].png</texture>
 					<colordiffuse>MediaFlagDiffuse</colordiffuse>
@@ -1812,11 +1132,10 @@
 			</control>
 			<control type="group">
 				<visible>!String.IsEmpty(ListItem.Year)</visible>
-				<width>135</width>
-				<height>120</height>
+				<width>156</width>
+					<height>80</height>
 				<control type="image">
-					<width>156</width>
-					<height>81</height>
+					
 					<colordiffuse>MediaFlagDiffuse</colordiffuse>
 					<texture>flags/flag_frame.png</texture>
 				</control>
@@ -1833,586 +1152,106 @@
 					<label>[I]$INFO[ListItem.Year][/I]</label>
 				</control>
 			</control>
-		</control>
-		<control type="grouplist"> <!-- rating + MPAA + Source + videocodec-->
-			<include>Horizlist</include>
-			<control type="group">
-				<visible>!StringCompare(ListItem.Label,..)</visible>
-				<width>90</width>
-				<height>93</height>
-				<control type="image">
-					<include>MediaFlagsVarsSquare</include>
-					<texture>Star.png</texture>
-					<aspectratio>stretch</aspectratio>
-					<colordiffuse>RatingStarDiffuse</colordiffuse>
-					<visible>!String.Contains(Container.FolderPath,advanced.launcher)</visible>
-				</control>
-				<control type="label">
-					<posy>15</posy>
-					<include>MediaFlagsVarsSquare</include>
-					<align>center</align>
-					<aligny>center</aligny>
-					<label>$VAR[StarRating]</label>
-					<textcolor>yellow</textcolor>
-					<font>METF_StarRating</font>
-					<visible>!String.Contains(Container.FolderPath,advanced.launcher)</visible>
-				</control>
-				<control type="image">
-					<include>MediaFlagsVarsSquare</include>
-					<texture>special://skin/extras/games/genres/$INFO[ListItem.Genre,,.png]</texture>
-					<aspectratio>stretch</aspectratio>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<visible>!String.IsEmpty(ListItem.Genre) + String.Contains(Container.FolderPath,advanced.launcher)</visible>
-				</control>
-				<control type="image">
-					<posx>2</posx>
-					<width>99</width>
-					<height>81</height>
-					<texture>flags/flag_frame.png</texture>
-					<aspectratio>stretch</aspectratio>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-			</control>
-			<control type="group">
-				<width>70</width>
-				<height>93</height>
-				<visible>Container.Content(movies) | Container.Content(episodes)| Container.Content(tvshows) | Container.Content(MusicVideos)</visible>
-				<visible>!String.IsEmpty(ListItem.Mpaa)</visible>
-				<control type="image">
-					<posx>10</posx>
-					<posy>8</posy>
-					<width>60</width>
-					<height>60</height>
-					<aspectratio>keep</aspectratio>
-					<texture fallback="flags/default.png">$VAR[MPAATexture]</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-				<control type="image">
-					<posx>-2</posx>
-					<width>90</width>
-					<height>81</height>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<texture>flags/flag_frame.png</texture>
-				</control>
-
-			</control>
-			<control type="group">
-				<width>135</width>
-				<height>80</height>
-				<visible>Container.Content(movies) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
-				<visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
-				<control type="image">
-					<include>MediaFlagsVarsWide</include>
-					<texture fallback="flags/default.png">$VAR[VarFlagSource]</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-				<control type="image">
-					<width>156</width>
-					<height>81</height>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<texture>flags/flag_frame.png</texture>
-				</control>
-
-			</control>
-			<control type="group">
-				<visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
-				<width>135</width>
-				<height>80</height>
-				<control type="image">
-					<include>MediaFlagsVarsWide</include>
-					<texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-				<control type="image">
-					<width>156</width>
-					<height>81</height>
-					<texture>flags/flag_frame.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-
-			</control>
-			<!-- Video 3D (sbs/tab) -->
-			<control type="group">
-				<visible>String.Contains(ListItem.StereoscopicMode,split_) | String.Contains(ListItem.StereoscopicMode,anaglyph_)|String.Contains(listitem.filename,.3D.)</visible>
-				<width>135</width>
-				<height>80</height>
-				<control type="image">
-					<include>MediaFlagsVarsWide</include>
-					<!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dSBS.png</texture>-->
-					<texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<visible>String.Contains(listitem.filename,.sbs.) | String.Contains(ListItem.StereoscopicMode,split_horizontal)</visible>
-				</control>
-				<control type="image">
-					<include>MediaFlagsVarsWide</include>
-					<!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dTAB.png</texture>-->
-					<texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<visible>String.Contains(listitem.filename,.tab.) | String.Contains(ListItem.StereoscopicMode,split_vertical)</visible>
-				</control>
-				<control type="image">
-					<include>MediaFlagsVarsWide</include>
-					<texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<visible>!String.Contains(listitem.filename,.tab.)+!String.Contains(listitem.filename,.sbs.)+!String.Contains(ListItem.StereoscopicMode,split_)</visible>
-				</control>
-				<control type="image">
-					<width>156</width>
-					<height>81</height>
-					<texture>flags/flag_frame.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-
-			</control>
-
-		</control>
-
-
-
-
-
-
-		<!-- Video Resolution -->
-		<control type="grouplist"> <!-- resolution +  Aspect-->
-			<include>Horizlist</include>
-			<control type="group">
-				<visible>!String.IsEmpty(ListItem.VideoResolution)</visible>
-				<width>135</width>
-				<height>120</height>
-				<control type="image">
-					<include>MediaFlagsVarsWide</include>
-					<texture fallback="flags/default.png">$INFO[ListItem.VideoResolution,flags/VideoResolution/,.png]</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-				<control type="image">
-					<width>156</width>
-					<height>81</height>
-					<texture>flags/flag_frame.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-
-			</control>
-
-			<!-- Video Aspect -->
-			<control type="group">
-				<visible>!String.IsEmpty(ListItem.VideoAspect)</visible>
-				<width>135</width>
-				<height>80</height>
-				<control type="image">
-					<include>MediaFlagsVarsWide</include>
-					<texture fallback="flags/VideoAspect/default.png">$INFO[ListItem.VideoAspect,flags/VideoAspect/,.png]</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-				<control type="image">
-					<width>156</width>
-					<height>81</height>
-					<texture>flags/flag_frame.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-				</control>
-
-			</control>
-
-			<control type="group">
-				<width>135</width>
-				<height>80</height>
-				<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
-				<control type="image">
-					<posx>2</posx>
-					<width>156</width>
-					<height>81</height>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<texture>flags/flag_frame.png</texture>
-				</control>
-
-				<control type="image">
-					<visible>String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
-					<posx>20</posx>
-					<include>MediaFlagsVarsWide</include>
-					<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.1)].png</texture>
-					<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
-					<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-				</control>
-				<control type="image">
-					<visible>String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
-					<posx>20</posx>
-					<include>MediaFlagsVarsWide</include>
-					<texture background="true" >flags/cc.png</texture>
-					<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
-					<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-				</control>
+		
 				<control type="group">
-					<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
+					<visible>!String.IsEqual(ListItem.Label,..)</visible>
+					<width>112</width>
+					<height>80</height>
 					<control type="image">
-						<posx>18</posx>
-						<posy>8</posy>
-						<width>60</width>
-						<height>30</height>
-						<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.1)].png</texture>
-						<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+						<include>MediaFlagsVarsSquare</include>
+						<texture>Star.png</texture>
+						<aspectratio>stretch</aspectratio>
+						<colordiffuse>RatingStarDiffuse</colordiffuse>
+						<visible>!String.Contains(Container.FolderPath,advanced.launcher)</visible>
+					</control>
+					<control type="label">
+						<posy>15</posy>
+						<include>MediaFlagsVarsSquare</include>
+						<align>center</align>
+						<aligny>center</aligny>
+						<label>$VAR[StarRating]</label>
+						<textcolor>yellow</textcolor>
+						<font>METF_StarRating</font>
+						<visible>!String.Contains(Container.FolderPath,advanced.launcher)</visible>
 					</control>
 					<control type="image">
-						<posx>18</posx>
-						<posy>8</posy>
-						<width>60</width>
-						<height>30</height>
-						<texture background="true" >flags/cc.png</texture>
-						<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>82</posx>
-						<width>60</width>
-						<posy>8</posy>
-						<height>30</height>
-						<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.2)].png</texture>
-						<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>82</posx>
-						<width>60</width>
-						<posy>8</posy>
-						<height>30</height>
-						<texture background="true" >flags/cc.png</texture>
-						<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>18</posx>
-						<posy>42</posy>
-						<width>60</width>
-						<height>30</height>
-						<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.3)].png</texture>
-						<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.3))</visible>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>18</posx>
-						<posy>42</posy>
-						<width>60</width>
-						<height>30</height>
-						<texture background="true" >flags/cc.png</texture>
-						<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.3))</visible>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>82</posx>
-						<posy>42</posy>
-						<width>60</width>
-						<height>30</height>
-						<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.4)].png</texture>
-						<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.4))</visible>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>82</posx>
-						<posy>42</posy>
-						<width>60</width>
-						<height>30</height>
-						<texture background="true" >flags/cc.png</texture>
-						<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.4))</visible>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-				</control>
-
-			</control>
-
-			<control type="group"> <!-- une seule langue -->
-				<width>135</width>
-				<height>80</height>
-				<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1)) + String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
-				<control type="image">
-					<posx>2</posx>
-					<width>156</width>
-					<height>81</height>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<texture>flags/flag_frame.png</texture>
-				</control>
-				<control type="image" id="7770">
-					<visible>String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
-					<posx>18</posx>
-					<posy>25</posy>
-					<width>60</width>
-					<height>30</height>
-					<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.1)].png</texture>
-					<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1))</visible>
-					<aspectratio aligny="center">scale</aspectratio>
-				</control>
-
-				<control type="group">
-
-					<posx>85</posx>
-					<posy>10</posy>
-					<width>60</width>
-					<height>30</height>
-					<control type="image">
-						<posx>-7</posx>
-						<posy>0</posy>
-						<width>57</width>
-						<height>30</height>
-						<texture>flags/flag_frame2.png</texture>
-						<colordiffuse>A0FFFFFF</colordiffuse>
-						<aspectratio>scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>0</posx>
-						<posy>1</posy>
-						<width>50</width>
-						<heigth>30</heigth>
-						<texture background="true" >$INFO[ListItem.Property(AudioChannels.1),flags/AudioChannels/,chOverlay.png]</texture>
-						<aspectratio>scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>-7</posx>
-						<posy>30</posy>
-						<width>57</width>
-						<height>28</height>
-						<texture>flags/flag_frame2.png</texture>
-						<colordiffuse>A0FFFFFF</colordiffuse>
-						<aspectratio>scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>-5</posx>
-						<posy>30</posy>
-						<width>50</width>
-						<height>30</height>
-						<texture >$VAR[MediaFlag_AudioCodec]</texture>
+						<include>MediaFlagsVarsSquare</include>
+						<texture>special://skin/extras/games/genres/$INFO[ListItem.Genre,,.png]</texture>
+						<aspectratio>stretch</aspectratio>
 						<colordiffuse>MediaFlagDiffuse</colordiffuse>
-						<aspectratio>scale</aspectratio>
+						<visible>!String.IsEmpty(ListItem.Genre) + String.Contains(Container.FolderPath,advanced.launcher)</visible>
+					</control>
+					<control type="image">
+						<posx>2</posx>
+						<width>99</width>
+						<height>76</height>
+						<texture>flags/flag_frame.png</texture>
+						<aspectratio>stretch</aspectratio>
+						<colordiffuse>MediaFlagDiffuse</colordiffuse>
 					</control>
 				</control>
-			</control>
-
-			<control type="group"> <!-- multi langues -->
-				<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1))+!String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
-
-				<width>290</width>
-				<height>80</height>
-
-
-				<control type="image">
-					<posx>-10</posx>
-					<width>332</width>
-					<height>81</height>
-					<texture>flags/flag_frame.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
-				</control>
-
-				<control type="image">
-					<posx>-5</posx>
-					<width>252</width>
-					<height>81</height>
-					<texture>flags/flag_frame.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.3))+String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
-				</control>
-				<control type="image">
-					<posx>0</posx>
-					<width>172</width>
-					<height>81</height>
-					<texture>flags/flag_frame.png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.2))+String.IsEmpty(ListItem.Property(AudioLanguage.4))+String.IsEmpty(ListItem.Property(AudioLanguage.3))</visible>
-				</control>
-
-
-				<control type="group"> <!-- language 1 -->
-					<width>60</width>
-					<height>65</height>
-					<posx>20</posx>
-					<control type="image">
-						<posx>0</posx>
-						<width>60</width>
-						<height>30</height>
-						<include>MediaFlagsVarsWide</include>
-						<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.1)].png</texture>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>30</posx>
-						<posy>10</posy>
-						<width>25</width>
-						<height>21</height>
-						<texture>flags/flag_frame2.png</texture>
-						<aspectratio >stretch</aspectratio>
-					</control>
-					<control type="image">
-						<posx>30</posx>
-						<posy>10</posy>
-						<width>22</width>
-						<height>18</height>
-						<texture background="true" >$INFO[ListItem.Property(AudioChannels.1),flags/AudioChannels/,chOverlay.png]</texture>
-						<aspectratio>scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>0</posx>
-						<posy>40</posy>
-						<width>60</width>
-						<height>30</height>
-						<include>MediaFlagsVarsWide</include>
-						<texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.1),flags/AudioCodec/,.png]</texture>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-				</control>
-
-				<control type="group"> <!-- language 2 -->
-					<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
-					<width>60</width>
-					<height>65</height>
-					<posx>85</posx>
-					<control type="image">
-						<posx>0</posx>
-						<width>60</width>
-						<height>30</height>
-						<include>MediaFlagsVarsWide</include>
-						<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.2)].png</texture>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>30</posx>
-						<posy>10</posy>
-						<width>25</width>
-						<height>21</height>
-						<texture>flags/flag_frame2.png</texture>
-						<aspectratio >stretch</aspectratio>
-					</control>
-					<control type="image">
-						<posx>30</posx>
-						<posy>10</posy>
-						<width>22</width>
-						<height>18</height>
-						<texture background="true" >$INFO[ListItem.Property(AudioChannels.2),flags/AudioChannels/,chOverlay.png]</texture>
-						<aspectratio>scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>0</posx>
-						<posy>40</posy>
-						<width>60</width>
-						<height>30</height>
-						<include>MediaFlagsVarsWide</include>
-						<texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.2),flags/AudioCodec/,.png]</texture>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-				</control>
-				<control type="group"> <!-- language 3 -->
-					<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.3))</visible>
-					<width>60</width>
-					<height>65</height>
-					<posx>155</posx>
-					<control type="image">
-						<posx>0</posx>
-						<width>60</width>
-						<height>30</height>
-						<include>MediaFlagsVarsWide</include>
-						<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.3)].png</texture>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>30</posx>
-						<posy>10</posy>
-						<width>25</width>
-						<height>21</height>
-						<texture>flags/flag_frame2.png</texture>
-						<aspectratio >stretch</aspectratio>
-					</control>
-					<control type="image">
-						<posx>30</posx>
-						<posy>10</posy>
-						<width>22</width>
-						<height>18</height>
-						<texture background="true" >$INFO[ListItem.Property(AudioChannels.3),flags/AudioChannels/,chOverlay.png]</texture>
-						<aspectratio>scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>0</posx>
-						<posy>40</posy>
-						<width>60</width>
-						<height>30</height>
-						<include>MediaFlagsVarsWide</include>
-						<texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.3),flags/AudioCodec/,.png]</texture>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-				</control>
-				<control type="group"> <!-- language 4 -->
-					<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
-					<width>60</width>
-					<height>65</height>
-					<posx>225</posx>
-					<control type="image">
-						<posx>0</posx>
-						<width>60</width>
-						<height>30</height>
-						<include>MediaFlagsVarsWide</include>
-						<texture fallback="flags/defaultsound.png" background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.4)].png</texture>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>30</posx>
-						<posy>10</posy>
-						<width>25</width>
-						<height>21</height>
-						<texture>flags/flag_frame2.png</texture>
-						<aspectratio >stretch</aspectratio>
-					</control>
-					<control type="image">
-						<posx>30</posx>
-						<posy>10</posy>
-						<width>22</width>
-						<height>18</height>
-						<texture background="true" >$INFO[ListItem.Property(AudioChannels.4),flags/AudioChannels/,chOverlay.png]</texture>
-						<aspectratio>scale</aspectratio>
-					</control>
-					<control type="image">
-						<posx>0</posx>
-						<posy>40</posy>
-						<width>60</width>
-						<height>30</height>
-						<include>MediaFlagsVarsWide</include>
-						<texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.4),flags/AudioCodec/,.png]</texture>
-						<aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-					</control>
-				</control>
-			</control>
-
-		</control>
-
-
-	</control>
-
-
-</include>
-<include name="MediaInfoGroup2">
-	<control type="group">
-		<width>1920</width>
-		<posx>0</posx>
-		<align>center</align>
-		<include>Animation_FadedByMenu</include>
-				<include>Animation_CommonFade</include>
-				<visible>!String.Contains(Container.FolderPath,plugin)</visible>
-				<visible>!String.Contains(ListItem.Label,..,left)+[Container.Content(movies)| Container.Content(tvshows) | Container.Content(episodes) | Container.Content(MusicVideos)]</visible>
-				<include>VisibleIfNotMovieSet</include> 
-		<!-- Video Resolution -->
-			<control type="grouplist"> <!-- resolution +  Aspect-->
-				<!-- <posx>500</posx> -->
-				<posy>1005</posy>
-				<posx>-150</posx>
-				<width>1920</width>
-				<!--<width>950</width> -->
-				<height>150</height>
-				<align>center</align>
-				<itemgap>2</itemgap>
-				<orientation>horizontal</orientation>
-				
 				<control type="group">
+					<width>95</width>
+					<height>80</height>
+					<visible>Container.Content(movies) | Container.Content(episodes)| Container.Content(tvshows) | Container.Content(MusicVideos)</visible>
+					<visible>!String.IsEmpty(ListItem.Mpaa)</visible>
+					<control type="image">
+						<posx>10</posx>
+						<posy>8</posy>
+						<width>60</width>
+						<height>60</height>
+						<aspectratio>keep</aspectratio>
+						<texture fallback="flags/default.png">$VAR[MPAATexture]</texture>
+						<colordiffuse>MediaFlagDiffuse</colordiffuse>
+					</control>
+					<control type="image">						
+						<colordiffuse>MediaFlagDiffuse</colordiffuse>
+						<texture>flags/flag_frame.png</texture>
+					</control>
+
+				</control>
+				<control type="group">
+					<width>156</width>
+					<height>80</height>
+					<visible>Container.Content(movies) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
 					<visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
-					<width>135</width>
+					<control type="image">
+						<include>MediaFlagsVarsWide</include>
+						<texture fallback="flags/default.png">$VAR[VarFlagSource]</texture>
+						<colordiffuse>MediaFlagDiffuse</colordiffuse>
+					</control>
+					<control type="image">
+						
+						<colordiffuse>MediaFlagDiffuse</colordiffuse>
+						<texture>flags/flag_frame.png</texture>
+					</control>
+
+				</control>
+				
+				<!-- Video 3D (sbs/tab) -->
+				<control type="group">
+					<visible>String.Contains(ListItem.StereoscopicMode,split_) | String.Contains(ListItem.StereoscopicMode,anaglyph_)|String.Contains(listitem.filename,.3D.)</visible>
+					<width>156</width>
 					<height>80</height>
 					<control type="image">
 						<include>MediaFlagsVarsWide</include>
-						<texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture>
+						<!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dSBS.png</texture>-->
+						<texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
 						<colordiffuse>MediaFlagDiffuse</colordiffuse>
+						<visible>String.Contains(listitem.filename,.sbs.) | String.Contains(ListItem.StereoscopicMode,split_horizontal)</visible>
+					</control>
+					<control type="image">
+						<include>MediaFlagsVarsWide</include>
+						<!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dTAB.png</texture>-->
+						<texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
+						<colordiffuse>MediaFlagDiffuse</colordiffuse>
+						<visible>String.Contains(listitem.filename,.tab.) | String.Contains(ListItem.StereoscopicMode,split_vertical)</visible>
+					</control>
+					<control type="image">
+						<include>MediaFlagsVarsWide</include>
+						<texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
+						<colordiffuse>MediaFlagDiffuse</colordiffuse>
+						<visible>!String.Contains(listitem.filename,.tab.)+!String.Contains(listitem.filename,.sbs.)+!String.Contains(ListItem.StereoscopicMode,split_)</visible>
 					</control>
 					<control type="image">
 						<width>156</width>
@@ -2420,20 +1259,41 @@
 						<texture>flags/flag_frame.png</texture>
 						<colordiffuse>MediaFlagDiffuse</colordiffuse>
 					</control>
+				</control>
+			</control>
+			<control type="grouplist"> <!-- 2eme ligne -->
+				<posy>1010</posy>				
+				<height>150</height>
+				<align>center</align>
+				<itemgap>-20</itemgap>
+				<orientation>horizontal</orientation>
+				
+				<control type="group">
+					<visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
+					<width>156</width>
+					<height>80</height>
+					<control type="image">
+						<include>MediaFlagsVarsWide</include>
+						<texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture>
+						<colordiffuse>MediaFlagDiffuse</colordiffuse>
+					</control>
+					<control type="image">						
+						<texture>flags/flag_frame.png</texture>
+						<colordiffuse>MediaFlagDiffuse</colordiffuse>
+					</control>
 
 				</control>
 				<control type="group">
 					<visible>!String.IsEmpty(ListItem.VideoResolution)</visible>
-					<width>135</width>
-					<height>120</height>
+					<width>156</width>
+					<height>80</height>
 					<control type="image">
 						<include>MediaFlagsVarsWide</include>
 						<texture fallback="flags/default.png">$INFO[ListItem.VideoResolution,flags/VideoResolution/,.png]</texture>
 						<colordiffuse>MediaFlagDiffuse</colordiffuse>
 					</control>
 					<control type="image">
-						<width>156</width>
-						<height>76</height>
+						
 						<texture>flags/flag_frame.png</texture>
 						<colordiffuse>MediaFlagDiffuse</colordiffuse>
 					</control>
@@ -2443,16 +1303,14 @@
 				<!-- Video Aspect -->
 				<control type="group">
 					<visible>!String.IsEmpty(ListItem.VideoAspect)</visible>
-					<width>135</width>
+					<width>156</width>
 					<height>80</height>
 					<control type="image">
 						<include>MediaFlagsVarsWide</include>
 						<texture fallback="flags/VideoAspect/default.png">$INFO[ListItem.VideoAspect,flags/VideoAspect/,.png]</texture>
 						<colordiffuse>MediaFlagDiffuse</colordiffuse>
 					</control>
-					<control type="image">
-						<width>156</width>
-						<height>76</height>
+					<control type="image">						
 						<texture>flags/flag_frame.png</texture>
 						<colordiffuse>MediaFlagDiffuse</colordiffuse>
 					</control>
@@ -2460,13 +1318,11 @@
 				</control>
 
 				<control type="group"> <!-- sous-titres -->
-					<width>135</width>
+					<width>156</width>
 					<height>80</height>
 					<visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
 					<control type="image">
-						<posx>2</posx>
-						<width>156</width>
-						<height>76</height>
+						<posx>2</posx>						
 						<colordiffuse>MediaFlagDiffuse</colordiffuse>
 						<texture>flags/flag_frame.png</texture>
 					</control>
@@ -2566,13 +1422,11 @@
 				</control>
 
 				<control type="group"> <!-- une seule langue -->
-					<width>135</width>
+					<width>156</width>
 					<height>80</height>
 					<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1)) + String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
 					<control type="image">
-						<posx>2</posx>
-						<width>156</width>
-						<height>76</height>
+						<posx>2</posx>						
 						<colordiffuse>MediaFlagDiffuse</colordiffuse>
 						<texture>flags/flag_frame.png</texture>
 					</control>
@@ -2634,7 +1488,7 @@
 				<control type="group"> <!-- multi langues -->
 					<visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1))+!String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
 
-					<width>135</width>
+					<width>156</width>
 					<height>80</height>
 
 
@@ -2825,210 +1679,6 @@
 
 			</control>
 			
-	<control type="grouplist">
-		<posx>500</posx>
-		<posy>935</posy>
-		<width>750</width>
-		<height>150</height>
-		<align>center</align>
-		<itemgap>2</itemgap>
-		<orientation>horizontal</orientation>
-		
-
-		<!-- Star Rating (or Game Genre when in Advanced Launcher addon) --
-		<control type="grouplist"> <!-- chrono + studio +année -->
-			<include>Horizlist</include>
-			<control type="group"> <!-- chrono -->
-				<width>135</width>
-				<height>120</height>
-				<control type="image">
-					<width>156</width>
-					<height>76</height>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<texture>flags/flag_frame.png</texture>
-				</control>
-				<control type="image">
-					<top>7</top>
-					<left>15</left>
-					<width>110</width>
-					<height>70</height>
-					<texture>$VAR[chronotoolstexture]</texture>
-					<aspectratio>scale</aspectratio>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-
-				</control>
-				<control type="group">
-					<top>8</top>
-					<left>23</left>
-					<include>chronotoolsV</include>
-				</control>
-				<visible>!String.IsEmpty(ListItem.Duration)|[Skin.HasSetting(Show_HeureFin)+!String.IsEmpty(Window(10000).Property(DurationTools))]</visible>
-				<visible>!Container.Content(seasons)+!Container.Content(tvshows)</visible>
-			</control>
-
-
-			<control type="group"> <!-- studio -->
-				<width>118</width>
-				<height>120</height>
-				<align>center</align>
-				<!-- <visible>!String.IsEmpty(Control.GetLabel(2525))</visible> -->
-				<control type="image">
-					<width>135</width>
-					<height>76</height>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<texture>flags/flag_frame.png</texture>
-				</control>
-				<control type="image">
-					<top>3</top>
-					<width>130</width>
-					<height>70</height>
-					<aspectratio align="center" aligny="center">keep</aspectratio>
-					<texture fallback="flags\default-studio.png">resource://resource.images.studios.coloured/$INFO[ListItem.Studio].png</texture>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-
-				</control>
-			</control>
-			<control type="group">
-				<visible>!String.IsEmpty(ListItem.Year)</visible>
-				<width>135</width>
-				<height>120</height>
-				<control type="image">
-					<width>156</width>
-					<height>76</height>
-					<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					<texture>flags/flag_frame.png</texture>
-				</control>
-
-
-				<control type="label">
-					<width min="25" max="200">auto</width>
-					<posx>30</posx>
-					<posy>10</posy>
-					<height>50</height>
-					<aligny>center</aligny>
-					<font>chicken</font>
-					<textcolor>white</textcolor>
-					<label>[I]$INFO[ListItem.Year][/I]</label>
-				</control>
-			</control>
-			<!--</control>
-			<control type="grouplist"> <!-- rating + MPAA + Source + videocodec-->
-
-				<control type="group">
-					<visible>!StringCompare(ListItem.Label,..)</visible>
-					<width>90</width>
-					<height>93</height>
-					<control type="image">
-						<include>MediaFlagsVarsSquare</include>
-						<texture>Star.png</texture>
-						<aspectratio>stretch</aspectratio>
-						<colordiffuse>RatingStarDiffuse</colordiffuse>
-						<visible>!String.Contains(Container.FolderPath,advanced.launcher)</visible>
-					</control>
-					<control type="label">
-						<posy>15</posy>
-						<include>MediaFlagsVarsSquare</include>
-						<align>center</align>
-						<aligny>center</aligny>
-						<label>$VAR[StarRating]</label>
-						<textcolor>yellow</textcolor>
-						<font>METF_StarRating</font>
-						<visible>!String.Contains(Container.FolderPath,advanced.launcher)</visible>
-					</control>
-					<control type="image">
-						<include>MediaFlagsVarsSquare</include>
-						<texture>special://skin/extras/games/genres/$INFO[ListItem.Genre,,.png]</texture>
-						<aspectratio>stretch</aspectratio>
-						<colordiffuse>MediaFlagDiffuse</colordiffuse>
-						<visible>!String.IsEmpty(ListItem.Genre) + String.Contains(Container.FolderPath,advanced.launcher)</visible>
-					</control>
-					<control type="image">
-						<posx>2</posx>
-						<width>99</width>
-						<height>76</height>
-						<texture>flags/flag_frame.png</texture>
-						<aspectratio>stretch</aspectratio>
-						<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					</control>
-				</control>
-				<control type="group">
-					<width>70</width>
-					<height>93</height>
-					<visible>Container.Content(movies) | Container.Content(episodes)| Container.Content(tvshows) | Container.Content(MusicVideos)</visible>
-					<visible>!String.IsEmpty(ListItem.Mpaa)</visible>
-					<control type="image">
-						<posx>10</posx>
-						<posy>8</posy>
-						<width>60</width>
-						<height>60</height>
-						<aspectratio>keep</aspectratio>
-						<texture fallback="flags/default.png">$VAR[MPAATexture]</texture>
-						<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					</control>
-					<control type="image">
-						<posx>-2</posx>
-						<width>90</width>
-						<height>76</height>
-						<colordiffuse>MediaFlagDiffuse</colordiffuse>
-						<texture>flags/flag_frame.png</texture>
-					</control>
-
-				</control>
-				<control type="group">
-					<width>135</width>
-					<height>80</height>
-					<visible>Container.Content(movies) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
-					<visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
-					<control type="image">
-						<include>MediaFlagsVarsWide</include>
-						<texture fallback="flags/default.png">$VAR[VarFlagSource]</texture>
-						<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					</control>
-					<control type="image">
-						<width>156</width>
-						<height>76</height>
-						<colordiffuse>MediaFlagDiffuse</colordiffuse>
-						<texture>flags/flag_frame.png</texture>
-					</control>
-
-				</control>
-				
-				<!-- Video 3D (sbs/tab) -->
-				<control type="group">
-					<visible>String.Contains(ListItem.StereoscopicMode,split_) | String.Contains(ListItem.StereoscopicMode,anaglyph_)|String.Contains(listitem.filename,.3D.)</visible>
-					<width>135</width>
-					<height>80</height>
-					<control type="image">
-						<include>MediaFlagsVarsWide</include>
-						<!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dSBS.png</texture>-->
-						<texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-						<colordiffuse>MediaFlagDiffuse</colordiffuse>
-						<visible>String.Contains(listitem.filename,.sbs.) | String.Contains(ListItem.StereoscopicMode,split_horizontal)</visible>
-					</control>
-					<control type="image">
-						<include>MediaFlagsVarsWide</include>
-						<!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dTAB.png</texture>-->
-						<texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-						<colordiffuse>MediaFlagDiffuse</colordiffuse>
-						<visible>String.Contains(listitem.filename,.tab.) | String.Contains(ListItem.StereoscopicMode,split_vertical)</visible>
-					</control>
-					<control type="image">
-						<include>MediaFlagsVarsWide</include>
-						<texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-						<colordiffuse>MediaFlagDiffuse</colordiffuse>
-						<visible>!String.Contains(listitem.filename,.tab.)+!String.Contains(listitem.filename,.sbs.)+!String.Contains(ListItem.StereoscopicMode,split_)</visible>
-					</control>
-					<control type="image">
-						<width>156</width>
-						<height>76</height>
-						<texture>flags/flag_frame.png</texture>
-						<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					</control>
-				</control>
-			</control>
-			<!-- </control> -->
-
-			<!-- </control>-->
 </control>
 	
 

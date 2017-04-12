@@ -3,12 +3,13 @@
 	<defaultcontrol always="true">3</defaultcontrol>
 
 	<controls>
+
 		<control type="group">
 			<posx>500</posx>
 			<posy>300</posy>
 			<width>800</width>
 			<height>490</height>
-			<animation type="Conditional" condition="StringCompare(Container(3).ListItem.Label2,plein)|StringCompare(Container(6).ListItem.Label2,plein)" reversible="false">
+					<animation type="Conditional" condition="String.IsEqual(Container(6).ListItem.Label2,selectionnevue)|String.IsEqual(Container(3).ListItem.Label2,selectionnevue)|[!IsEmpty(Container(3).ListItem.DBID)+!String.Contains(Container(3).ListItem.Path,setid)+!IsEmpty(Container(3).ListItem.Path)]|[!IsEmpty(Container(6).ListItem.DBID)+!String.Contains(Container(6).ListItem.Path,setid)+!IsEmpty(Container(6).ListItem.Path)]" reversible="false">
 				<effect type="slide" end="-450" time="10" />
 				<!-- <effect type="rotatey" center="0,240" end="-20" time="10" /> -->
 			</animation>
@@ -19,38 +20,24 @@
 			<control type="group">
 				<posx>20</posx>
 				<posy>0</posy>
-				<control type="image">
+				<control type="group">
+				<control type="multiimage">
 					<posx>760</posx>
 					<posy>20</posy>
 					<width>350</width>
-					<fadetime>100</fadetime>
-					<animation type="Conditional" condition="StringCompare(Container(6).ListItem.Label2,selectionnevue)" reversible="false">
+					<fadetime>1000</fadetime>
+					<timeperimage>3000</timeperimage>
+					<animation type="Conditional" condition="String.IsEqual(Container(6).ListItem.Label2,selectionnevue)|String.IsEqual(Container(3).ListItem.Label2,selectionnevue)|[!IsEmpty(Container(3).ListItem.DBID)+!String.Contains(Container(3).ListItem.Path,setid)+!IsEmpty(Container(3).ListItem.Path)]|[!IsEmpty(Container(6).ListItem.DBID)+!String.Contains(Container(6).ListItem.Path,setid)+!IsEmpty(Container(6).ListItem.Path)]" reversible="false">
 						<effect type="zoom" center="760,220" end="200" time="10" />
 						<effect type="rotatey" center="0,0" end="20" time="10" />
 						<effect type="slide" end="70" time="10" />
 					</animation>
 					<aspectratio align="left" aligny="center">keep</aspectratio>
-					<texture fallback="DefaultThumb.png">$INFO[Container(6).ListItem.Icon]</texture>
-					<bordersize>8</bordersize>
-					<bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
-					<visible>!String.IsEmpty(Container(6).ListItem.Icon)+!String.Contains(Container(6).ListItem.Icon,default)</visible>
+					<imagepath>$VAR[ImageContainer]</imagepath>				
 				</control>
-				<control type="image">
-					<posx>760</posx>
-					<posy>20</posy>
-					<width>350</width>
-					<animation type="Conditional" condition="StringCompare(Container(3).ListItem.Label2,selectionnevue)" reversible="false">
-						<effect type="zoom" center="760,220" end="200" time="10" />
-						<effect type="rotatey" center="0,0" end="20" time="10" />
-						<effect type="slide" end="70" time="10" />
-					</animation>
-					<fadetime>100</fadetime>
-					<aspectratio align="left" aligny="center">keep</aspectratio>
-					<texture fallback="DefaultThumb.png">$INFO[Container(3).ListItem.Icon]</texture>
-					<bordersize>8</bordersize>
-					<bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
-					<visible>!String.IsEmpty(Container(3).ListItem.Icon)+!String.Contains(Container(3).ListItem.Icon,default)</visible>
+				
 				</control>
+
 
 
 				<control type="label" id="1">
@@ -65,23 +52,35 @@
 					<aligny>center</aligny>
 					<label>[B]13406[/B]</label>
 				</control>
-
-
+				<!--
+				<control type="label">
+					<label>$INFO[Container(3).ListItem.DBID]/$VAR[ImageContainer]-$INFO[Container(3).ListItem.Path]/$INFO[Container(3).ListItem.Art(landscape)]/$INFO[Container(3).ListItem.Art(poster)]/$INFO[Container(3).ListItem.Art(thumb)]/</label>
+				</control>
+-->
+<control type="image">
+	<top>120</top>
+	<left>18</left>
+	<width>730</width>
+	<colordiffuse>BackgroundColor</colordiffuse>
+	<height>5</height>
+						<texture>VideoInfoLine.png</texture>
+					</control>
 				<control type="list" id="3">
-					<posx>20</posx>
+					<posx>6</posx>
 					<posy>140</posy>
-					<width>730</width>
+					<width>750</width>
 					<height>300</height>
 					<onleft>7</onleft>
 					<onright>5</onright>
 					<onup>3</onup>
 					<ondown>3</ondown>
-					<itemlayout height="38" width="730">
+					<itemlayout height="38" width="750">
 
 						<control type="label">
 							<textcolor>SettingsDetail</textcolor>
-							<left>35</left>
+							<left>45</left>
 							<font>comic20</font>
+							<width>730</width>
 							<align>left</align>
 							<aligny>center</aligny>
 							<focusedcolor>ButtonText</focusedcolor>
@@ -89,12 +88,14 @@
 						</control>
 						<control type="image">
 							<aligny>center</aligny>
+							<left>10</left>
 							<width>30</width>
 							<texture>buttons/repertoireferme.png</texture>
 							<aspectratio>keep</aspectratio>
 							<visible>String.Contains(ListItem.Label,>,right)</visible>
 						</control>
 						<control type="image">
+							<left>10</left>
 							<aligny>center</aligny>
 							<width>30</width>
 							<texture>buttons/checkvide.png</texture>
@@ -103,16 +104,18 @@
 						</control>
 
 					</itemlayout>
-					<focusedlayout height="38" width="730">
+					<focusedlayout height="38" width="750">
 
 						<control type="image">
 							<align>left</align>
 							<aligny>center</aligny>
-							<texture>ButtonFo.png</texture>
+							
+							<texture>ButtonFO2Wide.png</texture>
 							<visible>Control.HasFocus(3)</visible>
 						</control>
 						<control type="image">
 							<aligny>center</aligny>
+							<left>10</left>
 							<width>30</width>
 							<texture>buttons/repertoireouvert.png</texture>
 							<aspectratio>keep</aspectratio>
@@ -121,6 +124,7 @@
 						</control>
 						<control type="image">
 							<aligny>center</aligny>
+							<left>10</left>
 							<width>30</width>
 							<texture>buttons/checkok.png</texture>
 							<aspectratio>keep</aspectratio>
@@ -130,7 +134,8 @@
 						<control type="label">
 							<textcolor>ButtonText</textcolor>
 							<font>comic20</font>
-							<left>35</left>
+							<width>730</width>
+							<left>45</left>
 							<align>left</align>
 							<aligny>center</aligny>
 							<focusedcolor>ButtonText</focusedcolor>
@@ -141,20 +146,21 @@
 				</control>
 
 				<control type="list" id="6">
-					<posx>20</posx>
+					<posx>6</posx>
 					<posy>140</posy>
-					<width>730</width>
+					<width>750</width>
 					<height>300</height>
 					<onleft>7</onleft>
 					<onright>5</onright>
 					<onup>6</onup>
 					<ondown>6</ondown>
-					<itemlayout height="38" width="730">
+					<itemlayout height="38" width="750">
 
 						<control type="label">
 							<textcolor>SettingsDetail</textcolor>
-							<left>35</left>
+							<left>45</left>
 							<font>comic20</font>
+							<width>730</width>
 							<align>left</align>
 							<aligny>center</aligny>
 							<focusedcolor>ButtonText</focusedcolor>
@@ -162,12 +168,14 @@
 						</control>
 						<control type="image">
 							<aligny>center</aligny>
+							<left>10</left>
 							<width>30</width>
 							<texture>buttons/repertoireferme.png</texture>
 							<aspectratio>keep</aspectratio>
 							<visible>String.Contains(ListItem.Label,>,right)</visible>
 						</control>
 						<control type="image">
+							<left>10</left>
 							<aligny>center</aligny>
 							<width>30</width>
 							<texture>buttons/checkvide.png</texture>
@@ -176,16 +184,18 @@
 						</control>
 
 					</itemlayout>
-					<focusedlayout height="38" width="730">
+					<focusedlayout height="38" width="750">
 
 						<control type="image">
 							<align>left</align>
 							<aligny>center</aligny>
-							<texture>ButtonFo.png</texture>
+							<texture>ButtonFO2Wide.png</texture>
+							
 							<visible>Control.HasFocus(6)</visible>
 						</control>
 						<control type="image">
 							<aligny>center</aligny>
+							<left>10</left>
 							<width>30</width>
 							<texture>buttons/repertoireouvert.png</texture>
 							<aspectratio>keep</aspectratio>
@@ -193,6 +203,7 @@
 							<visible>String.Contains(ListItem.Label,>,right)</visible>
 						</control>
 						<control type="image">
+							<left>10</left>
 							<aligny>center</aligny>
 							<width>30</width>
 							<texture>buttons/checkok.png</texture>
@@ -203,7 +214,8 @@
 						<control type="label">
 							<textcolor>ButtonText</textcolor>
 							<font>comic20</font>
-							<left>35</left>
+							<left>45</left>
+							<width>730</width>
 							<align>left</align>
 							<aligny>center</aligny>
 							<focusedcolor>ButtonText</focusedcolor>
@@ -229,9 +241,9 @@
 				<texturenofocus colordiffuse="FF7F7F7F">buttons/obtenirplus.png</texturenofocus>
 				<align>right</align>
 				<aligny>center</aligny>
-				<onleft condition="!String.IsEmpty(Container(6).ListItem.Label)">6</onleft>
-				<onleft>3</onleft>				
-				<visible>Integer.IsGreater(Container(6).NumItems,0)</visible> 
+				<onleft condition="!IsEmpty(Container(6).ListItem.Label)">6</onleft>
+				<onleft>3</onleft>
+				<visible>Integer.IsGreater(Container(6).NumItems,0)</visible>
 			</control>
 			<control type="button" id="5">
 				<description>Default Addon Button</description>
@@ -247,10 +259,10 @@
 				<texturenofocus colordiffuse="FF7F7F7F">buttons/ok.png</texturenofocus>
 				<align>right</align>
 				<aligny>center</aligny>
-				<onleft condition="!String.IsEmpty(Container(6).ListItem.Label)">6</onleft>
+				<onleft condition="!IsEmpty(Container(6).ListItem.Label)">6</onleft>
 				<onleft>3</onleft>
-				
-				 <visible>!Integer.IsGreater(Container(6).NumItems,0)</visible> 
+
+				<visible>!Integer.IsGreater(Container(6).NumItems,0)</visible>
 			</control>
 
 			<control type="button" id="7">
@@ -267,8 +279,10 @@
 				<texturenofocus colordiffuse="FF7F7F7F">buttons/cancel.png</texturenofocus>
 				<align>right</align>
 				<aligny>center</aligny>
-				<onright condition="!String.IsEmpty(Container(6).ListItem.Label)">6</onright>
-				<onright>3</onright>				
+				<onright condition="!IsEmpty(Container(6).ListItem.Label)">6</onright>
+				<onright>3</onright>
+
+				<!-- <onclick>Close</onclick> -->
 				<info>.</info>
 				<label>.</label>
 				<animation type="Conditional" condition="Control.HasFocus(7)">
@@ -276,6 +290,11 @@
 				</animation>
 			</control>
 		</control>
-		
+		<!--	<include>Global_ContextFilter</include>
+		<include>Global_Weather</include>-->
+		<!--<include>Global_Time</include>
+		<include>Global_MediaOverlay</include>
+		<include>Setting_Heading</include>
+		<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>-->
 	</controls>
 </window>

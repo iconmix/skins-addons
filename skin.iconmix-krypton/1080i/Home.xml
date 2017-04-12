@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window id="0">
 	<defaultcontrol always="true">9000</defaultcontrol>
-	<onload condition="!Skin.HasSetting(MenuIcon)+!Skin.HasSetting(MenuTexte)+!Skin.HasSetting(MenuIconVertical)">Skin.ToggleSetting(MenuIcon)</onload> <!-- default to Icon menu -->
+	<onload condition="!Skin.HasSetting(MenuIcon)+!Skin.HasSetting(MenuTexte)+!Skin.HasSetting(MenuIconVertical)+!Skin.HasSetting(MenuIconBobine)">Skin.ToggleSetting(MenuIcon)</onload> <!-- default to Icon menu -->
 	<onload condition="Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuTexte)">Skin.ToggleSetting(MenuTexte)</onload> <!-- default to Icon menu -->
 	<onload condition="[Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuIconVertical)]">Skin.ToggleSetting(MenuIconVertical)</onload> <!-- default to Icon menu -->
 	<onload>RunScript(script.skinshortcuts,type=buildxml&amp;mainmenuID=9000&amp;levels=2)</onload>
@@ -13,7 +13,8 @@
 		<control type="group">
 			<include>GlobalBackground</include>  
 			<visible>!Window.IsVisible(movieinformation)+!Window.IsVisible(musicinformation)+!Window.IsVisible(songinformation)</visible>			
-			<include condition="Skin.HasSetting(MenuIcon)|[!Skin.HasSetting(MenuIcon)+!Skin.HasSetting(MenuTexte)+!Skin.HasSetting(MenuIconVertical)]">Home2_Icons</include>	
+			<include condition="Skin.HasSetting(MenuIcon)|[!Skin.HasSetting(MenuIcon)+!Skin.HasSetting(MenuIconBobine)+!Skin.HasSetting(MenuTexte)+!Skin.HasSetting(MenuIconVertical)]">Home2_Icons</include>	
+			<include condition="Skin.HasSetting(MenuIconBobine)">Home2_IconsBobine</include>
 			<include condition="Skin.HasSetting(MenuIconVertical)">Home2_IconsVertical</include>			 
 			<include condition="Skin.HasSetting(MenuTexte)">Home2_Texte</include>
 			

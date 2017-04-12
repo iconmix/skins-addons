@@ -90,7 +90,7 @@
 				<effect type="slide"  start="0,0" end="450,0" time="1" delay="1" reversible="false"/>
 				<effect type="fade"  start="0" end="100" time="100" delay="1" reversible="false"/>
 			</animation>
-			<visible>[[[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[StringCompare(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..)</visible>
+			<visible>[[[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[StringCompare(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!Substring(ListItem.Label,..)</visible>
 			<control type="image">
 				<top>60</top>
 				<left>30</left>
@@ -99,7 +99,7 @@
 				<texture>frames/Dialog_GlassActeur3.png</texture>
 				<colordiffuse>DialogBackgroundColor</colordiffuse>
 				<aspectratio  scalediffuse="true">stretch</aspectratio>
-				<visible>Control.IsVisible(1998)</visible>
+				<visible>Control.IsVisible(1998)+IntegerGreaterThan(Container(1998).NumItems,0)</visible>
 			</control>
 
 
@@ -127,7 +127,7 @@
 				<align>left</align>
 				<itemgap>1</itemgap>
 				<orientation>horizontal</orientation>
-				<visible>[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..)</visible>
+				<visible>[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!Substring(ListItem.Label,..)</visible>
 				<autoscroll delay="4000" repeat="5000" time="5000">!Control.HasFocus(1998)+!Control.HasFocus(5051)+!IsEmpty(Window(Home).Property(ActeurVideoReset))</autoscroll>-->
 				<pagecontrol>60</pagecontrol>
 				<!-- <content>$VAR[contentPanelActeurs]</content> -->
@@ -334,7 +334,7 @@
 						<height>60</height>
 						<texture>acteurs/films.png</texture>
 						<aspectratio>keep</aspectratio>
-						<visible>StringCompare(Container(5051).ListItem.Writer,movie)</visible>
+						<visible>StringCompare(Container(5051).ListItem.Property(TypeVideo),movie)</visible>
 					</control>
 					<control type="image">
 						<top>-2</top>
@@ -343,7 +343,7 @@
 						<align>left</align>
 						<texture>acteurs/series.png</texture>
 						<aspectratio>keep</aspectratio>
-						<visible>!StringCompare(Container(5051).ListItem.Writer,movie)</visible>
+						<visible>!StringCompare(Container(5051).ListItem.Property(TypeVideo),movie)</visible>
 					</control>
 					</control>
 					
@@ -432,12 +432,12 @@
 							<align>center</align>
 							<texture>acteurs/films.png</texture>
 							<aspectratio align="center" aligny="center">keep</aspectratio>
-							<visible>SubString(ListItem.DBTYPE,movie)</visible>
+							<visible>Substring(ListItem.DBTYPE,movie)</visible>
 						</control>
 						<control type="image">
 							<texture>acteurs/series.png</texture>
 							<aspectratio align="center" aligny="center">keep</aspectratio>
-							<visible>!SubString(ListItem.DBTYPE,movie)</visible>
+							<visible>!Substring(ListItem.DBTYPE,movie)</visible>
 						</control>
 					</control>
 					<control type="group">
@@ -523,11 +523,12 @@
 				</control>
 
 				<control type="fixedlist" id="5051">
+				  <!--- liste des roles -->
 					<top>60</top>
 					<left>20</left>
 					<width>1800</width>
 					<align>center</align>
-					  -->
+					 
 					<!--<onclick>ActivateWindow(10035,return)</onclick>-->
 					<onfocus>SetProperty(ActeurVideoReset,,Home)</onfocus>
 					<onup>Action(firstpage)</onup>
@@ -563,6 +564,30 @@
 		</control>
 
 	</control>
+</include>
+<include name="VideoType">
+  	<control type="group">
+  	  <visible>Container.Content(directors)|Container.Content(actors)</visible>
+			<description>Videotype image</description>
+			<posy>165</posy>
+			<posx>5</posx>			
+			<control type="image">
+				<posy>-10</posy>
+				<left>130</left>
+				<height>50</height>
+				<texture>acteurs/films.png</texture>
+				<aspectratio>keep</aspectratio>
+				<visible>StringCompare(ListItem.Property(TypeVideo),movie)</visible>
+			</control>
+			<control type="image">
+				<posy>-10</posy>
+				<left>130</left>
+				<height>50</height>
+				<texture>acteurs/series.png</texture>
+				<aspectratio>keep</aspectratio>
+				<visible>!StringCompare(ListItem.Property(TypeVideo),movie)</visible>
+			</control>
+		</control>
 </include>
 <include name="Acteurs">
 	<orientation>horizontal</orientation>
@@ -675,7 +700,7 @@
 
 
 		<control type="group">
-			<description>Actor image</description>
+			<description>Videotype image</description>
 			<posy>85</posy>
 			<posx>5</posx>
 			<control type="image">
@@ -692,7 +717,7 @@
 				<height>50</height>
 				<texture>acteurs/films.png</texture>
 				<aspectratio>keep</aspectratio>
-				<visible>StringCompare(ListItem.Writer,movie)+Control.IsVisible(5055)</visible>
+				<visible>StringCompare(ListItem.Property(TypeVideo),movie)+Control.IsVisible(5055)</visible>
 			</control>
 			<control type="image">
 				<posy>-10</posy>
@@ -700,7 +725,7 @@
 				<height>50</height>
 				<texture>acteurs/series.png</texture>
 				<aspectratio>keep</aspectratio>
-				<visible>!StringCompare(ListItem.Writer,movie)+!Control.IsVisible(5055)</visible>
+				<visible>!StringCompare(ListItem.Property(TypeVideo),movie)+!Control.IsVisible(5055)</visible>
 			</control>
 		</control>
 
@@ -767,7 +792,7 @@
 				<height>50</height>
 				<texture>acteurs/films.png</texture>
 				<aspectratio>keep</aspectratio>
-				<visible>StringCompare(ListItem.Writer,movie)+Control.IsVisible(5055)</visible>
+				<visible>StringCompare(ListItem.Property(TypeVideo),movie)+Control.IsVisible(5055)</visible>
 				<visible>!Control.HasFocus(5051)+!Control.HasFocus(505)</visible>
 			</control>
 			<control type="image">
@@ -776,10 +801,10 @@
 				<height>50</height>
 				<texture>acteurs/series.png</texture>
 				<aspectratio>keep</aspectratio>
-				<visible>!StringCompare(ListItem.Writer,movie)+!Control.IsVisible(5055)</visible>
+				<visible>!StringCompare(ListItem.Property(TypeVideo),movie)+!Control.IsVisible(5055)</visible>
 				<visible>!Control.HasFocus(5051)+!Control.HasFocus(505)</visible>
 			</control>
-		
+	
 			
 		</control>
 
@@ -1021,14 +1046,14 @@
 		<timeperimage>6000</timeperimage>
 		<randomize>true</randomize>
 		<imagepath background="true" diffuse="diffuse_fanart.png">$INFO[ListItem.Path,,../extrafanart/]</imagepath>
-		<visible>!SubString(Container.FolderPath,plugin) + [Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
+		<visible>!Substring(Container.FolderPath,plugin) + [Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
 	</control>
 	<control type="multiimage" id="7998">
 		<include>Thumb_Background_Fanart_Common</include>
 		<timeperimage>6000</timeperimage>
 		<randomize>true</randomize>
 		<imagepath background="true" diffuse="diffuse_fanart.png">$INFO[ListItem.Path,,/extrafanart/]</imagepath>
-		<visible>!IsEmpty(ListItem.label)+!SubString(Container.FolderPath,plugin) + [Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
+		<visible>!IsEmpty(ListItem.label)+!Substring(Container.FolderPath,plugin) + [Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
 	</control>
 	<control type="image">
 		<include>Thumb_Background_Fanart_Common</include>
@@ -1270,7 +1295,7 @@
 	<control type="group">
 		<posy>300</posy>
 		<posx>-600</posx>
-		<visible>Window.IsActive(502)+Control.HasFocus(2999)+!Container(1999).OnPrevious+!Container(1999).OnNext+[[Container.Content(genres)+!Skin.HasSetting(MusicGenreDetailsAucun)]|[Container.Content(artists)+!Skin.HasSetting(MusicAucun)]]</visible>
+		<visible>Window.IsActive(502)+[Control.HasFocus(2999)|Control.HasFocus(1999)]+!Container(1999).OnPrevious+!Container(1999).OnNext+[[Container.Content(genres)+!Skin.HasSetting(MusicGenreDetailsAucun)]|[Container.Content(artists)+!Skin.HasSetting(MusicAucun)]]</visible>
 		<animation type="Visible">
 
 
@@ -1361,7 +1386,7 @@
 -->
 
 <include name="VertHoriz">
-
+	
 	<movement>6</movement>
 	<height>177</height>
 	<width>1920</width>
@@ -1457,7 +1482,7 @@
 		<control type="group">
 
 			<!-- <animation type="focus"> -->
-			<animation type="Conditional" condition="Control.HasFocus(5002)">
+			<animation type="Conditional" condition="Control.HasFocus(2008)">
 
 				<effect type="zoom" center="100" start="100" end="110" time="400" easy="out" tween="bounce" delay="1" reversible="false"/>
 
@@ -1722,13 +1747,17 @@
 	<value condition="Control.HasFocus(50)|Control.HasFocus(505)">$INFO[Container(50).ListItem.Label]</value>
 	<value></value>
 </variable>
+<variable name="Is1998ID">
+	<value condition="Control.HasFocus(1998)|Control.HasFocus(5051)">$INFO[Container(1998).ListItem.Property(DBID)]</value>
+	<value></value>
+</variable>
 <variable name="Is1998">
 	<value condition="Control.HasFocus(1998)|Control.HasFocus(5051)">$INFO[Container(1998).ListItem.Label]</value>
 	<value></value>
 </variable>
 
 <include name="AnimationFocus1999">
-	<animation type="Conditional" condition="Control.HasFocus(2999)" reversible="true">
+	<animation type="Conditional" condition="Control.HasFocus(2999)|Control.HasFocus(1999)" reversible="true">
 					<effect type="zoom" center="auto" start="100" end="80" time="100"  />
 				</animation>
 </include>
@@ -1738,7 +1767,7 @@
 
 	<!-- <include>delayfanartinc</include> -->
 
-	<autoscroll time="6000">!Control.HasFocus(2999)</autoscroll>
+	<autoscroll time="6000">!Control.HasFocus(2999)+!Control.HasFocus(1999)</autoscroll>
 <!-- TEXTE-->
 	<itemlayout width="970" height="30" condition="[Window.IsActive(10025)+[[Skin.HasSetting(GenreDetailsTexte)+Container.Content(Genres)] |[Skin.HasSetting(directorTexte)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(SagaDetailsTexte)+StringCompare(ListItem.DBTYPE,set)]]]| [Window.IsActive(502)+[[Skin.HasSetting(MusicGenreDetailsTexte)+Container.Content(Genres)] | [Skin.HasSetting(MusicTexte)+!Container.Content(Genres)]]]">
 	
@@ -1746,7 +1775,7 @@
 			<align>center</align>
 			<font>comic24</font>
 			<label>$INFO[ListItem.Label]$VAR[doublonvar]</label>
-			<visible>!!IsEmpty(ListItem.Property(DateSortie))</visible>
+			<visible>!IsEmpty(ListItem.Property(DateSortie))</visible>
 		</control>
 		<control type="label">
 			<align>center</align>
@@ -1761,14 +1790,14 @@
 
 			<width>970</width>
 			<control type="label">
-				<visible>!Control.HasFocus(2999)</visible>
+				<visible>!Control.HasFocus(2999)+!Control.HasFocus(1999)</visible>
 				<align>center</align>
 				<font>comic24</font>
 				<label>$INFO[ListItem.Label]$VAR[doublonvar]</label>
-				<visible>!!IsEmpty(ListItem.Property(DateSortie))</visible>
+				<visible>!IsEmpty(ListItem.Property(DateSortie))</visible>
 			</control>
 			<control type="label">
-				<visible>!Control.HasFocus(2999)</visible>
+				<visible>!Control.HasFocus(2999)+!Control.HasFocus(1999)</visible>
 				<align>center</align>
 				<font>comic24</font>
 				<label>[COLOR=red][I]$INFO[ListItem.Label][/I][/COLOR]</label>
@@ -1776,15 +1805,15 @@
 			</control>
 
 			<control type="label">
-				<visible>Control.HasFocus(2999)</visible>
+				<visible>Control.HasFocus(2999)|Control.HasFocus(1999)</visible>
 				<align>center</align>
 				<font>comic24</font>
 				<label>[I][COLOR=yellow]$INFO[ListItem.Label][/COLOR][/I]$VAR[doublonvar]</label>
-				<visible>!!IsEmpty(ListItem.Property(DateSortie))</visible>
+				<visible>!IsEmpty(ListItem.Property(DateSortie))</visible>
 
 			</control>
 			<control type="label">
-				<visible>Control.HasFocus(2999)</visible>
+				<visible>Control.HasFocus(2999)|Control.HasFocus(1999)</visible>
 				<align>center</align>
 				<font>comic24</font>
 				<label>[I][COLOR=blue]$INFO[ListItem.Label][/COLOR][/I]</label>
@@ -1829,6 +1858,7 @@
 			</control>
 
 			<include>ManqueAlAppel</include>
+			<include>VideoType</include>
 		</control>
 		<include>doublon</include>
 
@@ -1864,6 +1894,7 @@
 				<aspectratio align="center">stretch</aspectratio>
 			</control>
 			<include>ManqueAlAppel</include>
+			<include>VideoType</include>
 		</control>
 		<include>doublon</include>
 		
@@ -1920,6 +1951,7 @@
 		<include>doublon</include>
 
 		<include>ManqueAlAppel</include>
+		<include>VideoType</include>
 	</itemlayout>
 	<focusedlayout width="240" height="280" condition="[[Skin.HasSetting(SagaDetailsClearArt)+StringCompare(ListItem.DBTYPE,set)] | [Skin.HasSetting(directorClearArt)+[Container.Content(directors)|Container.Content(actors)]] |[Skin.HasSetting(GenreDetailsClearArt)+Container.Content(Genres)]]+Window.IsActive(10025)">
 
@@ -1974,6 +2006,7 @@
 			<include>doublon</include>
 
 			<include>ManqueAlAppel</include>
+			<include>VideoType</include>
 		</control>
 
 	</focusedlayout>
@@ -1981,6 +2014,7 @@
 	<itemlayout    width="200" height="240" condition="[[Skin.HasSetting(SagaDetailsDisc)+StringCompare(ListItem.DBTYPE,set)] | [Skin.HasSetting(directorDisc)+[Container.Content(directors)|Container.Content(actors)]] |[Skin.HasSetting(GenreDetailsDisc)+Container.Content(Genres)]]+Window.IsActive(10025)">
 		<control type="group">
 			<include>AnimationFocus1999</include>
+			
 			<control type="image">
 				<left>0</left>
 				<top>40</top>
@@ -2005,6 +2039,7 @@
 			<include>doublon</include>
 
 			<include>ManqueAlAppel</include>
+			<include>VideoType</include>
 		</control>
 
 	</itemlayout>
@@ -2047,6 +2082,7 @@
 			<include>doublon</include>
 
 			<include>ManqueAlAppel</include>
+			<include>VideoType</include>
 		</control>
 
 
@@ -2316,7 +2352,7 @@
 				<aspectratio>keep</aspectratio>
 				<colordiffuse>MediaFlagDiffuse</colordiffuse>
 			</control>
-		
+	
 			
 
 
@@ -2513,7 +2549,7 @@
 				<include>Animation_OpenCloseFade</include>
 				<posx>62</posx>
 				<posy>264</posy>
-				<visible>Window.IsActive(502)+!Control.HasFocus(2999)</visible>
+				<visible>Window.IsActive(502)+!Control.HasFocus(2999)+!Control.HasFocus(1999)</visible>
 				<!-- Album Genre -->
 				<control type="label">
 					<width>380</width>
@@ -2619,7 +2655,7 @@
 	<effect type="fade"  start="0" end="100" time="100" delay="1" reversible="false"/>
 	</animation>
 
-	<visible>[[Container.Content(tvshows)+!Skin.HasSetting(HideTvCast)]|[StringCompare(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..)</visible>
+	<visible>[[Container.Content(tvshows)+!Skin.HasSetting(HideTvCast)]|[StringCompare(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!Substring(ListItem.Label,..)</visible>
 	<control type="image">
 	<left>30</left>
 	<width>326</width>
@@ -2639,7 +2675,7 @@
 	<align>left</align>
 	<itemgap>1</itemgap>
 	<orientation>horizontal</orientation>
-	<visible>[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..)</visible>
+	<visible>[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!Substring(ListItem.Label,..)</visible>
 
 	<autoscroll delay="4000" repeat="5000" time="5000">IntegerGreaterThan(Container(20001).NumItems,4)</autoscroll>
 	<pagecontrol>60</pagecontrol>
@@ -2868,15 +2904,7 @@
 
 <!-- -->
 <include name="SpecialPlotBox">
-	<!-- ----------------- PLOTBOX --------------------
-	<control type="label">
-	<label>$INFO[Container(8885).NumPages]-$INFO[Container(8888).NumPages]-$INFO[Control.GetLabel(8866)]</label>
-	<posx>0</posx>
-	<posy>100</posy>
-	<visible>!Control.IsVisible(5556)</visible>
 
-	</control>
-	-->
 	<control type="label" id="8865">
 		<label>$VAR[PlotBox_Text]</label>
 		<width>1</width>
@@ -2938,20 +2966,10 @@
 			<include>Animation_FadedByMenu</include>
 			<include>Animation_OpenCloseFade</include>
 			<include>Animation_HiddenByInfo</include>
-			<animation type="Conditional" condition="[Control.HasFocus(2999)|IntegerGreaterThan(Container(8885).NumPages,1)]+Skin.HasSetting(ShowLargePlot)" reversible="false">
+			<animation type="Conditional" condition="[Control.HasFocus(2999)|Control.HasFocus(1999)|IntegerGreaterThan(Container(8885).NumPages,1)]+Skin.HasSetting(ShowLargePlot)" reversible="false">
 				<effect type="fade"  end="0" time="700" />
 			</animation>
-
-			<!--	<posx>590</posx>
-			<posy>935</posy>
-			<width>900</width>
-			<height>140</height>
-
-			<posx>5</posx>
-			<posy>840</posy>
-			<width>480</width>
-			<height>230</height>
-			-->
+			
 			<posx>1420</posx>
 			<posy>840</posy>
 			<width>480</width>
@@ -2981,12 +2999,12 @@
 			<posx>-100</posx>
 			<label>ooo</label>
 			<!--  <visible>Control.HasFocus(2999)|[IntegerGreaterThan(Container(8885).NumPages,1)+[[System.IdleTime(3)+StringCompare(Skin.String(CacheNonSelectDelai),3)]|[System.IdleTime(5)+StringCompare(Skin.String(CacheNonSelectDelai),5)]|[System.IdleTime(7)+StringCompare(Skin.String(CacheNonSelectDelai),7)]|[System.IdleTime(9)+StringCompare(Skin.String(CacheNonSelectDelai),9)]]]</visible> -->
-			<visible>Control.HasFocus(2999)|[IntegerGreaterThan(Container(8885).NumPages,1)+System.IdleTime(2)+Skin.HasSetting(ShowLargePlot)]</visible>
+			<visible>Control.HasFocus(2999)|Control.HasFocus(1999)|[IntegerGreaterThan(Container(8885).NumPages,1)+System.IdleTime(2)+Skin.HasSetting(ShowLargePlot)]</visible>
 		</control>
 		<control type="group" id="7780">
-			<!-- <visible>IntegerGreaterThan(Container(8885).NumPages,1)+!Control.HasFocus(2999)+!Skin.HasSetting(Hide_Plot) + [Container.Content(Movies)|  Container.Content(TVShows) | Container.Content(Seasons) | Container.Content(Episodes) | Container.Content(MusicVideos) | Container.Content(Artists) | SubString(Container.FolderPath,plugin)]</visible> -->
+			<!-- <visible>IntegerGreaterThan(Container(8885).NumPages,1)+!Control.HasFocus(2999)+!Skin.HasSetting(Hide_Plot) + [Container.Content(Movies)|  Container.Content(TVShows) | Container.Content(Seasons) | Container.Content(Episodes) | Container.Content(MusicVideos) | Container.Content(Artists) | Substring(Container.FolderPath,plugin)]</visible> -->
 			<visible>!Skin.HasSetting(Hide_Plot)</visible>
-			<visible>Control.HasFocus(2999)| [IntegerGreaterThan(Container(8885).NumPages,1)+Skin.HasSetting(ShowLargePlot) + [Container.Content(Movies)|  Container.Content(TVShows) | Container.Content(Seasons) | Container.Content(Episodes) | Container.Content(MusicVideos) | Container.Content(Artists) | Container.Content(Albums) |Container.Content(Genres) |SubString(Container.FolderPath,plugin)|Container.Content(Addons)]]</visible>
+			<visible>Control.HasFocus(2999)| Control.HasFocus(1999)|[IntegerGreaterThan(Container(8885).NumPages,1)+Skin.HasSetting(ShowLargePlot) + [Container.Content(Movies)|  Container.Content(TVShows) | Container.Content(Seasons) | Container.Content(Episodes) | Container.Content(MusicVideos) | Container.Content(Artists) | Container.Content(Albums) |Container.Content(Genres) |Substring(Container.FolderPath,plugin)|Container.Content(Addons)]]</visible>
 			<include>Animation_FadedByMenu</include>
 			<include>Animation_OpenCloseFade</include>
 			<include>Animation_HiddenByInfo</include>
@@ -4945,10 +4963,10 @@
 			</control>
 		</control>
 		<control type="group">
-			<visible>!SubString(Player.FolderPath,http)</visible>
+			<visible>!Substring(Player.FolderPath,http)</visible>
 			<!-- TV Show Poster / Logo / Clearart -->
 			<control type="group">
-				<visible>VideoPlayer.Content(Episodes) + !SubString(VideoPlayer.Cover,default) + !Skin.HasSetting(Enable_OSDClearArt)</visible>
+				<visible>VideoPlayer.Content(Episodes) + !Substring(VideoPlayer.Cover,default) + !Skin.HasSetting(Enable_OSDClearArt)</visible>
 				<control type="image">
 					<description>TV Show Thumbnail</description>
 					<posx>40</posx>
@@ -4993,7 +5011,7 @@
 			</control>
 			<!-- Movie Poster -->
 			<control type="group">
-				<visible>VideoPlayer.Content(Movies) + !SubString(VideoPlayer.Cover,default)</visible>
+				<visible>VideoPlayer.Content(Movies) + !Substring(VideoPlayer.Cover,default)</visible>
 				<!--<control type="label">
 				<posx>20</posx>
 				<label>***$INFO[Window(Home).Property(MoviePlayerArt)]</label>
@@ -5031,7 +5049,7 @@
 				<bordertexture border="6">frames/thumb_border.png</bordertexture>
 				<bordersize>6</bordersize>
 				<texture diffuse="frames/EpisodeMatte.png">$INFO[VideoPlayer.Cover]</texture>
-				<visible>VideoPlayer.Content(MusicVideos) + !SubString(VideoPlayer.Cover,default)</visible>
+				<visible>VideoPlayer.Content(MusicVideos) + !Substring(VideoPlayer.Cover,default)</visible>
 			</control>
 			<!-- LiveTV Channel Icon -->
 			<control type="image">
@@ -5046,7 +5064,7 @@
 			</control>
 		</control>
 		<control type="group">
-			<visible>SubString(Player.FolderPath,http)</visible>
+			<visible>Substring(Player.FolderPath,http)</visible>
 			<!-- Default Thumbnail -->
 			<control type="image">
 				<description>Default Thumbnail</description>
@@ -5058,7 +5076,7 @@
 				<bordertexture border="6">frames/thumb_border.png</bordertexture>
 				<bordersize>6</bordersize>
 				<texture diffuse="frames/EpisodeMatte.png">$INFO[VideoPlayer.Cover]</texture>
-				<visible>!SubString(VideoPlayer.Cover,default)</visible>
+				<visible>!Substring(VideoPlayer.Cover,default)</visible>
 			</control>
 		</control>
 		<include>OSD_PLayer_Plot</include>
@@ -5448,11 +5466,11 @@
 	<aligny>bottom</aligny>
 </include>
 <include name="VisibleIfNotMovieSet">
-	<visible>!SubString(ListItem.DBTYPE,set)</visible>
+	<visible>!Substring(ListItem.DBTYPE,set)</visible>
 </include>
 <include name="VisibleIfMovieSet">
 	<!--<visible>Container.Content(movies) + IsEmpty(listitem.Genre) + IsEmpty(ListItem.VideoResolution)</visible>-->
-	<visible>SubString(ListItem.DBTYPE,set)</visible>
+	<visible>Substring(ListItem.DBTYPE,set)</visible>
 </include>
 <include name="ShowTotalTvEp">
 	<control type="group">

@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
 from __future__ import unicode_literals
 import xbmcplugin, xbmcgui, xbmc, xbmcaddon, xbmcvfs
 import os,sys,io
@@ -13,7 +13,7 @@ import urlparse
 from xml.dom.minidom import parse
 import json
 import sqlite3
-from operator import itemgetter
+import operator
     
 try:
     to_unicode = unicode
@@ -21,39 +21,35 @@ except NameError:
     to_unicode = str
 
 ADDON = xbmcaddon.Addon()
-ADDON_ID = ADDON.getAddonInfo('id').decode("utf-8")
-ADDON_ICON = ADDON.getAddonInfo('icon').decode("utf-8")
-ADDON_NAME = ADDON.getAddonInfo('name').decode("utf-8")
-ADDON_PATH = ADDON.getAddonInfo('path').decode("utf-8")
-ADDON_VERSION = ADDON.getAddonInfo('version').decode("utf-8")
-ADDON_DATA_PATH = xbmc.translatePath("special://profile/addon_data/%s" % ADDON_ID).decode("utf-8")
+ADDON_ID = ADDON.getAddonInfo('id').decode("utf8")
+ADDON_ICON = ADDON.getAddonInfo('icon').decode("utf8")
+ADDON_NAME = ADDON.getAddonInfo('name').decode("utf8")
+ADDON_PATH = ADDON.getAddonInfo('path').decode("utf8")
+ADDON_VERSION = ADDON.getAddonInfo('version').decode("utf8")
+ADDON_DATA_PATH = xbmc.translatePath("special://profile/addon_data/%s" % ADDON_ID).decode("utf8")
 KODI_VERSION  = int(xbmc.getInfoLabel( "System.BuildVersion" ).split(".")[0])
 WINDOW = xbmcgui.Window(10000)
 SETTING = ADDON.getSetting
 KODILANGUAGE = xbmc.getLanguage(xbmc.ISO_639_1)
-sys.path.append(xbmc.translatePath(os.path.join(ADDON_PATH, 'resources', 'lib')).decode('utf-8'))
-
+sys.path.append(xbmc.translatePath(os.path.join(ADDON_PATH, 'resources', 'lib')).decode('utf8'))
+if KODI_VERSION>16: 
+        DATABASE_PATH = os.path.join(xbmc.translatePath("special://database"), 'MyVideos107.db')
+else: 
+        DATABASE_PATH = os.path.join(xbmc.translatePath("special://database"), 'MyVideos99.db')
 
 
 
 def logMsg(msg, level = 1):
     if WINDOW.getProperty("IconMixTools.enableDebugLog") == "true" or level == 0:
         if isinstance(msg, unicode):
-            msg = msg.encode('utf-8')
+            msg = msg.encode('utf8')
         if "exception" in msg.lower() or "error" in msg.lower():
             xbmc.log("IconMixTools addon --> " + msg, level=xbmc.LOGERROR)
             print_exc()
         else:
             xbmc.log("IconMixTools addon --> " + msg, level=xbmc.LOGNOTICE)
-def logfile(msg):
-     with io.open("d:\kodifuck2.log", 'w+', encoding='utf8') as outfile: 
-                      str_ = msg
-                      outfile.write(to_unicode(str_))
-           
+
 def DirStru(filename):
-   #path = os.path.dirname(filename)
-   #if not xbmcvfs.exists(filename)
-   #if not os.path.exists(os.path.dirname(filename)):
    try:
         erreur=os.makedirs(os.path.dirname(filename))        
    except: 
@@ -62,7 +58,7 @@ def DirStru(filename):
     
 def setJSON(method,params):
     json_response = xbmc.executeJSONRPC('{ "jsonrpc": "2.0", "method" : "%s", "params": %s, "id":1 }' %(method, try_encode(params)))
-    jsonobject = json.loads(json_response.decode('utf-8','replace'))
+    jsonobject = json.loads(json_response.decode('utf8','replace'))
     return jsonobject
 
 # ------------------------------------SAGAS--------------------------------------------------------------    
@@ -96,14 +92,13 @@ def CheckSaga(itemId=None,Statique=None):
           json_result = getJSON('VideoLibrary.GetMovieDetails', '{ "movieid":%d,"properties":["setid"] }' %(int(xbmc.getInfoLabel("ListItem.DBID"))))
           itemId=json_result.get("setid")
           if not itemId:              
-                   return
-         
+                   return      
           
-       savepath=ADDON_DATA_PATH+"/collections/saga"+str(itemId).encode("utf-8")
-        
+      
        if not Statique:
           xbmcplugin.setContent(int(sys.argv[1]), 'movies')
-       savepath=ADDON_DATA_PATH+"/collections/saga"+str(itemId).encode("utf-8")
+          
+       savepath=ADDON_DATA_PATH+"/collections/saga"+itemId.encode('utf8')
        
        json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"movies": {"properties":["title","genre","year","rating","director","trailer","tagline","plot","plotoutline","originaltitle","lastplayed","playcount","writer","studio","mpaa","cast","country","imdbnumber","runtime","set","showlink","streamdetails","top250","votes","fanart","thumbnail","file","sorttitle","resume","setid","dateadded","tag","art"]} }' %(int(itemId)))
  
@@ -120,21 +115,17 @@ def CheckSaga(itemId=None,Statique=None):
           item["DBID"]=item.get("movieid")
           ImdbNumber=item.get("imdbnumber")          
           
-    
+          #pistes audios
           Audio=item["streamdetails"]["audio"]
           i=1
-          if Audio:
-               #wvideonav = xbmcgui.Window(10025)
-               #wvideonav.getControl(999)
-               
+          if Audio:               
                for AudioElement in Audio:
                     txx.setProperty('AudioLanguage.%d' %(i), AudioElement["language"])
                     txx.setProperty('AudioChannels.%d' %(i), str(AudioElement["channels"]))
-                    txx.setProperty('AudioCodec.%d' %(i), AudioElement["codec"])
-                    
+                    txx.setProperty('AudioCodec.%d' %(i), AudioElement["codec"])                    
                     i=i+1
     
-           
+          #pistes vidéos 
           Video=item["streamdetails"]["video"]
           i=0
           Codec=""
@@ -142,7 +133,7 @@ def CheckSaga(itemId=None,Statique=None):
             for VideoItem in Video:
                txx.setProperty('VideoCodec', VideoItem["codec"]) 
                
-               
+          #sous-titres     
           Subtitles=item["streamdetails"]["subtitle"]
           i=1
           
@@ -153,14 +144,12 @@ def CheckSaga(itemId=None,Statique=None):
                    
             
           txx.setProperty('DBID', str(item["DBID"]))
-          txx.setProperty('SetId', str(itemId))
+          txx.setProperty('SetId', itemId.encode('utf8'))
           txx.setProperty('IMDBNumber', str(item.get("imdbnumber")))
           txx.setProperty('TMDBNumber', '')
           txx.setProperty('DateSortie', '')
           txx.setProperty('doublons',str(Compteur[item.get("imdbnumber")]))
-
-          #logMsg("Colection "+str(itemId)+": imdb="+str(ImdbNumber)+" Movieid="+str(item.get("movieid")),0 )
-          
+         
           if item.get("art"):
                 txx.setArt( item.get("art"))
           txx.setIconImage(item["thumbnail"]) 
@@ -171,48 +160,50 @@ def CheckSaga(itemId=None,Statique=None):
              if not Statique:
                ListeItem.append([item["file"],txx,True])
              else:
-               ListeItem.append([item["year"],txx])
+               ListeItem.append([int(item["year"]),txx])
              
           if int(Compteur[item.get("imdbnumber")])>1:
               Compteur[item.get("imdbnumber")]=0
               
        if not xbmcvfs.exists(savepath):
-      #mise à jour !!!
-      #logMsg("telex Appel SAGA update : --> "  + str(itemId),0)
-         ArrayCollection=getsagaitem(str(itemId))
+        #création du fichier de la saga !!!
+         ArrayCollection=getsagaitem(itemId)
        else : 
-    #if os.path.exists(savepath):      
+        #lecture dans le fichier existant
          with open(savepath) as data_file:
           ArrayCollection = json.load(data_file)
           data_file.close()
           
        if ArrayCollection:         
-          NbFilmsSaga=ArrayCollection["kodi"]
-          NbManquant=ArrayCollection["manquant"]
-          TitreSaga=ArrayCollection["saga"]
-          NbTmdb=ArrayCollection["tmdb"]
+          NbFilmsSaga=ArrayCollection.get("kodi")
+          NbManquant=ArrayCollection.get("manquant")
+          TitreSaga=ArrayCollection.get("saga")
+          NbTmdb=ArrayCollection.get("tmdb")
+          
+          
        
           if NbFilmsSaga and NbKodi and NbTmdb:
-              if NbFilmsSaga!=NbKodi: # or NbKodi<NbTmdb: #mise à jour !!! 
-          #logMsg("ELEMENTS  ArrayCollection-->Mise a jour",0)
-                 ArrayCollection=getsagaitem(str(itemId))
-                 NbFilmsSaga=ArrayCollection["kodi"]
-                 NbManquant=ArrayCollection["manquant"]
-                 TitreSaga=ArrayCollection["saga"]
-                 NbTmdb=ArrayCollection["tmdb"]
+              if NbFilmsSaga!=NbKodi: # or NbKodi<NbTmdb: #mise a jour !!! 
+                 ArrayCollection=getsagaitem(itemId.encode('utf8'),None,ArrayCollection.get("kodicollection"),ArrayCollection.get("tmdbid"))
+                 NbFilmsSaga=ArrayCollection.get("kodi")
+                 NbManquant=ArrayCollection.get("manquant")
+                 TitreSaga=ArrayCollection.get("saga")
+                 NbTmdb=ArrayCollection.get("tmdb")
     
        if NbKodiValide>0: WINDOW.setProperty('IconMixSaga',str(NbKodiValide))
        else: WINDOW.clearProperty('IconMixSaga')
        if ArrayCollection:    
          for item in ArrayCollection["missing"]:
            today=item.get("release_date")
-           #DateSortie=today[8:10]+"/"+today[5:7]+"/"+today[0:4]
-           DateSortie=today[5:7]+"/"+today[0:4]
+           DateSortie="??/????"
+           if today:
+               DateSortie=today[5:7]+"/"+today[0:4] #mois/annee
            if today and xbmc.getCondVisibility("Skin.HasSetting(SagaDate)"):
               nowX2 = datetime.datetime.strptime(today, '%Y-%m-%d').date()
-              #logMsg("Resultat  date sortie --> "+str(DateSortie)+"/"+str(nowX)+"/"+str(nowX2),0)
            else :
-              nowX2=nowX  
+              nowX2=nowX 
+              today="????/??" 
+              
            if nowX2<=nowX :            
               txx = xbmcgui.ListItem(label=item.get("title"),iconImage="http://image.tmdb.org/t/p/original"+item.get("poster_path"),path="RunScript(script.iconmixtools,trailer=True)") 
               fanart=item.get("backdrop_path")
@@ -223,13 +214,12 @@ def CheckSaga(itemId=None,Statique=None):
               txx.setProperty('TMDBNumber', str(item.get("id")))
               txx.setProperty('DateSortie', DateSortie)
               txx.setProperty('dbtype', 'movie')
-              txx.setProperty('SetId', str(itemId))
+              txx.setProperty('SetId', itemId.encode('utf8'))
               if not Statique:
                  ListeItem.append([item["file"],txx,True])
               else:
-                 ListeItem.append([item.get("release_date"),txx])
-              #xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url="", listitem=txx, isFolder=False)   
-    #else: logMsg("SAGA VIDE ",0) 
+                 ListeItem.append([int(item.get("release_date")[0:4]),txx])
+
     if NbKodiValide==len(ListeItem): WINDOW.setProperty('IconMixSaga','complet')
     if not Statique:
           xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeItem)
@@ -238,6 +228,7 @@ def CheckSaga(itemId=None,Statique=None):
           ListeItemFinal=[]
           LL=[]          
           LL=sorted(ListeItem)
+          #tri par année
           cpt=0
           while cpt<len(LL):
                  ListeItemFinal.append(LL[cpt][1])
@@ -245,12 +236,9 @@ def CheckSaga(itemId=None,Statique=None):
                
           return ListeItemFinal
     
-    #logMsg("SAGA -> "+"["+str(itemId)+"] : "+str(len(ListeItem))+"="+str(ListeItem),0)           
+   
     
-    #logMsg("Temps passe recherche:"+str(time.time()-start),0)    
-  
-    
-def getsagaitem(ItemIdxx=None,ShowBusy=None):
+def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None):
   episodesDB= ""
   AllMovies= []
   Rspcollection= {}
@@ -269,56 +257,64 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None):
   DateSortie=""
   query_url=""
   
-  
-  
-  savepath=ADDON_DATA_PATH+"/collections/saga"+ItemIdxx.encode("utf-8") 
+  savepath=ADDON_DATA_PATH+"/collections/saga"+ItemIdxx.encode("utf8") 
   
   if ItemIdxx : 
       if not ShowBusy: xbmc.executebuiltin( "ActivateWindow(busydialog)" ) 
       json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"movies": {"properties": [ "title","imdbnumber" ]} }' %(int(ItemIdxx)))
       if json_result and json_result.get("movies"): 
         allMovies = json_result.get("movies")
-        #logMsg("VideoLibrary.GetMovieSetDetails  --> "+str(allMovies),0)
+
       if allMovies :
+        if AKodiCollection:
+          KodiCollection=AKodiCollection
         for Test in allMovies:
-           imdbNumber=Test.get("imdbnumber")
+           imdbNumber=str(Test.get("imdbnumber"))
            if imdbNumber :
-             xxx=get_externalID(imdbNumber.encode("utf-8"),"movie")
-             if xxx :
-              if flagcheck==0:
-                itemId=xxx # conversion imdb ou tvdb en themoviedb ....
-                flagcheck=1 
-              KodiCollection.append(xxx)
-              #logMsg("Resultat Collection kodi  --> " + str(imdbNumber)+"/"+str(xxx),0)
-        #logMsg("Resultat Collection kodi  --> " + str(KodiCollection),0)     
+             zz=None
+             for yy in KodiCollection:
+               if yy[0]==imdbNumber:
+                 zz=1
+                 break
+           
+             if not zz:
+               tmdbid=get_externalID(imdbNumber,"movie") # conversion imdb ou tvdb en themoviedb ....
+               if tmdbid :
+                if flagcheck==0:
+                  itemId=tmdbid 
+                  flagcheck=1 
+                KodiCollection.append([imdbNumber,str(tmdbid)])
         
        
       if itemId:
-               query_url = "https://api.themoviedb.org/3/movie/%s?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (itemId.encode("utf-8"),xbmc.getInfoLabel("System.Language").encode("utf-8"))
-               #logMsg("Query URL   --> " + str(query_url),0)
-               response = urllib.urlopen(query_url)
-               try:
-                  str_response = response.read().decode('utf-8')
-               except :
-                  str_response=''
-                  logMsg("Resultat  URL introuvable 1" + str(query_url),0)
+                if not ATmdbId:
+                   #numero de collection TMDB inconnu
+                   query_url = "https://api.themoviedb.org/3/movie/%s?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (itemId.encode("utf8"),xbmc.getInfoLabel("System.Language").encode("utf8"))
+                   #logMsg("Query URL   --> " + str(query_url),0)
+                   response = urllib.urlopen(query_url)
+                   try:
+                      str_response = response.read().decode('utf8')
+                   except :
+                      str_response=''
+                      logMsg("Resultat  URL introuvable 1" + str(query_url),0)
 
-               if str_response :
-                    try : 
-                         json_data = json.loads(str_response)
-                    except:
-                         json_data=""
-                         logMsg("Resultat  URL vide 1--> " + str(query_url),0)
-               if json_data:
-                  Rspcollection=json_data.get("belongs_to_collection")
-                  if Rspcollection: IDcollection=Rspcollection["id"]
-                  if IDcollection:
-                     query_url = "https://api.themoviedb.org/3/collection/%d?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (IDcollection,xbmc.getInfoLabel("System.Language").encode("utf-8"))
-                     #logMsg("Query URL details  --> " + str(query_url),0)
-                     #logMsg("Resultat  query_url --> " + str(query_url),0)
+                   if str_response :
+                        try : 
+                             json_data = json.loads(str_response)
+                        except:
+                             json_data=""
+                             logMsg("Resultat  URL vide 1--> " + str(query_url),0)
+                   if json_data:
+                      Rspcollection=json_data.get("belongs_to_collection")
+                      if Rspcollection: IDcollection=Rspcollection["id"]
+                else: 
+                   IDcollection=ATmdbId
+                   
+                if IDcollection:
+                     query_url = "https://api.themoviedb.org/3/collection/%d?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (IDcollection,xbmc.getInfoLabel("System.Language").encode("utf8"))
                      response = urllib.urlopen(query_url)
                      try:
-                       str_response = response.read().decode('utf-8')
+                       str_response = response.read().decode('utf8')
                      except :
                        str_response=''
                        logMsg("Resultat  URL introuvable 2--> " + str(query_url),0)
@@ -329,47 +325,54 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None):
                        except:
                               json_data=""
                               logMsg("Resultat  URL vide 2--> " + str(query_url),0)
-                       #logMsg("Resultat sortie  Collection--> " + str(json_data),0)
+
                        if json_data:
                          Rspcollection=json_data.get("parts")
-                         #logMsg("Resultat  Parts --> "+"["+str(len(Rspcollection))+"]" + str(Rspcollection),0)
+
                          if Rspcollection:
-                          #if len(Rspcollection)>=len(KodiCollection):
+
                             NbFilmsSaga=0
                             Manquant=0
                             for check in Rspcollection:
                               if check["id"]:
-                                xxx=check["id"]
-                                if not str(xxx) in KodiCollection :
+                                xxx=str(check["id"])
+                                zz=None
+                                cpt=0
+                                for yy in KodiCollection:
+                                  if yy[1]==xxx:
+                                    zz=1
+                                    break
+                                  else:
+                                    cpt=cpt+1
+                                
+                                
+                                if not zz :
                                    if check["title"] and check["release_date"] and check["poster_path"]:
-                                        #  and check["original_title"] and check["overview"]:                                     
-                                    
                                          ManquantM.append(check)
                                          NbFilmsSaga=NbFilmsSaga+1
                                                                  
                                 else: NbFilmsSaga=NbFilmsSaga+1
                             if NbFilmsSaga>0: 
                                  ArrayCollection["kodi"]=len(KodiCollection)
+                                 ArrayCollection["kodicollection"]=KodiCollection
                                  ArrayCollection["saga"]=json_data.get("name")
                                  ArrayCollection["tmdb"]=len(Rspcollection)
-                                 #ArrayCollection["tmdb"]=len(KodiCollection)+len(ManquantM)
+                                 ArrayCollection["tmdbid"]=IDcollection
                                  ArrayCollection["manquant"]=len(ManquantM)
                                  ArrayCollection["missing"]=ManquantM
                                  erreur=DirStru(savepath)
-                                 #logMsg("Saga %s mise a jour " %(ArrayCollection["saga"]),0)
-                                 #if not erreur :
                                  with io.open(savepath, 'w+', encoding='utf8') as outfile:
                                      str_ = json.dumps(ArrayCollection,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
                                      outfile.write(to_unicode(str_))
                             else :
                                  ArrayCollection["kodi"]=len(KodiCollection)
+                                 ArrayCollection["kodicollection"]=KodiCollection
+                                 ArrayCollection["tmdbid"]=IDcollection
                                  ArrayCollection["saga"]=xbmc.getInfoLabel("ListItem.Label")
                                  ArrayCollection["tmdb"]=len(Rspcollection)
                                  ArrayCollection["manquant"]=0
                                  ArrayCollection["missing"]=[]
                                  erreur=DirStru(savepath)
-                                 #logMsg("Saga %s mise a jour " %(ArrayCollection["saga"]),0)
-                                 #if not erreur :
                                  with io.open(savepath, 'w+', encoding='utf8') as outfile:
                                      str_ = json.dumps(ArrayCollection,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
                                      outfile.write(to_unicode(str_))
@@ -400,9 +403,9 @@ def UpdateSagas(Une=None,Toutes=None):
             ItemId=Sagas.get("setid")
             savepath=ADDON_DATA_PATH+"/collections/saga%d" %(ItemId)
             
-            #if Toutes or not os.path.exists(savepath) and ItemId: getsagaitem(str(ItemId),1)
+            #if Toutes or not os.path.exists(savepath) and ItemId: getsagaitem(itemId.encode('utf8'),1)
             if Toutes or not xbmcvfs.exists(savepath) and ItemId: 
-               getsagaitem(str(ItemId),1)   
+               getsagaitem(itemId.encode('utf8'),1)   
                Titre=xbmc.getLocalizedString( 31924 )+" : [I]"+Sagas.get("label")+"[/I]"
             Progres=(Compteur*100)/NbItems
             Compteur=Compteur+1
@@ -447,7 +450,7 @@ def getepisodes(ItemIdxx=None,saisonID=None,DBtype=None):
           NbKodi=json_result.get("episode")
           
       else : ItemIdx="" 
-  	#obligé d'aller chercher l'IMDB de la série mère dans la fiche tvshow !!! pouviez pas ajouter un champ dans la base ???? grrrrrrrrr !!!!!!
+  	#oblige d'aller chercher l'IMDB de la serie mere dans la fiche tvshow !!! pouviez pas ajouter un champ dans la base ???? grrrrrrrrr !!!!!!
   	#quel bordel mon colonel !
   	#http://127.0.0.1:8080/jsonrpc?request={ "jsonrpc ": "2.0 ", "method ": "VideoLibrary.GetEpisodeDetails ", "params ":{ "episodeid ":220, "properties ":[ "title ", "tvshowid "]}, "id ":1}
     if DBtype=="episode":
@@ -469,24 +472,22 @@ def getepisodes(ItemIdxx=None,saisonID=None,DBtype=None):
       if DBtype=="tvshow": 
         ItemIdx=xbmc.getInfoLabel("ListItem.IMDBNumber")
         NbKodi=int(xbmc.getInfoLabel("ListItem.Property(TotalEpisodes)"))
-      
      
     if ItemIdx:
-      savepath=ADDON_DATA_PATH+"/series/tv"+ItemIdx.encode("utf-8")
+      savepath=ADDON_DATA_PATH+"/series/tv"+ItemIdx.encode("utf8")
       #if not os.path.exists(savepath):
       if not xbmcvfs.exists(savepath):
-      #mise à jour !!!
-      #logMsg("telex Appel SAGA update : --> "  + str(itemId),0)
+     #creation
          ArrayCollection=getallepisodes("",ItemIdx,savepath,NbKodi,1)
+         
       else : 
     #if os.path.exists(savepath):      
          with open(savepath) as data_file:
             ArrayCollection = json.load(data_file)
             data_file.close()
          if not ArrayCollection or not ArrayCollection.get("v4"): # si fichier foireux ?
+          #mise a jour
             ArrayCollection=getallepisodes("",ItemIdx,savepath,NbKodi,1)
-        
-          
   
       if ArrayCollection:
             if ArrayCollection["dateecheance"]:
@@ -494,11 +495,11 @@ def getepisodes(ItemIdxx=None,saisonID=None,DBtype=None):
                   nowX2 = datetime.datetime.strptime(str(ArrayCollection["dateecheance"]), '%Y-%m-%d').date()
                except:
                   nowX2=nowX
-          
             
                
             if ArrayCollection["kodiid"]!=ItemIdx or ArrayCollection["nbkodi"]!=NbKodi or nowX>nowX2 or not ArrayCollection.get("v4"):
-                  ArrayCollection=getallepisodes("",ItemIdx,savepath,NbKodi,1)
+                  #mise a jour
+                  ArrayCollection=getallepisodes(ArrayCollection.get("tmdbid"),ItemIdx,savepath,NbKodi)
                   
             if ArrayCollection:
                      try:
@@ -529,7 +530,7 @@ def UpdateSeries(Une=None,Toutes=None):
             NbKodi=Series.get("episode")
             savepath=ADDON_DATA_PATH+"/series/tv%s" %(ImdbNumber)
             
-            #if Toutes or not os.path.exists(savepath) and ItemId: getsagaitem(str(ItemId),1)
+            #if Toutes or not os.path.exists(savepath) and ItemId: getsagaitem(itemId.encode('utf8'),1)
             if Toutes or not xbmcvfs.exists(savepath) and ItemId:                
                getallepisodes("",ImdbNumber,savepath,NbKodi,"")   
                Titre=xbmc.getLocalizedString( 20343 )+" : [I]"+Series.get("label")+"[/I]"
@@ -545,129 +546,11 @@ def UpdateSeries(Une=None,Toutes=None):
             
      dp.close()     
      
-def getallepisodesetacteurs(ItemIdx=None,KodiId=None,savepath=None,NbKodi=None,ShowBusy=None):
- 
-  KodiCollection = []
-  ArrayCollection={} 
-  EpisodesDiffusion={}
-  EpisodesSaison =[]
-  EpisodesEtcasting={}
-  SaisonTab={}
-  Episodes=[]
-  itemId=""
-  query_url=""
-  nowX = datetime.datetime.now().date()+datetime.timedelta(30) #pour mise à jour une fois par mois
-  
-  if ItemIdx or KodiId:
-     if ShowBusy: xbmc.executebuiltin( "ActivateWindow(busydialog)" ) 
-     if not ItemIdx and KodiId: 
-        itemId=get_externalID(KodiId.encode("utf-8"),"tv") # conversion imdb ou tvdb en themoviedb ....
-     else :
-        if ItemIdx: itemId=ItemIdx
-          
-     #itemid = id chez themoviedb du tvshow
-     if itemId :
-       ArrayCollection["name"]=xbmc.getInfoLabel("ListItem.TVShowTitle")
-       ArrayCollection["tmbid"]=itemId
-       ArrayCollection["kodiid"]=KodiId
-       ArrayCollection["nbkodi"]=NbKodi
-       ArrayCollection["dateecheance"]=nowX.strftime('%Y-%m-%d')
-       ArrayCollection["v4"]="ok"
-       TotalSaisons={}
-          
-       for cpt in range(99):
-         query_url = "https://api.themoviedb.org/3/tv/%s/season/%d?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (itemId.encode("utf-8"),cpt,xbmc.getInfoLabel("System.Language").encode("utf-8"))
-          
-         
-         response = urllib.urlopen(query_url)
-         try:
-           str_response = response.read().decode('utf-8')
-         except :
-           str_response=''
-           logMsg("Resultat  URL introuvable 3--> " + str(query_url),0)
 
-         if str_response :
-          try:
-            json_data = json.loads(str_response)
-          except:
-            json_data=""
-            logMsg("Resultat  URL vide 3--> " + str(query_url),0)
-         else: 
-          if cpt>0: break
-          
-         #logMsg("Resultat sortie NBep --> " + str(json_data),0)
-         if json_data:
-             #logMsg("Resultat sortie Saison --> "+"["+str(cpt)+"]",0)
-             if json_data:
-                         EpisodesEtcasting={}
-                         EpisodesDiffusion=json_data.get("episodes")
-                         if not EpisodesDiffusion:
-                              if cpt>0:
-                                   #logMsg("Resultat sortie Saison BREAK--> "+"["+str(cpt)+"]",0) 
-                                   break
-                              else: continue
-                         else:
-                              
-                              query_url = "https://api.themoviedb.org/3/tv/%s/season/%d/credits?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (itemId.encode("utf-8"),cpt,xbmc.getInfoLabel("System.Language").encode("utf-8"))
-                              
-                              #logMsg("Resultat  URL --> " + str(query_url),0)
-                              responseCasting = urllib.urlopen(query_url)
-                              try:
-                               str_responseCasting = responseCasting.read().decode('utf-8')
-                              except :
-                               str_responseCasting=''
-                               #logMsg("Resultat  URL introuvable 4--> " + str(query_url),0)
-                              if str_responseCasting:
-                                   try :
-                                        json_data = json.loads(str_responseCasting) 
-                                   except:
-                                        json_data=""
-                                        logMsg("Resultat  URL vide 4--> " + str(query_url),0)
-                                   if (json_data):
-                                        EpisodesEtcasting["cast"]=json_data.get("cast")
-                                        logMsg("Resultat  CAST --> " + str(json_data),0)
-                                  
-                              else:
-                                   EpisodesEtcasting={}
-                              
-                                  
-                              Saison=str(cpt)
-                              for item in EpisodesDiffusion:
-                              
-                                   DetailsEpisode={}
-                                   #EpNum=EpisodesDiffusion["episode_number"]
-                                   DetailsEpisode["episode_number"]=item["episode_number"]
-                                   DetailsEpisode["name"]=item["name"]
-                                   DetailsEpisode["poster"]=item["still_path"]
-                                   DetailsEpisode["air_date"]=item["air_date"]
-                                   #logMsg("Resultat  CAST --> " + str(item["episode_number"]),0)
-                                   EpisodesSaison.append(DetailsEpisode)
-                              EpisodesEtcasting["Episodes"]=EpisodesSaison
-                              EpisodesEtcasting["NbEpisodes"]=len(EpisodesSaison)
-                              
-                              TotalSaisons[Saison]=EpisodesEtcasting                              
-                              
-                              EpisodesSaison=[]
-                              
-       ArrayCollection["saisons"]=TotalSaisons         
-                         #episode_number
-                         #air_date
-                         #name
-                         #"still_path":"/dmqLlgqqoQoAVTlDelN2bis5clw.jpg"
-                           
-                
-                
-                
-       erreur=DirStru(savepath)
-       #if not erreur:
-       with io.open(savepath, 'w+', encoding='utf8') as outfile: 
-                      str_ = json.dumps(ArrayCollection,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
-                      outfile.write(to_unicode(str_))
-     if ShowBusy: xbmc.executebuiltin( "Dialog.Close(busydialog)" )                 
-  return ArrayCollection 
   
-def getallepisodes(ItemIdx=None,KodiId=None,savepath=None,NbKodi=None,ShowBusy=None):
- 
+def getallepisodesTMDB(ItemIdx=None,KodiId=None,savepath=None,NbKodi=None,ShowBusy=None):
+  #https://api.betaseries.com/shows/display?key=46be59b5b866&thetvdb_id=266398
+  
   KodiCollection = []
   ArrayCollection={} 
   EpisodesDiffusion={}
@@ -677,12 +560,14 @@ def getallepisodes(ItemIdx=None,KodiId=None,savepath=None,NbKodi=None,ShowBusy=N
   Episodes=[]
   itemId=""
   query_url=""
-  nowX = datetime.datetime.now().date()+datetime.timedelta(30) #pour mise à jour une fois par mois
+  nowX = datetime.datetime.now().date()+datetime.timedelta(30) #pour mise a jour une fois par mois
   
   if ItemIdx or KodiId:
      if ShowBusy: xbmc.executebuiltin( "ActivateWindow(busydialog)" ) 
+     #logMsg("Appel betaseries--> " + str(KodiId),0) 
+     getallepisodesBeta("",KodiId,savepath,NbKodi,1)
      if not ItemIdx and KodiId: 
-        itemId=get_externalID(KodiId.encode("utf-8"),"tv") # conversion imdb ou tvdb en themoviedb ....
+        itemId=get_externalID(KodiId.encode("utf8"),"tv") # conversion imdb ou tvdb en themoviedb ....
      else :
         if ItemIdx: itemId=ItemIdx
           
@@ -697,12 +582,12 @@ def getallepisodes(ItemIdx=None,KodiId=None,savepath=None,NbKodi=None,ShowBusy=N
          TotalSaisons={}
           
        
-         query_url = "https://api.themoviedb.org/3/tv/%s?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (itemId.encode("utf-8"),xbmc.getInfoLabel("System.Language").encode("utf-8"))
+         query_url = "https://api.themoviedb.org/3/tv/%s?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (itemId.encode("utf8"),xbmc.getInfoLabel("System.Language").encode("utf8"))
           
          
          response = urllib.urlopen(query_url)
          try:
-           str_response = response.read().decode('utf-8')
+           str_response = response.read().decode('utf8')
          except :
            str_response=''
            logMsg("Resultat  URL introuvable 5--> " + str(query_url),0)
@@ -729,6 +614,86 @@ def getallepisodes(ItemIdx=None,KodiId=None,savepath=None,NbKodi=None,ShowBusy=N
          ArrayCollection["saisons"]=TotalSaisons         
          erreur=DirStru(savepath)
 	   #if not erreur:
+         with io.open(savepath, 'w+', encoding='utf8') as outfile: 
+	                      str_ = json.dumps(ArrayCollection,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
+	                      outfile.write(to_unicode(str_))
+     if ShowBusy: xbmc.executebuiltin( "Dialog.Close(busydialog)" )                 
+  return ArrayCollection 
+  
+def getallepisodes(ItemIdx=None,KodiId=None,savepath=None,NbKodi=None,ShowBusy=None):
+  
+#https://api.betaseries.com/shows/display?key=46be59b5b866&thetvdb_id=266398  
+#{ "show": {"id":6268,"thetvdb_id":266398,"imdb_id":"tt2249364","title":"Broadchurch","description":"Le meurtre d'un jeune gar\u00e7on \u00e0 Broadchurch, une petite ville c\u00f4ti\u00e8re, entraine un d\u00e9ferlement m\u00e9diatique qui menace de d\u00e9chirer les liens de sa communaut\u00e9.\n","seasons":"3",
+#           "seasons_details":[{"number":1,"episodes":9},{"number":2,"episodes":8},{"number":3,"episodes":8}],
+#           "episodes":"24","followers":"19435","comments":"112","similars":"33","characters":"16","creation":"2013",
+#           "genres":["Crime","Drama"],
+#           "length":"45","network":"ITV","rating":"","status":"Continuing","language":"en",
+#           "notes":{"total":758,"mean":4.405,"user":0},
+#           "in_account":false,
+#           "images":{"show":"https:\/\/www.betaseries.com\/images\/fonds\/show\/6268_1172412.jpg","banner":"https:\/\/www.betaseries.com\/images\/fonds\/banner\/6268_952795.jpg","box":"https:\/\/www.betaseries.com\/images\/fonds\/box\/6268_952795.jpg","poster":"https:\/\/www.betaseries.com\/images\/fonds\/poster\/266398.jpg"},
+#           "aliases":["Broadchurch"],
+#           "user":{"archived":false,"favorited":false,"remaining":0,"status":0,"last":"S00E00","tags":null},
+#           "resource_url":"https:\/\/www.betaseries.com\/serie\/broadchurch"}, 
+#           "errors": [] }
+  
+  KodiCollection = []
+  ArrayCollection={} 
+  EpisodesDiffusion={}
+  EpisodesSaison =[]
+  EpisodesEtcasting={}
+  SaisonTab={}
+  Episodes=[]
+  itemId=""
+  query_url=""
+  nowX = datetime.datetime.now().date()+datetime.timedelta(30) #pour mise a jour une fois par mois
+  #logMsg("Resultat  URL betaseries--> " + str(ItemIdx),0) 
+  if ItemIdx or KodiId:
+     
+     #itemid = id chez themoviedb du tvshow
+     if KodiId :
+         itemId=KodiId
+         ArrayCollection["name"]=xbmc.getInfoLabel("ListItem.TVShowTitle")
+         ArrayCollection["tmbid"]=""
+         ArrayCollection["kodiid"]=KodiId
+         ArrayCollection["nbkodi"]=NbKodi
+         ArrayCollection["dateecheance"]=nowX.strftime('%Y-%m-%d')
+         ArrayCollection["v4"]="ok"
+         TotalSaisons={}
+          
+       
+         query_url = "https://api.betaseries.com/shows/display?key=46be59b5b866&thetvdb_id=%s" % (itemId.encode("utf8")) 
+         #logMsg("Resultat  URL betaseries--> " + str(query_url),0)         
+         
+         response = urllib.urlopen(query_url)
+         try:
+           str_response = response.read().decode('utf8')
+         except :
+           str_response=''
+           logMsg("Resultat  URL introuvable 5--> " + str(query_url),0)
+
+         if str_response :
+          try:
+            json_data = json.loads(str_response)
+          except:
+            json_data=""
+            logMsg("Resultat  URL vide 5--> " + str(query_url),0)
+         else:
+         	json_data=""
+          
+         if json_data:
+             SaisonTab=json_data.get("show")
+             ArrayCollection["imdbid"]=SaisonTab.get("imdb_id")
+             ArrayCollection["sa_id"]=SaisonTab.get("id")
+             SaisonTab=SaisonTab.get("seasons_details")
+             if SaisonTab:
+             	  for item in SaisonTab:             	  	       
+                         EpisodesEtcasting={} 
+                         EpisodesEtcasting["NbEpisodes"]=item["episodes"]
+                         TotalSaisons[str(item["number"])]=EpisodesEtcasting 
+                              
+         ArrayCollection["saisons"]=TotalSaisons 
+                 
+         erreur=DirStru(savepath)
          with io.open(savepath, 'w+', encoding='utf8') as outfile: 
 	                      str_ = json.dumps(ArrayCollection,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
 	                      outfile.write(to_unicode(str_))
@@ -775,7 +740,7 @@ def getDiffusionTV(ItemIdxx=None,saisonID=None,DBtype=None):
   txx=0
   tsea=0
   
-  logMsg("GetAirDates : "+ str(ItemIdxx)+"/"+str(saisonID)+"/"+str(DBtype),0)
+  #logMsg("GetAirDates : "+ str(ItemIdxx)+"/"+str(saisonID)+"/"+str(DBtype),0)
   if ItemIdxx and DBtype and saisonID:
     
     if DBtype=="episode":
@@ -791,11 +756,10 @@ def getDiffusionTV(ItemIdxx=None,saisonID=None,DBtype=None):
      
     if ItemIdx: #imdbnumber
       logMsg("Resultat  ItemIdx --> " + str(ItemIdx),0)
-      savepath=ADDON_DATA_PATH+"/series/tv"+ItemIdx.encode("utf-8")
+      savepath=ADDON_DATA_PATH+"/series/tv"+ItemIdx.encode("utf8")
       #if not os.path.exists(savepath):
       if not xbmcvfs.exists(savepath):
-          #mise à jour !!!
-          #logMsg("telex Appel SAGA update : --> "  + str(itemId),0)
+          #creation !!!
           ArrayCollection=getallepisodes("",ItemIdx,savepath,NbKodi,1)
       else :
     #if os.path.exists(savepath):
@@ -814,7 +778,8 @@ def getDiffusionTV(ItemIdxx=None,saisonID=None,DBtype=None):
              nowX2=nowX  
           
         if ArrayCollection["kodiid"]!=ItemIdx or ArrayCollection["nbkodi"]!=NbKodi or nowX>nowX2:
-             ArrayCollection=getallepisodes("",ItemIdx,savepath,NbKodi)
+             #mise à jour
+             ArrayCollection=getallepisodes(ArrayCollection.get("tmbid"),ItemIdx,savepath,NbKodi)
              
         if ArrayCollection:
                 AllSeasons=ArrayCollection["saisons"]
@@ -892,10 +857,9 @@ def getGenre(genrex=None,genretypex=None,origtitle=None):
        genretypex="tvshow"
        origtitle=xbmc.getInfoLabel("ListItem.TVShowTitle")
     genretype="VideoLibrary.Get%ss" %(genretypex)
-    genrelisttype=genretypex.encode("utf-8")
+    genrelisttype=genretypex.encode("utf8")
     #recuperation du premier genre
     genre = genrex.split(" /")[0]
-    
     
        
     if genre  :
@@ -913,7 +877,6 @@ def getGenre(genrex=None,genretypex=None,origtitle=None):
             #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetMovies","params":{ "filter": {"genreid":16}, "properties": [ "title", "Test" ] },"id":1}
             json_result = getJSON(genretype , '{ "filter": {"genreid":%d}, "properties": [ "thumbnail"] }' %xyz2)
             break
-      #logfile("Genre check="+genre+"/"+str(xyz2))
       
       if json_result:     
         for Test in json_result:
@@ -923,11 +886,10 @@ def getGenre(genrex=None,genretypex=None,origtitle=None):
             txx = xbmcgui.ListItem(label=ooo,iconImage=Test.get("thumbnail"),label2=str(xyz2))
             if ooo != origtitle:
                  genrelist.append(["", txx, False])
-                 #xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url="", listitem=txx, isFolder=False)
+
   xbmcplugin.addDirectoryItems(int(sys.argv[1]), genrelist) 
   xbmcplugin.endOfDirectory(int(sys.argv[1]))
   
-
 def getCasting(Castingtypex=None,itemId=None,Statique=None):
   allCast = []
   item = {}
@@ -940,11 +902,45 @@ def getCasting(Castingtypex=None,itemId=None,Statique=None):
   #videodb://movies/actors/1132/   1132=id acteur pour retrouver ses films
   
   if sys.argv[1]:
+      if itemId:     
+         allCast = sql_ActeurParVideo(itemId,Castingtypex)  
+         if allCast:
+           for Test in allCast:
+             name=Test.get("name")
+             if name:
+                 imageacteur=Test.get("thumbnail")
+                 if not imageacteur and not NonVide:
+                    imageacteur="DefaultActor.png"
+                 #else :
+                 if imageacteur:
+                    txx = xbmcgui.ListItem(label=name,iconImage=imageacteur,label2=Test.get("role"))
+                    txx.setProperty('DBID', str(Test.get("actor_id")) )  
+                 
+                    if not Statique:
+                         ListeActeur.append(["",txx,True])
+                    else:
+                         ListeActeur.append(txx)
+  if not Statique:
+     xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeActeur)
+     xbmcplugin.endOfDirectory(int(sys.argv[1]))
+  else:
+     return ListeActeur 
+
+def getCastingOK(Castingtypex=None,itemId=None,Statique=None):
+  allCast = []
+  item = {}
+  Casting = []
+  Castingtype=""
+  imageacteur="" 
+  ListeActeur=[]
+  NonVide=xbmc.getCondVisibility("Skin.HasSetting(HideMovieTvCastEmpty)")
+  #videodb://movies/actors/1132/   1132=id acteur pour retrouver ses films
+  
+  if sys.argv[1]:
       if Castingtypex and itemId:   
          #if Castingtypex=="episode":            Castingtypex="tvshow"
     
-         Castingtype="VideoLibrary.Get%sDetails" %(Castingtypex)       
-   
+         Castingtype="VideoLibrary.Get%sDetails" %(Castingtypex)
          json_result = getJSON(Castingtype, '{ "%sid":%d,"properties": [ "cast" ]}' %(Castingtypex,int(itemId)))
          #movie, tvshow
          if json_result:
@@ -964,14 +960,13 @@ def getCasting(Castingtypex=None,itemId=None,Statique=None):
                          ListeActeur.append(["",txx,True])
                     else:
                          ListeActeur.append(txx)
-                 #xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url="", listitem=txx, isFolder=False)
   if not Statique:
      xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeActeur)
      xbmcplugin.endOfDirectory(int(sys.argv[1]))
   else:
      return ListeActeur 
   
-def getFilmsParActeur(ActeurType=None,Acteur=None,Statique=None):
+def getFilmsParActeur(ActeurType=None,ActeurId=None,Statique=None):
   Donnees = []
   item = {}
   Casting = []
@@ -983,12 +978,56 @@ def getFilmsParActeur(ActeurType=None,Acteur=None,Statique=None):
   #videodb://movies/actors/1132/   1132=id acteur pour retrouver ses films
   
   if sys.argv[1]:
-      if ActeurType and Acteur:                  
+      if ActeurId: 
          
-         json_result = getJSON("VideoLibrary.GetMovies", '{"filter":{"actor":"%s"},"properties":["thumbnail","year","file","art","imdbnumber","cast"]}' %(Acteur))
-         #logMsg("Resultat  Filmographie local Movies--> " +str(json_result),0) 
-         json_result2 = getJSON("VideoLibrary.GetTvShows", '{"filter":{"actor":"%s"},"properties":["thumbnail","year","file","imdbnumber","art","cast"]}' %(Acteur))
+         Donnees=sql_VideosParActeur(str(ActeurId),ActeurType)                  
+         if Donnees:
+           for Item in Donnees:
+             Titre=Item.get("label")
+             if Titre:
+                 txx = xbmcgui.ListItem(label=Titre)
+                 txx.setLabel2(Item.get("role"))
+                 
+                 IdVideo=Item.get("movieid")
+                 TypeVideo="movie"
+                 if not IdVideo: 
+                    IVideo=Item.get("tvshowid")
+                    TypeVideo="tvshow"
+                 IdVideo=str(Item.get("imdbnumber"))                 
+                 txx.setArt( Item.get("art")) 
+                 logMsg('backend ART =' +str(Item.get("art")),0)
+                 txx.setProperty("TypeVideo",TypeVideo)
+                 txx.setInfo("video", {"Mpaa": Item.get("imdbnumber"),"title": Titre,"year": Item.get("year"),"trailer":Item.get("trailer")})
+                 if not Statique:
+                     ListeVideos.append([Item.get("file"),txx,False])
+                 else:
+                     ListeVideos.append(txx)
+  if not Statique:               
+     xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeVideos)       
+     xbmcplugin.endOfDirectory(int(sys.argv[1])) 
+  else:
+     return ListeVideos
+   
+     
+def getFilmsParActeurOK(ActeurType=None,Acteur=None,Statique=None):
+  Donnees = []
+  item = {}
+  Casting = []
+  RechercheType=""
+  VideoPoster="" 
+  ListeVideos=[]
+  
+  #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetMovies","params":{"filter":{"actor":"marion cotillard"},"properties":["thumbnail","year","file"]},"id":"1"}
+  #videodb://movies/actors/1132/   1132=id acteur pour retrouver ses films
+  
+  if sys.argv[1]:
+      if ActeurType and Acteur: 
+         
+         json_result = getJSON("VideoLibrary.GetMovies", '{"filter":{"actor":"%s"},"properties":["thumbnail","year","file","art","imdbnumber","cast"]}' %(Acteur) )
+         #logMsg("Resultat  Filmographie local Tv--> " +str(json_result),0) 
+         json_result2 = getJSON("VideoLibrary.GetTvShows", '{"filter":{"actor":"%s"},"properties":["thumbnail","year","file","imdbnumber","art","cast"]}' %(Acteur.encode('utf-8')))
          #logMsg("Resultat  Filmographie local Tv--> "+str(Acteur)+"/" +str(json_result2),0) 
+          
          if len(json_result)>0:
           Donnees=json_result
          if len(json_result2)>0:
@@ -1016,6 +1055,7 @@ def getFilmsParActeur(ActeurType=None,Acteur=None,Statique=None):
                     TypeVideo="tvshow"
                  IdVideo=str(Item.get("imdbnumber"))                 
                  txx.setArt( Item.get("art")) 
+                 logMsg('backend ART =' +str(Item.get("art")),0)
                  txx.setInfo("video", {"Mpaa": Item.get("imdbnumber"),"title": Titre,"year": Item.get("year"),"writer":TypeVideo,"trailer":Item.get("trailer")})
                  if not Statique:
                      ListeVideos.append([Item.get("file"),txx,False])
@@ -1026,7 +1066,7 @@ def getFilmsParActeur(ActeurType=None,Acteur=None,Statique=None):
      xbmcplugin.endOfDirectory(int(sys.argv[1])) 
   else:
      return ListeVideos
-  
+   
   
   
 def getFilmsTv(DbType=None,Acteur=None,Statique=None):
@@ -1043,11 +1083,11 @@ def getFilmsTv(DbType=None,Acteur=None,Statique=None):
     #logMsg("Resultat  Filmographie --> " + str(Acteur)+"/"+str(DbType),0)  
     if DbType and Acteur!="None": 
         Acteur=try_decode(Acteur)       
-        query_url = "https://api.themoviedb.org/3/search/person?api_key=67158e2af1624020e34fd893c881b019&language=%s&query=%s&page=1&include_adult=false" % (xbmc.getInfoLabel("System.Language").encode("utf-8"),unicodedata.normalize('NFKD', Acteur.split("(")[0]).encode('ascii','xmlcharrefreplace'))
+        query_url = "https://api.themoviedb.org/3/search/person?api_key=67158e2af1624020e34fd893c881b019&language=%s&query=%s&page=1&include_adult=false" % (xbmc.getInfoLabel("System.Language").encode("utf8"),unicodedata.normalize('NFKD', Acteur.split("(")[0]).encode('ascii','xmlcharrefreplace'))
         response = urllib.urlopen(query_url)
         #logMsg("URL --> " + str(query_url),0)
         try:
-            str_response = response.read().decode('utf-8')
+            str_response = response.read().decode('utf8')
         except :
             str_response=''
             logMsg("Resultat  URL introuvable 6",0)
@@ -1066,18 +1106,18 @@ def getFilmsTv(DbType=None,Acteur=None,Statique=None):
             ActeurId=""
             if allInfo:
                 #logMsg("Resultat  Results --> " + str(Acteur),0)
-                         item=allInfo[0]  #on prend le premier de la liste en espérant que ce soit le bon !                          
+                         item=allInfo[0]  #on prend le premier de la liste en esperant que ce soit le bon !                          
                          ActeurId=item.get("id")
                          #logMsg("Resultat  Acteur ID -->" + str(ActeurId),0)
                          if ActeurId:
                                  savepath=ADDON_DATA_PATH+"/acteurs/acteurTMDB"+str(ActeurId)
                                  if not xbmcvfs.exists(savepath):
                                         #logMsg("Chercher acteur --> " + str(ActeurId),0)
-                                        query_url = "https://api.themoviedb.org/3/person/%s/combined_credits?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (ActeurId,xbmc.getInfoLabel("System.Language").encode("utf-8")) 
+                                        query_url = "https://api.themoviedb.org/3/person/%s/combined_credits?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (ActeurId,xbmc.getInfoLabel("System.Language").encode("utf8")) 
                                         response = urllib.urlopen(query_url)
                                         #logMsg("URL --> " + str(query_url),0)
                                         try:
-                                          str_response = response.read().decode('utf-8')
+                                          str_response = response.read().decode('utf8')
                                         except :
                                           str_response=''
                                           logMsg("Resultat  URL introuvable 7 --> " + str(query_url),0)
@@ -1173,11 +1213,11 @@ def getRealisateur(CheminType="",DbId=None,realisateur=None):
             
              savepath="DefaultActor.png"
              realisateur=try_decode(realisateur)
-             query_url = "https://api.themoviedb.org/3/search/person?api_key=67158e2af1624020e34fd893c881b019&language=%s&query=%s&page=1&include_adult=false" % (xbmc.getInfoLabel("System.Language").encode("utf-8"),unicodedata.normalize('NFKD', realisateur.split("(")[0]).encode('ascii','xmlcharrefreplace'))
+             query_url = "https://api.themoviedb.org/3/search/person?api_key=67158e2af1624020e34fd893c881b019&language=%s&query=%s&page=1&include_adult=false" % (xbmc.getInfoLabel("System.Language").encode("utf8"),unicodedata.normalize('NFKD', realisateur.split("(")[0]).encode('ascii','xmlcharrefreplace'))
              response = urllib.urlopen(query_url)
              #logMsg("URL --> " + str(query_url),0)
              try:
-                 str_response = response.read().decode('utf-8')
+                 str_response = response.read().decode('utf8')
              except :
                  str_response=''
                  logMsg("Resultat  URL introuvable 8 ",0)
@@ -1221,13 +1261,13 @@ def getTrailer(ID=None,DbType=None):
      if DbType and ID: 
           #xbmc.executebuiltin( "ActivateWindow(busydialog)" ) 
           if DbType!="movie":
-               query_url ="https://api.themoviedb.org/3/tv/%s/videos?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (ID.encode("utf-8"),xbmc.getInfoLabel("System.Language").encode("utf-8"))
+               query_url ="https://api.themoviedb.org/3/tv/%s/videos?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (ID.encode("utf8"),xbmc.getInfoLabel("System.Language").encode("utf8"))
           else:
-               query_url ="https://api.themoviedb.org/3/movie/%s/videos?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (ID.encode("utf-8"),xbmc.getInfoLabel("System.Language").encode("utf-8"))
+               query_url ="https://api.themoviedb.org/3/movie/%s/videos?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (ID.encode("utf8"),xbmc.getInfoLabel("System.Language").encode("utf8"))
           #logMsg("Resultat  URL --> " + str(query_url),0)
           response = urllib.urlopen(query_url)
           try:
-               str_response = response.read().decode('utf-8')
+               str_response = response.read().decode('utf8')
           except :
                str_response=''
                logMsg("Resultat  URL introuvable 10--> " + str(query_url),0)
@@ -1239,13 +1279,13 @@ def getTrailer(ID=None,DbType=None):
                 json_data=""
                 logMsg("Resultat  URL vide 10--> " + str(query_url),0)
           if DbType!="movie":
-               query_url ="https://api.themoviedb.org/3/tv/%s/videos?api_key=67158e2af1624020e34fd893c881b019&language=en" % (ID.encode("utf-8"))
+               query_url ="https://api.themoviedb.org/3/tv/%s/videos?api_key=67158e2af1624020e34fd893c881b019&language=en" % (ID.encode("utf8"))
           else:
-               query_url ="https://api.themoviedb.org/3/movie/%s/videos?api_key=67158e2af1624020e34fd893c881b019&language=en" % (ID.encode("utf-8"))
+               query_url ="https://api.themoviedb.org/3/movie/%s/videos?api_key=67158e2af1624020e34fd893c881b019&language=en" % (ID.encode("utf8"))
           #logMsg("Resultat  URL --> " + str(query_url),0)
           response = urllib.urlopen(query_url)
           try:
-               str_response = response.read().decode('utf-8')
+               str_response = response.read().decode('utf8')
           except :
                str_response=''
                logMsg("Resultat  URL introuvable 11--> " + str(query_url),0)
@@ -1278,14 +1318,14 @@ def getRuntime(itemId=None,TypeID=None):
     if itemId:  xxx=get_externalID(itemId,TypeID)
     if xxx:
       if TypeID=="movie":
-          query_url = "https://api.themoviedb.org/3/movie/%s?api_key=67158e2af1624020e34fd893c881b019" % (xxx.encode("utf-8"))
+          query_url = "https://api.themoviedb.org/3/movie/%s?api_key=67158e2af1624020e34fd893c881b019" % (xxx.encode("utf8"))
       if TypeID=="episode":
-         query_url = "https://api.themoviedb.org/3/tv/%s?api_key=67158e2af1624020e34fd893c881b019" % (xxx.encode("utf-8"))
+         query_url = "https://api.themoviedb.org/3/tv/%s?api_key=67158e2af1624020e34fd893c881b019" % (xxx.encode("utf8"))
     
       logMsg("Runtime ->"+str(query_url),0)
       response = urllib.urlopen(query_url)
       try:
-       str_response = response.read().decode('utf-8')
+       str_response = response.read().decode('utf8')
       except :
        str_response=''
        logMsg("Resultat  URL introuvable 12--> " + str(query_url),0)
@@ -1314,11 +1354,11 @@ def get_externalID(itemId=None,ismovie=None):
      externalXX="tvdb_id"
    else:
      externalXX="imdb_id"
-   query_url = "https://api.themoviedb.org/3/find/%s?api_key=67158e2af1624020e34fd893c881b019&language=%s&external_source=%s" % (itemId.encode("utf-8"),xbmc.getInfoLabel("System.Language").encode("utf-8"),externalXX)
+   query_url = "https://api.themoviedb.org/3/find/%s?api_key=67158e2af1624020e34fd893c881b019&language=%s&external_source=%s" % (itemId.encode("utf8"),xbmc.getInfoLabel("System.Language").encode("utf8"),externalXX)
    #logMsg("Resultat  URL --> " + str(query_url),0)
    response = urllib.urlopen(query_url)
    try:
-        str_response = response.read().decode('utf-8')
+        str_response = response.read().decode('utf8')
    except :
         str_response=''
         logMsg("Resultat  URL introuvable 13",0)
@@ -1403,7 +1443,7 @@ def ModeVues(content_type=None, current_view=None):
         ListeVues = [] 
         choixpossibles=[]
          
-        views_file = xbmc.translatePath('special://skin/extras/views.xml').decode("utf-8")
+        views_file = xbmc.translatePath('special://skin/extras/views.xml').decode("utf8")
         if xbmcvfs.exists(views_file):
             doc = parse(views_file)
             listing = doc.documentElement.getElementsByTagName('view')
@@ -1443,10 +1483,13 @@ def ModeVues(content_type=None, current_view=None):
         	  
 
 # --------------------------------------------------------------------------------------------------
+
+
     
 def getJSON(method,params):
+    #logMsg("Resultat executeJSONRPC --> " + str(method),0)
     json_response = xbmc.executeJSONRPC('{ "jsonrpc": "2.0", "method" : "%s", "params": %s, "id":1 }' %(method, try_encode(params)))
-    jsonobject = json.loads(json_response.decode('utf-8','replace'))
+    jsonobject = json.loads(json_response.decode('utf8','replace'))
     if(jsonobject.has_key('result')):
         jsonobject = jsonobject['result']
         if isinstance(jsonobject, list):
@@ -1519,34 +1562,94 @@ def getJSON(method,params):
         return {}
 
 
-def try_encode(text, encoding="utf-8"):
+def try_encode(text, encoding="utf8"):
     try:
         return text.encode(encoding,"ignore")
     except:
         return text
 
-def try_decode(text, encoding="utf-8"):
+def try_decode(text, encoding="utf8"):
     try:
         return text.decode(encoding,"ignore")
     except:
         return text
  
 
-def sql_read(itemID=None):
-     
-     #con = sqlite3.connect('c:/Users/HTPC/AppData/Roaming/Kodi/userdata/Database/MyVideos107.db')
-     con = sqlite3.connect('c:/Users/Thierry/AppData/Roaming/Kodi/userdata/Database/MyVideos99.db') 
+def sql_ActeurParVideo(itemId=None,TypeVideo=""):     
+     ListeActeurs=[] 
+     ListeItemFinal=[] 
+        
+     con = sqlite3.connect(str(DATABASE_PATH))
      cursor = con.cursor()
-     #cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-     #cursor.execute("SELECT strSet FROM sets;")
-
-     # tables = version, bookmark, settings, stacktimes, genre, genre_link, country, country_link, movie, actor, actor_link, 
-     #          director_link, writer_link, path, files, tvshow, episode, tvshowlinkpath, movielinktvshow, studio, studio_link, 
-     #          musicvideo, streamdetails, sets, seasons, art, tag, tag_link, rating, uniqueid
-
-     #utils.logMsg('backend Sql SETS='+str(cursor.fetchall()),0)
-
-     cursor.execute("SELECT * FROM actor WHERE actor_id='%d';" %(int(itemID)))
-     logMsg('backend Sql SET %s=' %(str(itemID))+str(cursor.fetchall()),0)
+     #cursor.execute("SELECT media_type FROM uniqueid WHERE media_id='%d';" %(int(itemId)))
+     #for data_out in cursor.fetchall():
+     #   TypeVideo=str(data_out[0])
+     #   break
+        
+     if TypeVideo=='episode':
+        #alors on recupere l'idShow !
+        cursor.execute("SELECT idShow FROM episode WHERE idEpisode='%d';" %(int(itemId)))
+        TypeVideo="tvshow"
+        
+        for data_out in cursor.fetchall():
+            itemId=str(data_out[0])
+           
+     
+     cursor.execute("SELECT * FROM actor_link WHERE media_id='%d' and media_type='%s';" %(int(itemId),TypeVideo))
+     for data_out in cursor.fetchall():
+        Details={}
+        Details['actor_id']=data_out[0]
+        Details['media_id']=data_out[1]
+        Details['media_type']=data_out[2]
+        Details['role']=data_out[3]
+        Details['order']=data_out[4]
+        logMsg("Acteurs du media %s:%s" %(str(Details['media_id']),str(Details['media_type'])),0)
+        cursor2=con.cursor()
+        cursor2.execute("SELECT * FROM actor WHERE actor_id='%d';" %(int(data_out[0])))
+        for data2 in cursor2.fetchall():
+          Details['name']=data2[1]
+          Thumbnail=data2[2].replace("<thumb>","")
+          Details['thumbnail']=Thumbnail.replace("</thumb>","")
+          
+        
+        ListeActeurs.append([Details['order'],Details])
+     
+     #logMsg('backend Sql Acteurs %s=' %(itemId.encode('utf8'))+str(ListeActeurs),0)
+     LL=[]          
+     LL=sorted(ListeActeurs)
+     cpt=0
+     #trier par ordre de roles
+     while cpt<len(LL):
+           ListeItemFinal.append(LL[cpt][1])
+           cpt=cpt+1
      con.close()
+     return ListeItemFinal
+      
+      
+def sql_VideosParActeur(IdActeur=None,DbType=None):     
+     Donnees=[]
+     logMsg(str(xbmc.translatePath("special://database")),0)
+     con = sqlite3.connect(str(DATABASE_PATH))
+     cursor = con.cursor()
+     #recuperation de tous les medias de cet acteur/realisateur
+     if DbType!="director":
+      cursor.execute("SELECT actor_id,media_id,media_type,role FROM actor_link WHERE actor_id='%d';" %(int(IdActeur)))
+     else:
+      cursor.execute("SELECT actor_id,media_id,media_type FROM director_link WHERE actor_id='%d';" %(int(IdActeur)))
+     for data_out in cursor.fetchall():
+        Details={}
+        Details['actor_id']=data_out[0]
+        Details['media_id']=str(data_out[1])
+        Details['media_type']=data_out[2]
+        if DbType!="director":
+           Details['role']=data_out[3]
+        else:
+           Details['role']=""
+        json_result = getJSON("VideoLibrary.Get%sDetails" %(str(Details['media_type'])), '{"%sid":%d,"properties":["thumbnail","year","file","art","imdbnumber","cast"]}' %(str(Details['media_type']),int(Details['media_id'])) )
+       
+        if len(json_result)>0:
+          json_result['role']=Details['role']
+          Donnees.append(json_result)     
+     con.close()
+     return Donnees
       

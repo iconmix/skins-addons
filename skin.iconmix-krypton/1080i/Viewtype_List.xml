@@ -16,7 +16,7 @@
 			<!-- --	<animation effect="rotatey" center="1600" start="0" end="15" time="500" condition="true">Conditional</animation> -->
 
 			<posx>1000</posx>
-			<posy>20</posy>
+			<posy>60</posy>
 			<height>770</height>
 			<width>1350</width>
 			<onup>55</onup>

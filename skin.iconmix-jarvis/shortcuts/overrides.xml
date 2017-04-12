@@ -14,14 +14,14 @@
 	<!-- Widgets -->
 
 	<!-- Recently Added, Recommended, and Random -->
-	<widget  target="tvshows" type="video" icon="logos/tsna-logo.png" condition="System.HasAddon(script.tv.show.next.aired)" label="Tv Shows Next Aired" path="plugin://script.skin.helper.service/?action=nextairedtvshows&amp;reload=$INFO[Window(Home).Property(widgetreload-tvshows)]">NAired</widget>
-	<widget  target="tvshows" type="video" icon="logos/tsna-logo.png" condition="System.HasAddon(script.tv.show.next.aired)" label="UnAired Episodes" path="plugin://script.skin.helper.service/?action=unairedepisodes&amp;reload=$INFO[Window(Home).Property(widgetreload2)]">NAired</widget>
-	<widget  target="tvshows" type="video" icon="logos/tsna-logo.png" condition="System.HasAddon(script.tv.show.next.aired)" label="Next Aired Episodes" path="plugin://script.skin.helper.service/?action=nextairedepisodes&amp;reload=$INFO[Window(Home).Property(widgetreload2)]">NAired</widget>
+	<widget  target="tvshows" type="video" icon="logos/tsna-logo.png" condition="System.HasAddon(script.tv.show.next.aired)" label="Tv Shows Next Aired" path="plugin://script.skin.helper.widgets/?action=nextaired&mediatype=episodes&reload=$INFO[Window(Home).Property(widgetreload2)]">NAired</widget>
+	<widget  target="tvshows" type="video" icon="logos/tsna-logo.png" condition="System.HasAddon(script.tv.show.next.aired)" label="UnAired Episodes" path="plugin://script.skin.helper.widgets/?action=unaired&mediatype=episodes&reload=$INFO[Window(Home).Property(widgetreload2)] ">NAired</widget>
+	
 	
 	
 	
 	<!-- <widget type="programs" condition="System.HasAddon(plugin.video.allocine)" label="Allociné">Allocine2</widget> 
-	<widget label="Widgets Skinhelper" type="32010">||BROWSE||script.skin.helper.service/?action=widgets&amp;path=skinplaylists,librarydataprovider,scriptwidgets,extendedinfo,smartshortcuts</widget>
+	<widget label="Widgets Skinhelper" type="32010">||BROWSE||script.skin.helper.widgets/?action=widgets&amp;path=skinplaylists,librarydataprovider,scriptwidgets,extendedinfo,smartshortcuts</widget>
 -->
 	<widget type="video" icon="logos/ldp-logo.png" label="Films récemment ajoutés" path="videodb://recentlyaddedmovies/">LibraryRecentlyAddedMovies</widget>
 	<widget target="tvshows" type="video" icon="logos/ldp-logo.png" label="Episodes récemment ajoutés" path="videodb://recentlyaddedepisodes/">LibraryRecentlyAddedEpisodes</widget>
@@ -113,18 +113,18 @@
 		<background label="Widget 2" condition="StringCompare(Window.Property(groupname),mainmenu)">WDF2.jpg</background>
 	<!--
 	<backgrounddefault defaultID="movies">$INFO[Window(Home).Property(SkinHelper.AllMoviesBackground)]</backgrounddefault>
-	<propertydefault defaultID="movies" property="backgroundName">$ADDON[script.skin.helper.service 32039]</propertydefault>
+	<propertydefault defaultID="movies" property="backgroundName">$ADDON[script.skin.helper.widgets 32039]</propertydefault>
 	<backgrounddefault defaultID="tvshows">$INFO[Window(Home).Property(SkinHelper.AllTvShowsBackground)]</backgrounddefault>
-	<propertydefault defaultID="tvshows" property="backgroundName">$ADDON[script.skin.helper.service 32043]</propertydefault>
+	<propertydefault defaultID="tvshows" property="backgroundName">$ADDON[script.skin.helper.widgets 32043]</propertydefault>
 	
 	<backgrounddefault defaultID="music">$INFO[Window(Home).Property(SkinHelper.AllMusicBackground)]</backgrounddefault>
-	<propertydefault defaultID="music" property="backgroundName">$ADDON[script.skin.helper.service 32048]</propertydefault>
+	<propertydefault defaultID="music" property="backgroundName">$ADDON[script.skin.helper.widgets 32048]</propertydefault>
 	<backgrounddefault defaultID="musicvideos">$INFO[Window(Home).Property(SkinHelper.AllMusicVideosBackground)]</backgrounddefault>
-	<propertydefault defaultID="musicvideos" property="backgroundName">$ADDON[script.skin.helper.service 32047]</propertydefault>
+	<propertydefault defaultID="musicvideos" property="backgroundName">$ADDON[script.skin.helper.widgets 32047]</propertydefault>
 	<backgrounddefault defaultID="pictures">$INFO[Window(Home).Property(SkinHelper.PicturesBackground)]</backgrounddefault>
-	<propertydefault defaultID="pictures" property="backgroundName">$ADDON[script.skin.helper.service 32046]</propertydefault>
+	<propertydefault defaultID="pictures" property="backgroundName">$ADDON[script.skin.helper.widgets 32046]</propertydefault>
 	<backgrounddefault defaultID="videos">$INFO[Window(Home).Property(SkinHelper.GlobalFanartBackground)]</backgrounddefault>
-	<propertydefault defaultID="videos" property="backgroundName">$ADDON[script.skin.helper.service 32038]</propertydefault>
+	<propertydefault defaultID="videos" property="backgroundName">$ADDON[script.skin.helper.widgets 32038]</propertydefault>
 	<backgrounddefault defaultID="weather">resource://resource.images.weatherfanart.multi/$INFO[Window(Weather).Property(Day0.FanartCode)]</backgrounddefault>
 	<backgrounddefault defaultID="livetv">$INFO[Window(Home).Property(SkinHelper.PvrBackground)]</backgrounddefault>
 	-->

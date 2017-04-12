@@ -74,27 +74,35 @@
 	<include name="FadelabelPauseAtEnd90">
 		<pauseatend>90000</pauseatend>
 	</include>
+<variable name="ImageContainer">
+			<value condition="!IsEmpty(Container(3).ListItem.DBID)+!Substring(Container(3).ListItem.Path,setid)+!IsEmpty(Container(3).ListItem.Path)">$INFO[Container(3).ListItem.Path,,extrafanart\]</value>
+			<value condition="!IsEmpty(Container(6).ListItem.DBID)+!Substring(Container(6).ListItem.Path,setid)+!IsEmpty(Container(6).ListItem.Path)">$INFO[Container(6).ListItem.Path,,extrafanart\]</value>
 
+			<value condition="!IsEmpty(Container(6).ListItem.Icon)+!Substring(Container(6).ListItem.Icon,default)">$INFO[Container(6).ListItem.Icon]</value>
+			<value condition="!IsEmpty(Container(3).ListItem.Icon)+!Substring(Container(3).ListItem.Icon,default)">$INFO[Container(3).ListItem.Icon]</value>
+			<value></value>
+			
+		</variable>
 	<variable name="contentdvinfo">
-	  <value condition="System.HasAddon(script.iconmixtools)+Skin.HasSetting(SagaManquant)+SubString(ListItem.DBTYPE,set)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.setid]</value> -->
+	  <value condition="System.HasAddon(script.iconmixtools)+Skin.HasSetting(SagaManquant)+Substring(ListItem.DBTYPE,set)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.setid]</value> -->
 		<value condition="!IsEmpty(ListItem.setid)">videodb://movies/sets/$INFO[ListItem.setid]</value>	
 	</variable>
 	<variable name="contentsaga">
-		<value condition="System.HasAddon(script.iconmixtools)+Skin.HasSetting(SagaManquant)+SubString(ListItem.DBTYPE,set)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.DBID]</value> -->
-		<value condition="SubString(ListItem.DBTYPE,set)">videodb://movies/sets/$INFO[ListItem.DBID]</value>
+		<value condition="System.HasAddon(script.iconmixtools)+Skin.HasSetting(SagaManquant)+Substring(ListItem.DBTYPE,set)">plugin://script.iconmixtools/?action=getsaga&id=$INFO[ListItem.DBID]</value> -->
+		<value condition="Substring(ListItem.DBTYPE,set)">videodb://movies/sets/$INFO[ListItem.DBID]</value>
 		<value></value>
 		</variable>
 		<variable name="contentActeursDirecteurs">
-			<value condition="[Container.Content(directors)|Container.Content(actors)]+!IsEmpty(ListItem.DBID)">$INFO[Container.FolderPath]$INFO[ListItem.DBID]</value>
+		  <value condition="System.HasAddon(script.iconmixtools)+[Container.Content(actors)|Container.Content(directors)]+!IsEmpty(ListItem.DBID)">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]&local="oui"</value>
 			<value></value>
 		</variable>
 		<variable name="contentPanelActeurs">
-			<value condition="[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..)">plugin://script.iconmixtools/?action=getcast&casttype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]</value>
+			<value condition="[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!Substring(ListItem.Label,..)">plugin://script.iconmixtools/?action=getcast&casttype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]</value>
 			<value></value>
 		</variable>
 		<variable name="ActeursContent">
-			<value condition="IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]&local="oui"</value>
-			<value condition="IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]</value>
+			<value condition="System.HasAddon(script.iconmixtools)+IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998ID]&local="oui"</value>
+			<value condition="System.HasAddon(script.iconmixtools)+IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]</value>
 			<value>-</value>
 		</variable>
 
@@ -104,17 +112,17 @@
 		-->
 	
 	<variable name="fanartdialogvideoinfo">
-		<value condition="IsEmpty(Window(Home).Property(iconmixExtraFanart))+!SubString(Container.FolderPath,plugin) + [ Container.Content(movies) |Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)">$INFO[ListItem.Path,,/extrafanart/]</value>
+		<value condition="IsEmpty(Window(Home).Property(iconmixExtraFanart))+!Substring(Container.FolderPath,plugin) + [ Container.Content(movies) |Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)">$INFO[ListItem.Path,,/extrafanart/]</value>
 
 	</variable>
 
 	<variable name="ItemType">
 
-		<value condition="[SubString(Container(1999).Content,artist)|[SubString(Container(1999).Content,genres)+Window.IsActive(10502)]]+IntegerGreaterThan(Container(1999).NumItems,1)"> [I]( $INFO[Container(1999).NumItems] $LOCALIZE[133] )[/I]</value>
-		<value condition="[SubString(Container(1999).Content,artist)|[SubString(Container(1999).Content,genres)+Window.IsActive(10502)]]+!IntegerGreaterThan(Container(1999).NumItems,1)"> [I]( $INFO[Container(1999).NumItems] $LOCALIZE[557] )[/I]</value>
+		<value condition="[Substring(Container(1999).Content,artist)|[Substring(Container(1999).Content,genres)+Window.IsActive(10502)]]+IntegerGreaterThan(Container(1999).NumItems,1)"> [I]( $INFO[Container(1999).NumItems] $LOCALIZE[133] )[/I]</value>
+		<value condition="[Substring(Container(1999).Content,artist)|[Substring(Container(1999).Content,genres)+Window.IsActive(10502)]]+!IntegerGreaterThan(Container(1999).NumItems,1)"> [I]( $INFO[Container(1999).NumItems] $LOCALIZE[557] )[/I]</value>
 
-		<value condition="[SubString(Container(1999).Content,movie)|[SubString(Container(1999).Content,genres)+Window.IsActive(10025)]]+IntegerGreaterThan(Container(1999).NumItems,1)"> [I]( $INFO[Window(Home).Property(iconmixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[342] )[/I]</value>
-		<value condition="[SubString(Container(1999).Content,movie)|[SubString(Container(1999).Content,genres)+Window.IsActive(10025)]]+!IntegerGreaterThan(Container(1999).NumItems,1)"> [I]( $INFO[Window(Home).Property(iconmixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[20338] )[/I]</value>
+		<value condition="[Substring(Container(1999).Content,movie)|[Substring(Container(1999).Content,genres)+Window.IsActive(10025)]]+IntegerGreaterThan(Container(1999).NumItems,1)"> [I]( $INFO[Window(Home).Property(iconmixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[342] )[/I]</value>
+		<value condition="[Substring(Container(1999).Content,movie)|[Substring(Container(1999).Content,genres)+Window.IsActive(10025)]]+!IntegerGreaterThan(Container(1999).NumItems,1)"> [I]( $INFO[Window(Home).Property(iconmixSaga),,/]$INFO[Container(1999).NumItems] $LOCALIZE[20338] )[/I]</value>
 
 	</variable>
 
@@ -125,14 +133,14 @@
 
 	<variable name="PlayBrowseButton">
 
-		<value condition="!SubString(ListItem.Filenameandpath,plugin://)">buttons/button_play.png</value>
+		<value condition="!Substring(ListItem.Filenameandpath,plugin://)">buttons/button_play.png</value>
 
 		<value>buttons/button_Browse.png</value>
 	</variable>
 
 	<variable name="PlayBrowseButtonFO">
 
-		<value condition="!SubString(ListItem.Filenameandpath,plugin://)">buttons/button_playFO.png</value>
+		<value condition="!Substring(ListItem.Filenameandpath,plugin://)">buttons/button_playFO.png</value>
 
 		<value>buttons/button_BrowseFO.png</value>
 	</variable>
@@ -182,15 +190,15 @@
 		<value condition="StringCompare(Container(211).ListItem.Property(background),home\settings\)">home_art/settings.jpg</value>
 		<value condition="StringCompare(Container(211).ListItem.Property(background),home\shutdown\)">home_art/shutdown.jpg</value>
 		<!--
-		<value condition="SubString(Container(211).ListItem.Property(background),playlist)">*$LOCALIZE[559]-$INFO[Container(211).ListItem.Property(backgroundName)]</value>
-		<value condition="SubString(Container(211).ListItem.Property(background),favorite)">+$LOCALIZE[10134]-$INFO[Container(211).ListItem.Property(backgroundName)]</value>
+		<value condition="Substring(Container(211).ListItem.Property(background),playlist)">*$LOCALIZE[559]-$INFO[Container(211).ListItem.Property(backgroundName)]</value>
+		<value condition="Substring(Container(211).ListItem.Property(background),favorite)">+$LOCALIZE[10134]-$INFO[Container(211).ListItem.Property(backgroundName)]</value>
 		-->
 		<value>$INFO[Container(211).ListItem.Property(backgroundName)]</value>
 	</variable>
 
 	<variable name="pochettemusic">
 
-		<value condition="!SubString(ListItem.Icon,Default)">$INFO[ListItem.Icon]</value>
+		<value condition="!Substring(ListItem.Icon,Default)">$INFO[ListItem.Icon]</value>
 
 		<value condition="!IsEmpty(ListItem.Property(ArtistThumb))">$INFO[ListItem.Property(ArtistThumb)]</value>
 		<value condition="!IsEmpty(ListItem.Thumb)">$INFO[ListItem.Thumb]</value>
@@ -213,7 +221,7 @@
 	<variable name="ListItemTitle">
 
 		<value condition="Container.Content(artists) | Container.Content(albums) | Container.Content(songs)">$INFO[ListItem.Label]</value>
-		<value condition="Container.Content(episodes)|[SubString(Container.FolderPath,plugin)+IsEmpty(Container.Content)+!IsEmpty(ListItem.Title)]">$VAR[Seasonnum]$VAR[episodenum]$INFO[ListItem.Title]</value>
+		<value condition="Container.Content(episodes)|[Substring(Container.FolderPath,plugin)+IsEmpty(Container.Content)+!IsEmpty(ListItem.Title)]">$VAR[Seasonnum]$VAR[episodenum]$INFO[ListItem.Title]</value>
 
 		<value condition="Container.Content(tvshows)+!IsEmpty(ListItem.TVShowTitle)">$INFO[ListItem.TVShowTitle]</value>
 		<value condition="!IsEmpty(ListItem.Label)+StringCompare(ListItem.DBTYPE,set)">[I]$INFO[ListItem.Label][/I]</value>
@@ -231,9 +239,7 @@
 	</variable>
 	<variable name="ListItemInfoTitle">
 
-		<!-- <value condition="Control.HasFocus(2999)+StringCompare(Container(1999).ListItem.Label2,manquant)+!IsEmpty(Container(1999).ListItem.Label)">[I]$INFO[Container(1999).ListItem.Label] $INFO[Container(1999).ListItem.Writer,( , )][/I]</value> 
-		<value condition="Control.HasFocus(2999)+!IsEmpty(Container(1999).ListItem.Label)+!IsEmpty(Container(1999).ListItem.Year)">$INFO[Container(1999).ListItem.Label] [I]$INFO[Container(1999).ListItem.Year,( , )][/I]</value>
--->
+	
 		<value condition="Control.HasFocus(2999)+!IsEmpty(Container(1999).ListItem.Label)+!IsEmpty(Container(1999).ListItem.Year)">$INFO[Container(1999).ListItem.Label]</value>
 
 		<value condition="[[StringCompare(Container.Content,genres) +Window.IsActive(10502)]]+IntegerGreaterThan(Container(1999).NumItems,1)">$INFO[ListItem.Label] [COLOR=yellow][I]( $INFO[Container(1999).NumItems] $LOCALIZE[133] )[/I][/COLOR]</value>
@@ -246,7 +252,7 @@
 
 
 		<value condition="Container.Content(artists) | Container.Content(albums) | Container.Content(songs)">$INFO[ListItem.Label]</value>
-		<value condition="Container.Content(episodes)|[SubString(Container.FolderPath,plugin)+IsEmpty(Container.Content)+!IsEmpty(ListItem.Title)]">$VAR[Seasonnum]$VAR[episodenum]$INFO[ListItem.Title]</value>
+		<value condition="Container.Content(episodes)|[Substring(Container.FolderPath,plugin)+IsEmpty(Container.Content)+!IsEmpty(ListItem.Title)]">$VAR[Seasonnum]$VAR[episodenum]$INFO[ListItem.Title]</value>
 
 		<value condition="Container.Content(tvshows)+!IsEmpty(ListItem.TVShowTitle)">$INFO[ListItem.TVShowTitle]</value>
 		<value condition="!IsEmpty(ListItem.Label)">$INFO[ListItem.Label]</value>
@@ -276,7 +282,7 @@
 	<variable name="GlobalFanart">
 		<value condition="Window.IsActive(pictures) + IsEmpty(ListItem.Art(fanart)) + [StringCompare(ListItem.FileExtension,png) | StringCompare(ListItem.FileExtension,jpg) | StringCompare(ListItem.FileExtension,jpeg) | StringCompare(ListItem.FileExtension,bmp) | StringCompare(ListItem.FileExtension,gif) | StringCompare(ListItem.FileExtension,ico) | StringCompare(ListItem.FileExtension,tif) | StringCompare(ListItem.FileExtension,tiff) | StringCompare(ListItem.FileExtension,tga) | StringCompare(ListItem.FileExtension,pcx) | StringCompare(ListItem.FileExtension,cbz) | StringCompare(ListItem.FileExtension,zip) | StringCompare(ListItem.FileExtension,cbr) | StringCompare(ListItem.FileExtension,rar) | StringCompare(ListItem.FileExtension,m3u)]">$INFO[listitem.filenameandpath]</value>
 		<value condition="!Window.IsVisible(10025)+!Window.IsVisible(502)+!Window.IsVisible(home)">background.jpg</value>
-		<value condition="!Control.IsVisible(1999)+Skin.HasSetting(Enable_ExtraFanart)+!IsEmpty(Window(Home).Property(iconmixExtraFanart))+!SubString(Window(Home).Property(iconmixExtraFanart),plugin)+!SubString(Container.FolderPath,plugin)">$INFO[Window(Home).Property(iconmixExtraFanart)]</value>
+		<value condition="!Control.IsVisible(1999)+Skin.HasSetting(Enable_ExtraFanart)+!IsEmpty(Window(Home).Property(iconmixExtraFanart))+!Substring(Window(Home).Property(iconmixExtraFanart),plugin)+!Substring(Container.FolderPath,plugin)">$INFO[Window(Home).Property(iconmixExtraFanart)]</value>
 		<value condition="Control.IsVisible(1999)+!IsEmpty(Window(Home).Property(iconmixExtraFanart))">$INFO[Window(Home).Property(iconmixExtraFanart)]</value>
 		<value condition="!IsEmpty(Window(Home).Property(iconmixExtraFanart))+Skin.HasSetting(Enable_ExtraFanart)">$INFO[Window(Home).Property(iconmixExtraFanart)]</value>
 		<value condition="Control.IsVisible(1999)+!IsEmpty(Container(1999).ListItem.Art(fanart))">$INFO[Container(1999).ListItem.Art(fanart)]</value>
@@ -289,13 +295,13 @@
 		<value>FanartDiffuse</value>
 	</variable>
 	<variable name="MPAATexture">
-		<value condition="SubString(ListItem.Mpaa,10)">flags\Rating\Moins10.png</value>
-		<value condition="SubString(ListItem.Mpaa,12)">flags\Rating\Moins12.png</value>
-		<value condition="SubString(ListItem.Mpaa,14)">flags\Rating\Moins14.png</value>
-		<value condition="SubString(ListItem.Mpaa,16)">flags\Rating\Moins16.png</value>
-		<value condition="SubString(ListItem.Mpaa,18)">flags\Rating\Moins18.png</value>
-		<value condition="SubString(ListItem.Mpaa,-PG)">flags\Rating\PG.png</value>
-		<value condition="SubString(ListItem.Mpaa,-MA)">flags\Rating\Moins15.png</value>
+		<value condition="Substring(ListItem.Mpaa,10)">flags\Rating\Moins10.png</value>
+		<value condition="Substring(ListItem.Mpaa,12)">flags\Rating\Moins12.png</value>
+		<value condition="Substring(ListItem.Mpaa,14)">flags\Rating\Moins14.png</value>
+		<value condition="Substring(ListItem.Mpaa,16)">flags\Rating\Moins16.png</value>
+		<value condition="Substring(ListItem.Mpaa,18)">flags\Rating\Moins18.png</value>
+		<value condition="Substring(ListItem.Mpaa,-PG)">flags\Rating\PG.png</value>
+		<value condition="Substring(ListItem.Mpaa,-MA)">flags\Rating\Moins15.png</value>
 		<value condition="!IsEmpty(ListItem.Mpaa)">flags\Rating\Tous.png</value>
 	</variable>
 
@@ -312,29 +318,27 @@
 
 
 	<variable name="GlobalWidgetLabel">
-		<value condition="SubString(Container(9000).ListItem.Property(widget),RecentlyAddedMovies)|SubString(Container(9000).ListItem.Property(widget),RandomMovies)|SubString(Container(9000).ListItem.Property(widget),RecommendedMovies)">$INFO[ListItem.Title]$INFO[ListItem.Year, (,)]</value>
-		<value condition="SubString(Container(9000).ListItem.Property(widget),RecentlyAddedEpisodes)|SubString(Container(9000).ListItem.Property(widget),RecommendedEpisodes)|SubString(Container(9000).ListItem.Property(widget),RandomEpisodes)">$INFO[ListItem.TVShowTitle] - $VAR[Seasonnum]$VAR[episodenum] - $INFO[ListItem.Title]</value>
-		<value condition="SubString(Container(9000).ListItem.Property(widget),RecentlyAddedAlbums)|SubString(Container(9000).ListItem.Property(widget),RecommendedAlbums)|SubString(Container(9000).ListItem.Property(widget),RandomAlbums)">$INFO[ListItem.Artist] - $INFO[ListItem.Title]$INFO[ListItem.Year, (,)]</value>
-		<value condition="SubString(Container(9000).ListItem.Property(widget),RandomSongs)">$INFO[ListItem.Artist] - $INFO[ListItem.Title]</value>
-		<value condition="SubString(Container(9000).ListItem.Property(widget),NAired)">$INFO[ListItem.Label]-S$INFO[ListItem.Property(NextSeasonNumber)]E$INFO[ListItem.Property(NextEpisodeNumber)] : ([COLOR=NowPlayingTitle]$INFO[ListItem.Property(NextDay)][/COLOR])</value>
-		<value condition="SubString(Container(9000).ListItem.Property(widgetpath),nextaired)">$INFO[ListItem.Label]-S$INFO[ListItem.Property(NextSeasonNumber)]E$INFO[ListItem.Property(NextEpisodeNumber)] : ([COLOR=NowPlayingTitle]$INFO[ListItem.Property(NextDay)][/COLOR])</value>
+		<value condition="Substring(Container(9000).ListItem.Property(widget),RecentlyAddedMovies)|Substring(Container(9000).ListItem.Property(widget),RandomMovies)|Substring(Container(9000).ListItem.Property(widget),RecommendedMovies)">$INFO[ListItem.Title]$INFO[ListItem.Year, (,)]</value>
+		<value condition="Substring(Container(9000).ListItem.Property(widget),RecentlyAddedEpisodes)|Substring(Container(9000).ListItem.Property(widget),RecommendedEpisodes)|Substring(Container(9000).ListItem.Property(widget),RandomEpisodes)">$INFO[ListItem.TVShowTitle] - $VAR[Seasonnum]$VAR[episodenum] - $INFO[ListItem.Title]</value>
+		<value condition="Substring(Container(9000).ListItem.Property(widget),RecentlyAddedAlbums)|Substring(Container(9000).ListItem.Property(widget),RecommendedAlbums)|Substring(Container(9000).ListItem.Property(widget),RandomAlbums)">$INFO[ListItem.Artist] - $INFO[ListItem.Title]$INFO[ListItem.Year, (,)]</value>
+		<value condition="Substring(Container(9000).ListItem.Property(widget),RandomSongs)">$INFO[ListItem.Artist] - $INFO[ListItem.Title]</value>
+		<value condition="Substring(Container(9000).ListItem.Property(widget),NAired)|Substring(Container(9000).ListItem.Property(widgetpath),nextaired)">[I][COLOR=lightblue]$INFO[ListItem.TVShowTitle,,: ][/COLOR][/I]$INFO[ListItem.Label] : ([COLOR=white]$INFO[ListItem.Property(airdate)][/COLOR])</value>
 
 		<!-- fixing the playlists content labels
-		<value condition="SubString(Container(9000).ListItem.Property(widget),Playlist) + IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[ListItem.Title]$INFO[ListItem.Year, (,)]</value>
-		<value condition="SubString(Container(9000).ListItem.Property(widget),Playlist) + !SubString(ListItem.Title,ListItem.TVShowTitle) + !IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[ListItem.TVShowTitle] - $INFO[ListItem.Season,,x]$INFO[ListItem.Episode,,. ]$INFO[ListItem.Title]</value>
+		<value condition="Substring(Container(9000).ListItem.Property(widget),Playlist) + IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[ListItem.Title]$INFO[ListItem.Year, (,)]</value>
+		<value condition="Substring(Container(9000).ListItem.Property(widget),Playlist) + !Substring(ListItem.Title,ListItem.TVShowTitle) + !IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[ListItem.TVShowTitle] - $INFO[ListItem.Season,,x]$INFO[ListItem.Episode,,. ]$INFO[ListItem.Title]</value>
 		-->
-		<value>$INFO[ListItem.Label]</value>
+		<value>[I][COLOR=lightblue]$INFO[ListItem.TVShowTitle,,: ][/COLOR][/I]$INFO[ListItem.Label]</value>
 	</variable>
 	<variable name="GlobalWidgetLabel2">
 		<!-- fixing the service.library.data.provider content labels-->
-		<value condition="SubString(Container(9000).ListItem.Property(widget.2),RecentlyAddedMovies)|SubString(Container(9000).ListItem.Property(widget.2),RandomMovies)|SubString(Container(9000).ListItem.Property(widget.2),RecommendedMovies)">$INFO[ListItem.Title]$INFO[ListItem.Year, (,)]</value>
-		<value condition="SubString(Container(9000).ListItem.Property(widget.2),RecentlyAddedEpisodes)|SubString(Container(9000).ListItem.Property(widget.2),RecommendedEpisodes)|SubString(Container(9000).ListItem.Property(widget.2),RandomEpisodes)">$INFO[ListItem.TVShowTitle] - $VAR[Seasonnum]$VAR[episodenum] - $INFO[ListItem.Title]</value>
-		<value condition="SubString(Container(9000).ListItem.Property(widget.2),RecentlyAddedAlbums)|SubString(Container(9000).ListItem.Property(widget.2),RecommendedAlbums)|SubString(Container(9000).ListItem.Property(widget.2),RandomAlbums)">$INFO[ListItem.Artist] - $INFO[ListItem.Title]$INFO[ListItem.Year, (,)]</value>
-		<value condition="SubString(Container(9000).ListItem.Property(widget.2),RandomSongs)">$INFO[ListItem.Artist] - $INFO[ListItem.Title]</value>
-		<value condition="SubString(Container(9000).ListItem.Property(widget.2),NAired)">$INFO[ListItem.Label]-S$INFO[ListItem.Property(NextSeasonNumber)]E$INFO[ListItem.Property(NextEpisodeNumber)] : ([COLOR=NowPlayingTitle]$INFO[ListItem.Property(NextDay)][/COLOR])</value>
-		<value condition="SubString(Container(9000).ListItem.Property(widgetpath.2),nextaired)">$INFO[ListItem.Label]-S$INFO[ListItem.Property(NextSeasonNumber)]E$INFO[ListItem.Property(NextEpisodeNumber)] : ([COLOR=NowPlayingTitle]$INFO[ListItem.Property(NextDay)][/COLOR])</value>
+		<value condition="Substring(Container(9000).ListItem.Property(widget.2),RecentlyAddedMovies)|Substring(Container(9000).ListItem.Property(widget.2),RandomMovies)|Substring(Container(9000).ListItem.Property(widget.2),RecommendedMovies)">$INFO[ListItem.Title]$INFO[ListItem.Year, (,)]</value>
+		<value condition="Substring(Container(9000).ListItem.Property(widget.2),RecentlyAddedEpisodes)|Substring(Container(9000).ListItem.Property(widget.2),RecommendedEpisodes)|Substring(Container(9000).ListItem.Property(widget.2),RandomEpisodes)">$INFO[ListItem.TVShowTitle] - $VAR[Seasonnum]$VAR[episodenum] - $INFO[ListItem.Title]</value>
+		<value condition="Substring(Container(9000).ListItem.Property(widget.2),RecentlyAddedAlbums)|Substring(Container(9000).ListItem.Property(widget.2),RecommendedAlbums)|Substring(Container(9000).ListItem.Property(widget.2),RandomAlbums)">$INFO[ListItem.Artist] - $INFO[ListItem.Title]$INFO[ListItem.Year, (,)]</value>
+		<value condition="Substring(Container(9000).ListItem.Property(widget.2),RandomSongs)">$INFO[ListItem.Artist] - $INFO[ListItem.Title]</value>
+		<value condition="Substring(Container(9000).ListItem.Property(widget.2),NAired)|Substring(Container(9000).ListItem.Property(widgetpath.2),nextaired)">[I][COLOR=lightblue]$INFO[ListItem.TVShowTitle,,: ][/COLOR][/I]$INFO[ListItem.Label] : ([COLOR=white]$INFO[ListItem.Property(airdate)][/COLOR])</value>
 
-		<value>$INFO[ListItem.Label]</value>
+		<value>[I][COLOR=lightblue]$INFO[ListItem.TVShowTitle,,: ][/COLOR][/I]$INFO[ListItem.Label]</value>
 	</variable>
 
 
@@ -348,14 +352,14 @@
 	<variable name="HomeWidgetPosterVar">
 		<value condition="!IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
 		<value condition="!IsEmpty(ListItem.Art(tvshow.poster))">$INFO[ListItem.Art(tvshow.poster)]</value>
-		<value condition="!SubString(ListItem.Icon,default)">$INFO[ListItem.Icon]</value>
+		<value condition="!Substring(ListItem.Icon,default)">$INFO[ListItem.Icon]</value>
 		<value condition="!IsEmpty(ListItem.Art(thumb))">$INFO[ListItem.Art(thumb)]</value>
 		<value condition="!IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
 	</variable>
 	<variable name="HomeWidgetPosterVar1999">
 		<value condition="!IsEmpty(Container(1999).ListItem.Art(poster))">$INFO[Container(1999).ListItem.Art(poster)]</value>
 		<value condition="!IsEmpty(Container(1999).ListItem.Art(tvshow.poster))">$INFO[Container(1999).ListItem.Art(tvshow.poster)]</value>
-		<value condition="!SubString(Container(1999).ListItem.Icon,default)">$INFO[Container(1999).ListItem.Icon]</value>
+		<value condition="!Substring(Container(1999).ListItem.Icon,default)">$INFO[Container(1999).ListItem.Icon]</value>
 		<value condition="!IsEmpty(Container(1999).ListItem.Art(thumb))">$INFO[Container(1999).ListItem.Art(thumb)]</value>
 		<value condition="!IsEmpty(Container(1999).ListItem.Art(fanart))">$INFO[Container(1999).ListItem.Art(fanart)]</value>
 	</variable>
@@ -372,13 +376,13 @@
 
 
 	<variable name="RatingColor">
-		<value condition="!SubString(ListItem.Votes,$COMMA)">FFFF0000</value>
-		<value condition="SubString(ListItem.Votes,1$COMMA,Left)">FFFF5555</value>
-		<value condition="SubString(ListItem.Votes,2$COMMA,Left)">FFFFFF00</value>
-		<value condition="SubString(ListItem.Votes,3$COMMA,Left)">FFFFFF00</value>
-		<value condition="SubString(ListItem.Votes,4$COMMA,Left)">FFFFFF00</value>
-		<value condition="SubString(ListItem.Votes,5$COMMA,Left)">FFFFFF00</value>
-		<value condition="SubString(ListItem.Votes,$COMMA)">FF00FF00</value>
+		<value condition="!Substring(ListItem.Votes,$COMMA)">FFFF0000</value>
+		<value condition="Substring(ListItem.Votes,1$COMMA,Left)">FFFF5555</value>
+		<value condition="Substring(ListItem.Votes,2$COMMA,Left)">FFFFFF00</value>
+		<value condition="Substring(ListItem.Votes,3$COMMA,Left)">FFFFFF00</value>
+		<value condition="Substring(ListItem.Votes,4$COMMA,Left)">FFFFFF00</value>
+		<value condition="Substring(ListItem.Votes,5$COMMA,Left)">FFFFFF00</value>
+		<value condition="Substring(ListItem.Votes,$COMMA)">FF00FF00</value>
 	</variable>
 
 	<variable name="Weather_Fanart">
@@ -561,7 +565,7 @@
 	<constant name="WeatherMapWidth">1080</constant>
 
 	<variable name="emptyplot">
-		<!--	<value condition="[[Container.Content(Movies) + [!Skin.HasSetting(Show_PlotOutline) | IsEmpty(ListItem.PlotOutline)]] | Container.Content(TVShows) | Container.Content(Episodes) | Container.Content(MusicVideos) | SubString(Container.FolderPath,plugin)]+!IsEmpty(ListItem.Plot)">true</value>
+		<!--	<value condition="[[Container.Content(Movies) + [!Skin.HasSetting(Show_PlotOutline) | IsEmpty(ListItem.PlotOutline)]] | Container.Content(TVShows) | Container.Content(Episodes) | Container.Content(MusicVideos) | Substring(Container.FolderPath,plugin)]+!IsEmpty(ListItem.Plot)">true</value>
 		<value condition="[Container.Content(Movies) + Skin.HasSetting(Show_PlotOutline) + !IsEmpty(ListItem.PlotOutline)]+!IsEmpty(ListItem.PlotOutline)">true</value>
 		<value condition="Container.Content(Seasons)+!IsEmpty(Container.ShowPlot)">true</value>
 		Music -->
@@ -593,7 +597,7 @@
 		<value condition="Window.IsActive(script-skinshortcuts.xml) + [Control.HasFocus(1002)|Control.HasFocus(2002)]">Selected : Display center widget - Unselected : Display part of widget on right</value>
 		<value condition="Window.IsActive(script-skinshortcuts.xml) + [Control.HasFocus(1003)|Control.HasFocus(2003)]">Hide widget until has focused</value>
 		<!-- Videos -->
-		<value condition="[Container.Content(Movies) + IsEmpty(ListItem.PlotOutline)] | Container.Content(TVShows) | Container.Content(Episodes) | Container.Content(MusicVideos) | SubString(Container.FolderPath,plugin)">$INFO[ListItem.Plot]</value>
+		<value condition="[Container.Content(Movies) + IsEmpty(ListItem.PlotOutline)] | Container.Content(TVShows) | Container.Content(Episodes) | Container.Content(MusicVideos) | Substring(Container.FolderPath,plugin)">$INFO[ListItem.Plot]</value>
 		<value condition="Container.Content(Movies) +  !IsEmpty(ListItem.PlotOutline)">$INFO[ListItem.PlotOutline]</value>
 		<value condition="Container.Content(Seasons)">$INFO[Container.ShowPlot]</value>
 		<!-- Music -->
@@ -668,38 +672,38 @@
 		<value>$INFO[ListItem.VideoAspect,flags/VideoAspect/,.png]</value>
 	</variable>
 	<variable name="MediaFlag_VideoCodec">
-		<value condition="SubString(ListItem.DBTYPE,set)">flags/Source/set.png</value>
-		<value condition="IsEmpty(ListItem.VideoCodec)+[!ListItem.IsStereoscopic + !SubString(listitem.filename,3d)] + [SubString(listitem.filename,bluray) | SubString(listitem.filename,blu-ray) | SubString(listitem.filename,.mt2s) | SubString(listitem.filename,.bdmv) | SubString(listitem.filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bluray.png</value>
-		<value condition="IsEmpty(ListItem.VideoCodec)+[ListItem.IsStereoscopic | SubString(listitem.filename,3d)] +  [SubString(listitem.filename,bluray) | SubString(listitem.filename,blu-ray) | SubString(listitem.filename,.mt2s) | SubString(listitem.filename,.bdmv) | SubString(listitem.filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bd3d.png</value>
+		<value condition="Substring(ListItem.DBTYPE,set)">flags/Source/set.png</value>
+		<value condition="IsEmpty(ListItem.VideoCodec)+[!ListItem.IsStereoscopic + !Substring(listitem.filename,3d)] + [Substring(listitem.filename,bluray) | Substring(listitem.filename,blu-ray) | Substring(listitem.filename,.mt2s) | Substring(listitem.filename,.bdmv) | Substring(listitem.filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bluray.png</value>
+		<value condition="IsEmpty(ListItem.VideoCodec)+[ListItem.IsStereoscopic | Substring(listitem.filename,3d)] +  [Substring(listitem.filename,bluray) | Substring(listitem.filename,blu-ray) | Substring(listitem.filename,.mt2s) | Substring(listitem.filename,.bdmv) | Substring(listitem.filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bd3d.png</value>
 		<value>$INFO[ListItem.VideoCodec,flags/VideoCodec/,.png]</value>
 	</variable>
 	<variable name="Boitier_SelonResolution">
 		<value condition="StringCompare(ListItem.VideoResolution,4K)">frames/4k.png</value>
-		<value condition="SubString(ListItem.DBTYPE,set)">frames/collection.png</value>
-		<value condition="IsEmpty(ListItem.VideoResolution)+[SubString(ListItem.filename,.mt2s) | SubString(ListItem.filename,.bdmv) | SubString(ListItem.filename,.iso)]+[!SubString(ListItem.Filename,dvd) + !ListItem.IsStereoscopic + !SubString(ListItem.filename,3d)] ">frames/br.png</value>
-		<value condition="StringCompare(ListItem.VideoResolution,720)+[!ListItem.IsStereoscopic + !SubString(ListItem.filename,3d)] ">frames/br720.png</value>
-		<value condition="StringCompare(ListItem.VideoResolution,1080)+[!ListItem.IsStereoscopic + !SubString(ListItem.filename,3d)] ">frames/br1080.png</value>
-		<value condition="[StringCompare(ListItem.VideoResolution,720)|StringCompare(ListItem.VideoResolution,1080)|IsEmpty(ListItem.VideoResolution)]+[ListItem.IsStereoscopic | SubString(ListItem.filename,3d)] +  [SubString(ListItem.filename,bluray) | SubString(ListItem.filename,blu-ray) | SubString(ListItem.filename,.mt2s) | SubString(ListItem.filename,.bdmv) | SubString(ListItem.filename,.iso)]">frames/br3d.png</value>
-		<value condition="!SubString(ListItem.Filename,dvd)+[SubString(ListItem.Filename,.iso) | SubString(ListItem.Filename,.bdmv)]">frames/br.png</value>
-		<value condition="StringCompare(ListItem.VideoResolution,576)|StringCompare(ListItem.VideoResolution,540)|StringCompare(ListItem.VideoResolution,480)|SubString(ListItem.Filename,dvd) | SubString(ListItem.Filename,.ifo)">frames/dvd.png</value>
+		<value condition="Substring(ListItem.DBTYPE,set)">frames/collection.png</value>
+		<value condition="IsEmpty(ListItem.VideoResolution)+[Substring(ListItem.filename,.mt2s) | Substring(ListItem.filename,.bdmv) | Substring(ListItem.filename,.iso)]+[!Substring(ListItem.Filename,dvd) + !ListItem.IsStereoscopic + !Substring(ListItem.filename,3d)] ">frames/br.png</value>
+		<value condition="StringCompare(ListItem.VideoResolution,720)+[!ListItem.IsStereoscopic + !Substring(ListItem.filename,3d)] ">frames/br720.png</value>
+		<value condition="StringCompare(ListItem.VideoResolution,1080)+[!ListItem.IsStereoscopic + !Substring(ListItem.filename,3d)] ">frames/br1080.png</value>
+		<value condition="[StringCompare(ListItem.VideoResolution,720)|StringCompare(ListItem.VideoResolution,1080)|IsEmpty(ListItem.VideoResolution)]+[ListItem.IsStereoscopic | Substring(ListItem.filename,3d)] +  [Substring(ListItem.filename,bluray) | Substring(ListItem.filename,blu-ray) | Substring(ListItem.filename,.mt2s) | Substring(ListItem.filename,.bdmv) | Substring(ListItem.filename,.iso)]">frames/br3d.png</value>
+		<value condition="!Substring(ListItem.Filename,dvd)+[Substring(ListItem.Filename,.iso) | Substring(ListItem.Filename,.bdmv)]">frames/br.png</value>
+		<value condition="StringCompare(ListItem.VideoResolution,576)|StringCompare(ListItem.VideoResolution,540)|StringCompare(ListItem.VideoResolution,480)|Substring(ListItem.Filename,dvd) | Substring(ListItem.Filename,.ifo)">frames/dvd.png</value>
 		<value>frames/pochetteok.png</value>
 	</variable>
 
 	<!-- -->
 	<variable name="MediaFlag_VideoCodecSet">
-		<value condition="SubString(Container(1999).ListItem.DBTYPE,set)">flags/Source/set.png</value>
-		<value condition="[IsEmpty(Container(1999).ListItem.Property(VideoCodec))+IsEmpty(Container(1999).ListItem.VideoCodec)]+[!Container(1999).ListItem.IsStereoscopic + !SubString(Container(1999).ListItem.filename,3d)] + [SubString(Container(1999).ListItem.filename,bluray) | SubString(Container(1999).ListItem.filename,blu-ray) | SubString(Container(1999).ListItem.filename,.mt2s) | SubString(Container(1999).ListItem.filename,.bdmv) | SubString(Container(1999).ListItem.filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bluray.png</value>
-		<value condition="[IsEmpty(Container(1999).ListItem.Property(VideoCodec))+IsEmpty(Container(1999).ListItem.VideoCodec)]+[Container(1999).ListItem.IsStereoscopic | SubString(Container(1999).ListItem.filename,3d)] +  [SubString(Container(1999).ListItem.filename,bluray) | SubString(Container(1999).ListItem.filename,blu-ray) | SubString(Container(1999).ListItem.filename,.mt2s) | SubString(Container(1999).ListItem.filename,.bdmv) | SubString(Container(1999).ListItem.filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bd3d.png</value>
-		<value condition="[IsEmpty(Container(1999).ListItem.Property(VideoCodec))+IsEmpty(Container(1999).ListItem.VideoCodec)]+!SubString(Container(1999).ListItem.Filename,dvd)+[SubString(Container(1999).ListItem.Filename,.iso) | SubString(Container(1999).ListItem.Filename,.bdmv)]">flags/Source/bluray.png</value>
-		<value condition="[IsEmpty(Container(1999).ListItem.Property(VideoCodec))+IsEmpty(Container(1999).ListItem.VideoCodec)]+[SubString(Container(1999).ListItem.Filename,dvd) | SubString(Container(1999).ListItem.Filename,.ifo)]">flags/Source/dvd.png</value>
+		<value condition="Substring(Container(1999).ListItem.DBTYPE,set)">flags/Source/set.png</value>
+		<value condition="[IsEmpty(Container(1999).ListItem.Property(VideoCodec))+IsEmpty(Container(1999).ListItem.VideoCodec)]+[!Container(1999).ListItem.IsStereoscopic + !Substring(Container(1999).ListItem.filename,3d)] + [Substring(Container(1999).ListItem.filename,bluray) | Substring(Container(1999).ListItem.filename,blu-ray) | Substring(Container(1999).ListItem.filename,.mt2s) | Substring(Container(1999).ListItem.filename,.bdmv) | Substring(Container(1999).ListItem.filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bluray.png</value>
+		<value condition="[IsEmpty(Container(1999).ListItem.Property(VideoCodec))+IsEmpty(Container(1999).ListItem.VideoCodec)]+[Container(1999).ListItem.IsStereoscopic | Substring(Container(1999).ListItem.filename,3d)] +  [Substring(Container(1999).ListItem.filename,bluray) | Substring(Container(1999).ListItem.filename,blu-ray) | Substring(Container(1999).ListItem.filename,.mt2s) | Substring(Container(1999).ListItem.filename,.bdmv) | Substring(Container(1999).ListItem.filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bd3d.png</value>
+		<value condition="[IsEmpty(Container(1999).ListItem.Property(VideoCodec))+IsEmpty(Container(1999).ListItem.VideoCodec)]+!Substring(Container(1999).ListItem.Filename,dvd)+[Substring(Container(1999).ListItem.Filename,.iso) | Substring(Container(1999).ListItem.Filename,.bdmv)]">flags/Source/bluray.png</value>
+		<value condition="[IsEmpty(Container(1999).ListItem.Property(VideoCodec))+IsEmpty(Container(1999).ListItem.VideoCodec)]+[Substring(Container(1999).ListItem.Filename,dvd) | Substring(Container(1999).ListItem.Filename,.ifo)]">flags/Source/dvd.png</value>
 
 		<value condition="!IsEmpty(Container(1999).ListItem.Property(VideoCodec))">$INFO[Container(1999).ListItem.Property(VideoCodec),flags/VideoCodec/,.png]</value>
 		<value>$INFO[Container(1999).ListItem.VideoCodec,flags/VideoCodec/,.png]</value>
 	</variable>
 	-->
 	<variable name="MediaFlag_VideoCodecPlayer">
-		<value condition="IsEmpty(VideoPlayer.VideoCodec)+[!VideoPlayer.IsStereoscopic + !SubString(Player.Filename,3d)] + [SubString(Player.Filename,bluray) | SubString(Player.Filename,blu-ray) | SubString(Player.Filename,.mt2s) | SubString(Player.Filename,.bdmv) | SubString(Player.Filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bluray.png</value>
-		<value condition="IsEmpty(VideoPlayer.VideoCodec)+[VideoPlayer.IsStereoscopic | SubString(Player.Filename,3d)] +  [SubString(Player.Filename,bluray) | SubString(Player.Filename,blu-ray) | SubString(Player.Filename,.mt2s) | SubString(Player.Filename,.bdmv) | SubString(Player.Filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bd3d.png</value>
+		<value condition="IsEmpty(VideoPlayer.VideoCodec)+[!VideoPlayer.IsStereoscopic + !Substring(Player.Filename,3d)] + [Substring(Player.Filename,bluray) | Substring(Player.Filename,blu-ray) | Substring(Player.Filename,.mt2s) | Substring(Player.Filename,.bdmv) | Substring(Player.Filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bluray.png</value>
+		<value condition="IsEmpty(VideoPlayer.VideoCodec)+[VideoPlayer.IsStereoscopic | Substring(Player.Filename,3d)] +  [Substring(Player.Filename,bluray) | Substring(Player.Filename,blu-ray) | Substring(Player.Filename,.mt2s) | Substring(Player.Filename,.bdmv) | Substring(Player.Filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bd3d.png</value>
 		<value>$INFO[VideoPlayer.VideoCodec,flags/VideoCodec/,.png]</value>
 	</variable>
 
@@ -713,25 +717,25 @@
 	</variable>
 
 	<variable name="CheckRating">
-		<value condition="SubString(ListItem.Rating,1.)">LeftRating/rating1.png</value>
-		<value condition="SubString(ListItem.Rating,2.)">LeftRating/rating2.png</value>
-		<value condition="SubString(ListItem.Rating,3.)">LeftRating/rating3.png</value>
-		<value condition="SubString(ListItem.Rating,4.)">LeftRating/rating4.png</value>
-		<value condition="SubString(ListItem.Rating,5.)">LeftRating/rating5.png</value>
-		<value condition="SubString(ListItem.Rating,6.)">LeftRating/rating6.png</value>
-		<value condition="SubString(ListItem.Rating,7.)">LeftRating/rating7.png</value>
-		<value condition="SubString(ListItem.Rating,8.)">LeftRating/rating8.png</value>
-		<value condition="SubString(ListItem.Rating,9.)">LeftRating/rating9.png</value>
-		<value condition="SubString(ListItem.Rating,10.)">LeftRating/rating10.png</value>
+		<value condition="Substring(ListItem.Rating,1.)">LeftRating/rating1.png</value>
+		<value condition="Substring(ListItem.Rating,2.)">LeftRating/rating2.png</value>
+		<value condition="Substring(ListItem.Rating,3.)">LeftRating/rating3.png</value>
+		<value condition="Substring(ListItem.Rating,4.)">LeftRating/rating4.png</value>
+		<value condition="Substring(ListItem.Rating,5.)">LeftRating/rating5.png</value>
+		<value condition="Substring(ListItem.Rating,6.)">LeftRating/rating6.png</value>
+		<value condition="Substring(ListItem.Rating,7.)">LeftRating/rating7.png</value>
+		<value condition="Substring(ListItem.Rating,8.)">LeftRating/rating8.png</value>
+		<value condition="Substring(ListItem.Rating,9.)">LeftRating/rating9.png</value>
+		<value condition="Substring(ListItem.Rating,10.)">LeftRating/rating10.png</value>
 		<value>LeftRating/rating10.png</value>
 	</variable>
 	<variable name="MediaFlag_MPAA">
 		<!-- US (IMDB) -->
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,Rated R,Left)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,Rated R,Left)]">flags/Rating/mpaa_r.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,Rated PG-13,Left)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,Rated PG-13,Left)]">flags/Rating/mpaa_pg13.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,Rated PG,Left)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,Rated PG,Left)]">flags/Rating/mpaa_pg.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,Rated NC,Left)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,Rated NC,Left)]">flags/Rating/mpaa_nc17.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,Rated G,Left)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,Rated G,Left)]">flags/Rating/mpaa_general.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,Rated R,Left)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,Rated R,Left)]">flags/Rating/mpaa_r.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,Rated PG-13,Left)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,Rated PG-13,Left)]">flags/Rating/mpaa_pg13.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,Rated PG,Left)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,Rated PG,Left)]">flags/Rating/mpaa_pg.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,Rated NC,Left)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,Rated NC,Left)]">flags/Rating/mpaa_nc17.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,Rated G,Left)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,Rated G,Left)]">flags/Rating/mpaa_general.png</value>
 		<!-- US (TMDB) -->
 		<value condition="[!IsEmpty(ListItem.mpaa) + StringCompare(ListItem.mpaa,R)] | [IsEmpty(ListItem.mpaa) + StringCompare(VideoPlayer.mpaa,R)]">flags/Rating/mpaa_r.png</value>
 		<value condition="[!IsEmpty(ListItem.mpaa) + StringCompare(ListItem.mpaa,PG-13)] | [IsEmpty(ListItem.mpaa) + StringCompare(VideoPlayer.mpaa,PG-13)]">flags/Rating/mpaa_pg13.png</value>
@@ -739,49 +743,49 @@
 		<value condition="[!IsEmpty(ListItem.mpaa) + StringCompare(ListItem.mpaa,NC-17)] | [IsEmpty(ListItem.mpaa) + StringCompare(VideoPlayer.mpaa,NC-17)]">flags/Rating/mpaa_nc17.png</value>
 		<value condition="[!IsEmpty(ListItem.mpaa) + StringCompare(ListItem.mpaa,G)] | [IsEmpty(ListItem.mpaa) + StringCompare(VideoPlayer.mpaa,G)]">flags/Rating/mpaa_general.png</value>
 		<!-- US (TV) -->
-		<value condition="!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,TV-)">$INFO[ListItem.mpaa,flags/Rating/,.png]</value>
-		<value condition="IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,TV-)">$INFO[VideoPlayer.mpaa,flags/Rating/,.png]</value>
+		<value condition="!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,TV-)">$INFO[ListItem.mpaa,flags/Rating/,.png]</value>
+		<value condition="IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,TV-)">$INFO[VideoPlayer.mpaa,flags/Rating/,.png]</value>
 		<!-- Germany -->
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,Germany:0)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,Germany:0)]">flags/Rating/germany_0.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,Germany:6)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,Germany:6)]">flags/Rating/germany_6.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,Germany:12)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,Germany:12)]">flags/Rating/germany_12.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,Germany:16)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,Germany:16)]">flags/Rating/germany_16.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,Germany:18)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,Germany:18)]">flags/Rating/germany_18.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,Germany:0)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,Germany:0)]">flags/Rating/germany_0.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,Germany:6)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,Germany:6)]">flags/Rating/germany_6.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,Germany:12)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,Germany:12)]">flags/Rating/germany_12.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,Germany:16)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,Germany:16)]">flags/Rating/germany_16.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,Germany:18)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,Germany:18)]">flags/Rating/germany_18.png</value>
 		<!-- Australia -->
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,Australia:R)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,Australia:R)]">flags/Rating/australia_r.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,Australia:MA)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,Australia:MA)]">flags/Rating/australia_ma.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,Australia:M)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,Australia:M)]">flags/Rating/australia_m.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,Australia:PG)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,Australia:PG)]">flags/Rating/australia_pg.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,Australia:G)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,Australia:G)]">flags/Rating/australia_g.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,Australia:E)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,Australia:E)]">flags/Rating/australia_e.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,Australia:X)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,Australia:X)]">flags/Rating/australia_x.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,Australia:R)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,Australia:R)]">flags/Rating/australia_r.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,Australia:MA)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,Australia:MA)]">flags/Rating/australia_ma.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,Australia:M)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,Australia:M)]">flags/Rating/australia_m.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,Australia:PG)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,Australia:PG)]">flags/Rating/australia_pg.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,Australia:G)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,Australia:G)]">flags/Rating/australia_g.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,Australia:E)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,Australia:E)]">flags/Rating/australia_e.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,Australia:X)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,Australia:X)]">flags/Rating/australia_x.png</value>
 		<!-- United Kingdom -->
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,UK:U)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,UK:U)]">flags/Rating/bbfc_u.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,UK:PG)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,UK:PG)]">flags/Rating/bbfc_pg.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,UK:12A)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,UK:12A)]">flags/Rating/bbfc_12a.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,UK:12)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,UK:12)]">flags/Rating/bbfc_12.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,UK:15)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,UK:15)]">flags/Rating/bbfc_15.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,UK:18)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,UK:18)]">flags/Rating/bbfc_18.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,UK:X)] | [IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,UK:X)]">flags/Rating/bbfc_r18.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,UK:U)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,UK:U)]">flags/Rating/bbfc_u.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,UK:PG)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,UK:PG)]">flags/Rating/bbfc_pg.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,UK:12A)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,UK:12A)]">flags/Rating/bbfc_12a.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,UK:12)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,UK:12)]">flags/Rating/bbfc_12.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,UK:15)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,UK:15)]">flags/Rating/bbfc_15.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,UK:18)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,UK:18)]">flags/Rating/bbfc_18.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,UK:X)] | [IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,UK:X)]">flags/Rating/bbfc_r18.png</value>
 		<!-- France -->
-		<value condition="[IsEmpty(ListItem.mpaa) + [SubString(VideoPlayer.mpaa,France:U) | SubString(VideoPlayer.mpaa,partir de 3 ans) | SubString(VideoPlayer.mpaa,partir de 6 ans)]] | [!IsEmpty(ListItem.mpaa) + [SubString(ListItem.mpaa,France:U) | SubString(ListItem.mpaa,partir de 3 ans) | SubString(ListItem.mpaa,partir de 6 ans)]]">flags/Rating/csaU.png</value>
-		<value condition="[IsEmpty(ListItem.mpaa) + [SubString(VideoPlayer.mpaa,France:-10) | SubString(VideoPlayer.mpaa,Interdit aux moins de 10 ans) | SubString(VideoPlayer.mpaa,des propos ou des images peuvent heurter)]] | [!IsEmpty(ListItem.mpaa) + [SubString(ListItem.mpaa,France:-10) | SubString(ListItem.mpaa,Interdit aux moins de 10 ans) | SubString(ListItem.mpaa,des propos ou des images peuvent heurter)]]">flags/Rating/csa10.png</value>
-		<value condition="[IsEmpty(ListItem.mpaa) + [SubString(VideoPlayer.mpaa,France:-12) | SubString(VideoPlayer.mpaa,Interdit aux moins de 12 ans)]] | [!IsEmpty(ListItem.mpaa) + [SubString(ListItem.mpaa,France:-12) | SubString(ListItem.mpaa,Interdit aux moins de 12 ans)]]">flags/Rating/csa12.png</value>
-		<value condition="[IsEmpty(ListItem.mpaa) + [SubString(VideoPlayer.mpaa,France:-16) | SubString(VideoPlayer.mpaa,Interdit aux moins de 16 ans)]] | [!IsEmpty(ListItem.mpaa) + [SubString(ListItem.mpaa,France:-16) | SubString(ListItem.mpaa,Interdit aux moins de 16 ans)]]">flags/Rating/csa16.png</value>
-		<value condition="[IsEmpty(ListItem.mpaa) + [SubString(VideoPlayer.mpaa,France:-18) | SubString(VideoPlayer.mpaa,Interdit aux moins de 18 ans)]] | [!IsEmpty(ListItem.mpaa) + [SubString(ListItem.mpaa,France:-18) | SubString(ListItem.mpaa,Interdit aux moins de 18 ans)]]">flags/Rating/csa18.png</value>
+		<value condition="[IsEmpty(ListItem.mpaa) + [Substring(VideoPlayer.mpaa,France:U) | Substring(VideoPlayer.mpaa,partir de 3 ans) | Substring(VideoPlayer.mpaa,partir de 6 ans)]] | [!IsEmpty(ListItem.mpaa) + [Substring(ListItem.mpaa,France:U) | Substring(ListItem.mpaa,partir de 3 ans) | Substring(ListItem.mpaa,partir de 6 ans)]]">flags/Rating/csaU.png</value>
+		<value condition="[IsEmpty(ListItem.mpaa) + [Substring(VideoPlayer.mpaa,France:-10) | Substring(VideoPlayer.mpaa,Interdit aux moins de 10 ans) | Substring(VideoPlayer.mpaa,des propos ou des images peuvent heurter)]] | [!IsEmpty(ListItem.mpaa) + [Substring(ListItem.mpaa,France:-10) | Substring(ListItem.mpaa,Interdit aux moins de 10 ans) | Substring(ListItem.mpaa,des propos ou des images peuvent heurter)]]">flags/Rating/csa10.png</value>
+		<value condition="[IsEmpty(ListItem.mpaa) + [Substring(VideoPlayer.mpaa,France:-12) | Substring(VideoPlayer.mpaa,Interdit aux moins de 12 ans)]] | [!IsEmpty(ListItem.mpaa) + [Substring(ListItem.mpaa,France:-12) | Substring(ListItem.mpaa,Interdit aux moins de 12 ans)]]">flags/Rating/csa12.png</value>
+		<value condition="[IsEmpty(ListItem.mpaa) + [Substring(VideoPlayer.mpaa,France:-16) | Substring(VideoPlayer.mpaa,Interdit aux moins de 16 ans)]] | [!IsEmpty(ListItem.mpaa) + [Substring(ListItem.mpaa,France:-16) | Substring(ListItem.mpaa,Interdit aux moins de 16 ans)]]">flags/Rating/csa16.png</value>
+		<value condition="[IsEmpty(ListItem.mpaa) + [Substring(VideoPlayer.mpaa,France:-18) | Substring(VideoPlayer.mpaa,Interdit aux moins de 18 ans)]] | [!IsEmpty(ListItem.mpaa) + [Substring(ListItem.mpaa,France:-18) | Substring(ListItem.mpaa,Interdit aux moins de 18 ans)]]">flags/Rating/csa18.png</value>
 		<!-- Korean -->
-		<value condition="[IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,전체)] | [!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,전체)]">flags/Rating/KR_Certificate_All.png</value>
-		<value condition="[IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,12세)] | [!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,12세)]">flags/Rating/KR_Certificate_12.png</value>
-		<value condition="[IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,15세)] | [!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,15세)]">flags/Rating/KR_Certificate_15.png</value>
-		<value condition="[IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,불가)] | [!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,불가)]">flags/Rating/KR_Certificate_18.png</value>
-		<value condition="[IsEmpty(ListItem.mpaa) + SubString(VideoPlayer.mpaa,제한)] | [!IsEmpty(ListItem.mpaa) + SubString(ListItem.mpaa,제한)]">flags/Rating/KR_Certificate_R.png</value>
+		<value condition="[IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,전체)] | [!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,전체)]">flags/Rating/KR_Certificate_All.png</value>
+		<value condition="[IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,12세)] | [!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,12세)]">flags/Rating/KR_Certificate_12.png</value>
+		<value condition="[IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,15세)] | [!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,15세)]">flags/Rating/KR_Certificate_15.png</value>
+		<value condition="[IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,불가)] | [!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,불가)]">flags/Rating/KR_Certificate_18.png</value>
+		<value condition="[IsEmpty(ListItem.mpaa) + Substring(VideoPlayer.mpaa,제한)] | [!IsEmpty(ListItem.mpaa) + Substring(ListItem.mpaa,제한)]">flags/Rating/KR_Certificate_R.png</value>
 		<!-- Brazil -->
-		<value condition="[!IsEmpty(ListItem.mpaa) + [SubString(ListItem.mpaa,Brazil:Livre) | SubString(ListItem.mpaa,Livre)]] | [IsEmpty(ListItem.mpaa) + [SubString(VideoPlayer.mpaa,Brazil:Livre) | SubString(VideoPlayer.mpaa,Livre)]]">flags/Rating/MPAA_Brazil_Livre.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + [SubString(ListItem.mpaa,Brazil:10) | SubString(ListItem.mpaa,10 anos)]] | [IsEmpty(ListItem.mpaa) + [SubString(VideoPlayer.mpaa,Brazil:10) | SubString(VideoPlayer.mpaa,10 anos)]]">flags/Rating/MPAA_Brazil_10.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + [SubString(ListItem.mpaa,Brazil:12) | SubString(ListItem.mpaa,12 anos)]] | [IsEmpty(ListItem.mpaa) + [SubString(VideoPlayer.mpaa,Brazil:12) | SubString(VideoPlayer.mpaa,12 anos)]]">flags/Rating/MPAA_Brazil_12.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + [SubString(ListItem.mpaa,Brazil:14) | SubString(ListItem.mpaa,14 anos)]] | [IsEmpty(ListItem.mpaa) + [SubString(VideoPlayer.mpaa,Brazil:14) | SubString(VideoPlayer.mpaa,14 anos)]]">flags/Rating/MPAA_Brazil_14.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + [SubString(ListItem.mpaa,Brazil:16) | SubString(ListItem.mpaa,16 anos)]] | [IsEmpty(ListItem.mpaa) + [SubString(VideoPlayer.mpaa,Brazil:16) | SubString(VideoPlayer.mpaa,16 anos)]]">flags/Rating/MPAA_Brazil_16.png</value>
-		<value condition="[!IsEmpty(ListItem.mpaa) + [SubString(ListItem.mpaa,Brazil:18) | SubString(ListItem.mpaa,18 anos)]] | [IsEmpty(ListItem.mpaa) + [SubString(VideoPlayer.mpaa,Brazil:18) | SubString(VideoPlayer.mpaa,18 anos)]]">flags/Rating/MPAA_Brazil_18.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + [Substring(ListItem.mpaa,Brazil:Livre) | Substring(ListItem.mpaa,Livre)]] | [IsEmpty(ListItem.mpaa) + [Substring(VideoPlayer.mpaa,Brazil:Livre) | Substring(VideoPlayer.mpaa,Livre)]]">flags/Rating/MPAA_Brazil_Livre.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + [Substring(ListItem.mpaa,Brazil:10) | Substring(ListItem.mpaa,10 anos)]] | [IsEmpty(ListItem.mpaa) + [Substring(VideoPlayer.mpaa,Brazil:10) | Substring(VideoPlayer.mpaa,10 anos)]]">flags/Rating/MPAA_Brazil_10.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + [Substring(ListItem.mpaa,Brazil:12) | Substring(ListItem.mpaa,12 anos)]] | [IsEmpty(ListItem.mpaa) + [Substring(VideoPlayer.mpaa,Brazil:12) | Substring(VideoPlayer.mpaa,12 anos)]]">flags/Rating/MPAA_Brazil_12.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + [Substring(ListItem.mpaa,Brazil:14) | Substring(ListItem.mpaa,14 anos)]] | [IsEmpty(ListItem.mpaa) + [Substring(VideoPlayer.mpaa,Brazil:14) | Substring(VideoPlayer.mpaa,14 anos)]]">flags/Rating/MPAA_Brazil_14.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + [Substring(ListItem.mpaa,Brazil:16) | Substring(ListItem.mpaa,16 anos)]] | [IsEmpty(ListItem.mpaa) + [Substring(VideoPlayer.mpaa,Brazil:16) | Substring(VideoPlayer.mpaa,16 anos)]]">flags/Rating/MPAA_Brazil_16.png</value>
+		<value condition="[!IsEmpty(ListItem.mpaa) + [Substring(ListItem.mpaa,Brazil:18) | Substring(ListItem.mpaa,18 anos)]] | [IsEmpty(ListItem.mpaa) + [Substring(VideoPlayer.mpaa,Brazil:18) | Substring(VideoPlayer.mpaa,18 anos)]]">flags/Rating/MPAA_Brazil_18.png</value>
 		<value>flags/Rating/NoRating.png</value>
 	</variable>
 	<variable name="PosterThumb">
@@ -796,8 +800,8 @@
 		<value condition="Container.Content(directors)">$LOCALIZE[20348]</value>
 	</variable>
 	<variable name="VideoMusicGenres">
-		<value condition="[Window.IsActive(502) | [Window.IsActive(10025) + SubString(Container.FolderPath,videodb://musicvideos/)]]">musicgenres/$INFO[ListItem.Label].jpg</value>
-		<value condition="Window.IsActive(10025) + !SubString(Container.FolderPath,videodb://musicvideos/) + Container.Content(genres)">moviegenres/$INFO[ListItem.Label].jpg</value>
+		<value condition="[Window.IsActive(502) | [Window.IsActive(10025) + Substring(Container.FolderPath,videodb://musicvideos/)]]">musicgenres/$INFO[ListItem.Label].jpg</value>
+		<value condition="Window.IsActive(10025) + !Substring(Container.FolderPath,videodb://musicvideos/) + Container.Content(genres)">moviegenres/$INFO[ListItem.Label].jpg</value>
 	</variable>
 	<variable name="LandscapeFanartOverlayH">
 		<value condition="!IsEmpty(ListItem.Art(set.fanart)) + !StringCompare(ListItem.Art(set.fanart),-)+!IsEmpty(ListItem.Art(clearlogo))+!StringCompare(ListItem.Art(clearlogo),-)"> </value>
@@ -868,7 +872,7 @@
 	<variable name="VideoPlayerTitle2">
 		<value condition="!IsEmpty(VideoPlayer.Year) + [!IsEmpty(VideoPlayer.Artist) | !IsEmpty(VideoPlayer.Album)] + VideoPlayer.Content(MusicVideos)">$INFO[VideoPlayer.Artist]$INFO[VideoPlayer.Album, - ]$INFO[VideoPlayer.Year, (,)]</value>
 		<value condition="IsEmpty(VideoPlayer.Year) + [!IsEmpty(VideoPlayer.Artist) | !IsEmpty(VideoPlayer.Album)] + VideoPlayer.Content(MusicVideos)">$INFO[VideoPlayer.Artist]$INFO[VideoPlayer.Album, - ]</value>
-		<value condition="SubString(Player.ChapterName,00:)+IntegerGreaterThan(Player.ChapterCount,1) + !VideoPlayer.Content(LiveTV)">$INFO[Player.Chapter,$LOCALIZE[21396]: ]$INFO[Player.ChapterCount, / ]</value>
+		<value condition="Substring(Player.ChapterName,00:)+IntegerGreaterThan(Player.ChapterCount,1) + !VideoPlayer.Content(LiveTV)">$INFO[Player.Chapter,$LOCALIZE[21396]: ]$INFO[Player.ChapterCount, / ]</value>
 		<value condition="IntegerGreaterThan(Player.ChapterCount,1) + !VideoPlayer.Content(LiveTV)">$INFO[Player.Chapter,$LOCALIZE[21396]: ]$INFO[Player.ChapterCount, / ]$INFO[Player.ChapterName,[COLOR=TitleText] - (,)[/COLOR]]</value>
 		<value>$INFO[VideoPlayer.Tagline]</value>
 	</variable>
@@ -884,11 +888,11 @@
 	</variable>
 
 	<variable name="discartSpinning">
-		<value condition="!Control.HasFocus(2999)+!IsEmpty(Window(Home).Property(SkinHelper.Player.Music.DiscArt))">$INFO[Window(Home).Property(SkinHelper.Player.Music.DiscArt)]</value>
-		<value condition="Control.HasFocus(2999)+!IsEmpty(Window(Home).Property(SkinHelper.ListItem.Art.DiscArt))">$INFO[Window(Home).Property(SkinHelper.ListItem.Art.DiscArt)]</value>
-		<value condition="!Control.HasFocus(2999)">$INFO[Player.FolderPath]/cdart.png</value>
-		<value condition="Control.HasFocus(2999)+!IsEmpty(Container(1999).ListItem.Art(thumb))">$INFO[Container(1999).ListItem.Art(thumb)]</value>
-		<value condition="Control.HasFocus(2999)">cdorg.png</value>
+		<value condition="!Control.HasFocus(2999)+!Control.HasFocus(1999)+!IsEmpty(Window(Home).Property(SkinHelper.Player.Music.DiscArt))">$INFO[Window(Home).Property(SkinHelper.Player.Music.DiscArt)]</value>
+		<value condition="[Control.HasFocus(2999)|Control.HasFocus(1999)]+!IsEmpty(Window(Home).Property(SkinHelper.ListItem.Art.DiscArt))">$INFO[Window(Home).Property(SkinHelper.ListItem.Art.DiscArt)]</value>
+		<value condition="!Control.HasFocus(2999)+!Control.HasFocus(1999)">$INFO[Player.FolderPath]/cdart.png</value>
+		<value condition="[Control.HasFocus(2999)|Control.HasFocus(1999)]+!IsEmpty(Container(1999).ListItem.Art(thumb))">$INFO[Container(1999).ListItem.Art(thumb)]</value>
+		<value condition="[Control.HasFocus(2999)|Control.HasFocus(1999)]">cdorg.png</value>
 	</variable>
 
 	<variable name="TVShowStatus">

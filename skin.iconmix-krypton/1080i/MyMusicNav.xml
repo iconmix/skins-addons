@@ -65,7 +65,8 @@
 				<onfocus condition="Skin.HasSetting(MusicAucun)">SetFocus(55)</onfocus>
 			<focusposition>0</focusposition>
 			<onclick>SetFocus(7003)</onclick>	
-						
+			<onup>55</onup>		
+			<ondown>55</ondown>			
 			<movement>9</movement>
 			<description>Widget Lists</description>
 			<include>HorizVert</include>
@@ -80,7 +81,8 @@
 			<focusposition>0</focusposition>
 			<onclick>SetFocus(7003)</onclick>				
 			<movement>9</movement>
-			
+			<onleft>55</onleft>
+			<onright>55</onright>
 			<description>Widget Lists</description>
 			<include>VertHoriz</include>
 			<content>musicdb://artists/$INFO[ListItem.DBID]</content>			
@@ -101,7 +103,9 @@
 		<control type="list" id="1999">			
 			<onfocus condition="Skin.HasSetting(MusicGenreAucun)">SetFocus(55)</onfocus>
 			<focusposition>0</focusposition>
-			<onclick>SetFocus(7003)</onclick>				
+			<onclick>SetFocus(7003)</onclick>		
+			<onup>55</onup>		
+			<ondown>55</ondown>
 			<movement>9</movement>
 			<description>Widget Lists</description>
 			<include>HorizVert</include>
@@ -115,6 +119,8 @@
 			<focusposition>0</focusposition>
 			<onclick>SetFocus(7003)</onclick>				
 			<movement>9</movement>
+			<onleft>55</onleft>
+			<onright>55</onright>
 			<description>Widget Lists</description>
 			<include>VertHoriz</include>
 			<content>musicdb://genres/$INFO[ListItem.DBID]</content>			
