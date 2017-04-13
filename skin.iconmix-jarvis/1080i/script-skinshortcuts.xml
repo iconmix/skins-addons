@@ -68,7 +68,7 @@
 						<timeperimage>15000</timeperimage>
 						<randomize>true</randomize>
 						<fadetime>500</fadetime>
-						<texture background="true">widgetthumb/widgetperm.png</texture>
+						<texture background="true">widgetthumb/widgetperm.jpg</texture>
 						<aspectratio>keep</aspectratio>
 						<visible>[[Control.HasFocus(1002)|Control.HasFocus(1003)]+!IsEmpty(Container(211).ListItem.Property(WidgetShow))+IsEmpty(Container(211).ListItem.Property(WidgetShowH))]|[[Control.HasFocus(2002)|Control.HasFocus(2003)]+!IsEmpty(Container(211).ListItem.Property(WidgetShow.2))+IsEmpty(Container(211).ListItem.Property(WidgetShowH.2))]</visible>
 					</control>
@@ -80,7 +80,7 @@
 						<timeperimage>15000</timeperimage>
 						<randomize>true</randomize>
 						<fadetime>500</fadetime>
-						<texture background="true">widgetthumb/widgetpart.png</texture>
+						<texture background="true">widgetthumb/widgetpart.jpg</texture>
 						<aspectratio>keep</aspectratio>
 						<visible>[[Control.HasFocus(1002)|Control.HasFocus(1003)]+IsEmpty(Container(211).ListItem.Property(WidgetShow))+IsEmpty(Container(211).ListItem.Property(WidgetShowH))]|[[Control.HasFocus(2002)|Control.HasFocus(2003)]+IsEmpty(Container(211).ListItem.Property(WidgetShow.2))+IsEmpty(Container(211).ListItem.Property(WidgetShowH.2))]</visible>
 					</control>
@@ -92,7 +92,7 @@
 						<timeperimage>15000</timeperimage>
 						<randomize>true</randomize>
 						<fadetime>500</fadetime>
-						<texture background="true">widgetthumb/widgethide.png</texture>
+						<texture background="true">widgetthumb/widgethide.jpg</texture>
 						<aspectratio>keep</aspectratio>
 						<visible>[[Control.HasFocus(1002)|Control.HasFocus(1003)]+IsEmpty(Container(211).ListItem.Property(WidgetShow))+!IsEmpty(Container(211).ListItem.Property(WidgetShowH))]|[[Control.HasFocus(2002)|Control.HasFocus(2003)]+IsEmpty(Container(211).ListItem.Property(WidgetShow.2))+!IsEmpty(Container(211).ListItem.Property(WidgetShowH.2))]</visible>
 					</control>
@@ -105,7 +105,7 @@
 						<timeperimage>15000</timeperimage>
 						<randomize>true</randomize>
 						<fadetime>500</fadetime>
-						<texture background="true">widgetthumb/WidgetPanel.png</texture>
+						<texture background="true">widgetthumb/WidgetPanel.jpg</texture>
 						<aspectratio>keep</aspectratio>
 						<visible>[Control.HasFocus(1001)+StringCompare(Container(211).ListItem.Property(widgetStyle),Panel)]|[Control.HasFocus(2001)+StringCompare(Container(211).ListItem.Property(widgetStyle.2),Panel)]</visible>
 					</control>
@@ -117,11 +117,11 @@
 						<timeperimage>15000</timeperimage>
 						<randomize>true</randomize>
 						<fadetime>500</fadetime>
-						<texture background="true">widgetthumb/WidgetList.png</texture>
+						<texture background="true">widgetthumb/WidgetList.jpg</texture>
 						<aspectratio>keep</aspectratio>
 						<visible>[Control.HasFocus(1001)+StringCompare(Container(211).ListItem.Property(widgetStyle),List)]|[Control.HasFocus(2001)+StringCompare(Container(211).ListItem.Property(widgetStyle.2),List)]</visible>
 					</control>
-					<control type="image" id="782">
+				<control type="image" id="782">
 						<left>0</left>
 						<top>50</top>
 						<width>400</width>
@@ -425,8 +425,10 @@
 						<label>$LOCALIZE[31916]</label>
 						<onclick>SetProperty(shortcutDialog, backgroundplayliststyle, Home)</onclick>
 						<label2>[COLOR=yellow]$VAR[BackPlayListStyle][/COLOR]</label2>
-						<visible>!IsEmpty(Container(211).ListItem.Property(backgroundPlaylist))</visible>
+						<visible>!IsEmpty(Container(211).ListItem.Property(backgroundPlaylist))|Substring(Container(211).ListItem.Property(background),WDF1)|Substring(Container(211).ListItem.Property(background),WDF2)|Substring(Container(211).ListItem.Property(background),WDF3)</visible>
 					</control>
+					
+					
 					
 					
 					
@@ -518,7 +520,7 @@
 						<textcolor>white</textcolor>
 						<align>left</align>
 						<aligny>center</aligny>
-						<label>$LOCALIZE[31738] 1</label>
+						<label>Change widget style 1</label>
 						<label2>[COLOR=yellow]$VAR[WidgetStyleLabelVar][/COLOR]</label2>
 						<visible>!StringCompare(Container(211).ListItem.Property(widget),SystemInfo)+!StringCompare(Container(211).ListItem.Property(widget),WeatherForecast)+!IsEmpty(Container(211).ListItem.Property(widgetName))</visible>
 					</control>
@@ -611,7 +613,7 @@
 						<textcolor>white</textcolor>
 						<align>left</align>
 						<aligny>center</aligny>
-						<label>$LOCALIZE[31739] 2</label>
+						<label>Change widget style 2</label>
 						<label2>[COLOR=yellow]$VAR[WidgetStyle2LabelVar][/COLOR]</label2>
 						<visible>!StringCompare(Container(211).ListItem.Property(widget.2),SystemInfo)+!StringCompare(Container(211).ListItem.Property(widget.2),WeatherForecast)+!IsEmpty(Container(211).ListItem.Property(widgetName.2))</visible>
 					</control>		

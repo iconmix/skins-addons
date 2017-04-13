@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
-	<!-- ******* WIDGET 1 ******* -->
+	
 	<other include="widget1Fanart">
 		<!-- Widget Style -->
 	 <condition tag="property" attribute="name|widgetStyle">SystemInfo</condition>
@@ -18,7 +18,7 @@
 		<controls>
 			<control type="multiimage">
 				<skinshortcuts>visibility</skinshortcuts>
-				<visible>Control.HasFocus(9000)+SubString(Container(9000).ListItem.Property(background),WDF1)</visible>
+				<visible>Control.HasFocus(9000)+Substring(Container(9000).ListItem.Property(background),WDF1)+!StringCompare(Container(9000).ListItem.Property(backgroundplayliststyle),X2)</visible>
 				<imagepath background="true">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(fanart)]</imagepath>
 				<fadetime>600</fadetime>
 				
@@ -41,13 +41,14 @@
 		<controls>
 			<control type="multiimage">
 				<skinshortcuts>visibility</skinshortcuts>
-				<visible>Control.HasFocus(9000)+SubString(Container(9000).ListItem.Property(background),WDF2)</visible>
+				<visible>Control.HasFocus(9000)+Substring(Container(9000).ListItem.Property(background),WDF2)+!StringCompare(Container(9000).ListItem.Property(backgroundplayliststyle),X2)</visible>
 				<imagepath background="true">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(fanart)]</imagepath>
 				<fadetime>600</fadetime>
 			
 			</control>
 		</controls>
 	</other>
+	<!-- ******* WIDGET 1 ******* -->
 	<!-- Widget Liste -->
 	<other include="widget1">
 		<condition tag="property" attribute="name|widget">SystemInfo</condition>
@@ -82,8 +83,8 @@
 						<shadowcolor>ff000000</shadowcolor>
 					</control>
 					<control type="label">
-						<posy>-45</posy>
-						<width>1370</width>
+						<posy>-35</posy>
+							<width>1370</width>
 						<height>30</height>
 						<textcolor>black</textcolor>
 						<align>center</align>
@@ -94,7 +95,7 @@
 						<visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8011$SKINSHORTCUTS[id])|!IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
 					</control>
 					<control type="label">
-						<posy>-47</posy>
+						<posy>-37</posy>
 						<posx>-3</posx>
 						<width>1370</width>
 						<height>30</height>
@@ -136,12 +137,10 @@
 
 		<controls>
 
-	<!-- -->		<control type="group">
-				
+			<control type="group">
 				<posx>-310</posx>
 				<posy>-33</posy>
 				<include>FondWidgetMeteo</include>
-				
 				<skinshortcuts>visibility</skinshortcuts>
 				<animation effect="slide" start="0,0" end="-1620,0" delay="150" tween="cubic" time="350" condition="[!IsEmpty(Container(9000).ListItem.Property(widgetShow))|Control.HasFocus(8011$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)]+!Container(8011$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
 				<animation effect="slide"  end="0,-40" delay="150" tween="cubic" time="350" condition="Control.HasFocus(8011$SKINSHORTCUTS[id])+!Container(8011$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
@@ -163,7 +162,7 @@
 						<shadowcolor>ff000000</shadowcolor>
 					</control>
 					<control type="label">
-						<posy>-45</posy>
+						<posy>-35</posy>
 							<width>1370</width>
 						<height>30</height>
 						<textcolor>black</textcolor>
@@ -175,7 +174,7 @@
 						<visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8011$SKINSHORTCUTS[id])|!IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
 					</control>
 					<control type="label">
-							<posy>-47</posy>
+							<posy>-37</posy>
 						<posx>-3</posx>
 						<width>1370</width>
 						<height>30</height>
@@ -189,8 +188,11 @@
 					</control>
 		
 				</control>
-				
-				<control type="group" >					
+				<!-- meteo -->
+				<control type="group" >
+					
+
+					
 
 					<control type="button" id="8011$SKINSHORTCUTS[id]">
 						<onleft>9000</onleft>
@@ -203,7 +205,8 @@
 						<width>1</width>
 						<height>1</height>
 						<label>-</label>
-						<onclick>Close</onclick>
+
+					<onclick>Close</onclick>
 						<onclick>ActivateWindow(weather)</onclick>
 
 					</control>
@@ -223,12 +226,9 @@
 					
 				</control>
 
-			
+				<!-- InfoSysteme"> -->
 
 			</control>
-			-->
-			
-			
 		</controls>
 	</other>
 
@@ -259,11 +259,9 @@
 			<control type="group">
 				<skinshortcuts>visibility</skinshortcuts>
 				<animation effect="slide" start="0,0" end="-1620,0" delay="150" tween="cubic" time="350" condition="[!IsEmpty(Container(9000).ListItem.Property(widgetShow))|Control.HasFocus(8011$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)]+!Container(8011$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
+				<animation effect="slide"  end="0,-40" delay="150" tween="cubic" time="350" condition="Control.HasFocus(8011$SKINSHORTCUTS[id])+!Container(8011$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
 
-				<animation effect="slide" end="0,-40" delay="150" tween="cubic" time="350" condition="Control.HasFocus(8011$SKINSHORTCUTS[id])+!Container(8011$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
-
-			
-				<animation effect="slide" start="0,0" end="-270,0" delay="150" tween="cubic" time="350" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+[!Control.HasFocus(8011$SKINSHORTCUTS[id])|[Control.HasFocus(8011$SKINSHORTCUTS[id])+Container(8011$SKINSHORTCUTS[id]).IsUpdating]]+ IsEmpty(Container(9000).ListItem.Property(widgetShowH)) + IsEmpty(Container(9000).ListItem.Property(widgetShow))">Conditional</animation>
+				<animation effect="slide" start="0,0" end="-270,0" delay="150" tween="cubic" time="350" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8011$SKINSHORTCUTS[id])+ IsEmpty(Container(9000).ListItem.Property(widgetShowH)) + IsEmpty(Container(9000).ListItem.Property(widgetShow))">Conditional</animation>
 
 
 				<control type="group">
@@ -346,9 +344,9 @@
 							<font>METF_HomeMenu</font>
 							<textcolor>yellow</textcolor>
 							<label>$VAR[GlobalWidgetLabel8011$SKINSHORTCUTS[id]]</label>
-						<!-- 	<visible>!StringCompare(Container(9000).ListItem.Property(widget),NAired)</visible> -->
+							<!-- <visible>!StringCompare(Container(9000).ListItem.Property(widget),NAired)</visible> -->
 						</control>
-						<!---
+						<!--
 						<control type="fadelabel">
 							<posx>10</posx>
 							<width>895</width>
@@ -403,7 +401,7 @@
 						<onright>9000</onright>
 						<onleft>9000</onleft>
 						<onback>9000</onback>
-						<onunfocus>SetProperty(WidgetActifFanart,,Home)</onunfocus>
+						
 						<autoscroll delay="8000" repeat="10000" time="10000">Skin.HasSetting(AutoRotateWidget)+!Control.HasFocus(8011$SKINSHORTCUTS[id])</autoscroll>
 						<viewtype>list</viewtype>
 						<orientation>vertical</orientation>
@@ -411,7 +409,7 @@
 						<left>0</left>
 						<width>1200</width>
 						<height>255</height>
-
+<onunfocus>SetProperty(WidgetActifFanart,,Home)</onunfocus>
 						<orientation>vertical</orientation>
 						<preloaditems>2</preloaditems>
 						<scrolltime >300</scrolltime>
@@ -437,8 +435,6 @@
 							<!-- Focus Bar -->
 							<control type="button">
 								<onfocus condition="Control.HasFocus(8011$SKINSHORTCUTS[id])">SetProperty(WidgetActifFanart,$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(fanart)],Home)</onfocus>
-								
-
 							</control>
 
 							<control type="image">
@@ -505,9 +501,6 @@
 
 			
 				<animation effect="slide" start="0,0" end="-270,0" delay="150" tween="cubic" time="350" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+[!Control.HasFocus(8011$SKINSHORTCUTS[id])|[Control.HasFocus(8011$SKINSHORTCUTS[id])+Container(8011$SKINSHORTCUTS[id]).IsUpdating]]+ IsEmpty(Container(9000).ListItem.Property(widgetShowH)) + IsEmpty(Container(9000).ListItem.Property(widgetShow))">Conditional</animation>
-
-
-
 
 				<control type="group">
 					<visible>IntegerGreaterThan(Container(8011$SKINSHORTCUTS[id]).NumItems,0)</visible>
@@ -589,9 +582,9 @@
 							<font>METF_HomeMenu</font>
 							<textcolor>yellow</textcolor>
 							<label>$VAR[GlobalWidgetLabel8011$SKINSHORTCUTS[id]]</label>
-					<!--		<visible>!StringCompare(Container(9000).ListItem.Property(widget),NAired)</visible> -->
+							<!-- <visible>!StringCompare(Container(9000).ListItem.Property(widget),NAired)</visible> -->
 						</control>
-						<!---
+						<!--
 						<control type="fadelabel">
 							<posx>10</posx>
 							<width>895</width>
@@ -613,17 +606,17 @@
 				<control type="group">
 					<posx>-265</posx>
 						<posy>-10</posy>
-					<control type="group">	
-						  			
+					<control type="group">
+					
 						<control type="image">
 							<posy>-8</posy>
 							<width>220</width>
 							<height>260</height>
 							<aspectratio scalediffuse="true"  align="center" aligny="center">keep</aspectratio>
 								<bordersize>2</bordersize>
-								<texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVarList8011$SKINSHORTCUTS[id]]</texture>							
+								<texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVarList8011$SKINSHORTCUTS[id]]</texture>
+							<visible>[!Control.HasFocus(8011$SKINSHORTCUTS[id])+!Skin.HasSetting(ShowFullWidgets)]+IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
 						</control>
-						<visible>[!Control.HasFocus(8011$SKINSHORTCUTS[id])+!Skin.HasSetting(ShowFullWidgets)]+IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
 					</control>
 					<control type="list" id="8011$SKINSHORTCUTS[id]">
 						<width>1200</width>
@@ -653,11 +646,6 @@
 									
 								</animation>
 							</control>
-							<!--
-							<control type="label">
-								<label>***$INFO[ListItem.Icon][CR]$INFO[ListItem.Art(thumb)][CR]$INFO[ListItem.Art(fanart)]</label>
-							</control>
-							-->
 						</itemlayout>
 
 						<focusedlayout width="203" height="255">
@@ -740,7 +728,7 @@
 						<shadowcolor>ff000000</shadowcolor>
 					</control>
 					<control type="label">
-						<posy>-45</posy>
+						<posy>-35</posy>
 							<width>1370</width>
 						<height>30</height>
 						<textcolor>black</textcolor>
@@ -752,7 +740,7 @@
 						<visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
 					</control>
 					<control type="label">
-							<posy>-47</posy>
+							<posy>-37</posy>
 						<posx>-3</posx>
 						<width>1370</width>
 						<height>30</height>
@@ -798,7 +786,6 @@
 				<skinshortcuts>visibility</skinshortcuts>
 					<posx>-310</posx>
 				<posy>-33</posy>
-
 					<include>FondWidgetMeteo</include>
 				<animation effect="slide" start="0,0" end="-1620,0" delay="150" tween="cubic" time="350" condition="[!IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Control.HasFocus(8021$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)]+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
 				<animation effect="slide"  end="0,-40" delay="150" tween="cubic" time="350" condition="Control.HasFocus(8021$SKINSHORTCUTS[id])+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
@@ -820,7 +807,7 @@
 						<shadowcolor>ff000000</shadowcolor>
 					</control>
 					<control type="label">
-						<posy>-45</posy>
+						<posy>-35</posy>
 							<width>1370</width>
 						<height>30</height>
 						<textcolor>black</textcolor>
@@ -832,7 +819,7 @@
 						<visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
 					</control>
 					<control type="label">
-							<posy>-47</posy>
+							<posy>-37</posy>
 						<posx>-3</posx>
 						<width>1370</width>
 						<height>30</height>
@@ -874,6 +861,7 @@
 						<texture>$INFO[Window(weather).Property(WeatherProviderLogo)]</texture>
 						<colordiffuse>MediaFlagDiffuse</colordiffuse>
 				</control>
+					
 					<control type="grouplist">
 						<include>DetailsMeteo</include>
 					</control>
@@ -996,7 +984,8 @@
 						<label>$VAR[GlobalWidgetLabel8021$SKINSHORTCUTS[id]]</label>
 						<!-- <visible>!StringCompare(Container(9000).ListItem.Property(widget.2),NAired)</visible> -->
 					</control>
-				<!--	<control type="fadelabel">
+					<!--
+					<control type="fadelabel">
 						<posx>10</posx>
 						<width>895</width>
 						<height>60</height>
@@ -1078,7 +1067,7 @@
 					<focusedlayout width="550" height="30">
 						<!-- Focus Bar -->
 						<control type="button">
-							<onfocus  condition="Control.HasFocus(8021$SKINSHORTCUTS[id])">SetProperty(WidgetActifFanart,$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(fanart)],Home)</onfocus>
+							<onfocus condition="Control.HasFocus(8021$SKINSHORTCUTS[id])">SetProperty(WidgetActifFanart,$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(fanart)],Home)</onfocus>
 						</control>
 
 						<control type="image">
@@ -1289,7 +1278,7 @@
 
 					<focusedlayout width="203" height="255">
 						<control type="button">
-							<onfocus  condition="Control.HasFocus(8021$SKINSHORTCUTS[id])">SetProperty(WidgetActifFanart,$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(fanart)],Home)</onfocus>
+							<onfocus condition="Control.HasFocus(8021$SKINSHORTCUTS[id])">SetProperty(WidgetActifFanart,$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(fanart)],Home)</onfocus>
 						</control>
 						<control type="image">
 							<width>180</width>
@@ -1348,17 +1337,18 @@
 
 		</variable>
 		<variable name="GlobalWidgetLabel8011$SKINSHORTCUTS[id]">
-			<value condition="SubString(Container(9000).ListItem.Property(widget),RecentlyAddedMovies)
-				|SubString(Container(9000).ListItem.Property(widget),RecommendedMovies)
-			|SubString(Container(9000).ListItem.Property(widget),RandomMovies)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
+			<value condition="Substring(Container(9000).ListItem.Property(widget),RecentlyAddedMovies)
+				|Substring(Container(9000).ListItem.Property(widget),RecommendedMovies)
+			|Substring(Container(9000).ListItem.Property(widget),RandomMovies)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
 
-			<value condition="SubString(Container(9000).ListItem.Property(widget),RecentlyAddedEpisodes)|SubString(Container(9000).ListItem.Property(widget),RandomEpisodes)|SubString(Container(9000).ListItem.Property(widget),RecommendedEpisodes)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.TVShowTitle] - $INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Season,S,E]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Episode,,: ]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]</value> -->
-			<value condition="SubString(Container(9000).ListItem.Property(widget),RecentlyAddedAlbums)|SubString(Container(9000).ListItem.Property(widget),RandomAlbums)|SubString(Container(9000).ListItem.Property(widget),RecommendedAlbums)|SubString(Container(9000).ListItem.Property(widget),RandomSongs)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Artist] - $INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
+			<value condition="Substring(Container(9000).ListItem.Property(widget),RecentlyAddedEpisodes)|Substring(Container(9000).ListItem.Property(widget),RandomEpisodes)|Substring(Container(9000).ListItem.Property(widget),RecommendedEpisodes)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.TVShowTitle] - $INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Season,S,E]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Episode,,: ]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]</value>
 
-			<value condition="!IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.TVShowTitle)|SubString(Container(9000).ListItem.Property(widget),NAired)|SubString(Container(9000).ListItem.Property(widgetpath),nextaired)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Label] : ([COLOR=white][B]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Property(airday)] $INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Property(airdate)][/B][/COLOR])</value>
+			<value condition="Substring(Container(9000).ListItem.Property(widget),RecentlyAddedAlbums)|Substring(Container(9000).ListItem.Property(widget),RandomAlbums)|Substring(Container(9000).ListItem.Property(widget),RecommendedAlbums)|Substring(Container(9000).ListItem.Property(widget),RandomSongs)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Artist] - $INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
 
-			<value condition="SubString(Container(9000).ListItem.Property(widget),Playlist) + IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
-			<value condition="SubString(Container(9000).ListItem.Property(widget),Playlist) + !SubString(ListItem.Title,ListItem.TVShowTitle) + !IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.TVShowTitle] - $INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Season,S,]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Episode,E,. ]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]</value>
+			<value condition="Substring(Container(9000).ListItem.Property(widget),NAired)|Substring(Container(9000).ListItem.Property(widgetpath),nextaired)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Label] : ([COLOR=white][B]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Property(airday)] $INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Property(airdate)][/B][/COLOR])</value>
+
+			<value condition="Substring(Container(9000).ListItem.Property(widget),Playlist) + IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
+			<value condition="Substring(Container(9000).ListItem.Property(widget),Playlist) + !Substring(ListItem.Title,ListItem.TVShowTitle) + !IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.TVShowTitle] - $INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Season,S,]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Episode,E,. ]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]</value>
 			<value>$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Label]</value>
 		</variable>
 
@@ -1378,16 +1368,16 @@
 		</variable>
 
 		<variable name="GlobalWidgetLabel8021$SKINSHORTCUTS[id]">
-			<value condition="SubString(Container(9000).ListItem.Property(widget.2),RecentlyAddedMovies)|SubString(Container(9000).ListItem.Property(widget.2),RecommendedMovies)|SubString(Container(9000).ListItem.Property(widget.2),RandomMovies)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
+			<value condition="Substring(Container(9000).ListItem.Property(widget.2),RecentlyAddedMovies)|Substring(Container(9000).ListItem.Property(widget.2),RecommendedMovies)|Substring(Container(9000).ListItem.Property(widget.2),RandomMovies)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
 
-			<value condition="SubString(Container(9000).ListItem.Property(widget.2),RecentlyAddedEpisodes)|SubString(Container(9000).ListItem.Property(widget.2),RandomEpisodes)|SubString(Container(9000).ListItem.Property(widget.2),RecommendedEpisodes)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.TVShowTitle] - $INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Season,S,E]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Episode,,: ]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]</value>
+			<value condition="Substring(Container(9000).ListItem.Property(widget.2),RecentlyAddedEpisodes)|Substring(Container(9000).ListItem.Property(widget.2),RandomEpisodes)|Substring(Container(9000).ListItem.Property(widget.2),RecommendedEpisodes)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.TVShowTitle] - $INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Season,S,E]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Episode,,: ]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]</value>
 
-			<value condition="SubString(Container(9000).ListItem.Property(widget.2),RecentlyAddedAlbums)|SubString(Container(9000).ListItem.Property(widget.2),RandomAlbums)|SubString(Container(9000).ListItem.Property(widget.2),RecommendedAlbums)|SubString(Container(9000).ListItem.Property(widget.2),RandomSongs)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Artist] - $INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
+			<value condition="Substring(Container(9000).ListItem.Property(widget.2),RecentlyAddedAlbums)|Substring(Container(9000).ListItem.Property(widget.2),RandomAlbums)|Substring(Container(9000).ListItem.Property(widget.2),RecommendedAlbums)|Substring(Container(9000).ListItem.Property(widget.2),RandomSongs)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Artist] - $INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
 
-			<value condition="IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.TVShowTitle)|SubString(Container(9000).ListItem.Property(widget.2),NAired)|SubString(Container(9000).ListItem.Property(widgetpath.2),nextaired)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Label] : ([COLOR=white][B]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Property(airday)] $INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Property(airdate)][/B][/COLOR])</value>
+			<value condition="Substring(Container(9000).ListItem.Property(widget.2),NAired)|Substring(Container(9000).ListItem.Property(widgetpath.2),nextaired)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Label] : ([COLOR=white][B]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Property(airday)] $INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Property(airdate)][/B][/COLOR])</value>
 
-			<value condition="SubString(Container(9000).ListItem.Property(widget.2),Playlist) + IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
-			<value condition="SubString(Container(9000).ListItem.Property(widget.2),Playlist) + !SubString(ListItem.Title,ListItem.TVShowTitle) + !IsEmpty(Container(8000).ListItem.TVShowTitle)">x$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.TVShowTitle]x - $INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Season,S,]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Episode,E,. ]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]</value>
+			<value condition="Substring(Container(9000).ListItem.Property(widget.2),Playlist) + IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
+			<value condition="Substring(Container(9000).ListItem.Property(widget.2),Playlist) + !Substring(ListItem.Title,ListItem.TVShowTitle) + !IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.TVShowTitle] - $INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Season,S,]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Episode,E,. ]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]</value>
 			<value>$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Label]</value>
 
 		</variable>

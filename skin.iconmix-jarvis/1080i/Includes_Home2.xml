@@ -164,7 +164,7 @@
 						<height>20</height>
 						<texture>ArrowDown.png</texture>
 						<colordiffuse>HelpArrowDiffuse</colordiffuse>
-						<visible>!Control.HasFocus(9001) + ![Control.HasFocus(8000) | Control.HasFocus(80001) | Control.HasFocus(8002) | Control.HasFocus(8003)] + SubString(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
+						<visible>!Control.HasFocus(9001) + ![Control.HasFocus(8000) | Control.HasFocus(80001) | Control.HasFocus(8002) | Control.HasFocus(8003)] + Substring(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
 					</control>
 				</focusedlayout>
 				<content>
@@ -249,7 +249,7 @@
 		</control>
 	</include>
 	
-<include name="Home2_Icons">
+	<include name="Home2_Icons">
 		<include>HomeDeck</include>
 		<control type="group">
 		<animation effect="slide" start="0" end="0,-200" center="auto" time="500" condition="Control.HasFocus(9001)">Conditional</animation>
@@ -371,7 +371,7 @@
 					<height>20</height>
 					<texture>ArrowDown.png</texture>
 					<colordiffuse>HelpArrowDiffuse</colordiffuse>
-					<visible>!Control.HasFocus(9001) + SubString(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
+					<visible>!Control.HasFocus(9001) + Substring(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
 				</control>
 			</focusedlayout>
 			<content>
@@ -383,7 +383,7 @@
 		<!-- Frames for submenus -->
 		<control type="group">
 			<posy>825</posy>
-			<posx>580</posx>		
+			<posx>380</posx>		
 				
 			<control type="group">
 				<include>Animation_Submenu</include>
@@ -391,14 +391,14 @@
 				<control type="image">
 					<posx>15</posx>
 					<posy>20</posy>
-					<width>673</width>
+					<width>1073</width>
 					<height>210</height>
 					<texture>frames/ClassicFrame_Background.png</texture>
 					<colordiffuse>C0606060</colordiffuse>
 	
 				</control>
 				<control type="image">
-					<width>700</width>
+					<width>1100</width>
 					<height>250</height>
 					<texture>frames/banner_frame2.png</texture>
 					<colordiffuse>FrameBackgroundDiffuse</colordiffuse>	
@@ -410,7 +410,7 @@
 				<visible allowhiddenfocus="true">Control.HasFocus(9001) + ![Control.HasFocus(8000) | Control.HasFocus(80001) | Control.HasFocus(8002) | Control.HasFocus(8003)]</visible>
 				<posx>25</posx>
 				<posy>50</posy>
-				<width>650</width>
+				<width>1050</width>
 				<height>210</height>
 				<align>center</align>
 				<onup>9000</onup>
@@ -421,9 +421,10 @@
 				<defaultcontrol always="true">1</defaultcontrol>
 				<scrolltime tween="sine" easing="out">240</scrolltime>
 				<include>Animation_Submenu</include>
-				<itemlayout width="200" height="200">
+				<itemlayout width="250" height="200">
+
 					<control type="image">
-						<posx>60</posx>
+						<posx>85</posx>
 						<width>80</width>
 						<height>80</height>
 						<aligny>center</aligny>
@@ -432,9 +433,10 @@
 						<visible>Skin.HasSetting(ShowIconLabel)</visible>
 					</control>
 						<control type="image">
-						<posx>90</posx>
-						<width>80</width>
-						<height>80</height>
+							<posx>65</posx>
+						<width>120</width>
+						<height>120</height>
+						
 						<aligny>center</aligny>
 						<texture>$INFO[ListItem.Icon]</texture>
 						<aspectratio>stretch</aspectratio>
@@ -442,7 +444,7 @@
 					</control>
 					<control type="label">
 						<top>130</top>
-						<width>200</width>
+						<width>250</width>
 						<height>20</height>
 						<align>center</align>
 						<label>$INFO[ListItem.Label]</label>
@@ -451,18 +453,19 @@
 						<visible>Skin.HasSetting(ShowIconLabel)</visible>
 					</control>
 				</itemlayout>
-				<focusedlayout width="200" height="200">
+				
+				<focusedlayout width="250" height="200">
 					<control type="image">
-						<posx>40</posx>
-						<width>120</width>
-						<height>120</height>
+						<posx>50</posx>
+						<width>150</width>
+						<height>150</height>
 						<aligny>center</aligny>
 						<texture>$INFO[ListItem.Icon]</texture>
 						<aspectratio>stretch</aspectratio>
 					</control>
 					<control type="label">
-						<top>130</top>
-						<width>200</width>
+						<top>135</top>
+						<width>250</width>
 						<height>30</height>
 						<align>center</align>
 						<label>$INFO[ListItem.Label]</label>
@@ -554,7 +557,7 @@
 			<focusposition>2</focusposition>
 			<defaultcontrol >1</defaultcontrol>
 			<movement>6</movement>
-			<scrolltime>200</scrolltime>
+			<scrolltime>150</scrolltime>
 			<preloaditems>2</preloaditems>
 			<include>Animation_OpenCloseFade</include>
 			<include>Animation_FadedByMenu</include>
@@ -637,7 +640,7 @@
 					<height>20</height>
 					<texture>ArrowDown.png</texture>
 					<colordiffuse>HelpArrowDiffuse</colordiffuse>
-					<visible>!Control.HasFocus(9001) + SubString(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
+					<visible>!Control.HasFocus(9001) + Substring(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
 				</control>
 				</control>
 			</focusedlayout>
@@ -756,7 +759,6 @@
 		</control>		
 		<include>HomeStats</include>-->
 	</include>
-	
 		<include name="Home2_IconsVertical">
 		<include>HomeDeck</include>
 		<control type="group">
@@ -790,7 +792,7 @@
 			<posy>100</posy>
 			<height>880</height>
 			<width>300</width>		
-			<onfocus condition="SubString(Window(Weather).Property(Current.FanartCode),na,right)">Weather.Refresh</onfocus>
+			<onfocus condition="Substring(Window(Weather).Property(Current.FanartCode),na,right)">Weather.Refresh</onfocus>
 			
 			<onright condition="!IsEmpty(Control.GetLabel(9003))">9022</onright>	
 			<onright condition="IsEmpty(Control.GetLabel(9003))">9023</onright>	
@@ -876,7 +878,7 @@
 					<height>40</height>
 					<texture>ArrowLeft.png</texture>
 					<colordiffuse>HelpArrowDiffuse</colordiffuse>
-					<visible>!Control.HasFocus(9001) + SubString(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
+					<visible>!Control.HasFocus(9001) + Substring(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
 				</control>
 				</control>
 			</focusedlayout>

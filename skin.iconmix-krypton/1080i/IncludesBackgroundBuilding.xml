@@ -2,14 +2,20 @@
 <!-- version 4.3.6 -->
 <includes>
 
+
+
 <include name="pochettesjetees">
 <!-- -->
-	<control type="group">
-		<visible>Integer.IsGreater(Container(8080).NumItems,0)+!Container(8080).IsUpdating+[[Control.HasFocus(9001)+String.IsEqual(Container(9001).ListItem.Property(background),Playlist.FanartList)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X1)]|[!Control.HasFocus(9001)+String.IsEqual(Container(9000).ListItem.Property(background),Playlist.FanartList)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X1)]]</visible>
+	<control type="group"> <!-- pochettes jetees -->
+		<visible>Integer.IsGreater(Container(8080).NumItems,0)+!Container(8080).IsUpdating+
+		[
+		[Control.HasFocus(9001)+String.IsEqual(Container(9001).ListItem.Property(background),Playlist.FanartList)+String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)]|
+		[!Control.HasFocus(9001)+
+		 [String.IsEqual(Container(9000).ListItem.Property(background),Playlist.FanartList)|String.Contains(Container(9000).ListItem.Property(background),WDF1)|String.Contains(Container(9000).ListItem.Property(background),WDF2)|String.Contains(Container(9000).ListItem.Property(background),WDF3)]
+		 +String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)]]</visible>
 		<control type="image">
 			<posx>200</posx>
-			<posy>200</posy>
-			
+			<posy>200</posy>			
 			<texture>background.png</texture>
 		</control>
 		<posy>-200</posy>
@@ -22,7 +28,7 @@
 			<control type="image">
 				<posx>20</posx>
 				<posy>21</posy>
-				<texture>$INFO[Container(8080).ListItem(0).Art(poster)]</texture>
+				<texture>$INFO[Container(8080).ListItem(0).Icon]</texture>
 				<width>286</width>
 				<fadetime>400</fadetime>
 				<height>412</height>
@@ -44,7 +50,7 @@
 			<control type="image">
 				<posx>20</posx>
 				<posy>21</posy>
-				<texture>$INFO[Container(8080).ListItem(2).Art(poster)]</texture>
+				<texture>$INFO[Container(8080).ListItem(2).Icon]</texture>
 				<width>286</width>
 				<fadetime>400</fadetime>
 				<height>412</height>
@@ -66,7 +72,7 @@
 			<control type="image">
 				<posx>20</posx>
 				<posy>21</posy>
-				<texture>$INFO[Container(8080).ListItem(3).Art(poster)]</texture>
+				<texture>$INFO[Container(8080).ListItem(3).Icon]</texture>
 				<width>286</width>
 				<fadetime>400</fadetime>
 				<height>412</height>
@@ -88,7 +94,7 @@
 			<control type="image">
 				<posx>20</posx>
 				<posy>21</posy>
-				<texture>$INFO[Container(8080).ListItem(1).Art(poster)]</texture>
+				<texture>$INFO[Container(8080).ListItem(1).Icon]</texture>
 				<width>286</width>
 				<fadetime>400</fadetime>
 				<height>412</height>
@@ -111,7 +117,7 @@
 			<control type="image">
 				<posx>20</posx>
 				<posy>21</posy>
-				<texture>$INFO[Container(8080).ListItem(4).Art(poster)]</texture>
+				<texture>$INFO[Container(8080).ListItem(4).Icon]</texture>
 				<width>286</width>
 				<fadetime>400</fadetime>
 				<height>412</height>
@@ -133,7 +139,7 @@
 			<control type="image">
 				<posx>20</posx>
 				<posy>21</posy>
-				<texture>$INFO[Container(8080).ListItem(5).Art(poster)]</texture>
+				<texture>$INFO[Container(8080).ListItem(5).Icon]</texture>
 				<width>286</width>
 				<fadetime>400</fadetime>
 				<height>412</height>
@@ -155,7 +161,7 @@
 			<control type="image">
 				<posx>20</posx>
 				<posy>21</posy>
-				<texture>$INFO[Container(8080).ListItem(6).Art(poster)]</texture>
+				<texture>$INFO[Container(8080).ListItem(6).Icon]</texture>
 				<width>286</width>
 				<fadetime>400</fadetime>
 				<height>412</height>
@@ -177,7 +183,7 @@
 			<control type="image">
 				<posx>20</posx>
 				<posy>21</posy>
-				<texture>$INFO[Container(8080).ListItem(7).Art(poster)]</texture>
+				<texture>$INFO[Container(8080).ListItem(7).Icon]</texture>
 				<width>286</width>
 				<fadetime>400</fadetime>
 				<height>412</height>
@@ -199,7 +205,7 @@
 			<control type="image">
 				<posx>20</posx>
 				<posy>21</posy>
-				<texture>$INFO[Container(8080).ListItem(8).Art(poster)]</texture>
+				<texture>$INFO[Container(8080).ListItem(8).Icon]</texture>
 				<width>286</width>
 				<fadetime>400</fadetime>
 				<height>412</height>
@@ -222,7 +228,7 @@
 		<control type="image">
 		<posx>20</posx>
 		<posy>21</posy>
-		<texture>$INFO[Container(8080).ListItem(9).Art(poster)]</texture>
+		<texture>$INFO[Container(8080).ListItem(9).Icon]</texture>
 		<width>286</width>
 		<fadetime>400</fadetime>
 		<height>412</height>
@@ -239,83 +245,13 @@
 	
 	</control>
 
-	<control type="image">
-		<visible>!Container(8080).OnNext+Integer.IsGreater(Container(8080).NumItems,0)+!Container(8080).IsUpdating+[[Control.HasFocus(9001)+String.IsEqual(Container(9001).ListItem.Property(background),Playlist.FanartList)+String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X1)]|[!Control.HasFocus(9001)+String.IsEqual(Container(9000).ListItem.Property(background),Playlist.FanartList)+String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X1)]]</visible>
+	<control type="image"> <!-- defilement fanart -->
+		<visible>!Container(8080).OnNext+Integer.IsGreater(Container(8080).NumItems,0)+!Container(8080).IsUpdating+
+		  [[Control.HasFocus(9001)+String.IsEqual(Container(9001).ListItem.Property(background),Playlist.FanartList)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)]|[!Control.HasFocus(9001)+[String.IsEqual(Container(9000).ListItem.Property(background),Playlist.FanartList)|String.Contains(Container(9000).ListItem.Property(background),WDF1)|String.Contains(Container(9000).ListItem.Property(background),WDF2)|String.Contains(Container(9000).ListItem.Property(background),WDF3)]+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)]]</visible>
 		<animation effect="fade" start="10" end="100" time="500" reversible="false" >Visible</animation>
 		<texture>$INFO[Container(8080).ListItem.Art(fanart)]</texture>
 	</control>
--->
-				<!-- en cours de dev -----
-				<control type="panel" >
-					<visible>Integer.IsGreater(Container(8080).NumItems,0)</visible>
-					<content sortby="random">$VAR[backgroundVarPlaylist]</content>
-				<viewtype label="31826">icon</viewtype>
-				<posx>25</posx>
-				<posy>45</posy>
-				<width>1910</width>
-				<height>1080</height>	
-				<itemgap>0</itemgap>			
-				<orientation>vertical</orientation>				
-				<itemlayout width="160" height="240">
-					<control type="group">
-					<control type="image">
-							<posx>0</posx>
-							<posy>0</posy>
-							<width>160</width>
-							<height>240</height>
-							<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Art(poster)]</texture>
-							<aspectratio scalediffuse="true">stretch</aspectratio>
-						</control>
-						<control type="image">
-							<posx>0</posx>
-							<posy>0</posy>
-							<width>160</width>
-							<height>240</height>
-							<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
-							<aspectratio scalediffuse="true">keep</aspectratio>
-							<visible>IsEmpty(ListItem.Art(poster))</visible>
-						</control>
-						<control type="image">
-								<posx>0</posx>
-							<posy>0</posy>
-							<width>160</width>
-							<height>240</height>
-								<texture border="-17">showcase_shadow.png</texture>
-							</control>
-					
-			</control>
-				</itemlayout>
-				<focusedlayout width="160" height="240">
-				
-						<control type="image">
-							<posx>0</posx>
-							<posy>0</posy>
-							<width>160</width>
-							<height>240</height>
-							<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Art(poster)]</texture>
-							<aspectratio scalediffuse="true">stretch</aspectratio>
-						</control>
-						<control type="image">
-							<posx>0</posx>
-							<posy>0</posy>
-							<width>160</width>
-							<height>240</height>
-							<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
-							<aspectratio scalediffuse="true">keep</aspectratio>
-							<visible>IsEmpty(ListItem.Art(poster))</visible>
-						</control>
-						<control type="image">
-								<posx>0</posx>
-							<posy>0</posy>
-							<width>160</width>
-							<height>240</height>
-								<texture border="-17">showcase_shadow.png</texture>
-							</control>
-						
-				
-				</focusedlayout> 
-			</control>
-			-->
+
 </include>
 	-->
 	<include name="fanartSpeed5">
@@ -368,15 +304,24 @@
 
 	<variable name="backgroundVar">
 		<value condition="!Window.IsVisible(10025)+!Window.IsVisible(502)+!Window.IsVisible(home)">background.jpg</value>
-		<value condition="Control.HasFocus(9000)+[String.Contains(Container(9000).ListItem.Property(background),WDF1)|String.Contains(Container(9000).ListItem.Property(background),WDF2)]"></value>
+		<value condition="Control.HasFocus(9000)+[String.Contains(Container(9000).ListItem.Property(background),WDF1)|String.Contains(Container(9000).ListItem.Property(background),WDF2)|String.Contains(Container(9000).ListItem.Property(background),WDF3)]"></value>
 		<value condition="Integer.IsGreater(Container(8080).NumItems,0)"></value>
-		<value condition="Window.IsVisible(Home)+!Control.HasFocus(9000)+!Control.HasFocus(9001)+!String.IsEqual(Container(9000).ListItem.Property(widgetType),weather)+!String.IsEqual(Container(9000).ListItem.Property(widgetType),system)+!IsEmpty(Window(Home).Property(WidgetActifFanart))">$INFO[Window(Home).Property(WidgetActifFanart)]</value>
-		<value condition="Window.IsVisible(Home)+Control.HasFocus(9001)+!IsEmpty(Container(9001).ListItem.Property(background))">$INFO[Container(9001).ListItem.Property(background)]</value>
+		<value condition="Window.IsVisible(Home)+!Control.HasFocus(9000)+!Control.HasFocus(9001)+!String.IsEqual(Container(9000).ListItem.Property(widgetType),weather)+!String.IsEqual(Container(9000).ListItem.Property(widgetType),system)+!String.IsEmpty(Window(Home).Property(WidgetActifFanart))">$INFO[Window(Home).Property(WidgetActifFanart)]</value>
+		<value condition="Window.IsVisible(Home)+Control.HasFocus(9001)+!String.IsEmpty(Container(9001).ListItem.Property(background))">$INFO[Container(9001).ListItem.Property(background)]</value>
 		<value>$INFO[Container(9000).ListItem.Property(background)]</value>
 	</variable>
 	<variable name="backgroundVarPlaylist">
 		<value condition="!Control.HasFocus(9000)+Control.HasFocus(9001)+String.IsEqual(Container(9001).ListItem.Property(background),Playlist.FanartList)">$INFO[Container(9001).ListItem.Property(backgroundPlaylist)]</value>
-	  <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.IsEqual(Container(9000).ListItem.Property(background),Playlist.FanartList)">$INFO[Container(9000).ListItem.Property(backgroundPlaylist)]</value>
+		<value condition="!Control.HasFocus(9000)+Control.HasFocus(9001)+String.Contains(Container(9001).ListItem.Property(background),WDF1)">$INFO[Container(9001).ListItem.Property(widgetPath)]</value>
+		<value condition="!Control.HasFocus(9000)+Control.HasFocus(9001)+String.Contains(Container(9001).ListItem.Property(background),WDF2)">$INFO[Container(9001).ListItem.Property(widgetPath.2)]</value>
+	    
+	  <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.IsEqual(Container(9000).ListItem.Property(background),Playlist.FanartList)">$INFO[Container(9000).ListItem.Property(backgroundPlaylist)]</value>
+	  <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.Contains(Container(9000).ListItem.Property(background),WDF1)">$INFO[Container(9000).ListItem.Property(widgetPath)]</value>
+	  <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.Contains(Container(9000).ListItem.Property(background),WDF2)">$INFO[Container(9000).ListItem.Property(widgetPath.2)]</value>
+	  <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.Contains(Container(9000).ListItem.Property(list),library:)+String.Contains(Container(9000).ListItem.Property(background),WDF3)">$INFO[Container(9000).ListItem.Property(list)]</value>
+	  <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.Contains(Container(9000).ListItem.Property(list),special:)+String.Contains(Container(9000).ListItem.Property(background),WDF3)">$INFO[Container(9000).ListItem.Property(list)]</value>
+	  
+
 
 	</variable>
 	<include name="playlistfond">
@@ -387,7 +332,7 @@
 			<height>10</height>
 			<itemlayout height="10" width="10" />
 			<focusedlayout height="10" width="10" />
-			<content sortby="random">$VAR[backgroundVarPlaylist]</content>
+			<content>$VAR[backgroundVarPlaylist]</content>
 			<include>delayfanartinc</include>
 			<autoscroll time="10000" delay="500" repeat="10000">true</autoscroll>
 		</control>
@@ -408,21 +353,25 @@
 			<animation effect="fade" end="50" time="500" reversible="false" condition="String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)+Skin.HasSetting(MeteoPleinEcran)">Conditional</animation>
 			<include>playlistfond</include>
 			<include>pochettesjetees</include>
-			<!--		 -->
+			<!--		 telex --
+			<control type="label">
+			  <label>$VAR[backgroundVarPlaylist] : $INFO[Container(8080).NumItems]/$INFO[Container(8080).ListItem.Label]/$INFO[Container(8080).ListItem(0).Art(poster)]/$INFO[Container(8080).ListItem(0).Icon]</label>
+			</control>
+			-->
 			<control type="image">
 				<include>Dimensions_Fullscreen</include>
 				<texture background="true">$INFO[Skin.String(CustomBackground)]</texture>
 				<visible>!Integer.IsGreater(Container(8080).NumItems,0)+!Window.IsActive(10025)</visible>
-				<visible>!Control.HasFocus(9000)|[Control.HasFocus(9000)+!String.Contains(Container(9000).ListItem.Property(background),WDF1)+!String.Contains(Container(9000).ListItem.Property(background),WDF2)]</visible>
+				<visible>!Control.HasFocus(9000)|[Control.HasFocus(9000)+!String.Contains(Container(9000).ListItem.Property(background),WDF1)+!String.Contains(Container(9000).ListItem.Property(background),WDF2)+!String.Contains(Container(9000).ListItem.Property(background),WDF3)]</visible>
 			</control>
 			
 			<control type="multiimage" id="99004">
-				<visible>!Integer.IsGreater(Container(8080).NumItems,0)|!IsEmpty(Window(Home).Property(WidgetActifFanart))</visible>
+				<visible>!Integer.IsGreater(Container(8080).NumItems,0)|!String.IsEmpty(Window(Home).Property(WidgetActifFanart))</visible>
 				<posx>0</posx>
 				<posy>10</posy>
 				<width>1920</width>
 				<height>1080</height>
-				<visible>!Control.HasFocus(9000)|[Control.HasFocus(9000)+!String.Contains(Container(9000).ListItem.Property(background),WDF1)+!String.Contains(Container(9000).ListItem.Property(background),WDF2)]</visible>
+				<visible>!Control.HasFocus(9000)|[Control.HasFocus(9000)+!String.Contains(Container(9000).ListItem.Property(background),WDF1)+!String.Contains(Container(9000).ListItem.Property(background),WDF2)+!String.Contains(Container(9000).ListItem.Property(background),WDF3)]</visible>
 				<imagepath background="true" fallback="background.png">$VAR[backgroundVar]</imagepath>
 				<aspectratio>scale</aspectratio>
 				<fadetime>450</fadetime>
@@ -521,25 +470,25 @@
 				<control type="multiimage" id="90008">
 					<include>GlobalBackgroundVideoInfo_Common</include>
 					<imagepath loop="true"  diffuse="shine.png" fallback="none\" background="true">$INFO[ListItem.Path,,../extrafanart/]</imagepath>
-					<visible>IsEmpty(Window(Home).Property(SkinHelper.ExtraFanArtPath))+!String.Contains(Container.FolderPath,plugin) + [Container.Content(movies) |  Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
+					<visible>String.IsEmpty(Window(Home).Property(SkinHelper.ExtraFanArtPath))+!String.Contains(Container.FolderPath,plugin) + [Container.Content(movies) |  Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
 				</control>
 
 				<control type="multiimage" id="90009">
 					<include>GlobalBackgroundVideoInfo_Common</include>
 					<imagepath loop="true"  diffuse="shine.png" background="true">$INFO[Window(Home).Property(SkinHelper.ExtraFanArtPath)]</imagepath>
-					<visible>!IsEmpty(Window(Home).Property(SkinHelper.ExtraFanArtPath))+!String.Contains(Container.FolderPath,plugin) + [Container.Content(tvshows) | Container.Content(seasons) |  Container.Content(movies) |Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
+					<visible>!String.IsEmpty(Window(Home).Property(SkinHelper.ExtraFanArtPath))+!String.Contains(Container.FolderPath,plugin) + [Container.Content(tvshows) | Container.Content(seasons) |  Container.Content(movies) |Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
 				</control>
 				--
 				<control type="multiimage" id="90010">
 					<include>GlobalBackgroundVideoInfo_Common</include>
 					<imagepath colordiffuse="FFFFFFFF" diffuse="shine.png" fallback="none\" background="true">$INFO[ListItem.Path,,/extrafanart/]</imagepath>
-					<visible>IsEmpty(Window(Home).Property(SkinHelper.ExtraFanArtPath))+!String.Contains(Container.FolderPath,plugin) + [ Container.Content(movies) |Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
+					<visible>String.IsEmpty(Window(Home).Property(SkinHelper.ExtraFanArtPath))+!String.Contains(Container.FolderPath,plugin) + [ Container.Content(movies) |Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
 				</control>
 
 				<control type="multiimage" id="90011">
 					<include>GlobalBackgroundVideoInfo_Common</include>
 					<imagepath loop="true"  diffuse="shine.png" fallback="none\" background="true">$INFO[ListItem.FolderPath,,extrafanart/]</imagepath>
-					<visible>IsEmpty(Window(Home).Property(SkinHelper.ExtraFanArtPath))+String.Contains(Container.FolderPath,plugin) + [Container.Content(tvshows) | Container.Content(seasons)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
+					<visible>String.IsEmpty(Window(Home).Property(SkinHelper.ExtraFanArtPath))+String.Contains(Container.FolderPath,plugin) + [Container.Content(tvshows) | Container.Content(seasons)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
 				</control>
 				-->
 			</control>

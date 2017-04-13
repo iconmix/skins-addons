@@ -425,7 +425,7 @@
 						<label>$LOCALIZE[31916]</label>
 						<onclick>SetProperty(shortcutDialog, backgroundplayliststyle, Home)</onclick>
 						<label2>[COLOR=yellow]$VAR[BackPlayListStyle][/COLOR]</label2>
-						<visible>!String.IsEmpty(Container(211).ListItem.Property(backgroundPlaylist))</visible>
+						<visible>!String.IsEmpty(Container(211).ListItem.Property(backgroundPlaylist))|String.Contains(Container(211).ListItem.Property(background),WDF1)|String.Contains(Container(211).ListItem.Property(background),WDF2)|String.Contains(Container(211).ListItem.Property(background),WDF3)</visible>
 					</control>
 					
 					

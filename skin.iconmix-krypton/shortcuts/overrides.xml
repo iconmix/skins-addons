@@ -108,8 +108,9 @@
 	
 		<background label="8">$VAR[Weather_Fanart]</background>
 		<background label="::PLAYLIST::">Playlist.FanartList</background>
-		<background label="Widget 1" condition="StringCompare(Window.Property(groupname),mainmenu)" >WDF1.jpg</background>
-		<background label="Widget 2" condition="StringCompare(Window.Property(groupname),mainmenu)">WDF2.jpg</background>
+		<background label="Widget 1" condition="String.IsEqual(Window.Property(groupname),mainmenu)" >WDF1.jpg</background>
+		<background label="Widget 2" condition="String.IsEqual(Window.Property(groupname),mainmenu)">WDF2.jpg</background>
+		<background label="31733" condition="String.IsEqual(Window.Property(groupname),mainmenu)">WDF3.jpg</background>
 	<!--
 	<backgrounddefault defaultID="movies">$INFO[Window(Home).Property(SkinHelper.AllMoviesBackground)]</backgrounddefault>
 	<propertydefault defaultID="movies" property="backgroundName">$ADDON[script.skin.helper.service 32039]</propertydefault>

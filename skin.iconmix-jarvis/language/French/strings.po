@@ -1103,6 +1103,11 @@ msgctxt "#31717"
 msgid "Precip"
 msgstr "Précipitations"
 
+msgctxt "#31733"
+msgid "Main menu item list"
+msgstr "Raccourci du menu principal"
+
+
 msgctxt "#31736"
 msgid "List"
 msgstr "Liste"
@@ -1455,6 +1460,10 @@ msgstr "Mur de Bannières"
 msgctxt "#31832"
 msgid "Curved list"
 msgstr "Liste incurvée"
+
+msgctxt "#31833"
+msgid "Test"
+msgstr "Test"
 
 msgctxt "#31898"
 msgid "Complete Collection"

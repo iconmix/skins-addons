@@ -930,8 +930,8 @@
 		<value>$LOCALIZE[584]</value>
 	</variable>
 	<variable name="BackPlayListStyle">
-		<value condition="String.IsEqual(Window.Property(backgroundplayliststyle),X1)">$LOCALIZE[31914]</value>
-		<value>$LOCALIZE[31915]</value>
+		<value condition="String.IsEqual(Window.Property(backgroundplayliststyle),X2)">$LOCALIZE[31915]</value>
+		<value>$LOCALIZE[31914]</value>
 	</variable>
 	<variable name="WidgetStyleLabelVar">
 		<value condition="String.IsEqual(Window.Property(widgetStyle),List)">$LOCALIZE[31736]</value>

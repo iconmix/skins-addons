@@ -18,7 +18,7 @@
 		<controls>
 			<control type="multiimage">
 				<skinshortcuts>visibility</skinshortcuts>
-				<visible>Control.HasFocus(9000)+String.Contains(Container(9000).ListItem.Property(background),WDF1)</visible>
+				<visible>Control.HasFocus(9000)+String.Contains(Container(9000).ListItem.Property(background),WDF1)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)</visible>
 				<imagepath background="true">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(fanart)]</imagepath>
 				<fadetime>600</fadetime>
 				
@@ -41,7 +41,7 @@
 		<controls>
 			<control type="multiimage">
 				<skinshortcuts>visibility</skinshortcuts>
-				<visible>Control.HasFocus(9000)+String.Contains(Container(9000).ListItem.Property(background),WDF2)</visible>
+				<visible>Control.HasFocus(9000)+String.Contains(Container(9000).ListItem.Property(background),WDF2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)</visible>
 				<imagepath background="true">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(fanart)]</imagepath>
 				<fadetime>600</fadetime>
 			

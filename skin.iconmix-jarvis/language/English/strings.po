@@ -1337,6 +1337,10 @@ msgctxt "#31732"
 msgid "Are you sure you really want to remove the Settings shortcut?"
 msgstr ""
 
+msgctxt "#31733"
+msgid "Main menu item list"
+msgstr ""
+
 
 msgctxt "#31736"
 msgid "List"
@@ -1689,6 +1693,12 @@ msgstr ""
 msgctxt "#31832"
 msgid "Curved list"
 msgstr ""
+
+
+msgctxt "#31833"
+msgid "Test"
+msgstr ""
+
 
 msgctxt "#31898"
 msgid "Complete Collection"

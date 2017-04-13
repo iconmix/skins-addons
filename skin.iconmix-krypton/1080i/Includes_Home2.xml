@@ -557,7 +557,7 @@
 			<focusposition>2</focusposition>
 			<defaultcontrol >1</defaultcontrol>
 			<movement>6</movement>
-			<scrolltime>200</scrolltime>
+			<scrolltime>150</scrolltime>
 			<preloaditems>2</preloaditems>
 			<include>Animation_OpenCloseFade</include>
 			<include>Animation_FadedByMenu</include>
