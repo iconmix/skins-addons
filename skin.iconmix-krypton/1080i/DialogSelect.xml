@@ -58,7 +58,7 @@
 				</control>
 -->
 <control type="image">
-	<top>120</top>
+	<top>127</top>
 	<left>18</left>
 	<width>730</width>
 	<colordiffuse>BackgroundColor</colordiffuse>

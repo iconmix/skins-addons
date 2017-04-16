@@ -1,5 +1,5 @@
-# -*- coding: UTF-8 -*-
-from __future__ import unicode_literals
+# coding: utf-8
+#from __future__ import unicode_literals
 import resources.lib.Utils as utils
 import datetime
 import urlparse
@@ -94,8 +94,7 @@ class Main:
                 if not KodiLocal: 
                     utils.getFilmsTv(infotype,Id.encode('utf8'))
                 else:
-                    utils.logMsg("getFilmsParActeur :"+xbmc.getInfoLabel("ListItem.DBTYPE"),0) 
-                    utils.getFilmsParActeur(xbmc.getInfoLabel("ListItem.DBTYPE"),Id)
+                    utils.getFilmsParActeur(xbmc.getInfoLabel("ListItem.DBTYPE"),Id.encode('utf8'))
                     
                 
                 
@@ -107,8 +106,8 @@ class Main:
                 #utils.logMsg("TVDIFFUSION :"+str(TvId)+","+str(TvSe)+","+str(TvType),0) 
                 utils.getDiffusionTV(TvId,TvSe,TvType)
                 #utils.logMsg("Temps passe GETCAST :"+"["+str(Id)+"]:"+str(time.time()-start),0) 
-                      
-
+             
+             
                      
                      
         except:
@@ -177,19 +176,21 @@ class Main:
                 ActeursBio=""
                 ListeTrailer=[]
                 TMDBID=''
-                if xbmc.getCondVisibility("Control.HasFocus(2999)"):
+                if xbmc.getCondVisibility("Control.HasFocus(2999)"): #myvideonav
                     ActeursBio="non"
-                if xbmc.getCondVisibility("Control.HasFocus(2008)"):
+                if xbmc.getCondVisibility("Control.HasFocus(2008)"): #dialogvideoinfo
                     ActeursBio="noninf"
+                if xbmc.getCondVisibility("Control.HasFocus(441)"): #dialogvideoinfo cherche trailer
+                    ActeursBio="noninf2"
                     
                 if ActeursBio=="" :
                      #acteurs
-                     TypeVideo=xbmc.getInfoLabel("Container(5051).ListItem.Writer")
+                     TypeVideo=xbmc.getInfoLabel("Container(5051).ListItem.Property(TypeVideo)")
                      Titre=xbmc.getInfoLabel("Container(5051).ListItem.Label").decode('utf-8','ignore')
-                     if not xbmc.getInfoLabel("Container(5051).ListItem.Mpaa"):
+                     if not xbmc.getInfoLabel("Container(5051).ListItem.Property(IMDBNumber)"):
                        ListeTrailer=utils.getTrailer(xbmc.getInfoLabel("Container(5051).ListItem.Trailer"),TypeVideo) 
                      else:
-                       TMDBID=utils.get_externalID(xbmc.getInfoLabel("Container(5051).ListItem.Mpaa"),TypeVideo)
+                       TMDBID=utils.get_externalID(xbmc.getInfoLabel("Container(5051).ListItem.Property(IMDBNumber)"),TypeVideo)
                       # utils.logMsg("Resultat  Tmdb --> "+str(TMDBID)+"/"+xbmc.getInfoLabel("Container(5051).ListItem.Mpaa")+"/"+str(TypeVideo),0) 
                         
                 if ActeursBio=="non" :
@@ -218,6 +219,15 @@ class Main:
                      Titre=xbmc.getInfoLabel("Container(5002).ListItem.Label").decode('utf-8','ignore')
                      if TMDBID=='' and IMDBID:
                          TMDBID=utils.get_externalID(IMDBID,'movie')
+                
+                if ActeursBio=="noninf2" :
+                     #acteurs
+                     TypeVideo=xbmc.getInfoLabel("ListItem.DBTYPE")
+                     Titre=xbmc.getInfoLabel("ListItem.Label").decode('utf-8','ignore')
+                     if not xbmc.getInfoLabel("ListItem.IMDBNumber"):
+                       ListeTrailer=utils.getTrailer(xbmc.getInfoLabel("ListItem.Trailer"),TypeVideo) 
+                     else:
+                       TMDBID=utils.get_externalID(xbmc.getInfoLabel("ListItem.IMDBNumber"),TypeVideo)
                  
                 if TMDBID!='' :
                      ListeTrailer=utils.getTrailer(TMDBID,TypeVideo)
@@ -271,8 +281,8 @@ class Main:
           #self.winid = xbmcgui.Window(xbmcgui.getCurrentWindowId())
         #utils.logMsg('window ID: ' + str(winid))
           self.windowhome = xbmcgui.Window(10000) # Home.xml 
-          self.windowvideonav = xbmcgui.Window(10025) # Home.xml 
-          self.windowvideoinf = xbmcgui.Window(12003) # Home.xml 
+          self.windowvideonav = xbmcgui.Window(10025) # myvideonav.xml 
+          self.windowvideoinf = xbmcgui.Window(12003) # dialogvideoinfo.xml 
         
     def GetControl(self,Window=None,Id=None):
           ControlId=None          

@@ -93,7 +93,7 @@
 		<value></value>
 		</variable>
 		<variable name="contentActeursDirecteurs">
-		  <value condition="[Container.Content(actors)|Container.Content(directors)]+!String.IsEmpty(ListItem.DBID)">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]&local="oui"</value>
+		  <value condition="[Container.Content(actors)|Container.Content(directors)]+!String.IsEmpty(ListItem.Label)">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.Label]&local="oui"</value>
 			<!--<value condition="Container.Content(directors)+!String.IsEmpty(ListItem.DBID)">$INFO[Container.FolderPath]$INFO[ListItem.DBID]</value> -->
 			<value></value>
 		</variable>
@@ -102,7 +102,7 @@
 			<value></value>
 		</variable>
 		<variable name="ActeursContent">
-			<value condition="Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998ID]&local="oui"</value>
+			<value condition="Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]&local="oui"</value>
 			<value condition="Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]</value>
 			<value>-</value>
 		</variable>

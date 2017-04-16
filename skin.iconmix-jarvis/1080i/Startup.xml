@@ -7,7 +7,7 @@
   <onload condition="!Skin.HasSetting(SagaDetailsDisc)+!Skin.HasSetting(SagaDetailsTexte)+!Skin.HasSetting(SagaDetailsAucun)+!Skin.HasSetting(SagaDetailsClearArt)+!Skin.HasSetting(SagaDetailsBoitier)">Skin.ToggleSetting(SagaDetailsBoitier)</onload>
 	<onload condition="!Skin.HasSetting(GenreDetailsDisc)+!Skin.HasSetting(GenreDetailsTexte)+!Skin.HasSetting(GenreDetailsAucun)+!Skin.HasSetting(GenreDetailsClearArt)+!Skin.HasSetting(GenreDetailsBoitier)">Skin.ToggleSetting(GenreDetailsBoitier)</onload>
 	<onload condition="!Skin.HasSetting(directorDisc)+!Skin.HasSetting(directorTexte)+!Skin.HasSetting(directorAucun)+!Skin.HasSetting(directorClearArt)+!Skin.HasSetting(directorBoitier)">Skin.ToggleSetting(directorBoitier)</onload>
-	
+	RunScript(script.tv.show.next.aired,silent=True)
 	<onload>SetProperty(WidgetActifFanart,,Home)</onload>
 	<onload>SetProperty(VideoOsdOn,0,Home)</onload>
 

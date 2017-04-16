@@ -93,7 +93,9 @@
 		<value></value>
 		</variable>
 		<variable name="contentActeursDirecteurs">
-		  <value condition="System.HasAddon(script.iconmixtools)+[Container.Content(actors)|Container.Content(directors)]+!IsEmpty(ListItem.DBID)">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]&local="oui"</value>
+		  <value condition="System.HasAddon(script.iconmixtools)+[Container.Content(actors)|Container.Content(directors)]+!IsEmpty(ListItem.Label)">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.Label]&local="oui"</value>
+		  <!-- <value condition="[Container.Content(directors)|Container.Content(actors)]+!IsEmpty(ListItem.DBID)">$INFO[Container.FolderPath]$INFO[ListItem.DBID]</value> -->
+
 			<value></value>
 		</variable>
 		<variable name="contentPanelActeurs">
@@ -101,7 +103,7 @@
 			<value></value>
 		</variable>
 		<variable name="ActeursContent">
-			<value condition="System.HasAddon(script.iconmixtools)+IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998ID]&local="oui"</value>
+			<value condition="System.HasAddon(script.iconmixtools)+IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]&local="oui"</value>
 			<value condition="System.HasAddon(script.iconmixtools)+IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]</value>
 			<value>-</value>
 		</variable>

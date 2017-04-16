@@ -86,7 +86,7 @@
 						<texturenofocus>buttons/button_trailer.png</texturenofocus>
 						<texturefocus>buttons/button_trailerFO.png</texturefocus>
 						<include>Animation_ButtonFocus</include>
-						<visible>!IsEmpty(ListItem.Trailer)</visible>
+						<visible>!System.HasAddon(script.iconmixtools)+!IsEmpty(ListItem.Trailer)</visible>
 						<onfocus>SetProperty(showsaga,,12003)</onfocus>
 						<onfocus>SetProperty(showgenre,,12003)</onfocus>
 					</control>
@@ -95,11 +95,23 @@
 						<texturenofocus>buttons/button_cherche.png</texturenofocus>
 						<texturefocus>buttons/button_chercheFO.png</texturefocus>
 						<include>Animation_ButtonFocus</include>
-						<visible>IsEmpty(ListItem.Trailer)</visible>
+						<visible>!System.HasAddon(script.iconmixtools)+IsEmpty(ListItem.Trailer)</visible>
 						<onclick>Action(Close)</onclick>
 						<onfocus>SetProperty(showsaga,,12003)</onfocus>
 						<onfocus>SetProperty(showgenre,,12003)</onfocus>
 						<onclick>ActivateWindow(videos,plugin://plugin.video.youtube/kodion/search/query/?q=$INFO[ListItem.Label]+Trailer,return)</onclick>
+
+					</control>
+					<control type="button" id="441">
+						<include>VideoInfoButton</include>
+						<texturenofocus>buttons/button_cherche.png</texturenofocus>
+						<texturefocus>buttons/button_chercheFO.png</texturefocus>
+						<include>Animation_ButtonFocus</include>
+						<visible>System.HasAddon(script.iconmixtools)</visible>
+						<!-- <onclick>Action(Close)</onclick> -->
+						<onfocus>SetProperty(showsaga,,12003)</onfocus>
+						<onfocus>SetProperty(showgenre,,12003)</onfocus>
+						<onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
 
 					</control>
 					<!-- Choose Art -->
@@ -258,7 +270,7 @@
 					<description>Set rating</description>
 					<include>VideoInfoButtonLabel</include>
 					<label>$LOCALIZE[137] $LOCALIZE[20410] </label>
-					<visible>ControlGroup(7003).HasFocus(440)</visible>
+					<visible>ControlGroup(7003).HasFocus(440)|ControlGroup(7003).HasFocus(441)</visible>
 				</control>
 			</control>
 

@@ -1,6 +1,6 @@
 #!/usr/bin/python
-# -*- coding: UTF-8 -*-
-from __future__ import unicode_literals
+# coding: utf-8
+#from __future__ import unicode_literals
 import xbmcplugin, xbmcgui, xbmc, xbmcaddon, xbmcvfs
 import os,sys,io
 import urllib
@@ -81,7 +81,7 @@ def CheckSaga(itemId=None,Statique=None):
     
     DBTYPE=xbmc.getInfoLabel("ListItem.DBTYPE") 
     if not itemId or (DBTYPE!="movie" and xbmc.getCondVisibility("Window.IsVisible(12003)") and not DBTYPE=="set"):
-       xbmcplugin.endOfDirectory(handle=int(sys.argv[1]))
+       if not Statique: xbmcplugin.endOfDirectory(handle=int(sys.argv[1]))
        return
     
     if itemId:
@@ -803,6 +803,49 @@ def getDiffusionTV(ItemIdxx=None,saisonID=None,DBtype=None):
     xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeEpisodes)
   xbmcplugin.endOfDirectory(int(sys.argv[1]))
 # --------------------------------------------UTILITAIRES/PLUGIN----------------------------------------------
+def MergeContainers(Cont1Size=None,Cont2Size=None):
+  windowvideonav = xbmcgui.Window(self,10025)
+  try:
+     Cont1=windowvideonav.getControl(self,2996)  
+  except:
+     Cont1=None
+  try:
+     Cont2=windowvideonav.getControl(self,2997)  
+  except:
+     Cont2=None
+ 
+  
+  if Cont1 or Cont2:
+    ListesDest=[]
+    logMsg("merging....",0)
+    if Cont1:
+        logMsg("merge Cont1 = %d" %(Cont1.size()),0)
+        c=0
+        d=Cont1.size()
+        while c<d:
+          txx=Cont1.getListItem(c)
+          if txx:
+            logMsg("-O-"+str(c)+"/"+str(xxx),0)
+             #ListesDest.append(["", txx, False])
+          c=c+1
+    if Cont2:  
+        logMsg("merge Cont2 = %d" %(Cont2.size()),0)
+        c=0
+        Cont2.reset()
+        d=Cont2.size()
+        while c<d:
+          txx=Cont2.getListItem(c)
+          if txx:
+             logMsg("-O-"+str(c)+"/"+str(xxx),0)
+             #ListesDest.append(["", txx, False])
+          c=c+1
+    
+    xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeDest) 
+  else:
+    logMsg("merging....vide !",0)
+  xbmcplugin.endOfDirectory(int(sys.argv[1])) 
+
+
 def getItemPath(typex=None,itemId=None):
   allCast = []
   item = {}
@@ -889,44 +932,9 @@ def getGenre(genrex=None,genretypex=None,origtitle=None):
 
   xbmcplugin.addDirectoryItems(int(sys.argv[1]), genrelist) 
   xbmcplugin.endOfDirectory(int(sys.argv[1]))
-  
-def getCasting(Castingtypex=None,itemId=None,Statique=None):
-  allCast = []
-  item = {}
-  Casting = []
-  Castingtype=""
-  imageacteur="" 
-  ListeActeur=[]
-  NonVide=xbmc.getCondVisibility("Skin.HasSetting(HideMovieTvCastEmpty)")
-  
-  #videodb://movies/actors/1132/   1132=id acteur pour retrouver ses films
-  
-  if sys.argv[1]:
-      if itemId:     
-         allCast = sql_ActeurParVideo(itemId,Castingtypex)  
-         if allCast:
-           for Test in allCast:
-             name=Test.get("name")
-             if name:
-                 imageacteur=Test.get("thumbnail")
-                 if not imageacteur and not NonVide:
-                    imageacteur="DefaultActor.png"
-                 #else :
-                 if imageacteur:
-                    txx = xbmcgui.ListItem(label=name,iconImage=imageacteur,label2=Test.get("role"))
-                    txx.setProperty('DBID', str(Test.get("actor_id")) )  
-                 
-                    if not Statique:
-                         ListeActeur.append(["",txx,True])
-                    else:
-                         ListeActeur.append(txx)
-  if not Statique:
-     xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeActeur)
-     xbmcplugin.endOfDirectory(int(sys.argv[1]))
-  else:
-     return ListeActeur 
+ 
 
-def getCastingOK(Castingtypex=None,itemId=None,Statique=None):
+def getCasting(Castingtypex=None,itemId=None,Statique=None):
   allCast = []
   item = {}
   Casting = []
@@ -965,51 +973,10 @@ def getCastingOK(Castingtypex=None,itemId=None,Statique=None):
      xbmcplugin.endOfDirectory(int(sys.argv[1]))
   else:
      return ListeActeur 
-  
-def getFilmsParActeur(ActeurType=None,ActeurId=None,Statique=None):
-  Donnees = []
-  item = {}
-  Casting = []
-  RechercheType=""
-  VideoPoster="" 
-  ListeVideos=[]
-  
-  #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetMovies","params":{"filter":{"actor":"marion cotillard"},"properties":["thumbnail","year","file"]},"id":"1"}
-  #videodb://movies/actors/1132/   1132=id acteur pour retrouver ses films
-  
-  if sys.argv[1]:
-      if ActeurId: 
-         
-         Donnees=sql_VideosParActeur(str(ActeurId),ActeurType)                  
-         if Donnees:
-           for Item in Donnees:
-             Titre=Item.get("label")
-             if Titre:
-                 txx = xbmcgui.ListItem(label=Titre)
-                 txx.setLabel2(Item.get("role"))
-                 
-                 IdVideo=Item.get("movieid")
-                 TypeVideo="movie"
-                 if not IdVideo: 
-                    IVideo=Item.get("tvshowid")
-                    TypeVideo="tvshow"
-                 IdVideo=str(Item.get("imdbnumber"))                 
-                 txx.setArt( Item.get("art")) 
-                 logMsg('backend ART =' +str(Item.get("art")),0)
-                 txx.setProperty("TypeVideo",TypeVideo)
-                 txx.setInfo("video", {"Mpaa": Item.get("imdbnumber"),"title": Titre,"year": Item.get("year"),"trailer":Item.get("trailer")})
-                 if not Statique:
-                     ListeVideos.append([Item.get("file"),txx,False])
-                 else:
-                     ListeVideos.append(txx)
-  if not Statique:               
-     xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeVideos)       
-     xbmcplugin.endOfDirectory(int(sys.argv[1])) 
-  else:
-     return ListeVideos
-   
+ 
+
      
-def getFilmsParActeurOK(ActeurType=None,Acteur=None,Statique=None):
+def getFilmsParActeur(ActeurType=None,Acteur=None,Statique=None):
   Donnees = []
   item = {}
   Casting = []
@@ -1019,20 +986,22 @@ def getFilmsParActeurOK(ActeurType=None,Acteur=None,Statique=None):
   
   #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetMovies","params":{"filter":{"actor":"marion cotillard"},"properties":["thumbnail","year","file"]},"id":"1"}
   #videodb://movies/actors/1132/   1132=id acteur pour retrouver ses films
-  
   if sys.argv[1]:
-      if ActeurType and Acteur: 
+      if Acteur: 
+         if ActeurType and ActeurType=="director":
+            Ok=""
+         else: ActeurType="actor"
+         logMsg("->"+str(ActeurType),0)  
+         #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetMovies","params":{"filter":{"field":"director","operator":"contains","value":"ridley"},"properties":["thumbnail","year","file"]},"id":"1"}       
+         json_result = getJSON2("VideoLibrary.GetMovies", '{"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["thumbnail","year","file","art","imdbnumber","cast"]}' %(ActeurType,Acteur))
+         json_result2 = getJSON2("VideoLibrary.GetTvShows", '{"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["thumbnail","year","file","art","imdbnumber","cast"]}' %(ActeurType,Acteur))
+         #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetEpisodes","params":{"tvshowid":30,"properties":["cast"],"filter":{"actor":"CynthiaAddai-Robinson"}},"id":"1"}
+         #pour obtenir tous les episodes comprenant l'acteur
          
-         json_result = getJSON("VideoLibrary.GetMovies", '{"filter":{"actor":"%s"},"properties":["thumbnail","year","file","art","imdbnumber","cast"]}' %(Acteur) )
-         #logMsg("Resultat  Filmographie local Tv--> " +str(json_result),0) 
-         json_result2 = getJSON("VideoLibrary.GetTvShows", '{"filter":{"actor":"%s"},"properties":["thumbnail","year","file","imdbnumber","art","cast"]}' %(Acteur.encode('utf-8')))
-         #logMsg("Resultat  Filmographie local Tv--> "+str(Acteur)+"/" +str(json_result2),0) 
-          
          if len(json_result)>0:
           Donnees=json_result
          if len(json_result2)>0:
           Donnees=Donnees+json_result2        
-         #logMsg("Resultat  Filmographie local --> " + str(Acteur)+"/"+str(ActeurType)+"/"+str(json_result),0) 
          #movie, tvshow
                   
          if Donnees:
@@ -1043,20 +1012,20 @@ def getFilmsParActeurOK(ActeurType=None,Acteur=None,Statique=None):
                  Casting = Item.get("cast")
                  if Casting:
                     for ItemCast in  Casting:
-                         if ItemCast.get("name")==Acteur:
+                         if ItemCast.get("name").encode('utf8')==Acteur:
                               txx.setLabel2(ItemCast.get("role"))
-                              break               
+                              break  
                  
-                 #logMsg("Resultat  Filmographie local --> "+str(Titre)+"/" + str(VideoPoster),0)  
                  IdVideo=Item.get("movieid")
                  TypeVideo="movie"
                  if not IdVideo: 
-                    IVideo=Item.get("tvshowid")
+                    IdVideo=Item.get("tvshowid")
                     TypeVideo="tvshow"
-                 IdVideo=str(Item.get("imdbnumber"))                 
                  txx.setArt( Item.get("art")) 
-                 logMsg('backend ART =' +str(Item.get("art")),0)
-                 txx.setInfo("video", {"Mpaa": Item.get("imdbnumber"),"title": Titre,"year": Item.get("year"),"writer":TypeVideo,"trailer":Item.get("trailer")})
+                 #logMsg('backend ART =' +str(Item.get("art")),0)
+                 txx.setProperty("TypeVideo",TypeVideo)
+                 txx.setProperty('IMDBNumber', str(Item.get("imdbnumber")))
+                 txx.setInfo("video", {"dbid": str(IdVideo),"title": Titre,"year": Item.get("year"),"trailer":Item.get("trailer")})
                  if not Statique:
                      ListeVideos.append([Item.get("file"),txx,False])
                  else:
@@ -1141,16 +1110,16 @@ def getFilmsTv(DbType=None,Acteur=None,Statique=None):
                                  if json_data:
                                          #logMsg("Resultat  Roles --> " + str(json_data.get("cast")),0)
                                          for item in json_data.get("cast"):
-                                             typemedia=str(item.get("media_type"))
+                                             TypeVideo=str(item.get("media_type"))
                                              name=""
-                                             #logMsg("Resultat  Mediatype --> "+"/"+str(item.get("id"))+"/" + str(typemedia)+"/"+str(DbType),0)
-                                             #if typemedia=="movie" and DbType=="movie": name=item.get("title")
+                                             #logMsg("Resultat  Mediatype --> "+"/"+str(item.get("id"))+"/" + str(TypeVideo)+"/"+str(DbType),0)
+                                             #if TypeVideo=="movie" and DbType=="movie": name=item.get("title")
                                              #else: 
-                                             #     if typemedia=="tv" and DbType!="movie": name=item.get("name")
-                                             if typemedia=="movie": name=item.get("title")
+                                             #     if TypeVideo=="tv" and DbType!="movie": name=item.get("name")
+                                             if TypeVideo=="movie": name=item.get("title")
                                              else : name=item.get("name")
                                              if name:
-                                               #logMsg("Resultat  Mediatype --> "+"/"+str(name)+"/" + str(typemedia)+"/"+str(DbType),0)
+                                               #logMsg("Resultat  Mediatype --> "+"/"+str(name)+"/" + str(TypeVideo)+"/"+str(DbType),0)
                                                IdFix=item.get("id")
                                                Ajout=1
                                                if IdFix:
@@ -1161,7 +1130,7 @@ def getFilmsTv(DbType=None,Acteur=None,Statique=None):
                                                if Ajout>0:                                                  
                                                     Poster=item.get("poster_path")
                                                     if not Poster: 
-                                                       if typemedia=="movie": Poster="RolesFilms.png"
+                                                       if TypeVideo=="movie": Poster="RolesFilms.png"
                                                        else: Poster="RolesSeries.png"
                                                     else: Poster="http://image.tmdb.org/t/p/original"+str(Poster)
                                                     Role=item.get("character")
@@ -1171,7 +1140,8 @@ def getFilmsTv(DbType=None,Acteur=None,Statique=None):
                                                     Annee=item.get("release_date")
                                                     if not Annee: 
                                                        Annee=item.get("first_air_date")
-                                                    txx.setInfo("video", {"title": name,"year": Annee,"originaltitle": item.get("original_title"),"writer":typemedia,"trailer":item.get("id")})        
+                                                    txx.setProperty("TypeVideo",TypeVideo)
+                                                    txx.setInfo("video", {"title": name,"year": Annee,"originaltitle": item.get("original_title"),"trailer":item.get("id")})        
                                                     #else : txx.setInfo("video", {"title": item.get("name"),"year": item.get("first_air_date"),"originaltitle": item.get("original_name")})        
                                                     #logMsg("Resultat  Role --> " + str(name)+"/"+str(Poster)+"/"+str(item.get("character")),0)
                                                     if not Statique:
@@ -1322,7 +1292,7 @@ def getRuntime(itemId=None,TypeID=None):
       if TypeID=="episode":
          query_url = "https://api.themoviedb.org/3/tv/%s?api_key=67158e2af1624020e34fd893c881b019" % (xxx.encode("utf8"))
     
-      logMsg("Runtime ->"+str(query_url),0)
+      #logMsg("Runtime ->"+str(query_url),0)
       response = urllib.urlopen(query_url)
       try:
        str_response = response.read().decode('utf8')
@@ -1560,6 +1530,153 @@ def getJSON(method,params):
     else:
         #logMsg("getJson - invalid result for Method %s - params: %s - response: %s" %(method,params, str(jsonobject)))
         return {}
+        
+def getJSON2(method,params):
+    #logMsg("Resultat executeJSONRPC --> " + str(method),0)
+    json_response = xbmc.executeJSONRPC('{ "jsonrpc": "2.0", "method" : "%s", "params": %s, "id":1 }' %(method, params))
+    jsonobject = json.loads(json_response.decode('utf8','replace'))
+    if(jsonobject.has_key('result')):
+        jsonobject = jsonobject['result']
+        if isinstance(jsonobject, list):
+            return jsonobject
+        if jsonobject.has_key('files'):
+            return jsonobject['files']
+        elif jsonobject.has_key('movies'):
+            return jsonobject['movies']
+        elif jsonobject.has_key('tvshows'):
+            return jsonobject['tvshows']
+        elif jsonobject.has_key('episodes'):
+            return jsonobject['episodes']
+        elif jsonobject.has_key('musicvideos'):
+            return jsonobject['musicvideos']
+        elif jsonobject.has_key('channels'):
+            return jsonobject['channels']
+        elif jsonobject.has_key('recordings'):
+            return jsonobject['recordings']
+        elif jsonobject.has_key('timers'):
+            return jsonobject['timers']
+        elif jsonobject.has_key('channeldetails'):
+            return jsonobject['channeldetails']
+        elif jsonobject.has_key('recordingdetails'):
+            return jsonobject['recordingdetails']
+        elif jsonobject.has_key('songs'):
+            return jsonobject['songs']
+        elif jsonobject.has_key('albums'):
+            return jsonobject['albums']
+        elif jsonobject.has_key('songdetails'):
+            return jsonobject['songdetails']
+        elif jsonobject.has_key('albumdetails'):
+            return jsonobject['albumdetails']
+        elif jsonobject.has_key('artistdetails'):
+            return jsonobject['artistdetails']
+        elif jsonobject.get('favourites'):
+            return jsonobject['favourites']
+        elif jsonobject.has_key('tvshowdetails'):
+            return jsonobject['tvshowdetails']
+        elif jsonobject.has_key('episodedetails'):
+            return jsonobject['episodedetails']
+        elif jsonobject.has_key('moviedetails'):
+            return jsonobject['moviedetails']
+        elif jsonobject.has_key('setdetails'):
+            return jsonobject['setdetails']
+        elif jsonobject.has_key('musicvideodetails'):
+            return jsonobject['musicvideodetails']
+        elif jsonobject.has_key('sets'):
+            return jsonobject['sets']
+        elif jsonobject.has_key('video'):
+            return jsonobject['video']
+        elif jsonobject.has_key('artists'):
+            return jsonobject['artists']
+        elif jsonobject.has_key('channelgroups'):
+            return jsonobject['channelgroups']
+        elif jsonobject.get('sources'):
+            return jsonobject['sources']
+        elif jsonobject.has_key('addons'):
+            return jsonobject['addons']
+        elif jsonobject.has_key('item'):
+            return jsonobject['item']
+        elif jsonobject.has_key('genres'):
+            return jsonobject['genres']
+        elif jsonobject.has_key('value'):
+            return jsonobject['value']
+        else:
+            return {}
+
+    else:
+        #logMsg("getJson - invalid result for Method %s - params: %s - response: %s" %(method,params, str(jsonobject)))
+        return {}
+        
+def decode_json(jsonobject=None):
+    if(jsonobject.has_key('result')):
+        jsonobject = jsonobject['result']
+        if isinstance(jsonobject, list):
+            return jsonobject
+        if jsonobject.has_key('files'):
+            return jsonobject['files']
+        elif jsonobject.has_key('movies'):
+            return jsonobject['movies']
+        elif jsonobject.has_key('tvshows'):
+            return jsonobject['tvshows']
+        elif jsonobject.has_key('episodes'):
+            return jsonobject['episodes']
+        elif jsonobject.has_key('musicvideos'):
+            return jsonobject['musicvideos']
+        elif jsonobject.has_key('channels'):
+            return jsonobject['channels']
+        elif jsonobject.has_key('recordings'):
+            return jsonobject['recordings']
+        elif jsonobject.has_key('timers'):
+            return jsonobject['timers']
+        elif jsonobject.has_key('channeldetails'):
+            return jsonobject['channeldetails']
+        elif jsonobject.has_key('recordingdetails'):
+            return jsonobject['recordingdetails']
+        elif jsonobject.has_key('songs'):
+            return jsonobject['songs']
+        elif jsonobject.has_key('albums'):
+            return jsonobject['albums']
+        elif jsonobject.has_key('songdetails'):
+            return jsonobject['songdetails']
+        elif jsonobject.has_key('albumdetails'):
+            return jsonobject['albumdetails']
+        elif jsonobject.has_key('artistdetails'):
+            return jsonobject['artistdetails']
+        elif jsonobject.get('favourites'):
+            return jsonobject['favourites']
+        elif jsonobject.has_key('tvshowdetails'):
+            return jsonobject['tvshowdetails']
+        elif jsonobject.has_key('episodedetails'):
+            return jsonobject['episodedetails']
+        elif jsonobject.has_key('moviedetails'):
+            return jsonobject['moviedetails']
+        elif jsonobject.has_key('setdetails'):
+            return jsonobject['setdetails']
+        elif jsonobject.has_key('musicvideodetails'):
+            return jsonobject['musicvideodetails']
+        elif jsonobject.has_key('sets'):
+            return jsonobject['sets']
+        elif jsonobject.has_key('video'):
+            return jsonobject['video']
+        elif jsonobject.has_key('artists'):
+            return jsonobject['artists']
+        elif jsonobject.has_key('channelgroups'):
+            return jsonobject['channelgroups']
+        elif jsonobject.get('sources'):
+            return jsonobject['sources']
+        elif jsonobject.has_key('addons'):
+            return jsonobject['addons']
+        elif jsonobject.has_key('item'):
+            return jsonobject['item']
+        elif jsonobject.has_key('genres'):
+            return jsonobject['genres']
+        elif jsonobject.has_key('value'):
+            return jsonobject['value']
+        else:
+            return {}
+
+    else:
+        #logMsg("getJson - invalid result for Method %s - params: %s - response: %s" %(method,params, str(jsonobject)))
+        return {}
 
 
 def try_encode(text, encoding="utf8"):
@@ -1574,7 +1691,7 @@ def try_decode(text, encoding="utf8"):
     except:
         return text
  
-
+"""
 def sql_ActeurParVideo(itemId=None,TypeVideo=""):     
      ListeActeurs=[] 
      ListeItemFinal=[] 
@@ -1603,7 +1720,6 @@ def sql_ActeurParVideo(itemId=None,TypeVideo=""):
         Details['media_type']=data_out[2]
         Details['role']=data_out[3]
         Details['order']=data_out[4]
-        logMsg("Acteurs du media %s:%s" %(str(Details['media_id']),str(Details['media_type'])),0)
         cursor2=con.cursor()
         cursor2.execute("SELECT * FROM actor WHERE actor_id='%d';" %(int(data_out[0])))
         for data2 in cursor2.fetchall():
@@ -1614,7 +1730,6 @@ def sql_ActeurParVideo(itemId=None,TypeVideo=""):
         
         ListeActeurs.append([Details['order'],Details])
      
-     #logMsg('backend Sql Acteurs %s=' %(itemId.encode('utf8'))+str(ListeActeurs),0)
      LL=[]          
      LL=sorted(ListeActeurs)
      cpt=0
@@ -1652,4 +1767,4 @@ def sql_VideosParActeur(IdActeur=None,DbType=None):
           Donnees.append(json_result)     
      con.close()
      return Donnees
-      
+ """     
