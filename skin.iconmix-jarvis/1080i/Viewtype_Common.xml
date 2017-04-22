@@ -523,6 +523,9 @@
 			<control type="group">
 				<posx>-10</posx>
 				<posy>130</posy>
+				
+				
+				
 				<!-- Unfocused Item - Poster -->
 				<include>VuePosterChoix</include>
 				<!-- Unfocused Item - Watched Overlay -->
@@ -538,6 +541,7 @@
 					<include>ShowTotalTvEp</include>		
 				</control>
 			<include>AnimationCacheNonSelect</include>
+			
 			</control>
 		</itemlayout>
 		<focusedlayout width="380" height="520">

@@ -440,19 +440,20 @@ class Main:
                                TvSh=xbmc.getInfoLabel("ListItem.TVShowTitle") 
                                TvSe=xbmc.getInfoLabel("ListItem.Season")
                                TvId=self.selecteditem
+                               TvNbKodi=xbmc.getInfoLabel("Container.NumItems")
                                if TvId and TvSe and TvSh :
                                  if TvSe!=self.TvSeason or TvSh!=self.TvShow : 
                                    self.windowhome.clearProperty('IconMixEpSa')
-                                   self.EpSa=utils.getepisodes(TvId,int(TvSe),self.DBTYPE)
+                                   self.EpSa=utils.getepisodes(TvId,int(TvSe),self.DBTYPE,TvNbKodi)
                                   # utils.logMsg('utils.getepisodes',0)
-                                   if self.EpSa>0:                                     
-                                     self.windowhome.setProperty('IconMixEpSa',str(self.EpSa))
+                                   if self.EpSa>=0:                                     
+                                     self.windowhome.setProperty('IconMixEpSa',str(self.EpSa))                                       
                                      self.TvShow=TvSh
                                      self.TvSeason=TvSe
-                                   else:
-                                        self.windowhome.clearProperty('IconMixEpSa')
-                                        self.TvShow=""
-                                        self.TvSeason=""
+                                   else:                                     
+                                     self.windowhome.clearProperty('IconMixEpSa')
+                                     self.TvShow=""
+                                     self.TvSeason=""                                      
                                else : self.windowhome.clearProperty('IconMixEpSa')
                           if (self.DBTYPE=="director" or self.DBTYPE=="actor") and "Default" in xbmc.getInfoLabel("ListItem.Icon") :
                                #utils.logMsg('Directeurs.',0)

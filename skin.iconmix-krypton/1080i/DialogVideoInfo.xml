@@ -295,7 +295,7 @@
 					<font>impact</font>
 					<textcolor>TextNF</textcolor>
 					<label>$INFO[ListItem.Title]</label>
-					<visible>!Container.Content(tvshows)+!Container.Content(episodes)</visible>
+					<visible>!Container.Content(episodes)</visible>
 				</control>
 				<control type="fadelabel">
 					<posy>20</posy>
@@ -309,8 +309,8 @@
 					<scrollspeed>20</scrollspeed>
 					<font>impact</font>
 					<textcolor>TextNF</textcolor>
-					<label>[COLOR=yellow][I]$INFO[ListItem.TVShowTitle,,:][/I][/COLOR]   $INFO[ListItem.Title]</label>
-					<visible>Container.Content(episodes) | Container.Content(tvshows)</visible>
+					<label>[COLOR=yellow][I]$INFO[ListItem.TVShowTitle,,:][/I][/COLOR] $INFO[ListItem.Title]</label>
+					<visible>Container.Content(episodes)</visible>
 				</control>
 
 				<!-- Tagline -->
@@ -478,7 +478,7 @@
 					<textcolor>MPAADescription</textcolor>
 					<label>$INFO[ListItem.FilenameAndPath]</label>
 				</control>
-				<visible> !String.IsEmpty(ListItem.FilenameAndPath)</visible>
+				<visible> !String.IsEmpty(ListItem.FilenameAndPath)+Skin.HasSetting(ShowFilePath)</visible>
 			</control>
 			<!------------------------------- prochain épisode ----------------------------------------->
 			<control type="label">

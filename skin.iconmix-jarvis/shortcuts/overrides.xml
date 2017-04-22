@@ -128,9 +128,13 @@
 	<backgrounddefault defaultID="livetv">$INFO[Window(Home).Property(SkinHelper.PvrBackground)]</backgrounddefault>
 	-->
 	<!-- Thumbnails (Home2 icons, also specified in shortcuts/mainmenu.DATA.xml) -->
+	<thumbnail label="3D">Aicons/3d.png</thumbnail>
+	<thumbnail label="Acteurs">Aicons/acteurs.png</thumbnail>
+  <thumbnail label="Animations">Aicons/animations.png</thumbnail>
 	<thumbnail label="32032">Aicons/playdisc.png</thumbnail>
 	<thumbnail label="342">Aicons/movies.png</thumbnail>
 	<thumbnail label="20343">Aicons/tvshows.png</thumbnail>
+	<thumbnail label="20343">Aicons/serienews.png</thumbnail>
 	<thumbnail label="10006">Aicons/videos.png</thumbnail>
 	<thumbnail label="31334">Aicons/trailers.png</thumbnail>
 	<thumbnail label="32022">Aicons/livetv.png</thumbnail>
@@ -143,7 +147,18 @@
 	<thumbnail label="1036">Aicons/favourites.png</thumbnail>
 	<thumbnail label="137">Aicons/search.png</thumbnail>
 	<thumbnail label="10004">Aicons/settings.png</thumbnail>
+	<thumbnail label="10004">Aicons/config_128.png</thumbnail>
+	<thumbnail label="10004">Aicons/settings_256.png</thumbnail>
 	<thumbnail label="13005">Aicons/shutdown.png</thumbnail>
+  <thumbnail label="Veille">Aicons/dormir.png</thumbnail>
+  <thumbnail label="Cancel">Aicons/cancel_128.png</thumbnail>
+
+  
+  <thumbnail label="UsbDisk">Aicons/disqueusb.png</thumbnail>
+ 
+  <thumbnail label="Fichiers">Aicons/fichiers.png</thumbnail>  
+  <thumbnail label="Realisateurs">Aicons/realisateurs.png</thumbnail>
+  <thumbnail label="Reboot">Aicons/reboot.png</thumbnail>
 	
 	
 	<propertySettings property="backgroundplayliststyle" buttonID="1008" showNone="false" title="$LOCALIZE[31916]" />

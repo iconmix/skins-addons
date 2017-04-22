@@ -49,7 +49,7 @@
 <include file="VueExperimentale.xml" />
 
 <include name="BoutonCommun">
-	<width>440</width>
+	<width>440²</width>
 	<height>40</height>
 	<align>left</align>
 	<font>METF_DialogLarge</font>
@@ -90,17 +90,28 @@
 				<effect type="slide"  start="0,0" end="450,0" time="1" delay="1" reversible="false"/>
 				<effect type="fade"  start="0" end="100" time="100" delay="1" reversible="false"/>
 			</animation>
-			<visible>[[[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[StringCompare(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!Substring(ListItem.Label,..)</visible>
-			<control type="image">
+			<visible>[[[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[StringCompare(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..)</visible>
+			
+			<control type="image"> <!--- CADRE DES ACTEURS DEFILANTS---->
 				<top>60</top>
-				<left>30</left>
-				<width>405</width>
+				<left>15</left>
+				<width>435</width>
 				<height>220</height>
 				<texture>frames/Dialog_GlassActeur3.png</texture>
 				<colordiffuse>DialogBackgroundColor</colordiffuse>
 				<aspectratio  scalediffuse="true">stretch</aspectratio>
 				<visible>Control.IsVisible(1998)+IntegerGreaterThan(Container(1998).NumItems,0)</visible>
 			</control>
+			<!--- CADRE DES ACTEURS DEFILANTS
+			<control type="image"> 
+				<top>60</top>
+				<left>30</left>
+				<width>405</width>
+				<height>220</height>
+				<texture>$INFO[Container(1998).ListItem(1).Icon]</texture>
+				<aspectratio  scalediffuse="true">stretch</aspectratio>
+				<visible>Control.IsVisible(1998)+IntegerGreaterThan(Container(1998).NumItems,0)</visible>
+			</control>---->
 
 
 			<control type="fixedlist" id="1998"> <!-- liste des acteurs -->
@@ -110,7 +121,7 @@
 				<onfocus condition="!IsEmpty(Window(Home).Property(ActeurVideoReset))">Action(firstpage)</onfocus>
 
 				<posx>46</posx>
-				<posy>115</posy>
+				<posy>125</posy>
 				<ondown>5051</ondown>
 				<onback>Action(firstpage)</onback>
 				<onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
@@ -127,13 +138,13 @@
 				<align>left</align>
 				<itemgap>1</itemgap>
 				<orientation>horizontal</orientation>
-				<visible>[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!Substring(ListItem.Label,..)</visible>
+				<visible>[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..)</visible>
 				<autoscroll delay="4000" repeat="5000" time="5000">!Control.HasFocus(1998)+!Control.HasFocus(5051)+!IsEmpty(Window(Home).Property(ActeurVideoReset))</autoscroll>-->
 				<pagecontrol>60</pagecontrol>
 				<!-- <content>$VAR[contentPanelActeurs]</content> -->
 				<resetonlabelchange>true</resetonlabelchange>
 				<itemlayout width="75">
-					<control type="image">
+					<control type="image">				  
 						<width>75</width>
 						<height>110</height>
 						<texture  diffuse="frames/acteurframe.png" fallback="DefaultThumb.png">$INFO[ListItem.Icon]</texture>
@@ -143,8 +154,8 @@
 				</itemlayout>
 				<focusedlayout width="75">
 					<control type="image">
-						<animation type="Conditional" condition="Control.HasFocus(1998)">
-							<effect type="zoom"  center="37,55" start="100" end="110" time="5" delay="1" reversible="true"/>
+						<animation type="Conditional" condition="true">
+							<effect type="zoom"  center="37,55" start="100" end="120" time="5" delay="1" reversible="true"/>
 						</animation>
 						<width>75</width>
 						<height>110</height>
@@ -158,13 +169,12 @@
 				<control type="label">
 					<posy>82</posy>
 					<posx>75</posx>
-					<font>comic24</font>
+					<font>comic20</font>
 					<width>355</width>
 					<height>80</height>
 					<align>left</align>
 					<label>[COLOR=white][I]$INFO[ListItem.Director][/I][/COLOR]</label>
 				</control>
-
 				<visible>!IsEmpty(ListItem.Director)</visible>
 				<control type="image" id="5055">
 					<posy>81</posy>
@@ -187,11 +197,11 @@
 			</control>
 
 
-			<control type="label"> <!---- acteur sélectionné -->
-				<posy>218</posy>
+			<control type="fadelabel"> <!---- acteur sélectionné -->
+				<posy>230</posy>
 				<posx>44</posx>
-				<font>comic24</font>
-				<width>355</width>
+				<font>comic20</font>
+				<width>365</width>
 				<height>80</height>
 				<align>center</align>
 				 <label>[COLOR=yellow]$INFO[Container(1998).ListItem.Label][/COLOR]</label>
@@ -432,12 +442,12 @@
 							<align>center</align>
 							<texture>acteurs/films.png</texture>
 							<aspectratio align="center" aligny="center">keep</aspectratio>
-							<visible>Substring(ListItem.DBTYPE,movie)</visible>
+							<visible>SubString(ListItem.DBTYPE,movie)</visible>
 						</control>
 						<control type="image">
 							<texture>acteurs/series.png</texture>
 							<aspectratio align="center" aligny="center">keep</aspectratio>
-							<visible>!Substring(ListItem.DBTYPE,movie)</visible>
+							<visible>!SubString(ListItem.DBTYPE,movie)</visible>
 						</control>
 					</control>
 					<control type="group">
@@ -1092,9 +1102,9 @@
 	</control>
 	<control type="image">
 		<posy>-7</posy>
-		<posx>50</posx>
-		<width>24</width>
-		<height>24</height>
+		<posx>30</posx>
+		<width>32</width>
+		<height>32</height>
 		<texture>$INFO[ListItem.Overlay]</texture>
 		<colordiffuse>WatchedOverlay</colordiffuse>
 		<visible>!ListItem.IsResumable + [[[Container.Content(movies) | Container.Content(sets)] + !Skin.HasSetting(HideMovieWatchedOverlays)] | [![Container.Content(movies) | Container.Content(sets)] + !Skin.HasSetting(HideTVWatchedOverlays)]]</visible>

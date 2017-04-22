@@ -51,6 +51,8 @@
 				<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
 				<label>$LOCALIZE[629]: $INFO[Container.Viewmode]</label>
 				<onclick>RunScript(script.iconmixtools,setview=True)</onclick>
+								<visible>!String.IsEmpty(Container.ViewMode)</visible>
+
 			</control>
 			<control type="button" id="2100">
 				<!-- SAGA -->
@@ -160,6 +162,7 @@
 						<onclick condition="Window.IsVisible(10025)">UpdateLibrary(video)</onclick>
 						<onclick condition="Window.IsVisible(10502)">UpdateLibrary(music)</onclick>
 						<visible>![library.isscanningvideo]+![library.isscanningmusic]</visible>
+						<visible>!String.IsEmpty(Container.Content)</visible>
 					</control>
 
 					<control type="button" id="2106">
@@ -179,6 +182,7 @@
 						<onclick condition="Window.IsVisible(10025)">CleanLibrary(video)</onclick>
 						<onclick condition="Window.IsVisible(10502)">CleanLibrary(music)</onclick>
 						<visible>![library.isscanningvideo]+![library.isscanningmusic]</visible>
+						<visible>!String.IsEmpty(Container.Content)</visible>
 					</control>
 		</control>
 

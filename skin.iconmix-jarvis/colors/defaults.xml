@@ -58,7 +58,7 @@
 	<color name="MediaDetailsYear">eef8cd22</color>
 	<color name="MediaDetailsDuration">eef8cd22</color>
 	<color name="MediaDetailsEpisodes">eef8cd22</color>
-	<color name="WatchedOverlay">FFc89008</color>
+	<color name="WatchedOverlay">FFFFFFFF</color>
 	<color name="BulletDiffuse">ddFFFFFF</color>
 	<color name="ArrowDiffuse">FFc89008</color>
 	<color name="BannerFrameNF">ee3c95c8</color>

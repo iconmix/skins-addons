@@ -12,9 +12,13 @@
 				<height>775</height>
 				<scrolltime>100</scrolltime>
 				<orientation>vertical</orientation>
+				<onright>585</onright>
+				<onleft>585</onleft>
+			<!--	<onright>Control.Move(585,1)</onright>
 				<onleft>Action(lastpage)</onleft>
 				<onright>Action(firstpage)</onright>
-				<pagecontrol>60</pagecontrol>
+				
+				<pagecontrol>60</pagecontrol>-->
 				<preloaditems>2</preloaditems>
 				<include>Animation_ZoomInZoomOut</include>
 				<include>Animation_HiddenByInfo</include>
@@ -29,6 +33,7 @@
 							<height>240</height>
 							<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Art(poster)]</texture>
 							<aspectratio scalediffuse="true">stretch</aspectratio>
+							<visible>!String.IsEmpty(ListItem.Art(poster))</visible>
 						</control>
 						<control type="image">
 							<posx>0</posx>
@@ -37,7 +42,17 @@
 							<height>240</height>
 							<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
 							<aspectratio scalediffuse="true">keep</aspectratio>
-							<visible>String.IsEmpty(ListItem.Art(poster))</visible>
+							<visible>String.IsEmpty(ListItem.Art(poster))+!Container.Content(genres)</visible>
+						</control>
+							<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>160</width>
+							<height>240</height>
+							<texture fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
+				<aspectratio scalediffuse="false">keep</aspectratio>
+				<visible>String.IsEmpty(ListItem.Art(poster))+Container.Content(genres)</visible>
+							
 						</control>
 						<control type="image">
 								<posx>0</posx>
@@ -46,6 +61,15 @@
 							<height>240</height>
 								<texture border="-17">showcase_shadow.png</texture>
 							</control>
+							<control type="image">
+				<posx>120</posx>
+				<posy>200</posy>
+				<width>38</width>
+				<height>38</height>
+				<texture>$INFO[ListItem.Overlay]</texture>
+				<colordiffuse>WatchedOverlay</colordiffuse>
+				<visible>!Skin.HasSetting(HideTVWatchedOverlays)</visible>
+			</control>
 					<include>ShowTotalTvEp</include>
 					<include>AnimationCacheNonSelect</include>
 			</control>
@@ -55,17 +79,18 @@
 					<control type="group">
 					<animation type="Focus" reversible="false">
 						<effect type="zoom" center="auto" start="100" end="130" time="200" tween="sine" easing="inout" />
-						<effect type="rotatey" center="85" start="0" end="360" time="2000" tween="bounce" easing="out"/>
+						<!-- <effect type="rotatey" center="85" start="0" end="360" time="2000" tween="bounce" easing="out"/> -->
 					</animation>
 						<animation reversible="true" effect="zoom" center="auto" start="130" end="100" time="200" tween="sine" easing="inout">unfocus</animation>
 						
-						<control type="image">
+							<control type="image">
 							<posx>0</posx>
 							<posy>0</posy>
 							<width>160</width>
 							<height>240</height>
 							<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Art(poster)]</texture>
 							<aspectratio scalediffuse="true">stretch</aspectratio>
+							<visible>!String.IsEmpty(ListItem.Art(poster))</visible>
 						</control>
 						<control type="image">
 							<posx>0</posx>
@@ -74,7 +99,17 @@
 							<height>240</height>
 							<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
 							<aspectratio scalediffuse="true">keep</aspectratio>
-							<visible>String.IsEmpty(ListItem.Art(poster))</visible>
+							<visible>String.IsEmpty(ListItem.Art(poster))+!Container.Content(genres)</visible>
+						</control>
+							<control type="image">
+							<posx>0</posx>
+							<posy>0</posy>
+							<width>160</width>
+							<height>240</height>
+							<texture fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
+				<aspectratio scalediffuse="false">keep</aspectratio>
+				<visible>String.IsEmpty(ListItem.Art(poster))+Container.Content(genres)</visible>
+							
 						</control>
 						<control type="image">
 								<posx>0</posx>
@@ -83,7 +118,15 @@
 							<height>240</height>
 								<texture border="-17">showcase_shadow.png</texture>
 							</control>
-						
+						<control type="image">
+				<posx>120</posx>
+				<posy>200</posy>
+				<width>38</width>
+				<height>38</height>
+				<texture>$INFO[ListItem.Overlay]</texture>
+				<colordiffuse>WatchedOverlay</colordiffuse>
+				<visible>!Skin.HasSetting(HideTVWatchedOverlays)</visible>
+			</control>
 					</control>
 				</focusedlayout> 
 			</control>

@@ -422,12 +422,12 @@ def UpdateSagas(Une=None,Toutes=None):
 
 
 # --------------------------------------------SERIES-------------------------------------------
-def getepisodes(ItemIdxx=None,saisonID=None,DBtype=None):
+def getepisodes(ItemIdxx=None,saisonID=None,DBtype=None,NbEpisodesKodi=None):
   episodesDB= ""
   AllSeasons= []
   AllEpisodes=[]
   ArrayCollection={}
-  NbEpisodes=0
+  NbEpisodes=-1
   NbKodi=0
   itemId=""
   ItemIdx=""
@@ -505,8 +505,12 @@ def getepisodes(ItemIdxx=None,saisonID=None,DBtype=None):
                      try:
                         NbEpisodes=int(ArrayCollection["saisons"][str(saisonID)]["NbEpisodes"])
                      except:
-                        NbEpisodes=0           
-  
+                        NbEpisodes=-1
+            logMsg("nbepisodes kodi :"+str(NbEpisodesKodi)+"/"+str(NbEpisodes),0)
+            if NbEpisodes==int(NbEpisodesKodi):
+                 logMsg("fuck !!!",0)
+                 NbEpisodes=0 #complet           
+  logMsg("nbepisodes kodi :"+str(NbEpisodesKodi)+"/"+str(NbEpisodes),0)
   return NbEpisodes
   
 def UpdateSeries(Une=None,Toutes=None):
@@ -652,7 +656,7 @@ def getallepisodes(ItemIdx=None,KodiId=None,savepath=None,NbKodi=None,ShowBusy=N
      #itemid = id chez themoviedb du tvshow
      if KodiId :
          itemId=KodiId
-         ArrayCollection["name"]=xbmc.getInfoLabel("ListItem.TVShowTitle")
+         
          ArrayCollection["tmbid"]=""
          ArrayCollection["kodiid"]=KodiId
          ArrayCollection["nbkodi"]=NbKodi
@@ -682,6 +686,7 @@ def getallepisodes(ItemIdx=None,KodiId=None,savepath=None,NbKodi=None,ShowBusy=N
           
          if json_data:
              SaisonTab=json_data.get("show")
+             ArrayCollection["name"]=SaisonTab.get("title")
              ArrayCollection["imdbid"]=SaisonTab.get("imdb_id")
              ArrayCollection["sa_id"]=SaisonTab.get("id")
              SaisonTab=SaisonTab.get("seasons_details")
@@ -739,6 +744,21 @@ def getDiffusionTV(ItemIdxx=None,saisonID=None,DBtype=None):
   nowX2=nowX
   txx=0
   tsea=0
+  #betaseries : https://api.betaseries.com/episodes/next?key=46be59b5b866&thetvdb_id=261690
+  # https://api.betaseries.com/shows/episodes?key=46be59b5b866&thetvdb_id=268592&season=4    épisodes de "the 100 saison 4"
+  #https://api.betaseries.com/shows/episodes?key=46be59b5b866&thetvdb_id=268592  tous les épisodes de la série
+  # { "episodes": 
+  # [
+  # {"id":315312,"thetvdb_id":4543295,"youtube_id":null,"title":"Pilot","season":1,"episode":1,
+  #  "show":{"id":6622,"thetvdb_id":268592,"title":"The 100","in_account":false},
+  #  "code":"S01E01","global":1,"special":0,"description":"97 ans apr\u00e8s une guerre nucl\u00e9aire, les derniers humains r\u00e9sident dans une station orbitale connue sous le nom de \u00ab The Ark \u00bb. Face \u00e0 des ressources qui deviennent insuffisantes, 100 d\u00e9linquants juv\u00e9niles sont envoy\u00e9s sur Terre pour d\u00e9couvrir si elle est peut-\u00eatre de nouveau vivable.",
+  #  "date":"2014-03-19","note":{"total":3479,"mean":4.21,"user":0},"user":{"seen":false,"downloaded":false},
+  # "comments":"89","resource_url":"https:\/\/www.betaseries.com\/episode\/the-hundred\/s01e01","subtitles":[]},
+  # ...
+  #  x episodes
+  # ]}
+  
+  
   
   #logMsg("GetAirDates : "+ str(ItemIdxx)+"/"+str(saisonID)+"/"+str(DBtype),0)
   if ItemIdxx and DBtype and saisonID:

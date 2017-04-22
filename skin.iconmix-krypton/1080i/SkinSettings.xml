@@ -364,12 +364,7 @@
 						<selected>Skin.HasSetting(Hide_ExtraMediaFlags)</selected>
 					</control>
 					
-					<control type="radiobutton" id="507">
-						<include>SettingsLabel</include>
-						<label>$LOCALIZE[31481]</label>
-						<onclick>Skin.ToggleSetting(CacheFond)</onclick>
-						<selected>Skin.HasSetting(CacheFond)</selected>
-					</control>
+					
 					<control type="radiobutton" id="508">
 						<include>SettingsLabel</include>
 						<label>$LOCALIZE[32005]</label>
@@ -713,6 +708,12 @@
 						<onclick>Skin.ToggleSetting(ShowEpisodesNumber)</onclick>
 						<selected>Skin.HasSetting(ShowEpisodesNumber)</selected>
 						<visible>!Skin.String(ShowUnwatchedEpisodesNumber)</visible>
+					</control>
+					<control type="radiobutton" id="899">
+						<include>SettingsLabel</include>
+						<label>$LOCALIZE[31481]</label>
+						<onclick>Skin.ToggleSetting(CacheFond)</onclick>
+						<selected>Skin.HasSetting(CacheFond)</selected>
 					</control>
 					<!--<control type="radiobutton" id="800">
 						<include>SettingsLabel</include>

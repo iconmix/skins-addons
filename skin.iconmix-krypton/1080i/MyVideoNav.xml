@@ -820,7 +820,19 @@
 					<label>[B]$INFO[ListItem.TVShowTitle][/B] - $LOCALIZE[31761] $INFO[ListItem.Season] - [I][COLOR=yellow]($INFO[Container.NumItems]$INFO[Window(Home).Property(iconmixEpSa),/,] $LOCALIZE[20360])[/COLOR][/I]</label>
 					<scroll>true</scroll>
 					<scrollout>true</scrollout>
+					<visible>Integer.IsGreater(Window(Home).Property(iconmixEpSa),0)</visible>
 				</control>
+				<control type="fadelabel">
+					<aligny>center</aligny>
+					<align>center</align>
+					<font>PlotFont36</font>
+					<textcolor>white</textcolor>
+					<shadowcolor>ff000000</shadowcolor>
+					<label>[COLOR=yellow][I]( $LOCALIZE[20373] $INFO[ListItem.Season] $LOCALIZE[31898] )[/I][/COLOR]</label>
+					<scroll>true</scroll>
+					<scrollout>true</scrollout>
+					<visible>Integer.IsEqual(Window(Home).Property(iconmixEpSa),0)</visible>
+					</control>
 			</control>
 
 
@@ -1029,7 +1041,7 @@
 		<control type="label">
 	<posx>700</posx>
 
-	<label>Vertical:$INFO[Window(Home).Property(IconMixVerticalNavigation)][CR]Icon:$INFO[ListItem.Icon][CR]Trailer:$INFO[ListItem.Trailer][CR][CR]TVshow:$INFO[ListItem.TVShowTitle][CR]IconMixDirector:$INFO[Window(10000).Property(IconMixDirector)][CR]ID=$INFO[ListItem.DBID][CR]SETID=$INFO[ListItem.setID][CR]IMDB=$INFO[ListItem.IMDBNumber][CR]Type=$INFO[ListItem.DBTYPE][CR]Content:$INFO[Container.Content][CR]$INFO[Container.FolderPath][CR]FolderName:$INFO[Container.FolderName][CR]$INFO[ListItem.FileNameAndPath][CR]$INFO[ListItem.Path][CR]ID1999=$INFO[Container(1999).ListItem.DBID][CR]TYPE1999=$INFO[Container(1999).ListItem.DBTYPE][CR]NB1999=$INFO[Container(1999).NumItems][CR]IMDB1999=$INFO[Container(1999).ListItem.Property(IMDBNumber)][CR]TMDB1999=$INFO[Container(1999).ListItem.Property(TMDBNumber)][CR]ID1999C=$INFO[Container(1999).ListItem.Property(DBID)][CR]$INFO[Container(1999).ListItem.FileNameAndPath][CR]ID1998=$INFO[Container(1998).ListItem.Property(DBID)]</label>
+	<label>Epis:$INFO[Window(Home).Property(iconmixEpSa)][CR]Icon:$INFO[Container.NumItems][CR]Trailer:$INFO[ListItem.Trailer][CR][CR]TVshow:$INFO[ListItem.TVShowTitle][CR]IconMixDirector:$INFO[Window(10000).Property(IconMixDirector)][CR]ID=$INFO[ListItem.DBID][CR]SETID=$INFO[ListItem.setID][CR]IMDB=$INFO[ListItem.IMDBNumber][CR]Type=$INFO[ListItem.DBTYPE][CR]Content:$INFO[Container.Content][CR]$INFO[Container.FolderPath][CR]FolderName:$INFO[Container.FolderName][CR]$INFO[ListItem.FileNameAndPath][CR]$INFO[ListItem.Path][CR]ID1999=$INFO[Container(1999).ListItem.DBID][CR]TYPE1999=$INFO[Container(1999).ListItem.DBTYPE][CR]NB1999=$INFO[Container(1999).NumItems][CR]IMDB1999=$INFO[Container(1999).ListItem.Property(IMDBNumber)][CR]TMDB1999=$INFO[Container(1999).ListItem.Property(TMDBNumber)][CR]ID1999C=$INFO[Container(1999).ListItem.Property(DBID)][CR]$INFO[Container(1999).ListItem.FileNameAndPath][CR]ID1998=$INFO[Container(1998).ListItem.Property(DBID)][CR]Poster:$INFO[ListItem.Art(poster)][CR]Icon:$INFO[ListItem.Overlay]</label>
 	</control>
 
 

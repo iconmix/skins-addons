@@ -533,6 +533,7 @@
 			<control type="group">
 				<posx>-10</posx>
 				<posy>130</posy>
+		
 				<!-- Unfocused Item - Poster -->
 				<include>VuePosterChoix</include>
 				<!-- Unfocused Item - Watched Overlay -->
@@ -576,6 +577,7 @@
 		</focusedlayout>
 		
 	</include>
+
 	
 	<include name="PosterLargeViewCommon_BrowserVertical">
 		<posx>20</posx>
