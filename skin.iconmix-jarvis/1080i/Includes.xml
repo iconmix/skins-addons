@@ -893,7 +893,7 @@
         <align>left</align>
         <aligny>center</aligny>
         <font>comic24</font>
-        <autoscroll delay="10000" time="3500" repeat="10000">true</autoscroll>
+        <autoscroll delay="10000" time="3500" repeat="10000">Control.HasFocus(5051)</autoscroll>
         <textcolor>lightgrey</textcolor>
         <label>$INFO[Window(Home).Property(Actorbiographie)]</label>
       </control>
