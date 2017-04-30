@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 		<include name="VueChoix">
-		<control type="label" id="1010">
-			<posy>-1000</posy>
-			<label>$VAR[VisibleViewMode]</label>
-			<width>1</width>
-			<height>1</height>
-		</control>
+	
 
 		<!-- pochette -->
 		<control type="group">
-			<visible>!String.IsEqual(Control.GetLabel(1010),3)+!Container.Content(Genres)</visible>
+			<visible>!String.IsEqual(Control.GetLabel(1099),3)+!Container.Content(Genres)</visible>
 			<control type="image">
 				<posx>20</posx>
 				<posy>21</posy>
@@ -42,7 +37,7 @@
 				<visible>String.IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
 			</control>
 			<control type="group">
-				<visible>String.IsEqual(Control.GetLabel(1010),2)+!Container.Content(Genres)</visible>
+				<visible>String.IsEqual(Control.GetLabel(1099),2)+!Container.Content(Genres)</visible>
 				<control type="image">
 					<description>Glass overlay</description>
 					<posx>20</posx>
@@ -57,7 +52,7 @@
 
 		<!-- arrondies -->
 		<control type="group">
-			<visible>String.IsEqual(Control.GetLabel(1010),3)|Container.Content(Genres)</visible>
+			<visible>String.IsEqual(Control.GetLabel(1099),3)|Container.Content(Genres)</visible>
 			<control type="image">
 				<posx>20</posx>
 				<posy>21</posy>

@@ -352,7 +352,7 @@
 		</animation>
 	</include>
 	<include name="Animation_NavMenu">
-	<animation type="Conditional" condition="!ControlGroup(7000).HasFocus()+!ControlGroup(7002).HasFocus()+!ControlGroup(7008).HasFocus()">
+	<animation type="Conditional" condition="!ControlGroup(7000).HasFocus()+!ControlGroup(996).HasFocus()+!ControlGroup(7002).HasFocus()+!ControlGroup(7008).HasFocus()">
 		<effect type="zoom" start="100" end="0" center="auto" tween="back" easing="in" time="400" />
 		<effect type="fade" start="100" end="0" time="400" />
 	</animation>

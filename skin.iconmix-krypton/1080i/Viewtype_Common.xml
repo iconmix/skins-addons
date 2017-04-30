@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 	<include name="VuePosterChoix">
-		<control type="label" id="1010">
-			<posy>-1000</posy>
-			<label>$VAR[VisibleViewMode]</label>
-			<width>1</width>
-			<height>1</height>
-		</control>
+		
 
 		<!-- pochette -->
 		<control type="group">
-			<visible>!String.IsEqual(Control.GetLabel(1010),3)+!Container.Content(Genres)</visible>
+			<visible>!String.IsEqual(Control.GetLabel(1099),3)+!Container.Content(Genres)</visible>
 			<control type="image">
 				<posx>20</posx>
 				<posy>21</posy>
@@ -45,7 +40,7 @@
 				<visible>String.IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
 			</control>
 			<control type="group">
-				<visible>String.IsEqual(Control.GetLabel(1010),2)+!Container.Content(Genres)</visible>
+				<visible>String.IsEqual(Control.GetLabel(1099),2)+!Container.Content(Genres)</visible>
 				<control type="image">
 					<description>Glass overlay</description>
 					<posx>17</posx>
@@ -61,7 +56,7 @@
 
 		<!-- arrondies -->
 		<control type="group">
-			<visible>String.IsEqual(Control.GetLabel(1010),3)|Container.Content(Genres)</visible>
+			<visible>String.IsEqual(Control.GetLabel(1099),3)|Container.Content(Genres)</visible>
 			<control type="image">
 				<posx>20</posx>
 				<posy>21</posy>
@@ -107,17 +102,12 @@
 	</include>
 
 	<include name="VuePosterChoixLarge">
-		<control type="label" id="1010">
-			<posy>-1000</posy>
-			<label>$VAR[VisibleViewMode]</label>
-			<width>1</width>
-			<height>1</height>
-		</control>
+		
 
 		<!-- pochette -->
 		<control type="group">
 			<posy>10</posy>
-			<visible>!String.IsEqual(Control.GetLabel(1010),3)+!Container.Content(Genres)</visible>
+			<visible>!String.IsEqual(Control.GetLabel(1099),3)+!Container.Content(Genres)</visible>
 			<control type="image">
 				<posx>40</posx>
 				<posy>41</posy>
@@ -153,7 +143,7 @@
 				<visible>String.IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
 			</control>
 			<control type="group">
-				<visible>String.IsEqual(Control.GetLabel(1010),2)+!Container.Content(Genres)</visible>
+				<visible>String.IsEqual(Control.GetLabel(1099),2)+!Container.Content(Genres)</visible>
 				<control type="image">
 					<description>Glass overlay</description>
 					<posx>37</posx>
@@ -170,7 +160,7 @@
 		<!-- arrondies -->
 		<control type="group">
 			<posy>10</posy>
-			<visible>String.IsEqual(Control.GetLabel(1010),3)|Container.Content(Genres)</visible>
+			<visible>String.IsEqual(Control.GetLabel(1099),3)|Container.Content(Genres)</visible>
 			<control type="image">
 				<posx>40</posx>
 				<posy>41</posy>

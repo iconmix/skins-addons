@@ -411,7 +411,7 @@
 					<font>METF_InfoTextLarger</font>
 					<textcolor>MediaDetailsEpisodes</textcolor>
 					<label>Statut : $LOCALIZE[16102]</label>
-					<visible>Container.Content(episodes) + String.Integer.IsEqual(ListItem.Overlay,OverlayWatched.png)</visible>
+					<visible>Container.Content(episodes) + String.IsEqual(ListItem.Overlay,OverlayWatched.png)</visible>
 				</control>
 			</control>
 			<!----------------------------------------------------------------------------------------------------->

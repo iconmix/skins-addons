@@ -12,6 +12,7 @@
 				<height>775</height>
 				<scrolltime>100</scrolltime>
 				<orientation>vertical</orientation>
+				
 				<onright>585</onright>
 				<onleft>585</onleft>
 			<!--	<onright>Control.Move(585,1)</onright>

@@ -1,7 +1,8 @@
 # coding: utf-8
 #from __future__ import unicode_literals
 import resources.lib.Utils as utils
-import datetime
+from datetime import datetime,timedelta
+import _strptime
 import urlparse
 import time
 from time import sleep
@@ -94,7 +95,42 @@ class Main:
                 if not KodiLocal: 
                     utils.getFilmsTv(infotype,Id.encode('utf8'))
                 else:
+                    
+                    self.windowhome.clearProperty('Actorbiographie')
+                    self.windowhome.clearProperty('Actornaissance')
+                    self.windowhome.clearProperty('Actordeces')                                                 
+                    self.windowhome.clearProperty('Actorlieunaissance')
+                    self.windowhome.clearProperty('ActorAge')
                     utils.getFilmsParActeur(xbmc.getInfoLabel("ListItem.DBTYPE"),Id.encode('utf8'))
+                    Acteur=utils.try_decode(Id.encode('utf8')) 
+                    ActeurId=str(utils.GetActeurId(Acteur))
+                    if ActeurId:
+                       InfoSup=utils.GetActeurInfo(ActeurId) 
+                       if InfoSup :        
+                        self.windowhome.setProperty('Actorbiographie',InfoSup.get("biographie"))
+                        self.windowhome.setProperty('Actorlieunaissance',InfoSup.get("lieunaissance"))  
+                        
+                        InfoDate= InfoSup.get("naissance")
+                          
+                        if InfoDate:                         
+                           XBRegion=str(xbmc.getRegion('dateshort'))
+                           if XBRegion=="%d/%m/%Y":                             
+                             self.windowhome.setProperty('Actornaissance',str(InfoDate[8:10]+"/"+InfoDate[5:7]+"/"+InfoDate[0:4])) 
+                           else:                             
+                             self.windowhome.setProperty('Actornaissance',str(InfoDate))                                                             
+                        InfoDate= InfoSup.get("deces")                   
+                        if InfoDate:
+                          XBRegion=str(xbmc.getRegion('dateshort'))
+                          if XBRegion=="%d/%m/%Y":                             
+                             self.windowhome.setProperty('Actordeces',str(InfoDate[8:10]+"/"+InfoDate[5:7]+"/"+InfoDate[0:4])) 
+                          else:                             
+                             self.windowhome.setProperty('Actordeces',str(InfoDate))
+                          Age=""
+                        else:
+                          Age =  str(int(datetime.now().date().year) - int(InfoSup.get("naissance")[0:4])) 
+                        self.windowhome.setProperty('Actorage',Age)  
+                        
+                        
                     
                 
                 
@@ -207,6 +243,7 @@ class Main:
                      Titre=xbmc.getInfoLabel("Container(1999).ListItem.Label").decode('utf-8','ignore')
                      if TMDBID=='' and IMDBID:
                          TMDBID=utils.get_externalID(IMDBID,'movie')
+                         
                 if ActeursBio=="noninf" :
                      #SAGA
                      IMDBID=xbmc.getInfoLabel("Container(5002).ListItem.Property(IMDBNumber)")
@@ -219,6 +256,7 @@ class Main:
                      Titre=xbmc.getInfoLabel("Container(5002).ListItem.Label").decode('utf-8','ignore')
                      if TMDBID=='' and IMDBID:
                          TMDBID=utils.get_externalID(IMDBID,'movie')
+                   
                 
                 if ActeursBio=="noninf2" :
                      #acteurs
@@ -229,8 +267,16 @@ class Main:
                      else:
                        TMDBID=utils.get_externalID(xbmc.getInfoLabel("ListItem.IMDBNumber"),TypeVideo)
                  
-                if TMDBID!='' :
+                if TMDBID!='' :                    
                      ListeTrailer=utils.getTrailer(TMDBID,TypeVideo)
+                     if ActeursBio=="non" and str(xbmc.getInfoLabel("Container(1999).ListItem.Property(DBID)"))!="": 
+                        #utils.logMsg('-->'+str(xbmc.getInfoLabel("Container(1999).ListItem.DBID"))+"/"+str(xbmc.getInfoLabel("Container(1999).ListItem.FilenameAndPath")),0)
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(1999).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"<","key":"KODI","name":">-","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(1999).ListItem.Label")+" [/B][/I][/COLOR]","type":"KODI"})
+                     if ActeursBio=="noninf" and str(xbmc.getInfoLabel("Container(5002).ListItem.Property(DBID)"))!="": 
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5002).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"<","key":"KODI","name":">-","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(5002).ListItem.Label")+" [/B][/I][/COLOR]","type":"KODI"})
+                     if ActeursBio=="" and str(xbmc.getInfoLabel("Container(5051).ListItem.Property(DBID)"))!="": 
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5051).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"<","key":"KODI","name":">-","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(5051).ListItem.Label")+" [/B][/I][/COLOR]","type":"KODI"})
+                     
                 
                 
                 
@@ -239,18 +285,22 @@ class Main:
                     #utils.logMsg('Liste trailers: ' + str(ListeTrailer),0)
                     for Item in  ListeTrailer:
                          try: 
-                              ListeNomTrailer.append(utils.try_decode(Item["name"])+" ("+str(Item["size"])+")"+"-"+str(Item["iso_3166_1"]))
+                              ListeNomTrailer.append(utils.try_decode(Item["name"])+" ("+str(Item["size"])+")"+" -"+str(Item["iso_3166_1"]))
                          except:
-                              ListeNomTrailer.append(str(Item["type"])+" ("+str(Item["size"])+")"+"-"+str(Item["iso_3166_1"]))
+                              ListeNomTrailer.append(str(Item["type"])+" ("+str(Item["size"])+")"+" -"+str(Item["iso_3166_1"]))
+                              
                     if len(ListeNomTrailer)>0:
                           dialogC = xbmcgui.Dialog()
                           
                           ret=dialogC.select("[I]"+xbmc.getLocalizedString( 20410 )+"[/I][CR]"+"[B]"+Titre+"[/B]", ListeNomTrailer)
                           #utils.logMsg('Liste trailers choisie: ' + str(ret),0)
                           if ret<len(ListeTrailer) and ret>=0:
-                              #utils.logMsg('Liste trailers choisie: ' + str(ListeTrailer[ret]["key"]),0)
+                              #utils.logMsg('Liste trailers choisie: ' + str(ListeTrailer[ret]["key"])+"/"+str(ListeTrailer[ret]["id"]),0)
                               xbmc.executebuiltin('Dialog.Close(all,true)')
-                              xbmc.executebuiltin('PlayMedia(plugin://plugin.video.youtube/play/?video_id=%s,0)' %(ListeTrailer[ret]["key"]))
+                              if str(ListeTrailer[ret]["key"])!="KODI":
+                                 xbmc.executebuiltin('PlayMedia(plugin://plugin.video.youtube/play/?video_id=%s,0)' %(ListeTrailer[ret]["key"]))
+                              else:
+                                  xbmc.executebuiltin('PlayMedia(%s,0)' %(ListeTrailer[ret]["id"]))
                           else:
                               if  ActeursBio=="" :  
                                    self.windowhome.setProperty('ActeurVideoReset','')
@@ -509,8 +559,8 @@ class Main:
             self.windowhome.setProperty('DurationTools', readable_duration)
             
             if int(self.duration)>0:
-              now = datetime.datetime.now()
-              now_plus_10 = now + datetime.timedelta(minutes = int(self.duration))
+              now = datetime.now()
+              now_plus_10 = now + timedelta(minutes = int(self.duration))
               xxx = format(now_plus_10, '%Hh%M')
               self.windowhome.setProperty('DurationToolsEnd', xxx)
             else:

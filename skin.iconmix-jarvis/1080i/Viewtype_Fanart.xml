@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 		<include name="VueFanartChoix">
-		<control type="label" id="1010">
-			<posy>-1000</posy>
-			<label>$VAR[VisibleViewMode]</label>
-			<width>1</width>
-			<height>1</height>
-		</control>
+		
 
 		<!-- pochette -->
 		<control type="group">
 			<posx>28</posx>
 			<posy>30</posy>
-			<visible>!StringCompare(Control.GetLabel(1010),3)+!Container.Content(Genres)</visible>
+			<visible>!StringCompare(Control.GetLabel(1099),3)+!Container.Content(Genres)</visible>
 			<control type="image">
 							<width>204</width>
 						<height>300</height>
@@ -41,7 +36,7 @@
 				<visible>IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
 			</control>
 			<control type="group">
-				<visible>StringCompare(Control.GetLabel(1010),2)+!Container.Content(Genres)</visible>
+				<visible>StringCompare(Control.GetLabel(1099),2)+!Container.Content(Genres)</visible>
 				<control type="image">
 					<description>Glass overlay</description>
 					<posx>0</posx>
@@ -58,7 +53,7 @@
 		<control type="group">
 			<posx>28</posx>
 			<posy>30</posy>
-			<visible>StringCompare(Control.GetLabel(1010),3)|Container.Content(Genres)</visible>
+			<visible>StringCompare(Control.GetLabel(1099),3)|Container.Content(Genres)</visible>
 			<control type="image">
 				<width>204</width>
 						<height>300</height>

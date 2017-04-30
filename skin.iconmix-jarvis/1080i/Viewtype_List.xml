@@ -45,7 +45,7 @@
 				</control>
 				<!-- Items in Video Library -->
 				<control type="label">
-					<posx>85</posx>
+					<posx>95</posx>
 					<posy>-2</posy>
 					<width>708</width>
 					<height>35</height>
@@ -57,45 +57,16 @@
 					<scroll>false</scroll>
 					<visible>!Window.IsActive(502)</visible>
 				</control>
-				<!--
-				<control type="label">
-				<posx>85</posx>
-				<posy>-2</posy>
-				<width>635</width>
-				<height>35</height>
-				<aligny>center</aligny>
-				<font>METF_TitleText</font>
-				<textcolor>TextNF</textcolor>
-				<selectedcolor>TextFO</selectedcolor>
-				<label>$VAR[ListItemTitle]</label>
-				<scroll>false</scroll>
-				<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(sets) | Container.Content(episodes)]</visible>
-				</control>
-				<control type="label">
-				<posx>85</posx>
-				<posy>-2</posy>
-				<width>576</width>
-				<height>35</height>
-				<aligny>center</aligny>
-				<font>METF_TitleText</font>
-				<textcolor>TextNF</textcolor>
-				<selectedcolor>TextFO</selectedcolor>
-				<label>$VAR[ListItemTitle]</label>
-				<scroll>false</scroll>
-				<visible>Window.IsActive(10025) + [Container.Content(tvshows) | Container.Content(seasons)]</visible>
-				</control>
-
-				<!-- Watched Overlay for Items in Video Library -->
-
+			
 				<!-- Watched Overlay for In-Progress Items in Video Library -->
 				<control type="group">
-					<posx>7</posx>
+					<posx>15</posx>
 					<posy>10</posy>
 					<include>OverlayProgress</include>
 				</control>
 				<!-- Items in Music Library -->
 				<control type="label">
-					<posx>85</posx>
+					<posx>95</posx>
 					<posy>-2</posy>
 					<width>708</width>
 					<height>35</height>
@@ -109,7 +80,7 @@
 				</control>
 				<!-- Items NOT in Video or Music Library --
 				<control type="label">
-				<posx>85</posx>
+				<posx>95</posx>
 				<posy>-2</posy>
 				<width>740</width>
 				<height>35</height>
@@ -124,7 +95,7 @@
 				<!-- Watched Overlay for Items NOT in Video Library -->
 				<control type="image">
 					<posx>4</posx>
-					<posy>5</posy>
+					<posy>2</posy>
 					<width>24</width>
 					<height>24</height>
 					<texture>$INFO[ListItem.Overlay]</texture>
@@ -220,12 +191,13 @@
 					<width>895</width>
 					<height>33</height>
 					<aligny>center</aligny>
-					<texture>FocusLine.png</texture>
-					<colordiffuse>FocusBar</colordiffuse>
+					<texture>ButtonFO2Wide.png</texture>
+					<aspectratio>stretch</aspectratio>
+					<!--<colordiffuse>FocusBar</colordiffuse> -->
 				</control>
 				<!-- Items in Video Library -->
 				<control type="label">
-					<posx>85</posx>
+					<posx>95</posx>
 					<posy>-2</posy>
 					<width>708</width>
 					<height>35</height>
@@ -235,56 +207,22 @@
 					<scrollspeed>40</scrollspeed>
 					<scroll>true</scroll>
 					<font>METF_TitleText</font>
-					<textcolor>FocusBarText</textcolor>
+					<textcolor>yellow</textcolor>
 					<selectedcolor>FocusBarText</selectedcolor>
 					<label>$VAR[ListItemTitle]</label>
 					<visible>!Window.IsActive(502)</visible>
 				</control>
-				<!--
-				<control type="label">
-				<posx>85</posx>
-				<posy>-2</posy>
-				<width>635</width>
-				<height>35</height>
-				<aligny>center</aligny>
-				<scrollout>false</scrollout>
-				<pauseatend>1800</pauseatend>
-				<scrollspeed>40</scrollspeed>
-				<scroll>true</scroll>
-				<font>METF_TitleText</font>
-				<textcolor>FocusBarText</textcolor>
-				<selectedcolor>FocusBarText</selectedcolor>
-				<label>$VAR[ListItemTitle]</label>
-				<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(sets) | Container.Content(episodes)]</visible>
-				</control>
-				<control type="label">
-				<posx>85</posx>
-				<posy>-2</posy>
-				<width>576</width>
-				<height>35</height>
-				<aligny>center</aligny>
-				<scrollout>false</scrollout>
-				<pauseatend>1800</pauseatend>
-				<scrollspeed>40</scrollspeed>
-				<scroll>true</scroll>
-				<font>METF_TitleText</font>
-				<textcolor>FocusBarText</textcolor>
-				<selectedcolor>FocusBarText</selectedcolor>
-				<label>$VAR[ListItemTitle]</label>
-				<visible>Window.IsActive(10025) + [Container.Content(tvshows) | Container.Content(seasons)]</visible>
-				</control>
-				-->
-				<!-- Watched Overlay -->
+				
 
 				<!-- Watched Overlay for In-Progress Items in Video Library -->
 				<control type="group">
-					<posx>7</posx>
+					<posx>15</posx>
 					<posy>10</posy>
 					<include>OverlayProgress</include>
 				</control>
 				<!-- Items in Music Library -->
 				<control type="label">
-					<posx>85</posx>
+					<posx>95</posx>
 					<posy>-2</posy>
 					<width>708</width>
 					<height>35</height>
@@ -295,31 +233,14 @@
 					<aligny>center</aligny>
 					<font>METF_TitleText</font>
 					<label>$INFO[ListItem.Label]</label>
-					<textcolor>FocusBarText</textcolor>
+					<textcolor>yellow</textcolor>
 					<selectedcolor>FocusBarText</selectedcolor>
 					<visible>Window.IsActive(502)</visible>
 				</control>
-				<!-- Items NOT in Video or Music Library --
-				<control type="label">
-				<posx>85</posx>
-				<posy>-2</posy>
-				<width>740</width>
-				<height>35</height>
-				<aligny>center</aligny>
-				<scrollout>false</scrollout>
-				<pauseatend>1800</pauseatend>
-				<scrollspeed>40</scrollspeed>
-				<scroll>true</scroll>
-				<font>METF_TitleText</font>
-				<textcolor>FocusBarText</textcolor>
-				<selectedcolor>FocusBarText</selectedcolor>
-				<label>$VAR[ListItemTitle]</label>
-				<visible>!Window.IsActive(10025) + !Window.IsActive(502)</visible>
-				</control>
-				<!-- Watched Overlay for Items NOT in Video Library -->
+			<!-- Watched Overlay for Items NOT in Video Library -->
 				<control type="image">
 					<posx>4</posx>
-					<posy>5</posy>
+					<posy>2</posy>
 					<width>24</width>
 					<height>24</height>
 					<texture>$INFO[ListItem.Overlay]</texture>
@@ -429,6 +350,7 @@
 					<width>300</width>
 					<height>440</height>
 					<fadetime>100</fadetime>
+					
 					<texture background="true" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
 					<aspectratio scalediffuse="false">stretch</aspectratio>
 					<visible>!IsEmpty(ListItem.Title)</visible>
@@ -487,9 +409,9 @@
 				<fadetime>100</fadetime>
 				<aspectratio align="right" aligny="center">keep</aspectratio>
 				<!-- <texture>$INFO[ListItem.Icon]</texture> -->
+				<texture>$VAR[PosterThumb]</texture>
 				<bordersize>8</bordersize>
 				<bordertexture border="8">frames/acteur2.png</bordertexture>
-				<texture>$VAR[PosterThumb]</texture>
 				<visible>[!Container.Content(movies) + !Container.Content(sets) + !Container.Content(tvshows) + !Container.Content(seasons) + !Container.Content(episodes) + !Container.Content(genres) + !Container.Content(studios)]</visible>
 			</control>
 			<control type="image">

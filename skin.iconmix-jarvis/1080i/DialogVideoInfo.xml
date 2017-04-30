@@ -309,7 +309,7 @@
 					<scrollspeed>20</scrollspeed>
 					<font>impact</font>
 					<textcolor>TextNF</textcolor>
-					<label>[COLOR=yellow][I]$INFO[ListItem.TVShowTitle,,:][/I][/COLOR]   $INFO[ListItem.Title]</label>
+					<label>[COLOR=yellow][I]$INFO[ListItem.TVShowTitle,,:][/I][/COLOR] $INFO[ListItem.Title]</label>
 					<visible>Container.Content(episodes)</visible>
 				</control>
 
@@ -411,7 +411,7 @@
 					<font>METF_InfoTextLarger</font>
 					<textcolor>MediaDetailsEpisodes</textcolor>
 					<label>Statut : $LOCALIZE[16102]</label>
-					<visible>Container.Content(episodes) + StringCompare(ListItem.Overlay,OverlayWatched.png)</visible>
+					<visible>Container.Content(episodes) + String.IsEqual(ListItem.Overlay,OverlayWatched.png)</visible>
 				</control>
 			</control>
 			<!----------------------------------------------------------------------------------------------------->

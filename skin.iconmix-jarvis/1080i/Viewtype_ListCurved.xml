@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 	<include name="Viewtype_ListCurved">
-		<include>Animation_FadedByMenu</include>
 		<control type="group">
+			<include>Animation_FadedByMenu</include>
 			<visible>Control.IsVisible(906)</visible>
 			<!-- Browser 
 			<control type="label">
@@ -32,6 +32,7 @@
 				<aligny>top</aligny>
 				<pagecontrol>60</pagecontrol>
 				<include>Animation_OpenCloseFade</include>
+				
 				<include>Animation_HiddenByInfo</include>
 				<itemlayout height="35">
 				
@@ -124,13 +125,13 @@
 					<!-- Episode Count for Seasons -->
 					<control type="label">
 						<posx>730</posx>
-						<posy>-2</posy>
-						<width>120</width>
+						<posy>0</posy>
+						<width>250</width>
 						<height>35</height>
-						<align>right</align>
+						<align>center</align>
 						<aligny>center</aligny>
 						<label>$INFO[ListItem.Property(NumEpisodes)] $LOCALIZE[20360]</label>
-						<font>METF_InfoText</font>
+						<font>comic24</font>
 						<textcolor>MediaDetailsEpisodes</textcolor>
 						<visible>[Container.Content(seasons) + !IsEmpty(ListItem.Property(NumEpisodes))] + !IsEmpty(ListItem.Property(UnWatchedEpisodes))</visible>
 					</control>
@@ -266,15 +267,15 @@
 						<visible>Container.Content(tvshows) + !IsEmpty(ListItem.Property(NumEpisodes))</visible>
 					</control>
 					<!-- Episode Count for Seasons -->
-					<control type="label">
+						<control type="label">
 						<posx>730</posx>
-						<posy>-2</posy>
-						<width>120</width>
+						<posy>20</posy>
+						<width>250</width>
 						<height>35</height>
-						<align>right</align>
+						<align>center</align>
 						<aligny>center</aligny>
 						<label>$INFO[ListItem.Property(NumEpisodes)] $LOCALIZE[20360]</label>
-						<font>METF_InfoText</font>
+						<font>comic24</font>
 						<textcolor>MediaDetailsEpisodes</textcolor>
 						<visible>[Container.Content(seasons) + !IsEmpty(ListItem.Property(NumEpisodes))] + !IsEmpty(ListItem.Property(UnWatchedEpisodes))</visible>
 					</control>

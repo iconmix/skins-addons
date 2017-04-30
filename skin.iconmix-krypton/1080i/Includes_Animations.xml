@@ -2,11 +2,12 @@
 <includes>
 <!-- telex --->
 
+
 <include name="AnimationCacheNonSelect">
-<animation reversible="false" effect="fade" start="100" end="0" time="500" condition="!Container.Scrolling+System.IdleTime(3)+String.IsEqual(Skin.String(CacheNonSelectDelai),3)">Conditional</animation>
-<animation reversible="false" effect="fade" start="100" end="0" time="500" condition="!Container.Scrolling+System.IdleTime(5)+String.IsEqual(Skin.String(CacheNonSelectDelai),5)">Conditional</animation>
-<animation reversible="false" effect="fade" start="100" end="0" time="500" condition="!Container.Scrolling+System.IdleTime(7)+String.IsEqual(Skin.String(CacheNonSelectDelai),7)">Conditional</animation>
-<animation reversible="false" effect="fade" start="100" end="0" time="500" condition="!Container.Scrolling+System.IdleTime(9)+String.IsEqual(Skin.String(CacheNonSelectDelai),9)">Conditional</animation>
+<animation reversible="false" effect="fade" start="100" end="0" time="500" condition="System.IdleTime(3)+String.IsEqual(Skin.String(CacheNonSelectDelai),3)">Conditional</animation>
+<animation reversible="false" effect="fade" start="100" end="0" time="500" condition="System.IdleTime(5)+String.IsEqual(Skin.String(CacheNonSelectDelai),5)">Conditional</animation>
+<animation reversible="false" effect="fade" start="100" end="0" time="500" condition="System.IdleTime(7)+String.IsEqual(Skin.String(CacheNonSelectDelai),7)">Conditional</animation>
+<animation reversible="false" effect="fade" start="100" end="0" time="500" condition="System.IdleTime(9)+String.IsEqual(Skin.String(CacheNonSelectDelai),9)">Conditional</animation>
 
 </include>
 <include name="OsdAnimation">
@@ -351,7 +352,7 @@
 		</animation>
 	</include>
 	<include name="Animation_NavMenu">
-	<animation type="Conditional" condition="!ControlGroup(7000).HasFocus()+!ControlGroup(7002).HasFocus()+!ControlGroup(7008).HasFocus()">
+	<animation type="Conditional" condition="!ControlGroup(7000).HasFocus()+!ControlGroup(996).HasFocus()+!ControlGroup(7002).HasFocus()+!ControlGroup(7008).HasFocus()">
 		<effect type="zoom" start="100" end="0" center="auto" tween="back" easing="in" time="400" />
 		<effect type="fade" start="100" end="0" time="400" />
 	</animation>

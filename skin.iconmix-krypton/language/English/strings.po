@@ -1699,6 +1699,21 @@ msgctxt "#31833"
 msgid "Test"
 msgstr ""
 
+msgctxt "#31894"
+msgid "Age :"
+msgstr ""
+
+msgctxt "#31895"
+msgid "in :"
+msgstr ""
+
+msgctxt "#31896"
+msgid "Birthday date :"
+msgstr ""
+
+msgctxt "#31897"
+msgid "Death date :"
+msgstr ""
 
 msgctxt "#31898"
 msgid "Complete Collection"

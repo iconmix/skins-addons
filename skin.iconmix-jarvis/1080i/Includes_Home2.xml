@@ -164,7 +164,7 @@
 						<height>20</height>
 						<texture>ArrowDown.png</texture>
 						<colordiffuse>HelpArrowDiffuse</colordiffuse>
-						<visible>!Control.HasFocus(9001) + ![Control.HasFocus(8000) | Control.HasFocus(80001) | Control.HasFocus(8002) | Control.HasFocus(8003)] + Substring(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
+						<visible>!Control.HasFocus(9001) + ![Control.HasFocus(8000) | Control.HasFocus(80001) | Control.HasFocus(8002) | Control.HasFocus(8003)] + SubString(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
 					</control>
 				</focusedlayout>
 				<content>
@@ -371,7 +371,7 @@
 					<height>20</height>
 					<texture>ArrowDown.png</texture>
 					<colordiffuse>HelpArrowDiffuse</colordiffuse>
-					<visible>!Control.HasFocus(9001) + Substring(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
+					<visible>!Control.HasFocus(9001) + SubString(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
 				</control>
 			</focusedlayout>
 			<content>
@@ -507,12 +507,13 @@
 			<visible>system.getbool(lookandfeel.enablerssfeeds)</visible>
 		</control>
 		
-		<include>OsdMusicHome</include>
+		
 		
 		<control type="label" id="9003">
 			<posy>-1000</posy>
 			<label>$VAR[Wd1Visible]</label>
 		</control>
+		<control type="group">
 		<control type="image">	
 		      <posx>110</posx>	
 		      <posy>830</posy>			
@@ -533,7 +534,30 @@
 					<colordiffuse>FFFFFFFF</colordiffuse>
 					
 				</control>
-	
+				<animation effect="slide" start="0" end="0,600" center="auto" time="500" condition="Player.HasAudio + System.IdleTime(8)">Conditional</animation>
+				</control>
+				<control type="group">
+				  <visible>Player.HasAudio + System.IdleTime(8)</visible>
+				<control type="image">
+			<posx>0</posx>
+			<posy>900</posy>
+			<width>1920</width>
+			<height>140</height>
+			<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+			<colordiffuse>F0101010</colordiffuse>
+			<visible>!system.getbool(lookandfeel.enablerssfeeds)</visible>
+		</control>
+		<control type="image">
+			<posx>0</posx>
+			<posy>900</posy>
+			<width>1920</width>
+			<height>190</height>
+			<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+			<colordiffuse>F0101010</colordiffuse>
+			<visible>system.getbool(lookandfeel.enablerssfeeds)</visible>
+		</control>
+		</control>
+	<include>OsdMusicHome</include>
 		<!-- Main Menu -->
 		
 		<control type="wraplist" id="9000">
@@ -640,7 +664,7 @@
 					<height>20</height>
 					<texture>ArrowDown.png</texture>
 					<colordiffuse>HelpArrowDiffuse</colordiffuse>
-					<visible>!Control.HasFocus(9001) + Substring(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
+					<visible>!Control.HasFocus(9001) + SubString(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
 				</control>
 				</control>
 			</focusedlayout>
@@ -792,7 +816,7 @@
 			<posy>100</posy>
 			<height>880</height>
 			<width>300</width>		
-			<onfocus condition="Substring(Window(Weather).Property(Current.FanartCode),na,right)">Weather.Refresh</onfocus>
+			<onfocus condition="SubString(Window(Weather).Property(Current.FanartCode),na,right)">Weather.Refresh</onfocus>
 			
 			<onright condition="!IsEmpty(Control.GetLabel(9003))">9022</onright>	
 			<onright condition="IsEmpty(Control.GetLabel(9003))">9023</onright>	
@@ -878,7 +902,7 @@
 					<height>40</height>
 					<texture>ArrowLeft.png</texture>
 					<colordiffuse>HelpArrowDiffuse</colordiffuse>
-					<visible>!Control.HasFocus(9001) + Substring(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
+					<visible>!Control.HasFocus(9001) + SubString(Container(9000).ListItem.Property(hasSubmenu),True)</visible>
 				</control>
 				</control>
 			</focusedlayout>
