@@ -272,7 +272,7 @@
 					<onleft>9001</onleft>
 					<onright>304</onright>
 					<onup>211</onup>
-					<ondown>211</ondown>
+					<ondown>9001</ondown>
 					<scrolltime tween="sine" easing="out">240</scrolltime>
 					<itemlayout width="375" height="38">
 						<control type="label">
@@ -425,7 +425,7 @@
 						<label>$LOCALIZE[31916]</label>
 						<onclick>SetProperty(shortcutDialog, backgroundplayliststyle, Home)</onclick>
 						<label2>[COLOR=yellow]$VAR[BackPlayListStyle][/COLOR]</label2>
-						<visible>!IsEmpty(Container(211).ListItem.Property(backgroundPlaylist))|Substring(Container(211).ListItem.Property(background),WDF1)|Substring(Container(211).ListItem.Property(background),WDF2)|Substring(Container(211).ListItem.Property(background),WDF3)</visible>
+						<visible>!IsEmpty(Container(211).ListItem.Property(backgroundPlaylist))|SubString(Container(211).ListItem.Property(background),WDF1)|SubString(Container(211).ListItem.Property(background),WDF2)|SubString(Container(211).ListItem.Property(background),WDF3)</visible>
 					</control>
 					
 					

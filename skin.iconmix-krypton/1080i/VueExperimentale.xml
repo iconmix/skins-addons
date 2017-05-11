@@ -57,24 +57,9 @@
 				<height>20</height>
 				<texture>black-back2.png</texture>
 				<aspectratio>stretch</aspectratio>
-				<visible>!String.IsEmpty(Control.GetLabel(2222))</visible>
+				<visible>!String.IsEmpty(Control.GetLabel(2222))+!String.IsEqual(Control.GetLabel(2222), )+!Skin.HasSetting(Hide_Plot)+!Skin.HasSetting(ShowLargePlot)</visible>
 			</control>
-			<control type="fadelabel" id="2222">
-				<resetonlabelchange>true</resetonlabelchange>
-				<scrollspeed>50</scrollspeed>
-				<pauseatend>3500</pauseatend>
-				<posy>2033</posy>
-				<posx>3</posx>
-				<width>1920</width>
-				<height>20</height>
-				<aligny>top</aligny>
-				<align>center</align>
-				<font>PlotFont</font>
-				<textcolor>black</textcolor>
-				<label>$VAR[PlotBox_Text]</label>
-				<scrollout>false</scrollout>
-				<visible>!Skin.HasSetting(Hide_Plot)+!Skin.HasSetting(ShowLargePlot)</visible>
-			</control>
+			
 			<control type="fadelabel" >
 				<resetonlabelchange>true</resetonlabelchange>
 				<scrollspeed>50</scrollspeed>
@@ -89,6 +74,12 @@
 				<label>$VAR[PlotBox_Text]</label>
 				<scrollout>false</scrollout>
 				<visible>!Skin.HasSetting(Hide_Plot)+!Skin.HasSetting(ShowLargePlot)</visible>
+			</control>
+			
+						<control type="group">
+			  <posy>1200</posy>
+			   <include>SpecialPlotBox</include>
+			   <visible>!Skin.HasSetting(Hide_Plot)+Skin.HasSetting(ShowLargePlot)</visible>
 			</control>
 			
 

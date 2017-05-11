@@ -138,6 +138,11 @@ msgctxt "#31042"
 msgid "Install Optional Artist Slideshow Script"
 msgstr ""
 
+
+msgctxt "#31043"
+msgid "Show RSS feed on top [I](disabled for bottom)[/I]"
+msgstr ""
+
 #empty strings from id 31038 to 31053
 
 msgctxt "#31054"

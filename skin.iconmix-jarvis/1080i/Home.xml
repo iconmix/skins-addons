@@ -7,6 +7,12 @@
 	<onload>RunScript(script.skinshortcuts,type=buildxml&amp;mainmenuID=9000&amp;levels=2)</onload>
 	<!--<onload>RunScript(script.tv.show.next.aired,backend=True)</onload>-->
 	<onload condition="IsEmpty(Window(Home).property(iconmixtoolsbackend))">RunScript(script.iconmixtools,backend=True)</onload>
+		<onload>SetProperty(Actorbiographie,,Home)</onload>
+      <onload>SetProperty(Actornaissance,,Home)</onload>
+      <onload>SetProperty(Actordeces,,Home)</onload>                                                 
+      <onload>SetProperty(Actorlieunaissance,,Home)</onload>
+      <onload>SetProperty(ActorAge,,Home)</onload>
+      <onload>SetProperty(ActorNomReel,,Home)</onload>
 
 	<controls>
 			
@@ -27,6 +33,7 @@
 			<description>RSS Feed</description>
 			<posx>0</posx>
 			<posy>1050</posy>
+			<animation effect="slide" end="0,-1058" condition="Skin.HasSetting(RssTop)">Conditional</animation>
 			<width>1920</width>
 			<height>20</height>
 			<font>impactsongs</font>

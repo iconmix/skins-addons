@@ -116,6 +116,9 @@ msgctxt "#31042"
 msgid "Install Optional Artist Slideshow Script"
 msgstr "Installer l'addon Artist SlideShow"
 
+msgctxt "#31043"
+msgid "Show RSS feed on top [I](disabled for bottom)[/I]"
+msgstr "Afficher le plus RSS en haut [I](désactiver pour position basse)[/I]"
 
 msgctxt "#31054"
 msgid "Logo"

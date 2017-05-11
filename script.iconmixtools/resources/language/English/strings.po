@@ -43,3 +43,35 @@ msgstr ""
 msgctxt "#32508"
 msgid "Searching trailers... "
 msgstr ""
+
+msgctxt "#32580"
+msgid "Actors"
+msgstr ""
+
+msgctxt "#32581"
+msgid "Directors"
+msgstr ""
+
+msgctxt "#32582"
+msgid "MovieSets"
+msgstr ""
+
+msgctxt "#32583"
+msgid "TvShows"
+msgstr ""
+
+msgctxt "#32584"
+msgid "No information found for "
+msgstr ""
+
+msgctxt "#32600"
+msgid "Disable local cache"
+msgstr ""
+
+msgctxt "#32601"
+msgid "Delete local cache"
+msgstr ""
+
+msgctxt "#32602"
+msgid "Please confirm to delete local cache"
+msgstr ""

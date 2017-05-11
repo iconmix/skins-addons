@@ -272,7 +272,7 @@
 					<onleft>9001</onleft>
 					<onright>304</onright>
 					<onup>211</onup>
-					<ondown>211</ondown>
+					<ondown>9001</ondown>
 					<scrolltime tween="sine" easing="out">240</scrolltime>
 					<itemlayout width="375" height="38">
 						<control type="label">

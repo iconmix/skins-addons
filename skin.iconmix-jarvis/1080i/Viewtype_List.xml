@@ -3,6 +3,7 @@
 	<include name="Viewtype_List">
 		<control type="group">
 			<visible>Control.IsVisible(55)</visible>
+			
 			<!-- Browser
 			<control type="label">
 			<label>***$INFO[Window(Home).Property(MoviePlayerArt)]</label>
@@ -17,10 +18,13 @@
 
 			<posx>1000</posx>
 			<posy>60</posy>
-			<height>770</height>
+			<height>735</height>
 			<width>1350</width>
 			<onup>55</onup>
 			<ondown>55</ondown>
+			
+			<oninfo>SetProperty(ActorThumb,$VAR[PosterThumb],Home)</oninfo>
+			<oninfo>SetFocus(8889)</oninfo>
 			<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
 			<onright>60</onright>
 			<scrolltime>160</scrolltime>
@@ -483,6 +487,8 @@
 			<orientation>vertical</orientation>
 			<animation effect="fade" start="0" end="100" time="400" condition="Control.HasFocus(998) | Container.Scrolling">Conditional</animation>
 		</control>
+		<include>showacteurinfo</include>
 	</control>
+	
 </include>
 </includes>

@@ -299,12 +299,21 @@
 						<selected>Skin.HasSetting(ShowFullWidgets)</selected>
 					</control>		
 					
-					 <control type="radiobutton" id="31749">
+					 <control type="radiobutton" id="300">
                 <include>SettingsLabel</include>
                 <label>$LOCALIZE[31040]</label>
                 <onclick>	Skin.ToggleSetting(AutoRotateWidget)</onclick>
                 <selected>Skin.HasSetting(AutoRotateWidget)</selected>
-            </control>     		
+            </control>   
+          <control type="image" id="400">
+						<include>Settings_Line</include>
+					</control>  		
+					<control type="radiobutton" id="401">
+						<include>SettingsLabel</include>
+						<label>$LOCALIZE[31043]</label>
+						<onclick>Skin.ToggleSetting(RssTop)</onclick>
+						<selected>Skin.HasSetting(RssTop)</selected>
+					</control>
 					
 					
 					

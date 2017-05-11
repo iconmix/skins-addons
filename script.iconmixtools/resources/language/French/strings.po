@@ -44,3 +44,36 @@ msgstr "Mettre à jour uniquement "
 msgctxt "#32508"
 msgid "Searching trailers... "
 msgstr "Recherche de bande-annonces..."
+
+msgctxt "#32580"
+msgid "Actors"
+msgstr "Acteurs"
+
+msgctxt "#32581"
+msgid "Directors"
+msgstr "Réalisateurs"
+
+msgctxt "#32582"
+msgid "MovieSets"
+msgstr "Sagas"
+
+msgctxt "#32583"
+msgid "TvShows"
+msgstr "Séries Tv"
+
+msgctxt "#32584"
+msgid "No information found for "
+msgstr "Pas d'informations trouvées pour "
+
+msgctxt "#32600"
+msgid "Disable local cache"
+msgstr "Désactiver le cache"
+
+msgctxt "#32601"
+msgid "Delete local cache"
+msgstr "Vider le cache"
+
+msgctxt "#32602"
+msgid "Please confirm to delete local cache"
+msgstr "Veuillez confirmer la suppression de ce cache"
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+	
+    <category label="32580"> <!-- acteurs -->   
+        <setting label="32580" type="lsep"/>
+        <setting type="sep"/>
+        <setting id="cacheacteur" type="bool" label="32600" default="false" />
+        <setting label="32601" type="action" action="RunScript(script.iconmixtools,videcache=True&cache=acteurs)"/>
+    </category>
+    <category label="32581"> <!-- realisateurs -->
+     
+       <setting label="32581" type="lsep"/>
+       <setting type="sep"/>
+        <setting id="cacherealisateur" type="bool" label="32600" default="false" />
+        <setting label="32601" type="action" action="RunScript(script.iconmixtools,videcache=True&cache=realisateurs)"/>
+    </category>
+    <category label="32582"><!-- Sagas -->
+     <setting label="32582" type="lsep"/>
+     <setting type="sep"/>
+        <setting id="cachesaga" type="bool" label="32600" default="false" />
+        <setting label="32601" type="action" action="RunScript(script.iconmixtools,videcache=True&cache=collections)"/>
+        
+    </category>
+    <category label="32583"><!-- Series -->
+     <setting label="32583" type="lsep"/>
+     <setting type="sep"/>
+        
+        <setting id="cacheserie" type="bool" label="32600" default="false" />
+        <setting label="32601" type="action" action="RunScript(script.iconmixtools,videcache=True&cache=series)"/>
+       
+    </category>
+   
+    
+</settings>

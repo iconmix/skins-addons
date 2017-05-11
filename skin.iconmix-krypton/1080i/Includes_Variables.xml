@@ -92,6 +92,12 @@
 		<value condition="String.StartsWith(ListItem.DBTYPE,set)">videodb://movies/sets/$INFO[ListItem.DBID]</value>
 		<value></value>
 		</variable>
+		<variable name="GetBiographieActeur">
+		  <value condition="Control.HasFocus(5051)">plugin://script.iconmixtools/?action=getbiographie&id=$INFO[Container(1998).ListItem.Label]&infotype=$INFO[Container(1998).ListItem.DBTYPE]</value>
+		  <value condition="Control.HasFocus(8889)">plugin://script.iconmixtools/?action=getbiographie&id=$INFO[ListItem.Label]&infotype=$INFO[ListItem.DBTYPE]</value>
+		  <value></value>
+		  
+		  </variable>
 		<variable name="contentActeursDirecteurs">
 		  <value condition="[Container.Content(actors)|Container.Content(directors)]+!String.IsEmpty(ListItem.Label)">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.Label]&local="oui"</value>
 			<!--<value condition="Container.Content(directors)+!String.IsEmpty(ListItem.DBID)">$INFO[Container.FolderPath]$INFO[ListItem.DBID]</value> -->
@@ -582,6 +588,11 @@
 	<variable name="PlotBox_Text" id="7777">
 		<!-- Skin Shortcuts help text -->
 		<value condition="Control.HasFocus(2999)">$INFO[Container(1999).ListItem.Plot]</value>
+		<!--
+		<value condition="[Container.Content(directors)|Container.Content(actors)]+!String.IsEmpty(Window(Home).Property(Actorbiographie))+Skin.HasSetting(ShowLargePlot)">[I][COLOR=yellow]$INFO[Window(Home).Property(ActorNomReel),,[CR]][/COLOR]$INFO[Window(Home).Property(Actornaissance),[COLOR=yellow]$LOCALIZE[31896][/COLOR] ,[CR]]$INFO[Window(Home).Property(Actorlieunaissance),[COLOR=yellow]$LOCALIZE[31895][/COLOR] ,[CR]]$INFO[Window(Home).Property(Actorage),[COLOR=yellow]$LOCALIZE[31894][/COLOR] ,[CR]]$INFO[Window(Home).Property(Actordeces),[COLOR=white]$LOCALIZE[31897][/COLOR] ,[CR]][/I][CR]$INFO[Window(Home).Property(Actorbiographie)]</value>
+		<value condition="[Container.Content(directors)|Container.Content(actors)]+!String.IsEmpty(Window(Home).Property(Actorbiographie))+!Skin.HasSetting(ShowLargePlot)">[I][COLOR=yellow]$INFO[Window(Home).Property(ActorNomReel),, - ][/COLOR]$INFO[Window(Home).Property(Actornaissance),[COLOR=yellow]$LOCALIZE[31896][/COLOR] , - ]$INFO[Window(Home).Property(Actorlieunaissance),[COLOR=yellow]$LOCALIZE[31895][/COLOR] , - ]$INFO[Window(Home).Property(Actorage),[COLOR=yellow]$LOCALIZE[31894][/COLOR] , - ]$INFO[Window(Home).Property(Actordeces),[COLOR=white]$LOCALIZE[31897][/COLOR] , - ][/I]$INFO[Window(Home).Property(Actorbiographie)]</value>
+		-->
+	
 		<value condition="Window.IsActive(script-skinshortcuts.xml) + Control.HasFocus(302)">$LOCALIZE[31720]</value>
 		<value condition="Window.IsActive(script-skinshortcuts.xml) + Control.HasFocus(303)">$LOCALIZE[31721]</value>
 		<value condition="Window.IsActive(script-skinshortcuts.xml) + Control.HasFocus(304)">$LOCALIZE[31722]</value>
@@ -608,61 +619,7 @@
 		<!-- Addons -->
 		<value condition="!String.IsEmpty(ListItem.Property(Addon.Description))">$INFO[ListItem.Property(Addon.Description)]</value>
 		<!-- Video Genres -->
-		<value condition="String.IsEqual(ListItem.Label,Action)">$LOCALIZE[31343]</value>
-		<value condition="String.IsEqual(ListItem.Label,Adventure)">$LOCALIZE[31344]</value>
-		<value condition="String.IsEqual(ListItem.Label,Action And Adventure)">$LOCALIZE[31345]</value>
-		<value condition="String.IsEqual(ListItem.Label,Adult)">$LOCALIZE[31346]</value>
-		<value condition="String.IsEqual(ListItem.Label,Animation)">$LOCALIZE[31347]</value>
-		<value condition="String.IsEqual(ListItem.Label,Anime)">$LOCALIZE[31348]</value>
-		<value condition="String.IsEqual(ListItem.Label,Biography)">$LOCALIZE[31349]</value>
-		<value condition="String.IsEqual(ListItem.Label,Bollywood)">$LOCALIZE[31350]</value>
-		<value condition="String.IsEqual(ListItem.Label,Children)">$LOCALIZE[31351]</value>
-		<value condition="String.IsEqual(ListItem.Label,Christmas)">$LOCALIZE[31352]</value>
-		<value condition="String.IsEqual(ListItem.Label,Comedy)">$LOCALIZE[31353]</value>
-		<value condition="String.IsEqual(ListItem.Label,Concert)">$LOCALIZE[31354]</value>
-		<value condition="String.IsEqual(ListItem.Label,Crime)">$LOCALIZE[31355]</value>
-		<value condition="String.IsEqual(ListItem.Label,Disaster)">$LOCALIZE[31356]</value>
-		<value condition="String.IsEqual(ListItem.Label,Documentary)">$LOCALIZE[31357]</value>
-		<value condition="String.IsEqual(ListItem.Label,Drama)">$LOCALIZE[31358]</value>
-		<value condition="String.IsEqual(ListItem.Label,Epic)">$LOCALIZE[31397]</value>
-		<value condition="String.IsEqual(ListItem.Label,Family)">$LOCALIZE[31359]</value>
-		<value condition="String.IsEqual(ListItem.Label,Fantasy)">$LOCALIZE[31360]</value>
-		<value condition="String.IsEqual(ListItem.Label,Film Noir) | String.IsEqual(ListItem.Label,Neo-Noir)">$LOCALIZE[31361]</value>
-		<value condition="String.IsEqual(ListItem.Label,Foreign)">$LOCALIZE[31466]</value>
-		<value condition="String.IsEqual(ListItem.Label,Game Show)">$LOCALIZE[31362]</value>
-		<value condition="String.IsEqual(ListItem.Label,Hentai)">$LOCALIZE[31364]</value>
-		<value condition="String.IsEqual(ListItem.Label,History)">$LOCALIZE[31365]</value>
-		<value condition="String.IsEqual(ListItem.Label,Holiday)">$LOCALIZE[31467]</value>
-		<value condition="String.IsEqual(ListItem.Label,Horror)">$LOCALIZE[31367]</value>
-		<value condition="String.IsEqual(ListItem.Label,Independent) | String.IsEqual(ListItem.Label,Indie)">$LOCALIZE[31368]</value>
-		<value condition="String.IsEqual(ListItem.Label,Interview)">$LOCALIZE[31369]</value>
-		<value condition="String.IsEqual(ListItem.Label,Martial Arts)">$LOCALIZE[31370]</value>
-		<value condition="String.IsEqual(ListItem.Label,Mini-Series) | String.IsEqual(ListItem.Label,Mini-TV-Series)">$LOCALIZE[31371]</value>
-		<value condition="String.IsEqual(ListItem.Label,Monster)">$LOCALIZE[31372]</value>
-		<value condition="String.IsEqual(ListItem.Label,Music)">$LOCALIZE[31373]</value>
-		<value condition="String.IsEqual(ListItem.Label,Musical)">$LOCALIZE[31374]</value>
-		<value condition="String.IsEqual(ListItem.Label,Mystery)">$LOCALIZE[31375]</value>
-		<value condition="String.IsEqual(ListItem.Label,Nature)">$LOCALIZE[31376]</value>
-		<value condition="String.IsEqual(ListItem.Label,News)">$LOCALIZE[31377]</value>
-		<value condition="String.IsEqual(ListItem.Label,Post-Apocalypse)">$LOCALIZE[31378]</value>
-		<value condition="String.IsEqual(ListItem.Label,Reality)">$LOCALIZE[31379]</value>
-		<value condition="String.IsEqual(ListItem.Label,Romance)">$LOCALIZE[31381]</value>
-		<value condition="String.IsEqual(ListItem.Label,Sci-Fi) | String.IsEqual(ListItem.Label,Science Fiction) | String.IsEqual(ListItem.Label,Science-Fiction)">$LOCALIZE[31382]</value>
-		<value condition="String.IsEqual(ListItem.Label,Short)">$LOCALIZE[31383]</value>
-		<value condition="String.IsEqual(ListItem.Label,Silent)">$LOCALIZE[31398]</value>
-		<value condition="String.IsEqual(ListItem.Label,Soap)">$LOCALIZE[31384]</value>
-		<value condition="String.IsEqual(ListItem.Label,Sport)">$LOCALIZE[31386]</value>
-		<value condition="String.IsEqual(ListItem.Label,Spy)">$LOCALIZE[31387]</value>
-		<value condition="String.IsEqual(ListItem.Label,Stageplay)">$LOCALIZE[31388]</value>
-		<value condition="String.IsEqual(ListItem.Label,Stand-Up)">$LOCALIZE[31389]</value>
-		<value condition="String.IsEqual(ListItem.Label,Superhero) | String.IsEqual(ListItem.Label,Comics)">$LOCALIZE[31390]</value>
-		<value condition="String.IsEqual(ListItem.Label,Supernatural)">$LOCALIZE[31391]</value>
-		<value condition="String.IsEqual(ListItem.Label,Talk Show)">$LOCALIZE[31392]</value>
-		<value condition="String.IsEqual(ListItem.Label,Thriller) | String.IsEqual(ListItem.Label,Suspense)">$LOCALIZE[31393]</value>
-		<value condition="String.IsEqual(ListItem.Label,War)">$LOCALIZE[31394]</value>
-		<value condition="String.IsEqual(ListItem.Label,Western)">$LOCALIZE[31395]</value>
-		<value condition="String.IsEqual(ListItem.Label,Wrestling)">$LOCALIZE[31396]</value>
-		<value></value>
+		<value>[CR]</value>
 	</variable>
 	<variable name="MediaFlag_VideoResolution">
 		<value condition="Window.IsActive(fullscreenvideo)">$INFO[VideoPlayer.VideoResolution,flags/VideoResolution/,.png]</value>

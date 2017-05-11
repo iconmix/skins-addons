@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <overrides>
+  <propertyfallback property="widgetStyle">Panel</propertyfallback>
+	<propertyfallback property="widgetStyle.2">Panel</propertyfallback>
+	
+  
 	<backgrounddefault labelID="pictures">special://skin/extras/backgrounds/pictures.jpg</backgrounddefault>
 	<backgrounddefault labelID="music">special://skin/extras/backgrounds/music.jpg</backgrounddefault>
 	<backgrounddefault labelID="movies">special://skin/extras/backgrounds/movies.jpg</backgrounddefault>
@@ -111,14 +115,15 @@
 		<background label="Widget 1" condition="String.IsEqual(Window.Property(groupname),mainmenu)" >WDF1.jpg</background>
 		<background label="Widget 2" condition="String.IsEqual(Window.Property(groupname),mainmenu)">WDF2.jpg</background>
 		<background label="31733" condition="String.IsEqual(Window.Property(groupname),mainmenu)">WDF3.jpg</background>
-	<!--
-	<backgrounddefault defaultID="movies">$INFO[Window(Home).Property(SkinHelper.AllMoviesBackground)]</backgrounddefault>
-	<propertydefault defaultID="movies" property="backgroundName">$ADDON[script.skin.helper.service 32039]</propertydefault>
-	<backgrounddefault defaultID="tvshows">$INFO[Window(Home).Property(SkinHelper.AllTvShowsBackground)]</backgrounddefault>
-	<propertydefault defaultID="tvshows" property="backgroundName">$ADDON[script.skin.helper.service 32043]</propertydefault>
 	
-	<backgrounddefault defaultID="music">$INFO[Window(Home).Property(SkinHelper.AllMusicBackground)]</backgrounddefault>
-	<propertydefault defaultID="music" property="backgroundName">$ADDON[script.skin.helper.service 32048]</propertydefault>
+<!--	<backgrounddefault defaultID="movies">special://skin/extras/backgrounds/movies.jpg</backgrounddefault>
+	<propertydefault defaultID="movies" property="backgroundName">special://skin/extras/backgrounds/movies.jpg</propertydefault>
+	<backgrounddefault defaultID="tvshows">special://skin/extras/backgrounds/tvshows.jpg</backgrounddefault>
+	<propertydefault defaultID="tvshows" property="backgroundName">special://skin/extras/backgrounds/tvshows.jpg</propertydefault>
+	
+	<backgrounddefault defaultID="music">special://skin/extras/backgrounds/music.jpg</backgrounddefault>
+	<propertydefault defaultID="music" property="backgroundName">special://skin/extras/backgrounds/music.jpg</propertydefault>
+	
 	<backgrounddefault defaultID="musicvideos">$INFO[Window(Home).Property(SkinHelper.AllMusicVideosBackground)]</backgrounddefault>
 	<propertydefault defaultID="musicvideos" property="backgroundName">$ADDON[script.skin.helper.service 32047]</propertydefault>
 	<backgrounddefault defaultID="pictures">$INFO[Window(Home).Property(SkinHelper.PicturesBackground)]</backgrounddefault>

@@ -23,6 +23,9 @@
 				<width>1650</width>
 				<onup>906</onup>
 				<ondown>906</ondown>
+				<oninfo>SetProperty(ActorThumb,$VAR[PosterThumb],Home)</oninfo>
+				<oninfo>SetFocus(8889)</oninfo>
+				
 				<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
 				<onright>60</onright>
 				<scrolltime>160</scrolltime>
@@ -366,6 +369,8 @@
 				<orientation>vertical</orientation>
 				<animation effect="fade" start="0" end="100" time="400" condition="Control.HasFocus(998) | Container.Scrolling">Conditional</animation>
 			</control>
+			<include>showacteurinfo</include>
 		</control>
+		
 	</include>
 </includes>

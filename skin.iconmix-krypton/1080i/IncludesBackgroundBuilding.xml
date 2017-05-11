@@ -308,6 +308,8 @@
 		<value condition="Integer.IsGreater(Container(8080).NumItems,0)"></value>
 		<value condition="Window.IsVisible(Home)+!Control.HasFocus(9000)+!Control.HasFocus(9001)+!String.IsEqual(Container(9000).ListItem.Property(widgetType),weather)+!String.IsEqual(Container(9000).ListItem.Property(widgetType),system)+!String.IsEmpty(Window(Home).Property(WidgetActifFanart))">$INFO[Window(Home).Property(WidgetActifFanart)]</value>
 		<value condition="Window.IsVisible(Home)+Control.HasFocus(9001)+!String.IsEmpty(Container(9001).ListItem.Property(background))">$INFO[Container(9001).ListItem.Property(background)]</value>
+		<value condition="Window.IsVisible(Home)+Control.HasFocus(9001)+String.IsEmpty(Container(9001).ListItem.Property(background))">background.jpg</value>
+
 		<value>$INFO[Container(9000).ListItem.Property(background)]</value>
 	</variable>
 	<variable name="backgroundVarPlaylist">
@@ -353,11 +355,7 @@
 			<animation effect="fade" end="50" time="500" reversible="false" condition="String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)+Skin.HasSetting(MeteoPleinEcran)">Conditional</animation>
 			<include>playlistfond</include>
 			<include>pochettesjetees</include>
-			<!--		 telex --
-			<control type="label">
-			  <label>$VAR[backgroundVarPlaylist] : $INFO[Container(8080).NumItems]/$INFO[Container(8080).ListItem.Label]/$INFO[Container(8080).ListItem(0).Art(poster)]/$INFO[Container(8080).ListItem(0).Icon]</label>
-			</control>
-			-->
+			
 			<control type="image">
 				<include>Dimensions_Fullscreen</include>
 				<texture background="true">$INFO[Skin.String(CustomBackground)]</texture>
@@ -385,7 +383,11 @@
       <include>skinshortcuts-template-widget1Fanart</include>
 			<include>skinshortcuts-template-widget2Fanart</include>
 		</control>
-	
+	<!--		 telex --
+			<control type="label">
+			  <label>$VAR[backgroundVarPlaylist] : $INFO[Container(8080).NumItems][CR]$INFO[Container(8080).ListItem.Label][CR]$INFO[Container(8080).ListItem(0).Art(poster)][CR]$INFO[Container(8080).ListItem(0).Icon]<[CR]label>
+			</control>
+			-->
 		<control type="group">
 			<visible>Player.HasAudio+Control.IsVisible(9044)</visible>
 			<control type="multiimage" id="99">
