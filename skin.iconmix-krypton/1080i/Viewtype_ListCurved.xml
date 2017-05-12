@@ -23,8 +23,8 @@
 				<width>1650</width>
 				<onup>906</onup>
 				<ondown>906</ondown>
-				<oninfo>SetProperty(ActorThumb,$VAR[PosterThumb],Home)</oninfo>
-				<oninfo>SetFocus(8889)</oninfo>
+				<oninfo condition="Container.Content(actors|Container.Content(directors)">SetProperty(ActorThumb,$VAR[PosterThumb],Home)</oninfo>
+				<oninfo condition="Container.Content(actors|Container.Content(directors)">SetFocus(8889)</oninfo>
 				
 				<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
 				<onright>60</onright>

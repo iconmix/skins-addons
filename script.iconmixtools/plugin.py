@@ -358,7 +358,7 @@ class Main:
                         self.windowhome.clearProperty('ActorNomReel')
                         InfoDate=None
                         Lieu=None
-                        utils.logMsg("Info : "+str(Actif5051),0)
+                        #utils.logMsg("Info : "+str(Actif5051),0)
                         if Actif5051!="oui": 
                            xbmc.executebuiltin( "ActivateWindow(busydialog)" ) 
                         #if unidecode(self.LABEL8889):   

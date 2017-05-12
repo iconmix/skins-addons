@@ -961,7 +961,7 @@ def getCasting(Castingtypex=None,itemId=None,Statique=None):
          #if Castingtypex=="episode":            Castingtypex="tvshow"
     
          Castingtype="VideoLibrary.Get%sDetails" %(Castingtypex)
-         json_result = getJSON(Castingtype, '{ "%sid":%d,"properties": [ "cast" ]}' %(Castingtypex,int(itemId)))
+         json_result = getJSON(Castingtype, '{ "%sid":%d,"properties": [ "cast"]}' %(Castingtypex,int(itemId)))
          #movie, tvshow
          if json_result:
             allCast = json_result.get("cast")  
@@ -1288,7 +1288,7 @@ def Allocine_ChercheActeur(Acteur=None):
       return ActeurId
         
           
-def getFilmsTv(DbType=None,Acteur=None,Statique=None):
+def getFilmsTv(ActeurType=None,Acteur=None,Statique=None):
   allInfo = []
   item = {}
   Casting = []
@@ -1302,7 +1302,6 @@ def getFilmsTv(DbType=None,Acteur=None,Statique=None):
   if ActeurType and ActeurType=="director":
             ActeurType='realisateurs'
   else: ActeurType="acteurs"
- 
   if ActeurType and Acteur!="None": 
     
      if Acteur:
