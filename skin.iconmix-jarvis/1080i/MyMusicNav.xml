@@ -10,7 +10,7 @@
 		<include>Global_Background_Fanart</include>
 		
 		<control type="group">
-			<animation type="Conditional" condition="Control.HasFocus(1999)" reversible="true">
+			<animation type="Conditional" condition="Control.HasFocus(2997)" reversible="true">
 				<effect type="fade" start="100" end="0" time="500"  />
 			</animation>
 		<!--	<include>Object_InfoLines</include> -->
@@ -258,24 +258,7 @@
 			<content>musicdb://albums/$INFO[ListItem.DBID]</content>
 		</control>
 
-<!--
-		<control type="group">
-			<visible>[Container.Content(albums)|Container.Content(songs)]+[Skin.HasSetting(MusicBoitier)|Skin.HasSetting(MusicDiscArt)]</visible>
-			<control type="image">
-				<posy>60</posy>
-				<width>600</width>
-				<left>13</left>
-				<height>190</height>
-				<aspectratio>keep</aspectratio>
-				<fadetime>400</fadetime>
-				<bordersize>10</bordersize>
-				<bordertexture border="8">frames/flou.png</bordertexture>
-				<texture background="true" >$VAR[MusicArt]</texture>
-				<align>center</align>
-			</control>
 
-		</control>
-		-->
 		<include>Global_AddonInfo</include>
 		<include>Global_ScrollOffsetLabel</include>
 
@@ -524,7 +507,7 @@
 				<posx>10</posx>
 				<posy>10</posy>
 				<width>1600</width>
-				<label>ICON=$INFO[ListItem.Icon][CR]TestProperty=$INFO[ListItem.Property(TestProperty)]DBID=$INFO[ListItem.DBID][CR]DBID1999=$INFO[Container(1999).ListItem.Property(DBID)][CR]COVER999=$INFO[Container(1999).ListItem.Property(AlbumCover)][CR]CD1999=$INFO[Container(1999).ListItem.Property(AlbumCd)][CR]numitems1999:$INFO[Container(1999).NumItems][CR]numitems1994:$INFO[Container(1994).NumItems][CR]path1994:$INFO[Container(1994).ListItem.Path][CR]numitems2998:$INFO[Container(2998).NumItems][CR]Icon1999:$INFO[Container(1999).ListItem.Icon][CR]Title1999:$INFO[Container(1999).ListItem.Title][CR]Label1999:$INFO[Container(1999).ListItem.Label][CR]Title:$INFO[ListItem.Title][CR]Label:$INFO[ListItem.Label][CR]Label2:$INFO[ListItem.Label2][CR]DBType:$INFO[ListItem.DBType][CR]Content:$INFO[Container.Content][CR]Folder:$INFO[Container.FolderPath][CR]Discart=$INFO[Window(Home).Property(SkinHelper.ListItem.Art.DiscArt)][CR]Banner=$INFO[Window(Home).Property(SkinHelper.ListItem.Art.Banner)][CR]ArtisteBanner=$INFO[Window(Home).Property(ArtistBanner)][CR]ArtistLogo=$INFO[Window(Home).Property(ArtistLogo)][CR]AlbumCD=$INFO[Window(Home).Property(AlbumCd)][CR]AlbumCover=$INFO[Window(Home).Property(AlbumCover)][CR]$INFO[ListItem.Icon][CR]$VAR[discartSpinning]</label>
+				<label>Duree:$INFO[ListItem.Duration][CR]Dureetools:$INFO[Window(Home).Property(DurationTools)][CR]Fin:$INFO[Window(Home).Property(DurationToolsEnd)][CR]ICON=$INFO[ListItem.Icon][CR]TestProperty=$INFO[ListItem.Property(TestProperty)]DBID=$INFO[ListItem.DBID][CR]DBID1999=$INFO[Container(1999).ListItem.Property(DBID)][CR]COVER999=$INFO[Container(1999).ListItem.Property(AlbumCover)][CR]CD1999=$INFO[Container(1999).ListItem.Property(AlbumCd)][CR]numitems1999:$INFO[Container(1999).NumItems][CR]numitems1994:$INFO[Container(1994).NumItems][CR]path1994:$INFO[Container(1994).ListItem.Path][CR]numitems2998:$INFO[Container(2998).NumItems][CR]Icon1999:$INFO[Container(1999).ListItem.Icon][CR]Title1999:$INFO[Container(1999).ListItem.Title][CR]Label1999:$INFO[Container(1999).ListItem.Label][CR]Title:$INFO[ListItem.Title][CR]Label:$INFO[ListItem.Label][CR]Label2:$INFO[ListItem.Label2][CR]DBType:$INFO[ListItem.DBType][CR]Content:$INFO[Container.Content][CR]Folder:$INFO[Container.FolderPath][CR]Discart=$INFO[Window(Home).Property(SkinHelper.ListItem.Art.DiscArt)][CR]Banner=$INFO[Window(Home).Property(SkinHelper.ListItem.Art.Banner)][CR]ArtisteBanner=$INFO[Window(Home).Property(ArtistBanner)][CR]ArtistLogo=$INFO[Window(Home).Property(ArtistLogo)][CR]AlbumCD=$INFO[Window(Home).Property(AlbumCd)][CR]AlbumCover=$INFO[Window(Home).Property(AlbumCover)][CR]$INFO[ListItem.Icon][CR]$VAR[discartSpinning]</label>
 			</control>-->
 
 		<include>LabelFlagsCommon</include>
