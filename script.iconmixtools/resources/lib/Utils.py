@@ -904,17 +904,18 @@ def getSagaFanarts():
   
 def getSagaFanartsV2(SagaItemPath=None):
   ListeFanarts=[] 
+  ListeFanart=None
   if SagaItemPath:
     ItemPath=CheckItemExtrafanartPath(SagaItemPath) 
     if ItemPath!="":
       ListeFanart=get_filepaths(ItemPath)
-        
-    for Item in ListeFanart:
-        #logMsg("getSagaItemPathListe ="+str(Item),0)
-        if Item.endswith('.jpg') or Item.endswith('.jpg') or Item.endswith('.png'):
-           ItemListe=xbmcgui.ListItem(label="extrafanart",iconImage=Item)
-           ItemListe.setInfo("pictures", {"title": "extrafanart","picturepath": Item}) 
-           ListeFanarts.append(ItemListe)        
+    if ListeFanart:    
+      for Item in ListeFanart:
+          #logMsg("getSagaItemPathListe ="+str(Item),0)
+          if Item.endswith('.jpg') or Item.endswith('.jpg') or Item.endswith('.png'):
+             ItemListe=xbmcgui.ListItem(label="extrafanart",iconImage=Item)
+             ItemListe.setInfo("pictures", {"title": "extrafanart","picturepath": Item}) 
+             ListeFanarts.append(ItemListe)        
            
   return ListeFanarts
   
