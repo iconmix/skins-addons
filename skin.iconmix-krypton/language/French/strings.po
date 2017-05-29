@@ -1468,6 +1468,10 @@ msgctxt "#31833"
 msgid "Test"
 msgstr "Test"
 
+msgctxt "#31834"
+msgid "Trio list"
+msgstr "Liste Trio"
+
 msgctxt "#31894"
 msgid "Age :"
 msgstr "Age :"

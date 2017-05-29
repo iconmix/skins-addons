@@ -10,6 +10,7 @@ from time import sleep
 import unicodedata
 import os
 import xbmc,xbmcgui,xbmcaddon,xbmcplugin
+import random
 
 # Script constantes
 __addon__      = xbmcaddon.Addon()
@@ -59,14 +60,24 @@ class Main:
                 if origtitle: origtitle = origtitle[0]    
                 if origtitle and genre and genretype:
                     utils.getGenre(genre,genretype,origtitle)  
-                
+             """   
              if action == "GETSAGA":
                 Id=params.get("id",None)
                 if Id: Id = Id[0]  
                 utils.CheckSaga(Id)
                 return  
+             """
+             
+                
+             if action == "GETSAGAFANART":  
+                Id=params.get("id",None)
+                if Id: Id = Id[0]   
+                #utils.logMsg("GETSAGAFANART :"+str(Id),0)            
+                utils.getSagaFanarts()
+                return  
                               
              if action == "GETTRAILER":
+                
                 Id=params.get("id",None)
                 if Id: Id = Id[0] 
                 trailertype=params.get("trailertype",None)
@@ -290,7 +301,7 @@ class Main:
 
     def _init_vars(self):
           self.windowhome = xbmcgui.Window(10000) # Home.xml 
-          self.windowvideonav = xbmcgui.Window(10025) # myvideonav.xml 
+          self.windowvideonav = xbmcgui.Window(10025) # myvideonav.xml           
           self.windowvideoinf = xbmcgui.Window(12003) # dialogvideoinfo.xml 
         
     def GetControl(self,Window=None,Id=None):
@@ -300,11 +311,24 @@ class Main:
           except:
                ControlId=None
           return ControlId
+          
+    def SetArtisteHomeVar(self,ArtisteData=None):
+      if ArtisteData:
+        self.windowhome.setProperty("ArtistBio",ArtisteData.get("ArtistBio"))
+        self.windowhome.setProperty("ArtistThumb",ArtisteData.get("ArtistThumb"))
+        self.windowhome.setProperty("ArtistLogo",ArtisteData.get("ArtistLogo"))
+        self.windowhome.setProperty("ArtistBanner",ArtisteData.get("ArtistBanner"))
+        self.windowhome.setProperty("ArtistFanart",ArtisteData.get("ArtistFanart"))
+        self.windowhome.setProperty("ArtistFanart2",ArtisteData.get("ArtistFanart2"))
+        self.windowhome.setProperty("ArtistFanart3",ArtisteData.get("ArtistFanart3"))   
 
     def run_backend(self):
         self._stop = False
         self.previousitem = ""
         self.previousitem8889 = ""
+        self.previousitemMusic = ""
+        self.previousitemPlayer= ""
+        self.PreviousWindowActiveID= ""
         self.DBTYPEOK = False
         self.DBTYPE= ""
         self.duration=""
@@ -326,9 +350,191 @@ class Main:
         
        # utils.logMsg('Service en cours..',0)
         while not self._stop:
-            #videonav ou dialogvideoinfo uniquement
+            #-------------------------- MUSIQUE ---------------------------------
+            #EN LECTURE
+            if xbmc.getCondVisibility("Player.HasAudio"):
+                self.selecteditemAlbumPlayer = xbmc.getInfoLabel("MusicPlayer.Album")
+                self.windowmusicvisID=None
+                if xbmc.getCondVisibility("Window.IsVisible(12006)"): self.windowmusicvisID = 12006 # musicvis.xml
+                if xbmc.getCondVisibility("Window.IsVisible(10000)"): self.windowmusicvisID = 10000 
+                if not str(self.selecteditemAlbumPlayer)=="" and (self.previousitemPlayer != self.selecteditemAlbumPlayer or (self.windowmusicvisID and self.PreviousWindowActiveID!=self.windowmusicvisID)):
+                  self.previousitemPlayer = self.selecteditemAlbumPlayer
+                  self.selecteditemArtistPlayer = xbmc.getInfoLabel("MusicPlayer.Artist")
+                  if self.windowmusicvisID: self.windowmusicvis = xbmcgui.Window(self.windowmusicvisID) # musicvis.xml
+                  self.PreviousWindowActiveID=self.windowmusicvisID
+                  if self.windowmusicvis: 
+                    ListeFanarts=self.GetControl(self.windowmusicvis,2996)
+                  #utils.logMsg("Album en cours :"+str(self.selecteditemAlbumPlayer)+"de "+str(self.selecteditemArtistPlayer),0)
+                  try:
+                       AlbumData,ArtisteData=utils.GetMusicFicheAlbum(None,None,1,1,None)
+                       if AlbumData:
+                           #utils.logMsg("Album en cours :"+str(AlbumData)+"de "+str(ArtisteData),0)
+                           self.windowhome.setProperty("AlbumCoverPlayer",AlbumData.get("AlbumCover"))
+                           self.windowhome.setProperty("AlbumBackPlayer",AlbumData.get("AlbumBack"))
+                           if AlbumData.get("AlbumCd"):
+                              self.windowhome.setProperty("AlbumCdPlayer",AlbumData.get("AlbumCd"))
+                           else:
+                              self.windowhome.setProperty("AlbumCdPlayer","")
+                           self.windowhome.setProperty("AlbumInfoPlayer",AlbumData.get("AlbumInfo"))
+                       if ArtisteData:
+                            if ListeFanarts:
+                                ListeFanarts.reset()
+                                Fanarts=ArtisteData.get("fanarts")
+                                if Fanarts:
+                                  Fanarts2=new_array = random.sample( Fanarts, len(Fanarts) )
+                                TabFanarts=[]
+                                if Fanarts:
+                                    for Item in Fanarts2:
+                                        #logMsg("getSagaItemPathListe ="+str(Item),0)
+                                           ItemListe=xbmcgui.ListItem(label="extrafanart",iconImage=Item)
+                                           ItemListe.setInfo("pictures", {"title": "extrafanart","picturepath": Item}) 
+                                           TabFanarts.append(ItemListe)
+                                    
+                                    ListeFanarts.addItems(TabFanarts) 
+                            self.windowhome.setProperty("ArtistBioPlayer",ArtisteData.get("ArtistBio"))
+                            self.windowhome.setProperty("ArtistThumbPlayer",ArtisteData.get("ArtistThumb"))
+                            self.windowhome.setProperty("ArtistLogoPlayer",ArtisteData.get("ArtistLogo"))
+                            self.windowhome.setProperty("ArtistBannerPlayer",ArtisteData.get("ArtistBanner"))
+                            self.windowhome.setProperty("ArtistFanartPlayer",ArtisteData.get("ArtistFanart"))
+                            self.windowhome.setProperty("ArtistFanart2Player",ArtisteData.get("ArtistFanart2"))
+                            self.windowhome.setProperty("ArtistFanart3Player",ArtisteData.get("ArtistFanart3"))  
+                  except:
+                       utils.logMsg("Probleme : AlbumData,ArtisteData=utils.GetMusicFicheAlbum(None,None,1,1)",0)  
+                
+            #VUES MUSIQUES
+            if xbmc.getCondVisibility("Window.IsVisible(10502)"):
+              Music1999=0
+              if xbmc.getCondVisibility("Control.HasFocus(1999)"):
+                self.selecteditemMusic = xbmc.getInfoLabel("Container(1999).ListItem.DBID")
+                LabelMusic = xbmc.getInfoLabel("Container(1999).ListItem.Label")
+                Cover=xbmc.getInfoLabel("Container(1999).ListItem.Icon")
+                Music1999=1
+                #utils.logMsg("FOCUS 1999 ACTIF : "+str(self.selecteditemMusic),0)
+              else:
+                self.selecteditemMusic = xbmc.getInfoLabel("ListItem.DBID")
+                LabelMusic = xbmc.getInfoLabel("ListItem.Label")
+                Cover=xbmc.getInfoLabel("Container.ListItem.Icon")
+                
+              if self.selecteditemMusic==-1 or str(self.selecteditemMusic)=="" :
+                 self.windowhome.clearProperty("AlbumCover")
+                 self.windowhome.clearProperty("AlbumBack")
+                 self.windowhome.clearProperty("AlbumCd")
+                 self.windowhome.clearProperty("AlbumInfo")
+                 self.windowhome.clearProperty("iconmixExtraFanart")
+                 self.windowhome.clearProperty('DurationToolsEnd')
+                 self.windowhome.clearProperty('DurationTools')
+                
+              if self.selecteditemMusic>-1 and not str(self.selecteditemMusic)=="" and self.previousitemMusic != self.selecteditemMusic:
+                self.previousitemMusic = self.selecteditemMusic
+                #self.DBTYPE=xbmc.getInfoLabel("ListItem.DBTYPE")
+                self.DBTYPE=xbmc.getInfoLabel("Container.Content")
+                self.windowmusicnav = xbmcgui.Window(10502) # mymusicnav.xml
+                ListeSaga=self.GetControl(self.windowmusicnav,1999)
+                ListeFanarts=self.GetControl(self.windowmusicnav,2998)
+                #utils.logMsg("control.getid : "+str(xbmcgui.Control.getId()),0)
+                
+                
+                #if ((self.DBTYPE=="artist" or xbmc.getCondVisibility("Container.Content(artists)")) and Music1999==0) :
+                if ((self.DBTYPE=="artists") and Music1999==0) :
+                #or (xbmc.getCondVisibility("Container.Content(genres)") and Music1999==1): #mise à jour artiste complete
+                    if xbmc.getCondVisibility("Container.Content(genres)"): 
+                       Music1999=0
+                    ArtisteData=[]
+                    self.windowhome.clearProperty("ArtistBio")
+                    self.windowhome.clearProperty("ArtistThumb")
+                    self.windowhome.clearProperty("ArtistLogo")
+                    self.windowhome.clearProperty("ArtistBanner")
+                    self.windowhome.clearProperty("ArtistFanart")
+                    self.windowhome.clearProperty("ArtistFanart2")
+                    self.windowhome.clearProperty("ArtistFanart3")                    
+                    #ArtisteData=utils.GetMusicFicheArtiste(LabelMusic,self.selecteditemMusic)
+                    
+                    
+                    
+                    ArtisteId=self.selecteditemMusic
+                    ListeItemx=[] 
+                    if ListeSaga:
+                      ListeSaga.reset()
+                      try:
+                        ListeItemx,ArtisteData=utils.CheckArtisteAlbums(ArtisteId)
+                        #utils.logMsg("utils.CheckArtisteAlbums : "+str(len(ListeItemx)),0)
+                      except:
+                        ListeItemx=None                      
+                      if ListeItemx:
+                           ListeSaga.addItems(ListeItemx)
+                           
+                    if ArtisteData:
+                        if ListeFanarts:
+                          ListeFanarts.reset()
+                          Fanarts=ArtisteData.get("fanarts")
+                          TabFanarts=[]
+                          if Fanarts:
+                              for Item in Fanarts:
+                                  #logMsg("getSagaItemPathListe ="+str(Item),0)
+                                     ItemListe=xbmcgui.ListItem(label="extrafanart",iconImage=Item)
+                                     ItemListe.setInfo("pictures", {"title": "extrafanart","picturepath": Item}) 
+                                     TabFanarts.append(ItemListe)
+                              ListeFanarts.addItems(TabFanarts)  
+                        
+                        self.SetArtisteHomeVar(ArtisteData)       
+                                                            
+                           
+                    
+                   
+                #if self.DBTYPE=="album" or xbmc.getCondVisibility("Container.Content(albums)") or self.DBTYPE=="song" or xbmc.getCondVisibility("Container.Content(songs)"): 
+                if self.DBTYPE=="albums"  or self.DBTYPE=="songs": 
+                   utils.logMsg("GetMusicFicheAlbum : "+str(self.selecteditemMusic)+"/"+str(xbmc.getInfoLabel("Container.Content")),0)
+                   self.windowhome.clearProperty("AlbumCover")
+                   self.windowhome.clearProperty("AlbumBack")
+                   self.windowhome.clearProperty("AlbumCd")
+                   self.windowhome.clearProperty("AlbumInfo")
+                   ListeSaga=self.GetControl(self.windowmusicnav,1999)
+                   if ListeSaga:
+                      ListeSaga.reset()
+                   try:
+                       if self.DBTYPE=="songs":
+                                              
+                         AlbumData,ArtisteData=utils.GetMusicFicheAlbum(self.selecteditemMusic,Cover,1,None,1)
+                       else:
+                         AlbumData,ArtisteData=utils.GetMusicFicheAlbum(self.selecteditemMusic,Cover,1,None,None)
+                         
+                       self.windowhome.clearProperty('DurationTools')                   
+                       self.windowhome.clearProperty('DurationToolsEnd')
+                       self.duration = xbmc.getInfoLabel("ListItem.Duration") 
+                       self.display_duration() 
+                         
+                       if AlbumData:
+                           self.windowhome.setProperty("AlbumCover",AlbumData.get("AlbumCover"))
+                           self.windowhome.setProperty("AlbumBack",AlbumData.get("AlbumBack"))
+                           if AlbumData.get("AlbumCd"):
+                              self.windowhome.setProperty("AlbumCd",AlbumData.get("AlbumCd"))
+                           else:
+                              self.windowhome.setProperty("AlbumCd","")
+                           self.windowhome.setProperty("AlbumInfo",AlbumData.get("AlbumInfo"))
+                       if ArtisteData:
+                          if ListeFanarts:
+                              ListeFanarts.reset()
+                              Fanarts=ArtisteData.get("fanarts")
+                              TabFanarts=[]
+                              if Fanarts:
+                                  for Item in Fanarts:
+                                      #logMsg("getSagaItemPathListe ="+str(Item),0)
+                                         ItemListe=xbmcgui.ListItem(label="extrafanart",iconImage=Item)
+                                         ItemListe.setInfo("pictures", {"title": "extrafanart","picturepath": Item}) 
+                                         TabFanarts.append(ItemListe)
+                                  ListeFanarts.addItems(TabFanarts) 
+                          self.SetArtisteHomeVar(ArtisteData)  
+                   except:
+                       utils.logMsg("Probleme : AlbumData,ArtisteData=utils.GetMusicFicheAlbum(self.selecteditemMusic,Cover,None)",0)  
+                
+                
+              
+              
+          
+            #FILMS/SERIES/ACTEURS
             if (xbmc.getCondVisibility("Window.IsVisible(10025)") or xbmc.getCondVisibility("Window.IsVisible(12003)")) and not xbmc.getCondVisibility("Container.Scrolling") and not xbmc.getCondVisibility("Window.IsVisible(12000)"):
                 MiseAjour=""
+                #-------------------------- ACTEURS ---------------------------------
                 if xbmc.getCondVisibility("Control.HasFocus(8889)") or xbmc.getCondVisibility("Control.HasFocus(5051)"):
                     Actif5051="non"
                     if xbmc.getCondVisibility("Control.HasFocus(5051)"):
@@ -337,8 +543,9 @@ class Main:
                     else: 
                         self.selecteditem8889 = xbmc.getInfoLabel("ListItem.DBID")                   
                         
-                    
-                    if self.previousitem8889 != self.selecteditem8889:
+                    self.previousitem = ""
+                    self.previousitemMusic = ""
+                    if self.previousitem8889 != self.selecteditem8889 and not str(self.selecteditem8889)=="":
                         if xbmc.getCondVisibility("Control.HasFocus(5051)"):
                           self.LABEL8889=xbmc.getInfoLabel("Container(1998).ListItem.Label").split(" (")[0].decode("utf8")
                           self.DBTYPE=xbmc.getInfoLabel("Container(1998).ListItem.DBTYPE")
@@ -398,12 +605,12 @@ class Main:
                                  if Actif5051!="oui": 
                                      dialog=xbmcgui.Dialog()
                                      dialog.notification('IconMixTools', __language__( 32584 )+self.LABEL8889, "acteurs/arfffff.png", 3000)
-                                     xbmc.executebuiltin("SetFocus(55)")
-                                     
+                                     xbmc.executebuiltin("SetFocus(55)")                                 
                         
-                        #utils.logMsg("Control.HasFocus(8889) fini ",0) 
-                         
-                else:         
+                 #-------------------------- FILMS/SERIES ---------------------------------         
+                else:                     
+                    self.previousitem8889 = ""  
+                    self.previousitemMusic = ""     
                     if xbmc.getCondVisibility("Control.HasFocus(2999)"):
                         self.LABEL1999=xbmc.getInfoLabel("Container(1999).ListItem.Label")
                         self.selecteditem = xbmc.getInfoLabel("Container(1999).ListItem.DBID")
@@ -438,14 +645,14 @@ class Main:
                         
                         #focus 2999
                         if xbmc.getCondVisibility("Control.HasFocus(2999)"):
-                            if self.selecteditem > -1:                          
+                            if self.selecteditem > -1 and not str(self.selecteditem)=="":                          
                               if self.DBTYPEOK:
-                                   self.windowhome.setProperty('IconMixExtraFanart',utils.getItemPath(xbmc.getInfoLabel("Container(1999).ListItem.DBTYPE"),xbmc.getInfoLabel("Container(1999).ListItem.DBID")))   
+                                   self.windowhome.setProperty('IconMixExtraFanart',utils.CheckItemExtrafanartPath(xbmc.getInfoLabel("Container(1999).ListItem.Path")))   
                                    self.duration = xbmc.getInfoLabel("Container(1999).ListItem.Duration") 
                                    self.display_duration()
                         
                         else:
-                          if self.selecteditem > -1: 
+                          if self.selecteditem > -1 and not str(self.selecteditem)=="": 
                                 
                               ListeItemx=[]                         
                               if not self.DBTYPE=="set" and not status=="1":
@@ -497,23 +704,40 @@ class Main:
                                 status="1"
                                 if not MiseAjour=="2":
                                    ListeSaga=self.GetControl(self.windowvideonav,1999)
+                                   ListeFanarts=self.GetControl(self.windowvideonav,5555)
+                                   
                                    SetID=self.selecteditem
                                 else:
                                    ListeSaga=self.GetControl(self.windowvideoinf,5002)
+                                   ListeFanarts=None
                                    SetID=xbmc.getInfoLabel("ListItem.SetId")
                                    
                                 if ListeSaga and SetID:
                                   NbItems=ListeSaga.size()
-                                  ListeItemx=utils.CheckSaga(SetID,1)
+                                  FileTab=[]
+                                  try:
+                                    ListeItemx,FileTab =utils.CheckSaga(SetID,1)
+                                  except:
+                                    ListeItemx=None
                                   ListeSaga.reset()
                                   if ListeItemx:
-                                       ListeSaga.addItems(ListeItemx)
+                                       ListeSaga.addItems(ListeItemx)                                       
+                                       if FileTab and ListeFanarts:
+                                         ListeFanarts.reset()                                         
+                                         for index in FileTab:                                             
+                                             Liste=utils.getSagaFanartsV2(index)
+                                             if Liste:                                                
+                                                ListeFanarts.addItems(Liste)
+                                                
+                                       #utils.getSagaItemPath()
                                                                        
                                 status=""
                                 
-                             
-                              if self.DBTYPEOK : 
-                                   self.windowhome.setProperty('IconMixExtraFanart',utils.getItemPath(self.DBTYPE,self.selecteditem))
+                              if self.DBTYPEOK or self.DBTYPE=="tvshow":
+                                 self.windowhome.setProperty('IconMixExtraFanart',utils.CheckItemExtrafanartPath(xbmc.getInfoLabel("ListItem.Path")))
+                                 if self.DBTYPE!="tvshow": 
+                                   
+                                   #self.windowhome.setProperty('IconMixExtraFanart',utils.CheckItemExtrafanartPath(self.DBTYPE,self.selecteditem))
                                    self.duration = xbmc.getInfoLabel("ListItem.Duration") 
                                    self.display_duration()
                               if self.DBTYPE=="episode" and xbmc.getCondVisibility("Skin.HasSetting(CheckSeries)"):
@@ -559,20 +783,22 @@ class Main:
     def display_duration(self):
     #twolaw code
         xxx="null"
+        if not xbmc.getCondVisibility("Window.IsVisible(10502)"):
+          typeId=self.DBTYPE
+          itemId=self.selecteditem
+          IMDBID=xbmc.getInfoLabel("ListItem.IMDBNumber")
+         
+          if (not self.duration or self.duration<10) and IMDBID :
+              #utils.logMsg('GetRuntime selfduration: '+ str(self.duration) +' minutes'+" movie =" +str(xbmc.getInfoLabel("ListItem.DBID"))+" type =" +str(xbmc.getInfoLabel("ListItem.DBTYPE"))+" imdb="+str(xbmc.getInfoLabel("ListItem.IMDBNumber")),0)
+              if typeId.find('episode')==-1: self.duration=utils.getRuntime(IMDBID,typeId)
+              #else : self.duration=utils.getRuntime("tt"+IMDBID)
+              if self.duration and typeId :                    
+                      #mise à jour de la durée dans la base pour éviter de renouveller l'opération !
+                      utils.setJSON('VideoLibrary.Set%sDetails' %(typeId.encode("utf-8")),'{"%sid":%d,"runtime":%d}' %(typeId.encode("utf-8"),int(itemId),int(self.duration)*60))
+                       #http://127.0.0.1:8080/jsonrpc?request={%22jsonrpc%22:%222.0%22,%22method%22:%22VideoLibrary.SetMovieDetails%22,%22params%22:{%22movieid%22:37,%22runtime%22:111},%22id%22:1}
+                      #utils.logMsg('Mise a jour : %d' %( int(self.duration)*60) +' minutes'+" movie =" +str(itemId)+" type =" +typeId+"imdb="+IMDBID,0)
+                      
         
-        typeId=self.DBTYPE
-        itemId=self.selecteditem
-        IMDBID=xbmc.getInfoLabel("ListItem.IMDBNumber")
-       
-        if (not self.duration or self.duration<10) and IMDBID :
-            #utils.logMsg('GetRuntime selfduration: '+ str(self.duration) +' minutes'+" movie =" +str(xbmc.getInfoLabel("ListItem.DBID"))+" type =" +str(xbmc.getInfoLabel("ListItem.DBTYPE"))+" imdb="+str(xbmc.getInfoLabel("ListItem.IMDBNumber")),0)
-            if typeId.find('episode')==-1: self.duration=utils.getRuntime(IMDBID,typeId)
-            #else : self.duration=utils.getRuntime("tt"+IMDBID)
-            if self.duration and typeId :                    
-                    #mise à jour de la durée dans la base pour éviter de renouveller l'opération !
-                    utils.setJSON('VideoLibrary.Set%sDetails' %(typeId.encode("utf-8")),'{"%sid":%d,"runtime":%d}' %(typeId.encode("utf-8"),int(itemId),int(self.duration)*60))
-                     #http://127.0.0.1:8080/jsonrpc?request={%22jsonrpc%22:%222.0%22,%22method%22:%22VideoLibrary.SetMovieDetails%22,%22params%22:{%22movieid%22:37,%22runtime%22:111},%22id%22:1}
-                    #utils.logMsg('Mise a jour : %d' %( int(self.duration)*60) +' minutes'+" movie =" +str(itemId)+" type =" +typeId+"imdb="+IMDBID,0)
         if self.duration :
         #else :
          if self.duration.find(':')==-1:

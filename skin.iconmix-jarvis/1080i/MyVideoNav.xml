@@ -17,7 +17,7 @@
 
 	
 
-	<views>55,905,906,509,53,57,58,559,555,556,501,551,552,553,554,550,504,511,513,514,510,52,521,56,560,512,584,585,586,587</views>
+	<views>55,557,905,906,509,53,57,58,559,555,556,501,551,552,553,554,550,504,511,513,514,510,52,521,56,560,512,584,585,586,587</views>
 	<defaultcontrol always="true">55</defaultcontrol>
 	<controls>
 		<!--
@@ -50,6 +50,7 @@
 				</animation>
 
 				<include>Viewtype_List</include>			<!-- 55 -->
+				<include>Viewtype_ListTrio</include>			<!-- 55 -->
 				<include>Viewtype_LowList</include>			<!-- 905 -->
 				<include>Viewtype_ListFanart</include>			<!-- 509 -->
 				<include>Viewtype_PosterAndFanart</include>		<!-- 550 -->
@@ -108,13 +109,29 @@
 				<visible>!Skin.HasSetting(CacheFond)</visible>
 			</control>
 
-
+<!--
+      <control type="list" id="3000">
+				<left>-2000</left>
+				<onfocus>ActivateWindow(2003)</onfocus>
+				<content>videodb://movies/sets/$INFO[Window(Home).Property(Item1999)]</content>
+				<itemlayout>
+				  
+				</itemlayout>
+				<focusedlayout>
+				  
+				</focusedlayout>
+			</control>
+-->
 			<!----------------------------------------------SAGAS------------------------------------------------------------------ -->
 
 			<include>focusboitiers</include>
 			<control type="button" id="2999">
 				<left>-2000</left>
 				<label>FUCK</label>
+			<!--	<onup>SetProperty(Item1999,$INFO[ListItem.setID],Home)</onup>
+				<onup>Control.SetFocus(3000,Container(1999).Position)</onup>
+				<ondown>SetProperty(Item1999,,Home)</ondown>
+				<onup>ActivateWindow(2003)</onup>-->
 				<onleft condition="StringCompare(Window(Home).Property(IconMixVerticalNavigation),horizontal)">Control.Move(1999,-1)</onleft>
 				<onright condition="StringCompare(Window(Home).Property(IconMixVerticalNavigation),horizontal)">Control.Move(1999,1)</onright>	
 				<onup condition="StringCompare(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetFocus(55)</onup>
@@ -729,6 +746,7 @@
 
 
 	</control>
+	
 	<!-- <include>Global_MediaOverlay</include> -->
 	<include>AnimationVoletsHorizontaux</include>
 	<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
@@ -741,7 +759,7 @@
 		<control type="label">
 	<posx>700</posx>
 
-	<label>Epis:$INFO[Window(Home).Property(iconmixEpSa)][CR]Icon:$INFO[Container.NumItems][CR]Trailer:$INFO[ListItem.Trailer][CR][CR]TVshow:$INFO[ListItem.TVShowTitle][CR]IconMixDirector:$INFO[Window(10000).Property(IconMixDirector)][CR]ID=$INFO[ListItem.DBID][CR]SETID=$INFO[ListItem.setID][CR]IMDB=$INFO[ListItem.IMDBNumber][CR]Type=$INFO[ListItem.DBTYPE][CR]Content:$INFO[Container.Content][CR]$INFO[Container.FolderPath][CR]FolderName:$INFO[Container.FolderName][CR]$INFO[ListItem.FileNameAndPath][CR]$INFO[ListItem.Path][CR]ID1999=$INFO[Container(1999).ListItem.DBID][CR]TYPE1999=$INFO[Container(1999).ListItem.DBTYPE][CR]NB1999=$INFO[Container(1999).NumItems][CR]IMDB1999=$INFO[Container(1999).ListItem.Property(IMDBNumber)][CR]TMDB1999=$INFO[Container(1999).ListItem.Property(TMDBNumber)][CR]ID1999C=$INFO[Container(1999).ListItem.Property(DBID)][CR]$INFO[Container(1999).ListItem.FileNameAndPath][CR]NB1998=$INFO[Container(1998).NumItems][CR]ID1998=$INFO[Container(1998).ListItem.Property(DBID)][CR]Poster:$INFO[ListItem.Art(poster)][CR]Icon:$INFO[ListItem.Overlay]</label>
+	<label>Epis:$INFO[Window(Home).Property(iconmixEpSa)][CR]Icon:$INFO[Container.NumItems][CR]Trailer:$INFO[ListItem.Trailer][CR][CR]TVshow:$INFO[ListItem.TVShowTitle][CR]IconMixDirector:$INFO[Window(10000).Property(IconMixDirector)][CR]ID=$INFO[ListItem.DBID][CR]SETID=$INFO[ListItem.setID][CR]IMDB=$INFO[ListItem.IMDBNumber][CR]Type=$INFO[ListItem.DBTYPE][CR]Content:$INFO[Container.Content][CR]$INFO[Container.FolderPath][CR]FolderName:$INFO[Container.FolderName][CR]$INFO[ListItem.FileNameAndPath][CR]ListItem.Path=$INFO[ListItem.Path][CR]Extrafanart:$INFO[Window(Home).Property(IconMixExtraFanart)][CR]ID1999=$INFO[Container(1999).ListItem.DBID][CR]TYPE1999=$INFO[Container(1999).ListItem.DBTYPE][CR]NB1999=$INFO[Container(1999).NumItems][CR]IMDB1999=$INFO[Container(1999).ListItem.Property(IMDBNumber)][CR]TMDB1999=$INFO[Container(1999).ListItem.Property(TMDBNumber)][CR]ID1999C=$INFO[Container(1999).ListItem.Property(DBID)][CR]$INFO[Container(1999).ListItem.FileNameAndPath][CR]NB1998=$INFO[Container(1998).NumItems][CR]ID1998=$INFO[Container(1998).ListItem.Property(DBID)][CR]Poster:$INFO[ListItem.Art(poster)][CR]Icon:$INFO[ListItem.Overlay][CR]Item1999=$INFO[Window(Home).Property(Item1999)][CR]Nb3000=$INFO[Container(3000).NumItems][CR]Nb5555=$INFO[Container(5555).NumItems]</label>
 	</control>
 
 

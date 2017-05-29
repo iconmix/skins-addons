@@ -2,8 +2,9 @@
 <window>
 	<defaultcontrol>9000</defaultcontrol>
 	<onunload>RunScript(script.skinshortcuts,type=buildxml&amp;mainmenuID=9000&amp;levels=0)</onunload>
-	<onload condition="!Skin.HasSetting(MenuIconVertical)+!Skin.HasSetting(MenuIcon)+!Skin.HasSetting(MenuTexte)+!Skin.HasSetting(MenuIconBobine)">Skin.ToggleSetting(MenuTexte)</onload> <!-- default to Icon menu -->
+	<onload condition="!Skin.HasSetting(MenuIconVertical)+!Skin.HasSetting(MenuIcon)+!Skin.HasSetting(MenuTexte)+!Skin.HasSetting(MenuTexteVertical)+!Skin.HasSetting(MenuIconBobine)">Skin.ToggleSetting(MenuTexte)</onload> <!-- default to Icon menu -->
 	<onload condition="[Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuTexte)]">Skin.ToggleSetting(MenuTexte)</onload> <!-- default to Icon menu -->
+	<onload condition="[Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuTexteVertical)]">Skin.ToggleSetting(MenuTexteVertical)</onload> <!-- default to Icon menu -->
 	<onload condition="[Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuIconVertical)]">Skin.ToggleSetting(MenuIconVertical)</onload> <!-- default to Icon menu -->
 	<onload condition="[Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuIconBobine)]">Skin.ToggleSetting(MenuIconBobine)</onload>
 
@@ -236,26 +237,31 @@
 						<onclick condition="Skin.HasSetting(MenuIconBobine)">Skin.ToggleSetting(MenuIconBobine)</onclick>
 						<onclick condition="Skin.HasSetting(MenuIconVertical)">Skin.ToggleSetting(MenuIconVertical)</onclick>
 						<onclick condition="Skin.HasSetting(MenuIcon)">Skin.ToggleSetting(MenuIcon)</onclick>
+						<onclick condition="Skin.HasSetting(MenuTexteVertical)">Skin.ToggleSetting(MenuTexteVertical)</onclick>
 						<selected>Skin.HasSetting(MenuTexte)</selected>
 					</control>
-					<control type="radiobutton" id="202"> <!-- menu ICONES -->
+					<control type="radiobutton" id="202"> <!-- menu texte -->
+						<include>SettingsLabel</include>
+						<label>$LOCALIZE[31061] Vertical</label>
+						<onclick condition="!Skin.HasSetting(MenuTexteVertical)">Skin.ToggleSetting(MenuTexteVertical)</onclick>
+						<onclick condition="Skin.HasSetting(MenuIconBobine)">Skin.ToggleSetting(MenuIconBobine)</onclick>
+						<onclick condition="Skin.HasSetting(MenuIconVertical)">Skin.ToggleSetting(MenuIconVertical)</onclick>
+						<onclick condition="Skin.HasSetting(MenuIcon)">Skin.ToggleSetting(MenuIcon)</onclick>
+						<onclick condition="Skin.HasSetting(MenuTexte)">Skin.ToggleSetting(MenuTexte)</onclick>
+						<selected>Skin.HasSetting(MenuTexteVertical)</selected>
+					</control>
+					
+					<control type="radiobutton" id="203"> <!-- menu ICONES -->
 						<include>SettingsLabel</include>
 						<label>$LOCALIZE[31062]</label>
 						<onclick condition="!Skin.HasSetting(MenuIcon)">Skin.ToggleSetting(MenuIcon)</onclick>
 						<onclick condition="Skin.HasSetting(MenuIconBobine)">Skin.ToggleSetting(MenuIconBobine)</onclick>
 						<onclick condition="Skin.HasSetting(MenuIconVertical)">Skin.ToggleSetting(MenuIconVertical)</onclick>
 						<onclick condition="Skin.HasSetting(MenuTexte)">Skin.ToggleSetting(MenuTexte)</onclick>
+						<onclick condition="Skin.HasSetting(MenuTexteVertical)">Skin.ToggleSetting(MenuTexteVertical)</onclick>
 						<selected>Skin.HasSetting(MenuIcon)</selected>
 					</control>
-					<control type="radiobutton" id="203"> <!-- Menu ICONE Bobine -->
-						<include>SettingsLabel</include>
-						<label>$LOCALIZE[31062] Bobine</label>
-						<onclick condition="!Skin.HasSetting(MenuIconBobine)">Skin.ToggleSetting(MenuIconBobine)</onclick>
-						<onclick condition="Skin.HasSetting(MenuIcon)">Skin.ToggleSetting(MenuIcon)</onclick>
-						<onclick condition="Skin.HasSetting(MenuIconVertical)">Skin.ToggleSetting(MenuIconVertical)</onclick>
-						<onclick condition="Skin.HasSetting(MenuTexte)">Skin.ToggleSetting(MenuTexte)</onclick>
-						<selected>Skin.HasSetting(MenuIconBobine)</selected>
-					</control>
+					
 					<control type="radiobutton" id="204"> <!-- Menu ICONES Vertical -->
 						<include>SettingsLabel</include>
 						<label>$LOCALIZE[31065]</label>
@@ -263,14 +269,26 @@
 						<onclick condition="Skin.HasSetting(MenuIconBobine)">Skin.ToggleSetting(MenuIconBobine)</onclick>
 						<onclick condition="Skin.HasSetting(MenuTexte)">Skin.ToggleSetting(MenuTexte)</onclick>
 						<onclick condition="Skin.HasSetting(MenuIcon)">Skin.ToggleSetting(MenuIcon)</onclick>
+						<onclick condition="Skin.HasSetting(MenuTexteVertical)">Skin.ToggleSetting(MenuTexteVertical)</onclick>
 						<selected>Skin.HasSetting(MenuIconVertical)</selected>
 					</control>
-					<control type="radiobutton" id="205">
+					<control type="radiobutton" id="205"> <!-- Menu ICONE Bobine -->
+						<include>SettingsLabel</include>
+						<label>$LOCALIZE[31062] Bobine</label>
+						<onclick condition="!Skin.HasSetting(MenuIconBobine)">Skin.ToggleSetting(MenuIconBobine)</onclick>
+						<onclick condition="Skin.HasSetting(MenuIcon)">Skin.ToggleSetting(MenuIcon)</onclick>
+						<onclick condition="Skin.HasSetting(MenuIconVertical)">Skin.ToggleSetting(MenuIconVertical)</onclick>
+						<onclick condition="Skin.HasSetting(MenuTexte)">Skin.ToggleSetting(MenuTexte)</onclick>
+						<onclick condition="Skin.HasSetting(MenuTexteVertical)">Skin.ToggleSetting(MenuTexteVertical)</onclick>
+						<selected>Skin.HasSetting(MenuIconBobine)</selected>
+					</control>
+					<control type="radiobutton" id="206">
 						<include>SettingsLabel</include>
 						<label>$LOCALIZE[31063]</label>
 						<onclick>Skin.ToggleSetting(ShowIconLabel)</onclick>						
 						<selected>Skin.HasSetting(ShowIconLabel)</selected>
 						<visible>Skin.HasSetting(MenuIcon)|Skin.HasSetting(MenuIconBobine)|Skin.HasSetting(MenuIconVertical)</visible>
+						<onclick condition="Skin.HasSetting(MenuTexteVertical)">Skin.ToggleSetting(MenuTexteVertical)</onclick>
 					</control> 
 					
 					

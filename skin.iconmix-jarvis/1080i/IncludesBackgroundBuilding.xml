@@ -390,25 +390,7 @@
 			-->
 		<control type="group">
 			<visible>Player.HasAudio+Control.IsVisible(9044)</visible>
-			<control type="multiimage" id="99">
-				<include>MusicVis_Background</include>
-				<imagepath background="true">$INFO[Window(Visualisation).Property(ArtistSlideshow)]</imagepath>
-				<fadetime>450</fadetime>
-				<randomize>true</randomize>
-				<visible>Skin.HasSetting(VisBgArtistSlideshow)</visible>
-			</control>
-			<control type="image">
-				<include>MusicVis_Background</include>
-				<texture background="true" fallback="home_art/music.jpg">$INFO[Player.Art(fanart)]</texture>
-				<!--	<animation effect="slide" end="1920" time="2000" delay="2000" loop="true" condition="true">Conditional</animation> -->
-				<visible>Skin.HasSetting(VisBgFanart)| [Skin.HasSetting(VisBgArtistSlideshow)+SubString(Window(Visualisation).Property(ArtistSlideshow),resources/black)]</visible>
-			</control>
-			<control type="multiimage">
-				<include>MusicVis_Background</include>
-				<imagepath background="true">$INFO[Player.FolderPath,,../extrafanart/]</imagepath>
-				<randomize>true</randomize>
-				<visible>Skin.HasSetting(VisBgExtraFanart)</visible>
-			</control>
+			<include>MusiqueBackGround</include>
 		</control>
 		<!-- --	<control type="label">
 			<posy>50</posy>

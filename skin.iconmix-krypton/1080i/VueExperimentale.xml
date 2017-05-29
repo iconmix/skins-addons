@@ -50,7 +50,13 @@
 				<left>50</left>
 				<include>ClearLogoArt</include>
 			</control>
-			
+			<control type="image">
+			  <posy>990</posy>
+			  <width>200</width>
+			  <height>80</height>
+			  <texture>flags/notation/note$INFO[ListItem.UserRating].png</texture>
+			  <aspectratio>keep</aspectratio>
+			</control>
 			<control type="image">
 				<posy>2030</posy>
 				<width>1920</width>

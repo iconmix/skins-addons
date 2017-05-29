@@ -45,6 +45,10 @@ msgctxt "#32508"
 msgid "Searching trailers... "
 msgstr "Recherche de bande-annonces..."
 
+msgctxt "#32509"
+msgid "Updating Music artworks of "
+msgstr "Mise à jour des Artworks de "
+
 msgctxt "#32580"
 msgid "Actors"
 msgstr "Acteurs"
@@ -65,6 +69,14 @@ msgctxt "#32584"
 msgid "No information found for "
 msgstr "Pas d'informations trouvées pour "
 
+msgctxt "#32585"
+msgid "Music"
+msgstr "Musique"
+
+msgctxt "#32587"
+msgid "download album cover"
+msgstr "Télécharger la pochette"
+
 msgctxt "#32600"
 msgid "Disable local cache"
 msgstr "Désactiver le cache"
@@ -76,4 +88,6 @@ msgstr "Vider le cache"
 msgctxt "#32602"
 msgid "Please confirm to delete local cache"
 msgstr "Veuillez confirmer la suppression de ce cache"
+
+
 

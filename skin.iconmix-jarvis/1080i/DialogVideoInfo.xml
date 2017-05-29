@@ -175,6 +175,13 @@
 						<onfocus>SetProperty(showgenre,,12003)</onfocus>
 						<visible>!SubString(ListItem.Filenameandpath,plugin:)</visible>
 					</control>
+					<control type="button" id="7">
+						<include>VideoInfoButton</include>
+						<texturenofocus>buttons/button_videoextras.png</texturenofocus>
+						<texturefocus>buttons/button_videoextrasFO.png</texturefocus>
+						<include>Animation_ButtonFocus</include>
+						
+					</control>
 
 					<control type="button" id="600">
 						<include>VideoInfoButton</include>
@@ -320,7 +327,7 @@
 				<posx>10</posx>
 				<posy>700</posy>
 				<width>1600</width>
-				<label>NbItems5001:$INFO[Container(5001).NumItems][CR]NbItems5002:$INFO[Container(5002).NumItems][CR]DBID=$INFO[Container(50).ListItem.DBID][CR]SetID=$INFO[Container(5002).ListItem.SetID][CR]PropSetID=$INFO[Container(5002).ListItem.Property(SetID)][CR]Type=$INFO[ListItem.DBTYPE][CR]Folder:$INFO[Container(50).ListItem.FolderPath][CR]Serie:$INFO[ListItem.TVShowTitle]</label>
+				<label>NbItems5001:$INFO[Container(1999).NumItems][CR]NbItems5002:$INFO[Container(1999).ListItem.Icon][CR]DBID=$INFO[Container(50).ListItem.DBID][CR]SetID=$INFO[Container(5002).ListItem.SetID][CR]PropSetID=$INFO[Container(5002).ListItem.Property(SetID)][CR]Type=$INFO[ListItem.DBTYPE][CR]Folder:$INFO[Container(50).ListItem.FolderPath][CR]Serie:$INFO[ListItem.TVShowTitle]</label>
 			</control>-->
 
 			<control type="label">
@@ -411,7 +418,7 @@
 					<font>METF_InfoTextLarger</font>
 					<textcolor>MediaDetailsEpisodes</textcolor>
 					<label>Statut : $LOCALIZE[16102]</label>
-					<visible>Container.Content(episodes) + String.IsEqual(ListItem.Overlay,OverlayWatched.png)</visible>
+					<visible>Container.Content(episodes) + StringCompare(ListItem.Overlay,OverlayWatched.png)</visible>
 				</control>
 			</control>
 			<!----------------------------------------------------------------------------------------------------->
@@ -827,18 +834,17 @@
 	<!--------------------------------------------------------------------------------------------------------------->
 
 	<!-- Year and Duration -->
-	<control type="grouplist">
-		<posx>700</posx>
-		<posy>23</posy>
-		<width>620</width>
-		<height>80</height>
-		<align>right</align>
-		<itemgap>10</itemgap>
-		<orientation>horizontal</orientation>
-		<include>Animation_FadedByMenu</include>
-		<include>Animation_CommonFade</include>
-		<include>Animation_OpenCloseFade</include>
 		<control type="image">
+	  <posx>1125</posx>
+			  <posy>65</posy>
+			  <width>200</width>
+			  <height>80</height>
+			  <texture>flags/notation/note$INFO[ListItem.UserRating].png</texture>
+			  <aspectratio>keep</aspectratio>
+	</control>
+		<control type="image">
+		  <posx>1200</posx>
+		<posy>23</posy>
 			<visible>!IsEmpty(ListItem.Country)</visible>
 			<width>70</width>
 			<height>40</height>
@@ -847,7 +853,7 @@
 			<aspectratio aligny="center">scale</aspectratio>
 		</control>
 	
-	</control>
+
 </control>
 
 

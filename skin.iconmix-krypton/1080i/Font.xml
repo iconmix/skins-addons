@@ -296,6 +296,11 @@
 			<size>45</size>
 		</font>
 		<font>
+			<name>impact35</name>
+			<filename>impact.ttf</filename>
+			<size>35</size>
+		</font>
+		<font>
 			<name>impactsongs</name>
 			<filename>impact.ttf</filename>
 			<size>23</size>

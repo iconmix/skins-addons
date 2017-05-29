@@ -44,6 +44,10 @@ msgctxt "#32508"
 msgid "Searching trailers... "
 msgstr ""
 
+msgctxt "#32509"
+msgid "Updating Music artworks of "
+msgstr ""
+
 msgctxt "#32580"
 msgid "Actors"
 msgstr ""
@@ -63,6 +67,17 @@ msgstr ""
 msgctxt "#32584"
 msgid "No information found for "
 msgstr ""
+
+
+msgctxt "#32585"
+msgid "Music"
+msgstr ""
+
+
+msgctxt "#32587"
+msgid "download album cover"
+msgstr ""
+
 
 msgctxt "#32600"
 msgid "Disable local cache"

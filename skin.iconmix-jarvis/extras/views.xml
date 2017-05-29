@@ -2,6 +2,7 @@
 	<view id="List" value="55" languageid="31801"  type="all"/>
 	<view id="LowList" value="905"  languageid="31802"  type="videos,movies,setmovies,tvshows,musicvideos,seasons,sets,episodes" />
 	<view id="List and Fanart" value="509" languageid="31803"  type="movies,setmovies,tvshows,musicvideos,seasons,sets,episodes" />
+	<view id="List Trio" value="557" languageid="31834"  type="movies,setmovies,sets,tvshows" />
 	<view id="List Curved" value="906" languageid="31832"  type="all" />
 	<view id="Poster and Fanart " value="550" languageid="31804"  type="movies,setmovies,tvshows,musicvideos,sets" />
 	<view id="Poster Large fixe" value="555"  languageid="31829"  type="genres,movies,setmovies,tvshows,musicvideos,seasons,sets,episodes" />

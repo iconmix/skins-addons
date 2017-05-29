@@ -3,25 +3,7 @@
 	<onload condition="System.HasAddon(script.artistslideshow)">RunScript(script.artistslideshow, daemon=True)</onload>
 	<defaultcontrol>-</defaultcontrol>
 	<controls>
-
-		<control type="multiimage" id="99">
-			<include>MusicVis_Background</include>
-			<imagepath background="true">$INFO[Window(Visualisation).Property(ArtistSlideshow)]</imagepath>
-			<randomize>true</randomize>
-			<visible>Skin.HasSetting(VisBgArtistSlideshow)</visible>
-		</control>
-		<control type="image">
-			<include>MusicVis_Background</include>
-			<texture background="true" fallback="home_art/music.jpg">$INFO[Player.Art(fanart)]</texture>
-			<!--	<animation effect="slide" end="1920" time="2000" delay="2000" loop="true" condition="true">Conditional</animation> -->
-			<visible>Skin.HasSetting(VisBgFanart)| [Skin.HasSetting(VisBgArtistSlideshow)+String.Contains(Window(Visualisation).Property(ArtistSlideshow),resources/black)]</visible>
-		</control>
-		<control type="multiimage">
-			<include>MusicVis_Background</include>
-			<imagepath background="true">$INFO[Player.FolderPath,,../extrafanart/]</imagepath>
-			<randomize>true</randomize>
-			<visible>Skin.HasSetting(VisBgExtraFanart)</visible>
-		</control>
+	  <include>MusiqueBackGround</include>
 		<control type="visualisation" id="2">
 			<description>visualisation</description>
 			<posx>0</posx>
@@ -62,7 +44,7 @@
 				<animation effect="slide" start="-280" end="30" time="600" tween="cubic" easing="out" delay="400">WindowOpen</animation>
 				<animation effect="slide" start="30" end="-280" time="600" tween="cubic" easing="out" delay="800">WindowClose</animation>
 
-				<visible>Skin.HasSetting(MediaOverlay)</visible>
+				<!--<visible>Skin.HasSetting(MediaOverlay)</visible> -->
 				<control type="image" id="7026">
 					<width>180</width>
 					<height>180</height>
@@ -77,11 +59,11 @@
 					<width>340</width>
 					<height>200</height>
 					<fadetime>200</fadetime>
-					<texture background="true">$INFO[Player.Art(thumb)]</texture>
+					<texture background="true">$INFO[Window(Home).Property(AlbumCoverPlayer)]</texture>
 					<aspectratio aligny="bottom">keep</aspectratio>
 					<bordertexture border="8">thumb_border.png</bordertexture>
 					<bordersize>8</bordersize>
-					<visible>!String.IsEmpty(Player.Art(thumb))</visible>
+					<visible>!String.IsEmpty(Window(Home).Property(AlbumCoverPlayer))</visible>
 				</control>
 			</control>
 			<control type="image">
@@ -91,9 +73,10 @@
 				<posy>470</posy>
 				<aligny>top</aligny>
 				<align>center</align>
-				<texture diffuse="shine.png" background="true">$INFO[Window(Home).Property(SkinHelper.Player.Music.Banner)]</texture>
+				<texture diffuse="shine.png" background="true">$INFO[Window(Home).Property(ArtistBannerPlayer)]</texture>
 				<aspectratio>keep</aspectratio>
-				<visible>!String.IsEmpty(Window(Home).Property(SkinHelper.Player.Music.Banner))</visible>
+				<visible>!String.IsEmpty(Window(Home).Property(ArtistBannerPlayer))</visible>
+			
 			</control>
 			<control type="label">
 				<posx>324</posx>
@@ -104,7 +87,7 @@
 				<scroll>true</scroll>
 				<font>METF_MusicVizTitle</font>
 				<label>[COLOR=NowPlayingTitle]$INFO[MusicPlayer.Artist][/COLOR]</label>
-				<visible>String.IsEmpty(Window(Home).Property(SkinHelper.Player.Music.ArtistThumb))|String.IsEmpty(Window(Home).Property(SkinHelper.Player.Music.Banner))</visible>
+				<visible>String.IsEmpty(Window(Home).Property(ArtistThumbPlayer))|String.IsEmpty(Window(Home).Property(ArtistBannerPlayer))</visible>
 			</control>
 
 			<control type="fadelabel">
@@ -129,7 +112,7 @@
 				<aligny>center</aligny>
 				<font>METF_TitleTextLarge</font>
 				<label></label>
-				<visible>String.StartsWith(Control.GetLabel(14),0)|Container(15).HasNext| [Integer.IsGreater(MusicPlayer.Time,1) + !Integer.IsGreater(MusicPlayer.Time,11)]</visible>
+				<visible>String.Contains(Control.GetLabel(14),0)|Container(15).HasNext| [Integer.IsGreater(MusicPlayer.Time,1) + !Integer.IsGreater(MusicPlayer.Time,11)]</visible>
 			</control>
 
 			<!--- --------------------------------------------->
@@ -157,7 +140,7 @@
 					<onright>1</onright>
 				</control>
 
-				<visible>Skin.HasSetting(ShowArtistBio)+!String.IsEmpty(Window(Visualisation).Property(ArtistSlideshow.ArtistBiography))</visible>
+				<visible>Skin.HasSetting(ShowArtistBio)+!String.IsEmpty(Window(Home).Property(ArtistBioPlayer))</visible>
 				<!--+[[Integer.IsGreater(MusicPlayer.Time,1) + !Integer.IsGreater(MusicPlayer.Time,130)] | [Integer.IsGreater(MusicPlayer.Time,300)]]</visible> -->
 
 				<posx>1364</posx>
@@ -184,7 +167,7 @@
 						<align>center</align>
 						<font>METF_SettingsHeading</font>
 						<autoscroll delay="8000" time="1500" repeat="100">Skin.HasSetting(AutoScroll)+[Control.IsVisible(1555)| [Integer.IsGreater(MusicPlayer.Time,1) + !Integer.IsGreater(MusicPlayer.Time,20)]]</autoscroll>
-						<label>$INFO[Window(Visualisation).Property(ArtistSlideshow.ArtistBiography)]</label>
+						<label>$INFO[Window(Home).Property(ArtistBioPlayer)]</label>
 						<shadowcolor>FF000000</shadowcolor>
 						<textcolor>white</textcolor>
 					</control>
@@ -200,9 +183,9 @@
 				<posy>480</posy>
 				<aligny>top</aligny>
 				<align>left</align>
-				<texture diffuse="shine.png" background="true">$INFO[Window(Home).Property(SkinHelper.Player.Music.ArtistThumb)]</texture>
+				<texture diffuse="shine.png" background="true">$INFO[Window(Home).Property(ArtistThumbPlayer)]</texture>
 				<aspectratio>keep</aspectratio>
-				<visible>!String.IsEmpty(Window(Home).Property(SkinHelper.Player.Music.ArtistThumb))</visible>
+				<visible>!String.IsEmpty(Window(Home).Property(ArtistThumbPlayer))</visible>
 			</control>
 
 			<control type="fadelabel">
@@ -332,6 +315,13 @@
 			<!--<include>Global_Time</include>-->
 			<include>NextTracksPlaylist_Content</include>
 		</control>
+		<!-- --
+		<control type="label">
+				<posx>10</posx>
+				<posy>10</posy>
+				<width>1600</width>
+				<label>ArtisteBanner=$INFO[Window(Home).Property(ArtistBannerPlayer)][CR]ArtistLogo=$INFO[Window(Home).Property(ArtistLogoPlayer)][CR]AlbumCD=$INFO[Window(Home).Property(AlbumCdPlayer)][CR]AlbumCover=$INFO[Window(Home).Property(AlbumCoverPlayer)][CR]$INFO[ListItem.Icon][CR]DiscSpinning:$VAR[discartSpinning][CR]Slideshow:$INFO[Window(Visualisation).Property(ArtistSlideshow)][CR]PlayerFanart:$INFO[Player.Art(fanart)][CR]2996ICON:$INFO[Container(2996).ListItem.Icon]</label>
+			</control>-->
 		
 	</controls>
 </window>
