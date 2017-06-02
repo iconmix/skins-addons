@@ -328,6 +328,19 @@ msgctxt "#31251"
 msgid "Current Playlist"
 msgstr "Playliste Actuelle"
 
+msgctxt "#31252"
+msgid "Remove from a playlist"
+msgstr "Supprimer d'une liste de lecture"
+
+msgctxt "#31253"
+msgid "Playlist >>"
+msgstr "Listes de lecture >>"
+
+msgctxt "#31254"
+msgid "Add to a playlist"
+msgstr "Ajouter à une liste de lecture"
+
+
 msgctxt "#31270"
 msgid "Enable Custom Button"
 msgstr "Activer Bouton Personnalisé"

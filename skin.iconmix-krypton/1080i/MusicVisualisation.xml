@@ -3,6 +3,7 @@
 	<onload condition="System.HasAddon(script.artistslideshow)">RunScript(script.artistslideshow, daemon=True)</onload>
 	<defaultcontrol>-</defaultcontrol>
 	<controls>
+	  
 	  <include>MusiqueBackGround</include>
 		<control type="visualisation" id="2">
 			<description>visualisation</description>
@@ -45,6 +46,16 @@
 				<animation effect="slide" start="30" end="-280" time="600" tween="cubic" easing="out" delay="800">WindowClose</animation>
 
 				<!--<visible>Skin.HasSetting(MediaOverlay)</visible> -->
+				<control type="image">
+					<width>180</width>
+					<height>180</height>
+					<posx>124</posx>
+					<posy>-70</posy>
+					<texture>cd.png</texture>
+					<aspectratio align="bottom">keep</aspectratio>
+					<visible>Player.HasAudio</visible>
+					
+				</control>
 				<control type="image" id="7026">
 					<width>180</width>
 					<height>180</height>
@@ -59,11 +70,10 @@
 					<width>340</width>
 					<height>200</height>
 					<fadetime>200</fadetime>
-					<texture background="true">$INFO[Window(Home).Property(AlbumCoverPlayer)]</texture>
+					<texture background="true">$VAR[CoverPlayer]</texture>
 					<aspectratio aligny="bottom">keep</aspectratio>
 					<bordertexture border="8">thumb_border.png</bordertexture>
 					<bordersize>8</bordersize>
-					<visible>!String.IsEmpty(Window(Home).Property(AlbumCoverPlayer))</visible>
 				</control>
 			</control>
 			<control type="image">

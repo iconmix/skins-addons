@@ -301,7 +301,61 @@
   </control>
   -->
 </include>
+<include name="PlayListPerso">
+  <!-- choix details -->
+  <control type="group">
+    <posx>500</posx>
+    <posy>170</posy>
+    <control type="image">
+      <width>550</width>
+      <height>150</height>
+      <texture>frames/Menu_Glass2b.png</texture>
+      <colordiffuse>DialogBackgroundColor</colordiffuse>
+    </control>
+  <!--  <include>Animation_NavMenu</include>
+    <include>NavMenuBackground</include>-->
+    <visible>ControlGroup(7111).HasFocus|ControlGroup(996).HasFocus(2107)</visible>
+    <animation type="Visible" reversible="true">
+      <effect type="zoom" center="500,170" start="0" end="100" time="1000" tween="bounce" easy="out" />
+    </animation>
+    <!--<animation type="Conditional" condition="!ControlGroup(7002).HasFocus" reversible="false">
+    <effect type="zoom" center="960,450" start="100" end="0" time="10" />
+    </animation>
+    -->
+    <control type="grouplist" id="7111">
+      <posx>30</posx>
+      <posy>15</posy>
+      <width>490</width>
+      <height>130</height>
+      <itemgap>1</itemgap>
+      <onleft>996</onleft>
+      <onback>996</onback>
+      <onup>7111</onup>
+      <ondown>7111</ondown>
+      <orientation>vertical</orientation>
+       <control type="button" id="2200">
+        <include>BoutonCommun</include>
+        <label>$LOCALIZE[31254]</label>
+        <onclick>RunScript(script.iconmixtools,addplaylist=True)</onclick>
+        <visible>StringCompare(ListItem.DBTYPE,movie)</visible>
+      </control>
+      <control type="button" id="2201">
+        <include>BoutonCommun</include>
+        <label>$LOCALIZE[31252]</label>
+        <onclick>RunScript(script.iconmixtools,supplaylist=True)</onclick>
+        <visible>StringCompare(ListItem.DBTYPE,movie)</visible>
+      </control>
 
+
+      
+
+
+
+
+
+    </control>
+  </control>
+</include>
 <include name="choixdetails">
   <!-- choix details -->
   <control type="group">
@@ -3161,7 +3215,7 @@
     <fadetime>200</fadetime>
     <aspectratio aligny="center">keep</aspectratio>
   </control>
-  <visible>!Control.IsVisible(560)+!Control.IsVisible(56)+[[!Container.OnNext+!Container.OnPrevious+!Container(1999).OnNext+!Container(1999).OnPrevious]|Container.Content(episodes)]</visible>
+  <visible>!Control.IsVisible(560)+!Control.IsVisible(56)+[[!Container.OnNext+!Container.OnPrevious]|Container.Content(episodes)]</visible>
 </control>
 </include>
 

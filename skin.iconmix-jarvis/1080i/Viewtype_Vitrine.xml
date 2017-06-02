@@ -2,8 +2,8 @@
 <includes>
 	<include name="commontexture">
 		<top>60</top>	
-		<left>20</left>	
-		<width>260</width>
+		<left>30</left>	
+		<width>250</width>
 		<height>393</height>
 	</include>
 
@@ -37,30 +37,44 @@
 					<width>3000</width>
 					<height>665</height>
 					<include condition="!Skin.HasSetting(ViewLockdown)">OnUp7000</include>
+
+<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,up,Home)</onfocus>
+<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,down,Home)</onfocus>
+
+
 					<ondown>60</ondown>
 					<viewtype label="31825">wrap</viewtype>
 					<pagecontrol>60</pagecontrol>
 					<orientation>horizontal</orientation>
 					<scrolltime>250</scrolltime>
 					<focusposition>0</focusposition>
-					<visible>Container.Content(musicvideos) |Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons)</visible>
+					<visible>Container.Content(musicvideos) | Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons)</visible>
 					
 					<itemlayout height="700" width="330">
 						<control type="group">
 						<control type="group">
 						<!--	<animation effect="rotatey" center="150" start="0" end="-35" time="500" condition="true">Conditional</animation>-->
-							
 						
 							<control type="image">
 								<include>commontexture</include>
 								<texture background="true" fallback="DefaultThumb.png">$INFO[ListItem.Art(poster)]</texture>
 								<aspectratio scalediffuse="false">stretch</aspectratio>
 							</control>
+								<control type="image">
+					<top>450</top>
+					<left>3</left>
+					<width>390</width>
+					<height>33</height>
+					<texture background="true" fallback="frames/bannerdefault.png">$INFO[ListItem.Art(banner)]</texture>							
+					<aspectratio scalediffuse="false">stretch</aspectratio>
+					<animation effect="rotate"  center="3,450" end="90"  condition="true" reversible="false">Conditional</animation>
+				</control>
+						  
 							<control type="image">
 								<top>23</top>		
 								<width>287</width>
 								<height>443</height>
-								<texture background="true">frames/bcover3.png</texture>
+								<texture background="true">frames/bcover5.png</texture>
 								<aspectratio scalediffuse="false">stretch</aspectratio>
 							</control>
 							<control type="group">								
@@ -88,6 +102,8 @@
 								<effect type="rotatex" center="450,10"  end="60" reversible="false"/>
 							</animation>
 						-->
+						  
+						
 							<control type="image">
 								<top>468</top>
 								
@@ -112,7 +128,7 @@
 						</itemlayout>
 					<focusedlayout height="600" width="360">
 						<include>ActiveClearArt</include>
-				
+						
 						<control type="group">
 							
 							<animation type="Focus">
@@ -136,7 +152,7 @@
 					<!--<animation effect="slide" end="-400" time="1" delay="0" reversible="false">UnFocus</animation> -->
 					<animation effect="slide" end="-400" time="1" delay="0" reversible="false" condition="Container.OnNext()|Container.OnPrevious()">Conditional</animation>
 					<control type="group">
-						<visible>!SubString(ListItem.DBTYPE,set)</visible>					
+						<visible>!SubString(ListItem.DBTYPE,set)|[SubString(ListItem.DBTYPE,set)+!IsEmpty(ListItem.Art(discart))]</visible>
 						<control type="image">
 							<left>65</left>
 							<top>180</top>
@@ -162,17 +178,26 @@
 					
 				
 				</control>
+				
 				<control type="image">
 					<include>commontexture</include>
 					<texture background="true" fallback="DefaultThumb.png">$INFO[ListItem.Art(poster)]</texture>							
 					<aspectratio scalediffuse="false">stretch</aspectratio>
 				</control>
-				
+				<control type="image">
+					<top>450</top>
+					<left>3</left>
+					<width>390</width>
+					<height>33</height>
+					<texture background="true" fallback="frames/bannerdefault.png">$INFO[ListItem.Art(banner)]</texture>							
+					<aspectratio scalediffuse="false">stretch</aspectratio>
+					<animation effect="rotate"  center="3,450" end="90"  condition="true" reversible="false">Conditional</animation>
+				</control>
 				<control type="image">
 					<top>23</top>		
 					<width>287</width>
 					<height>443</height>
-					<texture background="true">frames/bcover3.png</texture>
+					<texture background="true">frames/bcover5.png</texture>
 					<aspectratio scalediffuse="false">stretch</aspectratio>
 				</control>
 				<control type="group">								

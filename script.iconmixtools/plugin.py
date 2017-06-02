@@ -131,6 +131,8 @@ class Main:
         self.trailer = params.get( 'trailer', False )
         self.setview = params.get( 'setview', False )
         self.videcache = params.get( 'videcache', False )
+        self.addplaylist = params.get( 'addplaylist', False )
+        self.supplaylist = params.get( 'supplaylist', False )
         
         if self.videcache:
            self.quelcache = params.get( 'cache', False )
@@ -150,14 +152,14 @@ class Main:
                 xbmc.executebuiltin("SetProperty(IconMixToolsbackend,true,home)")
                 self.run_backend()
             
-            if not self.trailer and not self.backend and not self.setview and xbmc.getCondVisibility("Window.IsVisible(10000)"):
+            if not self.addplaylist and not self.supplaylist and not self.trailer and not self.backend and not self.setview and xbmc.getCondVisibility("Window.IsVisible(10000)"):
                    dialogC = xbmcgui.Dialog()
                    ret=dialogC.select("IconMixTools", [__language__( 32505 )+xbmc.getLocalizedString( 20434 ), __language__( 32505 )+xbmc.getLocalizedString( 20343 )])
                    if ret==0: saga="1"
                    if ret==1: saga="2"
                    
             #METTRE A JOUR SAGA ou SERIE
-            if not self.trailer and not self.backend and not self.setview and ( xbmc.getInfoLabel("ListItem.DBTYPE")=="set" or xbmc.getInfoLabel("ListItem.DBTYPE")=="tvshow" or saga!=""):
+            if not self.addplaylist and not self.supplaylist and not self.trailer and not self.backend and not self.setview and ( xbmc.getInfoLabel("ListItem.DBTYPE")=="set" or xbmc.getInfoLabel("ListItem.DBTYPE")=="tvshow" or saga!=""):
                    if saga=="":
                      Unique="ok"
                    else:
@@ -295,8 +297,13 @@ class Main:
                  current_view = xbmc.getInfoLabel("Container.Viewmode").decode("utf-8")
                  utils.ModeVues(content_type, current_view)
 
-  		     
-       	         
+  		      #{"jsonrpc":"2.0","method":"Playlist.Add","id":-2067158130,"params":{"playlistid":0,"item":{"directory":"special://profile/playlists/music/Long Tracks.xsp"}}}
+            #{"jsonrpc":"2.0","method":"Player.Open","id":1877953368,"params":{"options":{"shuffled":true},"item":{"playlistid":0,"position":0}}}                   
+       	    if self.addplaylist:           	        
+                  utils.AddToPlayList()
+            if self.supplaylist:
+                  utils.DelFromPlayList()
+                 
 			    
 
     def _init_vars(self):
@@ -364,6 +371,8 @@ class Main:
                   self.PreviousWindowActiveID=self.windowmusicvisID
                   if self.windowmusicvis: 
                     ListeFanarts=self.GetControl(self.windowmusicvis,2996)
+                  self.vide_artiste()
+                  self.vide_album()
                   #utils.logMsg("Album en cours :"+str(self.selecteditemAlbumPlayer)+"de "+str(self.selecteditemArtistPlayer),0)
                   try:
                        AlbumData,ArtisteData=utils.GetMusicFicheAlbum(None,None,1,1,None)
@@ -416,10 +425,7 @@ class Main:
                 Cover=xbmc.getInfoLabel("Container.ListItem.Icon")
                 
               if self.selecteditemMusic==-1 or str(self.selecteditemMusic)=="" :
-                 self.windowhome.clearProperty("AlbumCover")
-                 self.windowhome.clearProperty("AlbumBack")
-                 self.windowhome.clearProperty("AlbumCd")
-                 self.windowhome.clearProperty("AlbumInfo")
+                 self.vide_album()
                  self.windowhome.clearProperty("iconmixExtraFanart")
                  self.windowhome.clearProperty('DurationToolsEnd')
                  self.windowhome.clearProperty('DurationTools')
@@ -440,13 +446,8 @@ class Main:
                     if xbmc.getCondVisibility("Container.Content(genres)"): 
                        Music1999=0
                     ArtisteData=[]
-                    self.windowhome.clearProperty("ArtistBio")
-                    self.windowhome.clearProperty("ArtistThumb")
-                    self.windowhome.clearProperty("ArtistLogo")
-                    self.windowhome.clearProperty("ArtistBanner")
-                    self.windowhome.clearProperty("ArtistFanart")
-                    self.windowhome.clearProperty("ArtistFanart2")
-                    self.windowhome.clearProperty("ArtistFanart3")                    
+                    self.vide_artiste()
+                                     
                     #ArtisteData=utils.GetMusicFicheArtiste(LabelMusic,self.selecteditemMusic)
                     
                     
@@ -483,11 +484,8 @@ class Main:
                    
                 #if self.DBTYPE=="album" or xbmc.getCondVisibility("Container.Content(albums)") or self.DBTYPE=="song" or xbmc.getCondVisibility("Container.Content(songs)"): 
                 if self.DBTYPE=="albums"  or self.DBTYPE=="songs": 
-                   utils.logMsg("GetMusicFicheAlbum : "+str(self.selecteditemMusic)+"/"+str(xbmc.getInfoLabel("Container.Content")),0)
-                   self.windowhome.clearProperty("AlbumCover")
-                   self.windowhome.clearProperty("AlbumBack")
-                   self.windowhome.clearProperty("AlbumCd")
-                   self.windowhome.clearProperty("AlbumInfo")
+                   #utils.logMsg("GetMusicFicheAlbum : "+str(self.selecteditemMusic)+"/"+str(xbmc.getInfoLabel("Container.Content")),0)
+                   self.vide_album()
                    ListeSaga=self.GetControl(self.windowmusicnav,1999)
                    if ListeSaga:
                       ListeSaga.reset()
@@ -778,7 +776,21 @@ class Main:
                     
             xbmc.sleep(200)
             
-          
+    def vide_artiste(self):
+        self.windowhome.clearProperty("ArtistBio")
+        self.windowhome.clearProperty("ArtistThumb")
+        self.windowhome.clearProperty("ArtistLogo")
+        self.windowhome.clearProperty("ArtistBanner")
+        self.windowhome.clearProperty("ArtistFanart")
+        self.windowhome.clearProperty("ArtistFanart2")
+        self.windowhome.clearProperty("ArtistFanart3") 
+        
+    def vide_album(self):
+       self.windowhome.clearProperty("AlbumCover")
+       self.windowhome.clearProperty("AlbumBack")
+       self.windowhome.clearProperty("AlbumCd")
+       self.windowhome.clearProperty("AlbumInfo")
+           
 
     def display_duration(self):
     #twolaw code

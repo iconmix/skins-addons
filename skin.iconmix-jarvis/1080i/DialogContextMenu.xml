@@ -20,7 +20,7 @@
   </coordinates>
 
   <controls>
-    
+    <include>PlayListPerso</include>
     <control type="image" id="999">
       <description>background image</description>
       <posx>0</posx>
@@ -164,6 +164,15 @@
         <visible>![library.isscanningvideo]+![library.isscanningmusic]</visible>
         <visible>!IsEmpty(Container.Content)</visible>
       </control>
+      <control type="button" id="2107">
+        <onleft>Dialog.Close(contextmenu)</onleft>
+        <onright>7111</onright>
+        <include>BoutonCommun</include>
+        <label>31253</label>
+        <onclick></onclick>
+        <visible>StringCompare(ListItem.DBTYPE,movie)</visible>
+      </control>
+      
      
     </control>
     <control type="button" id="1000">

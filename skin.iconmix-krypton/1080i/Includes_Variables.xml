@@ -74,6 +74,13 @@
 	<include name="FadelabelPauseAtEnd90">
 		<pauseatend>90000</pauseatend>
 	</include>
+	
+<variable name="CoverPlayer">
+	    <value>$INFO[Window(Home).Property(AlbumCoverPlayer)]</value>
+	    <value>$INFO[Player.Art(thumb)]</value>
+	    <value>$INFO[Player.Art(icon)]</value>
+	  </variable>
+	
 <variable name="ImageContainer">
 			<value condition="!String.IsEmpty(Container(3).ListItem.DBID)+!String.Contains(Container(3).ListItem.Path,setid)+!String.IsEmpty(Container(3).ListItem.Path)">$INFO[Container(3).ListItem.Path,,extrafanart\]</value>
 			<value condition="!String.IsEmpty(Container(6).ListItem.DBID)+!String.Contains(Container(6).ListItem.Path,setid)+!String.IsEmpty(Container(6).ListItem.Path)">$INFO[Container(6).ListItem.Path,,extrafanart\]</value>
@@ -866,20 +873,16 @@
 	</variable>
 
 	<variable name="discartSpinning">
-	<!--	<value condition="!Control.HasFocus(2999)+!Control.HasFocus(1999)+!String.IsEmpty(Window(Home).Property(SkinHelper.Player.Music.DiscArt))">$INFO[Window(Home).Property(SkinHelper.Player.Music.DiscArt)]</value>
-		<value condition="[Control.HasFocus(2999)|Control.HasFocus(1999)]+!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.Art.DiscArt))">$INFO[Window(Home).Property(SkinHelper.ListItem.Art.DiscArt)]</value>
-	 -->
-	 <value condition="Player.HasAudio+!Window.IsActive(502)">$INFO[Window(Home).Property(AlbumCdPlayer)]</value>
+	
+	 <value condition="Player.HasAudio+!Window.IsActive(502)+!String.IsEmpty(Window(Home).Property(AlbumCdPlayer))">$INFO[Window(Home).Property(AlbumCdPlayer)]</value>
+	 <value condition="Player.HasAudio+!Window.IsActive(502)+!String.IsEmpty(Window(Home).Property(ArtistLogoPlayer))">$INFO[Window(Home).Property(ArtistLogoPlayer)]</value>
 	 <value condition="Player.HasAudio+!Window.IsActive(502)">cdorg.png</value>
 	 <value condition="Control.HasFocus(2997)+!String.IsEmpty(Container(1999).ListItem.Property(AlbumCd))">$INFO[Container(1999).ListItem.Property(AlbumCd)]</value>
 	 <value condition="!String.IsEmpty(ListItem.Property(AlbumCd))">$INFO[ListItem.Property(AlbumCd)]</value>
 	 <value condition="!String.IsEmpty(Window(Home).Property(AlbumCd))">$INFO[Window(Home).Property(AlbumCd)]</value>
-	 <!-- <value condition="!String.IsEmpty(Window(Home).Property(AlbumCd))">$INFO[Window(Home).Property(AlbumCd)]</value> -->
 
-		<!--<value condition="!Control.HasFocus(2999)+!Control.HasFocus(1999)">$INFO[Player.FolderPath]/cdart.png</value> -->
 		<value condition="[Control.HasFocus(2999)|Control.HasFocus(1999)]+!String.IsEmpty(Container(1999).ListItem.Art(thumb))">$INFO[Container(1999).ListItem.Art(thumb)]</value>
 		<value condition="[Control.HasFocus(2999)|Control.HasFocus(1999)]">cdorg.png</value>
-		<!--<value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.Art.DiscArt))">$INFO[Window(Home).Property(SkinHelper.ListItem.Art.DiscArt)]</value> -->
 		
 		<value condition="!String.IsEmpty(ListItem.Art(thumb))">$INFO[ListItem.Art(thumb)]</value>
 		<value condition="!String.Contains(ListItem.Icon,Default)">$INFO[ListItem.Icon]</value>

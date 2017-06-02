@@ -443,6 +443,19 @@ msgctxt "#31251"
 msgid "Current Playlist"
 msgstr ""
 
+msgctxt "#31252"
+msgid "Remove from a playlist"
+msgstr ""
+
+msgctxt "#31253"
+msgid "Playlist >>"
+msgstr ""
+
+msgctxt "#31254"
+msgid "Add to a playlist"
+msgstr ""
+
+
 #empty strings from id 31252 to 31269
 
 msgctxt "#31270"

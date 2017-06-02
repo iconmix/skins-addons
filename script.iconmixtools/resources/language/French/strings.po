@@ -89,5 +89,32 @@ msgctxt "#32602"
 msgid "Please confirm to delete local cache"
 msgstr "Veuillez confirmer la suppression de ce cache"
 
+msgctxt "#32603"
+msgid "Update movieset poster when updating movieset details"
+msgstr "Mettre à jour les pochettes des sagas durant leur mise à jour"
+
+msgctxt "#32604"
+msgid "Select playlist for "
+msgstr "Choisir une liste pour "
+
+msgctxt "#32605"
+msgid "Create a new playlist"
+msgstr "Créer une nouvelle liste"
+
+msgctxt "#32606"
+msgid "Enter playlist name to create"
+msgstr "Saisir le nom de liste à créer"
+
+msgctxt "#32607"
+msgid " added to "
+msgstr " ajouté à "
+
+msgctxt "#32608"
+msgid "Select playlist containing "
+msgstr "Sélectionner la liste contenant "
+
+msgctxt "#32609"
+msgid " deleted from "
+msgstr " supprimé de "
 
 

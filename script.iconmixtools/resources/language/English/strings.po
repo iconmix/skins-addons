@@ -90,3 +90,33 @@ msgstr ""
 msgctxt "#32602"
 msgid "Please confirm to delete local cache"
 msgstr ""
+
+msgctxt "#32603"
+msgid "Update movieset poster when updating movieset details"
+msgstr ""
+
+msgctxt "#32604"
+msgid "Select playlist for "
+msgstr ""
+
+msgctxt "#32605"
+msgid "Create a new playlist"
+msgstr ""
+
+msgctxt "#32606"
+msgid "Enter playlist name to create"
+msgstr "
+
+
+msgctxt "#32607"
+msgid " added to "
+msgstr ""
+
+
+msgctxt "#32608"
+msgid "Select playlist containing "
+msgstr ""
+
+msgctxt "#32609"
+msgid " deleted from "
+msgstr ""

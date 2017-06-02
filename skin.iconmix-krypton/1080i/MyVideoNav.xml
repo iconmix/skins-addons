@@ -552,8 +552,22 @@
 					<visible>Integer.IsEqual(Window(Home).Property(iconmixEpSa),0)</visible>
 					</control>
 			</control>
+			
 
-
+      <!--
+      <control type="image">
+  			  <posy>0</posy>
+				  <posx>0</posx>
+  			  <height>300</height>
+          <aspectratio>keep</aspectratio>
+          <aligny>center</aligny>
+          <colordiffuse>FFFFFFFF</colordiffuse>
+          <texture>$INFO[Container(1999).ListItem.Property(PosterCollection)]</texture>
+          <visible>[!String.Contains(Container.FolderPath,videodb://movies/genres)+!String.Contains(Container.FolderPath,videodb://tvshows/genres)]|Container.Content(genres)|Control.HasFocus(2999)</visible>
+          <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
+					<effect type="slide" end="1460,898" time="0" tween="quadratic" />
+				</animation>
+        </control>-->
 			<control type="group"> <!-- bandeau genre--->
 				<width>700</width>
 				<height>88</height>
@@ -572,15 +586,19 @@
 				<effect type="rotate" center="0,88" end="27" time="1" />
 				<effect type="slide" end="90,280" time="1" delay="50" />
 			</animation>-->
+			
 			<control type="image">
 				<texture>frames/genrestag.png</texture>
+				<visible>String.IsEmpty(ListItem.Art(ClearLogo))</visible>
 				<aspectratio>stretch</aspectratio>
 			</control>
-			<control type="group">
+			<control type="group"> <!-- genres -->
 				<visible>[!String.Contains(Container.FolderPath,videodb://movies/genres)+!String.Contains(Container.FolderPath,videodb://tvshows/genres)]|Container.Content(genres)|Control.HasFocus(2999)</visible>
-				<control type="group">
+				<control type="group"> <!-- en vue experimentale -->
 					<left>30</left>
-					<visible>Skin.HasSetting(CacheFond)</visible>
+					<visible>Skin.HasSetting(CacheFond)</visible>				
+				 <control type="group">
+				  <visible>String.IsEmpty(ListItem.Art(ClearLogo))</visible>
 					<control type="fadelabel">
 						<width>550</width>
 						<posx>40</posx>
@@ -604,9 +622,20 @@
 						<scroll>true</scroll>
 						<scrollout>true</scrollout>
 					</control>
+						</control>
+					<control type="image">
+  			  <left>-100</left>
+  			  <posy>30</posy>
+  			  <height>120</height>
+          <aspectratio>keep</aspectratio>
+          <aligny>center</aligny>
+          <texture>$INFO[ListItem.Art(clearlogo)]</texture>
+        </control>
 				</control>
-				<control type="group">
+				<control type="group"> <!-- en vue normale -->
 					<visible>!Skin.HasSetting(CacheFond)</visible>
+					<control type="group">
+					  <visible>String.IsEmpty(ListItem.Art(ClearLogo))</visible>
 					<control type="fadelabel">
 						<width>550</width>
 						<posx>40</posx>
@@ -630,10 +659,19 @@
 						<scroll>true</scroll>
 						<scrollout>true</scrollout>
 					</control>
+					</control>
+					<control type="image">
+  			  <left>-30</left>
+  			  <posy>30</posy>
+  			  <height>120</height>
+          <aspectratio>keep</aspectratio>
+          <aligny>center</aligny>
+          <texture>$INFO[ListItem.Art(clearlogo)]</texture>
+        </control>
 				</control>
 			</control>
 
-			<control type="group">
+			<control type="group"> <!-- pas genres ni focus(2999)-->
 				<visible>!Container.Content(Genres)+[String.Contains(Container.FolderPath,videodb://movies/genres)|String.Contains(Container.FolderPath,videodb://tvshows/genres)]+!Control.HasFocus(2999)</visible>
 				<control type="fadelabel">
 					<width>390</width>
@@ -759,7 +797,7 @@
 		<control type="label">
 	<posx>700</posx>
 
-	<label>Epis:$INFO[Window(Home).Property(iconmixEpSa)][CR]Icon:$INFO[Container.NumItems][CR]Trailer:$INFO[ListItem.Trailer][CR][CR]TVshow:$INFO[ListItem.TVShowTitle][CR]IconMixDirector:$INFO[Window(10000).Property(IconMixDirector)][CR]ID=$INFO[ListItem.DBID][CR]SETID=$INFO[ListItem.setID][CR]IMDB=$INFO[ListItem.IMDBNumber][CR]Type=$INFO[ListItem.DBTYPE][CR]Content:$INFO[Container.Content][CR]$INFO[Container.FolderPath][CR]FolderName:$INFO[Container.FolderName][CR]$INFO[ListItem.FileNameAndPath][CR]$INFO[ListItem.Path][CR]Extrafanart:$INFO[Window(Home).Property(IconMixExtraFanart)][CR]ID1999=$INFO[Container(1999).ListItem.DBID][CR]TYPE1999=$INFO[Container(1999).ListItem.DBTYPE][CR]NB1999=$INFO[Container(1999).NumItems][CR]IMDB1999=$INFO[Container(1999).ListItem.Property(IMDBNumber)][CR]TMDB1999=$INFO[Container(1999).ListItem.Property(TMDBNumber)][CR]ID1999C=$INFO[Container(1999).ListItem.Property(DBID)][CR]$INFO[Container(1999).ListItem.FileNameAndPath][CR]NB1998=$INFO[Container(1998).NumItems][CR]ID1998=$INFO[Container(1998).ListItem.Property(DBID)][CR]Poster:$INFO[ListItem.Art(poster)][CR]Icon:$INFO[ListItem.Overlay][CR]Item1999=$INFO[Window(Home).Property(Item1999)][CR]Nb1998=$INFO[Container(1998).NumItems][CR]Nb5555=$INFO[Container(5555).NumItems]</label>
+	<label>poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]UniqueId:$INFO[ListItem.ImdbNumber]</label>
 	</control>
 
 

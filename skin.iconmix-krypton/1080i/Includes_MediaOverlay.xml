@@ -27,7 +27,7 @@
 					<control type="image">									
 						<width>320</width>
 						<height>300</height>
-						<texture background="true" diffuse="showcase_matte.png">frames/ClassicFrame_background.png</texture>
+						<texture background="true" diffuse="showcase_matte.png">frames/ClassicFrame_Background.png</texture>
 						<colordiffuse>70202020</colordiffuse>
 					</control>
 					<control type="image">									
@@ -35,7 +35,8 @@
 						<height>300</height>
 						<texture border="10">landscape.png</texture>						
 					</control>
-				</control>				
+				</control>			
+				<!---	
 				<control type="image">
 					<posx>-150</posx>
 					<posy>-22</posy>
@@ -44,38 +45,50 @@
 					<include>Animation_SpinningCD</include>
 					<visible>Player.HasAudio  + String.IsEmpty(Player.Art(thumb))</visible>
 				</control>
+				-->
+				<control type="label" id="1113">
+			<posy>2000</posy>
+			<posx>-700</posx>
+			<label>$VAR[CoverPlayer]</label>
+		</control>
+				<control type="group">
+				  <height>200</height>
+				  <animation effect="slide" end="-70" time="840" condition="String.IsEmpty(Control.GetLabel(1113))">Conditional</animation>
+				  <control type="image">
+					<posx>-30</posx>
+					<posy>-22</posy>
+					<width>220</width>
+					<height>150</height>
+					<texture>cd.png</texture>
+					<aspectratio align="bottom">keep</aspectratio>
+					<visible>Player.HasAudio</visible>
+					
+				</control>
 				<control type="image">
 					<posx>-90</posx>
 					<posy>-22</posy>
 					<width>220</width>
 					<height>150</height>
 					<include>Animation_SpinningCD</include>
-					<visible>Player.HasAudio  + [!String.IsEmpty(Player.Art(thumb))]</visible>
+					<visible>Player.HasAudio</visible>
+					
 				</control>
-				<control type="image">
-					<posx>-130</posx>
-					<posy>-40</posy>
+				
+			
+				
+				<control type="image" >
 					<description>cover image</description>
-					<width>260</width>
+					<posx>-100</posx>
+					<posy>-35</posy>
+					<width>180</width>
 					<height>180</height>
-					<texture background="true">$INFO[Player.Art(thumb)]</texture>
+					<texture background="true">$VAR[CoverPlayer]</texture>
 					<aspectratio aligny="bottom">keep</aspectratio>
 					<bordertexture border="8">thumb_border.png</bordertexture>
 					<bordersize>6</bordersize>
-					<visible>Player.HasAudio + !String.IsEmpty(Player.Art(thumb)) </visible>
+					<visible>Player.HasAudio</visible>
 				</control>
-				
-				<control type="image">
-					<description>cover image</description>
-					<width>135</width>
-					<height>135</height>
-					<texture background="true">$INFO[Player.Art(Icon)]</texture>
-					<aspectratio aligny="bottom">keep</aspectratio>
-					<bordertexture border="8">thumb_border.png</bordertexture>
-					<bordersize>6</bordersize>
-					<visible>Player.HasAudio + !IsEmpty(Player.Art(Icon)) </visible>
 				</control>
-				
 				<!-- Video overlay for screens other than Default Home Screen 
 				<control type="videowindow" id="1">
 					<description>Video Preview</description>

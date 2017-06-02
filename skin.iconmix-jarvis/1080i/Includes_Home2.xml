@@ -24,6 +24,7 @@
 					<posx>1550</posx>
 					<posy>650</posy>
 					<include>Animation_SpinningCD</include>
+					<visible>!Skin.HasSetting(MediaOverlay)</visible>
 				</control>
 			<!--
 			<control type="label">
@@ -845,7 +846,7 @@
 			</itemlayout>
 			<focusedlayout width="300" height="155">	
 			  <control type="group">
-			    <animation effect="zoom" end="115" center="auto" time="150" condition="Control.HasFocus(9000)" reversible="true">Focus</animation>
+			    <animation effect="zoom" end="118" center="auto" time="150" condition="Control.HasFocus(9000)" reversible="true">Focus</animation>
 			  <control type="image">					
 					<width>300</width>
 					<height>155</height>
@@ -863,6 +864,17 @@
 					<align>center</align>
 					<texture>$INFO[ListItem.Icon]</texture>
 					<aspectratio>stretch</aspectratio>
+				</control>
+				<control type="label">
+					<width>290</width>
+					<posx>5</posx>
+					<posy>100</posy>
+					<height>20</height>
+					<align>center</align>
+					<label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+					<font>impact35</font>
+					<textcolor>SubmenuText</textcolor>
+					<visible>Skin.HasSetting(ShowIconLabel)</visible>
 				</control>
 				<control type="image">
 					<posx>10</posx>
