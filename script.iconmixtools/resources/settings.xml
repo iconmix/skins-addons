@@ -28,6 +28,7 @@
         
         <setting id="cacheserie" type="bool" label="32600" default="false" />
         <setting label="32601" type="action" action="RunScript(script.iconmixtools,videcache=True&cache=series)"/>
+        <setting id="updatetvposter" type="bool" label="32603" default="false" />
        
     </category>
     <category label="32585"><!-- Musique -->

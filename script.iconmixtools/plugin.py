@@ -13,11 +13,18 @@ import xbmc,xbmcgui,xbmcaddon,xbmcplugin
 import random
 
 # Script constantes
-__addon__      = xbmcaddon.Addon()
-__addonid__    = __addon__.getAddonInfo('id')
-__version__    = __addon__.getAddonInfo('version')
-__language__   = __addon__.getLocalizedString
-__cwd__        = __addon__.getAddonInfo('path')
+ADDON = xbmcaddon.Addon()
+__addonid__    = ADDON.getAddonInfo('id')
+__version__    = ADDON.getAddonInfo('version')
+__language__   = ADDON.getLocalizedString
+__cwd__        = ADDON.getAddonInfo('path')  
+ADDON_ID = ADDON.getAddonInfo('id').decode("utf8")
+ADDON_ICON = ADDON.getAddonInfo('icon').decode("utf8")
+ADDON_NAME = ADDON.getAddonInfo('name').decode("utf8")
+ADDON_PATH = ADDON.getAddonInfo('path').decode("utf8")
+ADDON_VERSION = ADDON.getAddonInfo('version').decode("utf8")
+ADDON_DATA_PATH = xbmc.translatePath("special://profile/addon_data/%s" % ADDON_ID).decode("utf8")
+KODI_VERSION  = int(xbmc.getInfoLabel( "System.BuildVersion" ).split(".")[0])
 
 
 def in_hours_and_min(minutes_string):
@@ -33,6 +40,7 @@ class Main:
     def __init__( self ):
         
         self._init_vars()
+        self.windowhome.setProperty("IconMixDataPath",ADDON_DATA_PATH)
         #get params
         action = None
         try:
@@ -108,7 +116,13 @@ class Main:
                       
                       utils.getFilmsParActeur(xbmc.getInfoLabel("ListItem.DBTYPE"),Id.encode('utf8').split(" (")[0])
 
-                    
+             if action == "GETARTISTEART":
+                Id=params.get("id",None)
+                if Id: Id = Id[0] 
+                castingtype=params.get("casttype",None)
+                if castingtype: castingtype = castingtype[0]
+                Id=xbmc.getInfoLabel("ListItem.DBID")              
+                utils.getArtisteArt(castingtype,Id)       
                 
                 
              if action == "TVDIFFUSION":
@@ -133,6 +147,9 @@ class Main:
         self.videcache = params.get( 'videcache', False )
         self.addplaylist = params.get( 'addplaylist', False )
         self.supplaylist = params.get( 'supplaylist', False )
+        self.updateallmusic = params.get( 'updateallmusic', False )
+        self.mettreajour = params.get( 'mettreajour', False )
+        
         
         if self.videcache:
            self.quelcache = params.get( 'cache', False )
@@ -148,45 +165,60 @@ class Main:
         
           if not action :
             saga=""
+            #------ lancer mode serveur -----------
             if self.backend and xbmc.getCondVisibility("IsEmpty(Window(home).Property(IconMixToolsbackend))"):
                 xbmc.executebuiltin("SetProperty(IconMixToolsbackend,true,home)")
                 self.run_backend()
-            
+            """
             if not self.addplaylist and not self.supplaylist and not self.trailer and not self.backend and not self.setview and xbmc.getCondVisibility("Window.IsVisible(10000)"):
                    dialogC = xbmcgui.Dialog()
                    ret=dialogC.select("IconMixTools", [__language__( 32505 )+xbmc.getLocalizedString( 20434 ), __language__( 32505 )+xbmc.getLocalizedString( 20343 )])
                    if ret==0: saga="1"
                    if ret==1: saga="2"
-                   
-            #METTRE A JOUR SAGA ou SERIE
-            if not self.addplaylist and not self.supplaylist and not self.trailer and not self.backend and not self.setview and ( xbmc.getInfoLabel("ListItem.DBTYPE")=="set" or xbmc.getInfoLabel("ListItem.DBTYPE")=="tvshow" or saga!=""):
+            """       
+            #-------------METTRE A JOUR SAGA ou SERIE-------------
+            DBTYPEX=xbmc.getInfoLabel("ListItem.DBTYPE")
+            if xbmc.getCondVisibility("Container.Content(artists)"): 
+                     DBTYPEX="artist"
+            #utils.logMsg("TYPE = "+str(DBTYPEX)+":"+str(self.mettreajour),0)
+            if self.mettreajour and ( DBTYPEX=="set" or DBTYPEX=="tvshow" or DBTYPEX=="artist" or saga!=""):
                    if saga=="":
                      Unique="ok"
                    else:
                      Unique=""
-                   if xbmc.getInfoLabel("ListItem.DBTYPE")=="set": saga="1"
+                   
+                   """  
+                   if DBTYPEX=="set": saga="1"
+                    
                    else: 
                      if saga=="2" : saga=""
+                   """   
                    dialog = xbmcgui.Dialog()
-                   if saga: 
-                    Titre=xbmc.getLocalizedString( 20434 )
-                   else :
-                    Titre=xbmc.getLocalizedString( 20343 )
                    
-                   if Unique: 
+                   if DBTYPEX=="set": 
+                    Titre=xbmc.getLocalizedString( 20434 )
+                   if DBTYPEX=="tvshow": 
+                    Titre=xbmc.getLocalizedString( 20343 )
+                   if DBTYPEX=="artist": 
+                    Titre=xbmc.getLocalizedString( 36917 )
+                   
+                   if Unique and xbmc.getInfoLabel("ListItem.DBID"): 
                      Unique=__language__( 32507 )+" [COLOR=yellow]["+utils.try_decode(xbmc.getInfoLabel("ListItem.Label"))+"][/COLOR]"
                      ret=dialog.select(Titre, [__language__( 32502 )+Titre, __language__( 32503 )+Titre,Unique])
                    else:
                      ret=dialog.select(Titre, [__language__( 32502 )+Titre, __language__( 32503 )+Titre])
-                   if ret==0: 
-                    if saga: utils.UpdateSagas(0,1)
-                    else : utils.UpdateSeries(0,1)
-                   if ret==1: 
-                    if saga: utils.UpdateSagas()
-                    else: utils.UpdateSeries()
-                   if ret==2 and Unique: 
-                    if saga: utils.UpdateSagas(xbmc.getInfoLabel("ListItem.DBID"))
-                    else : utils.UpdateSeries(xbmc.getInfoLabel("ListItem.IMDBNumber"))
+                   if ret==0: #tous
+                    if DBTYPEX=="set": utils.UpdateSagas(0,1)
+                    if DBTYPEX=="tvshow": utils.UpdateSeries(0,1)
+                    if DBTYPEX=="artist": utils.UpdateArtistes(None,1)
+                   if ret==1: #que les nouveaux
+                    if DBTYPEX=="set": utils.UpdateSagas()
+                    if DBTYPEX=="tvshow": utils.UpdateSeries()
+                    if DBTYPEX=="artist": utils.UpdateArtistes()
+                   if ret==2 and Unique: #item en cours
+                    if DBTYPEX=="set": utils.UpdateSagas(xbmc.getInfoLabel("ListItem.DBID"))
+                    if DBTYPEX=="tvshow": utils.UpdateSeries(xbmc.getInfoLabel("ListItem.IMDBNumber"))
+                    if DBTYPEX=="artist": utils.UpdateArtistes(xbmc.getInfoLabel("ListItem.DBID"))
                          
             if self.trailer :
                 dialog=xbmcgui.Dialog()
@@ -303,7 +335,7 @@ class Main:
                   utils.AddToPlayList()
             if self.supplaylist:
                   utils.DelFromPlayList()
-                 
+           
 			    
 
     def _init_vars(self):
@@ -353,6 +385,7 @@ class Main:
         self.windowhome.clearProperty('IconMixSaga')
         self.windowhome.clearProperty('IconMixDirector')
         self.windowhome.clearProperty('IconMixActor')
+        
         
         
        # utils.logMsg('Service en cours..',0)
@@ -412,17 +445,10 @@ class Main:
                 
             #VUES MUSIQUES
             if xbmc.getCondVisibility("Window.IsVisible(10502)"):
-              Music1999=0
-              if xbmc.getCondVisibility("Control.HasFocus(1999)"):
-                self.selecteditemMusic = xbmc.getInfoLabel("Container(1999).ListItem.DBID")
-                LabelMusic = xbmc.getInfoLabel("Container(1999).ListItem.Label")
-                Cover=xbmc.getInfoLabel("Container(1999).ListItem.Icon")
-                Music1999=1
-                #utils.logMsg("FOCUS 1999 ACTIF : "+str(self.selecteditemMusic),0)
-              else:
-                self.selecteditemMusic = xbmc.getInfoLabel("ListItem.DBID")
-                LabelMusic = xbmc.getInfoLabel("ListItem.Label")
-                Cover=xbmc.getInfoLabel("Container.ListItem.Icon")
+              ContainerGenre=0
+              self.selecteditemMusic = xbmc.getInfoLabel("ListItem.DBID")
+              LabelMusic = xbmc.getInfoLabel("ListItem.Label")
+              Cover=xbmc.getInfoLabel("Container.ListItem.Icon")
                 
               if self.selecteditemMusic==-1 or str(self.selecteditemMusic)=="" :
                  self.vide_album()
@@ -441,7 +467,7 @@ class Main:
                 
                 
                 #if ((self.DBTYPE=="artist" or xbmc.getCondVisibility("Container.Content(artists)")) and Music1999==0) :
-                if ((self.DBTYPE=="artists") and Music1999==0) :
+                if (self.DBTYPE=="artists" or self.DBTYPE=="genres"):
                 #or (xbmc.getCondVisibility("Container.Content(genres)") and Music1999==1): #mise à jour artiste complete
                     if xbmc.getCondVisibility("Container.Content(genres)"): 
                        Music1999=0
@@ -457,7 +483,10 @@ class Main:
                     if ListeSaga:
                       ListeSaga.reset()
                       try:
-                        ListeItemx,ArtisteData=utils.CheckArtisteAlbums(ArtisteId)
+                        if self.DBTYPE=="artists":
+                           ListeItemx,ArtisteData=utils.CheckArtisteAlbums(ArtisteId,None,1)
+                        if self.DBTYPE=="genres":
+                           ListeItemx=utils.CheckGenres(LabelMusic)
                         #utils.logMsg("utils.CheckArtisteAlbums : "+str(len(ListeItemx)),0)
                       except:
                         ListeItemx=None                      
@@ -492,9 +521,9 @@ class Main:
                    try:
                        if self.DBTYPE=="songs":
                                               
-                         AlbumData,ArtisteData=utils.GetMusicFicheAlbum(self.selecteditemMusic,Cover,1,None,1)
+                         AlbumData,ArtisteData=utils.GetMusicFicheAlbum(self.selecteditemMusic,Cover,1,None,1,None)
                        else:
-                         AlbumData,ArtisteData=utils.GetMusicFicheAlbum(self.selecteditemMusic,Cover,1,None,None)
+                         AlbumData,ArtisteData=utils.GetMusicFicheAlbum(self.selecteditemMusic,Cover,1,None,None,None)
                          
                        self.windowhome.clearProperty('DurationTools')                   
                        self.windowhome.clearProperty('DurationToolsEnd')

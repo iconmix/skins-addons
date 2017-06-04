@@ -55,7 +55,7 @@
 				<onleft condition="!StringCompare(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetFocus(55)</onleft>
 				<onright condition="!StringCompare(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetFocus(55)</onright>		
 				<onclick condition="Container.Content(artists)">PlayMedia($INFO[Container(1994).ListItem.Path],true)</onclick>	
-				<onclick condition="Container.Content(genres)">ActivateWindow(Music,musicdb://artists/$INFO[Container(1999).ListItem.DBID])</onclick>	
+				<onclick condition="Container.Content(genres)">ActivateWindow(Music,musicdb://artists/$INFO[Container(1999).ListItem.property(DBID)])</onclick>	
 				<!--<onclick>ActivateWindow(Music,musicdb://albums/2/)</onclick>-->
 				<visible>IntegerGreaterThan(Container(1999).NumItems,0)</visible>				
 			</control>
@@ -125,9 +125,9 @@
 			<movement>9</movement>
 			<description>Widget Lists</description>
 			<include>HorizVert</include>
-			<content>musicdb://genres/$INFO[ListItem.DBID]</content>			
+			<!-- <content>musicdb://genres/$INFO[ListItem.DBID]</content>			-->			
 			<include>VueElementsBoitiers</include>	
-			<visible>!Skin.HasSetting(MusicGenreTexte)</visible>
+			<visible>!Skin.HasSetting(MusicGenreTexte)+!IsEmpty(ListItem.DBID)</visible>
 			<visible>Container.Content(genres)</visible>
 		</control>
 		<control type="list" id="1999">			
@@ -140,7 +140,7 @@
 			
 			<description>Widget Lists</description>
 			<include>VertHoriz</include>
-			<content>musicdb://genres/$INFO[ListItem.DBID]</content>			
+			<!-- <content>musicdb://genres/$INFO[ListItem.DBID]</content>			-->
 			<include>VueElementsBoitiers</include>	
 			<visible>Skin.HasSetting(MusicGenreTexte)</visible>
 			<visible>Container.Content(genres)</visible>
@@ -224,7 +224,7 @@
 					</control>
 				</focusedlayout>
 
-				<content>musicdb://artists/$INFO[Container(1999).ListItem.DBID]</content>
+				<content>musicdb://artists/$INFO[Container(1999).ListItem.property(DBID)]</content>
 			</control>
 
 		</control>
@@ -337,6 +337,7 @@
 				</control>
 
 
+
 				<control type="radiobutton" id="1004">
 					<visible>Container.Content(genres)</visible>
 					<include>BoutonCommun</include>
@@ -344,6 +345,7 @@
 					<selected>Skin.HasSetting(MusicGenreBoitier)</selected>
 					<onclick>Skin.ToggleSetting(MusicGenreBoitier)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreDiscArt)">Skin.ToggleSetting(MusicGenreDiscArt)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreBanner)">Skin.ToggleSetting(MusicGenreBanner)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreTexte)">Skin.ToggleSetting(MusicGenreTexte)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreAucun)">Skin.ToggleSetting(MusicGenreAucun)</onclick>
 					<onclick>SetFocus(55)</onclick>
@@ -351,21 +353,23 @@
 				<control type="radiobutton" id="1005">
 					<visible>Container.Content(genres)</visible>
 					<include>BoutonCommun</include>
-					<label>$LOCALIZE[31904]</label>
+					<label>$LOCALIZE[31054]</label>
 					<selected>Skin.HasSetting(MusicGenreDiscArt)</selected>
 					<onclick>Skin.ToggleSetting(MusicGenreDiscArt)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreBoitier)">Skin.ToggleSetting(MusicGenreBoitier)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreTexte)">Skin.ToggleSetting(MusicGenreTexte)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreBanner)">Skin.ToggleSetting(MusicGenreBanner)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreAucun)">Skin.ToggleSetting(MusicGenreAucun)</onclick>
 					<onclick>SetFocus(55)</onclick>
 				</control>
 				<control type="radiobutton" id="1006">
 					<visible>Container.Content(genres)</visible>
 					<include>BoutonCommun</include>
-					<label>$LOCALIZE[31905]</label>
-					<selected>Skin.HasSetting(MusicGenreTexte)</selected>
-					<onclick>Skin.ToggleSetting(MusicGenreTexte)</onclick>
+					<label>$LOCALIZE[31286]</label>
+					<selected>Skin.HasSetting(MusicGenreBanner)</selected>
+					<onclick>Skin.ToggleSetting(MusicGenreBanner)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreBoitier)">Skin.ToggleSetting(MusicGenreBoitier)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreTexte)">Skin.ToggleSetting(MusicGenreTexte)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreDiscArt)">Skin.ToggleSetting(MusicGenreDiscArt)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreAucun)">Skin.ToggleSetting(MusicGenreAucun)</onclick>
 					<onclick>SetFocus(55)</onclick>
@@ -373,11 +377,24 @@
 				<control type="radiobutton" id="1007">
 					<visible>Container.Content(genres)</visible>
 					<include>BoutonCommun</include>
+					<label>$LOCALIZE[31905]</label>
+					<selected>Skin.HasSetting(MusicGenreTexte)</selected>
+					<onclick>Skin.ToggleSetting(MusicGenreTexte)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreBoitier)">Skin.ToggleSetting(MusicGenreBoitier)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreDiscArt)">Skin.ToggleSetting(MusicGenreDiscArt)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreBanner)">Skin.ToggleSetting(MusicGenreBanner)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreAucun)">Skin.ToggleSetting(MusicGenreAucun)</onclick>
+					<onclick>SetFocus(55)</onclick>
+				</control>
+				<control type="radiobutton" id="1008">
+					<visible>Container.Content(genres)</visible>
+					<include>BoutonCommun</include>
 					<label>$LOCALIZE[31906]</label>
 					<selected>Skin.HasSetting(MusicGenreAucun)|[!Skin.HasSetting(MusicGenreTexte)+!Skin.HasSetting(MusicGenreBoitier)+!Skin.HasSetting(MusicGenreDiscArt)]</selected>
 					<onclick>Skin.ToggleSetting(MusicGenreAucun)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreBoitier)">Skin.ToggleSetting(MusicGenreBoitier)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreDiscArt)">Skin.ToggleSetting(MusicGenreDiscArt)</onclick>
+					<onclick condition="Skin.HasSetting(MusicGenreBanner)">Skin.ToggleSetting(MusicGenreBanner)</onclick>
 					<onclick condition="Skin.HasSetting(MusicGenreTexte)">Skin.ToggleSetting(MusicGenreTexte)</onclick>
 					<onclick>SetFocus(55)</onclick>
 				</control>
@@ -507,7 +524,7 @@
 				<posx>10</posx>
 				<posy>10</posy>
 				<width>1600</width>
-				<label>Duree:$INFO[ListItem.Duration][CR]Dureetools:$INFO[Window(Home).Property(DurationTools)][CR]Fin:$INFO[Window(Home).Property(DurationToolsEnd)][CR]ICON=$INFO[ListItem.Icon][CR]TestProperty=$INFO[ListItem.Property(TestProperty)]DBID=$INFO[ListItem.DBID][CR]DBID1999=$INFO[Container(1999).ListItem.Property(DBID)][CR]COVER999=$INFO[Container(1999).ListItem.Property(AlbumCover)][CR]CD1999=$INFO[Container(1999).ListItem.Property(AlbumCd)][CR]numitems1999:$INFO[Container(1999).NumItems][CR]numitems1994:$INFO[Container(1994).NumItems][CR]path1994:$INFO[Container(1994).ListItem.Path][CR]numitems2998:$INFO[Container(2998).NumItems][CR]Icon1999:$INFO[Container(1999).ListItem.Icon][CR]Title1999:$INFO[Container(1999).ListItem.Title][CR]Label1999:$INFO[Container(1999).ListItem.Label][CR]Title:$INFO[ListItem.Title][CR]Label:$INFO[ListItem.Label][CR]Label2:$INFO[ListItem.Label2][CR]DBType:$INFO[ListItem.DBType][CR]Content:$INFO[Container.Content][CR]Folder:$INFO[Container.FolderPath][CR]Discart=$INFO[Window(Home).Property(SkinHelper.ListItem.Art.DiscArt)][CR]Banner=$INFO[Window(Home).Property(SkinHelper.ListItem.Art.Banner)][CR]ArtisteBanner=$INFO[Window(Home).Property(ArtistBanner)][CR]ArtistLogo=$INFO[Window(Home).Property(ArtistLogo)][CR]AlbumCD=$INFO[Window(Home).Property(AlbumCd)][CR]AlbumCover=$INFO[Window(Home).Property(AlbumCover)][CR]$INFO[ListItem.Icon][CR]$VAR[discartSpinning]</label>
+				<label>ArtistBanner:$VAR[artistbanner][CR]IconMixDataPath:$INFO[Window(Home).Property(IconMixDataPath)][CR]Duree:$INFO[ListItem.Duration][CR]Dureetools:$INFO[Window(Home).Property(DurationTools)][CR]Fin:$INFO[Window(Home).Property(DurationToolsEnd)][CR]ICON=$INFO[ListItem.Icon][CR]TestProperty=$INFO[ListItem.Property(TestProperty)][CR]DBID=$INFO[ListItem.DBID][CR]DBID1999=$INFO[Container(1999).ListItem.Property(DBID)][CR]COVER999=$INFO[Container(1999).ListItem.Property(AlbumCover)][CR]CD1999=$INFO[Container(1999).ListItem.Property(AlbumCd)][CR]numitems1999:$INFO[Container(1999).NumItems][CR]numitems1994:$INFO[Container(1994).NumItems][CR]path1994:$INFO[Container(1994).ListItem.Path][CR]numitems2998:$INFO[Container(2998).NumItems][CR]Icon1999:$INFO[Container(1999).ListItem.Icon][CR]Title1999:$INFO[Container(1999).ListItem.Title][CR]Label1999:$INFO[Container(1999).ListItem.Label][CR]Title:$INFO[ListItem.Title][CR]Label:$INFO[ListItem.Label][CR]Label2:$INFO[ListItem.Label2][CR]DBType:$INFO[ListItem.DBType][CR]Content:$INFO[Container.Content][CR]Folder:$INFO[Container.FolderPath][CR]Discart=$INFO[Window(Home).Property(SkinHelper.ListItem.Art.DiscArt)][CR]Banner=$INFO[Window(Home).Property(SkinHelper.ListItem.Art.Banner)][CR]ArtisteBanner=$INFO[Window(Home).Property(ArtistBanner)][CR]ArtistLogo=$INFO[Window(Home).Property(ArtistLogo)][CR]AlbumCD=$INFO[Window(Home).Property(AlbumCd)][CR]AlbumCover=$INFO[Window(Home).Property(AlbumCover)][CR]$INFO[ListItem.Icon][CR]$VAR[discartSpinning]</label>
 			</control>-->
 
 		<include>LabelFlagsCommon</include>

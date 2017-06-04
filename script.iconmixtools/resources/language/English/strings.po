@@ -92,7 +92,7 @@ msgid "Please confirm to delete local cache"
 msgstr ""
 
 msgctxt "#32603"
-msgid "Update movieset poster when updating movieset details"
+msgid "Automatic update artworks in Kodi database when updating item"
 msgstr ""
 
 msgctxt "#32604"
@@ -120,3 +120,4 @@ msgstr ""
 msgctxt "#32609"
 msgid " deleted from "
 msgstr ""
+

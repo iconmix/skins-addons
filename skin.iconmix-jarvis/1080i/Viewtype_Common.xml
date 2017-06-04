@@ -226,12 +226,8 @@
 		
 	</include>
 <!------------------------------------------------------------------------------------------------------------->
-<variable name="artistbanner">
-	<value>http://localhost:52307/getmusicart&amp;artist=$INFO[Listitem.Artist]&amp;type=banner&amp;</value>	
-</variable>
-<variable name="artistlogo">
-	<value>http://localhost:52307/getmusicart&amp;artist=$INFO[Listitem.Artist]&amp;type=clearlogo</value>
-</variable>
+
+
 
 <include name="BannerViewCommon_Browser">
 	
@@ -246,17 +242,22 @@
 				<colordiffuse>FrameBackgroundDiffuse</colordiffuse>
 				
 			</control>
-			<!--
+			<!-- --
+			<control type="label" id="8787">
+			  <label>$VAR[artistlogo]$VAR[artistbanner]</label>
+			</control>
 	<control type="label">
 			<top>20</top>
 			<left>18</left>
 			<width>480</width>
+			<font>impact35</font>
 			<align>center</align>
 			<label>$INFO[ListItem.Label]</label>
-			<font>lcdn</font>
-			<visible>Container.Content(artists)</visible>
+			<visible>Container.Content(artists)+IsEmpty(Control.GetLabel(8787))</visible>
+			<autoscroll>true</autoscroll>
 		</control>
 		-->
+		<!-- -->
 	<control type="image">
 				<posx>12</posx>
 				<posy>15</posy>
@@ -267,6 +268,8 @@
 				<colordiffuse>FFFFFFFF</colordiffuse>
 				<visible>Container.Content(artists)</visible>
 			</control>
+			-->
+			<!-- -->
 		<control type="image">
 				<posx>12</posx>
 				<posy>15</posy>
@@ -277,7 +280,7 @@
 				<colordiffuse>FFFFFFFF</colordiffuse>
 				<visible>Container.Content(artists)</visible>
 			</control>
-			
+			-->
 			
 			<control type="image">
 				<posx>12</posx>
@@ -289,10 +292,7 @@
 				<aspectratio scalediffuse="true">keep</aspectratio>
 				<visible>Container.Content(artists)</visible>
 			</control>
-			
-			
-		
-		
+				
 			<control type="image">
 				<posx>12</posx>
 				<posy>15</posy>
@@ -352,7 +352,7 @@
 			<visible>Container.Content(artists)</visible>
 		</control>
 		-->
-	<control type="image">
+		<control type="image">
 				<posx>12</posx>
 				<posy>15</posy>
 				<width>502</width>
@@ -362,6 +362,8 @@
 				<colordiffuse>FFFFFFFF</colordiffuse>
 				<visible>Container.Content(artists)</visible>
 			</control>
+			-->
+			<!-- -->
 		<control type="image">
 				<posx>12</posx>
 				<posy>15</posy>
@@ -372,7 +374,7 @@
 				<colordiffuse>FFFFFFFF</colordiffuse>
 				<visible>Container.Content(artists)</visible>
 			</control>
-			
+			-->
 			
 			<control type="image">
 				<posx>12</posx>

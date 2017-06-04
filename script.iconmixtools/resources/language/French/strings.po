@@ -90,8 +90,8 @@ msgid "Please confirm to delete local cache"
 msgstr "Veuillez confirmer la suppression de ce cache"
 
 msgctxt "#32603"
-msgid "Update movieset poster when updating movieset details"
-msgstr "Mettre à jour les pochettes des sagas durant leur mise à jour"
+msgid "Automatic update artworks in Kodi database when updating item"
+msgstr "Mettre à jour automatiquement les images dans la base de Kodi "
 
 msgctxt "#32604"
 msgid "Select playlist for "
@@ -116,5 +116,4 @@ msgstr "Sélectionner la liste contenant "
 msgctxt "#32609"
 msgid " deleted from "
 msgstr " supprimé de "
-
 

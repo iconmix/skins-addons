@@ -281,7 +281,7 @@
     <label>[I]$LOCALIZE[31925][/I]</label>
 
     <onclick>Close</onclick>
-    <onclick>RunScript(script.iconmixtools)</onclick>
+    <onclick>RunScript(script.iconmixtools,mettreajour=True)</onclick>
     <include>VisibleIfMovieSet</include>
   </control>
   <control type="button" id="2010">
@@ -289,7 +289,7 @@
     <include>BoutonCommun</include>
     <label>[I]$LOCALIZE[31927][/I]</label>
     <onclick>Close</onclick>
-    <onclick>RunScript(script.iconmixtools)</onclick>
+    <onclick>RunScript(script.iconmixtools,mettreajour=True)</onclick>
     <visible>Container.Content(tvshows)+Skin.HasSetting(CheckSeries)+!Control.HasFocus(5051)+!Control.HasFocus(1998)</visible>
   </control>
   <!--<control type="image" id="2020">
@@ -308,7 +308,7 @@
     <posy>170</posy>
     <control type="image">
       <width>550</width>
-      <height>250</height>
+      <height>150</height>
       <texture>frames/Menu_Glass2b.png</texture>
       <colordiffuse>DialogBackgroundColor</colordiffuse>
     </control>
@@ -326,7 +326,7 @@
       <posx>30</posx>
       <posy>15</posy>
       <width>490</width>
-      <height>230</height>
+      <height>130</height>
       <itemgap>1</itemgap>
       <onleft>996</onleft>
       <onback>996</onback>
@@ -335,7 +335,7 @@
       <orientation>vertical</orientation>
        <control type="button" id="2200">
         <include>BoutonCommun</include>
-        <label>$LOCALIZE[526]</label>
+        <label>$LOCALIZE[31254]</label>
         <onclick>RunScript(script.iconmixtools,addplaylist=True)</onclick>
         <visible>String.IsEqual(ListItem.DBTYPE,movie)</visible>
       </control>
@@ -2368,7 +2368,7 @@
 </variable>
 
 <include name="AnimationFocus1999">
-  <animation type="Conditional" condition="Control.HasFocus(2997)|Control.HasFocus(2999)|Control.HasFocus(2997)" reversible="true">
+  <animation type="Conditional" condition="Control.HasFocus(2997)|Control.HasFocus(2999)" reversible="true">
     <effect type="zoom" center="auto" start="100" end="80" time="100"  />
   </animation>
 </include>
@@ -2391,7 +2391,7 @@
 
   <autoscroll time="6000">!Control.HasFocus(2997)+!Control.HasFocus(2999)</autoscroll>
   <!-- TEXTE-->
-  <itemlayout width="970" height="30" condition="[Window.IsActive(10025)+[[Skin.HasSetting(GenreDetailsTexte)+Container.Content(Genres)] |[Skin.HasSetting(directorTexte)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(SagaDetailsTexte)+String.IsEqual(ListItem.DBTYPE,set)]]] | [Window.IsActive(502)+Skin.HasSetting(MusicGenreTexte)+Container.Content(Genres)]">
+  <itemlayout width="970" height="30" condition="[Window.IsActive(10025)+[[Skin.HasSetting(GenreDetailsTexte)+Container.Content(Genres)] |[Skin.HasSetting(directorTexte)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(SagaDetailsTexte)+String.IsEqual(ListItem.DBTYPE,set)]]] | [Window.IsActive(502)+[[Skin.HasSetting(MusicGenreTexte)+Container.Content(Genres)]|[Skin.HasSetting(MusicTexte)+!Container.Content(Genres)]]]">
  
     <control type="label">
       <align>center</align>
@@ -2407,7 +2407,7 @@
     </control>
     
   </itemlayout>
-  <focusedlayout width="970" height="30" condition="[Window.IsActive(10025)+[[Skin.HasSetting(GenreDetailsTexte)+Container.Content(Genres)] |[Skin.HasSetting(directorTexte)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(SagaDetailsTexte)+String.IsEqual(ListItem.DBTYPE,set)]]]| [Window.IsActive(502)+Skin.HasSetting(MusicGenreTexte)+Container.Content(Genres)]">
+  <focusedlayout width="970" height="30" condition="[Window.IsActive(10025)+[[Skin.HasSetting(GenreDetailsTexte)+Container.Content(Genres)] |[Skin.HasSetting(directorTexte)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(SagaDetailsTexte)+String.IsEqual(ListItem.DBTYPE,set)]]] | [Window.IsActive(502)+[[Skin.HasSetting(MusicGenreTexte)+Container.Content(Genres)]|[Skin.HasSetting(MusicTexte)+!Container.Content(Genres)]]]">
     <include>boitiersmusicanim</include>
     <control type="group">
 
@@ -2803,18 +2803,48 @@
       </control>
     </control>
   </focusedlayout>
-   <!-- MUSIQUE DISQUES-->
-   
-  <itemlayout  width="200" height="240" condition="Window.IsActive(502)+[[Skin.HasSetting(MusicDiscArt)+!Container.Content(Genres)]|[Skin.HasSetting(MusicGenreBoitier)+Container.Content(Genres)]]">
+   <!-- MUSIQUE DISQUES-->   
+  <itemlayout  width="200" height="240" condition="Window.IsActive(502)+[Skin.HasSetting(MusicDiscArt)+!Container.Content(Genres)]">
     <control type="group">
       <include>AnimationFocus1999</include>
+      
 <control type="image">
         <left>0</left>
         <top>40</top>
         <width>170</width>
         <height>170</height>
         <aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
-        <texture backgrount="true"  background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
+        <texture fallback="cd.png" background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
+        <bordersize>2</bordersize>
+        <bordertexture>frames/cdart-mask.png</bordertexture>
+        <visible>String.IsEmpty(ListItem.Art(discart))</visible>
+      </control>
+      
+      <control type="image">
+        <left>0</left>
+        <top>40</top>
+        <width>170</width>
+        <height>170</height>
+        <aspectratio>keep</aspectratio>
+        <texture  background="true">$INFO[ListItem.Property(AlbumCd)]</texture>
+        <bordersize>2</bordersize>
+        <bordertexture>frames/cdart-mask.png</bordertexture>
+      </control>
+      
+     
+    </control>
+
+  </itemlayout>
+  <focusedlayout width="200" height="240" condition="Window.IsActive(502)+[Skin.HasSetting(MusicDiscArt)+!Container.Content(Genres)]">
+    <control type="group">
+
+<control type="image">
+        <left>0</left>
+        <top>40</top>
+        <width>170</width>
+        <height>170</height>
+        <aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
+        <texture fallback="cd.png" background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
         <bordersize>2</bordersize>
         <bordertexture>frames/cdart-mask.png</bordertexture>
         <visible>String.IsEmpty(ListItem.Art(discart))</visible>
@@ -2825,24 +2855,9 @@
         <width>170</width>
         <height>170</height>
         <aspectratio>keep</aspectratio>
-        <texture backgrount="true"  background="true">$INFO[ListItem.Property(AlbumCd)]</texture>
-      </control>
-      
-     
-    </control>
-
-  </itemlayout>
-  <focusedlayout width="200" height="240" condition="Window.IsActive(502)+[[Skin.HasSetting(MusicDiscArt)+!Container.Content(Genres)]|[Skin.HasSetting(MusicGenreBoitier)+Container.Content(Genres)]]">
-    <control type="group">
-
-
-      <control type="image">
-        <left>0</left>
-        <top>40</top>
-        <width>170</width>
-        <height>170</height>
-        <aspectratio>keep</aspectratio>
-        <texture background="true">$INFO[ListItem.Property(AlbumCd)]</texture>
+        <texture  background="true">$INFO[ListItem.Property(AlbumCd)]</texture>
+        <bordersize>2</bordersize>
+        <bordertexture>frames/cdart-mask.png</bordertexture>
       </control>
      <control type="image">
         <description>Glass overlay</description>
@@ -2855,6 +2870,141 @@
 
         <visible>Control.HasFocus(2997)</visible>
       </control>
+      
+      
+    </control>
+
+
+  </focusedlayout>
+  
+  <!-- MUSIC LOGO ARTISTES GENRE -->
+  <itemlayout  width="210" height="240" condition="Window.IsActive(502)+[Skin.HasSetting(MusicGenreDiscArt)+Container.Content(Genres)]">
+    <control type="group">
+      <include>AnimationFocus1999</include>
+      
+<control type="image">
+        <left>0</left>
+        <top>160</top>
+        <width>210</width>
+        <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
+        <texture  background="true" >$INFO[ListItem.Property(ArtistLogo)]</texture> 
+        <animation effect="rotate"  center="0,160" end="45"  condition="True" reversible="false">Conditonal</animation>
+
+       
+      </control>
+      <control type="label">
+        <left>0</left>
+        <top>160</top>
+        <width>210</width>
+        <font>impact35</font>
+        <label>$INFO[ListItem.Label]</label>
+        <animation effect="rotate"  center="0,160" end="45"  condition="True" reversible="false">Conditonal</animation> 
+        <visible>String.IsEmpty(ListItem.Property(ArtistLogo))</visible>     
+      </control>
+     
+     
+    </control>
+
+  </itemlayout>
+  <focusedlayout width="210" height="240" condition="Window.IsActive(502)+[Skin.HasSetting(MusicGenreDiscArt)+Container.Content(Genres)]">
+    <control type="group">
+      
+
+<control type="image">
+        <left>0</left>
+        <top>160</top>
+        <width>210</width>
+        <aspectratio scalediffuse="true" aligny="center" align="center">keep</aspectratio>
+        <texture background="true" >$INFO[ListItem.Property(ArtistLogo)]</texture>
+        <animation effect="rotate"  center="0,160" end="45"  condition="True" reversible="false">Conditonal</animation>      
+      </control>
+      <control type="label">
+        <left>0</left>
+        <top>160</top>
+        <width>210</width>
+        <font>impact35</font>
+        <label>$INFO[ListItem.Label]</label>
+        <animation effect="rotate"  center="0,160" end="45"  condition="True" reversible="false">Conditonal</animation> 
+        <visible>String.IsEmpty(ListItem.Property(ArtistLogo))</visible>     
+      </control>
+      
+     
+      
+      
+    </control>
+
+
+  </focusedlayout>
+  
+   <itemlayout  width="450" height="240" condition="Window.IsActive(502)+[Skin.HasSetting(MusicGenreBanner)+Container.Content(Genres)]">
+    <control type="group">
+      <include>AnimationFocus1999</include>
+      
+<control type="image">
+        <left>0</left>
+        <top>70</top>
+        <width>440</width>
+        <aspectratio scalediffuse="true" align="center" aligny="top">keep</aspectratio>
+        <texture  background="true" diffuse="dialog-background2.png">$INFO[ListItem.Property(ArtistBanner)]</texture> 
+      
+      </control>
+      <control type="image">
+        <left>0</left>
+        <top>70</top>
+        <width>440</width>
+        <height>81</height>
+        <aspectratio scalediffuse="true" align="center" aligny="top">stretch</aspectratio>
+        <texture  background="true" >dialog-background3.png</texture>
+        <visible>String.IsEmpty(ListItem.Property(ArtistBanner))</visible>  
+      
+      </control>
+      <control type="label">
+        <left>30</left>
+        <top>70</top>
+        <width>380</width>
+        <font>impact</font>
+        <align>center</align>
+        <label>$INFO[ListItem.Label]</label>
+        <visible>String.IsEmpty(ListItem.Property(ArtistBanner))</visible>     
+      </control>
+     
+     
+    </control>
+
+  </itemlayout>
+  <focusedlayout width="450" height="240" condition="Window.IsActive(502)+[Skin.HasSetting(MusicGenreBanner)+Container.Content(Genres)]">
+    <control type="group">
+      
+
+<control type="image">
+        <left>0</left>
+        <top>70</top>
+        <width>440</width>
+        <aspectratio scalediffuse="true" aligny="top" align="center">keep</aspectratio>
+        <texture background="true" diffuse="dialog-background2.png">$INFO[ListItem.Property(ArtistBanner)]</texture>
+        
+      </control>
+        <control type="image">
+        <left>0</left>
+        <top>70</top>
+        <width>440</width>
+        <height>81</height>
+        <aspectratio scalediffuse="true" align="center" aligny="top">stretch</aspectratio>
+        <texture  background="true" >dialog-background3.png</texture>
+        <visible>String.IsEmpty(ListItem.Property(ArtistBanner))</visible>  
+      
+      </control>
+      <control type="label">
+        <left>30</left>
+        <top>70</top>
+        <width>380</width>
+        <font>impact</font>
+        <align>center</align>
+        <label>$INFO[ListItem.Label]</label>
+        <visible>String.IsEmpty(ListItem.Property(ArtistBanner))</visible>     
+      </control>
+      
+     
       
       
     </control>
@@ -3631,7 +3781,7 @@
     <width>1</width>
   </control>
   <control type="group">
-    <visible>!String.IsEmpty(Control.GetLabel(8865))+!Container.Content(genres)+!Skin.HasSetting(Hide_Plot)</visible>
+    <visible>!String.IsEmpty(Control.GetLabel(8865))+[!Container.Content(genres)|Control.HasFocus(2999)|Control.HasFocus(2997)]+!Skin.HasSetting(Hide_Plot)</visible>
     <control type="scrollbar" id="8866">
       <posx>0</posx>
       <posy>100</posy>
@@ -3797,7 +3947,7 @@
   <!-- Plot (Bottom) -->
   <control type="group">
     <posx>30</posx>
-    <posy>560</posy>
+    <posy>870</posy>
     <visible>Control.IsVisible(50) | Control.IsVisible(10) | Control.IsVisible(11) | Control.IsVisible(13) | Control.IsVisible(15) | Control.IsVisible(16) | Control.IsVisible(17)</visible>
     <control type="image">
       <description>TV Channel Icon</description>
@@ -3836,7 +3986,7 @@
       <description>TV Channel Plot</description>
       <posx>140</posx>
       <posy>40</posy>
-      <width>880</width>
+      <width>1600</width>
       <height>110</height>
       <align>justify</align>
       <font>METF_PlotTextMedium</font>

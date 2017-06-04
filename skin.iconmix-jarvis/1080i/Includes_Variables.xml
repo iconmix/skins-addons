@@ -74,7 +74,15 @@
 	<include name="FadelabelPauseAtEnd90">
 		<pauseatend>90000</pauseatend>
 	</include>
-	
+
+<variable name="artistlogo">
+   <value>special://userdata/addon_data/script.iconmixtools/music/artiste$INFO[ListItem.DBID]/clearlogo.jpg</value>
+</variable>
+<variable name="artistbanner">
+  <value>special://userdata/addon_data/script.iconmixtools/music/artiste$INFO[ListItem.DBID]/banner.jpg</value>
+ 
+	<!-- value>http://localhost:52307/getmusicart&amp;artist=$INFO[Listitem.Artist]&amp;type=banner&amp;</value>	 -->
+</variable>	
 <variable name="CoverPlayer">
 	    <value>$INFO[Window(Home).Property(AlbumCoverPlayer)]</value>
 	    <value>$INFO[Player.Art(thumb)]</value>
@@ -315,6 +323,7 @@
 		<value condition="Control.IsVisible(1999)+!IsEmpty(Container(1999).ListItem.Art(fanart))">$INFO[Container(1999).ListItem.Art(fanart)]</value>
 		<value condition="IntegerGreaterThan(Container(2998).NumItems,0)">$INFO[Container(2998).ListItem.Icon]</value>
 		<value condition="Control.IsVisible(1999)+!IsEmpty(Container(1999).ListItem.Property(AlbumFanart))">$INFO[Container(1999).ListItem.Property(AlbumFanart)]</value>
+		<value condition="Control.IsVisible(1999)+!IsEmpty(Container(1999).ListItem.Property(ArtistFanart))">$INFO[Container(1999).ListItem.Property(ArtistFanart)]</value>
 		<value condition="!IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
 		<value condition="Window.IsVisible(502)">special://skin/extras/backgrounds/music.jpg</value>
 		<value condition="Window.IsVisible(10025)">special://skin/extras/backgrounds/movies.jpg</value>
@@ -613,7 +622,9 @@
 	<variable name="PlotBox_Text" id="7777">
 		<!-- Skin Shortcuts help text -->
 		<value condition="Control.HasFocus(2999)">$INFO[Container(1999).ListItem.Plot]</value> <!-- saga -->
-		<value condition="Control.HasFocus(2997)">$INFO[Container(1999).ListItem.Property(AlbumInfo)]</value> <!-- album -->
+		<value condition="Control.HasFocus(2997)+Container.Content(artists)">$INFO[Container(1999).ListItem.Property(AlbumInfo)]</value> <!-- album -->
+	  <value condition="Control.HasFocus(2997)+Container.Content(genres)">$INFO[Container(1999).ListItem.Property(ArtistBio)]</value> <!-- album -->
+
 		<!--
 		<value condition="[Container.Content(directors)|Container.Content(actors)]+!IsEmpty(Window(Home).Property(Actorbiographie))+Skin.HasSetting(ShowLargePlot)">[I][COLOR=yellow]$INFO[Window(Home).Property(ActorNomReel),,[CR]][/COLOR]$INFO[Window(Home).Property(Actornaissance),[COLOR=yellow]$LOCALIZE[31896][/COLOR] ,[CR]]$INFO[Window(Home).Property(Actorlieunaissance),[COLOR=yellow]$LOCALIZE[31895][/COLOR] ,[CR]]$INFO[Window(Home).Property(Actorage),[COLOR=yellow]$LOCALIZE[31894][/COLOR] ,[CR]]$INFO[Window(Home).Property(Actordeces),[COLOR=white]$LOCALIZE[31897][/COLOR] ,[CR]][/I][CR]$INFO[Window(Home).Property(Actorbiographie)]</value>
 		<value condition="[Container.Content(directors)|Container.Content(actors)]+!IsEmpty(Window(Home).Property(Actorbiographie))+!Skin.HasSetting(ShowLargePlot)">[I][COLOR=yellow]$INFO[Window(Home).Property(ActorNomReel),, - ][/COLOR]$INFO[Window(Home).Property(Actornaissance),[COLOR=yellow]$LOCALIZE[31896][/COLOR] , - ]$INFO[Window(Home).Property(Actorlieunaissance),[COLOR=yellow]$LOCALIZE[31895][/COLOR] , - ]$INFO[Window(Home).Property(Actorage),[COLOR=yellow]$LOCALIZE[31894][/COLOR] , - ]$INFO[Window(Home).Property(Actordeces),[COLOR=white]$LOCALIZE[31897][/COLOR] , - ][/I]$INFO[Window(Home).Property(Actorbiographie)]</value>
