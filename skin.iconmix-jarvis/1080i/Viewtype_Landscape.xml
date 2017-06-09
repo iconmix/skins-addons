@@ -88,6 +88,11 @@
 				<height>500</height>
 				<width>2350</width>
 				<include condition="!Skin.HasSetting(ViewLockdown)">OnUp7000</include>
+
+<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,up,Home)</onfocus>
+<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,down,Home)</onfocus>
+
+
 				<ondown>60</ondown>
 				<onleft>52</onleft>
 				<onright>52</onright>
@@ -332,6 +337,11 @@
 				<height>820</height>
 				<width>450</width>
 				<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
+
+<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
+<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
+
+
 				<ondown>521</ondown>
 				<onup>521</onup>
 				<onright>60</onright>

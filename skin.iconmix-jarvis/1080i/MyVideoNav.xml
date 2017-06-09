@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window id="10025">
-	<onload>RunScript(script.tv.show.next.aired,backend=True)</onload>-->
+		<onload condition="System.HasAddon(script.tv.show.next.aired)">RunScript(script.tv.show.next.aired,backend=True)</onload>-->
+
 	<!---->
 	<onload condition="IsEmpty(Window(Home).property(iconmixtoolsbackend))">RunScript(script.iconmixtools,backend=True)</onload>--> 
 	<onload>SetProperty(SetTitle,,Home) </onload>
@@ -549,7 +550,7 @@
 					<label>[COLOR=yellow][I]( $LOCALIZE[20373] $INFO[ListItem.Season] $LOCALIZE[31898] )[/I][/COLOR]</label>
 					<scroll>true</scroll>
 					<scrollout>true</scrollout>
-					<visible>IsEqual(Window(Home).Property(iconmixEpSa),0)</visible>
+					<visible>StringCompare(Window(Home).Property(iconmixEpSa),0)</visible>
 					</control>
 			</control>
 			
@@ -589,7 +590,7 @@
 			
 			<control type="image">
 				<texture>frames/genrestag.png</texture>
-				<visible>IsEmpty(ListItem.Art(ClearLogo))</visible>
+				<visible>IsEmpty(Window(Home).Property(IconMixSagaClearLogo))</visible>
 				<aspectratio>stretch</aspectratio>
 			</control>
 			<control type="group"> <!-- genres -->
@@ -598,7 +599,7 @@
 					<left>30</left>
 					<visible>Skin.HasSetting(CacheFond)</visible>				
 				 <control type="group">
-				  <visible>IsEmpty(ListItem.Art(ClearLogo))</visible>
+				  <visible>IsEmpty(Window(Home).Property(IconMixSagaClearLogo))</visible>
 					<control type="fadelabel">
 						<width>550</width>
 						<posx>40</posx>
@@ -629,13 +630,13 @@
   			  <height>120</height>
           <aspectratio>keep</aspectratio>
           <aligny>center</aligny>
-          <texture>$INFO[ListItem.Art(clearlogo)]</texture>
+          <texture>$INFO[Window(Home).Property(IconMixSagaClearLogo)]</texture>
         </control>
 				</control>
 				<control type="group"> <!-- en vue normale -->
 					<visible>!Skin.HasSetting(CacheFond)</visible>
 					<control type="group">
-					  <visible>IsEmpty(ListItem.Art(ClearLogo))</visible>
+					  <visible>IsEmpty(Window(Home).Property(IconMixSagaClearLogo))</visible>
 					<control type="fadelabel">
 						<width>550</width>
 						<posx>40</posx>
@@ -666,7 +667,7 @@
   			  <height>120</height>
           <aspectratio>keep</aspectratio>
           <aligny>center</aligny>
-          <texture>$INFO[ListItem.Art(clearlogo)]</texture>
+          <texture>$INFO[Window(Home).Property(IconMixSagaClearLogo)]</texture>
         </control>
 				</control>
 			</control>
@@ -789,17 +790,19 @@
 	<include>AnimationVoletsHorizontaux</include>
 	<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
 
-	<!-- --
+	<!-- -->
 	<control type="label">
 		<label>TEXTE</label>
 		<visible>Skin.HasSetting(SagaDetailsTexte)</visible>
 	</control>
-		<control type="label">
+<!--	--
+	<control type="label">
 	<posx>700</posx>
 
-	<label>poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]</label>
+	<label>nbepisodes:$INFO[Window(Home).Property(iconmixEpSa)][CR]poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]</label>
+	
 	</control>
-
+-->
 
 	-->
 </controls>

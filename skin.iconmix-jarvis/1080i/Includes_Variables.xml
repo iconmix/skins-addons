@@ -84,9 +84,10 @@
 	<!-- value>http://localhost:52307/getmusicart&amp;artist=$INFO[Listitem.Artist]&amp;type=banner&amp;</value>	 -->
 </variable>	
 <variable name="CoverPlayer">
-	    <value>$INFO[Window(Home).Property(AlbumCoverPlayer)]</value>
+	    <value condition="!IsEmpty(Window(Home).Property(AlbumCoverPlayer))">$INFO[Window(Home).Property(AlbumCoverPlayer)]</value>
+	    <value>$INFO[MusicPlayer.Cover]</value>
 	    <value>$INFO[Player.Art(thumb)]</value>
-	    <value>$INFO[Player.Art(icon)]</value>
+	    <value>$INFO[Player.Art(poster)]</value>
 	  </variable>
 	
 <variable name="ImageContainer">
@@ -321,6 +322,7 @@
 		<value condition="Control.IsVisible(1999)+!IsEmpty(Window(Home).Property(iconmixExtraFanart))">$INFO[Window(Home).Property(iconmixExtraFanart)]</value>
 		<value condition="!IsEmpty(Window(Home).Property(iconmixExtraFanart))+Skin.HasSetting(Enable_ExtraFanart)">$INFO[Window(Home).Property(iconmixExtraFanart)]</value>
 		<value condition="Control.IsVisible(1999)+!IsEmpty(Container(1999).ListItem.Art(fanart))">$INFO[Container(1999).ListItem.Art(fanart)]</value>
+		
 		<value condition="IntegerGreaterThan(Container(2998).NumItems,0)">$INFO[Container(2998).ListItem.Icon]</value>
 		<value condition="Control.IsVisible(1999)+!IsEmpty(Container(1999).ListItem.Property(AlbumFanart))">$INFO[Container(1999).ListItem.Property(AlbumFanart)]</value>
 		<value condition="Control.IsVisible(1999)+!IsEmpty(Container(1999).ListItem.Property(ArtistFanart))">$INFO[Container(1999).ListItem.Property(ArtistFanart)]</value>
@@ -831,6 +833,7 @@
 	<variable name="ListClearartClearlogoOn">
 		<value condition="Control.HasFocus(2999)+!IsEmpty(Container(1999).ListItem.Art(clearart))">$INFO[Container(1999).ListItem.Art(clearart)]</value>
 		<value condition="Control.HasFocus(2999)+!IsEmpty(Container(1999).ListItem.Art(clearlogo)) + IsEmpty(Container(1999).ListItem.Art(clearart))">$INFO[Container(1999).ListItem.Art(clearlogo)]</value>
+		<value condition="!IsEmpty(Window(Home).Property(IconMixSagaClearArt))">$INFO[Window(Home).Property(IconMixSagaClearArt)]</value>
 
 		<value condition="!IsEmpty(ListItem.Art(clearart))">$INFO[ListItem.Art(clearart)]</value>
 		<value condition="!IsEmpty(ListItem.Art(tvshow.clearart))">$INFO[ListItem.Art(tvshow.clearart)]</value>

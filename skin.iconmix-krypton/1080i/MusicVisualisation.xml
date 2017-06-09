@@ -330,7 +330,7 @@
 				<posx>10</posx>
 				<posy>10</posy>
 				<width>1600</width>
-				<label>ArtisteBanner=$INFO[Window(Home).Property(ArtistBannerPlayer)][CR]ArtistLogo=$INFO[Window(Home).Property(ArtistLogoPlayer)][CR]AlbumCD=$INFO[Window(Home).Property(AlbumCdPlayer)][CR]AlbumCover=$INFO[Window(Home).Property(AlbumCoverPlayer)][CR]$INFO[ListItem.Icon][CR]DiscSpinning:$VAR[discartSpinning][CR]Slideshow:$INFO[Window(Visualisation).Property(ArtistSlideshow)][CR]PlayerFanart:$INFO[Player.Art(fanart)][CR]2996ICON:$INFO[Container(2996).ListItem.Icon]</label>
+				<label>ArtisteBanner=$INFO[Window(Home).Property(ArtistBannerPlayer)][CR]ArtistLogo=$INFO[Window(Home).Property(ArtistLogoPlayer)][CR]AlbumCD=$INFO[Window(Home).Property(AlbumCdPlayer)][CR]**AlbumCover=$VAR[CoverPlayer][CR]ICON=$INFO[ListItem.Icon][CR]DiscSpinning:$VAR[discartSpinning][CR]Slideshow:$INFO[Window(Visualisation).Property(ArtistSlideshow)][CR]PlayerFanart:$INFO[Player.Art(fanart)][CR]2996ICON:$INFO[Container(2996).ListItem.Icon]</label>
 			</control>-->
 		
 	</controls>

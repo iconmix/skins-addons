@@ -292,6 +292,7 @@
 					</control> 
 					
 					
+					
 					<control type="button" id="208">
 						<include>SettingsLabel</include>
 						<label>$LOCALIZE[10035] $LOCALIZE[33061]</label>
@@ -331,7 +332,7 @@
 						<label>$LOCALIZE[31043]</label>
 						<onclick>Skin.ToggleSetting(RssTop)</onclick>
 						<selected>Skin.HasSetting(RssTop)</selected>
-					</control>	
+					</control>
 					
 					
 					
@@ -667,6 +668,12 @@
 					</control>
 					<control type="image" id="711">
 						<include>Settings_Line</include>
+					</control>
+					<control type="button" id="712">
+					  <include>SettingsLabel</include>
+						<label>$LOCALIZE[31221]</label>
+						<onclick>Addon.OpenSettings(script.iconmixtools)</onclick>
+					  <visible>System.HasAddon(script.iconmixtools)</visible>
 					</control>
 					<!--
 					<control type="radiobutton" id="712">

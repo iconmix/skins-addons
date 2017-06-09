@@ -52,12 +52,13 @@
 			<label>$VAR[CoverPlayer]</label>
 		</control>
 				<control type="group">
+				  <posx>-10</posx>
 				  <height>200</height>
-				  <animation effect="slide" end="-70" time="840" condition="String.IsEmpty(Control.GetLabel(1113))">Conditional</animation>
+				  <!--<animation effect="slide" end="-70" time="840" condition="String.IsEmpty(Control.GetLabel(1113))">Conditional</animation>-->
 				  <control type="image">
-					<posx>-30</posx>
+					<posx>25</posx>
 					<posy>-22</posy>
-					<width>220</width>
+					<width>150</width>
 					<height>150</height>
 					<texture>cd.png</texture>
 					<aspectratio align="bottom">keep</aspectratio>
@@ -65,9 +66,9 @@
 					
 				</control>
 				<control type="image">
-					<posx>-90</posx>
+					<posx>-35</posx>
 					<posy>-22</posy>
-					<width>220</width>
+					<width>150</width>
 					<height>150</height>
 					<include>Animation_SpinningCD</include>
 					<visible>Player.HasAudio</visible>

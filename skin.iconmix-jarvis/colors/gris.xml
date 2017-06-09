@@ -101,7 +101,7 @@
 	<color name="OSDPlayingDuration">ddc89008</color>
 	
 	<!-- Dialogs -->
-	<color name="DialogBackgroundColor">ff7f7f7f</color>
+	<color name="DialogBackgroundColor">C07f7f7f</color>
 	<color name="DialogDropdownColor">ff7f7f7f</color>			<!-- FF87d1ff -->
 	<color name="DialogProgressBar">FFf8cd22</color>
 	<color name="DialogTextFO">eef8cd22</color>

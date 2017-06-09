@@ -8,7 +8,7 @@
 				<effect type="fade" start="100" end="15" time="500"  />
 			</animation>
 			<posy>-990</posy> -->
-			<visible>!String.StartsWith(ListItem.Label,..)</visible>
+			<visible>!String.Contains(ListItem.Label,..)</visible>
 		<control type="group">
 				<top>1040</top>
 				<posx>400</posx>
@@ -35,7 +35,7 @@
 				<visible> !String.IsEmpty(ListItem.FilenameAndPath) + !String.IsEmpty(ListItem.DBTYPE) +Skin.HasSetting(ShowFilePath)</visible>
 			</control>
 			<control type="group">
-				<top>135</top>
+				<top>140</top>
 
 				<include condition="!Skin.HasSetting(Hide_ExtraMediaFlags)">MediaInfoGroup2</include>
 				<include>VisibleIfNotMovieSet</include>
@@ -107,16 +107,29 @@
 				<!--<label>$VAR[ListItemTitle]</label>-->
 			</control>
 			
+			<control type="image">
+				<posy>1042</posy>
+				<left>420</left>
+				<width>930</width>
+				<height>32</height>
+				<align>center</align>
+				
+				<texture>frames/nextairedtab.png</texture>
+				<aspectratio>stretch</aspectratio>
+				<visible>Container.Content(episodes)+!String.IsEmpty(ListItem.TVShowTitle)+!String.IsEmpty(Window(Home).Property(iconmixEpSa))+!String.IsEmpty(Window(Home).Property(NextAired.NextDate))</visible>
+
+			</control>
+			
 
 			<control type="label">
-				<posy>1035</posy>
-				<left>380</left>
-				<width>1010</width>
+				<posy>1040</posy>
+				<left>430</left>
+				<width>910</width>
 				<height>63</height>
 				<align>center</align>
 				<font>comic24</font>
 				<textcolor>TextNF</textcolor>
-				<label>[COLOR=MediaDetailsInfo]$LOCALIZE[31427] [COLOR=NowPlayingTitle]($INFO[Window(Home).Property(NextAired.NextDate)])[/COLOR] :[COLOR=white] $INFO[Window(Home).Property(NextAired.NextTitle)][I]$INFO[Window(Home).Property(NextAired.NextSeasonNumber), (S,]$INFO[Window(Home).Property(NextAired.NextEpisodeNumber),E,)][/I][/COLOR]</label>
+				<label>[COLOR=MediaDetailsInfo]$LOCALIZE[31427] [COLOR=Yellow]($INFO[Window(Home).Property(NextAired.NextDate)])[/COLOR] :[COLOR=white] $INFO[Window(Home).Property(NextAired.NextTitle)][I]$INFO[Window(Home).Property(NextAired.NextSeasonNumber), (S,]$INFO[Window(Home).Property(NextAired.NextEpisodeNumber),E,)][/I][/COLOR]</label>
 
 				<visible>[Container.Content(tvshows)|Container.Content(episodes)]+!String.IsEmpty(Window(Home).Property(NextAired.NextDate))</visible>
 			</control>

@@ -79,7 +79,7 @@
 						<onclick>RunScript(script.iconmixtools,mettreajour=True)</onclick>
 						<visible>Container.Content(tvshows)+Skin.HasSetting(CheckSeries)+!Control.HasFocus(5051)+!Control.HasFocus(1998)</visible>
 					</control>
-					<control type="button" id="2009">
+					<control type="button" id="2011">
 						<!-- Mise a jour SAGA -->
 						<include>BoutonCommun</include>
 						<label>[I]Mettre à jour[/I]</label>

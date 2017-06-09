@@ -395,6 +395,7 @@ class Main:
             if xbmc.getCondVisibility("Player.HasAudio"):
                 self.selecteditemAlbumPlayer = xbmc.getInfoLabel("MusicPlayer.Album")
                 self.windowmusicvisID=None
+                self.windowmusicvis=None
                 if xbmc.getCondVisibility("Window.IsVisible(12006)"): self.windowmusicvisID = 12006 # musicvis.xml
                 if xbmc.getCondVisibility("Window.IsVisible(10000)"): self.windowmusicvisID = 10000 
                 if not str(self.selecteditemAlbumPlayer)=="" and (self.previousitemPlayer != self.selecteditemAlbumPlayer or (self.windowmusicvisID and self.PreviousWindowActiveID!=self.windowmusicvisID)):
@@ -404,20 +405,19 @@ class Main:
                   self.PreviousWindowActiveID=self.windowmusicvisID
                   if self.windowmusicvis: 
                     ListeFanarts=self.GetControl(self.windowmusicvis,2996)
-                  self.vide_artiste()
-                  self.vide_album()
+                  self.vide_artisteplayer()
+                  self.vide_albumplayer()
                   #utils.logMsg("Album en cours :"+str(self.selecteditemAlbumPlayer)+"de "+str(self.selecteditemArtistPlayer),0)
                   try:
                        AlbumData,ArtisteData=utils.GetMusicFicheAlbum(None,None,1,1,None)
                        if AlbumData:
-                           #utils.logMsg("Album en cours :"+str(AlbumData)+"de "+str(ArtisteData),0)
-                           self.windowhome.setProperty("AlbumCoverPlayer",AlbumData.get("AlbumCover"))
-                           self.windowhome.setProperty("AlbumBackPlayer",AlbumData.get("AlbumBack"))
+                           utils.logMsg("Album en cours :"+str(AlbumData)+"de "+str(ArtisteData),0)
+                           if AlbumData.get("AlbumCover"): self.windowhome.setProperty("AlbumCoverPlayer",AlbumData.get("AlbumCover"))
+                           if AlbumData.get("AlbumBack"): self.windowhome.setProperty("AlbumBackPlayer",AlbumData.get("AlbumBack"))
                            if AlbumData.get("AlbumCd"):
                               self.windowhome.setProperty("AlbumCdPlayer",AlbumData.get("AlbumCd"))
-                           else:
-                              self.windowhome.setProperty("AlbumCdPlayer","")
-                           self.windowhome.setProperty("AlbumInfoPlayer",AlbumData.get("AlbumInfo"))
+                           
+                           if AlbumData.get("AlbumInfo"): self.windowhome.setProperty("AlbumInfoPlayer",AlbumData.get("AlbumInfo"))
                        if ArtisteData:
                             if ListeFanarts:
                                 ListeFanarts.reset()
@@ -433,13 +433,13 @@ class Main:
                                            TabFanarts.append(ItemListe)
                                     
                                     ListeFanarts.addItems(TabFanarts) 
-                            self.windowhome.setProperty("ArtistBioPlayer",ArtisteData.get("ArtistBio"))
-                            self.windowhome.setProperty("ArtistThumbPlayer",ArtisteData.get("ArtistThumb"))
-                            self.windowhome.setProperty("ArtistLogoPlayer",ArtisteData.get("ArtistLogo"))
-                            self.windowhome.setProperty("ArtistBannerPlayer",ArtisteData.get("ArtistBanner"))
-                            self.windowhome.setProperty("ArtistFanartPlayer",ArtisteData.get("ArtistFanart"))
-                            self.windowhome.setProperty("ArtistFanart2Player",ArtisteData.get("ArtistFanart2"))
-                            self.windowhome.setProperty("ArtistFanart3Player",ArtisteData.get("ArtistFanart3"))  
+                            if ArtisteData.get("ArtistBio"): self.windowhome.setProperty("ArtistBioPlayer",ArtisteData.get("ArtistBio"))
+                            if ArtisteData.get("ArtistThumb"): self.windowhome.setProperty("ArtistThumbPlayer",ArtisteData.get("ArtistThumb"))
+                            if ArtisteData.get("ArtistLogo"): self.windowhome.setProperty("ArtistLogoPlayer",ArtisteData.get("ArtistLogo"))
+                            if ArtisteData.get("ArtistBanner"): self.windowhome.setProperty("ArtistBannerPlayer",ArtisteData.get("ArtistBanner"))
+                            if ArtisteData.get("ArtistFanart"): self.windowhome.setProperty("ArtistFanartPlayer",ArtisteData.get("ArtistFanart"))
+                            if ArtisteData.get("ArtistFanart2"): self.windowhome.setProperty("ArtistFanart2Player",ArtisteData.get("ArtistFanart2"))
+                            if ArtisteData.get("ArtistFanart3"): self.windowhome.setProperty("ArtistFanart3Player",ArtisteData.get("ArtistFanart3"))  
                   except:
                        utils.logMsg("Probleme : AlbumData,ArtisteData=utils.GetMusicFicheAlbum(None,None,1,1)",0)  
                 
@@ -680,7 +680,13 @@ class Main:
                         
                         else:
                           if self.selecteditem > -1 and not str(self.selecteditem)=="": 
-                                
+                              self.windowhome.clearProperty('IconMixSagaClearArt')  
+                              self.windowhome.clearProperty('IconMixSagaClearLogo')
+                              self.windowhome.clearProperty('IconMixSagaBackGround')
+                              self.windowhome.clearProperty('IconMixSagaBanner')
+                              self.windowhome.clearProperty('IconMixSagaDiscArt')
+                              self.windowhome.clearProperty('IconMixSagaPoster')
+                              self.windowhome.clearProperty('IconMixSagaThumb')  
                               ListeItemx=[]                         
                               if not self.DBTYPE=="set" and not status=="1":
                                 status="1"
@@ -771,11 +777,13 @@ class Main:
                                    TvSh=xbmc.getInfoLabel("ListItem.TVShowTitle") 
                                    TvSe=xbmc.getInfoLabel("ListItem.Season")
                                    TvId=self.selecteditem
+                                   
                                    TvNbKodi=xbmc.getInfoLabel("Container.NumItems")
                                    if TvId and TvSe and TvSh :
                                      if TvSe!=self.TvSeason or TvSh!=self.TvShow : 
                                        self.windowhome.clearProperty('IconMixEpSa')
-                                       self.EpSa=utils.getepisodes(TvId,int(TvSe),self.DBTYPE,TvNbKodi)
+
+                                       self.EpSa=utils.getepisodes(int(TvId),int(TvSe),self.DBTYPE,TvNbKodi)
                                        if self.EpSa>=0:                                     
                                          self.windowhome.setProperty('IconMixEpSa',str(self.EpSa))                                       
                                          self.TvShow=TvSh
@@ -819,6 +827,21 @@ class Main:
        self.windowhome.clearProperty("AlbumBack")
        self.windowhome.clearProperty("AlbumCd")
        self.windowhome.clearProperty("AlbumInfo")
+       
+    def vide_artisteplayer(self):
+        self.windowhome.clearProperty("ArtistBioPlayer")
+        self.windowhome.clearProperty("ArtistThumbPlayer")
+        self.windowhome.clearProperty("ArtistLogoPlayer")
+        self.windowhome.clearProperty("ArtistBannerPlayer")
+        self.windowhome.clearProperty("ArtistFanartPlayer")
+        self.windowhome.clearProperty("ArtistFanart2Player")
+        self.windowhome.clearProperty("ArtistFanart3Player") 
+        
+    def vide_albumplayer(self):
+       self.windowhome.clearProperty("AlbumCoverPlayer")
+       self.windowhome.clearProperty("AlbumBackPlayer")
+       self.windowhome.clearProperty("AlbumCdPlayer")
+       self.windowhome.clearProperty("AlbumInfoPlayer")
            
 
     def display_duration(self):

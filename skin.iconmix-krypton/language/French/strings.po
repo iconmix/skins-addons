@@ -312,6 +312,10 @@ msgctxt "#31220"
 msgid "Set up TV display. Includes TV channels management options, recordings and tv guide display options."
 msgstr "Réglages de l'affichage de la TV. Inclut les options pour la gestion des chaînes, la programmation des enregistrements et l'affichage du guide télé."
 
+msgctxt "#31221"
+msgid "IconMixTools script settings"
+msgstr "Paramétrage du script IconMixTools"
+
 msgctxt "#31244"
 msgid "Playing"
 msgstr "Lecture"
