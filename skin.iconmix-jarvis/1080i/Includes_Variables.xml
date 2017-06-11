@@ -124,8 +124,8 @@
 			<value></value>
 		</variable>
 		<variable name="ActeursContent">
-			<value condition="IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]&local="oui"</value>
-			<value condition="IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+IsEmpty(Window(Home).Property(ActeurVideoLocal))">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]</value>
+			<value condition="IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]&local="oui"</value>
+			<value condition="IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]</value>
 			<value>-</value>
 		</variable>
 

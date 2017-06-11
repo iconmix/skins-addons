@@ -414,33 +414,39 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None):
                             PosterCollection="http://image.tmdb.org/t/p/original"+json_data.get("poster_path")
 
                          if Rspcollection:
+                            NbItemsCollection=len(Rspcollection)
 
                             NbFilmsSaga=0
                             Manquant=0
                             for check in Rspcollection:
                               if check["id"]:
-                                xxx=str(check["id"])
-                                zz=None
-                                cpt=0
-                                for yy in KodiCollection:
-                                  if yy[1]==xxx:
-                                    zz=1
-                                    break
-                                  else:
-                                    cpt=cpt+1
-                                
-                                
-                                if not zz :
-                                   if check["title"] and check["release_date"] and check["poster_path"]:
-                                         ManquantM.append(check)
-                                         NbFilmsSaga=NbFilmsSaga+1
-                                                                 
-                                else: NbFilmsSaga=NbFilmsSaga+1
+                                if check.get("genre_ids"):
+                                  if check.get("genre_ids")[0]!=99:
+                                      xxx=str(check["id"])
+                                      zz=None
+                                      cpt=0
+                                      for yy in KodiCollection:
+                                        if yy[1]==xxx:
+                                          zz=1
+                                          break
+                                        else:
+                                          cpt=cpt+1
+                                      
+                                      
+                                      if not zz :
+                                         if check["title"] and check["release_date"] and check["poster_path"]:
+                                               ManquantM.append(check)
+                                               NbFilmsSaga=NbFilmsSaga+1
+                                                                       
+                                      else: NbFilmsSaga=NbFilmsSaga+1
+                                else:
+                                  if NbItemsCollection>0:
+                                     NbItemsCollection=NbItemsCollection-1
                                   
                             ArrayCollection["kodi"]=len(KodiCollection)
                             ArrayCollection["kodicollection"]=KodiCollection
                             ArrayCollection["tmdbid"]=IDcollection
-                            ArrayCollection["tmdb"]=len(Rspcollection)
+                            ArrayCollection["tmdb"]=NbItemsCollection
                             ArrayCollection["poster"]=PosterCollection
                             ArtWorks=getsagaartworks(IDcollection)
                             ArrayCollection["artworks"]=ArtWorks
@@ -988,37 +994,33 @@ def MergeContainers(Cont1Size=None,Cont2Size=None):
   xbmcplugin.endOfDirectory(int(sys.argv[1])) 
 
 
-#def CheckItemExtrafanartPath(typex=None,ItemId=None):
 def CheckItemExtrafanartPath(ItemPath=None,ItemSsRep='extrafanart'):
-  item = {}
-  Ptype=""
-  PathList = []
+ 
+  ListeFanart = []
   extrafanart_dir=""
   
   if ItemPath and ItemPath!='':
      #logMsg("ItemPath= "+str(ItemPath),0)
-     extrafanart_dir = os.path.join(ItemPath + ItemSsRep + '/')
-     succes=xbmcvfs.exists(extrafanart_dir)
-     if not succes:
-        extrafanart_dir=""
+     extrafanart_dir = ItemPath + ItemSsRep + '/'
+     ListeFanart=get_filepaths(extrafanart_dir)
+     for Item in ListeFanart:
+          if Item.endswith('.jpg') or Item.endswith('.jpeg') or Item.endswith('.png'):
+             return extrafanart_dir 
+             break   
   
  
-  return extrafanart_dir  
+  return ""  
 
 def getSagaFanarts():
   ListeFanarts=[] 
   
   c=0
   d=int(xbmc.getInfoLabel("Container(1999).NumItems")) 
-  #logMsg("getSagaFanarts ["+str(xbmc.getInfoLabel("ListItem.Label"))+"]",0)
   while c<d:
     ItemPath=CheckItemExtrafanartPath(xbmc.getInfoLabel("Container(1999).ListItem(%d).Path" %(c))) 
     if ItemPath!="":
       ListeFanart=get_filepaths(ItemPath)
-      
-    #ItemPath=CheckItemExtrafanartPath(xbmc.getInfoLabel("Container(1999).ListItem(%d).Path" %(c)),'extrathumbs') 
-    #if ItemPath!="":
-    #  ListeFanart=ListeFanart+get_filepaths(ItemPath)
+  
       
     for Item in ListeFanart:
         ItemListe=xbmcgui.ListItem(label="extrafanart",iconImage=Item)
@@ -1034,14 +1036,16 @@ def getSagaFanartsV2(SagaItemPath=None):
   if SagaItemPath:
     ItemPath=CheckItemExtrafanartPath(SagaItemPath) 
     if ItemPath!="":
+      #logMsg("ItemPath : "+"="+str(ItemPath.encode("utf8")),0) 
       ListeFanart=get_filepaths(ItemPath)
+      #logMsg("ListeFanart : "+str(len(ListeFanart))+"="+str(ListeFanart),0) 
     if ListeFanart:    
       for Item in ListeFanart:
-          if Item.endswith('.jpg') or Item.endswith('.jpg') or Item.endswith('.png'):
+          if Item.endswith('.jpg') or Item.endswith('.jpeg') or Item.endswith('.png'):
              ItemListe=xbmcgui.ListItem(label="extrafanart",iconImage=Item)
              ItemListe.setInfo("pictures", {"title": "extrafanart","picturepath": Item}) 
              ListeFanarts.append(ItemListe)        
-           
+  #logMsg("ListeFanarts : "+str(len(ListeFanarts))+"="+str(ListeFanarts),0)         
   return ListeFanarts
   
 
@@ -1058,26 +1062,49 @@ def get_filepaths(directory):
     file_paths = []
 
     # Walk the tree.
-    for root, directories, files in os.walk(directory):
+    if directory:
+      if xbmcvfs.exists(directory):
+        dirs,files=xbmcvfs.listdir(directory)
         for filename in files:
-            filepath = os.path.join(root, filename)
-            file_paths.append(filepath)
-
+                  filepath = directory+ filename
+                  file_paths.append(filepath)
+      #logMsg("dirs="+str(dirs)+" files ="+str(files),0)
+    
+    """
+    if directory:
+      for root, directories, files in os.walk(directory):
+          for filename in files:
+              filepath = os.path.join(root, filename)
+              file_paths.append(filepath)
+    """
     return file_paths  
     
 def get_files(directory,sansextension=None):
     file_paths = []
-
-    # Walk the tree.
-    for root, directories, files in os.walk(directory):
+    
+    if directory:
+      if xbmcvfs.exists(directory):
+        dirs,files=xbmcvfs.listdir(directory)
         for filename in files:
             if not sansextension:
-              filepath = filename
+                  filepath = filename
             else:
-              filepath = os.path.splitext(filename)[0]
+                  filepath = filename.replace(".xsp","")
             file_paths.append(filepath)
 
+    # Walk the tree.
+    """
+    if directory:
+      for root, directories, files in os.walk(directory):
+          for filename in files:
+              if not sansextension:
+                filepath = filename
+              else:
+                filepath = os.path.splitext(filename)[0]
+              file_paths.append(filepath)
+    """
     return file_paths  
+    
     
 def getGenre(genrex=None,genretypex=None,origtitle=None):
   ItemId = None
@@ -2499,28 +2526,29 @@ def indent(elem, level=0):
 def ChoixPlayList(Label=None,Suppression=None):
    ListePlayList=[]
    
-   ListePlayList=get_files(xbmc.translatePath('special://profile/playlists/video/' ).decode("utf8"),1) 
-   if not Suppression:
-      ListePlayList.insert(0,__language__( 32605 ))
-      Titre=__language__( 32604 )+Label
-   else:
-      Titre=__language__( 32608 )+Label
-   #logMsg("Liste de playlist ="+str(ListePlayList),0)
-   if len(ListePlayList)>0:
-      dialogC = xbmcgui.Dialog()
-      result=dialogC.select(Titre, ListePlayList)
-      if result==0 and not Suppression: #creation
-        dialog = xbmcgui.Dialog()
-        Reponse = dialog.input(__language__( 32606 ), type=xbmcgui.INPUT_ALPHANUM)
-        if Reponse:
-           return xbmc.translatePath('special://profile/playlists/video/%s.xsp' %(Reponse)),Reponse
+   ListePlayList=get_files(xbmc.translatePath('special://profile/playlists/video/' ),1) 
+   if ListePlayList:
+     if not Suppression:
+        ListePlayList.insert(0,__language__( 32605 ))
+        Titre=__language__( 32604 )+Label
+     else:
+        Titre=__language__( 32608 )+Label
+     #logMsg("Liste de playlist ="+str(ListePlayList),0)
+     if len(ListePlayList)>0:
+        dialogC = xbmcgui.Dialog()
+        result=dialogC.select(Titre, ListePlayList)
+        if result==0 and not Suppression: #creation
+          dialog = xbmcgui.Dialog()
+          Reponse = dialog.input(__language__( 32606 ), type=xbmcgui.INPUT_ALPHANUM)
+          if Reponse:
+             return xbmc.translatePath('special://profile/playlists/video/%s.xsp' %(Reponse)),Reponse
+          else:
+             return None,None        
         else:
-           return None,None        
-      else:
-        if result>=0:
-           return xbmc.translatePath('special://profile/playlists/video/%s.xsp' %(ListePlayList[result]) ).decode("utf8"),ListePlayList[result] 
-        else :
-           return None,None     
+          if result>=0:
+             return xbmc.translatePath('special://profile/playlists/video/%s.xsp' %(ListePlayList[result]) ).decode("utf8"),ListePlayList[result] 
+          else :
+             return None,None     
 
 def DelFromPlayList(): 
     suppr=0 

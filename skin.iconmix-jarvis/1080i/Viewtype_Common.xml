@@ -303,13 +303,24 @@
 				<visible>[Container.Content(tvshows)|Container.Content(seasons)]+!IsEmpty(ListItem.Title)</visible>
 			</control>
 			
-				<control type="image">
+			<control type="image">
 				<posx>12</posx>
 				<posy>15</posy>
 				<width>502</width>
 				<height>96</height>
 				<texture background="true" fallback="default_banner.png" diffuse="frames/banner_diffuse.png">$INFO[ListItem.Art(tvshow.banner)]</texture>				
 				<aspectratio scalediffuse="true">stretch</aspectratio>
+				<visible>[Container.Content(tvshows)|Container.Content(seasons)]+!IsEmpty(ListItem.Title)+IsEmpty(ListItem.Art(banner))</visible>
+			</control>
+			<control type="label">
+				<posx>12</posx>
+				<posy>55</posy>
+				<width>502</width>
+				<height>96</height>
+				<font>impact</font>
+								<align>center</align>
+
+				<label>$INFO[ListItem.Label]</label>
 				<visible>[Container.Content(tvshows)|Container.Content(seasons)]+!IsEmpty(ListItem.Title)+IsEmpty(ListItem.Art(banner))</visible>
 			</control>
 			
@@ -416,6 +427,16 @@
 				<height>96</height>
 				<texture background="true" fallback="default_banner.png" diffuse="frames/banner_diffuse.png">$INFO[ListItem.Art(tvshow.banner)]</texture>				
 				<aspectratio scalediffuse="true">stretch</aspectratio>
+				<visible>[Container.Content(tvshows)|Container.Content(seasons)]+!IsEmpty(ListItem.Title)+IsEmpty(ListItem.Art(banner))</visible>
+			</control>
+			<control type="label">
+				<posx>12</posx>
+				<posy>55</posy>
+				<width>502</width>
+				<height>96</height>
+				<align>center</align>
+				<font>impact</font>
+				<label>$INFO[ListItem.Label]</label>
 				<visible>[Container.Content(tvshows)|Container.Content(seasons)]+!IsEmpty(ListItem.Title)+IsEmpty(ListItem.Art(banner))</visible>
 			</control>
 			
