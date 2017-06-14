@@ -50,6 +50,7 @@
 				<left>50</left>
 				<include>ClearLogoArt</include>
 			</control>
+			<!--
 			<control type="image">
 			  <posy>990</posy>
 			  <width>200</width>
@@ -57,6 +58,8 @@
 			  <texture>flags/notation/note$INFO[ListItem.UserRating].png</texture>
 			  <aspectratio>keep</aspectratio>
 			</control>
+			-->
+			
 			<control type="image">
 				<posy>2030</posy>
 				<width>1920</width>
@@ -79,7 +82,7 @@
 				<textcolor>LowerText</textcolor>
 				<label>$VAR[PlotBox_Text]</label>
 				<scrollout>false</scrollout>
-				<visible>!Skin.HasSetting(Hide_Plot)+!Skin.HasSetting(ShowLargePlot)</visible>
+				<visible>!Control.HasFocus(2999)+!Skin.HasSetting(Hide_Plot)+!Skin.HasSetting(ShowLargePlot)</visible>
 			</control>
 			
 						<control type="group">
@@ -109,8 +112,8 @@
 			
 			<control type="image">
 				<posy>1042</posy>
-				<left>420</left>
-				<width>930</width>
+				<left>380</left>
+				<width>1010</width>
 				<height>32</height>
 				<align>center</align>
 				
@@ -122,9 +125,9 @@
 			
 
 			<control type="label">
-				<posy>1040</posy>
-				<left>430</left>
-				<width>910</width>
+				<posy>1035</posy>
+				<left>380</left>
+				<width>1010</width>
 				<height>63</height>
 				<align>center</align>
 				<font>comic24</font>

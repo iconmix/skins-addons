@@ -173,13 +173,15 @@ def CheckSaga(ItemId=None,Statique=None):
               ItemListe.setProperty('dbtype', 'movie')
               ItemListe.setProperty('SetId', str(ItemId))
               ItemListe.setProperty('PosterCollection',PosterCollection)
+              ItemListe.setProperty('Rating',str(int(item.get("vote_average"))))
+              ItemListe.setProperty('UserRating','')
               if not Statique:
                  ListeItem.append([item["file"],ItemListe,True])
               else:
                  ListeItem.append([int(item.get("release_date")[0:4]),ItemListe])
        #----------------------------BASE LOCALE ----------------------------
        
-       json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"movies": {"properties":["title","genre","year","rating","director","trailer","tagline","plot","plotoutline","originaltitle","lastplayed","playcount","writer","studio","mpaa","cast","country","imdbnumber","runtime","set","showlink","streamdetails","top250","votes","fanart","thumbnail","file","sorttitle","resume","setid","dateadded","tag","art"]} }' %(int(ItemId)))
+       json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"movies": {"properties":["title","genre","year","rating","userrating","director","trailer","tagline","plot","plotoutline","originaltitle","lastplayed","playcount","writer","studio","mpaa","cast","country","imdbnumber","runtime","set","showlink","streamdetails","top250","votes","fanart","thumbnail","file","sorttitle","resume","setid","dateadded","tag","art"]} }' %(int(ItemId)))
  
        for item in json_result.get("movies"): 
           ImdbItem.append(item.get("imdbnumber"))
@@ -230,6 +232,14 @@ def CheckSaga(ItemId=None,Statique=None):
           ItemListe.setProperty('DateSortie', '')
           ItemListe.setProperty('doublons',str(Compteur[item.get("imdbnumber")]))
           ItemListe.setProperty('PosterCollection',PosterCollection)
+          ItemListe.setProperty('Rating',str(int(item.get("rating"))))
+          UserRating=item.get("userrating")
+          if UserRating:
+             if int(UserRating)>0:
+               ItemListe.setProperty('UserRating',str(int(item.get("userrating"))))
+             else:
+               ItemListe.setProperty('UserRating','')
+          #logMsg("Rating "+str(int(item.get("rating")))+":"+str(item.get("rating")),0)
          
           if item.get("art"):
                 ItemListe.setArt( item.get("art"))
@@ -1513,7 +1523,7 @@ def getFilmsTv(ActeurType=None,Acteur=None,Statique=None):
             query_url = "https://api.themoviedb.org/3/person/%s/combined_credits?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (ActeurId["tmdb"],xbmc.getInfoLabel("System.Language").encode("utf8")) 
             json_data = requestUrlJson(query_url)
          
-            if json_data:                    
+        if json_data:                    
                   for item in json_data.get("cast"):
                      TypeVideo=str(item.get("media_type"))
                      name=""                     
@@ -2227,7 +2237,7 @@ def GetMusicFicheArtiste(Artiste=None,ArtisteId=None,Force=None):
     return save_data  
   
   
-def GetMusicFicheAlbum(AlbumId=None,Cover=None,GetArtistData=None,PlayerActif=None,Chanson=None,Force=None):
+def GetMusicFicheAlbum(AlbumId=None,Cover=None,GetArtistData=None,PlayerActif=None,Chanson=None,Force=None,IdArtiste=None):
   Donnees=[] 
   save_data={}
   albumIdBrainz=[]
@@ -2247,7 +2257,10 @@ def GetMusicFicheAlbum(AlbumId=None,Cover=None,GetArtistData=None,PlayerActif=No
         
         AlbumId=Donnees.get("albumid")
         Artiste=Donnees.get("artist")[0]
-        ArtisteId=Donnees.get("artistid")[0]
+        if not IdArtiste:          
+         ArtisteId=Donnees.get("artistid")[0]
+        else:
+          ArtisteId=IdArtiste
         AlbumLabel=remove_text_inside_brackets(Donnees.get("album"))
         GetArtistData=1
         
@@ -2267,7 +2280,11 @@ def GetMusicFicheAlbum(AlbumId=None,Cover=None,GetArtistData=None,PlayerActif=No
       Donnees = getJSON('AudioLibrary.GetAlbumDetails', '{ "albumid":%d,"properties":["artist","artistid","thumbnail"]}' %(int(AlbumId))) 
       if Donnees.get("label"): 
         AlbumLabel=remove_text_inside_brackets(Donnees.get("label"))
-        ArtisteId=Donnees.get("artistid")[0]
+       
+        if not IdArtiste:          
+         ArtisteId=Donnees.get("artistid")[0]
+        else:
+          ArtisteId=IdArtiste
         Artiste=Donnees.get("artist")[0]
         ThumbNail=Donnees.get("thumbnail")
         if ThumbNail:
@@ -2393,11 +2410,11 @@ def CheckArtisteAlbums(ArtisteId=None,Force=None,ShowProgress=None):
               ItemListe = xbmcgui.ListItem(label=item["label"],iconImage=item["thumbnail"])
               
               if not ArtisteData:                
-                AlbumData,ArtisteData=GetMusicFicheAlbum(item["albumid"],item["thumbnail"],1,None,None,Force)
+                AlbumData,ArtisteData=GetMusicFicheAlbum(item["albumid"],item["thumbnail"],1,None,None,Force,ArtisteId)
                 if ArtisteData:
                   FanartTab=[ArtisteData.get("ArtistFanart"),ArtisteData.get("ArtistFanart2"),ArtisteData.get("ArtistFanart3")]
               else:
-                AlbumData,ArtisteDataNull=GetMusicFicheAlbum(item["albumid"],item["thumbnail"],0,None,None,Force)
+                AlbumData,ArtisteDataNull=GetMusicFicheAlbum(item["albumid"],item["thumbnail"],0,None,None,Force,ArtisteId)
               if AlbumData:
                 
                 if not AlbumData.get("AlbumCover"):

@@ -16,6 +16,7 @@
 	<onunload>SetProperty(iconmixExtraFanart,,Home)</onunload>
 	<onload>SetProperty(IconMixUpdateSagas,1,Home)</onload>
 	<onload>SetProperty(IconMixVerticalNavigation,,Home)</onload>
+	
 
 	
 
@@ -107,7 +108,7 @@
 				</control>
 
 				<include>Global_ScrollOffsetLabel</include>
-				<include>Global_AddonInfo</include>
+				<include>Global_AddonInfo</include> 
 				<visible>!Skin.HasSetting(CacheFond)</visible>
 			</control>
 
@@ -125,8 +126,16 @@
 			</control>
 -->
 			<!----------------------------------------------SAGAS------------------------------------------------------------------ -->
-
+      <control type="group">
+        <visible>!Window.IsActive(502)+Control.HasFocus(2999)+!IsEmpty(Window(Home).Property(ShowFocus))+!Container(1999).OnNext+!Container(1999).OnPrevious</visible>
+         <posx>480</posx>
+    <posy>260</posy>
+    <animation type="Visible"  reversible="false">
+      <!--<effect type="slide"  end="900,0" time="300" delay="1000" />-->
+      <effect type="zoom"  center="720,400" start="0" end="100" time="500" tween="bounce" easy="out" delay="1000" />
+    </animation>
 			<include>focusboitiers</include>
+			</control>
 			<control type="button" id="2999">
 				<left>-2000</left>
 				<label>FUCK</label>
@@ -134,15 +143,22 @@
 				<onup>Control.SetFocus(3000,Container(1999).Position)</onup>
 				<ondown>SetProperty(Item1999,,Home)</ondown>
 				<onup>ActivateWindow(2003)</onup>-->
+				<onfocus>SetProperty(ShowFocus,ok,Home)</onfocus>
 				<onleft condition="StringCompare(Window(Home).Property(IconMixVerticalNavigation),horizontal)">Control.Move(1999,-1)</onleft>
 				<onright condition="StringCompare(Window(Home).Property(IconMixVerticalNavigation),horizontal)">Control.Move(1999,1)</onright>	
+				
+				<onup condition="StringCompare(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetProperty(ShowFocus,,Home)</onup>
 				<onup condition="StringCompare(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetFocus(55)</onup>
+				<ondown condition="StringCompare(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetProperty(ShowFocus,,Home)</ondown>
 				<ondown condition="StringCompare(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetFocus(55)</ondown>
+				
 				
 				<onup condition="!StringCompare(Window(Home).Property(IconMixVerticalNavigation),horizontal)">Control.Move(1999,-1)</onup>
 				<ondown condition="!StringCompare(Window(Home).Property(IconMixVerticalNavigation),horizontal)">Control.Move(1999,1)</ondown>
 				
+				<onleft condition="!StringCompare(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetProperty(ShowFocus,,Home)</onleft>
 				<onleft condition="!StringCompare(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetFocus(55)</onleft>
+				<onright condition="!StringCompare(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetProperty(ShowFocus,,Home)</onright>
 				<onright condition="!StringCompare(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetFocus(55)</onright>				
 				<onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
 				<visible>IntegerGreaterThan(Container(1999).NumItems,0)</visible>				
@@ -783,6 +799,24 @@
 
 		<!------------------------------------------------- ACTEURS et ROLES---------------------------------------->
 	<include>PanelActeurs</include>
+	<control type="group">
+	  <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
+					<effect type="slide" end="0,-835" time="0"  />
+				</animation>
+	  <posy>920</posy>
+        <left>390</left>
+        <align>center</align>
+			  <width>80</width>
+			  <height>80</height>
+	
+		 
+    	<control type="image">
+    	
+			  <texture>flags/notation/pnote$INFO[ListItem.UserRating].png</texture>
+			  <aspectratio>keep</aspectratio>
+			  <visible>!IsEmpty(ListItem.UserRating)</visible>
+	</control>
+	</control>
 
 
 	</control>
@@ -790,16 +824,13 @@
 	<include>AnimationVoletsHorizontaux</include>
 	<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
 
-	<!-- -->
-	<control type="label">
-		<label>TEXTE</label>
-		<visible>Skin.HasSetting(SagaDetailsTexte)</visible>
-	</control>
+	
+	
 <!--	--
 	<control type="label">
 	<posx>700</posx>
 
-	<label>nbepisodes:$INFO[Window(Home).Property(iconmixEpSa)][CR]poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]</label>
+	<label>IconMixSaga=$INFO[Window(Home).Property(IconMixSaga)][CR]Rating=$INFO[ListItem.Rating][CR]nbepisodes:$INFO[Window(Home).Property(iconmixEpSa)][CR]poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]</label>
 	
 	</control>
 -->

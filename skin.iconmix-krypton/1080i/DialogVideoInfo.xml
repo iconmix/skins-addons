@@ -177,8 +177,8 @@
 					</control>
 					<control type="button" id="7">
 						<include>VideoInfoButton</include>
-						<texturenofocus>buttons/button_videoextras.png</texturenofocus>
-						<texturefocus>buttons/button_videoextrasFO.png</texturefocus>
+						<texturenofocus>buttons/button_rating.png</texturenofocus>
+						<texturefocus>buttons/button_ratingFO.png</texturefocus>
 						<include>Animation_ButtonFocus</include>
 						
 					</control>
@@ -834,7 +834,7 @@
 	<!--------------------------------------------------------------------------------------------------------------->
 
 	<!-- Year and Duration -->
-		<control type="image">
+		<!--<control type="image">
 	  <posx>1125</posx>
 			  <posy>65</posy>
 			  <width>200</width>
@@ -842,12 +842,28 @@
 			  <texture>flags/notation/note$INFO[ListItem.UserRating].png</texture>
 			  <aspectratio>keep</aspectratio>
 	</control>
-		<control type="image">
-		  <posx>1200</posx>
+	-->
+	  
+	
+		 
+    	<control type="image">
+    	  
+	   <posx>1290</posx>
 		<posy>23</posy>
+        <align>center</align>
+			  <width>75</width>
+			  <height>75</height>
+    	
+			  <texture>flags/notation/pnote$INFO[ListItem.UserRating].png</texture>
+			  <aspectratio>keep</aspectratio>
+			  <visible>!String.IsEmpty(ListItem.UserRating)</visible>
+	</control>
+		<control type="image">
+		  <posx>1180</posx>
+		<posy>28</posy>
 			<visible>!IsEmpty(ListItem.Country)</visible>
-			<width>70</width>
-			<height>40</height>
+			<width>100</width>
+			<height>65</height>
 			<texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Country].png</texture>
 
 			<aspectratio aligny="center">scale</aspectratio>

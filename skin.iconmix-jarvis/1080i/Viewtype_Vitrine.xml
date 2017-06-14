@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
-	<include name="commontexture">
+	<!-- ---------------------------------------------------------------------------------------------- -->
+<include name="commontexture">
 		<top>60</top>	
 		<left>30</left>	
 		<width>250</width>
 		<height>393</height>
 	</include>
 
-	<include name="ViewType_Vitrine">
+	<!-- ---------------------------------------------------------------------------------------------- -->
+<include name="ViewType_Vitrine">
 		<!-- 3dreflect -->
 		<control type="image">
 				<top>500</top>
@@ -60,7 +62,7 @@
 								<texture background="true" fallback="DefaultThumb.png">$INFO[ListItem.Art(poster)]</texture>
 								<aspectratio scalediffuse="false">stretch</aspectratio>
 							</control>
-								<control type="image">
+					<control type="image">
 					<top>450</top>
 					<left>3</left>
 					<width>390</width>
@@ -68,8 +70,24 @@
 					<texture background="true" fallback="frames/bannerdefault.png">$INFO[ListItem.Art(banner)]</texture>							
 					<aspectratio scalediffuse="false">stretch</aspectratio>
 					<animation effect="rotate"  center="3,450" end="90"  condition="true" reversible="false">Conditional</animation>
+					<visible>SubString(ListItem.DBTYPE,set)</visible>
 				</control>
-						  
+				<control type="group">
+				  <top>450</top>
+					<left>3</left>
+					<width>390</width>
+					<height>33</height>
+				  
+					<animation effect="rotate"  center="3,450" end="90"  condition="true" reversible="false">Conditional</animation>
+				<control type="image">
+					
+					<texture background="true" fallback="frames/bannerdefaultall.png">$INFO[ListItem.Art(banner)]</texture>							
+					<aspectratio scalediffuse="false">stretch</aspectratio>
+					
+					
+					<visible>!SubString(ListItem.DBTYPE,set)</visible>
+				</control>
+				</control>
 							<control type="image">
 								<top>23</top>		
 								<width>287</width>
@@ -192,6 +210,22 @@
 					<texture background="true" fallback="frames/bannerdefault.png">$INFO[ListItem.Art(banner)]</texture>							
 					<aspectratio scalediffuse="false">stretch</aspectratio>
 					<animation effect="rotate"  center="3,450" end="90"  condition="true" reversible="false">Conditional</animation>
+					<visible>SubString(ListItem.DBTYPE,set)</visible>
+				</control>
+				<control type="group">
+				  <top>450</top>
+					<left>3</left>
+					<width>390</width>
+					<height>33</height>
+				  
+					<animation effect="rotate"  center="3,450" end="90"  condition="true" reversible="false">Conditional</animation>
+				<control type="image">					
+					<texture background="true" fallback="frames/bannerdefaultall.png">$INFO[ListItem.Art(banner)]</texture>							
+					<aspectratio scalediffuse="false">stretch</aspectratio>
+					
+					
+					<visible>!SubString(ListItem.DBTYPE,set)</visible>
+				</control>
 				</control>
 				<control type="image">
 					<top>23</top>		
