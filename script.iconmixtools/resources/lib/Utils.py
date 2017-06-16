@@ -94,7 +94,7 @@ def CheckSaga(ItemId=None,Statique=None):
        return
     
     if ItemId:
-     
+       #logMsg("ItemId = "+str(ItemId)+"/"+str(xbmc.getInfoLabel("ListItem.DBID")),0)
        try:
           dd=int(ItemId)
        except:          
@@ -108,10 +108,15 @@ def CheckSaga(ItemId=None,Statique=None):
           xbmcplugin.setContent(int(sys.argv[1]), 'movies')
           
        savepath=ADDON_DATA_PATH+"/collections/saga%s" %(ItemId)
+       #json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"movies": {"properties": [ "title","imdbnumber","art" ]} }' %(int(ItemId)))
+       json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"properties":["art"],"movies": {"properties":["title","genre","year","rating","userrating","director","trailer","tagline","plot","plotoutline","originaltitle","lastplayed","playcount","writer","studio","mpaa","cast","country","imdbnumber","runtime","set","showlink","streamdetails","top250","votes","fanart","thumbnail","file","sorttitle","resume","setid","dateadded","tag","art"]} }' %(int(ItemId)))
+       if json_result:
+         NbKodi=int(json_result.get("limits").get("total"))
+         
               #----------------------------BASE TMDB ----------------------------       
        if not xbmcvfs.exists(savepath):
         #création du fichier de la saga !!!
-         ArrayCollection=getsagaitem(ItemId,1)
+         ArrayCollection=getsagaitem(ItemId,1,None,None,json_result)
        else : 
         #lecture dans le fichier existant
          with open(savepath) as data_file:
@@ -127,7 +132,7 @@ def CheckSaga(ItemId=None,Statique=None):
        
           if NbFilmsSaga and NbKodi and NbTmdb:
               if NbFilmsSaga!=NbKodi: # or NbKodi<NbTmdb: #mise a jour !!! 
-                 ArrayCollection=getsagaitem(ItemId,1,ArrayCollection.get("kodicollection"),ArrayCollection.get("tmdbid"))
+                 ArrayCollection=getsagaitem(ItemId,1,ArrayCollection.get("kodicollection"),ArrayCollection.get("tmdbid"),json_result)
                  if ArrayCollection:
                      NbFilmsSaga=ArrayCollection.get("kodi")
                      NbManquant=ArrayCollection.get("manquant")
@@ -181,7 +186,7 @@ def CheckSaga(ItemId=None,Statique=None):
                  ListeItem.append([int(item.get("release_date")[0:4]),ItemListe])
        #----------------------------BASE LOCALE ----------------------------
        
-       json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"movies": {"properties":["title","genre","year","rating","userrating","director","trailer","tagline","plot","plotoutline","originaltitle","lastplayed","playcount","writer","studio","mpaa","cast","country","imdbnumber","runtime","set","showlink","streamdetails","top250","votes","fanart","thumbnail","file","sorttitle","resume","setid","dateadded","tag","art"]} }' %(int(ItemId)))
+       #json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"movies": {"properties":["title","genre","year","rating","userrating","director","trailer","tagline","plot","plotoutline","originaltitle","lastplayed","playcount","writer","studio","mpaa","cast","country","imdbnumber","runtime","set","showlink","streamdetails","top250","votes","fanart","thumbnail","file","sorttitle","resume","setid","dateadded","tag","art"]} }' %(int(ItemId)))
  
        for item in json_result.get("movies"): 
           ImdbItem.append(item.get("imdbnumber"))
@@ -290,15 +295,20 @@ def CheckSaga(ItemId=None,Statique=None):
           
           
 def getdatafanart(donnees=None):
-  
+  pardefaut=None
   langue=KODILANGUAGE.lower()[0:2]
   if donnees:
+     
      for item in donnees:
+       if item.get("lang")=="en":
+        pardefaut=item.get("url")   
        if item.get("lang")==langue:  
          return item.get("url")
-     return donnees[0].get("url")
+     return pardefaut
   
-  return None
+  return None  
+    
+   
   
 
          
@@ -332,7 +342,7 @@ def getsagaartworks(IDCollection=None)   :
   
 
     
-def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None):
+def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None,json_result=None):
   episodesDB= ""
   allArt=None
   AllMovies= []
@@ -361,15 +371,17 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None):
   check_thumb=None
   check_discart=None  
   
-  savepath=ADDON_DATA_PATH+"/collections/saga%s" %(ItemIdxx)
   
   if ItemIdxx : 
+      savepath=ADDON_DATA_PATH+"/collections/saga%s" %(ItemIdxx)
       if ShowBusy: xbmc.executebuiltin( "ActivateWindow(busydialog)" ) 
-      json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"movies": {"properties": [ "title","imdbnumber","art" ]} }' %(int(ItemIdxx)))
+      if not json_result:
+        json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"movies": {"properties": [ "title","imdbnumber","art" ]} }' %(int(ItemIdxx)))
       if json_result and json_result.get("movies"): 
         allMovies = json_result.get("movies")
         allArt=json_result.get("art")
         if allArt:
+          ArrayCollection["artworks"]=allArt
           check_clearlogo=allArt.get("clearlogo")
           check_clearart=allArt.get("clearart")
           check_banner=allArt.get("banner")
@@ -489,21 +501,30 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None):
                                   logMsg("VideoLibrary.SetMovieSetDetails : %d impossible = " %(int(ItemIdxx)) + str(MJSAGA),0 )
                                 
 
-                            if NbFilmsSaga>0: 
-                               
-                                 ArrayCollection["saga"]=json_data.get("name")
-                                 ArrayCollection["manquant"]=len(ManquantM)
-                                 ArrayCollection["missing"]=ManquantM
-                            else :
-                                
-                                 ArrayCollection["saga"]=xbmc.getInfoLabel("ListItem.Label")
-                                 ArrayCollection["manquant"]=0
-                                 ArrayCollection["missing"]=[]
-                            if SETTING("cachesaga")=="false":
-                                   erreur=DirStru(savepath)
-                                   with io.open(savepath, 'w+', encoding='utf8') as outfile:
-                                       str_ = json.dumps(ArrayCollection,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
-                                       outfile.write(to_unicode(str_))
+                if NbFilmsSaga>0: 
+                   
+                     ArrayCollection["saga"]=json_data.get("name")
+                     ArrayCollection["manquant"]=len(ManquantM)
+                     ArrayCollection["missing"]=ManquantM
+                else :
+                    
+                     ArrayCollection["saga"]=xbmc.getInfoLabel("ListItem.Label")
+                     ArrayCollection["commentaire"]="introuvable sur TMDB"
+                     ArrayCollection["manquant"]=0
+                     ArrayCollection["missing"]=[]
+                     ArrayCollection["kodi"]=len(KodiCollection)
+                     ArrayCollection["kodicollection"]=KodiCollection
+                     ArrayCollection["tmdbid"]=None
+                     ArrayCollection["tmdb"]=len(KodiCollection)
+                     ArrayCollection["poster"]=None                     
+                     ArrayCollection["artworks"]={}
+                     
+                     
+                if SETTING("cachesaga")=="false":
+                       erreur=DirStru(savepath)
+                       with io.open(savepath, 'w+', encoding='utf8') as outfile:
+                           str_ = json.dumps(ArrayCollection,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
+                           outfile.write(to_unicode(str_))
                               
       if ShowBusy: xbmc.executebuiltin( "Dialog.Close(busydialog)" )                           
             
