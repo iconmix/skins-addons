@@ -80,7 +80,6 @@ class Main:
              if action == "GETSAGAFANART":  
                 Id=params.get("id",None)
                 if Id: Id = Id[0]   
-                #utils.logMsg("GETSAGAFANART :"+str(Id),0)            
                 utils.getSagaFanarts()
                 return  
                               
@@ -155,7 +154,6 @@ class Main:
            self.quelcache = params.get( 'cache', False )
            dialogC = xbmcgui.Dialog()
            ret=dialogC.yesno("ICONMIXTOOLS CACHE !!!", __language__( 32602 )," ",str(self.quelcache).upper()) #-- Show a dialog 'YES/NO'.
-           utils.logMsg("Supression de "+str(self.quelcache)+"-->"+str(ret),0)
            if ret>0:
              utils.vidercache(self.quelcache)
  
@@ -180,19 +178,13 @@ class Main:
             DBTYPEX=xbmc.getInfoLabel("ListItem.DBTYPE")
             if xbmc.getCondVisibility("Container.Content(artists)"): 
                      DBTYPEX="artist"
-            #utils.logMsg("TYPE = "+str(DBTYPEX)+":"+str(self.mettreajour),0)
             if self.mettreajour and ( DBTYPEX=="set" or DBTYPEX=="tvshow" or DBTYPEX=="artist" or saga!=""):
                    if saga=="":
                      Unique="ok"
                    else:
                      Unique=""
                    
-                   """  
-                   if DBTYPEX=="set": saga="1"
-                    
-                   else: 
-                     if saga=="2" : saga=""
-                   """   
+                 
                    dialog = xbmcgui.Dialog()
                    
                    if DBTYPEX=="set": 
@@ -249,7 +241,6 @@ class Main:
                      if not TMDBID and not IMDBID:
                          json_result = utils.getJSON('VideoLibrary.GetMovieDetails', '{ "movieid":%d,"properties":["imdbnumber"] }' %(int(xbmc.getInfoLabel("Container(1999).ListItem.DBID"))))                         
                          IMDBID=json_result.get("imdbnumber")
-                         #utils.logMsg('Liste trailers pour : ' + str(IMDBID)+"/"+str(json_result),0)       
                          
                      TypeVideo='movie'
                      Titre=xbmc.getInfoLabel("Container(1999).ListItem.Label").decode('utf-8','ignore')
@@ -388,7 +379,7 @@ class Main:
         
         
         
-       # utils.logMsg('Service en cours..',0)
+        utils.logMsg('Service en cours..',0)
         while not self._stop:
             #-------------------------- MUSIQUE ---------------------------------
             #EN LECTURE
@@ -407,11 +398,9 @@ class Main:
                     ListeFanarts=self.GetControl(self.windowmusicvis,2996)
                   self.vide_artisteplayer()
                   self.vide_albumplayer()
-                  #utils.logMsg("Album en cours :"+str(self.selecteditemAlbumPlayer)+"de "+str(self.selecteditemArtistPlayer),0)
                   try:
                        AlbumData,ArtisteData=utils.GetMusicFicheAlbum(None,None,1,1,None)
                        if AlbumData:
-                           utils.logMsg("Album en cours :"+str(AlbumData)+"de "+str(ArtisteData),0)
                            if AlbumData.get("AlbumCover"): self.windowhome.setProperty("AlbumCoverPlayer",AlbumData.get("AlbumCover"))
                            if AlbumData.get("AlbumBack"): self.windowhome.setProperty("AlbumBackPlayer",AlbumData.get("AlbumBack"))
                            if AlbumData.get("AlbumCd"):
@@ -427,7 +416,6 @@ class Main:
                                 TabFanarts=[]
                                 if Fanarts:
                                     for Item in Fanarts2:
-                                        #logMsg("getSagaItemPathListe ="+str(Item),0)
                                            ItemListe=xbmcgui.ListItem(label="extrafanart",iconImage=Item)
                                            ItemListe.setInfo("pictures", {"title": "extrafanart","picturepath": Item}) 
                                            TabFanarts.append(ItemListe)
@@ -463,7 +451,6 @@ class Main:
                 self.windowmusicnav = xbmcgui.Window(10502) # mymusicnav.xml
                 ListeSaga=self.GetControl(self.windowmusicnav,1999)
                 ListeFanarts=self.GetControl(self.windowmusicnav,2998)
-                #utils.logMsg("control.getid : "+str(xbmcgui.Control.getId()),0)
                 
                 
                 #if ((self.DBTYPE=="artist" or xbmc.getCondVisibility("Container.Content(artists)")) and Music1999==0) :
@@ -487,7 +474,6 @@ class Main:
                            ListeItemx,ArtisteData=utils.CheckArtisteAlbums(ArtisteId,None,1)
                         if self.DBTYPE=="genres":
                            ListeItemx=utils.CheckGenres(LabelMusic)
-                        #utils.logMsg("utils.CheckArtisteAlbums : "+str(len(ListeItemx)),0)
                       except:
                         ListeItemx=None                      
                       if ListeItemx:
@@ -500,7 +486,6 @@ class Main:
                           TabFanarts=[]
                           if Fanarts:
                               for Item in Fanarts:
-                                  #logMsg("getSagaItemPathListe ="+str(Item),0)
                                      ItemListe=xbmcgui.ListItem(label="extrafanart",iconImage=Item)
                                      ItemListe.setInfo("pictures", {"title": "extrafanart","picturepath": Item}) 
                                      TabFanarts.append(ItemListe)
@@ -513,7 +498,6 @@ class Main:
                    
                 #if self.DBTYPE=="album" or xbmc.getCondVisibility("Container.Content(albums)") or self.DBTYPE=="song" or xbmc.getCondVisibility("Container.Content(songs)"): 
                 if self.DBTYPE=="albums"  or self.DBTYPE=="songs": 
-                   #utils.logMsg("GetMusicFicheAlbum : "+str(self.selecteditemMusic)+"/"+str(xbmc.getInfoLabel("Container.Content")),0)
                    self.vide_album()
                    ListeSaga=self.GetControl(self.windowmusicnav,1999)
                    if ListeSaga:
@@ -545,7 +529,6 @@ class Main:
                               TabFanarts=[]
                               if Fanarts:
                                   for Item in Fanarts:
-                                      #logMsg("getSagaItemPathListe ="+str(Item),0)
                                          ItemListe=xbmcgui.ListItem(label="extrafanart",iconImage=Item)
                                          ItemListe.setInfo("pictures", {"title": "extrafanart","picturepath": Item}) 
                                          TabFanarts.append(ItemListe)
@@ -582,7 +565,6 @@ class Main:
                           self.DBTYPE=xbmc.getInfoLabel("ListItem.DBTYPE")
                         
                           
-                        #utils.logMsg("Control.HasFocus(8889) : "+str(self.LABEL8889)+"/"+str(self.selecteditem8889)+"/"+str(self.previousitem8889),0)
                         self.previousitem8889 = self.selecteditem8889
                         self.windowhome.clearProperty('Actorbiographie')
                         self.windowhome.clearProperty('Actornaissance')
@@ -592,7 +574,6 @@ class Main:
                         self.windowhome.clearProperty('ActorNomReel')
                         InfoDate=None
                         Lieu=None
-                        #utils.logMsg("Info : "+str(Actif5051),0)
                         if Actif5051!="oui": 
                            xbmc.executebuiltin( "ActivateWindow(busydialog)" ) 
                         #if unidecode(self.LABEL8889):   
@@ -628,7 +609,6 @@ class Main:
                             xbmc.executebuiltin( "Dialog.Close(busydialog)" )
                         
                         if not InfoDate and not Lieu:
-                                 #utils.logMsg("Pas d'info !!! ",0)
                                  if Actif5051!="oui": 
                                      dialog=xbmcgui.Dialog()
                                      dialog.notification('IconMixTools', __language__( 32584 )+self.LABEL8889, "acteurs/arfffff.png", 3000)
@@ -664,7 +644,6 @@ class Main:
                     if MiseAjour!="" :
                         self.windowhome.setProperty('IconMixUpdating','1')                     
                         self.DBTYPEOK= self.DBTYPE!="set" and self.DBTYPE!="tvshow" and self.DBTYPE!="season" and self.DBTYPE!="addon" and self.DBTYPE!="artist"
-                        #utils.logMsg('backend DBTYPE='+self.DBTYPE,0)                                        
                         
                         self.windowhome.clearProperty('DurationTools')                   
                         self.windowhome.clearProperty('DurationToolsEnd')
@@ -705,9 +684,7 @@ class Main:
                                  
                                 if ListeActeurs:
                                   ListeItemx=utils.getCasting(self.DBTYPE,self.selecteditem,1)
-                                 # utils.logMsg('utils.getCastingList ->'+str(len(ListeItemx)),0)
                                   ListeActeurs.reset()
-                                 # utils.logMsg('ListeActeurs reset ->'+str(ListeActeurs.size()),0)                              
                                   if ListeItemx: 
                                        for itemX in ListeItemx:
                                             #ListeActeurs.setStaticContent(ListeItemx)
@@ -853,14 +830,12 @@ class Main:
           IMDBID=xbmc.getInfoLabel("ListItem.IMDBNumber")
          
           if (not self.duration or self.duration<10) and IMDBID :
-              #utils.logMsg('GetRuntime selfduration: '+ str(self.duration) +' minutes'+" movie =" +str(xbmc.getInfoLabel("ListItem.DBID"))+" type =" +str(xbmc.getInfoLabel("ListItem.DBTYPE"))+" imdb="+str(xbmc.getInfoLabel("ListItem.IMDBNumber")),0)
               if typeId.find('episode')==-1: self.duration=utils.getRuntime(IMDBID,typeId)
               #else : self.duration=utils.getRuntime("tt"+IMDBID)
               if self.duration and typeId :                    
                       #mise à jour de la durée dans la base pour éviter de renouveller l'opération !
                       utils.setJSON('VideoLibrary.Set%sDetails' %(typeId.encode("utf-8")),'{"%sid":%d,"runtime":%d}' %(typeId.encode("utf-8"),int(itemId),int(self.duration)*60))
                        #http://127.0.0.1:8080/jsonrpc?request={%22jsonrpc%22:%222.0%22,%22method%22:%22VideoLibrary.SetMovieDetails%22,%22params%22:{%22movieid%22:37,%22runtime%22:111},%22id%22:1}
-                      #utils.logMsg('Mise a jour : %d' %( int(self.duration)*60) +' minutes'+" movie =" +str(itemId)+" type =" +typeId+"imdb="+IMDBID,0)
                       
         
         if self.duration :
@@ -879,11 +854,10 @@ class Main:
               self.windowhome.clearProperty('DurationTools')
          else:
            self.windowhome.setProperty('DurationTools', self.duration)
-           #utils.logMsg('backend time : %s.- now: %s' % (self.duration,xxx),0)
          
 
            		   
 
 if (__name__ == "__main__"):
     Main()
-#utils.logMsg('script finished.')
+    utils.logMsg('script finished.')
