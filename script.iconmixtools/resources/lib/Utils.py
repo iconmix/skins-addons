@@ -314,6 +314,7 @@ def getsagaartworks(IDCollection=None)   :
   ArtWorks={}
   if IDCollection:
     UrlFanartTv="http://webservice.fanart.tv/v3/movies/%d?api_key=769f122ee8aba06f4a513830295f2bc0" %(int(IDCollection)) #infos completes
+  
     json_data = requestUrlJson(UrlFanartTv)  
     
     if json_data:      
@@ -1795,7 +1796,13 @@ def vidercache(quelcache=None):
 
 # --------------------------------------------------------------------------------------------------
 def requestUrlJson(query_url):
-  reponse = urllib.urlopen(query_url)
+  #logMsg("requestUrlJson :"+str(query_url),0)
+  try:
+    reponse = urllib.urlopen(query_url)
+    #reponse = urllib.request.urlopen(query_url, None, 2)
+  except:
+    reponse=None
+  
   json_data=None
   if reponse:
         try:
