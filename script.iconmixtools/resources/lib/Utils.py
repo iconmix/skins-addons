@@ -371,19 +371,28 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None,js
       savepath=ADDON_DATA_PATH+"/collections/saga%s" %(ItemIdxx)
       if ShowBusy: xbmc.executebuiltin( "ActivateWindow(busydialog)" ) 
       if not json_result:
-        json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"movies": {"properties": [ "title","imdbnumber","art" ]} }' %(int(ItemIdxx)))
+        json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"properties":["art"],"movies": {"properties": [ "title","imdbnumber","art" ]} }' %(int(ItemIdxx)))
       if json_result and json_result.get("movies"): 
         allMovies = json_result.get("movies")
         allArt=json_result.get("art")
         if allArt:
-          ArrayCollection["artworks"]=allArt
-          check_clearlogo=allArt.get("clearlogo")
-          check_clearart=allArt.get("clearart")
-          check_banner=allArt.get("banner")
-          check_poster=allArt.get("poster")
-          check_fanart=allArt.get("fanart")
-          check_thumb=allArt.get("thumb")
-          check_discart=allArt.get("discart")                  
+          
+          #ArrayCollection["artworks"]=allArt
+          if allArt.get("clearlogo"):
+            check_clearlogo=urllib.unquote(allArt.get("clearlogo").replace("image://","")[:-1])
+          if allArt.get("clearart"):
+            check_clearart=urllib.unquote(allArt.get("clearart").replace("image://","")[:-1])
+          if allArt.get("banner"):
+            check_banner=urllib.unquote(allArt.get("banner").replace("image://","")[:-1])
+          if allArt.get("poster"):
+            check_poster=urllib.unquote(allArt.get("poster").replace("image://","")[:-1])
+          if allArt.get("fanart"):
+            check_fanart=urllib.unquote(allArt.get("fanart").replace("image://","")[:-1])
+          if allArt.get("thumb"):
+            check_thumb=urllib.unquote(allArt.get("thumb").replace("image://","")[:-1])
+          if allArt.get("discart"):
+            check_discart=urllib.unquote(allArt.get("discart").replace("image://","")[:-1])   
+          ArrayCollection["artworks"]={"logo":check_clearlogo,"clearart":check_clearart,"banner":check_banner,"poster":check_poster,"fanart":check_fanart,"thumb":check_thumb,"discart":check_discart}               
 
         if allMovies :
           if AKodiCollection:
@@ -468,7 +477,10 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None,js
                               ArtWorks=getsagaartworks(IDcollection)
                             else:
                               ArtWorks=None
-                            ArrayCollection["artworks"]=ArtWorks
+                            if ArtWorks:
+                              ArrayCollection["artworks"]=ArtWorks
+                            else:
+                              ArtWorks=ArrayCollection.get("artworks")
                                   
                             #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.SetMovieSetDetails","params":{"setid":38,"art":{"poster":"http://image.tmdb.org/t/p/original/zrApSsUX9i0qVntcCD0Pp55TdCy.jpg"}},"id":1}
                             if KODI_VERSION>=17 and ArtWorks and  SETTING("updatesagaposter")=="true": 
@@ -548,7 +560,7 @@ def UpdateSagas(Une=None,Toutes=None):
             
             #if Toutes or not os.path.exists(savepath) and ItemId: getsagaitem(ItemId.encode('utf8'),1)
             if Toutes or not xbmcvfs.exists(savepath) and ItemId: 
-               getsagaitem(ItemId)   
+               getsagaitem(ItemId,None,None,None,None)   
                Titre=xbmc.getLocalizedString( 31924 )+" : [I]"+Sagas.get("label")+"[/I]"
             Progres=(Compteur*100)/NbItems
             Compteur=Compteur+1
@@ -557,7 +569,7 @@ def UpdateSagas(Une=None,Toutes=None):
             if dp.iscanceled(): break
        dp.close()  
      else :
-          getsagaitem(str(Une),1)        
+          getsagaitem(str(Une),1,None,None,None)        
             
      
      
@@ -691,7 +703,7 @@ def gettvartworks(IDCollection=None)   :
       
       
       return ArtWorks,ArtWorkSeason
-  return None 
+  return None,None 
    
 def UpdateSeries(Une=None,Toutes=None):
      ItemId=0
@@ -773,7 +785,6 @@ def getallepisodes(IdKodi=None,TvDbId=None,savepath=None,NbKodi=None,ShowBusy=No
          ArrayCollection["dateecheance"]=nowX.strftime('%Y-%m-%d')
          ArrayCollection["v5"]="ok"
          TotalSaisons={}
-         ArtWorkSaisons={}
          ArtWorkSerie,ArtWorkSeason=gettvartworks(TvDbId)
          if ArtWorkSerie:        
             ArrayCollection["artworks"]=ArtWorkSerie 
@@ -1633,6 +1644,7 @@ def getTrailer(ID=None,DbType=None):
           if Donnees:
                cc=0
                for Item in Donnees:
+                    Item["sizenull"]=""
                     if Item.get("site")=="YouTube":
                          Item["position"]=str(cc)                         
                          ListeTrailer.append(Item)
@@ -1797,8 +1809,11 @@ def vidercache(quelcache=None):
 # --------------------------------------------------------------------------------------------------
 def requestUrlJson(query_url):
   #logMsg("requestUrlJson :"+str(query_url),0)
+  
+  req = urllib2.Request(query_url) 
+  
   try:
-    reponse = urllib.urlopen(query_url)
+    reponse = urllib2.urlopen(req, timeout = 1)
     #reponse = urllib.request.urlopen(query_url, None, 2)
   except:
     reponse=None

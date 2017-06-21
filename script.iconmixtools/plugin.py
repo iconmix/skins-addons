@@ -213,6 +213,7 @@ class Main:
                     if DBTYPEX=="artist": utils.UpdateArtistes(xbmc.getInfoLabel("ListItem.DBID"))
                          
             if self.trailer :
+                self.windowhome.setProperty('FenetreListeChoix','1')
                 dialog=xbmcgui.Dialog()
                 dialog.notification('IconMixTools', __language__( 32508 ), "sablier.gif",100,False) 
                 ActeursBio=""
@@ -272,11 +273,11 @@ class Main:
                 if TMDBID!='' :                    
                      ListeTrailer=utils.getTrailer(TMDBID,TypeVideo)
                      if ActeursBio=="non" and str(xbmc.getInfoLabel("Container(1999).ListItem.Property(DBID)"))!="": 
-                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(1999).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"<","key":"KODI","name":">-","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(1999).ListItem.Label")+" [/B][/I][/COLOR]","type":"KODI"})
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(1999).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":" ","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(1999).ListItem.Label").decode("utf8")+" [/B][/I][/COLOR]","type":"KODI"})
                      if ActeursBio=="noninf" and str(xbmc.getInfoLabel("Container(5002).ListItem.Property(DBID)"))!="": 
-                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5002).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"<","key":"KODI","name":">-","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(5002).ListItem.Label")+" [/B][/I][/COLOR]","type":"KODI"})
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5002).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":" ","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(5002).ListItem.Label").decode("utf8")+" [/B][/I][/COLOR]","type":"KODI"})
                      if ActeursBio=="" and str(xbmc.getInfoLabel("Container(5051).ListItem.Property(DBID)"))!="": 
-                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5051).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"<","key":"KODI","name":">-","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(5051).ListItem.Label")+" [/B][/I][/COLOR]","type":"KODI"})
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5051).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":" ","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(5051).ListItem.Label").decode("utf8")+" [/B][/I][/COLOR]","type":"KODI"})
                      
                 
                 
@@ -285,9 +286,9 @@ class Main:
                     ListeNomTrailer=[]
                     for Item in  ListeTrailer:
                          try: 
-                              ListeNomTrailer.append(utils.try_decode(Item["name"])+" ("+str(Item["size"])+")"+" -"+str(Item["iso_3166_1"]))
+                              ListeNomTrailer.append(utils.try_decode(Item["name"])+" ("+str(Item["size"])+")"+" "+str(Item["iso_3166_1"]))
                          except:
-                              ListeNomTrailer.append(str(Item["type"])+" ("+str(Item["size"])+")"+" -"+str(Item["iso_3166_1"]))
+                              ListeNomTrailer.append(str(Item["type"])+" ("+Item.get("size")+")"+" "+str(Item["iso_3166_1"]))
                               
                     if len(ListeNomTrailer)>0:
                           dialogC = xbmcgui.Dialog()
@@ -298,7 +299,7 @@ class Main:
                               if str(ListeTrailer[ret]["key"])!="KODI":
                                  xbmc.executebuiltin('PlayMedia(plugin://plugin.video.youtube/play/?video_id=%s,0)' %(ListeTrailer[ret]["key"]))
                               else:
-                                  xbmc.executebuiltin('PlayMedia(%s,0)' %(ListeTrailer[ret]["id"]))
+                                  xbmc.executebuiltin('PlayMedia("'+ListeTrailer[ret]["id"]+'",0)' )
                           else:
                               if  ActeursBio=="" :  
                                    self.windowhome.setProperty('ActeurVideoReset','')
@@ -312,6 +313,7 @@ class Main:
                 else: 
                     dialog=xbmcgui.Dialog()
                     dialog.notification('IconMixTools', Titre+": "+__language__( 32506 ), "acteurs/arfffff.png", 3000)
+                self.windowhome.setProperty('FenetreListeChoix','')
                     
             if self.setview:
                  content_type = utils.VueActuelle()
@@ -824,6 +826,7 @@ class Main:
     def display_duration(self):
     #twolaw code
         xxx="null"
+        
         if not xbmc.getCondVisibility("Window.IsVisible(10502)"):
           typeId=self.DBTYPE
           itemId=self.selecteditem
@@ -832,9 +835,13 @@ class Main:
           if (not self.duration or self.duration<10) and IMDBID :
               if typeId.find('episode')==-1: self.duration=utils.getRuntime(IMDBID,typeId)
               #else : self.duration=utils.getRuntime("tt"+IMDBID)
-              if self.duration and typeId :                    
+              utils.logMsg("DEBUG : "+str(self.duration)+'/'+str(typeId)+'/'+str(itemId),0)
+              if self.duration and typeId and itemId:                    
                       #mise à jour de la durée dans la base pour éviter de renouveller l'opération !
-                      utils.setJSON('VideoLibrary.Set%sDetails' %(typeId.encode("utf-8")),'{"%sid":%d,"runtime":%d}' %(typeId.encode("utf-8"),int(itemId),int(self.duration)*60))
+                      try:
+                        utils.setJSON('VideoLibrary.Set%sDetails' %(typeId.encode("utf-8")),'{"%sid":%d,"runtime":%d}' %(typeId.encode("utf-8"),int(itemId),int(self.duration)*60))
+                      except:
+                        self.duration=None
                        #http://127.0.0.1:8080/jsonrpc?request={%22jsonrpc%22:%222.0%22,%22method%22:%22VideoLibrary.SetMovieDetails%22,%22params%22:{%22movieid%22:37,%22runtime%22:111},%22id%22:1}
                       
         
