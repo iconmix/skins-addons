@@ -15,7 +15,7 @@
 		<control type="group">
 			<include condition="!Window.IsActive(home)">OtherPos</include>
 			<include condition="Window.IsActive(home)">HomePos</include>
-			<visible>!Window.IsActive(visualisation) + String.IsEmpty(Window(videos).Property(PlayingBackgroundMedia))</visible>
+			<visible>!Window.IsActive(visualisation) + IsEmpty(Window(videos).Property(PlayingBackgroundMedia))</visible>
 			
 			<control type="group" id="9904">				
 				<visible>Skin.HasSetting(MediaOverlay)</visible>
@@ -43,7 +43,7 @@
 					<width>220</width>
 					<height>150</height>
 					<include>Animation_SpinningCD</include>
-					<visible>Player.HasAudio  + String.IsEmpty(Player.Art(thumb))</visible>
+					<visible>Player.HasAudio  + IsEmpty(Player.Art(thumb))</visible>
 				</control>
 				-->
 				<control type="label" id="1113">
@@ -54,7 +54,7 @@
 				<control type="group">
 				  <posx>-10</posx>
 				  <height>200</height>
-				  <!--<animation effect="slide" end="-70" time="840" condition="String.IsEmpty(Control.GetLabel(1113))">Conditional</animation>-->
+				  <!--<animation effect="slide" end="-70" time="840" condition="IsEmpty(Control.GetLabel(1113))">Conditional</animation>-->
 				  <control type="image">
 					<posx>25</posx>
 					<posy>-22</posy>

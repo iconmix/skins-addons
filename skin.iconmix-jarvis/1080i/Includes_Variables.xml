@@ -120,7 +120,7 @@
 			<value></value>
 		</variable>
 		<variable name="contentPanelActeurs">
-			<value condition="[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..)">plugin://script.iconmixtools/?action=getcast&casttype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]</value>
+			<value condition="[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..,left)">plugin://script.iconmixtools/?action=getcast&casttype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]</value>
 			<value></value>
 		</variable>
 		<variable name="ActeursContent">
@@ -796,6 +796,7 @@
 		<value>$INFO[ListItem.Icon]</value>
 	</variable>
 	<variable name="bandeauactreal">
+	  <value condition="Control.HasFocus(2999)">$INFO[ListItem.Label]</value>
 		<value condition="Container.Content(actors)">$LOCALIZE[344]</value>
 		<value condition="Container.Content(directors)">$LOCALIZE[20348]</value>
 	</variable>

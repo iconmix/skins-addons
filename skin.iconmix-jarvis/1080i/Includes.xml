@@ -676,7 +676,7 @@
         <effect type="slide"  start="0,0" end="450,0" time="1" delay="1" reversible="false"/>
         <effect type="fade"  start="0" end="100" time="100" delay="1" reversible="false"/>
       </animation>
-      <visible>[[[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[StringCompare(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..)</visible>
+      <visible>[[[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[StringCompare(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..,left)</visible>
 
 
       <control type="image"> <!--- CADRE DES ACTEURS DEFILANTS---->
@@ -738,7 +738,7 @@
       <align>left</align>
       <itemgap>1</itemgap>
       <orientation>horizontal</orientation>
-      <visible>[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..)</visible>
+      <visible>[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..,left)</visible>
       <autoscroll delay="4000" repeat="5000" time="5000">!Control.HasFocus(1998)+!Control.HasFocus(5051)+!IsEmpty(Window(Home).Property(ActeurVideoReset))</autoscroll>-->
       <pagecontrol>60</pagecontrol>
       <!-- <content>$VAR[contentPanelActeurs]</content> -->
@@ -942,7 +942,7 @@
           <height>60</height>
           <texture>acteurs/films.png</texture>
           <aspectratio>keep</aspectratio>
-          <visible>StringCompare(Container(5051).ListItem.Property(TypeVideo),movie)</visible>
+          <visible>StringCompare(Container(5051).ListItem.Property(dbtype),movie)</visible>
         </control>
         <control type="image">
           <top>-2</top>
@@ -951,7 +951,7 @@
           <align>left</align>
           <texture>acteurs/series.png</texture>
           <aspectratio>keep</aspectratio>
-          <visible>!StringCompare(Container(5051).ListItem.Property(TypeVideo),movie)</visible>
+          <visible>!StringCompare(Container(5051).ListItem.Property(dbtype),movie)</visible>
         </control>
       </control>
 
@@ -1187,7 +1187,7 @@
       <height>50</height>
       <texture>acteurs/films.png</texture>
       <aspectratio>keep</aspectratio>
-      <visible>StringCompare(ListItem.Property(TypeVideo),movie)</visible>
+      <visible>StringCompare(ListItem.Property(dbtype),movie)</visible>
     </control>
     <control type="image">
       <posy>-10</posy>
@@ -1195,7 +1195,7 @@
       <height>50</height>
       <texture>acteurs/series.png</texture>
       <aspectratio>keep</aspectratio>
-      <visible>!StringCompare(ListItem.Property(TypeVideo),movie)</visible>
+      <visible>!StringCompare(ListItem.Property(dbtype),movie)</visible>
     </control>
   </control>
 </include>
@@ -1330,7 +1330,7 @@
         <height>50</height>
         <texture>acteurs/films.png</texture>
         <aspectratio>keep</aspectratio>
-        <visible>StringCompare(ListItem.Property(TypeVideo),movie)+Control.IsVisible(5055)</visible>
+        <visible>StringCompare(ListItem.Property(dbtype),movie)+Control.IsVisible(5055)</visible>
       </control>
       <control type="image">
         <posy>-10</posy>
@@ -1338,7 +1338,7 @@
         <height>50</height>
         <texture>acteurs/series.png</texture>
         <aspectratio>keep</aspectratio>
-        <visible>!StringCompare(ListItem.Property(TypeVideo),movie)+!Control.IsVisible(5055)</visible>
+        <visible>!StringCompare(ListItem.Property(dbtype),movie)+!Control.IsVisible(5055)</visible>
       </control>
     </control>
 
@@ -1403,7 +1403,7 @@
         <height>50</height>
         <texture>acteurs/films.png</texture>
         <aspectratio>keep</aspectratio>
-        <visible>StringCompare(ListItem.Property(TypeVideo),movie)+Control.IsVisible(5055)</visible>
+        <visible>StringCompare(ListItem.Property(dbtype),movie)+Control.IsVisible(5055)</visible>
         <visible>!Control.HasFocus(5051)+!Control.HasFocus(505)</visible>
       </control>
       <control type="image">
@@ -1412,7 +1412,7 @@
         <height>50</height>
         <texture>acteurs/series.png</texture>
         <aspectratio>keep</aspectratio>
-        <visible>!StringCompare(ListItem.Property(TypeVideo),movie)+!Control.IsVisible(5055)</visible>
+        <visible>!StringCompare(ListItem.Property(dbtype),movie)+!Control.IsVisible(5055)</visible>
         <visible>!Control.HasFocus(5051)+!Control.HasFocus(505)</visible>
       </control>
 
@@ -3263,26 +3263,37 @@
         
       </control>
       <control type="group">
-					<visible>!IsEmpty(Container(1999).ListItem.Property(Rating))</visible>
+					<visible>!IsEmpty(Container(1999).ListItem.Property(Rating))+!StringCompare(Container(1999).ListItem.Property(Rating),0)</visible>
 					<top>18</top>
         <left>140</left>
 					<width>112</width>
 					<height>80</height>
 					<control type="image">
-						<include>MediaFlagsVarsSquare</include>
-						<texture>Star.png</texture>
-						<aspectratio>stretch</aspectratio>
-						<colordiffuse>RatingStarDiffuse</colordiffuse>
-					</control>
-					<control type="label">
-						<posy>15</posy>
-						<include>MediaFlagsVarsSquare</include>
-						<align>center</align>
-						<aligny>center</aligny>
-						<label>$INFO[Container(1999).ListItem.Property(Rating)]</label>
-						<textcolor>yellow</textcolor>
-						<font>METF_StarRating</font>
-					</control>
+          <top>1</top>
+          <include>MediaFlagsVarsSquare</include>
+          <!-- <texture>Star.png</texture> -->
+          <texture>flags/notation/notefilm.png</texture>
+          <aspectratio>stretch</aspectratio>
+          <visible>StringCompare(Container(1999).ListItem.DBTYPE,movie)|StringCompare(Container(1999).ListItem.DBTYPE,set)|StringCompare(Container(1999).ListItem.Property(dbtype),movie)</visible>
+          
+        </control>
+         <control type="image">
+          <include>MediaFlagsVarsSquare</include>
+          <!-- <texture>Star.png</texture> -->
+          <texture>flags/notation/notetv.png</texture>
+          <aspectratio>stretch</aspectratio>
+          <visible>[StringCompare(Container(1999).ListItem.DBTYPE,tvshow)|StringCompare(Container(1999).ListItem.DBTYPE,episode)]|[!Container.Content(movies)+!Container.Content(sets)+!StringCompare(Container(1999).ListItem.Property(dbtype),movie)]</visible>
+        </control>
+        <control type="label">
+          <posy>11</posy>
+          <include>MediaFlagsVarsSquare</include>
+          <align>center</align>
+          <aligny>center</aligny>
+          <label>$INFO[Container(1999).ListItem.Property(Rating)]</label>
+          <textcolor>grey</textcolor>
+          <font>METF_StarRating</font>
+          <angle>5</angle>
+        </control>
       
       
       </control>
@@ -3345,7 +3356,7 @@
     </control>
     
     <control type="group">
-      <animation type="Conditional" condition="System.IdleTime(2)" reversible="false">
+      <animation type="Conditional" condition="System.IdleTime(2)|!IsEmpty(Window(Home).Property(FenetreListeChoix))" reversible="false">
         <effect type="rotatey" center="50,0" end="180" time="800" delay="100" />
       </animation>
 
@@ -3426,7 +3437,7 @@
       </control>
       
       <control type="group">
-        <visible>System.IdleTime(2)+!Skin.HasSetting(Hide_Plot)</visible>
+        <visible>[System.IdleTime(2)|!IsEmpty(Window(Home).Property(FenetreListeChoix))]+!Skin.HasSetting(Hide_Plot)</visible>
 
         <animation type="Visible" reversible="false">
           <effect type="fade" start="0" end="100" time="2000" delay="0" />
@@ -3503,37 +3514,8 @@
     <include>Animation_FadedByMenu</include>
     <include>Animation_HiddenByInfo</include>
     <include>Animation_OpenCloseFade</include>
-     <control type="image">
-	  <posy>828</posy>
-        <left>5</left>
-        <align>center</align>
-			  <width>80</width>
-			  <height>80</height>
-			  <texture>flags/notation/pnote$INFO[ListItem.Rating].png</texture>
-			  <aspectratio>keep</aspectratio>
-			  <visible>IsEmpty(ListItem.UserRating)</visible>
-	</control>
-    	<control type="image">
-    	<posy>828</posy>
-        <left>5</left>
-        <align>center</align>
-			  <width>80</width>
-			  <height>80</height>
-			  <texture>flags/notation/pnote$INFO[ListItem.UserRating].png</texture>
-			  <aspectratio>keep</aspectratio>
-			  <visible>!IsEmpty(ListItem.UserRating)</visible>
-	</control>
-    <!--
-    <control type="image">
-      <posy>828</posy>
-      <width>200</width>
-      <height>80</height>
-      <texture>flags/notation/note$INFO[ListItem.UserRating].png</texture>
-      <aspectratio>keep</aspectratio>
-    </control>
-    <!--	<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) |Container.Content(seasons)</visible> -->
-    <control type="group">
-      <posx>390</posx>
+  <control type="group">
+      <posx>460</posx>
       <posy>828</posy>
       <!-- ------------------------------- -->
 
@@ -3614,8 +3596,8 @@
         <visible>[Container.Content(tvshows)|Container.Content(episodes)]+!IsEmpty(Window(Home).Property(NextAired.NextDate))</visible>
       </control>
       <control type="group">
-        <posy>80</posy>
-        <posx>20</posx>
+        <posy>-30</posy>
+        <posx>-350</posx>
         <align>center</align>
         <control type="image">
           <top>-5</top>
@@ -3625,8 +3607,8 @@
           <texture>flags/explorer.png</texture>
         </control>
         <control type="fadelabel">
-          <left>60</left>
-          <width>935</width>
+          <left>40</left>
+          <width>1235</width>
           <height>40</height>
           <align>left</align>
           <scroll>true</scroll>
@@ -3888,10 +3870,11 @@
 </include>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="MediaFlagsVarsSquare">
-  <posx>14</posx>
+  <posx>9</posx>
   <posy>8</posy>
-  <width>66</width>
-  <height>54</height>
+  <width>82</width>
+  <height>64</height>
+  <!-- <colordiffuse>C0FFFFFF</colordiffuse> -->
 </include>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="MediaFlagsVarsSquareHalfTop">

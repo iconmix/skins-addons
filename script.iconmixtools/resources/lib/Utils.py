@@ -173,6 +173,7 @@ def CheckSaga(ItemId=None,Statique=None):
                 ItemListe.setProperty('TMDBNumber', str(item.get("id")))
                 ItemListe.setProperty('DateSortie', DateSortie)
                 ItemListe.setProperty('dbtype', 'movie')
+                
                 ItemListe.setProperty('SetId', str(ItemId))
                 ItemListe.setProperty('PosterCollection',PosterCollection)
                 ItemListe.setProperty('Rating',str(int(item.get("vote_average"))))
@@ -1246,8 +1247,8 @@ def getFilmsParActeur(ActeurType=None,Acteur=None,Statique=None):
          else: ActeurType="actor"
          
          #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetMovies","params":{"filter":{"field":"director","operator":"contains","value":"ridley"},"properties":["thumbnail","year","file"]},"id":"1"}       
-         json_result = getJSON2("VideoLibrary.GetMovies", '{"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["plot","thumbnail","year","file","art","imdbnumber","cast"]}' %(ActeurType,Acteur))
-         json_result2 = getJSON2("VideoLibrary.GetTvShows", '{"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["plot","thumbnail","year","file","art","imdbnumber","cast"]}' %(ActeurType,Acteur))
+         json_result = getJSON2("VideoLibrary.GetMovies", '{"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["plot","thumbnail","year","file","art","imdbnumber","rating","userrating","cast"]}' %(ActeurType,Acteur))
+         json_result2 = getJSON2("VideoLibrary.GetTvShows", '{"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["plot","thumbnail","year","file","art","imdbnumber","rating","userrating","cast"]}' %(ActeurType,Acteur))
          #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetEpisodes","params":{"tvshowid":30,"properties":["cast"],"filter":{"actor":"CynthiaAddai-Robinson"}},"id":"1"}
          #pour obtenir tous les episodes comprenant l'acteur
          
@@ -1276,8 +1277,15 @@ def getFilmsParActeur(ActeurType=None,Acteur=None,Statique=None):
                     TypeVideo="tvshow"
                  ItemListe.setArt( Item.get("art")) 
                  ItemListe.setProperty('DBID', str(IdVideo))
-                 ItemListe.setProperty("TypeVideo",TypeVideo)
+                 ItemListe.setProperty('dbtype',TypeVideo)
                  ItemListe.setProperty('IMDBNumber', str(Item.get("imdbnumber")))
+                 ItemListe.setProperty('Rating',str(int(Item.get("rating"))))
+                 UserRating=Item.get("userrating")
+                 if UserRating:
+                     if int(UserRating)>0:
+                       ItemListe.setProperty('UserRating',str(int(Item.get("userrating"))))
+                     else:
+                       ItemListe.setProperty('UserRating','')
                  ItemListe.setInfo("video", {"dbid": str(IdVideo),"title": Titre,"year": Item.get("year"),"trailer":Item.get("trailer"),"plot":Item.get("plot")})
                  if not Statique:
                      ListeVideos.append([Item.get("file"),ItemListe,False])
@@ -1556,7 +1564,7 @@ def getFilmsTv(ActeurType=None,Acteur=None,Statique=None):
                             Annee=item.get("release_date")
                             if not Annee: 
                                Annee=item.get("first_air_date")
-                            ItemListe.setProperty("TypeVideo",TypeVideo)
+                            ItemListe.setProperty("dbtype",TypeVideo)
                             ItemListe.setInfo("video", {"title": name,"year": Annee,"originaltitle": item.get("original_title"),"trailer":item.get("id")})        
                             if not Statique:
                                ListeRoles.append(["",ItemListe,True])

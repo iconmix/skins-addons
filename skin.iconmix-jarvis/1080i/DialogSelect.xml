@@ -243,7 +243,7 @@
 				<aligny>center</aligny>
 				<onleft condition="!IsEmpty(Container(6).ListItem.Label)">6</onleft>
 				<onleft>3</onleft>
-				<visible>IntegerGreaterThan(Container(6).NumItems,0)</visible>
+				<visible>IntegerGreaterThan(Container(6).NumItems,0)|Container.Content(movies)</visible>
 			</control>
 			<control type="button" id="5">
 				<description>Default Addon Button</description>
@@ -262,7 +262,7 @@
 				<onleft condition="!IsEmpty(Container(6).ListItem.Label)">6</onleft>
 				<onleft>3</onleft>
 
-				<visible>!IntegerGreaterThan(Container(6).NumItems,0)</visible>
+				<visible>!IntegerGreaterThan(Container(6).NumItems,0)+!Container.Content(movies)</visible>
 			</control>
 
 			<control type="button" id="7">

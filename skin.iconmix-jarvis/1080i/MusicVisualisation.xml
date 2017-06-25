@@ -85,7 +85,7 @@
 				<align>center</align>
 				<texture diffuse="shine.png" background="true">$INFO[Window(Home).Property(ArtistBannerPlayer)]</texture>
 				<aspectratio>keep</aspectratio>
-				<visible>!String.IsEmpty(Window(Home).Property(ArtistBannerPlayer))</visible>
+				<visible>!IsEmpty(Window(Home).Property(ArtistBannerPlayer))</visible>
 			
 			</control>
 			<control type="label">
@@ -97,7 +97,7 @@
 				<scroll>true</scroll>
 				<font>METF_MusicVizTitle</font>
 				<label>[COLOR=NowPlayingTitle]$INFO[MusicPlayer.Artist][/COLOR]</label>
-				<visible>String.IsEmpty(Window(Home).Property(ArtistThumbPlayer))|String.IsEmpty(Window(Home).Property(ArtistBannerPlayer))</visible>
+				<visible>IsEmpty(Window(Home).Property(ArtistThumbPlayer))|IsEmpty(Window(Home).Property(ArtistBannerPlayer))</visible>
 			</control>
 
 			<control type="fadelabel">
@@ -122,7 +122,7 @@
 				<aligny>center</aligny>
 				<font>METF_TitleTextLarge</font>
 				<label></label>
-				<visible>String.Contains(Control.GetLabel(14),0)|Container(15).HasNext| [Integer.IsGreater(MusicPlayer.Time,1) + !Integer.IsGreater(MusicPlayer.Time,11)]</visible>
+				<visible>SubString(Control.GetLabel(14),0)|Container(15).HasNext| [IntegerGreaterThan(MusicPlayer.Time,1) + !IntegerGreaterThan(MusicPlayer.Time,11)]</visible>
 			</control>
 
 			<!--- --------------------------------------------->
@@ -150,8 +150,8 @@
 					<onright>1</onright>
 				</control>
 
-				<visible>Skin.HasSetting(ShowArtistBio)+!String.IsEmpty(Window(Home).Property(ArtistBioPlayer))</visible>
-				<!--+[[Integer.IsGreater(MusicPlayer.Time,1) + !Integer.IsGreater(MusicPlayer.Time,130)] | [Integer.IsGreater(MusicPlayer.Time,300)]]</visible> -->
+				<visible>Skin.HasSetting(ShowArtistBio)+!IsEmpty(Window(Home).Property(ArtistBioPlayer))</visible>
+				<!--+[[IntegerGreaterThan(MusicPlayer.Time,1) + !IntegerGreaterThan(MusicPlayer.Time,130)] | [IntegerGreaterThan(MusicPlayer.Time,300)]]</visible> -->
 
 				<posx>1364</posx>
 				<posy>-350</posy>
@@ -176,7 +176,7 @@
 						<aligny>top</aligny>
 						<align>center</align>
 						<font>METF_SettingsHeading</font>
-						<autoscroll delay="8000" time="1500" repeat="100">Skin.HasSetting(AutoScroll)+[Control.IsVisible(1555)| [Integer.IsGreater(MusicPlayer.Time,1) + !Integer.IsGreater(MusicPlayer.Time,20)]]</autoscroll>
+						<autoscroll delay="8000" time="1500" repeat="100">Skin.HasSetting(AutoScroll)+[Control.IsVisible(1555)| [IntegerGreaterThan(MusicPlayer.Time,1) + !IntegerGreaterThan(MusicPlayer.Time,20)]]</autoscroll>
 						<label>$INFO[Window(Home).Property(ArtistBioPlayer)]</label>
 						<shadowcolor>FF000000</shadowcolor>
 						<textcolor>white</textcolor>
@@ -195,7 +195,7 @@
 				<align>left</align>
 				<texture diffuse="shine.png" background="true">$INFO[Window(Home).Property(ArtistThumbPlayer)]</texture>
 				<aspectratio>keep</aspectratio>
-				<visible>!String.IsEmpty(Window(Home).Property(ArtistThumbPlayer))</visible>
+				<visible>!IsEmpty(Window(Home).Property(ArtistThumbPlayer))</visible>
 			</control>
 
 			<control type="fadelabel">
