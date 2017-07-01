@@ -228,11 +228,13 @@ class Main:
                     
                 if ActeursBio=="" :
                      #acteurs
-                     TypeVideo=xbmc.getInfoLabel("Container(5051).ListItem.Property(TypeVideo)")
+                     TypeVideo=xbmc.getInfoLabel("Container(5051).ListItem.Property(dbtype)")
                      Titre=xbmc.getInfoLabel("Container(5051).ListItem.Label").decode('utf-8','ignore')
                      if not xbmc.getInfoLabel("Container(5051).ListItem.Property(IMDBNumber)"):
+                       #pas local
                        ListeTrailer=utils.getTrailer(xbmc.getInfoLabel("Container(5051).ListItem.Trailer"),TypeVideo) 
                      else:
+                       #local
                        TMDBID=utils.get_externalID(xbmc.getInfoLabel("Container(5051).ListItem.Property(IMDBNumber)"),TypeVideo)
                         
                 if ActeursBio=="non" :
@@ -583,6 +585,7 @@ class Main:
                             InfoSup=utils.GetActeurInfo(utils.try_decode(self.LABEL8889.encode("utf8")),self.DBTYPE)
                             
                             if InfoSup : 
+                                
                                 self.windowhome.setProperty('Actorbiographie',InfoSup.get("biographie"))
                                 Lieu=InfoSup.get("lieunaissance")
                                 self.windowhome.setProperty('Actorlieunaissance',InfoSup.get("lieunaissance"))  
@@ -867,4 +870,4 @@ class Main:
 
 if (__name__ == "__main__"):
     Main()
-    utils.logMsg('script finished.')
+    #utils.logMsg('script finished.')

@@ -202,7 +202,22 @@
     </animation>
     </control>
     -->
-    <control type="textbox">
+     <control type="scrollbar" id="8892">
+      <description>My first scroll bar control</description>
+      <left>80</left>
+      <top>60</top>
+      <width>250</width>
+      <height>30</height>
+      <visible>true</visible>
+      
+      <orientation>vertical</orientation>
+      <showonepage>true</showonepage>
+      <onup>2</onup>
+      <ondown>3</ondown>
+      <onleft>1</onleft>
+      <onright>1</onright>
+    </control>
+    <control type="textbox" id="8890">
       <visible>Control.HasFocus(5051)</visible>
       <top>15</top>
       <left>400</left>
@@ -215,14 +230,15 @@
       <textcolor>lightgrey</textcolor>
       <label>$INFO[Window(Home).Property(Actorbiographie)]</label>
     </control>
-    <control type="textbox">
+    <control type="textbox" id="8891">
       <visible>!Container(8888).IsUpdating+Control.HasFocus(8889)</visible>
       <top>15</top>
       <left>400</left>
-      <width>950</width>
-      <height>620</height>
+      <width>950</width> 
+      <height>600</height>
       <align>left</align>
       <aligny>center</aligny>
+      <pagecontrol>8892</pagecontrol>
       <font>comic24</font>
       <autoscroll delay="10000" time="3500" repeat="10000">[Control.HasFocus(5051)|Control.HasFocus(8889)]+System.IdleTime(2)</autoscroll>
       <textcolor>lightgrey</textcolor>
@@ -242,7 +258,10 @@
       <label>-O-</label>
       <onclick>SetFocus(55)</onclick>
       <oninfo>SetFocus(55)</oninfo>
-      <onback>SetFocus(55)</onback>
+      <onleft>SetFocus(55)</onleft>
+      <onright>SetFocus(55)</onright>
+      <ondown>PageDown(8892)</ondown>
+      <onup>PageUp(8892)</onup>
     </control>
     <control type="group">
       <left>-200</left>
@@ -813,7 +832,7 @@
       <animation type="Conditional" loop="true" condition="!Control.HasFocus(1998)+!Control.HasFocus(5051)">
         <effect type="fade"  start="0" end="100"  time="1000" delay="2000" reversible="true"/>
       </animation>
-      <visible>!Control.HasFocus(1998)+!Control.HasFocus(5051)</visible>
+      <visible>!Control.HasFocus(1998)+!Control.HasFocus(5051)+IntegerGreaterThan(Container(1998).NumItems,0)</visible>
       <control type="image">
         <width>30</width>
         <height>30</height>
@@ -1288,7 +1307,7 @@
         <align>center</align>
         <aligny>center</aligny>
         <font>comic24</font>
-        <textcolor>lightgrey</textcolor>
+        <textcolor>grey</textcolor>
         <label>$INFO[ListItem.Label]</label>
       </control>
       <control type="label">
@@ -1305,8 +1324,8 @@
         <height>30</height>
         <align>center</align>
         <aligny>center</aligny>
-        <font>lcdep</font>
-        <textcolor>lightgrey</textcolor>
+        <font>impactsongs</font>
+        <textcolor>grey</textcolor>
         <label>[I]$INFO[ListItem.Label2][/I]</label>
       </control>
     </control>
@@ -1321,7 +1340,7 @@
         <height>245</height>
         <bordersize>8</bordersize>
         <bordertexture border="8">landscape.png</bordertexture>
-        <texture>$INFO[Listitem.Icon]</texture>
+        <texture>$INFO[ListItem.Icon]</texture>
         <aspectratio align="center" aligny="center">keep</aspectratio>
       </control>
       <control type="image">
@@ -1356,7 +1375,7 @@
         <align>center</align>
         <aligny>center</aligny>
         <font>comic24</font>
-        <textcolor>lightgrey</textcolor>
+        <textcolor>white</textcolor>
         <label>$INFO[ListItem.Label]</label>
         <visible>!Control.HasFocus(5051)+!Control.HasFocus(505)</visible>
       </control>
@@ -1366,7 +1385,7 @@
         <align>center</align>
         <aligny>center</aligny>
         <font>comic24</font>
-        <textcolor>grey</textcolor>
+        <textcolor>white</textcolor>
         <label>[I]$INFO[ListItem.Year][/I]</label>
         <visible>!Control.HasFocus(5051)+!Control.HasFocus(505)</visible>
       </control>
@@ -1375,8 +1394,8 @@
         <height>30</height>
         <align>center</align>
         <aligny>center</aligny>
-        <font>lcdep</font>
-        <textcolor>grey</textcolor>
+        <font>impactsongs</font>
+        <textcolor>white</textcolor>
         <label>[I]$INFO[ListItem.Label2][/I]</label>
       </control>
     </control>
@@ -2869,8 +2888,8 @@
         <top>40</top>
         <width>170</width>
         <height>170</height>
-        <aspectratio>keep</aspectratio>
-        <texture  background="true">$INFO[ListItem.Property(AlbumCd)]</texture>
+        <aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
+        <texture  background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Property(AlbumCd)]</texture>
         <bordersize>2</bordersize>
         <bordertexture>frames/cdart-mask.png</bordertexture>
       </control>
@@ -2898,8 +2917,8 @@
         <top>40</top>
         <width>170</width>
         <height>170</height>
-        <aspectratio>keep</aspectratio>
-        <texture  background="true">$INFO[ListItem.Property(AlbumCd)]</texture>
+        <aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
+        <texture  background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Property(AlbumCd)]</texture>
         <bordersize>2</bordersize>
         <bordertexture>frames/cdart-mask.png</bordertexture>
       </control>

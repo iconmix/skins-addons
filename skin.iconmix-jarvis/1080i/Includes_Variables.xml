@@ -405,6 +405,7 @@
 		<value condition="!IsEmpty(Container(1999).ListItem.Art(thumb))">$INFO[Container(1999).ListItem.Art(thumb)]</value>
 		<value condition="!IsEmpty(Container(1999).ListItem.Art(fanart))">$INFO[Container(1999).ListItem.Art(fanart)]</value>
 		<value condition="!IsEmpty(Window(Home).Property(AlbumCover))">$INFO[Window(Home).Property(AlbumCover)]</value>
+		<value>$INFO[Container(1999).ListItem.Icon]</value>
 	</variable>
 
 
@@ -892,7 +893,11 @@
 	 <value condition="Player.HasAudio+!Window.IsActive(502)+!IsEmpty(Window(Home).Property(AlbumCdPlayer))">$INFO[Window(Home).Property(AlbumCdPlayer)]</value>
 	 <value condition="Player.HasAudio+!Window.IsActive(502)+!IsEmpty(Window(Home).Property(ArtistLogoPlayer))">$INFO[Window(Home).Property(ArtistLogoPlayer)]</value>
 	 <value condition="Player.HasAudio+!Window.IsActive(502)">cdorg.png</value>
+	 
 	 <value condition="Control.HasFocus(2997)+!IsEmpty(Container(1999).ListItem.Property(AlbumCd))">$INFO[Container(1999).ListItem.Property(AlbumCd)]</value>
+	 
+	 
+	 
 	 <value condition="!IsEmpty(ListItem.Property(AlbumCd))">$INFO[ListItem.Property(AlbumCd)]</value>
 	 <value condition="!IsEmpty(Window(Home).Property(AlbumCd))">$INFO[Window(Home).Property(AlbumCd)]</value>
 

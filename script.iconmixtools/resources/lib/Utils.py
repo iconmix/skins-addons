@@ -304,12 +304,7 @@ def getdatafanart(donnees=None):
   
   return None  
     
-   
-  
-
-         
-    
-    
+      
   
 def getsagaartworks(IDCollection=None)   :
   ArtWorks={}
@@ -486,19 +481,19 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None,js
                             #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.SetMovieSetDetails","params":{"setid":38,"art":{"poster":"http://image.tmdb.org/t/p/original/zrApSsUX9i0qVntcCD0Pp55TdCy.jpg"}},"id":1}
                             if KODI_VERSION>=17 and ArtWorks and  SETTING("updatesagaposter")=="true": 
                               MAJ=""                            
-                              if ArtWorks.get("logo") and not check_clearlogo:
+                              if ArtWorks.get("logo") and ( SETTING("forceupdatesagaposter") or not  check_clearlogo):
                                 MAJ='"clearlogo":"%s",' %(ArtWorks.get("logo"))
-                              if ArtWorks.get("clearart") and not check_clearart:
+                              if ArtWorks.get("clearart") and ( SETTING("forceupdatesagaposter") or not  check_clearart):
                                 MAJ=MAJ+'"clearart":"%s",' %(ArtWorks.get("clearart"))
-                              if ArtWorks.get("banner")  and not check_banner:
+                              if ArtWorks.get("banner") and ( SETTING("forceupdatesagaposter") or not  check_banner):
                                 MAJ=MAJ+'"banner":"%s",' %(ArtWorks.get("banner"))
-                              if ArtWorks.get("poster")  and not check_poster:
+                              if ArtWorks.get("poster") and ( SETTING("forceupdatesagaposter") or not  check_poster):
                                 MAJ=MAJ+'"poster":"%s",' %(ArtWorks.get("poster"))
-                              if ArtWorks.get("fanart") and not check_fanart:
+                              if ArtWorks.get("fanart") and ( SETTING("forceupdatesagaposter") or not  check_fanart):
                                 MAJ=MAJ+'"fanart":"%s",' %(ArtWorks.get("fanart"))
-                              if ArtWorks.get("thumb") and not check_thumb:
+                              if ArtWorks.get("thumb") and ( SETTING("forceupdatesagaposter") or not  check_thumb):
                                 MAJ=MAJ+'"thumb":"%s",' %(ArtWorks.get("thumb"))
-                              if ArtWorks.get("discart")  and not check_discart:
+                              if ArtWorks.get("discart") and ( SETTING("forceupdatesagaposter") or not  check_discart):
                                 MAJ=MAJ+'"discart":"%s",' %(ArtWorks.get("discart"))
 
                               if len(MAJ)>3:
@@ -774,11 +769,9 @@ def getallepisodes(IdKodi=None,TvDbId=None,savepath=None,NbKodi=None,ShowBusy=No
   nowX = datetime.datetime.now().date()+datetime.timedelta(30) #pour mise a jour une fois par mois
   if IdKodi or TvDbId:
      
-     #ItemId = id chez themoviedb du tvshow
      if TvDbId :
          if ShowBusy: xbmc.executebuiltin( "ActivateWindow(busydialog)" )                             
       
-         #ItemId=TvDbId
          
          ArrayCollection["tmdbid"]=TvDbId
          ArrayCollection["kodiid"]=IdKodi
@@ -792,7 +785,6 @@ def getallepisodes(IdKodi=None,TvDbId=None,savepath=None,NbKodi=None,ShowBusy=No
          
        
          query_url = "https://api.betaseries.com/shows/display?key=46be59b5b866&thetvdb_id=%s" % (TvDbId) 
-         
          json_data = requestUrlJson(query_url)
          
           
@@ -1308,19 +1300,21 @@ def GetActeurId(Acteur):
           #TMDB    
                  
         query_url = "https://api.themoviedb.org/3/search/person?api_key=67158e2af1624020e34fd893c881b019&language=%s&query=%s&page=1&include_adult=false" % (xbmc.getInfoLabel("System.Language").encode("utf8"),unicodedata.normalize('NFKD', Acteur.split("(")[0]).encode('ascii','xmlcharrefreplace'))
-        json_data = requestUrlJson(query_url)
-              
-                
+        json_data = requestUrlJson(query_url)              
+        ActeurId["tmdb"]=None        
         if json_data:
             allInfo=json_data.get("results")            
-            ActeurId["tmdb"]=''
+            
             if allInfo:
-                item=allInfo[0]  #on prend le premier de la liste en esperant que ce soit le bon !                          
+              for item in allInfo:
                 ActeurId["tmdb"]=str(item.get("id"))
+                break
   return ActeurId 
 
 def GetActeurInfo(NomActeur,ActeurType=None):
   ActeurCache={}
+  ActeurId={}
+  Bio=None
   json_data={}
   SaveActeur=0
   if ActeurType and ActeurType=="director":
@@ -1333,28 +1327,38 @@ def GetActeurInfo(NomActeur,ActeurType=None):
         with open(savepath) as data_file:
                   json_data = json.load(data_file)
                   data_file.close() 
-                  ActeurCache["cast"]=json_data.get("cast") 
+                  if json_data:
+                      ActeurCache["cast"]=json_data.get("cast") 
+                      ActeurId=json_data.get("id")
+                      Bio=json_data.has_key('biographie')
+                      #Bio=json_data.get("biographie")
+                      
                   
-    ActeurId=json_data.get("id")
-    Bio=json_data.get("biographie")
+   
+    
     if not Bio or not ActeurId : 
           if not ActeurId :            
             ActeurId=GetActeurId(NomActeur)
-          json_data=GetActeurInfoMaj(ActeurId,NomActeur)
-          
-          if (json_data.get("biographie") or json_data.get("naissance")) and SETTING("cacheacteur")=="false":
-            SaveActeur=1
-    
+          if ActeurId:
+            json_data=GetActeurInfoMaj(ActeurId,NomActeur)
+          else:
+            return ActeurCache  
+          if json_data:
+            #if (json_data.get("biographie") or json_data.get("naissance") or json_data.get("nom")) and SETTING("cacheacteur")=="false":
+            if SETTING("cacheacteur")=="false":
+               SaveActeur=1
+  
          
            
-    if json_data :                                      
+    if json_data : 
               ActeurCache["biographie"]=json_data.get("biographie")
               ActeurCache["naissance"]=json_data.get("naissance")                  
               ActeurCache["deces"]=json_data.get("deces")                                                 
               ActeurCache["lieunaissance"]=json_data.get("lieunaissance")
               ActeurCache["nom"]=json_data.get("nom")
               ActeurCache["nomreel"]=json_data.get("nomreel")
-              ActeurCache["id"]=json_data.get("id")
+              ActeurCache["id"]=ActeurId
+              
               if SaveActeur>0:
                   
                   erreur=DirStru(savepath)            
@@ -1368,47 +1372,76 @@ def GetActeurInfo(NomActeur,ActeurType=None):
 def GetActeurInfoMaj(ActeurId,NomActeur):
   #http://www.imdb.com/xml/find?json=1&nr=1&nm=on&q=Cynthia%20Addai-Robinson
   json_data={}
+  json_datatmdb={}
   ActeurCache={}
-  
-  if KODILANGUAGE[0:4]=='Fren' and ActeurId.get("allocine"):
-        if (ActeurId["allocine"]!='') :        
-          #si pas de bio en francais  et language de Kodi est French 
-            jsonacteurdata=json.loads(Allocine_Acteur(ActeurId.get("allocine")))            
+  if ActeurId:
+    if NomActeur:
+      ActeurCache["nom"]=NomActeur
+    if KODILANGUAGE[0:4]=='Fren' and ActeurId.get("allocine"):
+          if (ActeurId["allocine"]!='') :        
+            #si pas de bio en francais  et language de Kodi est French 
+            json_datax=Allocine_Acteur(ActeurId.get("allocine"))
+            if json_datax:
+              
+              jsonacteurdata=json.loads(json_datax) 
             
-            if jsonacteurdata and KODILANGUAGE[0:4]=='Fren':            
-                    jsonActeur=jsonacteurdata.get("person")
-                    if jsonActeur:
-                      json_data["name"]=NomActeur 
-                      json_data["realName"]=jsonActeur.get("realName")
-                      json_data["biography"]=jsonActeur.get("biography")
-                      json_data["birthday"]=jsonActeur.get("birthDate")      
-                      json_data["deathday"]=''                                                 
-                      json_data["place_of_birth"]=jsonActeur.get("birthPlace")            
-                      #ActeurId='allo'+str(AllocineId)
-                   
-          #break
-  
-  if not json_data.get("biography"):
-     
-    #on recherche sur tmdb dans la langue de KODI
-      query_url = "https://api.themoviedb.org/3/person/%s?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (ActeurId.get("tmdb"),xbmc.getInfoLabel("System.Language").encode("utf8")) 
-      json_data = requestUrlJson(query_url) 
-      
-  if not json_data.get("biography"):   
-        #pas de biographie dans la langue de KODI alors on cherche en Anglais......
-        query_url = "https://api.themoviedb.org/3/person/%s?api_key=67158e2af1624020e34fd893c881b019&language=EN" % (ActeurId.get("tmdb")) 
-        json_data = requestUrlJson(query_url)
-        
-     
-  if json_data : 
+              if jsonacteurdata and KODILANGUAGE[0:4]=='Fren':
+                      jsonActeur=jsonacteurdata.get("person")
+                      if jsonActeur:
+                        json_data["name"]=NomActeur 
+                        json_data["realName"]=jsonActeur.get("realName")
+                        json_data["biography"]=jsonActeur.get("biography")
+                        json_data["birthday"]=jsonActeur.get("birthDate")      
+                        json_data["deathday"]=''                                                 
+                        json_data["place_of_birth"]=jsonActeur.get("birthPlace")   
+                        #ActeurId='allo'+str(AllocineId)
+                     
+            #break
+    if ActeurId.get("tmdb"):
+        if not json_data.get("biography"):
+           
+          #on recherche sur tmdb dans la langue de KODI
+            query_url = "https://api.themoviedb.org/3/person/%s?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (ActeurId.get("tmdb"),xbmc.getInfoLabel("System.Language").encode("utf8")) 
+            json_datatmdb = requestUrlJson(query_url) 
+            
+        if not json_data or (not json_data.get("biography") and not json_datatmdb.get("biography")):   
+              #pas de biographie dans la langue de KODI alors on cherche en Anglais......
+              query_url = "https://api.themoviedb.org/3/person/%s?api_key=67158e2af1624020e34fd893c881b019&language=EN" % (ActeurId.get("tmdb")) 
+              json_datatmdb = requestUrlJson(query_url)
+          
        
-        ActeurCache["biographie"]=json_data.get("biography")
-        ActeurCache["naissance"]=json_data.get("birthday")      
-        ActeurCache["deces"]=json_data.get("deathday")                                                 
-        ActeurCache["lieunaissance"]=json_data.get("place_of_birth")        
-        ActeurCache["nom"]=json_data.get("name")
-        ActeurCache["nomreel"]=json_data.get("realName")        
-        ActeurCache["id"]=ActeurId
+    if json_data or json_datatmdb: 
+          if json_data.get("biography"):
+             ActeurCache["biographie"]=json_data.get("biography")
+          else:
+             ActeurCache["biographie"]=json_datatmdb.get("biography")
+             
+          if json_data.get("birthday"):
+             ActeurCache["naissance"]=json_data.get("birthday")
+          else:
+             ActeurCache["naissance"]=json_datatmdb.get("birthday")
+             
+          if json_data.get("deathday"):
+             ActeurCache["deces"]=json_data.get("deathday")
+          else:
+             ActeurCache["deces"]=json_datatmdb.get("deathday")
+             
+          if json_data.get("place_of_birth"):
+             ActeurCache["lieunaissance"]=json_data.get("place_of_birth")
+          else:
+             ActeurCache["lieunaissance"]=json_datatmdb.get("place_of_birth")
+             
+          if json_data.get("name"):
+             ActeurCache["nom"]=json_data.get("name")
+          else:
+             ActeurCache["nom"]=json_datatmdb.get("name")
+             
+          if json_data.get("realName"):
+             ActeurCache["nomreel"]=json_data.get("realName")
+          else:
+             ActeurCache["nomreel"]=json_datatmdb.get("realName")
+                 
+          
 
                 
   return ActeurCache  
@@ -1419,12 +1452,13 @@ def Allocine_request(method=None, params=None):
      
        api_url = 'http://api.allocine.fr/rest/v3'
        secret_key = '29d185d98c984a359e6e6f26a0474269'
+       response=None
        user_agent = 'Dalvik/1.6.0 (Linux; U; Android 4.2.2; Nexus 4 Build/JDQ39E)'    
        query_url =api_url+'/'+method
        try:
           str_params=urllib.urlencode(params)
        except:
-          return ''
+          return None
 
        today = datetime.date.today()
        sed = today.strftime('%Y%m%d')
@@ -1435,14 +1469,18 @@ def Allocine_request(method=None, params=None):
        req = urllib2.Request(query_url)
        req.add_header('User-agent',user_agent)
 
-       response = urllib2.urlopen(req, timeout = 3)
        try:
            response = urllib2.urlopen(req, timeout = 3)       
-           str_response = response.read().decode('utf8') 
+            
        except :
-           str_response=''
-           logMsg("Resultat  URL introuvable 5--> " + str(query_url),0)
-
+           str_response=None
+           response=None
+           #logMsg("Resultat  URL introuvable 5--> " + str(query_url),0)
+           
+       if response :
+          str_response = response.read().decode('utf8')
+          #logMsg("Reponse allocine : "+str(str_response.encode("utf8")),0)
+       
        return str_response
        
 def Allocine_Acteur(IdActeur=None):
@@ -1622,7 +1660,7 @@ def getRealisateur(CheminType="",DbId=None,realisateur=None):
                              except :
                                str_response=''
                                savepath="DefaultActor.png"
-                               logMsg("Resultat  URL introuvable 9--> " + str(query_url),0)
+                               #logMsg("Resultat  URL introuvable 9--> " + str(query_url),0)
                          else:
                           savepath=Poster
              return(savepath)            
@@ -1691,6 +1729,7 @@ def get_externalID(ItemId=None,ismovie=None):
    else:
      externalXX="imdb_id"
    query_url = "https://api.themoviedb.org/3/find/%s?api_key=67158e2af1624020e34fd893c881b019&language=%s&external_source=%s" % (ItemId,xbmc.getInfoLabel("System.Language").encode("utf8"),externalXX)
+   
    json_data = requestUrlJson(query_url)
    
       
@@ -1703,7 +1742,6 @@ def get_externalID(ItemId=None,ismovie=None):
              for Test in allID:
                	  ItemIdR=Test.get("id")
                	  break
-                           
    return str(ItemIdR)
    
 
@@ -1817,14 +1855,21 @@ def vidercache(quelcache=None):
 # --------------------------------------------------------------------------------------------------
 def requestUrlJson(query_url):
   #logMsg("requestUrlJson :"+str(query_url),0)
-  
-  req = urllib2.Request(query_url) 
-  
+  try:
+    req = urllib2.Request(query_url.replace(" ","%20")) 
+  except :
+    str_response=None
+    logMsg("Erreur  urllib2.Request(query_url) --> " + str(query_url),0)
+  if req:
+    user_agent = 'Dalvik/1.6.0 (Linux; U; Android 4.2.2; Nexus 4 Build/JDQ39E)'
+    req.add_header('User-agent',user_agent)
+             
   try:
     reponse = urllib2.urlopen(req, timeout = 1)
     #reponse = urllib.request.urlopen(query_url, None, 2)
   except:
     reponse=None
+    logMsg("Erreur  urllib2.urlopen(query_url) --> " + str(query_url),0)
   
   json_data=None
   if reponse:
@@ -1832,14 +1877,14 @@ def requestUrlJson(query_url):
           str_response = reponse.read().decode('utf8')
         except :
           str_response=None
-          logMsg("Resultat  requestUrlJson introuvable  --> " + str(query_url),0)
+          logMsg("Erreur  requestUrlJson introuvable  --> " + str(query_url),0)
 
         if str_response :
           try:
            json_data = json.loads(str_response)
           except:
            json_data=None
-           logMsg("Resultat  requestUrlJson  vide --> " + str(query_url),0)
+           logMsg("Erreur  requestUrlJson  vide --> " + str(query_url),0)
                
   return json_data
 # --------------------------------------------------------------------------------------------------
@@ -2238,7 +2283,7 @@ def GetMusicFicheArtiste(Artiste=None,ArtisteId=None,Force=None):
          try:
            urllib.urlretrieve(save_data.get("ArtistBanner"),savepath)              
          except:
-           logMsg("Banniere impossible : "+str(savepath)+":"+str(save_data.get("ArtistBanner")),0)
+           #logMsg("Banniere impossible : "+str(savepath)+":"+str(save_data.get("ArtistBanner")),0)
            savepath=""
     if save_data.get("ArtistLogo"): 
        savepath=ADDON_DATA_PATH+"/music/artiste%s/clearlogo.jpg" %(str(ArtisteId))
@@ -2246,7 +2291,7 @@ def GetMusicFicheArtiste(Artiste=None,ArtisteId=None,Force=None):
          try:
            urllib.urlretrieve(save_data.get("ArtistLogo"),savepath)              
          except:
-           logMsg("ClearLogo impossible : "+str(savepath)+":"+str(save_data.get("ArtistLogo")),0)
+           #logMsg("ClearLogo impossible : "+str(savepath)+":"+str(save_data.get("ArtistLogo")),0)
            savepath=""
    
     return save_data  
@@ -2665,7 +2710,7 @@ def getallepisodesTMDB(ItemIdx=None,KodiId=None,savepath=None,NbKodi=None,ShowBu
            str_response = response.read().decode('utf8')
          except :
            str_response=''
-           logMsg("Resultat  URL introuvable 5--> " + str(query_url),0)
+           #logMsg("Resultat  URL introuvable 5--> " + str(query_url),0)
 
          if str_response :
           try:

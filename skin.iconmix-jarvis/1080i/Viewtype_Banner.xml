@@ -23,7 +23,7 @@
 				<include>Animation_FadedByMenu</include>
 				<include>Animation_HiddenByInfo</include>
 				<visible>!Skin.HasSetting(NoViewBanner)</visible>
-				
+				<onfocus>SetProperty(ActeurDirection,no,Home)</onfocus>
 				<include>BannerViewCommon_Browser</include>
 			</control>
 			
@@ -70,6 +70,8 @@
 				<onup>Action(lastpage)</onup>
 				<onright>514</onright>
 				<onleft>514</onleft>
+				<onfocus>SetProperty(ActeurDirection,no,Home)</onfocus>
+				
 
 				
 				<orientation>vertical</orientation>
@@ -123,6 +125,8 @@
 				<height>800</height>
 				<width>550</width>
 				<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
+				<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
+      <onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
 				<ondown>513</ondown>
 				<onup>513</onup>
 				<pagecontrol>-</pagecontrol>

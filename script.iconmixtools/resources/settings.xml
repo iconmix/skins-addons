@@ -20,6 +20,7 @@
         <setting id="cachesaga" type="bool" label="32600" default="false" />
         <setting label="32601" type="action" action="RunScript(script.iconmixtools,videcache=True&cache=collections)"/>
         <setting id="updatesagaposter" type="bool" label="32603" default="false" />
+        <setting visible="eq(-1,true)" id="forceupdatesagaposter" type="bool" label="32610" default="false" />
         
     </category>
     <category label="32583"><!-- Series -->

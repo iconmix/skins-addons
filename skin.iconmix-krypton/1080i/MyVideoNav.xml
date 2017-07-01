@@ -532,7 +532,7 @@
         <posy>2</posy>
         <posx>0</posx>
 
-        <visible>Container.Content(episodes)+!String.IsEmpty(ListItem.TVShowTitle)+!String.IsEmpty(Window(Home).Property(iconmixEpSa))</visible>
+        <visible>Container.Content(episodes)</visible> <!-- +!String.IsEmpty(ListItem.TVShowTitle)+!String.IsEmpty(Window(Home).Property(iconmixEpSa))</visible> -->
 
         <control type="image">
           <texture>frames/genrestag.png</texture>
@@ -841,7 +841,7 @@
   <control type="label">
   <posx>700</posx>
 
-  <label>Varaiable:$INFO[Window(Home).Property(IconMixSagaClearLogo)][CR]IconMixSaga=$INFO[Window(Home).Property(IconMixSaga)][CR]Rating=$INFO[ListItem.Rating][CR]Rating1999=$INFO[Container(1999).ListItem.Property(Rating)][CR]nbepisodes:$INFO[Window(Home).Property(iconmixEpSa)][CR]poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]DBTYPE=$INFO[Container(1999).ListItem.DBTYPE]</label>
+  <label>$INFO[ListItem.TVShowTitle][CR]$INFO[Window(Home).Property(iconmixEpSa)][CR]Varaiable:$INFO[Window(Home).Property(IconMixSagaClearLogo)][CR]IconMixSaga=$INFO[Window(Home).Property(IconMixSaga)][CR]Rating=$INFO[ListItem.Rating][CR]Rating1999=$INFO[Container(1999).ListItem.Property(Rating)][CR]nbepisodes:$INFO[Window(Home).Property(iconmixEpSa)][CR]poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]DBTYPE=$INFO[Container(1999).ListItem.DBTYPE]</label>
 
   </control>
   -->
