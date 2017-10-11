@@ -73,12 +73,13 @@ msgid "Horizontal Text Home layout"
 msgstr "Agencement d'accueil en texte horizontal"
 
 msgctxt "#31031"
-msgid "Hide Movie Watched Status"
-msgstr "Masquer le statut Films Déjà Vus"
+msgid "Don't fade Movie Watched"
+msgstr "Ne pas griser les films vus"
 
 msgctxt "#31032"
-msgid "Hide TV Watched Status"
-msgstr "Masquer le statut Séries TV Déjà Vues"
+msgid "Don't fade TVshows Watched"
+msgstr "Ne pas griser les séries vues"
+
 
 msgctxt "#31033"
 msgid "Hide Background Fanart"

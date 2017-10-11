@@ -91,11 +91,11 @@ msgstr ""
 #empty strings from id 31026 to 31030
 
 msgctxt "#31031"
-msgid "Hide Movie Watched Status"
+msgid "Don't fade Movie Watched"
 msgstr ""
 
 msgctxt "#31032"
-msgid "Hide TV Watched Status"
+msgid "Don't fade TVshows Watched"
 msgstr ""
 
 msgctxt "#31033"
