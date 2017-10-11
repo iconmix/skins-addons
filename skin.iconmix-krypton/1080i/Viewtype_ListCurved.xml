@@ -38,9 +38,10 @@
 				
 				<include>Animation_HiddenByInfo</include>
 				<itemlayout height="35">
-				
+				  
 					<!-- Items in Video Library -->
 					<control type="label">
+					  <include>isWatched</include>
 						<posx>85</posx>
 						<posy>-2</posy>
 						<width>1500</width>

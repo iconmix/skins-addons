@@ -135,8 +135,9 @@
 				<visible>!Skin.HasSetting(NoViewFanart)</visible>
 				<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows)</visible>
 				<itemlayout width="260" height="420">
+				  
 					<control type="group">
-					
+					<include>isWatched</include>
 										<include>VueFanartChoix</include>
 
 					

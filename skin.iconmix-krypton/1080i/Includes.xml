@@ -43,7 +43,7 @@
 <include file="Viewtype_Poster_Large_FixedV.xml" />	<!-- 553 -->
 <include file="Viewtype_Vitrine.xml" />		<!-- 584 -->
 <include file="Viewtype_MurFilms.xml" />		<!-- 585 -->
-<include file="Viewtype_Roulette.xml" />		<!-- 501 -->
+<!--<include file="Viewtype_Roulette.xml" />		 501 -->
 <include file="Viewtype_Disc.xml" />		<!-- 586,587 -->
 <include file="Viewtype_MusicBox.xml" />		<!-- 561 -->
 <include file="IncludesBackgroundBuilding.xml" />
@@ -1744,7 +1744,8 @@
       <visible>!String.IsEmpty(ListItem.Property(PercentPlayed))</visible>
     </control>
   </control>
-  <control type="image"><!-- vu -->
+  <!-- vu --
+  <control type="image">
     <posy>-10</posy>
     <posx>30</posx>
     <width>32</width>
@@ -1753,7 +1754,7 @@
     <colordiffuse>WatchedOverlay</colordiffuse>
     <visible>!ListItem.IsResumable+ Integer.IsGreater(ListItem.PlayCount,0)+ String.IsEmpty(ListItem.Property(PercentPlayed)) + [[[Container.Content(movies) | Container.Content(sets)] + !Skin.HasSetting(HideMovieWatchedOverlays)] | [![Container.Content(movies) | Container.Content(sets)] + !Skin.HasSetting(HideTVWatchedOverlays)]]</visible>
   </control>
-
+-->
 </include>
 
 
@@ -4057,21 +4058,30 @@
       -->
 
       <control type="group">
+        <control type="image">
+          <posy>-5</posy>
+          <posx>-40</posx>
+          <width>556</width>
+          <height>596</height>
+          <texture>frames/fondplot.png</texture>
+          <aspectratio>stretch</aspectratio>
+          <colordiffuse>A0F0F0F0</colordiffuse>
+        </control>
 
         <control type="image">
-          <posy>-40</posy>
-          <posx>-30</posx>
-          <width>536</width>
-          <height>676</height>
-          <texture>frames/plotframe.png</texture>
-          <aspectratio>keep</aspectratio>
-          <colordiffuse>FFC0C0C0</colordiffuse>
+          <posy>-50</posy>
+          <posx>-60</posx>
+          <width>586</width>
+          <height>686</height>
+          <texture>frames/cadreplot.png</texture>
+          <aspectratio>stretch</aspectratio>
+          <colordiffuse>C0101010</colordiffuse>
         </control>
         <control type="textbox" id="8888" >
           <pagecontrol>8867</pagecontrol>
           <width>410</width>
           <height>505</height>
-          <posx>35</posx>
+          <posx>20</posx>
           <posy>40</posy>
           <aligny>top</aligny>
           <align>center</align>
@@ -4080,7 +4090,7 @@
           <label>$VAR[PlotBox_Text] </label>
 
           <shadowcolor>FF000000</shadowcolor>
-          <textcolor>yellow</textcolor>
+          <textcolor>black</textcolor>
         </control>
 
       </control>
@@ -5710,8 +5720,9 @@
 
       </control>
 
-      <visible>Container.Content(tvshows)</visible>
+      <visible>[Container.Content(tvshows)|Container.Content(seasons)]</visible>
       <control type="label">
+        <visible>!Integer.IsGreater(ListItem.Property(TotalSeasons),1)</visible>
         <left>16</left>
         <top>16</top>
         <width>60</width>
@@ -5719,9 +5730,20 @@
         <aligny>center</aligny>
         <align>center</align>
         <label>[COLOR green]$INFO[ListItem.Property(UnWatchedEpisodes)][/COLOR]/[COLOR yellow]$INFO[ListItem.Property(TotalEpisodes)][/COLOR]</label>
-        <visible>Skin.HasSetting(ShowEpisodesNumber)</visible>
         <font>lcdep</font>
       </control>
+      <control type="label">
+      <visible>Integer.IsGreater(ListItem.Property(TotalSeasons),1)</visible>
+        <left>16</left>
+        <top>16</top>
+        <width>60</width>
+        <height>38</height>
+        <aligny>center</aligny>
+        <align>center</align>
+        <label>[COLOR black]x [/COLOR][COLOR white]$INFO[ListItem.Property(TotalSeasons)][/COLOR]</label>
+        <font>lcdep</font>
+      </control>
+
 
     </control>
     <!----------------- MUSIQUE -------------------

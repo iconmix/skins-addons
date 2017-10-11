@@ -154,6 +154,7 @@
 				<itemlayout width="260" height="420">
 				
 					<control type="group">
+					   <include>isWatched</include>
 						<posx>-30</posx>
 						<posy>80</posy>
 						<!-- Unfocused Item - Poster -->

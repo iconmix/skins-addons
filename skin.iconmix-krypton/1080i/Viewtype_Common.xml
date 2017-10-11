@@ -233,6 +233,7 @@
 	
 		<itemlayout width="560" height="120">
 			<control type="group">
+			  <include>isWatched</include>
 			<control type="image">
 				<posx>12</posx>
 				<posy>15</posy>
@@ -332,15 +333,7 @@
 				<texture background="true">frames/banner_frame2.png</texture>
 				<aspectratio scalediffuse="true">stretch</aspectratio>
 			</control>
-			<control type="image">
-				<posx>354</posx>
-				<posy>52</posy>
-				<width>38</width>
-				<height>38</height>
-				<texture>$INFO[ListItem.Overlay]</texture>
-				<colordiffuse>WatchedOverlay</colordiffuse>
-				<visible>!Skin.HasSetting(HideTVWatchedOverlays)</visible>
-			</control>
+		
 			<control type="group">
 				<left>0</left>
 				<top>0</top>
@@ -355,6 +348,7 @@
 			<control type="group">
 				<animation reversible="false" effect="zoom" center="auto" start="100" end="135" time="200" tween="bounce" >focus</animation>
 				<animation reversible="false" effect="zoom" center="auto" start="135" end="100" time="200" tween="bounce" >unfocus</animation>
+				
 			<control type="image">
 				<posx>12</posx>
 				<posy>15</posy>
@@ -450,16 +444,7 @@
 				
 				<aspectratio scalediffuse="true">stretch</aspectratio>
 			</control>
-			<control type="image">
-				<posx>354</posx>
-				<posy>52</posy>
-				<width>38</width>
-				<height>38</height>
-				<texture>$INFO[ListItem.Overlay]</texture>
-				<colordiffuse>WatchedOverlay</colordiffuse>
-				<visible>!Skin.HasSetting(HideTVWatchedOverlays)</visible>
-				
-			</control>	
+			
 			<control type="group">
 				<left>0</left>
 				<top>0</top>
@@ -473,7 +458,7 @@
 	
 	<include name="PosterVeryLargeViewCommon_Browser">
 		<posx>-250</posx>
-		<posy>10</posy>
+		<posy>-5</posy>
 		<height>800</height>
 		<width>2250</width>
 		
@@ -496,6 +481,7 @@
 			<control type="group">
 				<posx>-10</posx>
 				<posy>160</posy>
+				<include>isWatched</include>
 				<include>VuePosterChoixLarge</include>
 				<!-- Unfocused Item - Watched Overlay -->
 				
@@ -547,7 +533,7 @@
 	
 	<include name="PosterLargeViewCommon_Browser">
 		<posx>50</posx>
-		<posy>240</posy>
+		<posy>230</posy>
 		<height>600</height>
 		<width>2000</width>
 		<include condition="!Skin.HasSetting(ViewLockdown)">OnUp7000</include>
@@ -569,7 +555,7 @@
 			<control type="group">
 				<posx>-10</posx>
 				<posy>130</posy>
-		
+		<include>isWatched</include>
 				<!-- Unfocused Item - Poster -->
 				<include>VuePosterChoix</include>
 				<!-- Unfocused Item - Watched Overlay -->

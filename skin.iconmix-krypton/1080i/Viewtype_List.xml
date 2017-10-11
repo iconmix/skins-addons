@@ -51,6 +51,7 @@
 				</control>
 				<!-- Items in Video Library -->
 				<control type="label">
+<include>isWatched</include>
 					<posx>95</posx>
 					<posy>-2</posy>
 					<width>708</width>

@@ -30,6 +30,8 @@
 				<visible>!Skin.HasSetting(NoViewListFanart)</visible>
 				<visible>Window.IsActive(pictures) | Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)</visible>
 				<itemlayout width="600" height="35">
+				  <control type="group">
+				  <include>isWatched</include>
 					<!-- List Line Item Divider -->
 					<control type="image">
 						<posx>0</posx>
@@ -58,6 +60,7 @@
 					<posy>10</posy>
 					<include>OverlayProgress</include>
 				</control>	
+				</control>
 				</itemlayout>
 				<focusedlayout width="600" height="35">
 					<include>ActiveClearArt</include>

@@ -2,6 +2,10 @@
 <includes>
 <!-- telex --->
 
+<include name="isWatched">
+  <animation reversible="false" effect="fade" center="auto" start="100" end="50" time="5" condition="[[[Container.Content(movies) | Container.Content(sets)] + !Skin.HasSetting(HideMovieWatchedOverlays)] | [![Container.Content(movies) | Container.Content(sets)] + !Skin.HasSetting(HideTVWatchedOverlays)]]+!Window.IsActive(502)+!ListItem.IsResumable+!String.Contains(ListItem.Overlay,Unwatch)">Conditional</animation>
+  <!--<animation reversible="false" effect="fade" center="auto" start="100" end="50" time="5" condition="!Window.IsActive(502)+!ListItem.IsResumable+!Skin.HasSetting(HideMovieWatchedOverlays)+!String.Contains(ListItem.Overlay,Unwatch)">Conditional</animation> -->
+</include>
 
 <include name="AnimationCacheNonSelect">
 <animation reversible="false" effect="fade" start="100" end="0" time="500" condition="System.IdleTime(3)+String.IsEqual(Skin.String(CacheNonSelectDelai),3)">Conditional</animation>

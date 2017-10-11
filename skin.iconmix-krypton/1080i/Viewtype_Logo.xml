@@ -48,7 +48,9 @@
 				
 				<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows)]</visible>
 				<itemlayout width="400" height="194">
+				  
 					<control type="group">
+					  <include>isWatched</include>
 					<control type="image" id="9898">						
 						<posx>9</posx>
 						<posy>118</posy>
@@ -144,7 +146,9 @@
 			
 			<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows)]</visible>
 			<itemlayout width="294" height="200">
+			 
 				<control type="group">
+				   <include>isWatched</include>
 				<control type="image" id="9898">
 					<include>Animation_HiddenByInfo</include>
 					<posx>9</posx>

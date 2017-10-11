@@ -108,6 +108,7 @@
 			<include>Animation_HiddenByInfo</include>
 			<itemlayout width="0" height="35">
 				<!-- List Line Item Divider -->
+				
 				<control type="image">
 					<posx>5</posx>
 					<posy>33</posy>
@@ -119,6 +120,7 @@
 				</control>
 				<!-- Items in Video Library -->
 				<control type="label">
+				  <include>isWatched</include>
 					<posx>95</posx>
 					<posy>-2</posy>
 					<width>708</width>

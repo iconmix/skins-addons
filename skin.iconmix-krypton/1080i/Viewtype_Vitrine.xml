@@ -53,7 +53,9 @@
 					<visible>Container.Content(musicvideos) | Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons)</visible>
 					
 					<itemlayout height="700" width="330">
+					 
 						<control type="group">
+						   <include>isWatched</include>
 						<control type="group">
 						<!--	<animation effect="rotatey" center="150" start="0" end="-35" time="500" condition="true">Conditional</animation>-->
 						
@@ -142,7 +144,7 @@
 							
 						</control>
 						<include>AnimationCacheNonSelect</include>
-			</control>
+			       </control>
 						</itemlayout>
 					<focusedlayout height="600" width="360">
 						<include>ActiveClearArt</include>

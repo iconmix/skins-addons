@@ -21,7 +21,7 @@
 	<view id="Banner Poster" value="510" languageid="31814"  type="artists,tvshows,musicvideos" />
 	<view id="Logo" value="56"  languageid="31817"  type="movies,setmovies,tvshows,musicvideos,sets" />
 	<view id="Logo vertical" value="560" languageid="31818"  type="movies,setmovies,tvshows,musicvideos,sets" />
-	<view id="Roulette" value="501"  languageid="31819"  type="movies,setmovies,tvshows,musicvideos,seasons,sets,episodes" /> -->
+	
 	<view id="Gallery Square" value="58" languageid="31822"  type="videos,artists,albums,songs" />
 	<view id="Panel Square" value="559" languageid="31823"  type="videos,artists,albums,songs" />
 	<view id="3D" value="584" languageid="31825"  type="movies,setmovies,tvshows,musicvideos,seasons,sets" />

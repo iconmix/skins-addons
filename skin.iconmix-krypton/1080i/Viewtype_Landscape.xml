@@ -105,6 +105,7 @@
 				<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes)]</visible>
 					<itemlayout width="350" height="260">
 					<control type="group">
+					   <include>isWatched</include>
 					<visible>!Control.HasFocus(1999)</visible>
 						<control type="image">
 							<posx>0</posx>
@@ -357,6 +358,7 @@
 				<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes)]</visible>
 				<itemlayout width="350" height="170">
 					<control type="group">
+					   <include>isWatched</include>
 					<control type="image">
 						<posx>0</posx>
 						<posy>0</posy>
