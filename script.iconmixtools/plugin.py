@@ -653,6 +653,10 @@ class Main:
                         self.windowhome.clearProperty('DurationTools')                   
                         self.windowhome.clearProperty('DurationToolsEnd')
                         self.windowhome.clearProperty('IconMixExtraFanart') 
+                        self.windowhome.clearProperty("ItemCountry1")
+                        self.windowhome.clearProperty("ItemCountry2")
+                        self.windowhome.clearProperty("ItemCountry3")
+                        self.windowhome.clearProperty("ItemCountry4")
                         
                         #focus 2999
                         if xbmc.getCondVisibility("Control.HasFocus(2999)"):
@@ -830,6 +834,16 @@ class Main:
     #twolaw code
         xxx="null"
         
+        #self.windowhome.setProperty('ItemUniqueGenre',xbmc.getInfoLabel( "ListItem.Genre" ).replace(" /",", "))
+        CountryList=xbmc.getInfoLabel( "ListItem.Country" ).split(" / ")
+        if not CountryList:
+          CountryList.append(xbmc.getInfoLabel( "ListItem.Country" ))
+        idx=1
+        for country in CountryList:
+           self.windowhome.setProperty('ItemCountry%d' %(idx),country.rstrip())
+           idx=idx+1
+           
+              
         if not xbmc.getCondVisibility("Window.IsVisible(10502)"):
           typeId=self.DBTYPE
           itemId=self.selecteditem
