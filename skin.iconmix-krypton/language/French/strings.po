@@ -73,12 +73,12 @@ msgid "Horizontal Text Home layout"
 msgstr "Agencement d'accueil en texte horizontal"
 
 msgctxt "#31031"
-msgid "Don't fade Movie Watched"
-msgstr "Ne pas griser les films vus"
+msgid "Disable Movie Watched flag"
+msgstr "Désactiver l'indicateur de films vus"
 
 msgctxt "#31032"
-msgid "Don't fade TVshows Watched"
-msgstr "Ne pas griser les séries vues"
+msgid "Disable TVshows Watched flag"
+msgstr "Désactiver l'indicateur de  séries vues"
 
 
 msgctxt "#31033"
@@ -703,8 +703,8 @@ msgid "Use Plot Summary in other views"
 msgstr "Utiliser le Résumé dans d'autres vues"
 
 msgctxt "#31403"
-msgid "Hide Media Flags"
-msgstr "Masquer les Indicateurs Média"
+msgid "Choose Media Flags"
+msgstr "Choisir les Indicateurs Média"
 
 msgctxt "#31404"
 msgid "Hide Rating and Studio Flags"
@@ -1011,8 +1011,8 @@ msgid "Hide Media Flags background panel"
 msgstr "Cacher le fond des indicateurs médias "
 
 msgctxt "#31481"
-msgid "New videos layout (experimental)"
-msgstr "Nouvelle présentation des vidéos (expérimental) "
+msgid "New videos layout"
+msgstr "Nouvelle présentation des vidéos"
 
 msgctxt "#31483"
 msgid "Position"
@@ -1127,6 +1127,10 @@ msgstr "Précipitations"
 msgctxt "#31733"
 msgid "Main menu item list"
 msgstr "Raccourci du menu principal"
+
+msgctxt "#31734"
+msgid "Animated country flags"
+msgstr "Drapeaux des pays animés"
 
 
 msgctxt "#31736"
@@ -1259,7 +1263,7 @@ msgstr ""
 
 msgctxt "#31768"
 msgid "MPAA"
-msgstr ""
+msgstr "Age conseillé"
 
 msgctxt "#31769"
 msgid "VideoResolution"
@@ -1336,6 +1340,14 @@ msgstr "Aucun"
 msgctxt "#31787"
 msgid "Hide until focus"
 msgstr "Affichage au focus"
+
+msgctxt "#31788"
+msgid "Source"
+msgstr ""
+
+msgctxt "#31789"
+msgid "3D Type"
+msgstr "Type de 3D"
 
 msgctxt "#31790"
 msgid "Movies in progress"
@@ -1516,11 +1528,11 @@ msgstr ""
 
 msgctxt "#31900"
 msgid "Show total episodes on TVShow view"
-msgstr "Afficher le nombre d'épisodes"
+msgstr "Afficher le nombre d'épisodes des séries"
 
 msgctxt "#31901"
 msgid "Show total unwatched episodes on TVShow view"
-msgstr "Afficher le nombre d'épisodes non-vus"
+msgstr "Afficher le nombre d'épisodes non-vus des séries"
 
 msgctxt "#31902"
 msgid "Show Video playing in background"

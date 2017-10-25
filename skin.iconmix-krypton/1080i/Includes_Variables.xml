@@ -75,6 +75,15 @@
 		<pauseatend>90000</pauseatend>
 	</include>
 
+<variable name="flagpath">
+  <value condition="Skin.HasSetting(animatedflag)">flags/country/</value>
+  <value>resource://resource.images.languageflags.colour/</value>
+</variable>
+<variable name="flagpathext">
+  <value condition="Skin.HasSetting(animatedflag)">.gif</value>
+  <value>.png</value>
+</variable>
+
 <variable name="artistlogo">
    <value>special://userdata/addon_data/script.iconmixtools/music/artiste$INFO[ListItem.DBID]/clearlogo.jpg</value>
 </variable>

@@ -333,7 +333,11 @@
 				<texture background="true">frames/banner_frame2.png</texture>
 				<aspectratio scalediffuse="true">stretch</aspectratio>
 			</control>
-		
+		<control type="group">
+					<posx>7</posx>
+					<posy>80</posy>
+					<include>OverlayProgress</include>
+				</control>	
 			<control type="group">
 				<left>0</left>
 				<top>0</top>
@@ -444,7 +448,12 @@
 				
 				<aspectratio scalediffuse="true">stretch</aspectratio>
 			</control>
-			
+			<control type="group">
+					<posx>7</posx>
+					<posy>80</posy>
+					<include>OverlayProgress</include>
+				</control>	
+				
 			<control type="group">
 				<left>0</left>
 				<top>0</top>

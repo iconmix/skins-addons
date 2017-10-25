@@ -327,7 +327,7 @@
         <posx>10</posx>
         <posy>700</posy>
         <width>1600</width>
-        <label>NbItems5001:$INFO[Container(1999).NumItems][CR]NbItems5002:$INFO[Container(1999).ListItem.Icon][CR]DBID=$INFO[Container(50).ListItem.DBID][CR]SetID=$INFO[Container(5002).ListItem.SetID][CR]PropSetID=$INFO[Container(5002).ListItem.Property(SetID)][CR]Type=$INFO[ListItem.DBTYPE][CR]Folder:$INFO[Container(50).ListItem.FolderPath][CR]Serie:$INFO[ListItem.TVShowTitle]</label>
+        <label>$INFO[Window(Home).Property(ItemCountry1)]</label>
       </control>-->
 
       <control type="label">
@@ -864,11 +864,22 @@
       <visible>!IsEmpty(ListItem.Country)+String.IsEmpty(Window(Home).Property(ItemCountry2))</visible>
       <width>100</width>
       <height>65</height>
-      <!-- <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Country].png</texture> -->
+      <!-- <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Country].png</texture> --
       <texture background="true" >resource://resource.images.languageflags.colour/$INFO[Window(Home).Property(ItemCountry1)].png</texture>
+      -->
+              <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry1)]$VAR[flagpathext]</texture>
+
 
       <aspectratio aligny="center">scale</aspectratio>
     </control>
+     <control type="label">
+        <posx>980</posx>
+        <posy>90</posy>
+        <width>500</width>
+        <align>center</align>
+        <label>$INFO[Window(Home).Property(ItemCountry1)]</label>
+        <visible>!IsEmpty(ListItem.Country)+String.IsEmpty(Window(Home).Property(ItemCountry2))</visible>
+      </control>
 
     <control type="group">
        <visible>!IsEmpty(ListItem.Country)+!String.IsEmpty(Window(Home).Property(ItemCountry2))</visible>
@@ -877,21 +888,26 @@
       <control type="image">
         <width>50</width>
         <height>32</height>
-        <texture background="true" >resource://resource.images.languageflags.colour/$INFO[Window(Home).Property(ItemCountry1)].png</texture>
+        <!-- <texture background="true" >resource://resource.images.languageflags.colour/$INFO[Window(Home).Property(ItemCountry1)].png</texture> -->
+        <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry1)]$VAR[flagpathext]</texture>
         <aspectratio aligny="center">scale</aspectratio>
       </control>
       <control type="image">
         <top>40</top>
         <width>50</width>
         <height>32</height>
-        <texture background="true" >resource://resource.images.languageflags.colour/$INFO[Window(Home).Property(ItemCountry2)].png</texture>
+       <!-- <texture background="true" >resource://resource.images.languageflags.colour/$INFO[Window(Home).Property(ItemCountry2)].png</texture>-->
+                <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry2)]$VAR[flagpathext]</texture>
+
         <aspectratio aligny="center">scale</aspectratio>
       </control>
       <control type="image">
         <width>50</width>
         <left>55</left>
         <height>32</height>
-        <texture background="true" >resource://resource.images.languageflags.colour/$INFO[Window(Home).Property(ItemCountry3)].png</texture>
+        <!-- <texture background="true" >resource://resource.images.languageflags.colour/$INFO[Window(Home).Property(ItemCountry3)].png</texture> -->
+                <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry3)]$VAR[flagpathext]</texture>
+
         <aspectratio aligny="center">scale</aspectratio>
       </control>
       <control type="image">
@@ -899,7 +915,9 @@
         <left>55</left>
         <width>50</width>
         <height>32</height>
-        <texture background="true" >resource://resource.images.languageflags.colour/$INFO[Window(Home).Property(ItemCountry4)].png</texture>
+        <!-- <texture background="true" >resource://resource.images.languageflags.colour/$INFO[Window(Home).Property(ItemCountry4)].png</texture> -->
+                <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry4)]$VAR[flagpathext]</texture>
+
         <aspectratio aligny="center">scale</aspectratio>
       </control>
 
@@ -951,21 +969,16 @@
   <!--<include>Global_ContextFilter</include>-->
   <include>GlobalBackgroundVideoInfo</include>
   <control type="group">
-    <posy>-50</posy>
-    <posx>0</posx>
+    <posy>970</posy>
+    <posx>5</posx>
     <include condition="!Skin.HasSetting(Hide_MediaFlags)">MediaInfo</include>
-    <include condition="!Skin.HasSetting(Hide_ExtraMediaFlags)">MediaInfo2</include>
+    <include condition="!Skin.HasSetting(Hide_ExtraMediaFlags)">MediaInfoGroup3</include>
   </control>
 
 </control>
 
 
 <include>PanelActeurs</include>
-<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
-
-
-
-
 
 </controls>
 
