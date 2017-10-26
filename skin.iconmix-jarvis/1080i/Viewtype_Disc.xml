@@ -15,7 +15,7 @@
 				<posy>415</posy>
 				<width>1920</width>
 				<height>230</height>
-				<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+				<texture diffuse="shine.png">frames/ClassicFrame_background.png</texture>
 				<include>AnimationCacheNonSelect</include>
 			
 				<colordiffuse>90101010</colordiffuse>
@@ -27,6 +27,11 @@
 				<width>2000</width>
 				<align>center</align>
 				<include condition="!Skin.HasSetting(ViewLockdown)">OnUp7000</include>
+
+<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,up,Home)</onfocus>
+<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,down,Home)</onfocus>
+
+
 		<!--		<ondown>60</ondown>-->
 				
 				<ondown condition="!SubString(ListItem.DBTYPE,set)">60</ondown>
@@ -44,7 +49,9 @@
 				
 				<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows)]</visible>
 				<itemlayout width="400" height="194">
+				  
 				<control type="group">
+				  <include>isWatched</include>
 					<posy>40</posy>
 					<control type="group">
 					
@@ -69,7 +76,7 @@
 						<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Art(poster)]</texture>		
 						<fadetime>200</fadetime>
 						<colordiffuse>C0FFFFFF</colordiffuse>
-						<visible>IsEmpty(ListItem.Art(discart))</visible>
+						<visible>String.IsEmpty(ListItem.Art(discart))</visible>
 						<animation type="conditional" condition="Container(586).OnNext" >
 						
 						<effect type="rotatey" center="100,0"  end="360" time="800" reversible="false" />
@@ -116,7 +123,7 @@
 						<effect type="zoom" center="auto" start="100" end="140" time="400" tween="bounce" easing="out" />
 						<effect type="rotatey" center="100,0"  end="360" time="1000" reversible="false" delay="1000" />
 						</animation>
-						<visible>IsEmpty(ListItem.Art(discart))</visible>
+						<visible>String.IsEmpty(ListItem.Art(discart))</visible>
 					</control>
 				
 			
@@ -148,7 +155,7 @@
 			<posy>0</posy>
 			<width>290</width>
 			<height>820</height>
-			<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+			<texture diffuse="shine.png">frames/ClassicFrame_background.png</texture>
 			<include>AnimationCacheNonSelect</include>
 			
 			<colordiffuse>90101010</colordiffuse>
@@ -159,6 +166,11 @@
 			<height>800</height>
 			<width>1900</width>
 			<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
+
+<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
+<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
+
+
 			<ondown>587</ondown>
 			<onup>587</onup>
 			<viewtype label="$LOCALIZE[31828]">icon</viewtype>
@@ -171,6 +183,7 @@
 			<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows)]</visible>
 			<itemlayout width="294" height="200">
 				<control type="group">
+				  <include>isWatched</include>
 				<control type="image" >						
 						<posx>9</posx>						
 						<width>150</width>
@@ -193,7 +206,7 @@
 						<animation type="Focus" >
 						
 						</animation>
-						<visible>IsEmpty(ListItem.Art(discart))</visible>
+						<visible>String.IsEmpty(ListItem.Art(discart))</visible>
 					</control>
 				
 				<!-- Watched Overlay for In-Progress Items -->
@@ -235,7 +248,7 @@
 						<effect type="zoom" center="auto" start="100" end="140" time="400" tween="bounce" easing="out" />
 						<effect type="rotatey" center="85,0"  end="360" time="1000" reversible="false" delay="1000" />
 						</animation>
-						<visible>IsEmpty(ListItem.Art(discart))</visible>
+						<visible>String.IsEmpty(ListItem.Art(discart))</visible>
 					</control>
 				
 				<!-- Watched Overlay for In-Progress Items -->

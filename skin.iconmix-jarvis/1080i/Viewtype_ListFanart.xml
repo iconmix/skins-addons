@@ -13,6 +13,11 @@
 				<onup>509</onup>
 				<ondown>509</ondown>
 				<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
+
+<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
+<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
+
+
 				<onright>61</onright>
 				<orientation>vertical</orientation>
 				<preloaditems>2</preloaditems>
@@ -25,6 +30,8 @@
 				<visible>!Skin.HasSetting(NoViewListFanart)</visible>
 				<visible>Window.IsActive(pictures) | Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)</visible>
 				<itemlayout width="600" height="35">
+				  <control type="group">
+				  <include>isWatched</include>
 					<!-- List Line Item Divider -->
 					<control type="image">
 						<posx>0</posx>
@@ -53,6 +60,7 @@
 					<posy>10</posy>
 					<include>OverlayProgress</include>
 				</control>	
+				</control>
 				</itemlayout>
 				<focusedlayout width="600" height="35">
 					<include>ActiveClearArt</include>
@@ -65,7 +73,7 @@
 						<aligny>center</aligny>
 						<texture>VideoInfoLine.png</texture>
 						<colordiffuse>FilesDividerDiffuse</colordiffuse>
-						<visible>!IsEmpty(ListItem.Title)</visible>
+						<visible>!String.IsEmpty(ListItem.Title)</visible>
 					</control>
 					<control type="image">
 						<posx>0</posx>
@@ -109,10 +117,10 @@
 					<posy>66</posy>
 					<width>600</width>
 					<height>338</height>
-					<texture>frames/ClassicFrame_Background.png</texture>
+					<texture>frames/ClassicFrame_background.png</texture>
 					<colordiffuse>FrameBackgroundDiffuse</colordiffuse>
 					<aspectratio scalediffuse="false">stretch</aspectratio>
-						<visible>!IsEmpty(ListItem.Title)</visible>
+						<visible>!String.IsEmpty(ListItem.Title)</visible>
 				</control>
 				<!-- Picture Icon Image -->
 				<control type="image">
@@ -122,7 +130,7 @@
 					<height>338</height>
 					<texture background="true">$INFO[ListItem.Icon]</texture>
 					<aspectratio scalediffuse="false">scale</aspectratio>
-					<visible>Window.IsActive(pictures) + !IsEmpty(ListItem.Icon)</visible>
+					<visible>Window.IsActive(pictures) + !String.IsEmpty(ListItem.Icon)</visible>
 				</control>
 				<!-- Picture Fanart Image (use for thumb if no icon set) -->
 				<control type="image">
@@ -132,7 +140,7 @@
 					<height>338</height>
 					<texture background="true" fallback="home_art/pictures.jpg">$INFO[ListItem.Art(fanart)]</texture>
 					<aspectratio scalediffuse="false">scale</aspectratio>
-					<visible>Window.IsActive(pictures) + IsEmpty(ListItem.Icon)</visible>
+					<visible>Window.IsActive(pictures) + String.IsEmpty(ListItem.Icon)</visible>
 				</control>
 				<!-- Movie Fanart Image -->
 				<control type="image">
@@ -142,7 +150,7 @@
 					<height>338</height>
 					<texture background="true" fallback="home_art/movies.jpg">$VAR[LandscapeFanart]</texture>
 					<aspectratio scalediffuse="false">stretch</aspectratio>
-					<visible>!IsEmpty(ListItem.Title) + [Container.Content(movies) | Container.Content(sets)]</visible>
+					<visible>!String.IsEmpty(ListItem.Title) + [Container.Content(movies) | Container.Content(sets)]</visible>
 				</control>
 				<!-- TVShow Fanart Image -->
 				<control type="image">
@@ -152,7 +160,7 @@
 					<height>338</height>
 					<texture background="true" fallback="home_art/tvshows.jpg">$VAR[LandscapeFanart]</texture>
 					<aspectratio scalediffuse="false">stretch</aspectratio>
-					<visible>!IsEmpty(ListItem.Title) + [Container.Content(tvshows) | Container.Content(seasons)]</visible>
+					<visible>!String.IsEmpty(ListItem.Title) + [Container.Content(tvshows) | Container.Content(seasons)]</visible>
 				</control>
 				<!-- Episode Image -->
 				<control type="image">
@@ -162,7 +170,7 @@
 					<height>338</height>
 					<texture background="true">$INFO[ListItem.Icon]</texture>
 					<aspectratio scalediffuse="false">scale</aspectratio>
-					<visible>!IsEmpty(ListItem.Title) + Container.Content(episodes)</visible>
+					<visible>!String.IsEmpty(ListItem.Title) + Container.Content(episodes)</visible>
 				</control>
 				<!-- Image Frame -->
 				<control type="image">
@@ -172,7 +180,7 @@
 					<height>383</height>
 					<texture>frames/ClassicFrame_FanartMedium.png</texture>
 					<aspectratio scalediffuse="false">scale</aspectratio>
-						<visible>!IsEmpty(ListItem.Title)</visible>
+						<visible>!String.IsEmpty(ListItem.Title)</visible>
 				</control>
 				
 				<!-- Season - TV Show Title -->
@@ -200,7 +208,7 @@
 					<font>METF_MediaDetailsSmall</font>
 					<textcolor>MediaDetailsYear</textcolor>
 					<label>$LOCALIZE[20416] $INFO[ListItem.Premiered]</label>
-					<visible>!IsEmpty(ListItem.Premiered) + Container.Content(episodes)</visible>
+					<visible>!String.IsEmpty(ListItem.Premiered) + Container.Content(episodes)</visible>
 				</control>-->
 				<!-- Picture Date -->
 				<control type="label">
@@ -213,7 +221,7 @@
 					<font>METF_MediaDetailsSmall</font>
 					<textcolor>MediaDetailsGenre</textcolor>
 					<label>$INFO[ListItem.PictureDateTime]</label>
-					<visible>Window.IsActive(pictures) + !IsEmpty(ListItem.PictureDateTime)</visible>
+					<visible>Window.IsActive(pictures) + !String.IsEmpty(ListItem.PictureDateTime)</visible>
 				</control>
 				<!-- Movie Sets -->
 				<control type="label">

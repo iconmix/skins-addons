@@ -12,6 +12,11 @@
 				<onup>905</onup>
 				<ondown>905</ondown>
 				<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
+
+<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
+<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
+
+
 				<onright>998</onright>
 				<orientation>vertical</orientation>
 				<pagecontrol>998</pagecontrol>
@@ -32,7 +37,9 @@
 						<colordiffuse>FilesDividerDiffuse</colordiffuse>
 					</control>
 					<!-- Items in Video Library -->
+					
 					<control type="label">
+					  <include>isWatched</include>
 						<posx>85</posx>
 						<posy>0</posy>
 						<width>475</width>
@@ -171,7 +178,7 @@
 					<texture background="true">$INFO[ListItem.Icon]</texture>
 					<aspectratio scalediffuse="false">keep</aspectratio>
 					<fadetime>300</fadetime>
-					<visible>Window.IsActive(10025) + ![Container.Content(seasons) | Container.Content(episodes) | Container.Content(musicvideos) | Container.Content(artists) | Container.Content(albums) | Container.Content(addons)] + IsEmpty(ListItem.Title)</visible>
+					<visible>Window.IsActive(10025) + ![Container.Content(seasons) | Container.Content(episodes) | Container.Content(musicvideos) | Container.Content(artists) | Container.Content(albums) | Container.Content(addons)] + String.IsEmpty(ListItem.Title)</visible>
 				</control>
 				<control type="image">
 					<posx>-70</posx>
@@ -181,7 +188,7 @@
 					<texture background="true" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
 					<aspectratio scalediffuse="false">stretch</aspectratio>
 					<fadetime>300</fadetime>
-					<visible>Window.IsActive(10025) + ![Container.Content(seasons) | Container.Content(episodes) | Container.Content(musicvideos) | Container.Content(artists) | Container.Content(albums) | Container.Content(addons)] + !IsEmpty(ListItem.Title)</visible>
+					<visible>Window.IsActive(10025) + ![Container.Content(seasons) | Container.Content(episodes) | Container.Content(musicvideos) | Container.Content(artists) | Container.Content(albums) | Container.Content(addons)] + !String.IsEmpty(ListItem.Title)</visible>
 				</control>
 				<!-- Poster Image for TV Show Seasons and Episodes -->
 				<control type="image">
@@ -203,7 +210,7 @@
 					<texture>frames/ClassicFrame_PosterMedium.png</texture>
 					<aspectratio>stretch</aspectratio>
 					<fadetime>300</fadetime>
-					<visible>[!IsEmpty(ListItem.Title) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows)]] | [Container.Content(seasons) | Container.Content(episodes)]</visible>
+					<visible>[!String.IsEmpty(ListItem.Title) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows)]] | [Container.Content(seasons) | Container.Content(episodes)]</visible>
 				</control>
 				<!-- Pictures, Addons, Music Videos, and Album/Artist Cover -->
 				<control type="image">
@@ -280,7 +287,7 @@
 					<texture fallback="home_art/pictures.jpg" background="true">$INFO[ListItem.Art(fanart)]</texture>
 					<aspectratio scalediffuse="false" background="true">scale</aspectratio>
 					<fadetime>300</fadetime>
-					<visible>Window.IsActive(pictures) + !IsEmpty(ListItem.Art(fanart))</visible>
+					<visible>Window.IsActive(pictures) + !String.IsEmpty(ListItem.Art(fanart))</visible>
 				</control>
 				<control type="image">
 					<posx>852</posx>
@@ -290,7 +297,7 @@
 					<texture fallback="home_art/pictures.jpg" background="true">$INFO[ListItem.filenameandpath]</texture>
 					<aspectratio scalediffuse="false" background="true">scale</aspectratio>
 					<fadetime>300</fadetime>
-					<visible>Window.IsActive(pictures) + IsEmpty(ListItem.Art(fanart))</visible>
+					<visible>Window.IsActive(pictures) + String.IsEmpty(ListItem.Art(fanart))</visible>
 				</control>
 				<!-- Addons Fanart Image -->
 				<control type="image">

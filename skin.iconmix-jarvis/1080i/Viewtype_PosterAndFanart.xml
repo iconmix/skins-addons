@@ -16,7 +16,7 @@
 				<bordertexture border="9" colordiffuse="FFFFFFFF">landscapeinfo.png</bordertexture>
 				<texture background="true" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
 				<aspectratio scalediffuse="false">scale</aspectratio>
-				<visible>!IsEmpty(ListItem.Title)</visible>
+				<visible>!String.IsEmpty(ListItem.Title)</visible>
 			</control>
 			<control type="image">
 				<posx>20</posx>
@@ -28,7 +28,7 @@
 				<bordertexture border="9" colordiffuse="FFFFFFFF">landscapeinfo.png</bordertexture>
 				<texture background="true">$INFO[ListItem.Icon]</texture>
 				<aspectratio scalediffuse="false">scale</aspectratio>
-				<visible>IsEmpty(ListItem.Title)+!Container.Content(genres)</visible>
+				<visible>String.IsEmpty(ListItem.Title)+!Container.Content(genres)</visible>
 			</control>
 			<control type="image">
 				<posx>20</posx>
@@ -40,7 +40,7 @@
 				<bordertexture border="9" colordiffuse="FFFFFFFF">landscapeinfo.png</bordertexture>
 				<texture fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
 				<aspectratio scalediffuse="false">scale</aspectratio>
-				<visible>IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
+				<visible>String.IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
 			</control>
 			<control type="group">
 				<visible>StringCompare(Control.GetLabel(1099),2)+!Container.Content(Genres)</visible>
@@ -52,7 +52,20 @@
 					<height>392</height>
 					<texture>$VAR[Boitier_SelonResolution]</texture>
 				</control>
-				
+				<!--
+				<control type="group">
+					<visible>SubString(ListItem.DBTYPE,set) | Container.Content(movies) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
+					<control type="image">
+						<top>-2</top>
+						<left>125</left>
+						<width>60</width>
+						<height>35</height>
+						<texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture>
+						<aspectratio>keep</aspectratio>
+						<colordiffuse>MediaFlagDiffuse</colordiffuse>
+					</control>
+				</control>
+				-->
 			</control>
 		</control>
 
@@ -69,7 +82,7 @@
 				<texture background="true" diffuse="showcase_matte.png" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
 
 				<aspectratio scalediffuse="false">scale</aspectratio>
-				<visible>!IsEmpty(ListItem.Title)</visible>
+				<visible>!String.IsEmpty(ListItem.Title)</visible>
 			</control>
 			<control type="image">
 				<posx>20</posx>
@@ -80,7 +93,7 @@
 
 				<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
 				<aspectratio scalediffuse="false">scale</aspectratio>
-				<visible>IsEmpty(ListItem.Title)+!Container.Content(genres)</visible>
+				<visible>String.IsEmpty(ListItem.Title)+!Container.Content(genres)</visible>
 			</control>
 			<control type="image">
 				<posx>20</posx>
@@ -91,7 +104,7 @@
 
 				<texture background="true" diffuse="showcase_matte.png" fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
 				<aspectratio scalediffuse="false">scale</aspectratio>
-				<visible>IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
+				<visible>String.IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
 			</control>
 
 			<control type="image">
@@ -120,6 +133,11 @@
 				<height>500</height>
 				<width>2100</width>				
 				<include condition="!Skin.HasSetting(ViewLockdown)">OnUp7000</include>
+
+<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,up,Home)</onfocus>
+<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,down,Home)</onfocus>
+
+
 				<ondown>60</ondown>
 				<onleft>550</onleft>
 				<onright>550</onright>
@@ -136,6 +154,7 @@
 				<itemlayout width="260" height="420">
 				
 					<control type="group">
+					   <include>isWatched</include>
 						<posx>-30</posx>
 						<posy>80</posy>
 						<!-- Unfocused Item - Poster -->
@@ -199,17 +218,17 @@
 							<texture>frames/ClassicFrame_SegmentedDiffuse.png</texture>
 							<aspectratio scalediffuse="false">stretch</aspectratio>
 							<colordiffuse>FrameBackgroundDiffuse</colordiffuse>
-							<visible>!IsEmpty(ListItem.Title) + !Skin.HasSetting(NoSegmentedFanart)</visible>
+							<visible>!String.IsEmpty(ListItem.Title) + !Skin.HasSetting(NoSegmentedFanart)</visible>
 						</control>
 						<control type="image">
 							<posx>23</posx>
 							<posy>21</posy>
 							<width>646</width>
 							<height>362</height>
-							<texture>frames/ClassicFrame_Background.png</texture>
+							<texture>frames/ClassicFrame_background.png</texture>
 							<aspectratio scalediffuse="false">stretch</aspectratio>
 							<colordiffuse>FrameBackgroundDiffuse</colordiffuse>
-							<visible>!IsEmpty(ListItem.Title) + Skin.HasSetting(NoSegmentedFanart)</visible>
+							<visible>!String.IsEmpty(ListItem.Title) + Skin.HasSetting(NoSegmentedFanart)</visible>
 						</control>
 						<control type="image">
 							<posx>23</posx>
@@ -218,7 +237,7 @@
 							<height>362</height>
 							<texture fallback="home_art/movies.jpg" diffuse="frames/ClassicFrame_SegmentedDiffuse.png">$VAR[LandscapeFanart]</texture>
 							<aspectratio scalediffuse="false">stretch</aspectratio>
-							<visible>!IsEmpty(ListItem.Title) + !Skin.HasSetting(NoSegmentedFanart)</visible>
+							<visible>!String.IsEmpty(ListItem.Title) + !Skin.HasSetting(NoSegmentedFanart)</visible>
 						</control>
 						<control type="image">
 							<posx>23</posx>
@@ -227,7 +246,7 @@
 							<height>362</height>
 							<texture fallback="home_art/movies.jpg">$VAR[LandscapeFanart]</texture>
 							<aspectratio scalediffuse="false">stretch</aspectratio>
-							<visible>!IsEmpty(ListItem.Title) + Skin.HasSetting(NoSegmentedFanart)</visible>
+							<visible>!String.IsEmpty(ListItem.Title) + Skin.HasSetting(NoSegmentedFanart)</visible>
 						</control>
 						<!-- Focused Item Segmented Fanart Frame -->
 						<control type="image">
@@ -235,7 +254,7 @@
 							<height>410</height>
 							<texture>frames/ClassicFrame_Segmented.png</texture>
 							<aspectratio scalediffuse="false">stretch</aspectratio>
-							<visible>!IsEmpty(ListItem.Title) + !Skin.HasSetting(NoSegmentedFanart)</visible>
+							<visible>!String.IsEmpty(ListItem.Title) + !Skin.HasSetting(NoSegmentedFanart)</visible>
 						</control>
 						<!-- Focused Item Normal Fanart Frame -->						
 						<control type="image">
@@ -243,7 +262,7 @@
 							<height>410</height>
 							<texture>frames/ClassicFrame_FanartMedium.png</texture>
 							<aspectratio scalediffuse="false">stretch</aspectratio>
-							<visible>!IsEmpty(ListItem.Title) + Skin.HasSetting(NoSegmentedFanart)</visible>
+							<visible>!String.IsEmpty(ListItem.Title) + Skin.HasSetting(NoSegmentedFanart)</visible>
 						</control>
 					</control>
 				</focusedlayout>

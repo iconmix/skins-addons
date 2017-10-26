@@ -3,7 +3,7 @@
   <onload condition="System.HasAddon(script.tv.show.next.aired)">RunScript(script.tv.show.next.aired,backend=True)</onload>-->
 
   <!---->
-  <onload condition="IsEmpty(Window(Home).property(iconmixtoolsbackend))">RunScript(script.iconmixtools,backend=True)</onload>-->
+  <onload condition="String.IsEmpty(Window(Home).property(iconmixtoolsbackend))">RunScript(script.iconmixtools,backend=True)</onload>-->
   <onload>SetProperty(SetTitle,,Home) </onload>
   <onunload>SetProperty(SetTitle,,Home) </onunload>
   <onload>SetProperty(MovieSagaTitle,,Home)</onload>
@@ -80,7 +80,7 @@
         <include>Viewtype_Disc</include>			<!-- 586 -->
         <include>Viewtype_DiscV</include>			<!-- 587 -->
         <include>Viewtype_ListCurved</include> <!-- 906 -->
-        <include>Viewtype_Roulette</include>			<!-- 501 -->
+        <!--<include>Viewtype_Roulette</include>			 501 -->
       </control>
 
       -- -->
@@ -127,7 +127,7 @@
       -->
       <!----------------------------------------------SAGAS------------------------------------------------------------------ -->
       <control type="group">
-        <visible>!Window.IsActive(502)+Control.HasFocus(2999)+!IsEmpty(Window(Home).Property(ShowFocus))+!Container(1999).OnNext+!Container(1999).OnPrevious</visible>
+        <visible>!Window.IsActive(502)+Control.HasFocus(2999)+!String.IsEmpty(Window(Home).Property(ShowFocus))+!Container(1999).OnNext+!Container(1999).OnPrevious</visible>
         <posx>480</posx>
         <posy>260</posy>
         <animation type="Visible"  reversible="false">
@@ -241,7 +241,7 @@
       <control type="group">
         <top>-15</top>
 
-        <visible>!IsEmpty(ListItem.DBID)</visible>
+        <visible>!String.IsEmpty(ListItem.DBID)</visible>
 
         <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
           <effect type="slide" end="0,-820" time="0"  />
@@ -532,7 +532,7 @@
         <posy>2</posy>
         <posx>0</posx>
 
-        <visible>Container.Content(episodes)+!IsEmpty(ListItem.TVShowTitle)+!IsEmpty(Window(Home).Property(iconmixEpSa))</visible>
+        <visible>Container.Content(episodes)</visible> <!-- +!String.IsEmpty(ListItem.TVShowTitle)+!String.IsEmpty(Window(Home).Property(iconmixEpSa))</visible> -->
 
         <control type="image">
           <texture>frames/genrestag.png</texture>
@@ -604,7 +604,7 @@
           <left>30</left>
           <visible>Skin.HasSetting(CacheFond)</visible>
           <control type="group">
-            <visible>IsEmpty(Window(Home).Property(IconMixSagaClearLogo))</visible>
+            <visible>String.IsEmpty(Window(Home).Property(IconMixSagaClearLogo))</visible>
             <control type="fadelabel">
               <width>550</width>
               <posx>40</posx>
@@ -641,7 +641,7 @@
         <control type="group"> <!-- en vue normale -->
           <visible>!Skin.HasSetting(CacheFond)</visible>
           <control type="group">
-            <visible>IsEmpty(Window(Home).Property(IconMixSagaClearLogo))</visible>
+            <visible>String.IsEmpty(Window(Home).Property(IconMixSagaClearLogo))</visible>
             <control type="fadelabel">
               <width>550</width>
               <posx>40</posx>
@@ -825,7 +825,7 @@
 
         <texture>flags/notation/pnote$INFO[ListItem.UserRating].png</texture>
         <aspectratio>keep</aspectratio>
-        <visible>!IsEmpty(ListItem.UserRating)</visible>
+        <visible>!String.IsEmpty(ListItem.UserRating)</visible>
       </control>
     </control>
 
@@ -841,7 +841,7 @@
   <control type="label">
   <posx>700</posx>
 
-  <label>Varaiable:$INFO[Window(Home).Property(IconMixSagaClearLogo)][CR]IconMixSaga=$INFO[Window(Home).Property(IconMixSaga)][CR]Rating=$INFO[ListItem.Rating][CR]Rating1999=$INFO[Container(1999).ListItem.Property(Rating)][CR]nbepisodes:$INFO[Window(Home).Property(iconmixEpSa)][CR]poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]DBTYPE=$INFO[Container(1999).ListItem.DBTYPE]</label>
+  <label>$INFO[ListItem.TVShowTitle][CR]$INFO[ListItem.Overlay][CR]Varaiable:$INFO[Window(Home).Property(ItemUniqueGenre)]O[CR]IconMixSaga=$INFO[Window(Home).Property(IconMixSaga)][CR]Rating=$INFO[ListItem.Rating][CR]Rating1999=$INFO[Container(1999).ListItem.Property(Rating)][CR]nbepisodes:$INFO[Window(Home).Property(iconmixEpSa)][CR]poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]DBTYPE=$INFO[Container(1999).ListItem.DBTYPE][CR]Content:$INFO[Container.Content]Pays : $INFO[ListItem.Country][CR]Country1:$INFO[Window(Home).Property(ItemCountry1)]O[CR]Country2:$INFO[Window(Home).Property(ItemCountry2)]O</label>
 
   </control>
   -->

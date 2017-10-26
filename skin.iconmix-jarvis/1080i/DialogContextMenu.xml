@@ -39,6 +39,7 @@
       <itemgap>2</itemgap>
 
       <!---->
+      
       <control type="button" id="2001">
 						<!-- Choix elements SAGAS -->
 						<include>BoutonCommun</include>
@@ -180,7 +181,12 @@
         <onclick></onclick>
         <visible>StringCompare(ListItem.DBTYPE,movie)</visible>
       </control>
-      
+      <control type="button" id="2108">
+            <description>Search</description>
+            <label>137</label>
+            <include>BoutonCommun</include>
+            <onclick>VideoLibrary.Search</onclick>
+          </control>
      
     </control>
     <control type="button" id="1000">

@@ -53,7 +53,9 @@
 					<visible>Container.Content(musicvideos) | Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons)</visible>
 					
 					<itemlayout height="700" width="330">
+					 
 						<control type="group">
+						   <include>isWatched</include>
 						<control type="group">
 						<!--	<animation effect="rotatey" center="150" start="0" end="-35" time="500" condition="true">Conditional</animation>-->
 						
@@ -142,7 +144,7 @@
 							
 						</control>
 						<include>AnimationCacheNonSelect</include>
-			</control>
+			       </control>
 						</itemlayout>
 					<focusedlayout height="600" width="360">
 						<include>ActiveClearArt</include>
@@ -170,7 +172,7 @@
 					<!--<animation effect="slide" end="-400" time="1" delay="0" reversible="false">UnFocus</animation> -->
 					<animation effect="slide" end="-400" time="1" delay="0" reversible="false" condition="Container.OnNext()|Container.OnPrevious()">Conditional</animation>
 					<control type="group">
-						<visible>!SubString(ListItem.DBTYPE,set)|[SubString(ListItem.DBTYPE,set)+!IsEmpty(ListItem.Art(discart))]</visible>
+						<visible>!SubString(ListItem.DBTYPE,set)|[SubString(ListItem.DBTYPE,set)+!String.IsEmpty(ListItem.Art(discart))]</visible>
 						<control type="image">
 							<left>65</left>
 							<top>180</top>
@@ -189,7 +191,7 @@
 							<aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
 							<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
 							<animation effect="rotate"  center="auto" end="-360" time="1000" delay="1300" reversible="false">Focus</animation>			
-							<visible>IsEmpty(ListItem.Art(discart))</visible>
+							<visible>String.IsEmpty(ListItem.Art(discart))</visible>
 						</control>						
 					</control>
 					

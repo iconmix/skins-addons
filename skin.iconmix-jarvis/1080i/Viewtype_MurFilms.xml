@@ -34,7 +34,7 @@
 							<height>240</height>
 							<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Art(poster)]</texture>
 							<aspectratio scalediffuse="true">stretch</aspectratio>
-							<visible>!IsEmpty(ListItem.Art(poster))</visible>
+							<visible>!String.IsEmpty(ListItem.Art(poster))</visible>
 						</control>
 						<control type="image">
 							<posx>0</posx>
@@ -43,7 +43,7 @@
 							<height>240</height>
 							<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
 							<aspectratio scalediffuse="true">keep</aspectratio>
-							<visible>IsEmpty(ListItem.Art(poster))+!Container.Content(genres)</visible>
+							<visible>String.IsEmpty(ListItem.Art(poster))+!Container.Content(genres)</visible>
 						</control>
 							<control type="image">
 							<posx>0</posx>
@@ -52,7 +52,7 @@
 							<height>240</height>
 							<texture fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
 				<aspectratio scalediffuse="false">keep</aspectratio>
-				<visible>IsEmpty(ListItem.Art(poster))+Container.Content(genres)</visible>
+				<visible>String.IsEmpty(ListItem.Art(poster))+Container.Content(genres)</visible>
 							
 						</control>
 						<control type="image">
@@ -62,15 +62,7 @@
 							<height>240</height>
 								<texture border="-17">showcase_shadow.png</texture>
 							</control>
-							<control type="image">
-				<posx>120</posx>
-				<posy>200</posy>
-				<width>38</width>
-				<height>38</height>
-				<texture>$INFO[ListItem.Overlay]</texture>
-				<colordiffuse>WatchedOverlay</colordiffuse>
-				<visible>!Skin.HasSetting(HideTVWatchedOverlays)</visible>
-			</control>
+							<include>isWatched</include>
 					<include>ShowTotalTvEp</include>
 					<include>AnimationCacheNonSelect</include>
 			</control>
@@ -91,7 +83,7 @@
 							<height>240</height>
 							<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Art(poster)]</texture>
 							<aspectratio scalediffuse="true">stretch</aspectratio>
-							<visible>!IsEmpty(ListItem.Art(poster))</visible>
+							<visible>!String.IsEmpty(ListItem.Art(poster))</visible>
 						</control>
 						<control type="image">
 							<posx>0</posx>
@@ -100,7 +92,7 @@
 							<height>240</height>
 							<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
 							<aspectratio scalediffuse="true">keep</aspectratio>
-							<visible>IsEmpty(ListItem.Art(poster))+!Container.Content(genres)</visible>
+							<visible>String.IsEmpty(ListItem.Art(poster))+!Container.Content(genres)</visible>
 						</control>
 							<control type="image">
 							<posx>0</posx>
@@ -109,7 +101,7 @@
 							<height>240</height>
 							<texture fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
 				<aspectratio scalediffuse="false">keep</aspectratio>
-				<visible>IsEmpty(ListItem.Art(poster))+Container.Content(genres)</visible>
+				<visible>String.IsEmpty(ListItem.Art(poster))+Container.Content(genres)</visible>
 							
 						</control>
 						<control type="image">

@@ -24,7 +24,7 @@
 				<onup>906</onup>
 				<ondown>906</ondown>
 				<oninfo condition="Container.Content(actors|Container.Content(directors)">SetProperty(ActorThumb,$VAR[PosterThumb],Home)</oninfo>
-			<oninfo condition="Container.Content(actors|Container.Content(directors)">SetFocus(8889)</oninfo>
+				<oninfo condition="Container.Content(actors|Container.Content(directors)">SetFocus(8889)</oninfo>
 				
 				<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
 				<onright>60</onright>
@@ -38,9 +38,10 @@
 				
 				<include>Animation_HiddenByInfo</include>
 				<itemlayout height="35">
-				
+				  
 					<!-- Items in Video Library -->
 					<control type="label">
+					  <include>isWatched</include>
 						<posx>85</posx>
 						<posy>-2</posy>
 						<width>1500</width>
@@ -123,7 +124,7 @@
 						<label>$INFO[ListItem.Property(NumEpisodes)] $LOCALIZE[20360]</label>
 						<font>METF_InfoText</font>
 						<textcolor>MediaDetailsEpisodes</textcolor>
-						<visible>Container.Content(tvshows) + !IsEmpty(ListItem.Property(NumEpisodes))</visible>
+						<visible>Container.Content(tvshows) + !String.IsEmpty(ListItem.Property(NumEpisodes))</visible>
 					</control>
 					<!-- Episode Count for Seasons -->
 					<control type="label">
@@ -136,7 +137,7 @@
 						<label>$INFO[ListItem.Property(NumEpisodes)] $LOCALIZE[20360]</label>
 						<font>comic24</font>
 						<textcolor>MediaDetailsEpisodes</textcolor>
-						<visible>[Container.Content(seasons) + !IsEmpty(ListItem.Property(NumEpisodes))] + !IsEmpty(ListItem.Property(UnWatchedEpisodes))</visible>
+						<visible>[Container.Content(seasons) + !String.IsEmpty(ListItem.Property(NumEpisodes))] + !String.IsEmpty(ListItem.Property(UnWatchedEpisodes))</visible>
 					</control>
 					<!-- Star Rating -->
 					<control type="group">
@@ -151,7 +152,7 @@
 							<label>$INFO[ListItem.Rating]</label>
 							<font>METF_InfoText</font>
 							<textcolor>TextNF</textcolor>
-							<visible>!IsEmpty(ListItem.Rating)</visible>
+							<visible>!String.IsEmpty(ListItem.Rating)</visible>
 						</control>
 						<control type="image">
 							<posx>772</posx>
@@ -160,7 +161,7 @@
 							<height>20</height>
 							<texture>Star.png</texture>
 							<colordiffuse>FFFFFFFF</colordiffuse>
-							<visible>!IsEmpty(ListItem.Rating)</visible>
+							<visible>!String.IsEmpty(ListItem.Rating)</visible>
 						</control>
 					</control>
 				</itemlayout>
@@ -199,7 +200,7 @@
 						<fadetime>100</fadetime>
 				    <texture>frames/banner_frame2t.png</texture>
 						<aspectratio scalediffuse="false">stretch</aspectratio>
-						<visible>[!IsEmpty(ListItem.Title) | !IsEmpty(ListItem.Label)] + [!SubString(ListItem.Art(fanart),default)|!SubString(ListItem.Icon,default)]</visible>
+						<visible>[!String.IsEmpty(ListItem.Title) | !String.IsEmpty(ListItem.Label)] + [!SubString(ListItem.Art(fanart),default)|!SubString(ListItem.Icon,default)]</visible>
 					</control>
 							
 					
@@ -267,7 +268,7 @@
 						<label>$INFO[ListItem.Property(NumEpisodes)] $LOCALIZE[20360]</label>
 						<font>METF_InfoText</font>
 						<textcolor>MediaDetailsEpisodes</textcolor>
-						<visible>Container.Content(tvshows) + !IsEmpty(ListItem.Property(NumEpisodes))</visible>
+						<visible>Container.Content(tvshows) + !String.IsEmpty(ListItem.Property(NumEpisodes))</visible>
 					</control>
 					<!-- Episode Count for Seasons -->
 						<control type="label">
@@ -280,7 +281,7 @@
 						<label>$INFO[ListItem.Property(NumEpisodes)] $LOCALIZE[20360]</label>
 						<font>comic24</font>
 						<textcolor>MediaDetailsEpisodes</textcolor>
-						<visible>[Container.Content(seasons) + !IsEmpty(ListItem.Property(NumEpisodes))] + !IsEmpty(ListItem.Property(UnWatchedEpisodes))</visible>
+						<visible>[Container.Content(seasons) + !String.IsEmpty(ListItem.Property(NumEpisodes))] + !String.IsEmpty(ListItem.Property(UnWatchedEpisodes))</visible>
 					</control>
 					<!-- Star Rating -->
 					<control type="group">
@@ -299,7 +300,7 @@
 							<label>$INFO[ListItem.Rating]</label>
 							<font>METF_InfoText</font>
 							<textcolor>TextNF</textcolor>
-							<visible>!IsEmpty(ListItem.Rating)</visible>
+							<visible>!String.IsEmpty(ListItem.Rating)</visible>
 						</control>
 						<control type="image">
 							<posx>772</posx>
@@ -308,7 +309,7 @@
 							<height>20</height>
 							<texture>Star.png</texture>
 							<colordiffuse>$VAR[RatingColor]</colordiffuse>
-							<visible>!IsEmpty(ListItem.Rating)</visible>
+							<visible>!String.IsEmpty(ListItem.Rating)</visible>
 						</control>
 					</control>
 			
@@ -345,7 +346,7 @@
 				<height>24</height>
 				<label>-</label>
 				<onclick>ActivateWindow(10025,"videodb://movies/sets/$INFO[ListItem.SetId]/?setid=$INFO[ListItem.SetId]",return)</onclick>
-				<visible>Window.IsActive(10025) + !Container.Content(sets) + !IsEmpty(ListItem.Set)</visible>
+				<visible>Window.IsActive(10025) + !Container.Content(sets) + !String.IsEmpty(ListItem.Set)</visible>
 			</control>			
 			<!-- Browser label and flags -->
 		

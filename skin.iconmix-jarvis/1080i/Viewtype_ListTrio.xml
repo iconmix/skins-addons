@@ -19,7 +19,8 @@
 					<colordiffuse>DialogBackgroundColor</colordiffuse>	
 				</control>
 		
-			<control type="group">
+						
+		<control type="group">
       <top>-200</top>
       <posx>1425</posx>
       <animation effect="fade" start="100" end="0" time="0" condition="Container(557).OnPrevious+Container(557).OnNext" reversible="false">conditional</animation>
@@ -73,8 +74,7 @@
     			  </focusedlayout>
     		  
 				</control>
-		</control>			
-				
+		</control>		
 		<control type="list" id="557">
 			<animation type="Conditional" condition="Window.IsActive(addoninformation)">
 				<effect type="zoom" time="600" center="640,360" start="100" end="50" tween="cubic" easing="out" />
@@ -108,6 +108,7 @@
 			<include>Animation_HiddenByInfo</include>
 			<itemlayout width="0" height="35">
 				<!-- List Line Item Divider -->
+				
 				<control type="image">
 					<posx>5</posx>
 					<posy>33</posy>
@@ -119,6 +120,7 @@
 				</control>
 				<!-- Items in Video Library -->
 				<control type="label">
+				  <include>isWatched</include>
 					<posx>95</posx>
 					<posy>-2</posy>
 					<width>708</width>
@@ -539,8 +541,8 @@
 	   
     </control>
     ---->	
-   
     
+   
 		<!-- Sets button 
 		<control type="button" id="997">
 			<onup>557</onup>

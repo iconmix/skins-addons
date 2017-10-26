@@ -14,7 +14,7 @@
 				<posy>480</posy>
 				<width>1920</width>
 				<height>170</height>
-				<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+				<texture diffuse="shine.png">frames/ClassicFrame_background.png</texture>
 				<include>AnimationCacheNonSelect</include>
 			
 				<colordiffuse>90101010</colordiffuse>
@@ -26,6 +26,11 @@
 				<width>2000</width>
 				<align>center</align>
 				<include condition="!Skin.HasSetting(ViewLockdown)">OnUp7000</include>
+
+<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,up,Home)</onfocus>
+<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,down,Home)</onfocus>
+
+
 		<!--		<ondown>60</ondown>-->
 				
 				<ondown condition="!SubString(ListItem.DBTYPE,set)">60</ondown>
@@ -43,7 +48,9 @@
 				
 				<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows)]</visible>
 				<itemlayout width="400" height="194">
+				  
 					<control type="group">
+					  <include>isWatched</include>
 					<control type="image" id="9898">						
 						<posx>9</posx>
 						<posy>118</posy>
@@ -112,7 +119,7 @@
 			<posy>0</posy>
 			<width>330</width>
 			<height>820</height>
-			<texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
+			<texture diffuse="shine.png">frames/ClassicFrame_background.png</texture>
 			<include>AnimationCacheNonSelect</include>
 		
 			<colordiffuse>90101010</colordiffuse>
@@ -123,6 +130,11 @@
 			<height>800</height>
 			<width>1900</width>
 			<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
+
+<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
+<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
+
+
 			<ondown>560</ondown>
 			<onup>560</onup>
 			<viewtype label="$LOCALIZE[31818]">icon</viewtype>
@@ -134,7 +146,9 @@
 			
 			<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows)]</visible>
 			<itemlayout width="294" height="200">
+			 
 				<control type="group">
+				   <include>isWatched</include>
 				<control type="image" id="9898">
 					<include>Animation_HiddenByInfo</include>
 					<posx>9</posx>
