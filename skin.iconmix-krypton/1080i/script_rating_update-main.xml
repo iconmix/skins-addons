@@ -13,7 +13,7 @@
 			<posy>-20</posy>
 			<width>620</width>
 			<height>400</height>
-			<texture>frames/Menu_Glass2c.png</texture>
+			<texture>frames/Menu_Glass2b.png</texture>
 		</control>
 		<control type="label" id="100">
 			<description>Title Label</description>

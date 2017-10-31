@@ -674,7 +674,8 @@ class Main:
                               self.windowhome.clearProperty('IconMixSagaBanner')
                               self.windowhome.clearProperty('IconMixSagaDiscArt')
                               self.windowhome.clearProperty('IconMixSagaPoster')
-                              self.windowhome.clearProperty('IconMixSagaThumb')  
+                              self.windowhome.clearProperty('IconMixSagaThumb') 
+                              self.windowhome.clearProperty('ItemCountry1') 
                               ListeItemx=[]                         
                               if not self.DBTYPE=="set" and not status=="1":
                                 status="1"
@@ -754,11 +755,13 @@ class Main:
                                 
                               if self.DBTYPEOK or self.DBTYPE=="tvshow":
                                  self.windowhome.setProperty('IconMixExtraFanart',utils.CheckItemExtrafanartPath(xbmc.getInfoLabel("ListItem.Path")))
-                                 if self.DBTYPE!="tvshow": 
-                                   
+                                 #self.windowhome.setProperty('IconMixTvShowCountry',utils.GetTvShowCountry(self.selecteditem))
+                                 if self.DBTYPE!="tvshow":                                    
                                    #self.windowhome.setProperty('IconMixExtraFanart',utils.CheckItemExtrafanartPath(self.DBTYPE,self.selecteditem))
                                    self.duration = xbmc.getInfoLabel("ListItem.Duration") 
                                    self.display_duration()
+                                 else:
+                                   utils.getepisodes(int(self.selecteditem),None,self.DBTYPE,None)
                               if self.DBTYPE=="episode" and xbmc.getCondVisibility("Skin.HasSetting(CheckSeries)"):
                                    TvSh=xbmc.getInfoLabel("ListItem.TVShowTitle") 
                                    TvSe=xbmc.getInfoLabel("ListItem.Season")

@@ -12,15 +12,15 @@
 <include name="ViewType_Vitrine">
 		<!-- 3dreflect -->
 		<control type="image">
-				<top>500</top>
-				<left>-10</left>
+				<top>450</top>
+				<left>-100</left>
 				<width>3000</width>
-				<height>300</height>
-				<texture background="true" >frames/ocean.png</texture>
+				<height>540</height>
+				<texture background="true" >frames/submenubar.png</texture>
 				<aspectratio scalediffuse="false">stretch</aspectratio>
 				<include>AnimationCacheNonSelect</include>
 		
-				<colordiffuse>90909090</colordiffuse>
+				<colordiffuse>BackgroundColor</colordiffuse>
 				<visible>Control.IsVisible(584)</visible>
 			<!---->
 				<animation effect="rotatey" center="0" start="0" end="-8" time="500" condition="true">Conditional</animation>

@@ -37,14 +37,14 @@
     			  <itemlayout width="490" height="300">
     			    <control type="image">
     			      <bordersize>8</bordersize>
-							<bordertexture border="8" colordiffuse="FFFFFFFF">frames/Menu_Glass2d.png</bordertexture>
+							<bordertexture border="8" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
     			      <texture>$INFO[ListItem.Icon]</texture>
     			    </control>
     			  </itemlayout>
     			  <focusedlayout width="490" height="300">
     			    <control type="image">
     			      <bordersize>8</bordersize>
-							<bordertexture border="8" colordiffuse="FFFFFFFF">frames/Menu_Glass2d.png</bordertexture>
+							<bordertexture border="8" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
     			      <texture>$INFO[ListItem.Icon]</texture>
     			    </control>
     			  </focusedlayout>
@@ -61,14 +61,14 @@
     			  <itemlayout width="490" height="300">
     			    <control type="image">
     			      <bordersize>8</bordersize>
-							<bordertexture border="8" colordiffuse="FFFFFFFF">frames/Menu_Glass2d.png</bordertexture>
+							<bordertexture border="8" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
     			      <texture>$INFO[ListItem.Icon]</texture>
     			    </control>
     			  </itemlayout>
     			  <focusedlayout width="490" height="300">
     			    <control type="image">
     			      <bordersize>8</bordersize>
-							<bordertexture border="8" colordiffuse="FFFFFFFF">frames/Menu_Glass2d.png</bordertexture>
+							<bordertexture border="8" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
     			      <texture>$INFO[ListItem.Icon]</texture>
     			    </control>
     			  </focusedlayout>

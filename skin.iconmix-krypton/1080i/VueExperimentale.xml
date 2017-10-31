@@ -59,7 +59,9 @@
 			  <aspectratio>keep</aspectratio>
 			</control>
 			-->
-			
+		<control type="group">
+		        <include>VisibleIfNotMovieSet</include>
+
 			<control type="image">
 				<posy>2030</posy>
 				<width>1920</width>
@@ -97,7 +99,7 @@
 			   <include>SpecialPlotBox</include>
 			   <visible>!Skin.HasSetting(Hide_Plot)+Skin.HasSetting(ShowLargePlot)</visible>
 			</control>
-			
+		</control>	
 
 			<!-- Title -->
 			<control type="fadelabel">

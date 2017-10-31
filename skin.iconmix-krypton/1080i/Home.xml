@@ -6,6 +6,20 @@
 	<onload condition="Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuTexteVertical)">Skin.ToggleSetting(MenuTexteVertical)</onload> <!-- default to Icon menu -->
 	<onload condition="Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuIconBobine)">Skin.ToggleSetting(MenuIconBobine)</onload> <!-- default to Icon menu -->
 	<onload condition="Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuIconVertical)">Skin.ToggleSetting(MenuIconVertical)</onload> <!-- default to Icon menu -->
+	<onload condition="!Skin.HasSetting(hideduree)+!Skin.HasSetting(hideduree2)">Skin.ToggleSetting(hideduree2)</onload>
+<onload condition="!Skin.HasSetting(hidegenre)+!Skin.HasSetting(hidegenre2)">Skin.ToggleSetting(hidegenre2)</onload>
+<onload condition="!Skin.HasSetting(hidestudio)+!Skin.HasSetting(hidestudio2)">Skin.ToggleSetting(hidestudio2)</onload>
+<onload condition="!Skin.HasSetting(hideannee)+!Skin.HasSetting(hideannee2)">Skin.ToggleSetting(hideannee2)</onload>
+<onload condition="!Skin.HasSetting(hidenotation)+!Skin.HasSetting(hidenotation2)">Skin.ToggleSetting(hidenotation2)</onload>
+<onload condition="!Skin.HasSetting(hidempaa)+!Skin.HasSetting(hidempaa2)">Skin.ToggleSetting(hidempaa2)</onload>
+<onload condition="!Skin.HasSetting(hidesource)+!Skin.HasSetting(hidesource2)">Skin.ToggleSetting(hidesource2)</onload>
+<onload condition="!Skin.HasSetting(hide3d)+!Skin.HasSetting(hide3d2)">Skin.ToggleSetting(hide3d2)</onload>
+<onload condition="!Skin.HasSetting(hideitemcountry)+!Skin.HasSetting(hideitemcountry2)">Skin.ToggleSetting(hideitemcountry)</onload>
+<onload condition="!Skin.HasSetting(hidecodecvideo)+!Skin.HasSetting(hidecodecvideo2)">Skin.ToggleSetting(hidecodecvideo)</onload>
+<onload condition="!Skin.HasSetting(hideresolution)+!Skin.HasSetting(hideresolution2)">Skin.ToggleSetting(hideresolution)</onload>
+<onload condition="!Skin.HasSetting(hideaspect)+!Skin.HasSetting(hideaspect2)">Skin.ToggleSetting(hideaspect)</onload>
+<onload condition="!Skin.HasSetting(hidesoustitres)+!Skin.HasSetting(hidesoustitres2)">Skin.ToggleSetting(hidesoustitres)</onload>
+<onload condition="!Skin.HasSetting(hidelangues)+!Skin.HasSetting(hidelangues2)">Skin.ToggleSetting(hidelangues)</onload>
 	<onload>RunScript(script.skinshortcuts,type=buildxml&amp;mainmenuID=9000&amp;levels=2)</onload>
 	<!--<onload>RunScript(script.tv.show.next.aired,backend=True)</onload>-->
 	<onload condition="String.IsEmpty(Window(Home).property(iconmixtoolsbackend))">RunScript(script.iconmixtools,backend=True)</onload>

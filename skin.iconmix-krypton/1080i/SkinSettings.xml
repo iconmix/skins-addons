@@ -31,6 +31,8 @@
           <pagecontrol>-</pagecontrol>
           <itemlayout height="38" width="380">
             <control type="label">
+<height>35</height>
+<height>35</height>
               <posx>0</posx>
               <posy>0</posy>
               <width>362</width>
@@ -55,6 +57,8 @@
               <animation effect="fade" start="100" end="50" condition="!Control.HasFocus(9000)">Conditional</animation>
             </control>
             <control type="label">
+<height>35</height>
+<height>35</height>
               <posx>0</posx>
               <posy>0</posy>
               <width>362</width>
@@ -396,9 +400,9 @@
             -->
             <control type="button" id="506">
               <include>SettingsLabel</include>
-              <label>$LOCALIZE[31403]</label>
-              <onright>7008</onright>
-              <onclick>setfocus(7008)</onclick>
+              <label>$LOCALIZE[31403] >>></label>
+              <onright>998</onright>
+              <onclick>setfocus(998)</onclick>
 
             </control>
 
@@ -557,7 +561,7 @@
           <include>SettingsLabel</include>
           <label>Synopsys</label>
           <label2>EXAMPLE</label2>
-          <onclick>SetFocus(7008)</onclick>
+          <onclick>noop</onclick>
         </control>
         <control type="button" id="106">
           <include>SettingsLabel</include>
@@ -1019,166 +1023,465 @@
 
   <control type="group">
     <visible>[ControlGroup(7008).HasFocus|ControlGroup(9007).HasFocus(506)]+Container(9000).Hasfocus(3)</visible>
+      <animation effect="fade" start="100" end="50" condition="!ControlGroup(7008).HasFocus+!ControlGroup(7009).HasFocus+!Control.HasFocus(999)+!Control.HasFocus(998)">Conditional</animation>
+
     <posy>850</posy>
     <control type="group">
+     
       <control type="grouplist"> <!-- 1ere ligne -->
-
+ 
         <height>150</height>
         <align>center</align>
         <itemgap>-20</itemgap>
         <orientation>horizontal</orientation>
+        <control type="label">
+       <width>100</width>
+        <posy>20</posy>
+        <label>$LOCALIZE[31276] 1:</label>
+        
+      </control>
         <include>mediaflaglinesettings1</include>
       </control>
     </control>
     <control type="group">
       <posy>77</posy>
+      
       <control type="grouplist"> <!-- 2eme ligne -->
-
         <height>150</height>
         <align>center</align>
         <itemgap>-20</itemgap>
         <orientation>horizontal</orientation>
+        <control type="label">
+        <posy>20</posy>
+        <width>100</width>
+        <label>$LOCALIZE[31276] 2:</label>
+        
+      </control>
         <include>mediaflaglinesettings2</include>
       </control>
     </control>
 
   </control>
 
+<control type="group">
+  <visible>[Control.HasFocus(999)|ControlGroup(7008).HasFocus|ControlGroup(7009).HasFocus|ControlGroup(9007).HasFocus(506)]+Container(9000).Hasfocus(3)</visible>
+  <animation effect="fade" start="100" end="50" condition="!ControlGroup(7008).HasFocus+!ControlGroup(7009).HasFocus+!Control.HasFocus(999)+!Control.HasFocus(998)">Conditional</animation>
   <control type="image">
-    <visible>[ControlGroup(7008).HasFocus|ControlGroup(9007).HasFocus(506)]+Container(9000).Hasfocus(3)</visible>
+
     <posx>1295</posx>
     <posy>5</posy>
     <width>580</width>
-    <height>640</height>
+    <height>750</height>
     <texture>frames/Menu_Glass2b.png</texture>
     <colordiffuse>DialogBackgroundColor</colordiffuse>
-    <animation effect="fade" start="100" end="70" condition="!ControlGroup(7008).HasFocus">Conditional</animation>
   </control>
+   <control type="button" id="999">
+    <posx>1330</posx>
+    <posy>55</posy>
+    <ondown>998</ondown>
+    <onup>999</onup>
+    <onleft>9007</onleft>
+      <onback>9007</onback>
+        <label>$LOCALIZE[31485]</label>
+        <include>BoutonCommunFlags</include>
+        <onclick condition="Skin.HasSetting(hideduree)+!Skin.HasSetting(hideduree2)+">Skin.ToggleSetting(hideduree2)</onclick>
+<onclick condition="Skin.HasSetting(hidegenre)+!Skin.HasSetting(hidegenre2)">Skin.ToggleSetting(hidegenre2)</onclick>
+<onclick condition="Skin.HasSetting(hidestudio)+!Skin.HasSetting(hidestudio2)">Skin.ToggleSetting(hidestudio2)</onclick>
+<onclick condition="Skin.HasSetting(hideannee)+!Skin.HasSetting(hideannee2)">Skin.ToggleSetting(hideannee2)</onclick>
+<onclick condition="Skin.HasSetting(hidenotation)+!Skin.HasSetting(hidenotation2)">Skin.ToggleSetting(hidenotation2)</onclick>
+<onclick condition="Skin.HasSetting(hidempaa)+!Skin.HasSetting(hidempaa2)">Skin.ToggleSetting(hidempaa2)</onclick>
+<onclick condition="Skin.HasSetting(hidesource)+!Skin.HasSetting(hidesource2)">Skin.ToggleSetting(hidesource2)</onclick>
+<onclick condition="Skin.HasSetting(hide3d)+!Skin.HasSetting(hide3d2)">Skin.ToggleSetting(hide3d2)</onclick>
 
-  <control type="group">
+<onclick condition="Skin.HasSetting(hideduree)">Skin.ToggleSetting(hideduree)</onclick>
+<onclick condition="Skin.HasSetting(hidegenre)">Skin.ToggleSetting(hidegenre)</onclick>
+<onclick condition="Skin.HasSetting(hidestudio)">Skin.ToggleSetting(hidestudio)</onclick>
+<onclick condition="Skin.HasSetting(hideannee)">Skin.ToggleSetting(hideannee)</onclick>
+<onclick condition="Skin.HasSetting(hidenotation)">Skin.ToggleSetting(hidenotation)</onclick>
+<onclick condition="Skin.HasSetting(hidempaa)">Skin.ToggleSetting(hidempaa)</onclick>
+<onclick condition="Skin.HasSetting(hidesource)">Skin.ToggleSetting(hidesource)</onclick>
+<onclick condition="Skin.HasSetting(hide3d)">Skin.ToggleSetting(hide3d)</onclick>
+
+<onclick condition="!Skin.HasSetting(hideitemcountry)+Skin.HasSetting(hideitemcountry2)">Skin.ToggleSetting(hideitemcountry)</onclick>
+<onclick condition="!Skin.HasSetting(hidecodecvideo)+Skin.HasSetting(hidecodecvideo2)">Skin.ToggleSetting(hidecodecvideo)</onclick>
+<onclick condition="!Skin.HasSetting(hideresolution)+Skin.HasSetting(hideresolution2)">Skin.ToggleSetting(hideresolution)</onclick>
+<onclick condition="!Skin.HasSetting(hideaspect)+Skin.HasSetting(hideaspect2)">Skin.ToggleSetting(hideaspect)</onclick>
+<onclick condition="!Skin.HasSetting(hidesoustitres)+Skin.HasSetting(hidesoustitres2)">Skin.ToggleSetting(hidesoustitres)</onclick>
+<onclick condition="!Skin.HasSetting(hidelangues)+Skin.HasSetting(hidelangues2)">Skin.ToggleSetting(hidelangues)</onclick>
+
+<onclick condition="Skin.HasSetting(hideitemcountry2)">Skin.ToggleSetting(hideitemcountry2)</onclick>
+<onclick condition="Skin.HasSetting(hidecodecvideo2)">Skin.ToggleSetting(hidecodecvideo2)</onclick>
+<onclick condition="Skin.HasSetting(hideresolution2)">Skin.ToggleSetting(hideresolution2)</onclick>
+<onclick condition="Skin.HasSetting(hideaspect2)">Skin.ToggleSetting(hideaspect2)</onclick>
+<onclick condition="Skin.HasSetting(hidesoustitres2)">Skin.ToggleSetting(hidesoustitres2)</onclick>
+<onclick condition="Skin.HasSetting(hidelangues2)">Skin.ToggleSetting(hidelangues2)</onclick>
+      </control>
+  <control type="radiobutton" id="998">
+    <posx>1330</posx>
+    <posy>95</posy>
+    <ondown>7008</ondown>
+    <onup>999</onup>
+    <onleft>9007</onleft>
+      <onback>9007</onback>
+        <label>$LOCALIZE[31786]</label>
+        <include>BoutonCommunFlags</include>
+        <selected>Skin.HasSetting(Hide_ExtraMediaFlags)</selected>
+        <onclick>Skin.ToggleSetting(Hide_ExtraMediaFlags)</onclick>
+      </control>
+      
+      <control type="label">
+        <posx>1600</posx>
+        <posy>150</posy>
+        <label>$LOCALIZE[31276] 1</label>
+        <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
+      </control>
+       <control type="label">
+        <posx>1735</posx>
+        <posy>150</posy>
+        <label>$LOCALIZE[31276] 2</label>
+        <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
+      </control>
+  <control type="group"> <!-- label L1 -->
     <posx>1300</posx>
-    <posy>50</posy>
-    <!--<include>NavMenuBackground</include>-->
-    <visible>[ControlGroup(7008).HasFocus|ControlGroup(9007).HasFocus(506)]+Container(9000).Hasfocus(3)</visible>
-    <animation effect="fade" start="100" end="70" condition="!ControlGroup(7008).HasFocus">Conditional</animation>
+    <posy>170</posy>
+    
     <control type="grouplist" id="7008">
+      <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
       <posx>30</posx>
       <posy>15</posy>
-      <width>490</width>
+      <width>320</width>
       <height>530</height>
       <itemgap>1</itemgap>
       <onleft>9007</onleft>
       <onback>9007</onback>
-      <onup>7008</onup>
+      <onright>7009</onright>
+      <onup>998</onup>
       <ondown>7008</ondown>
       <orientation>vertical</orientation>
-      <control type="radiobutton" id="999">
-        <label>$LOCALIZE[31786]</label>
-        <include>BoutonCommun</include>
-        <selected>Skin.HasSetting(Hide_ExtraMediaFlags)</selected>
-        <onclick>Skin.ToggleSetting(Hide_ExtraMediaFlags)</onclick>
-      </control>
-      <control type="image" id="998">
-        <include>Settings_Line</include>
-      </control>
+      <!--
+      
+      -->
+      
+     
       <control type="radiobutton" id="1000">
         <label>$LOCALIZE[31748]</label>
-        <include>BoutonCommun</include>
+        <include>BoutonCommunFlags</include>
+        <onright>2000</onright>
         <selected>!Skin.HasSetting(hideduree)</selected>
         <onclick>Skin.ToggleSetting(hideduree)</onclick>
-        <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
+        <onclick condition="!Skin.HasSetting(hideduree2)">Skin.ToggleSetting(hideduree2)</onclick>
+        
       </control>
       <control type="radiobutton" id="1001">
         <label>$LOCALIZE[31752]</label>
-        <include>BoutonCommun</include>
+        <include>BoutonCommunFlags</include>
+        <onright>2001</onright>
         <selected>!Skin.HasSetting(hidegenre)</selected>
         <onclick>Skin.ToggleSetting(hidegenre)</onclick>
-        <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
+        <onclick condition="!Skin.HasSetting(hidegenre2)">Skin.ToggleSetting(hidegenre2)</onclick>
+        
       </control>
       <control type="radiobutton" id="1002">
         <label>$LOCALIZE[31776]</label>
-        <include>BoutonCommun</include>
+        <include>BoutonCommunFlags</include>
+        <onright>2002</onright>
         <selected>!Skin.HasSetting(hidestudio)</selected>
         <onclick>Skin.ToggleSetting(hidestudio)</onclick>
-        <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
+        <onclick condition="!Skin.HasSetting(hidestudio2)">Skin.ToggleSetting(hidestudio2)</onclick>
+        
       </control>
       <control type="radiobutton" id="1003">
         <label>$LOCALIZE[31754]</label>
-        <include>BoutonCommun</include>
+        <include>BoutonCommunFlags</include>
+        <onright>2003</onright>
         <selected>!Skin.HasSetting(hideannee)</selected>
         <onclick>Skin.ToggleSetting(hideannee)</onclick>
-        <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
+        <onclick condition="!Skin.HasSetting(hideannee2)">Skin.ToggleSetting(hideannee2)</onclick>
+        
       </control>
       <control type="radiobutton" id="1004">
         <label>$LOCALIZE[31755]</label>
-        <include>BoutonCommun</include>
+        <include>BoutonCommunFlags</include>
+        <onright>2004</onright>
         <selected>!Skin.HasSetting(hidenotation)</selected>
         <onclick>Skin.ToggleSetting(hidenotation)</onclick>
-        <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
+        <onclick condition="!Skin.HasSetting(hidenotation2)">Skin.ToggleSetting(hidenotation2)</onclick>
+        
       </control>
       <control type="radiobutton" id="1005">
         <label>$LOCALIZE[31768]</label>
-        <include>BoutonCommun</include>
+        <include>BoutonCommunFlags</include>
+        <onright>2005</onright>
         <selected>!Skin.HasSetting(hidempaa)</selected>
         <onclick>Skin.ToggleSetting(hidempaa)</onclick>
-        <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
+        <onclick condition="!Skin.HasSetting(hidempaa2)">Skin.ToggleSetting(hidempaa2)</onclick>
+        
       </control>
       <control type="radiobutton" id="1006">
         <label>$LOCALIZE[31788]</label>
-        <include>BoutonCommun</include>
+        <include>BoutonCommunFlags</include>
+        <onright>2006</onright>
         <selected>!Skin.HasSetting(hidesource)</selected>
         <onclick>Skin.ToggleSetting(hidesource)</onclick>
-        <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
+        <onclick condition="!Skin.HasSetting(hidesource2)">Skin.ToggleSetting(hidesource2)</onclick>
+        
       </control>
       <control type="radiobutton" id="1017">
         <label>$LOCALIZE[31789]</label>
-        <include>BoutonCommun</include>
+        <include>BoutonCommunFlags</include>
+        <onright>2017</onright>
         <selected>!Skin.HasSetting(hide3d)</selected>
         <onclick>Skin.ToggleSetting(hide3d)</onclick>
-        <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
+        <onclick condition="!Skin.HasSetting(hide3d2)">Skin.ToggleSetting(hide3d2)</onclick>
+        
       </control>
-      <control type="image" id="1020">
-        <include>Settings_Line</include>
+     
+      <control type="radiobutton" id="1020">
+        <label>$LOCALIZE[31753]</label>
+        <include>BoutonCommunFlags</include>
+        <onright>2020</onright>
+        <selected>!Skin.HasSetting(hideitemcountry)</selected>
+        <onclick>Skin.ToggleSetting(hideitemcountry)</onclick>
+        <onclick condition="!Skin.HasSetting(hideitemcountry2)">Skin.ToggleSetting(hideitemcountry2)</onclick>
+        
       </control>
       <control type="radiobutton" id="1021">
         <label>$LOCALIZE[31770]</label>
-        <include>BoutonCommun</include>
+        <onright>2021</onright>
+        <include>BoutonCommunFlags</include>
         <selected>!Skin.HasSetting(hidecodecvideo)</selected>
         <onclick>Skin.ToggleSetting(hidecodecvideo)</onclick>
-        <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
+        <onclick condition="!Skin.HasSetting(hidecodecvideo2)">Skin.ToggleSetting(hidecodecvideo2)</onclick>
+        
       </control>
       <control type="radiobutton" id="1022">
         <label>$LOCALIZE[31769]</label>
-        <include>BoutonCommun</include>
+        <include>BoutonCommunFlags</include>
+        <onright>2022</onright>
         <selected>!Skin.HasSetting(hideresolution)</selected>
         <onclick>Skin.ToggleSetting(hideresolution)</onclick>
-        <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
+        <onclick condition="!Skin.HasSetting(hideresolution2)">Skin.ToggleSetting(hideresolution2)</onclick>
+        
       </control>
       <control type="radiobutton" id="1023">
         <label>$LOCALIZE[31771]</label>
-        <include>BoutonCommun</include>
+        <onright>2023</onright>
+        <include>BoutonCommunFlags</include>
         <selected>!Skin.HasSetting(hideaspect)</selected>
         <onclick>Skin.ToggleSetting(hideaspect)</onclick>
-        <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
+        <onclick condition="!Skin.HasSetting(hideaspect2)">Skin.ToggleSetting(hideaspect2)</onclick>
+        
       </control>
       <control type="radiobutton" id="1024">
         <label>$LOCALIZE[31775]</label>
-        <include>BoutonCommun</include>
+        <onright>2024</onright>
+        <include>BoutonCommunFlags</include>
         <selected>!Skin.HasSetting(hidesoustitres)</selected>
         <onclick>Skin.ToggleSetting(hidesoustitres)</onclick>
-        <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
+        <onclick condition="!Skin.HasSetting(hidesoustitres2)">Skin.ToggleSetting(hidesoustitres2)</onclick>
+        
       </control>
       <control type="radiobutton" id="1025">
         <label>$LOCALIZE[31774]</label>
-        <include>BoutonCommun</include>
+        <include>BoutonCommunFlags</include>
+        <onright>2025</onright>
         <selected>!Skin.HasSetting(hidelangues)</selected>
         <onclick>Skin.ToggleSetting(hidelangues)</onclick>
-        <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
+        <onclick condition="!Skin.HasSetting(hidelangues2)">Skin.ToggleSetting(hidelangues2)</onclick>
+        
       </control>
 
     </control>
 
+
   </control>
+  <control type="group"> <!-- L2 -->
+    <posx>1500</posx>
+    <posy>170</posy>
+    <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
+
+    <control type="grouplist" id="7009">
+    <posx>230</posx>
+    <posy>15</posy>
+    <width>490</width>
+    <height>530</height>
+    <itemgap>1</itemgap>
+    <onleft>setfocus(7008)</onleft>
+    <onright>7009</onright>
+    <onback>9007</onback>
+    <onup>998</onup>
+    <ondown>7009</ondown>
+    <orientation>vertical</orientation>
+    <!--
+    <control type="radiobutton" id="999">
+      <label> </label>
+      
+      <include>BoutonCommunFlags2</include>
+      <selected>Skin.HasSetting(Hide_ExtraMediaFlags)</selected>
+      <onclick>Skin.ToggleSetting(Hide_ExtraMediaFlags)</onclick>
+    </control>
+    -->
+    
+    
+    <control type="radiobutton" id="2000">
+      <label></label>
+      <include>BoutonCommunFlags2</include>
+<onleft>1000</onleft>
+      
+      <selected>!Skin.HasSetting(hideduree2)</selected>
+      <onclick>Skin.ToggleSetting(hideduree2)</onclick>
+      <onclick condition="!Skin.HasSetting(hideduree)">Skin.ToggleSetting(hideduree)</onclick>
+    </control>
+
+    <control type="radiobutton" id="2001">
+      <label></label>
+     <include>BoutonCommunFlags2</include>
+<onleft>1001</onleft>
+
+       
+      <selected>!Skin.HasSetting(hidegenre2)</selected>
+      <onclick>Skin.ToggleSetting(hidegenre2)</onclick>
+      <onclick condition="!Skin.HasSetting(hidegenre)">Skin.ToggleSetting(hidegenre)</onclick>
+      
+    </control>
+    <control type="radiobutton" id="2002">
+      <label></label>
+      <include>BoutonCommunFlags2</include>
+<onleft>1002</onleft>
+
+      
+      <selected>!Skin.HasSetting(hidestudio2)</selected>
+      <onclick>Skin.ToggleSetting(hidestudio2)</onclick>
+      <onclick condition="!Skin.HasSetting(hidestudio)">Skin.ToggleSetting(hidestudio)</onclick>
+      
+    </control>
+    <control type="radiobutton" id="2003">
+      <label></label>
+      <include>BoutonCommunFlags2</include>
+<onleft>1003</onleft>
+
+      
+      <selected>!Skin.HasSetting(hideannee2)</selected>
+      <onclick>Skin.ToggleSetting(hideannee2)</onclick>
+      <onclick condition="!Skin.HasSetting(hideannee)">Skin.ToggleSetting(hideannee)</onclick>
+      
+    </control>
+    <control type="radiobutton" id="2004">
+      <label></label>
+      <include>BoutonCommunFlags2</include>
+<onleft>1004</onleft>
+
+      
+      <selected>!Skin.HasSetting(hidenotation2)</selected>
+      <onclick>Skin.ToggleSetting(hidenotation2)</onclick>
+      <onclick condition="!Skin.HasSetting(hidenotation)">Skin.ToggleSetting(hidenotation)</onclick>
+      
+    </control>
+    <control type="radiobutton" id="2005">
+      <label></label>
+      <include>BoutonCommunFlags2</include>
+<onleft>1005</onleft>
+
+      
+      <selected>!Skin.HasSetting(hidempaa2)</selected>
+      <onclick>Skin.ToggleSetting(hidempaa2)</onclick>
+      <onclick condition="!Skin.HasSetting(hidempaa)">Skin.ToggleSetting(hidempaa)</onclick>
+      
+    </control>
+    <control type="radiobutton" id="2006">
+      <label></label>
+      <include>BoutonCommunFlags2</include>
+<onleft>1006</onleft>
+
+      
+      <selected>!Skin.HasSetting(hidesource2)</selected>
+      <onclick>Skin.ToggleSetting(hidesource2)</onclick>
+      <onclick condition="!Skin.HasSetting(source)">Skin.ToggleSetting(source)</onclick>
+      
+    </control>
+    <control type="radiobutton" id="2017">
+      <label></label>
+      <include>BoutonCommunFlags2</include>
+<onleft>1017</onleft>
+
+      
+      <selected>!Skin.HasSetting(hide3d2)</selected>
+      <onclick>Skin.ToggleSetting(hide3d2)</onclick>
+      <onclick condition="!Skin.HasSetting(hide3d)">Skin.ToggleSetting(hide3d)</onclick>
+      
+    </control>
+    
+    <control type="radiobutton" id="2020">
+      <label></label>
+      <include>BoutonCommunFlags2</include>
+<onleft>1020</onleft>
+
+      
+      <selected>!Skin.HasSetting(hideitemcountry2)</selected>
+      <onclick>Skin.ToggleSetting(hideitemcountry2)</onclick>
+      <onclick condition="!Skin.HasSetting(hideitemcountry)">Skin.ToggleSetting(hideitemcountry)</onclick>
+      
+    </control>
+    <control type="radiobutton" id="2021">
+      <label></label>
+      <include>BoutonCommunFlags2</include>
+<onleft>1021</onleft>
+
+      
+      <selected>!Skin.HasSetting(hidecodecvideo2)</selected>
+      <onclick>Skin.ToggleSetting(hidecodecvideo2)</onclick>
+      <onclick condition="!Skin.HasSetting(hidecodecvideo)">Skin.ToggleSetting(hidecodecvideo)</onclick>
+    </control>
+
+
+    <control type="radiobutton" id="2022">
+      <label></label>
+      <include>BoutonCommunFlags2</include>
+<onleft>1022</onleft>
+
+      
+      <selected>!Skin.HasSetting(hideresolution2)</selected>
+      <onclick>Skin.ToggleSetting(hideresolution2)</onclick>
+      <onclick condition="!Skin.HasSetting(hideresolution)">Skin.ToggleSetting(hideresolution)</onclick>
+      
+    </control>
+    <control type="radiobutton" id="2023">
+      <label></label>
+      <include>BoutonCommunFlags2</include>
+<onleft>1023</onleft>
+
+      
+      <selected>!Skin.HasSetting(hideaspect2)</selected>
+      <onclick>Skin.ToggleSetting(hideaspect2)</onclick>
+      <onclick condition="!Skin.HasSetting(hideaspect)">Skin.ToggleSetting(hideaspect)</onclick>
+      
+    </control>
+    <control type="radiobutton" id="2024">
+      <label></label>
+      <include>BoutonCommunFlags2</include>
+<onleft>1024</onleft>
+
+      
+      <selected>!Skin.HasSetting(hidesoustitres2)</selected>
+      <onclick>Skin.ToggleSetting(hidesoustitres2)</onclick>
+      <onclick condition="!Skin.HasSetting(hidesoustitres)">Skin.ToggleSetting(hidesoustitres)</onclick>
+      
+    </control>
+    <control type="radiobutton" id="2025">
+      <label></label>
+      <include>BoutonCommunFlags2</include>
+<onleft>1025</onleft>
+
+      
+      <selected>!Skin.HasSetting(hidelangues2)</selected>
+      <onclick>Skin.ToggleSetting(hidelangues2)</onclick>
+      <onclick condition="!Skin.HasSetting(hidelangues)">Skin.ToggleSetting(hidelangues)</onclick>
+      
+    </control>
+  </control>
+</control>
+  </control>
+
 
 
   <include>Global_ContextFilter</include>

@@ -358,6 +358,10 @@ msgctxt "#31275"
 msgid "Multi Image"
 msgstr "Image multiple"
 
+msgctxt "#31276"
+msgid "Line "
+msgstr "Ligne"
+
 msgctxt "#31277"
 msgid "Item"
 msgstr "Élément"
@@ -1022,7 +1026,9 @@ msgctxt "#31484"
 msgid "Time remaining"
 msgstr "Temps restant"
 
-
+msgctxt "#31485"
+msgid "!!!Default settings!!!"
+msgstr "!!!Configuration par défaut!!!"
 
 msgctxt "#31600"
 msgid "Enable Live TV (PVR) support"

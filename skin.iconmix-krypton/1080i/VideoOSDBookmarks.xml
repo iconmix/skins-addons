@@ -15,7 +15,7 @@
 			<posy>0</posy>
 			<width>830</width>
 			<height>650</height>
-			<texture>frames/Menu_Glass2c.png</texture>
+			<texture>frames/Menu_Glass2b.png</texture>
 			<colordiffuse>OSDDialogBackgroundColor</colordiffuse>
 		</control>
 		<control type="label">

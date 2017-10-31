@@ -374,38 +374,33 @@
 			<!-- Episode Posters -->
 			<control type="group">
 				<visible>Window.IsActive(10025) + Container.Content(episodes)</visible>
+				<animation effect="rotatey" center="auto"  end="-10" time="800" delay="0" condition="true" reversible="false">Conditional</animation>
 				<posx>25</posx>
-				<posy>45</posy>
+				<posy>5</posy>
+				
 				<control type="image">
 					<posx>22</posx>
-					<posy>112</posy>
-					<width>493</width>
-					<height>465</height>
-					<fadetime>100</fadetime>
-					<texture background="true" diffuse="episodematte.png">$INFO[ListItem.Icon]</texture>
-					<aspectratio scalediffuse="false">keep</aspectratio>
-					<visible>String.IsEmpty(ListItem.Title) | String.Contains(ListItem.Icon,default)</visible>
-				</control>
-				<control type="image">
-					<posx>22</posx>
-					<posy>162</posy>
+					<posy>156</posy>
 					<width>493</width>
 					<height>365</height>
 					<fadetime>100</fadetime>
-					<texture background="true">$INFO[ListItem.Icon]</texture>
+					<bordersize>16</bordersize>
+      <bordertexture border="16" colordiffuse="FFFFFFFF">frames/ClassicFrame_Tall.png</bordertexture>
+					<texture  background="true">$INFO[ListItem.Icon]</texture>
 					<aspectratio scalediffuse="false">scale</aspectratio>
 					<visible>!String.IsEmpty(ListItem.Title) + !String.Contains(ListItem.Icon,default)</visible>
 				</control>
 
-				<control type="image">
+				<!--<control type="image">
 					<posx>-10</posx>
 					<posy>124</posy>
 					<width>554</width>
 					<height>443</height>
-					<texture>frames/ClassicFrame_FanartSmall.png</texture>
+					<texture>frames/ClassicFrame_FanartSmadll.png</texture>
 					<fadetime>100</fadetime>
 					<visible>!String.IsEmpty(ListItem.Title) + !String.Contains(ListItem.Icon,default)</visible>
 				</control>
+				-->
 			</control>
 			<!-- Images for All Items NOT in Video Library -->
 			<control type="image">

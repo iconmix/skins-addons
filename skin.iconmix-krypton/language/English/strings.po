@@ -476,6 +476,9 @@ msgstr ""
 msgctxt "#31275"
 msgid "Multi Image"
 msgstr ""
+msgctxt "#31276"
+msgid "Line "
+msgstr ""
 
 #empty string with id 31276
 
@@ -1182,6 +1185,12 @@ msgstr ""
 msgctxt "#31484"
 msgid "Time remaining"
 msgstr ""
+
+msgctxt "#31485"
+msgid "!!!Default settings!!!"
+msgstr ""
+
+
 
 #empty strings from id 31482 to 31599
 #PVR Resources
