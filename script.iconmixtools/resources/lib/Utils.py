@@ -640,7 +640,9 @@ def getepisodes(UniqueId=None,saisonID=None,DBtype=None,NbEpisodesKodi=None):
           #mise a jour
             ArrayCollection=getallepisodes(KodiId,UniqueId,savepath,NbKodi,1)
       if ArrayCollection:
-            WINDOW.setProperty('ItemCountry1',ArrayCollection.get("pays"))
+            WINDOW.setProperty('ItemCountry1',ArrayCollection.get("pays"))  
+            
+            
             if ArrayCollection.get("dateecheance"):
                try:
                   nowX2 = datetime.datetime.strptime(str(ArrayCollection.get("dateecheance")), '%Y-%m-%d').date()
@@ -660,9 +662,11 @@ def getepisodes(UniqueId=None,saisonID=None,DBtype=None,NbEpisodesKodi=None):
                         NbEpisodes=-1
             if ArrayCollection:
                      WINDOW.setProperty('ItemCountry1',ArrayCollection.get("pays"))
+                     
             if NbEpisodesKodi:
               if NbEpisodes==int(NbEpisodesKodi):
-                 NbEpisodes=0 #complet   
+                 NbEpisodes=0 #complet  
+      
   return NbEpisodes
 
 def getdatafanarttv(donnees=None,saison=None):  

@@ -653,7 +653,7 @@ class Main:
                         self.windowhome.clearProperty('DurationTools')                   
                         self.windowhome.clearProperty('DurationToolsEnd')
                         self.windowhome.clearProperty('IconMixExtraFanart') 
-                        self.windowhome.clearProperty("ItemCountry1")
+                        #self.windowhome.clearProperty("ItemCountry1")
                         self.windowhome.clearProperty("ItemCountry2")
                         self.windowhome.clearProperty("ItemCountry3")
                         self.windowhome.clearProperty("ItemCountry4")
@@ -675,7 +675,7 @@ class Main:
                               self.windowhome.clearProperty('IconMixSagaDiscArt')
                               self.windowhome.clearProperty('IconMixSagaPoster')
                               self.windowhome.clearProperty('IconMixSagaThumb') 
-                              self.windowhome.clearProperty('ItemCountry1') 
+                              
                               ListeItemx=[]                         
                               if not self.DBTYPE=="set" and not status=="1":
                                 status="1"
@@ -771,8 +771,9 @@ class Main:
                                    if TvId and TvSe and TvSh :
                                      if TvSe!=self.TvSeason or TvSh!=self.TvShow : 
                                        self.windowhome.clearProperty('IconMixEpSa')
-
+  
                                        self.EpSa=utils.getepisodes(int(TvId),int(TvSe),self.DBTYPE,TvNbKodi)
+                                       
                                        if self.EpSa>=0:                                     
                                          self.windowhome.setProperty('IconMixEpSa',str(self.EpSa))                                       
                                          self.TvShow=TvSh
@@ -838,13 +839,14 @@ class Main:
         xxx="null"
         
         #self.windowhome.setProperty('ItemUniqueGenre',xbmc.getInfoLabel( "ListItem.Genre" ).replace(" /",", "))
-        CountryList=xbmc.getInfoLabel( "ListItem.Country" ).split(" / ")
-        if not CountryList:
-          CountryList.append(xbmc.getInfoLabel( "ListItem.Country" ))
-        idx=1
-        for country in CountryList:
-           self.windowhome.setProperty('ItemCountry%d' %(idx),country.rstrip())
-           idx=idx+1
+        if self.DBTYPE=="movie":
+          CountryList=xbmc.getInfoLabel( "ListItem.Country" ).split(" / ")
+          if not CountryList:
+            CountryList.append(xbmc.getInfoLabel( "ListItem.Country" ))
+          idx=1
+          for country in CountryList:
+             self.windowhome.setProperty('ItemCountry%d' %(idx),country.rstrip())
+             idx=idx+1
            
               
         if not xbmc.getCondVisibility("Window.IsVisible(10502)"):
