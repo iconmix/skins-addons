@@ -134,7 +134,7 @@
 					<label>$INFO[ListItem.Property(NumEpisodes)] $LOCALIZE[20360]</label>
 					<font>METF_InfoText</font>
 					<textcolor>MediaDetailsEpisodes</textcolor>
-					<visible>Container.Content(tvshows) + !String.IsEmpty(ListItem.Property(NumEpisodes))</visible>
+					<visible>Container.Content(tvshows) + !IsEmpty(ListItem.Property(NumEpisodes))</visible>
 				</control>
 				<!-- Episode Count for Seasons -->
 				<control type="label">
@@ -147,7 +147,7 @@
 					<label>$INFO[ListItem.Property(NumEpisodes)] $LOCALIZE[20360]</label>
 					<font>METF_InfoText</font>
 					<textcolor>MediaDetailsEpisodes</textcolor>
-					<visible>[Container.Content(seasons) + !String.IsEmpty(ListItem.Property(NumEpisodes))] + !String.IsEmpty(ListItem.Property(UnWatchedEpisodes))</visible>
+					<visible>[Container.Content(seasons) + !IsEmpty(ListItem.Property(NumEpisodes))] + !IsEmpty(ListItem.Property(UnWatchedEpisodes))</visible>
 				</control>
 				<!-- Star Rating -->
 				<control type="group">
@@ -166,7 +166,7 @@
 						<label>$INFO[ListItem.Rating]</label>
 						<font>METF_InfoText</font>
 						<textcolor>TextNF</textcolor>
-						<visible>!String.IsEmpty(ListItem.Rating)</visible>
+						<visible>!IsEmpty(ListItem.Rating)</visible>
 					</control>
 					<control type="image">
 						<posx>772</posx>
@@ -175,7 +175,7 @@
 						<height>20</height>
 						<texture>Star.png</texture>
 						<colordiffuse>FFFFFFFF</colordiffuse>
-						<visible>!String.IsEmpty(ListItem.Rating)</visible>
+						<visible>!IsEmpty(ListItem.Rating)</visible>
 					</control>
 				</control>
 			</itemlayout>
@@ -279,7 +279,7 @@
 					<label>$INFO[ListItem.Property(NumEpisodes)] $LOCALIZE[20360]</label>
 					<font>METF_InfoText</font>
 					<textcolor>MediaDetailsEpisodes</textcolor>
-					<visible>Container.Content(tvshows) + !String.IsEmpty(ListItem.Property(NumEpisodes))</visible>
+					<visible>Container.Content(tvshows) + !IsEmpty(ListItem.Property(NumEpisodes))</visible>
 				</control>
 				<!-- Episode Count for Seasons -->
 				<control type="label">
@@ -292,7 +292,7 @@
 					<label>$INFO[ListItem.Property(NumEpisodes)] $LOCALIZE[20360]</label>
 					<font>METF_InfoText</font>
 					<textcolor>MediaDetailsEpisodes</textcolor>
-					<visible>[Container.Content(seasons) + !String.IsEmpty(ListItem.Property(NumEpisodes))] + !String.IsEmpty(ListItem.Property(UnWatchedEpisodes))</visible>
+					<visible>[Container.Content(seasons) + !IsEmpty(ListItem.Property(NumEpisodes))] + !IsEmpty(ListItem.Property(UnWatchedEpisodes))</visible>
 				</control>
 				<!-- Star Rating -->
 				<control type="group">
@@ -311,7 +311,7 @@
 						<label>$INFO[ListItem.Rating]</label>
 						<font>METF_InfoText</font>
 						<textcolor>TextNF</textcolor>
-						<visible>!String.IsEmpty(ListItem.Rating)</visible>
+						<visible>!IsEmpty(ListItem.Rating)</visible>
 					</control>
 					<control type="image">
 						<posx>772</posx>
@@ -320,7 +320,7 @@
 						<height>20</height>
 						<texture>Star.png</texture>
 						<colordiffuse>$VAR[RatingColor]</colordiffuse>
-						<visible>!String.IsEmpty(ListItem.Rating)</visible>
+						<visible>!IsEmpty(ListItem.Rating)</visible>
 					</control>
 				</control>
 			</focusedlayout>
@@ -349,7 +349,7 @@
 					<fadetime>100</fadetime>
 					<texture background="true" diffuse="postermatte.png">$INFO[ListItem.Icon]</texture>
 					<aspectratio scalediffuse="false">keep</aspectratio>
-					<visible>String.IsEmpty(ListItem.Title)</visible>
+					<visible>IsEmpty(ListItem.Title)</visible>
 				</control>
 				<control type="image">
 					<posx>17</posx>
@@ -360,7 +360,7 @@
 					
 					<texture background="true" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
 					<aspectratio scalediffuse="false">stretch</aspectratio>
-					<visible>!String.IsEmpty(ListItem.Title)</visible>
+					<visible>!IsEmpty(ListItem.Title)</visible>
 				</control>
 				<control type="image">
 					<posx>0</posx>
@@ -368,44 +368,39 @@
 					<width>335</width>
 					<height>490</height>
 					<texture>frames/ClassicFrame_PosterMedium.png</texture>
-					<visible>!String.IsEmpty(ListItem.Title)</visible>
+					<visible>!IsEmpty(ListItem.Title)</visible>
 				</control>
 			</control>
 			<!-- Episode Posters -->
 			<control type="group">
 				<visible>Window.IsActive(10025) + Container.Content(episodes)</visible>
+				<animation effect="rotatey" center="auto"  end="-10" time="800" delay="0" condition="true" reversible="false">Conditional</animation>
 				<posx>25</posx>
-				<posy>45</posy>
+				<posy>5</posy>
+				
 				<control type="image">
 					<posx>22</posx>
-					<posy>112</posy>
-					<width>493</width>
-					<height>465</height>
-					<fadetime>100</fadetime>
-					<texture background="true" diffuse="episodematte.png">$INFO[ListItem.Icon]</texture>
-					<aspectratio scalediffuse="false">keep</aspectratio>
-					<visible>String.IsEmpty(ListItem.Title) | SubString(ListItem.Icon,default)</visible>
-				</control>
-				<control type="image">
-					<posx>22</posx>
-					<posy>162</posy>
+					<posy>156</posy>
 					<width>493</width>
 					<height>365</height>
 					<fadetime>100</fadetime>
-					<texture background="true">$INFO[ListItem.Icon]</texture>
+					<bordersize>16</bordersize>
+      <bordertexture border="16" colordiffuse="FFFFFFFF">frames/ClassicFrame_Tall.png</bordertexture>
+					<texture  background="true">$INFO[ListItem.Icon]</texture>
 					<aspectratio scalediffuse="false">scale</aspectratio>
-					<visible>!String.IsEmpty(ListItem.Title) + !SubString(ListItem.Icon,default)</visible>
+					<visible>!IsEmpty(ListItem.Title) + !SubString(ListItem.Icon,default)</visible>
 				</control>
 
-				<control type="image">
+				<!--<control type="image">
 					<posx>-10</posx>
 					<posy>124</posy>
 					<width>554</width>
 					<height>443</height>
-					<texture>frames/ClassicFrame_FanartSmall.png</texture>
+					<texture>frames/ClassicFrame_FanartSmadll.png</texture>
 					<fadetime>100</fadetime>
-					<visible>!String.IsEmpty(ListItem.Title) + !SubString(ListItem.Icon,default)</visible>
+					<visible>!IsEmpty(ListItem.Title) + !SubString(ListItem.Icon,default)</visible>
 				</control>
+				-->
 			</control>
 			<!-- Images for All Items NOT in Video Library -->
 			<control type="image">
@@ -466,7 +461,7 @@
 			<height>24</height>
 			<label>-</label>
 			<onclick>ActivateWindow(10025,"videodb://movies/sets/$INFO[ListItem.SetId]/?setid=$INFO[ListItem.SetId]",return)</onclick>
-			<visible>Window.IsActive(10025) + !Container.Content(sets) + !String.IsEmpty(ListItem.Set)</visible>
+			<visible>Window.IsActive(10025) + !Container.Content(sets) + !IsEmpty(ListItem.Set)</visible>
 		</control>
 		<!-- Browser label and flags -->
 

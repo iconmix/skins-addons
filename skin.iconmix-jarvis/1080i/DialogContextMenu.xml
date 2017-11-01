@@ -39,7 +39,6 @@
       <itemgap>2</itemgap>
 
       <!---->
-      
       <control type="button" id="2001">
 						<!-- Choix elements SAGAS -->
 						<include>BoutonCommun</include>
@@ -88,6 +87,14 @@
 						<onclick>RunScript(script.iconmixtools,mettreajour=True)</onclick>
 						<visible>Container.Content(artists)|Container.Content(albums)</visible>
 					</control>
+					<control type="button" id="2012">
+						<!-- Mise a jour SAGA -->
+						<include>BoutonCommun</include>
+						<label>[I]Modifier la pochette de $ESCINFO[ListItem.Title][/I]</label>
+						<onclick>Close</onclick>
+						<onclick>XBMC.RunScript(script.artwork.downloader, mode=gui,medianame=$ESCINFO[ListItem.Title],mediapath=$ESCINFO[ListItem.Path])</onclick>
+						<include>VisibleIfMovieSet</include>
+					</control>
 					
       <control type="button" id="2099">
 
@@ -99,29 +106,7 @@
         <visible>!IsEmpty(Container.ViewMode)</visible>
 
       </control>
-      <!-- SAGA 
-      <control type="button" id="2100">
-        
-        <onleft>Dialog.Close(contextmenu)</onleft>
-        <onright>Dialog.Close(contextmenu)</onright>
-        <include>BoutonCommun</include>
-        <label>[I]$LOCALIZE[31925][/I]</label>
-
-        <onclick>Close</onclick>
-        <onclick>RunScript(script.iconmixtools,mettreajour=True)</onclick>
-        <include>VisibleIfMovieSet</include>
-      </control>-->
-      <!-- SERIES 
-      <control type="button" id="2101">
-        
-        <onleft>Dialog.Close(contextmenu)</onleft>
-        <onright>Dialog.Close(contextmenu)</onright>
-        <include>BoutonCommun</include>
-        <label>[I]$LOCALIZE[31927][/I]</label>
-        <onclick>Close</onclick>
-        <onclick>RunScript(script.iconmixtools,mettreajour=True)</onclick>
-        <visible>Container.Content(tvshows)+Skin.HasSetting(CheckSeries)+!Control.HasFocus(5051)+!Control.HasFocus(1998)</visible>
-      </control>-->
+      
       <control type="button" id="2102">
         <!-- Accéder à la saga -->
         <onleft>Dialog.Close(contextmenu)</onleft>
@@ -181,12 +166,7 @@
         <onclick></onclick>
         <visible>StringCompare(ListItem.DBTYPE,movie)</visible>
       </control>
-      <control type="button" id="2108">
-            <description>Search</description>
-            <label>137</label>
-            <include>BoutonCommun</include>
-            <onclick>VideoLibrary.Search</onclick>
-          </control>
+      
      
     </control>
     <control type="button" id="1000">

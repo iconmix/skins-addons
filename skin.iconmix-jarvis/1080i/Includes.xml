@@ -668,6 +668,42 @@
   <pulseonselect>false</pulseonselect>
 
 </include>
+<include name="BoutonCommunFlags">
+  <width>320</width>
+  <height>35</height>
+  <align>left</align>
+  <font>METF_DialogLarge</font>
+  <textcolor>TextNF</textcolor>
+  <focusedcolor>DialogTextFO</focusedcolor>
+  <disabledcolor>TextDisabled</disabledcolor>
+  <texturefocus>ButtonFO2Wide.png</texturefocus>
+  <texturenofocus>-</texturenofocus>
+  <textoffsetx>5</textoffsetx>
+  <!--<alttexturenofocus border="2">-</alttexturenofocus>
+  <alttexturefocus border="5">ButtonFO2.png</alttexturefocus>
+  -->
+  <aligny>center</aligny>
+  <pulseonselect>false</pulseonselect>
+
+</include>
+<include name="BoutonCommunFlags2">
+  <width>50</width>
+  <height>35</height>
+  <align>left</align>
+  <font>METF_DialogLarge</font>
+  <textcolor>TextNF</textcolor>
+  <focusedcolor>DialogTextFO</focusedcolor>
+  <disabledcolor>TextDisabled</disabledcolor>
+  <texturefocus>ButtonFO2Wide.png</texturefocus>
+  <texturenofocus>-</texturenofocus>
+  <textoffsetx>5</textoffsetx>
+  <!--<alttexturenofocus border="2">-</alttexturenofocus>
+  <alttexturefocus border="5">ButtonFO2.png</alttexturefocus>
+  -->
+  <aligny>center</aligny>
+  <pulseonselect>false</pulseonselect>
+
+</include>
 
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="shortcutstyle">
@@ -690,6 +726,7 @@
       <left>-480</left>
       <animation type="Conditional" condition="Skin.HasSetting(CacheFond)">
         <effect type="slide"  start="0,0" end="0,-835" time="1" delay="1" reversible="false"/>
+        
       </animation>
       <animation type="Conditional" condition="!Container(1998).IsUpdating">
         <effect type="slide"  start="0,0" end="450,0" time="1" delay="1" reversible="false"/>
@@ -3501,7 +3538,7 @@
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="ClearLogoArt">
   <control type="group">
-    <posy>640</posy>
+    <posy>645</posy>
     <posx>1570</posx>
     <!--	<posy>-180</posy>
     <animation type="Visible" reversible="false">
@@ -3514,6 +3551,18 @@
   </animation>
   <control type="image">
     <!--<posx>1550</posx>-->
+    <left>3</left>
+    <top>2</top>
+
+    <width>300</width>
+    <height>183</height>
+    <texture background="true">$VAR[ListClearartClearlogoOn]</texture>
+    <fadetime>200</fadetime>
+    <aspectratio aligny="center">keep</aspectratio>
+    <colordiffuse>FF5F5F5F</colordiffuse>
+  </control>
+  <control type="image">
+    <!--<posx>1550</posx>-->
 
     <width>300</width>
     <height>183</height>
@@ -3521,6 +3570,7 @@
     <fadetime>200</fadetime>
     <aspectratio aligny="center">keep</aspectratio>
   </control>
+  
   <visible>!Control.IsVisible(560)+!Control.IsVisible(56)+[[!Container.OnNext+!Container.OnPrevious]|Container.Content(episodes)]</visible>
 </control>
 </include>
@@ -3666,83 +3716,7 @@
   </control>
 </include>
 <!-- ---------------------------------------------------------------------------------------------- -->
-<include name="DialogActeurs">
-  <!--- ACTEURS SERIES --
-  <control type="group">
-  <top>292</top>
-  <left>-425</left>
-  <animation type="Conditional" condition="!Container(20001).IsUpdating">
-  <effect type="slide"  start="0,0" end="450,-305" time="1" delay="1" reversible="false"/>
-  <effect type="fade"  start="0" end="100" time="100" delay="1" reversible="false"/>
-  </animation>
 
-  <visible>[[Container.Content(tvshows)+!Skin.HasSetting(HideTvCast)]|[StringCompare(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..)</visible>
-  <control type="image">
-  <left>30</left>
-  <width>326</width>
-  <height>280</height>
-  <texture>frames/Dialog_GlassActeur2.png</texture>
-  <colordiffuse>DialogBackgroundColor</colordiffuse>
-  <aspectratio  scalediffuse="true">stretch</aspectratio>
-
-  <visible>Control.IsVisible(20001)</visible>
-  </control>
-
-  <control type="fixedlist" id="20001">
-  <posx>44</posx>
-  <posy>142</posy>
-  <height>120</height>
-  <width>298</width>
-  <align>left</align>
-  <itemgap>1</itemgap>
-  <orientation>horizontal</orientation>
-  <visible>[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..)</visible>
-
-  <autoscroll delay="4000" repeat="5000" time="5000">IntegerGreaterThan(Container(20001).NumItems,4)</autoscroll>
-  <pagecontrol>60</pagecontrol>
-  <content>plugin://script.iconmixtools/?action=getcast&casttype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]</content>
-  <resetonlabelchange>true</resetonlabelchange>
-  <itemlayout width="75">
-  <control type="image">
-  <width>75</width>
-  <height>110</height>
-  <texture  diffuse="frames/acteurframe.png" fallback="DefaultThumb.png">$INFO[ListItem.Icon]</texture>
-  <aspectratio scalediffuse="true">keep</aspectratio>
-  <colordiffuse>AAFFFFFF</colordiffuse>
-  </control>
-  </itemlayout>
-  <focusedlayout width="75">
-  <control type="image">
-  <width>75</width>
-  <height>110</height>
-  <texture  diffuse="frames/acteurframe.png" fallback="DefaultThumb.png">$INFO[ListItem.Icon]</texture>
-  <aspectratio scalediffuse="true">keep</aspectratio>
-  <colordiffuse>FFFFFFFF</colordiffuse>
-  </control>
-  </focusedlayout>
-  </control>
-  <control type="label">
-  <posy>80</posy>
-  <posx>44</posx>
-  <font>comic24</font>
-  <width>298</width>
-  <height>80</height>
-  <align>center</align>
-  <label>$LOCALIZE[344]</label>
-  </control>
-  <control type="label">
-  <posy>105</posy>
-  <posx>44</posx>
-  <font>comic24</font>
-  <width>298</width>
-  <height>80</height>
-  <align>center</align>
-  <label>[COLOR=yellow]$INFO[Container(20001).ListItem.Label][/COLOR]</label>
-  </control>
-
-  </control>
-  -->
-</include>
 
 
 <!-- ---------------------------------------------------------------------------------------------- -->
@@ -3948,6 +3922,8 @@
   </control>
   <control type="group">
     <visible>!IsEmpty(Control.GetLabel(8865))+[!Container.Content(genres)|Control.HasFocus(2999)|Control.HasFocus(2997)]+!Skin.HasSetting(Hide_Plot)</visible>
+          <include>VisibleIfNotMovieSet</include>
+
     <control type="scrollbar" id="8866">
       <posx>0</posx>
       <posy>100</posy>
