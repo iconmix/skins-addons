@@ -128,13 +128,23 @@
 			<!--<value condition="Container.Content(directors)+!String.IsEmpty(ListItem.DBID)">$INFO[Container.FolderPath]$INFO[ListItem.DBID]</value> -->
 			<value></value>
 		</variable>
+		<variable name="contentPanelActeursOsd">
+			<value condition="Player.HasVideo+!String.IsEmpty(VideoPlayer.TVShowTitle)+System.HasAddon(script.iconmixtools)">plugin://script.iconmixtools/?action=getcast&casttype=tvshow&id=$INFO[VideoPlayer.DBID]</value>
+			<value condition="Player.HasVideo+String.IsEmpty(VideoPlayer.TVShowTitle)+System.HasAddon(script.iconmixtools)">plugin://script.iconmixtools/?action=getcast&casttype=movie&id=$INFO[VideoPlayer.DBID]</value>
+			<value></value>
+		</variable>
 		<variable name="contentPanelActeurs">
 			<value condition="[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)|String.IsEqual(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!String.StartWith(ListItem.Label,..)">plugin://script.iconmixtools/?action=getcast&casttype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]</value>
 			<value></value>
 		</variable>
 		<variable name="ActeursContent">
-			<value condition="Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]&local="oui"</value>
-			<value condition="Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]</value>
+			<value condition="!Player.HasVideo+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]&local="oui"</value>
+			<value condition="!Player.HasVideo+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]</value>
+			<value condition="Player.HasVideo+!String.IsEmpty(VideoPlayer.TVShowTitle)+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=tvshow&id=$VAR[Is1998]&local="oui"</value>
+			<value condition="Player.HasVideo+!String.IsEmpty(VideoPlayer.TVShowTitle)+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=tvshow&id=$VAR[Is1998]</value>
+			<value condition="Player.HasVideo+String.IsEmpty(VideoPlayer.TVShowTitle)+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=movie&id=$VAR[Is1998]&local="oui"</value>
+			<value condition="Player.HasVideo+String.IsEmpty(VideoPlayer.TVShowTitle)+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=movie&id=$VAR[Is1998]</value>
+			
 			<value>-</value>
 		</variable>
 

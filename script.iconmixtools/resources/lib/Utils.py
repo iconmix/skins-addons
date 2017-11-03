@@ -1388,7 +1388,6 @@ def GetActeurInfo(NomActeur,ActeurType=None):
               ActeurCache["nom"]=json_data.get("nom")
               ActeurCache["nomreel"]=json_data.get("nomreel")
               ActeurCache["id"]=ActeurId
-              
               if SaveActeur>0:
                   
                   erreur=DirStru(savepath)            
@@ -1570,11 +1569,13 @@ def getFilmsTv(ActeurType=None,Acteur=None,Statique=None):
   ActeurId={}
   ActeurCache={}
   ActeurSave=1
+  ActeurCache["nom"]=None
+  ActeurCache["id"]=None
   if ActeurType and ActeurType=="director":
             ActeurType='realisateurs'
   else: ActeurType="acteurs"
   if ActeurType and Acteur!="None": 
-    
+     
      if Acteur:
         savepath=ADDON_DATA_PATH+"/%s/%s" %(ActeurType,str(unidecode(Acteur)).replace(" ", "_"))
         if xbmcvfs.exists(savepath):
@@ -1596,16 +1597,19 @@ def getFilmsTv(ActeurType=None,Acteur=None,Statique=None):
                       ActeurCache["nomreel"]=json_data.get("nomreel")
                       ActeurCache["id"]=json_data.get("id")
                       ActeurId=json_data.get("id")
-        else : 
-            ActeurId=GetActeurId(Acteur,ActeurType)            
+        else :
+            ActeurId=GetActeurId(Acteur) 
         
         #http://api.allocine.fr/rest/v3/filmography?partner=100043982026&code=12302&profile=large&filter=movie&striptags=synopsis%2Csynopsisshort&format=json&sed=20170507&sig=jfS3iVDun%2FywD91uBJ78p1lZlog%3D
 
         if ActeurId.get("tmdb") and (not xbmcvfs.exists(savepath) or ActeurSave>0):
+            
             query_url = "https://api.themoviedb.org/3/person/%s/combined_credits?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (ActeurId.get("tmdb"),xbmc.getInfoLabel("System.Language").encode("utf8")) 
+            
             json_data = requestUrlJson(query_url)
          
-        if json_data:                    
+        if json_data: 
+                                     
                   for item in json_data.get("cast"):
                      TypeVideo=str(item.get("media_type"))
                      name=""                     
@@ -1638,15 +1642,17 @@ def getFilmsTv(ActeurType=None,Acteur=None,Statique=None):
                                ListeRoles.append(["",ItemListe,True])
                             else :
                                ListeRoles.append(ItemListe)
+                  
                             
                   if ActeurSave>0 and SETTING("cacheacteur")=="false":
                         erreur=DirStru(savepath)
-                        ActeurCache["cast"]=json_data.get("cast")
-                        if not ActeurCache["nom"]: ActeurCache["nom"]=str(unidecode(Acteur))
-                        if not ActeurCache["id"]: ActeurCache["id"]=ActeurId
+                        ActeurCache["cast"]=json_data.get("cast")                        
+                        if not ActeurCache["nom"]: ActeurCache["nom"]=str(unidecode(Acteur))                         
+                        if not ActeurCache["id"]: ActeurCache["id"]=ActeurId                        
                         with io.open(savepath, 'w+', encoding='utf8') as outfile: 
                           str_ = json.dumps(ActeurCache,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
                           outfile.write(to_unicode(str_)) 
+                       
                           
                   if not Statique:     
                       xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeRoles)

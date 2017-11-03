@@ -96,7 +96,7 @@ class Main:
                 if Id: Id = Id[0] 
                 castingtype=params.get("casttype",None)
                 if castingtype: castingtype = castingtype[0]
-                Id=xbmc.getInfoLabel("ListItem.DBID")              
+                #Id=xbmc.getInfoLabel("ListItem.DBID")              
                 utils.getCasting(castingtype,Id)
                 
              
@@ -112,8 +112,7 @@ class Main:
                   if not KodiLocal: 
                       utils.getFilmsTv(infotype,Acteur.split(" (")[0])
                   else:                  
-                      
-                      utils.getFilmsParActeur(xbmc.getInfoLabel("ListItem.DBTYPE"),Id.encode('utf8').split(" (")[0])
+                      utils.getFilmsParActeur(infotype,Id.encode('utf8').split(" (")[0])
 
              if action == "GETARTISTEART":
                 Id=params.get("id",None)
@@ -337,6 +336,7 @@ class Main:
           self.windowhome = xbmcgui.Window(10000) # Home.xml 
           self.windowvideonav = xbmcgui.Window(10025) # myvideonav.xml           
           self.windowvideoinf = xbmcgui.Window(12003) # dialogvideoinfo.xml 
+          self.windowvideoplayer = xbmcgui.Window(12901) # dialogvideoinfo.xml 
         
     def GetControl(self,Window=None,Id=None):
           ControlId=None          
@@ -546,7 +546,7 @@ class Main:
               
           
             #FILMS/SERIES/ACTEURS
-            if (xbmc.getCondVisibility("Window.IsVisible(10025)") or xbmc.getCondVisibility("Window.IsVisible(12003)")) and not xbmc.getCondVisibility("Container.Scrolling") and not xbmc.getCondVisibility("Window.IsVisible(12000)"):
+            if (xbmc.getCondVisibility("Window.IsVisible(10025)") or xbmc.getCondVisibility("Window.IsVisible(12901)") or xbmc.getCondVisibility("Window.IsVisible(12003)")) and not xbmc.getCondVisibility("Container.Scrolling") and not xbmc.getCondVisibility("Window.IsVisible(12000)"):
                 MiseAjour=""
                 #-------------------------- ACTEURS ---------------------------------
                 if xbmc.getCondVisibility("Control.HasFocus(8889)") or xbmc.getCondVisibility("Control.HasFocus(5051)"):
@@ -554,8 +554,11 @@ class Main:
                     if xbmc.getCondVisibility("Control.HasFocus(5051)"):
                         self.selecteditem8889 = xbmc.getInfoLabel("Container(1998).ListItem.Label")
                         
-                    else: 
-                        self.selecteditem8889 = xbmc.getInfoLabel("ListItem.DBID")                   
+                    else:
+                        if not xbmc.getCondVisibility("Player.HasVideo"):
+                            self.selecteditem8889 = xbmc.getInfoLabel("ListItem.DBID")
+                        else:
+                            self.selecteditem8889 = xbmc.getInfoLabel("VideoPlayer.DBID")                   
                         
                     self.previousitem = ""
                     self.previousitemMusic = ""
@@ -632,11 +635,29 @@ class Main:
                              self.previousLABEL1999=self.LABEL1999
                              MiseAjour="1"                   
                     else : 
-                        self.selecteditem = xbmc.getInfoLabel("ListItem.DBID")
-                        self.DBTYPE=xbmc.getInfoLabel("ListItem.DBTYPE") 
+                        if not xbmc.getCondVisibility("Window.IsVisible(12901)") :
+                            self.selecteditem = xbmc.getInfoLabel("ListItem.DBID")
+                            self.DBTYPE=xbmc.getInfoLabel("ListItem.DBTYPE")
+                            self.previousitemPlayer=""
+                        else:
+                            self.selecteditem = xbmc.getInfoLabel("VideoPlayer.DBID")
+                            if self.previousitemPlayer != self.selecteditem :
+                               self.previousitem=""
+                            if xbmc.getCondVisibility("!String.IsEmpty(VideoPlayer.TVShowTitle)"):
+                               self.DBTYPE="episode"
+                            else:
+                               self.DBTYPE="movie"
+                            
+                         
                         if (self.previousitem != self.selecteditem) or (self.windowhome.getProperty('IconMixUpdateActeurs')=="1")  or (self.windowhome.getProperty('IconMixUpdateSagas')=="1") :
+                             #utils.logMsg("DBTYPE VideoPlayer : "+str(self.DBTYPE)+"/"+str(self.previousitem)+"/"+str(self.selecteditem)+"/"+str(self.previousitemPlayer),0)
                              self.previousitem = self.selecteditem
-                             MiseAjour="1"
+                             
+                             if xbmc.getCondVisibility("Window.IsVisible(12901)") :
+                                MiseAjour="3"
+                                self.previousitemPlayer = self.selecteditem
+                             else:
+                                MiseAjour="1"
                              if self.windowhome.getProperty('IconMixUpdateActeurs')=="1":
                                   #fenetre videoinfo
                                   MiseAjour="2" 
@@ -689,6 +710,11 @@ class Main:
                                    ListeActeurs=self.GetControl(self.windowvideoinf,1998)
                                    ListeRole=self.GetControl(self.windowvideoinf,5051)
                                    
+                                if MiseAjour=="3":
+                                   #ACTEURS VideoPlayer
+                                   ListeActeurs=self.GetControl(self.windowvideoplayer,1998)
+                                   ListeRole=self.GetControl(self.windowvideoplayer,5051)
+                                   
                                    
                                 #ACTEURS  
                                  
@@ -720,79 +746,83 @@ class Main:
                                  # utils.logMsg('windowvideonav.getControl(1998) fin',0)
                                 """  
                               #SAGAS
-                              if (self.DBTYPE=="set" or MiseAjour=="2") and not status=="1":
-                                status="1"
-                                if not MiseAjour=="2":
-                                   ListeSaga=self.GetControl(self.windowvideonav,1999)
-                                   ListeFanarts=self.GetControl(self.windowvideonav,5555)
-                                   
-                                   SetID=self.selecteditem
-                                else:
-                                   ListeSaga=self.GetControl(self.windowvideoinf,5002)
-                                   ListeFanarts=None
-                                   SetID=xbmc.getInfoLabel("ListItem.SetId")
-                                   
-                                if ListeSaga and SetID:
-                                  NbItems=ListeSaga.size()
-                                  FileTab=[]
-                                  try:
-                                    ListeItemx,FileTab =utils.CheckSaga(SetID,1)
-                                  except:
-                                    ListeItemx=None
-                                  ListeSaga.reset()
-                                  if ListeItemx:
-                                       ListeSaga.addItems(ListeItemx)                                       
-                                       if FileTab and ListeFanarts:
-                                         ListeFanarts.reset()                                         
-                                         for index in FileTab:                                             
-                                             Liste=utils.getSagaFanartsV2(index)
-                                             if Liste:                                                
-                                                ListeFanarts.addItems(Liste)
-                                                
-                                       #utils.getSagaItemPath()
-                                                                       
-                                status=""
-                                
-                              if self.DBTYPEOK or self.DBTYPE=="tvshow":
-                                 self.windowhome.setProperty('IconMixExtraFanart',utils.CheckItemExtrafanartPath(xbmc.getInfoLabel("ListItem.Path")))
-                                 #self.windowhome.setProperty('IconMixTvShowCountry',utils.GetTvShowCountry(self.selecteditem))
-                                 if self.DBTYPE!="tvshow":                                    
-                                   #self.windowhome.setProperty('IconMixExtraFanart',utils.CheckItemExtrafanartPath(self.DBTYPE,self.selecteditem))
-                                   self.duration = xbmc.getInfoLabel("ListItem.Duration") 
-                                   self.display_duration()
-                                 else:
-                                   utils.getepisodes(int(self.selecteditem),None,self.DBTYPE,None)
-                              if self.DBTYPE=="episode" and xbmc.getCondVisibility("Skin.HasSetting(CheckSeries)"):
-                                   TvSh=xbmc.getInfoLabel("ListItem.TVShowTitle") 
-                                   TvSe=xbmc.getInfoLabel("ListItem.Season")
-                                   TvId=self.selecteditem
-                                   
-                                   TvNbKodi=xbmc.getInfoLabel("Container.NumItems")
-                                   if TvId and TvSe and TvSh :
-                                     if TvSe!=self.TvSeason or TvSh!=self.TvShow : 
-                                       self.windowhome.clearProperty('IconMixEpSa')
-  
-                                       self.EpSa=utils.getepisodes(int(TvId),int(TvSe),self.DBTYPE,TvNbKodi)
+                              if not xbmc.getCondVisibility("Window.IsVisible(12901)") :
+                                  if (self.DBTYPE=="set" or MiseAjour=="2") and not status=="1":
+                                    status="1"
+                                    if not MiseAjour=="2":
+                                       ListeSaga=self.GetControl(self.windowvideonav,1999)
+                                       ListeFanarts=self.GetControl(self.windowvideonav,5555)
                                        
-                                       if self.EpSa>=0:                                     
-                                         self.windowhome.setProperty('IconMixEpSa',str(self.EpSa))                                       
-                                         self.TvShow=TvSh
-                                         self.TvSeason=TvSe
-                                       else:                                     
-                                         self.windowhome.clearProperty('IconMixEpSa')
-                                         self.TvShow=""
-                                         self.TvSeason=""                                      
-                                   else : self.windowhome.clearProperty('IconMixEpSa')
-                              if (self.DBTYPE=="director" or self.DBTYPE=="actor") and "Default" in xbmc.getInfoLabel("ListItem.Icon") :
-                                   if self.DBTYPE=="director":
-                                       self.windowhome.setProperty('IconMixDirector',str(utils.getRealisateur('realisateur',self.selecteditem,realisateur=xbmc.getInfoLabel("ListItem.label"))))
-                                   else:
-                                       self.windowhome.setProperty('IconMixDirector',str(utils.getRealisateur('acteur',xbmc.getInfoLabel("ListItem.DBID"),realisateur=xbmc.getInfoLabel("ListItem.label"))))
-                                  
+                                       SetID=self.selecteditem
+                                    else:
+                                       ListeSaga=self.GetControl(self.windowvideoinf,5002)
+                                       ListeFanarts=None
+                                       SetID=xbmc.getInfoLabel("ListItem.SetId")
+                                       
+                                    if ListeSaga and SetID:
+                                      NbItems=ListeSaga.size()
+                                      FileTab=[]
+                                      try:
+                                        ListeItemx,FileTab =utils.CheckSaga(SetID,1)
+                                      except:
+                                        ListeItemx=None
+                                      ListeSaga.reset()
+                                      if ListeItemx:
+                                           ListeSaga.addItems(ListeItemx)                                       
+                                           if FileTab and ListeFanarts:
+                                             ListeFanarts.reset()                                         
+                                             for index in FileTab:                                             
+                                                 Liste=utils.getSagaFanartsV2(index)
+                                                 if Liste:                                                
+                                                    ListeFanarts.addItems(Liste)
+                                                    
+                                           #utils.getSagaItemPath()
+                                                                           
+                                    status=""
+                                    
+                                  if self.DBTYPEOK or self.DBTYPE=="tvshow":
+                                     self.windowhome.setProperty('IconMixExtraFanart',utils.CheckItemExtrafanartPath(xbmc.getInfoLabel("ListItem.Path")))
+                                     #self.windowhome.setProperty('IconMixTvShowCountry',utils.GetTvShowCountry(self.selecteditem))
+                                     if self.DBTYPE!="tvshow":                                    
+                                       #self.windowhome.setProperty('IconMixExtraFanart',utils.CheckItemExtrafanartPath(self.DBTYPE,self.selecteditem))
+                                       self.duration = xbmc.getInfoLabel("ListItem.Duration") 
+                                       self.display_duration()
+                                     else:
+                                       utils.getepisodes(int(self.selecteditem),None,self.DBTYPE,None)
+                                  if self.DBTYPE=="episode" and xbmc.getCondVisibility("Skin.HasSetting(CheckSeries)"):
+                                       TvSh=xbmc.getInfoLabel("ListItem.TVShowTitle") 
+                                       TvSe=xbmc.getInfoLabel("ListItem.Season")
+                                       TvId=self.selecteditem
+                                       
+                                       TvNbKodi=xbmc.getInfoLabel("Container.NumItems")
+                                       if TvId and TvSe and TvSh :
+                                         if TvSe!=self.TvSeason or TvSh!=self.TvShow : 
+                                           self.windowhome.clearProperty('IconMixEpSa')
+      
+                                           self.EpSa=utils.getepisodes(int(TvId),int(TvSe),self.DBTYPE,TvNbKodi)
+                                           
+                                           if self.EpSa>=0:                                     
+                                             self.windowhome.setProperty('IconMixEpSa',str(self.EpSa))                                       
+                                             self.TvShow=TvSh
+                                             self.TvSeason=TvSe
+                                           else:                                     
+                                             self.windowhome.clearProperty('IconMixEpSa')
+                                             self.TvShow=""
+                                             self.TvSeason=""                                      
+                                       else : self.windowhome.clearProperty('IconMixEpSa')
+                                  if (self.DBTYPE=="director" or self.DBTYPE=="actor") and "Default" in xbmc.getInfoLabel("ListItem.Icon") :
+                                       if self.DBTYPE=="director":
+                                           self.windowhome.setProperty('IconMixDirector',str(utils.getRealisateur('realisateur',self.selecteditem,realisateur=xbmc.getInfoLabel("ListItem.label"))))
+                                       else:
+                                           self.windowhome.setProperty('IconMixDirector',str(utils.getRealisateur('acteur',xbmc.getInfoLabel("ListItem.DBID"),realisateur=xbmc.getInfoLabel("ListItem.label"))))
+                                      
+                                  else : 
+                                      
+                                      self.windowhome.clearProperty('IconMixDirector')
                               else : 
-                                  
-                                  self.windowhome.clearProperty('IconMixDirector')
-                                  
+                                self.windowhome.clearProperty('IconMixEpSa')
+                                self.TvShow=""
+                                self.TvSeason=""        
                           else : 
                              self.windowhome.clearProperty('IconMixEpSa')
                              self.TvShow=""
@@ -857,7 +887,7 @@ class Main:
           if (not self.duration or self.duration<10) and IMDBID :
               if typeId.find('episode')==-1: self.duration=utils.getRuntime(IMDBID,typeId)
               #else : self.duration=utils.getRuntime("tt"+IMDBID)
-              utils.logMsg("DEBUG : "+str(self.duration)+'/'+str(typeId)+'/'+str(itemId),0)
+              #utils.logMsg("DEBUG : "+str(self.duration)+'/'+str(typeId)+'/'+str(itemId),0)
               if self.duration and typeId and itemId:                    
                       #mise à jour de la durée dans la base pour éviter de renouveller l'opération !
                       try:

@@ -713,11 +713,65 @@
   <texturenofocus border="5">ButtonNf.png</texturenofocus>
 </include>
 
+<!-- --------------------------------------------------------------------------------------------- -->
+<include name="PanelActeursOsd">
+  <control type="group">
+    <top>1100</top>
+    <visible>Skin.HasSetting(ShowOsdActors)+Player.HasVideo</visible>
+    <animation type="Conditional" condition="!Control.HasFocus(5051)+!Control.HasFocus(1998)+!Container(1998).IsUpdating">
+      <effect type="slide"  start="0,0" end="0,-500" time="500" delay="1" reversible="true"/>
+    </animation>
+    <!--
+    <animation type="Conditional" condition="Control.HasFocus(5051)|Control.HasFocus(1998)|Window.IsVisible(movieinformation)">
+        <effect type="fade"  start="100" end="0" time="5" delay="1" reversible="true"/>
+      </animation>
+      -->
+    
+    <!--- CADRE DES ACTEURS DEFILANTS---->
+  <control type="image">
+      <posx>0</posx>
+      <width>1920</width>
+      <height>380</height>
+      <texture>osd/OSDdialogback.png</texture>
+      <colordiffuse>OSDBackgroundColor</colordiffuse>
+    </control>
+      
+      <!-- liste des acteurs -->
+   <control type="fixedlist" id="1998"> 
+      <movement>6</movement>
+     
+      <posx>46</posx>
+      <posy>25</posy>
+      <ondown>5051</ondown>
+       <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
+      <onback>SetProperty(ActeurVideoReset,1,Home)</onback>
+      <onfocus>SetProperty(ActeurVideoLocal,1,Home)</onfocus>
+      <onback>2001</onback>
+      <onup>2001</onup>
+       
+      <height>420</height>
+      <width>1740</width>
+      <align>center</align>
+      <itemgap>1</itemgap>
+      <orientation>horizontal</orientation>
+      <autoscroll delay="4000" repeat="5000" time="5000">!Control.HasFocus(1998)+!Control.HasFocus(5051)</autoscroll>
+      <pagecontrol>60</pagecontrol>
+      <!-- <content>$VAR[contentPanelActeursOsd]</content> -->
+      <resetonlabelchange>true</resetonlabelchange>
+      
+      <include>Acteurs</include>
+      
+    </control>
+    -->
+</control>
+</include>
+
 
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="PanelActeurs">
   <control type="group">
     <control type="group"> <!-- acteurs -->
+      <visible>!Player.HasVideo</visible>
       <include>Animation_FadedByMenu</include>
       <animation type="Conditional" condition="Control.HasFocus(5051)|Control.HasFocus(1998)|Window.IsVisible(movieinformation)">
         <effect type="fade"  start="100" end="0" time="5" delay="1" reversible="true"/>
@@ -877,7 +931,7 @@
       </control>
     </control>
   </control>
-
+  <include>PanelActeursOsd</include>
   <!---------------------------------------------------- roles --------------------------------------------------------->
   <control type="group">
     <top>-1500</top>
@@ -1261,12 +1315,12 @@
   <itemlayout height="380" width="250">
     <control type="label">
       <posy>260</posy>
-      <height>24</height>
+      <height>44</height>
       <align>center</align>
       <aligny>center</aligny>
       <font>comic24</font>
       <textcolor>TextNF</textcolor>
-      <label>$INFO[ListItem.Label][CR]( [I]$INFO[ListItem.Label2][/I] )</label>
+      <label>$INFO[ListItem.Label][CR][COLOR=yellow]([I]$INFO[ListItem.Label2])[/I][/COLOR]</label>
     </control>
 
     <control type="group">
@@ -1291,12 +1345,12 @@
 
     <control type="label">
       <posy>260</posy>
-      <height>24</height>
+      <height>44</height>
       <align>center</align>
       <aligny>center</aligny>
       <font>comic24</font>
       <textcolor>TextNF</textcolor>
-      <label>$INFO[ListItem.Label][CR]( [I]$INFO[ListItem.Label2][/I] )</label>
+      <label>$INFO[ListItem.Label][CR][COLOR=yellow]([I]$INFO[ListItem.Label2])[/I][/COLOR]</label>
       <visible>!Control.HasFocus(50)</visible>
     </control>
     <control type="label">
@@ -5407,6 +5461,7 @@
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="OsdHorloge">
   <control type="group">
+    <visible>!Control.IsVisible(1998)</visible>
     <posy>-900</posy>
     <posx>450</posx>
     <animation type="WindowOpen" reversible="false">

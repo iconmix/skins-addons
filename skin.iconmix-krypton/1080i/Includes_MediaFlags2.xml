@@ -841,197 +841,69 @@
     </control>
   </control>
 
-  <control type="group"> <!-- multi langues -->
-    <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1))+!String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
+  <control type="group"> <!-- multi langues 4-->
+    <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1))+!String.IsEmpty(ListItem.Property(AudioLanguage.2))+!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
     <visible>!Skin.HasSetting(hidelangues)</visible>
 
-    <width>156</width>
     <height>80</height>
+    <width>332</width>
 
 
     <control type="image">
       <posx>-10</posx>
-      <width>332</width>
+      
       <height>76</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
-    </control>
+      <visible></visible>
+    </control>  
+  <include>multilangues</include>
 
+   
+  </control>
+   <control type="group"> <!-- multi langues 3-->
+    <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1))+!String.IsEmpty(ListItem.Property(AudioLanguage.2))+!String.IsEmpty(ListItem.Property(AudioLanguage.3))+String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
+    <visible>!Skin.HasSetting(hidelangues)</visible>
+
+  
+    <width>252</width>
+    <height>80</height>
+
+
+   
     <control type="image">
       <posx>-5</posx>
-      <width>252</width>
+      
       <height>76</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.3))+String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
+      <visible></visible>
     </control>
+   
+  <include>multilangues</include>
+
+   
+  </control>
+    <control type="group"> <!-- multi langues 2-->
+    <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1))+!String.IsEmpty(ListItem.Property(AudioLanguage.2))+String.IsEmpty(ListItem.Property(AudioLanguage.4))+String.IsEmpty(ListItem.Property(AudioLanguage.3))</visible>
+    <visible>!Skin.HasSetting(hidelangues)</visible>
+
+    <width>172</width>
+    <height>80</height>
+
+
+    
     <control type="image">
       <posx>0</posx>
       <width>172</width>
       <height>76</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.2))+String.IsEmpty(ListItem.Property(AudioLanguage.4))+String.IsEmpty(ListItem.Property(AudioLanguage.3))</visible>
+      <visible></visible>
     </control>
+  <include>multilangues</include>
 
-
-    <control type="group"> <!-- language 1 -->
-      <width>60</width>
-      <height>65</height>
-      <posx>20</posx>
-      <control type="image">
-        <posx>0</posx>
-        <width>60</width>
-        <height>30</height>
-        <include>MediaFlagsVarsWide</include>
-        <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.1)].png</texture>
-        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-      </control>
-      <control type="image">
-        <posx>30</posx>
-        <posy>10</posy>
-        <width>25</width>
-        <height>21</height>
-        <texture>flags/flag_frame2.png</texture>
-        <aspectratio >stretch</aspectratio>
-      </control>
-      <control type="image">
-        <posx>30</posx>
-        <posy>10</posy>
-        <width>22</width>
-        <height>18</height>
-        <texture background="true" >$INFO[ListItem.Property(AudioChannels.1),flags/AudioChannels/,chOverlay.png]</texture>
-        <aspectratio>scale</aspectratio>
-      </control>
-      <control type="image">
-        <posx>0</posx>
-        <posy>40</posy>
-        <width>60</width>
-        <height>30</height>
-        <include>MediaFlagsVarsWide</include>
-        <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.1),flags/AudioCodec/,.png]</texture>
-        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-      </control>
-    </control>
-
-    <control type="group"> <!-- language 2 -->
-      <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
-      <width>60</width>
-      <height>65</height>
-      <posx>85</posx>
-      <control type="image">
-        <posx>0</posx>
-        <width>60</width>
-        <height>30</height>
-        <include>MediaFlagsVarsWide</include>
-        <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.2)].png</texture>
-        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-      </control>
-      <control type="image">
-        <posx>30</posx>
-        <posy>10</posy>
-        <width>25</width>
-        <height>21</height>
-        <texture>flags/flag_frame2.png</texture>
-        <aspectratio >stretch</aspectratio>
-      </control>
-      <control type="image">
-        <posx>30</posx>
-        <posy>10</posy>
-        <width>22</width>
-        <height>18</height>
-        <texture background="true" >$INFO[ListItem.Property(AudioChannels.2),flags/AudioChannels/,chOverlay.png]</texture>
-        <aspectratio>scale</aspectratio>
-      </control>
-      <control type="image">
-        <posx>0</posx>
-        <posy>40</posy>
-        <width>60</width>
-        <height>30</height>
-        <include>MediaFlagsVarsWide</include>
-        <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.2),flags/AudioCodec/,.png]</texture>
-        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-      </control>
-    </control>
-    <control type="group"> <!-- language 3 -->
-      <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.3))</visible>
-      <width>60</width>
-      <height>65</height>
-      <posx>155</posx>
-      <control type="image">
-        <posx>0</posx>
-        <width>60</width>
-        <height>30</height>
-        <include>MediaFlagsVarsWide</include>
-        <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.3)].png</texture>
-        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-      </control>
-      <control type="image">
-        <posx>30</posx>
-        <posy>10</posy>
-        <width>25</width>
-        <height>21</height>
-        <texture>flags/flag_frame2.png</texture>
-        <aspectratio >stretch</aspectratio>
-      </control>
-      <control type="image">
-        <posx>30</posx>
-        <posy>10</posy>
-        <width>22</width>
-        <height>18</height>
-        <texture background="true" >$INFO[ListItem.Property(AudioChannels.3),flags/AudioChannels/,chOverlay.png]</texture>
-        <aspectratio>scale</aspectratio>
-      </control>
-      <control type="image">
-        <posx>0</posx>
-        <posy>40</posy>
-        <width>60</width>
-        <height>30</height>
-        <include>MediaFlagsVarsWide</include>
-        <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.3),flags/AudioCodec/,.png]</texture>
-        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-      </control>
-    </control>
-    <control type="group"> <!-- language 4 -->
-      <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
-      <width>60</width>
-      <height>65</height>
-      <posx>225</posx>
-      <control type="image">
-        <posx>0</posx>
-        <width>60</width>
-        <height>30</height>
-        <include>MediaFlagsVarsWide</include>
-        <texture fallback="flags/defaultsound.png" background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.4)].png</texture>
-        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-      </control>
-      <control type="image">
-        <posx>30</posx>
-        <posy>10</posy>
-        <width>25</width>
-        <height>21</height>
-        <texture>flags/flag_frame2.png</texture>
-        <aspectratio >stretch</aspectratio>
-      </control>
-      <control type="image">
-        <posx>30</posx>
-        <posy>10</posy>
-        <width>22</width>
-        <height>18</height>
-        <texture background="true" >$INFO[ListItem.Property(AudioChannels.4),flags/AudioChannels/,chOverlay.png]</texture>
-        <aspectratio>scale</aspectratio>
-      </control>
-      <control type="image">
-        <posx>0</posx>
-        <posy>40</posy>
-        <width>60</width>
-        <height>30</height>
-        <include>MediaFlagsVarsWide</include>
-        <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.4),flags/AudioCodec/,.png]</texture>
-        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-      </control>
-    </control>
+   
   </control>
 
 </include>
@@ -1287,197 +1159,70 @@
     </control>
   </control>
 
-  <control type="group"> <!-- multi langues -->
-    <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1))+!String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
+  
+  <control type="group"> <!-- multi langues 4-->
+    <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1))+!String.IsEmpty(ListItem.Property(AudioLanguage.2))+!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
     <visible>!Skin.HasSetting(hidelangues2)</visible>
 
-    <width>156</width>
     <height>80</height>
+    <width>332</width>
 
 
     <control type="image">
       <posx>-10</posx>
-      <width>332</width>
+      
       <height>76</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
-    </control>
+      <visible></visible>
+    </control>  
+  <include>multilangues</include>
 
+   
+  </control>
+   <control type="group"> <!-- multi langues 3-->
+    <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1))+!String.IsEmpty(ListItem.Property(AudioLanguage.2))+!String.IsEmpty(ListItem.Property(AudioLanguage.3))+String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
+    <visible>!Skin.HasSetting(hidelangues2)</visible>
+
+  
+    <width>252</width>
+    <height>80</height>
+
+
+   
     <control type="image">
       <posx>-5</posx>
-      <width>252</width>
+      
       <height>76</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.3))+String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
+      <visible></visible>
     </control>
+   
+  <include>multilangues</include>
+
+   
+  </control>
+    <control type="group"> <!-- multi langues 2-->
+    <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1))+!String.IsEmpty(ListItem.Property(AudioLanguage.2))+String.IsEmpty(ListItem.Property(AudioLanguage.4))+String.IsEmpty(ListItem.Property(AudioLanguage.3))</visible>
+    <visible>!Skin.HasSetting(hidelangues2)</visible>
+
+    <width>172</width>
+    <height>80</height>
+
+
+    
     <control type="image">
       <posx>0</posx>
       <width>172</width>
       <height>76</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.2))+String.IsEmpty(ListItem.Property(AudioLanguage.4))+String.IsEmpty(ListItem.Property(AudioLanguage.3))</visible>
+      <visible></visible>
     </control>
+  <include>multilangues</include>
 
-
-    <control type="group"> <!-- language 1 -->
-      <width>60</width>
-      <height>65</height>
-      <posx>20</posx>
-      <control type="image">
-        <posx>0</posx>
-        <width>60</width>
-        <height>30</height>
-        <include>MediaFlagsVarsWide</include>
-        <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.1)].png</texture>
-        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-      </control>
-      <control type="image">
-        <posx>30</posx>
-        <posy>10</posy>
-        <width>25</width>
-        <height>21</height>
-        <texture>flags/flag_frame2.png</texture>
-        <aspectratio >stretch</aspectratio>
-      </control>
-      <control type="image">
-        <posx>30</posx>
-        <posy>10</posy>
-        <width>22</width>
-        <height>18</height>
-        <texture background="true" >$INFO[ListItem.Property(AudioChannels.1),flags/AudioChannels/,chOverlay.png]</texture>
-        <aspectratio>scale</aspectratio>
-      </control>
-      <control type="image">
-        <posx>0</posx>
-        <posy>40</posy>
-        <width>60</width>
-        <height>30</height>
-        <include>MediaFlagsVarsWide</include>
-        <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.1),flags/AudioCodec/,.png]</texture>
-        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-      </control>
-    </control>
-
-    <control type="group"> <!-- language 2 -->
-      <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
-      <width>60</width>
-      <height>65</height>
-      <posx>85</posx>
-      <control type="image">
-        <posx>0</posx>
-        <width>60</width>
-        <height>30</height>
-        <include>MediaFlagsVarsWide</include>
-        <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.2)].png</texture>
-        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-      </control>
-      <control type="image">
-        <posx>30</posx>
-        <posy>10</posy>
-        <width>25</width>
-        <height>21</height>
-        <texture>flags/flag_frame2.png</texture>
-        <aspectratio >stretch</aspectratio>
-      </control>
-      <control type="image">
-        <posx>30</posx>
-        <posy>10</posy>
-        <width>22</width>
-        <height>18</height>
-        <texture background="true" >$INFO[ListItem.Property(AudioChannels.2),flags/AudioChannels/,chOverlay.png]</texture>
-        <aspectratio>scale</aspectratio>
-      </control>
-      <control type="image">
-        <posx>0</posx>
-        <posy>40</posy>
-        <width>60</width>
-        <height>30</height>
-        <include>MediaFlagsVarsWide</include>
-        <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.2),flags/AudioCodec/,.png]</texture>
-        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-      </control>
-    </control>
-    <control type="group"> <!-- language 3 -->
-      <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.3))</visible>
-      <width>60</width>
-      <height>65</height>
-      <posx>155</posx>
-      <control type="image">
-        <posx>0</posx>
-        <width>60</width>
-        <height>30</height>
-        <include>MediaFlagsVarsWide</include>
-        <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.3)].png</texture>
-        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-      </control>
-      <control type="image">
-        <posx>30</posx>
-        <posy>10</posy>
-        <width>25</width>
-        <height>21</height>
-        <texture>flags/flag_frame2.png</texture>
-        <aspectratio >stretch</aspectratio>
-      </control>
-      <control type="image">
-        <posx>30</posx>
-        <posy>10</posy>
-        <width>22</width>
-        <height>18</height>
-        <texture background="true" >$INFO[ListItem.Property(AudioChannels.3),flags/AudioChannels/,chOverlay.png]</texture>
-        <aspectratio>scale</aspectratio>
-      </control>
-      <control type="image">
-        <posx>0</posx>
-        <posy>40</posy>
-        <width>60</width>
-        <height>30</height>
-        <include>MediaFlagsVarsWide</include>
-        <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.3),flags/AudioCodec/,.png]</texture>
-        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-      </control>
-    </control>
-    <control type="group"> <!-- language 4 -->
-      <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
-      <width>60</width>
-      <height>65</height>
-      <posx>225</posx>
-      <control type="image">
-        <posx>0</posx>
-        <width>60</width>
-        <height>30</height>
-        <include>MediaFlagsVarsWide</include>
-        <texture fallback="flags/defaultsound.png" background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.4)].png</texture>
-        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-      </control>
-      <control type="image">
-        <posx>30</posx>
-        <posy>10</posy>
-        <width>25</width>
-        <height>21</height>
-        <texture>flags/flag_frame2.png</texture>
-        <aspectratio >stretch</aspectratio>
-      </control>
-      <control type="image">
-        <posx>30</posx>
-        <posy>10</posy>
-        <width>22</width>
-        <height>18</height>
-        <texture background="true" >$INFO[ListItem.Property(AudioChannels.4),flags/AudioChannels/,chOverlay.png]</texture>
-        <aspectratio>scale</aspectratio>
-      </control>
-      <control type="image">
-        <posx>0</posx>
-        <posy>40</posy>
-        <width>60</width>
-        <height>30</height>
-        <include>MediaFlagsVarsWide</include>
-        <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.4),flags/AudioCodec/,.png]</texture>
-        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
-      </control>
-    </control>
+   
   </control>
 <!-- ------------------------------------ ---->
 <control type="group"> <!-- chrono -->
@@ -1693,6 +1438,170 @@
 </control>
 
 </include>
+
+
+ <include name="multilangues">
+   
+
+    <control type="group"> <!-- language 1 -->
+      <width>60</width>
+      <height>65</height>
+      <posx>20</posx>
+      <control type="image">
+        <posx>0</posx>
+        <width>60</width>
+        <height>30</height>
+        <include>MediaFlagsVarsWide</include>
+        <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.1)].png</texture>
+        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+      </control>
+      <control type="image">
+        <posx>30</posx>
+        <posy>10</posy>
+        <width>25</width>
+        <height>21</height>
+        <texture>flags/flag_frame2.png</texture>
+        <aspectratio >stretch</aspectratio>
+      </control>
+      <control type="image">
+        <posx>30</posx>
+        <posy>10</posy>
+        <width>22</width>
+        <height>18</height>
+        <texture background="true" >$INFO[ListItem.Property(AudioChannels.1),flags/AudioChannels/,chOverlay.png]</texture>
+        <aspectratio>scale</aspectratio>
+      </control>
+      <control type="image">
+        <posx>0</posx>
+        <posy>40</posy>
+        <width>60</width>
+        <height>30</height>
+        <include>MediaFlagsVarsWide</include>
+        <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.1),flags/AudioCodec/,.png]</texture>
+        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+      </control>
+    </control>
+
+    <control type="group"> <!-- language 2 -->
+      <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
+      <width>60</width>
+      <height>65</height>
+      <posx>85</posx>
+      <control type="image">
+        <posx>0</posx>
+        <width>60</width>
+        <height>30</height>
+        <include>MediaFlagsVarsWide</include>
+        <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.2)].png</texture>
+        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+      </control>
+      <control type="image">
+        <posx>30</posx>
+        <posy>10</posy>
+        <width>25</width>
+        <height>21</height>
+        <texture>flags/flag_frame2.png</texture>
+        <aspectratio >stretch</aspectratio>
+      </control>
+      <control type="image">
+        <posx>30</posx>
+        <posy>10</posy>
+        <width>22</width>
+        <height>18</height>
+        <texture background="true" >$INFO[ListItem.Property(AudioChannels.2),flags/AudioChannels/,chOverlay.png]</texture>
+        <aspectratio>scale</aspectratio>
+      </control>
+      <control type="image">
+        <posx>0</posx>
+        <posy>40</posy>
+        <width>60</width>
+        <height>30</height>
+        <include>MediaFlagsVarsWide</include>
+        <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.2),flags/AudioCodec/,.png]</texture>
+        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+      </control>
+    </control>
+    <control type="group"> <!-- language 3 -->
+      <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.3))</visible>
+      <width>60</width>
+      <height>65</height>
+      <posx>155</posx>
+      <control type="image">
+        <posx>0</posx>
+        <width>60</width>
+        <height>30</height>
+        <include>MediaFlagsVarsWide</include>
+        <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.3)].png</texture>
+        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+      </control>
+      <control type="image">
+        <posx>30</posx>
+        <posy>10</posy>
+        <width>25</width>
+        <height>21</height>
+        <texture>flags/flag_frame2.png</texture>
+        <aspectratio >stretch</aspectratio>
+      </control>
+      <control type="image">
+        <posx>30</posx>
+        <posy>10</posy>
+        <width>22</width>
+        <height>18</height>
+        <texture background="true" >$INFO[ListItem.Property(AudioChannels.3),flags/AudioChannels/,chOverlay.png]</texture>
+        <aspectratio>scale</aspectratio>
+      </control>
+      <control type="image">
+        <posx>0</posx>
+        <posy>40</posy>
+        <width>60</width>
+        <height>30</height>
+        <include>MediaFlagsVarsWide</include>
+        <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.3),flags/AudioCodec/,.png]</texture>
+        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+      </control>
+    </control>
+    <control type="group"> <!-- language 4 -->
+      <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
+      <width>60</width>
+      <height>65</height>
+      <posx>225</posx>
+      <control type="image">
+        <posx>0</posx>
+        <width>60</width>
+        <height>30</height>
+        <include>MediaFlagsVarsWide</include>
+        <texture fallback="flags/defaultsound.png" background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.4)].png</texture>
+        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+      </control>
+      <control type="image">
+        <posx>30</posx>
+        <posy>10</posy>
+        <width>25</width>
+        <height>21</height>
+        <texture>flags/flag_frame2.png</texture>
+        <aspectratio >stretch</aspectratio>
+      </control>
+      <control type="image">
+        <posx>30</posx>
+        <posy>10</posy>
+        <width>22</width>
+        <height>18</height>
+        <texture background="true" >$INFO[ListItem.Property(AudioChannels.4),flags/AudioChannels/,chOverlay.png]</texture>
+        <aspectratio>scale</aspectratio>
+      </control>
+      <control type="image">
+        <posx>0</posx>
+        <posy>40</posy>
+        <width>60</width>
+        <height>30</height>
+        <include>MediaFlagsVarsWide</include>
+        <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.4),flags/AudioCodec/,.png]</texture>
+        <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+      </control>
+    </control>
+ 
+ </include>
+  
 <include name="MediaInfoGroup3">
   <control type="group">
     <width>1920</width>
