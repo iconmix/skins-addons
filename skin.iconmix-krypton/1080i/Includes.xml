@@ -766,6 +766,22 @@
 </control>
 </include>
 
+<include name="ActeurLeft">
+  <width>375</width>
+</include>
+<include name="ActeurCenter">
+  <width>965</width>
+  <left>475</left>
+</include>
+<include name="PanelActeurLeft">
+  <left>15</left>
+  <width>435</width>
+</include>
+<include name="PanelActeurCenter">
+  <width>1065</width>
+  <left>420</left>
+</include>
+
 
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="PanelActeurs">
@@ -788,149 +804,143 @@
       </animation>
       <visible>[[[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[String.IsEqual(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!String.StartWith(ListItem.Label,..)</visible>
 
+          
+          <control type="image"> <!--- CADRE DES ACTEURS DEFILANTS---->
+            <top>60</top>
+             <include condition="Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(CacheFond)">PanelActeurCenter</include>
+            <include condition="!Skin.HasSetting(ActeursAuCentre)|!Skin.HasSetting(CacheFond)">PanelActeurLeft</include>
+           
+            
+            <height>220</height>
+            <texture>frames/Dialog_GlassActeur3.png</texture>
+            <colordiffuse>DialogBackgroundColor</colordiffuse>
+            <aspectratio  scalediffuse="true">stretch</aspectratio>
+            <visible>Control.IsVisible(1998)+Integer.IsGreater(Container(1998).NumItems,0)</visible>
+          </control>
+   <control type="group">    
+          <control type="fixedlist" id="1998"> <!-- liste des acteurs -->
+            <movement>4</movement>
+            <onfocus condition="Container(1998).IsUpdating">Control.SetFocus(55)</onfocus>
+            <onunfocus condition="Container(1998).IsUpdating">Control.SetFocus(55)</onunfocus>
+            <onfocus condition="!String.IsEmpty(Window(Home).Property(ActeurVideoReset))">Action(firstpage)</onfocus>
+            
+            <include condition="Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(CacheFond)">ActeurCenter</include>
+            <include condition="!Skin.HasSetting(ActeursAuCentre)|!Skin.HasSetting(CacheFond)">ActeurLeft</include>
 
-      <control type="image"> <!--- CADRE DES ACTEURS DEFILANTS---->
-        <top>60</top>
-        <left>15</left>
-        <width>435</width>
-        <height>220</height>
-        <texture>frames/Dialog_GlassActeur3.png</texture>
-        <colordiffuse>DialogBackgroundColor</colordiffuse>
-        <aspectratio  scalediffuse="true">stretch</aspectratio>
-        <visible>Control.IsVisible(1998)+Integer.IsGreater(Container(1998).NumItems,0)</visible>
+            <posx>46</posx>
+            <posy>125</posy>
+            <ondown>5051</ondown>
+            <onback>Action(firstpage)</onback>
+            <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
+            <onback>SetProperty(ActeurVideoReset,1,Home)</onback>
+            <onback condition="!Window.IsVisible(movieinformation)">55</onback>
+            <onback condition="Window.IsVisible(movieinformation)">7003</onback>
+            <onup>Action(firstpage)</onup>
+            <onup>SetProperty(ActeurVideoLocal,1,Home)</onup>
+            <onup>SetProperty(ActeurVideoReset,1,Home)</onup>
+            <onup condition="!Window.IsVisible(movieinformation)">55</onup>
+            <onup condition="Window.IsVisible(movieinformation)">7003</onup>
+         
+            <height>200</height>
+            <!-- <width>375</width> -->
+            <align>left</align>
+            <itemgap>1</itemgap>
+            <orientation>horizontal</orientation>
+            <visible>[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)|String.IsEqual(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!String.StartWith(ListItem.Label,..)</visible>
+            <autoscroll delay="4000" repeat="5000" time="5000">!Control.HasFocus(1998)+!Control.HasFocus(5051)+!String.IsEmpty(Window(Home).Property(ActeurVideoReset))</autoscroll>-->
+            <pagecontrol>60</pagecontrol>
+            <!-- <content>$VAR[contentPanelActeurs]</content> -->
+            <resetonlabelchange>true</resetonlabelchange>
+            <itemlayout width="75">
+              <control type="image">
+                <width>75</width>
+                <height>110</height>
+                <texture  diffuse="frames/acteurframe.png" fallback="DefaultThumb.png">$INFO[ListItem.Icon]</texture>
+                <aspectratio scalediffuse="true">keep</aspectratio>
+                <colordiffuse>FF999999</colordiffuse>
+              </control>
+            </itemlayout>
+            <focusedlayout width="75">
+              <control type="image">
+                <animation type="Conditional" condition="true">
+                  <effect type="zoom"  center="37,55" start="100" end="120" time="5" delay="1" reversible="true"/>
+                </animation>
+                <width>75</width>
+                <height>110</height>
+                <texture  diffuse="frames/acteurframe.png" fallback="DefaultThumb.png">$INFO[ListItem.Icon]</texture>
+                <aspectratio scalediffuse="true">keep</aspectratio>
+                <colordiffuse>FFFFFFFF</colordiffuse>
+              </control>
+            </focusedlayout>
+          </control>
+          <control type="group">
+            <include condition="Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(CacheFond)">PanelActeurCenter</include>
+            <include condition="!Skin.HasSetting(ActeursAuCentre)|!Skin.HasSetting(CacheFond)">PanelActeurLeft</include>
+            <control type="group"> <!-- realisateur -->
+             
+              <control type="label">
+                <posy>82</posy>
+                <posx>75</posx>
+                <font>comic20</font>
+                <!-- <width>355</width> -->
+                <height>80</height>
+                <align>left</align>
+                <label>[COLOR=white][I]$INFO[ListItem.Director][/I][/COLOR]</label>
+              </control>
+              <visible>!String.IsEmpty(ListItem.Director)</visible>
+              <control type="image" id="5055">
+                <posy>81</posy>
+                <posx>41</posx>
+                <width>35</width>
+                <height>35</height>
+                <texture>frames/actortv.png</texture>
+                <aspectratio  scalediffuse="true">keep</aspectratio>
+                <visible>Control.IsVisible(1998)+!String.IsEqual(ListItem.DBTYPE,movie)</visible>
+              </control>
+              <control type="image" id="5056">
+                <posy>85</posy>
+                <posx>44</posx>
+                <width>30</width>
+                <height>30</height>
+                <texture>frames/actorfilm.png</texture>
+                <aspectratio  scalediffuse="true">keep</aspectratio>
+                <visible>Control.IsVisible(1998)+String.IsEqual(ListItem.DBTYPE,movie)</visible>
+              </control>
+            </control>
+
+
+            <control type="fadelabel"> <!---- acteur sélectionné -->
+              <posy>230</posy>
+              <posx>44</posx>
+              <font>comic20</font>
+              <!-- <width>365</width>-->
+              <height>80</height>
+              <align>center</align>
+              <label>[COLOR=yellow]$INFO[Container(1998).ListItem.Label][/COLOR]</label>
+
+            </control>
+            <!--
+            <control type="group">
+              <top>195</top>
+              <left>435</left>
+              <animation type="Conditional" loop="true" condition="!Control.HasFocus(1998)+!Control.HasFocus(5051)">
+                <effect type="fade"  start="0" end="100"  time="1000" delay="2000" reversible="true"/>
+              </animation>
+              <visible>!Control.HasFocus(1998)+!Control.HasFocus(5051)+Integer.IsGreater(Container(1998).NumItems,0)</visible>
+              <control type="image">
+                <width>30</width>
+                <height>30</height>
+                <texture>Arrow$INFO[Window(Home).Property(ActeurDirection)].png</texture>
+              </control>
+            </control>
+            -->
+          </control>
       </control>
-      <!--- CADRE DES ACTEURS DEFILANTS
-      <control type="image">
-      <top>60</top>
-      <left>30</left>
-      <width>405</width>
-      <height>220</height>
-      <texture>$INFO[Container(1998).ListItem(1).Icon]</texture>
-      <aspectratio  scalediffuse="true">stretch</aspectratio>
-      <visible>Control.IsVisible(1998)+Integer.IsGreater(Container(1998).NumItems,0)</visible>
-    </control>---->
-
-
-
-
-
-
-    <control type="fixedlist" id="1998"> <!-- liste des acteurs -->
-      <movement>4</movement>
-      <onfocus condition="Container(1998).IsUpdating">Control.SetFocus(55)</onfocus>
-      <onunfocus condition="Container(1998).IsUpdating">Control.SetFocus(55)</onunfocus>
-      <onfocus condition="!String.IsEmpty(Window(Home).Property(ActeurVideoReset))">Action(firstpage)</onfocus>
-
-      <posx>46</posx>
-      <posy>125</posy>
-      <ondown>5051</ondown>
-      <onback>Action(firstpage)</onback>
-      <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
-      <onback>SetProperty(ActeurVideoReset,1,Home)</onback>
-      <onback condition="!Window.IsVisible(movieinformation)">55</onback>
-      <onback condition="Window.IsVisible(movieinformation)">7003</onback>
-      <onup>Action(firstpage)</onup>
-      <onup>SetProperty(ActeurVideoLocal,1,Home)</onup>
-      <onup>SetProperty(ActeurVideoReset,1,Home)</onup>
-      <onup condition="!Window.IsVisible(movieinformation)">55</onup>
-      <onup condition="Window.IsVisible(movieinformation)">7003</onup>
-      <!--
-      <onfocus>SetProperty(Actorbiographie,,Home)</onfocus>
-      <onfocus>SetProperty(Actornaissance,,Home)</onfocus>
-      <onfocus>SetProperty(Actordeces,,Home)</onfocus>
-      <onfocus>SetProperty(Actorlieunaissance,,Home)</onfocus>
-      <onfocus>SetProperty(ActorAge,,Home)</onfocus>
-      <onfocus>SetProperty(ActorNomReel,,Home)</onfocus>
-      -->
-
-      <height>200</height>
-      <width>375</width>
-      <align>left</align>
-      <itemgap>1</itemgap>
-      <orientation>horizontal</orientation>
-      <visible>[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)|String.IsEqual(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!String.StartWith(ListItem.Label,..)</visible>
-      <autoscroll delay="4000" repeat="5000" time="5000">!Control.HasFocus(1998)+!Control.HasFocus(5051)+!String.IsEmpty(Window(Home).Property(ActeurVideoReset))</autoscroll>-->
-      <pagecontrol>60</pagecontrol>
-      <!-- <content>$VAR[contentPanelActeurs]</content> -->
-      <resetonlabelchange>true</resetonlabelchange>
-      <itemlayout width="75">
-        <control type="image">
-          <width>75</width>
-          <height>110</height>
-          <texture  diffuse="frames/acteurframe.png" fallback="DefaultThumb.png">$INFO[ListItem.Icon]</texture>
-          <aspectratio scalediffuse="true">keep</aspectratio>
-          <colordiffuse>FF999999</colordiffuse>
-        </control>
-      </itemlayout>
-      <focusedlayout width="75">
-        <control type="image">
-          <animation type="Conditional" condition="true">
-            <effect type="zoom"  center="37,55" start="100" end="120" time="5" delay="1" reversible="true"/>
-          </animation>
-          <width>75</width>
-          <height>110</height>
-          <texture  diffuse="frames/acteurframe.png" fallback="DefaultThumb.png">$INFO[ListItem.Icon]</texture>
-          <aspectratio scalediffuse="true">keep</aspectratio>
-          <colordiffuse>FFFFFFFF</colordiffuse>
-        </control>
-      </focusedlayout>
+      <!-- -->
+     
     </control>
-    <control type="group"> <!-- realisateur -->
-      <control type="label">
-        <posy>82</posy>
-        <posx>75</posx>
-        <font>comic20</font>
-        <width>355</width>
-        <height>80</height>
-        <align>left</align>
-        <label>[COLOR=white][I]$INFO[ListItem.Director][/I][/COLOR]</label>
-      </control>
-      <visible>!String.IsEmpty(ListItem.Director)</visible>
-      <control type="image" id="5055">
-        <posy>81</posy>
-        <posx>41</posx>
-        <width>35</width>
-        <height>35</height>
-        <texture>frames/actortv.png</texture>
-        <aspectratio  scalediffuse="true">keep</aspectratio>
-        <visible>Control.IsVisible(1998)+!String.IsEqual(ListItem.DBTYPE,movie)</visible>
-      </control>
-      <control type="image" id="5056">
-        <posy>85</posy>
-        <posx>44</posx>
-        <width>30</width>
-        <height>30</height>
-        <texture>frames/actorfilm.png</texture>
-        <aspectratio  scalediffuse="true">keep</aspectratio>
-        <visible>Control.IsVisible(1998)+String.IsEqual(ListItem.DBTYPE,movie)</visible>
-      </control>
-    </control>
-
-
-    <control type="fadelabel"> <!---- acteur sélectionné -->
-      <posy>230</posy>
-      <posx>44</posx>
-      <font>comic20</font>
-      <width>365</width>
-      <height>80</height>
-      <align>center</align>
-      <label>[COLOR=yellow]$INFO[Container(1998).ListItem.Label][/COLOR]</label>
-
-    </control>
-    <control type="group">
-      <top>195</top>
-      <left>435</left>
-      <animation type="Conditional" loop="true" condition="!Control.HasFocus(1998)+!Control.HasFocus(5051)">
-        <effect type="fade"  start="0" end="100"  time="1000" delay="2000" reversible="true"/>
-      </animation>
-      <visible>!Control.HasFocus(1998)+!Control.HasFocus(5051)+Integer.IsGreater(Container(1998).NumItems,0)</visible>
-      <control type="image">
-        <width>30</width>
-        <height>30</height>
-        <texture>Arrow$INFO[Window(Home).Property(ActeurDirection)].png</texture>
-      </control>
-    </control>
-  </control>
+  
+  
   <include>PanelActeursOsd</include>
   <!---------------------------------------------------- roles --------------------------------------------------------->
   <control type="group">

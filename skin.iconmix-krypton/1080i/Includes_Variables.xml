@@ -667,7 +667,7 @@
 		<value condition="Window.IsActive(script-skinshortcuts.xml) + [Control.HasFocus(1002)|Control.HasFocus(2002)]">Selected : Display center widget - Unselected : Display part of widget on right</value>
 		<value condition="Window.IsActive(script-skinshortcuts.xml) + [Control.HasFocus(1003)|Control.HasFocus(2003)]">Hide widget until has focused</value>
 		<!-- Videos -->
-		<value condition="[Container.Content(Movies) + String.IsEmpty(ListItem.PlotOutline)] | Container.Content(TVShows) | Container.Content(Episodes) | Container.Content(MusicVideos) | String.Contains(Container.FolderPath,plugin)">$INFO[ListItem.Plot]</value>
+		<value condition="[Container.Content(Movies) + !String.IsEmpty(ListItem.Plot)] | Container.Content(TVShows) | Container.Content(Episodes) | Container.Content(MusicVideos) | String.Contains(Container.FolderPath,plugin)">$INFO[ListItem.Plot]</value>
 		<value condition="Container.Content(Movies) +  !String.IsEmpty(ListItem.PlotOutline)">$INFO[ListItem.PlotOutline]</value>
 		<value condition="Container.Content(Seasons)">$INFO[Container.ShowPlot]</value>
 		<!-- Music -->

@@ -67,7 +67,7 @@
     <!-- <posx>500</posx> -->
     <height>150</height>
     <align>left</align>
-    <itemgap>-20</itemgap>
+    <itemgap>0</itemgap>
     <orientation>horizontal</orientation>
 
     <control type="group"> <!-- studio -->
@@ -353,18 +353,20 @@
 
   <height>150</height>
   <align>center</align>
-  <itemgap>-20</itemgap>
+  <!-- <itemgap>-20</itemgap> -->
+  <itemgap>0</itemgap>
   <orientation>horizontal</orientation>
   <include>mediaflagline1</include>
 </control>
 </control>
 <control type="group">
-  <posy>1010</posy>
+  <posy>1015</posy>
   <control type="grouplist"> <!-- 2eme ligne -->
 
     <height>150</height>
     <align>center</align>
-    <itemgap>-20</itemgap>
+    <itemgap>0</itemgap>
+    <!-- <itemgap>-20</itemgap>-->
     <orientation>horizontal</orientation>
     <include>mediaflagline2</include>
   </control>
@@ -412,23 +414,37 @@
   <control type="group"> <!--- GENRES -->
     <visible>!String.IsEmpty(ListItem.Genre)+Skin.HasSetting(CacheFond)+!Window.IsActive(2003)</visible>
     <visible>!Skin.HasSetting(hidegenre)</visible>
-    <width>300</width>
+    <width>156</width>
     <height>80</height>
     <left>-5</left>
 
-    <control type="textbox">
-      <top>8</top>
-      <left>25</left>
+  <control type="fadelabel">
+          <top>8</top>
+      <left>9</left>
       <height>70</height>
-      <width>236</width>
+      <width>136</width>
+          <aligny>center</aligny>
+          <align>center</align>
+          <scrollout>false</scrollout>
+          <pauseatend>400</pauseatend>
+          <font>impact35</font>
+          <scrollspeed>20</scrollspeed>
+          <shadowcolor>FF000000</shadowcolor>
+          <label>[COLOR=MediaDetailsInfo]$INFO[ListItem.Genre][/COLOR]</label>
+          <textcolor>white</textcolor>
+        </control>
+    <!-- <control type="textbox">
+      <top>8</top>
+      <left>5</left>
+      <height>70</height>
+      <width>136</width>
       <align>center</align>
       <font>comic24</font>
       <textcolor>TextNF</textcolor>
-    <!-- <label>[COLOR=MediaDetailsInfo]$INFO[Window(10000).Property(ItemUniqueGenre)][/COLOR]</label> -->
     <label>[COLOR=MediaDetailsInfo]$INFO[ListItem.Genre][/COLOR]</label>
     <autoscroll delay="5000" time="3500" repeat="5000">true</autoscroll>
-
   </control>
+  -->
   <control type="image">
     <texture>flags/flag_frame.png</texture>
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
@@ -1253,26 +1269,30 @@
     <visible>!Container.Content(seasons)+!Container.Content(tvshows)</visible>
   </control>
 
-  <control type="group"> <!--- GENRES -->
+   <control type="group"> <!--- GENRES -->
     <visible>!String.IsEmpty(ListItem.Genre)+Skin.HasSetting(CacheFond)+!Window.IsActive(2003)</visible>
     <visible>!Skin.HasSetting(hidegenre2)</visible>
-    <width>300</width>
+    <width>200</width>
     <height>80</height>
     <left>-5</left>
 
-    <control type="textbox">
-      <top>8</top>
-      <left>25</left>
+   <control type="fadelabel">
+          <top>8</top>
+      <left>9</left>
       <height>70</height>
-      <width>236</width>
-      <align>center</align>
-      <font>comic24</font>
-      <textcolor>TextNF</textcolor>
-    <!-- <label>[COLOR=MediaDetailsInfo]$INFO[Window(10000).Property(ItemUniqueGenre)][/COLOR]</label> -->
-    <label>[COLOR=MediaDetailsInfo]$INFO[ListItem.Genre][/COLOR]</label>
-    <autoscroll delay="5000" time="3500" repeat="5000">true</autoscroll>
+      <width>136</width>
+          <aligny>center</aligny>
+          <align>center</align>
+          <scrollout>false</scrollout>
+          <pauseatend>400</pauseatend>
+          <font>impact35</font>
+          <scrollspeed>20</scrollspeed>
+          <shadowcolor>FF000000</shadowcolor>
+          <label>[COLOR=MediaDetailsInfo]$INFO[ListItem.Genre][/COLOR]</label>
+          <textcolor>white</textcolor>
+        </control>
 
-  </control>
+ 
   <control type="image">
     <texture>flags/flag_frame.png</texture>
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
@@ -1608,6 +1628,7 @@
     <align>left</align>
     <include>Animation_FadedByMenu</include>
     <include>Animation_CommonFade</include>
+    
     <visible>!String.Contains(Container.FolderPath,plugin)</visible>
     <visible>!String.StartWith(ListItem.Label,..)+[Container.Content(movies)| Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)  | Container.Content(MusicVideos)]</visible>
     <include>VisibleIfNotMovieSet</include>
@@ -1615,7 +1636,7 @@
     <!-- <posx>500</posx> -->
     <height>100</height>
     <align>left</align>
-    <itemgap>-20</itemgap>
+    <itemgap>0</itemgap>
     <orientation>horizontal</orientation>
     <include>mediaflagline1</include>
     <include>mediaflagline2</include>
@@ -1637,23 +1658,27 @@
 
   <control type="group"> <!--- GENRES -->
     <visible>!Skin.HasSetting(hidegenre)</visible>
-    <width>300</width>
+    <width>200</width>
     <height>80</height>
-    <left>-5</left>
+    <left>-20</left>
+    <align>center</align>
 
-    <control type="textbox">
-      <top>8</top>
-      <left>25</left>
+   
+  <control type="fadelabel">
+          <top>8</top>
+      <left>9</left>
       <height>70</height>
-      <width>236</width>
-      <align>center</align>
-      <font>comic24</font>
-      <textcolor>TextNF</textcolor>
-    <!-- <label>[COLOR=MediaDetailsInfo]$INFO[Window(10000).Property(ItemUniqueGenre)][/COLOR]</label> -->
-    <label>[COLOR=MediaDetailsInfo]Drame / Histoire / Science-Fiction[/COLOR]</label>
-    <autoscroll delay="5000" time="3500" repeat="5000">true</autoscroll>
-
-  </control>
+      <width>136</width>
+          <aligny>center</aligny>
+          <align>center</align>
+          <scrollout>false</scrollout>
+          <pauseatend>400</pauseatend>
+          <font>impact35</font>
+          <scrollspeed>20</scrollspeed>
+          <shadowcolor>FF000000</shadowcolor>
+          <label>[COLOR=MediaDetailsInfo]Drame / Histoire / Science-Fiction[/COLOR]</label>
+          <textcolor>white</textcolor>
+        </control>
   <control type="image">
     <texture>flags/flag_frame.png</texture>
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
@@ -1914,25 +1939,28 @@
 
   </control>
 
-  <control type="group"> <!--- GENRES -->
+   <control type="group"> <!--- GENRES -->
     <visible>!Skin.HasSetting(hidegenre2)</visible>
-    <width>300</width>
+    <width>200</width>
     <height>80</height>
-    <left>-5</left>
+    <left>-20</left>
+    <align>center</align>
 
-    <control type="textbox">
-      <top>8</top>
-      <left>25</left>
+    <control type="fadelabel">
+          <top>8</top>
+      <left>9</left>
       <height>70</height>
-      <width>236</width>
-      <align>center</align>
-      <font>comic24</font>
-      <textcolor>TextNF</textcolor>
-    <!-- <label>[COLOR=MediaDetailsInfo]$INFO[Window(10000).Property(ItemUniqueGenre)][/COLOR]</label> -->
-    <label>[COLOR=MediaDetailsInfo]Drame / Histoire / Science-Fiction[/COLOR]</label>
-    <autoscroll delay="5000" time="3500" repeat="5000">true</autoscroll>
-
-  </control>
+      <width>136</width>
+          <aligny>center</aligny>
+          <align>center</align>
+          <scrollout>false</scrollout>
+          <pauseatend>400</pauseatend>
+          <font>impact35</font>
+          <scrollspeed>20</scrollspeed>
+          <shadowcolor>FF000000</shadowcolor>
+          <label>[COLOR=MediaDetailsInfo]Drame / Histoire / Science-Fiction[/COLOR]</label>
+          <textcolor>white</textcolor>
+        </control>
   <control type="image">
     <texture>flags/flag_frame.png</texture>
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
@@ -2177,6 +2205,56 @@
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
   </control>
 </control>
+
+
+</include>
+
+
+<include name="MediaInfoGroup2v">
+  <control type="group">
+    <width>500</width>
+  <!--<posx>-70</posx>-->
+  <align>left</align>
+  
+  <include>Animation_FadedByMenu</include>
+  <include>Animation_CommonFade</include>
+  <visible>!String.Contains(Container.FolderPath,plugin)</visible>
+  <visible>!String.StartWith(ListItem.Label,..)+[Container.Content(movies)| Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons) |Container.Content(MusicVideos)]</visible>
+  <include>VisibleIfNotMovieSet</include>
+  <!-- Video Resolution -->
+  <control type="group">
+    <posy>875</posy>
+    <!-- -->
+    <animation type="Conditional" condition="true" reversible="true">
+      <effect type="zoom" center="0,875" start="100" end="90" time="10" />
+    </animation>
+    -->
+    <control type="grouplist"> <!-- 1ere ligne-->
+      <width>200</width>
+      <height>1120</height>
+      <align>top</align>
+      <itemgap>0</itemgap>
+      <orientation>vertical</orientation>
+      <include>mediaflagline1</include>
+    </control>
+     <control type="grouplist"> <!-- 2eme ligne-->
+      
+      <left>155</left>
+      <width>200</width>
+      <height>1120</height>
+      <align>left</align>
+      <itemgap>0</itemgap>
+      <orientation>vertical</orientation>
+      <include>mediaflagline2</include>
+    </control>
+  </control>
+
+
+</control>
+
+
+
+
 
 
 </include>
