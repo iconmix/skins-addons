@@ -185,7 +185,7 @@
       <!-- <texture>$INFO[ListItem.Icon]</texture> -->
       <texture>$INFO[Window(Home).Property(ActorThumb)]</texture>
       <bordersize>8</bordersize>
-      <bordertexture border="8">frames/acteur2.png</bordertexture>
+      <bordertexture border="8">frames/ClassicFrame_Poster3.png</bordertexture>
       <visible>Control.HasFocus(8889)+[!String.IsEmpty(Window(Home).Property(Actornaissance))|!String.IsEmpty(Window(Home).Property(Actorlieunaissance))]</visible>
     </control>
     <!--
@@ -1335,7 +1335,7 @@
         <height>220</height>
         <texture fallback="DefaultActor.png">$INFO[Listitem.Icon]</texture>
         <bordersize>5</bordersize>
-        <bordertexture border="5">frames/acteur2.png</bordertexture>
+        <bordertexture border="5">frames/ClassicFrame_Poster3.png</bordertexture>
         <aspectratio align="center" aligny="center">keep</aspectratio>
       </control>
 
@@ -1376,7 +1376,7 @@
         <height>220</height>
         <texture fallback="DefaultActor.png">$INFO[Listitem.Icon]</texture>
         <bordersize>5</bordersize>
-        <bordertexture border="5">frames/acteur2.png</bordertexture>
+        <bordertexture border="5">frames/ClassicFrame_Poster3.png</bordertexture>
         <aspectratio align="center" aligny="center">keep</aspectratio>
       </control>
 
@@ -1539,7 +1539,7 @@
 
   <aspectratio scalediffuse="true" align="center" >keep</aspectratio>
   <bordersize>5</bordersize>
-  <bordertexture border="5">frames/acteur2.png</bordertexture> -->
+  <bordertexture border="5">frames/ClassicFrame_Poster3.png</bordertexture> -->
 </include>
 
 <!-- systeminfo widget -->
