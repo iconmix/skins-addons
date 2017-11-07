@@ -1219,7 +1219,8 @@ def getCasting(Castingtypex=None,ItemId=None,Statique=None):
   NonVide=xbmc.getCondVisibility("Skin.HasSetting(HideMovieTvCastEmpty)")
   #videodb://movies/actors/1132/   1132=id acteur pour retrouver ses films
   
-  if sys.argv[1]:
+  if sys.argv[1] or Statique:
+      
       if Castingtypex and ItemId:   
          #if Castingtypex=="episode":            Castingtypex="tvshow"
     
@@ -1262,7 +1263,7 @@ def getFilmsParActeur(ActeurType=None,Acteur=None,Statique=None):
   
   #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetMovies","params":{"filter":{"actor":"marion cotillard"},"properties":["thumbnail","year","file"]},"id":"1"}
   #videodb://movies/actors/1132/   1132=id acteur pour retrouver ses films
-  if sys.argv[1]:
+  if sys.argv[1] or Statique:
       if Acteur: 
          if ActeurType and ActeurType=="director":
             Ok=""
@@ -1284,7 +1285,7 @@ def getFilmsParActeur(ActeurType=None,Acteur=None,Statique=None):
            for Item in Donnees:
              Titre=Item.get("label")
              if Titre:
-                 ItemListe = xbmcgui.ListItem(label=Titre)
+                 ItemListe = xbmcgui.ListItem(label=Titre,iconImage=Item.get("art").get("poster")) 
                  Casting = Item.get("cast")
                  if Casting:
                     for ItemCast in  Casting:
@@ -1297,7 +1298,8 @@ def getFilmsParActeur(ActeurType=None,Acteur=None,Statique=None):
                  if not IdVideo: 
                     IdVideo=Item.get("tvshowid")
                     TypeVideo="tvshow"
-                 ItemListe.setArt( Item.get("art")) 
+                 ItemListe.setArt( Item.get("art"))
+                 
                  ItemListe.setProperty('DBID', str(IdVideo))
                  ItemListe.setProperty('dbtype',TypeVideo)
                  ItemListe.setProperty('IMDBNumber', str(Item.get("imdbnumber")))

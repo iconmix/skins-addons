@@ -407,7 +407,7 @@
             </control>
             <control type="radiobutton" id="507">
               <include>SettingsLabel</include>
-              <label>Acteurs Centrés</label>
+              <label>$LOCALIZE[32006]</label>
               <onclick>Skin.ToggleSetting(ActeursAuCentre)</onclick>
               <selected>Skin.HasSetting(ActeursAuCentre)</selected>
             </control>

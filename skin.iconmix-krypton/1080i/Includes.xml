@@ -712,29 +712,178 @@
   <texturefocus border="5">ButtonFo.png</texturefocus>
   <texturenofocus border="5">ButtonNf.png</texturenofocus>
 </include>
+<!-- --------------------------------------------------------------------------------------------- -->
+	<include name="PPActeurs">
+		
+		<param name="ItemId" default="0"/>
+		<param name="Width1" default="265"/>
+		<param name="DiffuseFrame" default="acteurs/frame2.png"/>
+		<param name="visibility" default=True/>
+		<definition>
+		  <control type="group">
+		    <height>320</height>
+		    <visible>$PARAM[visibility]</visible>
+		    <width>$PARAM[Width1]</width>
+		    
+    		<control type="textbox">
+          <posy>230</posy>
+          <height>115</height>
+          <align>center</align>
+          <aligny>top</aligny>
+          <font>comic24</font>
+          <textcolor>TextNF</textcolor>
+          <label>$INFO[Container(1998).ListItem($PARAM[ItemId]).Label][CR][COLOR=yellow]([I]$INFO[Container(1998).ListItem($PARAM[ItemId]).Label2])[/I][/COLOR]</label>
+        </control>
 
+        <control type="group">
+          <posx>35</posx>
+          <posy>5</posy>
+          <control type="image">
+            <description>Actor image</description>
+            <posy>10</posy>
+            <posx>5</posx>
+            <align>center</align>
+            <width>175</width>
+            <height>220</height>
+            <texture diffuse=$PARAM[DiffuseFrame] fallback="DefaultActor.png">$INFO[Container(1998).ListItem($PARAM[ItemId]).Icon]</texture>
+            <!-- <bordersize>5</bordersize>
+            <bordertexture border="5">frames/ClassicFrame_Poster3.png</bordertexture>
+            -->
+            <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
+          </control>
+        </control>
+	    </control>
+		</definition>
+	</include>
 <!-- --------------------------------------------------------------------------------------------- -->
 <include name="PanelActeursOsd">
   <control type="group">
     <top>1100</top>
-    <visible>Skin.HasSetting(ShowOsdActors)+Player.HasVideo</visible>
-    <animation type="Conditional" condition="!Control.HasFocus(5051)+!Control.HasFocus(1998)+!Container(1998).IsUpdating">
-      <effect type="slide"  start="0,0" end="0,-500" time="500" delay="1" reversible="true"/>
+    <animation type="Conditional" reversible="true" condition="!Control.HasFocus(5051)+!Control.HasFocus(1998)+!Container(1998).IsUpdating">
+      <effect type="slide"  start="0,0" end="0,-500" time="500" delay="1" />
     </animation>
+    <animation type="Visible" >
+			<effect type="zoom" center="960,1300" start="10" end="100" tween="back" easy="out"  time="600" delay="10" />
+			<effect type="fade" start="10" end="100" time="900" delay="5" />
+		</animation>
+		<animation type="Hidden" >
+			<effect type="zoom" center="960,1300" start="100" end="1"  time="500" delay="10" />
+			<effect type="fade" start="100" end="0" time="500" delay="5" />
+		</animation>
+    <visible>Skin.HasSetting(ShowOsdActors)+Player.HasVideo</visible>
+    
     <!--
     <animation type="Conditional" condition="Control.HasFocus(5051)|Control.HasFocus(1998)|Window.IsVisible(movieinformation)">
         <effect type="fade"  start="100" end="0" time="5" delay="1" reversible="true"/>
       </animation>
       -->
+  <control type="button" id="2022">
+    <top>1500</top>
+    <label>Activation1998</label>
+    <onleft>Control.Move(1998,-1)</onleft>
+    <onright>Control.Move(1998,1)</onright>
+    <onback>2001</onback>
+    <onup>2001</onup>
+    <ondown>1998</ondown>
+    <onclick>SetFocus(1998)</onclick>
+    
+  </control>
     
     <!--- CADRE DES ACTEURS DEFILANTS---->
-  <control type="image">
+  <control type="group">
+    
+    
+    <control type="image">
       <posx>0</posx>
       <width>1920</width>
       <height>380</height>
       <texture>osd/OSDdialogback.png</texture>
       <colordiffuse>OSDBackgroundColor</colordiffuse>
     </control>
+    <control type="group"> <!-- focus -->
+      <top>0</top>
+      <left>15</left>
+      <height>350</height>
+      <animation type="Conditional" condition="Control.HasFocus(2022)">
+        <effect type="zoom" end="110" time="1" delay="1" reversible="false"/>
+        
+      </animation>
+      <include content="PPActeurs">
+					<param name="ItemId">0</param>										
+			</include>
+      
+    </control>
+    <control type="group">
+      
+              <visible>Control.HasFocus(2022)</visible>
+              <control type="image">
+      <top>375</top>
+      <left>927</left>
+              <align>center</align>
+              <width>65</width>
+              <height>55</height>
+              <texture>acteurs\details.png</texture>
+              
+            </control> 
+    <control type="image">
+      <animation type="Conditional" loop="true" condition="true">
+              <effect type="fade"  start="0" end="100"  time="1000" delay="2000" reversible="false"/>
+            </animation>
+      <top>350</top>
+      <left>945</left>
+              <align>center</align>
+              <width>30</width>
+              <height>30</height>
+              <texture>ArrowDown.png</texture>
+              
+            </control> 
+             
+           </control>
+    
+    <control type="grouplist">
+      <top>0</top>
+      <left>265</left>
+      <height>350</height>        
+      <width>1640</width>
+      <orientation>horizontal</orientation>   
+        
+      
+			<include content="PPActeurs">
+					<param name="ItemId">1</param>
+<param name="visibility">Integer.IsGreater(Container(1998).NumItems,1)</param>					
+			</include>
+			<include  content="PPActeurs">
+					<param name="ItemId">2</param>
+<param name="visibility">Integer.IsGreater(Container(1998).NumItems,2)</param>					
+			</include>
+			<include content="PPActeurs">
+					<param name="ItemId">3</param>
+<param name="visibility">Integer.IsGreater(Container(1998).NumItems,3)</param>	
+					
+			</include>
+			<include content="PPActeurs">
+					<param name="ItemId">4</param>
+<param name="visibility">Integer.IsGreater(Container(1998).NumItems,4)</param>					
+			</include>
+			<include content="PPActeurs">
+					<param name="ItemId">5</param>
+<param name="visibility">Integer.IsGreater(Container(1998).NumItems,5)</param>					
+			</include>
+			<include content="PPActeurs">
+					<param name="ItemId">6</param>
+<param name="visibility">Integer.IsGreater(Container(1998).NumItems,6)</param>					
+			</include>
+			<include content="PPActeurs">
+					<param name="ItemId">7</param>
+<param name="visibility">Integer.IsGreater(Container(1998).NumItems,7)</param>					
+			</include>
+			<include content="PPActeurs">
+					<param name="ItemId">8</param>
+<param name="visibility">Integer.IsGreater(Container(1998).NumItems,8)</param>					
+			</include>
+			
+    </control>
+  </control>
       
       <!-- liste des acteurs -->
    <control type="fixedlist" id="1998"> 
@@ -754,12 +903,18 @@
       <align>center</align>
       <itemgap>1</itemgap>
       <orientation>horizontal</orientation>
-      <autoscroll delay="4000" repeat="5000" time="5000">!Control.HasFocus(1998)+!Control.HasFocus(5051)</autoscroll>
+      <autoscroll delay="4000" repeat="5000" time="5000">!Control.HasFocus(1998)+!Control.HasFocus(5051)+!Control.HasFocus(2022)+Integer.IsGreater(Container(1998).NumItems,7)</autoscroll>
       <pagecontrol>60</pagecontrol>
       <!-- <content>$VAR[contentPanelActeursOsd]</content> -->
       <resetonlabelchange>true</resetonlabelchange>
       
-      <include>Acteurs</include>
+      <!-- <include>Acteurs</include> -->
+      <itemlayout>
+        
+      </itemlayout>
+      <focusedlayout>
+        
+      </focusedlayout>
       
     </control>
     -->
@@ -819,7 +974,7 @@
           </control>
    <control type="group">    
           <control type="fixedlist" id="1998"> <!-- liste des acteurs -->
-            <movement>4</movement>
+            <movement>6</movement>
             <onfocus condition="Container(1998).IsUpdating">Control.SetFocus(55)</onfocus>
             <onunfocus condition="Container(1998).IsUpdating">Control.SetFocus(55)</onunfocus>
             <onfocus condition="!String.IsEmpty(Window(Home).Property(ActeurVideoReset))">Action(firstpage)</onfocus>
@@ -855,7 +1010,7 @@
               <control type="image">
                 <width>75</width>
                 <height>110</height>
-                <texture  diffuse="frames/acteurframe.png" fallback="DefaultThumb.png">$INFO[ListItem.Icon]</texture>
+                <texture  diffuse="acteurs/frame2.png" fallback="DefaultThumb.png">$INFO[ListItem.Icon]</texture>
                 <aspectratio scalediffuse="true">keep</aspectratio>
                 <colordiffuse>FF999999</colordiffuse>
               </control>
@@ -867,7 +1022,7 @@
                 </animation>
                 <width>75</width>
                 <height>110</height>
-                <texture  diffuse="frames/acteurframe.png" fallback="DefaultThumb.png">$INFO[ListItem.Icon]</texture>
+                <texture  diffuse="acteurs/frame2.png" fallback="DefaultThumb.png">$INFO[ListItem.Icon]</texture>
                 <aspectratio scalediffuse="true">keep</aspectratio>
                 <colordiffuse>FFFFFFFF</colordiffuse>
               </control>
@@ -960,70 +1115,7 @@
         <height>290</height>
         <control type="group">
           <width>660</width>
-          <control type="grouplist"> <!-- acteurs suivants -->
-            <orientation>horizontal</orientation>
-            <animation type="Conditional" condition="Control.HasFocus(5051)">
-              <!-- <effect type="fade"  start="100" end="60"  time="10"  reversible="false"/> -->
-              <effect type="slide"   end="0,200"  time="250"  reversible="true"/>
-            </animation>
-            <top>-85</top>
-            <left>165</left>
-            <align>left</align>
-            <itemgap>20</itemgap>
-            <width>1400</width>
-            <control type="label">
-              <width>5</width>
-              <label></label>
-            </control>
-            <control type="image">
-              <include>VignettesActeurs</include>
-              <left>480</left>
-              <visible>Integer.IsGreater(Container(1998).NumItems,1)</visible>
-              <texture   fallback="DefaultActor.png">$INFO[Container(1998).ListItem(1).Icon]</texture>
-            </control>
-            <control type="image">
-              <include>VignettesActeurs</include>
-              <left>360</left>
-              <visible>Integer.IsGreater(Container(1998).NumItems,2)</visible>
-              <texture   fallback="DefaultActor.png">$INFO[Container(1998).ListItem(2).Icon]</texture>
-            </control>
-            <control type="image">
-              <include>VignettesActeurs</include>
-              <left>240</left>
-              <visible>Integer.IsGreater(Container(1998).NumItems,3)</visible>
-              <texture   fallback="DefaultActor.png">$INFO[Container(1998).ListItem(3).Icon]</texture>
-            </control>
-            <control type="image">
-              <include>VignettesActeurs</include>
-              <left>120</left>
-              <visible>Integer.IsGreater(Container(1998).NumItems,4)</visible>
-              <texture   fallback="DefaultActor.png">$INFO[Container(1998).Listitem(4).Icon]</texture>
-            </control>
-            <control type="image">
-              <include>VignettesActeurs</include>
-              <left>120</left>
-              <visible>Integer.IsGreater(Container(1998).NumItems,5)</visible>
-              <texture   fallback="DefaultActor.png">$INFO[Container(1998).Listitem(5).Icon]</texture>
-            </control>
-            <control type="image">
-              <include>VignettesActeurs</include>
-              <left>120</left>
-              <visible>Integer.IsGreater(Container(1998).NumItems,6)</visible>
-              <texture   fallback="DefaultActor.png">$INFO[Container(1998).Listitem(6).Icon]</texture>
-            </control>
-            <control type="image">
-              <include>VignettesActeurs</include>
-              <left>120</left>
-              <visible>Integer.IsGreater(Container(1998).NumItems,7)</visible>
-              <texture   fallback="DefaultActor.png">$INFO[Container(1998).Listitem(7).Icon]</texture>
-            </control>
-            <control type="image">
-              <include>VignettesActeurs</include>
-              <left>120</left>
-              <visible>Integer.IsGreater(Container(1998).NumItems,8)</visible>
-              <texture   fallback="DefaultActor.png">$INFO[Container(1998).Listitem(8).Icon]</texture>
-            </control>
-          </control>
+         <include>ActeursSuivants</include>
         </control>
       </control>
       <control type="group">
@@ -1159,15 +1251,9 @@
         <height>220</height>
         <control type="image">
           <align>center</align>
-          <texture>acteurs/films.png</texture>
+          <texture>acteurs/filmotv.png</texture>
           <aspectratio align="center" aligny="center">keep</aspectratio>
-          <visible>String.Contains(ListItem.DBTYPE,movie)</visible>
-        </control>
-        <control type="image">
-          <texture>acteurs/series.png</texture>
-          <aspectratio align="center" aligny="center">keep</aspectratio>
-          <visible>!String.Contains(ListItem.DBTYPE,movie)</visible>
-        </control>
+        </control>       
       </control>
       <control type="group">
         <posy>-30</posy>
@@ -1268,6 +1354,7 @@
       <onright>5051</onright>
       <focusposition>2</focusposition>
       <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
+      <oninfo>RunScript(script.iconmixtools,trailer=True)</oninfo>
       <onback>SetProperty(ActeurVideoReset,1,Home)</onback>
       <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
       <onback>Action(firstpage)</onback>
@@ -1285,14 +1372,83 @@
       <animation type="Conditional" condition="Container(5051).IsUpdating">
         <effect type="fade"  start="100" end="10" time="500" delay="100" reversible="true"/>
       </animation>
-      <!-- -->
-      <content sortby="year" sortorder="descending">$VAR[ActeursContent]</content>
+      <!-- 
+      <content sortby="year" sortorder="descending">$VAR[ActeursContent]</content>-->
       <include>Roles</include>
     </control>
   </control>
 </control>
 
 </control>
+</include>
+<!-- ---------------------------------------------------------------------------------------------- -->
+<include name="ActeursSuivants">
+   <control type="grouplist"> <!-- acteurs suivants -->
+            <orientation>horizontal</orientation>
+            <animation type="Conditional" condition="Control.HasFocus(5051)">
+              <!-- <effect type="fade"  start="100" end="60"  time="10"  reversible="false"/> -->
+              <effect type="slide"   end="0,200"  time="250"  reversible="true"/>
+            </animation>
+            <top>-85</top>
+            <left>165</left>
+            <align>left</align>
+            <itemgap>20</itemgap>
+            <width>1400</width>
+            <control type="label">
+              <width>5</width>
+              <label></label>
+            </control>
+            <control type="image">
+              <include>VignettesActeurs</include>
+              <visible>Integer.IsGreater(Container(1998).NumItems,1)</visible>
+              <texture   fallback="DefaultActor.png">$INFO[Container(1998).ListItem(1).Icon]</texture>
+            </control>
+            <control type="image">
+              <include>VignettesActeurs</include>
+              <visible>Integer.IsGreater(Container(1998).NumItems,2)</visible>
+              <texture   fallback="DefaultActor.png">$INFO[Container(1998).ListItem(2).Icon]</texture>
+            </control>
+            <control type="image">
+              <include>VignettesActeurs</include>
+              <visible>Integer.IsGreater(Container(1998).NumItems,3)</visible>
+              <texture   fallback="DefaultActor.png">$INFO[Container(1998).ListItem(3).Icon]</texture>
+            </control>
+            <control type="image">
+              <include>VignettesActeurs</include>
+              <visible>Integer.IsGreater(Container(1998).NumItems,4)</visible>
+              <texture   fallback="DefaultActor.png">$INFO[Container(1998).Listitem(4).Icon]</texture>
+            </control>
+            <control type="image">
+              <include>VignettesActeurs</include>
+              <visible>Integer.IsGreater(Container(1998).NumItems,5)</visible>
+              <texture   fallback="DefaultActor.png">$INFO[Container(1998).Listitem(5).Icon]</texture>
+            </control>
+            <control type="image">
+              <include>VignettesActeurs</include>
+              <visible>Integer.IsGreater(Container(1998).NumItems,6)</visible>
+              <texture   fallback="DefaultActor.png">$INFO[Container(1998).Listitem(6).Icon]</texture>
+            </control>
+            <control type="image">
+              <include>VignettesActeurs</include>
+              <visible>Integer.IsGreater(Container(1998).NumItems,7)</visible>
+              <texture   fallback="DefaultActor.png">$INFO[Container(1998).Listitem(7).Icon]</texture>
+            </control>
+            <control type="image">
+              <include>VignettesActeurs</include>
+              <visible>Integer.IsGreater(Container(1998).NumItems,8)</visible>
+              <texture   fallback="DefaultActor.png">$INFO[Container(1998).Listitem(8).Icon]</texture>
+            </control>
+            <control type="image">
+              <include>VignettesActeurs</include>
+              <visible>Integer.IsGreater(Container(1998).NumItems,9)</visible>
+              <texture   fallback="DefaultActor.png">$INFO[Container(1998).Listitem(9).Icon]</texture>
+            </control>
+            <control type="image">
+              <include>VignettesActeurs</include>
+              <visible>Integer.IsGreater(Container(1998).NumItems,10)</visible>
+              <texture   fallback="DefaultActor.png">$INFO[Container(1998).Listitem(10).Icon]</texture>
+            </control>
+          </control>
 </include>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="VideoType">
@@ -1505,10 +1661,9 @@
       <animation type="Conditional" condition="Control.HasFocus(5051)|Control.HasFocus(505)">
         <effect type="zoom"  center="175,250" start="100" end="150" time="5" delay="1" reversible="true"/>
       </animation>
-      <description>Actor image</description>
       <posy>85</posy>
       <posx>5</posx>
-      <control type="image">
+      <control type="image"> 
         <align>center</align>
         <height>245</height>
         <bordersize>8</bordersize>
@@ -1516,24 +1671,20 @@
         <texture>$INFO[Listitem.Icon]</texture>
         <aspectratio align="center" aligny="center">keep</aspectratio>
       </control>
-      <control type="image">
-        <posy>-10</posy>
-        <left>130</left>
-
-        <height>50</height>
-        <texture>acteurs/films.png</texture>
+      
+      <control type="group">
+        <posy>200</posy>
+        <left>90</left>
+        <animation type="Conditional" loop="true" condition="true">
+              <effect type="fade"  start="100" end="0"  time="1500" delay="1000" reversible="false"/>
+            </animation>
+        <control type="image">
+        
+        <height>30</height>
+        <texture>info.png</texture>
         <aspectratio>keep</aspectratio>
-        <visible>String.IsEqual(ListItem.Property(dbtype),movie)+Control.IsVisible(5055)</visible>
-        <visible>!Control.HasFocus(5051)+!Control.HasFocus(505)</visible>
+        <visible>[Control.HasFocus(5051)|Control.HasFocus(505)]+System.IdleTime(2)</visible>
       </control>
-      <control type="image">
-        <posy>-10</posy>
-        <left>130</left>
-        <height>50</height>
-        <texture>acteurs/series.png</texture>
-        <aspectratio>keep</aspectratio>
-        <visible>!String.IsEqual(ListItem.Property(dbtype),movie)+!Control.IsVisible(5055)</visible>
-        <visible>!Control.HasFocus(5051)+!Control.HasFocus(505)</visible>
       </control>
 
 

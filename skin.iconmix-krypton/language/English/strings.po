@@ -1938,4 +1938,10 @@ msgctxt "#32005"
 msgid "Show end time after duration"
 msgstr ""
 
+msgctxt "#32006"
+msgid "Show media flags on left and center cast "
+msgstr ""
+
+
+
 

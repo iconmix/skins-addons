@@ -139,6 +139,7 @@ class Main:
             params = dict( arg.split( '=' ) for arg in sys.argv[ 1 ].split( '&' ) )
         except:
             params = {}
+            
         self.backend = params.get( 'backend', False )
         self.trailer = params.get( 'trailer', False )
         self.setview = params.get( 'setview', False )
@@ -162,6 +163,7 @@ class Main:
         
           if not action :
             saga=""
+            
             #------ lancer mode serveur -----------
             if self.backend and xbmc.getCondVisibility("IsEmpty(Window(home).Property(IconMixToolsbackend))"):
                 xbmc.executebuiltin("SetProperty(IconMixToolsbackend,true,home)")
@@ -212,6 +214,7 @@ class Main:
                     if DBTYPEX=="artist": utils.UpdateArtistes(xbmc.getInfoLabel("ListItem.DBID"))
                          
             if self.trailer :
+                
                 self.windowhome.setProperty('FenetreListeChoix','1')
                 dialog=xbmcgui.Dialog()
                 dialog.notification('IconMixTools', __language__( 32508 ), "sablier.gif",100,False) 
@@ -360,6 +363,8 @@ class Main:
         self._stop = False
         self.previousitem = ""
         self.previousitem8889 = ""
+        self.previousitem1998 = ""
+        self.previousitem1998local = ""
         self.previousitemMusic = ""
         self.previousitemPlayer= ""
         self.PreviousWindowActiveID= ""
@@ -549,81 +554,117 @@ class Main:
             if (xbmc.getCondVisibility("Window.IsVisible(10025)") or xbmc.getCondVisibility("Window.IsVisible(12901)") or xbmc.getCondVisibility("Window.IsVisible(12003)")) and not xbmc.getCondVisibility("Container.Scrolling") and not xbmc.getCondVisibility("Window.IsVisible(12000)"):
                 MiseAjour=""
                 #-------------------------- ACTEURS ---------------------------------
-                if xbmc.getCondVisibility("Control.HasFocus(8889)") or xbmc.getCondVisibility("Control.HasFocus(5051)"):
-                    Actif5051="non"
-                    if xbmc.getCondVisibility("Control.HasFocus(5051)"):
-                        self.selecteditem8889 = xbmc.getInfoLabel("Container(1998).ListItem.Label")
-                        
-                    else:
-                        if not xbmc.getCondVisibility("Player.HasVideo"):
-                            self.selecteditem8889 = xbmc.getInfoLabel("ListItem.DBID")
-                        else:
-                            self.selecteditem8889 = xbmc.getInfoLabel("VideoPlayer.DBID")                   
-                        
-                    self.previousitem = ""
-                    self.previousitemMusic = ""
-                    if self.previousitem8889 != self.selecteditem8889 and not str(self.selecteditem8889)=="":
+                if xbmc.getCondVisibility("Control.HasFocus(8889)") or xbmc.getCondVisibility("Control.HasFocus(1998)") or xbmc.getCondVisibility("Control.HasFocus(5051)"):
+                    if xbmc.getCondVisibility("Control.HasFocus(1998)") or xbmc.getCondVisibility("Control.HasFocus(5051)"):
+                        self.selecteditem1998 = xbmc.getInfoLabel("Container(1998).ListItem.Label")
+                        KodiLocal=self.windowhome.getProperty('ActeurVideoLocal')
+                        if (self.previousitem1998 != self.selecteditem1998 and not str(self.selecteditem1998)=="") or ( self.previousitem1998local!=KodiLocal):
+                          self.previousitem1998 = self.selecteditem1998
+                          self.previousitem1998local=KodiLocal
+                          if xbmc.getCondVisibility("Window.IsVisible(10025)"):
+                             #ACTEURS VIDEONAV
+                             ListeRole=self.GetControl(self.windowvideonav,5051)
+                             
+                          if xbmc.getCondVisibility("Window.IsVisible(12003)"):
+                             #ACTEURS VIDEOINFO
+                             ListeRole=self.GetControl(self.windowvideoinf,5051)
+                             
+                          if xbmc.getCondVisibility("Window.IsVisible(12901)"):
+                             #ACTEURS VideoPlayer
+                             ListeRole=self.GetControl(self.windowvideoplayer,5051)
+                           
+                          if ListeRole:
+                            Acteur=utils.try_decode(xbmc.getInfoLabel("Container(1998).ListItem.Label").encode('utf8'))
+                            if not KodiLocal: 
+                                 ListeItemx=utils.getFilmsTv("acteurs",Acteur.split(" (")[0],1)                                   
+                            else:
+                                 ListeItemx=utils.getFilmsParActeur("acteurs",xbmc.getInfoLabel("Container(1998).ListItem.Label").encode('utf8').split(" (")[0],1)
+                                 
+                            #ListeItemx=utils.getCasting(self.DBTYPE,self.selecteditem,1)
+                            ListeRole.reset()
+                           # utils.logMsg('ListeRole reset ->'+str(ListeActeurs.size()),0)                              
+                            if ListeItemx: 
+                                 for itemX in ListeItemx:
+                                      ListeRole.addItem(itemX)                                   
+                            status=""
+                    if xbmc.getCondVisibility("Control.HasFocus(8889)") or xbmc.getCondVisibility("Control.HasFocus(5051)"):
+                        Actif5051="non"
                         if xbmc.getCondVisibility("Control.HasFocus(5051)"):
-                          self.LABEL8889=xbmc.getInfoLabel("Container(1998).ListItem.Label").split(" (")[0].decode("utf8")
-                          self.DBTYPE=xbmc.getInfoLabel("Container(1998).ListItem.DBTYPE")
-                          Actif5051="oui"
-                        else: 
-                          self.LABEL8889=xbmc.getInfoLabel("ListItem.Label").split(" (")[0].decode("utf8")
-                          self.DBTYPE=xbmc.getInfoLabel("ListItem.DBTYPE")
-                        
-                          
-                        self.previousitem8889 = self.selecteditem8889
-                        self.windowhome.clearProperty('Actorbiographie')
-                        self.windowhome.clearProperty('Actornaissance')
-                        self.windowhome.clearProperty('Actordeces')                                                 
-                        self.windowhome.clearProperty('Actorlieunaissance')
-                        self.windowhome.clearProperty('ActorAge')
-                        self.windowhome.clearProperty('ActorNomReel')
-                        InfoDate=None
-                        Lieu=None
-                        if Actif5051!="oui": 
-                           xbmc.executebuiltin( "ActivateWindow(busydialog)" ) 
-                        #if unidecode(self.LABEL8889):   
-                        if not Lieu:                   
-                            InfoSup=utils.GetActeurInfo(utils.try_decode(self.LABEL8889.encode("utf8")),self.DBTYPE)
+                            self.selecteditem8889 = xbmc.getInfoLabel("Container(1998).ListItem.Label")
                             
-                            if InfoSup : 
+                        else:
+                            if not xbmc.getCondVisibility("Player.HasVideo"):
+                                self.selecteditem8889 = xbmc.getInfoLabel("ListItem.DBID")
+                            else:
+                                self.selecteditem8889 = xbmc.getInfoLabel("VideoPlayer.DBID")                   
+                            
+                        self.previousitem = ""
+                        self.previousitemMusic = ""
+                        if self.previousitem8889 != self.selecteditem8889 and not str(self.selecteditem8889)=="":
+                            if xbmc.getCondVisibility("Control.HasFocus(5051)"):
+                              self.LABEL8889=xbmc.getInfoLabel("Container(1998).ListItem.Label").split(" (")[0].decode("utf8")
+                              self.DBTYPE=xbmc.getInfoLabel("Container(1998).ListItem.DBTYPE")
+                              Actif5051="oui"
+                            else: 
+                              self.LABEL8889=xbmc.getInfoLabel("ListItem.Label").split(" (")[0].decode("utf8")
+                              self.DBTYPE=xbmc.getInfoLabel("ListItem.DBTYPE")
+                            
+                              
+                            self.previousitem8889 = self.selecteditem8889
+                            self.windowhome.clearProperty('Actorbiographie')
+                            self.windowhome.clearProperty('Actornaissance')
+                            self.windowhome.clearProperty('Actordeces')                                                 
+                            self.windowhome.clearProperty('Actorlieunaissance')
+                            self.windowhome.clearProperty('ActorAge')
+                            self.windowhome.clearProperty('ActorNomReel')
+                            InfoDate=None
+                            Lieu=None
+                            if Actif5051!="oui": 
+                               xbmc.executebuiltin( "ActivateWindow(busydialog)" ) 
+                            #if unidecode(self.LABEL8889):   
+                            if not Lieu:                   
+                                InfoSup=utils.GetActeurInfo(utils.try_decode(self.LABEL8889.encode("utf8")),self.DBTYPE)
                                 
-                                self.windowhome.setProperty('Actorbiographie',InfoSup.get("biographie"))
-                                Lieu=InfoSup.get("lieunaissance")
-                                self.windowhome.setProperty('Actorlieunaissance',InfoSup.get("lieunaissance"))  
-                                self.windowhome.setProperty('ActorNomReel',InfoSup.get("nomreel"))
+                                if InfoSup : 
+                                    
+                                    self.windowhome.setProperty('Actorbiographie',InfoSup.get("biographie"))
+                                    Lieu=InfoSup.get("lieunaissance")
+                                    self.windowhome.setProperty('Actorlieunaissance',InfoSup.get("lieunaissance"))  
+                                    self.windowhome.setProperty('ActorNomReel',InfoSup.get("nomreel"))
 
-                                InfoDate= InfoSup.get("naissance")
+                                    InfoDate= InfoSup.get("naissance")
 
-                                if InfoDate:                         
-                                    XBRegion=str(xbmc.getRegion('dateshort'))
-                                    if XBRegion=="%d/%m/%Y":                             
-                                     self.windowhome.setProperty('Actornaissance',str(InfoDate[8:10]+"/"+InfoDate[5:7]+"/"+InfoDate[0:4])) 
-                                    else:                             
-                                     self.windowhome.setProperty('Actornaissance',str(InfoDate))                                                             
-                                    InfoDate= InfoSup.get("deces")                   
-                                    if InfoDate:
+                                    if InfoDate:                         
                                         XBRegion=str(xbmc.getRegion('dateshort'))
                                         if XBRegion=="%d/%m/%Y":                             
-                                         self.windowhome.setProperty('Actordeces',str(InfoDate[8:10]+"/"+InfoDate[5:7]+"/"+InfoDate[0:4])) 
+                                         self.windowhome.setProperty('Actornaissance',str(InfoDate[8:10]+"/"+InfoDate[5:7]+"/"+InfoDate[0:4])) 
                                         else:                             
-                                         self.windowhome.setProperty('Actordeces',str(InfoDate))
-                                        Age=""
-                                    else:
-                                        Age =  str(int(datetime.now().date().year) - int(InfoSup.get("naissance")[0:4])) 
-                                        self.windowhome.setProperty('Actorage',Age) 
-                        if Actif5051!="oui": 
-                            xbmc.executebuiltin( "Dialog.Close(busydialog)" )
+                                         self.windowhome.setProperty('Actornaissance',str(InfoDate))                                                             
+                                        InfoDate= InfoSup.get("deces")                   
+                                        if InfoDate:
+                                            XBRegion=str(xbmc.getRegion('dateshort'))
+                                            if XBRegion=="%d/%m/%Y":                             
+                                             self.windowhome.setProperty('Actordeces',str(InfoDate[8:10]+"/"+InfoDate[5:7]+"/"+InfoDate[0:4])) 
+                                            else:                             
+                                             self.windowhome.setProperty('Actordeces',str(InfoDate))
+                                            Age=""
+                                        else:
+                                            Age =  str(int(datetime.now().date().year) - int(InfoSup.get("naissance")[0:4])) 
+                                            self.windowhome.setProperty('Actorage',Age) 
+                            if Actif5051!="oui": 
+                                xbmc.executebuiltin( "Dialog.Close(busydialog)" )
+                            
+                            if not InfoDate and not Lieu:
+                                     if Actif5051!="oui": 
+                                         dialog=xbmcgui.Dialog()
+                                         dialog.notification('IconMixTools', __language__( 32584 )+self.LABEL8889, "acteurs/arfffff.png", 3000)
+                                         xbmc.executebuiltin("SetFocus(55)")                                 
                         
-                        if not InfoDate and not Lieu:
-                                 if Actif5051!="oui": 
-                                     dialog=xbmcgui.Dialog()
-                                     dialog.notification('IconMixTools', __language__( 32584 )+self.LABEL8889, "acteurs/arfffff.png", 3000)
-                                     xbmc.executebuiltin("SetFocus(55)")                                 
+                #-------------------------- FILMS/SERIES ---------------------------------   
+                #roles  ------------------------------------------------
+                else:
                         
-                 #-------------------------- FILMS/SERIES ---------------------------------         
-                else:                     
+                                       
                     self.previousitem8889 = ""  
                     self.previousitemMusic = ""     
                     if xbmc.getCondVisibility("Control.HasFocus(2999)"):
@@ -679,7 +720,7 @@ class Main:
                         self.windowhome.clearProperty("ItemCountry3")
                         self.windowhome.clearProperty("ItemCountry4")
                         
-                        #focus 2999
+                        #focus 2999 (saga)
                         if xbmc.getCondVisibility("Control.HasFocus(2999)"):
                             if self.selecteditem > -1 and not str(self.selecteditem)=="":                          
                               if self.DBTYPEOK:
@@ -703,20 +744,18 @@ class Main:
                                 if MiseAjour=="1":
                                    #ACTEURS VIDEONAV
                                    ListeActeurs=self.GetControl(self.windowvideonav,1998)
-                                   ListeRole=self.GetControl(self.windowvideonav,5051)
                                    
                                 if MiseAjour=="2":
                                    #ACTEURS VIDEOINFO
                                    ListeActeurs=self.GetControl(self.windowvideoinf,1998)
-                                   ListeRole=self.GetControl(self.windowvideoinf,5051)
                                    
                                 if MiseAjour=="3":
                                    #ACTEURS VideoPlayer
                                    ListeActeurs=self.GetControl(self.windowvideoplayer,1998)
-                                   ListeRole=self.GetControl(self.windowvideoplayer,5051)
                                    
                                    
-                                #ACTEURS  
+                                   
+                                #ACTEURS  ------------------------------------------------
                                  
                                 if ListeActeurs:
                                   ListeItemx=utils.getCasting(self.DBTYPE,self.selecteditem,1)
@@ -726,26 +765,11 @@ class Main:
                                             #ListeActeurs.setStaticContent(ListeItemx)
                                             ListeActeurs.addItem(itemX)                                   
                                   status=""
-                                """
-                                #roles  
-                                if ListeRole:
-                                  KodiLocal=self.windowhome.getProperty('ActeurVideoLocal')                                                      
-                                  if not KodiLocal: 
-                                       utils.getFilmsTv(infotype,Id)                                   
-                                  else:
-                                       utils.getFilmsParActeur(xbmc.getInfoLabel("ListItem.DBTYPE"),Id)
-                                       
-                                  ListeItemx=utils.getCasting(self.DBTYPE,self.selecteditem,1)
-                                 # utils.logMsg('utils.getCastingList ->'+str(len(ListeItemx)),0)
-                                  ListeRole.reset()
-                                 # utils.logMsg('ListeRole reset ->'+str(ListeActeurs.size()),0)                              
-                                  if ListeItemx: 
-                                       for itemX in ListeItemx:
-                                            ListeRole.addItem(itemX)                                   
-                                  status=""
+                                
+                               
                                  # utils.logMsg('windowvideonav.getControl(1998) fin',0)
-                                """  
-                              #SAGAS
+                                  
+                              #SAGAS ------------------------------------------------
                               if not xbmc.getCondVisibility("Window.IsVisible(12901)") :
                                   if (self.DBTYPE=="set" or MiseAjour=="2") and not status=="1":
                                     status="1"
@@ -865,10 +889,10 @@ class Main:
            
 
     def display_duration(self):
-    #twolaw code
         xxx="null"
         
         #self.windowhome.setProperty('ItemUniqueGenre',xbmc.getInfoLabel( "ListItem.Genre" ).replace(" /",", "))
+        
         if self.DBTYPE=="movie":
           CountryList=xbmc.getInfoLabel( "ListItem.Country" ).split(" / ")
           if not CountryList:
@@ -877,7 +901,6 @@ class Main:
           for country in CountryList:
              self.windowhome.setProperty('ItemCountry%d' %(idx),country.rstrip())
              idx=idx+1
-           
               
         if not xbmc.getCondVisibility("Window.IsVisible(10502)"):
           typeId=self.DBTYPE
@@ -887,15 +910,12 @@ class Main:
           if (not self.duration or self.duration<10) and IMDBID :
               if typeId.find('episode')==-1: self.duration=utils.getRuntime(IMDBID,typeId)
               #else : self.duration=utils.getRuntime("tt"+IMDBID)
-              #utils.logMsg("DEBUG : "+str(self.duration)+'/'+str(typeId)+'/'+str(itemId),0)
               if self.duration and typeId and itemId:                    
                       #mise à jour de la durée dans la base pour éviter de renouveller l'opération !
                       try:
                         utils.setJSON('VideoLibrary.Set%sDetails' %(typeId.encode("utf-8")),'{"%sid":%d,"runtime":%d}' %(typeId.encode("utf-8"),int(itemId),int(self.duration)*60))
                       except:
                         self.duration=None
-                       #http://127.0.0.1:8080/jsonrpc?request={%22jsonrpc%22:%222.0%22,%22method%22:%22VideoLibrary.SetMovieDetails%22,%22params%22:{%22movieid%22:37,%22runtime%22:111},%22id%22:1}
-                      
         
         if self.duration :
         #else :
