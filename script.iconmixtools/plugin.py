@@ -398,7 +398,7 @@ class Main:
                 self.windowmusicvis=None
                 if xbmc.getCondVisibility("Window.IsVisible(12006)"): self.windowmusicvisID = 12006 # musicvis.xml
                 if xbmc.getCondVisibility("Window.IsVisible(10000)"): self.windowmusicvisID = 10000 
-                if not str(self.selecteditemAlbumPlayer)=="" and (self.previousitemPlayer != self.selecteditemAlbumPlayer or (self.windowmusicvisID and self.PreviousWindowActiveID!=self.windowmusicvisID)):
+                if self.windowmusicvisID and not str(self.selecteditemAlbumPlayer)=="" and (self.previousitemPlayer != self.selecteditemAlbumPlayer or (self.windowmusicvisID and self.PreviousWindowActiveID!=self.windowmusicvisID)):
                   self.previousitemPlayer = self.selecteditemAlbumPlayer
                   self.selecteditemArtistPlayer = xbmc.getInfoLabel("MusicPlayer.Artist")
                   if self.windowmusicvisID: self.windowmusicvis = xbmcgui.Window(self.windowmusicvisID) # musicvis.xml

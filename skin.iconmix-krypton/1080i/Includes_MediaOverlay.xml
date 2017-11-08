@@ -3,7 +3,7 @@
 	<include name="HomePos">
 		
 		<posx>150</posx>
-		<posy>70</posy>
+		<posy>60</posy>
 	</include>
 	<include name="OtherPos">				
 		<posx>150</posx>
@@ -25,14 +25,14 @@
 					<posx>-140</posx>
 					<visible>Player.HasAudio</visible>
 					<control type="image">									
-						<width>320</width>
-						<height>300</height>
+						<width>520</width>
+						<height>150</height>
 						<texture background="true" diffuse="showcase_matte.png">frames/ClassicFrame_Background.png</texture>
 						<colordiffuse>70202020</colordiffuse>
 					</control>
 					<control type="image">									
-						<width>320</width>
-						<height>300</height>
+						<width>520</width>
+						<height>150</height>
 						<texture border="10">landscape.png</texture>						
 					</control>
 				</control>			
@@ -58,8 +58,8 @@
 				  <control type="image">
 					<posx>25</posx>
 					<posy>-22</posy>
-					<width>150</width>
-					<height>150</height>
+					<width>100</width>
+					<height>100</height>
 					<texture>cd.png</texture>
 					<aspectratio align="bottom">keep</aspectratio>
 					<visible>Player.HasAudio</visible>
@@ -68,8 +68,8 @@
 				<control type="image">
 					<posx>-35</posx>
 					<posy>-22</posy>
-					<width>150</width>
-					<height>150</height>
+					<width>100</width>
+					<height>100</height>
 					<include>Animation_SpinningCD</include>
 					<visible>Player.HasAudio</visible>
 					
@@ -81,8 +81,8 @@
 					<description>cover image</description>
 					<posx>-100</posx>
 					<posy>-35</posy>
-					<width>180</width>
-					<height>180</height>
+					<width>130</width>
+					<height>130</height>
 					<texture background="true">$VAR[CoverPlayer]</texture>
 					<aspectratio aligny="bottom">keep</aspectratio>
 					<bordertexture border="8">thumb_border.png</bordertexture>
@@ -101,7 +101,8 @@
 				<!-- Default Home Screen video overlay is in Includes_Home1.xml -->
 			</control>
 			<control type="group" id="9905">
-				<posx>-210</posx>				
+				<posx>50</posx>	
+				<posy>-180</posy>			
 				<animation effect="fade" time="200">VisibleChange</animation>
 				<animation effect="slide" start="-204,0" end="204,0" time="600" tween="cubic" easing="out" condition="Skin.HasSetting(MediaOverlay)">Conditional</animation>
 				<visible>Player.HasAudio + Skin.HasSetting(MediaOverlay)</visible>
@@ -112,7 +113,7 @@
 						<posy>148</posy>
 						<height>30</height>
 						<aligny>center</aligny>
-						<width>280</width>
+						<width>230</width>
 						<font>METF_ArtistPlayer</font>
 						<align>center</align>
 						<label>$INFO[MusicPlayer.Artist]</label>
@@ -123,7 +124,7 @@
 						<posy>150</posy>
 						<height>30</height>
 						<aligny>center</aligny>
-						<width>280</width>
+						<width>230</width>
 						<font>METF_ArtistPlayer</font>
 						<align>center</align>
 						<label>$INFO[MusicPlayer.Artist]</label>
@@ -134,7 +135,7 @@
 						<posy>178</posy>
 						<height>30</height>
 						<aligny>center</aligny>
-						<width>280</width>
+						<width>230</width>
 						<align>center</align>
 						<font>METF_ArtistPlayer</font>
 						<label>$INFO[MusicPlayer.Album]</label>
@@ -145,7 +146,7 @@
 						<posy>180</posy>
 						<height>30</height>
 						<aligny>center</aligny>
-						<width>280</width>
+						<width>230</width>
 						<align>center</align>
 						<font>METF_ArtistPlayer</font>
 						<label>$INFO[MusicPlayer.Album]</label>
@@ -156,7 +157,7 @@
 						<posx>-128</posx>
 						<posy>208</posy>
 						<align>center</align>
-						<width>280</width>
+						<width>230</width>
 						<scrollout>false</scrollout>
 						<pauseatend>1800</pauseatend>
 						<scrollspeed>40</scrollspeed>
@@ -169,7 +170,7 @@
 						<posx>-130</posx>
 						<posy>210</posy>
 						<align>center</align>
-						<width>280</width>
+						<width>230</width>
 						<scrollout>false</scrollout>
 						<pauseatend>1800</pauseatend>
 						<scrollspeed>40</scrollspeed>

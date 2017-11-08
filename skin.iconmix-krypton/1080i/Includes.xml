@@ -895,6 +895,7 @@
        <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
       <onback>SetProperty(ActeurVideoReset,1,Home)</onback>
       <onfocus>SetProperty(ActeurVideoLocal,1,Home)</onfocus>
+      <onfocus>SetProperty(IconmixTrailer,,Home)</onfocus>
       <onback>2001</onback>
       <onup>2001</onup>
        
@@ -978,7 +979,7 @@
             <onfocus condition="Container(1998).IsUpdating">Control.SetFocus(55)</onfocus>
             <onunfocus condition="Container(1998).IsUpdating">Control.SetFocus(55)</onunfocus>
             <onfocus condition="!String.IsEmpty(Window(Home).Property(ActeurVideoReset))">Action(firstpage)</onfocus>
-            
+            <onfocus>SetProperty(IconmixTrailer,,Home)</onfocus> 
             <include condition="Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(CacheFond)">ActeurCenter</include>
             <include condition="!Skin.HasSetting(ActeursAuCentre)|!Skin.HasSetting(CacheFond)">ActeurLeft</include>
 
@@ -1353,10 +1354,12 @@
       <onleft>5051</onleft>
       <onright>5051</onright>
       <focusposition>2</focusposition>
-      <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
       <oninfo>RunScript(script.iconmixtools,trailer=True)</oninfo>
+      <oninfo>SetProperty(IconmixTrailer,1,Home)</oninfo>
       <onback>SetProperty(ActeurVideoReset,1,Home)</onback>
       <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
+      <onfocus>SetProperty(IconmixTrailer,,Home)</onfocus>
+
       <onback>Action(firstpage)</onback>
       <onback condition="!Window.IsVisible(movieinformation)">55</onback>
       <onback condition="Window.IsVisible(movieinformation)">7003</onback>
@@ -1369,7 +1372,7 @@
       <effect type="fade"  start="100" end="0" time="1" delay="1" reversible="true"/>
       </animation>
       -->
-      <animation type="Conditional" condition="Container(5051).IsUpdating">
+      <animation type="Conditional" condition="Container(5051).IsUpdating | !String.IsEmpty(Window(Home).Property(IconmixTrailer))">
         <effect type="fade"  start="100" end="10" time="500" delay="100" reversible="true"/>
       </animation>
       <!-- 
@@ -1589,7 +1592,6 @@
 
 
     <control type="group">
-      <description>Videotype image</description>
       <posy>85</posy>
       <posx>5</posx>
       <control type="image">
@@ -2074,7 +2076,7 @@
       <posx>1546</posx>
       <posy>840</posy>
       <width>320</width>
-      <height>200</height>
+      <height>150</height>
       <texture background="true" diffuse="showcase_matte.png">frames/ClassicFrame_background.png</texture>
       <colordiffuse>70202020</colordiffuse>
     </control>
@@ -2082,14 +2084,15 @@
       <posx>1546</posx>
       <posy>840</posy>
       <width>320</width>
-      <height>200</height>
+      <height>150</height>
       <texture border="10">landscape.png</texture>
     </control>
     <control type="group">
       <visible>Skin.HasSetting(ShowCpuUsage)</visible>
+      <posy>950</posy>
+      <posx>1650</posx>
       <control type="image">
-        <posx>1827</posx>
-        <posy>850</posy>
+        
         <width>30</width>
         <height>30</height>
         <texture>homewidgets/systeminfo/square/cpu.png</texture>
@@ -2097,9 +2100,9 @@
       </control>
       <control type="progress" id="23">
         <description>Progressbar</description>
-        <posx>1775</posx>
-        <posy>940</posy>
-        <width>130</width>
+        <posx>45</posx>
+        <posy>10</posy>
+        <width>150</width>
         <height>10</height>
         <info>System.CpuUsage</info>
         <reveal>true</reveal>
@@ -2107,11 +2110,12 @@
         <lefttexture>osd/osd_progress_left.png</lefttexture>
         <midtexture>osd/osd_progress_mid.png</midtexture>
         <righttexture>osd/osd_progress_right.png</righttexture>
-        <colordiffuse>OSDProgressBar</colordiffuse>
+        <colordiffuse>FF00FFFF</colordiffuse>
         <overlaytexture>-</overlaytexture>
-        <animation type="Conditional" condition="true" reversible="false">
+        <!--<animation type="Conditional" condition="true" reversible="false">
           <effect type="rotate" center="auto"  end="90" time="2"   />
         </animation>
+        -->
       </control>
     </control>
     <include>Global_Weather</include>
@@ -3985,12 +3989,12 @@
     </control>
     <control type="label">
       <description>Temperature</description>
-      <posx>200</posx>
-      <posy>17</posy>
-      <width>200</width>
+      <posx>0</posx>
+      <posy>90</posy>
+      <width>80</width>
       <height>30</height>
       <font>METF_Temp</font>
-      <align>right</align>
+      <align>left</align>
       <aligny>center</aligny>
       <textcolor>yellow</textcolor>
       <label>[B]$INFO[Window(Weather).Property(Current.Temperature)]$INFO[System.TemperatureUnits][/B]</label>
@@ -4008,8 +4012,8 @@
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="Global_Time">
   <control type="group">
-    <posx>1600</posx>
-    <posy>940</posy>
+    <posx>1650</posx>
+    <posy>865</posy>
     <width>200</width>
     <height>30</height>
     <visible>[!Window.IsActive(visualisation) + !Skin.HasSetting(HideClock)] | [Window.IsActive(visualisation) + Player.ShowInfo + !Skin.HasSetting(HideVisClock) + !Window.IsVisible(120)]</visible>

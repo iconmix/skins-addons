@@ -7,6 +7,7 @@
 		<top>0</top>
 	</coordinates>
 	<controls>
+	  <visible>Window.IsVisible(12006)</visible>
 		<control type="group">
 			<animation effect="slide" end="0,120" time="300" tween="quadratic" condition="Window.IsActive(musicosd)">Conditional</animation>
 			<animation effect="slide" end="0,0" start="0,-540" time="200" tween="quadratic" easing="out">WindowOpen</animation>

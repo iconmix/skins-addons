@@ -1314,12 +1314,23 @@ def getFilmsParActeur(ActeurType=None,Acteur=None,Statique=None):
                  if not Statique:
                      ListeVideos.append([Item.get("file"),ItemListe,False])
                  else:
-                     ListeVideos.append(ItemListe)
+                     #ListeVideos.append(ItemListe)
+                     ListeVideos.append([int(Item.get("year")),ItemListe])
   if not Statique:               
      xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeVideos)       
      xbmcplugin.endOfDirectory(int(sys.argv[1])) 
   else:
-     return ListeVideos
+     ListeItemFinal=[]
+     LL=[]          
+     LL=sorted(ListeVideos,reverse=True)
+     #tri par année
+     cpt=0
+     while cpt<len(LL):
+             ListeItemFinal.append(LL[cpt][1])
+             cpt=cpt+1
+           
+     return ListeItemFinal
+     
    
 def GetActeurId(Acteur):
     
@@ -1635,15 +1646,22 @@ def getFilmsTv(ActeurType=None,Acteur=None,Statique=None):
                             if not Role:
                                Role="?"
                             ItemListe = xbmcgui.ListItem(label=name,iconImage=Poster,label2=Role)
-                            Annee=item.get("release_date")
-                            if not Annee: 
-                               Annee=item.get("first_air_date")
+                            try:
+                              Annee=item.get("release_date").split("-")[0]
+                            except:
+                              Annee=None
+                            if not Annee:
+                               try: 
+                                 Annee=item.get("first_air_date").split("-")[0]
+                               except:
+                                 Annee="0"
                             ItemListe.setProperty("dbtype",TypeVideo)
                             ItemListe.setInfo("video", {"title": name,"year": Annee,"originaltitle": item.get("original_title"),"trailer":item.get("id")})        
                             if not Statique:
                                ListeRoles.append(["",ItemListe,True])
                             else :
-                               ListeRoles.append(ItemListe)
+                               #ListeRoles.append(ItemListe)
+                               ListeRoles.append([int(Annee),ItemListe])
                   
                             
                   if ActeurSave>0 and SETTING("cacheacteur")=="false":
@@ -1662,7 +1680,16 @@ def getFilmsTv(ActeurType=None,Acteur=None,Statique=None):
   if not Statique:
       xbmcplugin.endOfDirectory(int(sys.argv[1])) 
   else:
-      return(ListeRoles)
+     ListeItemFinal=[]
+     LL=[]          
+     LL=sorted(ListeRoles,reverse=True)
+     #tri par année
+     cpt=0
+     while cpt<len(LL):
+             ListeItemFinal.append(LL[cpt][1])
+             cpt=cpt+1
+           
+     return ListeItemFinal
                
 def getRealisateur(CheminType="",DbId=None,realisateur=None):
     allInfo = []
