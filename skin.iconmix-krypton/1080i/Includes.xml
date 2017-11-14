@@ -924,7 +924,11 @@
 <include name="CommonPanelActeursSaga">
   <height>160</height>
   <width>110</width>
+   <animation type="Conditional"  condition="true">
+          <effect type="zoom" center="0,80" end="85"  time="1" delay="1" reversible="false"/>
+        </animation>
   <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
+  <colordiffuse>A0FFFFFF</colordiffuse>
 </include>
 <!-- ----------------------------------------------------------------------------------------------- -->
 <include name="PanelActeursSaga">
@@ -946,14 +950,21 @@
         <aspectratio  scalediffuse="true">stretch</aspectratio>
       </control>
       <control type="label">
-        <left>110</left>
-        <top>46</top>
+        <left>140</left>
+        <top>550</top>
         <label> [I]$LOCALIZE[33029][/I]</label>
+      </control>
+      <control type="label">
+        <left>35</left>
+        <width>300</width>
+        <top>46</top>
+        <align>left</align>
+        <label>[COLOR=yellow]$INFO[Container(1998).ListItem.Label][/COLOR]</label>
       </control>
 
       <control type="image">
-        <left>-1220</left>
-        <top>48</top>
+        <left>-1190</left>
+        <top>552</top>
         <animation type="Conditional" loop="true" condition="true">
           <effect type="fade"  start="100" end="0"  time="1500" delay="1000" reversible="false"/>
         </animation>
@@ -962,29 +973,7 @@
         <aspectratio>keep</aspectratio>
       </control>
     </control>
-    <control type="grouplist"> <!-- ligne 1 -->
-      <posx>20</posx>
-      <posy>80</posy>
-      <width>340</width>
-      <height>170</height>
-      <align>left</align>
-      <orientation>horizontal</orientation>
-      <control type="image">
-        <include>CommonPanelActeursSaga</include>
-        <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem.Icon]</texture>
-      </control>
-      <control type="image">
-        <include>CommonPanelActeursSaga</include>
-        <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem(1).Icon]</texture>
-        <visible>Integer.IsGreater(Container(1998).NumItems,1)</visible>
-      </control>
-      <control type="image">
-        <include>CommonPanelActeursSaga</include>
-        <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem(2).Icon]</texture>
-        <visible>Integer.IsGreater(Container(1998).NumItems,2)</visible>
-      </control>
-
-    </control>
+    
     <control type="grouplist"> <!-- ligne 2 -->
       <posx>20</posx>
       <posy>235</posy>
@@ -1030,6 +1019,32 @@
         <include>CommonPanelActeursSaga</include>
         <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem(8).Icon]</texture>
         <visible>Integer.IsGreater(Container(1998).NumItems,8)</visible>
+      </control>
+
+    </control>
+    <control type="grouplist"> <!-- ligne 1 -->
+      <posx>20</posx>
+      <posy>80</posy>
+      <width>340</width>
+      <height>170</height>
+      <align>left</align>
+      <orientation>horizontal</orientation>
+      <control type="image">
+        <height>160</height>
+  <width>110</width>
+  <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
+       
+        <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem.Icon]</texture>
+      </control>
+      <control type="image">
+        <include>CommonPanelActeursSaga</include>
+        <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem(1).Icon]</texture>
+        <visible>Integer.IsGreater(Container(1998).NumItems,1)</visible>
+      </control>
+      <control type="image">
+        <include>CommonPanelActeursSaga</include>
+        <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem(2).Icon]</texture>
+        <visible>Integer.IsGreater(Container(1998).NumItems,2)</visible>
       </control>
 
     </control>
