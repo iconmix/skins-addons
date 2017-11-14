@@ -4373,10 +4373,10 @@
 				<include>Global_HeadingDetailVars</include>
 			</control>
 		</control>
-		<!--<include>Global_Weather</include>-->
-		<!--<include>Global_Time</include>-->
+		
+		
 		<include>AnimationVoletsHorizontaux</include>
 		</control>
-		<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
+		
 	</controls>
 </window>

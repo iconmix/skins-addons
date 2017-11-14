@@ -63,6 +63,6 @@
 			<align>center</align>
 			<label>-</label>
 		</control>
-		<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
+		
 	</controls>
 </window>

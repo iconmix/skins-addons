@@ -564,7 +564,7 @@
         <!-- -->
         <control type="image">
           <align>center</align>
-          <posy>160</posy>
+          <posy>155</posy>
           <posx>1260</posx>
           <width>50</width>
           <height>50</height>

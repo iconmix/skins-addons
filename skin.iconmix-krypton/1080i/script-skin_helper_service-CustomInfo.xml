@@ -769,7 +769,7 @@
 				<include condition="!Skin.HasSetting(Hide_MediaFlags)">MediaInfo</include>
 				<include condition="!Skin.HasSetting(Hide_ExtraMediaFlags)">MediaInfo2Saga</include>
 			</control>
-			<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
+			
 -->
 				
 		</control>

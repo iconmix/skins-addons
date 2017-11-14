@@ -181,7 +181,14 @@ def CheckSaga(ItemId=None,Statique=None):
                 if not Statique:
                    ListeItem.append([item.get("file"),ItemListe,True])
                 else:
-                   ListeItem.append([int(item.get("release_date")[0:4]),ItemListe])
+                   
+                   try:
+                    release_date=item.get("release_date")[0:4]
+                   except:
+                    release_date="0"
+                   if not release_date or release_date=="":
+                    release_date="0" 
+                   ListeItem.append([int(release_date),ItemListe])
        #----------------------------BASE LOCALE ----------------------------
        
        #json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"movies": {"properties":["title","genre","year","rating","userrating","director","trailer","tagline","plot","plotoutline","originaltitle","lastplayed","playcount","writer","studio","mpaa","cast","country","imdbnumber","runtime","set","showlink","streamdetails","top250","votes","fanart","thumbnail","file","sorttitle","resume","setid","dateadded","tag","art"]} }' %(int(ItemId)))
@@ -261,7 +268,13 @@ def CheckSaga(ItemId=None,Statique=None):
              if not Statique:
                ListeItem.append([item.get("file"),ItemListe,True])
              else:
-               ListeItem.append([int(item.get("year")),ItemListe])
+               try:
+                    Annee=item.get("year")
+               except:
+                    Annee="0"
+               if not Annee or Annee=="":
+                Annee="0" 
+               ListeItem.append([int(Annee),ItemListe])
              
           if int(Compteur[item.get("imdbnumber")])>1:
               Compteur[item.get("imdbnumber")]=0
@@ -1239,12 +1252,14 @@ def getCasting(Castingtypex=None,ItemId=None,Statique=None):
                     imageacteur="DefaultActor.png"
                  #else :
                  if imageacteur:
+                     imageacteur=urllib.unquote(imageacteur.replace("image://","")[:-1])
                      ItemListe = xbmcgui.ListItem(label=name,iconImage=imageacteur,label2=Test.get("role"))
-                     
+                     #logMsg("Acteurs : "+str(ItemId)+"/"+str(imageacteur),0)   
                      if not Statique:
                          ListeActeur.append(["",ItemListe,True])
                      else:
                          ListeActeur.append(ItemListe)
+                         
   if not Statique:
      xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeActeur)
      xbmcplugin.endOfDirectory(int(sys.argv[1]))
@@ -1315,7 +1330,14 @@ def getFilmsParActeur(ActeurType=None,Acteur=None,Statique=None):
                      ListeVideos.append([Item.get("file"),ItemListe,False])
                  else:
                      #ListeVideos.append(ItemListe)
-                     ListeVideos.append([int(Item.get("year")),ItemListe])
+                     try:
+                          Annee=item.get("year")
+                     except:
+                          Annee="0"
+                     if not Annee or Annee=="":
+                      Annee="0" 
+                     ListeVideos.append([int(Annee),ItemListe])
+                    
   if not Statique:               
      xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeVideos)       
      xbmcplugin.endOfDirectory(int(sys.argv[1])) 
@@ -1655,6 +1677,8 @@ def getFilmsTv(ActeurType=None,Acteur=None,Statique=None):
                                  Annee=item.get("first_air_date").split("-")[0]
                                except:
                                  Annee="0"
+                            if not Annee or Annee=="":
+                              Annee="0"
                             ItemListe.setProperty("dbtype",TypeVideo)
                             ItemListe.setInfo("video", {"title": name,"year": Annee,"originaltitle": item.get("original_title"),"trailer":item.get("id")})        
                             if not Statique:

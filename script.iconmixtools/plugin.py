@@ -339,7 +339,9 @@ class Main:
           self.windowhome = xbmcgui.Window(10000) # Home.xml 
           self.windowvideonav = xbmcgui.Window(10025) # myvideonav.xml           
           self.windowvideoinf = xbmcgui.Window(12003) # dialogvideoinfo.xml 
-          self.windowvideoplayer = xbmcgui.Window(12901) # dialogvideoinfo.xml 
+          self.windowvideoplayer = xbmcgui.Window(12901) # videoOSD.xml 
+          self.windowvideoplayerinfo = xbmcgui.Window(10142) # DialogFullScreenInfo.xml 
+          
         
     def GetControl(self,Window=None,Id=None):
           ControlId=None          
@@ -368,6 +370,7 @@ class Main:
         self.previousitemMusic = ""
         self.previousitemPlayer= ""
         self.PreviousWindowActiveID= ""
+        self.PreviousPlayerActiveID= ""
         self.DBTYPEOK = False
         self.DBTYPE= ""
         self.duration=""
@@ -550,8 +553,8 @@ class Main:
               
               
           
-            #FILMS/SERIES/ACTEURS
-            if (xbmc.getCondVisibility("Window.IsVisible(10025)") or xbmc.getCondVisibility("Window.IsVisible(12901)") or xbmc.getCondVisibility("Window.IsVisible(12003)")) and not xbmc.getCondVisibility("Container.Scrolling") and not xbmc.getCondVisibility("Window.IsVisible(12000)"):
+            #-------------------------- FILMS/SERIES/ACTEURS --------------------------
+            if (xbmc.getCondVisibility("Window.IsVisible(10025)") or xbmc.getCondVisibility("Window.IsVisible(12901)") or xbmc.getCondVisibility("Window.IsVisible(10142)") or xbmc.getCondVisibility("Window.IsVisible(12003)")) and not xbmc.getCondVisibility("Container.Scrolling") and not xbmc.getCondVisibility("Window.IsVisible(12000)"):
                 MiseAjour=""
                 #-------------------------- ACTEURS ---------------------------------
                 if xbmc.getCondVisibility("Control.HasFocus(8889)") or xbmc.getCondVisibility("Control.HasFocus(1998)") or xbmc.getCondVisibility("Control.HasFocus(5051)"):
@@ -572,6 +575,12 @@ class Main:
                           if xbmc.getCondVisibility("Window.IsVisible(12901)"):
                              #ACTEURS VideoPlayer
                              ListeRole=self.GetControl(self.windowvideoplayer,5051)
+                             
+                          if xbmc.getCondVisibility("Window.IsVisible(10142)"):
+                             #ACTEURS VideoPlayer
+                             ListeRole=self.GetControl(self.windowvideoplayerinfo,5051)   
+                             
+                             
                            
                           if ListeRole:
                             Acteur=utils.try_decode(xbmc.getInfoLabel("Container(1998).ListItem.Label").encode('utf8'))
@@ -676,12 +685,22 @@ class Main:
                              self.previousLABEL1999=self.LABEL1999
                              MiseAjour="1"                   
                     else : 
-                        if not xbmc.getCondVisibility("Window.IsVisible(12901)") :
+                        if not xbmc.getCondVisibility("Window.IsVisible(12901)") and  not xbmc.getCondVisibility("Window.IsVisible(10142)"):
                             self.selecteditem = xbmc.getInfoLabel("ListItem.DBID")
                             self.DBTYPE=xbmc.getInfoLabel("ListItem.DBTYPE")
                             self.previousitemPlayer=""
                         else:
                             self.selecteditem = xbmc.getInfoLabel("VideoPlayer.DBID")
+                            if xbmc.getCondVisibility("Window.IsVisible(12901)"):
+                              self.PlayerActiveID=1
+                            if xbmc.getCondVisibility("Window.IsVisible(10142)"):
+                              self.PlayerActiveID=2
+                            
+                            
+                            if self.PreviousPlayerActiveID!=self.PlayerActiveID:
+                              self.PreviousPlayerActiveID=self.PlayerActiveID
+                              self.previousitemPlayer=""                         
+                            
                             if self.previousitemPlayer != self.selecteditem :
                                self.previousitem=""
                             if xbmc.getCondVisibility("!String.IsEmpty(VideoPlayer.TVShowTitle)"):
@@ -693,12 +712,16 @@ class Main:
                         if (self.previousitem != self.selecteditem) or (self.windowhome.getProperty('IconMixUpdateActeurs')=="1")  or (self.windowhome.getProperty('IconMixUpdateSagas')=="1") :
                              #utils.logMsg("DBTYPE VideoPlayer : "+str(self.DBTYPE)+"/"+str(self.previousitem)+"/"+str(self.selecteditem)+"/"+str(self.previousitemPlayer),0)
                              self.previousitem = self.selecteditem
-                             
-                             if xbmc.getCondVisibility("Window.IsVisible(12901)") :
+                             MiseAjour="1"
+                             if xbmc.getCondVisibility("Window.IsVisible(12901)"):
                                 MiseAjour="3"
                                 self.previousitemPlayer = self.selecteditem
-                             else:
-                                MiseAjour="1"
+                             if xbmc.getCondVisibility("Window.IsVisible(10142)") :
+                                MiseAjour="4"
+                                self.previousitemPlayer = self.selecteditem
+                             
+                                
+                                
                              if self.windowhome.getProperty('IconMixUpdateActeurs')=="1":
                                   #fenetre videoinfo
                                   MiseAjour="2" 
@@ -724,9 +747,21 @@ class Main:
                         if xbmc.getCondVisibility("Control.HasFocus(2999)"):
                             if self.selecteditem > -1 and not str(self.selecteditem)=="":                          
                               if self.DBTYPEOK:
-                                   self.windowhome.setProperty('IconMixExtraFanart',utils.CheckItemExtrafanartPath(xbmc.getInfoLabel("Container(1999).ListItem.Path")))   
-                                   self.duration = xbmc.getInfoLabel("Container(1999).ListItem.Duration") 
-                                   self.display_duration()
+                                    ListeActeurs=self.GetControl(self.windowvideonav,1998)
+                                    #ACTEURS  ------------------------------------------------                                 
+                                    if ListeActeurs:
+                                      ListeItemx=utils.getCasting("movie",self.selecteditem,1)
+                                      ListeActeurs.reset()
+                                      if ListeItemx: 
+                                           for itemX in ListeItemx:
+                                                ListeActeurs.addItem(itemX) 
+                                                                               
+                                      status=""
+                                
+                                
+                                    self.windowhome.setProperty('IconMixExtraFanart',utils.CheckItemExtrafanartPath(xbmc.getInfoLabel("Container(1999).ListItem.Path")))   
+                                    self.duration = xbmc.getInfoLabel("Container(1999).ListItem.Duration") 
+                                    self.display_duration()
                         
                         else:
                           if self.selecteditem > -1 and not str(self.selecteditem)=="": 
@@ -739,7 +774,8 @@ class Main:
                               self.windowhome.clearProperty('IconMixSagaThumb') 
                               
                               ListeItemx=[]                         
-                              if not self.DBTYPE=="set" and not status=="1":
+                              #if not self.DBTYPE=="set" and not status=="1":
+                              if not status=="1":
                                 status="1"
                                 if MiseAjour=="1":
                                    #ACTEURS VIDEONAV
@@ -752,25 +788,23 @@ class Main:
                                 if MiseAjour=="3":
                                    #ACTEURS VideoPlayer
                                    ListeActeurs=self.GetControl(self.windowvideoplayer,1998)
+                                if MiseAjour=="4":
+                                   #ACTEURS VideoPlayer
+                                   ListeActeurs=self.GetControl(self.windowvideoplayerinfo,1998)
                                    
                                    
                                    
-                                #ACTEURS  ------------------------------------------------
-                                 
+                                #ACTEURS  ------------------------------------------------                                 
                                 if ListeActeurs:
                                   ListeItemx=utils.getCasting(self.DBTYPE,self.selecteditem,1)
                                   ListeActeurs.reset()
                                   if ListeItemx: 
                                        for itemX in ListeItemx:
-                                            #ListeActeurs.setStaticContent(ListeItemx)
                                             ListeActeurs.addItem(itemX)                                   
                                   status=""
-                                
-                               
-                                 # utils.logMsg('windowvideonav.getControl(1998) fin',0)
                                   
                               #SAGAS ------------------------------------------------
-                              if not xbmc.getCondVisibility("Window.IsVisible(12901)") :
+                              if not xbmc.getCondVisibility("Window.IsVisible(12901)") and not xbmc.getCondVisibility("Window.IsVisible(10142)") :
                                   if (self.DBTYPE=="set" or MiseAjour=="2") and not status=="1":
                                     status="1"
                                     if not MiseAjour=="2":
@@ -799,7 +833,7 @@ class Main:
                                                  Liste=utils.getSagaFanartsV2(index)
                                                  if Liste:                                                
                                                     ListeFanarts.addItems(Liste)
-                                                    
+                                           #ListeSaga.selectItem(1)         
                                            #utils.getSagaItemPath()
                                                                            
                                     status=""

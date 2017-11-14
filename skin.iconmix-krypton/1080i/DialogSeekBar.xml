@@ -27,7 +27,7 @@
 				<include condition="Skin.HasSetting(Slim_Seekbar)">OSD_Progress_Bar3</include>
 				
 				<control type="group">
-					<posy>20</posy>
+					<posy>10</posy>
 					<include condition="!Skin.HasSetting(Slim_Seekbar)">MediaInfo2</include>
 					
 				</control>
@@ -45,7 +45,7 @@
 				<visible>Window.IsActive(Visualisation)</visible>
 			</control>
 		</control>
-		<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
+		
 		</control>
 	</controls>
 </window>

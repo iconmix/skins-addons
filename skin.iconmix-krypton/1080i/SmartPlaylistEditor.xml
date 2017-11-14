@@ -291,7 +291,7 @@
 				<alttexturenofocus>-</alttexturenofocus>
 				<alttexturefocus>ButtonFo.png</alttexturefocus>
 			</control>
-			<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
+			
 		</control>
 	</controls>
 </window>

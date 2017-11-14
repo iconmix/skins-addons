@@ -128,13 +128,23 @@
 			<!--<value condition="Container.Content(directors)+!IsEmpty(ListItem.DBID)">$INFO[Container.FolderPath]$INFO[ListItem.DBID]</value> -->
 			<value></value>
 		</variable>
+		<variable name="contentPanelActeursOsd">
+			<value condition="Player.HasVideo+!IsEmpty(VideoPlayer.TVShowTitle)+System.HasAddon(script.iconmixtools)">plugin://script.iconmixtools/?action=getcast&casttype=tvshow&id=$INFO[VideoPlayer.DBID]</value>
+			<value condition="Player.HasVideo+IsEmpty(VideoPlayer.TVShowTitle)+System.HasAddon(script.iconmixtools)">plugin://script.iconmixtools/?action=getcast&casttype=movie&id=$INFO[VideoPlayer.DBID]</value>
+			<value></value>
+		</variable>
 		<variable name="contentPanelActeurs">
 			<value condition="[Container.Content(tvshows)|StringCompare(ListItem.DBTYPE,episode)|StringCompare(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!SubString(ListItem.Label,..,left)">plugin://script.iconmixtools/?action=getcast&casttype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]</value>
 			<value></value>
 		</variable>
 		<variable name="ActeursContent">
-			<value condition="IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]&local="oui"</value>
-			<value condition="IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]</value>
+			<value condition="!Player.HasVideo+IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]&local="oui"</value>
+			<value condition="!Player.HasVideo+IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]</value>
+			<value condition="Player.HasVideo+!IsEmpty(VideoPlayer.TVShowTitle)+IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=tvshow&id=$VAR[Is1998]&local="oui"</value>
+			<value condition="Player.HasVideo+!IsEmpty(VideoPlayer.TVShowTitle)+IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=tvshow&id=$VAR[Is1998]</value>
+			<value condition="Player.HasVideo+IsEmpty(VideoPlayer.TVShowTitle)+IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=movie&id=$VAR[Is1998]&local="oui"</value>
+			<value condition="Player.HasVideo+IsEmpty(VideoPlayer.TVShowTitle)+IntegerGreaterThan(Container(1998).NumItems,0)+!Container(1998).IsUpdating+IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=movie&id=$VAR[Is1998]</value>
+			
 			<value>-</value>
 		</variable>
 
@@ -657,7 +667,7 @@
 		<value condition="Window.IsActive(script-skinshortcuts.xml) + [Control.HasFocus(1002)|Control.HasFocus(2002)]">Selected : Display center widget - Unselected : Display part of widget on right</value>
 		<value condition="Window.IsActive(script-skinshortcuts.xml) + [Control.HasFocus(1003)|Control.HasFocus(2003)]">Hide widget until has focused</value>
 		<!-- Videos -->
-		<value condition="[Container.Content(Movies) + IsEmpty(ListItem.PlotOutline)] | Container.Content(TVShows) | Container.Content(Episodes) | Container.Content(MusicVideos) | SubString(Container.FolderPath,plugin)">$INFO[ListItem.Plot]</value>
+		<value condition="[Container.Content(Movies) + !IsEmpty(ListItem.Plot)] | Container.Content(TVShows) | Container.Content(Episodes) | Container.Content(MusicVideos) | SubString(Container.FolderPath,plugin)">$INFO[ListItem.Plot]</value>
 		<value condition="Container.Content(Movies) +  !IsEmpty(ListItem.PlotOutline)">$INFO[ListItem.PlotOutline]</value>
 		<value condition="Container.Content(Seasons)">$INFO[Container.ShowPlot]</value>
 		<!-- Music -->

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<window>
+<window id="12005">
 	<controls>
+	  
 		<control type="group">
 			<animation effect="slide" end="0,-200" time="0" condition="Window.IsVisible(fullscreeninfo)">conditional</animation>
+			<
 			<!-- Background Image -->
 			<control type="image">
 				<posx>0</posx>

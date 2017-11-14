@@ -53,7 +53,6 @@
 			<include>Global_MediaOverlay</include>
 			<include>AnimationVoletsHorizontaux</include>
 		</control>
-		<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
 		<control type="rss">
 			<description>RSS Feed</description>
 			<posx>0</posx>

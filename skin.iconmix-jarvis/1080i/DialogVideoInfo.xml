@@ -464,7 +464,7 @@
 
       <!------------------------------- emplacement de la vidéo ----------------------------------------->
       <control type="group">
-        <posy>1010</posy>
+        <posy>927</posy>
         <posx>0</posx>
         <control type="image">
           <width>40</width>

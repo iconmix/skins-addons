@@ -405,6 +405,12 @@
               <onclick>setfocus(998)</onclick>
 
             </control>
+            <control type="radiobutton" id="507">
+              <include>SettingsLabel</include>
+              <label>$LOCALIZE[32006]</label>
+              <onclick>Skin.ToggleSetting(ActeursAuCentre)</onclick>
+              <selected>Skin.HasSetting(ActeursAuCentre)</selected>
+            </control>
 
             <control type="radiobutton" id="508">
               <include>SettingsLabel</include>
@@ -1032,7 +1038,7 @@
  
         <height>150</height>
         <align>center</align>
-        <itemgap>-20</itemgap>
+        <itemgap>0</itemgap>
         <orientation>horizontal</orientation>
         <control type="label">
        <width>100</width>
@@ -1044,12 +1050,12 @@
       </control>
     </control>
     <control type="group">
-      <posy>77</posy>
+      <posy>90</posy>
       
       <control type="grouplist"> <!-- 2eme ligne -->
         <height>150</height>
         <align>center</align>
-        <itemgap>-20</itemgap>
+        <itemgap>0</itemgap>
         <orientation>horizontal</orientation>
         <control type="label">
         <posy>20</posy>

@@ -216,9 +216,9 @@
 				<label>$INFO[ListItem.Label2]</label>
 			</control>
 		</control>
-		<!--<include>Global_Weather</include>-->
-		<!--<include>Global_Time</include>-->
-		<!-- <include>Global_Heading</include> -->
-		<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
+		
+		
+		
+		
 	</controls>
 </window>

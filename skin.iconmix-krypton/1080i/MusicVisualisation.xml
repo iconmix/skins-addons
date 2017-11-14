@@ -321,8 +321,8 @@
 				</control>
 
 			</control>
-			<!--<include>Global_Weather</include>-->
-			<!--<include>Global_Time</include>-->
+			
+			
 			<include>NextTracksPlaylist_Content</include>
 		</control>
 		<!-- --

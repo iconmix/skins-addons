@@ -126,6 +126,6 @@
 				</control>
 			</control>
 		</control>
-		<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
+		
 	</controls>
 </window>

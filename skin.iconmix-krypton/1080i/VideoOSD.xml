@@ -30,19 +30,20 @@
 			<include>Animation_OpenCloseFade</include>
 			<include>Animation_FadedByOSDSettings</include>
 			<!-- <include>OSD_Player_Banner</include> -->
-			
-			<include>OSD_Player_Details</include>
-			
-			<control type="group">
-				<top>-150</top>
-				<animation type="Conditional" condition="Skin.HasSetting(ShowOsdActors)">
+			<animation type="Conditional" condition="Skin.HasSetting(ShowOsdActors)">
       <effect type="slide"  start="0,0" end="0,-350" time="500" delay="1" reversible="false"/>
     </animation>
+			<include>OSD_Player_Details</include>
+			<include>OsdAnimation</include>
+			<include>PanelActeurs</include>
+			<control type="group">
+				<top>-150</top>
+				
      <animation type="Conditional" condition="Control.HasFocus(5051)|Control.HasFocus(1998)">
       <effect type="slide"  start="0,0" end="0,-800" time="500" delay="1" reversible="false"/>
     </animation>
 				<include>OSD_Progress_Bar2</include>
-				<include>OsdAnimation</include>
+				
 				<control type="grouplist" id="2001"> <!-- button -->
 					<posx>212</posx>
 					<posy>1000</posy>
@@ -271,10 +272,11 @@
 					  <visible>Control.HasFocus(12)</visible>
 					</control>
 				</control>	-->
+				
 			</control>
 		
-			<include>OsdHorloge</include>
-			<include>PanelActeurs</include>
+			
+			
 		</control>
 
 		<!-- LiveTV OSD -->
@@ -1001,6 +1003,6 @@
 				<textcolor>HomeStatsNumber</textcolor>
 			</control>
 		</control>
-		<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
+		<include>OsdHorloge</include>
 	</controls>
 </window>

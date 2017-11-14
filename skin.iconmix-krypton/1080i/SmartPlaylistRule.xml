@@ -153,7 +153,7 @@
 				<onup>19</onup>
 				<ondown>19</ondown>
 			</control>
-			<include condition="Skin.HasSetting(DebugGrid)">Object_DebugGrid</include>
+			
 		</control>
 	</controls>
 </window>
