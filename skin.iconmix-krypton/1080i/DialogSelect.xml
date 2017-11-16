@@ -22,9 +22,9 @@
 				<posy>0</posy>
 				<control type="group">
 				<control type="multiimage">
-					<posx>760</posx>
+					<posx>780</posx>
 					<posy>20</posy>
-					<width>350</width>
+					<width>300</width>
 					<fadetime>1000</fadetime>
 					<timeperimage>3000</timeperimage>
 					<animation type="Conditional" condition="String.IsEqual(Container(6).ListItem.Label2,selectionnevue)|String.IsEqual(Container(3).ListItem.Label2,selectionnevue)|[!IsEmpty(Container(3).ListItem.DBID)+!String.Contains(Container(3).ListItem.Path,setid)+!IsEmpty(Container(3).ListItem.Path)]|[!IsEmpty(Container(6).ListItem.DBID)+!String.Contains(Container(6).ListItem.Path,setid)+!IsEmpty(Container(6).ListItem.Path)]" reversible="false">
@@ -32,8 +32,10 @@
 						<effect type="rotatey" center="0,0" end="20" time="10" />
 						<effect type="slide" end="70" time="10" />
 					</animation>
-					<aspectratio align="left" aligny="center">keep</aspectratio>
-					<imagepath>$VAR[ImageContainer]</imagepath>				
+					<bordersize>8</bordersize>
+          <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
+					<aspectratio scalediffuse="true" align="left" aligny="center">keep</aspectratio>
+					<imagepath diffuse="landscapeframeselect.png">$VAR[ImageContainer]</imagepath>				
 				</control>
 				
 				</control>
@@ -52,7 +54,7 @@
 					<aligny>center</aligny>
 					<label>[B]13406[/B]</label>
 				</control>
-				<!--
+				<!-- --
 				<control type="label">
 					<label>$INFO[Container(3).ListItem.DBID]/$VAR[ImageContainer]-$INFO[Container(3).ListItem.Path]/$INFO[Container(3).ListItem.Art(landscape)]/$INFO[Container(3).ListItem.Art(poster)]/$INFO[Container(3).ListItem.Art(thumb)]/</label>
 				</control>

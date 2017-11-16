@@ -635,7 +635,9 @@ def getepisodes(UniqueId=None,saisonID=None,DBtype=None,NbEpisodesKodi=None):
       if DBtype=="tvshow": 
         KodiId=xbmc.getInfoLabel("ListItem.DBID")
         UniqueId=xbmc.getInfoLabel("ListItem.IMDBNumber")
-        NbKodi=int(xbmc.getInfoLabel("ListItem.Property(TotalEpisodes)"))
+        TTEpisodes=xbmc.getInfoLabel("ListItem.Property(TotalEpisodes)")
+        if TTEpisodes and TTEpisodes!="":
+             NbKodi=int(TTEpisodes)
      
     if UniqueId:
       savepath=ADDON_DATA_PATH+"/series/tv%s" %(UniqueId)
@@ -752,7 +754,9 @@ def UpdateSeries(Une=None,Toutes=None):
             if dp.iscanceled(): break
        dp.close() 
      else :
-          NbKodi=int(xbmc.getInfoLabel("ListItem.Property(TotalEpisodes)"))
+          TTEpisodes=xbmc.getInfoLabel("ListItem.Property(TotalEpisodes)")
+          if TTEpisodes and TTEpisodes!="":
+               NbKodi=int(TTEpisodes)
           savepath=ADDON_DATA_PATH+"/series/tv%s" %(Une)
           getallepisodes(xbmc.getInfoLabel("ListItem.DBID"),Une,savepath,NbKodi,1)        
             
@@ -934,7 +938,9 @@ def GetImdbTvNumber(ItemIdxx=None,DBtype=None):
    else :
       if DBtype=="tvshow":
         ItemIdx=xbmc.getInfoLabel("ListItem.IMDBNumber")
-        NbKodi=int(xbmc.getInfoLabel("ListItem.Property(TotalEpisodes)"))
+        TTEpisodes=xbmc.getInfoLabel("ListItem.Property(TotalEpisodes)")
+        if TTEpisodes and TTEpisodes!="":
+             NbKodi=int(TTEpisodes)
       
 def getDiffusionTV(IdKodi=None,saisonID=None,DBtype=None):
   episodesDB= ""
@@ -1331,7 +1337,7 @@ def getFilmsParActeur(ActeurType=None,Acteur=None,Statique=None):
                  else:
                      #ListeVideos.append(ItemListe)
                      try:
-                          Annee=item.get("year")
+                          Annee=Item.get("year")
                      except:
                           Annee="0"
                      if not Annee or Annee=="":
@@ -1343,9 +1349,10 @@ def getFilmsParActeur(ActeurType=None,Acteur=None,Statique=None):
      xbmcplugin.endOfDirectory(int(sys.argv[1])) 
   else:
      ListeItemFinal=[]
-     LL=[]          
-     LL=sorted(ListeVideos,reverse=True)
+     LL=[]               
+     LL=sorted(ListeVideos, key=lambda x:x[0],reverse=True)
      #tri par année
+     #logMsg("LL="+str(LL),0)
      cpt=0
      while cpt<len(LL):
              ListeItemFinal.append(LL[cpt][1])
@@ -1706,7 +1713,8 @@ def getFilmsTv(ActeurType=None,Acteur=None,Statique=None):
   else:
      ListeItemFinal=[]
      LL=[]          
-     LL=sorted(ListeRoles,reverse=True)
+     #LL=sorted(ListeRoles,reverse=True)
+     LL=sorted(ListeRoles, key=lambda x:x[0],reverse=True)
      #tri par année
      cpt=0
      while cpt<len(LL):
@@ -1948,7 +1956,7 @@ def requestUrlJson(query_url):
     req = urllib2.Request(query_url.replace(" ","%20")) 
   except :
     str_response=None
-    logMsg("Erreur  urllib2.Request(query_url) --> " + str(query_url),0)
+    logMsg("Erreur1  urllib2.Request(query_url) --> " + str(query_url),0)
   if req:
     user_agent = 'Dalvik/1.6.0 (Linux; U; Android 4.2.2; Nexus 4 Build/JDQ39E)'
     req.add_header('User-agent',user_agent)
@@ -1958,7 +1966,7 @@ def requestUrlJson(query_url):
     #reponse = urllib.request.urlopen(query_url, None, 2)
   except:
     reponse=None
-    logMsg("Erreur  urllib2.urlopen(query_url) --> " + str(query_url),0)
+    logMsg("Erreur2  urllib2.urlopen(query_url) --> " + str(query_url),0)
   
   json_data=None
   if reponse:

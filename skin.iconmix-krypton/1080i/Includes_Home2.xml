@@ -1,7 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 	<!-- Home2 Icons -->
+
+<include name="submenuicons"	>
+  <!-- Frames for submenus -->
+		<control type="group">
+			<posy>825</posy>
+			<posx>380</posx>		
+				
+			<control type="group">
+				<include>Animation_Submenu</include>
+				<visible>Control.HasFocus(9001)</visible>	
+			
+				<control type="image">
+					<width>1100</width>
+					<height>250</height>
+					<include>fondsubmenu</include>
+				</control>
+			</control>
 	
+			<!-- Submenus -->
+			<control type="list" id="9001">
+				<visible allowhiddenfocus="true">Control.HasFocus(9001) + ![Control.HasFocus(8000) | Control.HasFocus(80001) | Control.HasFocus(8002) | Control.HasFocus(8003)]</visible>
+				<posx>25</posx>
+				<posy>50</posy>
+				<width>1030</width>
+				<height>210</height>
+				<align>center</align>
+				<onup>9000</onup>
+				<ondown>9000</ondown>
+				<onleft>9001</onleft>
+				<onright>9001</onright>
+				<orientation>horizontal</orientation>
+				<defaultcontrol always="true">1</defaultcontrol>
+				<scrolltime tween="sine" easing="out">240</scrolltime>
+				<include>Animation_Submenu</include>
+				<itemlayout width="250" height="200">
+
+					<control type="image">
+						<posx>85</posx>
+						<width>80</width>
+						<height>80</height>
+						<aligny>center</aligny>
+						<texture>$INFO[ListItem.Icon]</texture>
+						<aspectratio>stretch</aspectratio>
+						<visible>Skin.HasSetting(ShowIconLabel)</visible>
+					</control>
+						<control type="image">
+							<posx>65</posx>
+						<width>120</width>
+						<height>120</height>
+						
+						<aligny>center</aligny>
+						<texture>$INFO[ListItem.Icon]</texture>
+						<aspectratio>stretch</aspectratio>
+						<visible>!Skin.HasSetting(ShowIconLabel)</visible>
+					</control>
+					<control type="label">
+						<top>130</top>
+						<width>250</width>
+						<height>20</height>
+						<align>center</align>
+						<label>$INFO[ListItem.Label]</label>
+						<font>impact35</font>
+						<textcolor>SubmenuText</textcolor>
+						<visible>Skin.HasSetting(ShowIconLabel)</visible>
+					</control>
+				</itemlayout>
+				
+				<focusedlayout width="250" height="200">
+					<control type="image">
+						<posx>50</posx>
+						<width>150</width>
+						<height>150</height>
+						<aligny>center</aligny>
+						<texture>$INFO[ListItem.Icon]</texture>
+						<aspectratio>stretch</aspectratio>
+					</control>
+					<control type="label">
+						<top>135</top>
+						<width>250</width>
+						<height>30</height>
+						<align>center</align>
+						<label>$INFO[ListItem.Label]</label>
+						<font>impact35</font>
+						<visible>Skin.HasSetting(ShowIconLabel)</visible>
+						<textcolor>yellow</textcolor>
+					</control>	
+				</focusedlayout>
+				<content>
+					<include>skinshortcuts-submenu</include>
+				</content>
+			</control>
+			
+		</control>
+</include>
+<include name="fondsubmenu">
+  		<bordersize>8</bordersize>
+      <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
+      <colordiffuse>90F0F0F0</colordiffuse>
+      <texture>frames/fondinfogris.png</texture>
+					<aspectratio scalediffuse="true">stretch</aspectratio>
+</include>
 	
 	
 	<include name="OsdMusicHome">
@@ -600,113 +700,8 @@
 	</control>
 	
 		<!-- Frames for submenus -->
-		<control type="group">
-			<posy>825</posy>
-			<posx>380</posx>		
-				
-			<control type="group">
-				<include>Animation_Submenu</include>
-				<visible>Control.HasFocus(9001)</visible>				
-				<control type="image">
-					<posx>15</posx>
-					<posy>20</posy>
-					<width>1073</width>
-					<height>210</height>
-					<texture>frames/ClassicFrame_Background.png</texture>
-					<colordiffuse>C0606060</colordiffuse>
+		<include>submenuicons</include>
 	
-				</control>
-				<control type="image">
-					<width>1100</width>
-					<height>250</height>
-					<texture>frames/banner_frame2.png</texture>
-					<colordiffuse>FrameBackgroundDiffuse</colordiffuse>	
-				</control>
-			</control>
-	
-			<!-- Submenus -->
-			<control type="list" id="9001">
-				<visible allowhiddenfocus="true">Control.HasFocus(9001) + ![Control.HasFocus(8000) | Control.HasFocus(80001) | Control.HasFocus(8002) | Control.HasFocus(8003)]</visible>
-				<posx>25</posx>
-				<posy>50</posy>
-				<width>1050</width>
-				<height>210</height>
-				<align>center</align>
-				<onup>9000</onup>
-				<ondown>9000</ondown>
-				<onleft>9001</onleft>
-				<onright>9001</onright>
-				<orientation>horizontal</orientation>
-				<defaultcontrol always="true">1</defaultcontrol>
-				<scrolltime tween="sine" easing="out">240</scrolltime>
-				<include>Animation_Submenu</include>
-				<itemlayout width="250" height="200">
-
-					<control type="image">
-						<posx>85</posx>
-						<width>80</width>
-						<height>80</height>
-						<aligny>center</aligny>
-						<texture>$INFO[ListItem.Icon]</texture>
-						<aspectratio>stretch</aspectratio>
-						<visible>Skin.HasSetting(ShowIconLabel)</visible>
-					</control>
-						<control type="image">
-							<posx>65</posx>
-						<width>120</width>
-						<height>120</height>
-						
-						<aligny>center</aligny>
-						<texture>$INFO[ListItem.Icon]</texture>
-						<aspectratio>stretch</aspectratio>
-						<visible>!Skin.HasSetting(ShowIconLabel)</visible>
-					</control>
-					<control type="label">
-						<top>130</top>
-						<width>250</width>
-						<height>20</height>
-						<align>center</align>
-						<label>$INFO[ListItem.Label]</label>
-						<font>impact35</font>
-						<textcolor>SubmenuText</textcolor>
-						<visible>Skin.HasSetting(ShowIconLabel)</visible>
-					</control>
-				</itemlayout>
-				
-				<focusedlayout width="250" height="200">
-					<control type="image">
-						<posx>50</posx>
-						<width>150</width>
-						<height>150</height>
-						<aligny>center</aligny>
-						<texture>$INFO[ListItem.Icon]</texture>
-						<aspectratio>stretch</aspectratio>
-					</control>
-					<control type="label">
-						<top>135</top>
-						<width>250</width>
-						<height>30</height>
-						<align>center</align>
-						<label>$INFO[ListItem.Label]</label>
-						<font>METF_PlotText</font>
-						<visible>Skin.HasSetting(ShowIconLabel)</visible>
-						<textcolor>yellow</textcolor>
-					</control>	
-				</focusedlayout>
-				<content>
-					<include>skinshortcuts-submenu</include>
-				</content>
-			</control>
-			
-		</control>
-		<!-- Shared Home Stats/Media Totals 
-		<control type="label">
-			<posx>200</posx>
-			<posy>50</posy>
-			<label>$INFO[Container(9000).ListItem.Property(labelID)]</label>
-
-		</control>		
-		<include>HomeStats</include>-->
 	</include>
 	<include name="Home2_IconsBobine">
 		
@@ -905,114 +900,8 @@
 	</control>
 	
 		<!-- Frames for submenus -->
-		<control type="group">
-			<posy>825</posy>
-			<posx>380</posx>		
-				
-			<control type="group">
-				<include>Animation_Submenu</include>
-				<visible>Control.HasFocus(9001)</visible>				
-				<control type="image">
-					<posx>15</posx>
-					<posy>20</posy>
-					<width>1073</width>
-					<height>210</height>
-					<texture>frames/ClassicFrame_Background.png</texture>
-					<colordiffuse>C0606060</colordiffuse>
-	
-				</control>
-				<control type="image">
-					<width>1100</width>
-					<height>250</height>
-					<texture>frames/banner_frame2.png</texture>
-					<colordiffuse>FrameBackgroundDiffuse</colordiffuse>	
-				</control>
-			</control>
-	
-			<!-- Submenus -->
-			<control type="list" id="9001">
-				<visible allowhiddenfocus="true">Control.HasFocus(9001) + ![Control.HasFocus(8000) | Control.HasFocus(80001) | Control.HasFocus(8002) | Control.HasFocus(8003)]</visible>
-				<posx>25</posx>
-				<posy>50</posy>
-				<width>1050</width>
-				<height>210</height>
-				<align>center</align>
-				<onup>9000</onup>
-				<ondown>9000</ondown>
-				<onleft>9001</onleft>
-				<onright>9001</onright>
-				<orientation>horizontal</orientation>
-				<defaultcontrol always="true">1</defaultcontrol>
-				<scrolltime tween="sine" easing="out">240</scrolltime>
-				<include>Animation_Submenu</include>
-				<itemlayout width="250" height="200">
-
-					<control type="image">
-						<posx>85</posx>
-						<width>80</width>
-						<height>80</height>
-						<aligny>center</aligny>
-						<texture>$INFO[ListItem.Icon]</texture>
-						<aspectratio>stretch</aspectratio>
-						<visible>Skin.HasSetting(ShowIconLabel)</visible>
-					</control>
-						<control type="image">
-							<posx>65</posx>
-						<width>120</width>
-						<height>120</height>
-						
-						<aligny>center</aligny>
-						<texture>$INFO[ListItem.Icon]</texture>
-						<aspectratio>stretch</aspectratio>
-						<visible>!Skin.HasSetting(ShowIconLabel)</visible>
-					</control>
-					<control type="label">
-						<top>130</top>
-						<width>250</width>
-						<height>20</height>
-						<align>center</align>
-						<label>$INFO[ListItem.Label]</label>
-						<font>impact35</font>
-						<textcolor>SubmenuText</textcolor>
-						<visible>Skin.HasSetting(ShowIconLabel)</visible>
-					</control>
-				</itemlayout>
-				
-				<focusedlayout width="250" height="200">
-					<control type="image">
-						<posx>50</posx>
-						<width>150</width>
-						<height>150</height>
-						<aligny>center</aligny>
-						<texture>$INFO[ListItem.Icon]</texture>
-						<aspectratio>stretch</aspectratio>
-					</control>
-					<control type="label">
-						<top>135</top>
-						<width>250</width>
-						<height>30</height>
-						<align>center</align>
-						<label>$INFO[ListItem.Label]</label>
-						<font>METF_PlotText</font>
-						<visible>Skin.HasSetting(ShowIconLabel)</visible>
-						<textcolor>yellow</textcolor>
-					</control>	
-				</focusedlayout>
-				<content>
-					<include>skinshortcuts-submenu</include>
-				</content>
-			</control>
-			
-		</control>
-		<!-- Shared Home Stats/Media Totals 
-		<control type="label">
-			<posx>200</posx>
-			<posy>50</posy>
-			<label>$INFO[Container(9000).ListItem.Property(labelID)]</label>
-
-		</control>		
-		<include>HomeStats</include>-->
-	</include>
+<include>submenuicons</include>	
+</include>
 		<include name="Home2_IconsVertical">
 		
 		<control type="group">
@@ -1165,8 +1054,11 @@
 					<posx>5</posx>
 					<width>310</width>
 					<height>840</height>
-					<texture>frames/Menu_Glass2b.png</texture>
-					<colordiffuse>DialogBackgroundColor</colordiffuse>
+							<bordersize>8</bordersize>
+      <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
+      <colordiffuse>90F0F0F0</colordiffuse>
+      <texture>frames/fondinfogris.png</texture>
+					<aspectratio scalediffuse="true">stretch</aspectratio>
 	
 				</control>
 				
@@ -1228,7 +1120,7 @@
 						<height>30</height>
 						<align>center</align>
 						<label>$INFO[ListItem.Label]</label>
-						<font>METF_PlotText</font>
+						<font>impact35</font>
 						<visible>Skin.HasSetting(ShowIconLabel)</visible>
 						<textcolor>yellow</textcolor>
 					</control>	

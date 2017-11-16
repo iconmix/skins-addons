@@ -168,6 +168,22 @@
         <onclick></onclick>
         <visible>String.IsEqual(ListItem.DBTYPE,movie)</visible>
       </control>
+      <control type="button" id="2108">
+        <onleft>Dialog.Close(contextmenu)</onleft>
+        <onright>7111</onright>
+        <include>BoutonCommun</include>
+        <label>137</label>
+        <onclick>VideoLibrary.Search</onclick>
+        <visible>Container.Content(movies)|Container.Content(tvshows)|Container.Content(episodes)|Container.Content(sets)|Container.Content(episodes)</visible>
+      </control>
+      <control type="button" id="2108">
+        <onleft>Dialog.Close(contextmenu)</onleft>
+        <onright>7111</onright>
+        <include>BoutonCommun</include>
+        <label>137</label>
+        <onclick>AudioLibrary.Search</onclick>
+        <visible>Container.Content(songs)|Container.Content(artists)|Container.Content(albums)</visible>
+      </control>
       
      
     </control>

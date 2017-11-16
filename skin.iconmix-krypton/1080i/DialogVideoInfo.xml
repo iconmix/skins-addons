@@ -52,7 +52,7 @@
           <bordertexture border="8">landscape.png</bordertexture>
         </control>
 
-        <control type="grouplist" id="7003">
+        <control type="grouplist" id="7003"> <!--- boutons -->
           <include>VideoInfoButtonText</include>
           <itemgap>5</itemgap>
           <align>center</align>
@@ -64,10 +64,6 @@
           <onleft condition="!String.IsEmpty(ListItem.Director)">13</onleft>
           <onleft condition="String.IsEmpty(ListItem.Director)+Integer.IsGreater(Container(50).NumItems,0)+!Container(1998).IsUpdating">50</onleft>
 
-
-          <!--	<onleft condition="!System.HasAddon(script.iconmixtools)+![Control.HasFocus(5005)|Control.HasFocus(5001)]">50</onleft>
-          <onleft condition="System.HasAddon(script.iconmixtools)+![Control.HasFocus(5005)|Control.HasFocus(5001)]">501</onleft>
-          -->
 
           <!-- Play -->
           <control type="button" id="8">
@@ -196,7 +192,7 @@
         </control>
       </control>
       <!---->
-      <control type="button" id="2008">
+      <control type="button" id="2008"> <!-- realisateur -->
 
         <left>-2000</left>
         <label>FUCK</label>
@@ -320,14 +316,14 @@
           <visible>Container.Content(episodes)</visible>
         </control>
 
-        <!-- Tagline -->
+      
         <!-- telex debug--
 
         <control type="label">
         <posx>10</posx>
         <posy>700</posy>
         <width>1600</width>
-        <label>$INFO[Window(Home).Property(ItemCountry1)]</label>
+        <label>Varaiable:$INFO[ListItem.IMDBNumber]</label>
       </control>-->
 
       <control type="label">
@@ -510,8 +506,8 @@
       <include>Animation_FadedByMenu</include>
       <include>Animation_CommonFade</include>
       <include>Animation_OpenCloseFade</include>
-      <!-- Plot -->
-      <control type="textbox">
+      
+      <control type="textbox"><!-- Plot -->
         <posx>60</posx>
         <posy>110</posy>
         <width>720</width>
@@ -523,9 +519,6 @@
         <include condition="!Skin.HasSetting(AutoScrollFast)">AutoScrollLong</include>
         <include condition="Skin.HasSetting(AutoScrollFast)">AutoScrollLongFast</include>
       </control>
-
-
-
 
       <control type="group">
         <visible>!ControlGroup(7003).HasFocus(5005)+!ControlGroup(7003).HasFocus(5006)+!Control.HasFocus(5001)+!Control.HasFocus(5002)+String.IsEmpty(Window(12003).Property(showgenre))+String.IsEmpty(Window(12003).Property(showsaga))</visible>
@@ -559,8 +552,6 @@
           </control>
         </control>
 
-
-
         <!-- -->
         <control type="image">
           <align>center</align>
@@ -579,13 +570,12 @@
           <height>380</height>
           <onleft>50</onleft>
           <onright>50</onright>
-          <onfocus>setfocus(1998)</onfocus>
+          <onfocus>SetFocus(1998)</onfocus>
           <ondown>7003</ondown>
           <scrolltime tween="linear" easing="out">10500</scrolltime>
           <autoscroll>!Control.HasFocus(1998)+!Control.HasFocus(5051)</autoscroll>
           <include>Acteurs</include>
-        </control>
-        -->
+        </control>      
 
       </control>
       <!-------------------------------------GENRES ET SAGAS------------------------------------------------------------------------->
@@ -795,7 +785,6 @@
 
       </control>
 
-
       <!-- SAGAS -->
       <control type="fixedlist" id="5002">
         <visible>Integer.IsGreater(Container(5002).NumItems,0)+!String.IsEmpty(Window(12003).Property(showsaga))</visible>
@@ -828,32 +817,15 @@
 
     </control>
 
-
-
-
     <!--------------------------------------------------------------------------------------------------------------->
 
     <!-- Year and Duration -->
-    <!--<control type="image">
-    <posx>1125</posx>
-    <posy>65</posy>
-    <width>200</width>
-    <height>80</height>
-    <texture>flags/notation/note$INFO[ListItem.UserRating].png</texture>
-    <aspectratio>keep</aspectratio>
-    </control>
-    -->
-
-
-
     <control type="image">
-
       <posx>1290</posx>
       <posy>23</posy>
       <align>center</align>
       <width>75</width>
       <height>75</height>
-
       <texture>flags/notation/pnote$INFO[ListItem.UserRating].png</texture>
       <aspectratio>keep</aspectratio>
       <visible>!String.IsEmpty(ListItem.UserRating)</visible>
@@ -864,12 +836,7 @@
       <visible>!IsEmpty(Window(Home).Property(ItemCountry1))+String.IsEmpty(Window(Home).Property(ItemCountry2))</visible>
       <width>100</width>
       <height>65</height>
-      <!-- <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Country].png</texture> --
-      <texture background="true" >resource://resource.images.languageflags.colour/$INFO[Window(Home).Property(ItemCountry1)].png</texture>
-      -->
-              <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry1)]$VAR[flagpathext]</texture>
-
-
+      <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry1)]$VAR[flagpathext]</texture>
       <aspectratio aligny="center">scale</aspectratio>
     </control>
      <control type="label">
@@ -888,7 +855,6 @@
       <control type="image">
         <width>50</width>
         <height>32</height>
-        <!-- <texture background="true" >resource://resource.images.languageflags.colour/$INFO[Window(Home).Property(ItemCountry1)].png</texture> -->
         <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry1)]$VAR[flagpathext]</texture>
         <aspectratio aligny="center">scale</aspectratio>
       </control>
@@ -896,18 +862,14 @@
         <top>40</top>
         <width>50</width>
         <height>32</height>
-       <!-- <texture background="true" >resource://resource.images.languageflags.colour/$INFO[Window(Home).Property(ItemCountry2)].png</texture>-->
-                <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry2)]$VAR[flagpathext]</texture>
-
+        <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry2)]$VAR[flagpathext]</texture>
         <aspectratio aligny="center">scale</aspectratio>
       </control>
       <control type="image">
         <width>50</width>
         <left>55</left>
         <height>32</height>
-        <!-- <texture background="true" >resource://resource.images.languageflags.colour/$INFO[Window(Home).Property(ItemCountry3)].png</texture> -->
-                <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry3)]$VAR[flagpathext]</texture>
-
+        <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry3)]$VAR[flagpathext]</texture>
         <aspectratio aligny="center">scale</aspectratio>
       </control>
       <control type="image">
@@ -915,9 +877,7 @@
         <left>55</left>
         <width>50</width>
         <height>32</height>
-        <!-- <texture background="true" >resource://resource.images.languageflags.colour/$INFO[Window(Home).Property(ItemCountry4)].png</texture> -->
-                <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry4)]$VAR[flagpathext]</texture>
-
+        <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry4)]$VAR[flagpathext]</texture>
         <aspectratio aligny="center">scale</aspectratio>
       </control>
 
@@ -935,7 +895,6 @@
       <include>Animation_FadedByMenu</include>
       <include>Animation_CommonFade</include>
       <include>Animation_OpenCloseFade</include>
-      <!-- <visible>[Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes) | Container.Content(MusicVideos)]</visible>-->
       <!-- Default Poster Image -->
       <control type="image">
         <width>360</width>
@@ -947,7 +906,6 @@
         <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
         <animation effect="zoom" center="auto" start="40" end="100" time="400" tween="cubic" easing="inout">WindowOpen</animation>
         <animation effect="fade" start="0" end="0" time="0">WindowClose</animation>
-
       </control>
 
       <!-- Frame for poster (for Music Videos) -->
@@ -966,7 +924,6 @@
 
 
   </control>
-  <!--<include>Global_ContextFilter</include>-->
   <include>GlobalBackgroundVideoInfo</include>
   <control type="group">
     <posy>970</posy>
@@ -974,9 +931,7 @@
     <include condition="!Skin.HasSetting(Hide_MediaFlags)">MediaInfo</include>
     <include condition="!Skin.HasSetting(Hide_ExtraMediaFlags)">MediaInfoGroup3</include>
   </control>
-
 </control>
-
 
 <include>PanelActeurs</include>
 

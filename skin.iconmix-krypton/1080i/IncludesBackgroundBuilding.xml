@@ -344,12 +344,12 @@
 
 	<!--Global Background -->
 	<include name="GlobalBackground">
-
+<!--
 		<control type="videowindow" id="1">
 			<description>Video Preview</description>
 			<visible>Player.HasVideo + !Window.IsActive(selectdialog)  +Skin.HasSetting(PlayVideoOverlay)</visible>
 		</control>
-
+-->
 		<control type="group">
 			<visible>[!Player.HasAudio |  [Player.HasAudio+ !Control.IsVisible(9044)]]+[!Player.HasVideo | [Player.HasVideo+!Skin.HasSetting(PlayVideoOverlay)]]</visible>
 			<animation effect="fade" end="50" time="500" reversible="false" condition="String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)+Skin.HasSetting(MeteoPleinEcran)">Conditional</animation>

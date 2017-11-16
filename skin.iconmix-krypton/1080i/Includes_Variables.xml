@@ -105,6 +105,9 @@
 
 			<value condition="!String.IsEmpty(Container(6).ListItem.Icon)+!String.Contains(Container(6).ListItem.Icon,default)">$INFO[Container(6).ListItem.Icon]</value>
 			<value condition="!String.IsEmpty(Container(3).ListItem.Icon)+!String.Contains(Container(3).ListItem.Icon,default)">$INFO[Container(3).ListItem.Icon]</value>
+			
+			<value condition="!String.IsEmpty(Container(6).ListItem.Property(Icon))">$INFO[Container(6).ListItem.Property(Icon)]</value>
+			<value condition="!String.IsEmpty(Container(3).ListItem.Property(Icon))">$INFO[Container(3).ListItem.Property(Icon)]</value>
 			<value></value>
 			
 		</variable>

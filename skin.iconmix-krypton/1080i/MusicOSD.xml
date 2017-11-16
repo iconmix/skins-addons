@@ -3,12 +3,8 @@
 	<defaultcontrol>4</defaultcontrol>
 	<controls>
 		<control type="group">
-			<!-- <include>OSD_Player_Banner</include> -->
 			<include>OSD_Player_Details</include>		
-				
-				<!-- <include>NextTracksPlaylist_Content</include> -->
-			
-			<animation type="Visible">
+				<animation type="Visible">
 				<effect type="slide" start="0,-300" end="0,0" time="400" tween="cubic" easing="out" />
 				<effect type="fade" start="0" end="100" time="400" />
 			</animation>
@@ -44,35 +40,9 @@
 			</control>
 		</control>
 		
-		<!--
-		<control type="group">
-			<animation type="Visible">
-				<effect type="slide" start="1580,0" end="0,0" time="400" tween="cubic" easing="out" />
-				<effect type="fade" start="0" end="100" time="400" />
-			</animation>
-			<animation type="Hidden">
-				<effect type="slide" start="0,0" end="0,1580" time="400" tween="cubic" easing="out" />
-				<effect type="fade" start="100" end="0" time="400" />
-			</animation>
-			<animation effect="slide" start="1580,0" end="0,0" time="400" tween="quadratic" easing="out">WindowOpen</animation>
-			<animation effect="slide" start="0,0" end="1580,0" time="400" tween="quadratic" easing="out">WindowClose</animation>
-			<control type="label">
-				<posx>1800</posx>
-				<posy>10</posy>
-				<width>150</width>
-				<height>40</height>
-				<aligny>center</aligny>
-				<align>right</align>
-				<font>METF_OSDTime</font>
-				<textcolor>OSDFinishTime</textcolor>
-				<label>$INFO[MusicPlayer.PlaylistPosition]$INFO[MusicPlayer.PlaylistLength,/]</label>
-			</control>
-		</control>
-		-->
 		
 		
-		<!--- apparait avec les controles MUSIQUE
-		<!-- <include>OSD_Player_Banner</include> --> -->
+		<!--- apparait avec les controles MUSIQUE --->
 		<control type="group">
 			<posy>350</posy>
 			<include>Animation_SlideUpFadeOut</include>
@@ -323,17 +293,6 @@
 					<enable>Visualisation.HasPresets</enable>
 					<onclick>ActivateWindow(visualisationpresetlist)+Visualisation.HasPresets</onclick>
 				</control>
-				<!--
-				<control type="button" id="14">
-					<description>Visualisation Settings</description>
-					<height>68</height>
-					<width>68</width>
-					<texturefocus>osd/osd_button_settings_fo.png</texturefocus>
-					<texturenofocus>osd/osd_button_settings_nf.png</texturenofocus>
-					<onclick>ActivateWindow(1105)</onclick>
-				</control>
-				-->
-				
 				
 			</control>
 		</control>

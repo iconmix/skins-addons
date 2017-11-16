@@ -4,7 +4,7 @@ import resources.lib.Utils as utils
 from unidecode import unidecode
 from datetime import datetime,timedelta
 import _strptime
-import urlparse
+import urlparse,urllib
 import time
 from time import sleep
 import unicodedata
@@ -277,22 +277,36 @@ class Main:
                 if TMDBID!='' :                    
                      ListeTrailer=utils.getTrailer(TMDBID,TypeVideo)
                      if ActeursBio=="non" and str(xbmc.getInfoLabel("Container(1999).ListItem.Property(DBID)"))!="": 
-                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(1999).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":" ","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(1999).ListItem.Label").decode("utf8")+" [/B][/I][/COLOR]","type":"KODI"})
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(1999).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":" ","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(1999).ListItem.Label").decode("utf8")+" [/B][/I][/COLOR]","type":"KODI","landscape":xbmc.getInfoLabel("Container(1999).ListItem.Art(landscape)")})
                      if ActeursBio=="noninf" and str(xbmc.getInfoLabel("Container(5002).ListItem.Property(DBID)"))!="": 
-                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5002).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":" ","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(5002).ListItem.Label").decode("utf8")+" [/B][/I][/COLOR]","type":"KODI"})
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5002).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":" ","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(5002).ListItem.Label").decode("utf8")+" [/B][/I][/COLOR]","type":"KODI","landscape":xbmc.getInfoLabel("Container(5002).ListItem.Art(landscape)")})
+                     if ActeursBio=="noninf2" and str(xbmc.getInfoLabel("ListItem.DBID"))!="": 
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":" ","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("ListItem.Label").decode("utf8")+" [/B][/I][/COLOR]","type":"KODI","landscape":xbmc.getInfoLabel("ListItem.Art(landscape)")})
                      if ActeursBio=="" and str(xbmc.getInfoLabel("Container(5051).ListItem.Property(DBID)"))!="": 
-                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5051).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":" ","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(5051).ListItem.Label").decode("utf8")+" [/B][/I][/COLOR]","type":"KODI"})
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5051).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":" ","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(5051).ListItem.Label").decode("utf8")+" [/B][/I][/COLOR]","type":"KODI","landscape":xbmc.getInfoLabel("Container(5051).ListItem.Art(landscape)")})
                      
                 
                 
                 
                 if ListeTrailer:
                     ListeNomTrailer=[]
+                    Image=""
                     for Item in  ListeTrailer:
+                         NomTrailer=None
+                        
+                         if Item.get("key")!="KODI": 
+                          Image="http://img.youtube.com/vi/%s/hqdefault.jpg" %(Item.get("key"))
+                         else:
+                          Image=urllib.unquote(Item.get("landscape").replace("image://","")[:-1])
+                         utils.logMsg("Image = "+str(Image),0) 
                          try: 
-                              ListeNomTrailer.append(utils.try_decode(Item["name"])+" ("+str(Item["size"])+")"+" "+str(Item["iso_3166_1"]))
+                              NomTrailer=utils.try_decode(Item["name"])+" ("+str(Item["size"])+")"+" "+str(Item["iso_3166_1"])
                          except:
-                              ListeNomTrailer.append(str(Item["type"])+" ("+Item.get("size")+")"+" "+str(Item["iso_3166_1"]))
+                              NomTrailer=str(Item["type"])+" ("+Item.get("size")+")"+" "+str(Item["iso_3166_1"])
+                         utils.logMsg("ItemTrailer = "+str(Item),0)
+                         Elements = xbmcgui.ListItem(label=NomTrailer, iconImage=str(Image),label2="selectionnevue")
+                         Elements.setProperty("Icon", Image)
+                         ListeNomTrailer.append(Elements)
                               
                     if len(ListeNomTrailer)>0:
                           dialogC = xbmcgui.Dialog()
@@ -306,8 +320,8 @@ class Main:
                                   xbmc.executebuiltin('PlayMedia("'+ListeTrailer[ret]["id"]+'",0)' )
                           else:
                               if  ActeursBio=="" :  
-                                   self.windowhome.setProperty('ActeurVideoReset','')
-                                   xbmc.executebuiltin("SetFocus(1998)")
+                                   #self.windowhome.setProperty('ActeurVideoReset','')
+                                   xbmc.executebuiltin("SetFocus(5051)")
                               else :
                                    if  ActeursBio=="non" : 
                                         xbmc.executebuiltin("SetFocus(2999)")                             
