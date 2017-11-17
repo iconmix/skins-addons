@@ -783,7 +783,5 @@
 			</control>
 		</control>
 	<!--<include>Global_ContextFilter</include>-->
-		
-		<include condition="Skin.HasSetting(DebugMode)">Debug</include>
 	</controls>
 </window>

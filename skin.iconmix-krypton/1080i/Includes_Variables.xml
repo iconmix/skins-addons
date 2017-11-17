@@ -353,8 +353,8 @@
 		<value condition="Window.IsVisible(10025)">special://skin/extras/backgrounds/movies.jpg</value>
 	</variable>
 	<variable name="GlobalFanartDiffuse">
-		<value condition="Skin.HasSetting(GlobalFanartLight)">FanartDiffuseLight</value>
-		<value>FanartDiffuse</value>
+		<!-- <value condition="!Skin.HasSetting(GlobalFanartLight)">FanartDiffuse</value> -->
+		<value>FanartDiffuseLight</value>
 	</variable>
 	<variable name="MPAATexture">
 		<value condition="String.Contains(ListItem.Mpaa,10)">flags\Rating\Moins10.png</value>

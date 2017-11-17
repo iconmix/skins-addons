@@ -25,6 +25,5 @@
 			<height>30</height>
 			<texture>PointerClick.png</texture>
 		</control>
-		<include>Object_DebugGrid</include>
 	</controls>
 </window>

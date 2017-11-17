@@ -97,12 +97,13 @@
 				<visible>!Control.HasFocus(2999)</visible>
 			</control>
 			
-						<control type="group">
+					
+		</control>		
+		<control type="group">
 			  <posy>1200</posy>
 			   <include>SpecialPlotBox</include>
 			   <visible>!Skin.HasSetting(Hide_Plot)+Skin.HasSetting(ShowLargePlot)</visible>
 			</control>
-		</control>	
 
 			<!-- Title -->
 			<control type="fadelabel">

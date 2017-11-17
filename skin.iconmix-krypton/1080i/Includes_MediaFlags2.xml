@@ -35,7 +35,7 @@
     <control type="image">
       <posx>-10</posx>
       <width>332</width>
-      <height>81</height>
+      <height>70</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
       <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
@@ -44,7 +44,7 @@
     <control type="image">
       <posx>-10</posx>
       <width>252</width>
-      <height>81</height>
+      <height>70</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
       <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.3))</visible>
@@ -52,7 +52,7 @@
     <control type="image">
       <posx>-10</posx>
       <width>172</width>
-      <height>81</height>
+      <height>70</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
       <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
@@ -72,7 +72,7 @@
 
     <control type="group"> <!-- studio -->
       <width>156</width>
-      <height>80</height>
+      <height>70</height>
       <align>center</align>
     <!-- <visible>!String.IsEmpty(Control.GetLabel(2525))</visible> -->
     <control type="image">
@@ -97,7 +97,7 @@
     <height>120</height>
     <control type="image">
       <width>156</width>
-      <height>81</height>
+      <height>70</height>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
       <texture>flags/flag_frame.png</texture>
     </control>
@@ -116,7 +116,7 @@
   <!-- codec -->
   <control type="group">
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <visible>Container.Content(movies) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
     <visible>!String.IsEmpty(VideoPlayer.VideoCodec)</visible>
     <control type="image">
@@ -126,7 +126,7 @@
     </control>
     <control type="image">
       <width>156</width>
-      <height>81</height>
+      <height>70</height>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
       <texture>flags/flag_frame.png</texture>
     </control>
@@ -145,7 +145,7 @@
     </control>
     <control type="image">
       <width>156</width>
-      <height>81</height>
+      <height>70</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
     </control>
@@ -156,7 +156,7 @@
   <control type="group">
     <visible>!String.IsEmpty(VideoPlayer.VideoAspect)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/VideoAspect/default.png">$INFO[VideoPlayer.VideoAspect,flags/VideoAspect/,.png]</texture>
@@ -164,7 +164,7 @@
     </control>
     <control type="image">
       <width>156</width>
-      <height>81</height>
+      <height>70</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
     </control>
@@ -175,7 +175,7 @@
   <control type="group">
     <visible>!String.IsEmpty(VideoPlayer.VideoCodec)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodecPlayer]</texture>
@@ -183,7 +183,7 @@
     </control>
     <control type="image">
       <width>156</width>
-      <height>81</height>
+      <height>70</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
     </control>
@@ -194,7 +194,7 @@
   <control type="group">
     <visible>String.Contains(VideoPlayer.StereoscopicMode,split_) | String.Contains(VideoPlayer.StereoscopicMode,anaglyph_)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
     <!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dSBS.png</texture>-->
@@ -217,7 +217,7 @@
 </control>
 <control type="image">
   <width>156</width>
-  <height>81</height>
+  <height>70</height>
   <texture>flags/flag_frame.png</texture>
   <colordiffuse>MediaFlagDiffuse</colordiffuse>
 </control>
@@ -230,12 +230,12 @@
 <!-- Hors lecture uniquement -->
 <control type="group">
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <visible>!String.IsEmpty(VideoPlayer.SubtitlesLanguage)</visible>
   <control type="image">
     <posx>2</posx>
     <width>156</width>
-    <height>81</height>
+    <height>70</height>
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
     <texture>flags/flag_frame.png</texture>
   </control>
@@ -257,12 +257,12 @@
 
 <control type="group"> <!-- une seule langue -->
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <visible>!String.IsEmpty(VideoPlayer.AudioLanguage)</visible>
   <control type="image">
     <posx>2</posx>
     <width>156</width>
-    <height>81</height>
+    <height>70</height>
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
     <texture>flags/flag_frame.png</texture>
   </control>
@@ -327,7 +327,7 @@
 </include>
 <include name="Horizlist">
   <width>700</width>
-  <height>80</height>
+  <height>70</height>
   <align>left</align>
   <itemgap>5</itemgap>
   <orientation>horizontal</orientation>
@@ -360,7 +360,7 @@
 </control>
 </control>
 <control type="group">
-  <posy>1015</posy>
+  <posy>1007</posy>
   <control type="grouplist"> <!-- 2eme ligne -->
 
     <height>150</height>
@@ -386,15 +386,14 @@
   <control type="group"> <!-- chrono -->
     <visible>!Skin.HasSetting(hideduree)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <control type="image">
-
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
       <texture>flags/flag_frame.png</texture>
     </control>
     <control type="image">
-      <top>7</top>
-      <left>15</left>
+      <top>2</top>
+      <left>11</left>
       <width>110</width>
       <height>70</height>
       <texture>$VAR[chronotoolstexture]</texture>
@@ -403,7 +402,7 @@
 
     </control>
     <control type="group">
-      <top>8</top>
+      <top>4</top>
       <left>23</left>
       <include>chronotoolsV</include>
     </control>
@@ -415,11 +414,11 @@
     <visible>!String.IsEmpty(ListItem.Genre)+Skin.HasSetting(CacheFond)+!Window.IsActive(2003)</visible>
     <visible>!Skin.HasSetting(hidegenre)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <left>-5</left>
 
   <control type="fadelabel">
-          <top>8</top>
+          <top>4</top>
       <left>9</left>
       <height>70</height>
       <width>136</width>
@@ -434,7 +433,7 @@
           <textcolor>white</textcolor>
         </control>
     <!-- <control type="textbox">
-      <top>8</top>
+      <top>4</top>
       <left>5</left>
       <height>70</height>
       <width>136</width>
@@ -454,7 +453,7 @@
 <control type="group"> <!-- studio -->
   <visible>!Skin.HasSetting(hidestudio)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <align>center</align>
 <!-- <visible>!String.IsEmpty(Control.GetLabel(2525))</visible> -->
 <control type="image">
@@ -474,7 +473,7 @@
   <visible>!Skin.HasSetting(hideannee)</visible>
   <visible>!String.IsEmpty(ListItem.Year)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
 
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
@@ -498,7 +497,7 @@
   <visible>!String.IsEmpty(ListItem.Rating)</visible>
   <visible>!Skin.HasSetting(hidenotation)</visible>
   <width>107</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <top>1</top>
     <include>MediaFlagsVarsSquare</include>
@@ -528,7 +527,7 @@
 <control type="image">
   <posx>2</posx>
   <width>98</width>
-  <height>80</height>
+  <height>70</height>
   <texture>flags/flag_frame.png</texture>
   <aspectratio>stretch</aspectratio>
 </control>
@@ -536,7 +535,7 @@
 
 <control type="group"> <!-- MPAA -->
   <width>80</width>
-  <height>80</height>
+  <height>70</height>
   <visible>Container.Content(movies) | Container.Content(episodes)| Container.Content(tvshows) | Container.Content(MusicVideos)</visible>
   <visible>!String.IsEmpty(ListItem.Mpaa)</visible>
   <visible>!Skin.HasSetting(hidempaa)</visible>
@@ -559,7 +558,7 @@
 <control type="group"> <!-- Source-->
   <visible>!Skin.HasSetting(hidesource)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <visible>Container.Content(movies) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
   <visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
   <control type="image">
@@ -580,7 +579,7 @@
   <visible>!Skin.HasSetting(hide3d)</visible>
   <visible>String.Contains(ListItem.StereoscopicMode,split_) | String.Contains(ListItem.StereoscopicMode,anaglyph_)|String.Contains(listitem.filename,.3D.)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
   <!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dSBS.png</texture>-->
@@ -603,7 +602,7 @@
 </control>
 <control type="image">
   <width>156</width>
-  <height>76</height>
+  <height>70</height>
   <texture>flags/flag_frame.png</texture>
   <colordiffuse>MediaFlagDiffuse</colordiffuse>
 </control>
@@ -615,9 +614,9 @@
     <visible>!IsEmpty(Window(Home).Property(ItemCountry1))</visible>
     <visible>!Skin.HasSetting(hideitemcountry)+!Window.IsActive(12003)</visible>
     <width>136</width>
-    <height>80</height>
+    <height>70</height>
     <control type="image">
-      <top>9</top>
+      <top>4</top>
       <left>23</left>
       <width>90</width>
       <height>60</height>
@@ -639,7 +638,7 @@
     <visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
     <visible>!Skin.HasSetting(hidecodecvideo)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture>
@@ -655,7 +654,7 @@
     <visible>!String.IsEmpty(ListItem.VideoResolution)</visible>
     <visible>!Skin.HasSetting(hideresolution)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/default.png">$INFO[ListItem.VideoResolution,flags/VideoResolution/,.png]</texture>
@@ -674,7 +673,7 @@
     <visible>!String.IsEmpty(ListItem.VideoAspect)</visible>
     <visible>!Skin.HasSetting(hideaspect)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/VideoAspect/default.png">$INFO[ListItem.VideoAspect,flags/VideoAspect/,.png]</texture>
@@ -690,7 +689,7 @@
   <control type="group"> <!-- sous-titres -->
     <visible>!Skin.HasSetting(hidesoustitres)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
     <control type="image">
       <posx>2</posx>
@@ -795,7 +794,7 @@
   <control type="group"> <!-- une seule langue -->
     <visible>!Skin.HasSetting(hidelangues)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1)) + String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
     <control type="image">
       <posx>2</posx>
@@ -861,14 +860,14 @@
     <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1))+!String.IsEmpty(ListItem.Property(AudioLanguage.2))+!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
     <visible>!Skin.HasSetting(hidelangues)</visible>
 
-    <height>80</height>
+    <height>70</height>
     <width>332</width>
 
 
     <control type="image">
       <posx>-10</posx>
       
-      <height>76</height>
+      <height>70</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
       <visible></visible>
@@ -883,14 +882,14 @@
 
   
     <width>252</width>
-    <height>80</height>
+    <height>70</height>
 
 
    
     <control type="image">
       <posx>-5</posx>
       
-      <height>76</height>
+      <height>70</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
       <visible></visible>
@@ -905,14 +904,14 @@
     <visible>!Skin.HasSetting(hidelangues)</visible>
 
     <width>172</width>
-    <height>80</height>
+    <height>70</height>
 
 
     
     <control type="image">
       <posx>0</posx>
       <width>172</width>
-      <height>76</height>
+      <height>70</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
       <visible></visible>
@@ -933,9 +932,9 @@
     <visible>!IsEmpty(Window(Home).Property(ItemCountry1))</visible>
     <visible>!Skin.HasSetting(hideitemcountry2)+!Window.IsActive(12003)</visible>
     <width>136</width>
-    <height>80</height>
+    <height>70</height>
     <control type="image">
-      <top>9</top>
+      <top>4</top>
       <left>23</left>
       <width>90</width>
       <height>60</height>
@@ -957,7 +956,7 @@
     <visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
     <visible>!Skin.HasSetting(hidecodecvideo2)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture>
@@ -973,7 +972,7 @@
     <visible>!String.IsEmpty(ListItem.VideoResolution)</visible>
     <visible>!Skin.HasSetting(hideresolution2)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/default.png">$INFO[ListItem.VideoResolution,flags/VideoResolution/,.png]</texture>
@@ -992,7 +991,7 @@
     <visible>!String.IsEmpty(ListItem.VideoAspect2)</visible>
     <visible>!Skin.HasSetting(hideaspect)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/VideoAspect/default.png">$INFO[ListItem.VideoAspect,flags/VideoAspect/,.png]</texture>
@@ -1008,7 +1007,7 @@
   <control type="group"> <!-- sous-titres -->
     <visible>!Skin.HasSetting(hidesoustitres2)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
     <control type="image">
       <posx>2</posx>
@@ -1113,7 +1112,7 @@
   <control type="group"> <!-- une seule langue -->
     <visible>!Skin.HasSetting(hidelangues2)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1)) + String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
     <control type="image">
       <posx>2</posx>
@@ -1180,14 +1179,14 @@
     <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1))+!String.IsEmpty(ListItem.Property(AudioLanguage.2))+!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
     <visible>!Skin.HasSetting(hidelangues2)</visible>
 
-    <height>80</height>
+    <height>70</height>
     <width>332</width>
 
 
     <control type="image">
       <posx>-10</posx>
       
-      <height>76</height>
+      <height>70</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
       <visible></visible>
@@ -1202,14 +1201,14 @@
 
   
     <width>252</width>
-    <height>80</height>
+    <height>70</height>
 
 
    
     <control type="image">
       <posx>-5</posx>
       
-      <height>76</height>
+      <height>70</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
       <visible></visible>
@@ -1224,14 +1223,14 @@
     <visible>!Skin.HasSetting(hidelangues2)</visible>
 
     <width>172</width>
-    <height>80</height>
+    <height>70</height>
 
 
     
     <control type="image">
       <posx>0</posx>
       <width>172</width>
-      <height>76</height>
+      <height>70</height>
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
       <visible></visible>
@@ -1244,15 +1243,15 @@
 <control type="group"> <!-- chrono -->
     <visible>!Skin.HasSetting(hideduree2)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <control type="image">
 
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
       <texture>flags/flag_frame.png</texture>
     </control>
     <control type="image">
-      <top>7</top>
-      <left>15</left>
+      <top>2</top>
+      <left>11</left>
       <width>110</width>
       <height>70</height>
       <texture>$VAR[chronotoolstexture]</texture>
@@ -1261,7 +1260,7 @@
 
     </control>
     <control type="group">
-      <top>8</top>
+      <top>4</top>
       <left>23</left>
       <include>chronotoolsV</include>
     </control>
@@ -1272,12 +1271,12 @@
    <control type="group"> <!--- GENRES -->
     <visible>!String.IsEmpty(ListItem.Genre)+Skin.HasSetting(CacheFond)+!Window.IsActive(2003)</visible>
     <visible>!Skin.HasSetting(hidegenre2)</visible>
-    <width>200</width>
-    <height>80</height>
+       <width>156</width>
+    <height>70</height>
     <left>-5</left>
 
-   <control type="fadelabel">
-          <top>8</top>
+  <control type="fadelabel">
+          <top>4</top>
       <left>9</left>
       <height>70</height>
       <width>136</width>
@@ -1302,7 +1301,7 @@
 <control type="group"> <!-- studio -->
   <visible>!Skin.HasSetting(hidestudio2)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <align>center</align>
 <!-- <visible>!String.IsEmpty(Control.GetLabel(2525))</visible> -->
 <control type="image">
@@ -1322,7 +1321,7 @@
   <visible>!Skin.HasSetting(hideannee2)</visible>
   <visible>!String.IsEmpty(ListItem.Year)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
 
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
@@ -1346,7 +1345,7 @@
   <visible>!String.IsEmpty(ListItem.Rating)</visible>
   <visible>!Skin.HasSetting(hidenotation2)</visible>
   <width>107</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <top>1</top>
     <include>MediaFlagsVarsSquare</include>
@@ -1376,7 +1375,7 @@
 <control type="image">
   <posx>2</posx>
   <width>98</width>
-  <height>80</height>
+  <height>70</height>
   <texture>flags/flag_frame.png</texture>
   <aspectratio>stretch</aspectratio>
 </control>
@@ -1384,7 +1383,7 @@
 
 <control type="group"> <!-- MPAA -->
   <width>80</width>
-  <height>80</height>
+  <height>70</height>
   <visible>Container.Content(movies) | Container.Content(episodes)| Container.Content(tvshows) | Container.Content(MusicVideos)</visible>
   <visible>!String.IsEmpty(ListItem.Mpaa)</visible>
   <visible>!Skin.HasSetting(hidempaa2)</visible>
@@ -1407,7 +1406,7 @@
 <control type="group"> <!-- Source-->
   <visible>!Skin.HasSetting(hidesource2)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <visible>Container.Content(movies) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
   <visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
   <control type="image">
@@ -1428,7 +1427,7 @@
   <visible>!Skin.HasSetting(hide3d2)</visible>
   <visible>String.Contains(ListItem.StereoscopicMode,split_) | String.Contains(ListItem.StereoscopicMode,anaglyph_)|String.Contains(listitem.filename,.3D.)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
   <!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dSBS.png</texture>-->
@@ -1451,7 +1450,7 @@
 </control>
 <control type="image">
   <width>156</width>
-  <height>76</height>
+  <height>70</height>
   <texture>flags/flag_frame.png</texture>
   <colordiffuse>MediaFlagDiffuse</colordiffuse>
 </control>
@@ -1649,7 +1648,7 @@
   <control type="group"> <!-- chrono -->
     <visible>!Skin.HasSetting(hideduree)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <control type="image">
       <texture>settings/chronoset.png</texture>
     </control>
@@ -1658,14 +1657,12 @@
 
   <control type="group"> <!--- GENRES -->
     <visible>!Skin.HasSetting(hidegenre)</visible>
-    <width>200</width>
-    <height>80</height>
-    <left>-20</left>
-    <align>center</align>
+       <width>156</width>
+    <height>70</height>
+    <left>-5</left>
 
-   
   <control type="fadelabel">
-          <top>8</top>
+          <top>4</top>
       <left>9</left>
       <height>70</height>
       <width>136</width>
@@ -1688,7 +1685,7 @@
 <control type="group"> <!-- studio -->
   <visible>!Skin.HasSetting(hidestudio)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <align>center</align>
 <!-- <visible>!String.IsEmpty(Control.GetLabel(2525))</visible> -->
 <control type="image">
@@ -1707,7 +1704,7 @@
 <control type="group"> <!-- année -->
   <visible>!Skin.HasSetting(hideannee)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
 
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
@@ -1730,7 +1727,7 @@
 <control type="group"> <!-- notation -->
   <visible>!Skin.HasSetting(hidenotation)</visible>
   <width>107</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <top>1</top>
     <include>MediaFlagsVarsSquare</include>
@@ -1752,7 +1749,7 @@
 <control type="image">
   <posx>2</posx>
   <width>98</width>
-  <height>80</height>
+  <height>70</height>
   <texture>flags/flag_frame.png</texture>
   <aspectratio>stretch</aspectratio>
 </control>
@@ -1760,7 +1757,7 @@
 
 <control type="group"> <!-- MPAA -->
   <width>80</width>
-  <height>80</height>
+  <height>70</height>
   <visible>!Skin.HasSetting(hidempaa)</visible>
   <control type="image">
     <posx>10</posx>
@@ -1781,7 +1778,7 @@
 <control type="group"> <!-- Source-->
   <visible>!Skin.HasSetting(hidesource)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture>flags\Source\bluray.png</texture>
@@ -1799,7 +1796,7 @@
 <control type="group">
   <visible>!Skin.HasSetting(hide3d)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
   <!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dSBS.png</texture>-->
@@ -1808,7 +1805,7 @@
 </control>
 <control type="image">
   <width>156</width>
-  <height>76</height>
+  <height>70</height>
   <texture>flags/flag_frame.png</texture>
   <colordiffuse>MediaFlagDiffuse</colordiffuse>
 </control>
@@ -1818,9 +1815,9 @@
 
   <visible>!Skin.HasSetting(hideitemcountry)</visible>
   <width>136</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
-    <top>9</top>
+    <top>4</top>
     <left>23</left>
     <width>90</width>
     <height>60</height>
@@ -1843,7 +1840,7 @@
 
   <visible>!Skin.HasSetting(hidecodecvideo)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture>flags\VideoCodec\h.264.png</texture>
@@ -1859,7 +1856,7 @@
 <control type="group"> <!-- video resolution -->
   <visible>!Skin.HasSetting(hideresolution)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture>flags\VideoResolution\1080.png</texture>
@@ -1877,7 +1874,7 @@
 <control type="group"><!-- Video Aspect -->
   <visible>!Skin.HasSetting(hideaspect)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture>flags\VideoAspect\2.35.png</texture>
@@ -1893,7 +1890,7 @@
 <control type="group"> <!-- sous-titres -->
   <visible>!Skin.HasSetting(hidesoustitres)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
 
   <control type="image">
     <include>MediaFlagsVarsWide</include>
@@ -1911,7 +1908,7 @@
 <control type="group"> <!-- une seule langue -->
   <visible>!Skin.HasSetting(hidelangues)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <posx>2</posx>
     <texture>settings\audiosettings.png</texture>
@@ -1932,7 +1929,7 @@
   <control type="group"> <!-- chrono -->
     <visible>!Skin.HasSetting(hideduree2)</visible>
     <width>156</width>
-    <height>80</height>
+    <height>70</height>
     <control type="image">
       <texture>settings/chronoset.png</texture>
     </control>
@@ -1941,13 +1938,12 @@
 
    <control type="group"> <!--- GENRES -->
     <visible>!Skin.HasSetting(hidegenre2)</visible>
-    <width>200</width>
-    <height>80</height>
-    <left>-20</left>
-    <align>center</align>
+       <width>156</width>
+    <height>70</height>
+    <left>-5</left>
 
-    <control type="fadelabel">
-          <top>8</top>
+  <control type="fadelabel">
+          <top>4</top>
       <left>9</left>
       <height>70</height>
       <width>136</width>
@@ -1970,7 +1966,7 @@
 <control type="group"> <!-- studio -->
   <visible>!Skin.HasSetting(hidestudio2)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <align>center</align>
 <!-- <visible>!String.IsEmpty(Control.GetLabel(2525))</visible> -->
 <control type="image">
@@ -1989,7 +1985,7 @@
 <control type="group"> <!-- année -->
   <visible>!Skin.HasSetting(hideannee2)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
 
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
@@ -2012,7 +2008,7 @@
 <control type="group"> <!-- notation -->
   <visible>!Skin.HasSetting(hidenotation2)</visible>
   <width>107</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <top>1</top>
     <include>MediaFlagsVarsSquare</include>
@@ -2034,7 +2030,7 @@
 <control type="image">
   <posx>2</posx>
   <width>98</width>
-  <height>80</height>
+  <height>70</height>
   <texture>flags/flag_frame.png</texture>
   <aspectratio>stretch</aspectratio>
 </control>
@@ -2042,7 +2038,7 @@
 
 <control type="group"> <!-- MPAA -->
   <width>80</width>
-  <height>80</height>
+  <height>70</height>
   <visible>!Skin.HasSetting(hidempaa2)</visible>
   <control type="image">
     <posx>10</posx>
@@ -2063,7 +2059,7 @@
 <control type="group"> <!-- Source-->
   <visible>!Skin.HasSetting(hidesource2)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture>flags\Source\bluray.png</texture>
@@ -2081,7 +2077,7 @@
 <control type="group">
   <visible>!Skin.HasSetting(hide3d2)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
   <!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dSBS.png</texture>-->
@@ -2090,7 +2086,7 @@
 </control>
 <control type="image">
   <width>156</width>
-  <height>76</height>
+  <height>70</height>
   <texture>flags/flag_frame.png</texture>
   <colordiffuse>MediaFlagDiffuse</colordiffuse>
 </control>
@@ -2102,9 +2098,9 @@
 
   <visible>!Skin.HasSetting(hideitemcountry2)</visible>
   <width>136</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
-    <top>9</top>
+    <top>4</top>
     <left>23</left>
     <width>90</width>
     <height>60</height>
@@ -2127,7 +2123,7 @@
 
   <visible>!Skin.HasSetting(hidecodecvideo2)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture>flags\VideoCodec\h.264.png</texture>
@@ -2143,7 +2139,7 @@
 <control type="group"> <!-- video resolution -->
   <visible>!Skin.HasSetting(hideresolution2)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture>flags\VideoResolution\1080.png</texture>
@@ -2161,7 +2157,7 @@
 <control type="group"><!-- Video Aspect -->
   <visible>!Skin.HasSetting(hideaspect2)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture>flags\VideoAspect\2.35.png</texture>
@@ -2177,7 +2173,7 @@
 <control type="group"> <!-- sous-titres -->
   <visible>!Skin.HasSetting(hidesoustitres2)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
 
   <control type="image">
     <include>MediaFlagsVarsWide</include>
@@ -2195,7 +2191,7 @@
 <control type="group"> <!-- une seule langue -->
   <visible>!Skin.HasSetting(hidelangues2)</visible>
   <width>156</width>
-  <height>80</height>
+  <height>70</height>
   <control type="image">
     <posx>2</posx>
     <texture>settings\audiosettings.png</texture>

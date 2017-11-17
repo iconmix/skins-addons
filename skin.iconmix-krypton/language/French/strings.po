@@ -29,8 +29,8 @@ msgid "Home Artwork"
 msgstr "Présentation Accueil"
 
 msgctxt "#31004"
-msgid "Debug"
-msgstr "Débogage"
+msgid "Skin Reset"
+msgstr "Réinitialiser"
 
 msgctxt "#31005"
 msgid "Enable auto scrolling for text that does not fit on-screen"
