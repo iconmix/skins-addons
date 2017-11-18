@@ -172,7 +172,7 @@
 						<include>Animation_ButtonFocus</include>
 						<height>80</height>
 						<width>80</width>
-						<label>-</label>
+						<label></label>
 						<texturefocus>-</texturefocus>
 						<texturenofocus>-</texturenofocus>
 						<onclick>PlayerControl(Repeat)</onclick>

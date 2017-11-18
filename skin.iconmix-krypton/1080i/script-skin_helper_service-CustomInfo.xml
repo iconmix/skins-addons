@@ -32,7 +32,7 @@
 				<onfocus>SetFocus(300)</onfocus>
 			</control>
 			<control type="button" id="5">
-				<label>-</label>
+				<label></label>
 				<font>-</font>
 				<onfocus>SetFocus(998)</onfocus>
 			</control>
@@ -238,7 +238,7 @@
 						<font>METF_CastText</font>
 						<textcolor>TextNF</textcolor>
 						<label>$INFO[Container(999).ListItem.Cast]</label>
-						<visible>!Control.IsVisible(998)+IntegerGreaterThan(Container(998).NumItems,0)</visible>
+						<visible>!Control.IsVisible(998)+Integer.IsGreater(Container(998).NumItems,0)</visible>
 					</control>
 					<control type="label">
 						<posx>0</posx>
@@ -326,7 +326,7 @@
 							<!-- acteur -->
 							<label>$LOCALIZE[344]</label>
 							<onclick>SetProperty(AdditionalInfo, cast)</onclick>
-							<visible>IntegerGreaterThan(Container(998).NumItems,0)</visible>
+							<visible>Integer.IsGreater(Container(998).NumItems,0)</visible>
 							<onclick>SetFocus(5)</onclick>
 						</item>
 					</content>

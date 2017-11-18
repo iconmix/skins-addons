@@ -108,7 +108,7 @@
 			<align>center</align>
 			<aligny>center</aligny>
 			<include>Animation_HiddenByInfo</include>
-			<label>-</label>
+			<label></label>
 		</control>
 		<control type="label" id="201">
 			<description>View Options</description>
@@ -134,7 +134,7 @@
 			<disabledcolor>TextDisabled</disabledcolor>
 			<texturefocus>ButtonFO2Wide.png</texturefocus>
 			<texturenofocus>-</texturenofocus>
-			<label>-</label>
+			<label></label>
 		</control>
 		<control type="radiobutton" id="5">
 			<description>Group recording items by folder structure</description>
@@ -164,7 +164,7 @@
 			<disabledcolor>TextDisabled</disabledcolor>
 			<texturefocus>ButtonFO2Wide.png</texturefocus>
 			<texturenofocus>-</texturenofocus>
-			<label>-</label>
+			<label></label>
 			<visible>Window.IsActive(TVGuide) | Window.IsActive(RadioGuide)</visible>
 		</control>
 		<control type="button" id="3">

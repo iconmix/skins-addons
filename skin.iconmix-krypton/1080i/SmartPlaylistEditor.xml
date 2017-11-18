@@ -19,7 +19,7 @@
 				<textcolor>SettingsTitle</textcolor>
 				<align>left</align>
 				<aligny>center</aligny>
-				<label>-</label>
+				<label></label>
 			</control>
 
 			<control type="button" id="21">
@@ -93,7 +93,7 @@
 				<height>38</height>
 				<align>right</align>
 				<include>SettingsLabel</include>
-				<label>-</label>
+				<label></label>
 				<onup>22</onup>
 				<onleft>20</onleft>
 				<onright>noop</onright>

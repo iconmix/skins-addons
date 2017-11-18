@@ -7,7 +7,7 @@
 			<posy>-20</posy>
 			<width>1</width>
 			<height>1</height>
-			<label>-</label>
+			<label></label>
 			<font>-</font>
 			<texturenofocus>-</texturenofocus>
 			<texturefocus>-</texturefocus>

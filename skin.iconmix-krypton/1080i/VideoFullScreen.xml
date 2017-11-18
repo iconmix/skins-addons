@@ -19,7 +19,7 @@
 				<description>row 1 label</description>
 				<posx>20</posx>
 				<posy>10</posy>
-				<label>-</label>
+				<label></label>
 				<align>left</align>
 				<width>1240</width>
 				<height>36</height>
@@ -30,7 +30,7 @@
 				<description>row 2 label</description>
 				<posx>20</posx>
 				<posy>45</posy>
-				<label>-</label>
+				<label></label>
 				<align>left</align>
 				<width>1240</width>
 				<height>36</height>
@@ -41,7 +41,7 @@
 				<description>row 3 label</description>
 				<posx>20</posx>
 				<posy>80</posy>
-				<label>-</label>
+				<label></label>
 				<align>left</align>
 				<width>1240</width>
 				<height>108</height>

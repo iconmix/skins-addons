@@ -137,7 +137,7 @@
 			<value></value>
 		</variable>
 		<variable name="contentPanelActeurs">
-			<value condition="[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)|String.IsEqual(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!String.StartWith(ListItem.Label,..)">plugin://script.iconmixtools/?action=getcast&casttype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]</value>
+			<value condition="[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)|String.IsEqual(ListItem.DBTYPE,movie)]+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Label,..)">plugin://script.iconmixtools/?action=getcast&casttype=$INFO[ListItem.DBTYPE]&id=$INFO[ListItem.DBID]</value>
 			<value></value>
 		</variable>
 		<variable name="ActeursContent">
@@ -461,9 +461,12 @@
 		<value>resource://resource.images.WeatherIcons.3d-coloured</value>
 	</variable>
 	<variable name="WeatherIconsExt">
+	  <!-- -->
 		<value condition="!String.IsEmpty(Skin.String(WeatherIcons.name)) + !Skin.HasSetting(WeatherIcons.multi)">$INFO[Skin.String(WeatherIcons.ext)]</value>
 		<value condition="!String.IsEmpty(Skin.String(WeatherIcons.name)) + Skin.HasSetting(WeatherIcons.multi)">/</value>
-		<value>.png</value>
+		
+		<value>.png</value>-->
+	
 	</variable>
 	<variable name="Weather_Icons_Current">
 		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Current.FanartCode)]$VAR[WeatherIconsExt]</value>

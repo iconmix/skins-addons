@@ -143,7 +143,7 @@
 			<include>Animation_FadedByMenu</include>
 			<include>Animation_SlideDownFadeOut</include>
 			<control type="label" id="411">
-				<label>-</label>
+				<label></label>
 				<include>Global_HeadingSectionVars</include>
 			</control>
 			<control type="label">

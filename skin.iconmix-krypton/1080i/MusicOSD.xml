@@ -84,7 +84,7 @@
 					<description>Repeat</description>
 					<height>68</height>
 					<width>68</width>
-					<label>-</label>
+					<label></label>
 					<texturefocus>-</texturefocus>
 					<texturenofocus>-</texturenofocus>
 					<onclick>PlayerControl(repeat)</onclick>
@@ -102,7 +102,7 @@
 					<description>Random</description>
 					<height>68</height>
 					<width>68</width>
-					<label>-</label>
+					<label></label>
 					<texturefocus>osd/osd_button_random_fo.png</texturefocus>
 					<texturenofocus>osd/osd_button_random_nf.png</texturenofocus>
 					<usealttexture>Playlist.IsRandom</usealttexture>

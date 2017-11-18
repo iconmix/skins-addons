@@ -27,7 +27,7 @@
 				<aligny>center</aligny>
 				<font>METF_SettingsHeading</font>
 				<textcolor>DialogTextFO</textcolor>
-				<label>-</label>
+				<label></label>
 			</control>
 			<control type="grouplist" id="5">
 				<description>Control Area</description>
@@ -50,7 +50,7 @@
 				<align>left</align>
 				<aligny>center</aligny>
 				<font>METF_DialogLarge</font>
-				<label>-</label>
+				<label></label>
 				<textoffsetx>20</textoffsetx>
 				<textcolor>TextNF</textcolor>
 				<focusedcolor>DialogTextFO</focusedcolor>
@@ -66,7 +66,7 @@
 				<align>left</align>
 				<aligny>center</aligny>
 				<font>METF_DialogLarge</font>
-				<label>-</label>
+				<label></label>
 				<textcolor>TextNF</textcolor>
 				<focusedcolor>DialogTextFO</focusedcolor>
 				<disabledcolor>TextDisabled</disabledcolor>
@@ -89,7 +89,7 @@
 				<height>40</height>
 				<align>left</align>
 				<aligny>center</aligny>
-				<label>-</label>
+				<label></label>
 				<font>METF_DialogLarge</font>
 				<textoffsetx>20</textoffsetx>
 				<textcolor>TextNF</textcolor>
@@ -120,7 +120,7 @@
 				<width>620</width>
 				<height>120</height>
 				<align>left</align>
-				<label>-</label>
+				<label></label>
 				<include>SettingsLabel</include>
 			</control>
 			<control type="sliderex" id="13">
@@ -156,7 +156,7 @@
 				<aligny>center</aligny>
 				<font>METF_DialogLarge</font>
 				<textcolor>DialogTextFO</textcolor>
-				<label>-</label>
+				<label></label>
 			</control>
 			<control type="group" id="9000">
 				<left>00</left>
@@ -189,7 +189,7 @@
 					<texturenofocus>-</texturenofocus>
 					<disabledcolor>TextDisabled</disabledcolor>
 					<pulseonselect>false</pulseonselect>
-					<label>-</label>
+					<label></label>
 					<onleft>noop</onleft>
 					<onright>5</onright>
 					<onup>30</onup>
@@ -220,7 +220,7 @@
 					<texturenofocus>-</texturenofocus>
 					<disabledcolor>TextDisabled</disabledcolor>
 					<pulseonselect>false</pulseonselect>
-					<label>-</label>
+					<label></label>
 					<onleft>noop</onleft>
 					<onright>5</onright>
 					<onup>28</onup>
@@ -251,7 +251,7 @@
 					<texturenofocus>-</texturenofocus>
 					<disabledcolor>TextDisabled</disabledcolor>
 					<pulseonselect>false</pulseonselect>
-					<label>-</label>
+					<label></label>
 					<onleft>noop</onleft>
 					<onright>5</onright>
 					<onup>29</onup>

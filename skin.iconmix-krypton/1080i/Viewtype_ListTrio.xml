@@ -224,7 +224,7 @@
 					<visible>!Window.IsActive(10025) | [Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes)]]</visible>
 					<include>VisibleIfNotMovieSet</include>
 					-->
-					<visible>!Window.IsActive(10025) + !SubString(Container.FolderPath,plugin)</visible>
+					<visible>!Window.IsActive(10025) + !String.Contains(Container.FolderPath,plugin)</visible>
 					<control type="label">
 						<posx>775</posx>
 						<posy>-2</posy>
@@ -369,7 +369,7 @@
 					<visible>!Window.IsActive(10025) | [Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes)]]</visible>
 					<include>VisibleIfNotMovieSet</include>
 					-->
-					<visible>!Window.IsActive(10025) + !SubString(Container.FolderPath,plugin)</visible>
+					<visible>!Window.IsActive(10025) + !String.Contains(Container.FolderPath,plugin)</visible>
 					<control type="label">
 						<posx>775</posx>
 						<posy>-2</posy>
@@ -448,7 +448,7 @@
 					<fadetime>100</fadetime>
 					<texture background="true" diffuse="episodematte.png">$INFO[ListItem.Icon]</texture>
 					<aspectratio scalediffuse="false">keep</aspectratio>
-					<visible>IsEmpty(ListItem.Title) | SubString(ListItem.Icon,default)</visible>
+					<visible>IsEmpty(ListItem.Title) | String.Contains(ListItem.Icon,default)</visible>
 				</control>
 				<control type="image">
 					<posx>22</posx>
@@ -458,7 +458,7 @@
 					<fadetime>100</fadetime>
 					<texture background="true">$INFO[ListItem.Icon]</texture>
 					<aspectratio scalediffuse="false">scale</aspectratio>
-					<visible>!IsEmpty(ListItem.Title) + !SubString(ListItem.Icon,default)</visible>
+					<visible>!IsEmpty(ListItem.Title) + !String.Contains(ListItem.Icon,default)</visible>
 				</control>
 
 				<control type="image">
@@ -468,7 +468,7 @@
 					<height>443</height>
 					<texture>frames/ClassicFrame_FanartSmall.png</texture>
 					<fadetime>100</fadetime>
-					<visible>!IsEmpty(ListItem.Title) + !SubString(ListItem.Icon,default)</visible>
+					<visible>!IsEmpty(ListItem.Title) + !String.Contains(ListItem.Icon,default)</visible>
 				</control>
 			</control>
 			<!-- Images for All Items NOT in Video Library -->
@@ -493,7 +493,7 @@
 				<fadetime>100</fadetime>
 				<aspectratio align="center" aligny="center">keep</aspectratio>
 				<texture fallback="DefaultFolder.png">resource://resource.images.studios.white/$INFO[ListItem.Label].png</texture>
-				<visible>Window.IsActive(10025) + !SubString(Container.FolderPath,videodb://musicvideos/) + Container.Content(studios)</visible>
+				<visible>Window.IsActive(10025) + !String.Contains(Container.FolderPath,videodb://musicvideos/) + Container.Content(studios)</visible>
 			</control>
 			<control type="image">
 				<posx>37</posx>
@@ -503,7 +503,7 @@
 				<fadetime>100</fadetime>
 				<aspectratio align="right" aligny="center">keep</aspectratio>
 				<texture fallback="DefaultMovieGenre.jpg">moviegenres/$INFO[ListItem.Label].jpg</texture>
-				<visible>Window.IsActive(10025) + !SubString(Container.FolderPath,videodb://musicvideos/) + Container.Content(genres)</visible>
+				<visible>Window.IsActive(10025) + !String.Contains(Container.FolderPath,videodb://musicvideos/) + Container.Content(genres)</visible>
 			</control>
 			<control type="image">
 				<posx>37</posx>
@@ -513,7 +513,7 @@
 				<fadetime>100</fadetime>
 				<aspectratio align="right" aligny="center">keep</aspectratio>
 				<texture fallback="DefaultMusicGenre.jpg">musicgenres/$INFO[ListItem.Label].jpg</texture>
-				<visible>[Window.IsActive(502) | [Window.IsActive(10025) + SubString(Container.FolderPath,videodb://musicvideos/)]] + Container.Content(genres)</visible>
+				<visible>[Window.IsActive(502) | [Window.IsActive(10025) + String.Contains(Container.FolderPath,videodb://musicvideos/)]] + Container.Content(genres)</visible>
 			</control>
 		</control>
 <!-- INFO 
@@ -554,7 +554,7 @@
 			<posy>5</posy>
 			<width>32</width>
 			<height>24</height>
-			<label>-</label>
+			<label></label>
 			<onclick>ActivateWindow(10025,"videodb://movies/sets/$INFO[ListItem.SetId]/?setid=$INFO[ListItem.SetId]",return)</onclick>
 			<visible>Window.IsActive(10025) + !Container.Content(sets) + !IsEmpty(ListItem.Set)</visible>
 		</control>-->

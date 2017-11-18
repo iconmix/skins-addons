@@ -157,6 +157,11 @@ msgctxt "#31065"
 msgid "Vertical Icons View"
 msgstr "Vue Icones Verticale"
 
+msgctxt "#31107"
+msgid "Reset menu settings"
+msgstr "Réinitialiser le menu"
+
+
 msgctxt "#31108"
 msgid "Enable Debug Mode"
 msgstr "Activer le mode débogage"

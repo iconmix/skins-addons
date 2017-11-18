@@ -165,7 +165,7 @@ class Main:
             saga=""
             
             #------ lancer mode serveur -----------
-            if self.backend and xbmc.getCondVisibility("IsEmpty(Window(home).Property(IconMixToolsbackend))"):
+            if self.backend and xbmc.getCondVisibility("String.IsEmpty(Window(home).Property(IconMixToolsbackend))"):
                 xbmc.executebuiltin("SetProperty(IconMixToolsbackend,true,home)")
                 self.run_backend()
             """
@@ -298,12 +298,12 @@ class Main:
                           Image="http://img.youtube.com/vi/%s/hqdefault.jpg" %(Item.get("key"))
                          else:
                           Image=urllib.unquote(Item.get("landscape").replace("image://","")[:-1])
-                         utils.logMsg("Image = "+str(Image),0) 
+                         #utils.logMsg("Image = "+str(Image),0) 
                          try: 
                               NomTrailer=utils.try_decode(Item["name"])+" ("+str(Item["size"])+")"+" "+str(Item["iso_3166_1"])
                          except:
                               NomTrailer=str(Item["type"])+" ("+Item.get("size")+")"+" "+str(Item["iso_3166_1"])
-                         utils.logMsg("ItemTrailer = "+str(Item),0)
+                         #utils.logMsg("ItemTrailer = "+str(Item),0)
                          Elements = xbmcgui.ListItem(label=NomTrailer, iconImage=str(Image),label2="selectionnevue")
                          Elements.setProperty("Icon", Image)
                          ListeNomTrailer.append(Elements)
@@ -573,7 +573,9 @@ class Main:
                 #-------------------------- ACTEURS ---------------------------------
                 if xbmc.getCondVisibility("Control.HasFocus(8889)") or xbmc.getCondVisibility("Control.HasFocus(1998)") or xbmc.getCondVisibility("Control.HasFocus(5051)"):
                     if xbmc.getCondVisibility("Control.HasFocus(1998)") or xbmc.getCondVisibility("Control.HasFocus(5051)"):
-                        self.selecteditem1998 = xbmc.getInfoLabel("Container(1998).ListItem.Label")
+                        self.selecteditem1998 = xbmc.getInfoLabel("Container(1998).ListItem.Label")               
+                        
+                        
                         KodiLocal=self.windowhome.getProperty('ActeurVideoLocal')
                         if (self.previousitem1998 != self.selecteditem1998 and not str(self.selecteditem1998)=="") or ( self.previousitem1998local!=KodiLocal):
                           self.previousitem1998 = self.selecteditem1998
@@ -896,6 +898,10 @@ class Main:
                                 self.TvShow=""
                                 self.TvSeason=""        
                           else : 
+                             ListeActeurs=self.GetControl(self.windowvideonav,1998)
+                                    #ACTEURS  ------------------------------------------------                                 
+                             if ListeActeurs:                              
+                              ListeActeurs.reset()
                              self.windowhome.clearProperty('IconMixEpSa')
                              self.TvShow=""
                              self.TvSeason=""
@@ -967,6 +973,19 @@ class Main:
         
         if self.duration :
         #else :
+         if self.duration.find(':')!=-1: #KODI LEIA
+            #utils.logMsg("-->"+str(self.duration))
+            TT=self.duration.rsplit(':')
+            XX=0
+            if len(TT)==3:
+              XX=XX+int(TT[0])*60
+              XX=XX+int(TT[1])
+            if len(TT)==2:
+              XX=int(TT[0])
+            if len(TT)>1:
+             self.duration=str(XX)
+            #utils.logMsg("-->"+str(self.duration))
+        
          if self.duration.find(':')==-1:
             readable_duration = in_hours_and_min(self.duration)
             self.windowhome.setProperty('DurationTools', readable_duration)
@@ -986,5 +1005,6 @@ class Main:
            		   
 
 if (__name__ == "__main__"):
+    
     Main()
     #utils.logMsg('script finished.')

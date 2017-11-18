@@ -17,7 +17,7 @@
 				<top>0</top>
 				<width>20</width>
 				<height>1080</height>
-				<label>-</label>
+				<label></label>
 				<font>-</font>
 				<texturenofocus>-</texturenofocus>
 				<texturefocus>-</texturefocus>
@@ -38,7 +38,7 @@
 				<top>0</top>
 				<width>64</width>
 				<height>32</height>
-				<label>-</label>
+				<label></label>
 				<font>-</font>
 				<onclick>PreviousMenu</onclick>
 				<texturefocus>subtitles/DialogCloseButton-focus.png</texturefocus>

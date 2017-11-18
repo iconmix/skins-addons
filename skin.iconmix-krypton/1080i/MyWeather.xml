@@ -5,8 +5,8 @@
 		<control type="group">
 		<include>Global_Background</include>
 		<control type="button" id="50">
-			<texturefocus>-</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<imagepathfocus>-</imagepathfocus>
+			<imagepathnofocus>-</imagepathnofocus>
 			<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
 			<onright>7000</onright>
 			<!-- for switching between weather maps -->
@@ -26,18 +26,18 @@
 				<bottom>280</bottom>
 				<width>216</width>
 				<height>90</height>
-				<control type="image">
+				<control type="multiimage">
 						<width>190</width>
 						<centerleft>58</centerleft>
 						<centertop>30</centertop>
 						<aspectratio align="center" aligny="center">keep</aspectratio>
-						<texture>$INFO[Window(weather).Property(WeatherProviderLogo)]</texture>
+						<imagepath>$INFO[Window(weather).Property(WeatherProviderLogo)]</imagepath>
 						<colordiffuse>MediaFlagDiffuse</colordiffuse>
 				</control>
 				<!--
-				<control type="image">
+				<control type="multiimage">
 						<aspectratio align="center" aligny="center">stretch</aspectratio>
-						<texture>flags/flag_frame.png</texture>
+						<imagepath>flags/flag_frame.png</imagepath>
 						<colordiffuse>MediaFlagBoxDiffuse</colordiffuse>
 				</control>
 				-->
@@ -49,15 +49,16 @@
 				<posy>50</posy>
 				<width>190</width>
 				<height>Weather7DayHeight</height>
-				<control type="image">
-						<texture>WeatherDayBG.png</texture>
+				
+				<control type="multiimage">
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>BackgroundDiffuse</colordiffuse>
 				</control>
-				<control type="image">
+				<control type="multiimage">
 					<top>5</top>
 					<height>140</height>
 					<aspectratio align="center">keep</aspectratio>
-					<texture>$VAR[Weather_Icons_Current]</texture>
+					<imagepath>$VAR[Weather_Icons_Current]</imagepath>
 				</control>
 				<control type="label">
 					<top>140</top>
@@ -156,11 +157,11 @@
 					<font>METF_TitleTextLarge</font>
 					<textcolor>WeatherDay</textcolor>
 				</control>
-				<control type="image">
+				<control type="multiimage">
 					<top>30</top>
 					<height>55</height>
 					<aspectratio align="center">keep</aspectratio>
-					<texture>$VAR[Weather_Icons_36Hr1]</texture>
+					<imagepath>$VAR[Weather_Icons_36Hr1]</imagepath>
 				</control>
 				<control type="label">
 					<top>85</top>
@@ -178,11 +179,11 @@
 					<textcolor>WeatherDay</textcolor>
 					<wrapmultiline>true</wrapmultiline>
 				</control>
-				<control type="image">
+				<control type="multiimage">
 					<top>195</top>
 					<height>55</height>
 					<aspectratio align="center">keep</aspectratio>
-					<texture>$VAR[Weather_Icons_36Hr2]</texture>
+					<imagepath>$VAR[Weather_Icons_36Hr2]</imagepath>
 				</control>
 				<control type="label">
 					<top>250</top>
@@ -199,11 +200,11 @@
 					<font>METF_TitleTextLarge</font>
 					<textcolor>WeatherDay</textcolor>
 				</control>
-				<control type="image">
+				<control type="multiimage">
 					<top>355</top>
 					<height>55</height>
 					<aspectratio align="center">keep</aspectratio>
-					<texture>$VAR[Weather_Icons_36Hr3]</texture>
+					<imagepath>$VAR[Weather_Icons_36Hr3]</imagepath>
 				</control>
 				<control type="label">
 					<top>415</top>
@@ -360,16 +361,16 @@
 				<!-- Current Day Forecast -->
 				<control type="group">
 					<width>Weather7DayWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>130</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Day0]</texture>
+						<imagepath>$VAR[Weather_Icons_Day0]</imagepath>
 					</control>
 					<control type="label">
 						<label>$LOCALIZE[33006]</label>
@@ -460,16 +461,16 @@
 				<!-- Next Day Forecast or One Day From Today -->
 				<control type="group">
 					<width>Weather7DayWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>130</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Day1]</texture>
+						<imagepath>$VAR[Weather_Icons_Day1]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Day1.Title)</info>
@@ -560,16 +561,16 @@
 				<!-- Two Days From Today -->
 				<control type="group">
 					<width>Weather7DayWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>130</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Day2]</texture>
+						<imagepath>$VAR[Weather_Icons_Day2]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Day2.Title)</info>
@@ -660,16 +661,16 @@
 				<!-- Three Days From Today -->
 				<control type="group">
 					<width>Weather7DayWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>130</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Day3]</texture>
+						<imagepath>$VAR[Weather_Icons_Day3]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Day3.Title)</info>
@@ -760,16 +761,16 @@
 				<!-- Four Days From Today -->
 				<control type="group">
 					<width>Weather7DayWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>130</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Day4]</texture>
+						<imagepath>$VAR[Weather_Icons_Day4]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Day4.Title)</info>
@@ -860,16 +861,16 @@
 				<!-- Five Days From Today -->
 				<control type="group">
 					<width>Weather7DayWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>130</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Day5]</texture>
+						<imagepath>$VAR[Weather_Icons_Day5]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Day5.Title)</info>
@@ -960,16 +961,16 @@
 				<!-- Six Days From Today -->
 				<control type="group">
 					<width>Weather7DayWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>130</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Day6]</texture>
+						<imagepath>$VAR[Weather_Icons_Day6]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Day6.Title)</info>
@@ -1070,16 +1071,16 @@
 				<!-- Hour 1 -->
 				<control type="group">
 					<width>Weather12HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>65</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour10]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour10]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.1.Time)]</label>
@@ -1141,16 +1142,16 @@
 				<!-- Hour 2 -->
 				<control type="group">
 					<width>Weather12HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>65</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour2]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour2]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Hourly.2.Time)</info>
@@ -1216,16 +1217,16 @@
 				<!-- Hour 3 -->
 				<control type="group">
 					<width>Weather12HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>65</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour3]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour3]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Hourly.3.Time)</info>
@@ -1291,16 +1292,16 @@
 				<!-- Hour 4 -->
 				<control type="group">
 					<width>Weather12HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>65</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour4]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour4]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Hourly.4.Time)</info>
@@ -1366,16 +1367,16 @@
 				<!-- Hour 5 -->
 				<control type="group">
 					<width>Weather12HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>65</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour5]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour5]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Hourly.5.Time)</info>
@@ -1441,16 +1442,16 @@
 				<!-- Hour 6 -->
 				<control type="group">
 					<width>Weather12HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>65</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour6]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour6]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Hourly.6.Time)</info>
@@ -1526,16 +1527,16 @@
 				<!-- Hour 7 -->
 				<control type="group">
 					<width>Weather12HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>65</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour7]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour7]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Hourly.7.Time)</info>
@@ -1601,16 +1602,16 @@
 				<!-- Hour 8 -->
 				<control type="group">
 					<width>Weather12HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>65</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour8]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour8]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Hourly.8.Time)</info>
@@ -1676,16 +1677,16 @@
 				<!-- Hour 9 -->
 				<control type="group">
 					<width>Weather12HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>65</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour9]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour9]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Hourly.9.Time)</info>
@@ -1751,16 +1752,16 @@
 				<!-- Hour 10 -->
 				<control type="group">
 					<width>Weather12HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>65</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour10]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour10]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Hourly.10.Time)</info>
@@ -1826,16 +1827,16 @@
 				<!-- Hour 11 -->
 				<control type="group">
 					<width>Weather12HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>65</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour5]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour5]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Hourly.11.Time)</info>
@@ -1901,16 +1902,16 @@
 				<!-- Hour 12 -->
 				<control type="group">
 					<width>Weather12HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>65</height>
 						<posy>5</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour12]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour12]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Hourly.12.Time)</info>
@@ -1986,16 +1987,16 @@
 				<!-- Hour 1 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour1]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour1]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.1.Time)]</label>
@@ -2032,16 +2033,16 @@
 				<!-- Hour 2 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour2]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour2]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.2.Time)]</label>
@@ -2078,16 +2079,16 @@
 				<!-- Hour 3 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour3]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour3]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.3.Time)]</label>
@@ -2124,16 +2125,16 @@
 				<!-- Hour 4 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour4]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour4]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.4.Time)]</label>
@@ -2170,16 +2171,16 @@
 				<!-- Hour 5 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour5]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour5]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.5.Time)]</label>
@@ -2216,16 +2217,16 @@
 				<!-- Hour 6 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour6]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour6]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.6.Time)]</label>
@@ -2262,16 +2263,16 @@
 				<!-- Hour 7 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour7]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour7]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.7.Time)]</label>
@@ -2308,16 +2309,16 @@
 				<!-- Hour 8 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour8]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour8]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.8.Time)]</label>
@@ -2354,16 +2355,16 @@
 				<!-- Hour 9 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour9]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour9]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.9.Time)]</label>
@@ -2410,16 +2411,16 @@
 				<!-- Hour 10 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour10]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour10]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.10.Time)]</label>
@@ -2456,16 +2457,16 @@
 				<!-- Hour 11 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour11]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour11]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.11.Time)]</label>
@@ -2502,16 +2503,16 @@
 				<!-- Hour 12 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour12]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour12]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.12.Time)]</label>
@@ -2548,16 +2549,16 @@
 				<!-- Hour 13 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour13]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour13]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.13.Time)]</label>
@@ -2594,16 +2595,16 @@
 				<!-- Hour 14 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour14]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour14]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.14.Time)]</label>
@@ -2640,16 +2641,16 @@
 				<!-- Hour 15 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour15]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour15]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.15.Time)]</label>
@@ -2686,16 +2687,16 @@
 				<!-- Hour 16 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour16]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour16]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.16.Time)]</label>
@@ -2732,16 +2733,16 @@
 				<!-- Hour 17 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour17]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour17]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.17.Time)]</label>
@@ -2778,16 +2779,16 @@
 				<!-- Hour 18 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour18]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour18]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.18.Time)]</label>
@@ -2834,16 +2835,16 @@
 				<!-- Hour 19 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour19]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour19]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.19.Time)]</label>
@@ -2880,16 +2881,16 @@
 				<!-- Hour 20 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour20]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour20]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.20.Time)]</label>
@@ -2926,16 +2927,16 @@
 				<!-- Hour 21 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour21]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour21]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.21.Time)]</label>
@@ -2972,16 +2973,16 @@
 				<!-- Hour 22 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour22]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour22]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.22.Time)]</label>
@@ -3018,16 +3019,16 @@
 				<!-- Hour 23 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour23]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour23]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.23.Time)]</label>
@@ -3064,16 +3065,16 @@
 				<!-- Hour 24 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour24]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour24]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.24.Time)]</label>
@@ -3110,16 +3111,16 @@
 				<!-- Hour 25 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour25]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour25]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.25.Time)]</label>
@@ -3156,16 +3157,16 @@
 				<!-- Hour 26 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour26]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour26]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.26.Time)]</label>
@@ -3202,16 +3203,16 @@
 				<!-- Hour 27 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour27]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour27]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.27.Time)]</label>
@@ -3258,16 +3259,16 @@
 				<!-- Hour 28 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour28]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour28]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.28.Time)]</label>
@@ -3304,16 +3305,16 @@
 				<!-- Hour 29 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour29]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour29]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.29.Time)]</label>
@@ -3350,16 +3351,16 @@
 				<!-- Hour 30 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour30]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour30]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.30.Time)]</label>
@@ -3396,16 +3397,16 @@
 				<!-- Hour 31 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour31]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour31]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.31.Time)]</label>
@@ -3442,16 +3443,16 @@
 				<!-- Hour 32 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour32]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour32]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.32.Time)]</label>
@@ -3488,16 +3489,16 @@
 				<!-- Hour 33 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour33]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour33]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.33.Time)]</label>
@@ -3534,16 +3535,16 @@
 				<!-- Hour 34 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour34]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour34]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.34.Time)]</label>
@@ -3580,16 +3581,16 @@
 				<!-- Hour 35 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour35]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour35]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.35.Time)]</label>
@@ -3626,16 +3627,16 @@
 				<!-- Hour 36 -->
 				<control type="group">
 					<width>Weather36HourWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>35</height>
 						<posy>0</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Hour36]</texture>
+						<imagepath>$VAR[Weather_Icons_Hour36]</imagepath>
 					</control>
 					<control type="label">
 						<label>$INFO[Window.Property(Hourly.36.Time)]</label>
@@ -3682,9 +3683,9 @@
 				<!-- Saturday -->
 				<control type="group">
 					<width>WeatherWeekendWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
 					<control type="label">
@@ -3694,11 +3695,11 @@
 						<font>METF_WeatherDayNameWeekend</font>
 						<textcolor>WeatherDay</textcolor>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>140</height>
 						<posy>55</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Weekend1]</texture>
+						<imagepath>$VAR[Weather_Icons_Weekend1]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Weekend.1.Outlook)</info>
@@ -3860,9 +3861,9 @@
 				<!-- Sunday -->
 				<control type="group">
 					<width>WeatherWeekendWidth</width>
-					<control type="image">
+					<control type="multiimage">
 						<posy>0</posy>
-						<texture>WeatherDayBG.png</texture>
+						<imagepath>WeatherDayBG.png</imagepath>
 						<colordiffuse>WeatherBGDiffuse</colordiffuse>
 					</control>
 					<control type="label">
@@ -3872,11 +3873,11 @@
 						<font>METF_WeatherDayNameWeekend</font>
 						<textcolor>WeatherDay</textcolor>
 					</control>
-					<control type="image">
+					<control type="multiimage">
 						<height>140</height>
 						<posy>55</posy>
 						<aspectratio align="center">keep</aspectratio>
-						<texture>$VAR[Weather_Icons_Weekend2]</texture>
+						<imagepath>$VAR[Weather_Icons_Weekend2]</imagepath>
 					</control>
 					<control type="label">
 						<info>Window.Property(Weekend.2.Outlook)</info>
@@ -4042,12 +4043,12 @@
 				<visible>String.Contains(Skin.String(WeatherDisplay),WeatherMap) + !String.IsEmpty(Window.Property(Map.IsFetched))</visible>
 				<top>-10</top>
 				<left>350</left>
-				<control type="image">
+				<control type="multiimage">
 					<left>160</left>
 					<top>568</top>
 					<width>24</width>
 					<height>24</height>
-					<texture>Arrow2Up.png</texture>
+					<imagepath>Arrow2Up.png</imagepath>
 					<colordiffuse>ArrowDiffuse</colordiffuse>
 				</control>
 				<control type="label">
@@ -4063,12 +4064,12 @@
 					<textcolor>white</textcolor>
 					<shadowcolor>black</shadowcolor>
 				</control>
-				<control type="image">
+				<control type="multiimage">
 					<left>470</left>
 					<top>568</top>
 					<width>24</width>
 					<height>24</height>
-					<texture>Arrow2Down.png</texture>
+					<imagepath>Arrow2Down.png</imagepath>
 					<colordiffuse>ArrowDiffuse</colordiffuse>
 				</control>
 				<control type="list" id="53">
@@ -4085,32 +4086,32 @@
 					<itemlayout height="470" width="590">
 					</itemlayout>
 					<focusedlayout height="490" width="590">
-						<control type="image">
+						<control type="multiimage">
 							<description>layer image</description>
 							<left>0</left>
 							<top>0</top>
 							<width>590</width>
 							<height>470</height>
-							<texture>$INFO[ListItem.Icon]</texture>
+							<imagepath>$INFO[ListItem.Icon]</imagepath>
 							<aspectratio>scale</aspectratio>
 						</control>
-						<control type="image">
+						<control type="multiimage">
 							<description>area image</description>
 							<left>0</left>
 							<top>0</top>
 							<width>590</width>
 							<height>470</height>
-							<texture>$INFO[ListItem.Property(Layer)]</texture>
+							<imagepath>$INFO[ListItem.Property(Layer)]</imagepath>
 							<aspectratio>scale</aspectratio>
 							<colordiffuse>70FFFFFF</colordiffuse>
 						</control>
-						<control type="image">
+						<control type="multiimage">
 							<description>legend image</description>
 							<left>360</left>
 							<top>425</top>
 							<width>224</width>
 							<height>45</height>
-							<texture>$INFO[ListItem.Label2]</texture>
+							<imagepath>$INFO[ListItem.Label2]</imagepath>
 						</control>
 					</focusedlayout>
 					<content>
@@ -4203,8 +4204,8 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<texturefocus>ButtonFO2Wide.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<imagepathfocus>ButtonFO2Wide.png</imagepathfocus>
+					<imagepathnofocus>-</imagepathnofocus>
 					<pulseonselect>false</pulseonselect>
 					<onclick>Skin.SetString(WeatherDisplay,7Day)</onclick>
 				</control>
@@ -4221,8 +4222,8 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<texturefocus>ButtonFO2Wide.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<imagepathfocus>ButtonFO2Wide.png</imagepathfocus>
+					<imagepathnofocus>-</imagepathnofocus>
 					<pulseonselect>false</pulseonselect>
 					<onclick>Skin.SetString(WeatherDisplay,12Hour)</onclick>
 				</control>
@@ -4239,8 +4240,8 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<texturefocus>ButtonFO2Wide.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<imagepathfocus>ButtonFO2Wide.png</imagepathfocus>
+					<imagepathnofocus>-</imagepathnofocus>
 					<pulseonselect>false</pulseonselect>
 					<onclick>Skin.SetString(WeatherDisplay,36Hour)</onclick>
 				</control>
@@ -4257,8 +4258,8 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<texturefocus>ButtonFO2Wide.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<imagepathfocus>ButtonFO2Wide.png</imagepathfocus>
+					<imagepathnofocus>-</imagepathnofocus>
 					<pulseonselect>false</pulseonselect>
 					<onclick>Skin.SetString(WeatherDisplay,Weekend)</onclick>
 				</control>
@@ -4275,8 +4276,8 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<texturefocus>ButtonFO2Wide.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<imagepathfocus>ButtonFO2Wide.png</imagepathfocus>
+					<imagepathnofocus>-</imagepathnofocus>
 					<pulseonselect>false</pulseonselect>
 					<onclick>Skin.SetString(WeatherDisplay,WeatherMap)</onclick>
 				</control>
@@ -4287,13 +4288,13 @@
 					<align>left</align>
 					<aligny>center</aligny>
 					<font>METF_DialogLarge</font>
-					<label>-</label>
+					<label></label>
 					<textoffsetx>20</textoffsetx>
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<texturefocus>ButtonFO2Wide.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<imagepathfocus>ButtonFO2Wide.png</imagepathfocus>
+					<imagepathnofocus>-</imagepathnofocus>
 					<pulseonselect>false</pulseonselect>
 				</control>
 				<control type="button" id="4">
@@ -4308,8 +4309,8 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<texturefocus>ButtonFO2Wide.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<imagepathfocus>ButtonFO2Wide.png</imagepathfocus>
+					<imagepathnofocus>-</imagepathnofocus>
 					<pulseonselect>false</pulseonselect>
 					<onclick>Addon.OpenSettings($INFO[Weather.plugin])</onclick>
 					
@@ -4321,20 +4322,20 @@
 					<align>left</align>
 					<aligny>center</aligny>
 					<font>-</font>
-					<label>-</label>
+					<label></label>
 					<textoffsetx>20</textoffsetx>
 					<textcolor>-</textcolor>
 					<focusedcolor>-</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<texturefocus>ButtonFO2Wide.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<imagepathfocus>ButtonFO2Wide.png</imagepathfocus>
+					<imagepathnofocus>-</imagepathnofocus>
 					<pulseonselect>false</pulseonselect>
 					<spinwidth>34</spinwidth>
 					<spinheight>34</spinheight>
-					<textureup>ArrowUpNF.png</textureup>
-					<texturedown>ArrowDownNF.png</texturedown>
-					<textureupfocus>ArrowUpFo.png</textureupfocus>
-					<texturedownfocus>ArrowDownFo.png</texturedownfocus>
+					<imagepathup>ArrowUpNF.png</imagepathup>
+					<imagepathdown>ArrowDownNF.png</imagepathdown>
+					<imagepathupfocus>ArrowUpFo.png</imagepathupfocus>
+					<imagepathdownfocus>ArrowDownFo.png</imagepathdownfocus>
 					<reverse>yes</reverse>
 				</control>
 				<include>Nav_NowPlaying</include>
@@ -4373,8 +4374,7 @@
 				<include>Global_HeadingDetailVars</include>
 			</control>
 		</control>
-		
-		
+	
 		<include>AnimationVoletsHorizontaux</include>
 		</control>
 		

@@ -254,6 +254,10 @@ msgstr ""
 
 #empty strings from id 31061 to 31107
 
+msgctxt "#31107"
+msgid "Reset menu settings"
+msgstr ""
+
 msgctxt "#31108"
 msgid "Enable Debug Mode"
 msgstr ""

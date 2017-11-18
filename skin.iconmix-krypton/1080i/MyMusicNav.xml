@@ -441,7 +441,7 @@
 				<control type="button" id="3">
 					<description>Sort</description>
 					<include>BoutonCommun</include>
-					<label>-</label>
+					<label></label>
 					
 				</control>
 				<control type="togglebutton" id="4">

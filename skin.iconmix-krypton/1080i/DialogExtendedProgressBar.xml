@@ -83,7 +83,7 @@
 				<width min="25" max="835">auto</width>
 				<height>30</height>
 				<aligny>center</aligny>
-				<label>-</label>
+				<label></label>
 				<font>METF_DialogSmallBold</font>
 				<textcolor>TextNF</textcolor>
 			</control>

@@ -8,7 +8,7 @@
 				<effect type="fade" start="100" end="15" time="500"  />
 			</animation>
 			<posy>-990</posy> -->
-			<visible>!String.StartWith(ListItem.Label,..)</visible>
+			<visible>!String.StartsWith(ListItem.Label,..)</visible>
 		<control type="group">
 				<top>1240</top>
 				<posx>400</posx>

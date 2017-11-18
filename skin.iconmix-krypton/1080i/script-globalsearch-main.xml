@@ -44,7 +44,7 @@
 				<posy>10</posy>
 				<width>400</width>
 				<height>30</height>
-				<label>-</label>
+				<label></label>
 				<font>METF_Heading</font>
 				<textcolor>GlobalHeading</textcolor>
 				<align>right</align>
@@ -55,7 +55,7 @@
 				<posy>10</posy>
 				<width>400</width>
 				<height>30</height>
-				<label>-</label>
+				<label></label>
 				<font>METF_Heading</font>
 				<textcolor>GlobalHeading</textcolor>
 				<align>left</align>
@@ -102,7 +102,7 @@
 						<control type="label" id="110">
 							<width min="10" max="280">auto</width>
 							<height>25</height>
-							<label>-</label>
+							<label></label>
 							<font>METF_PlotTextSmall</font>
 							<textcolor>white</textcolor>
 						</control>
@@ -334,7 +334,7 @@
 						<control type="label" id="210">
 							<width min="10" max="280">auto</width>
 							<height>25</height>
-							<label>-</label>
+							<label></label>
 							<font>METF_PlotTextSmall</font>
 							<textcolor>white</textcolor>
 						</control>
@@ -566,7 +566,7 @@
 						<control type="label" id="120">
 							<width min="10" max="280">auto</width>
 							<height>25</height>
-							<label>-</label>
+							<label></label>
 							<font>METF_PlotTextSmall</font>
 							<textcolor>white</textcolor>
 						</control>
@@ -732,7 +732,7 @@
 						<control type="label" id="130">
 							<width min="10" max="280">auto</width>
 							<height>25</height>
-							<label>-</label>
+							<label></label>
 							<font>METF_PlotTextSmall</font>
 							<textcolor>white</textcolor>
 						</control>
@@ -879,7 +879,7 @@
 						<control type="label" id="140">
 							<width min="10" max="280">auto</width>
 							<height>25</height>
-							<label>-</label>
+							<label></label>
 							<font>METF_PlotTextSmall</font>
 							<textcolor>white</textcolor>
 						</control>
@@ -1045,7 +1045,7 @@
 						<control type="label" id="150">
 							<width min="10" max="280">auto</width>
 							<height>25</height>
-							<label>-</label>
+							<label></label>
 							<font>METF_PlotTextSmall</font>
 							<textcolor>white</textcolor>
 						</control>
@@ -1232,7 +1232,7 @@
 						<control type="label" id="160">
 							<width min="10" max="280">auto</width>
 							<height>25</height>
-							<label>-</label>
+							<label></label>
 							<font>METF_PlotTextSmall</font>
 							<textcolor>white</textcolor>
 						</control>
@@ -1380,7 +1380,7 @@
 						<control type="label" id="170">
 							<width min="10" max="280">auto</width>
 							<height>25</height>
-							<label>-</label>
+							<label></label>
 							<font>METF_PlotTextSmall</font>
 							<textcolor>white</textcolor>
 						</control>
@@ -1528,7 +1528,7 @@
 						<control type="label" id="180">
 							<width min="10" max="280">auto</width>
 							<height>25</height>
-							<label>-</label>
+							<label></label>
 							<font>METF_PlotTextSmall</font>
 							<textcolor>white</textcolor>
 						</control>
@@ -1697,7 +1697,7 @@
 						<control type="label" id="220">
 							<width min="10" max="280">auto</width>
 							<height>25</height>
-							<label>-</label>
+							<label></label>
 							<font>METF_PlotTextSmall</font>
 							<textcolor>white</textcolor>
 						</control>
@@ -1864,7 +1864,7 @@
 			<texturefocus>ButtonFO2Wide.png</texturefocus>
 			<texturenofocus>-</texturenofocus>
 			<pulseonselect>false</pulseonselect>
-			<label>-</label>
+			<label></label>
 			<onup>101</onup>
 			<ondown>101</ondown>
 			<onleft>101</onleft>

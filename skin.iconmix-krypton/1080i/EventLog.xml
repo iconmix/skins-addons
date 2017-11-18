@@ -218,7 +218,7 @@
 					<align>left</align>
 					<aligny>center</aligny>
 					<font>METF_DialogLarge</font>
-					<label>-</label>
+					<label></label>
 					<textoffsetx>20</textoffsetx>
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
@@ -233,7 +233,7 @@
 					<align>left</align>
 					<aligny>center</aligny>
 					<font>METF_DialogLarge</font>
-					<label>-</label>
+					<label></label>
 					<textoffsetx>20</textoffsetx>
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>

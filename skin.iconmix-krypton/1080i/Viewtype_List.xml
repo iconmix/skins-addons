@@ -459,7 +459,7 @@
 			<posy>5</posy>
 			<width>32</width>
 			<height>24</height>
-			<label>-</label>
+			<label></label>
 			<onclick>ActivateWindow(10025,"videodb://movies/sets/$INFO[ListItem.SetId]/?setid=$INFO[ListItem.SetId]",return)</onclick>
 			<visible>Window.IsActive(10025) + !Container.Content(sets) + !String.IsEmpty(ListItem.Set)</visible>
 		</control>

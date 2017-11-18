@@ -84,7 +84,7 @@
 				<textcolor>yellow</textcolor>
 				<align>right</align>
 				<include>SettingsLabel</include>
-				<label>-</label>
+				<label></label>
 				<onup>16</onup>
 				<onleft>18</onleft>
 				<onright>noop</onright>

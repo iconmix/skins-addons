@@ -1043,7 +1043,7 @@
 
     <control type="group"> <!-- ACTEURS DEFILANTS -->
       <visible>!Player.HasVideo|[!Window.IsVisible(12901)+!Window.IsVisible(10142)]</visible>
-      <visible>[[[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[String.IsEqual(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!String.StartWith(ListItem.Label,..)</visible>
+      <visible>[[[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[String.IsEqual(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Label,..)</visible>
       <include>Animation_FadedByMenu</include>
       <animation type="Conditional" condition="Control.HasFocus(5051)|Control.HasFocus(1998)|Window.IsVisible(movieinformation)">
         <effect type="fade"  start="100" end="0" time="5" delay="1" reversible="true"/>
@@ -3719,12 +3719,12 @@
               <posy>850</posy>
 
               <visible>Weather.IsFetched + [[!Window.IsActive(visualisation) + !Skin.HasSetting(HideClockTemp)] | [Window.IsActive(visualisation) + Player.ShowInfo + !Skin.HasSetting(HideVisClock) + !Window.IsVisible(120)]]</visible>
-              <control type="image">
+              <control type="multiimage">
                 <posx>0</posx>
                 <posy>0</posy>
                 <width>80</width>
                 <height>80</height>
-                <texture>$VAR[Weather_Icons_Current]</texture>
+                <imagepath>$VAR[Weather_Icons_Current]</imagepath>
               </control>
               <control type="label">
                 <description>Temperature</description>
@@ -4451,7 +4451,7 @@
         </include>
         <!-- ---------------------------------------------------------------------------------------------- -->
         <include name="VideoInfoButton">
-          <label>-</label>
+          <label></label>
           <altlabel>-</altlabel>
           <height>90</height>
           <width>90</width>

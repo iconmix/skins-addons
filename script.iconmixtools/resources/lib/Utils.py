@@ -1860,13 +1860,13 @@ def VueActuelle(containerprefix=""):
     contenu= ""
     if xbmc.getCondVisibility("Container.Content(episodes)"):
         contenu= "episodes"
-    elif xbmc.getCondVisibility("Container.Content(movies) + !substring(Container.FolderPath,setid=)"):
+    elif xbmc.getCondVisibility("Container.Content(movies) + !String.Contains(Container.FolderPath,setid=)"):
         contenu= "movies"
-    elif xbmc.getCondVisibility("[Container.Content(sets) | StringCompare(Container.Folderpath,videodb://movies/sets/)] + !substring(Container.FolderPath,setid=)"):
+    elif xbmc.getCondVisibility("[Container.Content(sets) | String.IsEqual(Container.Folderpath,videodb://movies/sets/)] + !String.Contains(Container.FolderPath,setid=)"):
         contenu= "sets"
-    elif xbmc.getCondVisibility("substring(Container.FolderPath,setid=)"):
+    elif xbmc.getCondVisibility("String.Contains(Container.FolderPath,setid=)"):
         contenu= "setmovies"
-    elif xbmc.getCondVisibility("!IsEmpty(Container.Content) + !StringCompare(Container.Content,pvr)"):
+    elif xbmc.getCondVisibility("!String.IsEmpty(Container.Content) + !String.IsEqual(Container.Content,pvr)"):
         contenu= xbmc.getInfoLabel("Container.Content")
     elif xbmc.getCondVisibility("Container.Content(tvshows)"):
         contenu= "tvshows"
@@ -1874,7 +1874,7 @@ def VueActuelle(containerprefix=""):
         contenu= "seasons"
     elif xbmc.getCondVisibility("Container.Content(musicvideos)"):
         contenu= "musicvideos"
-    elif xbmc.getCondVisibility("Container.Content(songs) | StringCompare(Container.FolderPath,musicdb://singles/)"):
+    elif xbmc.getCondVisibility("Container.Content(songs) | String.IsEqual(Container.FolderPath,musicdb://singles/)"):
         contenu= "songs"
     elif xbmc.getCondVisibility("Container.Content(artists)"):
         contenu= "artists"

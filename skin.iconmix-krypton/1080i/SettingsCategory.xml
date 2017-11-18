@@ -101,7 +101,7 @@
 				<aligny>center</aligny>
 				<font>METF_ContextValue</font>
 				<textcolor>SettingsDetail</textcolor>
-				<label>-</label>
+				<label></label>
 			</control>
 		</control>
 		<include>Global_ContextFilter</include>
