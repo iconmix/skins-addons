@@ -752,7 +752,7 @@
      
 </control>
 -->
-    <!--	DEBUG -->
+    <!--	DEBUG --
     <control type="label">
     <posx>700</posx>
 
