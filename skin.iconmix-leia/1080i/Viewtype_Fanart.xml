@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+		<include name="VueFanartChoix">
+		
+
+		<!-- pochette -->
+		<control type="group">
+			<posx>28</posx>
+			<posy>30</posy>
+			<visible>!String.IsEqual(Control.GetLabel(1099),3)+!Container.Content(Genres)</visible>
+			<control type="image">
+							<width>204</width>
+						<height>300</height>
+				<bordersize>9</bordersize>
+				<bordertexture border="9" colordiffuse="FFFFFFFF">landscapeinfo.png</bordertexture>
+				<texture background="true" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>!String.IsEmpty(ListItem.Title)</visible>
+			</control>
+			<control type="image">
+						<width>204</width>
+						<height>300</height>
+				<bordersize>9</bordersize>
+				<bordertexture border="9" colordiffuse="FFFFFFFF">landscapeinfo.png</bordertexture>
+				<texture background="true">$INFO[ListItem.Icon]</texture>
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>String.IsEmpty(ListItem.Title)+!Container.Content(genres)</visible>
+			</control>
+			<control type="image">
+				<width>204</width>
+						<height>300</height>
+				<bordersize>9</bordersize>
+				<bordertexture border="9" colordiffuse="FFFFFFFF">landscapeinfo.png</bordertexture>
+				<texture fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>String.IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
+			</control>
+			<control type="group">
+				<visible>String.IsEqual(Control.GetLabel(1099),2)+!Container.Content(Genres)</visible>
+				<control type="image">
+					<description>Glass overlay</description>
+					<posx>0</posx>
+					<posy>-20</posy>
+					<width>206</width>
+					<height>320</height>
+					<texture>$VAR[Boitier_SelonResolution]</texture>
+				</control>
+				<!--
+				<control type="group">
+					<visible>String.Contains(ListItem.DBTYPE,set) | Container.Content(movies) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
+					<control type="image">
+						<top>-20</top>
+						<left>65</left>
+						<width>60</width>
+						<height>35</height>
+						<texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture>
+						<aspectratio>keep</aspectratio>
+						<colordiffuse>MediaFlagDiffuse</colordiffuse>
+					</control>
+				</control>
+				-->
+			</control>
+		</control>
+
+		<!-- arrondies -->
+		<control type="group">
+			<posx>28</posx>
+			<posy>30</posy>
+			<visible>String.IsEqual(Control.GetLabel(1099),3)|Container.Content(Genres)</visible>
+			<control type="image">
+				<width>204</width>
+						<height>300</height>
+				<texture background="true" diffuse="showcase_matte.png" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
+
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>!String.IsEmpty(ListItem.Title)</visible>
+			</control>
+			<control type="image">
+				<width>204</width>
+						<height>300</height>
+
+				<texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>String.IsEmpty(ListItem.Title)+!Container.Content(genres)</visible>
+			</control>
+			<control type="image">
+				<width>204</width>
+						<height>300</height>
+				<texture background="true" diffuse="showcase_matte.png" fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<visible>String.IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
+			</control>
+
+			<control type="image">
+				<description>Glass overlay</description>
+				<posx>-20</posx>
+				<posy>-21</posy>
+				<width>244</width>
+						<height>340</height>
+				<texture>showcase_noshadow.png</texture>
+			</control>
+		</control>
+
+	</include>
+	<include name="Viewtype_Fanart">
+		<control type="group">
+		<posy>200</posy>
+			<visible>Control.IsVisible(504)</visible>
+			<!-- Browser -->
+			<control type="wraplist" id="504">
+				<posx>-55</posx>
+				<posy>200</posy>
+				<height>420</height>
+				<width>2020</width>
+				<include condition="!Skin.HasSetting(ViewLockdown)">OnUp7000</include>
+
+<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,up,Home)</onfocus>
+<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,down,Home)</onfocus>
+
+
+				<ondown>60</ondown>
+				<onleft>504</onleft>
+				<onright>504</onright>
+				<viewtype label="31811">bigwrap</viewtype>
+				<orientation>horizontal</orientation>
+				<focusposition>1</focusposition>
+				<scrolltime>200</scrolltime>
+				<!-- XXX: Causes left-most item to 'blink' out instead of smoothly scrolling off (sometimes...)
+				<preloaditems>2</preloaditems>
+				-->
+				<pagecontrol>60</pagecontrol>
+				<include>Animation_FadedByMenu</include>
+				<include>Animation_OpenCloseFade</include>
+				<include>Animation_HiddenByInfo</include>
+				<visible>!Skin.HasSetting(NoViewFanart)</visible>
+				<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows)</visible>
+				<itemlayout width="260" height="420">
+				  
+					<control type="group">
+					<include>isWatched</include>
+										<include>VueFanartChoix</include>
+
+					
+					<!-- Watched Overlay for In-Progress Items -->
+					<control type="group">
+					<posx>140</posx>
+					<posy>312</posy>
+					<include>OverlayProgress</include>
+				</control>
+					<control type="group">
+				<left>28</left>
+				<top>30</top>
+			<include>ShowTotalTvEp</include>		
+			</control>
+			<include>AnimationCacheNonSelect</include>
+			</control>
+				</itemlayout>
+				<focusedlayout width="720" height="420">
+					<include>ActiveClearArt</include>
+					<control type="image">
+						<posx>32</posx>
+						<posy>1</posy>
+						<width>646</width>
+						<height>362</height>
+						<texture>frames/ClassicFrame_SegmentedDiffuse.png</texture>
+						<fadetime>200</fadetime>
+						<aspectratio scalediffuse="false">stretch</aspectratio>
+						<colordiffuse>FrameBackgroundDiffuse</colordiffuse>
+						<visible>!String.IsEmpty(ListItem.Title) + !Skin.HasSetting(NoSegmentedFanart)</visible>
+					</control>
+					<control type="image">
+						<posx>32</posx>
+						<posy>1</posy>
+						<width>646</width>
+						<height>362</height>
+						<texture>frames/ClassicFrame_background.png</texture>
+						<fadetime>200</fadetime>
+						<aspectratio scalediffuse="false">stretch</aspectratio>
+						<colordiffuse>FrameBackgroundDiffuse</colordiffuse>
+						<visible>!String.IsEmpty(ListItem.Title) + Skin.HasSetting(NoSegmentedFanart)</visible>
+					</control>
+					<control type="image">
+						<posx>32</posx>
+						<posy>1</posy>
+						<width>646</width>
+						<height>362</height>
+						<texture fallback="home_art/movies.jpg" diffuse="frames/ClassicFrame_SegmentedDiffuse.png">$VAR[LandscapeFanart]</texture>
+						<fadetime>200</fadetime>
+						<aspectratio scalediffuse="false">stretch</aspectratio>
+						<visible>!String.IsEmpty(ListItem.Title) + !Skin.HasSetting(NoSegmentedFanart)</visible>
+					</control>
+					<control type="image">
+						<posx>32</posx>
+						<posy>1</posy>
+						<width>646</width>
+						<height>362</height>
+						<texture fallback="home_art/movies.jpg">$VAR[LandscapeFanart]</texture>
+						<fadetime>200</fadetime>
+						<aspectratio scalediffuse="false">stretch</aspectratio>
+						<visible>!String.IsEmpty(ListItem.Title) + Skin.HasSetting(NoSegmentedFanart)</visible>
+					</control>
+					<control type="image">
+						<posx>9</posx>
+						<posy>-20</posy>
+						<width>700</width>
+						<height>410</height>
+						<texture>frames/ClassicFrame_Segmented.png</texture>
+						<fadetime>200</fadetime>
+						<aspectratio scalediffuse="false">stretch</aspectratio>
+						<visible>!String.IsEmpty(ListItem.Title) + !Skin.HasSetting(NoSegmentedFanart)</visible>
+					</control>
+					<control type="image">
+						<posx>9</posx>
+						<posy>-20</posy>
+						<width>700</width>
+						<height>410</height>
+						<texture>frames/ClassicFrame_FanartMedium.png</texture>
+						<fadetime>200</fadetime>
+						<aspectratio scalediffuse="false">stretch</aspectratio>
+						<visible>!String.IsEmpty(ListItem.Title) + Skin.HasSetting(NoSegmentedFanart)</visible>
+					</control>
+					<control type="group">
+					<posx>140</posx>
+					<posy>312</posy>
+					<include>OverlayProgress</include>
+				</control>
+				</focusedlayout>
+			</control>
+			<!-- Browser label and flags -->
+		
+
+			<include>ScrollBar_Horizontal</include>
+		</control>
+		
+	</include>
+</includes>

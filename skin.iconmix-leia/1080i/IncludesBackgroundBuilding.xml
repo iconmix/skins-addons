@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- version 4.3.6 -->
+<includes>
+
+
+
+<include name="pochettesjetees">
+<!-- -->
+	<control type="group"> <!-- pochettes jetees -->
+		<visible>Integer.IsGreater(Container(8080).NumItems,0)+!Container(8080).IsUpdating+
+		[
+		[Control.HasFocus(9001)+String.IsEqual(Container(9001).ListItem.Property(background),Playlist.FanartList)+String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)]|
+		[!Control.HasFocus(9001)+
+		 [String.IsEqual(Container(9000).ListItem.Property(background),Playlist.FanartList)|String.Contains(Container(9000).ListItem.Property(background),WDF1)|String.Contains(Container(9000).ListItem.Property(background),WDF2)|String.Contains(Container(9000).ListItem.Property(background),WDF3)]
+		 +String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)]]</visible>
+		<control type="image">
+			<posx>200</posx>
+			<posy>200</posy>			
+			<texture>background.png</texture>
+		</control>
+		<posy>-200</posy>
+		<posx>-200</posx>
+		<control type="group">
+			<left>1170</left>
+			<top>1030</top>
+			
+			<animation effect="rotate" center="auto" start="-65" end="-65" time="0" condition="true">Conditional</animation>
+			<control type="image">
+				<posx>20</posx>
+				<posy>21</posy>
+				<texture>$INFO[Container(8080).ListItem(0).Icon]</texture>
+				<width>286</width>
+				<fadetime>400</fadetime>
+				<height>412</height>
+				<aspectratio>scale</aspectratio>
+			</control>
+			<control type="image">
+				<posx>14</posx>
+				<posy>-19</posy>
+				<width>298</width>
+				<height>455</height>
+				<texture>frames/bcover.png</texture>
+			</control>
+		</control>
+		<control type="group">
+			<left>500</left>
+			<top>150</top>
+
+			<animation effect="rotate" center="auto" start="10" end="10" time="0" condition="true">Conditional</animation>
+			<control type="image">
+				<posx>20</posx>
+				<posy>21</posy>
+				<texture>$INFO[Container(8080).ListItem(2).Icon]</texture>
+				<width>286</width>
+				<fadetime>400</fadetime>
+				<height>412</height>
+				<aspectratio>scale</aspectratio>
+			</control>
+			<control type="image">
+				<posx>14</posx>
+				<posy>-19</posy>
+				<width>298</width>
+				<height>455</height>
+				<texture>frames/bcover.png</texture>
+			</control>
+		</control>
+		<control type="group">
+			<left>1550</left>
+			<top>300</top>
+
+			<animation effect="rotate" center="auto" start="-20" end="-20" time="0" condition="true">Conditional</animation>
+			<control type="image">
+				<posx>20</posx>
+				<posy>21</posy>
+				<texture>$INFO[Container(8080).ListItem(3).Icon]</texture>
+				<width>286</width>
+				<fadetime>400</fadetime>
+				<height>412</height>
+				<aspectratio>scale</aspectratio>
+			</control>
+			<control type="image">
+				<posx>14</posx>
+				<posy>-19</posy>
+				<width>298</width>
+				<height>455</height>
+				<texture>frames/bcover.png</texture>
+			</control>
+		</control>
+		<control type="group">
+			<left>800</left>
+			<top>0</top>
+
+			<animation effect="rotate" center="auto" start="65" end="65" time="0" condition="true">Conditional</animation>
+			<control type="image">
+				<posx>20</posx>
+				<posy>21</posy>
+				<texture>$INFO[Container(8080).ListItem(1).Icon]</texture>
+				<width>286</width>
+				<fadetime>400</fadetime>
+				<height>412</height>
+				<aspectratio>scale</aspectratio>
+			</control>
+			<control type="image">
+				<posx>14</posx>
+				<posy>-19</posy>
+				<width>298</width>
+				<height>455</height>
+				<texture>frames/bcover.png</texture>
+			</control>
+		</control>
+
+		<control type="group">
+			<left>1000</left>
+			<top>170</top>
+
+			<animation effect="rotate" center="auto" start="25" end="25" time="0" condition="true">Conditional</animation>
+			<control type="image">
+				<posx>20</posx>
+				<posy>21</posy>
+				<texture>$INFO[Container(8080).ListItem(4).Icon]</texture>
+				<width>286</width>
+				<fadetime>400</fadetime>
+				<height>412</height>
+				<aspectratio>scale</aspectratio>
+			</control>
+			<control type="image">
+				<posx>14</posx>
+				<posy>-19</posy>
+				<width>298</width>
+				<height>455</height>
+				<texture>frames/bcover.png</texture>
+			</control>
+		</control>
+		<control type="group">
+			<left>1400</left>
+			<top>80</top>
+
+			<animation effect="rotate" center="auto" start="10" end="10" time="0" condition="true">Conditional</animation>
+			<control type="image">
+				<posx>20</posx>
+				<posy>21</posy>
+				<texture>$INFO[Container(8080).ListItem(5).Icon]</texture>
+				<width>286</width>
+				<fadetime>400</fadetime>
+				<height>412</height>
+				<aspectratio>scale</aspectratio>
+			</control>
+			<control type="image">
+				<posx>14</posx>
+				<posy>-19</posy>
+				<width>298</width>
+				<height>455</height>
+				<texture>frames/bcover.png</texture>
+			</control>
+		</control>
+		<control type="group">
+			<left>1650</left>
+			<top>700</top>
+
+			<animation effect="rotate" center="auto" start="15" end="15" time="0" condition="true">Conditional</animation>
+			<control type="image">
+				<posx>20</posx>
+				<posy>21</posy>
+				<texture>$INFO[Container(8080).ListItem(6).Icon]</texture>
+				<width>286</width>
+				<fadetime>400</fadetime>
+				<height>412</height>
+				<aspectratio>scale</aspectratio>
+			</control>
+			<control type="image">
+				<posx>14</posx>
+				<posy>-19</posy>
+				<width>298</width>
+				<height>455</height>
+				<texture>frames/bcover.png</texture>
+			</control>
+		</control>
+		<control type="group">
+			<left>400</left>
+			<top>450</top>
+
+			<animation effect="rotate" center="auto" start="-35" end="-35" time="0" condition="true">Conditional</animation>
+			<control type="image">
+				<posx>20</posx>
+				<posy>21</posy>
+				<texture>$INFO[Container(8080).ListItem(7).Icon]</texture>
+				<width>286</width>
+				<fadetime>400</fadetime>
+				<height>412</height>
+				<aspectratio>scale</aspectratio>
+			</control>
+			<control type="image">
+				<posx>14</posx>
+				<posy>-19</posy>
+				<width>298</width>
+				<height>455</height>
+				<texture>frames/bcover.png</texture>
+			</control>
+		</control>
+		<control type="group">
+			<left>200</left>
+			<top>600</top>
+
+			<animation effect="rotate" center="auto" start="10" end="10" time="0" condition="true">Conditional</animation>
+			<control type="image">
+				<posx>20</posx>
+				<posy>21</posy>
+				<texture>$INFO[Container(8080).ListItem(8).Icon]</texture>
+				<width>286</width>
+				<fadetime>400</fadetime>
+				<height>412</height>
+				<aspectratio>scale</aspectratio>
+			</control>
+			<control type="image">
+				<posx>14</posx>
+				<posy>-19</posy>
+				<width>298</width>
+				<height>455</height>
+				<texture>frames/bcover.png</texture>
+			</control>
+		</control>
+		
+			<control type="group">
+		<left>1200</left>
+		<top>500</top>
+
+		<animation effect="rotate" center="auto" start="-10" end="-10" time="0" condition="true">Conditional</animation>
+		<control type="image">
+		<posx>20</posx>
+		<posy>21</posy>
+		<texture>$INFO[Container(8080).ListItem(9).Icon]</texture>
+		<width>286</width>
+		<fadetime>400</fadetime>
+		<height>412</height>
+		<aspectratio>scale</aspectratio>
+		</control>
+		<control type="image">
+		<posx>14</posx>
+		<posy>-19</posy>
+		<width>298</width>
+		<height>455</height>
+		<texture>frames/bcover.png</texture>
+		</control>
+		</control>
+	
+	</control>
+
+	<control type="image"> <!-- defilement fanart -->
+		<visible>!Container(8080).OnNext+Integer.IsGreater(Container(8080).NumItems,0)+!Container(8080).IsUpdating+
+		  [[Control.HasFocus(9001)+String.IsEqual(Container(9001).ListItem.Property(background),Playlist.FanartList)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)]|[!Control.HasFocus(9001)+[String.IsEqual(Container(9000).ListItem.Property(background),Playlist.FanartList)|String.Contains(Container(9000).ListItem.Property(background),WDF1)|String.Contains(Container(9000).ListItem.Property(background),WDF2)|String.Contains(Container(9000).ListItem.Property(background),WDF3)]+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)]]</visible>
+		<animation effect="fade" start="10" end="100" time="500" reversible="false" >Visible</animation>
+		<texture>$INFO[Container(8080).ListItem.Art(fanart)]</texture>
+	</control>
+
+</include>
+	-->
+	<include name="fanartSpeed5">
+		<timeperimage>5000</timeperimage>
+		<autoscroll time="5000" delay="500" repeat="5000">true</autoscroll>
+	</include>
+	<include name="fanartSpeed6">
+		<timeperimage>6000</timeperimage>
+		<autoscroll time="6000" delay="500" repeat="6000">true</autoscroll>
+	</include>
+	<include name="fanartSpeed8">
+		<timeperimage>8000</timeperimage>
+		<autoscroll time="8000" delay="500" repeat="8000">true</autoscroll>
+	</include>
+	<include name="fanartSpeed10">
+		<timeperimage>10000</timeperimage>
+		<autoscroll time="10000" delay="500" repeat="10000">true</autoscroll>
+	</include>
+	<include name="fanartSpeed15">
+		<timeperimage>15000</timeperimage>
+		<autoscroll time="15000" delay="500" repeat="15000">true</autoscroll>
+	</include>
+	<include name="fanartSpeed20">
+		<timeperimage>20000</timeperimage>
+		<autoscroll time="20000" delay="500" repeat="20000">true</autoscroll>
+	</include>
+	<include name="fanartSpeed30">
+		<timeperimage>30000</timeperimage>
+		<autoscroll time="30000" delay="500" repeat="30000">true</autoscroll>
+	</include>
+	<include name="fanartSpeed60">
+		<timeperimage>60000</timeperimage>
+		<autoscroll time="60000" delay="500" repeat="60000">true</autoscroll>
+	</include>
+	<include name="delayfanartinc">
+		<include condition="skin.string(SkinHelper.RandomFanartDelay, 6)">fanartSpeed6</include>
+		<include condition="skin.string(SkinHelper.RandomFanartDelay, 5)">fanartSpeed5</include>
+		<include condition="skin.string(SkinHelper.RandomFanartDelay, 8)">fanartSpeed8</include>
+		<include condition="skin.string(SkinHelper.RandomFanartDelay, 10)">fanartSpeed10</include>
+		<include condition="skin.string(SkinHelper.RandomFanartDelay, 15)">fanartSpeed15</include>
+		<include condition="skin.string(SkinHelper.RandomFanartDelay, 20)">fanartSpeed20</include>
+		<include condition="skin.string(SkinHelper.RandomFanartDelay, 30)">fanartSpeed30</include>
+		<include condition="skin.string(SkinHelper.RandomFanartDelay, 60)">fanartSpeed60</include>
+	</include>
+
+	<include name="randomizeImages">
+		<randomize>true</randomize>
+	</include>
+
+
+	<variable name="backgroundVar">
+		<value condition="!Window.IsVisible(10025)+!Window.IsVisible(502)+!Window.IsVisible(home)">background.jpg</value>
+		<value condition="Control.HasFocus(9000)+[String.Contains(Container(9000).ListItem.Property(background),WDF1)|String.Contains(Container(9000).ListItem.Property(background),WDF2)|String.Contains(Container(9000).ListItem.Property(background),WDF3)]"></value>
+		<value condition="Integer.IsGreater(Container(8080).NumItems,0)"></value>
+		<value condition="Window.IsVisible(Home)+!Control.HasFocus(9000)+!Control.HasFocus(9001)+!String.IsEqual(Container(9000).ListItem.Property(widgetType),weather)+!String.IsEqual(Container(9000).ListItem.Property(widgetType),system)+!String.IsEmpty(Window(Home).Property(WidgetActifFanart))">$INFO[Window(Home).Property(WidgetActifFanart)]</value>
+		<value condition="Window.IsVisible(Home)+Control.HasFocus(9001)+!String.IsEmpty(Container(9001).ListItem.Property(background))">$INFO[Container(9001).ListItem.Property(background)]</value>
+		<value condition="Window.IsVisible(Home)+Control.HasFocus(9001)+String.IsEmpty(Container(9001).ListItem.Property(background))">background.jpg</value>
+
+		<value>$INFO[Container(9000).ListItem.Property(background)]</value>
+	</variable>
+	<variable name="backgroundVarPlaylist">
+		<value condition="!Control.HasFocus(9000)+Control.HasFocus(9001)+String.IsEqual(Container(9001).ListItem.Property(background),Playlist.FanartList)">$INFO[Container(9001).ListItem.Property(backgroundPlaylist)]</value>
+		<value condition="!Control.HasFocus(9000)+Control.HasFocus(9001)+String.Contains(Container(9001).ListItem.Property(background),WDF1)">$INFO[Container(9001).ListItem.Property(widgetPath)]</value>
+		<value condition="!Control.HasFocus(9000)+Control.HasFocus(9001)+String.Contains(Container(9001).ListItem.Property(background),WDF2)">$INFO[Container(9001).ListItem.Property(widgetPath.2)]</value>
+	    
+	  <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.IsEqual(Container(9000).ListItem.Property(background),Playlist.FanartList)">$INFO[Container(9000).ListItem.Property(backgroundPlaylist)]</value>
+	  <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.Contains(Container(9000).ListItem.Property(background),WDF1)">$INFO[Container(9000).ListItem.Property(widgetPath)]</value>
+	  <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.Contains(Container(9000).ListItem.Property(background),WDF2)">$INFO[Container(9000).ListItem.Property(widgetPath.2)]</value>
+	  <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.Contains(Container(9000).ListItem.Property(list),library:)+String.Contains(Container(9000).ListItem.Property(background),WDF3)">$INFO[Container(9000).ListItem.Property(list)]</value>
+	  <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.Contains(Container(9000).ListItem.Property(list),special:)+String.Contains(Container(9000).ListItem.Property(background),WDF3)">$INFO[Container(9000).ListItem.Property(list)]</value>
+	  
+
+
+	</variable>
+	<include name="playlistfond">
+		<control type="wraplist" id="8080">
+			<left>-1000</left>
+			<top>-1000</top>
+			<width>10</width>
+			<height>10</height>
+			<itemlayout height="10" width="10" />
+			<focusedlayout height="10" width="10" />
+			<content>$VAR[backgroundVarPlaylist]</content>
+			<include>delayfanartinc</include>
+			<autoscroll time="10000" delay="500" repeat="10000">true</autoscroll>
+		</control>
+	
+	</include>
+
+
+	<!--Global Background -->
+	<include name="GlobalBackground">
+<!--
+		<control type="videowindow" id="1">
+			<description>Video Preview</description>
+			<visible>Player.HasVideo + !Window.IsActive(selectdialog)  +Skin.HasSetting(PlayVideoOverlay)</visible>
+		</control>
+-->
+		<control type="group">
+			<visible>[!Player.HasAudio |  [Player.HasAudio+ !Control.IsVisible(9044)]]+[!Player.HasVideo | [Player.HasVideo+!Skin.HasSetting(PlayVideoOverlay)]]</visible>
+			<animation effect="fade" end="50" time="500" reversible="false" condition="String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)+Skin.HasSetting(MeteoPleinEcran)">Conditional</animation>
+			<include>playlistfond</include>
+			<include>pochettesjetees</include>
+			
+			<control type="image">
+				<include>Dimensions_Fullscreen</include>
+				<texture background="true">$INFO[Skin.String(CustomBackground)]</texture>
+				<visible>!Integer.IsGreater(Container(8080).NumItems,0)+!Window.IsActive(10025)</visible>
+				<visible>!Control.HasFocus(9000)|[Control.HasFocus(9000)+!String.Contains(Container(9000).ListItem.Property(background),WDF1)+!String.Contains(Container(9000).ListItem.Property(background),WDF2)+!String.Contains(Container(9000).ListItem.Property(background),WDF3)]</visible>
+			</control>
+			
+			<control type="multiimage" id="99004">
+				<visible>!Integer.IsGreater(Container(8080).NumItems,0)|!String.IsEmpty(Window(Home).Property(WidgetActifFanart))</visible>
+				<posx>0</posx>
+				<posy>10</posy>
+				<width>1920</width>
+				<height>1080</height>
+				<visible>!Control.HasFocus(9000)|[Control.HasFocus(9000)+!String.Contains(Container(9000).ListItem.Property(background),WDF1)+!String.Contains(Container(9000).ListItem.Property(background),WDF2)+!String.Contains(Container(9000).ListItem.Property(background),WDF3)]</visible>
+				<imagepath background="true" fallback="background.png">$VAR[backgroundVar]</imagepath>
+				<aspectratio>scale</aspectratio>
+				<fadetime>450</fadetime>
+				<include condition="Skin.String(BackgroundDiffuseColor) + !Skin.String(BackgroundDiffuseColor, None)">bgColorDiffuse</include>
+				<include>delayfanartinc</include>
+				<randomize>true</randomize>
+				<loop>yes</loop>
+				<animation effect="zoom" start="110" end="130" center="auto" time="12000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(BackgroundAnimation)">Conditional</animation>
+				<animation effect="slide" start="-10,-10" end="10,10" time="8000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(BackgroundAnimation)">Conditional</animation>
+			</control>
+      <include>skinshortcuts-template-widget1Fanart</include>
+			<include>skinshortcuts-template-widget2Fanart</include>
+		</control>
+	<!--		 telex --
+			<control type="label">
+			  <label>$VAR[backgroundVarPlaylist] : $INFO[Container(8080).NumItems][CR]$INFO[Container(8080).ListItem.Label][CR]$INFO[Container(8080).ListItem(0).Art(poster)][CR]$INFO[Container(8080).ListItem(0).Icon]<[CR]label>
+			</control>
+			-->
+		<control type="group">
+			<visible>Player.HasAudio+Control.IsVisible(9044)</visible>
+			<include>MusiqueBackGround</include>
+		</control>
+		<!-- --	<control type="label">
+			<posy>50</posy>
+			<label>**X1=$INFO[Container(9001).ListItem.Property(backgroundplayliststyle)][CR]Background=$VAR[Skin.String(CustomBackground)][CR]BackgroundInf=$INFO[Skin.String(CustomBackground)][CR]Actif:$INFO[Window(Home).Property(WidgetActifFanart)][CR]FanartWD1:$INFO[Window(Home).Property(WidgetFanart1)][CR]FanartWD2:$INFO[Window(Home).Property(WidgetFanart2)][CR]->$VAR[backgroundVarPlaylist][CR]VAR=$VAR[backgroundVar][CR]$INFO[Container(8080).ListItem.Art(fanart)][CR]Items:$INFO[Container(8080).NumItems]</label>
+
+		</control>
+		-->
+	</include>
+
+	<include name="GlobalBackgroundVideoInfo_Common">
+		<aspectratio>stretch</aspectratio>
+		<fadetime>450</fadetime>
+		<visible>true</visible>
+		<include condition="Skin.String(BackgroundDiffuseColor) + !Skin.String(BackgroundDiffuseColor, None)">bgColorDiffuse</include>
+		<include>delayfanartinc</include>
+		<include condition="Skin.HasSetting(RandomizeBackground)">randomizeImages</include>
+		<loop>yes</loop>
+		<animation effect="zoom" start="110" end="130" center="auto" time="12000" tween="cubic" easing="inout" pulse="true" >Conditional</animation>
+		<animation effect="slide" start="-10,-10" end="10,10" time="8000" tween="cubic" easing="inout" pulse="true" >Conditional</animation>
+
+	</include>
+
+	<!--fanart dialoginfo -->
+	<include name="GlobalBackgroundVideoInfo">
+		<control type="group">
+			<posx>1170</posx>
+			<posy>115</posy>
+
+
+
+			<control type="group">
+				<width>550</width>
+				<height>360</height>
+
+				<control type="multiimage" id="90007">
+					<include>GlobalBackgroundVideoInfo_Common</include>
+					<imagepath loop="true"  diffuse="shine.png"  background="true">$VAR[GlobalFanart]</imagepath>
+
+				</control>
+				<!--			----		--
+
+				<control type="multiimage" id="90008">
+				<include>GlobalBackgroundVideoInfo_Common</include>
+				<imagepath loop="true"  diffuse="shine.png"  background="true">$VAR[LEXX]</imagepath>
+				<visible>Container.Content(seasons)|Container.Content(tvshows)</visible>
+				</control>
+				<control type="multiimage" id="90009">
+				<include>GlobalBackgroundVideoInfo_Common</include>
+				<imagepath loop="true"  diffuse="shine.png"  background="true">$VAR[LEXX2]</imagepath>
+				<visible>Container.Content(movies)|Container.Content(episodes)</visible>
+				</control>
+				<control type="label">
+				<posx>-1000</posx>
+				<posy>-100</posy>
+				<width>1500</width>
+				<label>[COLOR=yellow]90007=$INFO[Control.GetLabel(90007)][CR]90008=$INFO[Control.GetLabel(90008)][CR]90009=$INFO[Control.GetLabel(90009)][CR]90010=$INFO[Control.GetLabel(90010)][CR]90011=$INFO[Control.GetLabel(90011)][CR]Path : $INFO[ListItem.Path][CR]FolderPath : $INFO[ListItem.FolderPath][CR]FolderName : $INFO[ListItem.FolderName][CR]Item : $INFO[ListItem.FileNameAndPath][CR]Var=$VAR[fanartdialogvideoinfo][CR]Skinhelper:$INFO[Window(Home).Property(SkinHelper.ExtraFanArtPath)][CR]FLEXX=$INFO[Window(Home).Property(FLEXX)][CR]FLEXX2=$INFO[Window(Home).Property(FLEXX2)][/COLOR]</label>
+				</control>
+				<!--			--
+
+
+				<control type="multiimage" id="90008">
+					<include>GlobalBackgroundVideoInfo_Common</include>
+					<imagepath loop="true"  diffuse="shine.png" fallback="none\" background="true">$INFO[ListItem.Path,,../extrafanart/]</imagepath>
+					<visible>String.IsEmpty(Window(Home).Property(SkinHelper.ExtraFanArtPath))+!String.Contains(Container.FolderPath,plugin) + [Container.Content(movies) |  Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
+				</control>
+
+				<control type="multiimage" id="90009">
+					<include>GlobalBackgroundVideoInfo_Common</include>
+					<imagepath loop="true"  diffuse="shine.png" background="true">$INFO[Window(Home).Property(SkinHelper.ExtraFanArtPath)]</imagepath>
+					<visible>!String.IsEmpty(Window(Home).Property(SkinHelper.ExtraFanArtPath))+!String.Contains(Container.FolderPath,plugin) + [Container.Content(tvshows) | Container.Content(seasons) |  Container.Content(movies) |Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
+				</control>
+				--
+				<control type="multiimage" id="90010">
+					<include>GlobalBackgroundVideoInfo_Common</include>
+					<imagepath colordiffuse="FFFFFFFF" diffuse="shine.png" fallback="none\" background="true">$INFO[ListItem.Path,,/extrafanart/]</imagepath>
+					<visible>String.IsEmpty(Window(Home).Property(SkinHelper.ExtraFanArtPath))+!String.Contains(Container.FolderPath,plugin) + [ Container.Content(movies) |Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
+				</control>
+
+				<control type="multiimage" id="90011">
+					<include>GlobalBackgroundVideoInfo_Common</include>
+					<imagepath loop="true"  diffuse="shine.png" fallback="none\" background="true">$INFO[ListItem.FolderPath,,extrafanart/]</imagepath>
+					<visible>String.IsEmpty(Window(Home).Property(SkinHelper.ExtraFanArtPath))+String.Contains(Container.FolderPath,plugin) + [Container.Content(tvshows) | Container.Content(seasons)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
+				</control>
+				-->
+			</control>
+
+			<!---->
+
+
+		</control>
+
+	</include>
+
+
+</includes>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+
+<variable name="chronotoolstexture">
+ 	<value condition="Skin.HasSetting(Show_HeureFin)+!String.IsEmpty(Window(10000).Property(DurationToolsEnd))">chronotools.png</value>
+ 	<value>chronotoolssimple.png</value>
+ 	
+ </variable>
+	<include name="MediaInfo">
+
+		<control type="group" id="9901">
+			<posx>-10</posx>
+			<posy>300</posy>
+			<include>Animation_FadedByMenu</include>
+			<include>Animation_CommonFade</include>
+			<visible>!String.IsEmpty(ListItem.Title)</visible>
+			<visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes) | String.Contains(Container.FolderPath,plugin)</visible>
+			<include>VisibleIfNotMovieSet</include>
+			<!-- <visible>![[Player.HasAudio | Player.HasVideo] + Skin.HasSetting(MediaOverlay)]</visible> -->
+
+			<!--
+			<control type="grouplist">
+			
+				<left>18</left>
+				<posy>555</posy>
+				
+				<orientation>horizontal</orientation>
+				<height>150</height>
+				<itemgap>-20</itemgap>
+				<control type="group">
+					<top>20</top>		
+					<width>162</width>
+					<control type="image">							
+						<width>153</width>
+						<texture>$VAR[chronotoolstexture]</texture>
+						<aspectratio>scale</aspectratio>
+						<colordiffuse>MediaFlagDiffuse</colordiffuse>
+						<bordersize>15</bordersize>
+					<bordertexture border="5">flags/flag_frame.png</bordertexture>
+					</control>
+					<control type="group">
+						<top>30</top>
+						<left>23</left>
+					<include>chronotoolsV</include>	
+					</control>
+					<visible>!String.IsEmpty(ListItem.Duration)|[Skin.HasSetting(Show_HeureFin)+!String.IsEmpty(Window(10000).Property(DurationTools))]</visible>
+					<visible>!Container.Content(seasons)+!Container.Content(tvshows)</visible>
+				</control>
+				<control type="group">
+					<top>20</top>		
+					<width>162</width>
+				<control type="image" id="8887">
+					<width>178</width>
+					<aspectratio align="center" aligny="center">scale</aspectratio>
+					<texture fallback="pasdestudio.png">resource://resource.images.studios.coloured/$INFO[ListItem.Studio].png</texture>
+					<colordiffuse>MediaFlagDiffuse</colordiffuse>
+					<bordersize>15</bordersize>
+					<bordertexture border="5">flags/flag_frame.png</bordertexture>
+				</control>
+				</control>
+			</control>
+			-->
+			
+			
+			
+			
+		</control>
+	</include>
+</includes>

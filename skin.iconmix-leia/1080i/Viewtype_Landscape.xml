@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+	<include name="CommonH">
+		<posx>5</posx>
+		<posy>36</posy>
+		<width>340</width>
+		<height>188</height>
+		<fadetime>200</fadetime>
+	</include>
+	
+	<include name="Viewtype_Landscape">
+		<control type="group">
+			<visible>Control.IsVisible(52)</visible>
+			<include>Animation_FadedByMenu</include>
+				<include>Animation_OpenCloseFade</include>
+				<include>Animation_HiddenByInfo</include>	
+			<!-- Browser -->
+			<control type="grouplist">
+				<include>AnimationCacheNonSelect</include>
+		
+				<posx>-290</posx>
+				<posy>540</posy>
+				<height>500</height>
+				<width>2350</width>	
+				<itemgap>0</itemgap>				
+				<orientation>horizontal</orientation>
+				<control type="image">					
+					<width>350</width>
+					<height>265</height>
+					<texture>frames/movie_frameh.png</texture>
+					<aspectratio scalediffuse="true">stretch</aspectratio>
+					<colordiffuse>AAFFFFFF</colordiffuse>
+					
+				</control>
+				<control type="image">					
+					<width>350</width>
+					<height>265</height>
+					<texture>frames/movie_frameh.png</texture>
+					<aspectratio scalediffuse="true">stretch</aspectratio>
+					<colordiffuse>AAFFFFFF</colordiffuse>
+					
+				</control>
+				<control type="image">					
+					<width>350</width>
+					<height>265</height>
+					<texture>frames/movie_frameh.png</texture>
+					<aspectratio scalediffuse="true">stretch</aspectratio>
+					<colordiffuse>AAFFFFFF</colordiffuse>
+					
+				</control>
+				<control type="image">					
+					<width>350</width>
+					<height>265</height>
+					<texture>frames/movie_frameh.png</texture>
+					<aspectratio scalediffuse="true">stretch</aspectratio>
+					<colordiffuse>AAFFFFFF</colordiffuse>
+					
+				</control>
+				<control type="image">					
+					<width>350</width>
+					<height>265</height>
+					<texture>frames/movie_frameh.png</texture>
+					<aspectratio scalediffuse="true">stretch</aspectratio>
+					<colordiffuse>AAFFFFFF</colordiffuse>
+					
+				</control>
+				<control type="image">					
+					<width>350</width>
+					<height>265</height>
+					<texture>frames/movie_frameh.png</texture>
+					<aspectratio scalediffuse="true">stretch</aspectratio>
+					<colordiffuse>AAFFFFFF</colordiffuse>
+					
+				</control>
+				<control type="image">					
+					<width>350</width>
+					<height>265</height>
+					<texture>frames/movie_frameh.png</texture>
+					<aspectratio scalediffuse="true">stretch</aspectratio>
+					<colordiffuse>AAFFFFFF</colordiffuse>
+					
+				</control>
+			
+			</control>
+			<control type="fixedlist" id="52">
+				<posx>-290</posx>
+				<posy>540</posy>
+				<height>500</height>
+				<width>2350</width>
+				<include condition="!Skin.HasSetting(ViewLockdown)">OnUp7000</include>
+
+<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,up,Home)</onfocus>
+<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,down,Home)</onfocus>
+
+
+				<ondown>60</ondown>
+				<onleft>52</onleft>
+				<onright>52</onright>
+				<viewtype label="31810">icon</viewtype>
+				<orientation>horizontal</orientation>
+				<focusposition>3</focusposition>
+				<scrolltime>200</scrolltime>
+				<preloaditems>2</preloaditems>
+				<pagecontrol>60</pagecontrol>							
+				<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes)]</visible>
+					<itemlayout width="350" height="260">
+					<control type="group">
+					   <include>isWatched</include>
+					<visible>!Control.HasFocus(1999)</visible>
+						<control type="image">
+							<posx>0</posx>
+							<posy>-2</posy>
+							<width>350</width>
+							<height>265</height>
+							<texture>frames/movie_frameh.png</texture>
+							<aspectratio scalediffuse="true">stretch</aspectratio>
+							<colordiffuse>AAFFFFFF</colordiffuse>						
+						</control>
+						
+				
+						<control type="image">
+							<include>CommonH</include>
+							<texture background="true" diffuse="landscapematteNF.png">$INFO[ListItem.Icon]</texture>
+							<colordiffuse >LandscapeDiffuse</colordiffuse>
+							<aspectratio scalediffuse="true">keep</aspectratio>
+							<visible>Container.Content(episodes)</visible>
+						</control>
+						<control type="image">
+							<texture background="true" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
+							<include>CommonH</include>
+							<colordiffuse>LandscapeDiffuse</colordiffuse>
+							<aspectratio scalediffuse="true">stretch</aspectratio>
+							<visible>Container.Content(tvshows)</visible>
+						</control>
+						<control type="image">
+							<include>CommonH</include>
+							<texture background="true" fallback="home_art/movies.jpg" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
+							<colordiffuse>LandscapeDiffuse</colordiffuse>
+							<aspectratio scalediffuse="true">stretch</aspectratio>
+							<visible>[Container.Content(movies) | Container.Content(sets)]</visible>
+						</control>
+						<control type="image">
+							<posx>5</posx>
+							<posy>36</posy>
+							<width>180</width>
+							<height>140</height>
+							<texture background="true" diffuse="landscapematteNF.png">$VAR[LandscapeFanartOverlay]</texture>
+							<colordiffuse>FFFFFFFF</colordiffuse>
+							<aspectratio scalediffuse="true">keep</aspectratio>
+							<visible>[Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows)]</visible>
+						</control>
+				
+						<control type="label">
+							<posx>10</posx>
+							<posy>36</posy>
+							<width>320</width>
+							<height>160</height>						
+							<label>$VAR[LandscapeFanartOverlayH]</label>
+							<font>lcdtime</font>	
+							<aligny>center</aligny>
+							<align>center</align>
+							<textcolor>yellow</textcolor>
+							<colordiffuse>50FFFFFF</colordiffuse>
+							<scroll>true</scroll>					
+							<visible>[Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows)]</visible>
+						</control>
+						<control type="image">
+							<include>CommonH</include>
+							<texture>landscapeframeNF.png</texture>
+						</control>
+						
+						<!-- Watched Overlay for In-Progress Items -->
+						<control type="group">
+					<posx>250</posx>
+					<posy>210</posy>
+					<include>OverlayProgress</include>
+				</control>				
+						<control type="group">
+					<left>18</left>
+					<top>35</top>
+				<include>ShowTotalTvEp</include>	
+				</control>
+			<include>AnimationCacheNonSelect</include>
+			</control>
+				</itemlayout>
+				<focusedlayout width="350" height="260">
+					<include>ActiveClearArt</include>						
+					<control type="image">
+						<posx>0</posx>
+						<posy>-2</posy>
+						<width>350</width>
+						<height>265</height>
+						<texture>frames/movie_frameh.png</texture>
+						<aspectratio scalediffuse="true">stretch</aspectratio>
+						<colordiffuse>FFFFFFFF</colordiffuse>											
+					</control>
+					
+					<control type="group">
+						<animation type="Focus" reversible="true">							
+							<effect type="rotatey" center="180" start="90" end="0"  time="500" tween="bounce" easing="out" />
+						</animation>
+				
+					<control type="image">
+						<include>CommonH</include>
+						<texture background="true" diffuse="landscapematteNF.png">$INFO[ListItem.Icon]</texture>
+						<colordiffuse>FFFFFFFF</colordiffuse>
+						<aspectratio scalediffuse="true">keep</aspectratio>
+						<visible>Container.Content(episodes)</visible>
+					</control>
+					<control type="image">
+						<texture background="true" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
+						<include>CommonH</include>
+						<colordiffuse>FFFFFFFF</colordiffuse>
+						<aspectratio scalediffuse="true">keep</aspectratio>
+						<visible>Container.Content(tvshows)</visible>
+					</control>
+					<control type="image">
+						<include>CommonH</include>
+						<texture background="true" fallback="home_art/movies.jpg" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
+						<colordiffuse>FFFFFFFF</colordiffuse>
+						<aspectratio scalediffuse="true">keep</aspectratio>
+						<visible>[Container.Content(movies) | Container.Content(sets)]</visible>
+					</control>
+					<control type="image">
+						<posx>5</posx>
+						<posy>36</posy>
+						<width>180</width>
+						<height>140</height>
+						<texture background="true" diffuse="landscapematteNF.png">$VAR[LandscapeFanartOverlay]</texture>
+						<colordiffuse>FFFFFFFF</colordiffuse>
+						<aspectratio scalediffuse="true">keep</aspectratio>
+						<visible>[Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows)]</visible>
+					</control>				
+					<control type="image">
+						<include>CommonH</include>
+						<texture>landscapeframeNF.png</texture>
+					</control>
+					
+					<!-- Watched Overlay for In-Progress Items -->
+					<control type="group">
+					<posx>250</posx>
+					<posy>210</posy>
+					<include>OverlayProgress</include>
+				</control>				
+					</control>
+				</focusedlayout>
+			</control>
+			<!-- Browser label and flags -->
+			
+			<include>ScrollBar_Horizontal</include>
+		</control>
+	</include>
+	
+	<include name="CommonV">
+		<posx>25</posx>
+		<posy>5</posy>
+		<width>300</width>
+		<height>160</height>
+		<fadetime>200</fadetime>
+	</include>
+	<include name="Viewtype_LandscapeV">
+		<control type="group">
+			<visible>Control.IsVisible(521)</visible>
+			<include>Animation_FadedByMenu</include>
+				<include>Animation_OpenCloseFade</include>
+				<include>Animation_HiddenByInfo</include>	
+			<control type="grouplist">
+				<include>AnimationCacheNonSelect</include>
+		
+				<posx>5</posx>
+				<posy>0</posy>
+				<height>820</height>
+				<width>450</width>	
+				<itemgap>0</itemgap>				
+				<orientation>vertical</orientation>
+				<control type="image">					
+					<width>350</width>
+					<height>170</height>
+					<texture>frames/movie_frame.png</texture>
+					<aspectratio scalediffuse="true">stretch</aspectratio>
+					<colordiffuse>AAFFFFFF</colordiffuse>
+					
+				</control>
+				<control type="image">					
+					<width>350</width>
+					<height>170</height>
+					<texture>frames/movie_frame.png</texture>
+					<aspectratio scalediffuse="true">stretch</aspectratio>
+					<colordiffuse>AAFFFFFF</colordiffuse>
+					
+				</control>
+				<control type="image">					
+					<width>350</width>
+					<height>170</height>
+					<texture>frames/movie_frame.png</texture>
+					<aspectratio scalediffuse="true">stretch</aspectratio>
+					<colordiffuse>AAFFFFFF</colordiffuse>
+					
+				</control>
+				<control type="image">					
+					<width>350</width>
+					<height>170</height>
+					<texture>frames/movie_frame.png</texture>
+					<aspectratio scalediffuse="true">stretch</aspectratio>
+					<colordiffuse>AAFFFFFF</colordiffuse>
+					
+				</control>
+				<control type="image">					
+					<width>350</width>
+					<height>170</height>
+					<texture>frames/movie_frame.png</texture>
+					<aspectratio scalediffuse="true">stretch</aspectratio>
+					<colordiffuse>AAFFFFFF</colordiffuse>
+					
+				</control>
+				<control type="image">					
+					<width>350</width>
+					<height>170</height>
+					<texture>frames/movie_frame.png</texture>
+					<aspectratio scalediffuse="true">stretch</aspectratio>
+					<colordiffuse>AAFFFFFF</colordiffuse>
+					
+				</control>
+				<control type="image">					
+					<width>350</width>
+					<height>170</height>
+					<texture>frames/movie_frame.png</texture>
+					<aspectratio scalediffuse="true">stretch</aspectratio>
+					<colordiffuse>AAFFFFFF</colordiffuse>
+					
+				</control>
+			
+			</control>
+			<!-- Browser -->
+			<control type="fixedlist" id="521">
+				<posx>5</posx>
+				<posy>0</posy>
+				<height>820</height>
+				<width>450</width>
+				<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
+
+<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
+<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
+
+
+				<ondown>521</ondown>
+				<onup>521</onup>
+				<onright>60</onright>
+				<viewtype label="$LOCALIZE[31824]">icon</viewtype>
+				<orientation>vertical</orientation>
+				<focusposition>3</focusposition>
+				<scrolltime>200</scrolltime>
+				<preloaditems>2</preloaditems>
+				<pagecontrol>60</pagecontrol>
+				<include>Animation_FadedByMenu</include>
+				<include>Animation_OpenCloseFade</include>
+				<include>Animation_HiddenByInfo</include>				
+				<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes)]</visible>
+				<itemlayout width="350" height="170">
+					<control type="group">
+					   <include>isWatched</include>
+					<control type="image">
+						<posx>0</posx>
+						<posy>0</posy>
+						<width>350</width>
+						<height>170</height>
+						<texture>frames/movie_frame.png</texture>
+						<aspectratio scalediffuse="true">stretch</aspectratio>
+						<colordiffuse>AAFFFFFF</colordiffuse>
+					</control>				
+					<control type="image">
+						<include>CommonV</include>
+						<texture background="true" diffuse="landscapematteNF.png">$INFO[ListItem.Icon]</texture>
+						<colordiffuse>LandscapeDiffuse</colordiffuse>
+						<aspectratio scalediffuse="true">keep</aspectratio>
+						<visible>Container.Content(episodes)</visible>
+					</control>
+					<control type="image">
+						<texture background="true" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
+						<include>CommonV</include>
+						<colordiffuse>LandscapeDiffuse</colordiffuse>
+						<aspectratio scalediffuse="true">keep</aspectratio>
+						<visible>Container.Content(tvshows)</visible>
+					</control>
+					<control type="image">
+						<include>CommonV</include>
+						<texture background="true" fallback="home_art/movies.jpg" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
+						<colordiffuse>LandscapeDiffuse</colordiffuse>
+						<aspectratio scalediffuse="true">keep</aspectratio>
+						<visible>[Container.Content(movies) | Container.Content(sets)]</visible>
+					</control>
+					<control type="image">
+						<posx>45</posx>
+						<posy>5</posy>
+						<width>180</width>
+						<height>140</height>
+						<texture background="true" diffuse="landscapematteNF.png">$VAR[LandscapeFanartOverlay]</texture>
+						<colordiffuse>FFFFFFFF</colordiffuse>
+						<aspectratio scalediffuse="true">keep</aspectratio>
+						<visible>[Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows)]</visible>
+					</control>
+			
+					<control type="label">
+						<posx>35</posx>
+						<posy>5</posy>
+						<width>270</width>
+						<height>160</height>						
+						<label>$VAR[LandscapeFanartOverlayH]</label>
+						<font>lcdtime</font>	
+						<aligny>center</aligny>
+						<align>center</align>
+						<textcolor>yellow</textcolor>
+						<scroll>true</scroll>					
+						<visible>!String.IsEmpty(ListItem.Title) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows)]</visible>
+					</control>
+					<control type="image">
+						<include>CommonV</include>
+						<texture>landscapeframeNF.png</texture>
+					</control>
+					
+					<!-- Watched Overlay for In-Progress Items -->
+					<control type="group">
+					<posx>235</posx>
+					<posy>145</posy>
+					<include>OverlayProgress</include>
+				</control>						
+					<control type="group">
+						<left>28</left>
+						<top>5</top>
+						<include>ShowTotalTvEp</include>		
+					</control>
+					<include>AnimationCacheNonSelect</include>
+			</control>
+				</itemlayout>
+				
+				<focusedlayout width="350" height="170">	
+					<include>ActiveClearArt</include>
+						
+					<control type="image">
+						<posx>0</posx>
+						<posy>0</posy>
+						<width>350</width>
+						<height>170</height>
+						<texture>frames/movie_frame.png</texture>
+						<aspectratio scalediffuse="true">stretch</aspectratio>
+						<colordiffuse>FFFFFFFF</colordiffuse>						
+					</control>
+					<control type="group">
+						<animation type="Focus" reversible="true">
+							
+							<effect type="rotatey" center="180" start="90" end="0"  time="500" tween="back" easing="out" />
+						</animation>
+					
+					<control type="image">
+						<include>CommonV</include>
+						<texture background="true" diffuse="landscapematteNF.png">$INFO[ListItem.Icon]</texture>
+						<colordiffuse>FFFFFFFF</colordiffuse>
+						<aspectratio scalediffuse="true">keep</aspectratio>
+						<visible>Container.Content(episodes)</visible>
+					</control>
+					<control type="image">
+						<texture background="true" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
+						<include>CommonV</include>
+						<colordiffuse>FFFFFFFF</colordiffuse>
+						<aspectratio scalediffuse="true">keep</aspectratio>
+						<visible>Container.Content(tvshows)</visible>
+					</control>
+					<control type="image">
+						<include>CommonV</include>
+						<texture background="true" fallback="home_art/movies.jpg" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
+						<colordiffuse>FFFFFFFF</colordiffuse>
+						<aspectratio scalediffuse="true">keep</aspectratio>
+						<visible>[Container.Content(movies) | Container.Content(sets)]</visible>
+					</control>
+					<control type="image">
+						<posx>45</posx>
+						<posy>5</posy>
+						<width>180</width>
+						<height>140</height>
+						<texture background="true" diffuse="landscapematteNF.png">$VAR[LandscapeFanartOverlay]</texture>
+						<colordiffuse>FFFFFFFF</colordiffuse>
+						<aspectratio scalediffuse="true">keep</aspectratio>
+						<visible>[Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows)]</visible>
+					</control>
+			
+					
+					<control type="image">
+						<include>CommonV</include>
+						<texture>landscapeframeNF.png</texture>
+					</control>
+					
+					<!-- Watched Overlay for In-Progress Items -->
+					<control type="group">
+					<posx>235</posx>
+					<posy>145</posy>
+					<include>OverlayProgress</include>
+				</control>			
+					</control>
+				</focusedlayout>
+			</control>
+			<!-- Browser label and flags -->
+			
+			<include>ScrollBar_Horizontal</include>
+		</control>
+	</include>
+</includes>
