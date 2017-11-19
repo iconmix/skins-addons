@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <window id="10025">
   <onload condition="System.HasAddon(script.tv.show.next.aired)">RunScript(script.tv.show.next.aired,backend=True)</onload>-->
 
@@ -725,38 +725,17 @@
     </control>
     
     <include>AnimationVoletsHorizontaux</include>
-    <!--- ------------BANDE ANNONCE EN FENETRE ----------
-    <control type="group">
-      <top>1085</top>
-      <animation type="Conditional" condition="Player.HasVideo" reversible="true">
-          <effect type="slide" end="0,-755" time="1000"  />
-        </animation>
-      <visible>Player.HasVideo</visible>
-      <control type="image" >
-    <description>Video Preview</description>
-    <top>0</top>
-    <left>312</left>
-    <width>1296</width>
-    <height>750</height>
-    <texture>frames/tvvideo.png</texture>
-    <aspectratio>stretch</aspectratio>
-     </control>
-    <control type="videowindow" id="1192">
-    <description>Video Preview</description>
-    <top>5</top>
-    <left>320</left>
-    <width>1280</width>
-    <height>720</height>
     
-     </control>
-     
-</control>
--->
+    <control type="group">
+      <visible>!Window.IsVisible(2003)</visible>
+      <include>BandeAnnonceFenetre</include>
+    </control>
+
     <!--	DEBUG --
     <control type="label">
     <posx>700</posx>
 
-    <label>$INFO[ListItem.TVShowTitle][CR]Varaiable:$INFO[ListItem.IMDBNumber][CR]$INFO[ListItem.Icon][CR]$INFO[ListItem.Year][CR]IconMixSaga=$INFO[Window(Home).Property(IconMixSaga)][CR]DBTYPE=$INFO[ListItem.DBType][CR]Rating1999=$INFO[Container(1999).ListItem.Property(Rating)][CR]1991:$INFO[Container(1991).NumItems][CR]1998:$INFO[Container(1998).NumItems][CR]1999:$INFO[Container(1999).NumItems][CR]poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]DBTYPE=$INFO[Container(1999).ListItem.DBTYPE][CR]Content:$INFO[Container.Content]Pays : $INFO[ListItem.Country][CR]Country1:$INFO[Window(Home).Property(ItemCountry1)]O[CR]Portrait:$INFO[ListItem.Label][CR]$INFO[ListItem.FileNameAndPath]</label>
+    <label>$INFO[ListItem.TVShowTitle][CR]Varaiable:$INFO[ListItem.IMDBNumber][CR]$INFO[ListItem.Icon][CR]$INFO[ListItem.Year][CR]IconMixSaga=$INFO[Window(Home).Property(IconMixSaga)][CR]DBTYPE=$INFO[ListItem.DBType][CR]Rating1999=$INFO[Container(1999).ListItem.Property(Rating)][CR]1991:$INFO[Container(1991).NumItems][CR]1998:$INFO[Container(1998).NumItems][CR]1999:$INFO[Container(1999).NumItems][CR]poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]DBTYPE=$INFO[Container(1999).ListItem.DBTYPE][CR]Content:$INFO[Container.Content]Pays : $INFO[ListItem.Country][CR]Country1:$INFO[Window(Home).Property(ItemCountry1)]O[CR]Portrait:$INFO[ListItem.Label][CR]$INFO[ListItem.FileNameAndPath][CR]Varaiable:$INFO[Container.FolderPath]</label>
 
     </control>
     -->

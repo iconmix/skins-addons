@@ -934,7 +934,9 @@
 </control>
 
 <include>PanelActeurs</include>
-
+ <control type="group">
+      <include>BandeAnnonceFenetre</include>
+    </control>
 </controls>
 
 </window>

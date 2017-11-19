@@ -47,6 +47,51 @@
 <include file="IncludesVideoLyrics.xml" />
 <include file="VueExperimentale.xml" />
 
+
+<!--- ------------BANDE ANNONCE EN FENETRE ---------- -->
+<include name="BandeAnnonceFenetre">
+    <control type="group">
+      <!-- -->
+      <visible>Skin.HasSetting(BAFenetre)+Player.HasVideo+String.IsEmpty(VideoPlayer.DBID)</visible>
+      <top>1085</top>
+      <animation type="Conditional" condition="Player.HasVideo" reversible="true">
+          <effect type="slide" end="0,-755" time="1000"  />
+        </animation>
+        -->
+         <control type="image">
+          <top>90</top>
+          <left>380</left>
+          <width>900</width>
+          <height>506</height>
+          <texture>black.png</texture>
+          <aspectratio>stretch</aspectratio>
+        </control>    
+        <control type="videowindow" id="1192">    
+            <top>90</top>
+            <left>380</left>
+            <width>900</width>
+            <height>506</height>    
+        </control>
+        <control type="image">
+            <top>4</top>
+            <left>276</left>
+            <width>1110</width>
+            <height>726</height>
+            <texture>frames/tvvideo.png</texture>
+            <aspectratio>stretch</aspectratio>
+        </control>
+        <control type="label">
+          <top>45</top>
+          <width>950</width>
+          <left>356</left>
+          <align>center</align>
+          <scroll>true</scroll>
+          <font>impact35</font>
+          <label>[I]$INFO[VideoPlayer.Title][/I]</label>
+        </control>
+        
+    </control>
+</include>
 <!------------------------------------------------------------------------------------------------ -->
 <include name="MusiqueBackGround">
   <control type="wraplist" id="2996">
@@ -745,11 +790,11 @@
 <include name="PanelActeursOsd">
   <control type="group">
     <top>1450</top>
-    <animation type="Conditional" reversible="true" condition="!Control.HasFocus(5051)+!Control.HasFocus(1998)+!Container(1998).IsUpdating">
+    <animation type="Conditional" reversible="true" condition="!Control.HasFocus(5051)+!Control.HasFocus(1998)+!Container(1998).IsUpdating+Integer.IsGreater(Container(1998).NumItems,0)">
       <effect type="slide"  start="0,0" end="0,-500" time="500" delay="1" />
     </animation>
 
-    <visible>Skin.HasSetting(ShowOsdActors)+Player.HasVideo+[Window.IsVisible(12901)|Window.IsVisible(10142)]</visible>
+    <visible>Skin.HasSetting(ShowOsdActors)+Player.HasVideo+[Window.IsVisible(12901)|Window.IsVisible(10142)]+Integer.IsGreater(Container(1998).NumItems,0)</visible>
     <control type="button" id="2022">
       <top>1500</top>
       <label>Activation1998</label>
@@ -975,70 +1020,7 @@
 
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="PanelActeurs">
-  <control type="fixedlist" id="1998">
-    <visible>Container.Content(directors)|Container.Content(actors)|Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(episodes)|Container.Content(seasons)|Player.HasVideo</visible>
-    <animation type="Conditional" condition="Window.IsVisible(12901)|Window.IsVisible(10142)|Window.IsVisible(movieinformation)|Control.HasFocus(1998)|Control.HasFocus(5051)|Control.HasFocus(2022)|Control.HasFocus(2999)">
-      <effect type="fade"  start="100" end="0" time="1" delay="1" reversible="true"/>
-    </animation>
-    <animation type="Conditional" condition="Skin.HasSetting(CacheFond)">
-        <effect type="slide"  start="0,0" end="0,-835" time="1" delay="1" reversible="false"/>
-      </animation>
-    <movement>6</movement>
-    <ondown>5051</ondown>
-    <onfocus>SetProperty(ActeurVideoLocal,1,Home)</onfocus>
-    <onfocus>SetProperty(IconmixTrailer,,Home)</onfocus>
-    <onfocus condition="!String.IsEmpty(Window(Home).Property(ActeurVideoReset))">Action(firstpage)</onfocus>
-
-    <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
-    <onback>SetProperty(ActeurVideoReset,1,Home)</onback>
-    <onback condition="Skin.HasSetting(ShowOsdActors)+Player.HasVideo+[Window.IsVisible(12901)|Window.IsVisible(10142)]">2001</onback>
-    <onback condition="!Window.IsVisible(movieinformation)+!Window.IsVisible(12901)+!Window.IsVisible(10142)+!Control.IsVisible(1999)">55</onback>
-    <onback condition="Window.IsVisible(movieinformation)">7003</onback>
-    <onback condition="Control.IsVisible(1999)">2999</onback>
-    <onback>Action(firstpage)</onback>
-
-    <onup condition="Skin.HasSetting(ShowOsdActors)+Player.HasVideo+[Window.IsVisible(12901)|Window.IsVisible(10142)]">2001</onup>
-    <onup>SetProperty(ActeurVideoLocal,1,Home)</onup>
-    <onup>SetProperty(ActeurVideoReset,1,Home)</onup>
-    <onup condition="!Window.IsVisible(movieinformation)+!Window.IsVisible(12901)+!Window.IsVisible(10142)+!Control.IsVisible(1999)">55</onup>
-    <onup condition="Window.IsVisible(movieinformation)">7003</onup>
-    <onup condition="Control.IsVisible(1999)">2999</onup>
-
-    <include condition="Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(CacheFond)">ActeurCenter</include>
-    <include condition="[!Skin.HasSetting(ActeursAuCentre)|!Skin.HasSetting(CacheFond)]">ActeurLeft</include>
-
-    <posx>20</posx>
-    <posy>938</posy>
-    <height>200</height>
-    <align>left</align>
-    <itemgap>1</itemgap>
-    <orientation>horizontal</orientation>
-    <autoscroll delay="6000" repeat="5000" time="5000">!Control.HasFocus(1998)+!Control.HasFocus(5051)+!Control.HasFocus(2022)+Integer.IsGreater(Container(1998).NumItems,7)</autoscroll>
-    <pagecontrol>60</pagecontrol>
-    <resetonlabelchange>true</resetonlabelchange>
-    <itemlayout width="75">
-      <control type="image">
-        <width>75</width>
-        <height>110</height>
-        <texture  diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[ListItem.Icon]</texture>
-        <aspectratio scalediffuse="true">keep</aspectratio>
-        <colordiffuse>FFCCCCCC</colordiffuse>
-      </control>
-    </itemlayout>
-    <focusedlayout width="75">
-      <control type="image">
-        <animation type="Conditional" condition="true">
-          <effect type="zoom"  center="37,55" start="100" end="120" time="5" delay="1" reversible="true"/>
-        </animation>
-        <width>75</width>
-        <height>110</height>
-        <texture  diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[ListItem.Icon]</texture>
-        <aspectratio scalediffuse="true">keep</aspectratio>
-        <colordiffuse>FFFFFFFF</colordiffuse>
-      </control>
-    </focusedlayout>
-
-  </control>
+  
   <control type="group">
 
     <control type="group"> <!-- ACTEURS DEFILANTS -->
@@ -1376,6 +1358,70 @@
     </control>
   </control>
 </control>
+<control type="fixedlist" id="1998">
+    <visible>Container.Content(directors)|Container.Content(actors)|Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(episodes)|Container.Content(seasons)|[Player.HasVideo+!String.IsEmpty(VideoPlayer.DBDID)]</visible>
+    <animation type="Conditional" condition="Window.IsVisible(12901)|Window.IsVisible(10142)|Window.IsVisible(movieinformation)|Control.HasFocus(1998)|Control.HasFocus(5051)|Control.HasFocus(2022)|Control.HasFocus(2999)">
+      <effect type="fade"  start="100" end="0" time="1" delay="1" reversible="true"/>
+    </animation>
+    <animation type="Conditional" condition="Skin.HasSetting(CacheFond)">
+        <effect type="slide"  start="0,0" end="0,-835" time="1" delay="1" reversible="false"/>
+      </animation>
+    <movement>6</movement>
+    <ondown>5051</ondown>
+    <onfocus>SetProperty(ActeurVideoLocal,1,Home)</onfocus>
+    <onfocus>SetProperty(IconmixTrailer,,Home)</onfocus>
+    <onfocus condition="!String.IsEmpty(Window(Home).Property(ActeurVideoReset))">Action(firstpage)</onfocus>
+
+    <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
+    <onback>SetProperty(ActeurVideoReset,1,Home)</onback>
+    <onback condition="Skin.HasSetting(ShowOsdActors)+Player.HasVideo+[Window.IsVisible(12901)|Window.IsVisible(10142)]">2001</onback>
+    <onback condition="!Window.IsVisible(movieinformation)+!Window.IsVisible(12901)+!Window.IsVisible(10142)+!Control.IsVisible(1999)">55</onback>
+    <onback condition="Window.IsVisible(movieinformation)">7003</onback>
+    <onback condition="Control.IsVisible(1999)">2999</onback>
+    <onback>Action(firstpage)</onback>
+
+    <onup condition="Skin.HasSetting(ShowOsdActors)+Player.HasVideo+[Window.IsVisible(12901)|Window.IsVisible(10142)]">2001</onup>
+    <onup>SetProperty(ActeurVideoLocal,1,Home)</onup>
+    <onup>SetProperty(ActeurVideoReset,1,Home)</onup>
+    <onup condition="!Window.IsVisible(movieinformation)+!Window.IsVisible(12901)+!Window.IsVisible(10142)+!Control.IsVisible(1999)">55</onup>
+    <onup condition="Window.IsVisible(movieinformation)">7003</onup>
+    <onup condition="Control.IsVisible(1999)">2999</onup>
+
+    <include condition="Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(CacheFond)">ActeurCenter</include>
+    <include condition="[!Skin.HasSetting(ActeursAuCentre)|!Skin.HasSetting(CacheFond)]">ActeurLeft</include>
+
+    <posx>20</posx>
+    <posy>938</posy>
+    <height>200</height>
+    <align>left</align>
+    <itemgap>1</itemgap>
+    <orientation>horizontal</orientation>
+    <autoscroll delay="6000" repeat="5000" time="5000">!Control.HasFocus(1998)+!Control.HasFocus(5051)+!Control.HasFocus(2022)+Integer.IsGreater(Container(1998).NumItems,7)</autoscroll>
+    <pagecontrol>60</pagecontrol>
+    <resetonlabelchange>true</resetonlabelchange>
+    <itemlayout width="75">
+      <control type="image">
+        <width>75</width>
+        <height>110</height>
+        <texture  diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[ListItem.Icon]</texture>
+        <aspectratio scalediffuse="true">keep</aspectratio>
+        <colordiffuse>FFCCCCCC</colordiffuse>
+      </control>
+    </itemlayout>
+    <focusedlayout width="75">
+      <control type="image">
+        <animation type="Conditional" condition="true">
+          <effect type="zoom"  center="37,55" start="100" end="120" time="5" delay="1" reversible="true"/>
+        </animation>
+        <width>75</width>
+        <height>110</height>
+        <texture  diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[ListItem.Icon]</texture>
+        <aspectratio scalediffuse="true">keep</aspectratio>
+        <colordiffuse>FFFFFFFF</colordiffuse>
+      </control>
+    </focusedlayout>
+
+  </control>
 </include>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="ActeursSuivants">
@@ -1910,7 +1956,7 @@
   <include name="Global_Background_Fanart">
 
     <control type="videowindow" id="1">
-      <visible>Player.HasVideo + !Window.IsActive(selectdialog)  +Skin.HasSetting(PlayVideoOverlay)</visible>
+      <visible>[Player.HasVideo+!String.IsEmpty(VideoPlayer.DBID)] + !Window.IsActive(selectdialog)  +Skin.HasSetting(PlayVideoOverlay)</visible>
     </control>
 
     <control type="group" id="6999">
@@ -3377,8 +3423,8 @@
                 <visible>!String.IsEmpty(Container(1999).ListItem.Property(UserRating))</visible>
               </control>
 
-              <control type="group">
-                <!-- slide du fond + disc --->
+              <control type="group"><!-- slide du fond + disc --->
+                
                 <left>161</left>
                 <top>138</top>
                 <width>280</width>
@@ -3401,11 +3447,19 @@
                     <effect type="rotate"  center="auto" end="-360" time="700" delay="100" />
                   </animation>
                 </control>
+                <control type="image">
+                  <left>110</left>
+                  <top>110</top>
+                  <height>60</height>
+                  <width>60</width>
+                  <texture>buttons/button_chercheFO.png</texture>
+                  <animation effect="zoom"  center="auto" start="95" end="110" time="1000" pulse="true" reversible="false" condition="true">Conditional</animation>
+                </control>
               </control>
             </control>
 
             <control type="group"> <!--- animation couvercle -->
-              <animation type="Conditional" condition="System.IdleTime(2)|!String.IsEmpty(Window(Home).Property(FenetreListeChoix))" reversible="false">
+              <animation type="Conditional" condition="[System.IdleTime(2)|!String.IsEmpty(Window(Home).Property(FenetreListeChoix))]+![Skin.HasSetting(BAFenetre)+Player.HasVideo+String.IsEmpty(VideoPlayer.DBID)]" reversible="false">
                 <effect type="rotatey" center="50,0" end="180" time="800" delay="100" />
               </animation>
 
@@ -3485,7 +3539,7 @@
               </control>
 
               <control type="group">
-                <visible>[System.IdleTime(2)|!String.IsEmpty(Window(Home).Property(FenetreListeChoix))]+!Skin.HasSetting(Hide_Plot)</visible>
+                <visible>[System.IdleTime(2)|!String.IsEmpty(Window(Home).Property(FenetreListeChoix))]+!Skin.HasSetting(Hide_Plot)+![Skin.HasSetting(BAFenetre)+Player.HasVideo+String.IsEmpty(VideoPlayer.DBID)]</visible>
 
                 <animation type="Visible" reversible="false">
                   <effect type="fade" start="0" end="100" time="2000" delay="0" />

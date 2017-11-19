@@ -322,6 +322,10 @@
 	  <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.Contains(Container(9000).ListItem.Property(background),WDF2)">$INFO[Container(9000).ListItem.Property(widgetPath.2)]</value>
 	  <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.Contains(Container(9000).ListItem.Property(list),library:)+String.Contains(Container(9000).ListItem.Property(background),WDF3)">$INFO[Container(9000).ListItem.Property(list)]</value>
 	  <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.Contains(Container(9000).ListItem.Property(list),special:)+String.Contains(Container(9000).ListItem.Property(background),WDF3)">$INFO[Container(9000).ListItem.Property(list)]</value>
+	  <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.Contains(Container(9000).ListItem.Property(list),MovieTitles)+String.Contains(Container(9000).ListItem.Property(background),WDF3)">videodb://movies/titles</value>
+	  <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.Contains(Container(9000).ListItem.Property(list),TVShowTitles)+String.Contains(Container(9000).ListItem.Property(background),WDF3)">videodb://tvshows/titles</value>
+	  <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.Contains(Container(9000).ListItem.Property(list),Videos)+String.Contains(Container(9000).ListItem.Property(background),WDF3)">videodb://video/</value>
+
 	  
 
 
@@ -344,10 +348,10 @@
 
 	<!--Global Background -->
 	<include name="GlobalBackground">
-<!--
+<!-- -->
 		<control type="videowindow" id="1">
 			<description>Video Preview</description>
-			<visible>Player.HasVideo + !Window.IsActive(selectdialog)  +Skin.HasSetting(PlayVideoOverlay)</visible>
+			<visible>Player.HasVideo +!String.IsEmpty(VideoPlayer.DBID) + !Window.IsActive(selectdialog)  +Skin.HasSetting(PlayVideoOverlay)</visible>
 		</control>
 -->
 		<control type="group">

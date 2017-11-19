@@ -310,14 +310,19 @@ class Main:
                               
                     if len(ListeNomTrailer)>0:
                           dialogC = xbmcgui.Dialog()
+                          BAF=0
+                          if xbmc.getCondVisibility("Skin.HasSetting(BAfenetre)"):
+                            BAF=1
+                             
                           
                           ret=dialogC.select("[I]"+xbmc.getLocalizedString( 20410 )+"[/I][CR]"+"[B]"+Titre+"[/B]", ListeNomTrailer)
                           if ret<len(ListeTrailer) and ret>=0:
-                              xbmc.executebuiltin('Dialog.Close(all,true)')
+                              if BAF==0: 
+                                xbmc.executebuiltin('Dialog.Close(all,true)')
                               if str(ListeTrailer[ret]["key"])!="KODI":
-                                 xbmc.executebuiltin('PlayMedia(plugin://plugin.video.youtube/play/?video_id=%s,0)' %(ListeTrailer[ret]["key"]))
+                                 xbmc.executebuiltin('PlayMedia(plugin://plugin.video.youtube/play/?video_id=%s,%d)' %(ListeTrailer[ret]["key"],BAF))
                               else:
-                                  xbmc.executebuiltin('PlayMedia("'+ListeTrailer[ret]["id"]+'",0)' )
+                                  xbmc.executebuiltin('PlayMedia("'+ListeTrailer[ret]["id"]+'",%d)' %(BAF) )
                           else:
                               if  ActeursBio=="" :  
                                    #self.windowhome.setProperty('ActeurVideoReset','')
