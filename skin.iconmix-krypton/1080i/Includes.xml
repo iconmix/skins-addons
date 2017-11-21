@@ -896,7 +896,7 @@
     <effect type="zoom" center="0,80" end="85"  time="1" delay="1" reversible="false"/>
   </animation>
   <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
-  <colordiffuse>A0FFFFFF</colordiffuse>
+  <colordiffuse>FFFFFFFF</colordiffuse>
 </include>
 <!-- ----------------------------------------------------------------------------------------------- -->
 <include name="PanelActeursSaga">
@@ -935,7 +935,7 @@
           <effect type="fade"  start="100" end="0"  time="1500" delay="1000" reversible="false"/>
         </animation>
         <height>25</height>
-        <texture>buttons/button_chercheFO.png</texture>
+        <texture>info.png</texture>
         <aspectratio>keep</aspectratio>
       </control>
     </control>
@@ -1443,7 +1443,6 @@
         <!-- <onup>Action(firstpage)</onup> -->
         <onup>SetProperty(ActeurVideoLocal,1,Home)</onup>
         <onup>1998</onup>        
-        <onunfocus>SetProperty(ActeurVideoLocal,1,Home)</onunfocus>
         <onleft>Control.Move(5051,-1)</onleft>
         
         <onright>Control.Move(5051,1)</onright>        
@@ -1455,10 +1454,10 @@
         <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
         <!-- <onback>Action(firstpage)</onback> -->
         <onback>55</onback>
-        <ondown condition="String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">SetProperty(ActeurVideoLocal,1,Home)</ondown>
-        <ondown condition="!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">SetProperty(ActeurVideoLocal,,Home)</ondown>
+        <ondown condition="String.IsEmpty(Window(Home).Property(IconMixUpdating))+String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">SetProperty(ActeurVideoLocal,1,Home)</ondown>
+        <ondown condition="String.IsEmpty(Window(Home).Property(IconMixUpdating))+!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">SetProperty(ActeurVideoLocal,,Home)</ondown>
         <!-- <ondown>Action(firstpage)</ondown> -->
-        <ondown>SetFocus(5051)</ondown>
+        <ondown condition="String.IsEmpty(Window(Home).Property(IconMixUpdating))">SetFocus(5051)</ondown>
           
     </include>
 <include name="ControlesRealisateur">
@@ -1468,7 +1467,7 @@
         <label>CONTROLEROLES</label>
         <onfocus>SetProperty(ActeurVideoReset,,Home)</onfocus>
         <onfocus>SetProperty(IconmixTrailer,,Home)</onfocus>
-        <onunfocus>SetProperty(ActeurVideoLocal,1,Home)</onunfocus>
+        
         <!-- <onup>Action(firstpage)</onup> -->
         <onup>SetProperty(ActeurVideoLocal,1,Home)</onup>
         <onup>7003</onup>        
@@ -1484,10 +1483,10 @@
         <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
         <!-- <onback>Action(firstpage)</onback> -->
         <onback>7003</onback>
-        <ondown condition="String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">SetProperty(ActeurVideoLocal,1,Home)</ondown>
-        <ondown condition="!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">SetProperty(ActeurVideoLocal,,Home)</ondown>
+        <ondown condition="String.IsEmpty(Window(Home).Property(IconMixUpdating))+String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">SetProperty(ActeurVideoLocal,1,Home)</ondown>
+        <ondown condition="String.IsEmpty(Window(Home).Property(IconMixUpdating))+!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">SetProperty(ActeurVideoLocal,,Home)</ondown>
         <!-- <ondown>Action(firstpage)</ondown> -->
-        <ondown>SetFocus(5052)</ondown>
+        <ondown condition="String.IsEmpty(Window(Home).Property(IconMixUpdating))">SetFocus(5052)</ondown>
           
     </include>
 
@@ -1686,7 +1685,7 @@
         <font>lcdnsub</font>
         <textcolor>lightblue</textcolor>
         <label>$INFO[Container(5052).CurrentItem]/$INFO[Container(5052).NumItems]</label>
-        <visible>!Container(5052).IsUpdating)</visible>
+        <visible>!Container(5052).IsUpdating</visible>
       </control>
 
       <control type="fixedlist" id="5052">
@@ -1877,7 +1876,7 @@
         <align>center</align>
         <aligny>center</aligny>
         <font>comic24</font>
-        <textcolor>grey</textcolor>
+        <textcolor>lightgrey</textcolor>
         <label>$INFO[ListItem.Label]</label>
       </control>
       <control type="label">
@@ -1886,7 +1885,7 @@
         <align>center</align>
         <aligny>center</aligny>
         <font>comic24</font>
-        <textcolor>grey</textcolor>
+        <textcolor>lightgrey</textcolor>
         <label>[I]$INFO[ListItem.Year][/I]</label>
       </control>
       <control type="label">
@@ -1895,7 +1894,7 @@
         <align>center</align>
         <aligny>center</aligny>
         <font>impactsongs</font>
-        <textcolor>grey</textcolor>
+        <textcolor>lightgrey</textcolor>
         <label>[I]$INFO[ListItem.Label2][/I]</label>
       </control>
     </control>
@@ -1939,7 +1938,7 @@
         <align>center</align>
         <aligny>center</aligny>
         <font>comic24</font>
-        <textcolor>white</textcolor>
+        <textcolor>lightgrey</textcolor>
         <label>$INFO[ListItem.Label]</label>
         <visible>!Control.HasFocus(7779)+!Control.HasFocus(7778)+!Control.HasFocus(505)</visible>
       </control>
@@ -1949,7 +1948,7 @@
         <align>center</align>
         <aligny>center</aligny>
         <font>comic24</font>
-        <textcolor>white</textcolor>
+        <textcolor>lightgrey</textcolor>
         <label>[I]$INFO[ListItem.Year][/I]</label>
         <visible>!Control.HasFocus(7779)+!Control.HasFocus(7778)+!Control.HasFocus(505)</visible>
       </control>
@@ -1959,7 +1958,7 @@
         <align>center</align>
         <aligny>center</aligny>
         <font>impactsongs</font>
-        <textcolor>white</textcolor>
+        <textcolor>lightgrey</textcolor>
         <label>[I]$INFO[ListItem.Label2][/I]</label>
       </control>
     </control>
