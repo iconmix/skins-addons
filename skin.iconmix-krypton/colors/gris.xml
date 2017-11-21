@@ -10,6 +10,7 @@
 	<!-- Metropolis Default Colors -->
 	<!-- Global Colors -->
 	<color name="BackgroundColor">ff7f7f7f</color>
+	<color name="CouleurActeurs">7F7F7F7F</color>
 	<color name="FanartDiffuse">32FFFFFF</color>
 	<color name="FanartDiffuseLight">92FFFFFF</color>			<!-- FanartDiffuse + 0x60 -->
 	<color name="Home2FanartDiffuse">77FFFFFF</color>
@@ -45,7 +46,7 @@
 	<color name="Home2SkinName">FFc89008</color>
 	
 	<!-- Media Flags -->
-	<color name="MediaFlagDiffuse">ddFFFFFF</color>
+	<color name="MediaFlagDiffuse">EEFFFFFF</color>
 	<color name="MediaFlagBoxDiffuse">ee101010</color>
 	<color name="RatingStarDiffuse">ee3c95c8</color>
 	<color name="IMDbDiffuseTop250">eed0b331</color>

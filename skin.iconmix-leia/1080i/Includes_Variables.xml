@@ -121,7 +121,7 @@
 		<value></value>
 		</variable>
 		<variable name="GetBiographieActeur">
-		  <value condition="Control.HasFocus(5051)">plugin://script.iconmixtools/?action=getbiographie&id=$INFO[Container(1998).ListItem.Label]&infotype=$INFO[Container(1998).ListItem.DBTYPE]</value>
+		  <value condition="Control.HasFocus(7779)">plugin://script.iconmixtools/?action=getbiographie&id=$INFO[Container(1998).ListItem.Label]&infotype=$INFO[Container(1998).ListItem.DBTYPE]</value>
 		  <value condition="Control.HasFocus(8889)">plugin://script.iconmixtools/?action=getbiographie&id=$INFO[ListItem.Label]&infotype=$INFO[ListItem.DBTYPE]</value>
 		  <value></value>
 		  
@@ -141,12 +141,12 @@
 			<value></value>
 		</variable>
 		<variable name="ActeursContent">
-			<value condition="!Player.HasVideo+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]&local="oui"</value>
-			<value condition="!Player.HasVideo+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]</value>
-			<value condition="Player.HasVideo+!String.IsEmpty(VideoPlayer.TVShowTitle)+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=tvshow&id=$VAR[Is1998]&local="oui"</value>
-			<value condition="Player.HasVideo+!String.IsEmpty(VideoPlayer.TVShowTitle)+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=tvshow&id=$VAR[Is1998]</value>
-			<value condition="Player.HasVideo+String.IsEmpty(VideoPlayer.TVShowTitle)+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=movie&id=$VAR[Is1998]&local="oui"</value>
-			<value condition="Player.HasVideo+String.IsEmpty(VideoPlayer.TVShowTitle)+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(5051)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=movie&id=$VAR[Is1998]</value>
+			<value condition="!Player.HasVideo+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(7779)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]&local="oui"</value>
+			<value condition="!Player.HasVideo+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(7779)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=$INFO[ListItem.DBTYPE]&id=$VAR[Is1998]</value>
+			<value condition="Player.HasVideo+!String.IsEmpty(VideoPlayer.TVShowTitle)+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(7779)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=tvshow&id=$VAR[Is1998]&local="oui"</value>
+			<value condition="Player.HasVideo+!String.IsEmpty(VideoPlayer.TVShowTitle)+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(7779)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=tvshow&id=$VAR[Is1998]</value>
+			<value condition="Player.HasVideo+String.IsEmpty(VideoPlayer.TVShowTitle)+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(7779)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=movie&id=$VAR[Is1998]&local="oui"</value>
+			<value condition="Player.HasVideo+String.IsEmpty(VideoPlayer.TVShowTitle)+Integer.IsGreater(Container(1998).NumItems,0)+!Container(1998).IsUpdating+String.IsEmpty(Window(Home).Property(ActeurVideoLocal))+[Control.HasFocus(1998)|Control.HasFocus(7779)]">plugin://script.iconmixtools/?action=gettvfilmacteur&infotype=movie&id=$VAR[Is1998]</value>
 			
 			<value>-</value>
 		</variable>
@@ -336,8 +336,15 @@
 	  <value condition="!String.IsEqual(ListItem.DBTYPE,set)">$VAR[GlobalFanart]</value>
 	</variable>
 	
-	
+	<variable name="GlobalFanartActeur">
+	  
+	  <value condition="Control.HasFocus(7778)|Control.HasFocus(5052)">$INFO[Container(5052).ListItem.Property(fanart)]</value>
+	  <value condition="Control.HasFocus(7779)|Control.HasFocus(5051)">$INFO[Container(5051).ListItem.Property(fanart)]</value>
+	  <value>OO</value>
+	</variable>
+		
 	<variable name="GlobalFanart">
+	  
 		<value condition="Window.IsActive(pictures) + String.IsEmpty(ListItem.Art(fanart)) + [String.IsEqual(ListItem.FileExtension,png) | String.IsEqual(ListItem.FileExtension,jpg) | String.IsEqual(ListItem.FileExtension,jpeg) | String.IsEqual(ListItem.FileExtension,bmp) | String.IsEqual(ListItem.FileExtension,gif) | String.IsEqual(ListItem.FileExtension,ico) | String.IsEqual(ListItem.FileExtension,tif) | String.IsEqual(ListItem.FileExtension,tiff) | String.IsEqual(ListItem.FileExtension,tga) | String.IsEqual(ListItem.FileExtension,pcx) | String.IsEqual(ListItem.FileExtension,cbz) | String.IsEqual(ListItem.FileExtension,zip) | String.IsEqual(ListItem.FileExtension,cbr) | String.IsEqual(ListItem.FileExtension,rar) | String.IsEqual(ListItem.FileExtension,m3u)]">$INFO[listitem.filenameandpath]</value>
 		<value condition="!Window.IsVisible(10025)+!Window.IsVisible(502)+!Window.IsVisible(home)">background.jpg</value>
 		<value condition="[Container.Content(movies)|Container.Content(set)]+!Control.IsVisible(1999)+Skin.HasSetting(Enable_ExtraFanart)+!String.IsEmpty(Window(Home).Property(iconmixExtraFanart))+!String.Contains(Window(Home).Property(iconmixExtraFanart),plugin)+!String.Contains(Container.FolderPath,plugin)">$INFO[Window(Home).Property(iconmixExtraFanart)]</value>
@@ -354,7 +361,7 @@
 	</variable>
 	<variable name="GlobalFanartDiffuse">
 		<!-- <value condition="!Skin.HasSetting(GlobalFanartLight)">FanartDiffuse</value> -->
-		<value>FanartDiffuseLight</value>
+		<value>FFFFFFFF</value>
 	</variable>
 	<variable name="MPAATexture">
 		<value condition="String.Contains(ListItem.Mpaa,10)">flags\Rating\Moins10.png</value>
@@ -814,7 +821,7 @@
 		<value>flags/Rating/NoRating.png</value>
 	</variable>
 	<variable name="PosterThumb">
-		<value condition="!String.IsEmpty(Window(10000).Property(IconMixDirector))">$INFO[Window(10000).Property(IconMixDirector)]</value>
+		<value condition="!String.IsEmpty(Window(10000).Property(IconMixDirector))+!Window.IsVisible(12003)+Container.Content(directors)">$INFO[Window(10000).Property(IconMixDirector)]</value>
 
 		<value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(season.poster)]</value>

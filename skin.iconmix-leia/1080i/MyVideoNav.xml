@@ -11,6 +11,7 @@
   <onload>SetProperty(TvPlayerArt,,Home)</onload>
   <onload>SetProperty(ActeurVideoLocal,1,Home)</onload>
   <onload>SetProperty(ActeurVideoReset,1,Home)</onload>
+  <onload>SetProperty(IconMixDirector,,Home)</onload>
   <onunload>SetProperty(MovieSagaTitle,,Home)</onunload>
   <onunload>SetProperty(ActeurVideoLocal,,Home)</onunload>
   <onunload>SetProperty(iconmixExtraFanart,,Home)</onunload>
@@ -21,10 +22,22 @@
   <defaultcontrol always="true">55</defaultcontrol>
   <controls>
     <include>Global_Background_Fanart</include>
+    <control type="image">
+      <posx>0</posx>
+      <posy>0</posy>
+      <width>1920</width>
+      <height>1080</height>
+      <texture>$VAR[GlobalFanartActeur]</texture>
+      <visible>[Control.HasFocus(7779)]+[!Player.HasVideo|[Player.HasVideo+!Skin.HasSetting(PlayVideoOverlay)]]</visible>
+    </control>
+    <!-- -->
+    
+    -->
     <control type="group">
+      <control type="group">
       <include>Animation_HiddenByInfo</include>
       <control type="group">
-        <animation type="Conditional" condition="Control.HasFocus(5051)|Control.HasFocus(1998)" reversible="true">
+        <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(1998)" reversible="true">
           <effect type="fade" start="100" end="15" time="500"  />
         </animation>
         <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
@@ -73,7 +86,7 @@
 
       <!-- -->
       <control type="group">
-        <animation type="Conditional" condition="Control.HasFocus(5051)|Control.HasFocus(1998)" reversible="true">
+        <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(1998)" reversible="true">
           <effect type="fade" start="100" end="15" time="500"  />
         </animation>
         <include>Animation_FadedByMenu</include>
@@ -441,7 +454,7 @@
             <include>BoutonCommun</include>
             <label>[I]$LOCALIZE[31910][/I]  >></label>
             <onclick>SetFocus(7008)</onclick>
-            <visible>[Container.Content(sets)|Container.Content(movies)|Container.Content(tvshows)|Container.Content(episodes)]+[Control.IsVisible(550)|Control.IsVisible(551)|Control.IsVisible(552)|Control.IsVisible(555)|Control.IsVisible(556)|Control.IsVisible(504)|Control.IsVisible(512)]+!Control.HasFocus(5051)+!Control.HasFocus(1998)</visible>
+            <visible>[Container.Content(sets)|Container.Content(movies)|Container.Content(tvshows)|Container.Content(episodes)]+[Control.IsVisible(550)|Control.IsVisible(551)|Control.IsVisible(552)|Control.IsVisible(555)|Control.IsVisible(556)|Control.IsVisible(504)|Control.IsVisible(512)]+!Control.HasFocus(7779)+!Control.HasFocus(1998)</visible>
           </control>
         </control>
       </control>
@@ -699,7 +712,10 @@
         </control>
       </control>
       <include condition="Skin.HasSetting(CacheFond)">vueexperimentale</include>
-
+      <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7778)" reversible="true">
+          <effect type="fade" start="100" end="0" time="1"  />
+        </animation>
+      </control>
       <!------------------------------------------------- ACTEURS et ROLES---------------------------------------->
       <include>PanelActeurs</include>
       <control type="group">
@@ -721,7 +737,7 @@
 <!--- ------------------------------------------------------------------ ---->
  <!-- liste des acteurs -->
    
-
+      
     </control>
     
     <include>AnimationVoletsHorizontaux</include>
@@ -733,9 +749,13 @@
 
     <!--	DEBUG --
     <control type="label">
+      <posy>1000</posy>
+      <label>>>$VAR[GlobalFanartActeur]</label>
+    </control>
+    <control type="label">
     <posx>700</posx>
 
-    <label>$INFO[ListItem.TVShowTitle][CR]Varaiable:$INFO[ListItem.IMDBNumber][CR]$INFO[ListItem.Icon][CR]$INFO[ListItem.Year][CR]IconMixSaga=$INFO[Window(Home).Property(IconMixSaga)][CR]DBTYPE=$INFO[ListItem.DBType][CR]Rating1999=$INFO[Container(1999).ListItem.Property(Rating)][CR]1991:$INFO[Container(1991).NumItems][CR]1998:$INFO[Container(1998).NumItems][CR]1999:$INFO[Container(1999).NumItems][CR]poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]DBTYPE=$INFO[Container(1999).ListItem.DBTYPE][CR]Content:$INFO[Container.Content]Pays : $INFO[ListItem.Country][CR]Country1:$INFO[Window(Home).Property(ItemCountry1)]O[CR]Portrait:$INFO[ListItem.Label][CR]$INFO[ListItem.FileNameAndPath][CR]Varaiable:$INFO[Container.FolderPath]</label>
+    <label>$INFO[ListItem.TVShowTitle][CR]ImdbNumber:$INFO[ListItem.IMDBNumber][CR]$INFO[ListItem.Icon][CR]$INFO[ListItem.Year][CR]IconMixSaga=$INFO[Window(Home).Property(IconMixSaga)][CR]DBTYPE=$INFO[ListItem.DBType][CR]Rating1999=$INFO[Container(1999).ListItem.Property(Rating)][CR]1991:$INFO[Container(1991).NumItems][CR]1998:$INFO[Container(1998).NumItems][CR]1999:$INFO[Container(1999).NumItems][CR]poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]DBTYPE=$INFO[Container(1999).ListItem.DBTYPE][CR]Content:$INFO[Container.Content]Pays : $INFO[ListItem.Country][CR]Country1:$INFO[Window(Home).Property(ItemCountry1)]O[CR]Portrait:$INFO[ListItem.Label][CR]$INFO[ListItem.FileNameAndPath][CR]Varaiable:$INFO[Container.FolderPath]</label>
 
     </control>
     -->

@@ -4,7 +4,7 @@
 		<control type="group"> <!-- vue experimentale -->
 			<!-- -->
 			<include>Animation_FadedByMenu</include>
-			<animation type="Conditional" condition="Control.HasFocus(5051)|Control.HasFocus(1998)" reversible="true">
+			<animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(1998)" reversible="true">
 				<effect type="fade" start="100" end="15" time="500"  />
 			</animation>
 			<posy>-990</posy> -->

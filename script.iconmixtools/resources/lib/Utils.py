@@ -1320,6 +1320,11 @@ def getFilmsParActeur(ActeurType=None,Acteur=None,Statique=None):
                     IdVideo=Item.get("tvshowid")
                     TypeVideo="tvshow"
                  ItemListe.setArt( Item.get("art"))
+                 Fanart=Item.get("art").get("fanart")
+                 if Fanart:
+                     ItemListe.setProperty("fanart",Fanart)
+                 else:
+                     ItemListe.setProperty("fanart","")
                  
                  ItemListe.setProperty('DBID', str(IdVideo))
                  ItemListe.setProperty('dbtype',TypeVideo)
@@ -1452,10 +1457,10 @@ def GetActeurInfoMaj(ActeurId,NomActeur):
           if (ActeurId["allocine"]!='') :        
             #si pas de bio en francais  et language de Kodi est French 
             json_datax=Allocine_Acteur(ActeurId.get("allocine"))
+            
             if json_datax:
               
-              jsonacteurdata=json.loads(json_datax) 
-            
+              jsonacteurdata=json.loads(json_datax)             
               if jsonacteurdata and KODILANGUAGE[0:4]=='Fren':
                       jsonActeur=jsonacteurdata.get("person")
                       if jsonActeur:
@@ -1465,12 +1470,10 @@ def GetActeurInfoMaj(ActeurId,NomActeur):
                         json_data["birthday"]=jsonActeur.get("birthDate")      
                         json_data["deathday"]=''                                                 
                         json_data["place_of_birth"]=jsonActeur.get("birthPlace")   
-                        #ActeurId='allo'+str(AllocineId)
-                     
-            #break
+                        #ActeurId='allo'+str(AllocineId)                     
+            
     if ActeurId.get("tmdb"):
-        if not json_data.get("biography"):
-           
+        if not json_data.get("biography"):           
           #on recherche sur tmdb dans la langue de KODI
             query_url = "https://api.themoviedb.org/3/person/%s?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (ActeurId.get("tmdb"),xbmc.getInfoLabel("System.Language").encode("utf8")) 
             json_datatmdb = requestUrlJson(query_url) 
@@ -1610,6 +1613,7 @@ def getFilmsTv(ActeurType=None,Acteur=None,Statique=None):
   ListeId=[]
   ActeurId={}
   ActeurCache={}
+  
   ActeurSave=1
   ActeurCache["nom"]=None
   ActeurCache["id"]=None
@@ -1619,13 +1623,15 @@ def getFilmsTv(ActeurType=None,Acteur=None,Statique=None):
   if ActeurType and Acteur!="None": 
      
      if Acteur:
+        ActeurCache["cast"]=[] 
+        ActeurCache["crew"]=[]
         savepath=ADDON_DATA_PATH+"/%s/%s" %(ActeurType,str(unidecode(Acteur)).replace(" ", "_"))
         if xbmcvfs.exists(savepath):
           with open(savepath) as data_file:
                   json_data = json.load(data_file)
                   ActeurSave=0
                   data_file.close()
-                  if not json_data.get("cast") :
+                  if not json_data.get("cast") or (ActeurType=="realisateurs" and not json_data.get("crew")):
                     ActeurSave=1
                   #if not json_data.get("biographie"):  
                   #  json_data=json_data+GetActeurInfo(Acteur)
@@ -1671,10 +1677,17 @@ def getFilmsTv(ActeurType=None,Acteur=None,Statique=None):
                                if TypeVideo=="movie": Poster="RolesFilms.png"
                                else: Poster="RolesSeries.png"
                             else: Poster="http://image.tmdb.org/t/p/original"+str(Poster)
+                            
+                            
                             Role=item.get("character")
                             if not Role:
                                Role="?"
                             ItemListe = xbmcgui.ListItem(label=name,iconImage=Poster,label2=Role)
+                            Fanart=item.get("backdrop_path")
+                            if Fanart:
+                               ItemListe.setProperty("fanart","http://image.tmdb.org/t/p/original"+Fanart)
+                            else:
+                               ItemListe.setProperty("fanart","xx")
                             try:
                               Annee=item.get("release_date").split("-")[0]
                             except:
@@ -1686,6 +1699,7 @@ def getFilmsTv(ActeurType=None,Acteur=None,Statique=None):
                                  Annee="0"
                             if not Annee or Annee=="":
                               Annee="0"
+                            ActeurCache["cast"].append(item)
                             ItemListe.setProperty("dbtype",TypeVideo)
                             ItemListe.setInfo("video", {"title": name,"year": Annee,"originaltitle": item.get("original_title"),"trailer":item.get("id")})        
                             if not Statique:
@@ -1693,11 +1707,63 @@ def getFilmsTv(ActeurType=None,Acteur=None,Statique=None):
                             else :
                                #ListeRoles.append(ItemListe)
                                ListeRoles.append([int(Annee),ItemListe])
+                               
+                  if ActeurType=='realisateurs':             
+                      for item in json_data.get("crew"):
+                         TypeVideo=str(item.get("media_type"))
+                         name=""                     
+                         if TypeVideo=="movie": name=item.get("title")
+                         else : name=item.get("name")
+                         if name:
+                           IdFix=item.get("id")
+                           Ajout=1
+                           if IdFix:
+                              if not IdFix in ListeId:
+                                 ListeId.append(IdFix)  
+                                 #logMsg("Id :  "+str(IdFix),0)                                                   
+                              else:
+                                 Ajout=0
+                           if Ajout>0:                                                  
+                                Poster=item.get("poster_path")
+                                if not Poster: 
+                                   if TypeVideo=="movie": Poster="RolesFilms.png"
+                                   else: Poster="RolesSeries.png"
+                                else: Poster="http://image.tmdb.org/t/p/original"+str(Poster)
+                                Fanart=item.get("backdrop_path")
+                                
+                                Role=item.get("job")
+                                if not Role:
+                                   Role="?"
+                                ItemListe = xbmcgui.ListItem(label=name,iconImage=Poster,label2=Role)
+                                if Fanart:
+                                   ItemListe.setProperty("fanart","http://image.tmdb.org/t/p/original"+Fanart)
+                                else:
+                                   ItemListe.setProperty("fanart","zz")
+                                try:
+                                  Annee=item.get("release_date").split("-")[0]
+                                except:
+                                  Annee=None
+                                if not Annee:
+                                   try: 
+                                     Annee=item.get("first_air_date").split("-")[0]
+                                   except:
+                                     Annee="0"
+                                if not Annee or Annee=="":
+                                  Annee="0"
+                                ActeurCache["crew"].append(item)
+                                ItemListe.setProperty("dbtype",TypeVideo)
+                                ItemListe.setInfo("video", {"title": name,"year": Annee,"originaltitle": item.get("original_title"),"trailer":item.get("id")})        
+                                if not Statique:
+                                   ListeRoles.append(["",ItemListe,True])
+                                else :
+                                   #ListeRoles.append(ItemListe)
+                                   ListeRoles.append([int(Annee),ItemListe])
                   
                             
                   if ActeurSave>0 and SETTING("cacheacteur")=="false":
                         erreur=DirStru(savepath)
-                        ActeurCache["cast"]=json_data.get("cast")                        
+                        #ActeurCache["cast"]=json_data.get("cast") 
+                        #ActeurCache["crew"]=json_data.get("crew")                       
                         if not ActeurCache["nom"]: ActeurCache["nom"]=str(unidecode(Acteur))                         
                         if not ActeurCache["id"]: ActeurCache["id"]=ActeurId                        
                         with io.open(savepath, 'w+', encoding='utf8') as outfile: 
@@ -1723,7 +1789,7 @@ def getFilmsTv(ActeurType=None,Acteur=None,Statique=None):
            
      return ListeItemFinal
                
-def getRealisateur(CheminType="",DbId=None,realisateur=None):
+def getRealisateur(CheminType="",DbId=None,realisateur=None,HttpUniquement=None):
     allInfo = []
     realisateurId=""
     savepath=""     
@@ -2217,10 +2283,7 @@ def try_decode(text, encoding="utf8"):
         return text.decode(encoding,"ignore")
     except:
         return text
-# ----------- ----- MUSIQUE ------ -----------------
-
-
-    
+# ----------- ---------- MUSIQUE --------- -----------------    
 def remove_text_inside_brackets(text, brackets="()[]"):
     count = [0] * (len(brackets) // 2) # count open/close brackets
     saved_chars = []

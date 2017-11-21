@@ -426,59 +426,15 @@
 
 
 			<control type="group">
-				<width>550</width>
-				<height>360</height>
+				<width>500</width>
+				<height>310</height>
 
 				<control type="multiimage" id="90007">
 					<include>GlobalBackgroundVideoInfo_Common</include>
 					<imagepath loop="true"  diffuse="shine.png"  background="true">$VAR[GlobalFanart]</imagepath>
 
 				</control>
-				<!--			----		--
-
-				<control type="multiimage" id="90008">
-				<include>GlobalBackgroundVideoInfo_Common</include>
-				<imagepath loop="true"  diffuse="shine.png"  background="true">$VAR[LEXX]</imagepath>
-				<visible>Container.Content(seasons)|Container.Content(tvshows)</visible>
-				</control>
-				<control type="multiimage" id="90009">
-				<include>GlobalBackgroundVideoInfo_Common</include>
-				<imagepath loop="true"  diffuse="shine.png"  background="true">$VAR[LEXX2]</imagepath>
-				<visible>Container.Content(movies)|Container.Content(episodes)</visible>
-				</control>
-				<control type="label">
-				<posx>-1000</posx>
-				<posy>-100</posy>
-				<width>1500</width>
-				<label>[COLOR=yellow]90007=$INFO[Control.GetLabel(90007)][CR]90008=$INFO[Control.GetLabel(90008)][CR]90009=$INFO[Control.GetLabel(90009)][CR]90010=$INFO[Control.GetLabel(90010)][CR]90011=$INFO[Control.GetLabel(90011)][CR]Path : $INFO[ListItem.Path][CR]FolderPath : $INFO[ListItem.FolderPath][CR]FolderName : $INFO[ListItem.FolderName][CR]Item : $INFO[ListItem.FileNameAndPath][CR]Var=$VAR[fanartdialogvideoinfo][CR]Skinhelper:$INFO[Window(Home).Property(SkinHelper.ExtraFanArtPath)][CR]FLEXX=$INFO[Window(Home).Property(FLEXX)][CR]FLEXX2=$INFO[Window(Home).Property(FLEXX2)][/COLOR]</label>
-				</control>
-				<!--			--
-
-
-				<control type="multiimage" id="90008">
-					<include>GlobalBackgroundVideoInfo_Common</include>
-					<imagepath loop="true"  diffuse="shine.png" fallback="none\" background="true">$INFO[ListItem.Path,,../extrafanart/]</imagepath>
-					<visible>String.IsEmpty(Window(Home).Property(SkinHelper.ExtraFanArtPath))+!String.Contains(Container.FolderPath,plugin) + [Container.Content(movies) |  Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
-				</control>
-
-				<control type="multiimage" id="90009">
-					<include>GlobalBackgroundVideoInfo_Common</include>
-					<imagepath loop="true"  diffuse="shine.png" background="true">$INFO[Window(Home).Property(SkinHelper.ExtraFanArtPath)]</imagepath>
-					<visible>!String.IsEmpty(Window(Home).Property(SkinHelper.ExtraFanArtPath))+!String.Contains(Container.FolderPath,plugin) + [Container.Content(tvshows) | Container.Content(seasons) |  Container.Content(movies) |Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
-				</control>
-				--
-				<control type="multiimage" id="90010">
-					<include>GlobalBackgroundVideoInfo_Common</include>
-					<imagepath colordiffuse="FFFFFFFF" diffuse="shine.png" fallback="none\" background="true">$INFO[ListItem.Path,,/extrafanart/]</imagepath>
-					<visible>String.IsEmpty(Window(Home).Property(SkinHelper.ExtraFanArtPath))+!String.Contains(Container.FolderPath,plugin) + [ Container.Content(movies) |Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
-				</control>
-
-				<control type="multiimage" id="90011">
-					<include>GlobalBackgroundVideoInfo_Common</include>
-					<imagepath loop="true"  diffuse="shine.png" fallback="none\" background="true">$INFO[ListItem.FolderPath,,extrafanart/]</imagepath>
-					<visible>String.IsEmpty(Window(Home).Property(SkinHelper.ExtraFanArtPath))+String.Contains(Container.FolderPath,plugin) + [Container.Content(tvshows) | Container.Content(seasons)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)</visible>
-				</control>
-				-->
+	
 			</control>
 
 			<!---->

@@ -39,7 +39,7 @@
 			<control type="group">
 				<top>-150</top>
 				
-     <animation type="Conditional" condition="Control.HasFocus(5051)|Control.HasFocus(1998)">
+     <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(1998)">
       <effect type="slide"  start="0,0" end="0,-800" time="500" delay="1" reversible="false"/>
     </animation>
 				<include>OSD_Progress_Bar2</include>
