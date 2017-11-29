@@ -812,6 +812,7 @@
             <onclick>Skin.ToggleSetting(HideSagaCast)</onclick>
             <selected>Skin.HasSetting(HideSagaCast)</selected>
           </control>
+          
           <control type="radiobutton" id="810">
             <include>SettingsLabel</include>
             <label>Bande annonce en fenêtre</label>

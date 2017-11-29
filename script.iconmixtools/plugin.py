@@ -25,7 +25,60 @@ ADDON_PATH = ADDON.getAddonInfo('path').decode("utf8")
 ADDON_VERSION = ADDON.getAddonInfo('version').decode("utf8")
 ADDON_DATA_PATH = xbmc.translatePath("special://profile/addon_data/%s" % ADDON_ID).decode("utf8")
 KODI_VERSION  = int(xbmc.getInfoLabel( "System.BuildVersion" ).split(".")[0])
+ACTION_PREVIOUS_MENU = (9, 10, 92, 216, 247, 257, 275, 61467, 61448)
 
+
+class dialog_select_UI(xbmcgui.WindowXMLDialog):
+    def __init__(self, *args, **kwargs):
+        xbmcgui.WindowXMLDialog.__init__(self)
+        self.listing = kwargs.get('listing')
+        self.ListeTrailer = kwargs.get('trailers')
+
+    def onInit(self):
+        self.img_list = self.getControl(6)            
+            
+
+        if self.img_list:
+          for item in self.listing:           
+              self.img_list.addItem(item)
+          self.setFocus(self.img_list)
+          self.BAF=0
+          if xbmc.getCondVisibility("Skin.HasSetting(BAfenetre)"):
+            self.BAF=1
+        else:
+          self.close()
+        #utils.logMsg("Courant ID : %d" %(xbmcgui.getCurrentWindowDialogId()),0)
+
+    def onAction(self, action):
+        if action in ACTION_PREVIOUS_MENU:
+            if xbmc.Player().isPlaying():
+               xbmc.Player().stop()
+            self.close()
+        #else:  utils.logMsg("Action : %s" %(action.getId()),0)
+# Action : 3 haut
+#Action : 4 bas
+# Action : 2 droite
+# Action : 1 gauche
+
+    def onClick(self, controlID):
+        utils.logMsg('# GUI control: %s' % controlID,0)
+        if controlID == 6 or controlID == 3: 
+            ret = self.img_list.getSelectedPosition()
+            utils.logMsg('# GUI position: %s' % ret,0)
+            
+            if self.BAF==0: 
+                xbmc.executebuiltin('Dialog.Close(all,true)')
+            if str(self.ListeTrailer[ret]["key"])!="KODI": 
+              
+               xbmc.executebuiltin('PlayMedia(plugin://plugin.video.youtube/play/?video_id=%s,%d)' %(self.ListeTrailer[ret]["key"],self.BAF))
+              
+            else:
+                xbmc.executebuiltin('PlayMedia("'+self.ListeTrailer[ret]["id"]+'",%d)' %(self.BAF) )
+                #self.close()
+
+    def onFocus(self, controlID):
+        pass
+        
 
 def in_hours_and_min(minutes_string):
     try:
@@ -40,6 +93,7 @@ class Main:
     def __init__( self ):
         
         self._init_vars()
+        self.ui=None
         self.windowhome.setProperty("IconMixDataPath",ADDON_DATA_PATH)
         #get params
         action = None
@@ -66,8 +120,8 @@ class Main:
                 if genretype: genretype = genretype[0]
                 origtitle=params.get("title",None)
                 if origtitle: origtitle = origtitle[0]    
-                if origtitle and genre and genretype:
-                    utils.getGenre(genre,genretype,origtitle)  
+                #if origtitle and genre and genretype:
+                utils.getGenre(genre,genretype,origtitle)  
              """   
              if action == "GETSAGA":
                 Id=params.get("id",None)
@@ -216,7 +270,7 @@ class Main:
             if self.trailer :                
                 self.windowhome.setProperty('FenetreListeChoix','1')
                 dialog=xbmcgui.Dialog()
-                dialog.notification('IconMixTools', __language__( 32508 ), "sablier.gif",100,False) 
+                dialog.notification('IconMixTools', __language__( 32508 ), "sablier.gif",1000) 
                 ActeursBio=""
                 ListeTrailer=[]
                 TMDBID=''
@@ -224,7 +278,7 @@ class Main:
                     ActeursBio="non"
                 if xbmc.getCondVisibility("Control.HasFocus(2008)"): #dialogvideoinfo
                     ActeursBio="noninf"
-                if xbmc.getCondVisibility("Control.HasFocus(441)"): #dialogvideoinfo cherche trailer
+                if xbmc.getCondVisibility("ControlGroup(7003).HasFocus"): #dialogvideoinfo cherche trailer
                     ActeursBio="noninf2"
                 if xbmc.getCondVisibility("Control.HasFocus(7778)"): #dialogvideoinfo realisateur
                     ActeursBio="noninf3"
@@ -281,23 +335,29 @@ class Main:
                      #acteurs
                      TypeVideo=xbmc.getInfoLabel("ListItem.DBTYPE")
                      Titre=xbmc.getInfoLabel("ListItem.Label").decode('utf-8','ignore')
-                     if not xbmc.getInfoLabel("ListItem.IMDBNumber"):
+                     if TypeVideo!="episode":
+                       IMDBNUMBER=xbmc.getInfoLabel("ListItem.IMDBNumber")
+                     else:
+                       IMDBNUMBER=xbmc.getInfoLabel("ListItem.TVShowTitle")
+                       Titre=IMDBNUMBER
+                     
+                     if not IMDBNUMBER:
                        ListeTrailer=utils.getTrailer(xbmc.getInfoLabel("ListItem.Trailer"),TypeVideo) 
                      else:
-                       TMDBID=utils.get_externalID(xbmc.getInfoLabel("ListItem.IMDBNumber"),TypeVideo)
+                       TMDBID=utils.get_externalID(IMDBNUMBER,TypeVideo)
                  
                 if TMDBID!='' :                    
                      ListeTrailer=utils.getTrailer(TMDBID,TypeVideo)
                      if ActeursBio=="non" and str(xbmc.getInfoLabel("Container(1999).ListItem.Property(DBID)"))!="": 
-                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(1999).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":" ","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(1999).ListItem.Label").decode("utf8")+" [/B][/I][/COLOR]","type":"KODI","landscape":xbmc.getInfoLabel("Container(1999).ListItem.Art(landscape)")})
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(1999).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(1999).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(1999).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(1999).ListItem.Art(landscape)")})
                      if ActeursBio=="noninf" and str(xbmc.getInfoLabel("Container(5002).ListItem.Property(DBID)"))!="": 
-                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5002).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":" ","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(5002).ListItem.Label").decode("utf8")+" [/B][/I][/COLOR]","type":"KODI","landscape":xbmc.getInfoLabel("Container(5002).ListItem.Art(landscape)")})
-                     if ActeursBio=="noninf2" and str(xbmc.getInfoLabel("ListItem.DBID"))!="": 
-                        ListeTrailer.append({"id":xbmc.getInfoLabel("ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":" ","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("ListItem.Label").decode("utf8")+" [/B][/I][/COLOR]","type":"KODI","landscape":xbmc.getInfoLabel("ListItem.Art(landscape)")})
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5002).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(5002).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(5002).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(5002).ListItem.Art(landscape)")})
+                     if ActeursBio=="noninf2" and str(xbmc.getInfoLabel("ListItem.DBID"))!="":
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("ListItem.Art(landscape)")})
                      if ActeursBio=="" and str(xbmc.getInfoLabel("Container(5051).ListItem.Property(DBID)"))!="": 
-                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5051).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":" ","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(5051).ListItem.Label").decode("utf8")+" [/B][/I][/COLOR]","type":"KODI","landscape":xbmc.getInfoLabel("Container(5051).ListItem.Art(landscape)")})
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5051).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(5051).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(5051).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(5051).ListItem.Art(landscape)")})
                      if ActeursBio=="noninf3" and str(xbmc.getInfoLabel("Container(5052).ListItem.Property(DBID)"))!="": 
-                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5052).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":" ","site":"YouTube","size":"[B][I]"+xbmc.getLocalizedString( 208 )+"[COLOR=yellow] "+xbmc.getInfoLabel("Container(5052).ListItem.Label").decode("utf8")+" [/B][/I][/COLOR]","type":"KODI","landscape":xbmc.getInfoLabel("Container(5052).ListItem.Art(landscape)")})
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5052).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(5052).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(5052).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(5052).ListItem.Art(landscape)")})
                      
                 
                 
@@ -323,32 +383,29 @@ class Main:
                          ListeNomTrailer.append(Elements)
                               
                     if len(ListeNomTrailer)>0:
-                          dialogC = xbmcgui.Dialog()
-                          BAF=0
-                          if xbmc.getCondVisibility("Skin.HasSetting(BAfenetre)"):
-                            BAF=1
-                             
+                          #dialogC = xbmcgui.Dialog()
                           
-                          ret=dialogC.select("[I]"+xbmc.getLocalizedString( 20410 )+"[/I][CR]"+"[B]"+Titre+"[/B]", ListeNomTrailer)
-                          if ret<len(ListeTrailer) and ret>=0:
-                              if BAF==0: 
-                                xbmc.executebuiltin('Dialog.Close(all,true)')
-                              if str(ListeTrailer[ret]["key"])!="KODI":
-                                 xbmc.executebuiltin('PlayMedia(plugin://plugin.video.youtube/play/?video_id=%s,%d)' %(ListeTrailer[ret]["key"],BAF))
-                              else:
-                                  xbmc.executebuiltin('PlayMedia("'+ListeTrailer[ret]["id"]+'",%d)' %(BAF) )
-                          else:
-                              if  ActeursBio=="" :  
-                                   #self.windowhome.setProperty('ActeurVideoReset','')
-                                   xbmc.executebuiltin("SetFocus(5051)")
-                              else :
-                                   if  ActeursBio=="non" : 
-                                        xbmc.executebuiltin("SetFocus(2999)")                             
-                                   else:
-                                        if  ActeursBio=="noninf3" :
-                                          xbmc.executebuiltin("SetFocus(7778)")
-                                        else:  
-                                          xbmc.executebuiltin("SetFocus(2008)")
+                          
+                          self.ui = dialog_select_UI('choix.xml', ADDON_PATH, 'default','1080i',listing=ListeNomTrailer,trailers=ListeTrailer)
+                          self.windowhome.setProperty("IconMixTrailer","1")
+                          ret=self.ui.doModal()
+                          del self.ui                          
+                          self.windowhome.clearProperty('IconMixEpSa')
+                          utils.logMsg("sortie player",0)
+                          #ret=dialogC.select("[I]"+xbmc.getLocalizedString( 20410 )+"[/I][CR]"+"[B]"+Titre+"[/B]", ListeNomTrailer)
+                          if  ActeursBio=="" :  
+                               #self.windowhome.setProperty('ActeurVideoReset','')
+                               xbmc.executebuiltin("SetFocus(5051)")
+                          else :
+                               if  ActeursBio=="non" : 
+                                    xbmc.executebuiltin("SetFocus(2999)")                             
+                               else:
+                                    if  ActeursBio=="noninf3" :
+                                      xbmc.executebuiltin("SetFocus(7778)")
+                                    if  ActeursBio=="noninf2" :
+                                      xbmc.executebuiltin("SetFocus(7003)")
+                                    else:    
+                                      xbmc.executebuiltin("SetFocus(2008)")
                               
                 else: 
                     dialog=xbmcgui.Dialog()
@@ -376,7 +433,7 @@ class Main:
           self.windowvideonav = xbmcgui.Window(10025) # myvideonav.xml           
           self.windowvideoinf = xbmcgui.Window(12003) # dialogvideoinfo.xml 
           self.windowvideoplayer = xbmcgui.Window(12901) # videoOSD.xml 
-          self.windowvideoplayerinfo = xbmcgui.Window(10142) # DialogFullScreenInfo.xml 
+          self.windowvideoplayerinfo = xbmcgui.Window(10142) # DialogFullScreenInfo.xml
           
         
     def GetControl(self,Window=None,Id=None):
@@ -424,6 +481,7 @@ class Main:
         self.windowhome.clearProperty('IconMixSaga')
         self.windowhome.clearProperty('IconMixDirector')
         self.windowhome.clearProperty('IconMixActor')
+        self.windowhome.clearProperty('IconMixTrailer')
         
         
         
@@ -590,135 +648,145 @@ class Main:
               
           
             #-------------------------- FILMS/SERIES/ACTEURS --------------------------
-            if (xbmc.getCondVisibility("Window.IsVisible(10025)") or xbmc.getCondVisibility("Window.IsVisible(12901)") or xbmc.getCondVisibility("Window.IsVisible(10142)") or xbmc.getCondVisibility("Window.IsVisible(12003)")) and not xbmc.getCondVisibility("Container.Scrolling") and not xbmc.getCondVisibility("Window.IsVisible(12000)"):
+            #if not self.ui:
+            if (self.windowhome.getProperty('IconMixTrailer')!="1") and (xbmc.getCondVisibility("Window.IsVisible(10025)") or xbmc.getCondVisibility("Window.IsVisible(12901)") or xbmc.getCondVisibility("Window.IsVisible(10142)") or xbmc.getCondVisibility("Window.IsVisible(12003)")) and not xbmc.getCondVisibility("Container.Scrolling") and not xbmc.getCondVisibility("Window.IsVisible(12000)"):
+                
                 MiseAjour=""
+               
                 #-------------------------- ACTEURS ---------------------------------
                 if xbmc.getCondVisibility("Control.HasFocus(8889)") or xbmc.getCondVisibility("Control.HasFocus(1998)") or xbmc.getCondVisibility("Control.HasFocus(7779)") or xbmc.getCondVisibility("Control.HasFocus(7777)") or xbmc.getCondVisibility("Control.HasFocus(7778)"):
                     F8889=xbmc.getCondVisibility("Control.HasFocus(8889)")
                     F1998=xbmc.getCondVisibility("Control.HasFocus(1998)")
                     F7779=xbmc.getCondVisibility("Control.HasFocus(7779)")
                     F7777=xbmc.getCondVisibility("Control.HasFocus(7777)") or xbmc.getCondVisibility("Control.HasFocus(7778)")
-                    if not F8889:
-                        ActeurRealisateur="acteurs"
-                        if not F7777:
-                           self.selecteditem1998 = xbmc.getInfoLabel("Container(1998).ListItem.Label")  
-                        else:
-                           self.selecteditem1998 = xbmc.getInfoLabel("ListItem.Director") 
-                           ActeurRealisateur="director"             
-                        
-                        KodiLocal=self.windowhome.getProperty('ActeurVideoLocal')
-                        if (self.previousitem1998 != self.selecteditem1998 and not str(self.selecteditem1998)=="") or ( self.previousitem1998local!=KodiLocal):
-                          self.previousitem1998 = self.selecteditem1998
-                          self.previousitem1998local=KodiLocal
-                          if xbmc.getCondVisibility("Window.IsVisible(10025)"):
-                             #ACTEURS VIDEONAV
-                             ListeRole=self.GetControl(self.windowvideonav,5051)
+                    if F8889 | F1998 | F7779 |F7777:
+                      if not F8889:
+                          ActeurRealisateur="acteurs"
+                          if not F7777:
+                             self.selecteditem1998 = xbmc.getInfoLabel("Container(1998).ListItem.Label").split(" (")[0]  
+                          else:
+                             self.selecteditem1998 = xbmc.getInfoLabel("ListItem.Director").split(" (")[0] 
+                             ActeurRealisateur="director"             
+                          
+                          KodiLocal=self.windowhome.getProperty('ActeurVideoLocal')
+                          if (self.previousitem1998 != self.selecteditem1998 and not str(self.selecteditem1998)=="") or ( self.previousitem1998local!=KodiLocal):
+                            self.previousitem1998 = self.selecteditem1998
+                            self.previousitem1998local=KodiLocal
+                            if xbmc.getCondVisibility("Window.IsVisible(10025)"):
+                               #ACTEURS VIDEONAV
+                               ListeRole=self.GetControl(self.windowvideonav,5051)
+                               
+                            if xbmc.getCondVisibility("Window.IsVisible(12003)"):
+                               #ACTEURS VIDEOINFO
+                               if not F7777:
+                                ListeRole=self.GetControl(self.windowvideoinf,5051)
+                               else:
+                                ListeRole=self.GetControl(self.windowvideoinf,5052)
+                               
+                            if xbmc.getCondVisibility("Window.IsVisible(12901)"):
+                               #ACTEURS VideoPlayer
+                               ListeRole=self.GetControl(self.windowvideoplayer,5051)
+                               
+                            if xbmc.getCondVisibility("Window.IsVisible(10142)"):
+                               #ACTEURS VideoPlayer
+                               ListeRole=self.GetControl(self.windowvideoplayerinfo,5051)                              
+                               
                              
-                          if xbmc.getCondVisibility("Window.IsVisible(12003)"):
-                             #ACTEURS VIDEOINFO
-                             if not F7777:
-                              ListeRole=self.GetControl(self.windowvideoinf,5051)
-                             else:
-                              ListeRole=self.GetControl(self.windowvideoinf,5052)
-                             
-                          if xbmc.getCondVisibility("Window.IsVisible(12901)"):
-                             #ACTEURS VideoPlayer
-                             ListeRole=self.GetControl(self.windowvideoplayer,5051)
-                             
-                          if xbmc.getCondVisibility("Window.IsVisible(10142)"):
-                             #ACTEURS VideoPlayer
-                             ListeRole=self.GetControl(self.windowvideoplayerinfo,5051)                              
-                             
-                           
-                          if ListeRole:
-                            Acteur=utils.try_decode(self.selecteditem1998.encode('utf8'))
-                            if not KodiLocal: 
-                                 ListeItemx=utils.getFilmsTv(ActeurRealisateur,Acteur.split(" (")[0],1)                                   
-                            else:
-                                 ListeItemx=utils.getFilmsParActeur(ActeurRealisateur,self.selecteditem1998.encode('utf8').split(" (")[0],1)
-                                 
-                            ListeRole.reset()
-                            if ListeItemx: 
-                                 for itemX in ListeItemx:
-                                      ListeRole.addItem(itemX)                                   
-                            status=""
-                    if not F1998:
-                        ActiF7779="non"
-                        if F7779  or F7777:
-                            if F7779:
-                               self.selecteditem8889 = xbmc.getInfoLabel("Container(1998).ListItem.Label")
-                            else:
-                               self.selecteditem8889 = xbmc.getInfoLabel("ListItem.Director") 
-                        else:
-                            if not xbmc.getCondVisibility("Player.HasVideo"):
-                                self.selecteditem8889 = xbmc.getInfoLabel("ListItem.DBID")
-                            else:
-                                self.selecteditem8889 = xbmc.getInfoLabel("VideoPlayer.DBID")                   
-                            
-                        self.previousitem = ""
-                        self.previousitemMusic = ""
-                        if self.previousitem8889 != self.selecteditem8889 and not str(self.selecteditem8889)=="":
-                            if F7779 or F7777:
-                              ActiF7779="oui"
-                              if not F7777:
-                                  self.LABEL8889=xbmc.getInfoLabel("Container(1998).ListItem.Label").split(" (")[0].decode("utf8")
-                                  self.DBTYPE=xbmc.getInfoLabel("Container(1998).ListItem.DBTYPE")
-                                 
+                            if ListeRole:
+                             #Acteur=utils.try_decode(self.selecteditem1998.encode('utf8'))
+                             #https://api.themoviedb.org/3/search/person?api_key=67158e2af1624020e34fd893c881b019&language=en-US&query=Rafael%20L%C3%B3pez&page=1&include_adult=false
+                              Acteur=self.selecteditem1998.decode("utf8") 
+                              if not KodiLocal: 
+                                     ListeItemx=utils.getFilmsTv(ActeurRealisateur,utils.try_decode(Acteur.encode("utf8")),1) 
                               else:
-                                  self.LABEL8889=xbmc.getInfoLabel("ListItem.Director").split(" (")[0].decode("utf8")
-                                  self.DBTYPE="director"
-                            else: 
-                              self.LABEL8889=xbmc.getInfoLabel("ListItem.Label").split(" (")[0].decode("utf8")
-                              self.DBTYPE=xbmc.getInfoLabel("ListItem.DBTYPE")
+                                     ListeItemx=utils.getFilmsParActeur(ActeurRealisateur,self.selecteditem1998.split(" (")[0],1)
+                                   
+                              ListeRole.reset()
+                              if ListeItemx: 
+                                   for itemX in ListeItemx:
+                                        ListeRole.addItem(itemX) 
+                              else:
+                                 ItemVide = xbmcgui.ListItem(label="******",iconImage="DefaultTVShows.png",label2="*******") 
+                                 ItemVide.setProperty("dbtype","movie")
+                                 ItemVide.setInfo("video", {"title": "oooo","year": "1970","originaltitle": "original_title","trailer":"id"}) 
+                                 ListeRole.addItem(ItemVide)                                 
+                              status=""
+                      if not F1998:
+                          ActiF7779="non"
+                          if F7779  or F7777:
+                              if F7779:
+                                 self.selecteditem8889 = xbmc.getInfoLabel("Container(1998).ListItem.Label")
+                              else:
+                                 self.selecteditem8889 = xbmc.getInfoLabel("ListItem.Director") 
+                          else:
+                              if not xbmc.getCondVisibility("Player.HasVideo"):
+                                  self.selecteditem8889 = xbmc.getInfoLabel("ListItem.DBID")
+                              else:
+                                  self.selecteditem8889 = xbmc.getInfoLabel("VideoPlayer.DBID")                   
                               
-                            self.previousitem8889 = self.selecteditem8889
-                            self.windowhome.clearProperty('Actorbiographie')
-                            self.windowhome.clearProperty('Actornaissance')
-                            self.windowhome.clearProperty('Actordeces')                                                 
-                            self.windowhome.clearProperty('Actorlieunaissance')
-                            self.windowhome.clearProperty('ActorAge')
-                            self.windowhome.clearProperty('ActorNomReel')
-                            InfoDate=None
-                            Lieu=None
-                            if ActiF7779!="oui": 
-                               xbmc.executebuiltin( "ActivateWindow(busydialog)" ) 
-                            #if unidecode(self.LABEL8889):   
-                            if not Lieu:                   
-                                InfoSup=utils.GetActeurInfo(utils.try_decode(self.LABEL8889.encode("utf8")),self.DBTYPE)
+                          self.previousitem = ""
+                          self.previousitemMusic = ""
+                          if self.previousitem8889 != self.selecteditem8889 and not str(self.selecteditem8889)=="":
+                              if F7779 or F7777:
+                                ActiF7779="oui"
+                                if not F7777:
+                                    self.LABEL8889=xbmc.getInfoLabel("Container(1998).ListItem.Label").split(" (")[0].decode("utf8")
+                                    self.DBTYPE=xbmc.getInfoLabel("Container(1998).ListItem.DBTYPE")
+                                   
+                                else:
+                                    self.LABEL8889=xbmc.getInfoLabel("ListItem.Director").split(" (")[0].decode("utf8")
+                                    self.DBTYPE="director"
+                              else: 
+                                self.LABEL8889=xbmc.getInfoLabel("ListItem.Label").split(" (")[0].decode("utf8")
+                                self.DBTYPE=xbmc.getInfoLabel("ListItem.DBTYPE")
                                 
-                                if InfoSup : 
-                                    self.windowhome.setProperty('Actorbiographie',InfoSup.get("biographie"))
-                                    Lieu=InfoSup.get("lieunaissance")
-                                    self.windowhome.setProperty('Actorlieunaissance',InfoSup.get("lieunaissance"))  
-                                    self.windowhome.setProperty('ActorNomReel',InfoSup.get("nomreel"))
+                              self.previousitem8889 = self.selecteditem8889
+                              self.windowhome.clearProperty('Actorbiographie')
+                              self.windowhome.clearProperty('Actornaissance')
+                              self.windowhome.clearProperty('Actordeces')                                                 
+                              self.windowhome.clearProperty('Actorlieunaissance')
+                              self.windowhome.clearProperty('ActorAge')
+                              self.windowhome.clearProperty('ActorNomReel')
+                              InfoDate=None
+                              Lieu=None
+                              if ActiF7779!="oui": 
+                                 xbmc.executebuiltin( "ActivateWindow(busydialog)" ) 
+                              if not Lieu:                   
+                                  InfoSup=utils.GetActeurInfo(utils.try_decode(self.LABEL8889.encode("utf8")),self.DBTYPE)
+                                  
+                                  if InfoSup : 
+                                      self.windowhome.setProperty('Actorbiographie',InfoSup.get("biographie"))
+                                      Lieu=InfoSup.get("lieunaissance")
+                                      self.windowhome.setProperty('Actorlieunaissance',InfoSup.get("lieunaissance"))  
+                                      self.windowhome.setProperty('ActorNomReel',InfoSup.get("nomreel"))
 
-                                    InfoDate= InfoSup.get("naissance")
+                                      InfoDate= InfoSup.get("naissance")
 
-                                    if InfoDate:                         
-                                        XBRegion=str(xbmc.getRegion('dateshort'))
-                                        if XBRegion=="%d/%m/%Y":                             
-                                         self.windowhome.setProperty('Actornaissance',str(InfoDate[8:10]+"/"+InfoDate[5:7]+"/"+InfoDate[0:4])) 
-                                        else:                             
-                                         self.windowhome.setProperty('Actornaissance',str(InfoDate))                                                             
-                                        InfoDate= InfoSup.get("deces")                   
-                                        if InfoDate:
-                                            XBRegion=str(xbmc.getRegion('dateshort'))
-                                            if XBRegion=="%d/%m/%Y":                             
-                                             self.windowhome.setProperty('Actordeces',str(InfoDate[8:10]+"/"+InfoDate[5:7]+"/"+InfoDate[0:4])) 
-                                            else:                             
-                                             self.windowhome.setProperty('Actordeces',str(InfoDate))
-                                            Age=""
-                                        else:
-                                            Age =  str(int(datetime.now().date().year) - int(InfoSup.get("naissance")[0:4])) 
-                                            self.windowhome.setProperty('Actorage',Age) 
-                            if ActiF7779!="oui": 
-                                xbmc.executebuiltin( "Dialog.Close(busydialog)" )
-                            
-                            if not InfoDate and not Lieu:
-                                     if ActiF7779!="oui": 
-                                         dialog=xbmcgui.Dialog()
-                                         dialog.notification('IconMixTools', __language__( 32584 )+self.LABEL8889, "acteurs/arfffff.png", 3000)
-                                         xbmc.executebuiltin("SetFocus(55)")                                 
+                                      if InfoDate:                         
+                                          XBRegion=str(xbmc.getRegion('dateshort'))
+                                          if XBRegion=="%d/%m/%Y":                             
+                                           self.windowhome.setProperty('Actornaissance',str(InfoDate[8:10]+"/"+InfoDate[5:7]+"/"+InfoDate[0:4])) 
+                                          else:                             
+                                           self.windowhome.setProperty('Actornaissance',str(InfoDate))                                                             
+                                          InfoDate= InfoSup.get("deces")                   
+                                          if InfoDate:
+                                              XBRegion=str(xbmc.getRegion('dateshort'))
+                                              if XBRegion=="%d/%m/%Y":                             
+                                               self.windowhome.setProperty('Actordeces',str(InfoDate[8:10]+"/"+InfoDate[5:7]+"/"+InfoDate[0:4])) 
+                                              else:                             
+                                               self.windowhome.setProperty('Actordeces',str(InfoDate))
+                                              Age=""
+                                          else:
+                                              Age =  str(int(datetime.now().date().year) - int(InfoSup.get("naissance")[0:4])) 
+                                              self.windowhome.setProperty('Actorage',Age) 
+                              if ActiF7779!="oui": 
+                                  xbmc.executebuiltin( "Dialog.Close(busydialog)" )
+                              
+                              if not InfoDate and not Lieu:
+                                       if ActiF7779!="oui": 
+                                           dialog=xbmcgui.Dialog()
+                                           dialog.notification('IconMixTools', __language__( 32584 )+self.LABEL8889, "acteurs/arfffff.png", 3000)
+                                           xbmc.executebuiltin("SetFocus(55)")                                 
                 #-------------------------- FILMS/SERIES ---------------------------------   
                 #roles  ------------------------------------------------
                 else:
@@ -737,7 +805,7 @@ class Main:
                             self.selecteditem = xbmc.getInfoLabel("ListItem.DBID")
                             self.DBTYPE=xbmc.getInfoLabel("ListItem.DBTYPE")
                             self.previousitemPlayer=""
-                        else:
+                        else: #videoplayer
                             self.selecteditem = xbmc.getInfoLabel("VideoPlayer.DBID")
                             if xbmc.getCondVisibility("Window.IsVisible(12901)"):
                               self.PlayerActiveID=1
@@ -754,11 +822,9 @@ class Main:
                             if xbmc.getCondVisibility("!String.IsEmpty(VideoPlayer.TVShowTitle)"):
                                self.DBTYPE="episode"
                             else:
-                               self.DBTYPE="movie"
-                            
+                               self.DBTYPE="movie"                            
                          
                         if (self.previousitem != self.selecteditem) or (self.windowhome.getProperty('IconMixUpdateActeurs')=="1")  or (self.windowhome.getProperty('IconMixUpdateSagas')=="1") :
-                             #utils.logMsg("DBTYPE VideoPlayer : "+str(self.DBTYPE)+"/"+str(self.previousitem)+"/"+str(self.selecteditem)+"/"+str(self.previousitemPlayer),0)
                              self.previousitem = self.selecteditem
                              MiseAjour="1"
                              if xbmc.getCondVisibility("Window.IsVisible(12901)"):
@@ -777,7 +843,7 @@ class Main:
                     if not self.selecteditem :
                         self.windowhome.clearProperty('IconMixExtraFanart')
                         
-                    if MiseAjour!="" : #lkiste des acteurs
+                    if MiseAjour!="" : #liste des acteurs
                         self.windowhome.setProperty('IconMixUpdating','1')                     
                         self.DBTYPEOK= self.DBTYPE!="set" and self.DBTYPE!="tvshow" and self.DBTYPE!="season" and self.DBTYPE!="addon" and self.DBTYPE!="artist"
                         
@@ -789,7 +855,7 @@ class Main:
                         self.windowhome.clearProperty("ItemCountry3")
                         self.windowhome.clearProperty("ItemCountry4")
                         
-                        #focus 2999 (saga)
+                        #focus 2999 (saga) panneau acteurs
                         if xbmc.getCondVisibility("Control.HasFocus(2999)"):
                             if self.selecteditem > -1 and not str(self.selecteditem)=="":                          
                               if self.DBTYPEOK:
@@ -922,6 +988,8 @@ class Main:
                                   else :                                       
                                       if ResetDirector:
                                           self.windowhome.clearProperty('IconMixDirector')
+                                  self.duration = xbmc.getInfoLabel("ListItem.Duration") 
+                                  self.display_duration()
                               else : 
                                 self.windowhome.clearProperty('IconMixEpSa')
                                 self.TvShow=""
@@ -934,8 +1002,9 @@ class Main:
                              self.windowhome.clearProperty('IconMixEpSa')
                              self.TvShow=""
                              self.TvSeason=""
+                             #utils.logMsg("DBTYPE : "+str(self.DBTYPE),0)
                     self.windowhome.clearProperty('IconMixUpdating')                    
-                                   
+                               
                           
                     
             xbmc.sleep(200)
@@ -972,24 +1041,286 @@ class Main:
            
 
     def display_duration(self):
+        Traduction={"île de l’ascension":"ascension island",
+"andorre":"andorra",
+"émirats arabes unis":"united arab emirates",
+"afghanistan":"afghanistan",
+"antigua-et-barbuda":"antigua & barbuda",
+"anguilla":"anguilla",
+"angleterre":"united kingdom",
+"albanie":"albania",
+"arménie":"armenia",
+"angola":"angola",
+"antarctique":"antarctica",
+"argentine":"argentina",
+"samoa américaines":"american samoa",
+"autriche":"austria",
+"australie":"australia",
+"aruba":"aruba",
+"îles åland":"åland islands",
+"azerbaïdjan":"azerbaijan",
+"bosnie-herzégovine":"bosnia & herzegovina",
+"barbade":"barbados",
+"bangladesh":"bangladesh",
+"belgique":"belgium",
+"burkina faso":"burkina faso",
+"bulgarie":"bulgaria",
+"bahreïn":"bahrain",
+"burundi":"burundi",
+"bénin":"benin",
+"saint-barthélemy":"st. barthélemy",
+"bermudes":"bermuda",
+"brunéi darussalam":"brunei",
+"bolivie":"bolivia",
+"pays-bas caribéens":"caribbean netherlands",
+"brésil":"brazil",
+"bahamas":"bahamas",
+"bhoutan":"bhutan",
+"botswana":"botswana",
+"biélorussie":"belarus",
+"belize":"belize",
+"canada":"canada",
+"îles cocos":"cocos (keeling) islands",
+"congo-kinshasa":"congo - kinshasa",
+"république centrafricaine":"central african republic",
+"congo-brazzaville":"congo - brazzaville",
+"suisse":"switzerland",
+"côte d’ivoire":"côte d’ivoire",
+"îles cook":"cook islands",
+"chili":"chile",
+"cameroun":"cameroon",
+"chine":"china",
+"colombie":"colombia",
+"costa rica":"costa rica",
+"cuba":"cuba",
+"cap-vert":"cape verde",
+"curaçao":"curaçao",
+"île christmas":"christmas island",
+"chypre":"cyprus",
+"république tchèque":"czech republic",
+"allemagne":"germany",
+"diego garcia":"diego garcia",
+"djibouti":"djibouti",
+"danemark":"denmark",
+"dominique":"dominica",
+"république dominicaine":"dominican republic",
+"algérie":"algeria",
+"ceuta et melilla":"ceuta & melilla",
+"équateur":"ecuador",
+"estonie":"estonia",
+"égypte":"egypt",
+"sahara occidental":"western sahara",
+"érythrée":"eritrea",
+"espagne":"spain",
+"éthiopie":"ethiopia",
+"finlande":"finland",
+"fidji":"fiji",
+"îles malouines":"falkland islands",
+"états fédérés de micronésie":"micronesia",
+"îles féroé":"faroe islands",
+"france":"france",
+"gabon":"gabon",
+"royaume-uni":"united kingdom",
+"royaume uni":"united kingdom",
+"grenade":"grenada",
+"géorgie":"georgia",
+"guyane française":"french guiana",
+"guernesey":"guernsey",
+"ghana":"ghana",
+"gibraltar":"gibraltar",
+"groenland":"greenland",
+"gambie":"gambia",
+"guinée":"guinea",
+"guadeloupe":"guadeloupe",
+"guinée équatoriale":"equatorial guinea",
+"grèce":"greece",
+"îles géorgie du sud et sandwich du sud":"south georgia & south sandwich islands",
+"guatemala":"guatemala",
+"guam":"guam",
+"guinée-bissau":"guinea-bissau",
+"guyana":"guyana",
+"r.a.s. chinoise de hong kong":"hong kong sar china",
+"honduras":"honduras",
+"croatie":"croatia",
+"haïti":"haiti",
+"hongrie":"hungary",
+"îles canaries":"canary islands",
+"indonésie":"indonesia",
+"irlande":"ireland",
+"israël":"israel",
+"île de man":"isle of man",
+"inde":"india",
+"territoire britannique de l’océan indien":"british indian ocean territory",
+"irak":"iraq",
+"iran":"iran",
+"islande":"iceland",
+"italie":"italy",
+"jersey":"jersey",
+"jamaïque":"jamaica",
+"jordanie":"jordan",
+"japon":"japan",
+"kenya":"kenya",
+"kirghizistan":"kyrgyzstan",
+"cambodge":"cambodia",
+"kiribati":"kiribati",
+"comores":"comoros",
+"saint-christophe-et-niévès":"st. kitts & nevis",
+"corée du nord":"north korea",
+"corée du sud":"south korea",
+"koweït":"kuwait",
+"îles caïmans":"cayman islands",
+"kazakhstan":"kazakhstan",
+"laos":"laos",
+"liban":"lebanon",
+"sainte-lucie":"st. lucia",
+"liechtenstein":"liechtenstein",
+"sri lanka":"sri lanka",
+"libéria":"liberia",
+"lesotho":"lesotho",
+"lituanie":"lithuania",
+"luxembourg":"luxembourg",
+"lettonie":"latvia",
+"libye":"libya",
+"maroc":"morocco",
+"monaco":"monaco",
+"moldavie":"moldova",
+"monténégro":"montenegro",
+"saint-martin (partie française)":"st. martin",
+"madagascar":"madagascar",
+"îles marshall":"marshall islands",
+"macédoine":"macedonia",
+"mali":"mali",
+"myanmar":"myanmar (burma)",
+"mongolie":"mongolia",
+"r.a.s. chinoise de macao":"macau sar china",
+"îles mariannes du nord":"northern mariana islands",
+"martinique":"martinique",
+"mauritanie":"mauritania",
+"montserrat":"montserrat",
+"malte":"malta",
+"maurice":"mauritius",
+"maldives":"maldives",
+"malawi":"malawi",
+"mexique":"mexico",
+"malaisie":"malaysia",
+"mozambique":"mozambique",
+"namibie":"namibia",
+"nouvelle-calédonie":"new caledonia",
+"niger":"niger",
+"île norfolk":"norfolk island",
+"nigéria":"nigeria",
+"nicaragua":"nicaragua",
+"pays-bas":"netherlands",
+"norvège":"norway",
+"népal":"nepal",
+"nauru":"nauru",
+"niue":"niue",
+"nouvelle-zélande":"new zealand",
+"oman":"oman",
+"panama":"panama",
+"pérou":"peru",
+"polynésie française":"french polynesia",
+"papouasie-nouvelle-guinée":"papua new guinea",
+"philippines":"philippines",
+"pakistan":"pakistan",
+"pologne":"poland",
+"saint-pierre-et-miquelon":"st. pierre & miquelon",
+"pitcairn":"pitcairn islands",
+"porto rico":"puerto rico",
+"territoires palestiniens":"palestinian territories",
+"portugal":"portugal",
+"palaos":"palau",
+"paraguay":"paraguay",
+"qatar":"qatar",
+"la réunion":"réunion",
+"roumanie":"romania",
+"serbie":"serbia",
+"russie":"russia",
+"rwanda":"rwanda",
+"arabie saoudite":"saudi arabia",
+"îles salomon":"solomon islands",
+"seychelles":"seychelles",
+"soudan":"sudan",
+"suède":"sweden",
+"singapour":"singapore",
+"sainte-hélène":"st. helena",
+"slovénie":"slovenia",
+"svalbard et jan mayen":"svalbard & jan mayen",
+"slovaquie":"slovakia",
+"sierra leone":"sierra leone",
+"saint-marin":"san marino",
+"sénégal":"senegal",
+"somalie":"somalia",
+"suriname":"suriname",
+"soudan du sud":"south sudan",
+"sao tomé-et-principe":"são tomé & príncipe",
+"el salvador":"el salvador",
+"saint-martin":"sint maarten",
+"syrie":"syria",
+"swaziland":"swaziland",
+"tristan da cunha":"tristan da cunha",
+"îles turques-et-caïques":"turks & caicos islands",
+"tchad":"chad",
+"terres australes françaises":"french southern territories",
+"togo":"togo",
+"thaïlande":"thailand",
+"tadjikistan":"tajikistan",
+"tokelau":"tokelau",
+"timor oriental":"timor-leste",
+"turkménistan":"turkmenistan",
+"tunisie":"tunisia",
+"tonga":"tonga",
+"turquie":"turkey",
+"trinité-et-tobago":"trinidad & tobago",
+"tuvalu":"tuvalu",
+"taïwan":"taiwan",
+"tanzanie":"tanzania",
+"ukraine":"ukraine",
+"ouganda":"uganda",
+"îles mineures éloignées des états-unis":"u.s. outlying islands",
+"états-unis":"united states of america",
+"uruguay":"uruguay",
+"ouzbékistan":"uzbekistan",
+"état de la cité du vatican":"vatican city",
+"saint-vincent-et-les-grenadines":"st. vincent & grenadines",
+"venezuela":"venezuela",
+"îles vierges britanniques":"british virgin islands",
+"îles vierges des états-unis":"u.s. virgin islands",
+"vietnam":"vietnam",
+"vanuatu":"vanuatu",
+"wallis-et-futuna":"wallis & futuna",
+"samoa":"samoa",
+"kosovo":"kosovo",
+"yémen":"yemen",
+"mayotte":"mayotte",
+"afrique du sud":"south africa",
+"zambie":"zambia",
+"zimbabwe":"zimbabwe"}
         xxx="null"
         
         #self.windowhome.setProperty('ItemUniqueGenre',xbmc.getInfoLabel( "ListItem.Genre" ).replace(" /",", "))
         
         if self.DBTYPE=="movie":
-          CountryList=xbmc.getInfoLabel( "ListItem.Country" ).split(" / ")
+          CountryList=xbmc.getInfoLabel( "ListItem.Country" ).replace("/",",")
+          CountryList=CountryList.split(",")
           if not CountryList:
             CountryList.append(xbmc.getInfoLabel( "ListItem.Country" ))
           idx=1
           for country in CountryList:
-             self.windowhome.setProperty('ItemCountry%d' %(idx),country.rstrip())
+             Pays=country.strip()
+             TradFrEn=Traduction.get(country.strip().lower())
+             if TradFrEn:
+               Pays=TradFrEn
+             self.windowhome.setProperty('ItemCountry%d' %(idx),Pays)
+             
+             #utils.logMsg('ItemCountry%d : -%s-%s' %(idx,country.strip(),Traduction.get(country.strip().lower())),0)
              idx=idx+1
-              
+        """       
         if not xbmc.getCondVisibility("Window.IsVisible(10502)"):
           typeId=self.DBTYPE
           itemId=self.selecteditem
           IMDBID=xbmc.getInfoLabel("ListItem.IMDBNumber")
-         
+        
           if (not self.duration or self.duration<10) and IMDBID :
               if typeId.find('episode')==-1: self.duration=utils.getRuntime(IMDBID,typeId)
               #else : self.duration=utils.getRuntime("tt"+IMDBID)
@@ -999,7 +1330,7 @@ class Main:
                         utils.setJSON('VideoLibrary.Set%sDetails' %(typeId.encode("utf-8")),'{"%sid":%d,"runtime":%d}' %(typeId.encode("utf-8"),int(itemId),int(self.duration)*60))
                       except:
                         self.duration=None
-        
+        """
         if self.duration :
         #else :
          if self.duration.find(':')!=-1: #KODI LEIA
@@ -1018,7 +1349,6 @@ class Main:
          if self.duration.find(':')==-1:
             readable_duration = in_hours_and_min(self.duration)
             self.windowhome.setProperty('DurationTools', readable_duration)
-            
             if int(self.duration)>0:
               now = datetime.now()
               now_plus_10 = now + timedelta(minutes = int(self.duration))

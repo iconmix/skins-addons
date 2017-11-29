@@ -67,6 +67,7 @@
       <aspectratio>stretch</aspectratio>
     </control>
     <control type="videowindow" id="1192">
+      
       <top>90</top>
       <left>380</left>
       <width>900</width>
@@ -336,6 +337,37 @@
     <onclick>RunScript(script.iconmixtools,mettreajour=True)</onclick>
     <visible>Container.Content(tvshows)+Skin.HasSetting(CheckSeries)+!Control.HasFocus(7779)+!Control.HasFocus(1998)</visible>
   </control>
+    <control type="button" id="2102">
+        <!-- Accéder à la saga -->
+        <onleft>Dialog.Close(contextmenu)</onleft>
+        <onright>Dialog.Close(contextmenu)</onright>
+        <include>BoutonCommun</include>
+        <label>$LOCALIZE[31931]</label>
+        <onclick>Dialog.Close(contextmenu)</onclick>
+        <onclick>SetFocus(1999,0)</onclick>
+        <visible>String.Contains(ListItem.DBTYPE,set)</visible>
+      </control>
+      <control type="button" id="2103">
+        <!-- Accéder aux albums -->
+        <onleft>Dialog.Close(contextmenu)</onleft>
+        <onright>Dialog.Close(contextmenu)</onright>
+        <include>BoutonCommun</include>
+        <label>$LOCALIZE[31934]</label>
+        <onclick>Dialog.Close(contextmenu)</onclick>
+        <onclick>SetFocus(1999,0)</onclick>
+        <visible>Window.IsVisible(10502)+Container.Content(artists)</visible>
+      </control>
+      <control type="button" id="2104">
+        <!-- Accéder aux acteurs -->
+        <onleft>Dialog.Close(contextmenu)</onleft>
+        <onright>Dialog.Close(contextmenu)</onright>
+        <include>BoutonCommun</include>
+        <label>$LOCALIZE[31930]</label>
+        <onclick>Dialog.Close(contextmenu)</onclick>
+        <onclick>SetFocus(1998,0)</onclick>
+        <visible>[String.Contains(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]|[!Skin.HasSetting(HideTvCast)+[String.Contains(ListItem.DBTYPE,episode)|String.Contains(ListItem.DBTYPE,tvshow)]]+Window.IsVisible(10025)</visible>
+
+      </control>
 
 </include>
 <!-- ---------------------------------------------------------------------------------------------- -->
@@ -346,7 +378,7 @@
     <posy>170</posy>
     <control type="image">
       <width>550</width>
-      <height>150</height>
+      <height>100</height>
       <texture>frames/Menu_Glass2b.png</texture>
       <colordiffuse>DialogBackgroundColor</colordiffuse>
     </control>
@@ -358,7 +390,7 @@
       <posx>30</posx>
       <posy>15</posy>
       <width>490</width>
-      <height>130</height>
+      <height>80</height>
       <itemgap>1</itemgap>
       <onleft>996</onleft>
       <onback>996</onback>
@@ -633,8 +665,9 @@
 
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="BoutonCommun">
-  <width>490</width>
+  <width>475</width>
   <height>35</height>
+  <left>50</left>
   <align>left</align>
   <font>METF_DialogLarge</font>
   <textcolor>TextNF</textcolor>
@@ -642,6 +675,7 @@
   <disabledcolor>TextDisabled</disabledcolor>
   <texturefocus>ButtonFO2Wide.png</texturefocus>
   <texturenofocus>-</texturenofocus>
+  <alttexturefocus>ButtonFO2Wide.png</alttexturefocus>
   <textoffsetx>20</textoffsetx>
 
   <aligny>center</aligny>
@@ -884,7 +918,7 @@
   <width>435</width>
 </include>
 <include name="PanelActeurCenter">
-  <width>1065</width>
+  <width>1125</width>
   <left>420</left>
 </include>
 
@@ -1027,7 +1061,7 @@
       <visible>!Player.HasVideo|[!Window.IsVisible(12901)+!Window.IsVisible(10142)]</visible>
       <visible>[[[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[String.IsEqual(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Label,..)</visible>
       <include>Animation_FadedByMenu</include>
-      <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(1998)|Window.IsVisible(movieinformation)">
+      <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(1998)|ControlGroup(7000).HasFocus|ControlGroup(7002).HasFocus|ControlGroup(7008).HasFocus|Window.IsVisible(movieinformation)">
         <effect type="fade"  start="100" end="0" time="5" delay="1" reversible="true"/>
       </animation>
 
@@ -1366,7 +1400,8 @@
 </control>
 <control type="fixedlist" id="1998">
   <visible>Container.Content(directors)|Container.Content(actors)|Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(episodes)|Container.Content(seasons)|[Player.HasVideo+!String.IsEmpty(VideoPlayer.DBDID)]</visible>
-  <animation type="Conditional" condition="Window.IsVisible(12901)|Window.IsVisible(10142)|Window.IsVisible(movieinformation)|Control.HasFocus(1998)|Control.HasFocus(7779)|Control.HasFocus(2022)|Control.HasFocus(2999)">
+  <animation type="Conditional" condition="Window.IsVisible(12901)|Window.IsVisible(10142)|Window.IsVisible(movieinformation)|Control.HasFocus(1998)|Control.HasFocus(7779)|Control.HasFocus(2022)|Control.HasFocus(2999)|ControlGroup(7000).HasFocus|ControlGroup(7002).HasFocus|ControlGroup(7008).HasFocus">
+    
     <effect type="fade"  start="100" end="0" time="1" delay="1" reversible="true"/>
   </animation>
   <animation type="Conditional" condition="Skin.HasSetting(CacheFond)">
@@ -1789,7 +1824,6 @@
     <control type="group">
       <posx>35</posx>
       <posy>0</posy>
-      <animation effect="rotatey" center="90" start="0" end="-15" time="0" condition="true">Conditional</animation>
       <control type="image">
         <description>Actor image</description>
         <posy>10</posy>
@@ -1835,7 +1869,7 @@
     <control type="group">
       <posx>35</posx>
       <posy>0</posy>
-      <animation effect="rotatey" center="90" start="0" end="-15" time="0" condition="true">Conditional</animation>
+      <!--<animation effect="rotatey" center="90" start="0" end="-15" time="0" condition="true">Conditional</animation>-->
       <control type="image">
         <description>Actor image</description>
         <posy>10</posy>
@@ -4828,7 +4862,7 @@
     <width>400</width>
     <height>30</height>
     <font>METF_Button</font>
-    <textcolor>grey</textcolor>
+    <textcolor>white</textcolor>
     <align>center</align>
     <aligny>center</aligny>
   </include>

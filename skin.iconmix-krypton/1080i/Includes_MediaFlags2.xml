@@ -608,8 +608,8 @@
 
 <!--- -------------------------------- --->
 
-  <control type="group"> <!-- country --->
-    <visible>!IsEmpty(Window(Home).Property(ItemCountry1))</visible>
+   <control type="group"> <!-- country --->
+    <visible>!IsEmpty(Window(Home).Property(ItemCountry1))+String.IsEmpty(Window(Home).Property(ItemCountry2))</visible>
     <visible>!Skin.HasSetting(hideitemcountry)+!Window.IsActive(12003)</visible>
     <width>136</width>
     <height>70</height>
@@ -617,7 +617,6 @@
       <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
     </control>
-
     <control type="image">
       <top>4</top>
       <left>23</left>
@@ -632,7 +631,52 @@
       <aspectratio aligny="center">scale</aspectratio>
     </control>
     
+
   </control>
+     <control type="group">
+        <visible>!Skin.HasSetting(hideitemcountry)+!Window.IsActive(12003)</visible>
+    <width>136</width>
+    <height>70</height>
+       <visible>!IsEmpty(Window(Home).Property(ItemCountry1))+!String.IsEmpty(Window(Home).Property(ItemCountry2))</visible>
+      <control type="image">
+      <texture>flags/flag_frame.png</texture>
+      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    </control>
+      <control type="image">
+        <top>5</top>
+        <left>18</left>
+        <width>50</width>
+        <height>28</height>
+        <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry1)]$VAR[flagpathext]</texture>
+        <aspectratio aligny="center">scale</aspectratio>
+      </control>
+      <control type="image">
+        <top>37</top>
+        <left>18</left>
+        <width>50</width>
+        <height>28</height>
+        <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry2)]$VAR[flagpathext]</texture>
+        <aspectratio aligny="center">scale</aspectratio>
+      </control>
+      <control type="image">
+        <top>5</top>
+        <width>50</width>
+        <left>73</left>
+        <height>28</height>
+        <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry3)]$VAR[flagpathext]</texture>
+        <aspectratio aligny="center">scale</aspectratio>
+      </control>
+      <control type="image">
+        <top>37</top>
+        <left>73</left>
+        <width>50</width>
+        <height>28</height>
+        <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry4)]$VAR[flagpathext]</texture>
+        <aspectratio aligny="center">scale</aspectratio>
+      </control>
+
+    </control>
+    
   <control type="group"> <!-- codec video --->
     <visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
     <visible>!Skin.HasSetting(hidecodecvideo)</visible>
@@ -932,7 +976,7 @@
   <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
   
   <control type="group"> <!-- country --->
-    <visible>!IsEmpty(Window(Home).Property(ItemCountry1))</visible>
+    <visible>!IsEmpty(Window(Home).Property(ItemCountry1))+String.IsEmpty(Window(Home).Property(ItemCountry2))</visible>
     <visible>!Skin.HasSetting(hideitemcountry2)+!Window.IsActive(12003)</visible>
     <width>136</width>
     <height>70</height>
@@ -956,6 +1000,50 @@
     
 
   </control>
+     <control type="group">
+        <visible>!Skin.HasSetting(hideitemcountry2)+!Window.IsActive(12003)</visible>
+    <width>136</width>
+    <height>70</height>
+       <visible>!IsEmpty(Window(Home).Property(ItemCountry1))+!String.IsEmpty(Window(Home).Property(ItemCountry2))</visible>
+      <control type="image">
+      <texture>flags/flag_frame.png</texture>
+      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    </control>
+      <control type="image">
+        <top>5</top>
+        <left>18</left>
+        <width>50</width>
+        <height>28</height>
+        <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry1)]$VAR[flagpathext]</texture>
+        <aspectratio aligny="center">scale</aspectratio>
+      </control>
+      <control type="image">
+        <top>37</top>
+        <left>18</left>
+        <width>50</width>
+        <height>28</height>
+        <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry2)]$VAR[flagpathext]</texture>
+        <aspectratio aligny="center">scale</aspectratio>
+      </control>
+      <control type="image">
+        <top>5</top>
+        <width>50</width>
+        <left>73</left>
+        <height>28</height>
+        <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry3)]$VAR[flagpathext]</texture>
+        <aspectratio aligny="center">scale</aspectratio>
+      </control>
+      <control type="image">
+        <top>37</top>
+        <left>73</left>
+        <width>50</width>
+        <height>28</height>
+        <texture background="true"  >$VAR[flagpath]$INFO[Window(Home).Property(ItemCountry4)]$VAR[flagpathext]</texture>
+        <aspectratio aligny="center">scale</aspectratio>
+      </control>
+
+    </control>
+
   <control type="group"> <!-- codec video --->
     <visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
     <visible>!Skin.HasSetting(hidecodecvideo2)</visible>

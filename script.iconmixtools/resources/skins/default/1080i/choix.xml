@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="dialog" id="4000">
+  <defaultcontrol always="true">3</defaultcontrol>
+  <allowoverlay>no</allowoverlay>
+  <coordinates>
+    <system>1</system>
+    <posx>0</posx>
+    <posy>0</posy>
+  </coordinates>
+  <controls>
+
+    <control type="group">
+      <posx>5</posx>
+      <posy>300</posy>
+      <width>800</width>
+      <height>490</height>
+
+      <control type="image">
+        <texture background="true" >frames/Dialog_GlassActeur.png</texture>
+        <colordiffuse>BackgroundColor</colordiffuse>
+      </control>
+      <control type="group">
+        <posx>20</posx>
+        <posy>0</posy>
+         <control type="group"> <!-- bande annonce en fenetre -->
+           <visible>Skin.HasSetting(BAFenetre)+Player.HasVideo+!Player.Caching</visible> -->
+          <top>-50</top>
+          <left>430</left>
+          <control type="image">
+            <top>90</top>
+            <left>380</left>
+            <width>900</width>
+            <height>506</height>
+            <texture>black.png</texture>
+            <aspectratio>stretch</aspectratio>
+          </control>
+          <control type="videowindow" id="1192">
+            <top>90</top>
+            <left>380</left>
+            <width>900</width>
+            <height>506</height>
+                       
+          </control>
+           <control type="image">
+            <top>4</top>
+            <left>276</left>
+            <width>1110</width>
+            <height>725</height>
+            <texture>frames/tvvideo.png</texture>
+            <aspectratio>stretch</aspectratio>
+          </control>
+           <control type="label">
+            <top>45</top>
+            <width>950</width>
+            <left>356</left>
+            <align>center</align>
+            <scroll>true</scroll>
+            <font>impact35</font>
+            <label>[I]$INFO[VideoPlayer.Title][/I]</label>
+          </control>          
+        </control>
+        <control type="group"><!-- aperçus BA -->
+          <animation type="Conditional" condition="Player.HasVideo" reversible="true">
+              <!-- <effect type="rotatey" center="300,0" start="0" end="-20" time="500" /> -->
+              <effect type="fade" start="100" end="0" time="500" delay="500"/>
+            </animation>
+               <animation type="Conditional" condition="!Player.HasVideo" reversible="true">
+              <effect type="rotatey" center="950,0" start="0" end="10" time="100" />              
+            </animation>            
+            <top>-50</top>
+          <left>430</left>
+          <control type="image">
+            <top>90</top>
+            <left>380</left>
+            <width>900</width>
+            <height>506</height>
+            <texture>black.png</texture>
+            <aspectratio>stretch</aspectratio>
+          </control>
+          <control type="image"> 
+            <top>90</top>
+            <left>380</left>
+            <width>900</width>
+            <height>506</height>
+                      
+            
+            <aspectratio align="left" aligny="center">scale</aspectratio>
+            <!-- <imagepath diffuse="landscapeframeselect.png">$VAR[ImageContainer]</imagepath> -->
+            <texture fallback="brouille.png" >$INFO[Container(6).ListItem.Icon]</texture>
+          </control>
+           <control type="image">
+            <top>4</top>
+            <left>276</left>
+            <width>1110</width>
+            <height>725</height>
+            <texture>frames/tvvideo.png</texture>
+            <aspectratio>stretch</aspectratio>
+          </control>
+        </control>
+
+       
+        
+
+        <control type="label" id="1">
+          <description>Line 1</description>
+          <posx>20</posx>
+          <posy>55</posy>
+          <width>730</width>
+          <height>76</height>
+          <font>comic24</font>
+          <textcolor>lightgreen</textcolor>
+          <align>center</align>
+          <aligny>center</aligny>
+          <label>[B]$LOCALIZE[20410][/B]</label>
+        </control>
+        <!-- --
+        <control type="label">
+        <label>$INFO[Container(3).ListItem.DBID]/$VAR[ImageContainer]-$INFO[Container(3).ListItem.Path]/$INFO[Container(3).ListItem.Art(landscape)]/$INFO[Container(3).ListItem.Art(poster)]/$INFO[Container(3).ListItem.Art(thumb)]/</label>
+        </control>
+        -->
+        <control type="image">
+          <top>127</top>
+          <left>18</left>
+          <width>730</width>
+          <colordiffuse>BackgroundColor</colordiffuse>
+          <height>5</height>
+          <texture>VideoInfoLine.png</texture>
+        </control>
+    
+
+        <control type="list" id="6">
+          <posx>6</posx>
+          <posy>140</posy>
+          <width>750</width>
+          <height>300</height>
+          <onleft>7</onleft>
+          <onright>5</onright>
+          <onup>6</onup>
+          <ondown>6</ondown>
+          <itemlayout height="38" width="750">
+
+            <control type="label">
+              
+              <left>45</left>
+              <font>impactsongs</font>
+              <width>730</width>
+              <align>left</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+            </control>    
+           
+
+          </itemlayout>
+          <focusedlayout height="38" width="750">
+
+            <control type="image">
+              <align>left</align>
+              <aligny>center</aligny>
+              <texture>ButtonFO2Wide.png</texture>
+              <left>5</left>
+              <width>740</width>
+              <visible>Control.HasFocus(6)</visible>
+            </control>         
+           
+
+            <control type="label">
+              <textcolor>yellow</textcolor>
+              <font>impactsongs</font>
+              <left>45</left>
+              <width>730</width>
+              <align>left</align>
+              <aligny>center</aligny>
+              
+              <!--- <label>$INFO[ListItem.Label] ($INFO[ListItem.Label2])</label> -->
+              <label>$INFO[ListItem.Label]</label>
+            </control>
+          </focusedlayout>
+        </control>
+      </control>
+
+
+     
+
+     
+    </control>
+
+  </controls>
+</window>

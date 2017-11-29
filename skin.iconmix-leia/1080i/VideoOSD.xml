@@ -30,7 +30,7 @@
 			<include>Animation_OpenCloseFade</include>
 			<include>Animation_FadedByOSDSettings</include>
 			<!-- <include>OSD_Player_Banner</include> -->
-			<animation type="Conditional" condition="Skin.HasSetting(ShowOsdActors)">
+			<animation type="Conditional" condition="Skin.HasSetting(ShowOsdActors)+[Integer.IsGreater(Container(7779).NumItems,0)|Integer.IsGreater(Container(1998).NumItems,0)]">
       <effect type="slide"  start="0,0" end="0,-350" time="500" delay="1" reversible="false"/>
     </animation>
 			<include>OSD_Player_Details</include>

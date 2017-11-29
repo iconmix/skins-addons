@@ -22,6 +22,7 @@
   <views>55,557,905,906,509,53,57,58,559,555,556,501,551,552,553,554,550,504,511,513,514,510,52,521,56,560,512,584,585,586,587</views>
   <defaultcontrol always="true">55</defaultcontrol>
   <controls>
+   
     <include>Global_Background_Fanart</include>
     <control type="image">
       <posx>0</posx>
@@ -35,8 +36,14 @@
     
     -->
     <control type="group">
+     
       <control type="group">
       <include>Animation_HiddenByInfo</include>
+      <!--
+      <animation type="Conditional"  condition="!Window.IsTopMost(10025)+!Window.IsTopMost(12003)+!Window.IsVisible(10107)" reversible="false">
+        <effect type="fade" end="50"   time="500" delay="500" />
+      </animation>
+      -->
       <control type="group">
         <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(1998)" reversible="true">
           <effect type="fade" start="100" end="15" time="500"  />
@@ -352,6 +359,10 @@
       <control type="group">
         <posx>440</posx>
         <posy>65</posy>
+        <visible allowhiddenfocus="true">ControlGroup(7000).HasFocus|ControlGroup(7002).HasFocus|ControlGroup(7008).HasFocus|Window.IsVisible(contextmenu)</visible>
+          <animation type="Conditional" condition="ControlGroup(7002).HasFocus|ControlGroup(7008).HasFocus" reversible="false">
+            <effect type="fade" start="100" end="70" time="10" />
+          </animation>
         <control type="image">
           <width>550</width>
           <height>600</height>
@@ -374,10 +385,7 @@
           <onup>7000</onup>
           <ondown>7000</ondown>
           <orientation>vertical</orientation>
-          <visible allowhiddenfocus="true">ControlGroup(7000).HasFocus|ControlGroup(7002).HasFocus|ControlGroup(7008).HasFocus</visible>
-          <animation type="Conditional" condition="ControlGroup(7002).HasFocus|ControlGroup(7008).HasFocus" reversible="false">
-            <effect type="fade" start="100" end="70" time="10" />
-          </animation>
+          
           <control type="button" id="2099">
             <include>BoutonCommun</include>
             <description>View</description>
@@ -420,11 +428,13 @@
             <label>137</label>
             <include>BoutonCommun</include>
           </control>
+          <!--
           <control type="radiobutton" id="16">
             <description>PartyMode</description>
             <include>BoutonCommun</include>
             <label>589</label>
           </control>
+          -->
           <control type="radiobutton" id="11">
             <description>Unlock Shares</description>
             <include>BoutonCommun</include>
@@ -742,11 +752,12 @@
     </control>
     
     <include>AnimationVoletsHorizontaux</include>
-    
+    <!--
     <control type="group">
       <visible>!Window.IsVisible(2003)</visible>
       <include>BandeAnnonceFenetre</include>
     </control>
+    -->
 
     <!--	DEBUG --
     <control type="label">
@@ -756,7 +767,7 @@
     <control type="label">
     <posx>700</posx>
 
-    <label>$INFO[ListItem.TVShowTitle][CR]ImdbNumber:$INFO[ListItem.IMDBNumber][CR]$INFO[ListItem.Icon][CR]$INFO[ListItem.Year][CR]IconMixSaga=$INFO[Window(Home).Property(IconMixSaga)][CR]DBTYPE=$INFO[ListItem.DBType][CR]Rating1999=$INFO[Container(1999).ListItem.Property(Rating)][CR]1991:$INFO[Container(1991).NumItems][CR]1998:$INFO[Container(1998).NumItems][CR]1999:$INFO[Container(1999).NumItems][CR]poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]DBTYPE=$INFO[Container(1999).ListItem.DBTYPE][CR]Content:$INFO[Container.Content]Pays : $INFO[ListItem.Country][CR]Country1:$INFO[Window(Home).Property(ItemCountry1)]O[CR]Portrait:$INFO[ListItem.Label][CR]$INFO[ListItem.FileNameAndPath][CR]Varaiable:$INFO[Container.FolderPath]</label>
+    <label>$INFO[ListItem.TVShowTitle][CR][CR]ImdbNumber:$INFO[ListItem.FileNameAndPath][CR]$INFO[ListItem.Icon][CR]$INFO[ListItem.Year][CR]IconMixSaga=$INFO[Window(Home).Property(IconMixSaga)][CR]DBTYPE=$INFO[ListItem.DBType][CR]Rating1999=$INFO[Container(1999).ListItem.Property(Rating)][CR]1991:$INFO[Container(1991).NumItems][CR]1998:$INFO[Container(1998).NumItems][CR]1999:$INFO[Container(1999).NumItems][CR]poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]DBTYPE=$INFO[Container(1999).ListItem.DBTYPE][CR]Content:$INFO[Container.Content]Pays : $INFO[ListItem.Country][CR]Country1:$INFO[Window(Home).Property(ItemCountry1)]O[CR]Portrait:$INFO[ListItem.Label][CR]$INFO[ListItem.FileNameAndPath][CR]Varaiable:$INFO[Container.FolderPath]</label>
 
     </control>
     -->

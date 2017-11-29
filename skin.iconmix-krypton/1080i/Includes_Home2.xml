@@ -221,7 +221,7 @@
 		
 		
 		<control type="group">
-			<animation type="Conditional" condition="!Control.HasFocus(9000) | [Player.HasAudio + System.IdleTime(8)]" reversible="false">
+			<animation type="Conditional" condition="!Control.HasFocus(9000) | [!Control.HasFocus(9000)+!Control.HasFocus(9001)] | [Player.HasAudio + System.IdleTime(8)]" reversible="false">
 						<effect type="slide" start="0" end="-600,0" center="auto" time="500" />
 						<effect type="fade" start="100" end="50"  time="500" />
 					</animation>
@@ -384,6 +384,7 @@
 		<control type="group">
 			<animation effect="slide" start="0" end="0,-200" center="auto" time="500" condition="Control.HasFocus(9001)">Conditional</animation>
 		<animation effect="fade" start="100" end="50"  time="500" condition="Control.HasFocus(9001)">Conditional</animation>
+		<animation effect="slide" start="0" end="0,600" center="auto" time="500" condition="[Control.HasFocus(9001)]|[!Control.HasFocus(9000)+!Control.HasFocus(9001)] | [Player.HasAudio + System.IdleTime(8)]">Conditional</animation>
 			<control type="image">
 				<posx>0</posx>
 				<posy>900</posy>
@@ -409,7 +410,7 @@
 		</control>
 			<!-- Main Menu -->
 			<control type="wraplist" id="9000">
-				<animation effect="slide" start="0" end="0,600" center="auto" time="500" condition="Player.HasAudio + System.IdleTime(8)">Conditional</animation>
+				
 				<posx>10</posx>
 				<posy>900</posy>
 				<height>250</height>
@@ -561,6 +562,8 @@
 		<control type="group">
 		<animation effect="slide" start="0" end="0,-200" center="auto" time="500" condition="Control.HasFocus(9001)">Conditional</animation>
 		<animation effect="fade" start="100" end="50"  time="500" condition="Control.HasFocus(9001)">Conditional</animation>
+		<animation effect="slide" start="0" end="0,600" center="auto" time="500" condition="[!Control.HasFocus(9001)+!Control.HasFocus(9000)] | [Player.HasAudio + System.IdleTime(8)]">Conditional</animation>
+
 		
 
 		<control type="image">
@@ -592,7 +595,6 @@
 		<!-- Main Menu -->
 		
 		<control type="wraplist" id="9000">
-		<animation effect="slide" start="0" end="0,600" center="auto" time="500" condition="[!Control.HasFocus(9001)+!Control.HasFocus(9000)] | [Player.HasAudio + System.IdleTime(8)]">Conditional</animation>
 			<posx>50</posx>
 			<posy>850</posy>
 			<height>300</height>
@@ -708,6 +710,7 @@
 		<control type="group">
 		<animation effect="slide" start="0" end="0,-200" center="auto" time="500" condition="Control.HasFocus(9001)">Conditional</animation>
 		<animation effect="fade" start="100" end="50"  time="500" condition="Control.HasFocus(9001)">Conditional</animation>
+		<animation effect="slide" start="0" end="0,600" center="auto" time="500" condition="[!Control.HasFocus(9001)+!Control.HasFocus(9000)] | [Player.HasAudio + System.IdleTime(8)]">Conditional</animation>
 		
 
 		
@@ -748,7 +751,7 @@
 					<colordiffuse>FFFFFFFF</colordiffuse>
 					
 				</control>
-				<animation effect="slide" start="0" end="0,600" center="auto" time="500" condition="[!Control.HasFocus(9001)+!Control.HasFocus(9000)] | [Player.HasAudio + System.IdleTime(8)]">Conditional</animation>
+				
 				</control>
 				<control type="group">
 				  <visible>Player.HasAudio + System.IdleTime(8)</visible>
@@ -905,7 +908,7 @@
 		<include name="Home2_IconsVertical">
 		
 		<control type="group">
-			<animation type="Conditional" condition="!Control.HasFocus(9000) | [Player.HasAudio + System.IdleTime(8)]" reversible="false">
+			<animation type="Conditional" condition="Control.HasFocus(9001) | [!Control.HasFocus(9000)+!Control.HasFocus(9001)] | [Player.HasAudio + System.IdleTime(8)]" reversible="false">
 						<effect type="slide" start="0" end="-600,0" center="auto" time="500" />
 						<effect type="fade" start="100" end="50"  time="500" />
 					</animation>

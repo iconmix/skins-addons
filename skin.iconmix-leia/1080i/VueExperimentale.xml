@@ -10,7 +10,7 @@
 			<posy>-990</posy> -->
 			<visible>!String.StartsWith(ListItem.Label,..)</visible>
 		<control type="group">
-				<top>1240</top>
+				<top>1210</top>
 				<posx>400</posx>
 				<align>center</align>
 				<control type="image">

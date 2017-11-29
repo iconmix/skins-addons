@@ -834,8 +834,12 @@ def getallepisodes(IdKodi=None,TvDbId=None,savepath=None,NbKodi=None,ShowBusy=No
                    ArrayCollection["pays"]=""
                    if allID and len(allID)>0:
                       for Test in allID:
+                        try:
                	         ItemPays=Test.get("origin_country")[0]
-                      ArrayCollection["pays"]=ListePays.get(ItemPays)
+               	        except:
+               	         ItemPays=None
+                      if ItemPays:
+                        ArrayCollection["pays"]=ListePays.get(ItemPays)
                  
                  
                  SaisonTab=SaisonTab.get("seasons_details")
@@ -918,14 +922,15 @@ def GetImdbTvNumber(ItemIdxx=None,DBtype=None):
 
    if DBtype=="season":
      xxx=xbmc.getInfoLabel("Container.FolderPath")
-     xx=xxx.split("titles/")[1]
-     ItemIdxx=xx.split("/")[0]
-     if ItemIdxx:
-      json_result = getJSON('VideoLibrary.GetTVShowDetails', '{ "tvshowid":%d,"properties": [ "title", "imdbnumber","episode" ]}' %(int(ItemIdxx)))
-      if json_result:
-          ItemIdx=json_result.get("imdbnumber")
-          NbKodi=json_result.get("episode")
-      else : ItemIdx=""
+     if xxx:
+       xx=xxx.split("titles/")[1]
+       ItemIdxx=xx.split("/")[0]
+       if ItemIdxx:
+        json_result = getJSON('VideoLibrary.GetTVShowDetails', '{ "tvshowid":%d,"properties": [ "title", "imdbnumber","episode" ]}' %(int(ItemIdxx)))
+        if json_result:
+            ItemIdx=json_result.get("imdbnumber")
+            NbKodi=json_result.get("episode")
+        else : ItemIdx=""
    if DBtype=="episode":
       json_result = getJSON('VideoLibrary.GetEpisodeDetails', '{ "episodeid":%d,"properties": [ "title", "tvshowid" ]}' %(int(ItemIdxx)))
       if json_result and json_result.get("tvshowid"):
@@ -1184,16 +1189,18 @@ def getGenre(genrex=None,genretypex=None,origtitle=None):
   genre=""
   genrelist=[]
   if sys.argv[1]:
-
+    
     if genretypex=="episode": #si content=episode -> tvshow
        genretypex="tvshow"
        origtitle=xbmc.getInfoLabel("ListItem.TVShowTitle")
     genretype="VideoLibrary.Get%ss" %(genretypex)
     genrelisttype=genretypex.encode("utf8")
     #recuperation du premier genre
-    genre = genrex.split(" /")[0]
+    if genrex:
+      genre = genrex.split(" /")[0]
+      
     
-       
+     
     if genre  :
       
      #recuperation des IDs de tous les genres  
@@ -1376,7 +1383,9 @@ def GetActeurId(Acteur):
         
           #TMDB    
                  
-        query_url = "https://api.themoviedb.org/3/search/person?api_key=67158e2af1624020e34fd893c881b019&language=%s&query=%s&page=1&include_adult=false" % (xbmc.getInfoLabel("System.Language").encode("utf8"),unicodedata.normalize('NFKD', Acteur.split("(")[0]).encode('ascii','xmlcharrefreplace'))
+        #query_url = "https://api.themoviedb.org/3/search/person?api_key=67158e2af1624020e34fd893c881b019&language=%s&query=%s&page=1&include_adult=false" % (xbmc.getInfoLabel("System.Language").encode("utf8"),unicodedata.normalize('NFKD', Acteur.split("(")[0]).encode('ascii','xmlcharrefreplace'))
+        query_url = "https://api.themoviedb.org/3/search/person?api_key=67158e2af1624020e34fd893c881b019&language=%s&query=%s&page=1&include_adult=false" % (xbmc.getInfoLabel("System.Language").encode("utf8"),urllib.quote(unidecode(Acteur.split("(")[0])))
+        #logMsg("Query="+str(query_url),0)
         json_data = requestUrlJson(query_url)              
         ActeurId["tmdb"]=None        
         if json_data:
@@ -1384,7 +1393,9 @@ def GetActeurId(Acteur):
             
             if allInfo:
               for item in allInfo:
-                ActeurId["tmdb"]=str(item.get("id"))
+                if not ActeurId["tmdb"]:
+                   ActeurId["tmdb"]=str(item.get("id"))
+                   #logMsg("AxteurID="+str(ActeurId["tmdb"]),0)
                 break
   return ActeurId 
 
@@ -1619,12 +1630,13 @@ def getFilmsTv(ActeurType=None,Acteur=None,Statique=None):
   ActeurCache["id"]=None
   if ActeurType and ActeurType=="director":
             ActeurType='realisateurs'
+            ActeurCache["crew"]=[]
   else: ActeurType="acteurs"
   if ActeurType and Acteur!="None": 
      
      if Acteur:
         ActeurCache["cast"]=[] 
-        ActeurCache["crew"]=[]
+        
         savepath=ADDON_DATA_PATH+"/%s/%s" %(ActeurType,str(unidecode(Acteur)).replace(" ", "_"))
         if xbmcvfs.exists(savepath):
           with open(savepath) as data_file:
@@ -1834,6 +1846,11 @@ def getTrailer(ID=None,DbType=None):
      ListeTrailer=[]
      #https://api.themoviedb.org/3/movie/$$IDFILM$$/videos?api_key=67158e2af1624020e34fd893c881b019&language=French      
      #https://api.themoviedb.org/3/tv/$$IDTV$$/videos?api_key=67158e2af1624020e34fd893c881b019&language=French  
+     #https://api.themoviedb.org/3/search/tv?api_key=67158e2af1624020e34fd893c881b019&language=en-US&query=American%20Horror%20Story&page=1
+     
+
+     
+     
      if DbType and ID: 
           if DbType!="movie":
                query_url ="https://api.themoviedb.org/3/tv/%s/videos?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (ID,xbmc.getInfoLabel("System.Language").encode("utf8"))
@@ -1887,24 +1904,32 @@ def get_externalID(ItemId=None,ismovie=None):
    ItemIdR=""
    allID=[]
    query_url=""
-   if ItemId.find('tt')==-1: #pas IMDB
-     externalXX="tvdb_id"
-   else:
-     externalXX="imdb_id"
-   query_url = "https://api.themoviedb.org/3/find/%s?api_key=67158e2af1624020e34fd893c881b019&language=%s&external_source=%s" % (ItemId,xbmc.getInfoLabel("System.Language").encode("utf8"),externalXX)
-   
-   json_data = requestUrlJson(query_url)
+   if ismovie=="episode":
+         json_result2 = getJSON2("VideoLibrary.GetTvShows", '{"filter":{"field":"title","operator":"is","value":"%s"},"properties":["imdbnumber"]}' %(ItemId))
+         if json_result2:
+           for item in json_result2:
+              ItemId=item.get("imdbnumber")
+         else:
+           ItemId=None
+   if ItemId:
+     if ItemId.find('tt')==-1: #pas IMDB
+       externalXX="tvdb_id"
+     else:
+       externalXX="imdb_id"
+     query_url = "https://api.themoviedb.org/3/find/%s?api_key=67158e2af1624020e34fd893c881b019&language=%s&external_source=%s" % (ItemId,xbmc.getInfoLabel("System.Language").encode("utf8"),externalXX)
+     
+     json_data = requestUrlJson(query_url)
    
       
-   if json_data:
-         if ismovie!="movie": 
-          allID=json_data.get("tv_results")
-         else:
-          allID=json_data.get("movie_results")
-         if allID and len(allID)>0:
-             for Test in allID:
-               	  ItemIdR=Test.get("id")
-               	  break
+     if json_data:
+           if ismovie!="movie": 
+            allID=json_data.get("tv_results")
+           else:
+            allID=json_data.get("movie_results")
+           if allID and len(allID)>0:
+               for Test in allID:
+                 	  ItemIdR=Test.get("id")
+                 	  break
    return str(ItemIdR)
    
 

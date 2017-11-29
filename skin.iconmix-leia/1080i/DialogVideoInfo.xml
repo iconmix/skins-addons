@@ -2,7 +2,7 @@
 
 <window type="dialog" id="2003">
   <defaultcontrol always="true">7003</defaultcontrol>
-  <onload>SetFocus(7003,1)</onload>
+  <onload>SetFocus(7003,0)</onload>
   <onload>SetProperty(IconMixUpdateActeurs,"1",10000)</onload>
   <onunload>SetProperty(IconMixUpdateActeurs,"",10000)</onunload>
   <onload>SetProperty(showgenre,,12003)</onload>
@@ -10,6 +10,7 @@
   <onunload>SetProperty(IconMixDirector,,Home)</onunload>
 
   <controls>
+    
 
 
     <control type="group">
@@ -18,6 +19,10 @@
       <animation type="Conditional"  condition="Control.HasFocus(5052)|Control.HasFocus(7778)|Control.HasFocus(7779)|Control.HasFocus(1998)" reversible="false">
         <effect type="fade" end="0"   time="500" delay="10" />
       </animation>
+      <animation type="Conditional"  condition="!Window.IsTopMost(12003)+!Window.IsVisible(	10107)" reversible="false">
+        <effect type="fade" end="50"   time="500" delay="500" />
+      </animation>
+
 
       <!-- FOND -->
       <control type="image">
@@ -34,13 +39,13 @@
       <!-- Control Buttons -->
 
       <control type="group">
-        <animation type="Focus"  reversible="false">
+      <animation type="Focus"  reversible="false">
           <effect type="slide" start="250" end="0" tween="easy" easy="out"  time="500" delay="200" />
         </animation>
         <animation type="UnFocus"  reversible="false">
           <effect type="slide" start="0" end="250" tween="easy" easy="out"  time="500" delay="200" />
         </animation>
-        <!--- panneau de controle -->
+        <!---   panneau de controle -->
 
         <control type="image">
           <posx>1750</posx>
@@ -52,14 +57,15 @@
           <bordersize>8</bordersize>
           <bordertexture border="8">landscape.png</bordertexture>
         </control>
+        
+        
 
         <control type="grouplist" id="7003"> <!--- boutons -->
           <include>VideoInfoButtonText</include>
           <itemgap>5</itemgap>
           <align>center</align>
           <orientation>vertical</orientation>
-
-
+          <onfocus>8</onfocus>
           <onleft condition="!String.IsEmpty(Window(12003).Property(showgenre))+System.HasAddon(script.iconmixtools)+Control.HasFocus(5005)">5001</onleft>
           <onleft condition="!String.IsEmpty(Window(12003).Property(showsaga))+System.HasAddon(script.iconmixtools)+Control.HasFocus(5006)">2008</onleft>
           <!-- <onleft condition="!String.IsEmpty(ListItem.Director)">13</onleft> -->
@@ -75,6 +81,7 @@
             <onfocus>SetProperty(showsaga,,12003)</onfocus>
             <onfocus>SetProperty(showgenre,,12003)</onfocus>
             <!-- 	<visible>!String.IsEmpty(ListItem.DBTYPE)+!Container.Content(TVShows)</visible> -->
+            <visible>!String.IsEmpty(ListItem.DBID)</visible>
             <include>Animation_ButtonFocus</include>
           </control>
 
@@ -100,16 +107,18 @@
             <onclick>ActivateWindow(videos,plugin://plugin.video.youtube/kodion/search/query/?q=$INFO[ListItem.Label]+Trailer,return)</onclick>
 
           </control>
-          <control type="button" id="441">
+          <control type="button" id="442">
             <include>VideoInfoButton</include>
             <texturenofocus>buttons/button_cherche.png</texturenofocus>
             <texturefocus>buttons/button_chercheFO.png</texturefocus>
             <include>Animation_ButtonFocus</include>
             <visible>System.HasAddon(script.iconmixtools)</visible>
-            <!-- <onclick>Action(Close)</onclick> -->
+            
             <onfocus>SetProperty(showsaga,,12003)</onfocus>
             <onfocus>SetProperty(showgenre,,12003)</onfocus>
             <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
+            <onleft condition="!Skin.HasSetting(BAfenetre)">SetFocus(1000)</onleft>
+            <onleft condition="Skin.HasSetting(BAfenetre)">SetFocus(1001)</onleft>
 
           </control>
           <!-- Choose Art -->
@@ -193,10 +202,11 @@
           </control>
         </control>
       </control>
-      <!---->
+     
+      <!-- ----------------------------- ---->
       <control type="button" id="2008"> <!-- realisateur -->
 
-        <left>-2000</left>
+        <left>-3000</left>
         <label>FUCK</label>
         <onleft>Control.Move(5002,-1)</onleft>
         <onright>Control.Move(5002,1)</onright>
@@ -210,6 +220,7 @@
 
       <!-- Control Button Text -->
       <control type="group">
+        <top>62</top>
         <visible>ControlGroup(7003).HasFocus</visible>
         <control type="fadelabel">
           <description>Play</description>
@@ -276,7 +287,7 @@
           <description>Set rating</description>
           <include>VideoInfoButtonLabel</include>
           <label>$LOCALIZE[137] $LOCALIZE[20410] </label>
-          <visible>ControlGroup(7003).HasFocus(440)|ControlGroup(7003).HasFocus(441)</visible>
+          <visible>ControlGroup(7003).HasFocus(440)|ControlGroup(7003).HasFocus(442)</visible>
         </control>
       </control>
 
@@ -326,7 +337,7 @@
         <posx>10</posx>
         <posy>700</posy>
         <width>1600</width>
-        <label>Variable:$INFO[Container(5052).NumItems]</label>
+        <label>Variable:$INFO[Window(Home).Property(DurationTools)]</label>
       </control>-->
 
       <control type="label">
@@ -598,7 +609,7 @@
         <!-- -->
         <control type="image">
           <align>center</align>
-          <posy>155</posy>
+          <posy>150</posy>
           <posx>1260</posx>
           <width>50</width>
           <height>50</height>
@@ -618,8 +629,7 @@
           <scrolltime tween="linear" easing="out">10500</scrolltime>
           <autoscroll>!Control.HasFocus(1998)+!Control.HasFocus(7779)</autoscroll>
           <include>Acteurs</include>
-        </control>      
-
+        </control>
       </control>
       <!-------------------------------------GENRES ET SAGAS------------------------------------------------------------------------->
       <control type="group" id="5000">
@@ -824,7 +834,7 @@
           </control>
         </focusedlayout>
 
-        <content>plugin://script.iconmixtools/?action=getgenre&genre=$INFO[ListItem.Genre]&genretype=$INFO[ListItem.DBTYPE]&title=$INFO[ListItem.Title]</content>
+        <content>$VAR[genredialogvideoinfo]</content>
 
 
       </control>
@@ -972,11 +982,121 @@
   <include>GlobalBackgroundVideoInfo</include>
   <control type="group">
     <posy>970</posy>
-    <posx>5</posx>
+    <posx>15</posx>
     <include condition="!Skin.HasSetting(Hide_MediaFlags)">MediaInfo</include>
     <include condition="!Skin.HasSetting(Hide_ExtraMediaFlags)">MediaInfoGroup3</include>
   </control>
 </control>
+<!---SOUS-MENU TRAILER-->
+      <control type="group">
+        <top>210</top>
+        <left>1680</left>
+        
+         <animation type="Conditional"  condition="!ControlGroup(441).HasFocus" reversible="false">
+          <effect type="zoom" center="1700,270" start="100" end="60" tween="easy" easy="out"  time="100" delay="100" />
+        </animation>
+         <animation type="Conditional"  condition="!Window.IsTopMost(12003)+!Window.IsVisible(10107)" reversible="false">
+        <effect type="fade" end="50"   time="500" delay="500" />
+      </animation>
+        <visible>ControlGroup(7003).HasFocus(442)</visible>
+        <!--- panneau de controle -->
+
+        <control type="image">          
+          <posy>0</posy>
+          <width>220</width>
+          <height>140</height>
+          <colordiffuse>BackgroundColor</colordiffuse>
+          <texture>frames/fondinfogris.png</texture>
+          <bordersize>8</bordersize>
+          <bordertexture border="8">landscape.png</bordertexture>
+        </control>
+        <control type="grouplist" id="441"> <!--- boutons -->
+          <include>Animation_FadedByMenu</include>
+    <include>Animation_CommonFade</include>
+    <include>Animation_OpenCloseFade</include>
+    <posx>10</posx>
+    <posy>10</posy>
+    <width>200</width>
+    <height>110</height>
+          <itemgap>5</itemgap>
+          <align>center</align>
+          <orientation>horizontal</orientation>
+          <onup>7003</onup>  
+          <ondown>7003</ondown>
+
+          <!-- Fullscreen -->
+          
+          <control type="button" id="1000">
+            <include>VideoInfoButton</include>
+            <texturenofocus>buttons/bafull.png</texturenofocus>
+            <texturefocus>buttons/bafullFO.png</texturefocus>
+            <onfocus>SetProperty(showsaga,,12003)</onfocus>
+            <onfocus>SetProperty(showgenre,,12003)</onfocus>
+            <include>Animation_ButtonFocus</include>
+            <onclick condition="Skin.HasSetting(BAfenetre)">Skin.ToggleSetting(BAfenetre)</onclick>
+            <onclick>SetFocus(7003,0)</onclick>
+            <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>          
+          
+          </control>
+        
+
+          <!-- Window -->
+        
+          <control type="button" id="1001">
+            <include>VideoInfoButton</include>
+            <texturenofocus>buttons/bawin.png</texturenofocus>
+            <texturefocus>buttons/bawinFO.png</texturefocus>
+            <include>Animation_ButtonFocus</include>
+            <onfocus>SetProperty(showsaga,,12003)</onfocus>
+            <onfocus>SetProperty(showgenre,,12003)</onfocus>
+            <onclick condition="!Skin.HasSetting(BAfenetre)">Skin.ToggleSetting(BAfenetre)</onclick>
+            <onclick>SetFocus(7003,0)</onclick>
+            <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
+            
+          </control>
+          
+          
+       
+        </control>
+        <control type="group">
+           <posx>20</posx>
+    <posy>20</posy>
+     <animation type="Conditional"  condition="Skin.HasSetting(BAfenetre)" reversible="false">
+        <effect type="slide" end="95"   time="0" delay="1" />
+      </animation>
+           <control type="image" >
+            <width>90</width>
+            <height>90</height>
+            <!-- <visible>Skin.HasSetting(BAfenetre)</visible> -->
+            <texture>buttons/check.png</texture>
+             <align>center</align>
+            <aligny>center</aligny>
+          </control>
+        </control>
+        <control type="group">
+          <top>100</top>
+          <left>8</left>
+          <width>200</width>
+          <control type="label">
+            <description>Play</description>
+            <label>$LOCALIZE[244]</label>
+             <font>impactsongs</font>
+      <textcolor>white</textcolor>
+            <visible>Control.HasFocus(1000)</visible>
+            <align>center</align>
+          </control>
+          <control type="label">
+            <description>Play</description>
+            <label>$LOCALIZE[242]</label>
+             <font>impactsongs</font>
+      <textcolor>white</textcolor>
+            <visible>Control.HasFocus(1001)</visible>
+             <align>center</align>
+          </control>
+        </control>
+
+      
+      </control>
 <control type="image">
       <posx>0</posx>
       <posy>0</posy>
@@ -987,8 +1107,9 @@
     </control>
 <include>PanelActeurs</include>
 <include>DialogVideoInfoRealisateur</include>
- <control type="group">
-      <include>BandeAnnonceFenetre</include>
+ <control type="group" >
+      <!-- <include>BandeAnnonceFenetre</include>-->
+      
     </control>
      
 </controls>
