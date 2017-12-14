@@ -31,7 +31,7 @@
 <onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,down,Home)</onfocus>
 
 
-		<!--		<ondown>60</ondown>-->
+		<!--		<!-- <ondown>60</ondown> -->-->
 				
 				<ondown condition="!String.Contains(ListItem.DBTYPE,set)">60</ondown>
 				<ondown condition="String.Contains(ListItem.DBTYPE,set)">1999</ondown>
@@ -46,7 +46,7 @@
 				<pagecontrol>60</pagecontrol>
 				
 				
-				<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows)]</visible>
+				<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows) |Container.Content(sets) ]</visible>
 				<itemlayout width="400" height="194">
 				  
 					<control type="group">
@@ -144,7 +144,7 @@
 			<preloaditems>2</preloaditems>
 			<pagecontrol>60</pagecontrol>
 			
-			<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows)]</visible>
+			<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows) |Container.Content(sets)]</visible>
 			<itemlayout width="294" height="200">
 			 
 				<control type="group">

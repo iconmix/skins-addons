@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="dialog" id="4000">
+  <defaultcontrol always="true">200</defaultcontrol>
+  <allowoverlay>no</allowoverlay>
+  <coordinates>
+    <system>1</system>
+    <posx>0</posx>
+    <posy>0</posy>
+  </coordinates>
+  
+  <controls>
+   
+
+    <control type="group">
+      <posx>15</posx>
+      <posy>50</posy>
+      <width>1910</width>
+      <height>780</height>
+
+      <control type="image">
+        <texture background="true" >Dialog_GlassActeur.png</texture>
+        <colordiffuse>BackgroundColor</colordiffuse>
+      </control>
+      <control type="group">
+        <posx>50</posx>
+        <posy>0</posy>
+
+        <!-- aperçus ArtWork -->
+        <control type="group">
+          <left>1290</left>
+          <width>500</width>
+          <control type="image" id="9">
+            <top>280</top>
+            <height>220</height>
+            <texture></texture>
+            <aspectratio align="center" aligny="center">keep</aspectratio>
+          </control>
+        </control>
+        
+        <control type="group"><!-- artworks selectionnés -->
+          <top>480</top>
+          <height>210</height>
+          <control type="image" id="10"> <!-- affiche -->
+            <left>20</left>
+            <width>200</width>
+            <aspectratio align="center" aligny="center">keep</aspectratio>
+            <texture></texture>
+          </control>
+           <control type="image" id="11"> <!-- banniere -->
+            <left>230</left>
+            <width>200</width>
+            <aspectratio align="center" aligny="center">keep</aspectratio>
+            <texture></texture>
+          </control>
+          <control type="image" id="12"> <!-- logo -->
+            <left>440</left>
+            <width>200</width>
+            <aspectratio align="center" aligny="center">keep</aspectratio>
+            <texture></texture>
+
+          </control>
+          <control type="image" id="13"> <!-- clearart -->
+            <left>650</left>
+            <width>200</width>
+            <aspectratio align="center" aligny="center">keep</aspectratio>
+            <texture></texture>
+
+          </control>
+          <control type="image" id="14"> <!-- vignette -->
+            <left>865</left>
+            <width>200</width>
+            <aspectratio align="center" aligny="center">keep</aspectratio>
+            <texture></texture>
+          </control>
+         
+          <control type="image" id="15"> <!-- disque -->
+            <left>1080</left>
+            <width>200</width>
+            <aspectratio align="center" aligny="center">keep</aspectratio>
+            <texture></texture>
+
+          </control>
+          
+          
+        </control>
+        
+        <control type="grouplist">
+          <orientation>horizontal</orientation>
+          <top>113</top>
+          <left>225</left>
+          <height>580</height>
+          <itemgap>210</itemgap>
+         <control type="image">              
+          <colordiffuse>BackgroundColor</colordiffuse>          
+          <width>2</width>
+          <texture>VideoInfoLine_Vertical.png</texture>
+        </control>
+        <control type="image">              
+          <colordiffuse>BackgroundColor</colordiffuse>          
+          <width>2</width>
+          <texture>VideoInfoLine_Vertical.png</texture>
+        </control>
+        <control type="image">              
+          <colordiffuse>BackgroundColor</colordiffuse>          
+          <width>2</width>
+          <texture>VideoInfoLine_Vertical.png</texture>
+        </control>
+        <control type="image">              
+          <colordiffuse>BackgroundColor</colordiffuse>          
+          <width>2</width>
+          <texture>VideoInfoLine_Vertical.png</texture>
+        </control>
+        <control type="image">              
+          <colordiffuse>BackgroundColor</colordiffuse>          
+          <width>2</width>
+          <texture>VideoInfoLine_Vertical.png</texture>
+        </control>
+        <control type="image">              
+          <colordiffuse>BackgroundColor</colordiffuse>          
+          <width>2</width>
+          <texture>VideoInfoLine_Vertical.png</texture>
+        </control>
+          
+        </control>
+        
+        <control type="group"><!-- labels des artworks sélectionnés -->
+          <top>120</top>
+          <left>20</left>
+          <height>30</height>
+          <control type="label" id="20"> <!-- affiche -->
+            <left>20</left>
+            <width>200</width>
+            <label>32700</label>
+            <align>center</align>
+            <font>impactsongs</font>
+          </control>
+         
+        
+          <control type="label" id="22"> <!-- banniere -->
+            <left>230</left>
+            <width>200</width>
+            <label></label>
+            <align>center</align>
+            <font>impactsongs</font>
+          </control>
+          
+           <control type="label" id="25"> <!-- logo -->
+            <left>440</left>
+            <width>200</width>
+            <label></label>
+            <align>center</align>
+            <font>impactsongs</font>
+          </control>
+          <control type="label" id="23"> <!-- clearart -->
+            <left>650</left>
+            <width>200</width>
+            <label></label>
+            <align>center</align>
+            <font>impactsongs</font>
+          </control>
+           <control type="label" id="21"> <!-- thumb -->
+            <left>860</left>
+            <width>200</width>
+            <label></label>
+            <align>center</align>
+            <font>impactsongs</font>
+          </control>
+
+          <control type="label" id="24"> <!-- disque -->
+            <left>1070</left>
+            <width>200</width>
+            <label></label>
+            <align>center</align>
+            <font>impactsongs</font>
+          </control>
+        </control>
+
+
+<control type="group">
+  <left>0</left>
+  <width>1800</width>
+        <control type="label" id="1">       
+          <posy>35</posy>         
+          <height>76</height>
+          <font>impact</font>
+          <textcolor>black</textcolor>
+          <align>center</align>
+          <aligny>top</aligny>
+          <label></label>
+        </control>
+        <control type="label">       
+          <posy>32</posy>
+          <left>-3</left>         
+          <height>76</height>
+          <font>impact</font>
+          <textcolor>white</textcolor>
+          <align>center</align>
+          <aligny>top</aligny>
+          <label>$INFO[Control.GetLabel(1)]</label>
+        </control>
+
+   
+        <control type="image">
+          <top>470</top>
+          <width>1260</width>
+          <left>25</left>
+         <colordiffuse>BackgroundColor</colordiffuse>
+          <height>2</height>
+          <texture>VideoInfoLine.png</texture>
+        </control>
+    <!-- actuels     <control type="label" id="100"> 
+          <top>475</top>         
+          <font>comic24</font>
+          <textcolor>lightgreen</textcolor>
+          <label></label>
+          <align>center</align>
+        </control>-->
+       </control>
+
+
+        <control type="list" id="200"> <!-- affiche -->
+          <posx>20</posx>
+          <posy>160</posy>
+          <width>200</width>
+          <height>265</height>
+          <onleft>7</onleft>
+          <onright>201</onright>     
+                  
+          <itemlayout height="38" width="200">
+            <control type="label">
+              
+              <font>impactsongs</font>
+              <width>200</width>
+              <align>center</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+            </control>  
+            
+          </itemlayout>
+          <focusedlayout height="38" width="200">
+            <control type="image">
+              <align>center</align>
+              <aligny>center</aligny>
+              <texture>ButtonFO2Wide.png</texture>
+              <left>5</left>
+              <width>200</width>
+              <visible>Control.HasFocus(200)</visible>
+            </control>
+            <control type="label">
+              <textcolor>yellow</textcolor>
+              <font>impactsongs</font>
+              
+              <width>200</width>
+              <align>center</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+            </control>
+            <control type="image"> 
+              <top>3</top>     
+               <left>5</left>      
+              <width>35</width>
+              <height>35</height>              
+              <texture>buttons/ok.png</texture>
+              <visible>String.IsEqual(Container(200).ListItem.Property(Original),Original)+!String.IsEqual(Container(200).ListItem.Property(Delete),Delete)</visible>
+            </control>
+            <control type="image">         
+              <width>35</width>
+              <height>35</height>  
+              <top>3</top>
+              <left>5</left>            
+              <texture>buttons/cancel.png</texture>
+              <visible>String.IsEqual(Container(200).ListItem.Property(Original),Original)+String.IsEqual(Container(200).ListItem.Property(Delete),Delete)</visible>
+            </control>
+          </focusedlayout>
+         
+        </control>
+         <control type="list" id="201"> <!-- banniere -->
+          <posx>230</posx>
+          <posy>160</posy>
+          <width>200</width>
+          <height>265</height>
+          <onleft>200</onleft>
+          <onright>202</onright>
+          
+                  
+          <itemlayout height="38" width="200">
+            <control type="label">
+              
+              <font>impactsongs</font>
+              <width>200</width>
+              <align>center</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+            </control>  
+            
+          </itemlayout>
+          <focusedlayout height="38" width="200">
+            <control type="image">
+              <align>center</align>
+              <aligny>center</aligny>
+              <texture>ButtonFO2Wide.png</texture>
+              <left>5</left>
+              <width>200</width>
+              <visible>Control.HasFocus(201)</visible>
+            </control>
+            <control type="label">
+              <textcolor>yellow</textcolor>
+              <font>impactsongs</font>
+              
+              <width>200</width>
+              <align>center</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+            </control>
+            <control type="image"> 
+              <top>3</top>     
+               <left>5</left>      
+              <width>35</width>
+              <height>35</height>              
+              <texture>buttons/ok.png</texture>
+              <visible>String.IsEqual(Container(201).ListItem.Property(Original),Original)+!String.IsEqual(Container(201).ListItem.Property(Delete),Delete)</visible>
+            </control>
+            <control type="image">         
+              <width>35</width>
+              <height>35</height>  
+              <top>3</top>
+              <left>5</left>            
+              <texture>buttons/cancel.png</texture>
+              <visible>String.IsEqual(Container(201).ListItem.Property(Original),Original)+String.IsEqual(Container(201).ListItem.Property(Delete),Delete)</visible>
+            </control>
+          </focusedlayout>
+         
+        </control>
+         <control type="list" id="202"><!-- logo -->
+          <posx>440</posx>
+          <posy>160</posy>
+          <width>200</width>
+          <height>265</height>
+          <onleft>201</onleft>
+          <onright>203</onright>
+          
+                  
+          <itemlayout height="38" width="202">
+            <control type="label">
+              
+              <font>impactsongs</font>
+              <width>202</width>
+              <align>center</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+            </control>  
+            
+          </itemlayout>
+          <focusedlayout height="38" width="202">
+            <control type="image">
+              <align>center</align>
+              <aligny>center</aligny>
+              <texture>ButtonFO2Wide.png</texture>
+              <left>5</left>
+              <width>202</width>
+              <visible>Control.HasFocus(202)</visible>
+            </control>
+            <control type="label">
+              <textcolor>yellow</textcolor>
+              <font>impactsongs</font>
+              
+              <width>202</width>
+              <align>center</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+            </control>
+            <control type="image"> 
+              <top>3</top>     
+               <left>5</left>      
+              <width>35</width>
+              <height>35</height>              
+              <texture>buttons/ok.png</texture>
+              <visible>String.IsEqual(Container(202).ListItem.Property(Original),Original)+!String.IsEqual(Container(202).ListItem.Property(Delete),Delete)</visible>
+            </control>
+            <control type="image">         
+              <width>35</width>
+              <height>35</height>  
+              <top>3</top>
+              <left>5</left>            
+              <texture>buttons/cancel.png</texture>
+              <visible>String.IsEqual(Container(202).ListItem.Property(Original),Original)+String.IsEqual(Container(202).ListItem.Property(Delete),Delete)</visible>
+            </control>
+          </focusedlayout>
+         
+        </control>
+         <control type="list" id="203"><!-- clearart -->
+          <posx>650</posx>
+          <posy>160</posy>
+          <width>200</width>
+          <height>265</height>
+          <onleft>202</onleft>
+          <onright>204</onright>
+          
+                  
+          <itemlayout height="38" width="203">
+            <control type="label">
+              
+              <font>impactsongs</font>
+              <width>203</width>
+              <align>center</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+            </control>  
+            
+          </itemlayout>
+          <focusedlayout height="38" width="203">
+            <control type="image">
+              <align>center</align>
+              <aligny>center</aligny>
+              <texture>ButtonFO2Wide.png</texture>
+              <left>5</left>
+              <width>203</width>
+              <visible>Control.HasFocus(203)</visible>
+            </control>
+            <control type="label">
+              <textcolor>yellow</textcolor>
+              <font>impactsongs</font>
+              
+              <width>203</width>
+              <align>center</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+            </control>
+            <control type="image"> 
+              <top>3</top>     
+               <left>5</left>      
+              <width>35</width>
+              <height>35</height>              
+              <texture>buttons/ok.png</texture>
+              <visible>String.IsEqual(Container(203).ListItem.Property(Original),Original)+!String.IsEqual(Container(203).ListItem.Property(Delete),Delete)</visible>
+            </control>
+            <control type="image">         
+              <width>35</width>
+              <height>35</height>  
+              <top>3</top>
+              <left>5</left>            
+              <texture>buttons/cancel.png</texture>
+              <visible>String.IsEqual(Container(203).ListItem.Property(Original),Original)+String.IsEqual(Container(203).ListItem.Property(Delete),Delete)</visible>
+            </control>
+          </focusedlayout>
+         
+        </control>
+         <control type="list" id="204"><!-- vignette -->
+          <posx>860</posx>
+          <posy>160</posy>
+          <width>200</width>
+          <height>265</height>
+          <onleft>203</onleft>
+          <onright>205</onright>
+          
+                  
+          <itemlayout height="38" width="204">
+            <control type="label">
+              
+              <font>impactsongs</font>
+              <width>204</width>
+              <align>center</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+            </control>  
+            
+          </itemlayout>
+          <focusedlayout height="38" width="204">
+            <control type="image">
+              <align>center</align>
+              <aligny>center</aligny>
+              <texture>ButtonFO2Wide.png</texture>
+              <left>5</left>
+              <width>204</width>
+              <visible>Control.HasFocus(204)</visible>
+            </control>
+            <control type="label">
+              <textcolor>yellow</textcolor>
+              <font>impactsongs</font>
+              
+              <width>204</width>
+              <align>center</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+            </control>
+            <control type="image"> 
+              <top>3</top>     
+               <left>5</left>      
+              <width>35</width>
+              <height>35</height>              
+              <texture>buttons/ok.png</texture>
+              <visible>String.IsEqual(Container(204).ListItem.Property(Original),Original)+!String.IsEqual(Container(204).ListItem.Property(Delete),Delete)</visible>
+            </control>
+            <control type="image">         
+              <width>35</width>
+              <height>35</height>  
+              <top>3</top>
+              <left>5</left>            
+              <texture>buttons/cancel.png</texture>
+              <visible>String.IsEqual(Container(204).ListItem.Property(Original),Original)+String.IsEqual(Container(204).ListItem.Property(Delete),Delete)</visible>
+            </control>
+          </focusedlayout>
+         
+        </control>
+         <control type="list" id="205"><!-- disque -->
+          <posx>1070</posx>
+          <posy>160</posy>
+          <width>200</width>
+          <height>265</height>
+          <onleft>204</onleft>
+          <onright>5</onright>
+          
+                  
+          <itemlayout height="38" width="205">
+            <control type="label">
+              
+              <font>impactsongs</font>
+              <width>205</width>
+              <align>center</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+            </control>  
+            
+          </itemlayout>
+          <focusedlayout height="38" width="205">
+            <control type="image">
+              <align>center</align>
+              <aligny>center</aligny>
+              <texture>ButtonFO2Wide.png</texture>
+              <left>5</left>
+              <width>205</width>
+              <visible>Control.HasFocus(205)</visible>
+            </control>
+            <control type="label">
+              <textcolor>yellow</textcolor>
+              <font>impactsongs</font>
+              
+              <width>205</width>
+              <align>center</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+            </control>
+            <control type="image"> 
+              <top>3</top>     
+               <left>5</left>      
+              <width>35</width>
+              <height>35</height>              
+              <texture>buttons/ok.png</texture>
+              <visible>String.IsEqual(Container(205).ListItem.Property(Original),Original)+!String.IsEqual(Container(205).ListItem.Property(Delete),Delete)</visible>
+            </control>
+            <control type="image">         
+              <width>35</width>
+              <height>35</height>  
+              <top>3</top>
+              <left>5</left>            
+              <texture>buttons/cancel.png</texture>
+              <visible>String.IsEqual(Container(205).ListItem.Property(Original),Original)+String.IsEqual(Container(205).ListItem.Property(Delete),Delete)</visible>
+            </control>
+          </focusedlayout>
+         
+        </control>
+     
+      </control>
+      
+      <control type="button" id="5"> <!-- OK -->
+        <posx>1840</posx>
+        <posy>35</posy>
+        <width>53</width>
+        <height>53</height>
+        <font>METF_TitleTextMedium</font>
+        <colordiffuse>00FFFFFF</colordiffuse>
+        <textcolor>00FFFFFF</textcolor>
+        <focusedcolor>00FFFFFF</focusedcolor>
+        <texturefocus colordiffuse="FFFFFFFF">buttons/ok.png</texturefocus>
+        <texturenofocus colordiffuse="FF7F7F7F">buttons/ok.png</texturenofocus>
+        <align>right</align>
+        <aligny>center</aligny>
+        <onleft>205</onleft>
+        <animation type="Conditional" condition="Control.HasFocus(5)" loop="true">
+          <effect type="zoom" start="100" end="80"   time="1500" />
+        </animation>
+
+      </control>
+
+      <control type="button" id="7"> <!-- CANCEL -->
+        <posx>15</posx>
+        <posy>35</posy>
+        <width>53</width>
+        <height>53</height>
+        <font>METF_TitleTextMedium</font>
+        <colordiffuse>00FFFFFF</colordiffuse>
+        <textcolor>00FFFFFF</textcolor>
+        <focusedcolor>00FFFFFF</focusedcolor>
+        <texturefocus colordiffuse="FFFFFFFF">buttons/cancel.png</texturefocus>
+        <texturenofocus colordiffuse="FF7F7F7F">buttons/cancel.png</texturenofocus>
+        <align>right</align>
+        <aligny>center</aligny>
+        <onright>200</onright>
+        <!-- <onclick>Close</onclick> -->
+        <info>.</info>
+        <label>.</label>
+        <animation type="Conditional" condition="Control.HasFocus(7)" loop="true">
+          <effect type="zoom" start="100" end="80" time="1500" />
+        </animation>
+      </control>
+
+
+
+
+  </control>
+
+</controls>
+</window>

@@ -203,6 +203,11 @@
 			<filename>number.ttf</filename>
 			<size>45</size>
 		</font>
+		<font>
+		  <name>compteur</name>
+		  <filename>compteur.ttf</filename>
+		  <size>36</size>
+		</font>
 		
 		<font>
 			<name>PlotFont</name>

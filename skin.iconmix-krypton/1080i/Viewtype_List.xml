@@ -28,7 +28,7 @@
 			<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
 			<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
       <onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
-			<onright>60</onright>
+			<!-- <onright>60</onright> -->
 			<scrolltime>160</scrolltime>
 			<viewtype label="31801">list</viewtype>
 			<orientation>vertical</orientation>
@@ -333,6 +333,7 @@
 				</control>
 			</focusedlayout>
 		</control>
+		<include>ScrollBar_Horizontal</include>
 		<!-- Thumbnails -->
 		<control type="group">
 
@@ -475,24 +476,7 @@
 
 
 
-		<!-- Scroll Bar -->
-		<control type="scrollbar" id="998">
-			<include>Animation_OpenCloseFade</include>
-			<include>Animation_FadedByMenu</include>
-			<posx>1270</posx>
-			<posy>128</posy>
-			<width>22</width>
-			<height>376</height>
-			<visible allowhiddenfocus="true">Control.HasFocus(998) | Container.Scrolling</visible>
-			<texturesliderbackground>-</texturesliderbackground>
-			<textureslidernib>ScrollBarV_Nib_Focus.png</textureslidernib>
-			<textureslidernibfocus>ScrollBarV_Nib_Focus.png</textureslidernibfocus>
-			<onleft>997</onleft>
-			<onright>noop</onright>
-			<showonepage>true</showonepage>
-			<orientation>vertical</orientation>
-			<animation effect="fade" start="0" end="100" time="400" condition="Control.HasFocus(998) | Container.Scrolling">Conditional</animation>
-		</control>
+		
 		<include>showacteurinfo</include>
 	</control>
 	

@@ -15,7 +15,7 @@
 				<width>380</width>
 				<include>SettingsLabel</include>
 				<label>$LOCALIZE[19074]</label>
-				<onleft>60</onleft>
+				<!-- <onleft>60</onleft> -->
 				<onright>4</onright>
 				<onup>33</onup>
 				<ondown>8</ondown>
@@ -28,7 +28,7 @@
 				<include>SettingsLabel</include>
 				<label>$LOCALIZE[19201]</label>
 				<onright>4</onright>
-				<onleft>60</onleft>
+				<!-- <onleft>60</onleft> -->
 				<onup>7</onup>
 				<ondown>9</ondown>
 			</control>
@@ -39,7 +39,7 @@
 				<width>380</width>
 				<include>SettingsLabel</include>
 				<label>$LOCALIZE[19202]</label>
-				<onleft>60</onleft>
+				<!-- <onleft>60</onleft> -->
 				<onright>4</onright>
 				<onup>8</onup>
 				<ondown>11</ondown>
@@ -61,7 +61,7 @@
 				<include>SettingsLabel</include>
 				<label>$LOCALIZE[19207]</label>
 				<onright>4</onright>
-				<onleft>60</onleft>
+				<!-- <onleft>60</onleft> -->
 				<onup>9</onup>
 				<ondown>12</ondown>
 			</control>
@@ -72,7 +72,7 @@
 				<width>380</width>
 				<include>SettingsLabel</include>
 				<label>$LOCALIZE[19206]</label>
-				<onleft>60</onleft>
+				<!-- <onleft>60</onleft> -->
 				<onright>4</onright>
 				<onup>11</onup>
 				<ondown>13</ondown>
@@ -85,7 +85,7 @@
 				<include>SettingsLabel</include>
 				<label>$LOCALIZE[19200]</label>
 				<onright>4</onright>
-				<onleft>60</onleft>
+				<!-- <onleft>60</onleft> -->
 				<onup>12</onup>
 				<ondown>30</ondown>
 			</control>
@@ -103,7 +103,7 @@
 				<height>35</height>
 				<include>SettingsLabel</include>
 				<label>$LOCALIZE[19205]</label>
-				<onleft>60</onleft>
+				<!-- <onleft>60</onleft> -->
 				<onright>4</onright>
 				<onup>13</onup>
 				<ondown>34</ondown>
@@ -117,7 +117,7 @@
 				<include>SettingsLabel</include>
 				<label>$LOCALIZE[19024]</label>
 				<visible>String.IsEmpty(Window.Property(IsRadio))</visible>
-				<onleft>60</onleft>
+				<!-- <onleft>60</onleft> -->
 				<onright>4</onright>
 				<onup>30</onup>
 				<ondown>31</ondown>
@@ -131,7 +131,7 @@
 				<include>SettingsLabel</include>
 				<label>$LOCALIZE[19023]</label>
 				<visible>!String.IsEmpty(Window.Property(IsRadio))</visible>
-				<onleft>60</onleft>
+				<!-- <onleft>60</onleft> -->
 				<onright>4</onright>
 				<onup>30</onup>
 				<ondown>19204</ondown>
@@ -144,7 +144,7 @@
 				<height>35</height>
 				<include>SettingsLabel</include>
 				<label>$LOCALIZE[19204]</label>
-				<onleft>60</onleft>
+				<!-- <onleft>60</onleft> -->
 				<onright>4</onright>
 				<onup>34</onup>
 				<ondown>7</ondown>
@@ -161,7 +161,7 @@
 				<width>370</width>
 				<height>435</height>
 				<onleft>4</onleft>
-				<onright>60</onright>
+				<!-- <onright>60</onright> -->
 				<pagecontrol>60</pagecontrol>
 				<scrolltime>200</scrolltime>
 				<itemlayout height="40">

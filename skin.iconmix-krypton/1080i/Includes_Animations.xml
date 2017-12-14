@@ -492,7 +492,7 @@
 	
 	<!-- Info dialog animations -->
 	<include name="Animation_HiddenByInfo">
-		<animation effect="fade" start="100" end="0" time="200" condition="Window.IsActive(musicinformation) | Window.IsActive(movieinformation) | Window.IsActive(songinformation)">Conditional</animation>
+		<animation effect="fade" start="100" end="0" time="200" condition="System.HasModalDialog | Window.IsActive(musicinformation) | Window.IsActive(movieinformation) | Window.IsActive(songinformation) | Window.IsVisible(4000)">Conditional</animation>
 	</include>
 	<include name="Animation_PosterInfoHide">
 		<animation type="Conditional" condition="Window.IsActive(movieinformation)">

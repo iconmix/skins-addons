@@ -43,6 +43,7 @@
 			<control type="button" id="2997">
 				<left>-2000</left>
 				<label>ACTION</label>
+				<onfocus condition="Skin.HasSetting(MusicAucun)">SetFocus(55)</onfocus>
 			
 				<onleft condition="String.IsEqual(Window(Home).Property(IconMixVerticalNavigation),horizontal)">Control.Move(1999,-1)</onleft>
 				<onright condition="String.IsEqual(Window(Home).Property(IconMixVerticalNavigation),horizontal)">Control.Move(1999,1)</onright>	
@@ -79,7 +80,7 @@
 			<visible>!Container.OnNext</visible>
 			<visible>!Container.OnPrevious</visible>
 		<control type="list" id="1999">			
-				<onfocus condition="Skin.HasSetting(MusicAucun)">SetFocus(55)</onfocus>
+				
 			<focusposition>0</focusposition>
 			<onfocus>SetProperty(IconMixVerticalNavigation,"horizontal",Home)</onfocus>
 			<onfocus>Action(FirstPage)</onfocus>
@@ -94,7 +95,7 @@
 			
 		</control>
 		<control type="list" id="1999">			
-				<onfocus condition="Skin.HasSetting(MusicAucun)">SetFocus(55)</onfocus>
+			
 			<focusposition>0</focusposition>
 			<onfocus>SetProperty(IconMixVerticalNavigation,"vertical",Home)</onfocus>
 			  <onfocus>Action(FirstPage)</onfocus>
@@ -117,7 +118,7 @@
 			<visible>!Container.OnNext</visible>
 			<visible>!Container.OnPrevious</visible>
 		<control type="list" id="1999">			
-			<onfocus condition="Skin.HasSetting(MusicGenreAucun)">SetFocus(55)</onfocus>
+			
 			<focusposition>0</focusposition>
 			<onfocus>SetProperty(IconMixVerticalNavigation,"horizontal",Home)</onfocus>
 			<onfocus>Action(FirstPage)</onfocus>
@@ -416,7 +417,7 @@
 			<!--<include>NavMenuBackground</include>-->
 			<control type="grouplist" id="7000">
 				<posx>30</posx>
-				<posy>15</posy>
+				<posy>30</posy>
 				<width>440</width>
 				<height>520</height>
 				<itemgap>1</itemgap>
@@ -607,7 +608,7 @@
 			</control>
 			
 		</control>
-		
+		<include>AffichagePosition</include>
 		<include>AnimationVoletsHorizontaux</include>
 		
 		

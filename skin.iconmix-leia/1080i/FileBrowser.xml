@@ -17,7 +17,7 @@
 			<onup>450</onup>
 			<ondown>450</ondown>
 			<onleft>7001</onleft>
-			<onright>60</onright>
+			<!-- <onright>60</onright> -->
 			<scrolltime>120</scrolltime>
 			<viewtype label="">list</viewtype>
 			<orientation>vertical</orientation>

@@ -91,7 +91,7 @@
             <texturenofocus>buttons/button_trailer.png</texturenofocus>
             <texturefocus>buttons/button_trailerFO.png</texturefocus>
             <include>Animation_ButtonFocus</include>
-            <visible>!System.HasAddon(script.iconmixtools)+!String.IsEmpty(ListItem.Trailer)</visible>
+            <visible>!System.HasAddon(script.iconmixtools)+!String.IsEmpty(ListItem.Trailer)+!Player.HasVideo</visible>
             <onfocus>SetProperty(showsaga,,12003)</onfocus>
             <onfocus>SetProperty(showgenre,,12003)</onfocus>
           </control>
@@ -100,7 +100,7 @@
             <texturenofocus>buttons/button_cherche.png</texturenofocus>
             <texturefocus>buttons/button_chercheFO.png</texturefocus>
             <include>Animation_ButtonFocus</include>
-            <visible>!System.HasAddon(script.iconmixtools)+String.IsEmpty(ListItem.Trailer)</visible>
+            <visible>!System.HasAddon(script.iconmixtools)+String.IsEmpty(ListItem.Trailer)+!Player.HasVideo</visible>
             <onclick>Action(Close)</onclick>
             <onfocus>SetProperty(showsaga,,12003)</onfocus>
             <onfocus>SetProperty(showgenre,,12003)</onfocus>
@@ -112,7 +112,7 @@
             <texturenofocus>buttons/button_cherche.png</texturenofocus>
             <texturefocus>buttons/button_chercheFO.png</texturefocus>
             <include>Animation_ButtonFocus</include>
-            <visible>System.HasAddon(script.iconmixtools)</visible>
+            <visible>System.HasAddon(script.iconmixtools)+!Player.HasVideo</visible>
             
             <onfocus>SetProperty(showsaga,,12003)</onfocus>
             <onfocus>SetProperty(showgenre,,12003)</onfocus>
@@ -214,7 +214,7 @@
         <onup condition="!String.IsEmpty(ListItem.Director)">7777</onup>
         <onup condition="String.IsEmpty(ListItem.Director)">SetFocus(7003)</onup>
         <ondown>SetFocus(7003)</ondown>
-        <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
+        <onclick condition="!Player.HasVideo">RunScript(script.iconmixtools,trailer=True)</onclick>
         <visible>Integer.IsGreater(Container(5002).NumItems,0)</visible>
       </control>
 

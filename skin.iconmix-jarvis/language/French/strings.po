@@ -467,6 +467,10 @@ msgctxt "#31334"
 msgid "Trailers"
 msgstr "Bandes-Annonces"
 
+msgctxt "#31335"
+msgid "Windowed Trailers"
+msgstr "Bandes-Annonces en fenêtre"
+
 msgctxt "#31336"
 msgid "Enable Kiosk mode"
 msgstr "Activer le mode Kiosque"
@@ -478,6 +482,14 @@ msgstr "Désactiver les options destructrices du menu 'Éteindre'"
 msgctxt "#31338"
 msgid "Use simple Media Filter"
 msgstr "Utiliser le Filtre Média simple"
+
+msgctxt "#31339"
+msgid "Show Position in Item List"
+msgstr "Afficher la position dans la liste"
+
+msgctxt "#31340"
+msgid "Show Always Position in Item List"
+msgstr "Afficher en permanence la position dans la liste"
 
 msgctxt "#31341"
 msgid "View information for your computer on such items as your network, graphics, hardware and storage space available"
@@ -696,8 +708,8 @@ msgid "Films that have no synchronized soundtrack and no spoken dialogue, until 
 msgstr "Les films qui n'ont aucune bande sonore synchronisée et aucun dialogue parlé, jusqu'à l'aube du cinéma parlant dans la fin des années 1920. Les films sans dialogue utilisaient des titres pour les portions de dialogue et étaient souvent accompagnés par de la musique."
 
 msgctxt "#31399"
-msgid "Lighter Background Fanart diffuse overlay"
-msgstr "FanArt d'arrière plan plus clair, incrustation plus floue"
+msgid "Darker Background Fanart"
+msgstr "FanArt d'arrière plan plus sombre"
 
 msgctxt "#31400"
 msgid "Hide Current Temperature and Weather Conditions"
@@ -1499,15 +1511,15 @@ msgstr "Poster enroulé large"
 
 msgctxt "#31831"
 msgid "Banner Wall"
-msgstr "Mur de Bannières"
+msgstr "Bannières (Mur)"
 
 msgctxt "#31832"
 msgid "Curved list"
 msgstr "Liste incurvée"
 
 msgctxt "#31833"
-msgid "Test"
-msgstr "Test"
+msgid "View/Filter/Sort/..."
+msgstr "Vues/Filtre/Tri/..."
 
 msgctxt "#31834"
 msgid "Trio list"
@@ -1635,8 +1647,8 @@ msgid "Update only new movieset"
 msgstr "Mettre à jour les nouvelles sagas"
 
 msgctxt "#31924"
-msgid "Movieset updating..."
-msgstr "Mise a jour des sagas..."
+msgid "Movieset updating"
+msgstr "Mise a jour des sagas"
 
 msgctxt "#31926"
 msgid "Show videos/songs filename and path"
@@ -1647,8 +1659,8 @@ msgid "Update Movieset details"
 msgstr "Mettre à jour les éléments des sagas"
 
 msgctxt "#31927"
-msgid "Update Tvshows episodes"
-msgstr "Mettre à jour les épisodes par saison"
+msgid "Update Tvshows"
+msgstr "Mises à jour des séries"
 
 msgctxt "#31928"
 msgid "Hide Tvshows casting"
@@ -1682,6 +1694,10 @@ msgstr "Accéder aux éléments de l'artiste"
 msgctxt "#31935"
 msgid "Hide Movieset Casting"
 msgstr "Masquer les acteurs des sagas"
+
+msgctxt "#31936"
+msgid "Update Movie(s) ArtWorks"
+msgstr "Mettre à jour les illustrations du/des film(s)"
 
 msgctxt "#32000"
 msgid "Horizontal panel animation on windows close"

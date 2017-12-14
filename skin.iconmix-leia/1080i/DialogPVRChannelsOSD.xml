@@ -51,8 +51,8 @@
 			<posy>90</posy>
 			<width>430</width>
 			<height>365</height>
-			<onleft>60</onleft>
-			<onright>60</onright>
+			<!-- <onleft>60</onleft> -->
+			<!-- <onright>60</onright> -->
 			<itemlayout height="60" width="400">
 				<control type="label">
 					<description>Channel number label</description>

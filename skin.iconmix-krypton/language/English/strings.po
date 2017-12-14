@@ -606,7 +606,9 @@ msgctxt "#31334"
 msgid "Trailers"
 msgstr ""
 
-#empty string with id 31335
+msgctxt "#31335"
+msgid "Windowed Trailers"
+msgstr ""
 
 msgctxt "#31336"
 msgid "Enable Kiosk mode"
@@ -620,7 +622,15 @@ msgctxt "#31338"
 msgid "Use simple Media Filter"
 msgstr ""
 
-#empty strings from id 31339 to 31340
+msgctxt "#31339"
+msgid "Show Position in Item List"
+msgstr ""
+
+msgctxt "#31340"
+msgid "Show Always Position in Item List"
+msgstr ""
+
+
 
 msgctxt "#31341"
 msgid "View information for your computer on such items as your network, graphics, hardware and storage space available"
@@ -847,7 +857,7 @@ msgid "Films that have no synchronized soundtrack and no spoken dialogue, until 
 msgstr ""
 
 msgctxt "#31399"
-msgid "Lighter Background Fanart diffuse overlay"
+msgid "Darker Background Fanart"
 msgstr ""
 
 msgctxt "#31400"
@@ -1742,8 +1752,9 @@ msgid "Curved list"
 msgstr ""
 
 
+
 msgctxt "#31833"
-msgid "Test"
+msgid "View/Filter/Sort/..."
 msgstr ""
 
 msgctxt "#31834"
@@ -1874,7 +1885,7 @@ msgid "Update only new movieset"
 msgstr ""
 
 msgctxt "#31924"
-msgid "Movieset updating..."
+msgid "Movieset updating"
 msgstr ""
 
 msgctxt "#31925"
@@ -1886,7 +1897,7 @@ msgid "Show videos/songs filename and path"
 msgstr ""
 
 msgctxt "#31927"
-msgid "Update Tvshows episodes"
+msgid "Update Tvshows"
 msgstr ""
 
 msgctxt "#31928"
@@ -1921,6 +1932,12 @@ msgstr ""
 msgctxt "#31935"
 msgid "Hide Movieset Casting"
 msgstr ""
+
+
+msgctxt "#31936"
+msgid "Update Movie(s) ArtWorks"
+msgstr ""
+
 
 msgctxt "#32000"
 msgid "Horizontal panel animation on windows close"

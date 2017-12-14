@@ -118,7 +118,7 @@
 <onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,down,Home)</onfocus>
 
 
-				<ondown>60</ondown>
+				<!-- <ondown>60</ondown> -->
 				<onleft>504</onleft>
 				<onright>504</onright>
 				<viewtype label="31811">bigwrap</viewtype>

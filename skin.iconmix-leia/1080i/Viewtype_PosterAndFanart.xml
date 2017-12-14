@@ -138,7 +138,7 @@
 <onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,down,Home)</onfocus>
 
 
-				<ondown>60</ondown>
+				<!-- <ondown>60</ondown> -->
 				<onleft>550</onleft>
 				<onright>550</onright>
 				<orientation>horizontal</orientation>

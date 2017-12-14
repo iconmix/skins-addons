@@ -48,6 +48,25 @@
 <include file="VueExperimentale.xml" />
 
 
+
+<include name="AffichagePosition">
+  <control type="button">
+			  <visible>Skin.HasSetting(PositionCompteur)</visible>
+			  <animation reversible="false" type="Conditional" condition="!Container().OnNext+!Container().OnPrevious+!Skin.HasSetting(ToujoursPositionCompteur)">
+          <effect type="fade" start="100" end="0" time="2500" delay="400" /> 
+        </animation>
+			  <top>850</top>
+			  <left>5</left>
+			  <width>auto</width>
+			  <height>38</height>
+			  <textoffsety>15</textoffsety>
+			  <texturefocus>flags/flag_frame.png</texturefocus>
+      <texturenofocus>flags/flag_frame.png</texturenofocus>
+      <label>$INFO[Container().CurrentItem,,/]$INFO[Container().NumItems]</label>
+			    <font>compteur</font>
+			    <textcolor>white</textcolor>			    
+			</control>
+</include>
 <!--- ------------BANDE ANNONCE EN FENETRE ---------- -->
 <include name="BandeAnnonceFenetre">
   <control type="group">
@@ -90,7 +109,6 @@
       <font>impact35</font>
       <label>[I]$INFO[VideoPlayer.Title][/I]</label>
     </control>
-
   </control>
 </include>
 <!------------------------------------------------------------------------------------------------ -->
@@ -102,7 +120,6 @@
     <itemlayout>
     </itemlayout>
     <focusedlayout>
-
     </focusedlayout>
   </control>
 
@@ -320,14 +337,14 @@
     <visible>Container.Content(directors)|Container.Content(actors)</visible>
   </control>
 
-  <control type="button" id="2009">
-    <!-- Mise a jour SAGA -->
-    <include>BoutonCommun</include>
-    <label>[I]$LOCALIZE[31925][/I]</label>
 
+  <control type="button" id="2009">
+    <!-- Mise a jour Artwork films -->
+    <include>BoutonCommun</include>
+    <label>[I]$LOCALIZE[31936][/I]</label>
     <onclick>Close</onclick>
     <onclick>RunScript(script.iconmixtools,mettreajour=True)</onclick>
-    <include>VisibleIfMovieSet</include>
+    <visible>String.IsEqual(ListItem.DBType,movie)</visible>
   </control>
   <control type="button" id="2010">
     <!-- Mise a jour Serie -->
@@ -336,6 +353,14 @@
     <onclick>Close</onclick>
     <onclick>RunScript(script.iconmixtools,mettreajour=True)</onclick>
     <visible>Container.Content(tvshows)+Skin.HasSetting(CheckSeries)+!Control.HasFocus(7779)+!Control.HasFocus(1998)</visible>
+  </control>
+    <control type="button" id="2011">
+    <!-- Mise a jour SAGA -->
+    <include>BoutonCommun</include>
+    <label>[I]$LOCALIZE[31925][/I]</label>
+    <onclick>Close</onclick>
+    <onclick>RunScript(script.iconmixtools,mettreajour=True)</onclick>
+    <visible>String.Contains(ListItem.DBTYPE,set)</visible>
   </control>
     <control type="button" id="2102">
         <!-- Accéder à la saga -->
@@ -846,7 +871,7 @@
       <control type="image">
         <posx>0</posx>
         <width>1920</width>
-        <height>380</height>
+        <height>350</height>
         <texture>osd/OSDdialogback.png</texture>
         <colordiffuse>OSDBackgroundColor</colordiffuse>
       </control>
@@ -935,10 +960,11 @@
 <!-- ----------------------------------------------------------------------------------------------- -->
 <include name="PanelActeursSaga">
   <control type="group">
-    <visible>!Player.HasVideo+Integer.IsGreater(Container(1999).NumItems,0)+!Container(1999).OnNext+!Container(1999).OnPrevious+!Skin.HasSetting(HideSagaCast)+!Container.Content(artists)+!Container.Content(albums)</visible>
+    <visible>Integer.IsGreater(Container(1999).NumItems,0)+!Container(1999).OnNext+!Container(1999).OnPrevious+!Skin.HasSetting(HideSagaCast)+!Container.Content(artists)+!Container.Content(albums)</visible>
     <animation type="Conditional" condition="System.IdleTime(2)|!String.IsEmpty(Window(Home).Property(FenetreListeChoix))" reversible="false">
       <effect type="slide"  end="380" time="800" delay="100" />
     </animation>
+    
     <top>-28</top>
     <left>32</left>
     <control type="group">
@@ -980,6 +1006,7 @@
       <width>340</width>
       <height>170</height>
       <align>left</align>
+       
       <orientation>horizontal</orientation>
       <control type="image">
         <include>CommonPanelActeursSaga</include>
@@ -1056,7 +1083,7 @@
 <include name="PanelActeurs">
 
   <control type="group">
-
+    <visible>Integer.IsGreater(Container(1998).NumItems,0)</visible>
     <control type="group"> <!-- ACTEURS DEFILANTS -->
       <visible>!Player.HasVideo|[!Window.IsVisible(12901)+!Window.IsVisible(10142)]</visible>
       <visible>[[[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[String.IsEqual(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Label,..)</visible>
@@ -1084,7 +1111,7 @@
         <texture>frames/Dialog_GlassActeur3.png</texture>
         <colordiffuse>DialogBackgroundColor</colordiffuse>
         <aspectratio  scalediffuse="true">stretch</aspectratio>
-        <visible>Integer.IsGreater(Container(1998).NumItems,0)</visible>
+        
       </control>
 
 
@@ -1143,10 +1170,10 @@
       <align>left</align>
       <width>1900</width>
       <height>480</height>
-      <animation type="Conditional" condition="[Control.HasFocus(7779)|Control.HasFocus(1998)]+!Player.HasVideo">
+      <animation type="Conditional" condition="[Control.HasFocus(7779)|Control.HasFocus(1998)]+!Window.IsVisible(12901)+!Window.IsVisible(10142)">
         <effect type="slide"  start="0,0" end="0,3900" time="500" delay="1" reversible="false"/>
       </animation>
-      <animation type="Conditional" condition="[Control.HasFocus(7779)|Control.HasFocus(1998)]+Player.HasVideo">
+      <animation type="Conditional" condition="[Control.HasFocus(7779)|Control.HasFocus(1998)]+Player.HasVideo+[Window.IsVisible(12901)|Window.IsVisible(10142)]">
         <effect type="slide"  start="0,0" end="0,4200" time="500" delay="1" reversible="false"/>
       </animation>
       <animation type="Conditional" condition="Container(5051).IsUpdating | !String.IsEmpty(Window(Home).Property(IconmixTrailer))">
@@ -1277,7 +1304,7 @@
         </control>
 
         <control type="group">
-          <posy>-30</posy>
+          <posy>380</posy>
           <posx>1780</posx>
           <width>70</width>
           <height>70</height>
@@ -1292,6 +1319,7 @@
               <left>65</left>
               <texture>acteurs/tmdb.png</texture>
               <aspectratio>keep</aspectratio>
+              <visible>Control.HasFocus(7779)</visible>
               <width>40</width>
               <height>40</height>
             </control>
@@ -1311,23 +1339,23 @@
               <visible>Control.HasFocus(7779)</visible>
               <aspectratio>keep</aspectratio>
             </control>
-          </control>
-        </control>
-
-        <control type="group"> <!-- fleche aide -->
-          <visible>!Container(5051).IsUpdating</visible>
-          <posy>5</posy>
-          <posx>1850</posx>
+          </control> 
+         <control type="image">
           <width>30</width>
           <height>30</height>
+          <left>60</left>
+          <top>40</top>
           <animation type="Conditional" loop="true" condition="true">
             <effect type="fade"  start="0" end="100"  time="1000" delay="1000" reversible="false"/>
           </animation>
-          <control type="image">
+          <visible>Control.HasFocus(7779)</visible>
+         
             <align>center</align>
             <texture>ArrowDown.png</texture>
           </control>
         </control>
+
+        
       </control>
 
       <control type="image"> <!-- sablier -->
@@ -1366,26 +1394,7 @@
         <align>center</align>
         <focusposition>2</focusposition>
         <preloaditems>6</preloaditems>
-     <!--   
-        <onfocus>SetProperty(ActeurVideoReset,,Home)</onfocus>
-        <onup>Action(firstpage)</onup>
-        <onup>SetProperty(ActeurVideoLocal,1,Home)</onup>
-        <onup>1998</onup>        
-        <onleft>5051</onleft>
-        <onright>5051</onright>
-        <oninfo>RunScript(script.iconmixtools,trailer=True)</oninfo>
-        <oninfo>SetProperty(IconmixTrailer,1,Home)</oninfo>       
-        <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
-        <onclick>SetProperty(IconmixTrailer,1,Home)</onclick>
-        <onback>SetProperty(ActeurVideoReset,1,Home)</onback>
-        <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
-        <onfocus>SetProperty(IconmixTrailer,,Home)</onfocus>
-        <onback>Action(firstpage)</onback>
-        <onback condition="!Window.IsVisible(movieinformation)">55</onback>
-        <onback condition="Window.IsVisible(movieinformation)">7003</onback>
-        <ondown condition="String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">SetProperty(ActeurVideoLocal,1,Home)</ondown>
-        <ondown condition="!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">SetProperty(ActeurVideoLocal,,Home)</ondown>
-        <ondown>Action(firstpage)</ondown> -->
+     
         <onfocus>SetProperty(ActeurVideoReset,,Home)</onfocus>
         <onfocus>SetProperty(IconmixTrailer,,Home)</onfocus>
         <onfocus>Action(firstpage)</onfocus>
@@ -1399,10 +1408,13 @@
    
 </control>
 <control type="fixedlist" id="1998">
-  <visible>Container.Content(directors)|Container.Content(actors)|Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(episodes)|Container.Content(seasons)|[Player.HasVideo+!String.IsEmpty(VideoPlayer.DBDID)]</visible>
-  <animation type="Conditional" condition="Window.IsVisible(12901)|Window.IsVisible(10142)|Window.IsVisible(movieinformation)|Control.HasFocus(1998)|Control.HasFocus(7779)|Control.HasFocus(2022)|Control.HasFocus(2999)|ControlGroup(7000).HasFocus|ControlGroup(7002).HasFocus|ControlGroup(7008).HasFocus">
+  <include>Animation_HiddenByInfo</include>
+       <include>Animation_FadedByMenu</include>
+       <include>Animation_OpenCloseFade</include>
+  <visible>Container.Content(genres)|Container.Content(directors)|Container.Content(actors)|Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(episodes)|Container.Content(seasons)|[Player.HasVideo+!String.IsEmpty(VideoPlayer.DBID)]</visible>
+  <animation type="Conditional" condition="Container.Content(genres)|Container.Content(directors)|Container.Content(actors)|Window.IsVisible(12901)|Window.IsVisible(10142)|Window.IsVisible(movieinformation)|Control.HasFocus(1998)|Control.HasFocus(7779)|Control.HasFocus(2022)|Control.HasFocus(2999)|ControlGroup(7000).HasFocus|ControlGroup(7002).HasFocus|ControlGroup(7008).HasFocus">
     
-    <effect type="fade"  start="100" end="0" time="1" delay="1" reversible="true"/>
+    <effect type="slide"  start="0,0" end="-2000,0" time="1" delay="1" reversible="true"/>
   </animation>
   <animation type="Conditional" condition="Skin.HasSetting(CacheFond)">
     <effect type="slide"  start="0,0" end="0,-835" time="1" delay="1" reversible="false"/>
@@ -1473,6 +1485,7 @@
         <left>0</left>
         <top>2400</top>
         <label>CONTROLEROLES</label>
+        
         <onfocus>SetProperty(ActeurVideoReset,,Home)</onfocus>
         <onfocus>SetProperty(IconmixTrailer,,Home)</onfocus>
         <!-- <onup>Action(firstpage)</onup> -->
@@ -1482,8 +1495,8 @@
         
         <onright>Control.Move(5051,1)</onright>        
         
-        <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
-        <onclick>SetProperty(IconmixTrailer,1,Home)</onclick>      
+        <onclick condition="!Player.HasVideo">RunScript(script.iconmixtools,trailer=True)</onclick>
+        <onclick condition="!Player.HasVideo">SetProperty(IconmixTrailer,1,Home)</onclick>      
        
         <onback>SetProperty(ActeurVideoReset,1,Home)</onback>
         <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
@@ -1491,10 +1504,11 @@
         <onback>55</onback>
         <ondown condition="String.IsEmpty(Window(Home).Property(IconMixUpdating))+String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">SetProperty(ActeurVideoLocal,1,Home)</ondown>
         <ondown condition="String.IsEmpty(Window(Home).Property(IconMixUpdating))+!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">SetProperty(ActeurVideoLocal,,Home)</ondown>
-        <!-- <ondown>Action(firstpage)</ondown> -->
-        <ondown condition="String.IsEmpty(Window(Home).Property(IconMixUpdating))">SetFocus(5051)</ondown>
+        <!-- <ondown>Action(firstpage)</ondown> 
+        <ondown condition="String.IsEmpty(Window(Home).Property(IconMixUpdating))">SetFocus(5051)</ondown>-->
           
     </include>
+    
 <include name="ControlesRealisateur">
   
         <left>0</left>
@@ -1511,8 +1525,8 @@
         
         <onright>Control.Move(5052,1)</onright>        
         
-        <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
-        <onclick>SetProperty(IconmixTrailer,1,Home)</onclick>      
+        <onclick condition="!Player.HasVideo">RunScript(script.iconmixtools,trailer=True)</onclick>
+        <onclick condition="!Player.HasVideo">SetProperty(IconmixTrailer,1,Home)</onclick>      
        
         <onback>SetProperty(ActeurVideoReset,1,Home)</onback>
         <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
@@ -1940,7 +1954,7 @@
         <height>245</height>
         <bordersize>8</bordersize>
         <bordertexture border="8">landscape.png</bordertexture>
-        <texture>$INFO[ListItem.Icon]</texture>
+        <texture>$INFO[ListItem.Property(poster)]</texture>
         <aspectratio align="center" aligny="center">keep</aspectratio>
       </control>
       <control type="image">
@@ -2008,13 +2022,14 @@
         <height>245</height>
         <bordersize>8</bordersize>
         <bordertexture border="8">landscape.png</bordertexture>
-        <texture>$INFO[Listitem.Icon]</texture>
+        <texture>$INFO[ListItem.Property(poster)]</texture>
         <aspectratio align="center" aligny="center">keep</aspectratio>
       </control>
 
       <control type="group">
         <posy>210</posy>
         <left>120</left>
+        <visible>!Player.HasVideo</visible>
         <animation type="Conditional" loop="true" condition="true">
           <effect type="fade"  start="100" end="0"  time="1500" delay="1000" reversible="false"/>
         </animation>
@@ -2396,14 +2411,14 @@
   <onup>7000</onup>
   <ondown condition="!Control.IsVisible(54)+!Control.IsVisible(59)+!Control.IsVisible(58)+!Control.IsVisible(559)+Control.IsVisible(1999)">1999</ondown>
   <ondown condition="!Control.IsVisible(54)+!Control.IsVisible(59)+!Control.IsVisible(58)+!Control.IsVisible(559)+Control.IsVisible(1998)">1998</ondown>
-  <ondown>60</ondown>
+  <!-- <ondown>60</ondown> -->
 </include>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="OnUp7000Inverse">
   <ondown>7000</ondown>
   <onup condition="!Control.IsVisible(54)+!Control.IsVisible(59)+!Control.IsVisible(58)+!Control.IsVisible(559)+Control.IsVisible(1999)">1999</onup>
   <onup condition="!Control.IsVisible(54)+!Control.IsVisible(59)+!Control.IsVisible(58)+!Control.IsVisible(559)+Control.IsVisible(1998)">1998</onup>
-  <onup>60</onup>
+  <!-- <onup>60</onup> -->
 </include>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="OnUp7000">
@@ -3788,6 +3803,7 @@
           <height>60</height>
           <width>60</width>
           <texture>buttons/button_chercheFO.png</texture>
+          <visible>!Player.HasVideo</visible>
           <animation effect="zoom"  center="auto" start="95" end="110" time="1000" pulse="true" reversible="false" condition="true">Conditional</animation>
         </control>
       </control>
@@ -4025,6 +4041,7 @@
 
           <visible>[Container.Content(tvshows)|Container.Content(episodes)]+!String.IsEmpty(Window(Home).Property(NextAired.NextDate))</visible>
         </control>
+        <!--
         <control type="group">
           <posy>-30</posy>
           <posx>-350</posx>
@@ -4050,6 +4067,7 @@
           </control>
           <visible> !String.IsEmpty(ListItem.FilenameAndPath) + !String.IsEmpty(ListItem.DBTYPE) +Skin.HasSetting(ShowFilePath)</visible>
         </control>
+        -->
         <!--- fin acteurs -->
         <control type="grouplist">
           <posy>47</posy>
@@ -5121,7 +5139,7 @@
   </include>
   <!-- ---------------------------------------------------------------------------------------------- -->
   <include name="Settings_Line">
-    <height>8</height>
+    <height>14</height>
     <width>840</width>
     <texture border="2">settings_line.png</texture>
     <colordiffuse>SettingsLine</colordiffuse>
@@ -5431,7 +5449,7 @@
       </control>
       <control type="group">
         <visible>!String.Contains(Player.FolderPath,http)</visible>
-        <!-- TV Show Poster / Logo / Clearart -->
+        <!-- TV Show Poster / Logo / Clearart
         <control type="group">
           <visible>VideoPlayer.Content(Episodes) + !String.Contains(VideoPlayer.Cover,default) + !Skin.HasSetting(Enable_OSDClearArt)</visible>
           <control type="image">
@@ -5451,7 +5469,7 @@
             <height>343</height>
             <texture>frames/ClassicFrame_PosterSmall.png</texture>
           </control>
-        </control>
+        </control> -->
         <control type="image">
           <description>TV Show Clear Art/Logo</description>
           <posx>25</posx>
@@ -5460,7 +5478,7 @@
           <height>230</height>
           <texture background="true">$INFO[Player.Art(tvshow.clearlogo)]</texture>
           <aspectratio align="center" aligny="bottom">keep</aspectratio>
-          <visible>Skin.HasSetting(Enable_OSDClearArt) + VideoPlayer.Content(Episodes)</visible>
+          <visible>VideoPlayer.Content(Episodes)</visible>
         </control>
         <control type="image">
           <posx>1550</posx>
@@ -5794,12 +5812,7 @@
       <posx>0</posx>
       <include>Animation_OpenCloseFade</include>
       <include>Animation_FadedByOSDSettings</include>
-      <include condition="!String.IsEqual(Skin.String(OSDFade),Disabled) + String.IsEqual(Skin.String(OSDFadeTime),5)">Animation_FadeOSD5</include>
-      <include condition="!String.IsEqual(Skin.String(OSDFade),Disabled) + String.IsEqual(Skin.String(OSDFadeTime),10)">Animation_FadeOSD10</include>
-      <include condition="!String.IsEqual(Skin.String(OSDFade),Disabled) + String.IsEqual(Skin.String(OSDFadeTime),15)">Animation_FadeOSD15</include>
-      <include condition="!String.IsEqual(Skin.String(OSDFade),Disabled) + String.IsEqual(Skin.String(OSDFadeTime),20)">Animation_FadeOSD20</include>
-      <include condition="!String.IsEqual(Skin.String(OSDFade),Disabled) + String.IsEqual(Skin.String(OSDFadeTime),25)">Animation_FadeOSD25</include>
-      <include condition="!String.IsEqual(Skin.String(OSDFade),Disabled) + String.IsEqual(Skin.String(OSDFadeTime),30)">Animation_FadeOSD30</include>
+      
       <!-- Background Image -->
       <control type="image">
         <width>1920</width>
@@ -5814,16 +5827,17 @@
   <!-- Scrollbars -->
   <!-- ---------------------------------------------------------------------------------------------- -->
   <include name="ScrollBar_Horizontal">
-    <!-- Scroll Bar -->
+    <control type="group">
+      
+    <!-- Scroll Bar 
     <control type="scrollbar" id="60">
-      <include>Animation_OpenCloseFade</include>
-      <include>Animation_FadedByMenu</include>
+      
       <posx>0</posx>
       <posy>0</posy>
       <width>1920</width>
       <height>30</height>
-      <visible allowhiddenfocus="true">Control.HasFocus(60) | Container.Scrolling</visible>
-      <texturesliderbackground>-</texturesliderbackground>
+      <visible allowhiddenfocus="true">Control.HasFocus(60) | Container.Scrolling</visible> 
+      <texturesliderbackground>slider/slider_back.png</texturesliderbackground>
       <textureslidernib>ScrollBarV_Nib_Focus.png</textureslidernib>
       <textureslidernibfocus>ScrollBarV_Nib_Focus.png</textureslidernibfocus>
       <onup>55</onup>
@@ -5831,11 +5845,12 @@
       <showonepage>true</showonepage>
       <orientation>horizontal</orientation>
       <animation effect="fade" start="0" end="100" time="400" condition="Control.HasFocus(60) | Container.Scrolling">Conditional</animation>
+    </control>-->
     </control>
   </include>
   <!-- ---------------------------------------------------------------------------------------------- -->
   <include name="ScrollBar_Vertical">
-    <!-- Scroll Bar -->
+    <!-- Scroll Bar 
     <control type="scrollbar" id="61">
       <include>Animation_OpenCloseFade</include>
       <include>Animation_FadedByMenu</include>
@@ -5852,7 +5867,7 @@
       <showonepage>true</showonepage>
       <orientation>vertical</orientation>
       <animation effect="fade" start="0" end="100" time="400" condition="Control.HasFocus(61) | Container.Scrolling">Conditional</animation>
-    </control>
+    </control>-->
   </include>
   <!-- ---------------------------------------------------------------------------------------------- -->
   <include name="KeyboardButton">

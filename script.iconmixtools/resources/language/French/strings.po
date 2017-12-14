@@ -47,7 +47,31 @@ msgstr "Recherche de bande-annonces..."
 
 msgctxt "#32509"
 msgid "Updating Music artworks of "
-msgstr "Mise à jour des Artworks de "
+msgstr "Mise à jour des illustrations de "
+
+msgctxt "#32510"
+msgid "Automatic Update missing Artworks for all movies"
+msgstr "Mise à jour automatique des illustrations manquantes de tous les films"
+
+msgctxt "#32511"
+msgid "Automatic Update missing Artworks for all tvshows"
+msgstr "Mise à jour automatique des illustrations manquantes de toutes les séries"
+
+
+msgctxt "#32512"
+msgid "No Artworks found on FanartTv"
+msgstr "Rien trouvé ....sur FanartTV"
+
+msgctxt "#32513"
+msgid "Automatic Update missing Artworks for all moviesets"
+msgstr "Mise à jour automatique des illustrations manquantes de toutes les sagas"
+
+
+msgctxt "#32514"
+msgid "Set Artworks for "
+msgstr "Définir les illustrations de "
+
+
 
 msgctxt "#32580"
 msgid "Actors"
@@ -117,3 +141,54 @@ msgctxt "#32609"
 msgid " deleted from "
 msgstr " supprimé de "
 
+
+msgctxt "#32610"
+msgid "Allways Overwrite"
+msgstr "Toujours écraser ancien"
+
+
+msgctxt "#32611"
+msgid "[B]Your Choice[/B]"
+msgstr "[B]Votre Choix[/B]"
+
+msgctxt "#32612"
+msgid "[B]Attention !!! For all ... [/B]"
+msgstr "[B]Attention !!! Pour tous ...[/B]"
+
+msgctxt "#32613"
+msgid "Are you sure ?"
+msgstr "Êtes-vous sûr ?"
+
+msgctxt "#32614"
+msgid "Artworks"
+msgstr "Illustrations"
+
+
+msgctxt "#32700"
+msgid "Poster"
+msgstr "Affiche"
+
+msgctxt "#32701"
+msgid "ClearLogo"
+msgstr "Logo"
+
+msgctxt "#32702"
+msgid "Banner"
+msgstr "Bannière"
+
+msgctxt "#32703"
+msgid "Disc"
+msgstr "Disque"
+
+msgctxt "#32704"
+msgid "ClearArt"
+msgstr "ClearArt"
+
+msgctxt "#32705"
+msgid "Thumb"
+msgstr "Vignette"
+
+
+msgctxt "#32706"
+msgid "Fanart"
+msgstr "Fanart"

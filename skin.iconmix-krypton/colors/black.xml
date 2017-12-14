@@ -84,7 +84,7 @@
 	<!-- Settings -->
 	<color name="SettingsHeading">FFc89008</color>
 	<color name="SettingsDetail">ddFFFFFF</color>
-	<color name="SettingsLine">88727272</color>
+	<color name="SettingsLine">FF727272</color>
 	<color name="SettingsTitle">eef8cd22</color>
 	
 	<!-- Info -->

@@ -22,21 +22,29 @@
   <views>55,557,905,906,509,53,57,58,559,555,556,501,551,552,553,554,550,504,511,513,514,510,52,521,56,560,512,584,585,586,587</views>
   <defaultcontrol always="true">55</defaultcontrol>
   <controls>
-   
+    <control type="group">
     <include>Global_Background_Fanart</include>
-    <control type="image">
+    <animation type="Conditional" condition="Control.IsVisible(585)+!Skin.HasSetting(FanartSombre)" reversible="true">
+          <effect type="fade" start="100" end="40" time="500"  />
+        </animation>
+   
+    <animation type="Conditional" condition="Skin.HasSetting(FanartSombre)" reversible="true">
+          <effect type="fade" start="100" end="60" time="500"  />
+        </animation>
+    </control>
+    <control type="multiimage">
       <posx>0</posx>
       <posy>0</posy>
       <width>1920</width>
       <height>1080</height>
-      <texture>$VAR[GlobalFanartActeur]</texture>
+      <imagepath>$VAR[GlobalFanartActeur]</imagepath>
+      <fadetime>450</fadetime>
       <visible>[Control.HasFocus(7779)]+[!Player.HasVideo|[Player.HasVideo+!Skin.HasSetting(PlayVideoOverlay)]]</visible>
     </control>
     <!-- -->
     
     -->
     <control type="group">
-     
       <control type="group">
       <include>Animation_HiddenByInfo</include>
       <!--
@@ -98,7 +106,7 @@
           <effect type="fade" start="100" end="15" time="500"  />
         </animation>
         <include>Animation_FadedByMenu</include>
-        <include>ClearLogoArt</include>
+        <!-- <include>ClearLogoArt</include> -->
         <control type="image">
           <posx>0</posx>
           <posy>815</posy>
@@ -389,8 +397,10 @@
           <control type="button" id="2099">
             <include>BoutonCommun</include>
             <description>View</description>
-            <label>$LOCALIZE[629]:$INFO[Container.Viewmode]</label>
+            <label>$LOCALIZE[629]:[COLOR=yellow]$INFO[Container.Viewmode][/COLOR]</label>
+            <onclick>SetFocus(55)</onclick>
             <onclick>RunScript(script.iconmixtools,setview=True)</onclick>
+            
           </control>
           <control type="button" id="3">
             <description>Sort</description>
@@ -407,6 +417,7 @@
             <description>Watched Toggle</description>
             <label>137</label>
             <include>BoutonCommun</include>
+            
           </control>
           <control type="edit" id="19">
             <description>Filter</description>
@@ -449,6 +460,7 @@
             <label>653</label>
             <altlabel>13353</altlabel>
             <usealttexture>library.isscanningvideo</usealttexture>
+            <onclick>SetFocus(55)</onclick>
           </control>
           <control type="togglebutton" id="200">
             <description>Clean Library</description>
@@ -456,6 +468,7 @@
             <label>700</label>
             <usealttexture>library.isscanningvideo</usealttexture>
             <onclick>CleanLibrary(video)</onclick>
+            <onclick>SetFocus(55)</onclick>
             <visible>!library.isscanningvideo</visible>
           </control>
           <include>Nav_NowPlaying</include>
@@ -726,13 +739,23 @@
       <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7778)" reversible="true">
           <effect type="fade" start="100" end="0" time="1"  />
         </animation>
+        
       </control>
       <!------------------------------------------------- ACTEURS et ROLES---------------------------------------->
+     
       <include>PanelActeurs</include>
       <control type="group">
         <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
           <effect type="slide" end="0,-835" time="0"  />
         </animation>
+      <include>AffichagePosition</include>
+      </control>
+      
+      <control type="group">
+        <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
+          <effect type="slide" end="0,-835" time="0"  />
+        </animation>
+        
         <include>Animation_FadedByMenu</include>
         <posy>920</posy>
         <left>390</left>
@@ -762,12 +785,13 @@
     <!--	DEBUG --
     <control type="label">
       <posy>1000</posy>
-      <label>>>$VAR[GlobalFanartActeur]</label>
+      <height>80</height>
+      <label>>>($INFO[Container(1999).ListItem.DBID]):$INFO[Container(1999).ListItem.Icon][CR]$INFO[Container(1999).ListItem.Art(Poster)]</label>
     </control>
     <control type="label">
     <posx>700</posx>
 
-    <label>$INFO[ListItem.TVShowTitle][CR][CR]ImdbNumber:$INFO[ListItem.FileNameAndPath][CR]$INFO[ListItem.Icon][CR]$INFO[ListItem.Year][CR]IconMixSaga=$INFO[Window(Home).Property(IconMixSaga)][CR]DBTYPE=$INFO[ListItem.DBType][CR]Rating1999=$INFO[Container(1999).ListItem.Property(Rating)][CR]1991:$INFO[Container(1991).NumItems][CR]1998:$INFO[Container(1998).NumItems][CR]1999:$INFO[Container(1999).NumItems][CR]poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]DBTYPE=$INFO[Container(1999).ListItem.DBTYPE][CR]Content:$INFO[Container.Content]Pays : $INFO[ListItem.Country][CR]Country1:$INFO[Window(Home).Property(ItemCountry1)]O[CR]Portrait:$INFO[ListItem.Label][CR]$INFO[ListItem.FileNameAndPath][CR]Varaiable:$INFO[Container.FolderPath]</label>
+    <label>$INFO[Container.Content][CR][CR]ImdbNumber:$INFO[ListItem.FileNameAndPath][CR]$INFO[ListItem.Icon][CR]$INFO[ListItem.Year][CR]IconMixSaga=$INFO[Window(Home).Property(IconMixSaga)][CR]DBTYPE=$INFO[ListItem.DBType][CR]Rating1999=$INFO[Container(1999).ListItem.Property(Rating)][CR]1991:$INFO[Container(1991).NumItems][CR]1998:$INFO[Container(1998).NumItems][CR]1999:$INFO[Container(1999).NumItems][CR]poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]DBTYPE=$INFO[Container(1999).ListItem.DBTYPE][CR]Content:$INFO[Container.Content]Pays : $INFO[ListItem.Country][CR]Country1:$INFO[Window(Home).Property(ItemCountry1)]O[CR]Portrait:$INFO[ListItem.Label][CR]$INFO[ListItem.FileNameAndPath][CR]Varaiable:$VAR[GlobalFanart]]</label>
 
     </control>
     -->

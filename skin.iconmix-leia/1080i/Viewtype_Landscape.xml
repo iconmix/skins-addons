@@ -93,7 +93,7 @@
 <onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,down,Home)</onfocus>
 
 
-				<ondown>60</ondown>
+				<!-- <ondown>60</ondown> -->
 				<onleft>52</onleft>
 				<onright>52</onright>
 				<viewtype label="31810">icon</viewtype>
@@ -211,14 +211,14 @@
 						<texture background="true" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
 						<include>CommonH</include>
 						<colordiffuse>FFFFFFFF</colordiffuse>
-						<aspectratio scalediffuse="true">keep</aspectratio>
+						<aspectratio scalediffuse="true">stretch</aspectratio>
 						<visible>Container.Content(tvshows)</visible>
 					</control>
 					<control type="image">
 						<include>CommonH</include>
 						<texture background="true" fallback="home_art/movies.jpg" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
 						<colordiffuse>FFFFFFFF</colordiffuse>
-						<aspectratio scalediffuse="true">keep</aspectratio>
+						<aspectratio scalediffuse="true">stretch</aspectratio>
 						<visible>[Container.Content(movies) | Container.Content(sets)]</visible>
 					</control>
 					<control type="image">
@@ -345,7 +345,7 @@
 
 				<ondown>521</ondown>
 				<onup>521</onup>
-				<onright>60</onright>
+				<!-- <onright>60</onright> -->
 				<viewtype label="$LOCALIZE[31824]">icon</viewtype>
 				<orientation>vertical</orientation>
 				<focusposition>3</focusposition>
@@ -379,14 +379,14 @@
 						<texture background="true" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
 						<include>CommonV</include>
 						<colordiffuse>LandscapeDiffuse</colordiffuse>
-						<aspectratio scalediffuse="true">keep</aspectratio>
+						<aspectratio scalediffuse="true">stretch</aspectratio>
 						<visible>Container.Content(tvshows)</visible>
 					</control>
 					<control type="image">
 						<include>CommonV</include>
 						<texture background="true" fallback="home_art/movies.jpg" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
 						<colordiffuse>LandscapeDiffuse</colordiffuse>
-						<aspectratio scalediffuse="true">keep</aspectratio>
+						<aspectratio scalediffuse="true">stretch</aspectratio>
 						<visible>[Container.Content(movies) | Container.Content(sets)]</visible>
 					</control>
 					<control type="image">
@@ -462,14 +462,14 @@
 						<texture background="true" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
 						<include>CommonV</include>
 						<colordiffuse>FFFFFFFF</colordiffuse>
-						<aspectratio scalediffuse="true">keep</aspectratio>
+						<aspectratio scalediffuse="true">stretch</aspectratio>
 						<visible>Container.Content(tvshows)</visible>
 					</control>
 					<control type="image">
 						<include>CommonV</include>
 						<texture background="true" fallback="home_art/movies.jpg" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
 						<colordiffuse>FFFFFFFF</colordiffuse>
-						<aspectratio scalediffuse="true">keep</aspectratio>
+						<aspectratio scalediffuse="true">stretch</aspectratio>
 						<visible>[Container.Content(movies) | Container.Content(sets)]</visible>
 					</control>
 					<control type="image">

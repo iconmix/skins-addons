@@ -48,6 +48,29 @@ msgctxt "#32509"
 msgid "Updating Music artworks of "
 msgstr ""
 
+msgctxt "#32510"
+msgid "Automatic Update missing Artworks for all movies"
+msgstr ""
+
+msgctxt "#32511"
+msgid "Automatic Update missing Artworks for all tvshows"
+msgstr ""
+
+
+msgctxt "#32512"
+msgid "No Artworks found on FanartTv"
+msgstr ""
+
+msgctxt "#32513"
+msgid "Automatic Update missing Artworks for all moviesets"
+msgstr ""
+
+
+msgctxt "#32514"
+msgid "Set Artworks for "
+msgstr ""
+
+
 msgctxt "#32580"
 msgid "Actors"
 msgstr ""
@@ -120,4 +143,58 @@ msgstr ""
 msgctxt "#32609"
 msgid " deleted from "
 msgstr ""
+
+msgctxt "#32610"
+msgid "Allways Overwrite"
+msgstr ""
+
+
+msgctxt "#32611"
+msgid "[B]Your Choice[/B]"
+msgstr ""
+
+
+msgctxt "#32612"
+msgid "[B]Attention !!! For all ... [/B]"
+msgstr ""
+
+msgctxt "#32613"
+msgid "Are you sure ?"
+msgstr ""
+
+msgctxt "#32614"
+msgid "Artworks"
+msgstr ""
+
+msgctxt "#32700"
+msgid "Poster"
+msgstr ""
+
+msgctxt "#32701"
+msgid "ClearLogo"
+msgstr ""
+
+msgctxt "#32702"
+msgid "Banner"
+msgstr ""
+
+msgctxt "#32703"
+msgid "Disc"
+msgstr ""
+
+msgctxt "#32704"
+msgid "ClearArt"
+msgstr ""
+
+msgctxt "#32705"
+msgid "Thumb"
+msgstr ""
+
+
+msgctxt "#32706"
+msgid "Fanart"
+msgstr ""
+
+
+
 

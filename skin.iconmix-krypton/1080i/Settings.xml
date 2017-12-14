@@ -25,8 +25,8 @@
 				<posy>250</posy>
 				<width>1900</width>
 				<height>250</height>
-				<onleft>60</onleft>
-				<onright>60</onright>
+				<!-- <onleft>60</onleft> -->
+				<!-- <onright>60</onright> -->
 				<orientation>horizontal</orientation>
 				<focusposition>3</focusposition>
 				<scrolltime>200</scrolltime>

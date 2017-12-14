@@ -301,7 +301,7 @@
 				<height>96</height>
 				<texture background="true" fallback="default_banner.png" diffuse="frames/banner_diffuse.png">$INFO[ListItem.Art(banner)]</texture>				
 				<aspectratio scalediffuse="true">stretch</aspectratio>
-				<visible>[Container.Content(tvshows)|Container.Content(seasons)]+!String.IsEmpty(ListItem.Title)</visible>
+				<visible>[Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(seasons)]+!String.IsEmpty(ListItem.Title)</visible>
 			</control>
 			
 			<control type="image">
@@ -322,7 +322,7 @@
 								<align>center</align>
 
 				<label>$INFO[ListItem.Label]</label>
-				<visible>[Container.Content(tvshows)|Container.Content(seasons)]+!String.IsEmpty(ListItem.Title)+String.IsEmpty(ListItem.Art(banner))</visible>
+				<visible>[Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(seasons)]+!String.IsEmpty(ListItem.Title)+String.IsEmpty(ListItem.Art(banner))</visible>
 			</control>
 			
 			<control type="image">
@@ -415,7 +415,7 @@
 				<height>96</height>
 				<texture background="true" fallback="default_banner.png" diffuse="frames/banner_diffuse.png">$INFO[ListItem.Art(banner)]</texture>				
 				<aspectratio scalediffuse="true">stretch</aspectratio>
-				<visible>[Container.Content(tvshows)|Container.Content(seasons)]+!String.IsEmpty(ListItem.Title)</visible>
+				<visible>[Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(seasons)]+!String.IsEmpty(ListItem.Title)</visible>
 			</control>
 			
 				<control type="image">
@@ -435,7 +435,7 @@
 				<align>center</align>
 				<font>impact</font>
 				<label>$INFO[ListItem.Label]</label>
-				<visible>[Container.Content(tvshows)|Container.Content(seasons)]+!String.IsEmpty(ListItem.Title)+String.IsEmpty(ListItem.Art(banner))</visible>
+				<visible>[Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(seasons)]+!String.IsEmpty(ListItem.Title)+String.IsEmpty(ListItem.Art(banner))</visible>
 			</control>
 			
 			
@@ -477,7 +477,7 @@
 <onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,down,Home)</onfocus>
 
 
-		<ondown>60</ondown>
+		<!-- <ondown>60</ondown> -->
 		<orientation>horizontal</orientation>
 		<scrolltime>200</scrolltime>
 		<!-- XXX: Causes left-most item to 'blink' out instead of smoothly scrolling off (sometimes...)
@@ -551,7 +551,7 @@
 <onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,down,Home)</onfocus>
 
 
-		<ondown>60</ondown>
+		<!-- <ondown>60</ondown> -->
 		<orientation>horizontal</orientation>
 		<scrolltime>200</scrolltime>
 		<!-- XXX: Causes left-most item to 'blink' out instead of smoothly scrolling off (sometimes...)
@@ -622,7 +622,7 @@
 <onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
 
 
-		<ondown>60</ondown>
+		<!-- <ondown>60</ondown> -->
 		<orientation>vertical</orientation>
 		<focusposition>2</focusposition>
 		<scrolltime>200</scrolltime>

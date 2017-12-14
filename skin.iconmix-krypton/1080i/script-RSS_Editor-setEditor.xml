@@ -62,7 +62,7 @@
 				<pagecontrol>60</pagecontrol>
 				<scrolltime>120</scrolltime>
 				<onleft>18</onleft>
-				<onright>60</onright>
+				<!-- <onright>60</onright> -->
 				<itemlayout width="0" height="30">
 					<control type="label">
 						<posx>20</posx>
