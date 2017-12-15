@@ -19,6 +19,7 @@ import locale
 import hashlib
 import base64
 import xml.etree.ElementTree as ET
+from platform import machine
     
 try:
     to_unicode = unicode
@@ -31,7 +32,7 @@ ADDON = xbmcaddon.Addon()
 __addonid__    = ADDON.getAddonInfo('id')
 __version__    = ADDON.getAddonInfo('version')
 __language__   = ADDON.getLocalizedString
-__cwd__        = ADDON.getAddonInfo('path')  
+__cwd__        = xbmc.translatePath(ADDON.getAddonInfo('path')).decode('utf-8')   
 ADDON_ID = ADDON.getAddonInfo('id').decode("utf8")
 ADDON_ICON = ADDON.getAddonInfo('icon').decode("utf8")
 ADDON_NAME = ADDON.getAddonInfo('name').decode("utf8")
@@ -64,9 +65,10 @@ sys.path.append(xbmc.translatePath(os.path.join(ADDON_PATH, 'resources', 'lib'))
     
 class dialog_select_Arts(xbmcgui.WindowXMLDialog):
     def __init__(self, *args, **kwargs):
+        xbmcgui.WindowXMLDialog.__init__(self)
         self.listing = kwargs.get('listing')
         self.Actuels = kwargs.get('actuels')
-        xbmcgui.WindowXMLDialog.__init__(self)
+        
         
 
     def onInit(self):
@@ -99,7 +101,6 @@ class dialog_select_Arts(xbmcgui.WindowXMLDialog):
               self.ListeVignette.addItem(item)
           if Label2=="discart" and self.ListeDisque:           
               self.ListeDisque.addItem(item)
-        self.setFocus(self.ListeAffiche)
         #artworks en cours
         #{"logo","clearart","banner","poster","fanart","thumb","discart"}
         if self.Choix.get("poster") :
@@ -124,6 +125,8 @@ class dialog_select_Arts(xbmcgui.WindowXMLDialog):
         self.getControl(25).setLabel(__language__( 32701 ))
         #self.getControl(100).setLabel(__language__( 32611 ))
         
+        if self.ListeAffiche:
+          self.setFocus(self.ListeAffiche)
         
            
                   
@@ -135,7 +138,7 @@ class dialog_select_Arts(xbmcgui.WindowXMLDialog):
         if action in ACTION_PREVIOUS_MENU:
             self.Retour=False         
             self.close()
-        if idaction==3 or idaction==4 and (self.getFocusId()>200):
+        if (idaction==3 or idaction==4) and (self.getFocusId()>=200):
           Image = self.getControl(self.getFocusId()).getSelectedItem().getProperty("Icon") 
           typex=self.getControl(self.getFocusId()).getSelectedItem().getLabel2()
           if typex=="poster": 
@@ -144,7 +147,7 @@ class dialog_select_Arts(xbmcgui.WindowXMLDialog):
             self.getControl(9).setHeight(220) 
             
           self.getControl(9).setImage(Image, False)
-            
+        #else : logMsg("IdAction : "+str(idaction),0)    
        
         
 # Action : 3 haut
@@ -236,8 +239,8 @@ def sagachoixart(donnees=None,OriginalArt=None,TypeVideo="movie"): #movie ou tv
     sagachoixartcommun(donnees.get("%sart" %(TypeVideo)),"clearart",ListeChoixArt)
     
     
-    
   if ListeChoixArt:
+    #C:\Users\HTPC\AppData\Roaming\Kodi\addons\script.iconmixtools
     DialogChoixArtWorks = dialog_select_Arts('choixsagasarts.xml', __cwd__, 'default','1080i',listing=ListeChoixArt,actuels=OriginalArt) 
     DialogChoixArtWorks.doModal()
     ret=DialogChoixArtWorks.Retour   

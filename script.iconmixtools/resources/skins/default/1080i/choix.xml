@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<window type="dialog" id="4000">
+<window type="dialog">
   <defaultcontrol always="true">3</defaultcontrol>
   <allowoverlay>no</allowoverlay>
   <coordinates>
@@ -14,9 +14,8 @@
       <posy>300</posy>
       <width>800</width>
       <height>490</height>
-
       <control type="image">
-        <texture background="true" >frames/Dialog_GlassActeur.png</texture>
+        <texture background="true" >FondFenetre.png</texture>
         <colordiffuse>BackgroundColor</colordiffuse>
       </control>
       <control type="group">
@@ -31,7 +30,7 @@
             <left>380</left>
             <width>900</width>
             <height>506</height>
-            <texture>black.png</texture>
+            <texture>fondblack.png</texture>
             <aspectratio>stretch</aspectratio>
           </control>
           <control type="videowindow" id="1192">
@@ -46,7 +45,7 @@
             <left>276</left>
             <width>1110</width>
             <height>725</height>
-            <texture>frames/tvvideo.png</texture>
+            <texture>cadrevideo.png</texture>
             <aspectratio>stretch</aspectratio>
           </control>
            <control type="label">
@@ -74,7 +73,7 @@
             <left>380</left>
             <width>900</width>
             <height>506</height>
-            <texture>black.png</texture>
+            <texture>fondblack.png</texture>
             <aspectratio>stretch</aspectratio>
           </control>
           <control type="image"> 
@@ -86,14 +85,14 @@
             
             <aspectratio align="left" aligny="center">scale</aspectratio>
             <!-- <imagepath diffuse="landscapeframeselect.png">$VAR[ImageContainer]</imagepath> -->
-            <texture fallback="brouille.png" >$INFO[Container(6).ListItem.Icon]</texture>
+            <texture fallback="fondbrouille.png" >$INFO[Container(6).ListItem.Icon]</texture>
           </control>
            <control type="image">
             <top>4</top>
             <left>276</left>
             <width>1110</width>
             <height>725</height>
-            <texture>frames/tvvideo.png</texture>
+            <texture>cadrevideo.png</texture>
             <aspectratio>stretch</aspectratio>
           </control>
         </control>
@@ -124,7 +123,7 @@
           <width>730</width>
           <colordiffuse>BackgroundColor</colordiffuse>
           <height>5</height>
-          <texture>VideoInfoLine.png</texture>
+          <texture>LineHorizontal.png</texture>
         </control>
     
 
@@ -156,7 +155,7 @@
             <control type="image">
               <align>left</align>
               <aligny>center</aligny>
-              <texture>ButtonFO2Wide.png</texture>
+              <texture>buttonz/ButtonFocus.png</texture>
               <left>5</left>
               <width>740</width>
               <visible>Control.HasFocus(6)</visible>
