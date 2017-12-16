@@ -20,6 +20,7 @@ import hashlib
 import base64
 import xml.etree.ElementTree as ET
 from platform import machine
+
     
 try:
     to_unicode = unicode
@@ -161,12 +162,19 @@ class dialog_select_Arts(xbmcgui.WindowXMLDialog):
         if controlID>=200 and controlID<=210: #entrée
             item=self.getControl(controlID).getSelectedItem()
             Image=item.getProperty("Icon")
+            Label2="Delete"
+            
             if not item.getProperty("Original")=="":
-              if item.getProperty("Delete")=="Delete" : #on supprime
-                Image="None"
-                item.setProperty("Delete","")
+              Label2Actuel=self.getControl(controlID+100).getLabel()
+              if Label2Actuel=="Delete" : #on supprime
+                
+                Label2=""
               else:
-                item.setProperty("Delete","Delete")          
+                Image="None"
+                Label2="Delete"
+            
+            self.getControl(controlID+100).setLabel(Label2)
+              
               
             imagetype=item.getLabel2()                    
             self.Choix[imagetype]=Image 
@@ -203,7 +211,11 @@ def sagachoixartcommun(Donnees=None,Lab2=None,RetourElements=None):
       if item.get("lang")=="en" or item.get("lang")==KODILANGCODE or item.get("lang")=="00" or item.get("lang")=="" : 
         langue=item.get("lang").replace("00","?")
         if langue=="":
-          langue="?"            
+          langue="?"  
+        if langue=="en":
+          langue="English"    
+        if langue==KODILANGCODE:
+          langue=KODILANGUAGE      
         Elements = xbmcgui.ListItem(label=langue, iconImage=str(item.get("url")),label2=str(Lab2))
         Elements.setProperty("Icon",str(item.get("url")))
         Elements.setProperty("Original","")
@@ -2438,19 +2450,10 @@ def ModeVues(content_type=None, current_view=None):
                          Elements = xbmcgui.ListItem(label=label, iconImage=image,label2="selectionnevue")
                          Elements.setProperty("viewid", viewid)
                          Elements.setProperty("icon", image)
-                         if VueActuelle==try_decode(view[0]):
-                              ListeVues.insert(0,Elements) 
-                         else :
-                              ListeVues.append(Elements)
-                    else: 
-                         if VueActuelle==try_decode(view[0]):
-                              ListeVues.insert(0,label)
-                         else:
-                              ListeVues.append(label)
-                    if VueActuelle==try_decode(label):
-                         choixpossibles.insert(0,str(viewid))
-                    else:
-                         choixpossibles.append(str(viewid))
+                         ListeVues.append(Elements)
+                    else:                          
+                       ListeVues.append(label)
+                    choixpossibles.append(str(viewid))
         dialogC = xbmcgui.Dialog()
         if ListeVuesTriee:
             result=dialogC.select(xbmc.getLocalizedString(629), ListeVues)

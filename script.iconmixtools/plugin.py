@@ -364,15 +364,15 @@ class Main:
                 if TMDBID!='' :                    
                      ListeTrailer=utils.getTrailer(TMDBID,TypeVideo)
                      if TrailerType=="videonav" and str(xbmc.getInfoLabel("Container(1999).ListItem.Property(DBID)"))!="": 
-                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(1999).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(1999).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(1999).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(1999).ListItem.Art(landscape)")})
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(1999).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(1999).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(1999).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(1999).ListItem.Art(thumb)")})
                      if TrailerType=="saga" and str(xbmc.getInfoLabel("Container(5002).ListItem.Property(DBID)"))!="": 
-                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5002).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(5002).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(5002).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(5002).ListItem.Art(landscape)")})
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5002).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(5002).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(5002).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(5002).ListItem.Art(thumb)")})
                      if TrailerType=="videoinfo7003" and str(xbmc.getInfoLabel("ListItem.DBID"))!="":
-                        ListeTrailer.append({"id":xbmc.getInfoLabel("ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("ListItem.Art(landscape)")})
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("ListItem.Art(thumb)")})
                      if TrailerType=="" and str(xbmc.getInfoLabel("Container(5051).ListItem.Property(DBID)"))!="": 
-                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5051).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(5051).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(5051).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(5051).ListItem.Art(landscape)")})
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5051).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(5051).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(5051).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(5051).ListItem.Art(thumb)")})
                      if TrailerType=="realisateur" and str(xbmc.getInfoLabel("Container(5052).ListItem.Property(DBID)"))!="": 
-                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5052).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(5052).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(5052).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(5052).ListItem.Art(landscape)")})
+                        ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5052).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(5052).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(5052).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(5052).ListItem.Art(thumb)")})
                      
                 
                 
@@ -385,7 +385,8 @@ class Main:
                          if Item.get("key")!="KODI": 
                           Image="http://img.youtube.com/vi/%s/hqdefault.jpg" %(Item.get("key"))
                          else:
-                          Image=urllib.unquote(Item.get("landscape").replace("image://","")[:-1])
+                          Image=urllib.unquote(Item.get("landscape").replace("image://",""))
+                          utils.logMsg("Land :%s" %(Image,),0)
                          try: 
                               NomTrailer=utils.try_decode(Item["name"])+" ["+str(Item["type"])+" - "+str(Item["size"])+" - "+str(Item["iso_3166_1"]+"]")
                          except:
@@ -505,7 +506,7 @@ class Main:
         
         
         
-        utils.logMsg('Service en cours..',0)
+        utils.logMsg('Version : %s - Service en cours..' %(ADDON_VERSION),0)
         while not xbmc.abortRequested: 
             #-------------------------- MUSIQUE EN LECTURE---------------------------------
             #-------------------------- 
