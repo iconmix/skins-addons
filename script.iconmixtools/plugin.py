@@ -232,36 +232,38 @@ class Main:
             DBTYPEX=xbmc.getInfoLabel("ListItem.DBTYPE")
             if xbmc.getCondVisibility("Container.Content(artists)"): 
                      DBTYPEX="artist"
-            if self.mettreajour and ( DBTYPEX=="set" or DBTYPEX=="movie" or DBTYPEX=="tvshow" or DBTYPEX=="artist" or saga!=""):
+            if self.mettreajour and ( DBTYPEX=="set" or DBTYPEX=="movie" or DBTYPEX=="tvshow" or DBTYPEX=="artist" or DBTYPEX=="season" or saga!=""):
                    if saga=="":
                      Unique="ok"
                    else:
                      Unique=""
                    
-                 
-                   dialog = xbmcgui.Dialog()
-                   if DBTYPEX=="movie": 
-                    Titre=xbmc.getLocalizedString( 342 )
-                   if DBTYPEX=="set": 
-                    Titre=xbmc.getLocalizedString( 20434 )
-                   if DBTYPEX=="tvshow": 
-                    Titre=xbmc.getLocalizedString( 20343 )
-                   if DBTYPEX=="artist": 
-                    Titre=xbmc.getLocalizedString( 36917 )
-                    
-                   if DBTYPEX!="movie":
-                     Choix=[__language__( 32502 )+Titre, __language__( 32503 )+Titre]
-                   else :
-                     Choix=[__language__( 32510 )]
-                   if Unique and xbmc.getInfoLabel("ListItem.DBID") and not DBTYPEX=="movie": 
-                     Choix.append(__language__( 32507 )+" [COLOR=yellow]["+utils.try_decode(xbmc.getInfoLabel("ListItem.Label"))+"][/COLOR]")
+                   if DBTYPEX!="season": 
+                     dialog = xbmcgui.Dialog()
+                     if DBTYPEX=="movie": 
+                      Titre=xbmc.getLocalizedString( 342 )
+                     if DBTYPEX=="set": 
+                      Titre=xbmc.getLocalizedString( 20434 )
+                     if DBTYPEX=="tvshow": 
+                      Titre=xbmc.getLocalizedString( 20343 )
+                     if DBTYPEX=="artist": 
+                      Titre=xbmc.getLocalizedString( 36917 )
+                      
+                     if DBTYPEX!="movie":
+                       Choix=[__language__( 32502 )+Titre, __language__( 32503 )+Titre]
+                     else :
+                       Choix=[__language__( 32510 )]
+                     if Unique and xbmc.getInfoLabel("ListItem.DBID") and not DBTYPEX=="movie": 
+                       Choix.append(__language__( 32507 )+" [COLOR=yellow]"+utils.try_decode(xbmc.getInfoLabel("ListItem.Label"))+"[/COLOR]")
+                       
+                     if DBTYPEX=="set"  or DBTYPEX=="movie" or DBTYPEX=="tvshow":
+                         Choix.append(__language__( 32514 )+" [COLOR=yellow]"+utils.try_decode(xbmc.getInfoLabel("ListItem.Label"))+"[/COLOR]")
+                     if DBTYPEX=="tvshow":
+                       Choix.append(__language__( 32511 ))
                      
-                   if DBTYPEX=="set"  or DBTYPEX=="movie" or DBTYPEX=="tvshow":
-                       Choix.append(__language__( 32514 )+" [COLOR=yellow]"+utils.try_decode(xbmc.getInfoLabel("ListItem.Label"))+"[/COLOR]")
-                   if DBTYPEX=="tvshow":
-                     Choix.append(__language__( 32511 ))
-                   
-                   ret=dialog.select(Titre, Choix)
+                     ret=dialog.select(Titre, Choix)
+                   else:
+                    ret=0
                    if ret==0: #tous
                     if DBTYPEX=="set": utils.UpdateSagas(0,1)
                     if DBTYPEX=="tvshow": utils.UpdateSeries(0,1)
@@ -980,8 +982,8 @@ class Main:
                                        #self.windowhome.setProperty('IconMixExtraFanart',utils.CheckItemExtrafanartPath(self.DBTYPE,self.selecteditem))
                                        self.duration = xbmc.getInfoLabel("ListItem.Duration") 
                                        self.display_duration()
-                                     else:
-                                       utils.getepisodes(int(self.selecteditem),None,self.DBTYPE,None)
+                                     #else:
+                                     #  utils.getepisodes(int(self.selecteditem),None,self.DBTYPE,None)
                                        
                                   if self.DBTYPE=="episode" and xbmc.getCondVisibility("Skin.HasSetting(CheckSeries)"):
                                        TvSh=xbmc.getInfoLabel("ListItem.TVShowTitle") 

@@ -58,7 +58,7 @@ ListePays={"?":"Inconnu","AF":"Afghanistan","AL":"Albania","DZ":"Algeria","AS":"
 "TJ":"Tajikistan","TZ":"Tanzania, United Republic of","TH":"Thailand","TL":"Timor-Leste","TG":"Togo","TK":"Tokelau","TO":"Tonga","TT":"Trinidad and Tobago","TN":"Tunisia","TR":"Turkey","TM":"Turkmenistan","TC":"Turks and Caicos Islands","TV":"Tuvalu","UG":"Uganda","UA":"Ukraine","AE":"United Arab Emirates","GB":"United Kingdom","US":"United States of America","UM":"United States Minor Outlying Islands","UY":"Uruguay","UZ":"Uzbekistan","VU":"Vanuatu","VE":"Venezuela, Bolivarian Republic of","VN":"Viet Nam","VG":"Virgin Islands, British","VI":"Virgin Islands, U.S.","WF":"Wallis and Futuna","EH":"Western Sahara","YE":"Yemen","ZM":"Zambia","ZW":"Zimbabwe","":"?","00":"?"
 }
 
-
+#TVDBToken=None
 sys.path.append(xbmc.translatePath(os.path.join(ADDON_PATH, 'resources', 'lib')).decode('utf8'))
 
 
@@ -90,18 +90,21 @@ class dialog_select_Arts(xbmcgui.WindowXMLDialog):
             Label2=item.getLabel2()
           except:
             Label2=""
-          if Label2=="poster" and self.ListeAffiche:           
+           
+          if Label2=="poster" and self.ListeAffiche:  #32700         
               self.ListeAffiche.addItem(item)
-          if Label2=="banner" and self.ListeBanniere:           
+          if Label2=="banner" and self.ListeBanniere:  #32702         
               self.ListeBanniere.addItem(item)
-          if Label2=="logo" and self.ListeLogo:           
+          if Label2=="logo" and self.ListeLogo:        #32701   
               self.ListeLogo.addItem(item)
-          if Label2=="clearart" and self.ListeClearArt:           
+          if Label2=="clearart" and self.ListeClearArt: #32704          
               self.ListeClearArt.addItem(item)
-          if Label2=="thumb" and self.ListeVignette:           
+          if Label2=="thumb" and self.ListeVignette:  #32705         
               self.ListeVignette.addItem(item)
-          if Label2=="discart" and self.ListeDisque:           
+          if Label2=="discart" and self.ListeDisque:  #32703         
               self.ListeDisque.addItem(item)
+              
+        
         #artworks en cours
         #{"logo","clearart","banner","poster","fanart","thumb","discart"}
         if self.Choix.get("poster") :
@@ -117,13 +120,14 @@ class dialog_select_Arts(xbmcgui.WindowXMLDialog):
         if self.Choix.get("discart") :
           self.getControl(15).setImage(self.Choix["discart"], False)        
         
-        self.getControl(1).setLabel(__language__( 32614 ))  
-        self.getControl(20).setLabel(__language__( 32700 ))
-        self.getControl(21).setLabel(__language__( 32705 ))
-        self.getControl(22).setLabel(__language__( 32702 ))
-        self.getControl(23).setLabel(__language__( 32704 ))
-        self.getControl(24).setLabel(__language__( 32703 ))
-        self.getControl(25).setLabel(__language__( 32701 ))
+        self.getControl(1).setLabel(__language__( 32614 )) 
+        self.getControl(20).setLabel(__language__( 32700 )+" [I]("+str(self.ListeAffiche.size())+")[/I]")
+        self.getControl(21).setLabel(__language__( 32705 )+" [I]("+str(self.ListeVignette.size())+")[/I]")
+        self.getControl(22).setLabel(__language__( 32702 )+" [I]("+str(self.ListeBanniere.size())+")[/I]")
+        self.getControl(23).setLabel(__language__( 32704 )+" [I]("+str(self.ListeClearArt.size())+")[/I]")
+        self.getControl(24).setLabel(__language__( 32703 )+" [I]("+str(self.ListeDisque.size())+")[/I]")
+        self.getControl(25).setLabel(__language__( 32701 )+" [I]("+str(self.ListeLogo.size())+")[/I]")
+       
         #self.getControl(100).setLabel(__language__( 32611 ))
         
         if self.ListeAffiche:
@@ -247,8 +251,8 @@ def sagachoixart(donnees=None,OriginalArt=None,TypeVideo="movie"): #movie ou tv
     sagachoixartcommun(donnees.get("moviedisc"),"discart",ListeChoixArt) 
     sagachoixartcommun(donnees.get("hd%sthumb" %(TypeVideo)),"thumb",ListeChoixArt)  
     sagachoixartcommun(donnees.get("%sthumb" %(TypeVideo)),"thumb",ListeChoixArt) 
-    sagachoixartcommun(donnees.get("hd%sclearart" %(TypeVideo)),"clearart",ListeChoixArt)
-    sagachoixartcommun(donnees.get("%sart" %(TypeVideo)),"clearart",ListeChoixArt)
+    sagachoixartcommun(donnees.get("%s" %("hdmoviecleart" if TypeVideo!="tv" else "hdclearart")),"clearart",ListeChoixArt)
+    sagachoixartcommun(donnees.get("clearart"),"clearart",ListeChoixArt)
     
     
   if ListeChoixArt:
@@ -275,23 +279,142 @@ def getdatafanart(donnees=None):
          return item.get("url")
      return pardefaut  
   return None  
-    
 
+#--------------------------------------------TVDB---------------------------------------------
+def getTVDBToken():
+  request = urllib2.Request(
+      'https://api.thetvdb.com/login',
+      json.dumps({'userkey': '61E6A873385FBC44','apikey': '685D1677F8A17481','username': 'metropolicon'}),
+      headers = { 'Content-Type':'application/json' ,'Accept':'application/json'}
+  )
+  try:
+    handle = urllib2.urlopen(request)
+  except:
+    handle=None
   
-def getartworks(IDCollection=None,OriginalArt=None,updateartwork=None,TypeVideo="movie")   :
+  if handle:
+    zzz=json.loads(handle.read())
+    if zzz.get("token"):
+      return zzz.get("token")
+  
+  return None
+    
+def getTVDBData(url=None,token=None):
+  Langue=KODILANGCODE
+  if url and token:
+      request = urllib2.Request(
+          url,
+          headers = { 'Accept':'application/json','Accept-Language': KODILANGCODE,'Authorization':' Bearer %s' %(token)}
+            #'Accept-Language': 'en'
+      )
+      try:
+        handle = urllib2.urlopen(request)
+      except:
+        logMsg("erreur "+str(url),0)
+        handle=None
+        
+      if not handle:
+        Langue='en'
+        request = urllib2.Request(
+          url,
+          headers = { 'Accept':'application/json','Accept-Language': 'en','Authorization':' Bearer %s' %(token)}
+            #'Accept-Language': 'en'
+        )
+        try:
+          handle = urllib2.urlopen(request)
+        except:
+          logMsg("erreur "+str(url),0)
+          handle=None
+        
+      if handle:
+        logMsg("ok "+str(handle.getcode()),0)
+        zzz=json.loads(handle.read())
+        if zzz.get("data"):
+         return zzz.get("data"),Langue
+      
+  return None,None
+    
+def getTVDBartworks(IDShowX=None,ArtType=None,Saison=None):
+  KeyStr={'series':'tvbanner','poster':'tvposter','fanart':"showbackground","season":"seasonposter","seasonwide":"seasonbanner"}
+  #if not TVDBToken:
+  if ArtType and IDShowX:
+      TypeArtWork=None
+      for xx in KeyStr:
+        if KeyStr.get(xx)==ArtType:
+          TypeArtWork=xx
+          break
+      if TypeArtWork:
+        #TVDBToken=getTVDBToken()
+        TVDBToken="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MTM2Nzc2ODIsImlkIjoibWV0cm9wb2xpY29uIiwib3JpZ19pYXQiOjE1MTM1OTEyODIsInVzZXJpZCI6NDczODYxLCJ1c2VybmFtZSI6Im1ldHJvcG9saWNvbiJ9.yuivgYkNjZTpsDKC5XkyflNaZNMRa1qTwTsF_g77OIkIgdRrmGSajWIDCU__hhqpDFkNId__feU-L9XAVniLTnKOHNDjJtCnM0_8LOILh8ZpP7B3hwQ5Brw9UnFOOnL-Il4O6k-f_nl-QDGTZr65uP1OZq5_MqZ2VeqvcYNDVeWGG8kZn5b-wr2mjNnlW5iQeXpv2gRBSnYyYslQcr7t2BhHwz_c5cp4dkeXk4q4To623l6xz9M1v2BJ2TvEzNLv6BgBtrGH5B4WMWqVKxLoQuJKWzgj7BLUbgWMvW1cExot-YaDJUVNCIZKg8EQQjNbkCZpne64-W0TwinzT604hw"
+        IDShow=IDShowX
+        #logMsg("ID : %s Token: %s" %(IDShow,TVDBToken),0)
+        if 'tt' in IDShow:
+           Data,Langue=getTVDBData('https://api.thetvdb.com/search/series?imdbId=%s' %(IDShow),TVDBToken)
+           if Data:
+             IDShow=None
+        
+        if IDShow:  
+          QueryUrl='https://api.thetvdb.com/series/%s/images/query?keyType=%s' %(IDShow,TypeArtWork)
+          if Saison:
+            QueryUrl=QueryUrl+"&subKey=%d" %(Saison)   
+          Data,Langue=getTVDBData(QueryUrl,TVDBToken)
+          if Data:
+            ArtWork=[]    
+            for item in Data:
+              ArtWork.append({"url":"https://www.thetvdb.com/banners/%s" %item.get("fileName"),"lang":Langue})
+            return {"%s" %(ArtType):ArtWork}
+  
+  return None
+#----------------------------------------------------------------------------------------------  
+def getartworks(IDCollection=None,OriginalArt=None,updateartwork=None,TypeVideo="movie",IDKodiSetouSaisonTv=None)   :
   ArtWorks={}
   json_data2=None
   
-  if IDCollection:
+  if IDCollection:  
+    if updateartwork:
+       xbmc.executebuiltin( "ActivateWindow(busydialog)" ) 
+                                  
     if TypeVideo=="movie":
        UrlFanartTv="http://webservice.fanart.tv/v3/movies/%s?api_key=769f122ee8aba06f4a513830295f2bc0" %(IDCollection) #infos completes
+       json_data = requestUrlJson(UrlFanartTv)
+       if not json_data and IDKodiSetouSaisonTv: # on va récupérer tous les artworks des films de la saga également.....
+         json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"movies":{"properties": ["imdbnumber"]} }' %(int(IDKodiSetouSaisonTv)))
+         if json_result and json_result.get("movies"): 
+           allMovies = json_result.get("movies")
+           for item in allMovies:
+             UrlFanartTv="http://webservice.fanart.tv/v3/movies/%s?api_key=769f122ee8aba06f4a513830295f2bc0" %(item.get("imdbnumber")) #infos completes
+             json_data2 = requestUrlJson(UrlFanartTv)
+             if json_data2:
+              for xx in json_data2:
+                if json_data.get(xx):
+                  json_data[xx]=json_data[xx]+json_data2.get(xx)
+                else:
+                  json_data[xx]=json_data2.get(xx)
+               #json_data=json_data+json_data2
     else:
        UrlFanartTv="http://webservice.fanart.tv/v3/tv/%s?api_key=769f122ee8aba06f4a513830295f2bc0" %(IDCollection) #infos completes
-    json_data = requestUrlJson(UrlFanartTv)  
-    #logMsg("Artwork :"+str(UrlFanartTv),0)
+       json_data = requestUrlJson(UrlFanartTv) 
+       json_data2 =  getTVDBartworks(IDCollection,"tvbanner",IDKodiSetouSaisonTv)
+       if json_data2:
+              for xx in json_data2:
+                if json_data.get(xx):
+                  json_data[xx]=json_data[xx]+json_data2.get(xx)
+                else:
+                  json_data[xx]=json_data2.get(xx)
+       json_data2=getTVDBartworks(IDCollection,"tvposter",IDKodiSetouSaisonTv)
+       if json_data2:
+              for xx in json_data2:
+                if json_data.get(xx):
+                  json_data[xx]=json_data[xx]+json_data2.get(xx)
+                else:
+                  json_data[xx]=json_data2.get(xx)
     if not json_data and updateartwork :
+      xbmc.executebuiltin( "Dialog.Close(busydialog)" ) 
       dialog=xbmcgui.Dialog()
       dialog.notification('IconMixTools', __language__( 32512 ), "acteurs/arfffff.png", 3000)
+    else:
+      if updateartwork:
+        xbmc.executebuiltin( "Dialog.Close(busydialog)" ) 
     if json_data or (OriginalArt and updateartwork):    
        
       #logo,clearart,banner,poster,fanart,thumb,discart  
@@ -808,7 +931,7 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None,js
                                     xxActuels[key]=Actuels.get(key)
                                 #xxActuels.update(Actuels)
                               Kupdateartwork=updateartwork                                  
-                              ArtWorks,updateartwork=getartworks(IDcollection,xxActuels,updateartwork)
+                              ArtWorks,updateartwork=getartworks(IDcollection,xxActuels,updateartwork,"movie",ItemIdxx)
                             else:
                               if Actuels:
                                 ArtWorks=Actuels
@@ -925,7 +1048,7 @@ def UpdateSagas(Une=None,Toutes=None,updateartwork=None):
 
 
 # --------------------------------------------SERIES-------------------------------------------
-def updatetvartwork(ItemIdxx=None,Unique=True): 
+def updatetvartwork(ItemIdxx=None,Unique=True,Saison=None): 
   Actuels={}
   check_clearlogo=None
   check_clearart=None
@@ -1608,7 +1731,7 @@ def getGenre(genrex=None,genretypex=None,origtitle=None):
         if xyz1 == genre:
             xyz2 = Test1.get("genreid")
             #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetMovies","params":{ "filter": {"genreid":16}, "properties": [ "title", "Test" ] },"id":1}
-            json_result = getJSON(genretype , '{ "filter": {"genreid":%d}, "properties": [ "thumbnail"] }' %xyz2)
+            json_result = getJSON(genretype , '{ "filter": {"genreid":%d}, "properties": [ "art"] }' %xyz2)
             break
       
       if json_result:     
@@ -1616,7 +1739,7 @@ def getGenre(genrex=None,genretypex=None,origtitle=None):
           Titre = Test.get("label")
           if Titre and Titre not in json_result:            
             xyz = str(Test.get("movieid"))
-            ItemListe = xbmcgui.ListItem(label=Titre,iconImage=Test.get("thumbnail"),label2=str(xyz2))
+            ItemListe = xbmcgui.ListItem(label=Titre,iconImage=Test.get("art").get("poster"),label2=str(xyz2))
             if Titre != origtitle:
                  genrelist.append(["", ItemListe, False])
 

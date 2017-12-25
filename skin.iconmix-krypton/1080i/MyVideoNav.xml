@@ -264,7 +264,7 @@
       <!---------------------------------------------------------------------------------------------------------------- -->
       <include>choixdetails</include>
 
-      <!-- choix pochettes -->
+      <!-- choix pochettes ID=7008-->
       <control type="group">
         <posx>960</posx>
         <posy>450</posy>
@@ -363,7 +363,7 @@
       </control>
 
 
-      <!----------- menu ------------>
+      <!----------- menu ID=7000------------>
       <control type="group">
         <posx>440</posx>
         <posy>65</posy>
@@ -483,8 +483,8 @@
         </control>
       </control>
 
-
-      <control type="group"> <!-- bandeau séries --->
+<!-- bandeau séries --->
+      <control type="group"> 
         <width>1920</width>
         <height>50</height>
         <posy>2</posy>
@@ -525,7 +525,8 @@
           <visible>String.IsEqual(Window(Home).Property(iconmixEpSa),0)</visible>
         </control>
       </control>
-      <control type="group"> <!-- bandeau genre/sagas--->
+      <!-- bandeau genre/sagas--->
+      <control type="group"> 
         <width>700</width>
         <height>88</height>
         <posy>130</posy>
@@ -662,7 +663,8 @@
           <texture diffuse="acteurs/frame.png">$INFO[ListItem.Icon]</texture>
         </control>
       </control>
-      <control type="group"> <!-- bandeau acteurs/realisateurs--->
+      <!-- bandeau acteurs/realisateurs--->
+      <control type="group"> 
         <visible>[Container.Content(actors)|Container.Content(directors)]</visible>
         <width>700</width>
         <height>88</height>
@@ -738,12 +740,13 @@
       <include condition="Skin.HasSetting(CacheFond)">vueexperimentale</include>
       <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7778)" reversible="true">
           <effect type="fade" start="100" end="0" time="1"  />
-        </animation>
-        
+        </animation>        
       </control>
       <!------------------------------------------------- ACTEURS et ROLES---------------------------------------->
      
       <include>PanelActeurs</include>
+      
+      <!--- Indicateur de position ----->
       <control type="group">
         <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
           <effect type="slide" end="0,-835" time="0"  />

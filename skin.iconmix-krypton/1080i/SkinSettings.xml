@@ -775,6 +775,7 @@
               <label>$LOCALIZE[32006]</label>
               <onclick>Skin.ToggleSetting(ActeursAuCentre)</onclick>
               <selected>Skin.HasSetting(ActeursAuCentre)</selected>
+              <visible>Skin.HasSetting(CacheFond)</visible>
             </control>
          
           

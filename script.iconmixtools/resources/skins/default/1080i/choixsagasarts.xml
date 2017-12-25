@@ -639,9 +639,7 @@
 
 
   </control>
-  <control type="label">
-    <label>OOO$INFO[Container(200).ListItemAbsolute(0).Label]</label>
-  </control>
+  
 
 </controls>
 </window>

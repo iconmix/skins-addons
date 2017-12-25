@@ -292,7 +292,7 @@
       <posy>0</posy>
       <width>57</width>
       <height>30</height>
-      <texture>flags/flag_frame2.png</texture>
+      <texture>flags/flag_frame.png</texture>
       <colordiffuse>A0FFFFFF</colordiffuse>
       <aspectratio>scale</aspectratio>
     </control>
@@ -309,7 +309,7 @@
       <posy>30</posy>
       <width>57</width>
       <height>28</height>
-      <texture>flags/flag_frame2.png</texture>
+      <texture>flags/flag_frame.png</texture>
       <colordiffuse>A0FFFFFF</colordiffuse>
       <aspectratio>scale</aspectratio>
     </control>
@@ -346,6 +346,11 @@
 <!--<animation effect="rotatex" end="20" center="0,-150" condition="true">Conditional</animation> -->
 <include>Animation_FadedByMenu</include>
 <include>Animation_CommonFade</include>
+<!--
+<animation type="Conditional" reversible="true" condition="true">
+      <effect type="zoom" center="auto" end="80" time="1" />
+    </animation>
+    -->
 <visible>!String.Contains(Container.FolderPath,plugin)</visible>
 <visible>!String.StartsWith(ListItem.Label,..)+[Container.Content(movies)| Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons) |Container.Content(MusicVideos)]</visible>
 <include>VisibleIfNotMovieSet</include>
@@ -870,7 +875,7 @@
         <posy>0</posy>
         <width>57</width>
         <height>30</height>
-        <texture>flags/flag_frame2.png</texture>
+        <texture>flags/flag_frame.png</texture>
         <colordiffuse>A0FFFFFF</colordiffuse>
         <aspectratio>scale</aspectratio>
       </control>
@@ -887,7 +892,7 @@
         <posy>30</posy>
         <width>57</width>
         <height>28</height>
-        <texture>flags/flag_frame2.png</texture>
+        <texture>flags/flag_frame.png</texture>
         <colordiffuse>A0FFFFFF</colordiffuse>
         <aspectratio>scale</aspectratio>
       </control>
@@ -1237,7 +1242,7 @@
         <posy>0</posy>
         <width>57</width>
         <height>30</height>
-        <texture>flags/flag_frame2.png</texture>
+        <texture>flags/flag_frame.png</texture>
         <colordiffuse>A0FFFFFF</colordiffuse>
         <aspectratio>scale</aspectratio>
       </control>
@@ -1254,7 +1259,7 @@
         <posy>30</posy>
         <width>57</width>
         <height>28</height>
-        <texture>flags/flag_frame2.png</texture>
+        <texture>flags/flag_frame.png</texture>
         <colordiffuse>A0FFFFFF</colordiffuse>
         <aspectratio>scale</aspectratio>
       </control>
@@ -1579,7 +1584,7 @@
         <posy>10</posy>
         <width>25</width>
         <height>21</height>
-        <texture>flags/flag_frame2.png</texture>
+        <texture>flags/flag_frame.png</texture>
         <aspectratio >stretch</aspectratio>
       </control>
       <control type="image">
@@ -1619,7 +1624,7 @@
         <posy>10</posy>
         <width>25</width>
         <height>21</height>
-        <texture>flags/flag_frame2.png</texture>
+        <texture>flags/flag_frame.png</texture>
         <aspectratio >stretch</aspectratio>
       </control>
       <control type="image">
@@ -1658,7 +1663,7 @@
         <posy>10</posy>
         <width>25</width>
         <height>21</height>
-        <texture>flags/flag_frame2.png</texture>
+        <texture>flags/flag_frame.png</texture>
         <aspectratio >stretch</aspectratio>
       </control>
       <control type="image">
@@ -1697,7 +1702,7 @@
         <posy>10</posy>
         <width>25</width>
         <height>21</height>
-        <texture>flags/flag_frame2.png</texture>
+        <texture>flags/flag_frame.png</texture>
         <aspectratio >stretch</aspectratio>
       </control>
       <control type="image">
@@ -1735,6 +1740,28 @@
     <!-- <posx>500</posx> -->
     <height>100</height>
     <align>left</align>
+    <itemgap>0</itemgap>
+    <orientation>horizontal</orientation>
+    <include>mediaflagline1</include>
+    <include>mediaflagline2</include>
+  </control>
+</control>
+
+</include>
+<include name="MediaInfoGroupUp">
+  <control type="group">
+    <width>1920</width>
+    <align>center</align>
+    <include>Animation_FadedByMenu</include>
+    <include>Animation_CommonFade</include>
+    
+    <visible>!String.Contains(Container.FolderPath,plugin)</visible>
+    <visible>!String.StartsWith(ListItem.Label,..)+[Container.Content(movies)| Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)  | Container.Content(MusicVideos)]</visible>
+    <include>VisibleIfNotMovieSet</include>
+    <control type="grouplist"> <!-- 1ere ligne-->
+    <!-- <posx>500</posx> -->
+    <height>100</height>
+    <align>center</align>
     <itemgap>0</itemgap>
     <orientation>horizontal</orientation>
     <include>mediaflagline1</include>

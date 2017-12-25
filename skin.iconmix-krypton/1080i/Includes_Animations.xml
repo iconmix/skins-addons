@@ -2,6 +2,12 @@
 <includes>
 <!-- telex --->
 
+<include name="slideCacheFond">
+  <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
+          <effect type="slide" end="0,-835" time="0"  />
+        </animation>
+</include>
+
 <include name="isWatched">
   <animation reversible="false" effect="fade" center="auto" start="100" end="70" time="5" condition="[[[Container.Content(movies) | Container.Content(sets)] + !Skin.HasSetting(HideMovieWatchedOverlays)] | [![Container.Content(movies) | Container.Content(sets)] + !Skin.HasSetting(HideTVWatchedOverlays)]]+!Window.IsActive(502)+!ListItem.IsResumable+!String.Contains(ListItem.Overlay,Unwatch)">Conditional</animation>
   
@@ -388,7 +394,7 @@
 		</animation>
 	</include>
 	<include name="Animation_FadedByMenu">
-		<animation type="Conditional" condition=" Window.IsActive(yesnodialog) | Window.IsActive(contentsettings) | Window.IsActive(contextmenu) | Window.IsActive(playercontrols) | Window.IsActive(shutdownmenu) | Window.IsActive(favourites) | Window.IsActive(okdialog) | Window.IsActive(selectdialog) | Window.IsActive(mediafilter) | Window.IsActive(addoninformation) | Window.IsActive(profilesettings) | Window.IsActive(smartplaylisteditor) | Window.IsActive(smartplaylistrule) | Window.IsActive(virtualkeyboard) | Window.IsActive(numericinput) | ControlGroup(7000).HasFocus()| ControlGroup(7002).HasFocus()| ControlGroup(7008).HasFocus()| ControlGroup(7009).HasFocus()|Control.HasFocus(998)|Control.HasFocus(999)">
+		<animation type="Conditional" condition="[System.HasModalDialog + !Window.IsActive(musicinformation) + !Window.IsActive(movieinformation) + !Window.IsActive(songinformation) ]|  Window.IsActive(yesnodialog) | Window.IsActive(contentsettings) | Window.IsActive(contextmenu) | Window.IsActive(playercontrols) | Window.IsActive(shutdownmenu) | Window.IsActive(favourites) | Window.IsActive(okdialog) | Window.IsActive(selectdialog) | Window.IsActive(mediafilter) | Window.IsActive(addoninformation) | Window.IsActive(profilesettings) | Window.IsActive(smartplaylisteditor) | Window.IsActive(smartplaylistrule) | Window.IsActive(virtualkeyboard) | Window.IsActive(numericinput) | ControlGroup(7000).HasFocus()| ControlGroup(7002).HasFocus()| ControlGroup(7008).HasFocus()| ControlGroup(7009).HasFocus()|Control.HasFocus(998)|Control.HasFocus(999)">
 			<effect type="fade" time="200" start="100" end="30" />
 		</animation>
 		<animation type="Conditional" condition="Window.IsActive(addonsettings) | Window.IsActive(filebrowser) | Window.IsActive(mediasource) | Window.IsActive(peripheralsettings) | Window.IsActive(script-RSS_Editor-rssEditor.xml) | Window.IsActive(script-RSS_Editor-setEditor.xml) | Window.IsActive(custom_DialogFavourites.xml) | Window.IsActive(script-skinshortcuts.xml)">
@@ -492,7 +498,7 @@
 	
 	<!-- Info dialog animations -->
 	<include name="Animation_HiddenByInfo">
-		<animation effect="fade" start="100" end="0" time="200" condition="System.HasModalDialog | Window.IsActive(musicinformation) | Window.IsActive(movieinformation) | Window.IsActive(songinformation) | Window.IsVisible(4000)">Conditional</animation>
+		<animation effect="fade" start="100" end="0" time="200" condition="Window.IsActive(musicinformation) | Window.IsActive(movieinformation) | Window.IsActive(songinformation)">Conditional</animation>
 	</include>
 	<include name="Animation_PosterInfoHide">
 		<animation type="Conditional" condition="Window.IsActive(movieinformation)">

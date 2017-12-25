@@ -1725,5 +1725,5 @@ msgstr "Montrer l'heure de fin après la durée"
 
 
 msgctxt "#32006"
-msgid "Show media flags on left and center cast "
-msgstr "Indicateurs médias à gauche et Acteurs au centre"
+msgid "Show media flags and cast centered"
+msgstr "Indicateurs médias et Acteurs au centre"
