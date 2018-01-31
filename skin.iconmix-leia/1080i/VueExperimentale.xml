@@ -4,19 +4,40 @@
 		<control type="group"> <!-- vue experimentale -->
 			<!-- -->
 			<include>Animation_FadedByMenu</include>
-			<animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(1998)" reversible="true">
+			<animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7781)" reversible="true">
 				<effect type="fade" start="100" end="15" time="500"  />
 			</animation>
 			<posy>-990</posy> -->
 			<visible>!String.StartsWith(ListItem.Label,..)</visible>
 		
-		
+		<!---->
 			<control type="group">
 				<top>140</top>
+				 <animation type="Conditional" condition="true">
+				<effect type="zoom" center="960,1055" start="100" end="75" time="1"  />
+			</animation>	
 
-				 <include condition="!Skin.HasSetting(Hide_ExtraMediaFlags)+Skin.HasSetting(ActeursAuCentre)">MediaInfoGroup2v</include>
-         <include condition="!Skin.HasSetting(Hide_ExtraMediaFlags)+!Skin.HasSetting(ActeursAuCentre)">MediaInfoGroup2</include>
+         <include>MediaInfoGroup2</include>
+         <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)+!Skin.HasSetting(ActeursAuCentre)</visible>
 				<include>VisibleIfNotMovieSet</include>
+
+
+			</control>
+			
+			
+			<control type="group">
+			  <top>2015</top>
+			
+				
+        <animation type="Conditional" condition="true">
+				<effect type="zoom" center="960,2015" start="100" end="75" time="1"  />
+			</animation>	
+						 
+			
+				 <include>MediaInfoGroupUp</include>
+				 <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)+Skin.HasSetting(ActeursAuCentre)</visible>
+				<include>VisibleIfNotMovieSet</include>
+				
 
 
 			</control>
@@ -28,46 +49,44 @@
 				<left>50</left>
 				<include>ClearLogoArt</include>
 			</control>
-		
+		<!-- -->
 		<control type="group">
+<posy>2080</posy>
 		        <include>VisibleIfNotMovieSet</include>
-		        <visible>!Skin.HasSetting(Hide_Plot)+!Skin.HasSetting(ShowLargePlot)</visible>
+		         <animation reversible="false" type="Conditional" condition="!Container().OnNext+!Container().OnPrevious">
+        <effect type="slide" end="0,-50" time="500" delay="1000" />
+      </animation>
+		        <visible>!Skin.HasSetting(Hide_Plot)+!Skin.HasSetting(ShowLargePlot)+!Skin.HasSetting(ActeursAuCentre)+!Control.HasFocus(2999)</visible>
 
+			
 			<control type="image">
-				<posy>2030</posy>
+          
 				<width>1920</width>
-				<height>20</height>
-				<texture>black-back2.png</texture>
-				<aspectratio>stretch</aspectratio>
-				<visible>!String.IsEmpty(Control.GetLabel(2222))+!String.IsEqual(Control.GetLabel(2222), )</visible>
-			</control>
-			<control type="image">
-          <posy>2030</posy>
-				<width>1920</width>
-				<height>40</height>
-          <texture>frames/fondplot.png</texture>
+				<height>35</height>
+          <texture>osd/OSDdialogback.png</texture>
           <aspectratio>stretch</aspectratio>
           <colordiffuse>A0F0F0F0</colordiffuse>
-          <visible>!String.IsEmpty(Control.GetLabel(1777))+!Control.HasFocus(2999)</visible>
+          <visible>!String.IsEmpty(Control.GetLabel(1777))</visible>
         </control>
 			<control type="fadelabel" id="1777">
 				<resetonlabelchange>true</resetonlabelchange>
 				<scrollspeed>50</scrollspeed>
-				<pauseatend>3500</pauseatend>
-				<posy>2030</posy>
+				<pauseatend>4500</pauseatend>
+				<scrollout>false</scrollout>
+				<posy>5</posy>
 				<width>1920</width>
 				<height>20</height>
 				<aligny>top</aligny>
 				<align>center</align>
-				<font>PlotFont</font>
+				<font>exptext</font>
 				<textcolor>LowerText</textcolor>
 				<label>$VAR[PlotBox_Text]</label>
 				<scrollout>false</scrollout>
-				<visible>!Control.HasFocus(2999)</visible>
 			</control>
 			
 					
-		</control>		
+		</control>	
+		-->	
 		<control type="group">
 			  <posy>1200</posy>
 			   <include>SpecialPlotBox</include>
@@ -106,7 +125,7 @@
 				<align>center</align>
 				<scrollout>false</scrollout>
 				<pauseatend>400</pauseatend>
-				<font>impact</font>
+				<font>titre50</font>
 				<shadowcolor>FF000000</shadowcolor>
 				<label>$VAR[ListItemInfoTitle]</label>
 				<textcolor>white</textcolor>

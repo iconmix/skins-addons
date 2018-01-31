@@ -54,6 +54,21 @@
 			<include>AnimationVoletsHorizontaux</include>
 			
 		</control>
+		<!--
+		<control type="button">
+		  <width max="340">auto</width>
+      <height>30</height>
+      <left>40</left>
+      <top>90</top>
+      <label>$INFO[Window(Home).Property(IconMixToolsbackend)]</label>
+      <font>exptextacteurs</font>
+      <textcolor>FF404040</textcolor>
+      <shadowcolor>FF7F7F7F</shadowcolor>
+			<textoffsetx>15</textoffsetx>
+			<texturefocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturefocus>
+      <texturenofocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturenofocus>
+		</control>
+		-->
 		<control type="rss">
 			<description>RSS Feed</description>
 			<posx>0</posx>

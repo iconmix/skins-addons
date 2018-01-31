@@ -206,7 +206,32 @@
 		<font>
 		  <name>compteur</name>
 		  <filename>compteur.ttf</filename>
+		  <size>40</size>
+		</font>
+		<font>
+		  <name>titre50</name>
+		  <filename>lyrspin10.ttf</filename>
+		  <size>50</size>
+		</font>
+		<font>
+		  <name>debutfin</name>
+		  <filename>lyrspin10.ttf</filename>
 		  <size>36</size>
+		</font>
+		<font>
+		  <name>exptext</name>
+		  <filename>lyrspin10.ttf</filename>
+		  <size>30</size>
+		</font>
+		<font>
+		  <name>exptextacteurs</name>
+		  <filename>lyrspin10.ttf</filename>
+		  <size>23</size>
+		</font>
+		<font>
+		  <name>acteurs</name>
+		  <filename>lyrspin10.ttf</filename>
+		  <size>26</size>
 		</font>
 		
 		<font>

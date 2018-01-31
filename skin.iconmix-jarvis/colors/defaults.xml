@@ -92,7 +92,7 @@
 	<color name="MPAADescription">eef8cd22</color>
 	
 	<!-- OSD -->
-	<color name="OSDBackgroundColor">A03c95c8</color>			<!-- FF3c95c8 -->
+	<color name="OSDBackgroundColor">503c95c8</color>			<!-- FF3c95c8 -->
 	<color name="OSDDialogBackgroundColor">a06eb3ee</color>
 	<color name="OSDProgressBar">ddc89008</color>
 	<color name="OSDFinishTime">FFFFFFFF</color>
@@ -102,7 +102,7 @@
 	<color name="OSDPlayingDuration">ddc89008</color>
 	
 	<!-- Dialogs -->
-	<color name="DialogBackgroundColor">C06eb3ee</color>
+	<color name="DialogBackgroundColor">E06eb3ee</color>
 	<color name="DialogDropdownColor">FF6eb3ee</color>			<!-- FF87d1ff -->
 	<color name="DialogProgressBar">FFf8cd22</color>
 	<color name="DialogTextFO">eef8cd22</color>

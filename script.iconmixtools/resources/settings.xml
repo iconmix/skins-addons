@@ -41,6 +41,41 @@
         <setting id="cachemusiccover" type="bool" label="32587" default="false" />
        
     </category>
+    
+    <category label="32586"><!-- Bande annonce -->
+     <setting label="32589" type="lsep"/>
+     <setting type="sep"/>
+        <setting label="32594" type="lsep"/>
+        <!-- <setting label="32588" type="slider" id="tempsannonce" default="0" range="0,1,10" option="int" /> -->
+        <setting label="32588" type="enum" id="tempsannonce" default="0" values="0|1|2|3|4|5|6|7|8|9|10" />
+        <setting label="32592" type="bool" id="annoncefull" enable="!eq(-1,0)" default="false"/>
+        <setting label="32578" type="bool" id="annoncefilm" enable="!eq(-2,0)" default="true"/>
+        <setting label="32579" type="bool" id="annonceserie" enable="!eq(-3,0)" default="true"/>
+        <setting label="32800" type="bool" id="annoncetoutes" enable="!eq(-4,0)" default="true"/>
+        
+        <setting type="sep"/>
+        <setting label="32596" type="lsep"/>
+        <setting id="youtubeactif" type="bool" label="32597" default="true" />
+        <setting label="32598" type="enum" id="YotubeMiniQualite" enable="eq(-1,true)" default="0" values="720|480|320"/>
+        <setting type="sep"/>
+        <setting label="32595" type="lsep"/>
+        <setting id="allocineactif" type="bool" label="32590" default="false" />
+        <setting label="32591" type="enum" id="AllocineMiniQualite" enable="eq(-1,true)" default="0" values="720|480|320"/>
+        <setting label="32593" type="bool" id="allocinefirst" enable="eq(-2,true)" default="false" />  
+        <setting label="32599" type="bool" id="allocinepasdetrailer" enable="eq(-3,true)" default="true" />  
+        <setting label="32801" type="bool" id="allocinefrancais" enable="eq(-4,true)" default="false" />      
+       
+    </category>
+    <category label="32708"><!-- Notation -->
+     <setting label="32709" type="lsep"/>
+     <setting type="sep"/>
+        
+        <setting label="32710" type="bool" id="noterfilm"  default="false"/>
+        <setting label="32711" type="bool" id="noterserie" default="false"/>
+        
+       
+    </category>
+   
    
     
 </settings>

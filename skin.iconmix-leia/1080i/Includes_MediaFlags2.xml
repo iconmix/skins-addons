@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 
+<variable name="CadreFlag">
+  <value condition="!Skin.HasSetting(CacheFond)">flags/flag_frame.png</value>
+  <value>flags/flag_frame3.png</value>
+  <!-- <value>frames/EpisodeGlassVert.png</value> -->
+</variable>
+<variable name="chronotoolstexture">
+ 	<value condition="Skin.HasSetting(Show_HeureFin)+!String.IsEmpty(Window(10000).Property(DurationToolsEnd))">chronotools.png</value>
+ 	<value>chronotoolssimple.png</value>
+ 	
+ </variable>
 
 
   <variable name="VarFlagSource">
@@ -37,7 +47,7 @@
       <width>332</width>
       <height>70</height>
       <texture>flags/flag_frame.png</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
       <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
     </control>
 
@@ -46,7 +56,7 @@
       <width>252</width>
       <height>70</height>
       <texture>flags/flag_frame.png</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
       <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.3))</visible>
     </control>
     <control type="image">
@@ -54,7 +64,7 @@
       <width>172</width>
       <height>70</height>
       <texture>flags/flag_frame.png</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
       <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
     </control>
 
@@ -77,14 +87,14 @@
     <!-- <visible>!String.IsEmpty(Control.GetLabel(2525))</visible> -->
     <control type="image">
 
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
       <texture>flags/flag_frame.png</texture>
     </control>
     <control type="image">
       <top>3</top>
       <aspectratio align="center" aligny="center">keep</aspectratio>
       <texture fallback="flags\default-studio.png">resource://resource.images.studios.coloured/$INFO[VideoPlayer.Studio].png</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
 
     </control>
   </control>
@@ -98,7 +108,7 @@
     <control type="image">
       <width>156</width>
       <height>70</height>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
       <texture>flags/flag_frame.png</texture>
     </control>
     <!-- Year -->
@@ -122,13 +132,13 @@
     <control type="image">
       <width>156</width>
       <height>70</height>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
       <texture>flags/flag_frame.png</texture>
     </control>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/default.png">$VAR[VarFlagSourcePlayer]</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
     </control>
     
 
@@ -143,12 +153,12 @@
       <width>156</width>
       <height>70</height>
       <texture>flags/flag_frame.png</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
     </control>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/default.png">$INFO[VideoPlayer.VideoResolution,flags/VideoResolution/,.png]</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
     </control>
     
 
@@ -163,12 +173,12 @@
       <width>156</width>
       <height>70</height>
       <texture>flags/flag_frame.png</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
     </control>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/VideoAspect/default.png">$INFO[VideoPlayer.VideoAspect,flags/VideoAspect/,.png]</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
     </control>
     
 
@@ -183,12 +193,12 @@
       <width>156</width>
       <height>70</height>
       <texture>flags/flag_frame.png</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
     </control>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodecPlayer]</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
     </control>
     
 
@@ -203,26 +213,26 @@
   <width>156</width>
   <height>70</height>
   <texture>flags/flag_frame.png</texture>
-  <colordiffuse>MediaFlagDiffuse</colordiffuse>
+  
 </control>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
     <!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dSBS.png</texture>-->
     <texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
     <visible>String.Contains(VideoPlayer.filename,.sbs.) | String.Contains(VideoPlayer.StereoscopicMode,split_horizontal)</visible>
   </control>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
   <!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dTAB.png</texture>-->
   <texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-  <colordiffuse>MediaFlagDiffuse</colordiffuse>
+  
   <visible>String.Contains(VideoPlayer.filename,.tab.) | String.Contains(VideoPlayer.StereoscopicMode,split_vertical)</visible>
 </control>
 <control type="image">
   <include>MediaFlagsVarsWide</include>
   <texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-  <colordiffuse>MediaFlagDiffuse</colordiffuse>
+  
   <visible>!String.Contains(VideoPlayer.filename,.tab.)+!String.Contains(VideoPlayer.filename,.sbs.)+!String.Contains(VideoPlayer.StereoscopicMode,split_)</visible>
 </control>
 
@@ -241,7 +251,7 @@
     <posx>2</posx>
     <width>156</width>
     <height>70</height>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
     <texture>flags/flag_frame.png</texture>
   </control>
 
@@ -268,7 +278,7 @@
     <posx>2</posx>
     <width>156</width>
     <height>70</height>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
     <texture>flags/flag_frame.png</texture>
   </control>
   <control type="image" id="7770">
@@ -292,7 +302,7 @@
       <posy>0</posy>
       <width>57</width>
       <height>30</height>
-      <texture>flags/flag_frame2.png</texture>
+      <texture>flags/flag_frame.png</texture>
       <colordiffuse>A0FFFFFF</colordiffuse>
       <aspectratio>scale</aspectratio>
     </control>
@@ -309,7 +319,7 @@
       <posy>30</posy>
       <width>57</width>
       <height>28</height>
-      <texture>flags/flag_frame2.png</texture>
+      <texture>flags/flag_frame.png</texture>
       <colordiffuse>A0FFFFFF</colordiffuse>
       <aspectratio>scale</aspectratio>
     </control>
@@ -319,7 +329,7 @@
       <width>50</width>
       <height>30</height>
       <texture >$VAR[MediaFlag_AudioCodec]</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
       <aspectratio>scale</aspectratio>
     </control>
   </control>
@@ -346,6 +356,11 @@
 <!--<animation effect="rotatex" end="20" center="0,-150" condition="true">Conditional</animation> -->
 <include>Animation_FadedByMenu</include>
 <include>Animation_CommonFade</include>
+<!--
+<animation type="Conditional" reversible="true" condition="true">
+      <effect type="zoom" center="auto" end="80" time="1" />
+    </animation>
+    -->
 <visible>!String.Contains(Container.FolderPath,plugin)</visible>
 <visible>!String.StartsWith(ListItem.Label,..)+[Container.Content(movies)| Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons) |Container.Content(MusicVideos)]</visible>
 <include>VisibleIfNotMovieSet</include>
@@ -393,8 +408,9 @@
     <width>156</width>
     <height>70</height>
     <control type="image">
+      
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <texture>flags/flag_frame.png</texture>
+<texture>$VAR[CadreFlag]</texture>
     </control>
     <control type="image">
       <top>5</top>
@@ -403,7 +419,7 @@
       <height>70</height>
       <texture>$VAR[chronotoolstexture]</texture>
       <aspectratio>scale</aspectratio>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      <!--  -->
 
     </control>
     <control type="group">
@@ -422,8 +438,9 @@
     <height>70</height>
     <left>-5</left>
  <control type="image">
-    <texture>flags/flag_frame.png</texture>
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
+    
   </control>
   <control type="fadelabel">
           <top>4</top>
@@ -434,7 +451,7 @@
           <align>center</align>
           <scrollout>false</scrollout>
           <pauseatend>400</pauseatend>
-          <font>impact35</font>
+          <font>debutfin</font>
           <scrollspeed>20</scrollspeed>
           <shadowcolor>FF000000</shadowcolor>
           <label>[COLOR=MediaDetailsInfo]$INFO[ListItem.Genre][/COLOR]</label>
@@ -452,14 +469,14 @@
 <!-- <visible>!String.IsEmpty(Control.GetLabel(2525))</visible> -->
 <control type="image">
 
+  
   <colordiffuse>MediaFlagDiffuse</colordiffuse>
-  <texture>flags/flag_frame.png</texture>
+<texture>$VAR[CadreFlag]</texture>
 </control>
 <control type="image">
   <top>3</top>
   <aspectratio align="center" aligny="center">keep</aspectratio>
   <texture fallback="flags\default-studio.png">resource://resource.images.studios.coloured/$INFO[ListItem.Studio].png</texture>
-  <colordiffuse>MediaFlagDiffuse</colordiffuse>
 
 </control>
 </control>
@@ -469,9 +486,9 @@
   <width>156</width>
   <height>70</height>
   <control type="image">
-
+    
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
-    <texture>flags/flag_frame.png</texture>
+<texture>$VAR[CadreFlag]</texture>
   </control>
 
 
@@ -490,17 +507,17 @@
 <control type="group"> <!-- notation -->
   <visible>!String.IsEmpty(ListItem.Rating)</visible>
   <visible>!Skin.HasSetting(hidenotation)</visible>
-  <width>107</width>
-  <height>70</height>
-  <control type="image">
-  <posx>2</posx>
   <width>98</width>
   <height>70</height>
-  <texture>flags/flag_frame.png</texture>
+  <control type="image">
+  <!-- <posx>2</posx> -->  
+  <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
   <aspectratio>stretch</aspectratio>
+  
 </control>
   <control type="image">
-    <top>1</top>
+    <top>3</top>
     <include>MediaFlagsVarsSquare</include>
   <!-- <texture>Star.png</texture> -->
   <texture>flags/notation/notefilm.png</texture>
@@ -515,12 +532,12 @@
 <visible>String.IsEqual(ListItem.DBTYPE,tvshow)|String.IsEqual(ListItem.DBTYPE,episode)</visible>
 </control>
 <control type="label">
-  <posy>11</posy>
+  <posy>9</posy>
   <include>MediaFlagsVarsSquare</include>
   <align>center</align>
   <aligny>center</aligny>
   <label>$VAR[StarRating]</label>
-  <textcolor>grey</textcolor>
+  <textcolor>blue</textcolor>
   <font>METF_StarRating</font>
   <angle>5</angle>
 </control>
@@ -532,20 +549,19 @@
   <width>80</width>
   <height>70</height>
   <control type="image">
+    
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
-    <texture>flags/flag_frame.png</texture>
+<texture>$VAR[CadreFlag]</texture>
   </control>
   <visible>Container.Content(movies) | Container.Content(episodes)| Container.Content(tvshows) | Container.Content(MusicVideos)</visible>
   <visible>!String.IsEmpty(ListItem.Mpaa)</visible>
   <visible>!Skin.HasSetting(hidempaa)</visible>
   <control type="image">
-    <posx>10</posx>
     <posy>8</posy>
-    <width>60</width>
-    <height>60</height>
+    <height>55</height>
+    
     <aspectratio>keep</aspectratio>
     <texture fallback="flags/default.png">$VAR[MPAATexture]</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
   </control>
   
 
@@ -557,15 +573,15 @@
   <height>70</height>
   <control type="image">
 
+    
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
-    <texture>flags/flag_frame.png</texture>
+<texture>$VAR[CadreFlag]</texture>
   </control>
   <visible>Container.Content(movies) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
   <visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture fallback="flags/default.png">$VAR[VarFlagSource]</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
   </control>
   
 
@@ -580,27 +596,27 @@
   <control type="image">
   <width>156</width>
   <height>70</height>
-  <texture>flags/flag_frame.png</texture>
   <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
+  
 </control>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
   <!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dSBS.png</texture>-->
   <texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-  <colordiffuse>MediaFlagDiffuse</colordiffuse>
   <visible>String.Contains(listitem.filename,.sbs.) | String.Contains(ListItem.StereoscopicMode,split_horizontal)</visible>
 </control>
 <control type="image">
   <include>MediaFlagsVarsWide</include>
 <!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dTAB.png</texture>-->
 <texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-<colordiffuse>MediaFlagDiffuse</colordiffuse>
+
 <visible>String.Contains(listitem.filename,.tab.) | String.Contains(ListItem.StereoscopicMode,split_vertical)</visible>
 </control>
 <control type="image">
   <include>MediaFlagsVarsWide</include>
   <texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-  <colordiffuse>MediaFlagDiffuse</colordiffuse>
+  
   <visible>!String.Contains(listitem.filename,.tab.)+!String.Contains(listitem.filename,.sbs.)+!String.Contains(ListItem.StereoscopicMode,split_)</visible>
 </control>
 
@@ -614,8 +630,9 @@
     <width>136</width>
     <height>70</height>
     <control type="image">
-      <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
+      
     </control>
     <control type="image">
       <top>4</top>
@@ -639,8 +656,9 @@
     <height>70</height>
        <visible>!IsEmpty(Window(Home).Property(ItemCountry1))+!String.IsEmpty(Window(Home).Property(ItemCountry2))</visible>
       <control type="image">
-      <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
+      
     </control>
       <control type="image">
         <top>5</top>
@@ -683,14 +701,15 @@
     <width>156</width>
     <height>70</height>
     <control type="image">
-      <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
+      
     </control>
 
     <control type="image">
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
     </control>
     
   </control>
@@ -701,13 +720,14 @@
     <height>70</height>
     <control type="image">
 
-      <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
+      
     </control>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/default.png">$INFO[ListItem.VideoResolution,flags/VideoResolution/,.png]</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
     </control>
     
 
@@ -721,12 +741,13 @@
     <height>70</height>
     <control type="image"> 
       <control type="image">
-      <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
+      
     </control>
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/VideoAspect/default.png">$INFO[ListItem.VideoAspect,flags/VideoAspect/,.png]</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
     </control>
    
 
@@ -739,8 +760,9 @@
     <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
     <control type="image">
       <posx>2</posx>
+      
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <texture>flags/flag_frame.png</texture>
+<texture>$VAR[CadreFlag]</texture>
     </control>
 
     <control type="image">
@@ -764,7 +786,7 @@
       <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
       <control type="image">
         <posx>18</posx>
-        <posy>8</posy>
+        <posy>5</posy>
         <width>60</width>
         <height>30</height>
         <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.1)].png</texture>
@@ -773,7 +795,7 @@
       </control>
       <control type="image">
         <posx>18</posx>
-        <posy>8</posy>
+        <posy>5</posy>
         <width>60</width>
         <height>30</height>
         <texture background="true" >flags/cc.png</texture>
@@ -783,7 +805,7 @@
       <control type="image">
         <posx>82</posx>
         <width>60</width>
-        <posy>8</posy>
+        <posy>5</posy>
         <height>30</height>
         <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.2)].png</texture>
         <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
@@ -792,7 +814,7 @@
       <control type="image">
         <posx>82</posx>
         <width>60</width>
-        <posy>8</posy>
+        <posy>5</posy>
         <height>30</height>
         <texture background="true" >flags/cc.png</texture>
         <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
@@ -800,7 +822,7 @@
       </control>
       <control type="image">
         <posx>18</posx>
-        <posy>42</posy>
+        <posy>36</posy>
         <width>60</width>
         <height>30</height>
         <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.3)].png</texture>
@@ -809,7 +831,7 @@
       </control>
       <control type="image">
         <posx>18</posx>
-        <posy>42</posy>
+        <posy>36</posy>
         <width>60</width>
         <height>30</height>
         <texture background="true" >flags/cc.png</texture>
@@ -818,7 +840,7 @@
       </control>
       <control type="image">
         <posx>82</posx>
-        <posy>42</posy>
+        <posy>36</posy>
         <width>60</width>
         <height>30</height>
         <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.4)].png</texture>
@@ -827,7 +849,7 @@
       </control>
       <control type="image">
         <posx>82</posx>
-        <posy>42</posy>
+        <posy>36</posy>
         <width>60</width>
         <height>30</height>
         <texture background="true" >flags/cc.png</texture>
@@ -845,8 +867,9 @@
     <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1)) + String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
     <control type="image">
       <posx>2</posx>
+      
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <texture>flags/flag_frame.png</texture>
+<texture>$VAR[CadreFlag]</texture>
     </control>
     <control type="image" id="7770">
       <visible>String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
@@ -870,7 +893,8 @@
         <posy>0</posy>
         <width>57</width>
         <height>30</height>
-        <texture>flags/flag_frame2.png</texture>
+        <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
         <colordiffuse>A0FFFFFF</colordiffuse>
         <aspectratio>scale</aspectratio>
       </control>
@@ -887,7 +911,8 @@
         <posy>30</posy>
         <width>57</width>
         <height>28</height>
-        <texture>flags/flag_frame2.png</texture>
+        <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
         <colordiffuse>A0FFFFFF</colordiffuse>
         <aspectratio>scale</aspectratio>
       </control>
@@ -897,7 +922,7 @@
         <width>50</width>
         <height>30</height>
         <texture >$VAR[MediaFlag_AudioCodec]</texture>
-        <colordiffuse>MediaFlagDiffuse</colordiffuse>
+        
         <aspectratio>scale</aspectratio>
       </control>
     </control>
@@ -915,9 +940,10 @@
       <posx>-10</posx>
       
       <height>70</height>
-      <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <visible></visible>
+<texture>$VAR[CadreFlag]</texture>
+      
+      
     </control>  
   <include>multilangues</include>
 
@@ -937,9 +963,10 @@
       <posx>-5</posx>
       
       <height>70</height>
-      <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <visible></visible>
+<texture>$VAR[CadreFlag]</texture>
+      
+      
     </control>
    
   <include>multilangues</include>
@@ -959,9 +986,10 @@
       <posx>0</posx>
       <width>172</width>
       <height>70</height>
-      <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <visible></visible>
+<texture>$VAR[CadreFlag]</texture>
+      
+      
     </control>
   <include>multilangues</include>
 
@@ -981,8 +1009,9 @@
     <width>136</width>
     <height>70</height>
     <control type="image">
-      <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
+      
     </control>
     <control type="image">
       <top>4</top>
@@ -1006,8 +1035,9 @@
     <height>70</height>
        <visible>!IsEmpty(Window(Home).Property(ItemCountry1))+!String.IsEmpty(Window(Home).Property(ItemCountry2))</visible>
       <control type="image">
-      <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
+      
     </control>
       <control type="image">
         <top>5</top>
@@ -1050,13 +1080,14 @@
     <width>156</width>
     <height>70</height>
     <control type="image">
-      <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
+      
     </control>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
     </control>
     
 
@@ -1068,13 +1099,14 @@
     <height>70</height>
     <control type="image">
 
-      <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
+      
     </control>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/default.png">$INFO[ListItem.VideoResolution,flags/VideoResolution/,.png]</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
     </control>
     
 
@@ -1087,13 +1119,14 @@
     <width>156</width>
     <height>70</height>
     <control type="image">
-      <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
+      
     </control>
     <control type="image">
       <include>MediaFlagsVarsWide</include>
       <texture fallback="flags/VideoAspect/default.png">$INFO[ListItem.VideoAspect,flags/VideoAspect/,.png]</texture>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      
     </control>
     
 
@@ -1106,8 +1139,9 @@
     <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
     <control type="image">
       <posx>2</posx>
+      
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <texture>flags/flag_frame.png</texture>
+<texture>$VAR[CadreFlag]</texture>
     </control>
 
     <control type="image">
@@ -1131,7 +1165,7 @@
       <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
       <control type="image">
         <posx>18</posx>
-        <posy>8</posy>
+        <posy>5</posy>
         <width>60</width>
         <height>30</height>
         <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.1)].png</texture>
@@ -1140,7 +1174,7 @@
       </control>
       <control type="image">
         <posx>18</posx>
-        <posy>8</posy>
+        <posy>5</posy>
         <width>60</width>
         <height>30</height>
         <texture background="true" >flags/cc.png</texture>
@@ -1150,7 +1184,7 @@
       <control type="image">
         <posx>82</posx>
         <width>60</width>
-        <posy>8</posy>
+        <posy>5</posy>
         <height>30</height>
         <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.2)].png</texture>
         <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
@@ -1159,7 +1193,7 @@
       <control type="image">
         <posx>82</posx>
         <width>60</width>
-        <posy>8</posy>
+        <posy>5</posy>
         <height>30</height>
         <texture background="true" >flags/cc.png</texture>
         <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
@@ -1167,7 +1201,7 @@
       </control>
       <control type="image">
         <posx>18</posx>
-        <posy>42</posy>
+        <posy>36</posy>
         <width>60</width>
         <height>30</height>
         <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.3)].png</texture>
@@ -1176,7 +1210,7 @@
       </control>
       <control type="image">
         <posx>18</posx>
-        <posy>42</posy>
+        <posy>36</posy>
         <width>60</width>
         <height>30</height>
         <texture background="true" >flags/cc.png</texture>
@@ -1185,7 +1219,7 @@
       </control>
       <control type="image">
         <posx>82</posx>
-        <posy>42</posy>
+        <posy>36</posy>
         <width>60</width>
         <height>30</height>
         <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.4)].png</texture>
@@ -1194,7 +1228,7 @@
       </control>
       <control type="image">
         <posx>82</posx>
-        <posy>42</posy>
+        <posy>36</posy>
         <width>60</width>
         <height>30</height>
         <texture background="true" >flags/cc.png</texture>
@@ -1212,8 +1246,9 @@
     <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.1)) + String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
     <control type="image">
       <posx>2</posx>
+      
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <texture>flags/flag_frame.png</texture>
+<texture>$VAR[CadreFlag]</texture>
     </control>
     <control type="image" id="7770">
       <visible>String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
@@ -1237,7 +1272,8 @@
         <posy>0</posy>
         <width>57</width>
         <height>30</height>
-        <texture>flags/flag_frame2.png</texture>
+        <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
         <colordiffuse>A0FFFFFF</colordiffuse>
         <aspectratio>scale</aspectratio>
       </control>
@@ -1254,7 +1290,8 @@
         <posy>30</posy>
         <width>57</width>
         <height>28</height>
-        <texture>flags/flag_frame2.png</texture>
+        <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
         <colordiffuse>A0FFFFFF</colordiffuse>
         <aspectratio>scale</aspectratio>
       </control>
@@ -1264,7 +1301,7 @@
         <width>50</width>
         <height>30</height>
         <texture >$VAR[MediaFlag_AudioCodec]</texture>
-        <colordiffuse>MediaFlagDiffuse</colordiffuse>
+        
         <aspectratio>scale</aspectratio>
       </control>
     </control>
@@ -1283,9 +1320,10 @@
       <posx>-10</posx>
       
       <height>70</height>
-      <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <visible></visible>
+<texture>$VAR[CadreFlag]</texture>
+      
+      
     </control>  
   <include>multilangues</include>
 
@@ -1305,9 +1343,10 @@
       <posx>-5</posx>
       
       <height>70</height>
-      <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <visible></visible>
+<texture>$VAR[CadreFlag]</texture>
+      
+      
     </control>
    
   <include>multilangues</include>
@@ -1327,9 +1366,10 @@
       <posx>0</posx>
       <width>172</width>
       <height>70</height>
-      <texture>flags/flag_frame.png</texture>
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <visible></visible>
+<texture>$VAR[CadreFlag]</texture>
+      
+      
     </control>
   <include>multilangues</include>
 
@@ -1342,8 +1382,9 @@
     <height>70</height>
     <control type="image">
 
+      
       <colordiffuse>MediaFlagDiffuse</colordiffuse>
-      <texture>flags/flag_frame.png</texture>
+<texture>$VAR[CadreFlag]</texture>
     </control>
     <control type="image">
       <top>5</top>
@@ -1352,7 +1393,7 @@
       <height>70</height>
       <texture>$VAR[chronotoolstexture]</texture>
       <aspectratio>scale</aspectratio>
-      <colordiffuse>MediaFlagDiffuse</colordiffuse>
+      <!--  -->
 
     </control>
     <control type="group">
@@ -1373,8 +1414,9 @@
 
   <control type="fadelabel">
     <control type="image">
-    <texture>flags/flag_frame.png</texture>
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
+    
   </control>
           <top>4</top>
       <left>9</left>
@@ -1384,7 +1426,7 @@
           <align>center</align>
           <scrollout>false</scrollout>
           <pauseatend>400</pauseatend>
-          <font>impact35</font>
+          <font>debutfin</font>
           <scrollspeed>20</scrollspeed>
           <shadowcolor>FF000000</shadowcolor>
           <label>[COLOR=MediaDetailsInfo]$INFO[ListItem.Genre][/COLOR]</label>
@@ -1403,14 +1445,15 @@
 <!-- <visible>!String.IsEmpty(Control.GetLabel(2525))</visible> -->
 <control type="image">
 
+  
   <colordiffuse>MediaFlagDiffuse</colordiffuse>
-  <texture>flags/flag_frame.png</texture>
+<texture>$VAR[CadreFlag]</texture>
 </control>
 <control type="image">
   <top>3</top>
   <aspectratio align="center" aligny="center">keep</aspectratio>
   <texture fallback="flags\default-studio.png">resource://resource.images.studios.coloured/$INFO[ListItem.Studio].png</texture>
-  <colordiffuse>MediaFlagDiffuse</colordiffuse>
+  
 
 </control>
 </control>
@@ -1421,8 +1464,9 @@
   <height>70</height>
   <control type="image">
 
+    
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
-    <texture>flags/flag_frame.png</texture>
+<texture>$VAR[CadreFlag]</texture>
   </control>
 
 
@@ -1441,10 +1485,17 @@
 <control type="group"> <!-- notation -->
   <visible>!String.IsEmpty(ListItem.Rating)</visible>
   <visible>!Skin.HasSetting(hidenotation2)</visible>
-  <width>107</width>
+  <width>98</width>
   <height>70</height>
   <control type="image">
-    <top>1</top>
+  <!-- <posx>2</posx> -->  
+  <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
+  
+  <aspectratio>stretch</aspectratio>
+</control>
+  <control type="image">
+    <top>3</top>
     <include>MediaFlagsVarsSquare</include>
   <!-- <texture>Star.png</texture> -->
   <texture>flags/notation/notefilm.png</texture>
@@ -1459,43 +1510,37 @@
 <visible>String.IsEqual(ListItem.DBTYPE,tvshow)|String.IsEqual(ListItem.DBTYPE,episode)</visible>
 </control>
 <control type="label">
-  <posy>11</posy>
+  <posy>9</posy>
   <include>MediaFlagsVarsSquare</include>
   <align>center</align>
   <aligny>center</aligny>
   <label>$VAR[StarRating]</label>
-  <textcolor>grey</textcolor>
+  <textcolor>blue</textcolor>
   <font>METF_StarRating</font>
   <angle>5</angle>
 </control>
 
-<control type="image">
-  <posx>2</posx>
-  <width>98</width>
-  <height>70</height>
-  <texture>flags/flag_frame.png</texture>
-  <aspectratio>stretch</aspectratio>
-</control>
+
 </control>
 
 <control type="group"> <!-- MPAA -->
   <width>80</width>
   <height>70</height>
+  <control type="image">
+    
+    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
+  </control>
   <visible>Container.Content(movies) | Container.Content(episodes)| Container.Content(tvshows) | Container.Content(MusicVideos)</visible>
   <visible>!String.IsEmpty(ListItem.Mpaa)</visible>
   <visible>!Skin.HasSetting(hidempaa2)</visible>
   <control type="image">
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
-    <texture>flags/flag_frame.png</texture>
-  </control>
-  <control type="image">
-    <posx>10</posx>
     <posy>8</posy>
-    <width>60</width>
-    <height>60</height>
+        <height>55</height>
+
     <aspectratio>keep</aspectratio>
     <texture fallback="flags/default.png">$VAR[MPAATexture]</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   
 
@@ -1507,15 +1552,16 @@
   <height>70</height>
   <control type="image">
 
+    
     <colordiffuse>MediaFlagDiffuse</colordiffuse>
-    <texture>flags/flag_frame.png</texture>
+<texture>$VAR[CadreFlag]</texture>
   </control>
   <visible>Container.Content(movies) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
   <visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture fallback="flags/default.png">$VAR[VarFlagSource]</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   
 
@@ -1527,8 +1573,9 @@
   <control type="image">
   <width>156</width>
   <height>70</height>
-  <texture>flags/flag_frame.png</texture>
   <colordiffuse>MediaFlagDiffuse</colordiffuse>
+<texture>$VAR[CadreFlag]</texture>
+  
 </control>
   <visible>String.Contains(ListItem.StereoscopicMode,split_) | String.Contains(ListItem.StereoscopicMode,anaglyph_)|String.Contains(listitem.filename,.3D.)</visible>
   <width>156</width>
@@ -1537,20 +1584,20 @@
     <include>MediaFlagsVarsWide</include>
   <!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dSBS.png</texture>-->
   <texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-  <colordiffuse>MediaFlagDiffuse</colordiffuse>
+  
   <visible>String.Contains(listitem.filename,.sbs.) | String.Contains(ListItem.StereoscopicMode,split_horizontal)</visible>
 </control>
 <control type="image">
   <include>MediaFlagsVarsWide</include>
 <!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dTAB.png</texture>-->
 <texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-<colordiffuse>MediaFlagDiffuse</colordiffuse>
+
 <visible>String.Contains(listitem.filename,.tab.) | String.Contains(ListItem.StereoscopicMode,split_vertical)</visible>
 </control>
 <control type="image">
   <include>MediaFlagsVarsWide</include>
   <texture fallback="flags/default.png">flags/VideoCodec/flag3d.png</texture>
-  <colordiffuse>MediaFlagDiffuse</colordiffuse>
+  
   <visible>!String.Contains(listitem.filename,.tab.)+!String.Contains(listitem.filename,.sbs.)+!String.Contains(ListItem.StereoscopicMode,split_)</visible>
 </control>
 
@@ -1561,11 +1608,11 @@
 
  <include name="multilangues">
    
-
     <control type="group"> <!-- language 1 -->
       <width>60</width>
       <height>65</height>
       <posx>20</posx>
+      <top>-3</top>
       <control type="image">
         <posx>0</posx>
         <width>60</width>
@@ -1579,7 +1626,7 @@
         <posy>10</posy>
         <width>25</width>
         <height>21</height>
-        <texture>flags/flag_frame2.png</texture>
+        <texture>flags/flag_frame.png</texture>
         <aspectratio >stretch</aspectratio>
       </control>
       <control type="image">
@@ -1606,6 +1653,7 @@
       <width>60</width>
       <height>65</height>
       <posx>85</posx>
+      <top>-3</top>
       <control type="image">
         <posx>0</posx>
         <width>60</width>
@@ -1619,7 +1667,7 @@
         <posy>10</posy>
         <width>25</width>
         <height>21</height>
-        <texture>flags/flag_frame2.png</texture>
+        <texture>flags/flag_frame.png</texture>
         <aspectratio >stretch</aspectratio>
       </control>
       <control type="image">
@@ -1645,6 +1693,7 @@
       <width>60</width>
       <height>65</height>
       <posx>155</posx>
+      <top>-3</top>
       <control type="image">
         <posx>0</posx>
         <width>60</width>
@@ -1658,7 +1707,7 @@
         <posy>10</posy>
         <width>25</width>
         <height>21</height>
-        <texture>flags/flag_frame2.png</texture>
+        <texture>flags/flag_frame.png</texture>
         <aspectratio >stretch</aspectratio>
       </control>
       <control type="image">
@@ -1683,6 +1732,7 @@
       <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
       <width>60</width>
       <height>65</height>
+      <top>-3</top>
       <posx>225</posx>
       <control type="image">
         <posx>0</posx>
@@ -1697,7 +1747,7 @@
         <posy>10</posy>
         <width>25</width>
         <height>21</height>
-        <texture>flags/flag_frame2.png</texture>
+        <texture>flags/flag_frame.png</texture>
         <aspectratio >stretch</aspectratio>
       </control>
       <control type="image">
@@ -1743,6 +1793,28 @@
 </control>
 
 </include>
+<include name="MediaInfoGroupUp">
+  <control type="group">
+    <width>1920</width>
+    <align>center</align>
+    <include>Animation_FadedByMenu</include>
+    <include>Animation_CommonFade</include>
+    
+    <visible>!String.Contains(Container.FolderPath,plugin)</visible>
+    <visible>!String.StartsWith(ListItem.Label,..)+[Container.Content(movies)| Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)  | Container.Content(MusicVideos)]</visible>
+    <include>VisibleIfNotMovieSet</include>
+    <control type="grouplist"> <!-- 1ere ligne-->
+    <!-- <posx>500</posx> -->
+    <height>100</height>
+    <align>center</align>
+    <itemgap>1</itemgap>
+    <orientation>horizontal</orientation>
+    <include>mediaflagline1</include>
+    <include>mediaflagline2</include>
+  </control>
+</control>
+
+</include>
 <include name="mediaflaglinesettings1">
   <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
   <control type="group"> <!-- chrono -->
@@ -1762,7 +1834,7 @@
     <left>-5</left>
 <control type="image">
     <texture>flags/flag_frame.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   <control type="fadelabel">
           <top>4</top>
@@ -1773,7 +1845,7 @@
           <align>center</align>
           <scrollout>false</scrollout>
           <pauseatend>400</pauseatend>
-          <font>impact35</font>
+          <font>debutfin</font>
           <scrollspeed>20</scrollspeed>
           <shadowcolor>FF000000</shadowcolor>
           <label>[COLOR=MediaDetailsInfo]Drame / Histoire / Science-Fiction[/COLOR]</label>
@@ -1790,14 +1862,14 @@
 <!-- <visible>!String.IsEmpty(Control.GetLabel(2525))</visible> -->
 <control type="image">
 
-  <colordiffuse>MediaFlagDiffuse</colordiffuse>
+  
   <texture>flags/flag_frame.png</texture>
 </control>
 <control type="image">
   <top>3</top>
   <aspectratio align="center" aligny="center">keep</aspectratio>
   <texture>flags\default-studio.png</texture>
-  <colordiffuse>MediaFlagDiffuse</colordiffuse>
+  
 
 </control>
 </control>
@@ -1807,7 +1879,7 @@
   <height>70</height>
   <control type="image">
 
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
     <texture>flags/flag_frame.png</texture>
   </control>
 
@@ -1833,22 +1905,23 @@
   <width>98</width>
   <height>70</height>
   <texture>flags/flag_frame.png</texture>
+  
   <aspectratio>stretch</aspectratio>
 </control>
   <control type="image">
-    <top>1</top>
+    <top>3</top>
     <include>MediaFlagsVarsSquare</include>
   <!-- <texture>Star.png</texture> -->
   <texture>flags/notation/notefilm.png</texture>
   <aspectratio>stretch</aspectratio>
 </control>
 <control type="label">
-  <posy>11</posy>
+  <posy>9</posy>
   <include>MediaFlagsVarsSquare</include>
   <align>center</align>
   <aligny>center</aligny>
   <label>8.9</label>
-  <textcolor>grey</textcolor>
+  <textcolor>blue</textcolor>
   <font>METF_StarRating</font>
   <angle>5</angle>
 </control>
@@ -1860,19 +1933,19 @@
   <width>80</width>
   <height>70</height>
   <control type="image">
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
     <texture>flags/flag_frame.png</texture>
   </control>
 
   <visible>!Skin.HasSetting(hidempaa)</visible>
   <control type="image">
     <posx>10</posx>
-    <posy>8</posy>
+    <posy>5</posy>
     <width>60</width>
     <height>60</height>
     <aspectratio>keep</aspectratio>
     <texture>flags\Rating\Moins16.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   
 </control>
@@ -1883,13 +1956,13 @@
   <height>70</height>  
   <control type="image">
 
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
     <texture>flags/flag_frame.png</texture>
   </control>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture>flags\Source\bluray.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
 
 
@@ -1904,13 +1977,13 @@
   <width>156</width>
   <height>70</height>
   <texture>flags/flag_frame.png</texture>
-  <colordiffuse>MediaFlagDiffuse</colordiffuse>
+  
 </control>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
   <!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dSBS.png</texture>-->
   <texture>flags\VideoCodec\flag3DSBS.png</texture>
-  <colordiffuse>MediaFlagDiffuse</colordiffuse>
+  
 </control>
 
 </control>
@@ -1922,7 +1995,7 @@
   <height>70</height> 
   <control type="image">
     <texture>flags/flag_frame.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   <control type="image">
     <top>4</top>
@@ -1948,12 +2021,12 @@
   <height>70</height>
   <control type="image">
     <texture>flags/flag_frame.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture>flags\VideoCodec\h.264.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   
 
@@ -1966,12 +2039,12 @@
   <control type="image">
 
     <texture>flags/flag_frame.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture>flags\VideoResolution\1080.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   
 
@@ -1984,12 +2057,12 @@
   <height>70</height>
   <control type="image">
     <texture>flags/flag_frame.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture>flags\VideoAspect\2.35.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   
 
@@ -2001,7 +2074,7 @@
   <height>70</height>
  <control type="image">
     <texture>flags/flag_frame.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
 
   <control type="image">
@@ -2019,7 +2092,7 @@
   <height>70</height> 
   <control type="image">
     <texture>flags/flag_frame.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   <control type="image">
     <posx>2</posx>
@@ -2052,7 +2125,7 @@
     <left>-5</left>
 <control type="image">
     <texture>flags/flag_frame.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   <control type="fadelabel">
           <top>4</top>
@@ -2063,7 +2136,7 @@
           <align>center</align>
           <scrollout>false</scrollout>
           <pauseatend>400</pauseatend>
-          <font>impact35</font>
+          <font>debutfin</font>
           <scrollspeed>20</scrollspeed>
           <shadowcolor>FF000000</shadowcolor>
           <label>[COLOR=MediaDetailsInfo]Drame / Histoire / Science-Fiction[/COLOR]</label>
@@ -2080,14 +2153,14 @@
 <!-- <visible>!String.IsEmpty(Control.GetLabel(2525))</visible> -->
 <control type="image">
 
-  <colordiffuse>MediaFlagDiffuse</colordiffuse>
+  
   <texture>flags/flag_frame.png</texture>
 </control>
 <control type="image">
   <top>3</top>
   <aspectratio align="center" aligny="center">keep</aspectratio>
   <texture>flags\default-studio.png</texture>
-  <colordiffuse>MediaFlagDiffuse</colordiffuse>
+  
 
 </control>
 </control>
@@ -2097,7 +2170,7 @@
   <height>70</height>
   <control type="image">
 
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
     <texture>flags/flag_frame.png</texture>
   </control>
 
@@ -2126,19 +2199,19 @@
   <aspectratio>stretch</aspectratio>
 </control>
   <control type="image">
-    <top>1</top>
+    <top>3</top>
     <include>MediaFlagsVarsSquare</include>
   <!-- <texture>Star.png</texture> -->
   <texture>flags/notation/notefilm.png</texture>
   <aspectratio>stretch</aspectratio>
 </control>
 <control type="label">
-  <posy>11</posy>
+  <posy>9</posy>
   <include>MediaFlagsVarsSquare</include>
   <align>center</align>
   <aligny>center</aligny>
   <label>8.9</label>
-  <textcolor>grey</textcolor>
+  <textcolor>blue</textcolor>
   <font>METF_StarRating</font>
   <angle>5</angle>
 </control>
@@ -2151,17 +2224,17 @@
   <height>70</height>
   <visible>!Skin.HasSetting(hidempaa2)</visible>
   <control type="image">
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
     <texture>flags/flag_frame.png</texture>
   </control>
   <control type="image">
     <posx>10</posx>
-    <posy>8</posy>
+    <posy>5</posy>
     <width>60</width>
     <height>60</height>
     <aspectratio>keep</aspectratio>
     <texture>flags\Rating\Moins16.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   
 
@@ -2173,13 +2246,13 @@
   <height>70</height>
   <control type="image">
 
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
     <texture>flags/flag_frame.png</texture>
   </control>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture>flags\Source\bluray.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   
 
@@ -2194,13 +2267,13 @@
   <width>156</width>
   <height>70</height>
   <texture>flags/flag_frame.png</texture>
-  <colordiffuse>MediaFlagDiffuse</colordiffuse>
+  
 </control>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
   <!--<texture fallback="flags/default.png">flags/VideoCodec/flag3dSBS.png</texture>-->
   <texture>flags\VideoCodec\flag3DSBS.png</texture>
-  <colordiffuse>MediaFlagDiffuse</colordiffuse>
+  
 </control>
 
 </control>
@@ -2219,7 +2292,7 @@
     <height>60</height>
     <control type="image">
     <texture>flags/flag_frame.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
    
     <texture background="true"  >$VAR[flagpath]France$VAR[flagpathext]</texture>
@@ -2238,12 +2311,12 @@
   <height>70</height>
   <control type="image">
     <texture>flags/flag_frame.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture>flags\VideoCodec\h.264.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   
 
@@ -2256,12 +2329,12 @@
   <control type="image">
 
     <texture>flags/flag_frame.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture>flags\VideoResolution\1080.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   
 
@@ -2274,13 +2347,13 @@
   <height>70</height> 
   <control type="image">
     <texture>flags/flag_frame.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
 
   <control type="image">
     <include>MediaFlagsVarsWide</include>
     <texture>flags\VideoAspect\2.35.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
  
 </control>
@@ -2291,7 +2364,7 @@
   <height>70</height>
  <control type="image">
     <texture>flags/flag_frame.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
   <control type="image">
     <include>MediaFlagsVarsWide</include>
@@ -2309,7 +2382,7 @@
   <height>70</height>
   <control type="image">
     <texture>flags/flag_frame.png</texture>
-    <colordiffuse>MediaFlagDiffuse</colordiffuse>
+    
   </control>
 
   <control type="image">

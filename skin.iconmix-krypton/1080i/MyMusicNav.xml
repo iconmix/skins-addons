@@ -6,38 +6,48 @@
 	<defaultcontrol always="true">55</defaultcontrol>
 	<controls>
 		<control type="group">
-		<!-- <include>Global_Background</include> -->
-		<include>Global_Background_Fanart</include>
+		  <include>Global_Background_Fanart</include>
 		
-		<control type="group">
-			<animation type="Conditional" condition="Control.HasFocus(2997)" reversible="true">
-				<effect type="fade" start="100" end="0" time="500"  />
-			</animation>
-		<!--	<include>Object_InfoLines</include> -->
-		<include>Viewtype_Banner</include>			<!-- 511 -->
-		<include>Viewtype_BannerWall</include>			<!-- 514 -->
-		<include>Viewtype_BannerV</include>			<!-- 513 -->
-		<include>Viewtype_BannerPoster</include>		<!-- 510 -->
-		<include>Viewtype_List</include>
-		<include>Viewtype_LowList</include>
-		<include>Viewtype_Gallery_Square</include>
-		<include>Viewtype_Panel_Square</include>
-		<include>Viewtype_Poster_Large_Fixed</include>		<!-- 552 -->
-		<include>Viewtype_Poster_Large_Wrap</include>		<!-- 551 -->
-		<include>Viewtype_ListCurved</include> <!-- 906 -->
-		<include>Viewtype_MusicBox</include> <!-- 906 -->
-		<!-- <include>Global_ContextFilter</include> -->
-		</control>
-<control type="image">
-			<posx>0</posx>
-			<posy>815</posy>
-			<width>1920</width>
-			<height>265</height>
-			<colordiffuse>BackgroundColor</colordiffuse>
-			<texture>fondflaggris.png</texture>
-			<colordiffuse>BackgroundColor</colordiffuse>
-			<!--<visible>!Skin.HasSetting(CacheFond)</visible> -->
-		</control>
+  		<control type="group">
+  			<animation type="Conditional" condition="Control.HasFocus(2997)" reversible="true">
+  				<effect type="fade" start="100" end="0" time="500"  />
+  			</animation>
+  			 <animation type="Conditional" condition="Skin.HasSetting(CacheFondMusic)" reversible="false">
+            <effect type="slide" end="0,200" time="0"  />
+          </animation>
+    		<!--	<include>Object_InfoLines</include> -->
+    		<include>Viewtype_Banner</include>			<!-- 511 -->
+    		<include>Viewtype_BannerWall</include>			<!-- 514 -->
+    		<include>Viewtype_BannerV</include>			<!-- 513 -->
+    		<include>Viewtype_BannerPoster</include>		<!-- 510 -->
+    		<include>Viewtype_List</include>
+    		<include>Viewtype_LowList</include>
+    		<include>Viewtype_Gallery_Square</include>
+    		<include>Viewtype_Panel_Square</include>
+    		<include>Viewtype_Poster_Large_Fixed</include>		<!-- 552 -->
+    		<include>Viewtype_Poster_Large_Wrap</include>		<!-- 551 -->
+    		<include>Viewtype_ListCurved</include> <!-- 906 -->
+    		<include>Viewtype_MusicBox</include> <!-- 906 -->
+    		<include>Viewtype_Disc</include> <!-- 586 -->
+  		</control>
+  		<control type="group">
+        <include>Animation_FadedByMenu</include>
+        <control type="image">
+          <posx>0</posx>
+          <posy>815</posy>
+          <width>1920</width>
+          <height>265</height>
+          <texture>fondflaggris.png</texture>
+          <colordiffuse>BackgroundColor</colordiffuse>
+        </control>
+        <include>LabelFlagsCommon</include>
+        <control type="group">
+          <include condition="!Skin.HasSetting(Hide_ExtraMediaFlags)">MediaInfoGroup2</include>
+          <visible>!Window.IsVisible(songinformation)</visible>
+        </control>
+     
+        <visible>!Skin.HasSetting(CacheFondMusic)</visible>
+      </control>
 		<!-- lecture ou affichage -->
 		
 			<control type="button" id="2997">
@@ -64,464 +74,228 @@
 	
 		<!--------------------------------------------------ARTISTES------------------------------------------------------ -->
 		
-		<include>focusboitiers</include>
-		<control type="wraplist" id="2998">			
-				<posx>-2000</posx>
-				<autoscroll time="6000">true</autoscroll>
-			<itemlayout>
-			  </itemlayout>
-			<focusedlayout>
-			  
-			</focusedlayout>
-		</control>
-		<control type="group">
-			<posx>-15</posx>
-			<top>10</top>
-			<visible>!Container.OnNext</visible>
-			<visible>!Container.OnPrevious</visible>
-		<control type="list" id="1999">			
-				
-			<focusposition>0</focusposition>
-			<onfocus>SetProperty(IconMixVerticalNavigation,"horizontal",Home)</onfocus>
-			<onfocus>Action(FirstPage)</onfocus>
-			<onfocus>SetFocus(2997)</onfocus>						
-			<movement>9</movement>
-			<description>Widget Lists</description>
-			<include>HorizVert</include>
-		<!-- 	<content>musicdb://artists/$INFO[ListItem.DBID]</content>			 -->
-			<include>VueElementsBoitiers</include>	
-			<visible>!Skin.HasSetting(MusicTexte)</visible>
-			<visible>Container.Content(artists)</visible>
-			
-		</control>
-		<control type="list" id="1999">			
-			
-			<focusposition>0</focusposition>
-			<onfocus>SetProperty(IconMixVerticalNavigation,"vertical",Home)</onfocus>
-			  <onfocus>Action(FirstPage)</onfocus>
-			<onfocus>SetFocus(2997)</onfocus>				
-			<movement>9</movement>			
-			<description>Widget Lists</description>
-			<include>VertHoriz</include>
-			<include>VueElementsBoitiers</include>	
-			<visible>Skin.HasSetting(MusicTexte)</visible>
-			 <visible>Container.Content(artists)</visible>
-			
-		</control>
-		</control>
+  		<include>focusboitiers</include>
+  		<control type="wraplist" id="2998">			
+  				<posx>-2000</posx>
+  				<autoscroll time="6000">true</autoscroll>
+  			<itemlayout>
+  			  </itemlayout>
+  			<focusedlayout>
+  			  
+  			</focusedlayout>
+  		</control>
+  		<control type="group">
+  			<posx>-15</posx>
+  			<top>10</top>
+  			<visible>!Container.OnNext</visible>
+  			<visible>!Container.OnPrevious</visible>
+  			<animation type="Conditional" condition="Skin.HasSetting(CacheFondMusic)" reversible="false">
+            <effect type="slide" end="0,-835" time="0"  />
+          </animation>
+    		<control type="list" id="1999">			
+    				
+    			<focusposition>0</focusposition>
+    			<onfocus>SetProperty(IconMixVerticalNavigation,"horizontal",Home)</onfocus>
+    			<onfocus>Action(FirstPage)</onfocus>
+    			<onfocus>SetFocus(2997)</onfocus>						
+    			<movement>9</movement>
+    			<description>Widget Lists</description>
+    			<include>HorizVert</include>
+    			<include>VueElementsBoitiers</include>	
+    			<visible>!Skin.HasSetting(MusicTexte)</visible>
+    			<visible>Container.Content(artists)</visible>
+    			
+    		</control>
+    		<control type="list" id="1999">			
+    			
+    			<focusposition>0</focusposition>
+    			<onfocus>SetProperty(IconMixVerticalNavigation,"vertical",Home)</onfocus>
+    			  <onfocus>Action(FirstPage)</onfocus>
+    			<onfocus>SetFocus(2997)</onfocus>				
+    			<movement>9</movement>			
+    			<description>Widget Lists</description>
+    			<include>VertHoriz</include>
+    			<include>VueElementsBoitiers</include>	
+    			<visible>Skin.HasSetting(MusicTexte)</visible>
+    			 <visible>Container.Content(artists)</visible>
+    			
+    		</control>
+  		</control>
 
 
 		<!--------------------------------------------------GENRES------------------------------------------------------ -->
-				<control type="group">
-			<posx>-15</posx>
-			<top>10</top>
-			<visible>!Container.OnNext</visible>
-			<visible>!Container.OnPrevious</visible>
-		<control type="list" id="1999">			
-			
-			<focusposition>0</focusposition>
-			<onfocus>SetProperty(IconMixVerticalNavigation,"horizontal",Home)</onfocus>
-			<onfocus>Action(FirstPage)</onfocus>
-			<onfocus>SetFocus(2997)</onfocus>	
-			<movement>9</movement>
-			<description>Widget Lists</description>
-			<include>HorizVert</include>
-			<!-- <content>musicdb://genres/$INFO[ListItem.DBID]</content>			-->			
-			<include>VueElementsBoitiers</include>	
-			<visible>!Skin.HasSetting(MusicGenreTexte)+!String.IsEmpty(ListItem.DBID)</visible>
-			<visible>Container.Content(genres)</visible>
-		</control>
-		<control type="list" id="1999">			
-			<onfocus condition="Skin.HasSetting(MusicGenreAucun)">SetFocus(55)</onfocus>
-			<focusposition>0</focusposition>
-			<onfocus>SetProperty(IconMixVerticalNavigation,"vertical",Home)</onfocus>
-			<onfocus>Action(FirstPage)</onfocus>
-			<onfocus>SetFocus(2997)</onfocus>				
-			<movement>9</movement>
-			
-			<description>Widget Lists</description>
-			<include>VertHoriz</include>
-			<!-- <content>musicdb://genres/$INFO[ListItem.DBID]</content>			-->
-			<include>VueElementsBoitiers</include>	
-			<visible>Skin.HasSetting(MusicGenreTexte)</visible>
-			<visible>Container.Content(genres)</visible>
-			
-		</control>
-		</control>
+  		<control type="group">
+  			<posx>-15</posx>
+  			<top>10</top>
+  			<visible>!Container.OnNext</visible>
+  			<visible>!Container.OnPrevious</visible>
+  			<animation type="Conditional" condition="Skin.HasSetting(CacheFondMusic)" reversible="false">
+            <effect type="slide" end="0,-835" time="0"  />
+          </animation>
+    		<control type="list" id="1999">			
+    			
+    			<focusposition>0</focusposition>
+    			<onfocus>SetProperty(IconMixVerticalNavigation,"horizontal",Home)</onfocus>
+    			<onfocus>Action(FirstPage)</onfocus>
+    			<onfocus>SetFocus(2997)</onfocus>	
+    			<movement>9</movement>
+    			<description>Widget Lists</description>
+    			<include>HorizVert</include>
+    			<!-- <content>musicdb://genres/$INFO[ListItem.DBID]</content>			-->			
+    			<include>VueElementsBoitiers</include>	
+    			<visible>!Skin.HasSetting(MusicGenreTexte)+!String.IsEmpty(ListItem.DBID)</visible>
+    			<visible>Container.Content(genres)</visible>
+    		</control>
+    		<control type="list" id="1999">			
+    			<onfocus condition="Skin.HasSetting(MusicGenreAucun)">SetFocus(55)</onfocus>
+    			<focusposition>0</focusposition>
+    			<onfocus>SetProperty(IconMixVerticalNavigation,"vertical",Home)</onfocus>
+    			<onfocus>Action(FirstPage)</onfocus>
+    			<onfocus>SetFocus(2997)</onfocus>				
+    			<movement>9</movement>
+    			
+    			<description>Widget Lists</description>
+    			<include>VertHoriz</include>
+    			<!-- <content>musicdb://genres/$INFO[ListItem.DBID]</content>			-->
+    			<include>VueElementsBoitiers</include>	
+    			<visible>Skin.HasSetting(MusicGenreTexte)</visible>
+    			<visible>Container.Content(genres)</visible>
+    			
+    		</control>
+  		</control>
 
 	
 
 		<!---------------------------------------------------------------------------------------------------------------- -->
 
 
-		<!-- liste des chansons dans pochette-->
-		<control type="group">
-			<posx>421</posx>
-			<posy>-5</posy>
-			<visible>[Control.HasFocus(2997)+!Container(1999).OnPrevious+!Container(1999).OnNext]</visible>
-			<animation effect="fade" start="0"  end="100" time="1000" delay="3000" reversible="false">Visible</animation>
+  		<!-- liste des chansons dans pochette-->
+  		<control type="group">
+  			<posx>421</posx>
+  			<posy>-5</posy>
+  			<visible>[Control.HasFocus(2997)+!Container(1999).OnPrevious+!Container(1999).OnNext]</visible>
+  			<animation effect="fade" start="0"  end="100" time="1000" delay="3000" reversible="false">Visible</animation>
+  		
+  			
+  			
+  			<control type="image" >
+  				<posx>35</posx>
+  				<posy>315</posy>
+  				<width>480</width>
+  				<height>473</height>
+  				<texture>frames/cdcasexupback.png</texture>
+  				<colordiffuse>A07F7F7F</colordiffuse>
+  				<aspectratio scalediffuse="true">stretch</aspectratio>				
+  			</control>
+  		
+
+  			<control type="list" id="1994">
+  				<visible>Container.Content(artists)</visible>
+  				<posx>45</posx>
+  				<posy>324</posy>
+  				<width>460</width>
+  				<height>450</height>
+  				<autoscroll time="2300">true</autoscroll>
+  				<itemgap>0</itemgap>
+  				<orientation>vertical</orientation>
+  				<itemlayout width="460" height="28">
+  					<control type="label">
+  						<font>impactsongs</font>
+  						<align>left</align>
+  						<label>[COLOR=grey]$INFO[ListItem.TrackNumber]-[/COLOR][I]$INFO[ListItem.Title][/I]</label>
+  					</control>
+  				</itemlayout>
+  				<focusedlayout width="460" height="28">
+  					<control type="label">
+  						<align>left</align>
+  						<font>impactsongs</font>
+  						<label>[COLOR=grey]$INFO[ListItem.TrackNumber]-[/COLOR][I]$INFO[ListItem.Title][/I]</label>
+  					</control>
+  				</focusedlayout>
+  				<content>musicdb://albums/$INFO[Container(1999).ListItem.Property(DBID)]</content>
+  			</control>
+  			
+  			
+  			<control type="list" id="1994">
+  				<visible>Container.Content(genres)</visible>
+  				<posx>45</posx>
+  				<posy>324</posy>
+  				<width>460</width>
+  				<height>450</height>
+  				<autoscroll time="2300">true</autoscroll>
+  				<itemgap>0</itemgap>
+  				<orientation>vertical</orientation>
+  				<itemlayout width="460" height="28">
+  					<control type="label">
+  						<font>impactsongs</font>
+  						<align>center</align>
+  						<label>[I]$INFO[ListItem.Title][/I]</label>
+  					</control>
+  				</itemlayout>
+  				<focusedlayout width="460" height="28">
+  					<control type="label">
+  						<align>center</align>
+  						<font>impactsongs</font>
+  						<label>[I]$INFO[ListItem.Title][/I]</label>
+  					</control>
+  				</focusedlayout>
+
+  				<content>musicdb://artists/$INFO[Container(1999).ListItem.property(DBID)]</content>
+  			</control>
+
+  		</control>
+
+  		<control type="list" id="1997">
+  		  <animation type="Conditional" condition="Skin.HasSetting(CacheFondMusic)" reversible="false">
+            <effect type="slide" end="0,-835" time="0"  />
+          </animation>
+  			<include>Animation_HiddenByInfo</include>
+  			<posx>475</posx>
+  			<posy>923</posy>
+  			<width>970</width>
+  			<height>150</height>
+  			<align>center</align>
+  			<autoscroll time="2500">true</autoscroll>
+  			<itemgap>0</itemgap>
+  			<visible>Container.Content(albums)</visible>
+  			<orientation>vertical</orientation>
+  			<itemlayout width="970" height="30">    
+  				<control type="label">
+  					<font>impactsongs</font>
+  					<left>2</left>
+  					<top>2</top>
+  					<align>center</align>
+  					<textcolor>FF000000</textcolor>
+  					<label>$INFO[ListItem.Title]</label>
+  				</control>
+  				<control type="label">
+  					<font>impactsongs</font>
+  					<align>center</align>
+  					<label>$INFO[ListItem.Title]</label>
+  				</control>
+  				
+  			</itemlayout>
+  			<focusedlayout width="970" height="30">
+  			  <control type="label">
+  			  <font>impactsongs</font>
+  					<left>2</left>
+  					<top>2</top>
+  					<align>center</align>
+  					<textcolor>FF000000</textcolor>
+  					<label>$INFO[ListItem.Title]</label>
+  				</control>
+  				<control type="label">
+  					<align>center</align>
+  					<font>impactsongs</font>
+  					<label>$INFO[ListItem.Title]</label>
+  				</control>
+  			</focusedlayout>
+  			<content>musicdb://albums/$INFO[ListItem.DBID]</content>
+  		</control>
+
+	
 		
-			
-			
-			<control type="image" >
-				<posx>35</posx>
-				<posy>315</posy>
-				<width>480</width>
-				<height>473</height>
-				<texture>frames/cdcasexupback.png</texture>
-				<colordiffuse>A07F7F7F</colordiffuse>
-				<aspectratio scalediffuse="true">stretch</aspectratio>				
-			</control>
-		
-
-			<control type="list" id="1994">
-				<visible>Container.Content(artists)</visible>
-				<posx>45</posx>
-				<posy>324</posy>
-				<width>460</width>
-				<height>450</height>
-				<autoscroll time="2300">true</autoscroll>
-
-				<itemgap>0</itemgap>
-				<orientation>vertical</orientation>
-				<itemlayout width="460" height="28">
-					<control type="label">
-						<font>impactsongs</font>
-						<align>left</align>
-						<label>[COLOR=grey]$INFO[ListItem.TrackNumber]-[/COLOR][I]$INFO[ListItem.Title][/I]</label>
-					</control>
-				</itemlayout>
-				<focusedlayout width="460" height="28">
-					<control type="label">
-						<align>left</align>
-						<font>impactsongs</font>
-						<label>[COLOR=grey]$INFO[ListItem.TrackNumber]-[/COLOR][I]$INFO[ListItem.Title][/I]</label>
-					</control>
-				</focusedlayout>
-				<content>musicdb://albums/$INFO[Container(1999).ListItem.Property(DBID)]</content>
-			</control>
-			
-			
-			<control type="list" id="1994">
-				<visible>Container.Content(genres)</visible>
-				<posx>45</posx>
-				<posy>324</posy>
-				<width>460</width>
-				<height>450</height>
-				<autoscroll time="2300">true</autoscroll>
-				<itemgap>0</itemgap>
-				<orientation>vertical</orientation>
-				<itemlayout width="460" height="28">
-					<control type="label">
-						<font>impactsongs</font>
-						<align>center</align>
-						<label>[I]$INFO[ListItem.Title][/I]</label>
-					</control>
-				</itemlayout>
-				<focusedlayout width="460" height="28">
-					<control type="label">
-						<align>center</align>
-						<font>impactsongs</font>
-						<label>[I]$INFO[ListItem.Title][/I]</label>
-					</control>
-				</focusedlayout>
-
-				<content>musicdb://artists/$INFO[Container(1999).ListItem.property(DBID)]</content>
-			</control>
-
-		</control>
-		-->
-
-		<control type="list" id="1997">
-			<include>Animation_HiddenByInfo</include>
-			<posx>400</posx>
-			<posy>923</posy>
-			<width>970</width>
-			<height>150</height>
-			<align>center</align>
-			<autoscroll time="2500">true</autoscroll>
-			<itemgap>0</itemgap>
-			<visible>Container.Content(albums)</visible>
-			<orientation>vertical</orientation>
-			<itemlayout width="970" height="25">
-				<control type="label">
-					<font>METF_DialogLargeBold</font>
-					<align>center</align>
-					<label>$INFO[ListItem.Title]</label>
-				</control>
-			</itemlayout>
-			<focusedlayout width="970" height="25">
-				<control type="label">
-					<align>center</align>
-					<font>METF_DialogLargeBold</font>
-					<label>$INFO[ListItem.Title]</label>
-				</control>
-			</focusedlayout>
-			<content>musicdb://albums/$INFO[ListItem.DBID]</content>
-		</control>
-
-
-		<include>Global_AddonInfo</include>
-		<include>Global_ScrollOffsetLabel</include>
-
-		<!-- Navigation Menu -->
-		<control type="group">
-			<posx>960</posx>
-			<posy>450</posy>
-			<control type="image">
-				<width>550</width>
-				<height>200</height>
-				<texture>frames/Menu_Glass2b.png</texture>
-			<colordiffuse>DialogBackgroundColor</colordiffuse>
-			</control>
-			<include>Animation_NavMenu</include>
-			<!--<include>NavMenuBackground</include>-->
-			<visible>ControlGroup(7002).HasFocus|ControlGroup(7000).HasFocus(2001)|ControlGroup(7000).HasFocus(2002)</visible>
-			<animation type="Visible" reversible="true">
-				<effect type="zoom" center="960,450" start="0" end="100" time="1000" tween="bounce" easy="out" />
-			</animation>
-			
-			<control type="grouplist" id="7002">
-				<posx>30</posx>
-				<posy>15</posy>
-				<width>490</width>
-      <height>230</height>
-				<itemgap>1</itemgap>
-				<onleft>7000</onleft>
-				<onback>7000</onback>
-				<onup>7002</onup>
-				<ondown>7002</ondown>
-				<orientation>vertical</orientation>
-				<control type="radiobutton" id="1000">
-					<visible>Container.Content(artists)</visible>
-					<include>BoutonCommun</include>
-					<label>$LOCALIZE[31903]</label>
-					<selected>Skin.HasSetting(MusicBoitier)</selected>
-					<onclick>Skin.ToggleSetting(MusicBoitier)</onclick>
-					<onclick condition="Skin.HasSetting(MusicDiscArt)">Skin.ToggleSetting(MusicDiscArt)</onclick>
-					<onclick condition="Skin.HasSetting(MusicTexte)">Skin.ToggleSetting(MusicTexte)</onclick>
-					<onclick condition="Skin.HasSetting(MusicAucun)">Skin.ToggleSetting(MusicAucun)</onclick>
-					<onclick>SetFocus(55)</onclick>
-				</control>
-				<control type="radiobutton" id="1001">
-					<include>BoutonCommun</include>
-					<visible>Container.Content(artists)</visible>
-
-					<label>$LOCALIZE[31904]</label>
-					<selected>Skin.HasSetting(MusicDiscArt)</selected>
-					<onclick>Skin.ToggleSetting(MusicDiscArt)</onclick>
-					<onclick condition="Skin.HasSetting(MusicBoitier)">Skin.ToggleSetting(MusicBoitier)</onclick>
-					<onclick condition="Skin.HasSetting(MusicTexte)">Skin.ToggleSetting(MusicTexte)</onclick>
-					<onclick condition="Skin.HasSetting(MusicAucun)">Skin.ToggleSetting(MusicAucun)</onclick>
-					<onclick>SetFocus(55)</onclick>
-				</control>
-				<control type="radiobutton" id="1002">
-					<visible>Container.Content(artists)</visible>
-					<include>BoutonCommun</include>
-					<label>$LOCALIZE[31905]</label>
-					<selected>Skin.HasSetting(MusicTexte)</selected>
-					<onclick>Skin.ToggleSetting(MusicTexte)</onclick>
-					<onclick condition="Skin.HasSetting(MusicBoitier)">Skin.ToggleSetting(MusicBoitier)</onclick>
-					<onclick condition="Skin.HasSetting(MusicDiscArt)">Skin.ToggleSetting(MusicDiscArt)</onclick>
-					<onclick condition="Skin.HasSetting(MusicAucun)">Skin.ToggleSetting(MusicAucun)</onclick>
-					<onclick>SetFocus(55)</onclick>
-				</control>
-				<control type="radiobutton" id="1003">
-					<visible>Container.Content(artists)</visible>
-					<include>BoutonCommun</include>
-					<label>$LOCALIZE[31906]</label>
-					<selected>Skin.HasSetting(MusicAucun)|[!Skin.HasSetting(MusicTexte)+!Skin.HasSetting(MusicBoitier)+!Skin.HasSetting(MusicDiscArt)]</selected>
-					<onclick>Skin.ToggleSetting(MusicAucun)</onclick>
-					<onclick condition="Skin.HasSetting(MusicBoitier)">Skin.ToggleSetting(MusicBoitier)</onclick>
-					<onclick condition="Skin.HasSetting(MusicDiscArt)">Skin.ToggleSetting(MusicDiscArt)</onclick>
-					<onclick condition="Skin.HasSetting(MusicTexte)">Skin.ToggleSetting(MusicTexte)</onclick>
-					<onclick>SetFocus(55)</onclick>
-				</control>
-
-
-
-				<control type="radiobutton" id="1004">
-					<visible>Container.Content(genres)</visible>
-					<include>BoutonCommun</include>
-					<label>$LOCALIZE[31903]</label>
-					<selected>Skin.HasSetting(MusicGenreBoitier)</selected>
-					<onclick>Skin.ToggleSetting(MusicGenreBoitier)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreDiscArt)">Skin.ToggleSetting(MusicGenreDiscArt)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreBanner)">Skin.ToggleSetting(MusicGenreBanner)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreTexte)">Skin.ToggleSetting(MusicGenreTexte)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreAucun)">Skin.ToggleSetting(MusicGenreAucun)</onclick>
-					<onclick>SetFocus(55)</onclick>
-				</control>
-				<control type="radiobutton" id="1005">
-					<visible>Container.Content(genres)</visible>
-					<include>BoutonCommun</include>
-					<label>$LOCALIZE[31054]</label>
-					<selected>Skin.HasSetting(MusicGenreDiscArt)</selected>
-					<onclick>Skin.ToggleSetting(MusicGenreDiscArt)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreBoitier)">Skin.ToggleSetting(MusicGenreBoitier)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreTexte)">Skin.ToggleSetting(MusicGenreTexte)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreBanner)">Skin.ToggleSetting(MusicGenreBanner)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreAucun)">Skin.ToggleSetting(MusicGenreAucun)</onclick>
-					<onclick>SetFocus(55)</onclick>
-				</control>
-				<control type="radiobutton" id="1006">
-					<visible>Container.Content(genres)</visible>
-					<include>BoutonCommun</include>
-					<label>$LOCALIZE[31286]</label>
-					<selected>Skin.HasSetting(MusicGenreBanner)</selected>
-					<onclick>Skin.ToggleSetting(MusicGenreBanner)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreBoitier)">Skin.ToggleSetting(MusicGenreBoitier)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreTexte)">Skin.ToggleSetting(MusicGenreTexte)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreDiscArt)">Skin.ToggleSetting(MusicGenreDiscArt)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreAucun)">Skin.ToggleSetting(MusicGenreAucun)</onclick>
-					<onclick>SetFocus(55)</onclick>
-				</control>
-				<control type="radiobutton" id="1007">
-					<visible>Container.Content(genres)</visible>
-					<include>BoutonCommun</include>
-					<label>$LOCALIZE[31905]</label>
-					<selected>Skin.HasSetting(MusicGenreTexte)</selected>
-					<onclick>Skin.ToggleSetting(MusicGenreTexte)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreBoitier)">Skin.ToggleSetting(MusicGenreBoitier)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreDiscArt)">Skin.ToggleSetting(MusicGenreDiscArt)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreBanner)">Skin.ToggleSetting(MusicGenreBanner)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreAucun)">Skin.ToggleSetting(MusicGenreAucun)</onclick>
-					<onclick>SetFocus(55)</onclick>
-				</control>
-				<control type="radiobutton" id="1008">
-					<visible>Container.Content(genres)</visible>
-					<include>BoutonCommun</include>
-					<label>$LOCALIZE[31906]</label>
-					<selected>Skin.HasSetting(MusicGenreAucun)|[!Skin.HasSetting(MusicGenreTexte)+!Skin.HasSetting(MusicGenreBoitier)+!Skin.HasSetting(MusicGenreDiscArt)]</selected>
-					<onclick>Skin.ToggleSetting(MusicGenreAucun)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreBoitier)">Skin.ToggleSetting(MusicGenreBoitier)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreDiscArt)">Skin.ToggleSetting(MusicGenreDiscArt)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreBanner)">Skin.ToggleSetting(MusicGenreBanner)</onclick>
-					<onclick condition="Skin.HasSetting(MusicGenreTexte)">Skin.ToggleSetting(MusicGenreTexte)</onclick>
-					<onclick>SetFocus(55)</onclick>
-				</control>
-
-			</control>
-		</control>
-
-		<control type="group">
-			<posx>440</posx>
-			<posy>65</posy>
-			<control type="image">
-				<width>500</width>
-				<height>550</height>
-					<texture>frames/Menu_Glass2b.png</texture>
-			<colordiffuse>DialogBackgroundColor</colordiffuse>
-			</control>
-			<include>Animation_NavMenu</include>
-			<!--<include>NavMenuBackground</include>-->
-			<control type="grouplist" id="7000">
-				<posx>30</posx>
-				<posy>30</posy>
-				<width>440</width>
-				<height>520</height>
-				<itemgap>1</itemgap>
-				<onleft>55</onleft>
-				<onback>55</onback>
-				<onright condition="ControlGroup(7000).HasFocus(2001)|ControlGroup(7000).HasFocus(2002)">7002</onright>
-				<onright>55</onright>
-				<onup>7000</onup>
-				<ondown>7000</ondown>
-				<orientation>vertical</orientation>
-				<visible allowhiddenfocus="true">ControlGroup(7000).HasFocus|ControlGroup(7002).HasFocus</visible>
-				<animation type="Conditional" condition="ControlGroup(7002).HasFocus" reversible="false">
-				<effect type="fade" start="100" end="70" time="10" />
-			</animation>
-				<control type="button" id="2099">
-					<description>View</description>
-					<include>BoutonCommun</include>
-					<label>$LOCALIZE[629]:$INFO[Container.Viewmode]</label>
-					
-					<onclick>RunScript(script.iconmixtools,setview=True)</onclick>
-				</control>
-				<control type="button" id="3">
-					<description>Sort</description>
-					<include>BoutonCommun</include>
-					<label></label>
-					
-				</control>
-				<control type="togglebutton" id="4">
-					<description>Ascending/Descending</description>
-					<include>BoutonCommun</include>
-					<label>584</label>
-					<altlabel>585</altlabel>
-					
-				</control>
-				<control type="edit" id="19">
-					<description>Filter</description>
-					<include>BoutonCommun</include>
-					<label>587</label>
-					
-					<visible>[Container.CanFilterAdvanced + Skin.HasSetting(SimpleMediaFilter)] | Container.CanFilter</visible>
-				</control>
-				<control type="radiobutton" id="98">
-					<description>Advanced Filter</description>
-					<include>BoutonCommun</include>
-					<label>587</label>
-					
-					<selected>Container.Filtered</selected>
-					<onclick>right</onclick>
-					<onclick>Filter</onclick>
-					<visible>Container.CanFilterAdvanced + !Skin.HasSetting(SimpleMediaFilter)</visible>
-				</control>
-				<control type="button" id="8">
-					<description>Search</description>
-					<include>BoutonCommun</include>
-					<label>137</label>
-					
-				</control>
-				<control type="radiobutton" id="16">
-					<description>PartyMode</description>
-					<include>BoutonCommun</include>
-					<label>589</label>
-					
-				</control>
-				<control type="togglebutton" id="20">
-					<description>Update Library</description>
-					<include>BoutonCommun</include>
-					<label>653</label>
-					<altlabel>13353</altlabel>
-					
-					<usealttexture>library.isscanningmusic</usealttexture>
-					
-				</control>
-				<control type="togglebutton" id="200">
-					<description>Clean Library</description>
-					<include>BoutonCommun</include>
-					<label>700</label>
-					
-					<usealttexture>library.isscanningmusic</usealttexture>
-					
-					<onclick>CleanLibrary(music)</onclick>
-					<visible>!library.isscanningmusic</visible>
-				</control>
-				<include>Nav_NowPlaying</include>
-				<!-- -->
-
-				<control type="button" id="2001">
-					<include>BoutonCommun</include>
-					
-					<label>[I]$LOCALIZE[31908][/I]  >></label>
-					
-					<onclick>SetFocus(7002)</onclick>
-					<visible>Container.Content(artists)</visible>
-				</control>
-				<control type="button" id="2002">
-					<include>BoutonCommun</include>
-					
-					<label>[I]$LOCALIZE[31907][/I]  >></label>
-					
-					<onclick>SetFocus(7002)</onclick>
-					<visible>Container.Content(genres)</visible>
-				</control>
-			</control>
-		</control>
-		<!-- --
+		<!-- DEBUG --
 		<control type="label">
 				<posx>10</posx>
 				<posy>10</posy>
@@ -529,90 +303,158 @@
 				<label>ArtistBanner:$VAR[artistbanner][CR]IconMixDataPath:$INFO[Window(Home).Property(IconMixDataPath)][CR]Duree:$INFO[ListItem.Duration][CR]Dureetools:$INFO[Window(Home).Property(DurationTools)][CR]Fin:$INFO[Window(Home).Property(DurationToolsEnd)][CR]ICON=$INFO[ListItem.Icon][CR]TestProperty=$INFO[ListItem.Property(TestProperty)][CR]DBID=$INFO[ListItem.DBID][CR]DBID1999=$INFO[Container(1999).ListItem.Property(DBID)][CR]COVER999=$INFO[Container(1999).ListItem.Property(AlbumCover)][CR]CD1999=$INFO[Container(1999).ListItem.Property(AlbumCd)][CR]numitems1999:$INFO[Container(1999).NumItems][CR]numitems1994:$INFO[Container(1994).NumItems][CR]path1994:$INFO[Container(1994).ListItem.Path][CR]numitems2998:$INFO[Container(2998).NumItems][CR]Icon1999:$INFO[Container(1999).ListItem.Icon][CR]Title1999:$INFO[Container(1999).ListItem.Title][CR]Label1999:$INFO[Container(1999).ListItem.Label][CR]Title:$INFO[ListItem.Title][CR]Label:$INFO[ListItem.Label][CR]Label2:$INFO[ListItem.Label2][CR]DBType:$INFO[ListItem.DBType][CR]Content:$INFO[Container.Content][CR]Folder:$INFO[Container.FolderPath][CR]Discart=$INFO[Window(Home).Property(SkinHelper.ListItem.Art.DiscArt)][CR]Banner=$INFO[Window(Home).Property(SkinHelper.ListItem.Art.Banner)][CR]ArtisteBanner=$INFO[Window(Home).Property(ArtistBanner)][CR]ArtistLogo=$INFO[Window(Home).Property(ArtistLogo)][CR]AlbumCD=$INFO[Window(Home).Property(AlbumCd)][CR]AlbumCover=$INFO[Window(Home).Property(AlbumCover)][CR]$INFO[ListItem.Icon][CR]$VAR[discartSpinning]</label>
 			</control>-->
 
-		<include>LabelFlagsCommon</include>
-		
-		<control type="image">
-          <left>60</left>
-          <top>1090</top>
-          <width>280</width>
-          <height>280</height>
-          <aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
-          <texture background="true" diffuse="frames/cdart-mask.png">$VAR[discartSpinning]</texture>
-          <bordersize>2</bordersize>
-          <bordertexture>frames/cdart-mask.png</bordertexture>
-          <animation type="Visible">
-            <effect type="zoom" center="auto"  end="120" time="200" delay="300"  reversible="false"/>
-            <effect type="slide"   end="0,-300" time="500" delay="300"  reversible="false"/>
-            <effect type="rotate" center="auto" end="-360" time="1000" delay="300" reversible="false"/>
-            </animation>
-            <visible>!Container.OnNext+!Container.OnPrevious+Container.Content(albums)</visible>
-         <!-- <animation effect="rotate"  center="auto" end="-360" time="1000" delay="2400" condition="System.IdleTime(2)" reversible="false">Conditional</animation> -->
-        </control>
-				<!-- bandeau LOGO -->
-<control type="group">
-			<width>570</width>
-			<height>128</height>
-			<posy>140</posy>
-			<posx>-90</posx>
-			<visible>[[Container.Content(Genres)|Container.Content(artists)]+Control.HasFocus(2997)]|Container.Content(albums)|Container.Content(songs)</visible>
-			<animation type="Conditional" condition="true">
-				<effect type="rotate" center="0,88" end="27" time="1" />
-				<!-- <effect type="slide" end="90,280" time="1" delay="50" /> -->
-			</animation>
-			<control type="group">
-  			<control type="image">
-  				<texture>shine.png</texture>
-  				<aspectratio>stretch</aspectratio>
-  				
-  			</control>
-  			<control type="image">
-  			  <left>-50</left>
-  			  <height>110</height>
-          <aspectratio>keep</aspectratio>
-          <aligny>center</aligny>
-          <texture>$INFO[Window(Home).Property(ArtistLogo)]</texture>
-        </control>
-        <visible>!String.IsEmpty(Window(Home).Property(ArtistLogo))</visible>
-      </control>
-      <control type="group">
-        <control type="image">
-          <width>700</width>
-  				<texture>frames/genrestag.png</texture>
-  				<aspectratio>stretch</aspectratio>
-  				
-  			</control>
-    		<control type="fadelabel">
-    				<width>390</width>
-    				<posx>55</posx>
-    				<posy>3</posy>
-    				<aligny>center</aligny>
-    				<align>center</align>
-    				<font>impact</font>
-    				<textcolor>black</textcolor>
-    				<label>$INFO[ListItem.Label]</label>
-    				<scrollout>true</scrollout>
-    				 <scroll>true</scroll>
-    			</control>
-    			<control type="fadelabel">
-    				<width>390</width>
-    				<posx>52</posx>
-    				<aligny>center</aligny>
-    				<align>center</align>
-    				<font>impact</font>
-    				<textcolor>white</textcolor>
-    				<label>$INFO[ListItem.Label]</label>
-    				 <scroll>true</scroll>
-    				 <scrollout>true</scrollout>
-    			</control>
-    			<visible>String.IsEmpty(Window(Home).Property(ArtistLogo))</visible>
-			</control>
-			
-		</control>
-		<include>AffichagePosition</include>
+    		<include condition="Skin.HasSetting(CacheFondMusic)">vueexperimentalemusic</include>
+    		<control type="group">
+    		  <left>60</left>
+              <top>1090</top>
+    		     <control type="image">
+              
+              <width>280</width>
+              <height>280</height>
+              <aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
+              <texture background="true" diffuse="frames/cdart-mask.png">$VAR[discartSpinning]</texture>
+              <bordersize>2</bordersize>
+              <bordertexture>frames/cdart-mask.png</bordertexture>
+              <animation type="Visible">
+                <effect type="zoom" center="auto"  end="120" time="200" delay="300"  reversible="false"/>
+                <effect type="slide"   end="0,-300" time="500" delay="300"  reversible="false"/>
+                <effect type="rotate" center="auto" end="-360" time="1000" delay="300" reversible="false"/>
+                </animation>
+                <visible>!Container.OnNext+!Container.OnPrevious+Container.Content(albums)</visible>
+             <!-- <animation effect="rotate"  center="auto" end="-360" time="1000" delay="2400" condition="System.IdleTime(2)" reversible="false">Conditional</animation> -->
+            </control>
+            </control>
+    				<!-- bandeau LOGO -->
+    				
+    		<control type="group">
+    		    			<posy>-80</posy>
+      			<posx>1600</posx>
+
+          <control type="group">
+      			<width>570</width>
+      			<height>128</height>
+      			<visible>[[String.Contains(Container.FolderPath,musicdb://genre)|Container.Content(artists)]+Control.HasFocus(2997)]|[String.Contains(Container.FolderPath,musicdb://genre)+[Container.Content(artists)|Container.Content(albums)]]|Container.Content(albums)|Container.Content(songs)</visible>
+      			<animation type="Conditional" condition="true">
+                <!-- <effect type="rotate" center="0,88" end="20" time="1" /> -->
+                <effect type="rotate" center="0,0" end="-50" time="1" />
+              </animation>       
+      			
+      			<control type="group">
+        			<control type="image">
+        				<texture>shine.png</texture>
+        				<aspectratio>stretch</aspectratio>
+        				
+        			</control>
+        			<control type="image">
+        			  <left>-50</left>
+        			  <height>110</height>
+                <aspectratio>keep</aspectratio>
+                <aligny>center</aligny>
+                <texture>$INFO[Window(Home).Property(ArtistLogo)]</texture>
+              </control>
+              <visible>!String.IsEmpty(Window(Home).Property(ArtistLogo))+!String.Contains(Container.FolderPath,musicdb://genre)</visible>
+            </control>     
+            
+            <control type="group">
+              <control type="image">
+                <width>700</width>
+        				<texture>frames/genrestag.png</texture>
+        				<aspectratio>stretch</aspectratio>    				
+        			</control>
+        			<control type="group">
+          		<control type="fadelabel">
+          				<width>500</width>
+          				<posx>55</posx>
+          				<posy>3</posy>
+          				<aligny>center</aligny>
+          				<align>center</align>
+          				<font>impact</font>
+          				<textcolor>black</textcolor>
+          				<label>$INFO[ListItem.AlbumArtist]</label>
+          				<scrollout>true</scrollout>
+          				 <scroll>true</scroll>
+          			</control>
+          			<control type="fadelabel">
+          				<width>500</width>
+          				<posx>52</posx>
+          				<aligny>center</aligny>
+          				<align>center</align>
+          				<font>impact</font>
+          				<textcolor>white</textcolor>
+          				<label>$INFO[ListItem.AlbumArtist]</label>
+          				 <scroll>true</scroll>
+          				 <scrollout>true</scrollout>
+          			</control>
+          			<visible>!String.Contains(Container.FolderPath,musicdb://genre)</visible>
+          			</control>
+          			<control type="group">
+          			<control type="fadelabel">
+          				<width>500</width>
+          				<posx>55</posx>
+          				<posy>3</posy>
+          				<aligny>center</aligny>
+          				<align>center</align>
+          				<font>impact</font>
+          				<textcolor>black</textcolor>
+          				<label>$VAR[infogenre]</label>
+          				<scrollout>true</scrollout>
+          				 <scroll>true</scroll>
+          			</control>
+          			<control type="fadelabel">
+          				<width>500</width>
+          				<posx>52</posx>
+          				<aligny>center</aligny>
+          				<align>center</align>
+          				<font>impact</font>
+          				<textcolor>white</textcolor>
+          				<label>$VAR[infogenre]</label>
+          				 <scroll>true</scroll>
+          				 <scrollout>true</scrollout>
+          			</control>
+          			<visible>String.Contains(Container.FolderPath,musicdb://genre)</visible>
+          			</control>
+          			<visible>String.IsEmpty(Window(Home).Property(ArtistLogo))|String.Contains(Container.FolderPath,musicdb://genre)</visible>
+      			</control>
+      			
+      		</control>
+      		
+      		
+      		<control type="image">
+      		  <left>170</left>
+      		  <top>-880</top>
+              <width>150</width>
+              <bordersize>20</bordersize>
+    				  <bordertexture border="20" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+              <aspectratio scalediffuse="true">keep</aspectratio>
+              <texture>$INFO[Container.Art(artist.thumb)]</texture>
+            </control>
+    		</control>	
+  		 <control type="group">
+    		  <include>Global_ScrollOffsetLabel</include>
+        <include>Global_AddonInfo</include>
+        
+        <visible>!Skin.HasSetting(CacheFondMusic)</visible>
+    	 </control>	
+  		 <control type="group">
+          <animation type="Conditional" condition="Skin.HasSetting(CacheFondMusic)" reversible="false">
+            <!-- <effect type="slide" end="0,-835" time="0"  /> -->
+            <effect type="slide" end="0,205" time="0"  /> -->
+          </animation>
+        <include>AffichagePosition</include>      
+       </control>
+       <include>MenuGeneral</include>
+    </control>
 		<include>AnimationVoletsHorizontaux</include>
 		
 		
-		</control>
+		 <!--	DEBUG --
+    <control type="label">
+      <posy>1000</posy>
+      <height>80</height>
+      <label>>>$INFO[Container.Content]/$INFO[Container.FolderPath]--$INFO[Container(1999).ListItem.property(AlbumCover)]-$INFO[Container(1999).NumItems]</label>
+    </control>
+    
+    -->
 		
 	</controls>
 </window>

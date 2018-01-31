@@ -22,16 +22,8 @@
   <views>55,557,905,906,509,53,57,58,559,555,556,501,551,552,553,554,550,504,511,513,514,510,52,521,56,560,512,584,585,586,587</views>
   <defaultcontrol always="true">55</defaultcontrol>
   <controls>
-    <control type="group">
     <include>Global_Background_Fanart</include>
-    <animation type="Conditional" condition="Control.IsVisible(585)+!Skin.HasSetting(FanartSombre)" reversible="true">
-          <effect type="fade" start="100" end="40" time="500"  />
-        </animation>
-   
-    <animation type="Conditional" condition="Skin.HasSetting(FanartSombre)" reversible="true">
-          <effect type="fade" start="100" end="60" time="500"  />
-        </animation>
-    </control>
+    
     <control type="multiimage">
       <posx>0</posx>
       <posy>0</posy>
@@ -53,22 +45,23 @@
       </animation>
       -->
       <control type="group">
-        <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(1998)" reversible="true">
+        <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7781)" reversible="true">
           <effect type="fade" start="100" end="15" time="500"  />
         </animation>
         <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
-          <effect type="slide" end="0,250" time="0" tween="quadratic" />
+          <effect type="slide" end="0,200" time="0"  />
         </animation>
         <animation type="Conditional" condition="Control.HasFocus(2999)" reversible="true">
           <effect type="fade" start="100" end="0" time="500"  />
         </animation>
-
-        <animation type="Conditional" condition="!Control.HasFocus(2999)+Control.IsVisible(1999)+!Control.IsVisible(55)+!Control.IsVisible(905)+!Control.IsVisible(509)+Skin.HasSetting(CacheFond)" reversible="false">
-          <effect type="slide" end="0,0" time="200" tween="quadratic" />
+<!--
+        <animation type="Conditional" condition="!Control.HasFocus(2999)+Control.IsVisible(1999)+!Control.IsVisible(52)+!Control.IsVisible(55)+!Control.IsVisible(905)+!Control.IsVisible(509)+Skin.HasSetting(CacheFond)" reversible="false">
+          <effect type="slide" end="0,0" time="200"  />
         </animation>
-        <animation type="Conditional" condition="[Control.IsVisible(55)|Control.IsVisible(906)|Control.IsVisible(509)]+Skin.HasSetting(CacheFond)" reversible="false">
-          <effect type="slide" end="0,-50" time="0" tween="quadratic" />
+        <animation type="Conditional" condition="[Control.IsVisible(586)|Control.IsVisible(55)|Control.IsVisible(52)|Control.IsVisible(906)|Control.IsVisible(509)]+Skin.HasSetting(CacheFond)" reversible="false">
+          <effect type="slide" end="0,-45" time="0"  />
         </animation>
+       -->
         <include>Viewtype_List</include>			<!-- 55 -->
         <include>Viewtype_ListTrio</include>			<!-- 55 -->
         <include>Viewtype_LowList</include>			<!-- 905 -->
@@ -102,11 +95,11 @@
 
       <!-- -->
       <control type="group">
-        <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(1998)" reversible="true">
+        <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7781)" reversible="true">
           <effect type="fade" start="100" end="15" time="500"  />
         </animation>
         <include>Animation_FadedByMenu</include>
-        <!-- <include>ClearLogoArt</include> -->
+        <include>ClearLogoArt</include>
         <control type="image">
           <posx>0</posx>
           <posy>815</posy>
@@ -117,7 +110,6 @@
         </control>
         <include>LabelFlagsCommon</include>
         <control type="group">
-          <include condition="!Skin.HasSetting(Hide_MediaFlags)">MediaInfo</include>
           <include condition="!Skin.HasSetting(Hide_ExtraMediaFlags)">MediaInfoGroup2</include>
           <visible>!Window.IsVisible(movieinformation)</visible>
         </control>
@@ -136,6 +128,15 @@
         </animation>
         <include>focusboitiers</include>
       </control>
+      <!--
+      <control type="button" id="2995">
+        <left>-2000</left>
+        <label>---</label>
+        <ondown condition="!Skin.HasSetting(CacheFond)">SetFocus(7000)</ondown>
+        
+        <onfocus condition="!Skin.HasSetting(CacheFond)">SetFocus(7000)</onfocus>
+      </control>
+      -->
       <control type="button" id="2999">
         <left>-2000</left>
         <label>---</label>
@@ -264,7 +265,7 @@
       <!---------------------------------------------------------------------------------------------------------------- -->
       <include>choixdetails</include>
 
-      <!-- choix pochettes -->
+      <!-- choix pochettes ID=7008-->
       <control type="group">
         <posx>960</posx>
         <posy>450</posy>
@@ -363,7 +364,7 @@
       </control>
 
 
-      <!----------- menu ------------>
+      <!----------- menu ID=7000------------>
       <control type="group">
         <posx>440</posx>
         <posy>65</posy>
@@ -478,13 +479,13 @@
             <include>BoutonCommun</include>
             <label>[I]$LOCALIZE[31910][/I]  >></label>
             <onclick>SetFocus(7008)</onclick>
-            <visible>[Container.Content(sets)|Container.Content(movies)|Container.Content(tvshows)|Container.Content(episodes)]+[Control.IsVisible(550)|Control.IsVisible(551)|Control.IsVisible(552)|Control.IsVisible(555)|Control.IsVisible(556)|Control.IsVisible(504)|Control.IsVisible(512)]+!Control.HasFocus(7779)+!Control.HasFocus(1998)</visible>
+            <visible>[Container.Content(sets)|Container.Content(movies)|Container.Content(tvshows)|Container.Content(episodes)]+[Control.IsVisible(550)|Control.IsVisible(551)|Control.IsVisible(552)|Control.IsVisible(555)|Control.IsVisible(556)|Control.IsVisible(504)|Control.IsVisible(512)]+!Control.HasFocus(7779)+!Control.HasFocus(7781)</visible>
           </control>
         </control>
       </control>
 
-
-      <control type="group"> <!-- bandeau séries --->
+<!-- bandeau séries --->
+      <control type="group"> 
         <width>1920</width>
         <height>50</height>
         <posy>2</posy>
@@ -505,10 +506,10 @@
         <control type="fadelabel">
           <aligny>center</aligny>
           <align>center</align>
-          <font>PlotFont36</font>
+          <font>titre50</font>
           <textcolor>white</textcolor>
           <shadowcolor>ff000000</shadowcolor>
-          <label>[B]$INFO[ListItem.TVShowTitle][/B] - $LOCALIZE[31761] $INFO[ListItem.Season] - [I][COLOR=yellow]($INFO[Container.NumItems]$INFO[Window(Home).Property(iconmixEpSa),/,] $LOCALIZE[20360])[/COLOR][/I]</label>
+          <label>$INFO[ListItem.TVShowTitle] [LIGHT]$INFO[ListItem.Season,- $LOCALIZE[31761] , -] [I][COLOR=lightgrey]($INFO[Window(Home).Property(iconmixEpSaKodi)]$INFO[Window(Home).Property(iconmixEpSa),/,] $LOCALIZE[20360])[/COLOR][/I][/LIGHT]</label>
           <scroll>true</scroll>
           <scrollout>true</scrollout>
           <visible>Integer.IsGreater(Window(Home).Property(iconmixEpSa),0)</visible>
@@ -516,16 +517,17 @@
         <control type="fadelabel">
           <aligny>center</aligny>
           <align>center</align>
-          <font>PlotFont36</font>
+          <font>titre50</font>
           <textcolor>white</textcolor>
           <shadowcolor>ff000000</shadowcolor>
-          <label>[B]$INFO[ListItem.TVShowTitle][/B] - [COLOR=yellow][I]( $LOCALIZE[20373] $INFO[ListItem.Season] $LOCALIZE[31898] )[/I][/COLOR]</label>
+          <label>$INFO[ListItem.TVShowTitle] [LIGHT]$INFO[ListItem.Season,- $LOCALIZE[31761] , -] [COLOR=lightgrey][I]($LOCALIZE[31898])[/I][/COLOR][/LIGHT]</label>
           <scroll>true</scroll>
           <scrollout>true</scrollout>
           <visible>String.IsEqual(Window(Home).Property(iconmixEpSa),0)</visible>
         </control>
       </control>
-      <control type="group"> <!-- bandeau genre/sagas--->
+      <!-- bandeau genre/sagas--->
+      <control type="group"> 
         <width>700</width>
         <height>88</height>
         <posy>130</posy>
@@ -534,7 +536,7 @@
           <effect type="rotate" center="0,88" end="20" time="1" />
         </animation>
         <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
-          <effect type="slide" end="1460,898" time="0" tween="quadratic" />
+          <effect type="slide" end="1460,898" time="0"  />
           <effect type="rotate" center="0,88" end="45" time="1" />
         </animation>
         <visible>[[Container.Content(Genres)|Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)]+Control.HasFocus(2999)]|[[String.Contains(Container.FolderPath,videodb://movies/genres)|String.Contains(Container.FolderPath,videodb://tvshows/genres)]+[Container.Content(tvshows)|Container.Content(movies)]]</visible>
@@ -651,7 +653,7 @@
       </control>
       <control type="group">
         <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
-          <effect type="slide" end="-1690,780" time="0" tween="quadratic" />
+          <effect type="slide" end="-1690,780" time="0"  />
         </animation>
         <top>-780</top>
         <posx>1700</posx>
@@ -662,7 +664,8 @@
           <texture diffuse="acteurs/frame.png">$INFO[ListItem.Icon]</texture>
         </control>
       </control>
-      <control type="group"> <!-- bandeau acteurs/realisateurs--->
+      <!-- bandeau acteurs/realisateurs--->
+      <control type="group"> 
         <visible>[Container.Content(actors)|Container.Content(directors)]</visible>
         <width>700</width>
         <height>88</height>
@@ -672,7 +675,7 @@
           <effect type="rotate" center="0,88" end="20" time="1" />
         </animation>
         <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
-          <effect type="slide" end="1460,898" time="0" tween="quadratic" />
+          <effect type="slide" end="1460,898" time="0"  />
           <effect type="rotate" center="0,88" end="45" time="1" />
         </animation>
         <control type="image">
@@ -738,15 +741,17 @@
       <include condition="Skin.HasSetting(CacheFond)">vueexperimentale</include>
       <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7778)" reversible="true">
           <effect type="fade" start="100" end="0" time="1"  />
-        </animation>
-        
+        </animation>        
       </control>
       <!------------------------------------------------- ACTEURS et ROLES---------------------------------------->
      
       <include>PanelActeurs</include>
+      
+      <!--- Indicateur de position ----->
       <control type="group">
         <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
-          <effect type="slide" end="0,-835" time="0"  />
+          <!-- <effect type="slide" end="0,-835" time="0"  /> -->
+          <effect type="slide" end="0,205" time="0"  /> -->
         </animation>
       <include>AffichagePosition</include>
       </control>

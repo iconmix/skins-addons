@@ -63,7 +63,6 @@
 			<control type="panel" id="514">
 				<viewtype label="$LOCALIZE[31831]">wide</viewtype>
 				<posx>130</posx>
-				<posy>-30</posy>
 				<height>720</height>
 				<width>1800</width>
 				<ondown>Action(firstpage)</ondown>
@@ -121,8 +120,8 @@
 			<control type="panel" id="513">
 				<viewtype label="$LOCALIZE[31813]">wide</viewtype>
 				<posx>95</posx>
-				<posy>10</posy>
-				<height>800</height>
+				<posy>50</posy>
+				<height>730</height>
 				<width>550</width>
 				<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
 				<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>

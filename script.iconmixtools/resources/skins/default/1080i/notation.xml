@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="dialog" >
+	<defaultcontrol always="true">3</defaultcontrol>
+	
+
+	<controls>
+
+		<control type="group">
+			<posx>625</posx>
+			<posy>300</posy>
+			<width>670</width>
+			<height>160</height>
+					
+			<control type="image" id="99">
+			  <bordersize>10</bordersize>
+							<bordertexture border="10" colordiffuse="FFFFFFFF">frameglass.png</bordertexture>
+          <aspectratio scalediffuse="true">stretch</aspectratio>
+          <colordiffuse>FF7F7F7F</colordiffuse>
+				<texture>fond.png</texture> -->
+				<colordiffuse>BackgroundColor</colordiffuse>
+			</control>
+			<control type="grouplist">
+			  <posx>20</posx>
+				<posy>10</posy>
+				  <orientation>horizontal</orientation>
+				  <width>580</width>
+				  <height>65</height>
+				<control type="label" id="1">
+				  <width>500</width>
+				  <align>right</align>
+				  <aligny>center</aligny>
+					<description>Line 1</description>				
+					<font>comic24</font>
+					<textcolor>lightgreen</textcolor>					
+					<label></label>
+				</control>
+				<control type="image">  
+				  <width>60</width>              
+          <texture>pnote/pnote$INFO[Container(6).ListItem.Label].png</texture>
+          <aspectratio>keep</aspectratio>
+        </control>
+				</control>
+			<control type="group">
+				<posx>20</posx>
+				<posy>10</posy>
+				
+          <control type="image">
+          	<posy>68</posy>
+          	<left>18</left>
+          	<width>600</width>
+          	<colordiffuse>BackgroundColor</colordiffuse>
+          	<height>5</height>
+						<texture>LineHorizontal.png</texture>
+					</control>
+			
+
+				<control type="list" id="6">
+					<posx>20</posx>
+					<posy>80</posy>
+					<width>620</width>
+					<height>100</height>
+					<onleft>6</onleft>
+					<onright>6</onright>
+					<onup>7</onup>
+					<ondown>6</ondown>
+					<itemgap>15</itemgap>
+					<orientation>horizontal</orientation>
+					<itemlayout height="70" width="55">
+					    <control type="label">                
+                <align>center</align>                
+                <label>$INFO[ListItem.Label]</label>
+                <textcolor>A0FFFFFF</textcolor>
+                <font>compteur</font>                
+              </control>
+					</itemlayout>
+					<focusedlayout height="70" width="55">				
+    				<control type="label"> 
+    				  <animation type="Conditional" condition="Control.HasFocus(6)" reversible="true">
+    					  <effect type="zoom" center="auto" start="100" end="115"   time="150" />
+    				  </animation>     
+                <align>center</align>                
+                <label>$INFO[ListItem.Label]</label>
+                <textcolor>FFFFFFFF</textcolor>
+                <font>compteur</font>                
+              </control>						
+					</focusedlayout>
+				</control>
+			</control>
+
+
+			
+			<control type="button" id="7">
+				<description>Cancel button</description>
+				<posx>-15</posx>
+				<posy>-15</posy>
+				<width>53</width>
+				<height>53</height>
+				<font>METF_TitleTextMedium</font>
+				<colordiffuse>00FFFFFF</colordiffuse>
+				<textcolor>00FFFFFF</textcolor>
+				<focusedcolor>00FFFFFF</focusedcolor>
+				<texturefocus colordiffuse="FFFFFFFF">buttonz/cancel.png</texturefocus>
+				<texturenofocus colordiffuse="FF7F7F7F">buttonz/cancel.png</texturenofocus>
+				<align>right</align>
+				<aligny>center</aligny>
+				<onright>6</onright>
+				<ondown>6</ondown>
+				<onleft>6</onleft>
+				<ontop>6</ontop>
+				<!-- <onclick>Close</onclick> -->
+				<info>.</info>
+				<label>.</label>
+				
+			</control>
+		</control>
+		
+	</controls>
+</window>

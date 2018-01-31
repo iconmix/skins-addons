@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+  <include name="vueexperimentalemusic">
+    <control type="group"> <!-- vue experimentale -->
+
+      <include>Animation_FadedByMenu</include>
+      
+    <posy>-990</posy>
+    <visible>!String.StartsWith(ListItem.Label,..)</visible>
+
+    <control type="group">
+      <top>125</top>
+      <include>MediaInfoGroup2</include>
+      <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
+    </control>
+    <control type="group">
+      <posy>2080</posy>
+      <animation reversible="false" type="Conditional" condition="!Container().OnNext+!Container().OnPrevious">
+        <effect type="slide" end="0,-45" time="500" delay="1000" />
+      </animation>
+      <visible>!Skin.HasSetting(Hide_Plot)+!Control.HasFocus(2997)</visible>
+
+
+      <control type="image">
+
+        <width>1920</width>
+        <height>35</height>
+        <texture>osd/OSDdialogback.png</texture>
+        <aspectratio>stretch</aspectratio>
+        <colordiffuse>A0F0F0F0</colordiffuse>
+        <visible>!String.IsEmpty(Control.GetLabel(1777))</visible>
+      </control>
+      <control type="fadelabel" id="1777">
+        <resetonlabelchange>true</resetonlabelchange>
+        <scrollspeed>80</scrollspeed>
+        <pauseatend>1500</pauseatend>
+        <scrollout>false</scrollout>
+        <posy>5</posy>
+        <left>10</left>
+        <width>1900</width>
+        <height>20</height>
+        <aligny>top</aligny>
+        <align>center</align>
+        <font>exptext</font>
+        <textcolor>lightgrey</textcolor>
+        <textoffsetx>1500</textoffsetx>
+        <label>$VAR[PlotBox_Text]</label>
+        <scrollout>false</scrollout>
+      </control>
+
+
+    </control>
+    <control type="group">
+      <posy>1200</posy>
+      <include>SpecialPlotBox</include>
+      <visible>!Skin.HasSetting(Hide_Plot)+Skin.HasSetting(ShowLargePlot)</visible>
+    </control>
+
+
+
+
+   
+  <control type="grouplist">
+    <visible>![Container.Content(episodes)|Container.Content(tvshows)]</visible>
+    <left>0</left>
+    <width>1920</width>
+    <posy>993</posy>
+    <height>60</height>
+    <align>center</align>
+    <orientation>horizontal</orientation>
+
+    <control type="button">
+      <top>15</top>
+
+      <width>auto</width>
+      <height>50</height>
+      <align>center</align>
+      <aligny>center</aligny>
+
+      <label>$VAR[ListItemInfoTitle]</label>
+      <textcolor>white</textcolor>
+      <textoffsetx>10</textoffsetx>
+      <include>FontTitre</include>
+      <autoscroll>true</autoscroll>
+      <scrollout>true</scrollout>
+
+      <texturefocus colordiffuse="FFFFAAFF">frames/fondtitre2.png</texturefocus>
+      <texturenofocus colordiffuse="FFFFAAFF">frames/fondtitre2.png</texturenofocus>
+    </control>
+
+  </control> 
+
+    <visible>!Window.IsVisible(songinformation)</visible>
+  </control>
+
+</include>
+
+
+</includes>

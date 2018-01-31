@@ -71,23 +71,30 @@ msgctxt "#32514"
 msgid "Set Artworks for "
 msgstr "Définir les illustrations de "
 
+msgctxt "#32578"
+msgid "Enabled for movies"
+msgstr "Activé pour les films"
+
+msgctxt "#32579"
+msgid "Enabled for tvshows"
+msgstr "Activé pour les séries"
 
 
 msgctxt "#32580"
 msgid "Actors"
-msgstr "Acteurs"
+msgstr "[B]Acteurs[/B]"
 
 msgctxt "#32581"
 msgid "Directors"
-msgstr "Réalisateurs"
+msgstr "[B]Réalisateurs[/B]"
 
 msgctxt "#32582"
 msgid "MovieSets"
-msgstr "Sagas"
+msgstr "[B]Sagas[/B]"
 
 msgctxt "#32583"
 msgid "TvShows"
-msgstr "Séries Tv"
+msgstr "[B]Séries Tv[/B]"
 
 msgctxt "#32584"
 msgid "No information found for "
@@ -95,11 +102,66 @@ msgstr "Pas d'informations trouvées pour "
 
 msgctxt "#32585"
 msgid "Music"
-msgstr "Musique"
+msgstr "[B]Musique[/B]"
+
+msgctxt "#32586"
+msgid "Trailers"
+msgstr "[B]Bandes-Annonces[/B]"
 
 msgctxt "#32587"
 msgid "download album cover"
 msgstr "Télécharger la pochette"
+
+msgctxt "#32588"
+msgid "Delay before autoplay trailer (0:disabled)"
+msgstr "Délai avant lecture automatique (0:désactivé)"
+
+
+msgctxt "#32589"
+msgid "Trailers for movies/tvshows"
+msgstr "[B]Bande-Annonces Films et Séries[/B]"
+
+
+msgctxt "#32590"
+msgid "Search Trailers on Allocine (FR)"
+msgstr "Chercher sur Allociné (FR)"
+
+msgctxt "#32591"
+msgid "Minimum quality on Allocine"
+msgstr "Qualité minimale sur Allociné (FR)"
+
+msgctxt "#32592"
+msgid "Autoplay trailer in full screen"
+msgstr "Bande-Annonce automatique plein écran"
+
+msgctxt "#32593"
+msgid "AlloCine trailer prefered"
+msgstr "Préférer la bande-annonce Allociné"
+
+msgctxt "#32594"
+msgid "Autoplaying trailer"
+msgstr "Lecture automatique de la bande-annonce"
+
+msgctxt "#32595"
+msgid "ALLOCINE Trailers"
+msgstr "[B]Bande-Annonces ALLOCINE[/B]"
+
+msgctxt "#32596"
+msgid "YOUTUBE Trailers"
+msgstr "[B]Bande-Annonces YOUTUBE[/B]"
+
+msgctxt "#32597"
+msgid "Search Trailers on Youtube"
+msgstr "Chercher sur Youtube"
+
+msgctxt "#32598"
+msgid "Minimum quality on Youtube"
+msgstr "Qualité minimale sur Youtube"
+
+msgctxt "#32599"
+msgid "Only Trailers and no Teaser for tvshow"
+msgstr "Uniquement les Bande-Annonces pas de 'Teaser'"
+
 
 msgctxt "#32600"
 msgid "Disable local cache"
@@ -164,6 +226,11 @@ msgid "Artworks"
 msgstr "Illustrations"
 
 
+msgctxt "#32615"
+msgid "Stop the current playing for play this trailer ?"
+msgstr "Arrêter la lecture en cours pour lire ce choix ?"
+
+
 msgctxt "#32700"
 msgid "Poster"
 msgstr "Affiche"
@@ -192,3 +259,33 @@ msgstr "Vignette"
 msgctxt "#32706"
 msgid "Fanart"
 msgstr "Fanart"
+
+
+msgctxt "#32707"
+msgid "Rate this video : "
+msgstr "Quelle note donnez-vous ? "
+
+msgctxt "#32708"
+msgid "Rating"
+msgstr "Notation"
+
+msgctxt "#32709"
+msgid "Rate after play"
+msgstr "Notation après lecture"
+
+msgctxt "#32710"
+msgid "Rate movie after play"
+msgstr "Noter le film après lecture"
+
+msgctxt "#32711"
+msgid "Rate tvshow episode after play"
+msgstr "Noter l'épisode après lecture"
+
+msgctxt "#32800"
+msgid "Play all founded trailers"
+msgstr "Lire de toutes les bandes-annonces trouvées"
+
+msgctxt "#32801"
+msgid "Show only one language per trailers"
+msgstr "Eliminer doublons VO"
+

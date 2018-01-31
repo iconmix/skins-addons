@@ -1,54 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window id="12005">
 	<controls>
-	  
-		<control type="group">
-			<animation effect="slide" end="0,-200" time="0" condition="Window.IsVisible(fullscreeninfo)">conditional</animation>
-			<
-			<!-- Background Image -->
-			<control type="image">
-				<posx>0</posx>
-				<posy>-45</posy>
-				<width>1920</width>
-				<height>186</height>
-				<texture>osd/OSDdialogback_top.png</texture>
-				<colordiffuse>OSDBackgroundColor</colordiffuse>
-			</control>
-
-			<control type="label" id="10">
-				<description>row 1 label</description>
-				<posx>20</posx>
-				<posy>10</posy>
-				<label></label>
-				<align>left</align>
-				<width>1240</width>
-				<height>36</height>
-				<font>METF_DialogVerySmall</font>
-				<textcolor>TextNF</textcolor>
-			</control>
-			<control type="label" id="11">
-				<description>row 2 label</description>
-				<posx>20</posx>
-				<posy>45</posy>
-				<label></label>
-				<align>left</align>
-				<width>1240</width>
-				<height>36</height>
-				<font>METF_DialogVerySmall</font>
-				<textcolor>TextNF</textcolor>
-			</control>
-			<control type="label" id="12">
-				<description>row 3 label</description>
-				<posx>20</posx>
-				<posy>80</posy>
-				<label></label>
-				<align>left</align>
-				<width>1240</width>
-				<height>108</height>
-				<font>METF_DialogVerySmall</font>
-				<textcolor>TextNF</textcolor>
-			</control>
-		</control>
+	
 		<control type="label" id="24">
 			<description>buffering label</description>
 			<posx>0</posx>
@@ -60,5 +13,59 @@
 			<shadowcolor>FF000000</shadowcolor>
 			<font>METF_FontAMPM</font>
 		</control>
+	
+		
+		 
+		<control type="button" id="1110">
+		   <animation type="Conditional" condition="[Player.Playing+!String.IsEmpty(Window(Home).Property(annonceencours))]+Integer.IsGreater(Player.Time,1)">
+			<effect type="slide" time="500" start="0" end="2000" easy="in"/>
+		</animation>
+		  <left>-1980</left>      
+      <posy>1000</posy>
+		  <height>60</height>
+		  <width>60</width>  
+    <label> </label>
+    <visible>String.Contains(Player.Filenameandpath,googlevideo)</visible>
+    <texturefocus colordiffuse="FFFFFFFF">bande/youtube.png</texturefocus>
+    <texturenofocus colordiffuse="FFFFFFFF">bande/youtube.png</texturenofocus>
+    
+    <aspectratio>keep</aspectratio>
+  </control>
+  	<control type="button" id="1111">
+  	   <animation type="Conditional" condition="[Player.Playing+!String.IsEmpty(Window(Home).Property(annonceencours))]+Integer.IsGreater(Player.Time,1)">
+			<effect type="slide" time="500" start="0" end="2000" easy="in"/>
+		</animation>
+		  <left>-1980</left>      
+      <posy>1000</posy>
+		  <height>60</height>
+		  <width>60</width>  
+    <label> </label>
+    <visible>String.Contains(Player.Filenameandpath,acsta.net)</visible>
+    <texturefocus colordiffuse="FFFFFFFF">bande/allocine.png</texturefocus>
+    <texturenofocus colordiffuse="FFFFFFFF">bande/allocine.png</texturenofocus>
+    
+    <aspectratio>keep</aspectratio>
+  </control>
+	  <control type="button" id="1112">
+	     <animation type="Conditional" condition="[Player.Playing+!String.IsEmpty(Window(Home).Property(annonceencours))]+Integer.IsGreater(Player.Time,1)">
+			<effect type="slide" time="500" start="0" end="2000" easy="in"/>
+		</animation>
+	    <left>-1920</left>      
+      <posy>1000</posy>
+	    <height>60</height>
+		  <width>auto</width>      
+      <label>[COLOR=yellow]$INFO[Playlist.Position,(,/]$INFO[Playlist.Length(),,) :][/COLOR]$VAR[VideoPlayerTitle]</label>
+      <font>exptextacteurs</font>
+      <textcolor>FF202020</textcolor>
+      <shadowcolor>FF7F7F7F</shadowcolor>
+			<textoffsetx>15</textoffsetx>
+			<texturefocus colordiffuse="AFFFFFFF">bande/titre.png</texturefocus>
+      <texturenofocus colordiffuse="AFFFFFFF">bande/titre.png</texturenofocus>
+      <visible>!String.IsEmpty(Window(Home).Property(annonceencours))</visible>
+		</control>
+
+
+	
+		
 	</controls>
 </window>

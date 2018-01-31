@@ -16,6 +16,14 @@ msgstr ""
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+msgctxt "#12021"
+msgid "Play from beginning"
+msgstr "Lecture depuis le début"
+
+msgctxt "#12023"
+msgid "Play from beginning"
+msgstr "Lecture depuis le début"
+
 msgctxt "#31231"
 msgid "Seconds"
 msgstr "Secondes"
@@ -1033,7 +1041,7 @@ msgstr "Cacher le fond des indicateurs médias "
 
 msgctxt "#31481"
 msgid "New videos layout"
-msgstr "Nouvelle présentation des vidéos"
+msgstr "Nouvelle présentation"
 
 msgctxt "#31483"
 msgid "Position"
@@ -1046,6 +1054,13 @@ msgstr "Temps restant"
 msgctxt "#31485"
 msgid "!!!Default settings!!!"
 msgstr "!!!Configuration par défaut!!!"
+
+msgctxt "#31486"
+msgid "Hide seekbar and Pause message during Video pausing"
+msgstr "Cacher progression et message après 3s durant la pause"
+
+
+
 
 msgctxt "#31600"
 msgid "Enable Live TV (PVR) support"
@@ -1385,8 +1400,6 @@ msgid "Unwatched movies"
 msgstr "Films Non Vus"
 
 
-
-
 msgctxt "#31801"
 msgid "List"
 msgstr "Liste"
@@ -1650,13 +1663,13 @@ msgctxt "#31924"
 msgid "Movieset updating"
 msgstr "Mise a jour des sagas"
 
-msgctxt "#31926"
-msgid "Show videos/songs filename and path"
-msgstr "Afficher le chemin des vidéos/musiques"
-
 msgctxt "#31925"
 msgid "Update Movieset details"
-msgstr "Mettre à jour les éléments des sagas"
+msgstr "Mettre à jour les sagas"
+
+msgctxt "#31926"
+msgid "Update Artist/Albums details"
+msgstr "Mettre à jour l'artiste"
 
 msgctxt "#31927"
 msgid "Update Tvshows"
@@ -1685,7 +1698,7 @@ msgstr "Masquer les acteurs sans portrait"
 
 msgctxt "#31933"
 msgid "Directors/Actors Details"
-msgstr "Détails en vue Réalisateurs/Acteurs"
+msgstr "Détails Réalisateurs/Acteurs"
 
 msgctxt "#31934"
 msgid "Access to Artist Details"
@@ -1697,7 +1710,7 @@ msgstr "Masquer les acteurs des sagas"
 
 msgctxt "#31936"
 msgid "Update Movie(s) ArtWorks"
-msgstr "Mettre à jour les illustrations du/des film(s)"
+msgstr "Mettre à jour les illustrations"
 
 msgctxt "#32000"
 msgid "Horizontal panel animation on windows close"
@@ -1725,5 +1738,34 @@ msgstr "Montrer l'heure de fin après la durée"
 
 
 msgctxt "#32006"
-msgid "Show media flags and cast centered"
-msgstr "Indicateurs médias et Acteurs au centre"
+msgid "Show cast centered"
+msgstr "Acteurs au centre"
+
+msgctxt "#32007"
+msgid "Cast list in TEXT mode""
+msgstr "Acteurs en mode TEXTE"
+
+msgctxt "#32008"
+msgid "Cast list PICTURE mode""
+msgstr "Acteurs en mode PHOTO"
+
+msgctxt "#32009"
+msgid "Show videos/songs filename and path"
+msgstr "Afficher le chemin des vidéos/musiques"
+
+
+msgctxt "#32010"
+msgid "Rate movie after play"
+msgstr "Noter le film après lecture"
+
+msgctxt "#32011"
+msgid "Rate tvshow episode after play"
+msgstr "Noter l'épisode après lecture"
+
+msgctxt "#32012"
+msgid "Advanced filter"
+msgstr "Filtre avancé"
+
+msgctxt "#32013"
+msgid "Show "
+msgstr "Afficher"

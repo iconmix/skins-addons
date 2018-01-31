@@ -18,20 +18,14 @@
   <onload>SetProperty(IconMixUpdateSagas,1,Home)</onload>
   <onload>SetProperty(IconMixVerticalNavigation,,Home)</onload>
   <onload>SetProperty(IconMixUpdating,,Home)</onload>
+  <onload>SetProperty(IconMixActor,,Home)</onload>
+  <onload>SetProperty(ShowSeekBar,,Home)</onload>
 
   <views>55,557,905,906,509,53,57,58,559,555,556,501,551,552,553,554,550,504,511,513,514,510,52,521,56,560,512,584,585,586,587</views>
   <defaultcontrol always="true">55</defaultcontrol>
   <controls>
-    <control type="group">
     <include>Global_Background_Fanart</include>
-    <animation type="Conditional" condition="Control.IsVisible(585)+!Skin.HasSetting(FanartSombre)" reversible="true">
-          <effect type="fade" start="100" end="40" time="500"  />
-        </animation>
-   
-    <animation type="Conditional" condition="Skin.HasSetting(FanartSombre)" reversible="true">
-          <effect type="fade" start="100" end="60" time="500"  />
-        </animation>
-    </control>
+    
     <control type="multiimage">
       <posx>0</posx>
       <posy>0</posy>
@@ -45,6 +39,7 @@
     
     -->
     <control type="group">
+      <include>Animation_FadedByMenu</include>
       <control type="group">
       <include>Animation_HiddenByInfo</include>
       <!--
@@ -53,22 +48,16 @@
       </animation>
       -->
       <control type="group">
-        <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(1998)" reversible="true">
+        <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7781)" reversible="true">
           <effect type="fade" start="100" end="15" time="500"  />
         </animation>
         <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
-          <effect type="slide" end="0,250" time="0" tween="quadratic" />
+          <effect type="slide" end="0,200" time="0"  />
         </animation>
         <animation type="Conditional" condition="Control.HasFocus(2999)" reversible="true">
           <effect type="fade" start="100" end="0" time="500"  />
         </animation>
 
-        <animation type="Conditional" condition="!Control.HasFocus(2999)+Control.IsVisible(1999)+!Control.IsVisible(55)+!Control.IsVisible(905)+!Control.IsVisible(509)+Skin.HasSetting(CacheFond)" reversible="false">
-          <effect type="slide" end="0,0" time="200" tween="quadratic" />
-        </animation>
-        <animation type="Conditional" condition="[Control.IsVisible(55)|Control.IsVisible(906)|Control.IsVisible(509)]+Skin.HasSetting(CacheFond)" reversible="false">
-          <effect type="slide" end="0,-50" time="0" tween="quadratic" />
-        </animation>
         <include>Viewtype_List</include>			<!-- 55 -->
         <include>Viewtype_ListTrio</include>			<!-- 55 -->
         <include>Viewtype_LowList</include>			<!-- 905 -->
@@ -102,11 +91,11 @@
 
       <!-- -->
       <control type="group">
-        <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(1998)" reversible="true">
+        <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7781)" reversible="true">
           <effect type="fade" start="100" end="15" time="500"  />
         </animation>
         <include>Animation_FadedByMenu</include>
-        <!-- <include>ClearLogoArt</include> -->
+        <include>ClearLogoArt</include>
         <control type="image">
           <posx>0</posx>
           <posy>815</posy>
@@ -117,7 +106,6 @@
         </control>
         <include>LabelFlagsCommon</include>
         <control type="group">
-          <include condition="!Skin.HasSetting(Hide_MediaFlags)">MediaInfo</include>
           <include condition="!Skin.HasSetting(Hide_ExtraMediaFlags)">MediaInfoGroup2</include>
           <visible>!Window.IsVisible(movieinformation)</visible>
         </control>
@@ -136,6 +124,15 @@
         </animation>
         <include>focusboitiers</include>
       </control>
+      <!--
+      <control type="button" id="2995">
+        <left>-2000</left>
+        <label>---</label>
+        <ondown condition="!Skin.HasSetting(CacheFond)">SetFocus(7000)</ondown>
+        
+        <onfocus condition="!Skin.HasSetting(CacheFond)">SetFocus(7000)</onfocus>
+      </control>
+      -->
       <control type="button" id="2999">
         <left>-2000</left>
         <label>---</label>
@@ -154,7 +151,8 @@
         <onright condition="!String.IsEqual(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetFocus(55)</onright>
         <onclick>SetProperty(FenetreListeChoix,1,Home)</onclick>
         <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
-        <oninfo>SetFocus(1998)</oninfo>
+        <oninfo>SetFocus(7781)</oninfo>
+        <onback>SetFocus(55)</onback>
         <visible>Integer.IsGreater(Container(1999).NumItems,0)</visible>
       </control>
 
@@ -178,9 +176,9 @@
         <align>center</align>
 
         <control type="list" id="1999">
+          
           <onfocus condition="Skin.HasSetting(SagaDetailsAucun)">SetFocus(55)</onfocus>
           <onfocus>SetProperty(IconMixVerticalNavigation,"horizontal",Home)</onfocus>
-          <!-- <onfocus>Action(FirstPage)</onfocus> -->
           <onfocus>SetFocus(2999)</onfocus>
           <include>HorizVert</include>
           <include>VueElementsBoitiers</include>
@@ -240,7 +238,7 @@
           <onfocus>SetProperty(IconMixVerticalNavigation,"horizontal",Home)</onfocus>
           <onfocus>Action(FirstPage)</onfocus>
           <onfocus>SetFocus(2999)</onfocus>
-          <content sortby="name" sortorder="ascending">$VAR[contentActeursDirecteurs]</content>
+          
           <include>HorizVert</include>
           <include>VueElementsBoitiers</include>
           <visible>!Skin.HasSetting(directorTexte)</visible>
@@ -251,7 +249,7 @@
           <onfocus>SetProperty(IconMixVerticalNavigation,"vertical",Home)</onfocus>
           <onfocus>Action(FirstPage)</onfocus>
           <onfocus>SetFocus(2999)</onfocus>
-          <content sortby="name" sortorder="ascending">$VAR[contentActeursDirecteurs]</content>
+          
           <width>1920</width>
           <height>177</height>
           <include>VertHoriz</include>
@@ -262,268 +260,95 @@
       </control>
 
       <!---------------------------------------------------------------------------------------------------------------- -->
-      <include>choixdetails</include>
+       
 
-      <!-- choix pochettes ID=7008-->
-      <control type="group">
-        <posx>960</posx>
-        <posy>450</posy>
-        <control type="image">
-          <width>550</width>
-          <height>150</height>
-          <texture>frames/Menu_Glass2b.png</texture>
-					<colordiffuse>DialogBackgroundColor</colordiffuse>
-        </control>
-        <include>Animation_NavMenu</include>
-        <visible>ControlGroup(7008).HasFocus|ControlGroup(7000).HasFocus(2008)</visible>
-        <animation type="Visible" reversible="true">
-          <effect type="zoom" center="960,450" start="0" end="100" time="1000" tween="bounce" easy="out" />
-        </animation>
-        <control type="label" id="1099">
-          <posy>-90</posy>
-          <label>$VAR[VisibleViewMode]</label>
-          <width>1</width>
-          <height>1</height>
-        </control>
-        <control type="grouplist" id="7008">
-          <posx>30</posx>
-          <posy>15</posy>
-          <width>490</width>
-          <height>190</height>
-          <itemgap>1</itemgap>
-          <onleft>7000</onleft>
-          <onback>7000</onback>
-          <onup>7008</onup>
-          <ondown>7008</ondown>
-          <orientation>vertical</orientation>
-          <control type="radiobutton" id="1000">
-            <label>$LOCALIZE[31911]</label>
-            <include>BoutonCommun</include>
-            <selected>String.IsEqual(Control.GetLabel(1099),1)</selected>
-            <onclick>Skin.SetString($VAR[VisibleView]Vue,1)</onclick>
-            <visible>Container.Content(Movies)|Container.Content(sets)</visible>
-          </control>
-          <control type="radiobutton" id="1001">
-            <include>BoutonCommun</include>
-            <label>$LOCALIZE[31912]</label>
-            <selected>String.IsEqual(Control.GetLabel(1099),2)</selected>
-            <onclick>Skin.SetString($VAR[VisibleView]Vue,2)</onclick>
-            <visible>Container.Content(Movies)|Container.Content(sets)</visible>
-          </control>
-          <control type="radiobutton" id="1002">
-            <include>BoutonCommun</include>
-            <label>$LOCALIZE[31913]</label>
-            <selected>String.IsEqual(Control.GetLabel(1099),3)</selected>
-            <onclick>Skin.SetString($VAR[VisibleView]Vue,3)</onclick>
-            <visible>Container.Content(Movies)|Container.Content(sets)</visible>
-          </control>
-          <control type="radiobutton" id="1000">
-            <include>BoutonCommun</include>
-            <label>$LOCALIZE[31911]</label>
-            <selected>String.IsEqual(Control.GetLabel(1099),1)</selected>
-            <onclick>Skin.SetString($VAR[VisibleView]VueTvShows,1)</onclick>
-            <visible>Container.Content(TvShows)</visible>
-          </control>
-          <control type="radiobutton" id="1001">
-            <include>BoutonCommun</include>
-            <label>$LOCALIZE[31912]</label>
-            <selected>String.IsEqual(Control.GetLabel(1099),2)</selected>
-            <onclick>Skin.SetString($VAR[VisibleView]VueTvShows,2)</onclick>
-            <visible>Container.Content(TvShows)</visible>
-          </control>
-          <control type="radiobutton" id="1002">
-            <include>BoutonCommun</include>
-            <label>$LOCALIZE[31913]</label>
-            <selected>String.IsEqual(Control.GetLabel(1099),3)</selected>
-            <onclick>Skin.SetString($VAR[VisibleView]VueTvShows,3)</onclick>
-            <visible>Container.Content(TvShows)</visible>
-          </control>
-          <control type="radiobutton" id="1000">
-            <include>BoutonCommun</include>
-            <label>$LOCALIZE[31911]</label>
-            <selected>String.IsEqual(Control.GetLabel(1099),1)</selected>
-            <onclick>Skin.SetString($VAR[VisibleView]Vueepisodes,1)</onclick>
-            <visible>Container.Content(episodes)</visible>
-          </control>
-          <control type="radiobutton" id="1001">
-            <include>BoutonCommun</include>
-            <label>$LOCALIZE[31912]</label>
-            <selected>String.IsEqual(Control.GetLabel(1099),2)</selected>
-            <onclick>Skin.SetString($VAR[VisibleView]Vueepisodes,2)</onclick>
-            <visible>Container.Content(episodes)</visible>
-          </control>
-          <control type="radiobutton" id="1002">
-            <include>BoutonCommun</include>
-            <label>$LOCALIZE[31913]</label>
-            <selected>String.IsEqual(Control.GetLabel(1099),3)</selected>
-            <onclick>Skin.SetString($VAR[VisibleView]Vueepisodes,3)</onclick>
-            <visible>Container.Content(episodes)</visible>
-          </control>
-        </control>
-      </control>
+      
 
-
-      <!----------- menu ID=7000------------>
-      <control type="group">
-        <posx>440</posx>
-        <posy>65</posy>
-        <visible allowhiddenfocus="true">ControlGroup(7000).HasFocus|ControlGroup(7002).HasFocus|ControlGroup(7008).HasFocus|Window.IsVisible(contextmenu)</visible>
-          <animation type="Conditional" condition="ControlGroup(7002).HasFocus|ControlGroup(7008).HasFocus" reversible="false">
-            <effect type="fade" start="100" end="70" time="10" />
-          </animation>
-        <control type="image">
-          <width>550</width>
-          <height>600</height>
-          <texture>frames/Menu_Glass2b.png</texture>
-			<colordiffuse>DialogBackgroundColor</colordiffuse>
-        </control>
-        <include>Animation_NavMenu</include>
-        <control type="grouplist" id="7000">
-          <posx>30</posx>
-          <posy>40</posy>
-          <width>490</width>
-          <height>540</height>
-          <itemgap>1</itemgap>
-          <onleft>55</onleft>
-          <onback>Action(firstpage)</onback>
-          <onback>55</onback>
-          <onright condition="ControlGroup(7000).HasFocus(2001)|ControlGroup(7000).HasFocus(2002)|ControlGroup(7000).HasFocus(2003)">7002</onright>
-          <onright condition="ControlGroup(7000).HasFocus(2008)">7008</onright>
-          <onright>55</onright>
-          <onup>7000</onup>
-          <ondown>7000</ondown>
-          <orientation>vertical</orientation>
-          
-          <control type="button" id="2099">
-            <include>BoutonCommun</include>
-            <description>View</description>
-            <label>$LOCALIZE[629]:[COLOR=yellow]$INFO[Container.Viewmode][/COLOR]</label>
-            <onclick>SetFocus(55)</onclick>
-            <onclick>RunScript(script.iconmixtools,setview=True)</onclick>
-            
-          </control>
-          <control type="button" id="3">
-            <description>Sort</description>
-            <include>BoutonCommun</include>
-            <label></label>
-          </control>
-          <control type="togglebutton" id="4">
-            <description>Ascending</description>
-            <include>BoutonCommun</include>
-            <label>584</label>
-            <altlabel>585</altlabel>
-          </control>
-          <control type="button" id="10">
-            <description>Watched Toggle</description>
-            <label>137</label>
-            <include>BoutonCommun</include>
-            
-          </control>
-          <control type="edit" id="19">
-            <description>Filter</description>
-            <include>BoutonCommun</include>
-            <label>587</label>
-            <visible>[Container.CanFilterAdvanced + Skin.HasSetting(SimpleMediaFilter)] | Container.CanFilter</visible>
-          </control>
-          <control type="radiobutton" id="98">
-            <description>Advanced Filter</description>
-            <include>BoutonCommun</include>
-            <label>587</label>
-            <selected>Container.Filtered</selected>
-            <onclick>right</onclick>
-            <onclick>Filter</onclick>
-            <visible>Container.CanFilterAdvanced + !Skin.HasSetting(SimpleMediaFilter)</visible>
-          </control>
-          <control type="button" id="8">
-            <description>Search</description>
-            <label>137</label>
-            <include>BoutonCommun</include>
-          </control>
-          <!--
-          <control type="radiobutton" id="16">
-            <description>PartyMode</description>
-            <include>BoutonCommun</include>
-            <label>589</label>
-          </control>
-          -->
-          <control type="radiobutton" id="11">
-            <description>Unlock Shares</description>
-            <include>BoutonCommun</include>
-            <label>20336</label>
-            <onclick>MasterMode</onclick>
-            <selected>system.ismaster</selected>
-            <visible>system.haslocks</visible>
-          </control>
-          <control type="togglebutton" id="20">
-            <description>Update Library</description>
-            <include>BoutonCommun</include>
-            <label>653</label>
-            <altlabel>13353</altlabel>
-            <usealttexture>library.isscanningvideo</usealttexture>
-            <onclick>SetFocus(55)</onclick>
-          </control>
-          <control type="togglebutton" id="200">
-            <description>Clean Library</description>
-            <include>BoutonCommun</include>
-            <label>700</label>
-            <usealttexture>library.isscanningvideo</usealttexture>
-            <onclick>CleanLibrary(video)</onclick>
-            <onclick>SetFocus(55)</onclick>
-            <visible>!library.isscanningvideo</visible>
-          </control>
-          <include>Nav_NowPlaying</include>
-          <include>OptionsMenu</include>
-          <control type="button" id="2008">
-            <!-- Choix Pochettes -->
-            <include>BoutonCommun</include>
-            <label>[I]$LOCALIZE[31910][/I]  >></label>
-            <onclick>SetFocus(7008)</onclick>
-            <visible>[Container.Content(sets)|Container.Content(movies)|Container.Content(tvshows)|Container.Content(episodes)]+[Control.IsVisible(550)|Control.IsVisible(551)|Control.IsVisible(552)|Control.IsVisible(555)|Control.IsVisible(556)|Control.IsVisible(504)|Control.IsVisible(512)]+!Control.HasFocus(7779)+!Control.HasFocus(1998)</visible>
-          </control>
-        </control>
-      </control>
-
-<!-- bandeau séries --->
+      <!-- bandeau séries --->
       <control type="group"> 
         <width>1920</width>
-        <height>50</height>
-        <posy>2</posy>
-        <posx>0</posx>
-        <visible>Container.Content(episodes)+!String.IsEmpty(ListItem.TVShowTitle)</visible>
+        <height>55</height>
+        
+        <visible>[Container.Content(episodes)|Container.Content(tvshows)]+!String.IsEmpty(ListItem.TVShowTitle)+Skin.HasSetting(CacheFond)</visible>
         <control type="image">
-          <texture>frames/genrestag.png</texture>
+          <!--<texture>frames/genrestag.png</texture>-->
+          <texture>osd/OSDdialogback_top.png</texture>
+          <colordiffuse>FFFFFFFF</colordiffuse>
           <aspectratio>stretch</aspectratio>
         </control>
         <control type="image">
-          <posx>5</posx>
-          <align>left</align>
-          <width>250</width>
-          <height>50</height>
-          <texture>$INFO[ListItem.Art(tvshow.banner)]</texture>
-          <aspectratio>keep</aspectratio>
+          <posx>5</posx>          
+          <align>left</align>          
+          <posy>-2</posy>
+          <height>52</height>
+          <width>280</width>
+          <texture diffuse="frames/banner.png">$VAR[BanniereEpTv]</texture>   
+          <aspectratio scalediffuse="true">stretch</aspectratio>     
+          
+        </control>
+        
+        <control type="fadelabel">
+          <aligny>center</aligny>
+          <align>center</align>
+          <include>FontTitre</include>
+          <textcolor>white</textcolor>
+          <shadowcolor>ff000000</shadowcolor>
+          <label>$INFO[ListItem.TVShowTitle] [LIGHT]$INFO[ListItem.Season,- $LOCALIZE[31761] , -] [I][COLOR=lightgrey]($INFO[Window(Home).Property(iconmixEpSaKodi)]$INFO[Window(Home).Property(iconmixEpSa),/,] $LOCALIZE[20360])[/COLOR][/I][/LIGHT]</label>
+          <scroll>true</scroll>
+          <scrollout>true</scrollout>
+          <visible>Integer.IsGreater(Window(Home).Property(iconmixEpSa),0)+Container.Content(episodes)</visible>
         </control>
         <control type="fadelabel">
           <aligny>center</aligny>
           <align>center</align>
-          <font>PlotFont36</font>
+          <include>FontTitre</include>
           <textcolor>white</textcolor>
           <shadowcolor>ff000000</shadowcolor>
-          <label>[B]$INFO[ListItem.TVShowTitle][/B] - $LOCALIZE[31761] $INFO[ListItem.Season] - [I][COLOR=yellow]($INFO[Container.NumItems]$INFO[Window(Home).Property(iconmixEpSa),/,] $LOCALIZE[20360])[/COLOR][/I]</label>
+          <label>$INFO[ListItem.TVShowTitle] [LIGHT]$INFO[ListItem.Season,- $LOCALIZE[31761] , -] [COLOR=lightgrey][I]($LOCALIZE[31898])[/I][/COLOR][/LIGHT]</label>
           <scroll>true</scroll>
           <scrollout>true</scrollout>
-          <visible>Integer.IsGreater(Window(Home).Property(iconmixEpSa),0)</visible>
+          <visible>String.IsEqual(Window(Home).Property(iconmixEpSa),0)+Container.Content(episodes)</visible>
         </control>
-        <control type="fadelabel">
-          <aligny>center</aligny>
-          <align>center</align>
-          <font>PlotFont36</font>
-          <textcolor>white</textcolor>
-          <shadowcolor>ff000000</shadowcolor>
-          <label>[B]$INFO[ListItem.TVShowTitle][/B] - [COLOR=yellow][I]( $LOCALIZE[20373] $INFO[ListItem.Season] $LOCALIZE[31898] )[/I][/COLOR]</label>
-          <scroll>true</scroll>
-          <scrollout>true</scrollout>
-          <visible>String.IsEqual(Window(Home).Property(iconmixEpSa),0)</visible>
-        </control>
+      </control>
+      <control type="label" id="1991">
+        <label></label>
+        <visible>[!Container.OnNext+!Container.OnPrevious]+[Container.Content(episodes)|Container.Content(tvshows)]+!String.IsEmpty(Window(Home).Property(NextAired.NextDay))+Skin.HasSetting(CacheFond)</visible>
+
+      </control>
+      <control type="group">
+			  <posy>25</posy>
+			  <visible>[Container.Content(episodes)|Container.Content(tvshows)]+!String.IsEmpty(Window(Home).Property(NextAired.NextDay))+Skin.HasSetting(CacheFond)</visible>
+			  <!--<animation reversible="false" type="Visible">
+          <effect type="fade" start="0" end="100" time="1500" /> 
+          <effect type="slide" start="0,0" end="0,90" time="1500" tween="bounce"/>
+        </animation>
+        -->
+        <animation reversible="true" type="Conditional" condition="Control.IsVisible(1991)">
+          <effect type="fade" start="0" end="100" time="1500" /> 
+          <effect type="slide" start="0,-65" end="0,0" time="1500" tween="bounce"/>
+        </animation>
+        
+  			<control type="image">
+  				<top>5</top>
+  				<width>1920</width>
+  				<height>65</height>
+  				<align>center</align>  				
+  				<texture>frames/genrestagntv2.png</texture>
+  				<colordiffuse>FFFFFFFF</colordiffuse>
+  				<aspectratio>stretch</aspectratio>  				
+  			</control>	
+
+  			<control type="label">
+  				<left>555</left>
+  				<width>865</width>
+  				<height>30</height>
+  				<align>center</align>
+  				<top>26</top>
+  				
+  				<font>impactsongs</font>
+  				<textcolor>TextNF</textcolor>
+  				<label>[COLOR=MediaDetailsInfo]$LOCALIZE[31427] [COLOR=yellow]($INFO[Window(Home).Property(NextAired.NextDay)])[/COLOR] :[COLOR=white] $INFO[Window(Home).Property(NextAired.NextTitle)][I]$INFO[Window(Home).Property(NextAired.NextSeasonNumber), (S,]$INFO[Window(Home).Property(NextAired.NextEpisodeNumber),E,)][/I][/COLOR]</label>
+  			</control>
       </control>
       <!-- bandeau genre/sagas--->
       <control type="group"> 
@@ -535,13 +360,13 @@
           <effect type="rotate" center="0,88" end="20" time="1" />
         </animation>
         <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
-          <effect type="slide" end="1460,898" time="0" tween="quadratic" />
+          <effect type="slide" end="1460,898" time="0"  />
           <effect type="rotate" center="0,88" end="45" time="1" />
         </animation>
         <visible>[[Container.Content(Genres)|Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)]+Control.HasFocus(2999)]|[[String.Contains(Container.FolderPath,videodb://movies/genres)|String.Contains(Container.FolderPath,videodb://tvshows/genres)]+[Container.Content(tvshows)|Container.Content(movies)]]</visible>
         <control type="image">
           <texture>frames/genrestag.png</texture>
-          <visible>!String.Contains(Window(Home).Property(IconMixSagaClearLogo),http)</visible>
+          <visible>!String.Contains(ListItem.Art(clearlogo),http)</visible>
           <aspectratio>stretch</aspectratio>
         </control>
         <control type="group"> <!-- genres -->
@@ -550,7 +375,7 @@
             <left>30</left>
             <visible>Skin.HasSetting(CacheFond)</visible>
             <control type="group">
-              <visible>String.IsEmpty(Window(Home).Property(IconMixSagaClearLogo))</visible>
+              <visible>String.IsEmpty(ListItem.Art(clearlogo))</visible>
               <control type="fadelabel">
                 <width>550</width>
                 <posx>40</posx>
@@ -581,13 +406,13 @@
               <height>120</height>
               <aspectratio>keep</aspectratio>
               <aligny>center</aligny>
-              <texture>$INFO[Window(Home).Property(IconMixSagaClearLogo)]</texture>
+              <texture>$INFO[ListItem.Art(clearlogo)]</texture>
             </control>
           </control>
           <control type="group"> <!-- en vue normale -->
             <visible>!Skin.HasSetting(CacheFond)</visible>
             <control type="group">
-              <visible>String.IsEmpty(Window(Home).Property(IconMixSagaClearLogo))</visible>
+              <visible>String.IsEmpty(ListItem.Art(clearlogo))</visible>
               <control type="fadelabel">
                 <width>550</width>
                 <posx>40</posx>
@@ -613,12 +438,14 @@
               </control>
             </control>
             <control type="image">
-              <left>-30</left>
-              <posy>30</posy>
+              <left>-180</left>
+              <posy>-10</posy>
               <height>120</height>
               <aspectratio>keep</aspectratio>
               <aligny>center</aligny>
-              <texture>$INFO[Window(Home).Property(IconMixSagaClearLogo)]</texture>
+             <!-- <texture>$INFO[ListItem.Art(clearlogo)]</texture> -->
+             <texture>$INFO[ListItem.Art(clearlogo)]</texture>
+             
             </control>
           </control>
         </control>
@@ -650,37 +477,28 @@
           </control>
         </control>
       </control>
-      <control type="group">
-        <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
-          <effect type="slide" end="-1690,780" time="0" tween="quadratic" />
-        </animation>
-        <top>-780</top>
-        <posx>1700</posx>
-        <visible>Control.HasFocus(2999)+[Container.Content(actors)|Container.Content(directors)]+!String.Contains(ListItem.Icon,Default)</visible>
-        <control type="image">
-          <width>200</width>
-          <aspectratio scalediffuse="true">keep</aspectratio>
-          <texture diffuse="acteurs/frame.png">$INFO[ListItem.Icon]</texture>
-        </control>
-      </control>
-      <!-- bandeau acteurs/realisateurs--->
-      <control type="group"> 
-        <visible>[Container.Content(actors)|Container.Content(directors)]</visible>
+      <!-- bandeau et photo acteurs/realisateurs--->
+     <control type="group"> 
+        <visible>[Container.Content(actors)|Container.Content(directors)]|[Container.Content(movies)+!String.IsEmpty(Window(Home).Property(IconMixActor))]</visible>
         <width>700</width>
         <height>88</height>
         <posy>130</posy>
         <posx>-90</posx>
+        
         <animation type="Conditional" condition="!Skin.HasSetting(CacheFond)">
-          <effect type="rotate" center="0,88" end="20" time="1" />
+          <!-- <effect type="rotate" center="0,88" end="20" time="1" /> -->
+          <effect type="slide" end="1590,-120" time="0"  />
+          <effect type="rotate" center="0,88" end="-45" time="1" />
         </animation>
         <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
-          <effect type="slide" end="1460,898" time="0" tween="quadratic" />
+          <effect type="slide" end="1460,898" time="0"  />
           <effect type="rotate" center="0,88" end="45" time="1" />
         </animation>
         <control type="image">
           <texture>frames/genrestag.png</texture>
           <aspectratio>stretch</aspectratio>
         </control>
+        
         <control type="group">
           <control type="group">
             <left>30</left>
@@ -737,23 +555,60 @@
           </control>
         </control>
       </control>
+      <control type="group">
+        <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
+          <effect type="slide" end="0,875" time="0"  />
+        </animation>
+        <top>-860</top>
+        <posx>1750</posx>
+        <visible>[[Control.HasFocus(2999)+[Container.Content(actors)|Container.Content(directors)]]|[![Container.Content(actors)|Container.Content(directors)]+[[String.Contains(Container.FolderPath,/actors)|String.Contains(Container.FolderPath,?actorid)]|[String.Contains(Container.FolderPath,/directors)|String.Contains(Container.FolderPath,?directorid)]]]]+!String.Contains(Window(Home).Property(IconMixActorIcon),Default)</visible>
+        <control type="image">
+          <width>150</width>
+          <bordersize>20</bordersize>
+							<bordertexture border="20" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+          <aspectratio scalediffuse="true">keep</aspectratio>
+          <texture>$INFO[Window(Home).Property(IconMixActorIcon)]</texture>
+        </control>
+        <control type="group">
+          <visible>!String.Contains(Window(Home).Property(IconMixActorIcon),realisateur.png)+!String.Contains(Window(Home).Property(IconMixActorIcon),actorfilm.png)</visible>
+          <top>-160</top>
+          <left>-30</left>
+          <width>70</width>
+        <control type="image">
+          
+          <texture>flags/realisateur.png</texture>
+          <aspectratio scalediffuse="true">keep</aspectratio>
+          <visible>String.Contains(Container.FolderPath,/directors)|String.Contains(Container.FolderPath,?directorid)</visible>
+        </control>
+         <control type="image">
+         
+          <texture>frames/actorfilm.png</texture>
+          <aspectratio scalediffuse="true">keep</aspectratio>
+          <visible>String.Contains(Container.FolderPath,/actors)|String.Contains(Container.FolderPath,?actorid)</visible>
+        </control>
+        </control>
+      </control>
+      
+      <!--- ------------------------------------------------------------- -->
       <include condition="Skin.HasSetting(CacheFond)">vueexperimentale</include>
       <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7778)" reversible="true">
           <effect type="fade" start="100" end="0" time="1"  />
         </animation>        
       </control>
       <!------------------------------------------------- ACTEURS et ROLES---------------------------------------->
-     
+      <control type="group">
+     <top>-10</top>
       <include>PanelActeurs</include>
-      
+      </control>
       <!--- Indicateur de position ----->
       <control type="group">
         <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
-          <effect type="slide" end="0,-835" time="0"  />
+          <!-- <effect type="slide" end="0,-835" time="0"  /> -->
+          <effect type="slide" end="0,205" time="0"  /> -->
         </animation>
       <include>AffichagePosition</include>
       </control>
-      
+      <!--
       <control type="group">
         <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
           <effect type="slide" end="0,-835" time="0"  />
@@ -771,33 +626,43 @@
           <visible>!String.IsEmpty(ListItem.UserRating)</visible>
         </control>
       </control>
-<!--- ------------------------------------------------------------------ ---->
- <!-- liste des acteurs -->
-   
-      
+      --> 
+          
     </control>
+  <include>MenuGeneral</include>
+       	
+			
     
     <include>AnimationVoletsHorizontaux</include>
-    <!--
-    <control type="group">
-      <visible>!Window.IsVisible(2003)</visible>
-      <include>BandeAnnonceFenetre</include>
-    </control>
-    -->
-
+    <!--- ------------------------------------------------------------------ ---->
     <!--	DEBUG --
+    <control type="button">
+		  <width max="340">auto</width>
+      <height>30</height>
+      <left>40</left>
+      <posy>940</posy>
+      <label>Service : $INFO[Window(Home).Property(IconMixToolsbackend)]</label>
+      <font>exptextacteurs</font>
+      <textcolor>FF404040</textcolor>
+      <shadowcolor>FF7F7F7F</shadowcolor>
+			<textoffsetx>15</textoffsetx>
+			<texturefocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturefocus>
+      <texturenofocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturenofocus>
+		</control>
     <control type="label">
-      <posy>1000</posy>
+      <posy>970</posy>
       <height>80</height>
-      <label>>>($INFO[Container(1999).ListItem.DBID]):$INFO[Container(1999).ListItem.Icon][CR]$INFO[Container(1999).ListItem.Art(Poster)]</label>
+      <label>A:"special://skin/extras/viewthumbs/"$VAR[cheminapercu]$INFO[Container(7007).ListItem.Property(viewid)]".jpg"/B:$INFO[Container(1999).ListItem.Property(IMDBNumber)]/C:$INFO[Window(Home).Property(BAprecedenteInf)][CR]$INFO[ListItem.Trailer] E:$INFO[Container(1999).ListItem.property(DBID)] F:$INFO[ListItem.DBType] / $INFO[ListItem.IsResumable] / $INFO[ListItem.Overlay] / *$INFO[Container.Content]*</label>
     </control>
+    <!--
     <control type="label">
     <posx>700</posx>
 
-    <label>$INFO[Container.Content][CR][CR]ImdbNumber:$INFO[ListItem.FileNameAndPath][CR]$INFO[ListItem.Icon][CR]$INFO[ListItem.Year][CR]IconMixSaga=$INFO[Window(Home).Property(IconMixSaga)][CR]DBTYPE=$INFO[ListItem.DBType][CR]Rating1999=$INFO[Container(1999).ListItem.Property(Rating)][CR]1991:$INFO[Container(1991).NumItems][CR]1998:$INFO[Container(1998).NumItems][CR]1999:$INFO[Container(1999).NumItems][CR]poster:$INFO[ListItem.Art(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]DBTYPE=$INFO[Container(1999).ListItem.DBTYPE][CR]Content:$INFO[Container.Content]Pays : $INFO[ListItem.Country][CR]Country1:$INFO[Window(Home).Property(ItemCountry1)]O[CR]Portrait:$INFO[ListItem.Label][CR]$INFO[ListItem.FileNameAndPath][CR]Varaiable:$VAR[GlobalFanart]]</label>
+    <label>$INFO[Container.Content][CR][CR]ImdbNumber:$INFO[ListItem.FileNameAndPath][CR]$INFO[ListItem.Icon][CR]$INFO[ListItem.Year][CR]IconMixSaga=$INFO[Window(Home).Property(IconMixSaga)][CR]DBTYPE=$INFO[ListItem.DBType][CR]Rating1999=$INFO[Container(1999).ListItem.Property(Rating)][CR]1991:$INFO[Container(1991).NumItems][CR]1998:$INFO[Container(1998).NumItems][CR]1999:$INFO[Container(1999).NumItems][CR]poster:$INFO[Container(1999).ListItem.Art(poster)][CR]Pposter:$INFO[Container(1999).ListItem.Property(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]DBTYPE=$INFO[Container(1999).ListItem.DBTYPE][CR]Content:$INFO[Container.Content]Pays : $INFO[ListItem.Country][CR]Country1:$INFO[Window(Home).Property(ItemCountry1)]O[CR]Portrait:$INFO[ListItem.Label][CR]$INFO[ListItem.FileNameAndPath][CR]Variable:$VAR[GlobalFanart]]</label>
 
     </control>
     -->
+    <!--- ------------------------------------------------------------------ ---->
 
   </controls>
 </window>

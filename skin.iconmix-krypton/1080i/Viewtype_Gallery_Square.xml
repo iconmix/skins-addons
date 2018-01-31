@@ -1,5 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
+  <include name="CommonSquare">
+    <control type="group">
+					  <posx>25</posx>
+              <posy>50</posy>
+						<animation reversible="true" effect="zoom" center="auto" start="100" end="120" time="200" tween="sine" easing="inout">focus</animation>
+						<animation reversible="true" effect="zoom" center="auto" start="120" end="100" time="200" tween="sine" easing="inout">unfocus</animation>
+						<control type="image">
+						               
+              <width>230</width>
+              <height>205</height>
+              <texture>frames/cdcasexback.png</texture>
+              <aspectratio scalediffuse="true">stretch</aspectratio>
+            </control>
+            <control type="image">
+              <left>12</left>
+              <top>3</top>
+              <width>225</width>
+              <height>200</height>
+              <texture background="true" fallback="DefaultThumb.png">$INFO[ListItem.Icon]</texture>
+              <aspectratio>keep</aspectratio>
+            </control>
+            <control type="image">              
+              <width>230</width>
+              <height>205</height>
+              <texture>frames/cdcasexup.png</texture>
+              <aspectratio scalediffuse="true">stretch</aspectratio>
+            </control>   
+                    
+            <control type="button">
+      			  <top>210</top>
+      			  
+      			  <width max="245">auto</width>
+      			  <left>5</left>
+      			  <height>30</height>
+      			  <align>center</align>
+      			  <aligny>center</aligny>
+      			  <textoffsetx>10</textoffsetx>
+      			  
+      			  <font>METF_RecentlyAddedListText</font>
+    					<textcolor>TitleText</textcolor>
+    					<label>$VAR[ListItemTitle]</label>
+      			
+      				<texturefocus colordiffuse="FFFFAAFF">frames/fondtitre2.png</texturefocus>
+              <texturenofocus colordiffuse="FFFFAAFF">frames/fondtitre2.png</texturenofocus>
+      			</control>	
+            
+            
+  					
+					</control>
+    
+  </include>
 	<include name="Viewtype_Gallery_Square">
 		<control type="group">
 			<visible>Control.IsVisible(58)</visible>
@@ -27,55 +78,12 @@
 				<include>Animation_FadedByMenu</include>
 				<include>Animation_HiddenByInfo</include>
 				<visible>!Skin.HasSetting(NoViewGallerySquare)</visible>
-				<itemlayout width="205" height="195">
-					<control type="group">
-					<control type="image">
-						<posx>27</posx>
-						<posy>27</posy>
-						<width>155</width>
-						<height>155</height>
-						<texture fallback="DefaultThumb.png">$INFO[ListItem.Icon]</texture>
-						<aspectratio>scale</aspectratio>
-						<colordiffuse>FFFFFFFF</colordiffuse>
-					</control>
-					<control type="image">
-						<posx>10</posx>
-						<posy>24</posy>
-						<width>175</width>
-						<height>160</height>
-						<texture>frames/cd.png</texture>
-						<aspectratio scalediffuse="true">stretch</aspectratio>
-						<colordiffuse>FFFFFFFF</colordiffuse>
-					</control>
-					<include>AnimationCacheNonSelect</include>
-			</control>
+				<itemlayout width="255" height="295">
+				<include>CommonSquare</include>
 				</itemlayout>
-				<focusedlayout width="205" height="195">
-					<include>ActiveClearArt</include>
-					<control type="group">
-						<animation reversible="false" effect="zoom" center="auto" start="100" end="140" time="200" tween="sine" easing="inout">focus</animation>
-						<animation reversible="false" effect="zoom" center="auto" start="150" end="100" time="200" tween="sine" easing="inout">unfocus</animation>
-						<control type="image">
-							<posx>27</posx>
-							<posy>27</posy>
-							<width>155</width>
-							<height>155</height>
-							<texture fallback="DefaultThumb.png">$INFO[ListItem.Icon]</texture>
-							<aspectratio>scale</aspectratio>
-							<colordiffuse>FFFFFFFF</colordiffuse>
-						</control>
-						<control type="image">
-							<posx>10</posx>
-							<posy>24</posy>
-							<width>175</width>
-							<height>160</height>
-							<texture>frames/cd.png</texture>
-							<aspectratio scalediffuse="true">stretch</aspectratio>
-							<colordiffuse>FFFFFFFF</colordiffuse>
-						</control>
-						
-					</control>
-				</focusedlayout>
+				<focusedlayout width="255" height="295">
+					<include>CommonSquare</include>
+				</focusedlayout> 
 			</control>
 			
 			<!-- Browser label and flags 

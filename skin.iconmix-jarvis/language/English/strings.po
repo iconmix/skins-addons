@@ -16,6 +16,15 @@ msgstr ""
 "Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+
+msgctxt "#12021"
+msgid "Play from beginning"
+msgstr ""
+
+msgctxt "#12023"
+msgid "Play from beginning"
+msgstr ""
+
 #strings 31000 thru 31999 reserved for skins
 msgctxt "#31231"
 msgid "Seconds"
@@ -1205,6 +1214,11 @@ msgid "!!!Default settings!!!"
 msgstr ""
 
 
+msgctxt "#31486"
+msgid "Hide seekbar and Pause message during Video pausing"
+msgstr ""
+
+
 
 #empty strings from id 31482 to 31599
 #PVR Resources
@@ -1893,8 +1907,10 @@ msgid "Update Movieset details"
 msgstr ""
 
 msgctxt "#31926"
-msgid "Show videos/songs filename and path"
+msgid "Update Artist/Albums details"
 msgstr ""
+
+
 
 msgctxt "#31927"
 msgid "Update Tvshows"
@@ -1964,9 +1980,36 @@ msgid "Show end time after duration"
 msgstr ""
 
 msgctxt "#32006"
-msgid "Show media flags and cast centered"
+msgid "Show cast centered"
+msgstr ""
+
+msgctxt "#32007"
+msgid "Cast list in TEXT mode""
+msgstr ""
+
+msgctxt "#32008"
+msgid "Cast list PICTURE mode""
+msgstr ""
+
+msgctxt "#32009"
+msgid "Show videos/songs filename and path"
+msgstr ""
+
+msgctxt "#32010"
+msgid "Rate movie after play"
+msgstr ""
+
+msgctxt "#32011"
+msgid "Rate tvshow episode after play"
 msgstr ""
 
 
+msgctxt "#32012"
+msgid "Advanced filter"
+msgstr ""
 
+
+msgctxt "#32013"
+msgid "Show "
+msgstr ""
 

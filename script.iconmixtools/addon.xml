@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-	<addon id="script.iconmixtools" name="script.iconmixtools" version="1.6.3" provider-name="telexxingou">
+	<addon id="script.iconmixtools" name="script.iconmixtools" version="1.8.1" provider-name="telexxingou">
 	<requires>
 		<import addon="xbmc.python" version="2.24.0"/>
 		<import addon="xbmc.addon" version="16.0.0"/>
@@ -11,6 +11,7 @@
 		<provides>executable</provides>
 	</extension>
    <extension point="xbmc.python.pluginsource" library="plugin.py" />
+   <extension library="service.py" point="xbmc.service" start="login" />
 	
 	<extension point="xbmc.addon.metadata">
 		<summary lang="en">script.iconmixtools</summary>

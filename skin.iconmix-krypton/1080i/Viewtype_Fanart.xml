@@ -45,20 +45,7 @@
 					<height>320</height>
 					<texture>$VAR[Boitier_SelonResolution]</texture>
 				</control>
-				<!--
-				<control type="group">
-					<visible>String.Contains(ListItem.DBTYPE,set) | Container.Content(movies) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
-					<control type="image">
-						<top>-20</top>
-						<left>65</left>
-						<width>60</width>
-						<height>35</height>
-						<texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture>
-						<aspectratio>keep</aspectratio>
-						<colordiffuse>MediaFlagDiffuse</colordiffuse>
-					</control>
-				</control>
-				-->
+				
 			</control>
 		</control>
 
@@ -144,7 +131,7 @@
 					<!-- Watched Overlay for In-Progress Items -->
 					<control type="group">
 					<posx>140</posx>
-					<posy>312</posy>
+					<posy>300</posy>
 					<include>OverlayProgress</include>
 				</control>
 					<control type="group">
@@ -220,8 +207,11 @@
 						<visible>!String.IsEmpty(ListItem.Title) + Skin.HasSetting(NoSegmentedFanart)</visible>
 					</control>
 					<control type="group">
-					<posx>140</posx>
-					<posy>312</posy>
+					<posx>150</posx>
+					<posy>335</posy>
+					<animation type="Focus" >
+						<effect type="zoom" center="150,340" start="100" end="120" time="400" tween="bounce" easing="out" />
+						</animation>
 					<include>OverlayProgress</include>
 				</control>
 				</focusedlayout>

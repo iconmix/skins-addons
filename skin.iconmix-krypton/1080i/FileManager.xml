@@ -59,7 +59,7 @@
 						<align>left</align>
 						<aligny>center</aligny>
 						<focusedcolor>ButtonText</focusedcolor>
-						<label>$INFO[ListItem.Label]</label>
+						<label>$VAR[ListItemVu]</label>
 					</control>
 					<control type="label">
 						<posx>790</posx>
@@ -91,7 +91,7 @@
 						<align>left</align>
 						<aligny>center</aligny>
 						<focusedcolor>ButtonText</focusedcolor>
-						<label>$INFO[ListItem.Label]</label>
+						<label>$VAR[ListItemVu]</label>
 					</control>
 					<control type="label">
 						<posx>790</posx>
@@ -162,7 +162,7 @@
 						<align>left</align>
 						<aligny>center</aligny>
 						<focusedcolor>ButtonText</focusedcolor>
-						<label>$INFO[ListItem.label]</label>
+						<label>$VAR[ListItemVu]</label>
 					</control>
 					<control type="label">
 						<posx>790</posx>
@@ -194,7 +194,7 @@
 						<align>left</align>
 						<aligny>center</aligny>
 						<focusedcolor>ButtonText</focusedcolor>
-						<label>$INFO[ListItem.label]</label>
+						<label>$VAR[ListItemVu]</label>
 					</control>
 					<control type="label">
 						<posx>790</posx>

@@ -3,32 +3,27 @@
   <defaultcontrol>1000</defaultcontrol>
   <onload>SetFocus(2106)</onload>
   <animation type="WindowOpen" reversible="false">
-    <!-- <effect type="zoom" start="80" end="100" center="auto" easing="out" tween="back" time="300" /> -->
-    <effect type="slide" end="540" easing="out" tween="back" time="300" />
-    <effect type="fade" start="0" end="100" time="300" />
-  </animation>
-  <animation type="WindowClose" reversible="false">
-    <!-- <effect type="zoom" start="100" end="80" center="auto" easing="in" tween="back" time="300" /> -->
-    <effect type="slide" end="0" easing="out" tween="back" time="300" />
-    <effect type="fade" start="100" end="0" time="300" />
-  </animation>
-  <coordinates>
-    <system>1</system>
-    <posx>0</posx>
+  <!-- <effect type="zoom" start="80" end="100" center="auto" easing="out" tween="back" time="300" /> -->
+  <effect type="slide" start="-640" end="0" easing="out" tween="back" time="300" />
+  <effect type="fade" start="0" end="100" time="300" />
+</animation>
+<animation type="WindowClose" reversible="false">
+<!-- <effect type="zoom" start="100" end="80" center="auto" easing="in" tween="back" time="300" /> -->
+<effect type="slide" end="-1280" easing="out" tween="back" time="300" />
+<effect type="fade" start="100" end="0" time="300" />
+</animation>
+<coordinates>
+  <system>1</system>
+  <posx>0</posx>
     <posy>0</posy>
-    <origin x="0" y="120" />
-  </coordinates>
+    <origin x="0" y="0" />
+</coordinates>
 
-  <controls>
-    <control type="group">
-      <posy>-120</posy>
-      <left>35</left>
-    <include>PlayListPerso</include>
-    </control>
-    <control type="group">
-      <animation type="Conditional" reversible="true" condition="ControlGroup(7111).HasFocus">
-      <effect type="fade" start="100" end="60" time="1" />
-    </animation>
+<controls>
+ 
+  <control type="group">
+    <top>200</top>
+    
     <control type="image" id="999">
       <description>background image</description>
       <posx>0</posx>
@@ -40,44 +35,40 @@
     </control>
     <control type="grouplist" id="996">
       <description>grouplist for context buttons</description>
-      <left>38</left>
-      <top>45</top>
+      <left>30</left>
+      <top>35</top>
       <width>490</width>
+      <onleft>Close</onleft>
+      <onright>Close</onright>
       <height max="670">auto</height>
-      <itemgap>2</itemgap>      
-    
-      <control type="button" id="2106">
-            <description>Ascending</description>
-            <include>BoutonCommun</include>
-            <label>31833</label>
-            <onclick>SetFocus(7000)</onclick>            
-          </control>
-     
-      <control type="button" id="2107">        
-        <onright>7111</onright>        
-        <include>BoutonCommun</include>
-        <label>31253</label>
-
-        <visible>String.IsEqual(ListItem.DBTYPE,movie)</visible>
+      <itemgap>2</itemgap>
+      
+      <control type="button" id="10">
+        <description>Ascending</description>
+        <include>MonBoutonCommun2</include>
       </control>
-  <control type="button" id="8">
-            <description>Search</description>
-            <label>137</label>
-            <include>BoutonCommun</include>
-          </control>
 
-        
+      <control type="button" id="2106">
+        <description>menugeneral</description>
+        <include>MonBoutonCommun2</include>
+        <label>31833</label>
+        <onclick>SetFocus(7000)</onclick>
+      </control>
+
+      
+       <control type="button" id="2108">
+        <include>MonBoutonCommun2</include>        
+        <visible>System.HasAddon(script.iconmixtools)+!Player.HasVideo+ [Container.Content(movies) |Container.Content(tvshows)|Container.Content(seasons)|Container.Content(episodes)]</visible>
+        <label>$LOCALIZE[137] $LOCALIZE[20410]</label>
+        <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>       
+      </control>
      
     </control>
     <control type="button" id="1000">
 
-      <include>BoutonCommun</include>
+      <include>MonBoutonCommun2</include>
     </control>
-    <control type="group">
-      <left>-400</left>
-      <top>-400</top>
-     <include>choixdetails</include> 
-    </control>
-   </control>
-  </controls>
+    
+  </control>
+</controls>
 </window>

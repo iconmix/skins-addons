@@ -4,12 +4,17 @@
     <control type="group">
       <visible>Control.IsVisible(585)</visible>
       <!-- Browser -->
+      <animation type="conditional" reversible="true" condition="true">
+              <effect type="rotatey" center="0,400" start="0" end="-8" time="200" tween="sine" easing="inout" />
+            </animation>
+      
+      
       <control type="panel" id="585">
         <viewtype label="31826">icon</viewtype>
         <posx>25</posx>
-        <posy>45</posy>
-        <width>1910</width>
-        <height>775</height>
+        <posy>85</posy>
+        <width>2080</width>
+        <height>730</height>
         <scrolltime>100</scrolltime>
         <orientation>vertical</orientation>
         <onright>585</onright>
@@ -19,7 +24,10 @@
         <include>Animation_HiddenByInfo</include>
         <include>Animation_FadedByMenu</include>
         <include>Animation_OpenCloseFade</include>
-        <itemlayout width="170" height="257">
+        
+         
+        
+        <itemlayout width="170" height="245">
           <control type="group">
             <control type="image">
               <posx>0</posx>
@@ -29,6 +37,7 @@
               <texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Art(poster)]</texture>
               <aspectratio scalediffuse="true">stretch</aspectratio>
               <visible>!String.IsEmpty(ListItem.Art(poster))</visible>
+              <colordiffuse>FF909090</colordiffuse>
             </control>
             <control type="image">
               <posx>0</posx>
@@ -38,6 +47,7 @@
               <texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
               <aspectratio scalediffuse="true">keep</aspectratio>
               <visible>String.IsEmpty(ListItem.Art(poster))+!Container.Content(genres)</visible>
+              <colordiffuse>FF909090</colordiffuse>
             </control>
             <control type="image">
               <posx>0</posx>
@@ -47,29 +57,52 @@
               <texture fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
               <aspectratio scalediffuse="false">keep</aspectratio>
               <visible>String.IsEmpty(ListItem.Art(poster))+Container.Content(genres)</visible>
+              <colordiffuse>FF909090</colordiffuse>
             </control>
             <control type="image">
               <posx>0</posx>
               <posy>0</posy>
               <width>160</width>
               <height>240</height>
-              <texture border="-17">showcase_shadow.png</texture>
+              <texture>$VAR[Boitier_SelonResolution]</texture>
             </control>
             <include>isWatched</include>
             <include>ShowTotalTvEp</include>
             <include>AnimationCacheNonSelect</include>
           </control>
         </itemlayout>
-        <focusedlayout width="170" height="257">
+        <focusedlayout width="170" height="270">
           <include>ActiveClearArt</include>
           <control type="group">
-            <animation type="Focus" reversible="false">
-              <effect type="zoom" center="auto" start="100" end="150" time="200" tween="sine" easing="inout" />
+            <animation type="Conditional" reversible="false" condition="Integer.IsLess(Container(585).Column,2)">
+              <effect type="zoom" center="auto" start="100" end="160" time="200" tween="sine" easing="inout" />
+              <effect type="rotatey" center="auto" start="0" end="8" time="1" tween="sine" easing="inout" />
             </animation>
-            <animation reversible="true" effect="zoom" center="auto" start="130" end="100" time="200" tween="sine" easing="inout">unfocus</animation>
+            <animation type="Conditional" reversible="false" condition="Integer.IsGreater(Container(585).Column,1)+Integer.IsLess(Container(585).Column,5)">
+              <effect type="zoom" center="auto" start="100" end="170" time="200" tween="sine" easing="inout" />
+              <effect type="rotatey" center="auto" start="0" end="8" time="1" tween="sine" easing="inout" />
+            </animation>
+            <animation type="Conditional" reversible="false" condition="Integer.IsGreater(Container(585).Column,4)+Integer.IsLess(Container(585).Column,7)">
+              <effect type="zoom" center="auto" start="100" end="180" time="200" tween="sine" easing="inout" />
+              <effect type="rotatey" center="auto" start="0" end="9" time="1" tween="sine" easing="inout" />
+            </animation>
+             <animation type="Conditional" reversible="false" condition="Integer.IsGreater(Container(585).Column,6)+Integer.IsLess(Container(585).Column,9)">
+              <effect type="zoom" center="auto" start="100" end="190" time="200" tween="sine" easing="inout" />
+              <effect type="rotatey" center="auto" start="0" end="10" time="1" tween="sine" easing="inout" />
+            </animation>
+             <animation type="Conditional" reversible="false" condition="Integer.IsGreater(Container(585).Column,8)+Integer.IsLess(Container(585).Column,11)">
+              <effect type="zoom" center="auto" start="100" end="195" time="200" tween="sine" easing="inout" />
+              <effect type="rotatey" center="auto" start="0" end="12" time="1" tween="sine" easing="inout" />
+            </animation>
+             <animation type="Conditional" reversible="false" condition="Integer.IsEqual(Container(585).Column,11)">
+              <effect type="zoom" center="auto" start="100" end="205" time="200" tween="sine" easing="inout" />
+              <effect type="rotatey" center="auto" start="0" end="15" time="1" tween="sine" easing="inout" />
+            </animation>
+           
+            
             <control type="image">
-              <posx>0</posx>
-              <posy>0</posy>
+              <posx>3</posx>
+              <posy>22</posy>
               <width>160</width>
               <height>240</height>
               <texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Art(poster)]</texture>
@@ -77,8 +110,8 @@
               <visible>!String.IsEmpty(ListItem.Art(poster))</visible>
             </control>
             <control type="image">
-              <posx>0</posx>
-              <posy>0</posy>
+              <posx>3</posx>
+              <posy>30</posy>
               <width>160</width>
               <height>240</height>
               <texture background="true" diffuse="showcase_matte.png">$INFO[ListItem.Icon]</texture>
@@ -86,8 +119,8 @@
               <visible>String.IsEmpty(ListItem.Art(poster))+!Container.Content(genres)</visible>
             </control>
             <control type="image">
-              <posx>0</posx>
-              <posy>0</posy>
+              <posx>3</posx>
+              <posy>30</posy>
               <width>160</width>
               <height>240</height>
               <texture fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
@@ -97,9 +130,9 @@
             <control type="image">
               <posx>0</posx>
               <posy>0</posy>
-              <width>160</width>
-              <height>240</height>
-              <texture border="-17">showcase_shadow.png</texture>
+              <width>166</width>
+              <height>270</height>
+              <texture>$VAR[Boitier_SelonResolution]</texture>
             </control>
             <control type="image">
               <posx>120</posx>

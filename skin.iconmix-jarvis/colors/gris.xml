@@ -46,7 +46,7 @@
 	<color name="Home2SkinName">FFc89008</color>
 	
 	<!-- Media Flags -->
-	<color name="MediaFlagDiffuse">EEFFFFFF</color>
+	<color name="MediaFlagDiffuse">EE7F7F7F</color>
 	<color name="MediaFlagBoxDiffuse">ee101010</color>
 	<color name="RatingStarDiffuse">ee3c95c8</color>
 	<color name="IMDbDiffuseTop250">eed0b331</color>
@@ -92,7 +92,7 @@
 	<color name="MPAADescription">eef8cd22</color>
 	
 	<!-- OSD -->
-	<color name="OSDBackgroundColor">A07f7f7f</color>			<!-- FF3c95c8 -->
+	<color name="OSDBackgroundColor">507f7f7f</color>			<!-- FF3c95c8 -->
 	<color name="OSDDialogBackgroundColor">a06eb3ee</color>
 	<color name="OSDProgressBar">ddc89008</color>
 	<color name="OSDFinishTime">FFFFFFFF</color>
@@ -102,9 +102,9 @@
 	<color name="OSDPlayingDuration">ddc89008</color>
 	
 	<!-- Dialogs -->
-	<color name="DialogBackgroundColor">C07f7f7f</color>
+	<color name="DialogBackgroundColor">E07f7f7f</color>
 	<color name="DialogDropdownColor">ff7f7f7f</color>			<!-- FF87d1ff -->
-	<color name="DialogProgressBar">FFf8cd22</color>
+	<color name="DialogProgressBar">FFeeeeee</color>
 	<color name="DialogTextFO">eef8cd22</color>
 
 	<!-- Weather -->

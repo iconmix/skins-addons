@@ -47,7 +47,8 @@
 				<pagecontrol>60</pagecontrol>
 				
 				
-				<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows) |Container.Content(sets)]</visible>
+							<visible>[Container.Content(movies) | Container.Content(tvshows) |Container.Content(sets)|Container.Content(albums)]</visible>
+
 				<itemlayout width="400" height="194">
 				  
 				<control type="group">
@@ -55,12 +56,13 @@
 					<posy>40</posy>
 					<control type="group">
 					
-					<control type="image" >						
+					<control type="image" >	
+					  <visible>!String.IsEmpty(ListItem.Art(discart))</visible>					
 						<posx>9</posx>						
 						<width>200</width>
 						<height>200</height>
 						<aspectratio scalediffuse="true" aligny="center">keep</aspectratio>
-						<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Art(discart)]</texture>		
+						<texture background="true" fallback="cdorg.png" diffuse="frames/cdart-mask.png">$INFO[ListItem.Art(discart)]</texture>		
 						<fadetime>200</fadetime>
 						<colordiffuse>C0FFFFFF</colordiffuse>
 						<animation type="conditional" condition="Container.OnNext" >
@@ -73,7 +75,7 @@
 						<width>200</width>
 						<height>200</height>
 						<aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
-						<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Art(poster)]</texture>		
+						<texture background="true"  fallback="cdorg.png" diffuse="frames/cdart-mask.png">$INFO[ListItem.Art(poster)]</texture>		
 						<fadetime>200</fadetime>
 						<colordiffuse>C0FFFFFF</colordiffuse>
 						<visible>String.IsEmpty(ListItem.Art(discart))</visible>
@@ -100,12 +102,13 @@
 			</itemlayout>
 			<focusedlayout width="400" height="178">		
 				<include>ActiveClearArt</include>		
-				<control type="image" >						
+				<control type="image" >			
+				  <visible>!String.IsEmpty(ListItem.Art(discart))</visible>			
 						<posx>9</posx>						
 						<width>200</width>
 						<height>200</height>
 						<aspectratio scalediffuse="true" aligny="center">keep</aspectratio>
-						<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Art(discart)]</texture>		
+						<texture background="true"  fallback="cdorg.png" diffuse="frames/cdart-mask.png">$INFO[ListItem.Art(discart)]</texture>		
 						<fadetime>200</fadetime>
 						<animation type="Focus" >
 						<effect type="zoom" center="auto" start="100" end="140" time="400" tween="bounce" easing="out" />
@@ -117,7 +120,7 @@
 						<width>200</width>
 						<height>200</height>
 						<aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
-						<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Art(poster)]</texture>		
+						<texture background="true"  fallback="cdorg.png" diffuse="frames/cdart-mask.png">$INFO[ListItem.Art(poster)]</texture>		
 						<fadetime>200</fadetime>
 						<animation type="Focus" >
 						<effect type="zoom" center="auto" start="100" end="140" time="400" tween="bounce" easing="out" />
@@ -211,7 +214,7 @@
 				
 				<!-- Watched Overlay for In-Progress Items -->
 				<control type="group">
-					<posx>190</posx>
+					<posx>70</posx>
 					<posy>100</posy>
 					<include>OverlayProgress</include>
 				</control>
@@ -225,6 +228,11 @@
 			</itemlayout>
 			<focusedlayout width="318" height="200">
 				<include>ActiveClearArt</include>
+				<control type="group">
+				  <animation type="Focus" >
+						<effect type="zoom" center="85,100" start="100" end="140" time="400" tween="bounce" easing="out" />
+						<effect type="rotatey" center="85,0"  end="360" time="1000" reversible="false" delay="1000" />
+						</animation>
 				<control type="image" >						
 						<posx>9</posx>						
 						<width>150</width>
@@ -232,10 +240,7 @@
 						<aspectratio scalediffuse="true" aligny="center">keep</aspectratio>
 						<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Art(discart)]</texture>		
 						<fadetime>200</fadetime>
-						<animation type="Focus" >
-						<effect type="zoom" center="auto" start="100" end="140" time="400" tween="bounce" easing="out" />
-						<effect type="rotatey" center="85,0"  end="360" time="1000" reversible="false" delay="1000" />
-						</animation>
+						
 					</control>
 					<control type="image" >						
 						<posx>9</posx>						
@@ -244,18 +249,16 @@
 						<aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
 						<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Art(poster)]</texture>		
 						<fadetime>200</fadetime>
-						<animation type="Focus" >
-						<effect type="zoom" center="auto" start="100" end="140" time="400" tween="bounce" easing="out" />
-						<effect type="rotatey" center="85,0"  end="360" time="1000" reversible="false" delay="1000" />
-						</animation>
+						
 						<visible>String.IsEmpty(ListItem.Art(discart))</visible>
 					</control>
 				
 				<!-- Watched Overlay for In-Progress Items -->
 				<control type="group">
-					<posx>190</posx>
+					<posx>70</posx>
 					<posy>100</posy>
 					<include>OverlayProgress</include>
+				</control>
 				</control>
 			</focusedlayout>
 		</control>

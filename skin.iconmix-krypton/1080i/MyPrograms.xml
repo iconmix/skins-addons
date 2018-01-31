@@ -15,7 +15,6 @@
 		<include>Global_ContextFilter</include>
 		<include>SpecialPlotBox</include>
 		<include>Global_ScrollOffsetLabel</include>
-		<include condition="!Skin.HasSetting(Hide_MediaFlags)">MediaInfo</include>
 		<!-- Navigation Menu -->
 		<control type="group">
 			<include>Animation_NavMenu</include>

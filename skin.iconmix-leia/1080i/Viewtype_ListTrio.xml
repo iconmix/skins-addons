@@ -12,8 +12,8 @@
 		</control>-->
 		<control type="image">
 					<posx>15</posx>
-			<posy>5</posy>
-			<height>835</height>
+			<posy>35</posy>
+			<height>805</height>
 			<width>808</width>
 					<texture>frames/Menu_Glass2b.png</texture>
 					<colordiffuse>DialogBackgroundColor</colordiffuse>	
@@ -84,8 +84,8 @@
 			<!-- --	<animation effect="rotatey" center="1600" start="0" end="15" time="500" condition="true">Conditional</animation> -->
 
 			<posx>70</posx>
-			<posy>60</posy>
-			<height>735</height>
+			<posy>90</posy>
+			<height>705</height>
 			<width>700</width>
 			
 			<onup>557</onup>

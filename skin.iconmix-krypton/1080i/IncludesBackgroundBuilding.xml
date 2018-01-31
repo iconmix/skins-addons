@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- version 4.3.6 -->
+
 <includes>
 
 
@@ -253,7 +253,10 @@
 	</control>
 
 </include>
-	-->
+	<include name="fanartSpeed0">
+		<timeperimage>10000</timeperimage>
+		<autoscroll>false</autoscroll>
+	</include>
 	<include name="fanartSpeed5">
 		<timeperimage>5000</timeperimage>
 		<autoscroll time="5000" delay="500" repeat="5000">true</autoscroll>
@@ -287,14 +290,16 @@
 		<autoscroll time="60000" delay="500" repeat="60000">true</autoscroll>
 	</include>
 	<include name="delayfanartinc">
-		<include condition="skin.string(SkinHelper.RandomFanartDelay, 6)">fanartSpeed6</include>
-		<include condition="skin.string(SkinHelper.RandomFanartDelay, 5)">fanartSpeed5</include>
-		<include condition="skin.string(SkinHelper.RandomFanartDelay, 8)">fanartSpeed8</include>
-		<include condition="skin.string(SkinHelper.RandomFanartDelay, 10)">fanartSpeed10</include>
-		<include condition="skin.string(SkinHelper.RandomFanartDelay, 15)">fanartSpeed15</include>
-		<include condition="skin.string(SkinHelper.RandomFanartDelay, 20)">fanartSpeed20</include>
-		<include condition="skin.string(SkinHelper.RandomFanartDelay, 30)">fanartSpeed30</include>
-		<include condition="skin.string(SkinHelper.RandomFanartDelay, 60)">fanartSpeed60</include>
+	  <loop>true</loop>
+		<include condition="skin.string(RandomFanartDelay, 6)">fanartSpeed6</include>
+		<include condition="skin.string(RandomFanartDelay, 5)">fanartSpeed5</include>
+		<include condition="skin.string(RandomFanartDelay, 8)">fanartSpeed8</include>
+		<include condition="skin.string(RandomFanartDelay, 10)">fanartSpeed10</include>
+		<include condition="skin.string(RandomFanartDelay, 15)">fanartSpeed15</include>
+		<include condition="skin.string(RandomFanartDelay, 20)">fanartSpeed20</include>
+		<include condition="skin.string(RandomFanartDelay, 30)">fanartSpeed30</include>
+		<include condition="skin.string(RandomFanartDelay, 60)">fanartSpeed60</include>
+		<include condition="skin.string(RandomFanartDelay,)">fanartSpeed0</include>
 	</include>
 
 	<include name="randomizeImages">

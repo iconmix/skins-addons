@@ -1,0 +1,1592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ------------------------------------ACTEURS---------------------------------------------------------- -->
+<includes>
+  <include name="BioActeur"><!-- INFO BIOGRAPHIE ACTEUR -->
+
+    <control type="group">
+      <visible>Control.HasFocus(7779)|Control.HasFocus(7778)|Control.HasFocus(5051)|Control.HasFocus(5052)|Control.HasFocus(8889)</visible>
+      <animation type="Conditional" condition="[Control.HasFocus(7779)|Control.HasFocus(7778)]+[!String.IsEmpty(Window(Home).Property(Actornaissance))|!String.IsEmpty(Window(Home).Property(Actorlieunaissance))|!String.IsEmpty(Window(Home).Property(Actorbiographie))]">
+        <effect type="slide"  end="0,-270" time="300" easy="out" tween="linear" delay="1" reversible="false"/>
+        <effect type="fade" start="0" end="100" time="600"  reversible="true"/>
+      </animation>
+      <animation type="Conditional" condition="Control.HasFocus(8889)+[!String.IsEmpty(Window(Home).Property(Actornaissance))|!String.IsEmpty(Window(Home).Property(Actorlieunaissance))|!String.IsEmpty(Window(Home).Property(Actorbiographie))]">
+
+        <effect type="slide"  end="0,-710" time="0" easy="out" tween="linear" delay="1" reversible="false"/>
+        <effect type="fade" start="0" end="100" time="600"  reversible="true"/>
+      </animation>
+      <top>10</top>
+      <width>1400</width>
+      <left>250</left>
+      <control type="image">
+        <visible>[Control.HasFocus(7779)|Control.HasFocus(7778)]+[!String.IsEmpty(Window(Home).Property(Actornaissance))|!String.IsEmpty(Window(Home).Property(Actorlieunaissance))|!String.IsEmpty(Window(Home).Property(Actorbiographie))]</visible>
+        <height>250</height>
+        <colordiffuse>CouleurActeurs</colordiffuse>
+        <bordersize>8</bordersize>
+        <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
+        <texture>frames/fondinfogris.png</texture>
+        <aspectratio scalediffuse="false">stretch</aspectratio>
+      </control>
+      <control type="image">
+        <visible>Control.HasFocus(8889)</visible>
+        <height>650</height>
+        <colordiffuse>CouleurActeurs</colordiffuse>
+        <bordersize>8</bordersize>
+        <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
+        <texture>frames/fondinfogris.png</texture>
+        <aspectratio scalediffuse="false">stretch</aspectratio>
+      </control>
+      <control type="grouplist">
+        <visible>!Container(8888).IsUpdating</visible>
+        <top>15</top>
+        <left>15</left>
+        <height>350</height>
+        <control type="textbox"> <!---- Nom reel -->
+          <width>340</width>
+          <font>comic24</font>
+          <height max="70">auto</height>
+          <align>center</align>
+          <shadowcolor>white</shadowcolor>
+          <label>[COLOR=yellow][I]$INFO[Window(Home).Property(ActorNomReel)][/I][/COLOR]</label>
+          <visible>!String.IsEmpty(Window(Home).Property(ActorNomReel))</visible>
+        </control>
+
+        <control type="label"> <!---- Date naissance -->
+          <!--<top>15</top>
+          <left>15</left>-->
+          <font>comic24</font>
+          <height>30</height>
+          <label>$LOCALIZE[31896] [COLOR=yellow]$INFO[Window(Home).Property(Actornaissance)][/COLOR]</label>
+          <visible>!String.IsEmpty(Window(Home).Property(Actornaissance))</visible>
+        </control>
+
+        <control type="textbox"> <!---- Lieu Naissance -->
+          <width>340</width>
+          <font>comic24</font>
+          <height max="70">auto</height>
+          <label>[COLOR=yellow]$INFO[Window(Home).Property(Actorlieunaissance),[COLOR=white]$LOCALIZE[31895][/COLOR]][/COLOR]</label>
+          <visible>!String.IsEmpty(Window(Home).Property(Actorlieunaissance))</visible>
+        </control>
+        <control type="label"> <!---- AGE -->
+          <!-- <top>125</top>
+          <left>15</left> -->
+          <font>comic24</font>
+          <height>30</height>
+          <label>$LOCALIZE[31894] [COLOR=yellow]$INFO[Window(Home).Property(Actorage)][/COLOR]</label>
+          <visible>!String.IsEmpty(Window(Home).Property(Actorage))</visible>
+
+        </control>
+        <control type="label"> <!---- Date Deces -->
+
+          <font>comic24</font>
+          <height>30</height>
+          <label>$LOCALIZE[31897] [COLOR=yellow]$INFO[Window(Home).Property(Actordeces)][/COLOR]</label>
+          <visible>!String.IsEmpty(Window(Home).Property(Actordeces))</visible>
+        </control>
+
+      </control>
+      <control type="image">
+        <posy>250</posy>
+        <posx>50</posx>
+        <posy>40</posy>
+        <width>250</width>
+        <height>390</height>
+        <fadetime>100</fadetime>
+        <aspectratio>keep</aspectratio>
+        <!-- <texture>$INFO[ListItem.Icon]</texture> -->
+        <texture>$INFO[Window(Home).Property(ActorThumb)]</texture>
+        <bordersize>8</bordersize>
+        <bordertexture border="8">frames/ClassicFrame_Poster3.png</bordertexture>
+        <visible>Control.HasFocus(8889)+[!String.IsEmpty(Window(Home).Property(Actornaissance))|!String.IsEmpty(Window(Home).Property(Actorlieunaissance))]</visible>
+      </control>
+
+      <control type="scrollbar" id="8892">
+        <description>My first scroll bar control</description>
+        <left>80</left>
+        <top>60</top>
+        <width>250</width>
+        <height>30</height>
+        <visible>true</visible>
+
+        <orientation>vertical</orientation>
+        <showonepage>true</showonepage>
+        <onup>2</onup>
+        <ondown>3</ondown>
+        <onleft>1</onleft>
+        <onright>1</onright>
+      </control>
+      <control type="textbox" id="8890">
+        <visible>Control.HasFocus(7779)|Control.HasFocus(7778)</visible>
+        <top>15</top>
+        <left>400</left>
+        <width>950</width>
+        <height>220</height>
+        <align>left</align>
+        <aligny>center</aligny>
+        <font>comic24</font>
+        <autoscroll delay="10000" time="3500" repeat="10000">[Control.HasFocus(7779)|Control.HasFocus(7778)|Control.HasFocus(8889)]+System.IdleTime(2)</autoscroll>
+        <textcolor>white</textcolor>
+        <label>$INFO[Window(Home).Property(Actorbiographie)]</label>
+      </control>
+      <control type="textbox" id="8891">
+        <visible>!Container(8888).IsUpdating+Control.HasFocus(8889)</visible>
+        <top>15</top>
+        <left>400</left>
+        <width>950</width>
+        <height>600</height>
+        <align>left</align>
+        <aligny>center</aligny>
+        <pagecontrol>8892</pagecontrol>
+        <font>comic24</font>
+        <autoscroll delay="10000" time="3500" repeat="10000">[Control.HasFocus(7779)|Control.HasFocus(7778)|Control.HasFocus(8889)]+System.IdleTime(2)</autoscroll>
+        <textcolor>lightgrey</textcolor>
+        <label>$INFO[Window(Home).Property(Actorbiographie)]</label>
+      </control>
+      <visible>System.HasAddon(script.iconmixtools)</visible>
+    </control>
+  </include>
+  <!-- ---------------------------------------------------------------------------------------------- -->
+  <include name="showacteurinfo">
+    <control type="group">
+      <visible>System.HasAddon(script.iconmixtools)</visible>
+      <control type="button" id="8889">
+        <posx>-2000</posx>
+        <label>-O-</label>
+        <onclick>SetFocus(55)</onclick>
+        <oninfo>SetFocus(55)</oninfo>
+        <onleft>SetFocus(55)</onleft>
+        <onright>SetFocus(55)</onright>
+        <onback>55</onback>
+        <ondown>PageDown(8892)</ondown>
+        <onup>PageUp(8892)</onup>
+      </control>
+      <control type="group">
+        <left>-200</left>
+        <top>880</top>
+        <include>BioActeur</include>
+      </control>
+    </control>
+
+  </include>
+  <!-- --------------------------------------------------------------------------------------------- -->
+  <include name="PPActeurs">
+
+    <param name="ItemId" default="0"/>
+    <param name="Width1" default="265"/>
+    <param name="DiffuseFrame" default="acteurs/frame2.png"/>
+    <param name="visibility" default="True"/>
+    <param name="showlabel" default="True"/>
+    <param name="reflet" default="False"/>
+    <definition>
+      <control type="group">
+        <height>320</height>
+        <visible>$PARAM[visibility]</visible>
+        <width>$PARAM[Width1]</width>
+
+        <control type="textbox">
+          <posy>230</posy>
+          <height>115</height>
+          <align>center</align>
+          <aligny>top</aligny>
+          <font>acteurs</font>
+          <textcolor>TextNF</textcolor>
+          <label>$INFO[Container(1998).ListItem($PARAM[ItemId]).Label][CR][CR][COLOR=yellow][I]$INFO[Container(1998).ListItem($PARAM[ItemId]).Label2,(,)][/I][/COLOR]</label>
+          <visible>$PARAM[showlabel]</visible>
+        </control>
+
+        <control type="group">
+          <posx>35</posx>
+          <posy>5</posy>
+          <control type="image">
+            <description>Actor image</description>
+            <posy>10</posy>
+            <posx>5</posx>
+            <align>center</align>
+            <width>175</width>
+            <height>220</height>
+            <texture diffuse=$PARAM[DiffuseFrame] fallback="DefaultActor.png">$INFO[Container(1998).ListItem($PARAM[ItemId]).Icon]</texture>
+            <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
+          </control>
+          <control type="image">
+            <description>Actor image</description>
+            <top>220</top>
+            <posx>5</posx>
+            <align>center</align>
+            <width>175</width>
+            <height>220</height>
+            <texture flipy="true" diffuse="acteurs/reflect_poster2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem($PARAM[ItemId]).Icon]</texture>
+            <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
+            <visible>$PARAM[reflet]</visible>
+          </control>
+        </control>
+      </control>
+    </definition>
+  </include>
+  <!-- ------------------------------------------------------------------ ---->
+  <include name="PPActeursListe">
+    <param name="Width2" default="265"/>
+    <param name="showlabel2" default="True"/>
+    <param name="reflet" default="False"/>
+    <definition>
+      <include content="PPActeurs">
+        <param name="showlabel">$PARAM[showlabel2]</param>
+        <param name="ItemId">1</param>
+        <param name="reflet">$PARAM[reflet]</param>
+        <param name="Width1">$PARAM[Width2]</param>
+        <param name="visibility">Integer.IsGreater(Container(1998).NumItems,1)</param>
+      </include>
+      <include  content="PPActeurs">
+        <param name="showlabel">$PARAM[showlabel2]</param>
+        <param name="Width1">$PARAM[Width2]</param>
+        <param name="reflet">$PARAM[reflet]</param>
+        <param name="ItemId">2</param>
+        <param name="visibility">Integer.IsGreater(Container(1998).NumItems,2)</param>
+      </include>
+      <include content="PPActeurs">
+        <param name="showlabel">$PARAM[showlabel2]</param>
+        <param name="Width1">$PARAM[Width2]</param>
+        <param name="reflet">$PARAM[reflet]</param>
+        <param name="ItemId">3</param>
+        <param name="visibility">Integer.IsGreater(Container(1998).NumItems,3)</param>
+
+      </include>
+      <include content="PPActeurs">
+        <param name="showlabel">$PARAM[showlabel2]</param>
+        <param name="Width1">$PARAM[Width2]</param>
+        <param name="reflet">$PARAM[reflet]</param>
+        <param name="ItemId">4</param>
+        <param name="visibility">Integer.IsGreater(Container(1998).NumItems,4)</param>
+      </include>
+      <include content="PPActeurs">
+        <param name="showlabel">$PARAM[showlabel2]</param>
+        <param name="Width1">$PARAM[Width2]</param>
+        <param name="reflet">$PARAM[reflet]</param>
+        <param name="ItemId">5</param>
+        <param name="visibility">Integer.IsGreater(Container(1998).NumItems,5)</param>
+      </include>
+      <include content="PPActeurs">
+        <param name="showlabel">$PARAM[showlabel2]</param>
+        <param name="Width1">$PARAM[Width2]</param>
+        <param name="reflet">$PARAM[reflet]</param>
+        <param name="ItemId">6</param>
+        <param name="visibility">Integer.IsGreater(Container(1998).NumItems,6)</param>
+      </include>
+      <include content="PPActeurs">
+        <param name="showlabel">$PARAM[showlabel2]</param>
+        <param name="Width1">$PARAM[Width2]</param>
+        <param name="reflet">$PARAM[reflet]</param>
+        <param name="ItemId">7</param>
+        <param name="visibility">Integer.IsGreater(Container(1998).NumItems,7)</param>
+      </include>
+      <include content="PPActeurs">
+        <param name="showlabel">$PARAM[showlabel2]</param>
+        <param name="Width1">$PARAM[Width2]</param>
+        <param name="reflet">$PARAM[reflet]</param>
+        <param name="ItemId">8</param>
+        <param name="visibility">Integer.IsGreater(Container(1998).NumItems,8)</param>
+      </include>
+    </definition>
+  </include>
+  <!-- --------------------------------------------------------------------------------------------- -->
+  <include name="ShowActorDetails">
+    <control type="group">
+      <visible>!String.IsEmpty(VideoPlayer.DBID)</visible>
+      <control type="button">
+
+        <visible>!Control.hasFocus(2022)</visible>
+
+        <width>auto</width>
+        <textoffsety>5</textoffsety>
+        <height>40</height>
+        <align>center</align>
+        <textoffsetx>35</textoffsetx>
+        <texturefocus>frames/banner_frame2glass.png</texturefocus>
+        <texturenofocus>frames/banner_frame2glass.png</texturenofocus>
+        <font>exptext</font>
+        <textcolor>yellow</textcolor>
+        <label>$LOCALIZE[344]</label>
+      </control>
+
+
+
+      <control type="button">
+        <visible>Control.hasFocus(2022)</visible>
+
+        <width>auto</width>
+        <height>40</height>
+        <textoffsetx>35</textoffsetx>
+        <textoffsety>5</textoffsety>
+        <texturefocus>frames/banner_frame2glass.png</texturefocus>
+        <texturenofocus>frames/banner_frame2glass.png</texturenofocus>
+        <font>exptext</font>
+        <textcolor>yellow</textcolor>
+        <label>$LOCALIZE[29994]</label>
+      </control>
+      <control type="image">
+        <animation type="Conditional" loop="true" condition="true">
+          <effect type="fade"  start="10" end="100"  time="1000" delay="1000" reversible="false"/>
+        </animation>
+        <top>7</top>
+        <left>7</left>
+
+        <width>25</width>
+        <height>25</height>
+        <texture>Arrowdwactor.png</texture>
+
+      </control>
+    </control>
+  </include>
+
+  <include name="PanelActeursOsd">
+    <control type="group">
+      <top>1450</top>
+
+
+      <control type="button" id="2022">
+        <top>1500</top>
+        <label>Activation1998</label>
+        <onleft>Control.Move(1998,-1)</onleft>
+        <onright>Control.Move(1998,1)</onright>
+        <onback>2001</onback>
+        <onup>2001</onup>
+        <ondown>7781</ondown>
+        <onclick>SetFocus(7781)</onclick>
+        <visible>Player.HasVideo+[Window.IsVisible(12901)|Window.IsVisible(10142)]+Integer.IsGreater(Container(1998).NumItems,0)</visible>
+      </control>
+
+      <!--- CADRE DES ACTEURS ---->
+      <control type="group">
+        <animation type="Conditional" reversible="true" condition="!Control.HasFocus(7779)+!Control.HasFocus(7781)+!Container(1998).IsUpdating+Player.HasVideo+[Window.IsVisible(12901)|Window.IsVisible(10142)]+Integer.IsGreater(Container(1998).NumItems,0)">
+          <effect type="slide"  start="0,0" end="0,-500" time="500" delay="1" />
+        </animation>
+        <visible>Control.hasFocus(2022)</visible>
+        <control type="image">
+          <posx>0</posx>
+          <width>1920</width>
+          <height>350</height>
+          <texture>osd/OSDdialogback.png</texture>
+          <colordiffuse>OSDBackgroundColor</colordiffuse>
+        </control>
+        <control type="group"> <!-- focus -->
+          <top>0</top>
+          <left>15</left>
+          <height>350</height>
+
+          <include content="PPActeurs">
+            <param name="ItemId">0</param>
+          </include>
+
+        </control>
+        <control type="group">
+          <visible>Control.HasFocus(2022)</visible>
+          <top>295</top>
+          <left>927</left>
+          <include>ShowActorDetails</include>
+        </control>
+
+        <control type="grouplist">
+          <top>0</top>
+          <left>265</left>
+          <height>350</height>
+          <width>1640</width>
+          <orientation>horizontal</orientation>
+          <include content="PPActeursListe">
+          </include>
+
+        </control>
+      </control>
+
+
+    </control>
+  </include>
+
+  <include name="ActeurLeft">
+    <width>375</width>
+  </include>
+  <include name="ActeurCenter">
+    <width>1200</width>
+    <left>330</left>
+    <posy>938</posy>
+    <movement>15</movement>
+  </include>
+  <include name="ActeurCenterTexte">
+    <width>375</width>
+    <left>850</left>
+    <posy>918</posy>
+    <movement>15</movement>
+  </include>
+  <include name="PanelActeurLeft">
+    <left>30</left>
+    <width>435</width>
+  </include>
+  <include name="PanelActeurCenter">
+    <top>0</top>
+    <width>1265</width>
+    <left>327</left>
+    <height>150</height>
+  </include>
+  <include name="PanelActeurCenterTexte">
+    <top>0</top>
+    <width>435</width>
+    <left>772</left>
+  </include>
+
+  <!-- ----------------------------------------------------------------------------------------------- -->
+  <include name="CommonPanelActeursSaga">
+    <height>160</height>
+    <width>110</width>
+    <animation type="Conditional"  condition="true">
+      <effect type="zoom" center="0,80" end="85"  time="1" delay="1" reversible="false"/>
+    </animation>
+    <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
+    <colordiffuse>FFFFFFFF</colordiffuse>
+  </include>
+  <!-- ----------------------------------------------------------------------------------------------- -->
+  <include name="PanelActeursSaga">
+    <control type="group">
+      <visible>Integer.IsGreater(Container(1999).NumItems,0)+!Container(1999).OnNext+!Container(1999).OnPrevious+!Skin.HasSetting(HideSagaCast)+Window.IsVisible(10025)</visible>
+      <animation type="Conditional" condition="System.IdleTime(2)|!String.IsEmpty(Window(Home).Property(FenetreListeChoix))" reversible="false">
+        <effect type="slide"  end="380" time="800" delay="100" />
+      </animation>
+
+      <top>-28</top>
+      <left>32</left>
+      <control type="group">
+        <control type="image"> <!--- CADRE DES ACTEURS DEFILANTS---->
+          <height>615</height>
+          <width>380</width>
+          <texture>frames/Dialog_GlassActeur3.png</texture>
+          <colordiffuse>DialogBackgroundColor</colordiffuse>
+          <aspectratio  scalediffuse="true">stretch</aspectratio>
+        </control>
+        <control type="label">
+          <left>140</left>
+          <top>550</top>
+          <label> [I]$LOCALIZE[33029][/I]</label>
+        </control>
+        <control type="label">
+          <left>35</left>
+          <width>300</width>
+          <top>46</top>
+          <align>left</align>
+          <label>[COLOR=yellow]$INFO[Container(1998).ListItem.Label][/COLOR]</label>
+        </control>
+
+        <control type="image">
+          <left>-1190</left>
+          <top>552</top>
+          <animation type="Conditional" loop="true" condition="true">
+            <effect type="fade"  start="100" end="0"  time="1500" delay="1000" reversible="false"/>
+          </animation>
+          <height>25</height>
+          <texture>info.png</texture>
+          <aspectratio>keep</aspectratio>
+        </control>
+      </control>
+
+      <control type="grouplist"> <!-- ligne 2 -->
+        <posx>20</posx>
+        <posy>235</posy>
+        <width>340</width>
+        <height>170</height>
+        <align>left</align>
+
+        <orientation>horizontal</orientation>
+        <control type="image">
+          <include>CommonPanelActeursSaga</include>
+          <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem(3).Icon]</texture>
+          <visible>Integer.IsGreater(Container(1998).NumItems,3)</visible>
+        </control>
+        <control type="image">
+          <include>CommonPanelActeursSaga</include>
+          <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem(4).Icon]</texture>
+          <visible>Integer.IsGreater(Container(1998).NumItems,4)</visible>
+        </control>
+        <control type="image">
+          <include>CommonPanelActeursSaga</include>
+          <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem(5).Icon]</texture>
+          <visible>Integer.IsGreater(Container(1998).NumItems,5)</visible>
+        </control>
+
+      </control>
+      <control type="grouplist"> <!-- ligne 3 -->
+        <posx>20</posx>
+        <posy>390</posy>
+        <width>340</width>
+        <height>170</height>
+        <align>left</align>
+        <orientation>horizontal</orientation>
+        <control type="image">
+          <include>CommonPanelActeursSaga</include>
+          <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem(6).Icon]</texture>
+          <visible>Integer.IsGreater(Container(1998).NumItems,6)</visible>
+        </control>
+        <control type="image">
+          <include>CommonPanelActeursSaga</include>
+          <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem(7).Icon]</texture>
+          <visible>Integer.IsGreater(Container(1998).NumItems,7)</visible>
+        </control>
+        <control type="image">
+          <include>CommonPanelActeursSaga</include>
+          <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem(8).Icon]</texture>
+          <visible>Integer.IsGreater(Container(1998).NumItems,8)</visible>
+        </control>
+
+      </control>
+      <control type="grouplist"> <!-- ligne 1 -->
+        <posx>20</posx>
+        <posy>80</posy>
+        <width>340</width>
+        <height>170</height>
+        <align>left</align>
+        <orientation>horizontal</orientation>
+        <control type="image">
+          <height>160</height>
+          <width>110</width>
+          <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
+
+          <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem.Icon]</texture>
+        </control>
+        <control type="image">
+          <include>CommonPanelActeursSaga</include>
+          <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem(1).Icon]</texture>
+          <visible>Integer.IsGreater(Container(1998).NumItems,1)</visible>
+        </control>
+        <control type="image">
+          <include>CommonPanelActeursSaga</include>
+          <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem(2).Icon]</texture>
+          <visible>Integer.IsGreater(Container(1998).NumItems,2)</visible>
+        </control>
+
+      </control>
+
+    </control>
+  </include>
+
+  <!-- ---------------------------------------------------------------------------------------------- -->
+  <include name="PanelActeurs">
+
+    <control type="group">
+      <include>Animation_CacherSiMenu</include>
+
+      <visible>Integer.IsGreater(Container(1998).NumItems,0)</visible>
+      <control type="group"> <!-- ACTEURS DEFILANTS -->
+        <visible>!Player.HasVideo|[!Window.IsVisible(12901)+!Window.IsVisible(10142)]</visible>
+        <visible>[[[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[String.IsEqual(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Label,..)</visible>
+        <include>Animation_FadedByMenu</include>
+        <include>Animation_HiddenByInfo</include>
+        <animation type="Conditional" condition="Skin.HasSetting(ShowActeursTexte)+Skin.HasSetting(CacheFond)">
+          <effect type="slide"  start="0,0" end="0,20" time="1" delay="1" reversible="true"/>
+        </animation>
+        <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7781)|Window.IsVisible(movieinformation)">
+          <effect type="fade"  start="100" end="0" time="5" delay="1" reversible="true"/>
+        </animation>
+
+        <top>862</top>
+        <left>-480</left>
+        <animation type="Conditional" condition="String.IsEmpty(Window(Home).Property(NextAired.NextDate))+Skin.HasSetting(CacheFond)+Skin.HasSetting(ActeursAuCentre)">
+          <effect type="slide"  start="0,0" end="0,-19" time="1" delay="1" reversible="false"/>
+        </animation>
+        <animation type="Conditional" condition="Skin.HasSetting(CacheFond)">
+          <effect type="slide"  start="0,0" end="0,-843" time="1" delay="1" reversible="false"/>
+        </animation>
+
+        <animation type="Conditional" condition="!Container(1998).IsUpdating">
+          <effect type="slide"  start="0,0" end="450,0" time="1" delay="1" reversible="false"/>
+          <effect type="fade"  start="0" end="100" time="100" delay="1" reversible="false"/>
+        </animation>
+        <control type="group">
+          <control type="image"> <!--- CADRE A GAUCHE---->
+            <visible>[!Skin.HasSetting(ActeursAuCentre)|!Skin.HasSetting(CacheFond)]</visible>
+            <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
+              <effect type="slide"  start="0,0" end="0,-5" time="1" delay="1" reversible="true"/>
+            </animation>
+            <left>25</left>
+            <width>435</width>>
+            <height>175</height>
+            <top>41</top>
+            <bordersize>20</bordersize>
+            <bordertexture border="20">acteurs/acteursdiffuse.png</bordertexture>
+            <texture background="true">acteurs/fondacteurgauche.png</texture>
+            <aspectratio scalediffuse="true">stretch</aspectratio>
+            <colordiffuse>90FFFFFF</colordiffuse>
+          </control>
+          <control type="image"> <!--- CADRE AU CENTRE---->
+            <visible>Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(CacheFond)+!Skin.HasSetting(ShowActeursTexte)</visible>
+            <top>55</top>
+            <width>1265</width>
+            <left>327</left>
+            <height>170</height>
+            <bordersize>20</bordersize>
+            <bordertexture border="20">acteurs/acteursdiffuse.png</bordertexture>
+            <texture background="true">acteurs/fondacteurgauche.png</texture>
+            <aspectratio scalediffuse="true">stretch</aspectratio>
+            <colordiffuse>90FFFFFF</colordiffuse>
+            <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
+              <effect type="slide"  start="0,0" end="0,-5" time="1" delay="1" reversible="true"/>
+            </animation>
+          </control>
+          <control type="image"> <!--- CADRE AU CENTRE ET TEXTE---->
+            <visible>Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(CacheFond)+Skin.HasSetting(ShowActeursTexte)</visible>
+            <top>41</top>
+
+            <left>772</left>
+            <width>445</width>>
+            <height>175</height>
+            <bordersize>20</bordersize>
+            <bordertexture border="20">acteurs/acteursdiffuse.png</bordertexture>
+            <texture background="true">acteurs/fondacteurgauche.png</texture>
+            <aspectratio scalediffuse="true">stretch</aspectratio>
+            <colordiffuse>90FFFFFF</colordiffuse>
+            <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
+              <effect type="slide"  start="0,0" end="0,-5" time="1" delay="1" reversible="true"/>
+            </animation>
+          </control>
+          <!-- photo de l'acteur en mode texte-->
+          <control type="image">
+            <visible>Skin.HasSetting(ShowActeursTexte)</visible>
+            <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+Skin.HasSetting(ActeursAuCentre)">
+              <effect type="slide"  start="0,0" end="760,0" time="1" delay="1" reversible="true"/>
+            </animation>
+            <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
+              <effect type="slide"  start="0,0" end="0,-5" time="1" delay="1" reversible="true"/>
+            </animation>
+            <align>left</align>
+            <left>320</left>
+            <top>65</top>
+            <width>120</width>
+            <height>135</height>
+            <texture  diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem.Icon]</texture>
+            <aspectratio scalediffuse="true">keep</aspectratio>
+            <colordiffuse>FFFFFFFF</colordiffuse>
+          </control>
+
+        </control>
+
+        <!-- realisateur -->
+        <control type="grouplist">
+          <height>50</height>
+          <width>475</width>
+          <align>right</align>
+          <top>180</top>
+          <orientation>horizontal</orientation>
+          <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+Skin.HasSetting(ActeursAuCentre)+!Skin.HasSetting(ShowActeursTexte)">
+            <effect type="slide"  start="0,0" end="1160,0" time="1" delay="1" reversible="true"/>
+          </animation>
+          <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(ShowActeursTexte)">
+            <effect type="slide"  start="0,0" end="760,0" time="1" delay="1" reversible="true"/>
+          </animation>
+          <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
+            <effect type="slide"  start="0,0" end="0,-5" time="1" delay="1" reversible="true"/>
+          </animation>
+
+
+          <visible>!String.IsEmpty(ListItem.Director)</visible>
+
+
+          <control type="label">
+            <font>acteurs</font>
+            <width>auto</width>
+            <height>50</height>
+            <aligny>center</aligny>
+            <shadowcolor>ff000000</shadowcolor>
+            <label>[COLOR=lightgrey][I]$INFO[ListItem.Director][/I][/COLOR]</label>
+          </control>
+          <control type="image" id="5055">
+            <width>50</width>
+            <height>50</height>
+            <texture>flags/realisateur.png</texture>
+            <aspectratio  scalediffuse="true">keep</aspectratio>
+          </control>
+
+        </control>-->
+
+      </control>
+
+      <include>PanelActeursOsd</include>
+      <!---------------------------------------------------- roles --------------------------------------------------------->
+      <control type="group">
+        <top>-3500</top>
+        <left>10</left>
+        <align>left</align>
+        <width>1900</width>
+        <height>480</height>
+        <animation type="Conditional" condition="[Control.HasFocus(7779)|Control.HasFocus(7781)]+!Window.IsVisible(12901)+!Window.IsVisible(10142)">
+          <effect type="slide"  start="0,0" end="0,3900" time="500" delay="1" reversible="false"/>
+        </animation>
+        <animation type="Conditional" condition="[Control.HasFocus(7779)|Control.HasFocus(7781)]+Player.HasVideo+[Window.IsVisible(12901)|Window.IsVisible(10142)]">
+          <effect type="slide"  start="0,0" end="0,4200" time="500" delay="1" reversible="false"/>
+        </animation>
+        <animation type="Conditional" condition="Container(5051).IsUpdating | !String.IsEmpty(Window(Home).Property(IconmixTrailer))">
+          <effect type="fade"  start="100" end="30" time="500" delay="100" reversible="true"/>
+        </animation>
+
+        <control type="group">
+          <control type="group"> <!-- panel acteurs -->
+            <top>-180</top>
+            <left>10</left>
+            <height>290</height>
+            <control type="group">
+              <width>660</width>
+              <visible>!Control.HasFocus(7778)+!Control.HasFocus(7779)+!Control.HasFocus(5051)</visible>
+              <include>ActeursSuivants</include>
+            </control>
+          </control>
+          <control type="group">
+
+            <control type="group"><!-- fond panneau et titre -->
+              <visible>Control.HasFocus(7779)</visible>
+              <animation type="Visible">
+              <effect type="slide"  end="0,100" time="500" easy="out" tween="bounce" delay="1" reversible="false"/> -->
+            </animation>
+            <top>380</top>
+            <width>1500</width>
+            <left>200</left>
+            <control type="image">
+              <height>60</height>
+              <colordiffuse>CouleurActeurs</colordiffuse>
+              <bordersize>8</bordersize>
+              <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
+
+              <texture>frames/fondinfogris.png</texture>
+              <aspectratio scalediffuse="false">stretch</aspectratio>
+            </control>
+            <control type="label"> <!---- vidéo sélectionnée-->
+              <top>5</top>
+              <font>PlotFont36</font>
+              <height>80</height>
+              <align>center</align>
+              <label>[COLOR=yellow]$INFO[Container(5051).ListItem.Label] [I][COLOR=white]$INFO[Container(5051).ListItem.Year,(,)][/COLOR][/I][/COLOR]</label>
+            </control>
+            <control type="image">
+              <top>-2</top>
+              <align>left</align>
+              <left>-1480</left>
+              <height>60</height>
+              <texture>acteurs/films.png</texture>
+              <aspectratio>keep</aspectratio>
+              <visible>String.IsEqual(Container(5051).ListItem.Property(dbtype),movie)</visible>
+            </control>
+            <control type="image">
+              <top>-2</top>
+              <left>-1480</left>
+              <height>60</height>
+              <align>left</align>
+              <texture>acteurs/series.png</texture>
+              <aspectratio>keep</aspectratio>
+              <visible>!String.IsEqual(Container(5051).ListItem.Property(dbtype),movie)</visible>
+            </control>
+          </control>
+
+          <include>BioActeur</include>
+
+          <control type="image"> <!-- fond -->
+            <posx>0</posx>
+            <posy>0</posy>
+            <colordiffuse>CouleurActeurs</colordiffuse>
+            <bordersize>8</bordersize>
+            <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
+            <texture>frames/fondinfogris.png</texture>
+            <aspectratio scalediffuse="false">stretch</aspectratio>
+          </control>
+
+          <control type="group">
+            <top>-190</top>
+            <left>10</left>
+            <height>290</height>
+
+            <control type="group"><!-- acteur focus -->
+              <width>190</width>
+              <control type="image">
+                <align>center</align>
+                <posy>-10</posy>
+                <posx>5</posx>
+                <height>250</height>
+                <width>205</width>
+                <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Container(1998).ListItem.Icon]</texture>
+                <aspectratio scalediffuse="true" align="center" >keep</aspectratio>
+                <animation effect="zoom" center="100,125"  end="120" time="800" delay="200" condition="true" reversible="false">Conditional</animation>
+              </control>
+            </control>
+
+            <control type="group"> <!-- fleches d'aide --->
+              <top>205</top>
+              <left>175</left>
+              <width>30</width>
+              <height>30</height>
+              <control type="group">
+                <visible>[!Container(5051).IsUpdating+Control.HasFocus(7781)]|Control.HasFocus(7779)</visible>
+                <animation type="Conditional" loop="true" condition="true">
+                  <effect type="fade"  start="0" end="100"  time="1000" delay="2000" reversible="false"/>
+                </animation>
+                <control type="image">
+                  <align>center</align>
+                  <texture>ArrowUp.png</texture>
+                  <colordiffuse>FF00FFFF</colordiffuse>
+                </control>
+                <control type="image">
+                  <align>center</align>
+                  <texture>ArrowDown.png</texture>
+                </control>
+              </control>
+            </control>
+          </control>
+
+          <control type="group"> <!-- type local ou tmdb -->
+            <posy>-160</posy>
+            <posx>1700</posx>
+            <width>175</width>
+            <height>220</height>
+            <control type="image">
+              <align>center</align>
+              <texture>acteurs/filmotv.png</texture>
+              <aspectratio align="center" aligny="center">keep</aspectratio>
+            </control>
+          </control>
+
+          <control type="group">
+            <posy>380</posy>
+            <posx>1780</posx>
+            <width>70</width>
+            <height>70</height>
+            <control type="group"> <!-- mode local -->
+              <visible>!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))</visible>
+              <control type="image">
+                <texture>acteurs/local.png</texture>
+                <aspectratio>keep</aspectratio>
+              </control>
+              <control type="image">
+                <top>60</top>
+                <left>65</left>
+                <texture>acteurs/tmdb.png</texture>
+                <aspectratio>keep</aspectratio>
+                <visible>Control.HasFocus(7779)</visible>
+                <width>40</width>
+                <height>40</height>
+              </control>
+            </control>
+            <control type="group"> <!-- mode TMDB -->
+              <visible>String.IsEmpty(Window(Home).Property(ActeurVideoLocal))</visible>
+              <control type="image">
+                <texture>acteurs/tmdb.png</texture>
+                <aspectratio>keep</aspectratio>
+              </control>
+              <control type="image">
+                <texture>acteurs/local.png</texture>
+                <top>60</top>
+                <left>65</left>
+                <width>40</width>
+                <height>40</height>
+                <visible>Control.HasFocus(7779)</visible>
+                <aspectratio>keep</aspectratio>
+              </control>
+            </control>
+            <control type="image">
+              <width>30</width>
+              <height>30</height>
+              <left>60</left>
+              <top>40</top>
+              <animation type="Conditional" loop="true" condition="true">
+                <effect type="fade"  start="0" end="100"  time="1000" delay="1000" reversible="false"/>
+              </animation>
+              <visible>Control.HasFocus(7779)</visible>
+
+              <align>center</align>
+              <texture>ArrowDown.png</texture>
+            </control>
+          </control>
+
+
+        </control>
+
+        <control type="image"> <!-- sablier -->
+          <top>150</top>
+          <left>860</left>
+          <width>180</width>
+          <height>180</height>
+          <texture>sablier.gif</texture>
+          <visible>Container(5051).IsUpdating</visible>
+        </control>
+        <control type="label"> <!-- nom de l'acteur -->
+          <top>5</top>
+          <left>225</left>
+          <width>1440</width>
+          <align>left</align>
+          <font>impact</font>
+          <label>[COLOR=yellow]$VAR[Is1998][/COLOR]</label>
+        </control>
+
+        <control type="label"> <!-- compteur acteurs -->
+          <top>10</top>
+          <left>260</left>
+          <width>1450</width>
+          <align>right</align>
+          <font>lcdnsub</font>
+          <textcolor>lightblue</textcolor>
+          <label>$INFO[Container(5051).CurrentItem]/$INFO[Container(5051).NumItems]</label>
+          <visible>!Container(5051).IsUpdating</visible>
+        </control>
+
+        <!--- liste des roles -->
+        <control type="fixedlist" id="5051">
+
+          <top>60</top>
+          <left>20</left>
+          <width>1800</width>
+          <align>center</align>
+          <focusposition>2</focusposition>
+          <preloaditems>6</preloaditems>
+
+          <onfocus>SetProperty(ActeurVideoReset,,Home)</onfocus>
+          <onfocus>SetProperty(IconmixTrailer,,Home)</onfocus>
+          <onfocus>Action(firstpage)</onfocus>
+          <onfocus>SetFocus(7779)</onfocus>
+
+          <include>Roles</include>
+        </control>
+      </control>
+    </control>
+
+  </control>
+
+
+  <control type="button" id="7781"> <!-- controle acteurs -->
+    <ondown>7779</ondown>
+    <onclick>SetFocus(7779)</onclick>
+    <onfocus>SetProperty(ActeurVideoLocal,1,Home)</onfocus>
+    <onfocus>SetProperty(IconmixTrailer,,Home)</onfocus>
+    <onfocus condition="!String.IsEmpty(Window(Home).Property(ActeurVideoReset))">Action(firstpage)</onfocus>
+
+    <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
+    <onback>SetProperty(ActeurVideoReset,1,Home)</onback>
+    <onback condition="Player.HasVideo+[Window.IsVisible(12901)|Window.IsVisible(10142)]">2001</onback>
+    <onback condition="!Window.IsVisible(movieinformation)+!Window.IsVisible(12901)+!Window.IsVisible(10142)+!Control.IsVisible(1999)">55</onback>
+    <onback condition="Window.IsVisible(movieinformation)">7003</onback>
+    <onback condition="Control.IsVisible(1999)">2999</onback>
+    <onback>Action(firstpage)</onback>
+
+    <onup condition="Player.HasVideo+[Window.IsVisible(12901)|Window.IsVisible(10142)]">2001</onup>
+    <onup>SetProperty(ActeurVideoLocal,1,Home)</onup>
+    <onup>SetProperty(ActeurVideoReset,1,Home)</onup>
+    <onup condition="!Window.IsVisible(movieinformation)+!Window.IsVisible(12901)+!Window.IsVisible(10142)+!Control.IsVisible(1999)">55</onup>
+    <onup condition="Window.IsVisible(movieinformation)">7003</onup>
+    <onup condition="Control.IsVisible(1999)">2999</onup>
+    <onleft>Control.Move(1998,-1)</onleft>
+    <onright>Control.Move(1998,1)</onright>
+  </control>
+
+
+
+  <control type="button" id="7779"><!-- controle roles -->
+    <include>ControlesRoles</include>
+  </control>
+  <control type="fixedlist" id="1998"> <!-- mode photo -->
+    <visible>!Skin.HasSetting(ShowActeursTexte)</visible>
+    <include>Animation_HiddenByInfo</include>
+    <include>Animation_CacherSiMenu</include>
+    <include>Animation_OpenCloseFade</include>
+    <visible>Container.Content(genres)|Container.Content(directors)|Container.Content(actors)|Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(episodes)|Container.Content(seasons)|[Player.HasVideo+!String.IsEmpty(VideoPlayer.DBID)]</visible>
+    <animation type="Conditional" condition="String.Contains(ListItem.DBTYPE,set)|Container.Content(genres)|Container.Content(directors)|Container.Content(actors)|Window.IsVisible(12901)|Window.IsVisible(10142)|Window.IsVisible(movieinformation)|Control.HasFocus(7781)|Control.HasFocus(7779)|Control.HasFocus(2022)|Control.HasFocus(2999)">
+
+      <effect type="slide"  start="0,0" end="-2000,0" time="1" delay="1" reversible="true"/>
+    </animation>
+    <animation type="Conditional" condition="String.IsEmpty(Window(Home).Property(NextAired.NextDate))+Skin.HasSetting(CacheFond)+Skin.HasSetting(ActeursAuCentre)">
+      <effect type="slide"  start="0,0" end="0,-19" time="1" delay="1" reversible="false"/>
+    </animation>
+    <animation type="Conditional" condition="Skin.HasSetting(CacheFond)">
+      <effect type="slide"  start="0,0" end="0,-836" time="1" delay="1" reversible="false"/>
+    </animation>
+    <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
+      <effect type="slide"  start="0,0" end="0,-3" time="1" delay="1" reversible="true"/>
+    </animation>
+
+    <include condition="Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(CacheFond)">ActeurCenter</include>
+    <include condition="[!Skin.HasSetting(ActeursAuCentre)|!Skin.HasSetting(CacheFond)]">ActeurLeft</include>
+    <onfocus>7781</onfocus>
+    <movement>2</movement>
+    <posx>20</posx>
+    <posy>934</posy>
+    <height>200</height>
+
+    <itemgap>1</itemgap>
+    <orientation>horizontal</orientation>
+    <autoscroll delay="6000" repeat="5000" time="5000">!Control.HasFocus(7781)+!Control.HasFocus(7779)+!Control.HasFocus(2022)</autoscroll>
+    <pagecontrol>60</pagecontrol>
+    <resetonlabelchange>true</resetonlabelchange>
+    <itemlayout width="75">
+      <control type="image">
+        <height>110</height>
+        <texture  diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[ListItem.Icon]</texture>
+        <aspectratio scalediffuse="true">keep</aspectratio>
+        <colordiffuse>FFAFAFAF</colordiffuse>
+      </control>
+
+    </itemlayout>
+    <focusedlayout width="75">
+      <control type="image">
+        <animation type="Conditional" condition="!Skin.HasSetting(ActeursAuCentre)">
+          <effect type="zoom"  center="37,55" start="100" end="120" time="5" delay="1" reversible="true"/>
+        </animation>
+        <height>110</height>
+        <texture  diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[ListItem.Icon]</texture>
+        <aspectratio scalediffuse="true">keep</aspectratio>
+        <colordiffuse>FFFFFFFF</colordiffuse>
+      </control>
+      <control type="button">
+        <width max="340">auto</width>
+        <height>30</height>
+        <left>40</left>
+        <top>90</top>
+        <label>$INFO[Container(1998).ListItem.Label]</label>
+        <font>exptextacteurs</font>
+        <textcolor>FF404040</textcolor>
+        <shadowcolor>FF7F7F7F</shadowcolor>
+        <textoffsetx>15</textoffsetx>
+        <texturefocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturefocus>
+        <texturenofocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturenofocus>
+      </control>
+
+
+    </focusedlayout>
+
+  </control>
+  <control type="list" id="1998"> <!-- mode texte -->
+    <visible>Skin.HasSetting(ShowActeursTexte)</visible>
+    <include>Animation_CacherSiMenu</include>
+    <include>Animation_HiddenByInfo</include>
+    <include>Animation_OpenCloseFade</include>
+    <visible>Container.Content(genres)|Container.Content(directors)|Container.Content(actors)|Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(episodes)|Container.Content(seasons)|[Player.HasVideo+!String.IsEmpty(VideoPlayer.DBID)]</visible>
+    <animation type="Conditional" condition="String.Contains(ListItem.DBTYPE,set)|Container.Content(genres)|Container.Content(directors)|Container.Content(actors)|Window.IsVisible(12901)|Window.IsVisible(10142)|Window.IsVisible(movieinformation)|Control.HasFocus(7781)|Control.HasFocus(7779)|Control.HasFocus(2022)|Control.HasFocus(2999)">
+
+      <effect type="slide"  start="0,0" end="-2000,0" time="1" delay="1" reversible="true"/>
+    </animation>
+    <animation type="Conditional" condition="String.IsEmpty(Window(Home).Property(NextAired.NextDate))+Skin.HasSetting(CacheFond)+Skin.HasSetting(ActeursAuCentre)">
+      <effect type="slide"  start="0,0" end="0,-19" time="1" delay="1" reversible="false"/>
+    </animation>
+    <animation type="Conditional" condition="Skin.HasSetting(CacheFond)">
+      <effect type="slide"  start="0,0" end="0,-836" time="1" delay="1" reversible="false"/>
+    </animation>
+
+    <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+Skin.HasSetting(ActeursAuCentre)">
+      <effect type="slide"  start="0,0" end="760,10" time="1" delay="1" reversible="true"/>
+    </animation>
+    <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+!Skin.HasSetting(ActeursAuCentre)">
+      <effect type="slide"  start="0,0" end="0,10" time="1" delay="1" reversible="true"/>
+    </animation>
+    <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
+      <effect type="slide"  start="0,0" end="0,-5" time="1" delay="1" reversible="true"/>
+    </animation>
+
+    <onfocus>7781</onfocus>
+    <width>290</width>
+    <movement>3</movement>
+    <posx>8</posx>
+    <posy>926</posy>
+    <height>130</height>
+    <itemgap>1</itemgap>
+    <orientation>vertical</orientation>
+    <autoscroll delay="6000" repeat="5000" time="5000">!Control.HasFocus(7781)+!Control.HasFocus(7779)+!Control.HasFocus(2022)</autoscroll>
+    <pagecontrol>60</pagecontrol>
+    <resetonlabelchange>true</resetonlabelchange>
+    <itemlayout width="290" height="22">
+      <control type="label">
+        <left>3</left>
+        <top>3</top>
+        <align>right</align>
+        <label>$INFO[ListItem.Label]</label>
+        <textcolor>black</textcolor>
+        <font>exptextacteurs</font>
+      </control>
+      <control type="label">
+        <label>$INFO[ListItem.Label]</label>
+        <align>right</align>
+        <textcolor>white</textcolor>
+        <font>exptextacteurs</font>
+      </control>
+
+    </itemlayout>
+    <focusedlayout width="290" height="22">
+
+      <control type="label">
+        <left>3</left>
+        <top>3</top>
+        <align>right</align>
+        <label>$INFO[ListItem.Label]</label>
+        <textcolor>black</textcolor>
+        <font>exptextacteurs</font>
+      </control>
+      <control type="label">
+        <align>right</align>
+        <label>$INFO[ListItem.Label]</label>
+        <textcolor>lightgrey</textcolor>
+        <font>exptextacteurs</font>
+      </control>
+
+    </focusedlayout>
+
+  </control>
+</include>
+<!-- --------------------------------------------------------------------------------------------- -->
+<include name="ControlesRoles">
+
+  <left>0</left>
+  <top>2400</top>
+  <label>CONTROLEROLES</label>
+
+  <onfocus>SetProperty(ActeurVideoReset,,Home)</onfocus>
+  <onfocus>SetProperty(IconmixTrailer,,Home)</onfocus>
+  <!-- <onup>Action(firstpage)</onup> -->
+  <onup>SetProperty(ActeurVideoLocal,1,Home)</onup>
+  <onup>7781</onup>
+  <onleft>Control.Move(5051,-1)</onleft>
+
+  <onright>Control.Move(5051,1)</onright>
+
+  <onclick condition="!Player.HasVideo">RunScript(script.iconmixtools,trailer=True)</onclick>
+  <onclick condition="!Player.HasVideo">SetProperty(IconmixTrailer,1,Home)</onclick>
+
+  <onback>SetProperty(ActeurVideoReset,1,Home)</onback>
+  <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
+  <!-- <onback>Action(firstpage)</onback> -->
+  <onback>7781</onback>
+  <ondown condition="String.IsEmpty(Window(Home).Property(IconMixUpdating))+String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">SetProperty(ActeurVideoLocal,1,Home)</ondown>
+  <ondown condition="String.IsEmpty(Window(Home).Property(IconMixUpdating))+!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">SetProperty(ActeurVideoLocal,,Home)</ondown>
+  <!-- <ondown>Action(firstpage)</ondown>
+  <ondown condition="String.IsEmpty(Window(Home).Property(IconMixUpdating))">SetFocus(5051)</ondown>-->
+
+</include>
+
+<include name="ControlesRealisateur">
+
+  <left>0</left>
+  <top>2400</top>
+  <label>CONTROLEROLES</label>
+  <onfocus>SetProperty(ActeurVideoReset,,Home)</onfocus>
+  <onfocus>SetProperty(IconmixTrailer,,Home)</onfocus>
+
+  <!-- <onup>Action(firstpage)</onup> -->
+  <onup>SetProperty(ActeurVideoLocal,1,Home)</onup>
+  <onup>7003</onup>
+
+  <onleft>Control.Move(5052,-1)</onleft>
+
+  <onright>Control.Move(5052,1)</onright>
+
+  <onclick condition="!Player.HasVideo">RunScript(script.iconmixtools,trailer=True)</onclick>
+  <onclick condition="!Player.HasVideo">SetProperty(IconmixTrailer,1,Home)</onclick>
+
+  <onback>SetProperty(ActeurVideoReset,1,Home)</onback>
+  <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
+  <!-- <onback>Action(firstpage)</onback> -->
+  <onback>7003</onback>
+  <ondown condition="String.IsEmpty(Window(Home).Property(IconMixUpdating))+String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">SetProperty(ActeurVideoLocal,1,Home)</ondown>
+  <ondown condition="String.IsEmpty(Window(Home).Property(IconMixUpdating))+!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))">SetProperty(ActeurVideoLocal,,Home)</ondown>
+  <!-- <ondown>Action(firstpage)</ondown> -->
+  <ondown condition="String.IsEmpty(Window(Home).Property(IconMixUpdating))">SetFocus(5052)</ondown>
+
+</include>
+
+<!-- --------------------------------------------------------------------------------------------- -->
+<include name="DialogVideoInfoRealisateur">
+  <control type="group">
+    <top>500</top>
+    <left>10</left>
+    <align>left</align>
+    <width>1900</width>
+    <height>480</height>
+    <animation type="Conditional" condition="!Control.HasFocus(7778)+!Control.HasFocus(5052)">
+      <effect type="fade"  start="100" end="0" time="10" delay="1" reversible="true"/>
+    </animation>
+    <animation type="Conditional" condition="Container(5052).IsUpdating | !String.IsEmpty(Window(Home).Property(IconmixTrailer))">
+      <effect type="fade"  start="100" end="30" time="500" delay="100" reversible="true"/>
+    </animation>
+
+    <control type="group">
+
+      <control type="group"><!-- fond panneau et titre -->
+        <visible>Control.HasFocus(7778)|Control.HasFocus(5052)</visible>
+        <animation type="Visible">
+        <effect type="slide"  end="0,100" time="500" easy="out" tween="bounce" delay="1" reversible="false"/> -->
+      </animation>
+      <top>380</top>
+      <width>1500</width>
+      <left>200</left>
+      <control type="image">
+        <height>60</height>
+        <colordiffuse>CouleurActeurs</colordiffuse>
+        <bordersize>8</bordersize>
+        <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
+
+        <texture>frames/fondinfogris.png</texture>
+        <aspectratio scalediffuse="false">stretch</aspectratio>
+      </control>
+      <control type="label"> <!---- vidéo sélectionnée-->
+        <top>5</top>
+        <font>PlotFont36</font>
+        <height>80</height>
+        <align>center</align>
+        <label>[COLOR=yellow]$INFO[Container(5052).ListItem.Label] [I][COLOR=white]$INFO[Container(5052).ListItem.Year,(,)][/COLOR][/I][/COLOR]</label>
+      </control>
+      <control type="image">
+        <top>-2</top>
+        <align>left</align>
+        <left>-1480</left>
+        <height>60</height>
+        <texture>acteurs/films.png</texture>
+        <aspectratio>keep</aspectratio>
+        <visible>String.IsEqual(Container(5052).ListItem.Property(dbtype),movie)</visible>
+      </control>
+      <control type="image">
+        <top>-2</top>
+        <left>-1480</left>
+        <height>60</height>
+        <align>left</align>
+        <texture>acteurs/series.png</texture>
+        <aspectratio>keep</aspectratio>
+        <visible>!String.IsEqual(Container(5052).ListItem.Property(dbtype),movie)</visible>
+      </control>
+    </control>
+
+    <include>BioActeur</include> -->
+
+    <control type="image"> <!-- fond -->
+      <posx>0</posx>
+      <posy>0</posy>
+      <colordiffuse>CouleurActeurs</colordiffuse>
+      <bordersize>8</bordersize>
+      <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
+      <texture>frames/fondinfogris.png</texture>
+      <aspectratio scalediffuse="false">stretch</aspectratio>
+    </control>
+
+    <control type="group">
+      <top>-190</top>
+      <left>10</left>
+      <height>290</height>
+
+
+      <control type="image"><!-- acteur focus -->
+        <align>center</align>
+        <posy>-10</posy>
+        <posx>5</posx>
+        <height>250</height>
+        <width>205</width>
+        <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[Window(Home).Property(IconMixDirector)]</texture>
+        <aspectratio scalediffuse="true" align="center" >keep</aspectratio>
+        <animation effect="zoom" center="100,125"  end="120" time="800" delay="200" condition="true" reversible="false">Conditional</animation>
+      </control>
+
+      <control type="group"> <!-- fleches d'aide --->
+        <top>205</top>
+        <left>175</left>
+        <width>30</width>
+        <height>30</height>
+        <visible>!Container(5052).IsUpdating</visible>
+        <animation type="Conditional" loop="true" condition="true">
+          <effect type="fade"  start="0" end="100"  time="1000" delay="2000" reversible="false"/>
+        </animation>
+        <control type="image">
+          <align>center</align>
+          <texture>ArrowUp.png</texture>
+          <colordiffuse>FF00FFFF</colordiffuse>
+        </control>
+      </control>
+    </control>
+
+    <control type="image"><!-- type local ou tmdb -->
+      <posy>-160</posy>
+      <posx>1700</posx>
+      <width>175</width>
+      <height>220</height>
+      <align>center</align>
+      <texture>acteurs/filmotv.png</texture>
+      <aspectratio align="center" aligny="center">keep</aspectratio>
+    </control>
+
+    <control type="group"><!-- indicateurs local ou tmdb -->
+      <posy>-30</posy>
+      <posx>1780</posx>
+      <width>70</width>
+      <height>70</height>
+      <control type="group"> <!-- mode local -->
+        <visible>!String.IsEmpty(Window(Home).Property(ActeurVideoLocal))</visible>
+        <control type="image">
+          <texture>acteurs/local.png</texture>
+          <aspectratio>keep</aspectratio>
+        </control>
+        <control type="image">
+          <top>60</top>
+          <left>65</left>
+          <texture>acteurs/tmdb.png</texture>
+          <aspectratio>keep</aspectratio>
+          <width>40</width>
+          <height>40</height>
+        </control>
+      </control>
+      <control type="group"> <!-- mode TMDB -->
+        <visible>String.IsEmpty(Window(Home).Property(ActeurVideoLocal))</visible>
+        <control type="image">
+          <texture>acteurs/tmdb.png</texture>
+          <aspectratio>keep</aspectratio>
+        </control>
+        <control type="image">
+          <texture>acteurs/local.png</texture>
+          <top>60</top>
+          <left>65</left>
+          <width>40</width>
+          <height>40</height>
+          <aspectratio>keep</aspectratio>
+        </control>
+      </control>
+    </control>
+
+    <control type="group"> <!-- fleche aide -->
+      <visible>!Container(5052).IsUpdating</visible>
+      <posy>5</posy>
+      <posx>1850</posx>
+      <width>30</width>
+      <height>30</height>
+      <animation type="Conditional" loop="true" condition="true">
+        <effect type="fade"  start="0" end="100"  time="1000" delay="1000" reversible="false"/>
+      </animation>
+      <control type="image">
+        <align>center</align>
+        <texture>ArrowDown.png</texture>
+      </control>
+    </control>
+  </control>
+
+  <control type="image"> <!-- sablier -->
+    <top>150</top>
+    <left>860</left>
+    <width>180</width>
+    <height>180</height>
+    <texture>sablier.gif</texture>
+    <visible>Container(5052).IsUpdating</visible>
+  </control>
+  <control type="label"> <!-- nom de l'acteur -->
+    <top>5</top>
+    <left>225</left>
+    <width>1440</width>
+    <align>left</align>
+    <font>impact</font>
+    <label>[COLOR=yellow]$INFO[ListItem.Director][/COLOR]</label>
+  </control>
+
+  <control type="label"> <!-- compteur films/series -->
+    <top>10</top>
+    <left>260</left>
+    <width>1450</width>
+    <align>right</align>
+    <font>lcdnsub</font>
+    <textcolor>lightblue</textcolor>
+    <label>$INFO[Container(5052).CurrentItem]/$INFO[Container(5052).NumItems]</label>
+    <visible>!Container(5052).IsUpdating</visible>
+  </control>
+
+  <control type="fixedlist" id="5052">
+    <!--- liste des roles -->
+    <top>60</top>
+    <left>20</left>
+    <width>1800</width>
+    <align>center</align>
+    <preloaditems>6</preloaditems>
+    <focusposition>2</focusposition>
+    <onfocus>SetProperty(ActeurVideoReset,,Home)</onfocus>
+    <onfocus>SetProperty(IconmixTrailer,,Home)</onfocus>
+    <onfocus>Action(firstpage)</onfocus>
+    <onfocus>SetFocus(7778)</onfocus>
+
+    <animation type="Conditional" condition="!Control.HasFocus(7778) | !String.IsEmpty(Window(Home).Property(IconmixTrailer))">
+      <effect type="fade"  start="100" end="10" time="500" delay="100" reversible="true"/>
+    </animation>
+
+    <include>Roles</include>
+  </control>
+</control>
+</include>
+<!-- ---------------------------------------------------------------------------------------------- -->
+<include name="ActeursSuivants">
+  <control type="grouplist"> <!-- acteurs suivants -->
+    <orientation>horizontal</orientation>
+    <animation type="Conditional" condition="Control.HasFocus(7779)">
+      <effect type="slide"   end="0,200"  time="250"  reversible="true"/>
+    </animation>
+    <top>-35</top>
+    <left>150</left>
+    <align>left</align>
+    <itemgap>35</itemgap>
+    <width>1400</width>
+    <include content="PPActeursListe">
+      <param name="Width2">125</param>
+      <param name="showlabel2">false</param>
+    </include>
+  </control>
+</include>
+<!-- ---------------------------------------------------------------------------------------------- -->
+<include name="VideoType">
+  <control type="group">
+    <visible>Container.Content(directors)|Container.Content(actors)</visible>
+    <description>Videotype image</description>
+    <posy>165</posy>
+    <posx>5</posx>
+    <control type="image">
+      <posy>-10</posy>
+      <left>130</left>
+      <height>50</height>
+      <texture>acteurs/films.png</texture>
+      <aspectratio>keep</aspectratio>
+      <visible>String.IsEqual(ListItem.Property(dbtype),movie)</visible>
+    </control>
+    <control type="image">
+      <posy>-10</posy>
+      <left>130</left>
+      <height>50</height>
+      <texture>acteurs/series.png</texture>
+      <aspectratio>keep</aspectratio>
+      <visible>!String.IsEqual(ListItem.Property(dbtype),movie)</visible>
+    </control>
+  </control>
+</include>
+<!-- ---------------------------------------------------------------------------------------------- -->
+<include name="Roles">
+  <orientation>horizontal</orientation>
+  <itemlayout height="380" width="350">
+    <control type="group">
+      <top>5</top>
+      <left>10</left>
+      <width>330</width>
+      <control type="textbox">
+        <height>80</height>
+        <align>center</align>
+        <aligny>center</aligny>
+        <font>comic24</font>
+        <textcolor>lightgrey</textcolor>
+        <label>$INFO[ListItem.Label]</label>
+      </control>
+      <control type="label">
+        <top>325</top>
+        <height>30</height>
+        <align>center</align>
+        <aligny>center</aligny>
+        <font>comic24</font>
+        <textcolor>lightgrey</textcolor>
+        <label>[I]$INFO[ListItem.Year][/I]</label>
+      </control>
+      <control type="label">
+        <posy>365</posy>
+        <height>30</height>
+        <align>center</align>
+        <aligny>center</aligny>
+        <font>impactsongs</font>
+        <textcolor>lightgrey</textcolor>
+        <label>[I]$INFO[ListItem.Label2][/I]</label>
+      </control>
+    </control>
+    <control type="group">
+      <posy>85</posy>
+      <posx>5</posx>
+      <control type="image">
+        <align>center</align>
+        <height>245</height>
+        <bordersize>8</bordersize>
+        <bordertexture border="8">landscape.png</bordertexture>
+        <texture>$INFO[ListItem.Property(poster)]</texture>
+        <aspectratio align="center" aligny="center">keep</aspectratio>
+      </control>
+      <control type="image">
+        <posy>-10</posy>
+        <left>130</left>
+        <height>50</height>
+        <texture>acteurs/films.png</texture>
+        <aspectratio>keep</aspectratio>
+        <visible>String.IsEqual(ListItem.Property(dbtype),movie)+Control.IsVisible(5055)</visible>
+      </control>
+      <control type="image">
+        <posy>-10</posy>
+        <left>130</left>
+        <height>50</height>
+        <texture>acteurs/series.png</texture>
+        <aspectratio>keep</aspectratio>
+        <visible>!String.IsEqual(ListItem.Property(dbtype),movie)+!Control.IsVisible(5055)</visible>
+      </control>
+    </control>
+
+  </itemlayout>
+  <focusedlayout height="380" width="400">
+    <control type="group">
+      <top>5</top>
+      <left>35</left>
+      <width>330</width>
+      <control type="textbox">
+        <height>80</height>
+        <align>center</align>
+        <aligny>center</aligny>
+        <font>comic24</font>
+        <textcolor>lightgrey</textcolor>
+        <label>$INFO[ListItem.Label]</label>
+        <visible>!Control.HasFocus(7779)+!Control.HasFocus(7778)+!Control.HasFocus(505)</visible>
+      </control>
+      <control type="label">
+        <top>325</top>
+        <height>30</height>
+        <align>center</align>
+        <aligny>center</aligny>
+        <font>comic24</font>
+        <textcolor>lightgrey</textcolor>
+        <label>[I]$INFO[ListItem.Year][/I]</label>
+        <visible>!Control.HasFocus(7779)+!Control.HasFocus(7778)+!Control.HasFocus(505)</visible>
+      </control>
+      <control type="label">
+        <posy>365</posy>
+        <height>30</height>
+        <align>center</align>
+        <aligny>center</aligny>
+        <font>impactsongs</font>
+        <textcolor>lightgrey</textcolor>
+        <label>[I]$INFO[ListItem.Label2][/I]</label>
+      </control>
+    </control>
+
+    <control type="group">
+      <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7778)|Control.HasFocus(505)">
+        <effect type="zoom"  center="175,250" start="100" end="150" time="5" delay="1" reversible="true"/>
+      </animation>
+      <posy>85</posy>
+      <posx>5</posx>
+      <control type="image">
+        <align>center</align>
+        <height>245</height>
+        <bordersize>8</bordersize>
+        <bordertexture border="8">landscape.png</bordertexture>
+        <texture>$INFO[ListItem.Property(poster)]</texture>
+        <aspectratio align="center" aligny="center">keep</aspectratio>
+      </control>
+
+      <control type="group">
+        <posy>210</posy>
+        <left>120</left>
+        <visible>!Player.HasVideo</visible>
+        <animation type="Conditional" loop="true" condition="true">
+          <effect type="fade"  start="100" end="0"  time="1500" delay="1000" reversible="false"/>
+        </animation>
+        <control type="image">
+
+          <height>30</height>
+          <texture>buttons/button_chercheFO.png</texture>
+          <aspectratio>keep</aspectratio>
+          <visible>[Control.HasFocus(7779)|Control.HasFocus(7778)|Control.HasFocus(505)]</visible>
+        </control>
+      </control>
+    </control>
+
+  </focusedlayout>
+</include>
+<!-- ---------------------------------------------------------------------------------------------- -->
+<include name="VignettesActeurs">
+  <width>115</width>
+  <colordiffuse>FFFFFFFF</colordiffuse>
+  <aspectratio scalediffuse="true" align="center" >keep</aspectratio>
+  <bordersize>5</bordersize>
+  <bordertexture border="5">frames/ClassicFrame_Poster3.png</bordertexture> -->
+</include>
+</includes>

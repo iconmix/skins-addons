@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!-- ------------------------------------OSD---------------------------------------------------------- -->
+ <includes>
+  <!-- Onscreen Displays -->
+<!-- -------------------------------OSD --------------------------------------------------------------- -->
+<include name="OSD_Progress_Bar">
+  <control type="group">
+    <include>Animation_CommonFade</include>
+    <include>Animation_FadedByOSDSettings</include>
+    <control type="image">
+      <posx>0</posx>
+      <posy>545</posy>
+      <width>1920</width>
+      <height>135</height>
+      <texture>osd/OSDdialogback.png</texture>
+      <colordiffuse>OSDBackgroundColor</colordiffuse>
+    </control>
+    <control type="progress" id="23">
+      <description>Progressbar</description>
+      <posx>30</posx>
+      <posy>565</posy>
+      <width>1850</width>
+      <height>35</height>
+      <info>Player.Progress</info>
+      <reveal>true</reveal>
+      <texturebg>osd/osd_progress_back.png</texturebg>
+      <lefttexture>osd/osd_progress_left4.png</lefttexture>
+      <midtexture>osd/osd_progress_mid4.png</midtexture>
+      <righttexture>osd/osd_progress_right4.png</righttexture>
+    <overlaytexture></overlaytexture>
+    </control>
+    <control type="slider" id="87">
+      <description>Seek Slider</description>
+      <posx>30</posx>
+      <posy>572</posy>
+      <width>1850</width>
+      <height>18</height>
+      <action>seek</action>
+      <visible>![Window.IsVisible(SliderDialog)]</visible>
+    </control>
+    <include>OSD_PLayer_Plot</include>
+
+  </control>
+
+</include>
+<!-- ---------------------------------------------------------------------------------------------- -->
+<include name="OSD_Progress_Bar2">
+  <control type="group">
+
+    <posy>300</posy>
+     <include>Animation_CommonFade</include>
+    
+    <include>Animation_FadedByOSDSettings</include>
+    <control type="image">
+      <posx>0</posx>
+      <posy>545</posy>
+      <width>1920</width>
+      <height>250</height>
+      <texture>osd/OSDdialogback.png</texture>
+      <colordiffuse>OSDBackgroundColor</colordiffuse>
+    </control>
+    <!-- Title -->
+    <control type="fadelabel">
+      <posx>300</posx>
+      <posy>550</posy>
+      <width>950</width>
+      <height>40</height>
+      <font>debutfin</font>
+      <textcolor>TitleText</textcolor>
+      <align>center</align>
+      <aligny>center</aligny>
+      <scrollout>false</scrollout>
+      <pauseatend>3800</pauseatend>
+      <scrollspeed>40</scrollspeed>
+      <scroll>true</scroll>
+      <label>$VAR[VideoPlayerTitle]</label>
+      <animation effect="slide" end="0,25" condition="[!VideoPlayer.Content(MusicVideos) + String.IsEmpty(VideoPlayer.Tagline) + !Integer.IsGreater(Player.ChapterCount,1)] | [VideoPlayer.Content(MusicVideos) + String.IsEmpty(VideoPlayer.Artist) + String.IsEmpty(VideoPlayer.Album)]">Conditional</animation>
+    </control>
+    <control type="group">
+      <posy>10</posy>
+     
+      <control type="progress" id="23">
+        <description>Progressbar</description>
+        <posx>295</posx>
+        <posy>627</posy>
+        <width>960</width>
+        <height>30</height>
+        <info>Player.Progress</info>
+        <reveal>true</reveal>
+        
+      <texturebg>osd/osd_progress_back.png</texturebg>
+      <lefttexture>osd/osd_progress_left4.png</lefttexture>
+      <midtexture>osd/osd_progress_mid4.png</midtexture>
+      <righttexture>osd/osd_progress_right4.png</righttexture>
+    <overlaytexture></overlaytexture>
+    
+      </control>
+      <control type="slider" id="87">
+        <description>Seek Slider</description>
+        <posx>295</posx>
+        <posy>627</posy>
+        <width>960</width>
+        <height>20</height>
+        <action>seek</action>
+        <visible>![Window.IsVisible(SliderDialog)]</visible>
+      </control>
+      <!-- Current position / Total Time -->
+      <control type="label">
+        <posx>270</posx>
+        <posy>650</posy>
+        <width>1000</width>
+        <height>40</height>
+        <aligny>center</aligny>
+        <align>center</align>
+        <font>comic24</font>
+        <textcolor>yellow</textcolor>
+        <label>$LOCALIZE[31483]:[I]$INFO[VideoPlayer.Time][/I] - [COLOR=TextNF]$LOCALIZE[180]:[I]$INFO[VideoPlayer.Duration][/I][/COLOR] - $LOCALIZE[31484]:[I]$INFO[Player.TimeRemaining(hh)]h$INFO[Player.TimeRemaining(mm)][/I] - [COLOR=ddc890FF]$LOCALIZE[31409]:[I]$INFO[Player.FinishTime(hh)]h$INFO[Player.FinishTime(mm)][/I][/COLOR]</label>
+
+      </control>
+      <!-- Finish Time -->
+      <!-- Chapter Info, Movie Tagline, or Music Video Artist/Album -->
+      <control type="fadelabel">
+        <posx>300</posx>
+        <posy>593</posy>
+        <width>950</width>
+        <height>30</height>
+        <font>exptext</font>
+        <textcolor>TextFO</textcolor>
+        <align>center</align>
+        <aligny>center</aligny>
+        <scroll>true</scroll>
+        <scrollout>false</scrollout>
+        <pauseatend>3800</pauseatend>
+        <scrollspeed>40</scrollspeed>
+        <label>$VAR[VideoPlayerTitle2]</label>
+      </control>
+    </control>
+    <control type="group">
+      <visible>!String.Contains(Player.FolderPath,http)</visible>
+    
+    <control type="image">
+      <posx>1550</posx>
+      <posy>370</posy>
+      <width>300</width>
+      <height>183</height>
+      <texture background="true">$VAR[OSDClearart]</texture>
+      <fadetime>200</fadetime>
+      <aspectratio aligny="center">keep</aspectratio>
+      	<animation type="Conditional" condition="!Skin.HasSetting(ShowVideoPlotFullscreen) | String.IsEmpty(VideoPlayer.Plot)">
+       <effect type="slide"  start="0,0" end="0,195" time="800" delay="1" reversible="false"/>
+     </animation>
+    
+      
+
+    </control>
+    <!-- Movie Poster -->
+    <control type="group">
+      <visible>VideoPlayer.Content(Movies)|VideoPlayer.Content(episodes)</visible>
+
+      <posx>19</posx>
+      <posy>327</posy>
+      <control type="image">
+        <posx>21</posx>
+        <posy>26</posy>
+        <width>204</width>
+        <height>300</height>
+        <texture background="true">$VAR[videoplayerposter]</texture>
+        <aspectratio scalediffuse="false">stretch</aspectratio>
+      </control>
+      <control type="image">
+        <description>Movie Poster Frame</description>
+        <width>253</width>
+        <height>346</height>
+        <texture>frames/ClassicFrame_PosterSmall.png</texture>
+      </control>
+
+    </control>
+    <!-- Music Video Thumbnail -->
+    <control type="image">
+      <description>Music Video Thumbnail</description>
+      <posx>25</posx>
+      <posy>564</posy>
+      <width>250</width>
+      <height>140</height>
+      <aspectratio align="right" aligny="center">keep</aspectratio>
+      <bordertexture border="6">frames/thumb_border.png</bordertexture>
+      <bordersize>6</bordersize>
+      <texture diffuse="frames/EpisodeMatte.png">$INFO[VideoPlayer.Cover]</texture>
+      <visible>VideoPlayer.Content(MusicVideos) + !String.Contains(VideoPlayer.Cover,default)</visible>
+    </control>
+    <!-- LiveTV Channel Icon -->
+    <control type="image">
+      <description>LiveTV Channel</description>
+      <posx>70</posx>
+      <posy>560</posy>
+      <width>150</width>
+      <height>150</height>
+      <aspectratio aligny="bottom">keep</aspectratio>
+      <info>VideoPlayer.Cover</info>
+      <visible>VideoPlayer.Content(LiveTV)</visible>
+    </control>
+  </control>
+  <control type="group">
+    <visible>String.Contains(Player.FolderPath,http)</visible>
+    <!-- Default Thumbnail -->
+    <control type="image">
+      <description>Default Thumbnail</description>
+      <posx>25</posx>
+      <posy>564</posy>
+      <width>250</width>
+      <height>140</height>
+      <aspectratio align="right" aligny="center">keep</aspectratio>
+      <bordertexture border="6">frames/thumb_border.png</bordertexture>
+      <bordersize>6</bordersize>
+      <texture diffuse="frames/EpisodeMatte.png">$INFO[VideoPlayer.Cover]</texture>
+      <visible>!String.Contains(VideoPlayer.Cover,default)</visible>
+    </control>
+  </control>
+  <include>OSD_PLayer_Plot</include>
+</control>
+</include>
+<!-- ---------------------------------------------------------------------------------------------- -->
+<include name="OSD_Progress_Bar3">
+
+  <control type="group">
+    <include>Animation_CommonFade</include>
+    <posy>800</posy>
+    <include>Animation_FadedByOSDSettings</include>
+     <control type="image">
+      <posx>0</posx>
+      <posy>00</posy>
+      <width>1920</width>
+      <height>80</height>
+      <texture>osd/OSDdialogback.png</texture>
+      <colordiffuse>OSDBackgroundColor</colordiffuse>
+    </control>
+    <control type="group">
+      <left>300</left>
+      <width>1320</width>
+    <control type="progress" id="23">
+      <description>Progressbar</description>
+      <posy>37</posy>
+      <height>35</height>
+      <info>Player.Progress</info>
+      <reveal>true</reveal>
+      <texturebg>osd/osd_progress_back.png</texturebg>
+      <lefttexture>osd/osd_progress_left4.png</lefttexture>
+      <midtexture>osd/osd_progress_mid4.png</midtexture>
+      <righttexture>osd/osd_progress_right4.png</righttexture>
+    <overlaytexture></overlaytexture>
+    </control>
+    <control type="slider" id="87">
+      <description>Seek Slider</description>
+      <posy>47</posy>
+      <height>15</height>
+      <action>seek</action>
+      <visible>![Window.IsVisible(SliderDialog)]</visible>
+    </control>
+    <!-- Current position / Total Time -->
+    <control type="label">
+      <posy>33</posy>
+      <left>-300</left>
+      <height>40</height>
+      <aligny>center</aligny>
+      <width>270</width>
+      <align>right</align>
+      <font>METF_OSDTime</font>
+      <label>$INFO[VideoPlayer.Time]</label>
+      <textcolor>OSDPlayingDuration</textcolor>
+    </control>
+             
+
+   
+    <control type="label">
+      <posy>6</posy>
+      <left>3</left>
+      <height>40</height>
+      <font>debutfin</font>
+      <textcolor>black</textcolor>
+      <align>center</align>
+      <aligny>center</aligny>
+      
+      <label>$VAR[VideoPlayerTitle]</label>
+     
+    </control>
+     <control type="label">
+      <posy>3</posy>
+      <height>40</height>
+      <font>debutfin</font>
+      <textcolor>white</textcolor>
+      <align>center</align>
+      <aligny>center</aligny>
+      
+      <label>$VAR[VideoPlayerTitle]</label>
+     
+    </control>
+    <!-- Finish Time -->
+    <control type="label">
+      <posy>33</posy>
+      <height>40</height>
+      <aligny>center</aligny>
+      <left>1350</left>
+      <width>300</width>
+      <align>left</align>
+      <font>METF_OSDTime</font>
+      <textcolor>OSDPlayingDuration</textcolor>
+      <label>$INFO[VideoPlayer.Duration][COLOR TextNF]   [LIGHT] ($LOCALIZE[31409]:$INFO[Player.FinishTime(hh)]h$INFO[Player.FinishTime(mm)])[/COLOR][/LIGHT]</label>
+    </control>
+   </control>
+   <control type="image">
+      <posx>1600</posx>
+      <posy>-185</posy>
+      <width>300</width>
+      <height>183</height>
+      <texture background="true">$VAR[OSDClearart]</texture>
+      <fadetime>200</fadetime>
+      <aspectratio aligny="center">keep</aspectratio>
+
+    </control>
+    <!-- <include>OSD_PLayer_Plot</include> -->
+  </control>
+
+</include>
+<!-- ---------------------------------------------------------------------------------------------- -->
+<include name="OSD_Player_Labels">
+  <posx>0</posx>
+
+  <width>1920</width>
+
+  <height>1080</height>
+  <font>OsdD</font>
+  <textcolor>white</textcolor>
+  <align>center</align>
+  <aligny>center</aligny>
+  <include>Animation_FadedByOSDSettings</include>
+</include>
+<!-- ---------------------------------------------------------------------------------------------- -->
+<include name="OSD_Player_Labels_Left">
+  <posx>25</posx>
+  <posy>12</posy>
+  <width>450</width>
+  <height>40</height>
+  <font>METF_OSDPlayerStatus</font>
+  <textcolor>OSDPlayerStatusText</textcolor>
+  <shadowcolor>ff000000</shadowcolor>
+  <align>left</align>
+  <aligny>center</aligny>
+  <include>Animation_CommonFade</include>
+  <include>Animation_FadedByOSDSettings</include>
+</include>
+
+<!-- ---------------------------------------------------------------------------------------------- -->
+<include name="OSD_PLayer_Plot">
+  <control type="group">
+    <posx>1300</posx>
+    <posy>560</posy>
+    <visible>Window.IsActive(FullscreenInfo) | [Player.HasMedia + !Skin.HasSetting(Slim_Seekbar)]</visible>
+    <!-- Plot -->
+    <control type="textbox">
+      <width>600</width>
+      <height>200</height>
+      <align>left</align>
+      <font>METF_PlotTextMedium</font>
+      <textcolor>TextNF</textcolor>
+      <label>[I]$INFO[VideoPlayer.Plot][/I]</label>
+      <include condition="!Skin.HasSetting(AutoScrollFast)">AutoScrollShort</include>
+      <include condition="Skin.HasSetting(AutoScrollFast)">AutoScrollShortFast</include>
+      <visible>Skin.HasSetting(ShowVideoPlotFullscreen) + !String.IsEmpty(VideoPlayer.Plot)</visible>
+    </control>
+  </control>
+</include>
+<!-- ---------------------------------------------------------------------------------------------- -->
+<include name="OSD_Player_Time">
+  <control type="label" id="0">
+
+    <label></label>
+
+  </control>
+
+</include>
+
+<!-- ---------------------------------------------------------------------------------------------- -->
+<include name="OsdHorloge">
+  <control type="group">
+    <posy>-900</posy>
+    <posx>450</posx>
+    <animation type="WindowOpen" reversible="false">
+      <effect type="slide" end="-450" tween="back" easy="out"  time="800" delay="1000" />
+    </animation>
+    <animation type="WindowClose" reversible="false">
+      <effect type="slide" start="-450" end="0" tween="back" easy="in"  time="800" delay="100" />
+    </animation>
+
+    <control type="image">
+      <top>910</top>
+      <posx>1546</posx>
+      <width>320</width>
+      <height>150</height>
+      <texture background="true" diffuse="showcase_matte.png">frames/ClassicFrame_background.png</texture>
+      <colordiffuse>70202020</colordiffuse>
+    </control>
+    <control type="image">
+      <posx>1546</posx>
+      <posy>910</posy>
+      <width>320</width>
+      <height>150</height>
+      <texture border="10">landscape.png</texture>
+    </control>
+    <control type="group">
+      <top>70</top>
+      <include>Global_Time</include>
+      <include>Global_Weather</include>
+    </control>
+
+  </control>
+</include>
+
+<variable name="ChapitreEnCours">
+  <value condition="Integer.IsGreater(Player.Chapter,0)">$INFO[Player.Chapter,$LOCALIZE[21396]: ]$INFO[Player.ChapterCount, / ]</value>
+  <value></value>
+</variable>
+
+<!-- ---------------------------------------------------------------------------------------------- -->
+<include name="OSD_Player_Details">
+  <control type="group">
+    <posy>-100</posy>
+    <include>Animation_CommonFade</include>
+    <include>Animation_FadedByOSDSettings</include>
+    <animation effect="zoom" center="960,540" start="85" end="105" time="1500" pulse="true" condition="Player.Paused" reversible="false">Conditional</animation>
+
+    <control type="label">
+      <include>OSD_Player_Labels</include>
+      <label>[UPPERCASE]$LOCALIZE[112][/UPPERCASE]</label>
+      <visible>Player.Paused</visible>
+    </control>
+    <control type="label">
+      <include>OSD_Player_Labels</include>
+      <label>[UPPERCASE]$LOCALIZE[31159][/UPPERCASE]</label>
+      <visible>Player.Forwarding2x</visible>
+    </control>
+    <control type="label">
+      <include>OSD_Player_Labels</include>
+      <label>[UPPERCASE]$LOCALIZE[31160][/UPPERCASE]</label>
+      <visible>Player.Forwarding4x</visible>
+    </control>
+    <control type="label">
+      <include>OSD_Player_Labels</include>
+      <label>[UPPERCASE]$LOCALIZE[31161][/UPPERCASE]</label>
+      <visible>Player.Forwarding8x</visible>
+    </control>
+    <control type="label">
+      <include>OSD_Player_Labels</include>
+      <label>[UPPERCASE]$LOCALIZE[31162][/UPPERCASE]</label>
+      <visible>Player.Forwarding16x</visible>
+    </control>
+    <control type="label">
+      <include>OSD_Player_Labels</include>
+      <label>[UPPERCASE]$LOCALIZE[31163][/UPPERCASE]</label>
+      <visible>Player.Forwarding32x</visible>
+    </control>
+    <control type="label">
+      <include>OSD_Player_Labels</include>
+      <label>[UPPERCASE]$LOCALIZE[31164][/UPPERCASE]</label>
+      <visible>Player.Rewinding2x</visible>
+    </control>
+    <control type="label">
+      <include>OSD_Player_Labels</include>
+      <label>[UPPERCASE]$LOCALIZE[31165][/UPPERCASE]</label>
+      <visible>Player.Rewinding4x</visible>
+    </control>
+    <control type="label">
+      <include>OSD_Player_Labels</include>
+      <label>[UPPERCASE]$LOCALIZE[31166][/UPPERCASE]</label>
+      <visible>Player.Rewinding8x</visible>
+    </control>
+    <control type="label">
+      <include>OSD_Player_Labels</include>
+      <label>[UPPERCASE]$LOCALIZE[31167][/UPPERCASE]</label>
+      <visible>Player.Rewinding16x</visible>
+    </control>
+    <control type="label">
+      <include>OSD_Player_Labels</include>
+      <label>[UPPERCASE]$LOCALIZE[31168][/UPPERCASE]</label>
+      <visible>Player.Rewinding32x</visible>
+    </control>
+
+    <control type="label">
+      <include>OSD_Player_Labels</include>
+      <label>[UPPERCASE]$INFO[Player.SeekOffset][/UPPERCASE][CR][CR]$VAR[ChapitreEnCours]</label>
+      <visible>!Player.Paused + Player.DisplayAfterSeek</visible>
+    </control>
+
+  </control>
+
+</include>
+<!-- OSD default -->
+<!-- ---------------------------------------------------------------------------------------------- -->
+<include name="OSDdiffuse">
+  <colordiffuse>SubmenuTextFocused</colordiffuse>
+</include>
+<!-- ---------------------------------------------------------------------------------------------- -->
+<include name="OSD_Player_Banner">
+  <control type="group">
+    <top>500</top>
+    <posx>0</posx>
+    <include>Animation_OpenCloseFade</include>
+    <include>Animation_FadedByOSDSettings</include>
+
+    <!-- Background Image -->
+    <control type="image">
+      <width>1920</width>
+      <height>180</height>
+      <texture>osd/OSDdialogback_top.png</texture>
+      <colordiffuse>OSDBackgroundColor</colordiffuse>
+    </control>
+
+  </control>
+</include>
+
+</includes>

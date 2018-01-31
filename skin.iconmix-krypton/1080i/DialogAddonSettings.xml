@@ -34,12 +34,12 @@
 				<posx>440</posx>
 				<posy>240</posy>
 				<width>840</width>
-				<height>380</height>
+				<height>780</height>
 				<itemgap>0</itemgap>
 				<onleft>10</onleft>
 				<onright>10</onright>
-				<onup>10</onup>
-				<ondown>10</ondown>
+				<onup>2</onup>
+				<ondown>2</ondown>
 			</control>
 			<control type="button" id="3">
 				<description>Default Button</description>
@@ -60,6 +60,8 @@
 			<control type="label" id="7">
 				<description>Separator label</description>
 				<font>METF_Menu</font>
+				<textcolor>lightgrey</textcolor>
+				<align>center</align>
 				<include>SettingsLabel</include>
 			</control>
 			<control type="sliderex" id="8">
@@ -76,7 +78,7 @@
 				<posx>0</posx>
 				<posy>392</posy>
 				<width>380</width>
-				<height>230</height>
+				<height>500</height>
 				<itemgap>0</itemgap>
 				<scrolltime>0</scrolltime>
 				<onleft>2</onleft>

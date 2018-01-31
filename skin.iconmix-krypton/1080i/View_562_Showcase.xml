@@ -486,7 +486,7 @@
                             <height>332</height>
                             <aspectratio>scale</aspectratio>
                             <fadetime>FadeTime</fadetime>
-                            <texture background="true" border="1" diffuse="Shine.png" fallback="Empty.png">$INFO[ListItem.Art(fanart)]</texture>
+                            <texture background="true" border="1" diffuse="" fallback="Empty.png">$INFO[ListItem.Art(fanart)]</texture>
                             <visible>[Skin.HasSetting(fanart)+String.IsEmpty(Control.GetLabel(1101))]
 							|[[Container.Content(Movies)|Container.Content(musicvideos)]+!Skin.HasSetting(video_art)]
 							|[[Container.Content(Seasons)|Container.Content(tvshows)]+!Skin.HasSetting(tvshow_art)]</visible>
@@ -498,7 +498,7 @@
                             <top>0</top>
                             <width>586</width>
                             <height>332</height>
-                            <imagepath background="true" border="1" diffuse="Shine.png">$INFO[ListItem.Path]extrafanart</imagepath>
+                            <imagepath background="true" border="1" diffuse="">$INFO[ListItem.Path]extrafanart</imagepath>
                             <aspectratio>scale</aspectratio>
                             <timeperimage>4000</timeperimage>
                             <fadetime>800</fadetime>
@@ -547,7 +547,7 @@
 						<top>3</top>
 						<width>615</width>
 						<height>320</height>
-						<texture diffuse="Shine.png">$VAR[extraart_rule]$VAR[extraart_tvshow_rule]</texture>
+						<texture diffuse="">$VAR[extraart_rule]$VAR[extraart_tvshow_rule]</texture>
 						<aspectratio>keep</aspectratio>
 						<fadetime>FadeTime</fadetime>
 						<visible>!ListItem.IsCollection|!String.IsEmpty(ListItem.Plot)</visible>
@@ -690,7 +690,7 @@
                             <height>332</height>
                             <aspectratio>scale</aspectratio>
                             <fadetime>FadeTime</fadetime>
-                            <texture border="1" diffuse="Shine.png" fallback="Empty.png">$INFO[ListItem.Art(fanart)]</texture>
+                            <texture border="1" diffuse="" fallback="Empty.png">$INFO[ListItem.Art(fanart)]</texture>
                             <visible>Skin.HasSetting(fanart)+[String.IsEmpty(Control.GetLabel(1301))|!Skin.HasSetting(music_art)]</visible>
                             <include>opencloseslideup</include>
                         </control>
@@ -699,7 +699,7 @@
                             <top>0</top>
                             <width>586</width>
                             <height>332</height>
-                            <imagepath diffuse="Shine.png">$INFO[Skin.String(Music_Folder_Path)]$INFO[ListItem.Artist]/extrafanart</imagepath>
+                            <imagepath diffuse="">$INFO[Skin.String(Music_Folder_Path)]$INFO[ListItem.Artist]/extrafanart</imagepath>
                             <aspectratio>scale</aspectratio>
                             <timeperimage>4000</timeperimage>
                             <fadetime>800</fadetime>

@@ -4,6 +4,15 @@
 	<controls>
 		<control type="group">
 			<posy>-80</posy>
+			<control type="image" id="999">
+      <description>background image</description>
+      <posx>150</posx>
+      <posy>80</posy>
+      <width>1400</width>
+      <height>755</height>
+      <texture>frames/Menu_Glass2b.png</texture>
+      <colordiffuse>DialogBackgroundColor</colordiffuse>
+    </control>
 			<include>Animation_OpenCloseFade</include>
 			<animation type="Conditional" condition="Window.IsActive(smartplaylistrule) | Window.IsActive(filebrowser)">
 				<effect type="zoom" time="600" center="640,360" start="100" end="50" tween="cubic" easing="inout" />
@@ -56,7 +65,7 @@
 				<include>SettingsLabel</include>
 				<onright>noop</onright>
 				<onleft>20</onleft>
-				<onup>9001</onup>
+				<onup>23</onup>
 				<ondown>12</ondown>
 			</control>
 			<control type="label">
@@ -129,16 +138,16 @@
 				<description>Rules List Control</description>
 				<posx>440</posx>
 				<posy>310</posy>
-				<width>1240</width>
+				<width>840</width>
 				<height>76</height>
 				<onup>12</onup>
 				<onleft>9000</onleft>
 				<onright>noop</onright>
 				<ondown>16</ondown>
-				<itemlayout height="38" width="1240">
+				<itemlayout height="38" width="840">
 					<control type="label">
 						<posx>20</posx>
-						<width>1210</width>
+						<width>840</width>
 						<height>38</height>
 						<textcolor>SettingsDetail</textcolor>
 						<font>METF_ContextValue</font>
@@ -152,7 +161,7 @@
 					<control type="image">
 						<posx>0</posx>
 						<posy>0</posy>
-						<width>1240</width>
+						<width>840</width>
 						<height>38</height>
 						<align>left</align>
 						<aligny>center</aligny>
@@ -162,7 +171,7 @@
 					</control>
 					<control type="label">
 						<posx>20</posx>
-						<width>1210</width>
+						<width>830</width>
 						<height>38</height>
 						<textcolor>ButtonText</textcolor>
 						<font>METF_ContextValue</font>
@@ -237,7 +246,7 @@
 				<posx>440</posx>
 				<posy>500</posy>
 				<include>SettingsLabel</include>
-				<label>QQ$LOCALIZE[21427]</label>
+				<label>$LOCALIZE[21427]</label>
 				<onright>17</onright>
 				<onleft>17</onleft>
 				<onup>16</onup>
@@ -272,7 +281,7 @@
 				<onright>24</onright>
 				<onleft>24</onleft>
 				<onup>18</onup>
-				<ondown>22</ondown>
+				<ondown>24</ondown>
 			</control>
 			<control type="button" id="24">
 				<posx>440</posx>

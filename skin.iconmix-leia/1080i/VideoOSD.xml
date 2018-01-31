@@ -31,7 +31,7 @@
 			<include>Animation_FadedByOSDSettings</include>
 			<!-- <include>OSD_Player_Banner</include> -->
 			<animation type="Conditional" condition="Skin.HasSetting(ShowOsdActors)+[Integer.IsGreater(Container(7779).NumItems,0)|Integer.IsGreater(Container(1998).NumItems,0)]">
-      <effect type="slide"  start="0,0" end="0,-350" time="500" delay="1" reversible="false"/>
+      <effect type="slide"  start="0,0" end="0,-350" time="800" delay="1" reversible="false"/>
     </animation>
 			<include>OSD_Player_Details</include>
 			<include>OsdAnimation</include>
@@ -39,7 +39,7 @@
 			<control type="group">
 				<top>-150</top>
 				
-     <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(1998)">
+     <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7781)">
       <effect type="slide"  start="0,0" end="0,-800" time="500" delay="1" reversible="false"/>
     </animation>
 				<include>OSD_Progress_Bar2</include>

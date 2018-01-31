@@ -71,6 +71,15 @@ msgid "Set Artworks for "
 msgstr ""
 
 
+msgctxt "#32578"
+msgid "Enabled for movies"
+msgstr ""
+
+msgctxt "#32579"
+msgid "Enabled for tvshows"
+msgstr ""
+
+
 msgctxt "#32580"
 msgid "Actors"
 msgstr ""
@@ -97,8 +106,62 @@ msgid "Music"
 msgstr ""
 
 
+msgctxt "#32586"
+msgid "Trailers"
+msgstr ""
+
+
 msgctxt "#32587"
 msgid "download album cover"
+msgstr ""
+
+
+msgctxt "#32588"
+msgid "Delay before autoplay trailer (0:disabled)"
+msgstr ""
+
+msgctxt "#32589"
+msgid "Trailers for movies/tvshows"
+msgstr ""
+
+msgctxt "#32590"
+msgid "Search Trailers on Allocine (FR)"
+msgstr ""
+
+msgctxt "#32591"
+msgid "Minimum quality on Allocine"
+msgstr ""
+
+msgctxt "#32592"
+msgid "Autoplay trailer in full screen"
+msgstr ""
+
+msgctxt "#32593"
+msgid "AlloCine trailer prefered"
+msgstr ""
+
+msgctxt "#32594"
+msgid "Autoplaying trailer"
+msgstr ""
+
+msgctxt "#32595"
+msgid "ALLOCINE Trailers"
+msgstr ""
+
+msgctxt "#32596"
+msgid "YOUTUBE Trailers"
+msgstr ""
+
+msgctxt "#32597"
+msgid "Search Trailers on Youtube"
+msgstr ""
+
+msgctxt "#32598"
+msgid "Minimum quality on Youtube"
+msgstr ""
+
+msgctxt "#32599"
+msgid "Only Trailers and no Teaser for tvshow"
 msgstr ""
 
 
@@ -166,6 +229,10 @@ msgctxt "#32614"
 msgid "Artworks"
 msgstr ""
 
+msgctxt "#32615"
+msgid "Stop the current playing for play this trailer ?"
+msgstr ""
+
 msgctxt "#32700"
 msgid "Poster"
 msgstr ""
@@ -193,6 +260,34 @@ msgstr ""
 
 msgctxt "#32706"
 msgid "Fanart"
+msgstr ""
+
+msgctxt "#32707"
+msgid "Rate this video : "
+msgstr ""
+
+msgctxt "#32708"
+msgid "Rating"
+msgstr ""
+
+msgctxt "#32709"
+msgid "Rate after play"
+msgstr ""
+
+msgctxt "#32710"
+msgid "Rate movie after play"
+msgstr ""
+
+msgctxt "#32711"
+msgid "Rate tvshow episode after play"
+msgstr ""
+
+msgctxt "#32800"
+msgid "Play all founded trailers"
+msgstr ""
+
+msgctxt "#32801"
+msgid "Show only one language per trailers"
 msgstr ""
 
 

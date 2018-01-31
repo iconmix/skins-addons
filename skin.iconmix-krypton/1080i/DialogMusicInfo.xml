@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window id="2001">
-	<defaultcontrol>7001</defaultcontrol>
+	<defaultcontrol>8001</defaultcontrol>
 	<include>Animation_FadedByMenu</include>
 	<include>Animation_CommonFade</include>
 	<include>Animation_OpenCloseFade</include>
@@ -238,10 +238,10 @@
 					<posy>105</posy>
 					<width>515</width>
 					<height>350</height>
-					<onleft>7001</onleft>
-					<onright>7001</onright>
+					<onleft>8001</onleft>
+					<onright>8001</onright>
 					<onup>50</onup>
-					<ondown>7001</ondown>
+					<ondown>8001</ondown>
 					<viewtype label="">list</viewtype>
 					<pagecontrol>-</pagecontrol>
 					<scrolltime>0</scrolltime>
@@ -413,7 +413,7 @@
 						<align>center</align>
 						<font>METF_PlotText</font>
 						<textcolor>TextNF</textcolor>
-						<label fallback="161">$INFO[ListItem.Mood)]</label>
+						<label fallback="161">$INFO[ListItem.Mood]</label>
 						<include condition="!Skin.HasSetting(AutoScrollFast)">AutoScrollShort</include>
 						<include condition="Skin.HasSetting(AutoScrollFast)">AutoScrollShortFast</include>
 					</control>
@@ -668,7 +668,7 @@
 					<texture>landscape.png</texture>
 					<aspectratio>stretch</aspectratio>
 				</control>
-				<control type="grouplist" id="7001">
+				<control type="grouplist" id="8001">
 				<include>Animation_FadedByMenu</include>
 				<include>Animation_CommonFade</include>
 				<include>Animation_OpenCloseFade</include>
@@ -679,8 +679,8 @@
 					<onleft condition="Integer.IsGreater(Container(50).NumItems,1)">50</onleft>
 					<onleft condition="!Integer.IsGreater(Container(50).NumItems,1)">555</onleft>
 			
-				<onup>7001</onup>
-				<ondown>7001</ondown>
+				<onup>8001</onup>
+				<ondown>8001</ondown>
 				<control type="button" id="8">
 						<include>VideoInfoButton</include>
 						<texturenofocus>buttons/button_play.png</texturenofocus>
@@ -748,37 +748,37 @@
 					<description>Refresh</description>
 					<include>VideoInfoButtonLabel</include>
 					<info>Control.GetLabel(6)</info>
-					<visible>ControlGroup(7001).HasFocus(6)</visible>
+					<visible>ControlGroup(8001).HasFocus(6)</visible>
 				</control>
 				<control type="label">
 					<description>Thumb</description>
 					<include>VideoInfoButtonLabel</include>
 					<info>Control.GetLabel(10)</info>
-					<visible>ControlGroup(7001).HasFocus(10)</visible>
+					<visible>ControlGroup(8001).HasFocus(10)</visible>
 				</control>
 				<control type="label">
 					<description>Fanart</description>
 					<include>VideoInfoButtonLabel</include>
 					<info>Control.GetLabel(12)</info>
-					<visible>ControlGroup(7001).HasFocus(12)</visible>
+					<visible>ControlGroup(8001).HasFocus(12)</visible>
 				</control>
 				<control type="label">
 					<description>Review/Tracks</description>
 					<include>VideoInfoButtonLabel</include>
 					<info>Control.GetLabel(7)</info>
-					<visible>ControlGroup(7001).HasFocus(7)</visible>
+					<visible>ControlGroup(8001).HasFocus(7)</visible>
 				</control>
 				<control type="label">
 					<description>Lyris</description>
 					<include>VideoInfoButtonLabel</include>
 					<label>Play</label>
-					<visible>ControlGroup(7001).HasFocus(18)</visible>
+					<visible>ControlGroup(8001).HasFocus(18)</visible>
 				</control>
 				<control type="label">
 					<description>Set rating</description>
 					<include>VideoInfoButtonLabel</include>
 					<label>$LOCALIZE[15067]</label>
-					<visible>ControlGroup(7001).HasFocus(600)</visible>
+					<visible>ControlGroup(8001).HasFocus(600)</visible>
 				</control>
 			</control>
 		</control>
