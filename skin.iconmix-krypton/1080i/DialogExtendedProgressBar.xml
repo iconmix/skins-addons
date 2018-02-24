@@ -23,7 +23,7 @@
 			<height>1</height>
 			<width>1</width>
 			<texturefocus>-</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturenofocus>-</texturenofocus> -->
 			<onfocus>Skin.SetBool(LibraryUpdated)</onfocus>
 		</control>
 		<control type="image">

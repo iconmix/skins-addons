@@ -30,40 +30,43 @@
           <value condition="String.Contains(ListItem.DBTYPE,artist)">$LOCALIZE[31926]</value>
   </variable>
   <include name="CorrectType">
-    <visible>String.Contains(ListItem.DBTYPE,set)|String.Contains(ListItem.DBTYPE,movie)|Container.Content(tvshows)|Container.Content(actors)|Container.Content(directors)|Container.Content(artists)</visible>
+    <visible>String.Contains(ListItem.DBTYPE,set)|String.Contains(ListItem.DBTYPE,movie)|Container.Content(tvshows)| Container.Content(artists)</visible><!--|Container.Content(directors)|Container.Content(actors)</visible> -->
   </include>
   <include name="MonBoutonCommun">
-    <width>290</width>
-    <height>35</height>
-    <left>50</left>
+    <width>280</width>
+    <height>40</height>
+    <left>85</left>
     <align>left</align>
     <font>PlotFont</font>
     <textcolor>TextNF</textcolor>
-    <focusedcolor>DialogTextFO</focusedcolor>
+    <focusedcolor>yellow</focusedcolor>
     <disabledcolor>TextDisabled</disabledcolor>
-    <texturefocus>ButtonFO2Wide.png</texturefocus>
-    <texturenofocus>-</texturenofocus>
-    <alttexturefocus>ButtonFO2Wide.png</alttexturefocus>
+    <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+    <texturenofocus>-</texturenofocus> -->
+    <alttexturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</alttexturefocus>
     <textoffsetx>20</textoffsetx>
     <aligny>center</aligny>
     <pulseonselect>false</pulseonselect>
   </include>
+  
   <include name="MonBoutonCommun2">
-    <width>490</width>
-    <height>35</height>
-    <left>50</left>
+    <width>480</width>
+    <height>40</height>
+    <left>85</left>
     <align>left</align>
     <font>PlotFont</font>
     <textcolor>TextNF</textcolor>
-    <focusedcolor>DialogTextFO</focusedcolor>
+    <focusedcolor>yellow</focusedcolor>
     <disabledcolor>TextDisabled</disabledcolor>
-    <texturefocus>ButtonFO2Wide.png</texturefocus>
-    <texturenofocus>-</texturenofocus>
-    <alttexturefocus>ButtonFO2Wide.png</alttexturefocus>
+    <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+    <texturenofocus>-</texturenofocus> -->
+    <alttexturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</alttexturefocus>
     <textoffsetx>20</textoffsetx>
     <aligny>center</aligny>
     <pulseonselect>false</pulseonselect>
   </include>
+  
+  
   
 
   
@@ -89,7 +92,7 @@
         <animation type="Conditional" condition="!ControlGroup(7001).HasFocus" reversible="false">
         <effect type="fade" start="100" end="50" time="10" />
       </animation>
-        <posx>30</posx>
+        <posx>35</posx>
         <posy>15</posy>
         <width>490</width>
         <height>260</height>
@@ -149,6 +152,7 @@
         <include>MonBoutonCommun2</include>
         <ondown>19</ondown>
         <onup>4</onup>
+        <onleft>7000</onleft>
       </control>
       </control>
         <control type="edit" id="19"> <!-- FILTRE-->
@@ -191,7 +195,7 @@
         <effect type="fade" start="100" end="50" time="10" />
       </animation>
       <visible>Window.IsVisible(10025)</visible>
-        <posx>30</posx>
+        <posx>35</posx>
         <posy>15</posy>
         <width>440</width>
         <height>190</height>
@@ -226,7 +230,7 @@
         <effect type="fade" start="100" end="50" time="10" />
       </animation>
       <visible>Window.IsVisible(10502)</visible>
-        <posx>30</posx>
+        <posx>35</posx>
         <posy>15</posy>
         <width>440</width>
         <height>190</height>
@@ -287,7 +291,7 @@
         <animation type="Conditional" condition="!ControlGroup(7005).HasFocus" reversible="false">
         <effect type="fade" start="100" end="50" time="10" />
       </animation>
-        <posx>30</posx>
+        <posx>35</posx>
         <posy>15</posy>
         <width>490</width>
         <height>250</height>
@@ -357,7 +361,7 @@
         <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>       
       </control>
       <control type="button" id="2012"> <!-- playlist -->
-        <include>MonBoutonCommun2</include>
+         <include>MonBoutonCommun2</include>
         <label>31253</label>
         <visible>String.IsEqual(ListItem.DBTYPE,movie)</visible>
       </control>
@@ -393,7 +397,7 @@
         <animation type="Conditional" condition="!ControlGroup(7008).HasFocus" reversible="false">
         <effect type="fade" start="100" end="50" time="10" />
       </animation>
-        <posx>30</posx>
+        <posx>35</posx>
         <posy>15</posy>
         <width>290</width>
         <height>190</height>
@@ -424,7 +428,7 @@
         </control>
       </control>
       <control type="grouplist" id="7008">
-        <posx>30</posx>
+        <posx>35</posx>
         <posy>15</posy>
         <width>290</width>
         <height>190</height>
@@ -455,7 +459,7 @@
         </control>
       </control>
       <control type="grouplist" id="7008">
-        <posx>30</posx>
+        <posx>35</posx>
         <posy>15</posy>
         <width>290</width>
         <height>190</height>
@@ -509,7 +513,7 @@
         <effect type="fade" start="100" end="60" time="1" />
       </animation>
       <control type="grouplist" id="7006">
-        <posx>30</posx>
+        <posx>35</posx>
         <posy>15</posy>
         <width>490</width>
         <height>80</height>
@@ -546,7 +550,7 @@
       <left>940</left>
       <top>-100</top>
       <control type="image">
-        <width>350</width>
+        <width>400</width>
         <height>450</height>
         <texture>frames/Menu_Glass2b.png</texture>
         <colordiffuse>DialogBackgroundColor</colordiffuse>
@@ -564,6 +568,7 @@
           <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
 					<aspectratio scalediffuse="true" align="left" aligny="center">keep</aspectratio>
 					<texture diffuse="landscapeframeselect.png">special://skin/extras/viewthumbs/$VAR[cheminapercu]$INFO[Container(7007).ListItem.Property(viewid)].jpg</texture>				
+					<visible>Control.HasFocus(7017)</visible>
 				</control>
 
       <visible>[Control.HasFocus(7017)|[ControlGroup(7001).HasFocus+ControlGroup(7001).HasFocus(1500)]]</visible>
@@ -586,7 +591,7 @@
       	<!-- <content>$VAR[ContentListeVues]</content> -->
 				<posx>30</posx>
 				<posy>25</posy>
-				<width>290</width>
+				<width>340</width>
        <height>390</height>
 				<itemgap>1</itemgap>
 				<onleft>7001</onleft>
@@ -595,8 +600,9 @@
 				<ondown>7017</ondown>
 				<onclick>RunScript(script.iconmixtools,setviewmenu=True&id=$INFO[ListItem.Property(viewid)])</onclick>
 				<orientation>vertical</orientation>
-				<itemlayout width="500" height="35">
+				<itemlayout width="340" height="35">
 				  <control type="label">
+				    <left>10</left>
 				    <font>PlotFont</font>
 				    <label>$INFO[ListItem.Label]</label>
 				    <aligny>center</aligny>
@@ -604,16 +610,15 @@
 				  </control>		
 				    
 				</itemlayout>
-				<focusedlayout width="500" height="35">
+				<focusedlayout width="340" height="35">
 				  <control type="image">
-					
-					<height>30</height>
-					<top>5</top>
-					<texture>ButtonFO2Wide.png</texture>
+					<top>4</top>
+					<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 					<aspectratio>stretch</aspectratio>
 					<visible>Control.HasFocus(7017)</visible>
 				</control>
 				  <control type="label">
+				     <left>10</left>
 				    <aligny>center</aligny>
 				    <font>PlotFont</font>
 				    				    <label>$INFO[ListItem.Label]</label>
@@ -645,12 +650,12 @@
       </animation>
       <control type="grouplist" id="7002"> <!-- choix des boitiers Videos-->
         <visible>Window.IsVisible(10025)</visible>
-        <posx>30</posx>
+        <posx>35</posx>
         <posy>15</posy>
         <width>290</width>
         <height>230</height>
         <itemgap>1</itemgap>
-        <onleft>7005</onleft>
+        <onleft>7001</onleft>
         <onback>55</onback>
         <onup>7002</onup>
         <ondown>7002</ondown>
@@ -861,7 +866,7 @@
       </control>
       	<control type="grouplist" id="7002"> <!-- choix des boitiers musique -->
       	  <visible>Window.IsVisible(10502)</visible>
-				<posx>30</posx>
+				<posx>35</posx>
 				<posy>15</posy>
 				<width>290</width>
       <height>230</height>
@@ -994,6 +999,9 @@
         <animation type="Visible"  reversible="false">
           <effect type="slide" start="-1500" time="250" />
         </animation>
+        <animation type="Hidden"  reversible="false">
+          <effect type="slide" end="-1500" time="250" />
+        </animation>
         
       <visible allowhiddenfocus="true">ControlGroup(7000).HasFocus|ControlGroup(7001).HasFocus|ControlGroup(7005).HasFocus|ControlGroup(7006).HasFocus|Control.HasFocus(7017)|ControlGroup(7002).HasFocus|ControlGroup(7004).HasFocus|ControlGroup(7008).HasFocus|Window.IsVisible(contextmenu)</visible>
       <posy>150</posy>
@@ -1022,7 +1030,7 @@
           <animation type="Conditional" condition="ControlGroup(7001).HasFocus|ControlGroup(7002).HasFocus|Control.HasFocus(7017)|ControlGroup(7005).HasFocus|ControlGroup(7006).HasFocus|ControlGroup(7004).HasFocus|ControlGroup(7008).HasFocus" reversible="false">
           <effect type="fade" start="100" end="50" time="10" />
         </animation>
-          <posx>30</posx>
+          <posx>35</posx>
           <posy>40</posy>
           <width>290</width>
           <height>240</height>
@@ -1037,6 +1045,12 @@
           <onup>7000</onup>
           <ondown>7000</ondown>
           <orientation>vertical</orientation>
+          <control type="button" id="1099"> <!--- informations acteur/realisateur.... -->
+            <include>MonBoutonCommun</include>
+            <label>$LOCALIZE[32014]</label>
+            <onclick>SetProperty(IconmixShowInfo,55,Home)</onclick>
+            <visible>Container.Content(actors)|Container.Content(directors)</visible>
+          </control>
           <control type="button" id="1101"> <!--- films/sagas/tvshows.... -->
             <include>MonBoutonCommun</include>
             <label>$VAR[TitreContent]</label>

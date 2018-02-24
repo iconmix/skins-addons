@@ -165,14 +165,18 @@
         <width>204</width>
         <height>300</height>
         <texture background="true">$VAR[videoplayerposter]</texture>
-        <aspectratio scalediffuse="false">stretch</aspectratio>
+        <bordersize>20</bordersize>
+							<bordertexture border="20" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+          <aspectratio scalediffuse="true">stretch</aspectratio>
       </control>
+      <!--
       <control type="image">
         <description>Movie Poster Frame</description>
         <width>253</width>
         <height>346</height>
         <texture>frames/ClassicFrame_PosterSmall.png</texture>
       </control>
+      -->
 
     </control>
     <!-- Music Video Thumbnail -->

@@ -141,7 +141,7 @@
 				<include>FontTitre</include>
 			
 				<texturefocus colordiffuse="FFFFAAFF">frames/fondtitre2.png</texturefocus>
-        <texturenofocus colordiffuse="FFFFAAFF">frames/fondtitre2.png</texturenofocus>
+        <texturenofocus colordiffuse="FFFFAAFF">frames/fondtitre2.png</texturenofocus> -->
 			</control>	
 				
 			

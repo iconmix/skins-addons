@@ -1,6 +1,7 @@
 # coding: utf-8
 #from __future__ import unicode_literals
 import resources.lib.Utils as utils
+from resources.lib.Utils import logMsg
 import resources.lib.mainservice as MainService
 from unidecode import unidecode
 from datetime import datetime,timedelta
@@ -45,7 +46,7 @@ class Main:
            params = urlparse.parse_qs(sys.argv[2][1:].decode("utf-8"))
           
            if params: 
-              #utils.logMsg("Plugin : %s" %(params),0)       
+              #logMsg("Plugin : %s" %(params),0)       
               path=params.get("path",None)
               if path: path = path[0]
               limit=params.get("limit",None)
@@ -54,8 +55,7 @@ class Main:
               action=params.get("action",None)
               if action: action = action[0].upper()
           
-           if action:                     
-            
+           if action:  
                if action == "GETGENRE":
                   genre=params.get("genre",None)
                   if genre: genre = genre[0]  
@@ -73,9 +73,9 @@ class Main:
                   if Id: Id = Id[0] 
                   castingtype=params.get("casttype",None)
                   if castingtype: castingtype = castingtype[0]
-                  utils.getCasting(castingtype,Id)              
-               
-              
+                  utils.getCasting(castingtype,Id)   
+                  
+                             
                if action == "GETARTISTEART":
                   Id=params.get("id",None)
                   if Id: Id = Id[0] 
@@ -83,12 +83,7 @@ class Main:
                   if castingtype: castingtype = castingtype[0]
                   Id=xbmc.getInfoLabel("ListItem.DBID")              
                   utils.getArtisteArt(castingtype,Id)  
-               """   
-               if action == "SETMENUVIEW":
-                  vue=params.get("id",None)
-                  if Id:
-                    xbmc.executebuiltin("Container.SetViewMode(%s)" % vue)
-               """   
+               
                   
                if action == "GETMENUVIEW":
                   if  (len(sys.argv)>1 and sys.argv[1]):
@@ -99,12 +94,11 @@ class Main:
                     
                     ListeVues=utils.ModeVuesMenu(content_type, current_view)
                     if ListeVues:
-                      utils.logMsg("ListeVues ok (%s)" %(ListeVues))
+                      #logMsg("ListeVues ok (%s)" %(ListeVues))
                       xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeVues)
-                    xbmcplugin.endOfDirectory(int(sys.argv[1]))       
-                 
+                    xbmcplugin.endOfDirectory(int(sys.argv[1])) 
         except:
-           params= {}
+          params= {}
         
         try:
             params = dict( arg.split( '=' ) for arg in sys.argv[ 1 ].split( '&' ) )
@@ -112,11 +106,19 @@ class Main:
             params = {}
             
         self.trailer = params.get( 'trailer', False )
+        self.trailerTypeVideo=params.get( 'dbtype', None )
+        self.trailerTitre=params.get( 'label', None )
+        self.trailerAnnee=params.get( 'year', None )
+        self.trailerKODIID=params.get( 'dbid', None )
+        self.trailerIMDBID=params.get( 'imdbnumber', None )
+        self.trailerTMDBID=params.get( 'tmdbnumber', None )
+          
+          
         self.setview = params.get( 'setview', False )
         self.setviewmenu = params.get( 'setviewmenu', False )
         if self.setviewmenu:
           self.idview=params.get( 'id', None )
-          #utils.logMsg("On y est !!! (%s)(%s)" %(self.idview,params))
+          #logMsg("On y est !!! (%s)(%s)" %(self.idview,params))
           
         self.videcache = params.get( 'videcache', False )
         self.addplaylist = params.get( 'addplaylist', False )
@@ -124,6 +126,12 @@ class Main:
         self.updateallmusic = params.get( 'updateallmusic', False )
         self.mettreajour = params.get( 'mettreajour', False )
         self.backend = params.get( 'backend', False )
+        self.updateacteursinf = params.get( 'updateacteursinf', False )
+        if self.updateacteursinf:
+          self.itemidkodi=params.get( 'idkodi', None )
+          self.itemidtmdb=params.get( 'idtmb', None )
+        self.showinfo = params.get( 'showinfo', False )
+        
         
         
         if self.videcache:
@@ -166,6 +174,24 @@ class Main:
             #-------------SUPPRIMER D'UNE PLAYLIST-------------                              
             if self.supplaylist:
                   utils.DelFromPlayList()
+                  
+            if self.updateacteursinf and self.windowhome.getProperty('IconmixShowInfo')=="1":
+              ListeActeurs=self.GetControl(self.windowvideoinf,1998)                                 
+              #ACTEURS  ------------------------------------------------                                 
+              if ListeActeurs:
+                ListeItemx=utils.getCasting("movie",self.itemidkodi,1,self.itemidtmdb)
+                ListeActeurs.reset()
+                if ListeItemx:
+                     #logMsg("Acteursinf.....")
+                     for itemX in ListeItemx:
+                          ListeActeurs.addItem(itemX) 
+                                                         
+                status=""
+              
+              
+           
+           
+            
            
     
     
@@ -181,149 +207,182 @@ class Main:
       #xbmc.executebuiltin( "ActivateWindow(busydialog)" ) 
       self.windowhome.setProperty('FenetreListeChoix','1')
       dialog=xbmcgui.Dialog()                
-      TrailerType=""
+      self.TrailerType=""
       self.ListeTrailer=[]
+      ContainerID=None
+      Saison=None
       TMDBID='' 
       TMDBIDListe=[]
-      
+      PanneauActeur=None 
       TMDBIDListeAllocine=[]
-      TrailerType=""
-      TypeVideo=xbmc.getInfoLabel("ListItem.DBType")
-      Annee=xbmc.getInfoLabel("ListItem.Year")
-      Titre=xbmc.getInfoLabel("ListItem.Label").decode('utf-8','ignore')
-      Saison=None 
-      if TypeVideo=="episode":     
-            Saison=str(xbmc.getInfoLabel("ListItem.Season"))                      
-         
+      self.TrailerType=""
       
-      if TypeVideo=="set":
-        TrailerType="videonavsaga"
-     
       
-      if xbmc.getCondVisibility("Control.HasFocus(7779)"):
-          TypeVideo=xbmc.getInfoLabel("Container(5051).ListItem.Property(dbtype)")
-          Titre=xbmc.getInfoLabel("Container(5051).ListItem.Label").decode('utf-8','ignore')
-          Annee=xbmc.getInfoLabel("Container(5051).ListItem.Year")
-          TrailerType="Roles"
       
-      if xbmc.getCondVisibility("Control.HasFocus(2999)"): #myvideonav elements (saga,acteurs,realisateurs)
-          TypeVideo=xbmc.getInfoLabel("Container(1999).ListItem.DBType")
-          Titre=xbmc.getInfoLabel("Container(1999).ListItem.Label").decode('utf-8','ignore')
-          Annee=xbmc.getInfoLabel("Container(1999).ListItem.Year")
-          TrailerType="videonav"
-      if xbmc.getCondVisibility("Control.HasFocus(2008)"): #dialogvideoinfo
-          TypeVideo='movie'
-          Titre=xbmc.getInfoLabel("Container(5002).ListItem.Label").decode('utf-8','ignore')
-          Annee=xbmc.getInfoLabel("Container(5002).ListItem.Year")
-          TrailerType="saga"
-      if xbmc.getCondVisibility("ControlGroup(7003).HasFocus"): #dialogvideoinfo cherche trailer
-          TypeVideo=xbmc.getInfoLabel("ListItem.DBTYPE")
-          Titre=xbmc.getInfoLabel("ListItem.Label").decode('utf-8','ignore')
+      if self.trailerTitre:
+          TypeVideo=self.trailerTypeVideo
+          PanneauActeur=True
+          Titre=self.trailerTitre
+          Annee=self.trailerAnnee
+          KODIID=self.trailerKODIID
+          IMDBID=self.trailerIMDBID
+          TMDBID=self.trailerTMDBID
+          self.TrailerType="dialogplus"
+          if not TMDBID:
+                   TMDBID=utils.get_externalID(IMDBID,TypeVideo) 
+      else:    
+          TypeVideo=xbmc.getInfoLabel("ListItem.DBType")
           Annee=xbmc.getInfoLabel("ListItem.Year")
-          TrailerType="videoinfo7003"
-      if xbmc.getCondVisibility("Control.HasFocus(7778)"): #dialogvideoinfo realisateur
-          TypeVideo=xbmc.getInfoLabel("ListItem.Property(dbtype)")
           Titre=xbmc.getInfoLabel("ListItem.Label").decode('utf-8','ignore')
-          Annee=xbmc.getInfoLabel("ListItem.Year")
-          TrailerType="realisateur"
-      dialog.notification('IconMixTools', __language__( 32508 )+": [COLOR=Yellow] "+Titre+"[/COLOR]", ADDON_ICON,1000) 
-      xbmc.executebuiltin( "ActivateWindow(busydialog)" )    
-      if TrailerType=="Roles" :
-           #acteurs  
-           if not xbmc.getInfoLabel("Container(5051).ListItem.Property(IMDBNumber)"):
-             #pas local
-             Trailer5051=xbmc.getInfoLabel("Container(5051).ListItem.Trailer")
-             
-             self.ListeTrailer=utils.getTrailer(Trailer5051,TypeVideo) 
-             self.GetAllocineTrailer(Titre,Annee,TypeVideo,None)
-            
-             #utils.logMsg("recherche Trailer (%s)(%s)(%s)" %(Titre,Annee,TypeVideo),0)
-           else:
-             #local
-             TMDBID=utils.get_externalID(xbmc.getInfoLabel("Container(5051).ListItem.Property(IMDBNumber)"),TypeVideo)
-             
-      if TrailerType=="realisateur" :
-           #realisateur
-           if not xbmc.getInfoLabel("ListItem.Property(IMDBNumber)"):
-             #pas local
-             self.ListeTrailer=utils.getTrailer(xbmc.getInfoLabel("ListItem.Trailer"),TypeVideo) 
-             self.GetAllocineTrailer(xbmc.getInfoLabel("ListItem.Label"),xbmc.getInfoLabel("ListItem.Year"),xbmc.getInfoLabel("ListItem.Property(dbtype)"),None)
-           else:
-             #local
-             TMDBID=utils.get_externalID(xbmc.getInfoLabel("ListItem.Property(IMDBNumber)"),TypeVideo)
-              
-      if TrailerType=="videonav":
-           #VideoNav
-           IMDBID=xbmc.getInfoLabel("Container(1999).ListItem.Property(IMDBNumber)")
-           TMDBID=xbmc.getInfoLabel("Container(1999).ListItem.Property(TMDBNumber)")
-           if not TMDBID and not IMDBID:
-               json_result = utils.getJSON('VideoLibrary.Get%sDetails' %(TypeVideo), '{ "%sid":%d,"properties":["imdbnumber"] }' %(TypeVideo,int(xbmc.getInfoLabel("Container(1999).ListItem.DBID"))))                         
-               IMDBID=json_result.get("imdbnumber")                 
-           if TMDBID=='' and IMDBID:
-               TMDBID=utils.get_externalID(IMDBID,TypeVideo)
-               
-      if TrailerType=="videonavsaga":
-           #VideoNav
-             TypeVideo="movie"
-           
+          Saison=None 
+          if self.windowhome.getProperty('IconmixShowInfo')=="1":
+            ContainerID=1990
+          else:
+             if self.windowhome.getProperty('IconmixShowInfo')=="2":
+               if not xbmc.getCondVisibility("ControlGroup(7003).HasFocus"):
+                  ContainerID=5051
+               else:
+                  ContainerID=1990
+             else:
+                  ContainerID=None
           
-             zz=int(xbmc.getInfoLabel("Container(1999).NumItems"))
-             #utils.logMsg("SagaType (%s)(%s)" %(zz,xbmc.getInfoLabel("Container(1999).NumItems")),0)
-             compteur=0
+          if TypeVideo=="episode":     
+                Saison=str(xbmc.getInfoLabel("ListItem.Season"))                      
              
-             for compteur in range(0,zz): 
-               #SagaItem=ListeSaga.getListItem(cpt)
-               #IMDBID=SagaItem.getProperty(IMDBNumber)
-               #TMDBID=SagaItem.getProperty(TMDBNumber)
-               #DBID=SagaItem.getProperty(DBID)
-               
-               IMDBID=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Property(IMDBNumber)" %(compteur))
-               TMDBID=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Property(TMDBNumber)" %(compteur))
-               DBID=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Property(DBID)" %(compteur))
-               LABEL=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Label" %(compteur))
-               YEAR=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Year" %(compteur))
-               TMDBIDListeAllocine.append({"Titre":LABEL,"Annee":YEAR})
-               
-               #utils.logMsg("Allocine (%d)(%s)(%s)(%s)(%s)(%s)" %(compteur,LABEL,YEAR,IMDBID,TMDBID,DBID),0)
-               if DBID:
-                 if not TMDBID and not IMDBID:
-                     json_result = utils.getJSON('VideoLibrary.GetMovieDetails', '{ "movieid":%d,"properties":["imdbnumber"] }' %(int(DBID)))                         
-                     IMDBID=json_result.get("imdbnumber")                 
-                 if TMDBID or IMDBID:
-                    TMDBIDListe.append({"tmdbid":TMDBID,"imdbid":IMDBID})
-               
-               
-             
-               
-      if TrailerType=="saga" :
-           #SAGA
-           IMDBID=xbmc.getInfoLabel("Container(5002).ListItem.Property(IMDBNumber)")
-           TMDBID=xbmc.getInfoLabel("Container(5002).ListItem.Property(TMDBNumber)")
-           if not TMDBID and not IMDBID:
-               json_result = utils.getJSON('VideoLibrary.GetMovieDetails', '{ "movieid":%d,"properties":["imdbnumber"] }' %(int(xbmc.getInfoLabel("Container(5002).ListItem.DBID"))))                         
-               IMDBID=json_result.get("imdbnumber")
-           
-           if TMDBID=='' and IMDBID:
-               TMDBID=utils.get_externalID(IMDBID,'movie')
+          
+          if TypeVideo=="set":
+            self.TrailerType="videonavsaga"
          
-      
-      if TrailerType=="videoinfo7003" or TrailerType=="":
-           #acteurs videoinfo                     
-           if TypeVideo!="episode":
-             IMDBNUMBER=xbmc.getInfoLabel("ListItem.IMDBNumber")
-           else:
-             IMDBNUMBER=xbmc.getInfoLabel("ListItem.TVShowTitle")
-             Titre=IMDBNUMBER
+          
+          if xbmc.getCondVisibility("Control.HasFocus(7779)"):
+              PanneauActeur=True
+              TypeVideo=xbmc.getInfoLabel("Container(5051).ListItem.Property(dbtype)")
+              Titre=xbmc.getInfoLabel("Container(5051).ListItem.Label").decode('utf-8','ignore')
+              Annee=xbmc.getInfoLabel("Container(5051).ListItem.Year")
+              KODIID=xbmc.getInfoLabel("Container(5051).ListItem.DBID")
+              self.TrailerType="Roles"
+          
+          if xbmc.getCondVisibility("Control.HasFocus(2999)"): #myvideonav elements (saga,acteurs,realisateurs)
+              TypeVideo=xbmc.getInfoLabel("Container(1999).ListItem.DBType")
+              Titre=xbmc.getInfoLabel("Container(1999).ListItem.Label").decode('utf-8','ignore')
+              Annee=xbmc.getInfoLabel("Container(1999).ListItem.Year")
+              self.TrailerType="videonav"
+              
+          if xbmc.getCondVisibility("Control.HasFocus(2008)"): #dialogvideoinfo
+              TypeVideo='movie'
+              Titre=xbmc.getInfoLabel("Container(5002).ListItem.Label").decode('utf-8','ignore')
+              Annee=xbmc.getInfoLabel("Container(5002).ListItem.Year")
+              self.TrailerType="saga"
+          if xbmc.getCondVisibility("ControlGroup(442).HasFocus"): #dialogvideoinfo cherche trailer
+              logMsg("ContainerID (%s)" %(ContainerID))
+              TypeVideo=xbmc.getInfoLabel("Container(%d).ListItem.DBTYPE" %(ContainerID)) if ContainerID else xbmc.getInfoLabel("ListItem.DBTYPE")
+              Titre=xbmc.getInfoLabel("Container(%d).ListItem.Label" %(ContainerID)) if ContainerID else xbmc.getInfoLabel("ListItem.Label")
+              Titre=Titre.decode('utf-8','ignore')
+              Annee=xbmc.getInfoLabel("Container(%d).ListItem.Year" %(ContainerID)) if ContainerID else xbmc.getInfoLabel("ListItem.Year")
+              self.TrailerType="videoinfo7003"
+          if xbmc.getCondVisibility("Control.HasFocus(7778)"): #dialogvideoinfo realisateur
+              TypeVideo=xbmc.getInfoLabel("Container(5052).ListItem.DBTYPE" )
+              Titre=xbmc.getInfoLabel("Container(5052).ListItem.Label" )
+              Titre=Titre.decode('utf-8','ignore')
+              Annee=xbmc.getInfoLabel("Container(5052).ListItem.Year" )    
+              self.TrailerType="realisateur"
+
            
-           if not IMDBNUMBER:
-             self.ListeTrailer=utils.getTrailer(xbmc.getInfoLabel("ListItem.Trailer"),TypeVideo) 
-           else:
-             TMDBID=utils.get_externalID(IMDBNUMBER,TypeVideo)
-           #utils.logMsg("Trailertype (%s) : (%s)(%s)(%s)" %(Titre,IMDBNUMBER,TypeVideo,TMDBID))
-       
+           
+          if self.TrailerType=="Roles" :
+               #acteurs  
+               IMDBID=xbmc.getInfoLabel("Container(5051).ListItem.Property(IMDBNumber)")
+               TMDBID=xbmc.getInfoLabel("Container(5051).ListItem.Property(TMDBNumber)")
+              
+               if not TMDBID:
+                   TMDBID=utils.get_externalID(IMDBID,TypeVideo)
+                 
+                 
+          if self.TrailerType=="realisateur" :
+               #realisateur
+               IMDBID=xbmc.getInfoLabel("Container(5052).ListItem.Property(IMDBNumber)")
+               TMDBID=xbmc.getInfoLabel("Container(5052).ListItem.Property(TMDBNumber)")
+               KODIID=xbmc.getInfoLabel("Container(5052).ListItem.DBID")
+               PanneauActeur=True
+               if not TMDBID:
+                     TMDBID=utils.get_externalID(IMDBID,TypeVideo)
+                  
+          if self.TrailerType=="videonav":
+               #VideoNav
+               IMDBID=xbmc.getInfoLabel("Container(1999).ListItem.Property(IMDBNumber)")
+               TMDBID=xbmc.getInfoLabel("Container(1999).ListItem.Property(TMDBNumber)")
+               KODIID=xbmc.getInfoLabel("Container(1999).ListItem.DBID")
+               if not TMDBID and not IMDBID:
+                   json_result = utils.getJSON('VideoLibrary.Get%sDetails' %(TypeVideo), '{ "%sid":%d,"properties":["imdbnumber"] }' %(TypeVideo,int(xbmc.getInfoLabel("Container(1999).ListItem.DBID"))))                         
+                   IMDBID=json_result.get("imdbnumber")                 
+               if TMDBID=='' and IMDBID:
+                   TMDBID=utils.get_externalID(IMDBID,TypeVideo)
+                   
+          if self.TrailerType=="videonavsaga":
+               #VideoNav
+                 TypeVideo="movie"
+               
+              
+                 zz=int(xbmc.getInfoLabel("Container(1999).NumItems"))
+                 #logMsg("SagaType (%s)(%s)" %(zz,xbmc.getInfoLabel("Container(1999).NumItems")),0)
+                 compteur=0
+                 
+                 for compteur in range(0,zz): 
+                   #SagaItem=ListeSaga.getListItem(cpt)
+                   #IMDBID=SagaItem.getProperty(IMDBNumber)
+                   #TMDBID=SagaItem.getProperty(TMDBNumber)
+                   #DBID=SagaItem.getProperty(DBID)
+                   
+                   IMDBID=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Property(IMDBNumber)" %(compteur))
+                   TMDBID=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Property(TMDBNumber)" %(compteur))
+                   DBID=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Property(DBID)" %(compteur))
+                   LABEL=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Label" %(compteur))
+                   YEAR=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Year" %(compteur))
+                   TMDBIDListeAllocine.append({"Titre":LABEL,"Annee":YEAR})
+                   
+                   #logMsg("Allocine (%d)(%s)(%s)(%s)(%s)(%s)" %(compteur,LABEL,YEAR,IMDBID,TMDBID,DBID),0)
+                   if DBID:
+                     if not TMDBID and not IMDBID:
+                         json_result = utils.getJSON('VideoLibrary.GetMovieDetails', '{ "movieid":%d,"properties":["imdbnumber"] }' %(int(DBID)))                         
+                         IMDBID=json_result.get("imdbnumber")                 
+                     if TMDBID or IMDBID:
+                        TMDBIDListe.append({"tmdbid":TMDBID,"imdbid":IMDBID})
+                   
+                   
+                 
+                   
+          if self.TrailerType=="saga" :
+               #SAGA
+               IMDBID=xbmc.getInfoLabel("Container(5002).ListItem.Property(IMDBNumber)")
+               TMDBID=xbmc.getInfoLabel("Container(5002).ListItem.Property(TMDBNumber)")
+               KODIID=xbmc.getInfoLabel("Container(5002).ListItem.DBID")
+               if not TMDBID and not IMDBID:
+                   json_result = utils.getJSON('VideoLibrary.GetMovieDetails', '{ "movieid":%d,"properties":["imdbnumber"] }' %(int(xbmc.getInfoLabel("Container(5002).ListItem.DBID"))))                         
+                   IMDBID=json_result.get("imdbnumber")
+               
+               else: 
+                 if not TMDBID:
+                   TMDBID=utils.get_externalID(IMDBID,'movie')
+             
+          
+          if self.TrailerType=="videoinfo7003" or self.TrailerType=="":
+               #acteurs videoinfo   
+               KODIID=xbmc.getInfoLabel("Container(%d).ListItem.DBID" %(ContainerID)) if ContainerID else xbmc.getInfoLabel("ListItem.DBID")
+               TMDBID=xbmc.getInfoLabel("Container(%d).ListItem.Property(TMDBNumber)" %(ContainerID)) if ContainerID else xbmc.getInfoLabel("ListItem.Property(TMDBNumber)")
+               if TypeVideo!="episode":
+                 IMDBNUMBER=xbmc.getInfoLabel("Container(%d).ListItem.IMDBNumber" %(ContainerID)) if ContainerID else xbmc.getInfoLabel("ListItem.IMDBNumber")
+               else:
+                 IMDBNUMBER=xbmc.getInfoLabel("Container(%d).ListItem.TVShowTitle" %(ContainerID)) if ContainerID else xbmc.getInfoLabel("ListItem.TVShowTitle")
+                 Titre=IMDBNUMBER
+               if not TMDBID:             
+                   TMDBID=utils.get_externalID(IMDBNUMBER,TypeVideo)
+               logMsg("self.TrailerType (%s) : (%s)(%s)(%s)(%s)" %(Titre,IMDBNUMBER,TypeVideo,TMDBID,ContainerID))
+      dialog.notification('IconMixTools', __language__( 32508 )+": [COLOR=Yellow] "+Titre+"[/COLOR]", ADDON_ICON,500)   
       if TMDBID!='' or len(TMDBIDListe)>0:
+           xbmc.executebuiltin( "ActivateWindow(busydialog)" )   
+           logMsg("self.TrailerType (%s) : (%s)(%s)(%s)(%s)(%s)" %(self.TrailerType,Titre,TypeVideo,TMDBID,ContainerID,KODIID))
            if len(TMDBIDListe)>0:
-             #utils.logMsg("SagaType TMDBIDListe %s" %(TMDBIDListe),0)
+             #logMsg("SagaType TMDBIDListe %s" %(TMDBIDListe),0)
              #start_time = time.time() 
              if ADDON.getSetting('allocineactif')=="true" :
                 self.ListeTrailer=self.ListeTrailer+utils.GetSagaTrailersAllocine(TMDBIDListeAllocine)
@@ -334,26 +393,26 @@ class Main:
            else:
             
              self.ListeTrailer=utils.getTrailer(TMDBID,TypeVideo,Saison)
-             #utils.logMsg("recherche Trailer (%s)(%s)(%s)" %(Titre,Annee,TypeVideo),0)
              if not self.ListeTrailer:
                self.ListeTrailer=[]
-             self.GetAllocineTrailer(Titre,Annee,TypeVideo,None)
-             #utils.logMsg("self.ListeTrailer (%d)(%s)" %(len(self.ListeTrailer),self.ListeTrailer),0)
+             self.GetAllocineTrailer(Titre,Annee,TypeVideo,PanneauActeur)
            
                 
-           if TrailerType=="videonav" and str(xbmc.getInfoLabel("Container(1999).ListItem.Property(DBID)"))!="": 
+           if self.TrailerType=="videonav" and KODIID!="": 
               self.ListeTrailer.append({"id":xbmc.getInfoLabel("Container(1999).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(1999).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(1999).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(1999).ListItem.Art(thumb)")})
-           if TrailerType=="saga" and str(xbmc.getInfoLabel("Container(5002).ListItem.Property(DBID)"))!="": 
+           if self.TrailerType=="saga" and KODIID!="": 
               self.ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5002).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(5002).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(5002).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(5002).ListItem.Art(thumb)")})
-           if (TrailerType=="videoinfo7003" or TrailerType=="videoinfo7003") and str(xbmc.getInfoLabel("ListItem.DBID"))!="":
-              self.ListeTrailer.append({"id":xbmc.getInfoLabel("ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("ListItem.Art(thumb)")})
-           if TrailerType=="Roles" and str(xbmc.getInfoLabel("Container(5051).ListItem.Property(DBID)"))!="": 
+           if self.TrailerType=="videoinfo7003" and ContainerID and KODIID!="":
+              self.ListeTrailer.append({"id":xbmc.getInfoLabel("Container(%d).ListItem.FilenameAndPath" %(ContainerID)),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(%d).ListItem.Label" %(ContainerID)).decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(%d).ListItem.VideoResolution" %(ContainerID)),"type":"","landscape":xbmc.getInfoLabel("Container(%d).ListItem.Art(thumb)"%(ContainerID))})
+           if self.TrailerType=="videoinfo7003" and not ContainerID and  KODIID!="":
+              self.ListeTrailer.append({"id":xbmc.getInfoLabel("ListItem.FilenameAndPath" ),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("ListItem.Label" ).decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("ListItem.VideoResolution" ),"type":"","landscape":xbmc.getInfoLabel("ListItem.Art(thumb)")})
+           if self.TrailerType=="Roles" and KODIID!="": 
               self.ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5051).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(5051).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(5051).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(5051).ListItem.Art(thumb)")})
-           if TrailerType=="realisateur" and str(xbmc.getInfoLabel("ListItem.Property(DBID)"))!="": 
+           if self.TrailerType=="realisateur" and KODIID!="": 
               self.ListeTrailer.append({"id":xbmc.getInfoLabel("ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("ListItem.Art(thumb)")})
            
-      
-      xbmc.executebuiltin( "Dialog.Close(busydialog)" ) 
+        
+           xbmc.executebuiltin( "Dialog.Close(busydialog)" ) 
       if len(self.ListeTrailer)>0:
           ListeNomTrailer=[]
           Image=""
@@ -364,7 +423,7 @@ class Main:
                   Image=urllib.unquote(Item.get("landscape").replace("image://",""))
                except:
                   Image=""
-                  utils.logMsg("erreur : %s" %(Item),0)                      
+                  logMsg("erreur : %s" %(Item),0)                      
                 
                try: 
                     NomTrailer=utils.try_decode(Item["name"])+" ["+utils.try_decode(Item["type"])+" - "+str(Item["size"])+"p - "+utils.try_decode(Item["iso_3166_1"]+"]")
@@ -383,43 +442,31 @@ class Main:
                 ret=self.ui.doModal()
                 del self.ui                          
                 self.windowhome.clearProperty('IconMixTrailer')
-                
-                    
+                  
+                      
       else: 
           # 
           dialog=xbmcgui.Dialog()
-          dialog.notification('IconMixTools', Titre+": "+__language__( 32506 ), "acteurs/arfffff.png", 3000)
+          dialog.notification('IconMixTools', Titre+": "+__language__( 32506 ), "acteurs/arfffff.png", 500)
       self.windowhome.setProperty('FenetreListeChoix','')
       #retour au focus précédent
-      if  TrailerType=="Roles" :  
-                     #self.windowhome.setProperty('ActeurVideoReset','')
-                     xbmc.executebuiltin("SetFocus(7779)")
-      else :
-           if  TrailerType=="videonav" : 
-                xbmc.executebuiltin("SetFocus(2999)")                             
-           else:
-                if  TrailerType=="realisateur" :
-                  xbmc.executebuiltin("SetFocus(7778)")
-                if  TrailerType=="videoinfo7003" :
-                  xbmc.executebuiltin("SetFocus(7003)")
-                else:
-                  if TrailerType=="videonavsaga":
-                    xbmc.executebuiltin("SetFocus(2008)")
-                  else:    
-                    xbmc.executebuiltin("SetFocus(2008)")
+      retour={"":2008,"videonav":2999,"realisateur":7778,"videoinfo7003":7003,"dialogplus":7003,"videonavsaga":2008,"Roles":7779}
+      xbmc.executebuiltin("SetFocus(%d)" %(retour[self.TrailerType]))   
+           
     
     def GetAllocineTrailer(self,Titre=None,Annee=None,TypeVideo=None,PanneauActeur=None):
       if ADDON.getSetting('allocineactif')=="true":
         start_time = time.time() 
         AllocineBA=None
-        
+        #logMsg("recherche Trailer allocine %s/%s/%s/%s" %(Titre,TypeVideo,Annee,PanneauActeur),0)
         #Annee=xbmc.getInfoLabel("ListItem.Year")
         if TypeVideo=="movie":
           AllocineBA=utils.Allocine_BandeAnnonce(Titre.lower(),TypeVideo,None,None,Annee)
-          #utils.logMsg("recherche Trailer allocine %s/%s/%s" %(Titre,TypeVideo,Annee),0)
+          #
 
         else:
-          Titre=xbmc.getInfoLabel("ListItem.TVShowTitle")
+          if not PanneauActeur:
+            Titre=xbmc.getInfoLabel("ListItem.TVShowTitle")
           Episode=None              
           if TypeVideo=="tvshow":
             Saison=None                                        
@@ -431,10 +478,10 @@ class Main:
             Annee=None
             
           AllocineBA=utils.Allocine_BandeAnnonce(Titre.lower(),TypeVideo,Saison,Episode,Annee)
-          #utils.logMsg("recherche Trailer allocine %s/%s/%s/%s/%s" %(Titre,TypeVideo,Annee,Saison,Episode),0)
+          #logMsg("recherche Trailer allocine %s/%s/%s/%s/%s" %(Titre,TypeVideo,Annee,Saison,Episode),0)
 
             #interval = time.time() - start_time 
-            #utils.logMsg("Total time in seconds (%s): %s" %(xbmc.getInfoLabel("ListItem.Season"),str(interval)),0) 
+            #logMsg("Total time in seconds (%s): %s" %(xbmc.getInfoLabel("ListItem.Season"),str(interval)),0) 
         if AllocineBA:
             if not self.ListeTrailer:
               self.ListeTrailer=[]
@@ -523,4 +570,4 @@ class Main:
 
 if (__name__ == "__main__"):
     Main()
-    #utils.logMsg('appel plugin termine...')
+    #logMsg('appel plugin termine...')

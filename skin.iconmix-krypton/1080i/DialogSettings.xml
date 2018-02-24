@@ -55,8 +55,8 @@
 				<textcolor>TextNF</textcolor>
 				<focusedcolor>DialogTextFO</focusedcolor>
 				<disabledcolor>TextDisabled</disabledcolor>
-				<texturefocus>ButtonFO2Wide.png</texturefocus>
-				<texturenofocus>-</texturenofocus>
+				<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+				<texturenofocus>-</texturenofocus> -->
 				<pulseonselect>false</pulseonselect>
 			</control>
 			<control type="radiobutton" id="8">
@@ -72,8 +72,8 @@
 				<disabledcolor>TextDisabled</disabledcolor>
 				<radiowidth>30</radiowidth>
 				<radioheight>30</radioheight>
-				<texturefocus>ButtonFO2Wide.png</texturefocus>
-				<texturenofocus>-</texturenofocus>
+				<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+				<texturenofocus>-</texturenofocus> -->
 				<!--
 				<textureradiofocus>keyboard/RadioButtonFO.png</textureradiofocus>
 				<textureradionofocus>keyboard/RadioButtonNF.png</textureradionofocus>
@@ -98,8 +98,8 @@
 				<reverse>yes</reverse>
 				<spinwidth>26</spinwidth>
 				<spinheight>26</spinheight>
-				<texturefocus>ButtonFO2Wide.png</texturefocus>
-				<texturenofocus>-</texturenofocus>
+				<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+				<texturenofocus>-</texturenofocus> -->
 				<!--
 				<textureup>ArrowUpNF.png</textureup>
 				<texturedown>ArrowDownNF.png</texturedown>
@@ -136,8 +136,8 @@
 				<textoffsety>7</textoffsety>
 				<sliderwidth>150</sliderwidth>
 				<sliderheight>15</sliderheight>
-				<texturefocus>ButtonFO2Wide.png</texturefocus>
-				<texturenofocus>-</texturenofocus>
+				<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+				<texturenofocus>-</texturenofocus> -->
 				<!--
 				<texturesliderbar>osdsliderback.png</texturesliderbar>
 				<textureslidernib>osdslidernib_2.png</textureslidernib>
@@ -185,8 +185,8 @@
 					<textcolor>SettingsDetail</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<selectedcolor>TextFO</selectedcolor>
-					<texturefocus>ButtonFo.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+					<texturenofocus>-</texturenofocus> -->
 					<disabledcolor>TextDisabled</disabledcolor>
 					<pulseonselect>false</pulseonselect>
 					<label></label>
@@ -216,8 +216,8 @@
 					<textcolor>SettingsDetail</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<selectedcolor>TextFO</selectedcolor>
-					<texturefocus>ButtonFo.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+					<texturenofocus>-</texturenofocus> -->
 					<disabledcolor>TextDisabled</disabledcolor>
 					<pulseonselect>false</pulseonselect>
 					<label></label>
@@ -247,8 +247,8 @@
 					<textcolor>SettingsDetail</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<selectedcolor>TextFO</selectedcolor>
-					<texturefocus>ButtonFo.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+					<texturenofocus>-</texturenofocus> -->
 					<disabledcolor>TextDisabled</disabledcolor>
 					<pulseonselect>false</pulseonselect>
 					<label></label>

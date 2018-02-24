@@ -15,7 +15,7 @@
 				<posy>640</posy>
 				<onleft>107</onleft>
 				<onright>105</onright>
-				<texturenofocus>buttons/button_exit.png</texturenofocus>
+				<texturenofocus>buttons/button_exit.png</texturenofocus> -->
 				<texturefocus>buttons/button_exitFO.png</texturefocus>
 				<onclick>Quit()</onclick>
 				<visible>System.ShowExitButton</visible>
@@ -28,7 +28,7 @@
 				<posy>640</posy>
 				<onleft>104</onleft>
 				<onright>106</onright>
-				<texturenofocus>buttons/button_shutdown.png</texturenofocus>
+				<texturenofocus>buttons/button_shutdown.png</texturenofocus> -->
 				<texturefocus>buttons/button_shutdownFO.png</texturefocus>
 				<onclick>Powerdown()</onclick>
 				<visible>System.CanPowerDown</visible>
@@ -41,7 +41,7 @@
 				<posy>640</posy>
 				<onleft>105</onleft>
 				<onright>107</onright>
-				<texturenofocus>buttons/button_suspend.png</texturenofocus>
+				<texturenofocus>buttons/button_suspend.png</texturenofocus> -->
 				<texturefocus>buttons/button_suspendFO.png</texturefocus>
 				<onclick>Suspend()</onclick>
 				<visible>System.CanSuspend</visible>
@@ -54,7 +54,7 @@
 				<posy>640</posy>
 				<onleft>106</onleft>
 				<onright>104</onright>
-				<texturenofocus>buttons/button_reboot.png</texturenofocus>
+				<texturenofocus>buttons/button_reboot.png</texturenofocus> -->
 				<texturefocus>buttons/button_rebootFO.png</texturefocus>
 				<onclick>Reset()</onclick>
 				<include>Animation_ButtonFocus</include>

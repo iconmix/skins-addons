@@ -165,7 +165,7 @@
 						<height>38</height>
 						<align>left</align>
 						<aligny>center</aligny>
-						<texture>ButtonFo.png</texture>
+						<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 				<visible>Control.Hasfocus(10)</visible>
 						<animation effect="fade" start="0" end="100" condition="True">Conditional</animation>
 					</control>
@@ -295,8 +295,8 @@
 				<onleft>23</onleft>
 				<onup>18</onup>
 				<ondown>22</ondown>
-				<texturenofocus>-</texturenofocus>
-				<texturefocus>ButtonFo.png</texturefocus>
+				<texturenofocus>-</texturenofocus> -->
+				<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
 				<alttexturenofocus>-</alttexturenofocus>
 				<alttexturefocus>ButtonFo.png</alttexturefocus>
 			</control>

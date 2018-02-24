@@ -27,7 +27,7 @@
     <label> </label>
     <visible>String.Contains(Player.Filenameandpath,googlevideo)</visible>
     <texturefocus colordiffuse="FFFFFFFF">bande/youtube.png</texturefocus>
-    <texturenofocus colordiffuse="FFFFFFFF">bande/youtube.png</texturenofocus>
+    <texturenofocus colordiffuse="FFFFFFFF">bande/youtube.png</texturenofocus> -->
     
     <aspectratio>keep</aspectratio>
   </control>
@@ -42,7 +42,7 @@
     <label> </label>
     <visible>String.Contains(Player.Filenameandpath,acsta.net)</visible>
     <texturefocus colordiffuse="FFFFFFFF">bande/allocine.png</texturefocus>
-    <texturenofocus colordiffuse="FFFFFFFF">bande/allocine.png</texturenofocus>
+    <texturenofocus colordiffuse="FFFFFFFF">bande/allocine.png</texturenofocus> -->
     
     <aspectratio>keep</aspectratio>
   </control>
@@ -60,7 +60,7 @@
       <shadowcolor>FF7F7F7F</shadowcolor>
 			<textoffsetx>15</textoffsetx>
 			<texturefocus colordiffuse="AFFFFFFF">bande/titre.png</texturefocus>
-      <texturenofocus colordiffuse="AFFFFFFF">bande/titre.png</texturenofocus>
+      <texturenofocus colordiffuse="AFFFFFFF">bande/titre.png</texturenofocus> -->
       <visible>!String.IsEmpty(Window(Home).Property(annonceencours))</visible>
 		</control>
 

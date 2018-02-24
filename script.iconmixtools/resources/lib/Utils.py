@@ -542,7 +542,7 @@ def GetTvDbId(UniqueId=None):
     if TMDBID:
       UniqueId["tmdb"]=TMDBID
   if UniqueId.get("tmdb"):
-    query_url="https://api.themoviedb.org/3/tv/%s/external_ids?api_key=%s&language=en-US" % (UniqueId["tmdb"],TMDBApiKey) 
+    query_url="https://api.themoviedb.org/3/tv/%s/external_ids?api_key=%s&language=en-US&include_adult=true" % (UniqueId["tmdb"],TMDBApiKey) 
     json_result = requestUrlJson(query_url)
     if json_result:
       return json_result.get("tvdb_id")
@@ -649,11 +649,12 @@ def CheckSaga(ItemId=None,Statique=None):
                 ItemListe = xbmcgui.ListItem(label=item.get("title"),iconImage="http://image.tmdb.org/t/p/original"+item.get("poster_path"),path="RunScript(script.iconmixtools,trailer=True)") 
                 fanart=item.get("backdrop_path")
                 if fanart:
-                    ItemListe.setArt({"fanart":"http://image.tmdb.org/t/p/original"+fanart})
-                ItemListe.setInfo("video", {"title": item.get("title"),"mediatype": "movie","year": item.get("release_date"),"plot": item.get("overview"),"originaltitle": item.get("originaltitle")})        
+                   fanart="http://image.tmdb.org/t/p/original"+fanart
+                ItemListe.setArt({"poster":"http://image.tmdb.org/t/p/original"+item.get("poster_path"),"fanart":fanart})
+                ItemListe.setInfo("video", {"title": item.get("title"),"setid":ItemId,"mediatype": "movie","year": item.get("release_date"),"plot": item.get("overview"),"originaltitle": item.get("originaltitle")})        
                 ItemListe.setProperty('IMDBNumber', '')
                 ItemListe.setProperty('TMDBNumber', str(item.get("id")))
-                ItemListe.setProperty('DBID', str(item.get("id")))
+                ItemListe.setProperty('DBID', "")                
                 ItemListe.setProperty('DateSortie', DateSortie)
                 ItemListe.setProperty('dbtype', 'movie')
                 
@@ -684,19 +685,19 @@ def CheckSaga(ItemId=None,Statique=None):
     
        for item in json_result.get("movies"):
           ItemListe = xbmcgui.ListItem(label=item.get("label"),path=item.get("file"))
-          item["DBID"]=item.get("movieid")
-          ItemListe.setProperty('DBID','')
+          item["DBID"]=str(item.get("movieid"))     
           ImdbNumber=item.get("imdbnumber")
           FileTab.append( os.path.dirname(item.get("file"))+"\\")          
           
-          #pistes audios
+          #pistes audios tele
           Audio=item.get("streamdetails").get("audio")
           i=1
           if Audio:               
                for AudioElement in Audio:
                     ItemListe.setProperty('AudioLanguage.%d' %(i), AudioElement.get("language"))
                     ItemListe.setProperty('AudioChannels.%d' %(i), str(AudioElement.get("channels")))
-                    ItemListe.setProperty('AudioCodec.%d' %(i), AudioElement.get("codec"))                    
+                    ItemListe.setProperty('AudioCodec.%d' %(i), AudioElement.get("codec")) 
+                    ItemListe.addStreamInfo('audio',AudioElement)                   
                     i=i+1
     
           #pistes vidéos 
@@ -704,8 +705,10 @@ def CheckSaga(ItemId=None,Statique=None):
           i=0
           Codec=""
           if Video:
+            #{"aspect":2.3975000381469726563,"codec":"h264","duration":5584,"height":800,"language":"eng","stereomode":"","width":1918}
             for VideoItem in Video:
                ItemListe.setProperty('VideoCodec', VideoItem.get("codec")) 
+               ItemListe.addStreamInfo('video',VideoItem)
                
           #sous-titres     
           Subtitles=item.get("streamdetails").get("subtitle")
@@ -713,11 +716,12 @@ def CheckSaga(ItemId=None,Statique=None):
           
           if Subtitles:
                for SubtitleElement in Subtitles:
-                    ItemListe.setProperty('SubtitleLanguage.%d' %(i), SubtitleElement.get("language"))                     
+                    ItemListe.setProperty('SubtitleLanguage.%d' %(i), SubtitleElement.get("language"))  
+                    ItemListe.addStreamInfo('subtitle',SubtitleElement)                   
                     i=i+1
-                   
-            
-          ItemListe.setProperty('DBID', str(item.get("DBID")))
+                    
+          ItemListe.setProperty('DBID', str(item.get("movieid")))
+          logMsg("Valeur item.get : (%s)" %(item.get("movieid")))
           ItemListe.setProperty('SetId', str(ItemId))
           ItemListe.setProperty('IMDBNumber', str(item.get("imdbnumber")))
           ItemListe.setProperty('TMDBNumber', '')
@@ -749,7 +753,11 @@ def CheckSaga(ItemId=None,Statique=None):
              PercentPlayed=""
           ItemListe.setProperty('PercentPlayed', str(PercentPlayed))
           ItemListe.setInfo("dbid", str(item.get("movieid")))
-          ItemListe.setInfo("video", {"dbid": str(item.get("movieid")),"duration": item.get("runtime"), "title": item.get("title"),"mediatype": "movie","genre": item.get("genre"),"year": item.get("year"),"plot": item.get("plot"),"plotoutline": item.get("plotoutline"),"originaltitle": item.get("originaltitle"),"playcount":item.get("playcount")}) 
+          #ItemListe.setInfo("video", {"dbid": str(item.get("movieid")),"rating":item.get("rating"),"userrating":UserRating,"duration": item.get("runtime"),"set": item.get("set"),"setid": item.get("setid"), "title": item.get("title"),"mediatype": "movie","genre": item.get("genre"),"year": item.get("year"),"plot": item.get("plot"),"plotoutline": item.get("plotoutline"),"originaltitle": item.get("originaltitle"),"playcount":item.get("playcount"),"imdbnumber":item.get("imdbnumber")}) 
+          LabelsSaga=GetListItemInfoLabelsJson(item)  
+          if LabelsSaga:            
+            ItemListe.setInfo("video", LabelsSaga) 
+            
           NbKodi=NbKodi+1
           if int(Compteur[item.get("imdbnumber")])>0:
              NbKodiValide=NbKodiValide+1
@@ -790,6 +798,9 @@ def CheckSaga(ItemId=None,Statique=None):
                
           return ListeItemFinal,FileTab
           
+          
+          
+        
 
 def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None,json_result=None,updateartwork=None):
   
@@ -877,7 +888,7 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None,js
       if ItemId:
                 if not ATmdbId:
                    #numero de collection TMDB inconnu
-                   query_url = "https://api.themoviedb.org/3/movie/%s?api_key=%s&language=%s" % (ItemId,TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8"))
+                   query_url = "https://api.themoviedb.org/3/movie/%s?api_key=%s&language=%s&include_adult=true" % (ItemId,TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8"))
                    json_data = requestUrlJson(query_url)
                    
                    if json_data:
@@ -887,7 +898,7 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None,js
                    IDcollection=ATmdbId
                    
                 if IDcollection:
-                     query_url = "https://api.themoviedb.org/3/collection/%d?api_key=%s&language=%s" % (IDcollection,TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8"))
+                     query_url = "https://api.themoviedb.org/3/collection/%d?api_key=%s&language=%s&include_adult=true" % (IDcollection,TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8"))
                      json_data = requestUrlJson(query_url)
                      
 
@@ -1348,7 +1359,7 @@ def getallepisodes(IdKodi=None,TvDbId=None,savepath=None,NbKodi=None,ShowBusy=No
                  ArrayCollection["imdbid"]=SaisonTab.get("imdb_id")
                  ArrayCollection["sa_id"]=SaisonTab.get("id")
                  #recupération du pays
-                 qurl="https://api.themoviedb.org/3/find/%s?api_key=%s&language=en-US&external_source=imdb_id"  % (ArrayCollection["imdbid"],TMDBApiKey)
+                 qurl="https://api.themoviedb.org/3/find/%s?api_key=%s&language=en-US&external_source=imdb_id&include_adult=true"  % (ArrayCollection["imdbid"],TMDBApiKey)
                  json_data2 = requestUrlJson(qurl)
                  if json_data2:
                    allID=json_data2.get("tv_results")
@@ -1487,6 +1498,156 @@ def MergeContainers(Cont1Size=None,Cont2Size=None):
     logMsg("merging....vide !",0)
   xbmcplugin.endOfDirectory(int(sys.argv[1])) 
 
+def GetListItemInfoLabelsJson(data=None):
+    
+  if data:
+    Valeur={}
+    Valeur["genre"]=data.get("genre")
+    if data.get("country"):
+      Country=[]
+      if len(data.get("country"))>1:
+        for xx in data.get("country"):
+          Country.append(xx)
+      else:
+        Country=data.get("country")[0]
+     
+      Valeur["country"]=Country
+    
+    Valeur["year"]=int(data.get("year"))
+    Valeur["top250"]=int(data.get("top250")) if data.get("top250") else None
+    Valeur["setid"]=int(data.get("setid")) if data.get("setid") else None
+    Valeur["rating"]=float(data.get("rating")) if data.get("rating") else None
+    Valeur["userrating"]=int(data.get("userrating")) if data.get("userrating") else None
+    Valeur["playcount"]=int(data.get("playcount")) if data.get("playcount") else None
+    Valeur["overlay"]=int(data.get("overlay")) if data.get("overlay") else None
+ 
+    if data.get("cast"):
+      Casting=[]
+      CastingRole=[]
+      for xx in data.get("cast"):
+        Casting.append(xx["name"])
+        CastingRole.append((xx["name"],xx["role"]))      
+      Valeur["castandrole"]=CastingRole
+      Valeur["cast"]=Casting
+    if data.get("director"):
+      director=[]
+      if len(data.get("director"))>1:
+        for xx in data.get("director"):
+          director.append(xx)
+      else:
+        director=data.get("director")[0]
+      Valeur["director"]=director
+    
+    
+    Valeur["mpaa"]=data.get("mpaa")
+    Valeur["plot"]=data.get("plot")
+    Valeur["plotoutline"]=data.get("plotoutline")
+    Valeur["title"]=data.get("title")
+    Valeur["originaltitle"]=data.get("originaltitle")
+    DurationTexte=data.get("duration")
+    if DurationTexte and DurationTexte.find(':')!=-1: #KODI LEIA
+      Valeur["duration"]=DurationTexte
+    else:
+      try:
+         Valeur["duration"]=int(DurationTexte) if DurationTexte else None
+      except:
+         Valeur["duration"]=None
+    
+    if data.get("studio"):
+      studio=[]
+      if len(data.get("studio"))>1:
+        for xx in data.get("studio"):
+          studio.append(xx)
+      else:
+        studio=data.get("studio")[0]
+      Valeur["studio"]=studio
+    Valeur["tagline"]=data.get("tagline")
+    if data.get("writer"):
+      writer=[]
+      if len(data.get("writer"))>1:
+        for xx in data.get("writer"):
+          writer.append(xx)
+      else:
+        writer=data.get("writer")[0]
+      Valeur["writer"]=writer
+    Valeur["tvshowtitle"]=data.get("tvshowtitle")
+    Valeur["premiered"]=data.get("premiered")
+    Valeur["status"]=data.get("status")
+    Valeur["set"]=data.get("set")
+    Valeur["imdbnumber"]=data.get("imdbnumber")
+    if data.get("credits"):
+      credits=[]
+      if len(data.get("credits"))>1:
+        for xx in data.get("credits"):
+          credits.append(xx)
+      else:
+        credits=data.get("credits")[0]
+      Valeur["credits"]=credits
+    Valeur["lastplayed"]=data.get("lastplayed")
+    Valeur["votes"]=data.get("votes")
+    Valeur["path"]=data.get("file")
+    Valeur["trailer"]=data.get("trailer")
+    Valeur["dateadded"]=data.get("dateadded")
+    Valeur["mediatype"]="movie"
+    Valeur["dbid"]=int(data.get("movieid"))  if data.get("movieid") else None  
+    #logMsg("Valeur : (%s)" %(Valeur["dbid"]))
+    return Valeur
+  else:
+    return None             
+def GetListItemInfoLabels(ContainerID=None):
+  if ContainerID:
+    #logMsg("GetLabel (%s)" %(xbmc.getInfoLabel("Container(%d).ListItem.Country" %(ContainerID))))
+    DurationTexte=xbmc.getInfoLabel("Container(%d).ListItem.Duration" %(ContainerID))
+    if DurationTexte and DurationTexte.find(':')!=-1: #KODI LEIA
+      Duration=DurationTexte
+    else:
+      try:
+         Duration=int(DurationTexte) if DurationTexte else None,
+      except:
+         Duration=None
+    
+    
+    return  ({'genre':xbmc.getInfoLabel("Container(%d).ListItem.Genre" %(ContainerID)),
+              'country':xbmc.getInfoLabel("Container(%d).ListItem.Country" %(ContainerID)),
+              'year':int(xbmc.getInfoLabel("Container(%d).ListItem.Year" %(ContainerID))) if xbmc.getInfoLabel("Container(%d).ListItem.Year" %(ContainerID)) else None,
+              'episode':(int(xbmc.getInfoLabel("Container(%d).ListItem.Episode" %(ContainerID)))) if xbmc.getInfoLabel("Container(%d).ListItem.Episode" %(ContainerID)) else None,
+              'season':int(xbmc.getInfoLabel("Container(%d).ListItem.Season" %(ContainerID))) if xbmc.getInfoLabel("Container(%d).ListItem.Season" %(ContainerID)) else None,
+              'top250':int(xbmc.getInfoLabel("Container(%d).ListItem.Top250" %(ContainerID))) if xbmc.getInfoLabel("Container(%d).ListItem.Top250" %(ContainerID)) else None,
+              'setid':int(xbmc.getInfoLabel("Container(%d).ListItem.SetId" %(ContainerID))) if xbmc.getInfoLabel("Container(%d).ListItem.SetID" %(ContainerID)) else None,
+              'tracknumber':int(xbmc.getInfoLabel("Container(%d).ListItem.TrackNumber" %(ContainerID))) if xbmc.getInfoLabel("Container(%d).ListItem.TrackNumber" %(ContainerID)) else None,
+              'rating':float(xbmc.getInfoLabel("Container(%d).ListItem.Rating" %(ContainerID))) if xbmc.getInfoLabel("Container(%d).ListItem.Rating" %(ContainerID)) else None,
+              'userrating':int(xbmc.getInfoLabel("Container(%d).ListItem.UserRating" %(ContainerID))) if xbmc.getInfoLabel("Container(%d).ListItem.UserRating" %(ContainerID)) else None,
+              'watched':xbmc.getInfoLabel("Container(%d).ListItem.Watched" %(ContainerID)),
+              'playcount':int(xbmc.getInfoLabel("Container(%d).ListItem.PlayCount" %(ContainerID))) if xbmc.getInfoLabel("Container(%d).ListItem.PlayCount" %(ContainerID)) else None,
+              'overlay':int(xbmc.getInfoLabel("Container(%d).ListItem.Overlay" %(ContainerID))) if xbmc.getInfoLabel("Container(%d).ListItem.Overlay" %(ContainerID)) else None,
+              'cast':[xbmc.getInfoLabel("Container(%d).ListItem.Cast")],
+              'castandrole':[xbmc.getInfoLabel("Container(%d).ListItem.CastAndRole")],
+              'director':xbmc.getInfoLabel("Container(%d).ListItem.Director" %(ContainerID)),
+              'mpaa':xbmc.getInfoLabel("Container(%d).ListItem.Mpaa" %(ContainerID)),
+              'plot':xbmc.getInfoLabel("Container(%d).ListItem.Plot" %(ContainerID)),
+              'plotoutline':xbmc.getInfoLabel("Container(%d).ListItem.PlotOutline" %(ContainerID)),
+              'title':xbmc.getInfoLabel("Container(%d).ListItem.Title" %(ContainerID)),
+              'originaltitle':xbmc.getInfoLabel("Container(%d).ListItem.OriginalTitle" %(ContainerID)),
+              'duration':Duration,
+              'studio':xbmc.getInfoLabel("Container(%d).ListItem.Studio" %(ContainerID)),
+              'tagline':xbmc.getInfoLabel("Container(%d).ListItem.Tagline" %(ContainerID)),
+              'writer':xbmc.getInfoLabel("Container(%d).ListItem.Writer" %(ContainerID)),
+              'tvshowtitle':xbmc.getInfoLabel("Container(%d).ListItem.TvShowTitle" %(ContainerID)),
+              'premiered':xbmc.getInfoLabel("Container(%d).ListItem.Premiered" %(ContainerID)),
+              'status':xbmc.getInfoLabel("Container(%d).ListItem.Status" %(ContainerID)),
+              'set':xbmc.getInfoLabel("Container(%d).ListItem.Set" %(ContainerID)),
+              'imdbnumber':xbmc.getInfoLabel("Container(%d).ListItem.IMDBNumber" %(ContainerID)),
+              'credits':xbmc.getInfoLabel("Container(%d).ListItem.Credits" %(ContainerID)),
+              'lastplayed':xbmc.getInfoLabel("Container(%d).ListItem.LastPlayed" %(ContainerID)),
+              'album':xbmc.getInfoLabel("Container(%d).ListItem.Album" %(ContainerID)),
+              'artist':[xbmc.getInfoLabel("Container(%d).ListItem.Artist")],
+              'votes':xbmc.getInfoLabel("Container(%d).ListItem.Votes" %(ContainerID)),
+              'path':xbmc.getInfoLabel("Container(%d).ListItem.Path" %(ContainerID)),
+              'trailer':xbmc.getInfoLabel("Container(%d).ListItem.Trailer" %(ContainerID)),
+              'dateadded':xbmc.getInfoLabel("Container(%d).ListItem.DateAdded" %(ContainerID)),
+              'mediatype':xbmc.getInfoLabel("Container(%d).ListItem.DBTYPE" %(ContainerID)),
+              'dbid':int(xbmc.getInfoLabel("Container(%d).ListItem.DBID" %(ContainerID)))  if xbmc.getInfoLabel("Container(%d).ListItem.DBID" %(ContainerID)) else None})    
+
 
 def CheckItemExtrafanartPath(ItemPath=None,ItemSsRep='extrafanart'):
  
@@ -1495,6 +1656,7 @@ def CheckItemExtrafanartPath(ItemPath=None,ItemSsRep='extrafanart'):
   
   if ItemPath and ItemPath!='':
      extrafanart_dir = ItemPath + ItemSsRep + '/'
+     
      ListeFanart=get_filepaths(extrafanart_dir)
 
      for Item in ListeFanart:
@@ -1624,7 +1786,7 @@ def getGenre(genrex=None,genretypex=None,origtitle=None):
   xbmcplugin.addDirectoryItems(int(sys.argv[1]), genrelist) 
   xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
-
+# --------------------------------------------ACTEURS/REALISATEURS----------------------------------------------
         
 def getCasting(Castingtypex=None,ItemId=None,Statique=None,MissingId=None):
   allCast = []
@@ -1633,9 +1795,7 @@ def getCasting(Castingtypex=None,ItemId=None,Statique=None,MissingId=None):
   Castingtype=""
   imageacteur="" 
   ListeActeur=[]
-  
-  
-  
+ 
   
   NonVide=xbmc.getCondVisibility("Skin.HasSetting(HideMovieTvCastEmpty)")
   #videodb://movies/actors/1132/   1132=id acteur pour retrouver ses films
@@ -1648,7 +1808,11 @@ def getCasting(Castingtypex=None,ItemId=None,Statique=None,MissingId=None):
          if ItemId and not MissingId:
           json_result = getJSON(Castingtype, '{ "%sid":%d,"properties": [ "cast"]}' %(Castingtypex,int(ItemId)))
          else :
-            query_url="https://api.themoviedb.org/3/%s/%s/credits?api_key=%s&language=%s" % (Castingtypex,MissingId,TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8")) 
+            if not 'movie' in Castingtypex:
+              Typex="tv"
+            else:
+              Typex="movie"
+            query_url="https://api.themoviedb.org/3/%s/%s/credits?api_key=%s&language=%s&include_adult=true" % (Typex,MissingId,TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8")) 
             json_result = requestUrlJson(query_url)
 
          #movie, tvshow
@@ -1666,6 +1830,8 @@ def getCasting(Castingtypex=None,ItemId=None,Statique=None,MissingId=None):
                  else:
                    if Test.get("profile_path"):
                     imageacteur="http://image.tmdb.org/t/p/original"+str(Test.get("profile_path"))
+                   else:
+                    imageacteur=None
                  if not imageacteur and not NonVide:
                     imageacteur="DefaultActor.png"
                  #else :
@@ -1678,7 +1844,7 @@ def getCasting(Castingtypex=None,ItemId=None,Statique=None,MissingId=None):
                      if not label2x:
                        label2x=Test.get("character")
                      ItemListe = xbmcgui.ListItem(label=name,iconImage=imageacteur,label2=label2x)
-                     
+                     ItemListe.setProperty("DbType","acteurs")
                      #logMsg("Acteurs : "+str(ItemId)+"/"+str(imageacteur),0)   
                      if not Statique:
                          ListeActeur.append(["",ItemListe,True])
@@ -1708,10 +1874,11 @@ def ActeurFilmsTvKODI(ActeurType=None,Acteur=None,Statique=None):
          if ActeurType and ActeurType=="director":
             Ok=""
          else: ActeurType="actor"
-         
+         Acteur=Remove_Separator(Acteur)
          #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetMovies","params":{"filter":{"field":"director","operator":"contains","value":"ridley"},"properties":["thumbnail","year","file"]},"id":"1"}       
-         json_result = getJSON2("VideoLibrary.GetMovies", '{"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["plot","thumbnail","year","file","art","imdbnumber","rating","userrating","cast"]}' %(ActeurType,Acteur))
+         json_result = getJSON2("VideoLibrary.GetMovies", '{"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["title","genre","year","rating","userrating","director","trailer","tagline","plot","plotoutline","originaltitle","lastplayed","playcount","writer","studio","mpaa","cast","country","imdbnumber","runtime","set","showlink","streamdetails","top250","votes","fanart","thumbnail","file","sorttitle","resume","setid","dateadded","tag","art"]}' %(ActeurType,Acteur))
          json_result2 = getJSON2("VideoLibrary.GetTvShows", '{"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["plot","thumbnail","year","file","art","imdbnumber","rating","userrating","cast"]}' %(ActeurType,Acteur))
+         
          #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetEpisodes","params":{"tvshowid":30,"properties":["cast"],"filter":{"actor":"CynthiaAddai-Robinson"}},"id":"1"}
          #pour obtenir tous les episodes comprenant l'acteur
          
@@ -1722,6 +1889,7 @@ def ActeurFilmsTvKODI(ActeurType=None,Acteur=None,Statique=None):
          #movie, tvshow
                   
          if Donnees:
+           
            for Item in Donnees:
              Titre=Item.get("label")
              if Titre:
@@ -1750,26 +1918,70 @@ def ActeurFilmsTvKODI(ActeurType=None,Acteur=None,Statique=None):
                  ItemListe.setProperty('DBID', str(IdVideo))
                  ItemListe.setProperty('dbtype',TypeVideo)
                  ItemListe.setProperty('IMDBNumber', str(Item.get("imdbnumber")))
-                 ItemListe.setProperty('Rating',str(int(Item.get("rating"))))
+                 ItemListe.setProperty('Rating',str(int(Item.get("rating")))) 
                  UserRating=Item.get("userrating")
                  if UserRating:
                      if int(UserRating)>0:
                        ItemListe.setProperty('UserRating',str(int(Item.get("userrating"))))
                      else:
                        ItemListe.setProperty('UserRating','')
-                 ItemListe.setInfo("video", {"dbid": str(IdVideo),"mediatype": TypeVideo,"title": Titre,"year": Item.get("year"),"trailer":Item.get("trailer"),"plot":Item.get("plot")})
-                 if not Statique:
-                     ListeVideos.append([Item.get("file"),ItemListe,False])
-                 else:
-                     #ListeVideos.append(ItemListe)
-                     try:
-                          Annee=Item.get("year")
-                     except:
-                          Annee="0"
-                     if not Annee or Annee=="":
-                      Annee="0" 
-                     ListeVideos.append([int(Annee),ItemListe])
-                    
+                 
+                 #pistes audios tele
+                 try:
+                   Audio=Item.get("streamdetails").get("audio")
+                 except:
+                   Audio=None
+                 i=1
+                 if Audio:               
+                       for AudioElement in Audio:
+                            ItemListe.setProperty('AudioLanguage.%d' %(i), AudioElement.get("language"))
+                            ItemListe.setProperty('AudioChannels.%d' %(i), str(AudioElement.get("channels")))
+                            ItemListe.setProperty('AudioCodec.%d' %(i), AudioElement.get("codec")) 
+                            ItemListe.addStreamInfo('audio',AudioElement)                   
+                            i=i+1
+            
+                  #pistes vidéos 
+                 try:
+                   Video=Item.get("streamdetails").get("video")
+                 except:
+                   Video=None
+                 i=0
+                 Codec=""
+                 if Video:
+                    #{"aspect":2.3975000381469726563,"codec":"h264","duration":5584,"height":800,"language":"eng","stereomode":"","width":1918}
+                    for VideoItem in Video:
+                       ItemListe.setProperty('VideoCodec', VideoItem.get("codec")) 
+                       ItemListe.addStreamInfo('video',VideoItem)
+                       
+                  #sous-titres  
+                 try:   
+                   Subtitles=Item.get("streamdetails").get("subtitle")
+                 except:
+                   Subtitles=None
+                 i=1
+                  
+                 if Subtitles:
+                       for SubtitleElement in Subtitles:
+                            ItemListe.setProperty('SubtitleLanguage.%d' %(i), SubtitleElement.get("language"))  
+                            ItemListe.addStreamInfo('subtitle',SubtitleElement)                   
+                            i=i+1
+                            
+                 InfoLabels=GetListItemInfoLabelsJson(Item)
+                 if InfoLabels:
+                   InfoLabels["mediatype"]= TypeVideo
+                   #ItemListe.setInfo("video", {"dbid": str(IdVideo),"mediatype": TypeVideo,"title": Titre,"year": Item.get("year"),"trailer":Item.get("trailer"),"plot":Item.get("plot")})
+                   ItemListe.setInfo("video", InfoLabels)
+                   if not Statique:
+                       ListeVideos.append([Item.get("file"),ItemListe,False])
+                   else:
+                       #ListeVideos.append(ItemListe)
+                       try:
+                            Annee=Item.get("year")
+                       except:
+                            Annee="0"
+                       if not Annee or Annee=="":
+                        Annee="0" 
+                       ListeVideos.append([int(Annee),ItemListe])
   if not Statique:               
      xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeVideos)       
      xbmcplugin.endOfDirectory(int(sys.argv[1])) 
@@ -1796,6 +2008,7 @@ def ActeurFilmsTvTMDB(ActeurType=None,Acteur=None,Statique=None):
   ListeId=[]
   ActeurId={}
   ActeurCache={}
+  json_data=None
   
   ActeurSave=1
   ActeurCache["nom"]=None
@@ -1807,9 +2020,11 @@ def ActeurFilmsTvTMDB(ActeurType=None,Acteur=None,Statique=None):
   if ActeurType and Acteur!="None": 
      
      if Acteur:
+        Acteur=Remove_Separator(Acteur)
         ActeurCache["cast"]=[] 
-        
-        savepath=ADDON_DATA_PATH+"/%s/%s" %(ActeurType,str(unidecode(Acteur)).replace(" ", "_"))
+        check=remove_accents(Acteur).encode("utf8","ignore")
+        savepath=ADDON_DATA_PATH+"/%s/%s" %(ActeurType,check.replace(" ", "_"))
+        #savepath=ADDON_DATA_PATH+"/%s/%s" %(ActeurType,str(unidecode(Acteur)).replace(" ", "_"))
         if xbmcvfs.exists(savepath):
           with open(savepath) as data_file:
                   json_data = json.load(data_file)
@@ -1836,18 +2051,26 @@ def ActeurFilmsTvTMDB(ActeurType=None,Acteur=None,Statique=None):
 
         if ActeurId.get("tmdb") and (not xbmcvfs.exists(savepath) or ActeurSave>0):
             
-            query_url = "https://api.themoviedb.org/3/person/%s/combined_credits?api_key=%s&language=%s" % (ActeurId.get("tmdb"),TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8")) 
+            query_url = "https://api.themoviedb.org/3/person/%s/combined_credits?api_key=%s&language=%s&include_adult=true" % (ActeurId.get("tmdb"),TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8")) 
             
             json_data = requestUrlJson(query_url)
          
         if json_data: 
-                  if json_data.get("cast"):                   
-                    for item in json_data.get("cast"):
+                  Donnees=None
+                  if ActeurType!='realisateurs':
+                    Donnees=json_data.get("cast")
+                  if ActeurType=='realisateurs':
+                    Donnees=json_data.get("crew")
+                    
+                  if Donnees:
+                                     
+                    for item in Donnees:                       
                        TypeVideo=str(item.get("media_type"))
                        name=""                     
                        if TypeVideo=="movie": name=item.get("title")
                        else : name=item.get("name")
                        if name:
+                         
                          IdFix=item.get("id")
                          Ajout=1
                          if IdFix:
@@ -1855,7 +2078,7 @@ def ActeurFilmsTvTMDB(ActeurType=None,Acteur=None,Statique=None):
                                ListeId.append(IdFix)                                                     
                             else:
                                Ajout=0
-                         if Ajout>0:                                                  
+                         if Ajout>0:                                                                                
                               Poster=item.get("poster_path")
                               if not Poster: 
                                  if TypeVideo=="movie": Poster="RolesFilms.png"
@@ -1864,16 +2087,24 @@ def ActeurFilmsTvTMDB(ActeurType=None,Acteur=None,Statique=None):
                               if TypeVideo=="tv":
                                 TypeVideo="tvshow"
                               
-                              Role=item.get("character")
+                              if ActeurType!='realisateurs':
+                                ActeurCache["cast"].append(item)
+                                Role=item.get("character")
+                              if ActeurType=='realisateurs':
+                                ActeurCache["crew"].append(item)
+                                Role=item.get("job")
                               if not Role:
                                  Role="?"
                               ItemListe = xbmcgui.ListItem(label=name,iconImage=Poster,label2=Role)
                               ItemListe.setProperty("poster",Poster)
+                              ItemListe.setArt({"poster":Poster})
                               Fanart=item.get("backdrop_path")
                               if Fanart:
-                                 ItemListe.setProperty("fanart","http://image.tmdb.org/t/p/original"+Fanart)
+                                 Fanart="http://image.tmdb.org/t/p/original"+Fanart
+                                 ItemListe.setProperty("fanart",Fanart)
                               else:
-                                 ItemListe.setProperty("fanart","xx")
+                                 Fanart=""
+                                 
                               try:
                                 Annee=item.get("release_date").split("-")[0]
                               except:
@@ -1885,21 +2116,45 @@ def ActeurFilmsTvTMDB(ActeurType=None,Acteur=None,Statique=None):
                                    Annee="0"
                               if not Annee or Annee=="":
                                 Annee="0"
-                              ActeurCache["cast"].append(item)
+                             
+                              
+                              try:
+                                Rating=str(int(item.get("vote_average")))
+                              except:
+                                Rating=""
+                              try:
+                       	         ItemPays=item.get("origin_country")
+                       	      except:
+                       	         ItemPays=None
+                              if ItemPays:
+                                Pays=[]
+                                for paysitem in ItemPays:
+                                  if len(paysitem)<4:
+                                    Pays.append(ListePays.get(paysitem.upper()).encode("utf8"))
+                                  else:
+                                    Pays.append(paysitem.upper().encode("utf8"))
+                                
+                              else:
+                                  Pays=None
+                              ItemListe.setProperty("TMDBNumber",str(IdFix))
+                              ItemListe.setProperty('Rating',Rating) 
                               ItemListe.setProperty("dbtype",TypeVideo)
-                              ItemListe.setInfo("video", {"title": name,"mediatype": TypeVideo,"year": Annee,"originaltitle": item.get("original_title"),"trailer":item.get("id")})        
+                              ItemListe.setArt({'poster':Poster,'fanart':Fanart,'landscape':Fanart,'icon':Poster})
+                              ItemListe.setInfo("video", {"title": name,"mediatype": TypeVideo,"rating":Rating,"year": Annee,"originaltitle": item.get("original_title"),"trailer":item.get("id"),"plot":item.get("overview"),"country":Pays})        
                               if not Statique:
                                  ListeRoles.append(["",ItemListe,True])
                               else :
                                  #ListeRoles.append(ItemListe)
                                  ListeRoles.append([int(Annee),ItemListe])
-                               
+                  """             
                   if ActeurType=='realisateurs' and json_data.get("crew"):             
                       for item in json_data.get("crew"):
                          TypeVideo=str(item.get("media_type"))
                          name=""                     
-                         if TypeVideo=="movie": name=item.get("title")
-                         else : name=item.get("name")
+                         if TypeVideo=="movie": name=item.get("title")                          
+                         else : 
+                           name=item.get("name")
+                           TypeVideo="tvshow"
                          if name:
                            IdFix=item.get("id")
                            Ajout=1
@@ -1909,13 +2164,15 @@ def ActeurFilmsTvTMDB(ActeurType=None,Acteur=None,Statique=None):
                                  #logMsg("Id :  "+str(IdFix),0)                                                   
                               else:
                                  Ajout=0
-                           if Ajout>0:                                                  
+                           if Ajout>0:  
+                                                                                
                                 Poster=item.get("poster_path")
                                 if not Poster: 
                                    if TypeVideo=="movie": Poster="RolesFilms.png"
                                    else: Poster="RolesSeries.png"
                                 else: Poster="http://image.tmdb.org/t/p/original"+str(Poster)
                                 Fanart=item.get("backdrop_path")
+                               
                                 
                                 Role=item.get("job")
                                 if not Role:
@@ -1925,6 +2182,12 @@ def ActeurFilmsTvTMDB(ActeurType=None,Acteur=None,Statique=None):
                                    ItemListe.setProperty("fanart","http://image.tmdb.org/t/p/original"+Fanart)
                                 else:
                                    ItemListe.setProperty("fanart","zz")
+                                if Poster:
+                                   ItemListe.setProperty("poster",Poster)
+                                   ItemListe.setArt({"poster":Poster})
+                                else:
+                                   ItemListe.setProperty("poster","zz")
+                                #logMsg("name (%s) Poster (%s)" %(name,Poster))
                                 try:
                                   Annee=item.get("release_date").split("-")[0]
                                 except:
@@ -1937,14 +2200,23 @@ def ActeurFilmsTvTMDB(ActeurType=None,Acteur=None,Statique=None):
                                 if not Annee or Annee=="":
                                   Annee="0"
                                 ActeurCache["crew"].append(item)
+                                try:
+                       	           ItemPays=item.get("origin_country")[0]
+                       	        except:
+                         	         ItemPays=None
+                                if ItemPays:
+                                  Pays=ListePays.get(ItemPays.upper())
+                                else:
+                                  Pays=None
+                                ItemListe.setProperty("TMDBNumber",str(IdFix))
                                 ItemListe.setProperty("dbtype",TypeVideo)
-                                ItemListe.setInfo("video", {"title": name,"mediatype": TypeVideo,"year": Annee,"originaltitle": item.get("original_title"),"trailer":item.get("id")})        
+                                ItemListe.setInfo("video", {"plot":item.get("overview"),"title": name,"mediatype": TypeVideo,"year": Annee,"originaltitle": item.get("original_title"),"trailer":item.get("id"),"country":Pays})        
                                 if not Statique:
                                    ListeRoles.append(["",ItemListe,True])
                                 else :
                                    #ListeRoles.append(ItemListe)
                                    ListeRoles.append([int(Annee),ItemListe])
-                  
+                  """
                             
                   if ActeurSave>0 and SETTING("cacheacteur")=="false":
                         erreur=DirStru(savepath)
@@ -1981,12 +2253,15 @@ def GetActeurId(Acteur):
   if Acteur!="None":  
         #allocine pour les frenchies ;)
         #ActeurId["allocine"]=''
-        ActeurId["allocine"]=Allocine_ChercheActeur(unidecode(Acteur))
+        #Acteur=try_decode(Acteur.split("(")[0])
+        ActeurId["allocine"]=Allocine_ChercheActeur(Acteur)
         
-          #TMDB    
-                 
-        #query_url = "https://api.themoviedb.org/3/search/person?api_key=67158e2af1624020e34fd893c881b019&language=%s&query=%s&page=1&include_adult=false" % (xbmc.getInfoLabel("System.Language").encode("utf8"),unicodedata.normalize('NFKD', Acteur.split("(")[0]).encode('ascii','xmlcharrefreplace'))
-        query_url = "https://api.themoviedb.org/3/search/person?api_key=%s&language=%s&query=%s&page=1&include_adult=false" % (TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8"),urllib.quote(unidecode(Acteur.split("(")[0])))
+          #TMDB   
+        try:
+          check=Acteur.encode('utf8')
+        except:
+          check=Acteur 
+        query_url = "https://api.themoviedb.org/3/search/person?api_key=%s&language=%s&query=%s&page=1&include_adult=true" % (TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8"),urllib.quote(check))
         #logMsg("Query="+str(query_url),0)
         json_data = requestUrlJson(query_url)              
         ActeurId["tmdb"]=None        
@@ -2001,62 +2276,67 @@ def GetActeurId(Acteur):
                 break
   return ActeurId 
 
-def GetActeurInfo(NomActeur,ActeurType=None):
+def GetActeurInfo(NomActeur,ActeurType="acteurs"):
   ActeurCache={}
   ActeurId={}
   Bio=None
   json_data={}
   SaveActeur=0
-  if ActeurType and ActeurType=="director":
+  
+  if ActeurType and "director" in ActeurType:
             ActeurType='realisateurs'
-  else: ActeurType="acteurs"
-  #http://api.allocine.fr/rest/v3/search?partner=YW5kcm9pZC12M3M&filter=movie&count=5&page=1&q=alien&format=json
-  if NomActeur:
-    savepath=ADDON_DATA_PATH+"/%s/%s" %(ActeurType,str(unidecode(NomActeur)).replace(" ", "_"))
+  if ActeurType and "actor" in ActeurType:
+            ActeurType='acteurs'
+  if NomActeur and ActeurType:
+    NomActeur=Remove_Separator(NomActeur)
+    check=remove_accents(NomActeur).encode("utf8","ignore")
+    #savepath=ADDON_DATA_PATH+"/%s/%s" %(ActeurType,remove_accents(NomActeur.encode("utf8","ignore").decode("utf8","ignore").replace(" ", "_")))
+    savepath=ADDON_DATA_PATH+"/%s/%s" %(ActeurType,check.replace(" ", "_"))
+    #NomActeur=NomActeur.encode("utf8","ignore").decode("utf8","ignore")
+    
     if xbmcvfs.exists(savepath):
         with open(savepath) as data_file:
-                  json_data = json.load(data_file)
+                  try:
+                    json_data = json.load(data_file)
+                  except:
+                    json_data=None
                   data_file.close() 
                   if json_data:
                       ActeurCache["cast"]=json_data.get("cast") 
                       ActeurId=json_data.get("id")
                       Bio=json_data.has_key('biographie')
+                      if not json_data.get("v6"):
+                        Bio=None
+                       
                       #Bio=json_data.get("biographie")
                       
                   
    
     
-    if not Bio or not ActeurId : 
+    if not Bio or not ActeurId :
           if not ActeurId :            
             ActeurId=GetActeurId(NomActeur)
           if ActeurId:
             json_data=GetActeurInfoMaj(ActeurId,NomActeur)
           else:
-            return ActeurCache  
-          if json_data:
-            #if (json_data.get("biographie") or json_data.get("naissance") or json_data.get("nom")) and SETTING("cacheacteur")=="false":
-            if SETTING("cacheacteur")=="false":
-               SaveActeur=1
-  
-         
+            return ActeurCache          
            
     if json_data : 
               ActeurCache["biographie"]=json_data.get("biographie")
               ActeurCache["naissance"]=json_data.get("naissance")                  
               ActeurCache["deces"]=json_data.get("deces")                                                 
               ActeurCache["lieunaissance"]=json_data.get("lieunaissance")
-              ActeurCache["nom"]=json_data.get("nom")
-              ActeurCache["nomreel"]=json_data.get("nomreel")
+              ActeurCache["nom"]=try_decode(json_data.get("nom"))
+              ActeurCache["nomreel"]=try_decode(json_data.get("nomreel"))
+              ActeurCache["poster"]=json_data.get("poster")
               ActeurCache["id"]=ActeurId
-              if SaveActeur>0:
-                  
+              ActeurCache["v6"]="ok"
+              if SETTING("cacheacteur")=="false":
                   erreur=DirStru(savepath)            
                   with io.open(savepath, 'w+', encoding='utf8') as outfile: 
                     str_ = json.dumps(ActeurCache,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
                     outfile.write(to_unicode(str_))
   return ActeurCache
-  
-
 
 def GetActeurInfoMaj(ActeurId,NomActeur):
   #http://www.imdb.com/xml/find?json=1&nr=1&nm=on&q=Cynthia%20Addai-Robinson
@@ -2082,18 +2362,22 @@ def GetActeurInfoMaj(ActeurId,NomActeur):
                         json_data["biography"]=jsonActeur.get("biography")
                         json_data["birthday"]=jsonActeur.get("birthDate")      
                         json_data["deathday"]=''                                                 
-                        json_data["place_of_birth"]=jsonActeur.get("birthPlace")   
+                        json_data["place_of_birth"]=jsonActeur.get("birthPlace")
+                        try:
+                          json_data["poster"]=jsonActeur.get("picture")["href"] 
+                        except:
+                          json_data["poster"]=None
                         #ActeurId='allo'+str(AllocineId)                     
             
     if ActeurId.get("tmdb"):
         if not json_data.get("biography"):           
           #on recherche sur tmdb dans la langue de KODI
-            query_url = "https://api.themoviedb.org/3/person/%s?api_key=%s&language=%s" % (ActeurId.get("tmdb"),TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8")) 
+            query_url = "https://api.themoviedb.org/3/person/%s?api_key=%s&language=%s&include_adult=true" % (ActeurId.get("tmdb"),TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8")) 
             json_datatmdb = requestUrlJson(query_url) 
             
         if not json_data or (not json_data.get("biography") and not json_datatmdb.get("biography")):   
               #pas de biographie dans la langue de KODI alors on cherche en Anglais......
-              query_url = "https://api.themoviedb.org/3/person/%s?api_key=%s&language=EN" % (ActeurId.get("tmdb"),TMDBApiKey) 
+              query_url = "https://api.themoviedb.org/3/person/%s?api_key=%s&language=EN&include_adult=true" % (ActeurId.get("tmdb"),TMDBApiKey) 
               json_datatmdb = requestUrlJson(query_url)
           
        
@@ -2145,14 +2429,91 @@ def GetActeurInfoMaj(ActeurId,NomActeur):
               ActeurCache["nomreel"]=""
              else:
               ActeurCache["nomreel"]=json_datatmdb.get("realName")
+          
+          
+          #"picture":{"name":"Photo Matthew Vaughn","path":"/pictures/15/01/15/17/40/151965.jpg","href":"http://fr.web.img2.acsta.net/pictures/15/01/15/17/40/151965.jpg"}
+          
+          
+          if json_data.get("poster"):
+             ActeurCache["poster"]=json_data.get("poster")
+          else:
+             if not json_datatmdb:
+              ActeurCache["poster"]=""
+             else:
+              if json_datatmdb.get("profile_path"):
+                ActeurCache["poster"]="http://image.tmdb.org/t/p/original"+json_datatmdb.get("profile_path")    
+              
                  
           
 
                 
   return ActeurCache  
+    
+def GetPhotoRealisateur(CheminType="",realisateur=None,HttpUniquement=None):
+    allInfo = []
+    realisateurId=""
+    savepath=""   
+    Poster=None  
+    #savepath=ADDON_DATA_PATH+"/%s/%s" %(ActeurType,str(unidecode(NomActeur)).replace(" ", "_"))
+    
+    if realisateur and len(realisateur)>4: 
+          realisateur=Remove_Separator(realisateur)
+          #logMsg("realisateur (%s)" %(realisateur))
+          zig=try_decode(realisateur).replace('"','')
+          check=remove_accents(zig.replace(" ", "_"))
+          #logMsg("realisateur (%s)(%s)" %(zig,check))
+          savepath=ADDON_DATA_PATH+"/%s/%s" %(CheminType,check)
+          if xbmcvfs.exists(savepath+".jpg"):
+              return(savepath+".jpg")
+              
+          if xbmcvfs.exists(savepath):
+              with open(savepath) as data_file:
+                  try:
+                    json_data = json.load(data_file)
+                  except:
+                    json_data=None
+                  data_file.close() 
+                  Poster=None
+                  if json_data:
+                      Poster=json_data.get("poster") 
+                      if savepath:
+                        return Poster
+                      #Bio=json_data.get("biographie")
+          
+          if not Poster:  
+             Poster="DefaultActor.png" 
+             Cache=GetActeurInfo(zig,CheminType)
+             if Cache:
+                Poster=Cache.get("poster")
+                
+                if (CheminType=="realisateurs" and SETTING("cacherealisateur")=="false") or (CheminType=="acteurs" and SETTING("cacheacteur")=="false"):
+                   query_url=Poster
+                   try:                      
+                     erreur=DirStru(savepath+".jpg")
+                     urllib.urlretrieve(query_url,savepath+".jpg")
+                   except :
+                     str_response=''
+                     Poster="DefaultActor.png"
+
+    return(Poster if Poster else "DefaultActor.png")     
   
-  
-  
+     
+# --------------------------ALLOCINE --------------------------------------------
+
+def Allocine_Acteur(IdActeur=None):
+      if IdActeur:
+        params = {}
+        params['format'] = 'json'
+        params['partner'] = Allocinepartner_key
+        params['profile'] = 'medium'
+        params['code'] = str(IdActeur)
+        params['striptags'] = 'biography'
+
+        response = Allocine_request('person', params)
+        
+        return response
+
+
 def Allocine_request(method=None, params=None):
      
        api_url = 'http://api.allocine.fr/rest/v3'
@@ -2188,21 +2549,6 @@ def Allocine_request(method=None, params=None):
        
        return str_response
        
-def Allocine_Acteur(IdActeur=None):
-      if IdActeur:
-        params = {}
-        params['format'] = 'json'
-        params['partner'] = Allocinepartner_key
-        params['profile'] = 'medium'
-        params['code'] = str(IdActeur)
-        params['striptags'] = 'biography'
-
-        response = Allocine_request('person', params)
-        
-        return response
-
-# ----------------------------------------------------------------------
-
 def GetSagaTrailersAllocine(Liste=None):
      #logMsg("Allocine SagaAnnonces : %s" %(Liste),0)
      ListeTrailer=[]
@@ -2220,8 +2566,6 @@ def GetSagaTrailersAllocine(Liste=None):
        cpt=cpt+1
      return ListeTrailer 
      
-     
-# ----------------------------------------------------------------------
 def Allocine_BandeAnnonce(Titre=None,TypeVideo="movie",Saison=None,Episode=None,Annee=None,BAuniquement=None):
   ListeBandeAnnonce=[]
   XQualite=[720,480,320]
@@ -2242,7 +2586,7 @@ def Allocine_BandeAnnonce(Titre=None,TypeVideo="movie",Saison=None,Episode=None,
      if xbmcaddon.Addon().getSetting("allocinepasdetrailer") and not BAuniquement:
           TypeOk=[31003,31004]
      AllocineID=Allocine_ChercheFilmSerie(Titre,TypeVideo,Annee)
-     #logMsg("Allocine ID : %s - (%s)" %(AllocineID,TypeOk),0)
+     #logMsg("Allocine ID : (%s)(%s)(%s) : %s - (%s)" %(Titre,TypeVideo,Annee,AllocineID,TypeOk),0)
      
      
      if AllocineID:
@@ -2432,7 +2776,6 @@ def Allocine_BandeAnnonce(Titre=None,TypeVideo="movie",Saison=None,Episode=None,
   return ListeBandeAnnonce             
         #{u'code': 19574082, u'acShow': {u'nameShort': u'allocinezap', u'code': 0, u'$': u'AlloCin\xe9 Zap'}, u'title': u'American Assassin BONUS VO "Un moyen pour parvenir \xe0 une fin"', u'trailerEmbed': u"<div id='ACEmbed'><iframe src='http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19574082&amp;isApp=true' style='width:480px; height:270px' frameborder='0' allowfullscreen='true'></iframe></div>", u'thumbnail': {u'path': u'/videothumbnails/17/09/20/12/40/3248158.jpg', u'href': u'http://fr.web.img4.acsta.net/videothumbnails/17/09/20/12/40/3248158.jpg'}, u'version': {u'code': 6002, u'original': 0, u'$': u'Anglais'}, u'statistics': {u'commentCount': 0, u'viewCount': 55}, u'titleShort': u'American Assassin BONUS VO "Un moyen pour parvenir \xe0 une fin"', u'runtime': 155, u'type': {u'code': 31018, u'$': u'Making Of'}, u'class': u'video'}
      
-             
         
 
 def Allocine_ChercheFilmSerie(KodiTitre=None,TypeVideo="movie",Annee=None):
@@ -2539,18 +2882,7 @@ def Allocine_Media(IdMedia=None):
           except:
             return None
       return None
-# ----------------------------------------------------------------------        
-def checkUrl(url):
-    p = urlparse.urlparse(url)
-    conn = httplib.HTTPConnection(p.netloc)
-    conn.request('HEAD', p.path)
-    resp = conn.getresponse()
-    return resp.status < 400
-    
-def remove_accents(input_str):
-    nfkd_form = unicodedata.normalize('NFKD', input_str)
-    return u"".join([c for c in nfkd_form if not unicodedata.combining(c)])
-        
+      
 def Allocine_ChercheActeur(Acteur=None):
       ActeurId=None
       if Acteur:
@@ -2559,7 +2891,11 @@ def Allocine_ChercheActeur(Acteur=None):
         params['filter'] = 'person'
         params['partner'] = Allocinepartner_key
         try:
-          params['q'] = str(Acteur) #unicodedata.normalize('NFKD', Acteur.split("(")[0]).encode('ascii','xmlcharrefreplace')
+          check=Acteur.encode('utf8')
+        except:
+          check=Acteur 
+        try:
+          params['q'] = urllib.quote(check) # str(Acteur) #unicodedata.normalize('NFKD', Acteur.split("(")[0]).encode('ascii','xmlcharrefreplace')
         except:
           return ActeurId
         response = Allocine_request('search', params)
@@ -2577,47 +2913,31 @@ def Allocine_ChercheActeur(Acteur=None):
                     ActeurId=str(Item.get("code"))                 
                     break
       return ActeurId
+           
+      
+# ----------------------------------------------------------------------        
+def checkUrl(url):
+    p = urlparse.urlparse(url)
+    conn = httplib.HTTPConnection(p.netloc)
+    conn.request('HEAD', p.path)
+    resp = conn.getresponse()
+    return resp.status < 400
      
-               
-def getRealisateur(CheminType="",DbId=None,realisateur=None,HttpUniquement=None):
-    allInfo = []
-    realisateurId=""
-    savepath=""     
+def remove_accents(input_str):
+    nfkd_form = unicodedata.normalize('NFKD',  try_decode(input_str))
+    return u"".join([c for c in nfkd_form if not unicodedata.combining(c)])
     
-    if DbId and realisateur: 
-        savepath=ADDON_DATA_PATH+"/%ss/%s.jpg" %(CheminType,str(unidecode(realisateur)).replace(" ", "_"))
-        if xbmcvfs.exists(savepath):
-             return(savepath)
-        else:
-            
-             savepath="DefaultActor.png"
-             realisateur=try_decode(realisateur)
-             query_url = "https://api.themoviedb.org/3/search/person?api_key=%s&language=%s&query=%s&page=1&include_adult=false" % (TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8"),unicodedata.normalize('NFKD', realisateur.split(" (")[0]).encode('ascii','xmlcharrefreplace'))
-             json_data = requestUrlJson(query_url)
-             #logMsg("Url : %s" %(query_url),0)
-             #logMsg("Acteur : %s" %(json_data),0)        
-             if json_data:
-                 
-                 allInfo=json_data.get("results")
-                 if allInfo:
-                    for item in allInfo:
-                      Poster=item.get("profile_path")
-                      if Poster: 
-                         Poster="http://image.tmdb.org/t/p/original"+str(Poster)
-                         if (CheminType=="realisateur" and SETTING("cacherealisateur")=="false") or (CheminType=="acteur" and SETTING("cacheacteur")=="false"):
-                             query_url=Poster
-                             try:                      
-                               savepath=ADDON_DATA_PATH+"/%ss/%s.jpg" %(CheminType,str(unidecode(realisateur)).replace(" ", "_"))     
-                               erreur=DirStru(savepath)
-                               urllib.urlretrieve(query_url,savepath)
-                               break 
-                             except :
-                               str_response=''
-                               savepath="DefaultActor.png"
-                               #logMsg("Resultat  URL introuvable 9--> " + str(query_url),0)
-                         else:
-                          savepath=Poster
-             return(savepath)            
+def Remove_Separator(Chaine=None):
+  if Chaine:
+    Chaine=Chaine.split("/")[0].rstrip()
+    Chaine=Chaine.split("&")[0].rstrip()
+    Chaine=Chaine.split(",")[0].rstrip()
+    Chaine=Chaine.replace('"','')
+    Chaine=Chaine.replace("'",'')
+  return Chaine  
+        
+               
+         
                            
 def GetSagaTrailers(Liste=None):
      #logMsg("SagaAnnonces : %s" %(Liste),0)
@@ -2652,16 +2972,16 @@ def getTrailer(ID=None,DbType=None,AnnonceUniquement=None,SaisonID=None):
      if DbType and ID: 
           #logMsg("getTrailer (%s)(%s)" %(DbType,ID))
           if DbType!="movie":
-               query_url ="https://api.themoviedb.org/3/tv/%s/videos?api_key=%s&language=%s" % (ID,TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8"))
+               query_url ="https://api.themoviedb.org/3/tv/%s/videos?api_key=%s&language=%s&include_adult=true" % (ID,TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8"))
           else:
-               query_url ="https://api.themoviedb.org/3/movie/%s/videos?api_key=%s&language=%s" % (ID,TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8"))
+               query_url ="https://api.themoviedb.org/3/movie/%s/videos?api_key=%s&language=%s&include_adult=true" % (ID,TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8"))
           json_data = requestUrlJson(query_url) #en francais
           if json_data:
             Donnees=json_data.get("results")               
           if DbType!="movie":
-               query_url ="https://api.themoviedb.org/3/tv/%s/videos?api_key=%s&language=en" % (ID,TMDBApiKey)
+               query_url ="https://api.themoviedb.org/3/tv/%s/videos?api_key=%s&language=en&include_adult=true" % (ID,TMDBApiKey)
           else:
-               query_url ="https://api.themoviedb.org/3/movie/%s/videos?api_key=%s&language=en" % (ID,TMDBApiKey)
+               query_url ="https://api.themoviedb.org/3/movie/%s/videos?api_key=%s&language=en&include_adult=true" % (ID,TMDBApiKey)
           #logMsg("getTrailer (%s)(%s)(%s)" %(DbType,ID,query_url))
           json_data = requestUrlJson(query_url) #en anglais
           if json_data:
@@ -2700,8 +3020,7 @@ def getTrailer(ID=None,DbType=None,AnnonceUniquement=None,SaisonID=None):
                     #logMsg("YT TypeTrailer (%s)(%s)(%s)(%s)(%s)" %(ID,TypeTrailer,Item.get("key"),Site,ItemSize),0)
                     if Site=="youtube" and ItemSize>=MediaQualite and (TypeTrailer=="trailer" or not AnnonceUniquement):
                          Item["position"]=str(cc) 
-                         Item["id"]='plugin://plugin.video.youtube/play/?video_id=%s' %(Item["key"])
-                         
+                         Item["id"]='plugin://plugin.video.youtube/play/?video_id=%s' %(Item["key"])                         
                          Item["landscape"]="http://img.youtube.com/vi/%s/hqdefault.jpg" %(Item["key"]) 
                          Item["key"]="YouTube"      
                          ListeTrailer.append(Item)
@@ -2717,12 +3036,11 @@ def getRuntime(ItemId=None,TypeID=None):
     if ItemId:  xxx=get_externalID(ItemId,TypeID)
     if xxx:
       if TypeID=="movie":
-          query_url = "https://api.themoviedb.org/3/movie/%s?api_key=%s" % (xxx,TMDBApiKey)
+          query_url = "https://api.themoviedb.org/3/movie/%s?api_key=%s&include_adult=true" % (xxx,TMDBApiKey)
       if TypeID=="episode":
-         query_url = "https://api.themoviedb.org/3/tv/%s?api_key=%s" % (xxx,TMDBApiKey)
+         query_url = "https://api.themoviedb.org/3/tv/%s?api_key=%s&include_adult=true" % (xxx,TMDBApiKey)
     
-      json_data = requestUrlJson(query_url)
-      
+      json_data = requestUrlJson(query_url)      
     
       if json_data:
         RuntimeDB = json_data['runtime']        
@@ -2732,18 +3050,18 @@ def getRuntime(ItemId=None,TypeID=None):
 def get_uniqueid(ItemId=None,DbType=None):
   #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetMovieDetails","params":{"movieid":221,"properties":["imdbnumber","uniqueid"]},"id":"1"}    
   json_result = getJSON('VideoLibrary.GetMovieDetails', '{ "movieid":%d,"properties":["uniqueid"] }' %(int(ItemId)))
-  if json_reult:
+  if json_result:
     UniqueId=json_result.get("uniqueid")
     if UniqueId:
        IMDBNUMBER=UniqueId.get("imdb")
-       TMDBNUMBER=UniqueId.get("tmdb")
+       TMDBNumber=UniqueId.get("tmdb")
        UNKNNUMBER=UniqueId.get("unknown")
        if IMDBNUMBER:
         return IMDBNUMBER
        if UNKNNUMBER and ("tt" in UNKNNUMBER):
         return IMDBNUMBER
-       if TMDBNUMBER:
-        return TMDBNUMBER
+       if TMDBNumber:
+        return TMDBNumber
     
 def get_externalID(ItemId=None,ismovie=None):
    externalXX=""
@@ -2765,7 +3083,7 @@ def get_externalID(ItemId=None,ismovie=None):
        externalXX="tvdb_id"
      else:
        externalXX="imdb_id"
-     query_url = "https://api.themoviedb.org/3/find/%s?api_key=%s&language=%s&external_source=%s" % (ItemId,TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8"),externalXX)
+     query_url = "https://api.themoviedb.org/3/find/%s?api_key=%s&language=%s&external_source=%s&include_adult=true" % (ItemId,TMDBApiKey,xbmc.getInfoLabel("System.Language").encode("utf8"),externalXX)
      
      json_data = requestUrlJson(query_url)
  
@@ -3666,7 +3984,7 @@ def CheckGenres(GenreLabel=None):
      return ListeItem  
      
 #-------------------------------------ARTWORK-------------------------------------------------
-#https://api.themoviedb.org/3/search/multi?api_key=67158e2af1624020e34fd893c881b019&language=en-US&query=alfred%20hitchcock&page=1&include_adult=false     
+#https://api.themoviedb.org/3/search/multi?api_key=67158e2af1624020e34fd893c881b019&language=en-US&query=alfred%20hitchcock&page=1&include_adult=true     
   
 #--------------------------------------PLAYLIST-----------------------------------------------
 def indent(elem, level=0):
@@ -3778,103 +4096,3 @@ def AddToPlayList():
             logMsg("%s introuvable " %(str(views_file)),0)  
   
     
-    """  
-def getallepisodesTMDB(ItemIdx=None,KodiId=None,savepath=None,NbKodi=None,ShowBusy=None):
-  #https://api.betaseries.com/shows/display?key=46be59b5b866&thetvdb_id=266398
-  
-  KodiCollection = []
-  ArrayCollection={} 
-  EpisodesDiffusion={}
-  EpisodesSaison =[]
-  EpisodesEtcasting={}
-  SaisonTab={}
-  Episodes=[]
-  ItemId=""
-  query_url=""
-  nowX = datetime.datetime.now().date()+datetime.timedelta(30) #pour mise a jour une fois par mois
-  
-  if ItemIdx or KodiId:
-     if ShowBusy: xbmc.executebuiltin( "ActivateWindow(busydialog)" ) 
-     getallepisodesBeta("",KodiId,savepath,NbKodi,1)
-     if not ItemIdx and KodiId: 
-        ItemId=get_externalID(KodiId,"tv") # conversion imdb ou tvdb en themoviedb ....
-     else :
-        if ItemIdx: ItemId=ItemIdx
-          
-     #ItemId = id chez themoviedb du tvshow
-     if ItemId :
-         ArrayCollection["name"]=xbmc.getInfoLabel("ListItem.TVShowTitle")
-         ArrayCollection["tmdbid"]=ItemId
-         ArrayCollection["kodiid"]=KodiId
-         ArrayCollection["nbkodi"]=NbKodi
-         ArrayCollection["dateecheance"]=nowX.strftime('%Y-%m-%d')
-         ArrayCollection["v5"]="ok"
-         TotalSaisons={}
-          
-       
-         query_url = "https://api.themoviedb.org/3/tv/%s?api_key=67158e2af1624020e34fd893c881b019&language=%s" % (ItemId,xbmc.getInfoLabel("System.Language").encode("utf8"))
-          
-         
-         json_data = requestUrlJson(query_url)
-         try:
-           str_response = response.read().decode('utf8')
-         except :
-           str_response=''
-           #logMsg("Resultat  URL introuvable 5--> " + str(query_url),0)
-
-         if str_response :
-          try:
-            json_data = json.loads(str_response)
-          except:
-            json_data=""
-            logMsg("Resultat  URL vide 5--> " + str(query_url),0)
-         else:
-         	json_data=""
-          
-         if json_data:
-             SaisonTab=json_data.get("seasons")
-             if SaisonTab:
-             	  for item in SaisonTab:             	  	       
-                         EpisodesEtcasting={} 
-                         EpisodesEtcasting["NbEpisodes"]=item["episode_count"]
-                         TotalSaisons[str(item["season_number"])]=EpisodesEtcasting 
-                              
-         
-         ArrayCollection["saisons"]=TotalSaisons 
-         ArtWorks=gettvartworks(KodiId)
-         ArrayCollection["artworks"]=ArtWorks
-                
-          #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.SetTvShowDetails","params":{"setid":38,"art":{"poster":"http://image.tmdb.org/t/p/original/zrApSsUX9i0qVntcCD0Pp55TdCy.jpg"}},"id":1}
-         if KODI_VERSION>=17 and ArtWorks and  SETTING("updatetvposter")=="true":                              
-            MAJ=""
-            if ArtWorks.get("logo"):
-              MAJ='"clearlogo":"%s",' %(ArtWorks.get("logo"))
-            if ArtWorks.get("clearart"):
-              MAJ=MAJ+'"clearart":"%s",' %(ArtWorks.get("clearart"))
-            if ArtWorks.get("banner"):
-              MAJ=MAJ+'"banner":"%s",' %(ArtWorks.get("banner"))
-            if ArtWorks.get("poster"):
-              MAJ=MAJ+'"poster":"%s",' %(ArtWorks.get("poster"))
-            if ArtWorks.get("fanart"):
-              MAJ=MAJ+'"fanart":"%s",' %(ArtWorks.get("fanart"))
-            if ArtWorks.get("thumb"):
-              MAJ=MAJ+'"landscape":"%s",' %(ArtWorks.get("thumb"))
-            
-
-            if len(MAJ)>3:
-              MJTV=MAJ[0:len(MAJ)-1] #suppression de la virgule de fin
-              logMsg("MAJ=%s MJSAGA=%s" %(MAJ,MJSAGA),0 )
-              
-              try:
-               json_result = getJSON('VideoLibrary.SetTvShowDetails', '{ "tvshowid":%d,"art":{%s} }' %(int(ItemIdxx),MJTV))
-              except:
-                logMsg("VideoLibrary.SetTvShowDetails: %d impossible" %(int(ItemIdxx)),0 )
-                                
-         if SETTING("cacheserie")=="false":  
-           erreur=DirStru(savepath)
-           with io.open(savepath, 'w+', encoding='utf8') as outfile: 
-  	                      str_ = json.dumps(ArrayCollection,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
-  	                      outfile.write(to_unicode(str_))
-     if ShowBusy: xbmc.executebuiltin( "Dialog.Close(busydialog)" )                 
-  return ArrayCollection 
-"""

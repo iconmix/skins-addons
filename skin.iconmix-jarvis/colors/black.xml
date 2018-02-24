@@ -64,7 +64,7 @@
 	<color name="ArrowDiffuse">FFc89008</color>
 	<color name="BannerFrameNF">ee3c95c8</color>
 	<color name="GlassDiffuse">89FFFFFF</color>
-	<color name="FocusBar">ff101010</color>
+	<color name="FocusBar">ff7f7f7f</color>
 	<color name="FocusBarText">FFFFFFFF</color>
 
 	<!-- Low List View -->

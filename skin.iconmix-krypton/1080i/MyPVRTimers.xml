@@ -106,7 +106,7 @@
 							<posy>4</posy>
 							<width>1050</width>
 							<height>40</height>
-							<texture>ButtonFo.png</texture>
+							<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 						</control>
 						<control type="label">
 							<description>Title Label</description>

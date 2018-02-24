@@ -51,7 +51,50 @@
   <include file="VueExperimentale.xml" />
   <include file="VueExperimentalemusic.xml" />
   
- 
+ <include name="PlayListPersoContext">
+  <!-- choix details -->
+  <control type="group">
+    <posx>500</posx>
+    <posy>220</posy>
+    <control type="image">
+      <width>550</width>
+      <height>100</height>
+      <texture>frames/Menu_Glass2b.png</texture>
+      <colordiffuse>DialogBackgroundColor</colordiffuse>
+    </control>
+    <visible>ControlGroup(7111).HasFocus|ControlGroup(996).HasFocus(2107)</visible>
+    <animation type="Visible" reversible="true">
+      <effect type="zoom" center="500,170" start="0" end="100" time="1000" tween="bounce" easy="out" />
+    </animation>
+    <animation type="Conditional" reversible="true" condition="!ControlGroup(7111).HasFocus">
+      <effect type="fade" start="100" end="60" time="1" />
+    </animation>
+    <control type="grouplist" id="7111">
+      <posx>30</posx>
+      <posy>15</posy>
+      <width>490</width>
+      <height>80</height>
+      <itemgap>1</itemgap>
+      <onleft>996</onleft>
+      <onback>996</onback>
+      <onup>7111</onup>
+      <ondown>7111</ondown>
+      <orientation>vertical</orientation>
+      <control type="button" id="2200">
+        <include>MonBoutonCommun2</include>
+        <label>$LOCALIZE[31254]</label>
+        <onclick>RunScript(script.iconmixtools,addplaylist=True)</onclick>
+        <visible>String.IsEqual(ListItem.DBTYPE,movie)</visible>
+      </control>
+      <control type="button" id="2201">
+        <include>MonBoutonCommun2</include>
+        <label>$LOCALIZE[31252]</label>
+        <onclick>RunScript(script.iconmixtools,supplaylist=True)</onclick>
+        <visible>String.IsEqual(ListItem.DBTYPE,movie)</visible>
+      </control>
+    </control>
+  </control>
+</include>
 
 <include name="FontTitre">
  
@@ -103,7 +146,7 @@
       <aligny>top</aligny>
       <textoffsety>0</textoffsety>
       <texturefocus>flags/flag_frame2.png</texturefocus>
-      <texturenofocus>flags/flag_frame2.png</texturenofocus>
+      <texturenofocus>flags/flag_frame2.png</texturenofocus> -->
       <label>$INFO[Container().CurrentItem,,/]$INFO[Container().NumItems]</label>
       <font>compteur</font>
       <textcolor>white</textcolor>
@@ -153,7 +196,7 @@
   <width>960</width>
   <height>36</height>
   <texturefocus border="5">ButtonFo.png</texturefocus>
-  <texturenofocus border="5">ButtonNf.png</texturenofocus>
+  <texturenofocus border="5">ButtonNf.png</texturenofocus> -->
 </include>
 
 <!-- ---------------------------------------------------------------------------------------------- -->
@@ -350,9 +393,10 @@
   <param name="PositionY" default="0"/>
   <param name="PositionX" default="0"/>
   <param name="PositionXVU" default="30"/>
+  <param name="PositionYVU" default="-10"/>
   <definition>
   <control type="group">
-    <visible>[ListItem.IsResumable | !String.IsEmpty(ListItem.Property(PercentPlayed))] + [[[Container.Content(movies) | Container.Content(sets)] + !Skin.HasSetting(HideMovieWatchedOverlays)] | [![Container.Content(movies) | Container.Content(sets)] + !Skin.HasSetting(HideTVWatchedOverlays)]]</visible>
+    <visible>[ListItem.IsResumable | !String.IsEmpty(ListItem.Property(PercentPlayed))] + [[[String.IsEqual(ListItem.DbType,movie) | String.IsEqual(ListItem.DbType,set)] + !Skin.HasSetting(HideMovieWatchedOverlays)]|[!ListItem.IsFolder+!String.IsEqual(ListItem.DbType,movie) + !String.IsEqual(ListItem.DbType,set)+!String.IsEqual(ListItem.DbType,tvshow) + !String.IsEqual(ListItem.DbType,episode)+ !String.IsEqual(ListItem.DbType,season)]|[[String.IsEqual(ListItem.DbType,tvshow) | String.IsEqual(ListItem.DbType,episode)| String.IsEqual(ListItem.DbType,season)] + !Skin.HasSetting(HideTVWatchedOverlays)]]</visible>
     <posy>-3</posy>
     
     <control type="progress" id="23">
@@ -373,13 +417,13 @@
   
 </control>
 <control type="image">
-  <posy>-10</posy>
+  <posy>$PARAM[PositionYVU]</posy>
   <posx>$PARAM[PositionXVU]</posx>
   <width>30</width>
   <height>30</height>
   <texture>OverlayWatched.png</texture>
   <colordiffuse>WatchedOverlay</colordiffuse>
-  <visible>!ListItem.IsResumable+ Integer.IsGreater(ListItem.PlayCount,0)+ String.IsEmpty(ListItem.Property(PercentPlayed)) + [[[Container.Content(movies) | Container.Content(sets)] + !Skin.HasSetting(HideMovieWatchedOverlays)] | [[Container.Content(episodes) | Container.Content(tvshows) | Container.Content(seasons)] + !Skin.HasSetting(HideTVWatchedOverlays)]]</visible>
+  <visible>!ListItem.IsResumable+ Integer.IsGreater(ListItem.PlayCount,0)+ String.IsEmpty(ListItem.Property(PercentPlayed)) </visible>
 </control>
 </definition>
 </include>
@@ -405,7 +449,7 @@
     <visible>Skin.HasSetting(ShowEpisodesNumber)</visible>
     <posx>$PARAM[PositionX]</posx>
     <posy>$PARAM[PositionY]</posy>
-    <visible>[Container.Content(tvshows)|Container.Content(seasons)] + !String.IsEmpty(ListItem.Property(NumEpisodes))+![!ListItem.IsResumable+ Integer.IsGreater(ListItem.PlayCount,0)+ String.IsEmpty(ListItem.Property(PercentPlayed))]</visible>
+    <visible>[Container.Content(tvshows)|Container.Content(seasons)] + !String.IsEmpty(ListItem.Property(NumEpisodes))+[ ![!ListItem.IsResumable+ Integer.IsGreater(ListItem.PlayCount,0)+ String.IsEmpty(ListItem.Property(PercentPlayed))]|Skin.HasSetting(HideTVWatchedOverlays)]</visible>
 
     <control type="image"> <!--999/999 -->
       <width>168</width>
@@ -530,7 +574,7 @@
       <width>320</width>
       <height>150</height>
       <texture background="true" diffuse="showcase_matte.png">frames/ClassicFrame_background.png</texture>
-      <colordiffuse>70202020</colordiffuse>
+      <colordiffuse>C0202020</colordiffuse>
     </control>
     <control type="image">
       <posx>1546</posx>
@@ -932,7 +976,7 @@
   <include name="ViewDetailsGenreYearDurEpsUnwatched">
     <!-- Genre -->
     <control type="label">
-      <width min="25" max="450">auto</width>
+      <width min="25" max="850">auto</width>
       <height>30</height>
       <aligny>center</aligny>
       <font>METF_MediaDetailsSmall</font>
@@ -1078,21 +1122,20 @@
     <!-- ---------------------------------------------------------------------------------------------- -->
   <include name="chronodetails">
     <control type="group">
-      <width>120</width>
+      <width>125</width>
       <height>30</height>
-      <!--
       <control type="image">
-        <top>2</top>
-        <aligny>center</aligny>
-        <texture>chrono.png</texture>
-        <aspectratio>stretch</aspectratio>
+        <top>-4</top>
+        <left>2</left>
+        <width>35</width>
+        <height>35</height>
+        <texture>chronotoolssimple.png</texture>
+        <aspectratio>keep</aspectratio>
         <visible>Control.HasFocus(2999)|Container.Content(songs)|Container.Content(albums)</visible>
       </control>
-      -->
+      
       <control type="label">
         <left>10</left>
-        <width>100</width>
-        <height>30</height>
         <align>right</align>
         <aligny>center</aligny>
         <font>debutfin</font>
@@ -1102,8 +1145,6 @@
       </control>
       <control type="label">
         <left>10</left>
-        <width>100</width>
-        <height>30</height>
         <align>right</align>
         <aligny>center</aligny>
         <font>debutfin</font>
@@ -1115,19 +1156,20 @@
     </control>
     
     <control type="group">
-      <width>120</width>
+      <width>125</width>
       <height>30</height>
-     <!-- <control type="image">
+      <control type="image">
         <aligny>center</aligny>
+        <left>2</left>
+        <width>35</width>
+        <height>35</height>
         <texture>chronoend.png</texture>
-        <aspectratio>stretch</aspectratio>
+        <aspectratio>keep</aspectratio>
         <visible>Control.HasFocus(2999)|Container.Content(songs)|Container.Content(albums)</visible>
       </control>
-      -->
+      
       <control type="label">
         <left>10</left>
-        <width>100</width>
-        <height>30</height>
         <align>right</align>
         <aligny>center</aligny>
         <font>debutfin</font>
@@ -1154,7 +1196,7 @@
     <control type="grouplist">
       <visible>!String.IsEmpty(Window(10000).Property(DurationTools)) | !String.IsEmpty(ListItem.Duration)</visible>
       <width>270</width>
-      <height>150</height>
+      <height>60</height>
       <itemgap>5</itemgap>
       <orientation>vertical</orientation>
       <include>chronodetails</include>
@@ -1689,20 +1731,58 @@
   <!-- Video Info Screen Buttons and Text -->
   <!-- ---------------------------------------------------------------------------------------------- -->
   <include name="VideoInfoButtonText">
+    <!--
     <include>Animation_FadedByMenu</include>
     <include>Animation_CommonFade</include>
     <include>Animation_OpenCloseFade</include>
+    -->
     <posx>1760</posx>
     <posy>120</posy>
     <width>100</width>
-    <height>760</height>
+    <height>900</height>
+  </include>
+  
+  <include name="videoinfobuttonfond">
+     <width>210</width>
+     <height>100</height>
+     
+     <control type="image" id="888">         
+         <left>5</left>
+          <colordiffuse>BackgroundColor</colordiffuse>
+          <texture>frames/fondinfogris.png</texture>
+          <bordersize>8</bordersize>
+          <bordertexture border="8">landscape.png</bordertexture>
+        </control>
   </include>
   <!-- ---------------------------------------------------------------------------------------------- -->
   <include name="VideoInfoButton">
+    <onleft condition="!String.IsEmpty(ListItem.Director)">7777</onleft>
+    <onleft condition="String.IsEmpty(ListItem.Director)+!Container(1998).IsUpdating">7781</onleft>
     <label></label>
     <altlabel>-</altlabel>
-    <height>90</height>
-    <width>90</width>
+    <height>80</height>
+    <width>80</width>
+    <left>105</left>
+    <top>7</top>
+    <aspectratio>stretch</aspectratio>
+    <align>center</align>
+    <aligny>center</aligny>
+    <font>-</font>
+    <textcolor>-</textcolor>
+    <disabledcolor>-</disabledcolor>
+    <focusedcolor>-</focusedcolor>
+    <selectedcolor>-</selectedcolor>
+    <pulseonselect>false</pulseonselect>
+  </include>
+  <include name="VideoInfoButton2">
+    <onleft condition="!String.IsEmpty(Container(1990).ListItem.Director)">7777</onleft>
+    <onleft condition="String.IsEmpty(Container(1990).ListItem.Director)+!Container(1998).IsUpdating">7781</onleft>
+    <label></label>
+    <altlabel>-</altlabel>
+    <height>80</height>
+    <width>80</width>
+    <left>105</left>
+    <top>7</top>
     <aspectratio>stretch</aspectratio>
     <align>center</align>
     <aligny>center</aligny>
@@ -1781,7 +1861,7 @@
         <label>$LOCALIZE[10037]</label>
         <focusedcolor>DialogTextFO</focusedcolor>
         <texturefocus border="5">ButtonFo.png</texturefocus>
-        <texturenofocus border="5">ButtonNf.png</texturenofocus>
+        <texturenofocus border="5">ButtonNf.png</texturenofocus> -->
         <onleft>3</onleft>
         <onright>3</onright>
         <onup>3</onup>
@@ -1888,8 +1968,8 @@
     <textcolor>SettingsDetail</textcolor>
     <focusedcolor>DialogTextFO</focusedcolor>
     <selectedcolor>TextFO</selectedcolor>
-    <texturefocus>ButtonFO2Wide.png</texturefocus>
-    <texturenofocus>-</texturenofocus>
+    <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+    <texturenofocus>-</texturenofocus> -->
     <disabledcolor>TextDisabled</disabledcolor>
     <pulseonselect>false</pulseonselect>
   </include>
@@ -1912,8 +1992,8 @@
     <textcolor>SettingsDetail</textcolor>
     <focusedcolor>DialogTextFO</focusedcolor>
     <selectedcolor>TextFO</selectedcolor>
-    <texturefocus>ButtonFO2Wide.png</texturefocus>
-    <texturenofocus>-</texturenofocus>
+    <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+    <texturenofocus>-</texturenofocus> -->
     <disabledcolor>TextDisabled</disabledcolor>
     <pulseonselect>false</pulseonselect>
   </include>
@@ -1936,8 +2016,8 @@
     <textcolor>SettingsDetail</textcolor>
     <focusedcolor>DialogTextFO</focusedcolor>
     <selectedcolor>TextFO</selectedcolor>
-    <texturefocus>ButtonFO2Wide.png</texturefocus>
-    <texturenofocus>-</texturenofocus>
+    <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+    <texturenofocus>-</texturenofocus> -->
     <disabledcolor>TextDisabled</disabledcolor>
     <pulseonselect>false</pulseonselect>
   </include>
@@ -1962,8 +2042,8 @@
     <textcolor>SettingsDetail</textcolor>
     <focusedcolor>ButtonText</focusedcolor>
     <selectedcolor>TextFO</selectedcolor>
-    <texturefocus>ButtonFO2Wide.png</texturefocus>
-    <texturenofocus>-</texturenofocus>
+    <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+    <texturenofocus>-</texturenofocus> -->
     <disabledcolor>TextDisabled</disabledcolor>
     <pulseonselect>false</pulseonselect>
   </include>
@@ -1976,6 +2056,7 @@
     <aligny>center</aligny>
     <font>METF_TitleTextMedium</font>
     <textcolor>SettingsDetail</textcolor>
+    
   </include>
   <!-- ---------------------------------------------------------------------------------------------- -->
   <include name="Settings_Line">
@@ -2005,7 +2086,7 @@
     <font>METF_Menu</font>
     <textcolor>TextNF</textcolor>
     <focusedcolor>DialogTextFO</focusedcolor>
-    <texturefocus border="1">ButtonFO2Wide.png</texturefocus>
+    <texturefocus border="1" colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
     <disabledcolor>TextDisabled</disabledcolor>
     <pulseonselect>false</pulseonselect>
   </include>
@@ -2019,9 +2100,9 @@
   <textcolor>TextNF</textcolor>
   <focusedcolor>DialogTextFO</focusedcolor>
   <disabledcolor>TextDisabled</disabledcolor>
-  <texturefocus>ButtonFO2Wide.png</texturefocus>
-  <texturenofocus>-</texturenofocus>
-  <alttexturefocus>ButtonFO2Wide.png</alttexturefocus>
+  <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+  <texturenofocus>-</texturenofocus> -->
+  <alttexturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</alttexturefocus>
   <textoffsetx>20</textoffsetx>
   <aligny>center</aligny>
   <pulseonselect>false</pulseonselect>
@@ -2035,8 +2116,8 @@
   <textcolor>TextNF</textcolor>
   <focusedcolor>DialogTextFO</focusedcolor>
   <disabledcolor>TextDisabled</disabledcolor>
-  <texturefocus>ButtonFO2Wide.png</texturefocus>
-  <texturenofocus>-</texturenofocus>
+  <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+  <texturenofocus>-</texturenofocus> -->
   <textoffsetx>5</textoffsetx>
 
   <aligny>center</aligny>
@@ -2051,8 +2132,8 @@
   <textcolor>TextNF</textcolor>
   <focusedcolor>DialogTextFO</focusedcolor>
   <disabledcolor>TextDisabled</disabledcolor>
-  <texturefocus>ButtonFO2Wide.png</texturefocus>
-  <texturenofocus>-</texturenofocus>
+  <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+  <texturenofocus>-</texturenofocus> -->
   <textoffsetx>5</textoffsetx>
 
   <aligny>center</aligny>
@@ -2075,8 +2156,8 @@
       <textcolor>TextNF</textcolor>
       <focusedcolor>DialogTextFO</focusedcolor>
       <disabledcolor>TextDisabled</disabledcolor>
-      <texturefocus>ButtonFO2Wide.png</texturefocus>
-      <texturenofocus>-</texturenofocus>
+      <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+      <texturenofocus>-</texturenofocus> -->
       <pulseonselect>false</pulseonselect>
       <onclick>right</onclick>
       <onclick>$VAR[GoPlaylist]</onclick>
@@ -2095,8 +2176,8 @@
       <textcolor>TextNF</textcolor>
       <focusedcolor>DialogTextFO</focusedcolor>
       <disabledcolor>TextDisabled</disabledcolor>
-      <texturefocus>ButtonFO2Wide.png</texturefocus>
-      <texturenofocus>-</texturenofocus>
+      <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+      <texturenofocus>-</texturenofocus> -->
       <pulseonselect>false</pulseonselect>
       <onclick>right</onclick>
       <onclick>fullscreen</onclick>
@@ -2241,7 +2322,7 @@
 <include name="KeyboardButton">
   <width>50</width>
   <height>50</height>
-  <texturenofocus border="3">keyboard/KeyboardKeyNF.png</texturenofocus>
+  <texturenofocus border="3">keyboard/KeyboardKeyNF.png</texturenofocus> -->
   <texturefocus border="5">keyboard/KeyboardKey.png</texturefocus>
   <align>center</align>
   <aligny>center</aligny>
@@ -2292,7 +2373,7 @@
   <textcolor>TextNF</textcolor>
   <focusedcolor>TextFO</focusedcolor>
   <disabledcolor>TextDisabled</disabledcolor>
-  <texturenofocus>-</texturenofocus>
+  <texturenofocus>-</texturenofocus> -->
   <texturefocus>-</texturefocus>
   <alttexturenofocus>-</alttexturenofocus>
   <alttexturefocus>-</alttexturefocus>

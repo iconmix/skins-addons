@@ -416,7 +416,7 @@
 					<control type="button" id="1008">
 						<description>Change Background playlist style</description>
 						<texturefocus border="5">ButtonFo.png</texturefocus>
-						<texturenofocus border="5">ButtonNf.png</texturenofocus>
+						<texturenofocus border="5">ButtonNf.png</texturenofocus> -->
 						<include>shortcutstyle</include>
 						<font>METF_SettingsDetail</font>
 						<textcolor>white</textcolor>
@@ -479,7 +479,7 @@
 					<control type="button" id="312">
 						<description>Change widget</description>
 						<texturefocus></texturefocus>
-						<texturenofocus></texturenofocus>					
+						<texturenofocus></texturenofocus> -->					
 						<label></label>
 						<label2></label2>
 						<visible>false</visible>						
@@ -487,7 +487,7 @@
 					<control type="button" id="1313">
 						<description>Change widget</description>
 						<texturefocus></texturefocus>
-						<texturenofocus></texturenofocus>					
+						<texturenofocus></texturenofocus> -->					
 						<label></label>
 						<label2></label2>
 						<visible>false</visible>	
@@ -498,7 +498,7 @@
 					<control type="button" id="1000">
 						<description>Change widget 1</description>
 						<texturefocus border="5">ButtonFo.png</texturefocus>
-						<texturenofocus border="5">ButtonNf.png</texturenofocus>
+						<texturenofocus border="5">ButtonNf.png</texturenofocus> -->
 						<include>shortcutstyle</include>
 						<font>METF_SettingsDetail</font>
 						<textcolor>white</textcolor>
@@ -514,7 +514,7 @@
 					<control type="button" id="1001">
 						<description>Change widget style 1</description>
 						<texturefocus border="5">ButtonFo.png</texturefocus>
-						<texturenofocus border="5">ButtonNf.png</texturenofocus>
+						<texturenofocus border="5">ButtonNf.png</texturenofocus> -->
 						<include>shortcutstyle</include>
 						<font>METF_SettingsDetail</font>
 						<textcolor>white</textcolor>
@@ -527,7 +527,7 @@
 					<control type="button" id="1002">
 						<description>Change widget sort 1</description>
 						<texturefocus border="5">ButtonFo.png</texturefocus>
-						<texturenofocus border="5">ButtonNf.png</texturenofocus>
+						<texturenofocus border="5">ButtonNf.png</texturenofocus> -->
 						<include>shortcutstyle</include>
 						<font>METF_SettingsDetail</font>
 						<textcolor>white</textcolor>
@@ -541,7 +541,7 @@
 					<control type="button" id="1005">
 						<description>Change widget order 1</description>
 						<texturefocus border="5">ButtonFo.png</texturefocus>
-						<texturenofocus border="5">ButtonNf.png</texturenofocus>
+						<texturenofocus border="5">ButtonNf.png</texturenofocus> -->
 						<include>shortcutstyle</include>
 						<font>METF_SettingsDetail</font>
 						<textcolor>white</textcolor>
@@ -585,7 +585,7 @@
 				<control type="button" id="801">
 					<description>Change widget 2</description>
 					<texturefocus border="5">ButtonFo.png</texturefocus>
-						<texturenofocus border="5">ButtonNf.png</texturenofocus>
+						<texturenofocus border="5">ButtonNf.png</texturenofocus> -->
 					<left>0</left>
 					<top>0</top>
 					<width>960</width>
@@ -607,7 +607,7 @@
 				<control type="button" id="2001">
 						<description>Change widget style 2</description>
 						<texturefocus border="5">ButtonFo.png</texturefocus>
-						<texturenofocus border="5">ButtonNf.png</texturenofocus>
+						<texturenofocus border="5">ButtonNf.png</texturenofocus> -->
 						<include>shortcutstyle</include>
 						<font>METF_SettingsDetail</font>
 						<textcolor>white</textcolor>
@@ -620,7 +620,7 @@
 					<control type="button" id="2002">
 						<description>Change widget sort 2</description>
 						<texturefocus border="5">ButtonFo.png</texturefocus>
-						<texturenofocus border="5">ButtonNf.png</texturenofocus>
+						<texturenofocus border="5">ButtonNf.png</texturenofocus> -->
 						<include>shortcutstyle</include>
 						<font>METF_SettingsDetail</font>
 						<textcolor>white</textcolor>
@@ -633,7 +633,7 @@
 					<control type="button" id="2005">
 						<description>Change widget order 2</description>
 						<texturefocus border="5">ButtonFo.png</texturefocus>
-						<texturenofocus border="5">ButtonNf.png</texturenofocus>
+						<texturenofocus border="5">ButtonNf.png</texturenofocus> -->
 						<include>shortcutstyle</include>
 						<font>METF_SettingsDetail</font>
 						<textcolor>white</textcolor>
@@ -696,7 +696,7 @@
 						<textcolor>white</textcolor>
 						<focusedcolor>yellow</focusedcolor>
 						<texturefocus border="5">ButtonFo.png</texturefocus>
-						<texturenofocus border="5">ButtonNf.png</texturenofocus>
+						<texturenofocus border="5">ButtonNf.png</texturenofocus> -->
 						<label>$ADDON[script.skinshortcuts 32000]</label>
 					</control>
 					<!-- OK Button -->
@@ -709,7 +709,7 @@
 						<textcolor>white</textcolor>
 						<focusedcolor>yellow</focusedcolor>
 						<texturefocus border="5">ButtonFo.png</texturefocus>
-						<texturenofocus border="5">ButtonNf.png</texturenofocus>
+						<texturenofocus border="5">ButtonNf.png</texturenofocus> -->
 						<onclick>Close</onclick>
 					</control>
 					<!-- Reset -->
@@ -721,7 +721,7 @@
 						<textcolor>white</textcolor>
 						<focusedcolor>yellow</focusedcolor>
 						<texturefocus border="5">ButtonFo.png</texturefocus>
-						<texturenofocus border="5">ButtonNf.png</texturenofocus>
+						<texturenofocus border="5">ButtonNf.png</texturenofocus> -->
 						<label>$ADDON[script.skinshortcuts 32028]</label>
 					</control>
 				</control>

@@ -736,12 +736,13 @@
       <visible>!Skin.HasSetting(hideaspect)</visible>
       <width>156</width>
       <height>70</height>
-      <control type="image">
         <control type="image">
           <colordiffuse>MediaFlagDiffuse</colordiffuse>
           <texture>$VAR[CadreFlag]</texture>
 
         </control>
+      <control type="image">
+      
         <include>MediaFlagsVarsWide</include>
         <texture fallback="flags/VideoAspect/default.png">$INFO[ListItem.VideoAspect,flags/VideoAspect/,.png]</texture>
 
@@ -1129,8 +1130,8 @@
 
 
     <control type="group"><!-- Video Aspect -->
-      <visible>!String.IsEmpty(ListItem.VideoAspect2)</visible>
-      <visible>!Skin.HasSetting(hideaspect)</visible>
+      <visible>!String.IsEmpty(ListItem.VideoAspect)</visible>
+      <visible>!Skin.HasSetting(hideaspect2)</visible>
       <width>156</width>
       <height>70</height>
       <control type="image">

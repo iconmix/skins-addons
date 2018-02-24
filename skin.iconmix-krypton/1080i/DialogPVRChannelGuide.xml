@@ -83,7 +83,7 @@
 					<posy>2</posy>
 					<width>415</width>
 					<height>29</height>
-					<texture>ButtonFo.png</texture>
+					<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 				</control>
 				<control type="label">
 					<posx>0</posx>

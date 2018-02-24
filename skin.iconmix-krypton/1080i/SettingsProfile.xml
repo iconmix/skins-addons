@@ -16,7 +16,7 @@
 				<posy>234</posy>
 				<width>380</width>
 				<height>38</height>
-				<texture>ButtonFo.png</texture>
+				<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 				<animation effect="fade" start="100" end="0" condition="!Control.HasFocus(4)">Conditional</animation>
 			</control>
 			<control type="radiobutton" id="4">
@@ -40,7 +40,7 @@
 				<focusedcolor>ButtonText</focusedcolor>
 				<texturefocus>-</texturefocus>
 				<selectedcolor>TextFO</selectedcolor>
-				<texturenofocus>-</texturenofocus>
+				<texturenofocus>-</texturenofocus> -->
 				<pulseonselect>false</pulseonselect>
 				<label>$LOCALIZE[20096]</label>
 			</control>
@@ -59,9 +59,9 @@
 				<textcolor>ButtonText</textcolor>
 				<disabledcolor>TextDisabled</disabledcolor>
 				<focusedcolor>ButtonText</focusedcolor>
-				<texturefocus>ButtonFo.png</texturefocus>
+				<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
 				<selectedcolor>TextFO</selectedcolor>
-				<texturenofocus>-</texturenofocus>
+				<texturenofocus>-</texturenofocus> -->
 				<label>$LOCALIZE[31444]</label>
 				<enable>!System.HasLoginScreen</enable>
 			</control>
@@ -90,7 +90,7 @@
 				<posy>158</posy>
 				<width>840</width>
 				<height>38</height>
-				<texture>ButtonFo.png</texture>
+				<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 				<animation effect="fade" start="100" end="70" condition="True">Conditional</animation>
 			</control>
 			-->
@@ -147,7 +147,7 @@
 						<height>38</height>
 						<align>left</align>
 						<aligny>center</aligny>
-						<texture>ButtonFo.png</texture>
+						<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 						<animation effect="fade" start="100" end="50" condition="!Control.HasFocus(2)">Conditional</animation>
 						<animation effect="slide" end="0,20" condition="String.IsEmpty(ListItem.Label2)">Conditional</animation>
 					</control>

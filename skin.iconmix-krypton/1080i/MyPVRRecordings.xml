@@ -56,7 +56,7 @@
 						<description>Focus selection</description>
 						<width>1210</width>
 						<height>40</height>
-						<texture>ButtonFo.png</texture>
+						<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 					</control>
 					<control type="image">
 						<description>Recording icon</description>

@@ -61,7 +61,7 @@
               <height>38</height>
               <align>left</align>
               <aligny>center</aligny>
-              <texture>ButtonFO2Wide.png</texture>
+              <texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
               <animation effect="fade" start="100" end="50" condition="!Control.HasFocus(9000)">Conditional</animation>
             </control>
             <control type="label">
@@ -800,9 +800,9 @@
             <textcolor>TextNF</textcolor>
             <focusedcolor>DialogTextFO</focusedcolor>
             <disabledcolor>TextDisabled</disabledcolor>
-            <texturefocus>ButtonFO2Wide.png</texturefocus>
-            <texturenofocus>-</texturenofocus>
-            <alttexturefocus>ButtonFO2Wide.png</alttexturefocus>
+            <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+            <texturenofocus>-</texturenofocus> -->
+            <alttexturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</alttexturefocus>
             <textoffsetx>20</textoffsetx>
             <aligny>center</aligny>
             <pulseonselect>false</pulseonselect>
@@ -1185,8 +1185,8 @@
       <textcolor>TextNF</textcolor>
       <focusedcolor>DialogTextFO</focusedcolor>
       <disabledcolor>TextDisabled</disabledcolor>
-      <texturefocus>ButtonFO2Wide.png</texturefocus>
-      <texturenofocus>frames/genrestag.png</texturenofocus>
+      <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+      <texturenofocus>frames/genrestag.png</texturenofocus> -->
       <textoffsetx>5</textoffsetx>
 
       <aligny>center</aligny>

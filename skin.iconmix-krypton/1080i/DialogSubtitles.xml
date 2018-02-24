@@ -19,7 +19,7 @@
 				<height>1080</height>
 				<label></label>
 				<font>-</font>
-				<texturenofocus>-</texturenofocus>
+				<texturenofocus>-</texturenofocus> -->
 				<texturefocus>-</texturefocus>
 				<visible>true</visible>
 			</control>
@@ -42,7 +42,7 @@
 				<font>-</font>
 				<onclick>PreviousMenu</onclick>
 				<texturefocus>subtitles/DialogCloseButton-focus.png</texturefocus>
-				<texturenofocus>subtitles/DialogCloseButton.png</texturenofocus>
+				<texturenofocus>subtitles/DialogCloseButton.png</texturenofocus> -->
 				<onleft>101</onleft>
 				<onright>101</onright>
 				<onup>101</onup>
@@ -441,9 +441,9 @@
 					<font>METF_InfoText</font>
 					<textcolor>White</textcolor>
 					<focusedcolor>TextFO</focusedcolor>
-					<texturefocus>ButtonFo.png</texturefocus>
+					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
 					<selectedcolor>TextFO</selectedcolor>
-					<texturenofocus colordiffuse="7fffffff">ButtonFo.png</texturenofocus>
+					<texturenofocus colordiffuse="7fffffff">ButtonFo.png</texturenofocus> -->
 					<align>center</align>
 				</control>
 			</control>

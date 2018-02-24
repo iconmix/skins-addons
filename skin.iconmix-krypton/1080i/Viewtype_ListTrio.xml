@@ -239,7 +239,7 @@
 					<width>700</width>
 					<height>33</height>
 					<aligny>center</aligny>
-					<texture>ButtonFO2Wide.png</texture>
+					<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 					<aspectratio>stretch</aspectratio>
 				</control>
 				

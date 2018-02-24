@@ -14,15 +14,18 @@
   <onload>SetProperty(IconMixDirector,,Home)</onload>
   <onunload>SetProperty(MovieSagaTitle,,Home)</onunload>
   <onunload>SetProperty(ActeurVideoLocal,,Home)</onunload>
-  <onunload>SetProperty(iconmixExtraFanart,,Home)</onunload>
+  <onunload>SetProperty(IconMixExtraFanart,,Home)</onunload>
   <onload>SetProperty(IconMixUpdateSagas,1,Home)</onload>
   <onload>SetProperty(IconMixVerticalNavigation,,Home)</onload>
   <onload>SetProperty(IconMixUpdating,,Home)</onload>
   <onload>SetProperty(IconMixActor,,Home)</onload>
   <onload>SetProperty(ShowSeekBar,,Home)</onload>
+  <onload>SetProperty(IconmixShowInfo,,Home)</onload>
+  <onunload>SetProperty(IconmixShowInfo,,Home)</onunload>
 
   <views>55,557,905,906,509,53,57,58,559,555,556,501,551,552,553,554,550,504,511,513,514,510,52,521,56,560,512,584,585,586,587</views>
   <defaultcontrol always="true">55</defaultcontrol>
+  
   <controls>
     <include>Global_Background_Fanart</include>
     
@@ -39,7 +42,8 @@
     
     -->
     <control type="group">
-      <include>Animation_FadedByMenu</include>
+      <!-- <include>Animation_FadedByMenu</include>-->
+     
       <control type="group">
       <include>Animation_HiddenByInfo</include>
       <!--
@@ -57,6 +61,7 @@
         <animation type="Conditional" condition="Control.HasFocus(2999)" reversible="true">
           <effect type="fade" start="100" end="0" time="500"  />
         </animation>
+        
 
         <include>Viewtype_List</include>			<!-- 55 -->
         <include>Viewtype_ListTrio</include>			<!-- 55 -->
@@ -120,19 +125,12 @@
         <posx>480</posx>
         <posy>260</posy>
         <animation type="Visible"  reversible="false">
-          <effect type="zoom"  center="720,400" start="0" end="100" time="500" tween="bounce" easy="out" delay="1000" />
+          <effect type="zoom"  center="720,400" start="0" end="100" time="50"  delay="300" /> -->
+          <effect type="fade"  start="0" end="100" time="300" delay="300" />
         </animation>
         <include>focusboitiers</include>
       </control>
-      <!--
-      <control type="button" id="2995">
-        <left>-2000</left>
-        <label>---</label>
-        <ondown condition="!Skin.HasSetting(CacheFond)">SetFocus(7000)</ondown>
-        
-        <onfocus condition="!Skin.HasSetting(CacheFond)">SetFocus(7000)</onfocus>
-      </control>
-      -->
+     
       <control type="button" id="2999">
         <left>-2000</left>
         <label>---</label>
@@ -141,8 +139,12 @@
         <onright condition="String.IsEqual(Window(Home).Property(IconMixVerticalNavigation),horizontal)">Control.Move(1999,1)</onright>
         <onup condition="String.IsEqual(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetProperty(ShowFocus,,Home)</onup>
         <onup condition="String.IsEqual(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetFocus(55)</onup>
+        
+        <ondown condition="String.IsEqual(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetFocus(7781)</ondown>
+        <!--
         <ondown condition="String.IsEqual(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetProperty(ShowFocus,,Home)</ondown>
         <ondown condition="String.IsEqual(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetFocus(55)</ondown>
+        -->
         <onup condition="!String.IsEqual(Window(Home).Property(IconMixVerticalNavigation),horizontal)">Control.Move(1999,-1)</onup>
         <ondown condition="!String.IsEqual(Window(Home).Property(IconMixVerticalNavigation),horizontal)">Control.Move(1999,1)</ondown>
         <onleft condition="!String.IsEqual(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetProperty(ShowFocus,,Home)</onleft>
@@ -150,8 +152,13 @@
         <onright condition="!String.IsEqual(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetProperty(ShowFocus,,Home)</onright>
         <onright condition="!String.IsEqual(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetFocus(55)</onright>
         <onclick>SetProperty(FenetreListeChoix,1,Home)</onclick>
-        <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
-        <oninfo>SetFocus(7781)</oninfo>
+        <!-- <oninfo>RunScript(script.iconmixtools,showinfo=True&id=$INFO[Container(1999).CurrentItem])</oninfo> 
+        <onclick>RunPlugin(plugin://script.iconmixtools/?action=showinfo)</onclick>-->
+        <oninfo>SetProperty(IconmixShowInfo,1,Home)</oninfo> 
+       <!-- <oninfo>SetFocus(7781)</oninfo>
+        -->
+         <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
+        
         <onback>SetFocus(55)</onback>
         <visible>Integer.IsGreater(Container(1999).NumItems,0)</visible>
       </control>
@@ -559,16 +566,32 @@
         <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
           <effect type="slide" end="0,875" time="0"  />
         </animation>
-        <top>-860</top>
+        <animation type="Conditional" condition="true" reversible="false">
+          <effect type="rotate" center="auto" end="10" time="0"  />
+        </animation>
         <posx>1750</posx>
+        <width>200</width>
+        <height>250</height>
         <visible>[[Control.HasFocus(2999)+[Container.Content(actors)|Container.Content(directors)]]|[![Container.Content(actors)|Container.Content(directors)]+[[String.Contains(Container.FolderPath,/actors)|String.Contains(Container.FolderPath,?actorid)]|[String.Contains(Container.FolderPath,/directors)|String.Contains(Container.FolderPath,?directorid)]]]]+!String.Contains(Window(Home).Property(IconMixActorIcon),Default)</visible>
         <control type="image">
+          <top>25</top>
           <width>150</width>
+          <height>180</height>
           <bordersize>20</bordersize>
 							<bordertexture border="20" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-          <aspectratio scalediffuse="true">keep</aspectratio>
-          <texture>$INFO[Window(Home).Property(IconMixActorIcon)]</texture>
+          <aspectratio scalediffuse="true">stretch</aspectratio>
+          <texture fallback="DefaultActor.png">$INFO[Window(Home).Property(IconMixActorIcon)]</texture>
+          
         </control>
+        <control type="image">
+          <left>0</left>
+          <top>-156</top>
+          <width>80</width>
+          <texture>acteurs/punaise.png</texture>
+          <aspectratio>keep</aspectratio>
+          
+        </control>
+        <!--
         <control type="group">
           <visible>!String.Contains(Window(Home).Property(IconMixActorIcon),realisateur.png)+!String.Contains(Window(Home).Property(IconMixActorIcon),actorfilm.png)</visible>
           <top>-160</top>
@@ -586,7 +609,9 @@
           <aspectratio scalediffuse="true">keep</aspectratio>
           <visible>String.Contains(Container.FolderPath,/actors)|String.Contains(Container.FolderPath,?actorid)</visible>
         </control>
+        
         </control>
+        -->
       </control>
       
       <!--- ------------------------------------------------------------- -->
@@ -608,26 +633,18 @@
         </animation>
       <include>AffichagePosition</include>
       </control>
-      <!--
-      <control type="group">
-        <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
-          <effect type="slide" end="0,-835" time="0"  />
-        </animation>
-        
-        <include>Animation_FadedByMenu</include>
-        <posy>920</posy>
-        <left>390</left>
-        <align>center</align>
-        <width>80</width>
-        <height>80</height>
-        <control type="image">
-          <texture>flags/notation/pnote$INFO[ListItem.UserRating].png</texture>
-          <aspectratio>keep</aspectratio>
-          <visible>!String.IsEmpty(ListItem.UserRating)</visible>
-        </control>
-      </control>
-      --> 
+      
           
+    
+    
+     <control type="image">
+        <include>Animation_FadeFond</include>
+       <posx>0</posx>
+       <posy>0</posy>
+       <width>1920</width>
+       <height>1080</height>
+       <texture>frames/eau.png</texture>
+      </control>
     </control>
   <include>MenuGeneral</include>
        	
@@ -646,14 +663,35 @@
       <textcolor>FF404040</textcolor>
       <shadowcolor>FF7F7F7F</shadowcolor>
 			<textoffsetx>15</textoffsetx>
-			<texturefocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturefocus>
-      <texturenofocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturenofocus>
+			<texturenofocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturenofocus>
 		</control>
-    <control type="label">
+		
+		<control type="button">
+		  <width max="900">auto</width>
+      <height>30</height>
+      <left>40</left>
       <posy>970</posy>
-      <height>80</height>
-      <label>A:"special://skin/extras/viewthumbs/"$VAR[cheminapercu]$INFO[Container(7007).ListItem.Property(viewid)]".jpg"/B:$INFO[Container(1999).ListItem.Property(IMDBNumber)]/C:$INFO[Window(Home).Property(BAprecedenteInf)][CR]$INFO[ListItem.Trailer] E:$INFO[Container(1999).ListItem.property(DBID)] F:$INFO[ListItem.DBType] / $INFO[ListItem.IsResumable] / $INFO[ListItem.Overlay] / *$INFO[Container.Content]*</label>
-    </control>
+      <label>Fanart:$INFO[Container(5051).NumItems]/$INFO[Container(5052).NumItems] / DBTYPE=$INFO[Container(1998).NumItems]/$INFO[Container(1998).Label] / Resume=$INFO[Container.Content] / Overlay=$INFO[ListItem.Overlay] / Content=$INFO[Container.Content]</label>
+      <font>exptextacteurs</font>
+      <textcolor>FF404040</textcolor>
+      <shadowcolor>FF7F7F7F</shadowcolor>
+			<textoffsetx>45</textoffsetx>
+			<texturenofocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturenofocus>
+		</control>
+		<control type="button">
+		  <width max="900">auto</width>
+      <height>30</height>
+      <left>40</left>
+      <posy>1000</posy>
+      <label>Repertoire</label>
+      <font>exptextacteurs</font>
+      <textcolor>FF404040</textcolor>
+      <shadowcolor>FF7F7F7F</shadowcolor>
+			<textoffsetx>45</textoffsetx>
+			<texturenofocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturenofocus>
+      <visible>ListItem.IsFolder</visible>
+		</control>
+    
     <!--
     <control type="label">
     <posx>700</posx>

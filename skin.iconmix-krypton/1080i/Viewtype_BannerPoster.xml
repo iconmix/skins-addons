@@ -39,10 +39,13 @@
 					<posy>81</posy>
 					<width>300</width>
 					<height>440</height>
+					<bordersize>30</bordersize>
+							<bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
 					<texture background="true" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
-					<aspectratio scalediffuse="false">keep</aspectratio>
+					<aspectratio scalediffuse="true">keep</aspectratio>
 					<fadetime>200</fadetime>
 				</control>
+				<!--
 				<control type="image">
 					<posx>20</posx>
 					<posy>56</posy>
@@ -61,6 +64,7 @@
 					<fadetime>200</fadetime>
 					<visible>Container.Content(Artists)</visible>
 				</control>
+				-->
 				<!-- Title -->
 				
 			</control>

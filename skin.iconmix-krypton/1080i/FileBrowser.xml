@@ -48,7 +48,7 @@
 					<width>890</width>
 					<height>42</height>
 					<aligny>center</aligny>
-					<texture>ButtonFo.png</texture>
+					<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 					<animation effect="fade" start="100" end="100" condition="!Control.HasFocus(450)">Conditional</animation>
 				</control>
 				<control type="label">

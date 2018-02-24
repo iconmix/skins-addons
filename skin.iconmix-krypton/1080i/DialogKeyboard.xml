@@ -104,7 +104,7 @@
 				<aligny>center</aligny>
 				<textcolor>TitleText</textcolor>
 				<texturefocus>-</texturefocus>
-				<texturenofocus>-</texturenofocus>
+				<texturenofocus>-</texturenofocus> -->
 			</control>
 			<control type="group">
 				<left>30</left>
@@ -121,7 +121,7 @@
 						<label>20177</label>
 						<onup>300</onup>
 						<ondown>302</ondown>
-						<texturenofocus border="25,25,5,5">keyboard/KeyboardCornerTopNF.png</texturenofocus>
+						<texturenofocus border="25,25,5,5">keyboard/KeyboardCornerTopNF.png</texturenofocus> -->
 						<texturefocus border="25,25,5,5">keyboard/KeyboardCornerTop.png</texturefocus>
 						<align>center</align>
 						<aligny>center</aligny>
@@ -198,7 +198,7 @@
 						<description>(0,11) key button</description>
 						<onup>306</onup>
 						<ondown>131</ondown>
-						<texturenofocus flipx="true" border="5,25,25,5">keyboard/KeyboardCornerTopNF.png</texturenofocus>
+						<texturenofocus flipx="true" border="5,25,25,5">keyboard/KeyboardCornerTopNF.png</texturenofocus> -->
 						<texturefocus flipx="true" border="5,25,25,5">keyboard/KeyboardCornerTop.png</texturefocus>
 						<include>KeyboardButton</include>
 					</control>
@@ -216,7 +216,7 @@
 						<label>20178</label>
 						<onup>309</onup>
 						<ondown>303</ondown>
-						<texturenofocus border="3">keyboard/KeyboardKeyNF.png</texturenofocus>
+						<texturenofocus border="3">keyboard/KeyboardKeyNF.png</texturenofocus> -->
 						<texturefocus border="5">keyboard/KeyboardKey.png</texturefocus>
 						<radioposy>5</radioposy>
 						<radiowidth>20</radiowidth>
@@ -312,7 +312,7 @@
 						<label>20179</label>
 						<onup>302</onup>
 						<ondown>307</ondown>
-						<texturenofocus border="3">keyboard/KeyboardKeyNF.png</texturenofocus>
+						<texturenofocus border="3">keyboard/KeyboardKeyNF.png</texturenofocus> -->
 						<texturefocus border="5">keyboard/KeyboardKey.png</texturefocus>
 						<radioposy>5</radioposy>
 						<radiowidth>20</radiowidth>
@@ -408,7 +408,7 @@
 						<onup>303</onup>
 						<ondown>300</ondown>
 						<label>IP</label>
-						<texturenofocus border="3">keyboard/KeyboardKeyNF.png</texturenofocus>
+						<texturenofocus border="3">keyboard/KeyboardKeyNF.png</texturenofocus> -->
 						<texturefocus border="5">keyboard/KeyboardKey.png</texturefocus>
 						<align>center</align>
 						<aligny>center</aligny>
@@ -422,7 +422,7 @@
 						<label>@#!* </label>
 						<onup>303</onup>
 						<ondown>300</ondown>
-						<texturenofocus border="3">keyboard/KeyboardKeyNF.png</texturenofocus>
+						<texturenofocus border="3">keyboard/KeyboardKeyNF.png</texturenofocus> -->
 						<texturefocus border="5">keyboard/KeyboardKey.png</texturefocus>
 						<radioposy>5</radioposy>
 						<radiowidth>20</radiowidth>
@@ -515,7 +515,7 @@
 						<description>DONE button</description>
 						<width>200</width>
 						<height>50</height>
-						<texturenofocus border="25,5,25,5">keyboard/KeyboardCornerBottomNF.png</texturenofocus>
+						<texturenofocus border="25,5,25,5">keyboard/KeyboardCornerBottomNF.png</texturenofocus> -->
 						<texturefocus border="25,5,25,5">keyboard/KeyboardCornerBottom.png</texturefocus>
 						<label>20177</label>
 						<font>font13</font>
@@ -530,7 +530,7 @@
 						<width>200</width>
 						<height>50</height>
 						<label>20182</label>
-						<texturenofocus border="3">keyboard/KeyboardKeyNF.png</texturenofocus>
+						<texturenofocus border="3">keyboard/KeyboardKeyNF.png</texturenofocus> -->
 						<texturefocus border="5">keyboard/KeyboardKey.png</texturefocus>
 						<align>center</align>
 						<aligny>center</aligny>
@@ -546,7 +546,7 @@
 						<label>20181</label>
 						<onup>165</onup>
 						<ondown>105</ondown>
-						<texturenofocus border="3">keyboard/KeyboardKeyNF.png</texturenofocus>
+						<texturenofocus border="3">keyboard/KeyboardKeyNF.png</texturenofocus> -->
 						<texturefocus border="5">keyboard/KeyboardKey.png</texturefocus>
 						<align>center</align>
 						<aligny>center</aligny>
@@ -560,7 +560,7 @@
 						<label>&lt;</label>
 						<align>center</align>
 						<aligny>center</aligny>
-						<texturenofocus border="3">keyboard/KeyboardKeyNF.png</texturenofocus>
+						<texturenofocus border="3">keyboard/KeyboardKeyNF.png</texturenofocus> -->
 						<texturefocus border="5">keyboard/KeyboardKey.png</texturefocus>
 						<font>METF_TitleTextLarge</font>
 						<focusedcolor>black</focusedcolor>
@@ -574,7 +574,7 @@
 						<label>&gt;</label>
 						<align>center</align>
 						<aligny>center</aligny>
-						<texturenofocus flipx="true" border="5,5,25,25">keyboard/KeyboardCornerBottomNF.png</texturenofocus>
+						<texturenofocus flipx="true" border="5,5,25,25">keyboard/KeyboardCornerBottomNF.png</texturenofocus> -->
 						<texturefocus flipx="true" border="5,5,25,25">keyboard/KeyboardCornerBottom.png</texturefocus>
 						<font>METF_TitleTextLarge</font>
 						<focusedcolor>black</focusedcolor>

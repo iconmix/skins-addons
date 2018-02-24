@@ -3,14 +3,15 @@
 from unidecode import unidecode
 import urlparse,urllib
 import unicodedata
+from resources.lib.Utils import logMsg
 import xbmc,xbmcgui,xbmcaddon,xbmcplugin
 
 
 
-def ConversionPays(DBTYPE=None):
-  Traduction={"île de l’ascension":"ascension island",
+def ConversionPays(DBTYPE=None,ContainerID=None):
+  Traduction={"ile de l’ascension":"ascension island",
     "andorre":"andorra",
-    "émirats arabes unis":"united arab emirates",
+    "emirats arabes unis":"united arab emirates",
     "afghanistan":"afghanistan",
     "antigua-et-barbuda":"antigua & barbuda",
     "anguilla":"anguilla",
@@ -24,7 +25,7 @@ def ConversionPays(DBTYPE=None):
     "autriche":"austria",
     "australie":"australia",
     "aruba":"aruba",
-    "îles åland":"åland islands",
+    "iles åland":"åland islands",
     "azerbaïdjan":"azerbaijan",
     "bosnie-herzégovine":"bosnia & herzegovina",
     "barbade":"barbados",
@@ -47,13 +48,13 @@ def ConversionPays(DBTYPE=None):
     "biélorussie":"belarus",
     "belize":"belize",
     "canada":"canada",
-    "îles cocos":"cocos (keeling) islands",
+    "iles cocos":"cocos (keeling) islands",
     "congo-kinshasa":"congo - kinshasa",
     "république centrafricaine":"central african republic",
     "congo-brazzaville":"congo - brazzaville",
     "suisse":"switzerland",
     "côte d’ivoire":"côte d’ivoire",
-    "îles cook":"cook islands",
+    "iles cook":"cook islands",
     "chili":"chile",
     "cameroun":"cameroon",
     "chine":"china",
@@ -62,7 +63,7 @@ def ConversionPays(DBTYPE=None):
     "cuba":"cuba",
     "cap-vert":"cape verde",
     "curaçao":"curaçao",
-    "île christmas":"christmas island",
+    "ile christmas":"christmas island",
     "chypre":"cyprus",
     "république tchèque":"czech republic",
     "allemagne":"germany",
@@ -73,18 +74,18 @@ def ConversionPays(DBTYPE=None):
     "république dominicaine":"dominican republic",
     "algérie":"algeria",
     "ceuta et melilla":"ceuta & melilla",
-    "équateur":"ecuador",
+    "equateur":"ecuador",
     "estonie":"estonia",
-    "égypte":"egypt",
+    "egypte":"egypt",
     "sahara occidental":"western sahara",
-    "érythrée":"eritrea",
+    "erythrée":"eritrea",
     "espagne":"spain",
-    "éthiopie":"ethiopia",
+    "ethiopie":"ethiopia",
     "finlande":"finland",
     "fidji":"fiji",
-    "îles malouines":"falkland islands",
-    "états fédérés de micronésie":"micronesia",
-    "îles féroé":"faroe islands",
+    "iles malouines":"falkland islands",
+    "etats fédérés de micronésie":"micronesia",
+    "iles féroé":"faroe islands",
     "france":"france",
     "gabon":"gabon",
     "royaume-uni":"united kingdom",
@@ -101,7 +102,7 @@ def ConversionPays(DBTYPE=None):
     "guadeloupe":"guadeloupe",
     "guinée équatoriale":"equatorial guinea",
     "grèce":"greece",
-    "îles géorgie du sud et sandwich du sud":"south georgia & south sandwich islands",
+    "iles géorgie du sud et sandwich du sud":"south georgia & south sandwich islands",
     "guatemala":"guatemala",
     "guam":"guam",
     "guinée-bissau":"guinea-bissau",
@@ -111,11 +112,11 @@ def ConversionPays(DBTYPE=None):
     "croatie":"croatia",
     "haïti":"haiti",
     "hongrie":"hungary",
-    "îles canaries":"canary islands",
+    "iles canaries":"canary islands",
     "indonésie":"indonesia",
     "irlande":"ireland",
     "israël":"israel",
-    "île de man":"isle of man",
+    "ile de man":"isle of man",
     "inde":"india",
     "territoire britannique de l’océan indien":"british indian ocean territory",
     "irak":"iraq",
@@ -135,7 +136,7 @@ def ConversionPays(DBTYPE=None):
     "corée du nord":"north korea",
     "corée du sud":"south korea",
     "koweït":"kuwait",
-    "îles caïmans":"cayman islands",
+    "iles caïmans":"cayman islands",
     "kazakhstan":"kazakhstan",
     "laos":"laos",
     "liban":"lebanon",
@@ -154,13 +155,13 @@ def ConversionPays(DBTYPE=None):
     "monténégro":"montenegro",
     "saint-martin (partie française)":"st. martin",
     "madagascar":"madagascar",
-    "îles marshall":"marshall islands",
+    "iles marshall":"marshall islands",
     "macédoine":"macedonia",
     "mali":"mali",
     "myanmar":"myanmar (burma)",
     "mongolie":"mongolia",
     "r.a.s. chinoise de macao":"macau sar china",
-    "îles mariannes du nord":"northern mariana islands",
+    "iles mariannes du nord":"northern mariana islands",
     "martinique":"martinique",
     "mauritanie":"mauritania",
     "montserrat":"montserrat",
@@ -174,7 +175,7 @@ def ConversionPays(DBTYPE=None):
     "namibie":"namibia",
     "nouvelle-calédonie":"new caledonia",
     "niger":"niger",
-    "île norfolk":"norfolk island",
+    "ile norfolk":"norfolk island",
     "nigéria":"nigeria",
     "nicaragua":"nicaragua",
     "pays-bas":"netherlands",
@@ -205,7 +206,7 @@ def ConversionPays(DBTYPE=None):
     "russie":"russia",
     "rwanda":"rwanda",
     "arabie saoudite":"saudi arabia",
-    "îles salomon":"solomon islands",
+    "iles salomon":"solomon islands",
     "seychelles":"seychelles",
     "soudan":"sudan",
     "suède":"sweden",
@@ -226,7 +227,7 @@ def ConversionPays(DBTYPE=None):
     "syrie":"syria",
     "swaziland":"swaziland",
     "tristan da cunha":"tristan da cunha",
-    "îles turques-et-caïques":"turks & caicos islands",
+    "iles turques-et-caïques":"turks & caicos islands",
     "tchad":"chad",
     "terres australes françaises":"french southern territories",
     "togo":"togo",
@@ -244,15 +245,15 @@ def ConversionPays(DBTYPE=None):
     "tanzanie":"tanzania",
     "ukraine":"ukraine",
     "ouganda":"uganda",
-    "îles mineures éloignées des états-unis":"u.s. outlying islands",
-    "états-unis":"united states of america",
+    "iles mineures éloignées des états-unis":"u.s. outlying islands",
+    "etats-unis":"united states of america",
     "uruguay":"uruguay",
     "ouzbékistan":"uzbekistan",
-    "état de la cité du vatican":"vatican city",
+    "etat de la cité du vatican":"vatican city",
     "saint-vincent-et-les-grenadines":"st. vincent & grenadines",
     "venezuela":"venezuela",
-    "îles vierges britanniques":"british virgin islands",
-    "îles vierges des états-unis":"u.s. virgin islands",
+    "iles vierges britanniques":"british virgin islands",
+    "iles vierges des états-unis":"u.s. virgin islands",
     "vietnam":"vietnam",
     "vanuatu":"vanuatu",
     "wallis-et-futuna":"wallis & futuna",
@@ -266,12 +267,18 @@ def ConversionPays(DBTYPE=None):
       
     
   if DBTYPE=="movie":
-    CountryList=xbmc.getInfoLabel( "ListItem.Country" ).replace("/",",")
+    if ContainerID:  
+       CountryList=xbmc.getInfoLabel( "Container(%d).ListItem.Country" %(ContainerID) ).replace("/",",")
+    else:
+       CountryList=xbmc.getInfoLabel( "ListItem.Country" ).replace("/",",")
     xbmcgui.Window(10000).clearProperty('ItemCountry1')
     if CountryList:
       CountryList=CountryList.split(",")
       if not CountryList:
-        CountryList.append(xbmc.getInfoLabel( "ListItem.Country" ))
+        if ContainerID:
+          CountryList.append(xbmc.getInfoLabel( "Container(%d).ListItem.Country" %(ContainerID)))
+        else:
+          CountryList.append(xbmc.getInfoLabel( "ListItem.Country" ))
       idx=1
       for country in CountryList:
          Pays=country.strip()

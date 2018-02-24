@@ -33,28 +33,43 @@
       <texture>frames/Menu_Glass2b.png</texture>
       <colordiffuse>DialogBackgroundColor</colordiffuse>
     </control>
+    
     <control type="grouplist" id="996">
       <description>grouplist for context buttons</description>
-      <left>30</left>
+      <left>35</left>
       <top>35</top>
       <width>490</width>
       <onleft>Close</onleft>
       <onright>Close</onright>
       <height max="670">auto</height>
       <itemgap>2</itemgap>
+      <control type="button" id="2105"> <!--- informations acteur/realisateur.... -->
+            <include>MonBoutonCommun2</include>
+            <label>$LOCALIZE[32014]</label>
+            <onclick>Dialog.Close(all,true)</onclick>
+            <onclick>SetProperty(IconmixShowInfo,55,Home)</onclick>
+            <visible>Container.Content(actors)|Container.Content(directors)</visible>
+          </control>
       
-      <control type="button" id="10">
-        <description>Ascending</description>
-        <include>MonBoutonCommun2</include>
-      </control>
-
       <control type="button" id="2106">
         <description>menugeneral</description>
         <include>MonBoutonCommun2</include>
         <label>31833</label>
         <onclick>SetFocus(7000)</onclick>
       </control>
+ <control type="button" id="2107">        
+        <onright>7111</onright>        
+        <include>MonBoutonCommun2</include>
+        <label>31253</label>
 
+        <visible>String.IsEqual(ListItem.DBTYPE,movie)</visible>
+      </control>
+  <control type="button" id="8">
+            <description>Search</description>
+            <label>137</label>
+            <include>MonBoutonCommun2</include>
+            <onclick>VideoLibrary.Search</onclick>
+          </control>
       
        <control type="button" id="2108">
         <include>MonBoutonCommun2</include>        
@@ -70,5 +85,10 @@
     </control>
     
   </control>
+  <control type="group">
+      <posy>0</posy>
+      <left>35</left>
+    <include>PlayListPersoContext</include>
+    </control>
 </controls>
 </window>

@@ -1769,3 +1769,17 @@ msgstr "Filtre avancé"
 msgctxt "#32013"
 msgid "Show "
 msgstr "Afficher"
+
+
+msgctxt "#32014"
+msgid "More informations"
+msgstr "Plus d'informations"
+
+msgctxt "#32015"
+msgid "Fullscreen Trailers"
+msgstr "Bandes-Annonces plein écran"
+
+msgctxt "#32016"
+msgid "Back"
+msgstr "Dossier précédent"
+

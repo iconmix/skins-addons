@@ -85,7 +85,7 @@
       <scrollout>true</scrollout>
 
       <texturefocus colordiffuse="FFFFAAFF">frames/fondtitre2.png</texturefocus>
-      <texturenofocus colordiffuse="FFFFAAFF">frames/fondtitre2.png</texturenofocus>
+      <texturenofocus colordiffuse="FFFFAAFF">frames/fondtitre2.png</texturenofocus> -->
     </control>
 
   </control> 

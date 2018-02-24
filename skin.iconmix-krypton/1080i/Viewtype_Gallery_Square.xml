@@ -6,8 +6,7 @@
               <posy>50</posy>
 						<animation reversible="true" effect="zoom" center="auto" start="100" end="120" time="200" tween="sine" easing="inout">focus</animation>
 						<animation reversible="true" effect="zoom" center="auto" start="120" end="100" time="200" tween="sine" easing="inout">unfocus</animation>
-						<control type="image">
-						               
+						<control type="image">						               
               <width>230</width>
               <height>205</height>
               <texture>frames/cdcasexback.png</texture>
@@ -28,22 +27,28 @@
               <aspectratio scalediffuse="true">stretch</aspectratio>
             </control>   
                     
-            <control type="button">
+            <control type="image">
       			  <top>210</top>
       			  
-      			  <width max="245">auto</width>
+      			  <width>225</width>
       			  <left>5</left>
       			  <height>30</height>
       			  <align>center</align>
       			  <aligny>center</aligny>
-      			  <textoffsetx>10</textoffsetx>
+      			  <texture>frames/fondtitre2.png</texture>
+      			</control>	        
+            <control type="label">
+      			  <top>210</top>      			  
+      			  <width>215</width>
+      			  <left>5</left>
+      			  <height>30</height>
+      			  <align>center</align>
+      			  <aligny>center</aligny>      			  
       			  
       			  <font>METF_RecentlyAddedListText</font>
     					<textcolor>TitleText</textcolor>
-    					<label>$VAR[ListItemTitle]</label>
-      			
-      				<texturefocus colordiffuse="FFFFAAFF">frames/fondtitre2.png</texturefocus>
-              <texturenofocus colordiffuse="FFFFAAFF">frames/fondtitre2.png</texturenofocus>
+    					<label>$VAR[ListItemTitle]</label>      			
+      				
       			</control>	
             
             
@@ -51,6 +56,7 @@
 					</control>
     
   </include>
+ 
 	<include name="Viewtype_Gallery_Square">
 		<control type="group">
 			<visible>Control.IsVisible(58)</visible>
@@ -78,10 +84,16 @@
 				<include>Animation_FadedByMenu</include>
 				<include>Animation_HiddenByInfo</include>
 				<visible>!Skin.HasSetting(NoViewGallerySquare)</visible>
-				<itemlayout width="255" height="295">
+				<itemlayout width="255" height="295" condition="!String.Contains(ListItem.DBType,ctor)">
 				<include>CommonSquare</include>
 				</itemlayout>
-				<focusedlayout width="255" height="295">
+				<focusedlayout width="255" height="295" condition="!String.Contains(ListItem.DBType,ctor)">
+					<include>CommonSquare</include>
+				</focusedlayout> 
+				<itemlayout width="255" height="295" condition="String.Contains(ListItem.DBType,ctor)">
+				<include>CommonSquare</include>
+				</itemlayout>
+				<focusedlayout width="255" height="295" condition="String.Contains(ListItem.DBType,ctor)">
 					<include>CommonSquare</include>
 				</focusedlayout> 
 			</control>

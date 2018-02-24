@@ -76,8 +76,9 @@
 	</include>
 	
 	<variable name="ListItemVu">
-	  <value condition="!ListItem.IsFolder+[[[Container.Content(movies) | Container.Content(sets)] + !Skin.HasSetting(HideMovieWatchedOverlays)]|[[Container.Content(tvshows) | Container.Content(episodes)| Container.Content(seasons)] + !Skin.HasSetting(HideTVWatchedOverlays)]]+!Window.IsActive(502)+!ListItem.IsResumable+String.Contains(ListItem.Overlay,layWatched)">[COLOR=FFFF8C82][I]$VAR[ListItemTitle][/I][/COLOR]</value>
+	  <value condition="[[[String.IsEqual(ListItem.DbType,movie) | String.IsEqual(ListItem.DbType,set)] + !Skin.HasSetting(HideMovieWatchedOverlays)]|[!ListItem.IsFolder+!String.IsEqual(ListItem.DbType,movie) + !String.IsEqual(ListItem.DbType,set)+!String.IsEqual(ListItem.DbType,tvshow) + !String.IsEqual(ListItem.DbType,episode)+ !String.IsEqual(ListItem.DbType,season)]|[[String.IsEqual(ListItem.DbType,tvshow) | String.IsEqual(ListItem.DbType,episode)| String.IsEqual(ListItem.DbType,season)] + !Skin.HasSetting(HideTVWatchedOverlays)]]+!Window.IsActive(502)+!ListItem.IsResumable+String.Contains(ListItem.Overlay,layWatched)">[COLOR=FFFF8C82][I]$VAR[ListItemTitle][/I][/COLOR]</value>
 	  <value condition="ListItem.IsFolder+!String.IsEqual(ListItem.DBTYPE,set)">[COLOR=yellow][I]$VAR[ListItemTitle][/I][/COLOR]</value>
+	  <value condition="!Container.Content(sets)+String.IsEqual(ListItem.DbType,set)">[COLOR=FF7FAFAF]$VAR[ListItemTitle][/COLOR]</value>
 	  <value>$VAR[ListItemTitle]</value>
 	</variable>
 <variable name="PreviewSetting">
@@ -169,12 +170,14 @@
 		
 	
 	<variable name="fanartdialogvideoinfo">
-		<value condition="String.IsEmpty(Window(Home).Property(iconmixExtraFanart))+!String.Contains(Container.FolderPath,plugin) + [ Container.Content(movies) |Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)">$INFO[ListItem.Path,,/extrafanart/]</value>
+		<value condition="String.IsEmpty(Window(Home).Property(IconMixExtraFanart))+!String.Contains(Container.FolderPath,plugin) + [ Container.Content(movies) |Container.Content(episodes)] + !Skin.HasSetting(HideVideoFanart) + Skin.HasSetting(Enable_ExtraFanart)">$INFO[ListItem.Path,,/extrafanart/]</value>
 
 	</variable>
 	<variable name="genredialogvideoinfo">
-    <value condition="!String.IsEqual(ListItem.DBTYPE),episode">plugin://script.iconmixtools/?action=getgenre&genre=$INFO[ListItem.Genre]&genretype=$INFO[ListItem.DBTYPE]&title=$INFO[ListItem.Title]</value>
-    <value condition="String.IsEqual(ListItem.DBTYPE),episode">plugin://script.iconmixtools/?action=getgenre&genre=$INFO[ListItem.Genre]&genretype=tvshow&title=$INFO[ListItem.TvShowTitle]</value>
+    <value condition="String.IsEmpty(Window(Home).Property(IconmixShowInfo))+!String.IsEqual(ListItem.DBTYPE),episode">plugin://script.iconmixtools/?action=getgenre&genre=$INFO[ListItem.Genre]&genretype=$INFO[ListItem.DBTYPE]&title=$INFO[ListItem.Title]</value>
+    <value condition="String.IsEmpty(Window(Home).Property(IconmixShowInfo))+String.IsEqual(ListItem.DBTYPE),episode">plugin://script.iconmixtools/?action=getgenre&genre=$INFO[ListItem.Genre]&genretype=tvshow&title=$INFO[ListItem.TvShowTitle]</value>
+   <value condition="!String.IsEmpty(Window(Home).Property(IconmixShowInfo))+!String.IsEqual(ListItem.DBTYPE),episode">plugin://script.iconmixtools/?action=getgenre&genre=$INFO[Container(1990).ListItem.Genre]&genretype=$INFO[Container(1990).ListItem.DBTYPE]&title=$INFO[Container(1990).ListItem.Title]</value>
+    <value condition="!String.IsEmpty(Window(Home).Property(IconmixShowInfo))+String.IsEqual(Container(1990).ListItem.DBTYPE),episode">plugin://script.iconmixtools/?action=getgenre&genre=$INFO[Container(1990).ListItem.Genre]&genretype=tvshow&title=$INFO[Container(1990).ListItem.TvShowTitle]</value>
     </variable>
 	<variable name="ItemType">
 
@@ -329,9 +332,9 @@
 		<value condition="Container.Content(episodes)|[String.Contains(Container.FolderPath,plugin)+String.IsEmpty(Container.Content)+!String.IsEmpty(ListItem.Title)]">$VAR[Seasonnum]$VAR[episodenum]: $INFO[ListItem.Title]</value>
 
 		<value condition="Container.Content(tvshows)+!String.IsEmpty(ListItem.TVShowTitle)">$INFO[ListItem.TVShowTitle]</value>
-		<value condition="!String.IsEmpty(ListItem.Label)">$INFO[ListItem.Label]</value>
-		<value condition="!String.IsEmpty(ListItem.Title)">$INFO[ListItem.Title]</value>
-		<value></value>
+		<value condition="!String.IsEmpty(ListItem.Label)+!String.IsEqual(ListItem.Label,..)">$INFO[ListItem.Label]</value>
+		<value condition="!String.IsEmpty(ListItem.Title)+!String.IsEqual(ListItem.Title,..)">$INFO[ListItem.Title]</value>
+		<value>$LOCALIZE[32016]</value>
 	</variable>
 
 	<variable name="NextAiredFanart">
@@ -369,11 +372,11 @@
 	  
 		<value condition="Window.IsActive(pictures) + String.IsEmpty(ListItem.Art(fanart)) + [String.IsEqual(ListItem.FileExtension,png) | String.IsEqual(ListItem.FileExtension,jpg) | String.IsEqual(ListItem.FileExtension,jpeg) | String.IsEqual(ListItem.FileExtension,bmp) | String.IsEqual(ListItem.FileExtension,gif) | String.IsEqual(ListItem.FileExtension,ico) | String.IsEqual(ListItem.FileExtension,tif) | String.IsEqual(ListItem.FileExtension,tiff) | String.IsEqual(ListItem.FileExtension,tga) | String.IsEqual(ListItem.FileExtension,pcx) | String.IsEqual(ListItem.FileExtension,cbz) | String.IsEqual(ListItem.FileExtension,zip) | String.IsEqual(ListItem.FileExtension,cbr) | String.IsEqual(ListItem.FileExtension,rar) | String.IsEqual(ListItem.FileExtension,m3u)]">$INFO[listitem.filenameandpath]</value>
 		<value condition="!Window.IsVisible(10025)+!Window.IsVisible(502)+!Window.IsVisible(home)">background.jpg</value>
-    <value condition="[Container.Content(movies)|Container.Content(set)]+!Control.IsVisible(1999)+!String.IsEmpty(Window(Home).Property(iconmixExtraFanart))+!String.Contains(Window(Home).Property(iconmixExtraFanart),plugin)+!String.Contains(Container.FolderPath,plugin)">$INFO[Window(Home).Property(iconmixExtraFanart)]</value>
-		<!-- <value condition="[Container.Content(movies)|Container.Content(set)]+!Control.IsVisible(1999)+Skin.HasSetting(Enable_ExtraFanart)+!String.IsEmpty(Window(Home).Property(iconmixExtraFanart))+!String.Contains(Window(Home).Property(iconmixExtraFanart),plugin)+!String.Contains(Container.FolderPath,plugin)">$INFO[Window(Home).Property(iconmixExtraFanart)]</value> -->
-		<value condition="Control.IsVisible(1999)+!String.IsEmpty(Window(Home).Property(iconmixExtraFanart))">$INFO[Window(Home).Property(iconmixExtraFanart)]</value>
-		<!-- <value condition="!String.IsEmpty(Window(Home).Property(iconmixExtraFanart))+Skin.HasSetting(Enable_ExtraFanart)">$INFO[Window(Home).Property(iconmixExtraFanart)]</value>-->
-		<value condition="!String.IsEmpty(Window(Home).Property(iconmixExtraFanart))">$INFO[Window(Home).Property(iconmixExtraFanart)]</value>
+    <value condition="[Container.Content(movies)|Container.Content(set)]+!Control.IsVisible(1999)+!String.IsEmpty(Window(Home).Property(IconMixExtraFanart))+!String.Contains(Window(Home).Property(IconMixExtraFanart),plugin)+!String.Contains(Container.FolderPath,plugin)">$INFO[Window(Home).Property(IconMixExtraFanart)]</value>
+		<!-- <value condition="[Container.Content(movies)|Container.Content(set)]+!Control.IsVisible(1999)+Skin.HasSetting(Enable_ExtraFanart)+!String.IsEmpty(Window(Home).Property(IconMixExtraFanart))+!String.Contains(Window(Home).Property(IconMixExtraFanart),plugin)+!String.Contains(Container.FolderPath,plugin)">$INFO[Window(Home).Property(IconMixExtraFanart)]</value> -->
+		<value condition="Control.IsVisible(1999)+!String.IsEmpty(Window(Home).Property(IconMixExtraFanart))">$INFO[Window(Home).Property(IconMixExtraFanart)]</value>
+		<!-- <value condition="!String.IsEmpty(Window(Home).Property(IconMixExtraFanart))+Skin.HasSetting(Enable_ExtraFanart)">$INFO[Window(Home).Property(IconMixExtraFanart)]</value>-->
+		<value condition="!String.IsEmpty(Window(Home).Property(IconMixExtraFanart))">$INFO[Window(Home).Property(IconMixExtraFanart)]</value>
 		<value condition="Control.IsVisible(1999)+!String.IsEmpty(Container(1999).ListItem.Art(fanart))">$INFO[Container(1999).ListItem.Art(fanart)]</value>
 		
 		<value condition="Integer.IsGreater(Container(2998).NumItems,0)">$INFO[Container(2998).ListItem.Icon]</value>
@@ -398,6 +401,16 @@
 		<value condition="String.Contains(ListItem.Mpaa,-PG)">flags\Rating\PG.png</value>
 		<value condition="String.Contains(ListItem.Mpaa,-MA)">flags\Rating\Moins15.png</value>
 		<value condition="!String.IsEmpty(ListItem.Mpaa)">flags\Rating\Tous.png</value>
+	</variable>
+	<variable name="MPAATexture1990">
+		<value condition="String.Contains(Container(1990).ListItem.Mpaa,10)">flags\Rating\Moins10.png</value>
+		<value condition="String.Contains(Container(1990).ListItem.Mpaa,12)">flags\Rating\Moins12.png</value>
+		<value condition="String.Contains(Container(1990).ListItem.Mpaa,14)">flags\Rating\Moins14.png</value>
+		<value condition="String.Contains(Container(1990).ListItem.Mpaa,16)">flags\Rating\Moins16.png</value>
+		<value condition="String.Contains(Container(1990).ListItem.Mpaa,18)">flags\Rating\Moins18.png</value>
+		<value condition="String.Contains(Container(1990).ListItem.Mpaa,-PG)">flags\Rating\PG.png</value>
+		<value condition="String.Contains(Container(1990).ListItem.Mpaa,-MA)">flags\Rating\Moins15.png</value>
+		<value condition="!String.IsEmpty(Container(1990).ListItem.Mpaa)">flags\Rating\Tous.png</value>
 	</variable>
 
 
@@ -735,6 +748,20 @@
 		<value condition="String.IsEmpty(ListItem.VideoCodec)+[ListItem.IsStereoscopic | String.Contains(listitem.filename,3d)] +  [String.Contains(listitem.filename,bluray) | String.Contains(listitem.filename,blu-ray) | String.Contains(listitem.filename,.mt2s) | String.Contains(listitem.filename,.bdmv) | String.Contains(listitem.filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bd3d.png</value>
 		<value>$INFO[ListItem.VideoCodec,flags/VideoCodec/,.png]</value>
 	</variable>
+	<variable name="MediaFlag_VideoResolution1990">
+		<value condition="Window.IsActive(fullscreenvideo)">$INFO[VideoPlayer.VideoResolution,flags/VideoResolution/,.png]</value>
+		<value>$INFO[Container(1990).ListItem.VideoResolution,flags/VideoResolution/,.png]</value>
+	</variable>
+	<variable name="MediaFlag_VideoAspect1990">
+		<value condition="Window.IsActive(fullscreenvideo)">$INFO[VideoPlayer.VideoAspect,flags/VideoAspect/,.png]</value>
+		<value>$INFO[Container(1990).ListItem.VideoAspect,flags/VideoAspect/,.png]</value>
+	</variable>
+	<variable name="MediaFlag_VideoCodec1990">
+		<value condition="String.Contains(Container(1990).ListItem.DBTYPE,set)">flags/Source/set.png</value>
+		<value condition="String.IsEmpty(Container(1990).ListItem.VideoCodec)+[!Container(1990).ListItem.IsStereoscopic + !String.Contains(Container(1990).ListItem.filename,3d)] + [String.Contains(Container(1990).ListItem.filename,bluray) | String.Contains(Container(1990).ListItem.filename,blu-ray) | String.Contains(Container(1990).ListItem.filename,.mt2s) | String.Contains(Container(1990).ListItem.filename,.bdmv) | String.Contains(Container(1990).ListItem.filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bluray.png</value>
+		<value condition="String.IsEmpty(Container(1990).ListItem.VideoCodec)+[Container(1990).ListItem.IsStereoscopic | String.Contains(Container(1990).ListItem.filename,3d)] +  [String.Contains(Container(1990).ListItem.filename,bluray) | String.Contains(Container(1990).ListItem.filename,blu-ray) | String.Contains(Container(1990).ListItem.filename,.mt2s) | String.Contains(Container(1990).ListItem.filename,.bdmv) | String.Contains(Container(1990).ListItem.filename,.iso)] + [Container.Content(movies) | Container.Content(MusicVideos)]">flags/Source/bd3d.png</value>
+		<value>$INFO[Container(1990).ListItem.VideoCodec,flags/VideoCodec/,.png]</value>
+	</variable>
 	<variable name="Boitier_SelonResolution">
 		<value condition="String.IsEqual(ListItem.VideoResolution,4K)">frames/4k.png</value>
 		<value condition="String.Contains(ListItem.DBTYPE,set)">frames/collection.png</value>
@@ -772,6 +799,14 @@
 	<variable name="MediaFlag_AudioChannels">
 		<value condition="Window.IsActive(fullscreenvideo)">$INFO[VideoPlayer.AudioChannels,flags/AudioChannels/,ch.png]</value>
 		<value>$INFO[ListItem.AudioChannels,flags/AudioChannels/,ch.png]</value>
+	</variable>
+	<variable name="MediaFlag_AudioCodec1990">
+		<value condition="Window.IsActive(fullscreenvideo)">$INFO[VideoPlayer.AudioCodec,flags/AudioCodec/,.png]</value>
+		<value>$INFO[Container(1990).ListItem.AudioCodec,flags/AudioCodec/,.png]</value>
+	</variable>
+	<variable name="MediaFlag_AudioChannels1990">
+		<value condition="Window.IsActive(fullscreenvideo)">$INFO[VideoPlayer.AudioChannels,flags/AudioChannels/,ch.png]</value>
+		<value>$INFO[Container(1990).ListItem.AudioChannels,flags/AudioChannels/,ch.png]</value>
 	</variable>
 
 	<variable name="CheckRating">
@@ -850,6 +885,7 @@
 	  <value condition="Container.Content(genres)">$INFO[ListItem.Label]</value>
 	  <value condition="String.Contains(Container.FolderPath,musicdb://genre)">$INFO[Container.FolderName]</value>
 	</variable>
+	
 	<variable name="PosterThumb">
 	   <value condition="Container.Content(episodes)">$INFO[ListItem.Icon]</value>
 	  <value condition="!String.IsEmpty(ListItem.Property(poster))">$INFO[ListItem.Property(poster)]</value>		
@@ -920,7 +956,7 @@
 	<variable name="ListClearartClearlogo">
 		<value condition="Control.HasFocus(2999)+!String.IsEmpty(Container(1999).ListItem.Art(clearart))">$INFO[Container(1999).ListItem.Art(clearart)]</value>
 		<value condition="Control.HasFocus(2999)+!String.IsEmpty(Container(1999).ListItem.Art(clearlogo)) + String.IsEmpty(Container(1999).ListItem.Art(clearart))">$INFO[Container(1999).ListItem.Art(clearlogo)]</value>
-
+    <value condition="String.IsEqual(ListItem.Label,..)|String.IsEqual(ListItem.Title,..)">buttons/parent.png</value>
 		<value condition="!String.IsEmpty(ListItem.Art(clearart))">$INFO[ListItem.Art(clearart)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(clearlogo))">$INFO[ListItem.Art(clearlogo)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(landscape))">$INFO[ListItem.Art(landscape)]</value>

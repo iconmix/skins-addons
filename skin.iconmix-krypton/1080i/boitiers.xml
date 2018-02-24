@@ -453,6 +453,7 @@
 <include name="AnimationFocus1999">
   <animation type="Conditional" condition="Control.HasFocus(2997)|Control.HasFocus(2999)" reversible="true">
     <effect type="zoom" center="auto" start="100" end="80" time="100"  />
+    <effect type="fade" start="100" end="60" time="100"  />
   </animation>
 </include>
 <!-- ---------------------------------------------------------------------------------------------- -->
@@ -1057,7 +1058,7 @@
   <include>boitiersmusicanim</include>
   <include>PanelActeursSaga</include>
   <control type="group"> <!-- fond gral -->
-    <visible>!Window.IsVisible(502)</visible>
+    <visible>!Window.IsVisible(502)+String.IsEmpty(Window(Home).Property(IconmixShowInfo))</visible>
     <control type="group">
       <posx>-70</posx>
       <top>-10</top>
@@ -1101,7 +1102,7 @@
       <include>drapeauxlangues</include>
       <control type="group">
         <top>440</top>
-        <left>190</left>
+        <left>170</left>
         <width>420</width>
         <align>center</align>
         <include>chronotools</include>

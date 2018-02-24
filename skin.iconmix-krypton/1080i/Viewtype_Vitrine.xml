@@ -144,7 +144,17 @@
 							
 						</control>
 						<include>AnimationCacheNonSelect</include>
-			       </control>
+			       <visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
+  </control>
+  <control type="image">
+    <left>20</left>
+    <top>2</top>
+    <width>287</width>
+								<height>443</height>
+    <aspectratio>keep</aspectratio>
+    <texture>buttons/parent.png</texture>
+    <visible>String.IsEqual(ListItem.Label,..)|String.IsEqual(ListItem.Title,..)</visible>
+  </control>
 						</itemlayout>
 					<focusedlayout height="600" width="360">
 						<include>ActiveClearArt</include>
@@ -253,7 +263,28 @@
 							<include>OverlayProgress</include>
 						</control>						
 				</control>
-			</control>
+			<visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
+  </control>
+  <control type="image">
+    <left>20</left>
+    <top>2</top>
+    <width>287</width>
+								<height>443</height>
+    <aspectratio>keep</aspectratio>
+    <texture>buttons/parent.png</texture>
+    <visible>String.IsEqual(ListItem.Label,..)|String.IsEqual(ListItem.Title,..)</visible>
+    <animation type="Focus">
+								<effect type="rotatey" center="30" start="-8" end="8" time="500" reversible="false"/>
+								<effect type="zoom" start="100" end="120" time="500"  reversible="false"/>
+								<effect type="slide"  end="0,50" time="500"  reversible="false"/>
+								
+							</animation>
+							<animation type="UnFocus">
+								<effect type="zoom" start="120" end="100" time="100"  reversible="false"/>
+								<effect type="rotatey" center="30" start="8" end="0" time="100" reversible="false"/>	
+								
+							</animation>
+  </control>
 						</focusedlayout>
 				</control>
 			</control>

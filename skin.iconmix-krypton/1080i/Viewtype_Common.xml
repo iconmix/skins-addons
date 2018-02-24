@@ -344,7 +344,18 @@
 					<include>ShowTotalTvEp</include>		
 				</control>
 			<include>AnimationCacheNonSelect</include>
-			</control>
+			<visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
+  </control>
+  <control type="image">
+    <left>20</left>
+    <top>150</top>
+    <width>287</width>
+								<height>443</height>
+    <aspectratio>keep</aspectratio>
+    <texture>buttons/parent.png</texture>
+    <visible>String.IsEqual(ListItem.Label,..)|String.IsEqual(ListItem.Title,..)</visible>
+  
+  </control>
 		</itemlayout>
 		<focusedlayout width="380" height="520">
 			<include>ActiveClearArt</include>
@@ -367,7 +378,21 @@
 					<include>OverlayProgress</include>
 				</control>
 				
-			</control>
+			<visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
+  </control>
+  <control type="image">
+    <left>20</left>
+    <top>150</top>
+    <width>287</width>
+								<height>443</height>
+    <aspectratio>keep</aspectratio>
+    <texture>buttons/parent.png</texture>
+    <visible>String.IsEqual(ListItem.Label,..)|String.IsEqual(ListItem.Title,..)</visible>
+    <animation type="Focus" reversible="false">
+					<effect type="zoom" center="auto" start="100" end="130" time="150" tween="sine" easing="inout" delay="50" />
+					<effect type="rotatey" center="150" end="-15" time="300" delay="250" />
+				</animation>
+  </control>
 			<include>PosterViewCommon_Details</include>
 		</focusedlayout>
 		

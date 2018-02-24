@@ -2013,3 +2013,14 @@ msgctxt "#32013"
 msgid "Show "
 msgstr ""
 
+msgctxt "#32014"
+msgid "More informations"
+msgstr ""
+
+msgctxt "#32015"
+msgid "Fullscreen Trailers"
+msgstr ""
+
+msgctxt "#32016"
+msgid "Back"
+msgstr ""
