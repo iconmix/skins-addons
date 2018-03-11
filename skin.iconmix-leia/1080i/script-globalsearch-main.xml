@@ -1861,8 +1861,8 @@
 			<textcolor>TextNF</textcolor>
 			<focusedcolor>DialogTextFO</focusedcolor>
 			<disabledcolor>TextDisabled</disabledcolor>
-			<texturefocus>ButtonFO2Wide.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+			<texturenofocus>-</texturenofocus> -->
 			<pulseonselect>false</pulseonselect>
 			<label></label>
 			<onup>101</onup>

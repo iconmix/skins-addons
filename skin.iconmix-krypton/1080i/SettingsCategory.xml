@@ -25,6 +25,15 @@
 				<ondown>3</ondown>
 				<orientation>vertical</orientation>
 			</control>
+			  <control type="image">
+          <posx>420</posx>
+          <posy>0</posy>
+          <height>1080</height>
+          <width>10</width>
+          <texture border="2">VideoInfoLine.png</texture>
+          <colordiffuse>SettingsLine</colordiffuse>
+
+        </control>
 			<control type="grouplist" id="5">
 				<description>Control Area</description>
 				<include>Animation_FadedByMenu</include>
@@ -32,8 +41,8 @@
 				<include>Animation_CommonFadeNoHide</include>
 				<posx>440</posx>
 				<posy>80</posy>
-				<width>840</width>
-				<height>456</height>
+				<width>1240</width>
+				<height>756</height>
 				<scrolltime>0</scrolltime>
 				<itemgap>0</itemgap>
 				<onleft>3</onleft>
@@ -56,19 +65,7 @@
 			</control>
 			<control type="button" id="10">
 				<description>Default Category Button</description>
-				<width>370</width>
-				<height>50</height>
-				<textoffsetx>20</textoffsetx>
-				<font>METF_TitleTextMedium</font>
-				<textcolor>SettingsDetail</textcolor>
-				<focusedcolor>DialogTextFO</focusedcolor>
-				<align>right</align>
-				<aligny>center</aligny>
-				<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
-				<texturenofocus>-</texturenofocus> -->
-				<alttexturefocus>ButtonFo.png</alttexturefocus>
-				<alttexturenofocus>-</alttexturenofocus>
-				<pulseonselect>false</pulseonselect>
+				<include>SettingsLabel2</include>
 			</control>
 			<control type="sliderex" id="13">
 				<description>Default Slider</description>
@@ -80,27 +77,23 @@
 				<textureslidernibfocus>osdslidernib.png</textureslidernibfocus>
 			</control>
 			<control type="textbox" id="6">
-				<include>Animation_FadedByMenu</include>
-				<include>Animation_OpenCloseFade</include>
-				<include>Animation_HiddenByInfo</include>
-				<animation effect="fade" start="100" end="0" time="200">Hidden</animation>
-				<posx>300</posx>
-				<posy>565</posy>
-				<width>750</width>
-				<height>64</height>
-				<font>METF_PlotTextSmall</font>
-				<include condition="!Skin.HasSetting(AutoScrollFast)">AutoScrollShort</include>
-				<include condition="Skin.HasSetting(AutoScrollFast)">AutoScrollShortFast</include>
-				<textcolor>LowerText</textcolor>
-				<align>justify</align>
-			</control>
+            <posx>440</posx>
+            <posy>880</posy>
+            <width>1000</width>
+            <aligny>top</aligny>
+            <align>center</align>
+            <font>PlotFont</font>
+            <textcolor>LowerText</textcolor>
+            <shadowcolor>FF000000</shadowcolor>
+          </control>
+
 			<control type="label" id="14">
 				<description>Default Label</description>
 				<height>38</height>
 				<align>left</align>
 				<aligny>center</aligny>
-				<font>METF_ContextValue</font>
-				<textcolor>SettingsDetail</textcolor>
+				<font>METF_DialogLargeBold</font>
+				<textcolor>MediaDetailsGenre</textcolor>
 				<label></label>
 			</control>
 		</control>
@@ -108,7 +101,7 @@
 		
 		
 		<include>Global_MediaOverlay</include>
-		<include>Setting_Heading</include>
+		 <include>Setting_Heading</include>
 		
 	</controls>
 </window>

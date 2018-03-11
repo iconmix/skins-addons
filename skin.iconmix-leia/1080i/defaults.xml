@@ -15,6 +15,7 @@
 		<textcolor>TextNF</textcolor>
 		<focusedcolor>TextFO</focusedcolor>
 		<selectedcolor>TextFO</selectedcolor>
+		
 		<pulseonselect>false</pulseonselect>
 	</default>
 	<default type="togglebutton">
@@ -35,7 +36,7 @@
 		<disabledcolor>TextDisabled</disabledcolor>
 		<radiowidth>30</radiowidth>
 		<radioheight>30</radioheight>
-		<texturenofocus border="2">keyboard/ButtonNF.png</texturenofocus>
+		<texturenofocus border="2">keyboard/ButtonNF.png</texturenofocus> -->
 		<texturefocus border="5">keyboard/ButtonFO.png</texturefocus>
 		<textureradiofocus>keyboard/RadioButtonFO.png</textureradiofocus>
 		<textureradionofocus>keyboard/RadioButtonNF.png</textureradionofocus>
@@ -73,7 +74,7 @@
 		<textoffsetx>7</textoffsetx>
 		<aligny>center</aligny>
 		<texturefocus border="5">button-focus.png</texturefocus>
-		<texturenofocus border="5">button-nofocus.png</texturenofocus>
+		<texturenofocus border="5">button-nofocus.png</texturenofocus> -->
 		<sliderwidth>150</sliderwidth>
 		<sliderheight>20</sliderheight>
 		<texturesliderbar>osd/slider_bg_2.png</texturesliderbar>

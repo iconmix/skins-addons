@@ -37,7 +37,7 @@
 					<font>METF_DialogLarge</font>
 					<textcolor>TextNF</textcolor>
 					<selectedcolor>TextFO</selectedcolor>
-					<label>$INFO[ListItem.Label]</label>
+					<label>$VAR[ListItemVu]</label>
 					<scroll>false</scroll>
 				</control>
 			</itemlayout>
@@ -48,7 +48,7 @@
 					<width>890</width>
 					<height>42</height>
 					<aligny>center</aligny>
-					<texture>ButtonFo.png</texture>
+					<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 					<animation effect="fade" start="100" end="100" condition="!Control.HasFocus(450)">Conditional</animation>
 				</control>
 				<control type="label">
@@ -64,7 +64,7 @@
 					<font>METF_DialogLargeBold</font>
 					<textcolor>ButtonText</textcolor>
 					<selectedcolor>TextFO</selectedcolor>
-					<label>$INFO[ListItem.Label]$INFO[ListItem.Size,  |  ]</label>
+					<label>$VAR[ListItemVu]$INFO[ListItem.Size,  |  ]</label>
 				</control>
 			</focusedlayout>
 		</control>

@@ -64,8 +64,8 @@
 				<focusedcolor>DialogTextFO</focusedcolor>
 				<align>right</align>
 				<aligny>center</aligny>
-				<texturefocus>ButtonFo.png</texturefocus>
-				<texturenofocus>-</texturenofocus>
+				<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+				<texturenofocus>-</texturenofocus> -->
 				<alttexturefocus>ButtonFo.png</alttexturefocus>
 				<alttexturenofocus>-</alttexturenofocus>
 				<pulseonselect>false</pulseonselect>

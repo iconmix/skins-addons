@@ -41,7 +41,7 @@
 						<posy>0</posy>
 						<height>38</height>
 						<width>240</width>
-						<texture>ButtonFo.png</texture>
+						<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 						<animation effect="fade" start="100" end="50" condition="!Control.HasFocus(13)">Conditional</animation>
 					</control>
 					<control type="label">
@@ -116,7 +116,7 @@
 						<posy>0</posy>
 						<height>38</height>
 						<width>300</width>
-						<texture>ButtonFo.png</texture>
+						<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 						<animation effect="fade" start="100" end="50" condition="!Control.HasFocus(11)">Conditional</animation>
 					</control>
 					<control type="image">
@@ -203,7 +203,7 @@
 						<posy>0</posy>
 						<height>38</height>
 						<width>300</width>
-						<texture>ButtonFo.png</texture>
+						<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 						<animation effect="fade" start="100" end="50" condition="!Control.HasFocus(12)">Conditional</animation>
 					</control>
 					<control type="image">
@@ -277,8 +277,8 @@
 				<textcolor>TextNF</textcolor>
 				<focusedcolor>DialogTextFO</focusedcolor>
 				<disabledcolor>TextDisabled</disabledcolor>
-				<texturefocus>ButtonFO2Wide.png</texturefocus>
-				<texturenofocus>-</texturenofocus>
+				<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+				<texturenofocus>-</texturenofocus> -->
 				<label>19289</label>
 			</control>
 		</control>

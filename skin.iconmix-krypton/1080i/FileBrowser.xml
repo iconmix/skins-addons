@@ -11,7 +11,7 @@
 		<include>Global_Background</include>
 		<control type="list" id="450">
 			<posx>690</posx>
-			<posy>46</posy>
+			<posy>146</posy>
 			<height>768</height>
 			<width>890</width>
 			<onup>450</onup>
@@ -92,7 +92,7 @@
 		</control>
 		<!-- Buttons -->
 		<control type="grouplist" id="7001">
-			<posx>-110</posx>
+			<posx>0</posx>
 			<posy>230</posy>
 			<onleft>noop</onleft>
 			<onright>450</onright>
@@ -102,21 +102,21 @@
 				<description>Cancel</description>
 				<posx>0</posx>
 				<posy>95</posy>
-				<include>SettingsLabelLeft</include>
+				<include>SettingsLabel2</include>
 				<label>222</label>
 			</control>
 			<control type="button" id="413">
 				<description>Ok</description>
 				<posx>0</posx>
 				<posy>133</posy>
-				<include>SettingsLabelLeft</include>
+				<include>SettingsLabel2</include>
 				<label>186</label>
 			</control>
 			<control type="button" id="415">
 				<description>Create Folder</description>
 				<posx>0</posx>
 				<posy>171</posy>
-				<include>SettingsLabelLeft</include>
+				<include>SettingsLabel2</include>
 				<label>119</label>
 			</control>
 		</control>
@@ -147,6 +147,7 @@
 				<include>Global_HeadingSectionVars</include>
 			</control>
 			<control type="label">
+			  <top>50</top>
 				<label>$INFO[ListItem.path]</label>
 				<include>Global_HeadingDetailVars</include>
 			</control>

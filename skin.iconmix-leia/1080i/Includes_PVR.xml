@@ -23,8 +23,8 @@
 			<textcolor>TextNF</textcolor>
 			<focusedcolor>DialogTextFO</focusedcolor>
 			<disabledcolor>TextDisabled</disabledcolor>
-			<texturefocus>ButtonFO2Wide.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+			<texturenofocus>-</texturenofocus> -->
 			<label>$LOCALIZE[19019]</label>
 			<onclick condition="Window.IsActive(TVChannels) | Window.IsActive(RadioChannels)">NextChannelGroup</onclick>
 			<onclick condition="String.IsEmpty(Window.Property(IsRadio))">ActivateWindow(TVChannels)</onclick>
@@ -41,8 +41,8 @@
 			<textcolor>TextNF</textcolor>
 			<focusedcolor>DialogTextFO</focusedcolor>
 			<disabledcolor>TextDisabled</disabledcolor>
-			<texturefocus>ButtonFO2Wide.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+			<texturenofocus>-</texturenofocus> -->
 			<label>$LOCALIZE[22020]</label>
 			<onclick condition="Window.IsActive(TVGuide) | Window.IsActive(RadioGuide)">NextChannelGroup</onclick>
 			<onclick condition="String.IsEmpty(Window.Property(IsRadio))">ActivateWindow(TVGuide)</onclick>
@@ -59,8 +59,8 @@
 			<textcolor>TextNF</textcolor>
 			<focusedcolor>DialogTextFO</focusedcolor>
 			<disabledcolor>TextDisabled</disabledcolor>
-			<texturefocus>ButtonFO2Wide.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+			<texturenofocus>-</texturenofocus> -->
 			<label>$LOCALIZE[19163]</label>
 			<onclick condition="String.IsEmpty(Window.Property(IsRadio))">ActivateWindow(TVRecordings)</onclick>
 			<onclick condition="!String.IsEmpty(Window.Property(IsRadio))">ActivateWindow(RadioRecordings)</onclick>
@@ -76,8 +76,8 @@
 			<textcolor>TextNF</textcolor>
 			<focusedcolor>DialogTextFO</focusedcolor>
 			<disabledcolor>TextDisabled</disabledcolor>
-			<texturefocus>ButtonFO2Wide.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+			<texturenofocus>-</texturenofocus> -->
 			<label>$LOCALIZE[19040]</label>
 			<onclick condition="String.IsEmpty(Window.Property(IsRadio))">ActivateWindow(TVTimers)</onclick>
 			<onclick condition="!String.IsEmpty(Window.Property(IsRadio))">ActivateWindow(RadioTimers)</onclick>
@@ -93,8 +93,8 @@
 			<textcolor>TextNF</textcolor>
 			<focusedcolor>DialogTextFO</focusedcolor>
 			<disabledcolor>TextDisabled</disabledcolor>
-			<texturefocus>ButtonFO2Wide.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+			<texturenofocus>-</texturenofocus> -->
 			<label>$LOCALIZE[137]</label>
 			<onclick condition="String.IsEmpty(Window.Property(IsRadio))">ActivateWindow(TVSearch)</onclick>
 			<onclick condition="!String.IsEmpty(Window.Property(IsRadio))">ActivateWindow(RadioSearch)</onclick>
@@ -132,8 +132,8 @@
 			<textcolor>TextNF</textcolor>
 			<focusedcolor>DialogTextFO</focusedcolor>
 			<disabledcolor>TextDisabled</disabledcolor>
-			<texturefocus>ButtonFO2Wide.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+			<texturenofocus>-</texturenofocus> -->
 			<label></label>
 		</control>
 		<control type="radiobutton" id="5">
@@ -146,8 +146,8 @@
 			<textcolor>TextNF</textcolor>
 			<focusedcolor>DialogTextFO</focusedcolor>
 			<disabledcolor>TextDisabled</disabledcolor>
-			<texturefocus>ButtonFO2Wide.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+			<texturenofocus>-</texturenofocus> -->
 			<label>19270</label>
 			<visible>Window.IsActive(TVRecordings) | Window.IsActive(RadioRecordings)</visible>
 		</control>
@@ -162,8 +162,8 @@
 			<textcolor>TextNF</textcolor>
 			<focusedcolor>DialogTextFO</focusedcolor>
 			<disabledcolor>TextDisabled</disabledcolor>
-			<texturefocus>ButtonFO2Wide.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+			<texturenofocus>-</texturenofocus> -->
 			<label></label>
 			<visible>Window.IsActive(TVGuide) | Window.IsActive(RadioGuide)</visible>
 		</control>
@@ -178,8 +178,8 @@
 			<textcolor>TextNF</textcolor>
 			<focusedcolor>DialogTextFO</focusedcolor>
 			<disabledcolor>TextDisabled</disabledcolor>
-			<texturefocus>ButtonFO2Wide.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+			<texturenofocus>-</texturenofocus> -->
 			<label>103</label>
 		</control>
 		<control type="togglebutton" id="4">
@@ -192,8 +192,8 @@
 			<textcolor>TextNF</textcolor>
 			<focusedcolor>DialogTextFO</focusedcolor>
 			<disabledcolor>TextDisabled</disabledcolor>
-			<texturefocus>ButtonFO2Wide.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+			<texturenofocus>-</texturenofocus> -->
 			<alttexturenofocus border="2">-</alttexturenofocus>
 			<alttexturefocus border="5">ButtonFO2.png</alttexturefocus>
 			<aligny>center</aligny>
@@ -212,8 +212,8 @@
 			<textcolor>TextNF</textcolor>
 			<focusedcolor>DialogTextFO</focusedcolor>
 			<disabledcolor>TextDisabled</disabledcolor>
-			<texturefocus>ButtonFO2Wide.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+			<texturenofocus>-</texturenofocus> -->
 			<label>587</label>
 			<visible>Window.IsActive(TVChannels) | Window.IsActive(RadioChannels)</visible>
 		</control>		
@@ -227,8 +227,8 @@
 			<textcolor>TextNF</textcolor>
 			<focusedcolor>DialogTextFO</focusedcolor>
 			<disabledcolor>TextDisabled</disabledcolor>
-			<texturefocus>ButtonFO2Wide.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+			<texturenofocus>-</texturenofocus> -->
 			<label>19051</label>
 			<visible>Window.IsActive(TVChannels) | Window.IsActive(RadioChannels)</visible>
 		</control>
@@ -242,8 +242,8 @@
 			<textcolor>TextNF</textcolor>
 			<focusedcolor>DialogTextFO</focusedcolor>
 			<disabledcolor>TextDisabled</disabledcolor>
-			<texturefocus>ButtonFO2Wide.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+			<texturenofocus>-</texturenofocus> -->
 			<label>19184</label>
 			<visible>Window.IsActive(TVRecordings) | Window.IsActive(RadioRecordings)</visible>
 		</control>

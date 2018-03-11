@@ -3,25 +3,30 @@
   <onload condition="System.HasAddon(script.tv.show.next.aired)">RunScript(script.tv.show.next.aired,backend=True)</onload>-->
 
   <!---->
-  <onload condition="String.IsEmpty(Window(Home).property(iconmixtoolsbackend))">RunScript(script.iconmixtools,backend=True)</onload>-->
-  <onload>SetProperty(SetTitle,,Home) </onload>
-  <onunload>SetProperty(SetTitle,,Home) </onunload>
-  <onload>SetProperty(MovieSagaTitle,,Home)</onload>
-  <onload>SetProperty(MoviePlayerArt,,Home)</onload>
-  <onload>SetProperty(TvPlayerArt,,Home)</onload>
+  <onload condition="String.IsEmpty(Window(Home).property(iconmixtoolsbackend))">RunScript(script.iconmixtools,backend=True)</onload>-->  
   <onload>SetProperty(ActeurVideoLocal,1,Home)</onload>
   <onload>SetProperty(ActeurVideoReset,1,Home)</onload>
-  <onload>SetProperty(IconMixDirector,,Home)</onload>
-  <onunload>SetProperty(MovieSagaTitle,,Home)</onunload>
-  <onunload>SetProperty(ActeurVideoLocal,,Home)</onunload>
-  <onunload>SetProperty(IconMixExtraFanart,,Home)</onunload>
   <onload>SetProperty(IconMixUpdateSagas,1,Home)</onload>
-  <onload>SetProperty(IconMixVerticalNavigation,,Home)</onload>
-  <onload>SetProperty(IconMixUpdating,,Home)</onload>
-  <onload>SetProperty(IconMixActor,,Home)</onload>
-  <onload>SetProperty(ShowSeekBar,,Home)</onload>
-  <onload>SetProperty(IconmixShowInfo,,Home)</onload>
-  <onunload>SetProperty(IconmixShowInfo,,Home)</onunload>
+  <onload>ClearProperty(SetTitle,Home) </onload>
+  <onunload>ClearProperty(SetTitle,Home) </onunload>
+  <onload>ClearProperty(MovieSagaTitle,Home)</onload>
+  <onload>ClearProperty(MoviePlayerArt,Home)</onload>
+  <onload>ClearProperty(TvPlayerArt,Home)</onload>
+
+  <onload>ClearProperty(IconMixDirector,Home)</onload>
+  <onunload>ClearProperty(MovieSagaTitle,Home)</onunload>
+  <onunload>ClearProperty(ActeurVideoLocal,Home)</onunload>
+  <onunload>ClearProperty(IconMixExtraFanart,Home)</onunload>
+  <onload>ClearProperty(IconMixVerticalNavigation,Home)</onload>
+  <onload>ClearProperty(IconMixUpdating,Home)</onload>
+  <onload>ClearProperty(IconMixActor,Home)</onload>
+  <onload>ClearProperty(ShowSeekBar,Home)</onload>
+  <onload>ClearProperty(IconmixShowInfo,Home)</onload>
+  <onunload>ClearProperty(IconmixShowInfo,Home)</onunload>
+  <onload>ClearProperty(IconmixDialogContext,Home)</onload>
+  <onunload>ClearProperty(IconmixDialogContext,Home)</onunload>
+  <onload condition="!String.IsEmpty(Window(Home).property(IconmixFlagPanelEpisode))">SetFocus(1999)</onload>
+  <menucontrol>7000</menucontrol>
 
   <views>55,557,905,906,509,53,57,58,559,555,556,501,551,552,553,554,550,504,511,513,514,510,52,521,56,560,512,584,585,586,587</views>
   <defaultcontrol always="true">55</defaultcontrol>
@@ -265,6 +270,40 @@
           <visible>Container.Content(directors)|Container.Content(actors)</visible>
         </control>
       </control>
+      
+      <!----------------------------------------EPISODES------------------------------------------------------------------------ --
+      <control type="group">
+        <top>-15</top>
+        <visible>!String.IsEmpty(ListItem.DBID)</visible>
+        <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
+          <effect type="slide" end="0,-820" time="0"  />
+        </animation>
+        <include>Animation_FadedByMenu</include>
+        <control type="list" id="1999">
+          <onfocus condition="Skin.HasSetting(directorAucun)">SetFocus(55)</onfocus>
+          <onfocus>SetProperty(IconMixVerticalNavigation,"horizontal",Home)</onfocus>
+          <onfocus>Action(FirstPage)</onfocus>
+          <onfocus>SetFocus(2999)</onfocus>
+          
+          <include>HorizVert</include>
+          <include>VueElementsBoitiers</include>
+          <visible>!Skin.HasSetting(directorTexte)</visible>
+          <visible>Container.Content(tvshows)</visible>
+        </control>
+        <control type="list" id="1999">
+          <onfocus condition="Skin.HasSetting(directorAucun)">SetFocus(55)</onfocus>
+          <onfocus>SetProperty(IconMixVerticalNavigation,"vertical",Home)</onfocus>
+          <onfocus>Action(FirstPage)</onfocus>
+          <onfocus>SetFocus(2999)</onfocus>
+          
+          <width>1920</width>
+          <height>177</height>
+          <include>VertHoriz</include>
+          <include>VueElementsBoitiers</include>
+          <visible>Skin.HasSetting(directorTexte)</visible>
+          <visible>Container.Content(tvshows)</visible>
+        </control>
+      </control>
 
       <!---------------------------------------------------------------------------------------------------------------- -->
        
@@ -276,7 +315,7 @@
         <width>1920</width>
         <height>55</height>
         
-        <visible>[Container.Content(episodes)|Container.Content(tvshows)]+!String.IsEmpty(ListItem.TVShowTitle)+Skin.HasSetting(CacheFond)</visible>
+        <visible>[[Container.Content(episodes)|Container.Content(tvshows)]+!String.IsEmpty(ListItem.TVShowTitle)+Skin.HasSetting(CacheFond)]|[Container.Content(episodes)+!String.IsEmpty(ListItem.TVShowTitle)+!Skin.HasSetting(CacheFond)]</visible>
         <control type="image">
           <!--<texture>frames/genrestag.png</texture>-->
           <texture>osd/OSDdialogback_top.png</texture>
@@ -645,8 +684,12 @@
        <height>1080</height>
        <texture>frames/eau.png</texture>
       </control>
+      <include>ListeEpisodes</include>
     </control>
+  <control type="group">
+   <!-- <visible>!Window.IsVisible(contextmenu)</visible> -->
   <include>MenuGeneral</include>
+  </control>
        	
 			
     
@@ -658,7 +701,7 @@
       <height>30</height>
       <left>40</left>
       <posy>940</posy>
-      <label>Service : $INFO[Window(Home).Property(IconMixToolsbackend)]</label>
+      <label>IconmixDialogContext : $INFO[Window(Home).Property(IconmixFlagPanelEpisode)]/$INFO[Container(1999).ListItem.DbId]/$INFO[Container(1999).Position]</label>
       <font>exptextacteurs</font>
       <textcolor>FF404040</textcolor>
       <shadowcolor>FF7F7F7F</shadowcolor>
@@ -667,16 +710,16 @@
 		</control>
 		
 		<control type="button">
-		  <width max="900">auto</width>
-      <height>30</height>
-      <left>40</left>
-      <posy>970</posy>
-      <label>Fanart:$INFO[Container(5051).NumItems]/$INFO[Container(5052).NumItems] / DBTYPE=$INFO[Container(1998).NumItems]/$INFO[Container(1998).Label] / Resume=$INFO[Container.Content] / Overlay=$INFO[ListItem.Overlay] / Content=$INFO[Container.Content]</label>
-      <font>exptextacteurs</font>
-      <textcolor>FF404040</textcolor>
-      <shadowcolor>FF7F7F7F</shadowcolor>
-			<textoffsetx>45</textoffsetx>
-			<texturenofocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturenofocus>
+		  <width max="1900">auto</width>
+          <height>30</height>
+          <left>40</left>
+          <posy>970</posy>
+          <label>FileNameAndPath:$INFO[ListItem.DbId] : $INFO[Container(1999).ListItem.Art(season.poster)]</label>
+          <font>exptextacteurs</font>
+          <textcolor>FF404040</textcolor>
+          <shadowcolor>FF7F7F7F</shadowcolor>
+		  <textoffsetx>45</textoffsetx>
+		  <texturenofocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturenofocus>
 		</control>
 		<control type="button">
 		  <width max="900">auto</width>
@@ -689,14 +732,13 @@
       <shadowcolor>FF7F7F7F</shadowcolor>
 			<textoffsetx>45</textoffsetx>
 			<texturenofocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturenofocus>
-      <visible>ListItem.IsFolder</visible>
 		</control>
     
     <!--
     <control type="label">
     <posx>700</posx>
 
-    <label>$INFO[Container.Content][CR][CR]ImdbNumber:$INFO[ListItem.FileNameAndPath][CR]$INFO[ListItem.Icon][CR]$INFO[ListItem.Year][CR]IconMixSaga=$INFO[Window(Home).Property(IconMixSaga)][CR]DBTYPE=$INFO[ListItem.DBType][CR]Rating1999=$INFO[Container(1999).ListItem.Property(Rating)][CR]1991:$INFO[Container(1991).NumItems][CR]1998:$INFO[Container(1998).NumItems][CR]1999:$INFO[Container(1999).NumItems][CR]poster:$INFO[Container(1999).ListItem.Art(poster)][CR]Pposter:$INFO[Container(1999).ListItem.Property(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]DBTYPE=$INFO[Container(1999).ListItem.DBTYPE][CR]Content:$INFO[Container.Content]Pays : $INFO[ListItem.Country][CR]Country1:$INFO[Window(Home).Property(ItemCountry1)]O[CR]Portrait:$INFO[ListItem.Label][CR]$INFO[ListItem.FileNameAndPath][CR]Variable:$VAR[GlobalFanart]]</label>
+    <label>$INFO[Container.Content][CR][CR]ImdbNumber:$INFO[ListItem.FileNameAndPath][CR]$INFO[ListItem.Icon][CR]$INFO[ListItem.Year][CR]IconMixSaga=$INFO[Window(Home).Property(IconmixFlagPanelEpisode)][CR]DBTYPE=$INFO[ListItem.DBType][CR]Rating1999=$INFO[Container(1999).ListItem.Property(Rating)][CR]1991:$INFO[Container(1991).NumItems][CR]1998:$INFO[Container(1998).NumItems][CR]1999:$INFO[Container(1999).NumItems][CR]poster:$INFO[Container(1999).ListItem.Art(poster)][CR]Pposter:$INFO[Container(1999).ListItem.Property(poster)][CR]Banniere:$INFO[ListItem.Art(banner)][CR]logo:$INFO[ListItem.Art(clearlogo)][CR]clearart:$INFO[ListItem.Art(clearart)][CR]disque:$INFO[ListItem.Art(discart)][CR]Thumb:$INFO[ListItem.Art(thumb)][CR]Fanart:$INFO[ListItem.Art(fanart)][CR]DBTYPE=$INFO[Container(1999).ListItem.DBTYPE][CR]Content:$INFO[Container.Content]Pays : $INFO[ListItem.Country][CR]Country1:$INFO[Window(Home).Property(ItemCountry1)]O[CR]Portrait:$INFO[ListItem.Label][CR]$INFO[ListItem.FileNameAndPath][CR]Variable:$VAR[GlobalFanart]]</label>
 
     </control>
     -->

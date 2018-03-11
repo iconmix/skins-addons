@@ -40,8 +40,8 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<texturefocus>ButtonFO2Wide.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+					<texturenofocus>-</texturenofocus> -->
 					<pulseonselect>false</pulseonselect>
 				</control>
 				<control type="button" id="3">
@@ -56,8 +56,8 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<texturefocus>ButtonFO2Wide.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+					<texturenofocus>-</texturenofocus> -->
 					<pulseonselect>false</pulseonselect>
 				</control>
 				<control type="togglebutton" id="4">
@@ -72,8 +72,8 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<texturefocus>ButtonFO2Wide.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+					<texturenofocus>-</texturenofocus> -->
 					<alttexturenofocus border="2">-</alttexturenofocus>
 					<alttexturefocus border="5">ButtonFO2.png</alttexturefocus>
 					<aligny>center</aligny>
@@ -91,8 +91,8 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<texturefocus>ButtonFO2Wide.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+					<texturenofocus>-</texturenofocus> -->
 				</control>
 				<control type="radiobutton" id="7">
 					<description>Hide foreign</description>
@@ -105,8 +105,8 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<texturefocus>ButtonFO2Wide.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+					<texturenofocus>-</texturenofocus> -->
 				</control>
 				<control type="radiobutton" id="8">
 					<description>Hide broken</description>
@@ -119,8 +119,8 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<texturefocus>ButtonFO2Wide.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+					<texturenofocus>-</texturenofocus> -->
 				</control>
 				<control type="button" id="9">
 					<description>Check for updates</description>
@@ -134,8 +134,8 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<texturefocus>ButtonFO2Wide.png</texturefocus>
-					<texturenofocus>-</texturenofocus>
+					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+					<texturenofocus>-</texturenofocus> -->
 				</control>
 				<include>Nav_NowPlaying</include>
 			</control>

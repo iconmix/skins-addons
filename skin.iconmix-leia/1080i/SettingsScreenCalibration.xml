@@ -18,7 +18,7 @@
 			<width>128</width>
 			<height>128</height>
 			<texturefocus>calibrate/CalibrateTopLeft.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturenofocus>-</texturenofocus> -->
 		</control>
 		<control type="mover" id="9">
 			<description>right bottom mover</description>
@@ -27,7 +27,7 @@
 			<width>128</width>
 			<height>128</height>
 			<texturefocus>calibrate/CalibrateBottomRight.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturenofocus>-</texturenofocus> -->
 		</control>
 		<control type="mover" id="10">
 			<description>subtitle position mover</description>
@@ -36,7 +36,7 @@
 			<width>512</width>
 			<height>128</height>
 			<texturefocus>calibrate/CalibrateSubtitles.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturenofocus>-</texturenofocus> -->
 		</control>
 		<control type="resize" id="11">
 			<description>pixel aspect ratio box</description>
@@ -45,7 +45,7 @@
 			<width>256</width>
 			<height>256</height>
 			<texturefocus>calibrate/CalibratePixelRatio.png</texturefocus>
-			<texturenofocus>-</texturenofocus>
+			<texturenofocus>-</texturenofocus> -->
 		</control>
 		<control type="label" id="2">
 			<description>coordinates label</description>

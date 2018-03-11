@@ -33,7 +33,7 @@
                     <top>110</top>
                     <width>370</width>
                     <height>582</height>
-                    <texture border="40">ButtonFO2Wide.png</texture>
+                    <texture border="40" colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
                 </control>
                 <control type="grouplist" id="3">
                     <description>Controller types grouplist</description>
@@ -53,8 +53,8 @@
                     <align>center</align>
                     <aligny>center</aligny>
 					<font>METF_DialogLarge</font>
-                    <texturefocus colordiffuse="button_focus">ButtonFO2Wide.png</texturefocus>
-                    <texturenofocus>ButtonFO2Wide.png</texturenofocus>
+                    <texturefocus colordiffuse="button_focus" colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+                    <texturenofocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturenofocus> -->
                 </control>
                 <control type="gamecontroller" id="31">
                     <left>390</left>
@@ -80,7 +80,7 @@
                     <top>110</top>
                     <width>370</width>
                     <height>582</height>
-                    <texture border="40">ButtonFO2Wide.png</texture>
+                    <texture border="40" colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
                 </control>
                 <control type="grouplist" id="5">
                     <description>Feature types grouplist</description>
@@ -115,8 +115,8 @@
 						<textcolor>TextNF</textcolor>
 						<focusedcolor>DialogTextFO</focusedcolor>
 						<disabledcolor>TextDisabled</disabledcolor>
-						<texturefocus>ButtonFO2Wide.png</texturefocus>
-						<texturenofocus>-</texturenofocus>
+						<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+						<texturenofocus>-</texturenofocus> -->
 						<pulseonselect>false</pulseonselect>
 					</control>
 				<control type="grouplist" id="9001">
@@ -137,8 +137,8 @@
 						<textcolor>TextNF</textcolor>
 						<focusedcolor>DialogTextFO</focusedcolor>
 						<disabledcolor>TextDisabled</disabledcolor>
-						<texturefocus>ButtonFO2Wide.png</texturefocus>
-						<texturenofocus>-</texturenofocus>
+						<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+						<texturenofocus>-</texturenofocus> -->
 						<pulseonselect>false</pulseonselect>
 					</control>
 					<control type="button" id="19">
@@ -153,8 +153,8 @@
 						<textcolor>TextNF</textcolor>
 						<focusedcolor>DialogTextFO</focusedcolor>
 						<disabledcolor>TextDisabled</disabledcolor>
-						<texturefocus>ButtonFO2Wide.png</texturefocus>
-						<texturenofocus>-</texturenofocus>
+						<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+						<texturenofocus>-</texturenofocus> -->
 						<pulseonselect>false</pulseonselect>
 					</control>
 					<control type="button" id="18">
@@ -169,8 +169,8 @@
 						<textcolor>TextNF</textcolor>
 						<focusedcolor>DialogTextFO</focusedcolor>
 						<disabledcolor>TextDisabled</disabledcolor>
-						<texturefocus>ButtonFO2Wide.png</texturefocus>
-						<texturenofocus>-</texturenofocus>
+						<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+						<texturenofocus>-</texturenofocus> -->
 						<pulseonselect>false</pulseonselect>
 					</control>
 					<control type="button" id="17">
@@ -185,8 +185,8 @@
 						<textcolor>TextNF</textcolor>
 						<focusedcolor>DialogTextFO</focusedcolor>
 						<disabledcolor>TextDisabled</disabledcolor>
-						<texturefocus>ButtonFO2Wide.png</texturefocus>
-						<texturenofocus>-</texturenofocus>
+						<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+						<texturenofocus>-</texturenofocus> -->
 						<pulseonselect>false</pulseonselect>
 					</control>
 				</control>

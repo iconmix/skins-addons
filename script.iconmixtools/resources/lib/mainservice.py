@@ -69,15 +69,20 @@ class Player(xbmc.Player):
 
   def __init__(self):
       self.windowhome = xbmcgui.Window(10000)
+      self.windowvideo = xbmcgui.Window(10025)
       self.DureeTotale=None
       self.PositionLecture=0
       self.ItemID=None      
       self.ItemType=None
       self.noterfilm=None
       self.noterserie=None
+      self.currentepisode=None
       xbmc.Player.__init__(self,0)
 
   def onPlayBackStarted(self):
+    
+     
+           
       try:
         self.DureeTotale = int(self.getTotalTime())
       except:
@@ -89,16 +94,17 @@ class Player(xbmc.Player):
         self.DureeLue=int(self.PositionLecture)
       except:
         self.DureeLue=0
-      if ((self.DureeTotale-20)<=self.DureeLue):
-        #logMsg("ARRET DE LECTURE (%s)(%s)(%s)(%s)(%s)(%s)(%s)" %(self.DureeLue,self.DureeTotale,Annonce,self.ItemID,self.ItemType,self.noterfilm,self.noterserie),0)
-        if (self.ItemType=="Movie" and self.noterfilm=="false") or (self.ItemType=="Episode" and self.noterserie=="false") :
-          self.ItemID=None
-        if Annonce!="":
-          xbmc.PlayList().clear()  
-        if self.ItemID:
-           self.ui = dialog_Notation('notation.xml', ADDON_PATH, 'default','1080i',dbid=self.ItemID,TypeVideo=self.ItemType)
-           ret=self.ui.doModal()
-           del self.ui 
+      if self.DureeTotale and self.DureeLue:
+          if ((self.DureeTotale-20)<=self.DureeLue):
+            #logMsg("ARRET DE LECTURE (%s)(%s)(%s)(%s)(%s)(%s)(%s)" %(self.DureeLue,self.DureeTotale,Annonce,self.ItemID,self.ItemType,self.noterfilm,self.noterserie),0)
+            if (self.ItemType=="Movie" and self.noterfilm=="false") or (self.ItemType=="Episode" and self.noterserie=="false") :
+              self.ItemID=None
+            if Annonce!="":
+              xbmc.PlayList().clear()  
+            if self.ItemID:
+               self.ui = dialog_Notation('notation.xml', ADDON_PATH, 'default','1080i',dbid=self.ItemID,TypeVideo=self.ItemType)
+               ret=self.ui.doModal()
+               del self.ui 
       self.windowhome.clearProperty('annonceencours')
       self.windowhome.clearProperty('IconMixTrailer')
       self.PositionLecture=0
@@ -107,6 +113,7 @@ class Player(xbmc.Player):
       self.ItemType=None       
 
   def onPlayBackStopped(self):
+      #logMsg("Arret de lecture")
       self.Notation()
       
       
@@ -122,11 +129,8 @@ class dialog_ShowInfo(xbmcgui.WindowXMLDialog):
         self.listitem = kwargs.get('listitem')
         self.acteurs = kwargs.get('acteurs')
         self.mainservice = kwargs.get('mainservice')
-        if self.windowhome.getProperty('IconmixShowInfo')=="1":
-         self.IconmixShowInfo=1
-        if self.windowhome.getProperty('IconmixShowInfo')=="2":
-         self.IconmixShowInfo=2
-       
+        self.IconmixShowInfo=self.windowhome.getProperty('IconmixShowInfo')
+        
 
     def onInit(self):
         self.Ajour=None
@@ -622,10 +626,12 @@ class MainService:
         
           #-------------------------- FILMS/SERIES/ACTEURS --------------------------
           #if not self.ui:
-          if self.windowhome.getProperty('IconmixShowInfo')=="55":
+          IconmixShowInfo=self.windowhome.getProperty('IconmixShowInfo')
+          if IconmixShowInfo=="55":
             #logMsg("gogo gadget au prout !")
             #afficher info acteur/directeur direct
             self.windowhome.clearProperty('IconmixShowInfo')
+            IconmixShowInfo=None
             ContainerIDActor=None
             if xbmc.getCondVisibility("Control.IsVisible(55)"):  #liste            
               ContainerIDActor=55
@@ -659,24 +665,24 @@ class MainService:
               
             
           
-          if self.windowhome.getProperty('IconmixShowInfo')=="1" or self.windowhome.getProperty('IconmixShowInfo')=="2" :
-            IconMixShowInfo=self.windowhome.getProperty('IconmixShowInfo')
+          if IconmixShowInfo=="1" or IconmixShowInfo=="2" :
             DBKODI=None
-            if IconMixShowInfo=="1":
+            if IconmixShowInfo=="1":
               ContainerID=1999
-              
-            if IconMixShowInfo=="2":
+            
+                
+            if IconmixShowInfo=="2":
               TypeInfo=xbmc.getInfoLabel("Container(1998).ListItem.Property(DbType)")
               ContainerID=5051
               DBKODI=xbmc.getInfoLabel("Container(%d).ListItem.Property(DBID)" %(ContainerID) )
               DBTYPE=xbmc.getInfoLabel("Container(%d).ListItem.DbType" %(ContainerID) )
               TMDBNUMBER=xbmc.getInfoLabel("Container(%d).ListItem.Property(TMDBNUMBER)" %(ContainerID) )
             
-              
+            logMsg("IconmixShowInfo (%s)" %(IconmixShowInfo))  
             ItemListe=self.CreationItemInfo(DBKODI ,TMDBNUMBER,ContainerID )           
             if ItemListe:
                   ListeActeursInf=[]
-                  if IconMixShowInfo=="1":
+                  if IconmixShowInfo=="1":
                     ListeActeurs=self.GetControl(self.windowvideonav,1998)
                     if ListeActeurs:
                       max=ListeActeurs.size()
@@ -684,7 +690,7 @@ class MainService:
                       while cpt<max:
                         ListeActeursInf.append(ListeActeurs.getListItem(cpt))
                         cpt=cpt+1
-                  if IconMixShowInfo=="2":
+                  if IconmixShowInfo=="2":
                     ListeActeursInf=utils.getCasting(DBTYPE,DBKODI,1,TMDBNUMBER) 
                       
                  
@@ -774,10 +780,10 @@ class MainService:
                            
                                                     
                            
-                           if xbmc.getCondVisibility("Window.IsVisible(12901)"): #videoplayer
+                           if xbmc.getCondVisibility("Window.IsVisible(12901)"): #videoplayer <videoosd.xml>
                               MiseAjour="3"
                               self.previousitemPlayer = self.selecteditem
-                           if xbmc.getCondVisibility("Window.IsVisible(10142)") :#videoplayer
+                           if xbmc.getCondVisibility("Window.IsVisible(10142)") :#videoplayer <DialogFullScreenInfo.xml>
                               MiseAjour="4"
                               self.previousitemPlayer = self.selecteditem
                                
@@ -1019,6 +1025,23 @@ class MainService:
                                    else:
                                     self.TvSeason=""
                                     utils.getepisodes(int(self.selecteditem),None,self.DBTYPE)
+                                    #-------------------------- affichage des episodes de la série ------------------
+                                    """
+                                    ListeEpisodes=self.GetControl(self.windowvideonav,1999)
+                                    if ListeEpisodes:
+                                      try:
+                                        #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetEpisodes","params":{"tvshowid":39,"properties":["cast","episode","firstaired","originaltitle","productioncode","rating","ratings","season","seasonid","showtitle","specialsortepisode","specialsortseason","tvshowid","uniqueid","userrating"]},"id":1}
+                                        ListeItemx =utils.GetEpisodesKodi(int(self.selecteditem),True)
+                                      except:
+                                        ListeItemx=None
+                                      ListeEpisodes.reset()
+                                      if ListeItemx:
+                                           ListeEpisodes.setStaticContent(ListeItemx)  
+                                    
+                                    status=""
+                                    """
+                                    #--------------------------------------------------------------------------------
+                                    
                                      
                                 if self.DBTYPE=="episode" and xbmc.getCondVisibility("Skin.HasSetting(CheckSeries)"):
                                      TvSh=xbmc.getInfoLabel("ListItem.TVShowTitle") 
@@ -1028,7 +1051,7 @@ class MainService:
                                        if TvSe!=self.TvSeason or TvSh!=self.TvShow : 
                                          self.windowhome.clearProperty('IconMixEpSa')
                                          self.windowhome.clearProperty('IconMixEpSaKodi')        
-                                         self.EpSa,self.EpSaKodi=utils.getepisodes(int(TvId),int(TvSe),self.DBTYPE)                                           
+                                         self.EpSa,self.EpSaKodi,Poster=utils.getepisodes(int(TvId),int(TvSe),self.DBTYPE)                                           
                                          if self.EpSa>=0:                                     
                                            self.windowhome.setProperty('IconMixEpSa',str(self.EpSa)) 
                                            self.windowhome.setProperty('IconMixEpSaKodi',str(self.EpSaKodi))                                      

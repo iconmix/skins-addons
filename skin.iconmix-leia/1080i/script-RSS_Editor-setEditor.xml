@@ -84,7 +84,7 @@
 						<width>590</width>
 						<height>42</height>
 						<aligny>center</aligny>
-						<texture>ButtonFo.png</texture>
+						<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 						<visible>Control.HasFocus(10) | Control.HasFocus(14) | Control.HasFocus(11)</visible>
 					</control>
 					<control type="label">

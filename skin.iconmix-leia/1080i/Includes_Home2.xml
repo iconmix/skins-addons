@@ -634,7 +634,7 @@
 	
 				<control type="image">
 					<posy>60</posy>
-					<posx>110</posx>
+					<posx>125</posx>
 					<width>80</width>
 					<height>80</height>
 					<texture>$INFO[ListItem.Icon]</texture>
@@ -643,7 +643,7 @@
 				</control>
 				<control type="image">
 					<posy>90</posy>
-					<posx>110</posx>
+					<posx>125</posx>
 					<width>80</width>
 					<height>80</height>
 					<texture>$INFO[ListItem.Icon]</texture>

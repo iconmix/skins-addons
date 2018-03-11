@@ -1767,7 +1767,7 @@ msgid "Advanced filter"
 msgstr "Filtre avancé"
 
 msgctxt "#32013"
-msgid "Show "
+msgid "Show"
 msgstr "Afficher"
 
 
@@ -1782,4 +1782,11 @@ msgstr "Bandes-Annonces plein écran"
 msgctxt "#32016"
 msgid "Back"
 msgstr "Dossier précédent"
+
+msgctxt "#32017"
+msgid "Access to all episodes"
+msgstr "Accéder à tous les épisodes"
+
+
+
 

@@ -797,51 +797,98 @@
               <visible>!String.IsEqual(Container(5051).ListItem.Property(dbtype),movie)</visible>
             </control>
             <!--- aide --->
-             <control type="image"> 
-              <width>600</width>
-              <top>65</top>
-              <left>450</left>
-              <height>60</height>
-              <colordiffuse>CouleurActeurs</colordiffuse>
-              <bordersize>8</bordersize>
-              <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
-              <texture>frames/fondinfogris.png</texture>
-              <aspectratio scalediffuse="false">stretch</aspectratio>
-            </control>
-            <control type="grouplist">
-              <visible>[Control.HasFocus(7779)|Control.HasFocus(7778)|Control.HasFocus(505)]</visible>
-              <orientation>horizontal</orientation>
-              <width>550</width>
-              <left>475</left>
-              <top>73</top>
-              <height>40</height>
-              <aligny>center</aligny>
-               <align>left</align>
-              <control type="image">
-                <width>50</width>
+            <control type="group">
+              <animation type="Conditional"  condition="!String.IsEmpty(Container(5051).ListItem.Plot)" reversible="false">
+                <effect type="slide" end="0,65"   time="500" delay="500" />
+              </animation>
+              <control type="image"> 
+                <width>600</width>
+                <top>65</top>
+                <left>450</left>
+                <height>60</height>
+                <colordiffuse>CouleurActeurs</colordiffuse>
+                <bordersize>8</bordersize>
+                <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
+                <texture>frames/fondinfogris.png</texture>
+                <aspectratio scalediffuse="false">stretch</aspectratio>
+              </control>
+              <control type="grouplist">
+                <visible>[Control.HasFocus(7779)|Control.HasFocus(7778)|Control.HasFocus(505)]</visible>
+                <orientation>horizontal</orientation>
+                <width>550</width>
+                <left>475</left>
+                <top>73</top>
+                <height>40</height>
                 <aligny>center</aligny>
-                    <texture>buttons/okba.png</texture>
-                    <aspectratio>keep</aspectratio>
-                  </control>
-                  <control type="label">
-                    <aligny>center</aligny>
-                    <width>250</width>
-                    <label>$LOCALIZE[31334]</label>
-                  </control>
-                 <control type="image">
-                  <aligny>center</aligny>
+                 <align>left</align>
+                <control type="image">
                   <width>50</width>
-                    <texture>info.png</texture>
-                    <aspectratio>keep</aspectratio>
-                  </control>
-                  <control type="label">
+                  <aligny>center</aligny>
+                      <texture>buttons/okba.png</texture>
+                      <aspectratio>keep</aspectratio>
+                    </control>
+                    <control type="label">
+                      <aligny>center</aligny>
+                      <width>250</width>
+                      <label>$LOCALIZE[31334]</label>
+                      <visible>System.HasAddon(script.iconmixtools)+!Player.HasVideo</visible>
+
+                    </control>
+                    <control type="label">
+                      <visible>System.HasAddon(script.iconmixtools)+Player.HasVideo</visible>
+                      <aligny>center</aligny>
+                      <width>250</width>
+                      <label>$LOCALIZE[14116]</label>
+                    </control>
+                   <control type="image">
+                    <visible>System.HasAddon(script.iconmixtools)+!Player.HasVideo</visible>
                     <aligny>center</aligny>
-                    <width>250</width>
-                    <label>$LOCALIZE[14116]</label>
-                  </control>
-              
+                    <width>50</width>
+                      <texture>info.png</texture>
+                      <aspectratio>keep</aspectratio>
+                    </control>
+                    <control type="label">
+                      <visible>System.HasAddon(script.iconmixtools)+!Player.HasVideo</visible>
+                      <aligny>center</aligny>
+                      <width>250</width>
+                      <label>$LOCALIZE[14116]</label>
+                    </control>
+                
+              </control>
             </control>
-            
+            <!---- PLOT ----->
+             <control type="group">
+              <visible>!String.IsEmpty(Container(5051).ListItem.Plot)</visible>
+              <width>1620</width>
+                <top>65</top>
+                <left>-70</left>
+                <height>55</height>
+              <control type="image"> 
+                
+                <colordiffuse>CouleurActeurs</colordiffuse>
+                <bordersize>8</bordersize>
+                <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
+                <texture>frames/fondinfogris.png</texture>
+                <aspectratio scalediffuse="false">stretch</aspectratio>
+              </control>
+              <control type="fadelabel">
+        				<resetonlabelchange>true</resetonlabelchange>
+        				<scrollspeed>80</scrollspeed>
+        				<pauseatend>1500</pauseatend>
+        				<scrollout>false</scrollout>
+        				<posy>10</posy>
+        				<left>20</left>
+        				<width>1570</width>
+        				<height>20</height>
+        				<aligny>top</aligny>
+        				<align>center</align>
+        				<font>exptext</font>
+        				<textcolor>lightgrey</textcolor>
+        				<textoffsetx>1450</textoffsetx>
+        				<label>$INFO[Container(5051).ListItem.Plot]</label>
+        				<scrollout>false</scrollout>
+        			</control>
+             </control>
           </control>
 
           <include>BioActeur</include>
@@ -1028,7 +1075,8 @@
     <onback condition="Player.HasVideo+[Window.IsVisible(12901)|Window.IsVisible(10142)]">2001</onback>
     <onback condition="String.IsEqual(Window(home).Property(IconmixShowInfo),56)|[String.IsEmpty(Window(home).Property(IconmixShowInfo))+!Window.IsVisible(movieinformation)+!Window.IsVisible(12901)+!Window.IsVisible(10142)+!Control.IsVisible(1999)]">55</onback>
     <onback condition="Window.IsVisible(movieinformation)|[!String.IsEmpty(Window(home).Property(IconmixShowInfo))+!String.IsEqual(Window(home).Property(IconmixShowInfo),56)]">7003</onback>
-    <onback condition="String.IsEmpty(Window(home).Property(IconmixShowInfo))+Control.IsVisible(1999)">2999</onback>
+    <onback condition="String.IsEmpty(Window(home).Property(IconmixShowInfo))+Control.IsVisible(1999)+!Control.IsVisible(2998)">2999</onback>
+    <onback condition="String.IsEmpty(Window(home).Property(IconmixShowInfo))+Control.IsVisible(2998)">55</onback>
     <onback>Action(firstpage)</onback>
     
     
@@ -1037,7 +1085,8 @@
     <onup>SetProperty(ActeurVideoReset,1,Home)</onup>
     <onup condition="String.IsEqual(Window(home).Property(IconmixShowInfo),56)|[!Window.IsVisible(movieinformation)+!Window.IsVisible(12901)+!Window.IsVisible(10142)+!Control.IsVisible(1999)+String.IsEmpty(Window(home).Property(IconmixShowInfo))]">55</onup>
     <onup condition="Window.IsVisible(movieinformation)|[!String.IsEmpty(Window(home).Property(IconmixShowInfo))+!String.IsEqual(Window(home).Property(IconmixShowInfo),56)]">7003</onup>
-    <onup condition="String.IsEmpty(Window(home).Property(IconmixShowInfo))+Control.IsVisible(1999)">2999</onup>
+    <onup condition="String.IsEmpty(Window(home).Property(IconmixShowInfo))+Control.IsVisible(1999)+!Control.IsVisible(2998)">2999</onup>
+    <onup condition="String.IsEmpty(Window(home).Property(IconmixShowInfo))+Control.IsVisible(2998)">55</onup>
     <onleft>Control.Move(1998,-1)</onleft>
     <onright>Control.Move(1998,1)</onright>
   </control>
@@ -1217,6 +1266,7 @@
 
   <onclick condition="!Player.HasVideo">RunScript(script.iconmixtools,trailer=True)</onclick>
   <onclick condition="!Player.HasVideo">SetProperty(IconmixTrailer,1,Home)</onclick>
+  <onclick condition="Player.HasVideo">SetProperty(IconmixShowInfo,2,Home)</onclick>
   <oninfo>SetProperty(IconmixShowInfo,2,Home)</oninfo> 
   <onback>SetProperty(ActeurVideoReset,1,Home)</onback>
   <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>

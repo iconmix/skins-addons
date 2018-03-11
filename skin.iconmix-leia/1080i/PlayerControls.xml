@@ -46,7 +46,7 @@
 				<width>46</width>
 				<label></label>
 				<texturefocus border="2">osd/osd_button_prev_fo.png</texturefocus>
-				<texturenofocus border="2">osd/osd_button_prev_nf.png</texturenofocus>
+				<texturenofocus border="2">osd/osd_button_prev_nf.png</texturenofocus> 
 				<onclick>PlayerControl(Previous)</onclick>
 			</control>
 			<control type="button" id="403">
@@ -61,7 +61,7 @@
 				<width>46</width>
 				<label></label>
 				<texturefocus border="2">osd/osd_button_rew_fo.png</texturefocus>
-				<texturenofocus border="2">osd/osd_button_rew_nf.png</texturenofocus>
+				<texturenofocus border="2">osd/osd_button_rew_nf.png</texturenofocus> 
 				<onclick>PlayerControl(rewind)</onclick>
 			</control>
 			<control type="togglebutton" id="404">
@@ -76,7 +76,7 @@
 				<width>46</width>
 				<label></label>
 				<texturefocus border="2">osd/osd_button_pause_fo.png</texturefocus>
-				<texturenofocus border="2">osd/osd_button_pause_nf.png</texturenofocus>
+				<texturenofocus border="2">osd/osd_button_pause_nf.png</texturenofocus> 
 				<usealttexture>Player.Paused | Player.Forwarding | Player.Rewinding</usealttexture>
 				<alttexturefocus border="2">osd/osd_button_play_fo.png</alttexturefocus>
 				<alttexturenofocus border="2">osd/osd_button_play_nf.png</alttexturenofocus>
@@ -96,7 +96,7 @@
 				<width>46</width>
 				<label></label>
 				<texturefocus border="2">osd/osd_button_stop_fo.png</texturefocus>
-				<texturenofocus border="2">osd/osd_button_stop_nf.png</texturenofocus>
+				<texturenofocus border="2">osd/osd_button_stop_nf.png</texturenofocus> 
 				<onclick>PlayerControl(stop)</onclick>
 			</control>
 			<control type="button" id="406">
@@ -111,7 +111,7 @@
 				<width>46</width>
 				<label></label>
 				<texturefocus border="2">osd/osd_button_ff_fo.png</texturefocus>
-				<texturenofocus border="2">osd/osd_button_ff_nf.png</texturenofocus>
+				<texturenofocus border="2">osd/osd_button_ff_nf.png</texturenofocus> 
 				<onclick>PlayerControl(forward)</onclick>
 			</control>
 			<control type="button" id="407">
@@ -126,7 +126,7 @@
 				<width>46</width>
 				<label></label>
 				<texturefocus border="2">osd/osd_button_next_fo.png</texturefocus>
-				<texturenofocus border="2">osd/osd_button_next_nf.png</texturenofocus>
+				<texturenofocus border="2">osd/osd_button_next_nf.png</texturenofocus> 
 				<onclick>PlayerControl(Next)</onclick>
 			</control>
 			<control type="button" id="408">
@@ -141,7 +141,7 @@
 				<width>46</width>
 				<label></label>
 				<texturefocus>-</texturefocus>
-				<texturenofocus>-</texturenofocus>
+				<texturenofocus>-</texturenofocus> 
 				<onclick>PlayerControl(repeat)</onclick>
 			</control>
 			<control type="image">
@@ -210,7 +210,7 @@
 				<width>46</width>
 				<label></label>
 				<texturefocus border="2">osd/osd_button_random_fo.png</texturefocus>
-				<texturenofocus border="2">osd/osd_button_random_nf.png</texturenofocus>
+				<texturenofocus border="2">osd/osd_button_random_nf.png</texturenofocus> 
 				<usealttexture>Playlist.IsRandom</usealttexture>
 				<alttexturefocus border="2">osd/osd_button_random_on_fo.png</alttexturefocus>
 				<alttexturenofocus border="2">osd/osd_button_random_on_nf.png</alttexturenofocus>

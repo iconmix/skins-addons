@@ -66,7 +66,7 @@
 			<font>METF_ContextValue</font>
 			<align>center</align>
 			<aligny>center</aligny>
-			<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
+			<texturefocus border="1" colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
 			<onup>25</onup>
 			<onleft>25</onleft>
 			<onright>22</onright>
@@ -82,7 +82,7 @@
 			<font>METF_ContextValue</font>
 			<align>center</align>
 			<aligny>center</aligny>
-			<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
+			<texturefocus border="1" colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
 			<onup>21</onup>
 			<onleft>21</onleft>
 			<onright>23</onright>
@@ -98,7 +98,7 @@
 			<font>font12_title</font>
 			<align>center</align>
 			<aligny>center</aligny>
-			<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
+			<texturefocus border="1" colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
 			<onup>22</onup>
 			<onleft>22</onleft>
 			<onright>24</onright>
@@ -114,7 +114,7 @@
 			<font>METF_ContextValue</font>
 			<align>center</align>
 			<aligny>center</aligny>
-			<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
+			<texturefocus border="1" colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
 			<onup>23</onup>
 			<onleft>23</onleft>
 			<onright>25</onright>
@@ -129,7 +129,7 @@
 			<height>35</height>
 			<align>center</align>
 			<aligny>center</aligny>
-			<texturefocus border="1">ButtonFO2Wide.png</texturefocus>
+			<texturefocus border="1" colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
 			<font>METF_ContextValue</font>
 			<onup>24</onup>
 			<onleft>24</onleft>

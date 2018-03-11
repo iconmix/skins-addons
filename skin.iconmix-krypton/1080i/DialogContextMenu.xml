@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
   <defaultcontrol>1000</defaultcontrol>
-  <onload>SetFocus(2106)</onload>
+  <onload condition="Control.IsVisible(2104)">SetFocus(2104)</onload>
+  <onload condition="Control.IsVisible(2105)">SetFocus(2105)</onload>
+   <onload>SetProperty(IconmixDialogContext,,Home)</onload>
   <animation type="WindowOpen" reversible="false">
   <!-- <effect type="zoom" start="80" end="100" center="auto" easing="out" tween="back" time="300" /> -->
   <effect type="slide" start="-640" end="0" easing="out" tween="back" time="300" />
@@ -20,9 +22,15 @@
 </coordinates>
 
 <controls>
- 
+  <control type="group">
+      <posy>0</posy>
+      <left>35</left>
+    <include>PlayListPersoContext</include>
+    </control>
+  
   <control type="group">
     <top>200</top>
+    
     
     <control type="image" id="999">
       <description>background image</description>
@@ -39,10 +47,24 @@
       <left>35</left>
       <top>35</top>
       <width>490</width>
+      <onleft>SetProperty(IconmixDialogContext,,Home)</onleft>
+      <onback>SetProperty(IconmixDialogContext,,Home)</onback>
       <onleft>Close</onleft>
       <onright>Close</onright>
+      <onfocus>SetFocus(2004)</onfocus>
+      
       <height max="670">auto</height>
       <itemgap>2</itemgap>
+      <control type="button" id="2104"> <!--- informations acteur/realisateur.... -->
+            <include>MonBoutonCommun2</include>
+            <label>$LOCALIZE[32017]</label>
+            <onright>Close</onright>
+            <onright>SetFocus(1999)</onright>
+            <onclick>SetFocus(1999)</onclick>
+            <onfocus>SetProperty(IconmixDialogContext,,Home)</onfocus>  
+            <visible>String.IsEqual(ListItem.DbType,tvshow)</visible>
+          </control>
+      
       <control type="button" id="2105"> <!--- informations acteur/realisateur.... -->
             <include>MonBoutonCommun2</include>
             <label>$LOCALIZE[32014]</label>
@@ -53,12 +75,22 @@
       
       <control type="button" id="2106">
         <description>menugeneral</description>
-        <include>MonBoutonCommun2</include>
+        
         <label>31833</label>
-        <onclick>SetFocus(7000)</onclick>
+        <onfocus>SetProperty(IconmixDialogContext,1,Home)</onfocus>
+        <onup>SetProperty(IconmixDialogContext,,Home)</onup>
+        <ondown>SetProperty(IconmixDialogContext,,Home)</ondown>
+        
+        <onright>Close</onright> 
+        <onright>SetProperty(IconmixDialogContext,2,Home)</onright>
+        <onright>Action(Menu,10025)</onright>
+        
+        <onclick>Action(Menu,10025)</onclick>
+        <include>MonBoutonCommun2</include>
       </control>
  <control type="button" id="2107">        
-        <onright>7111</onright>        
+        <onright>7111</onright>    
+        <onfocus>SetProperty(IconmixDialogContext,,Home)</onfocus>    
         <include>MonBoutonCommun2</include>
         <label>31253</label>
 
@@ -67,12 +99,14 @@
   <control type="button" id="8">
             <description>Search</description>
             <label>137</label>
+            <onfocus>SetProperty(IconmixDialogContext,,Home)</onfocus>  
             <include>MonBoutonCommun2</include>
             <onclick>VideoLibrary.Search</onclick>
           </control>
       
        <control type="button" id="2108">
-        <include>MonBoutonCommun2</include>        
+        <include>MonBoutonCommun2</include> 
+        <onfocus>SetProperty(IconmixDialogContext,,Home)</onfocus>         
         <visible>System.HasAddon(script.iconmixtools)+!Player.HasVideo+ [Container.Content(movies) |Container.Content(tvshows)|Container.Content(seasons)|Container.Content(episodes)]</visible>
         <label>$LOCALIZE[137] $LOCALIZE[20410]</label>
         <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>       
@@ -80,15 +114,11 @@
      
     </control>
     <control type="button" id="1000">
-
+      <onfocus>SetProperty(IconmixDialogContext,,Home)</onfocus>  
       <include>MonBoutonCommun2</include>
     </control>
     
   </control>
-  <control type="group">
-      <posy>0</posy>
-      <left>35</left>
-    <include>PlayListPersoContext</include>
-    </control>
+   
 </controls>
 </window>

@@ -106,7 +106,8 @@ l            <ondown>2101</ondown>
           </control>
         </control>
         <control type="group" id="2103">
-          
+                   <visible>System.HasAddon(script.iconmixtools)+!Player.HasVideo</visible>
+
           <include>videoinfobuttonfond</include>
            
           <control type="grouplist" id="442">

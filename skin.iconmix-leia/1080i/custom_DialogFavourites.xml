@@ -9,7 +9,7 @@
 			<height>1</height>
 			<label></label>
 			<font>-</font>
-			<texturenofocus>-</texturenofocus>
+			<texturenofocus>-</texturenofocus> -->
 			<texturefocus>-</texturefocus>
 			<onfocus>RunScript(script.favourites,playlists=play)</onfocus>
 			<onfocus>450</onfocus>
@@ -26,7 +26,7 @@
 				<posy>158</posy>
 				<width>840</width>
 				<height>38</height>
-				<texture>ButtonFo.png</texture>
+				<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 				<animation effect="fade" start="100" end="70" condition="True">Conditional</animation>
 			</control>
 			<control type="label">
@@ -84,7 +84,7 @@
 						<height>38</height>
 						<align>left</align>
 						<aligny>center</aligny>
-						<texture>ButtonFo.png</texture>
+						<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 					</control>
 					<control type="label">
 						<posx>20</posx>

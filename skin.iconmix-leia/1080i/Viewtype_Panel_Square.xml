@@ -141,7 +141,7 @@
 					</control>
 				</focusedlayout> 
 			</control>
-			<!-- Fanart Image -->
+			<!-- Fanart Image 
 			<control type="group">
 				<include>Animation_ZoomInZoomOut</include>
 				<include>Animation_HiddenByInfo</include>
@@ -182,7 +182,7 @@
 				
 				
 			</control>
-		
+		-->
 			<!-- Browser label and flags 
 			
 			<include>ScrollBar_Vertical</include>-->

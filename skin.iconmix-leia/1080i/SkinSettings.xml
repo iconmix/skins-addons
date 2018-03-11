@@ -9,9 +9,18 @@
   <onload condition="[Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuIconBobine)]">Skin.ToggleSetting(MenuIconBobine)</onload>
 
   <controls>
-
+    
     <control type="group">
       <include>Global_Background</include>
+      <control type="image">
+        <top>-200</top>
+      <left>1300</left>
+      <width>620</width>
+      <bordersize>20</bordersize>
+							<bordertexture border="20" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+      <texture>$VAR[PreviewSetting]</texture>
+      <aspectratio>keep</aspectratio>
+    </control>
       <control type="group">
         <include>Animation_FadedByMenu</include>
         <include>Animation_OpenCloseFade</include>
@@ -52,7 +61,7 @@
               <height>38</height>
               <align>left</align>
               <aligny>center</aligny>
-              <texture>ButtonFO2Wide.png</texture>
+              <texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
               <animation effect="fade" start="100" end="50" condition="!Control.HasFocus(9000)">Conditional</animation>
             </control>
             <control type="label">
@@ -87,10 +96,10 @@
               <onclick>noop</onclick>
             </item>
 
-            <!--
-            <item id="5">
-            <description>View Types</description>
-            <label>$LOCALIZE[31440]</label>
+            <!-- --->
+            <item id="4">
+            <description>Polices</description>
+            <label>$LOCALIZE[13303]</label>
             <onclick>noop</onclick>
             </item>
             -->
@@ -352,12 +361,7 @@
             <scrolltime>0</scrolltime>
             <onleft>9000</onleft>
             <onright>9000</onright>
-            <control type="radiobutton" id="502">
-              <include>SettingsLabel</include>
-              <label>$LOCALIZE[31481]</label>
-              <onclick>Skin.ToggleSetting(CacheFond)</onclick>
-              <selected>Skin.HasSetting(CacheFond)</selected>
-            </control>
+            
 
 
             <control type="radiobutton" id="503">
@@ -506,7 +510,7 @@
         </control>-->
         <!-- Polices Settings -->
         <control type="grouplist" id="9014">
-          <visible>Container(9000).Hasfocus(14)</visible>
+          <visible>Container(9000).Hasfocus(4)</visible>
           <posx>0</posx>
           <posy>0</posy>
           <width>840</width>
@@ -515,17 +519,69 @@
           <scrolltime>0</scrolltime>
           <onleft>9000</onleft>
           <onright>9000</onright>
-          <control type="button" id="105">
+          <control type="label" id="198">
             <include>SettingsLabel</include>
-            <label>Synopsys</label>
-            <label2>EXAMPLE</label2>
-            <onclick>noop</onclick>
+            <label>$LOCALIZE[369]</label>
           </control>
-          <control type="button" id="106">
+          <control type="image" id="199">
+          <include>Settings_Line</include>
+          </control>
+           <control type="radiobutton" id="200">
+            
+            <label>Indiana Jones</label>
+            <height>50</height>
+            <font>TitrePolice1</font>
             <include>SettingsLabel</include>
-            <label>Synopsys large</label>
-            <label2>EXAMPLE</label2>
-            <onclick>noop</onclick>
+            <onclick>Skin.SetString(titrepolice,1)</onclick>
+            <selected>String.IsEqual(Skin.String(titrepolice),1)|String.IsEmpty(Skin.String(titrepolice))</selected>
+          </control>
+          <control type="radiobutton" id="201">
+            <height>50</height>
+            <label>Indiana Jones</label>
+            <font>TitrePolice2</font>
+            <include>SettingsLabel</include>
+            <onclick>Skin.SetString(titrepolice,2)</onclick>
+            <selected>String.IsEqual(Skin.String(titrepolice),2)</selected>
+          </control>
+          <control type="radiobutton" id="202">
+           <height>50</height>
+            <label>Indiana Jones</label>
+            <font>TitrePolice3</font>
+            <include>SettingsLabel</include>
+            <onclick>Skin.SetString(titrepolice,3)</onclick>
+            <selected>String.IsEqual(Skin.String(titrepolice),3)</selected>
+          </control>
+          <control type="radiobutton" id="203">
+            <height>50</height>
+            <label>Indiana Jones</label>
+            <font>TitrePolice4</font>
+            <include>SettingsLabel</include>
+            <onclick>Skin.SetString(titrepolice,4)</onclick>
+            <selected>String.IsEqual(Skin.String(titrepolice),4)</selected>
+          </control>
+          <control type="radiobutton" id="204">
+            <height>50</height>
+            <label>Indiana Jones</label>
+            <font>TitrePolice5</font>
+            <include>SettingsLabel</include>
+            <onclick>Skin.SetString(titrepolice,5)</onclick>
+            <selected>String.IsEqual(Skin.String(titrepolice),5)</selected>
+          </control>
+          <control type="radiobutton" id="205">
+            <height>50</height>
+            <label>Indiana Jones</label>
+            <font>TitrePolice6</font>
+            <include>SettingsLabel</include>
+            <onclick>Skin.SetString(titrepolice,6)</onclick>
+            <selected>String.IsEqual(Skin.String(titrepolice),6)</selected>
+          </control>
+          <control type="radiobutton" id="206">
+            <height>50</height>
+            <label>Indiana Jones</label>
+            <font>TitrePolice7</font>
+            <include>SettingsLabel</include>
+            <onclick>Skin.SetString(titrepolice,7)</onclick>
+            <selected>String.IsEqual(Skin.String(titrepolice),7)</selected>
           </control>
         </control>
 
@@ -580,6 +636,24 @@
           <scrolltime>0</scrolltime>
           <onleft>9000</onleft>
           <onright>9000</onright>
+             <control type="group" id="698">
+            <visible>System.HasAddon(script.iconmixtools)</visible>
+            <height>75</height>            
+            <control type="image">
+              <top>8</top>
+              <height>70</height>
+              <align>right</align>
+              <texture>$INFO[System.AddonIcon(script.iconmixtools)]</texture>
+              <aspectratio>keep</aspectratio>
+            </control>
+          </control>
+          <control type="button" id="699">
+            <include>SettingsLabel</include>
+            <label>$LOCALIZE[31221]</label>
+            <onclick>Addon.OpenSettings(script.iconmixtools)</onclick>
+            <visible>System.HasAddon(script.iconmixtools)</visible>
+          </control>
+          
           <control type="group" id="700">
             <visible>!String.IsEmpty(Skin.String(LyricPath))</visible>
             <height>75</height>
@@ -641,65 +715,8 @@
 
 
 
-          <control type="group" id="711">
-            <visible>System.HasAddon(script.iconmixtools)</visible>
-            <height>75</height>
-            <control type="image">
-              <top>0</top>
-              <include>Settings_Line</include>
-            </control>
-            <control type="image">
-              <top>8</top>
-              <height>70</height>
-              <align>right</align>
-              <texture>$INFO[System.AddonIcon(script.iconmixtools)]</texture>
-              <aspectratio>keep</aspectratio>
-            </control>
-          </control>
-          <control type="button" id="712">
-            <include>SettingsLabel</include>
-            <label>$LOCALIZE[31221]</label>
-            <onclick>Addon.OpenSettings(script.iconmixtools)</onclick>
-            <visible>System.HasAddon(script.iconmixtools)</visible>
-          </control>
-          <!--
-          <control type="radiobutton" id="712">
-          <include>SettingsLabel</include>
-          <label>$LOCALIZE[31710]</label>
-          <onclick>Skin.ToggleSetting(UseExtendedWeather)</onclick>
-          <selected>Skin.HasSetting(UseExtendedWeather)</selected>
-          </control>
-          <control type="image" id="713">
-          <include>Settings_Line</include>
-          </control>
-          -->
-          <!--
-          <control type="radiobutton" id="715">
-          <label>Install Optional Global Search Script</label>
-          <include>SettingsLabel</include>
-          <onclick condition="System.HasAddon(script.globalsearch)">Skin.ToggleSetting(EnableGlobalSearch)</onclick>
-          <onclick condition="!System.HasAddon(script.globalsearch)">RunPlugin(plugin://script.globalsearch)</onclick>
-          <selected>Skin.HasSetting(EnableGlobalSearch)</selected>
-          <visible>!System.HasAddon(script.globalsearch)</visible>
-          </control>
-          <control type="radiobutton" id="716">
-          <label>Install Optional Video Extras Script</label>
-          <include>SettingsLabel</include>
-          <onclick condition="System.HasAddon(script.videoextras)">Skin.ToggleSetting(EnableVideoExtras)</onclick>
-          <onclick condition="!System.HasAddon(script.videoextras)">RunPlugin(plugin://script.videoextras)</onclick>
-          <selected>Skin.HasSetting(EnableVideoExtras)</selected>
-          <visible>!System.HasAddon(script.videoextras)</visible>
-          </control>
-
-          <control type="radiobutton" id="717">
-          <label>Install Optional Cinema Experience Script</label>
-          <include>SettingsLabel</include>
-          <onclick condition="System.HasAddon(script.cinema.experience)">Skin.ToggleSetting(EnableCinemaExperience)</onclick>
-          <onclick condition="!System.HasAddon(script.cinema.experience)">RunPlugin(plugin://script.cinema.experience)</onclick>
-          <selected>Skin.HasSetting(EnableCinemaExperience)</selected>
-          <visible>!System.HasAddon(script.cinema.experience)</visible>
-          </control>
-          -->
+       
+        
           <control type="radiobutton" id="718">
             <label>$LOCALIZE[31042]</label>
             <include>SettingsLabel</include>
@@ -715,33 +732,29 @@
         <control type="grouplist" id="9011">
           <visible>Container(9000).Hasfocus(7)</visible>
           <posx>0</posx>
-          <posy>0</posy>
+          <posy>-90</posy>
           <width>840</width>
-          <height>890</height>
+          <height>990</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
           <onleft>9000</onleft>
           <onright>9000</onright>
-
-
-
-          <control type="group" id="800">
-            <height>75</height>
-            <control type="image">
-              <top>0</top>
-              <include>Settings_Line</include>
-            </control>
-            <control type="image">
-              <top>8</top>
-              <height>70</height>
-
+          <control type="group" id="799">
+            <height>70</height>            
+            <control type="image">              
               <align>right</align>
               <texture>acteurs/filmotv.png</texture>
               <aspectratio>keep</aspectratio>
             </control>
           </control>
+          <control type="radiobutton" id="800">
+              <include>SettingsLabel</include>
+              <label>$LOCALIZE[31481]</label>
+              <onclick>Skin.ToggleSetting(CacheFond)</onclick>
+              <selected>Skin.HasSetting(CacheFond)</selected>
+            </control>
 
-
+          
 
           <control type="radiobutton" id="801">
             <include>SettingsLabel</include>
@@ -758,7 +771,7 @@
           </control>
           <control type="radiobutton" id="803">
             <include>SettingsLabel</include>
-            <label>$LOCALIZE[31926]</label>
+            <label>$LOCALIZE[32009]</label>
             <onclick>Skin.ToggleSetting(ShowFilePath)</onclick>
             <selected>Skin.HasSetting(ShowFilePath)</selected>
           </control>
@@ -787,14 +800,15 @@
             <textcolor>TextNF</textcolor>
             <focusedcolor>DialogTextFO</focusedcolor>
             <disabledcolor>TextDisabled</disabledcolor>
-            <texturefocus>ButtonFO2Wide.png</texturefocus>
-            <texturenofocus>-</texturenofocus>
-            <alttexturefocus>ButtonFO2Wide.png</alttexturefocus>
+            <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+            <texturenofocus>-</texturenofocus> -->
+            <alttexturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</alttexturefocus>
             <textoffsetx>20</textoffsetx>
             <aligny>center</aligny>
             <pulseonselect>false</pulseonselect>
             <label>$LOCALIZE[32007] >>> $LOCALIZE[32008]</label>
             <altlabel>$LOCALIZE[32008] >>> $LOCALIZE[32007]</altlabel>
+            <usealttexture>!Skin.HasSetting(ShowActeursTexte)</usealttexture>
             <onclick>Skin.ToggleSetting(ShowActeursTexte)</onclick>
           </control>
 
@@ -813,8 +827,15 @@
             <onclick>Skin.ToggleSetting(FanartSombre)</onclick>
             <selected>Skin.HasSetting(FanartSombre)</selected>
           </control>
+          <control type="radiobutton" id="809">
+            <include>SettingsLabel</include>
+            <label>$LOCALIZE[31486]</label>
+            <onclick>Skin.ToggleSetting(CacherPause)</onclick>
+            <selected>Skin.HasSetting(CacherPause)</selected>
+          </control>
+          
           <!-- films/sagas -->
-          <control type="group" id="810">
+          <control type="group" id="820">
             <height>75</height>
             <control type="image">
               <top>0</top>
@@ -828,43 +849,51 @@
               <aspectratio>keep</aspectratio>
             </control>
           </control>
-          <control type="radiobutton" id="811">
+          <control type="radiobutton" id="821">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31031]</label>
             <onclick>Skin.ToggleSetting(HideMovieWatchedOverlays)</onclick>
             <selected>Skin.HasSetting(HideMovieWatchedOverlays)</selected>
           </control>
-          <control type="radiobutton" id="812">
+          <control type="radiobutton" id="822">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31918]</label>
             <onclick>Skin.ToggleSetting(SagaManquant)</onclick>
             <selected>Skin.HasSetting(SagaManquant)</selected>
 
           </control>
-          <control type="radiobutton" id="813">
+          <control type="radiobutton" id="823">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31921]</label>
             <onclick>Skin.ToggleSetting(SagaDate)</onclick>
             <selected>Skin.HasSetting(SagaDate)</selected>
             <visible>Skin.HasSetting(SagaManquant)</visible>
           </control>
-          <control type="radiobutton" id="814">
+          <control type="radiobutton" id="824">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31929]</label>
             <onclick>Skin.ToggleSetting(HideMovieCast)</onclick>
             <selected>Skin.HasSetting(HideMovieCast)</selected>
           </control>
 
-          <control type="radiobutton" id="815">
+          <control type="radiobutton" id="825">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31935]</label>
             <onclick>Skin.ToggleSetting(HideSagaCast)</onclick>
             <selected>Skin.HasSetting(HideSagaCast)</selected>
           </control>
+          <!--
+           <control type="radiobutton" id="826">
+            <include>SettingsLabel</include>
+            <label>$LOCALIZE[32010]</label>
+            <onclick>Skin.ToggleSetting(NoterFilm)</onclick>
+            <selected>Skin.HasSetting(NoterFilm)</selected>
+          </control>
+          -->
 
 
           <!-- series -->
-          <control type="group" id="820">
+          <control type="group" id="830">
             <height>75</height>
             <control type="image">
               <top>0</top>
@@ -879,13 +908,13 @@
               <aspectratio>keep</aspectratio>
             </control>
           </control>
-          <control type="radiobutton" id="821">
+          <control type="radiobutton" id="831">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31032]</label>
             <onclick>Skin.ToggleSetting(HideTVWatchedOverlays)</onclick>
             <selected>Skin.HasSetting(HideTVWatchedOverlays)</selected>
           </control>
-          <control type="radiobutton" id="822">
+          <control type="radiobutton" id="832">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31900]</label>
             <onclick>Skin.ToggleSetting(ShowEpisodesNumber)</onclick>
@@ -893,26 +922,34 @@
             <visible>!Skin.String(ShowUnwatchedEpisodesNumber)</visible>
           </control>
 
-          <control type="radiobutton" id="823">
+          <control type="radiobutton" id="833">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31919]</label>
             <onclick>Skin.ToggleSetting(CheckSeries)</onclick>
             <selected>Skin.HasSetting(CheckSeries)</selected>
 
           </control>
-          <control type="radiobutton" id="824">
+          <control type="radiobutton" id="834">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31928]</label>
             <onclick>Skin.ToggleSetting(HideTvCast)</onclick>
             <selected>Skin.HasSetting(HideTvCast)</selected>
           </control>
-          <control type="radiobutton" id="825">
+          <control type="radiobutton" id="835">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31932]</label>
             <onclick>Skin.ToggleSetting(HideMovieTvCastEmpty)</onclick>
             <selected>Skin.HasSetting(HideMovieTvCastEmpty)</selected>
             <visible>!Skin.HasSetting(HideMovieCast)|!Skin.HasSetting(HideTvCast)</visible>
           </control>
+          <!--
+          <control type="radiobutton" id="836">
+            <include>SettingsLabel</include>
+            <label>$LOCALIZE[32011]</label>
+            <onclick>Skin.ToggleSetting(NoterSerie)</onclick>
+            <selected>Skin.HasSetting(NoterSerie)</selected>
+          </control>
+          -->
 
         </control>
 
@@ -927,17 +964,25 @@
           <scrolltime>0</scrolltime>
           <onleft>9000</onleft>
           <onright>9000</onright>
+          <control type="radiobutton" id="899">
+              <include>SettingsLabel</include>
+              <label>$LOCALIZE[31481]</label>
+              <onclick>Skin.ToggleSetting(CacheFondMusic)</onclick>
+              <selected>Skin.HasSetting(CacheFondMusic)</selected>
+            </control>
+          
+          <control type="image" id="900">
+          <include>Settings_Line</include>
+          </control>
+          
           <control type="radiobutton" id="901">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31033]</label>
             <onclick>Skin.ToggleSetting(HideMusicFanart)</onclick>
             <selected>Skin.HasSetting(HideMusicFanart)</selected>
           </control>
-          <!--
-          <control type="image" id="902">
-          <include>Settings_Line</include>
-          </control>
-          -->
+        
+          
           <control type="radiobutton" id="903">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31057]</label>
@@ -1140,8 +1185,8 @@
       <textcolor>TextNF</textcolor>
       <focusedcolor>DialogTextFO</focusedcolor>
       <disabledcolor>TextDisabled</disabledcolor>
-      <texturefocus>ButtonFO2Wide.png</texturefocus>
-      <texturenofocus>frames/genrestag.png</texturenofocus>
+      <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+      <texturenofocus>frames/genrestag.png</texturenofocus> -->
       <textoffsetx>5</textoffsetx>
 
       <aligny>center</aligny>

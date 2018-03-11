@@ -4204,7 +4204,7 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<imagepathfocus>ButtonFO2Wide.png</imagepathfocus>
+					<imagepathfocus colordiffuse="FocusBar">ButtonFO2Wide2.png</imagepathfocus>
 					<imagepathnofocus>-</imagepathnofocus>
 					<pulseonselect>false</pulseonselect>
 					<onclick>Skin.SetString(WeatherDisplay,7Day)</onclick>
@@ -4222,7 +4222,7 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<imagepathfocus>ButtonFO2Wide.png</imagepathfocus>
+					<imagepathfocus colordiffuse="FocusBar">ButtonFO2Wide2.png</imagepathfocus>
 					<imagepathnofocus>-</imagepathnofocus>
 					<pulseonselect>false</pulseonselect>
 					<onclick>Skin.SetString(WeatherDisplay,12Hour)</onclick>
@@ -4240,7 +4240,7 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<imagepathfocus>ButtonFO2Wide.png</imagepathfocus>
+					<imagepathfocus colordiffuse="FocusBar">ButtonFO2Wide2.png</imagepathfocus>
 					<imagepathnofocus>-</imagepathnofocus>
 					<pulseonselect>false</pulseonselect>
 					<onclick>Skin.SetString(WeatherDisplay,36Hour)</onclick>
@@ -4258,7 +4258,7 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<imagepathfocus>ButtonFO2Wide.png</imagepathfocus>
+					<imagepathfocus colordiffuse="FocusBar">ButtonFO2Wide2.png</imagepathfocus>
 					<imagepathnofocus>-</imagepathnofocus>
 					<pulseonselect>false</pulseonselect>
 					<onclick>Skin.SetString(WeatherDisplay,Weekend)</onclick>
@@ -4276,7 +4276,7 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<imagepathfocus>ButtonFO2Wide.png</imagepathfocus>
+					<imagepathfocus colordiffuse="FocusBar">ButtonFO2Wide2.png</imagepathfocus>
 					<imagepathnofocus>-</imagepathnofocus>
 					<pulseonselect>false</pulseonselect>
 					<onclick>Skin.SetString(WeatherDisplay,WeatherMap)</onclick>
@@ -4293,7 +4293,7 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<imagepathfocus>ButtonFO2Wide.png</imagepathfocus>
+					<imagepathfocus colordiffuse="FocusBar">ButtonFO2Wide2.png</imagepathfocus>
 					<imagepathnofocus>-</imagepathnofocus>
 					<pulseonselect>false</pulseonselect>
 				</control>
@@ -4309,7 +4309,7 @@
 					<textcolor>TextNF</textcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<imagepathfocus>ButtonFO2Wide.png</imagepathfocus>
+					<imagepathfocus colordiffuse="FocusBar">ButtonFO2Wide2.png</imagepathfocus>
 					<imagepathnofocus>-</imagepathnofocus>
 					<pulseonselect>false</pulseonselect>
 					<onclick>Addon.OpenSettings($INFO[Weather.plugin])</onclick>
@@ -4327,7 +4327,7 @@
 					<textcolor>-</textcolor>
 					<focusedcolor>-</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<imagepathfocus>ButtonFO2Wide.png</imagepathfocus>
+					<imagepathfocus colordiffuse="FocusBar">ButtonFO2Wide2.png</imagepathfocus>
 					<imagepathnofocus>-</imagepathnofocus>
 					<pulseonselect>false</pulseonselect>
 					<spinwidth>34</spinwidth>

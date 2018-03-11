@@ -225,243 +225,7 @@
 			<!-- Browser label and flags -->
 		
 	</include>
-<!------------------------------------------------------------------------------------------------------------->
 
-
-
-<include name="BannerViewCommon_Browser">
-	
-		<itemlayout width="560" height="120">
-			<control type="group">
-			  <include>isWatched</include>
-			<control type="image">
-				<posx>12</posx>
-				<posy>15</posy>
-				<width>502</width>
-				<height>96</height>
-				<texture>frames/banner_diffuse.png</texture>
-				<colordiffuse>FrameBackgroundDiffuse</colordiffuse>
-				
-			</control>
-			<!-- --
-			<control type="label" id="8787">
-			  <label>$VAR[artistlogo]$VAR[artistbanner]</label>
-			</control>
-	<control type="label">
-			<top>20</top>
-			<left>18</left>
-			<width>480</width>
-			<font>impact35</font>
-			<align>center</align>
-			<label>$INFO[ListItem.Label]</label>
-			<visible>Container.Content(artists)+String.IsEmpty(Control.GetLabel(8787))</visible>
-			<autoscroll>true</autoscroll>
-		</control>
-		-->
-		<!-- -->
-	<control type="image">
-				<posx>12</posx>
-				<posy>15</posy>
-				<width>502</width>
-				<height>96</height>
-				<texture background="true" diffuse="frames/banner_diffuse.png">$INFO[ListItem.Thumb]</texture>	
-				<aspectratio scalediffuse="true">scale</aspectratio>
-				<colordiffuse>FFFFFFFF</colordiffuse>
-				<visible>Container.Content(artists)</visible>
-			</control>
-			-->
-			<!-- -->
-		<control type="image">
-				<posx>12</posx>
-				<posy>15</posy>
-				<width>502</width>
-				<height>96</height>
-				<texture background="true" diffuse="frames/banner_diffuse.png">$VAR[artistlogo]</texture>	
-				<aspectratio scalediffuse="true">keep</aspectratio>
-				<colordiffuse>FFFFFFFF</colordiffuse>
-				<visible>Container.Content(artists)</visible>
-			</control>
-			-->
-			
-			<control type="image">
-				<posx>12</posx>
-				<posy>15</posy>
-				<width>502</width>
-				<height>96</height>
-				<texture background="true" diffuse="frames/banner_diffuse.png">$VAR[artistbanner]</texture>	
-				<colordiffuse>FFFFFFFF</colordiffuse>
-				<aspectratio scalediffuse="true">keep</aspectratio>
-				<visible>Container.Content(artists)</visible>
-			</control>
-				
-				<control type="image">
-				<posx>12</posx>
-				<posy>15</posy>
-				<width>502</width>
-				<height>96</height>
-				<texture background="true" fallback="default_banner.png" diffuse="frames/banner_diffuse.png">$INFO[ListItem.Art(banner)]</texture>				
-				<aspectratio scalediffuse="true">stretch</aspectratio>
-				<visible>[Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(seasons)]+!String.IsEmpty(ListItem.Title)</visible>
-			</control>
-			
-			<control type="image">
-				<posx>12</posx>
-				<posy>15</posy>
-				<width>502</width>
-				<height>96</height>
-				<texture background="true" fallback="default_banner.png" diffuse="frames/banner_diffuse.png">$INFO[ListItem.Art(tvshow.banner)]</texture>				
-				<aspectratio scalediffuse="true">stretch</aspectratio>
-				<visible>[Container.Content(tvshows)|Container.Content(seasons)]+!String.IsEmpty(ListItem.Title)+String.IsEmpty(ListItem.Art(banner))</visible>
-			</control>
-			<control type="label">
-				<posx>12</posx>
-				<posy>55</posy>
-				<width>502</width>
-				<height>96</height>
-				<font>impact</font>
-								<align>center</align>
-
-				<label>$INFO[ListItem.Label]</label>
-				<visible>[Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(seasons)]+!String.IsEmpty(ListItem.Title)+String.IsEmpty(ListItem.Art(banner))</visible>
-			</control>
-			
-			<control type="image">
-				<posx>4</posx>
-				<posy>7</posy>
-				<width>518</width>
-				<height>114</height>
-				<texture background="true">frames/banner_frame2.png</texture>
-				<aspectratio scalediffuse="true">stretch</aspectratio>
-			</control>
-		<control type="group">
-					<posx>7</posx>
-					<posy>80</posy>
-					<include>OverlayProgress</include>
-				</control>	
-			<control type="group">
-				<left>0</left>
-				<top>0</top>
-				<include>ShowTotalTvEp</include>		
-			</control>
-			<include>AnimationCacheNonSelect</include>
-			</control>
-		</itemlayout>
-		
-		<focusedlayout width="560" height="120">
-			<include>ActiveClearArt</include>
-			<control type="group">
-				<animation reversible="false" effect="zoom" center="auto" start="100" end="135" time="200" tween="bounce" >focus</animation>
-				<animation reversible="false" effect="zoom" center="auto" start="135" end="100" time="200" tween="bounce" >unfocus</animation>
-				
-			<control type="image">
-				<posx>12</posx>
-				<posy>15</posy>
-				<width>502</width>
-				<height>96</height>
-				<texture>frames/banner_diffuse.png</texture>
-				<colordiffuse>FrameBackgroundDiffuse</colordiffuse>
-			</control>
-			<!--
-	<control type="label">
-			<top>20</top>
-			<left>18</left>
-			<width>480</width>
-			<align>center</align>
-			<label>$INFO[ListItem.Label]</label>
-			<font>lcdn</font>
-			<visible>Container.Content(artists)</visible>
-		</control>
-		-->
-		<control type="image">
-				<posx>12</posx>
-				<posy>15</posy>
-				<width>502</width>
-				<height>96</height>
-				<texture background="true" diffuse="frames/banner_diffuse.png">$INFO[ListItem.Thumb]</texture>	
-				<aspectratio scalediffuse="true">scale</aspectratio>
-				<colordiffuse>FFFFFFFF</colordiffuse>
-				<visible>Container.Content(artists)</visible>
-			</control>
-			-->
-			<!-- -->
-		<control type="image">
-				<posx>12</posx>
-				<posy>15</posy>
-				<width>502</width>
-				<height>96</height>
-				<texture background="true" diffuse="frames/banner_diffuse.png">$VAR[artistlogo]</texture>	
-				<aspectratio scalediffuse="true">keep</aspectratio>
-				<colordiffuse>FFFFFFFF</colordiffuse>
-				<visible>Container.Content(artists)</visible>
-			</control>
-			-->
-			
-			<control type="image">
-				<posx>12</posx>
-				<posy>15</posy>
-				<width>502</width>
-				<height>96</height>
-				<texture background="true" diffuse="frames/banner_diffuse.png">$VAR[artistbanner]</texture>	
-				<colordiffuse>FFFFFFFF</colordiffuse>
-				<aspectratio scalediffuse="true">keep</aspectratio>
-				<visible>Container.Content(artists)</visible>
-			</control>
-			
-			
-				<control type="image">
-				<posx>12</posx>
-				<posy>15</posy>
-				<width>502</width>
-				<height>96</height>
-				<texture background="true" fallback="default_banner.png" diffuse="frames/banner_diffuse.png">$INFO[ListItem.Art(banner)]</texture>				
-				<aspectratio scalediffuse="true">stretch</aspectratio>
-				<visible>[Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(seasons)]+!String.IsEmpty(ListItem.Title)</visible>
-			</control>
-			
-				<control type="image">
-				<posx>12</posx>
-				<posy>15</posy>
-				<width>502</width>
-				<height>96</height>
-				<texture background="true" fallback="default_banner.png" diffuse="frames/banner_diffuse.png">$INFO[ListItem.Art(tvshow.banner)]</texture>				
-				<aspectratio scalediffuse="true">stretch</aspectratio>
-				<visible>[Container.Content(tvshows)|Container.Content(seasons)]+!String.IsEmpty(ListItem.Title)+String.IsEmpty(ListItem.Art(banner))</visible>
-			</control>
-			<control type="label">
-				<posx>12</posx>
-				<posy>55</posy>
-				<width>502</width>
-				<height>96</height>
-				<align>center</align>
-				<font>impact</font>
-				<label>$INFO[ListItem.Label]</label>
-				<visible>[Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(seasons)]+!String.IsEmpty(ListItem.Title)+String.IsEmpty(ListItem.Art(banner))</visible>
-			</control>
-			
-			
-			<control type="image">
-				<posx>4</posx>
-				<posy>7</posy>
-				<width>518</width>
-				<height>114</height>
-				<texture background="true">frames/banner_frame2.png</texture>
-				
-				<aspectratio scalediffuse="true">stretch</aspectratio>
-			</control>
-			<control type="group">
-					<posx>7</posx>
-					<posy>80</posy>
-					<include>OverlayProgress</include>
-				</control>	
-				
-			<control type="group">
-				<left>0</left>
-				<top>0</top>
-			<include>ShowTotalTvEp</include>		
-			</control>
-			</control>
-		</focusedlayout>
-	</include>
 	<!------------------------------------------------------------------------------------------------------------->
 
 	
@@ -580,7 +344,18 @@
 					<include>ShowTotalTvEp</include>		
 				</control>
 			<include>AnimationCacheNonSelect</include>
-			</control>
+			<visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
+  </control>
+  <control type="image">
+    <left>20</left>
+    <top>150</top>
+    <width>287</width>
+								<height>443</height>
+    <aspectratio>keep</aspectratio>
+    <texture>buttons/parent.png</texture>
+    <visible>String.IsEqual(ListItem.Label,..)|String.IsEqual(ListItem.Title,..)</visible>
+  
+  </control>
 		</itemlayout>
 		<focusedlayout width="380" height="520">
 			<include>ActiveClearArt</include>
@@ -603,7 +378,21 @@
 					<include>OverlayProgress</include>
 				</control>
 				
-			</control>
+			<visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
+  </control>
+  <control type="image">
+    <left>20</left>
+    <top>150</top>
+    <width>287</width>
+								<height>443</height>
+    <aspectratio>keep</aspectratio>
+    <texture>buttons/parent.png</texture>
+    <visible>String.IsEqual(ListItem.Label,..)|String.IsEqual(ListItem.Title,..)</visible>
+    <animation type="Focus" reversible="false">
+					<effect type="zoom" center="auto" start="100" end="130" time="150" tween="sine" easing="inout" delay="50" />
+					<effect type="rotatey" center="150" end="-15" time="300" delay="250" />
+				</animation>
+  </control>
 			<include>PosterViewCommon_Details</include>
 		</focusedlayout>
 		

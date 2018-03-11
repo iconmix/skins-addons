@@ -103,6 +103,7 @@
 	
 	<!-- Dialogs -->
 	<color name="DialogBackgroundColor">ff101010</color>
+	<color name="DialogBackgroundColorEau">FF505050</color>
 	<color name="DialogDropdownColor">ff101010</color>			<!-- FF87d1ff -->
 	<color name="DialogProgressBar">FFf8cd22</color>
 	<color name="DialogTextFO">eef8cd22</color>

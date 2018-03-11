@@ -76,7 +76,7 @@
 	</include>
 	
 	<variable name="ListItemVu">
-	  <value condition="[[[String.IsEqual(ListItem.DbType,movie) | String.IsEqual(ListItem.DbType,set)] + !Skin.HasSetting(HideMovieWatchedOverlays)]|[!ListItem.IsFolder+!String.IsEqual(ListItem.DbType,movie) + !String.IsEqual(ListItem.DbType,set)+!String.IsEqual(ListItem.DbType,tvshow) + !String.IsEqual(ListItem.DbType,episode)+ !String.IsEqual(ListItem.DbType,season)]|[[String.IsEqual(ListItem.DbType,tvshow) | String.IsEqual(ListItem.DbType,episode)| String.IsEqual(ListItem.DbType,season)] + !Skin.HasSetting(HideTVWatchedOverlays)]]+!Window.IsActive(502)+!ListItem.IsResumable+String.Contains(ListItem.Overlay,layWatched)">[COLOR=FFFF8C82][I]$VAR[ListItemTitle][/I][/COLOR]</value>
+	  <value condition="[[[String.IsEqual(ListItem.DbType,movie) | String.IsEqual(ListItem.DbType,set)] + !Skin.HasSetting(HideMovieWatchedOverlays)]|[!ListItem.IsFolder+!String.IsEqual(ListItem.DbType,movie) + !String.IsEqual(ListItem.DbType,set)+!String.IsEqual(ListItem.DbType,tvshow) + !String.IsEqual(ListItem.DbType,episode)+ !String.IsEqual(ListItem.DbType,season)]|[[String.IsEqual(ListItem.DbType,tvshow) | String.IsEqual(ListItem.DbType,episode)| String.IsEqual(ListItem.DbType,season)] + !Skin.HasSetting(HideTVWatchedOverlays)]]+!Window.IsActive(502)+!ListItem.IsResumable+ Integer.IsGreater(ListItem.PlayCount,0)+ String.IsEmpty(ListItem.Property(PercentPlayed))">[COLOR=FFFF8C82][I]$VAR[ListItemTitle][/I][/COLOR]</value>
 	  <value condition="ListItem.IsFolder+!String.IsEqual(ListItem.DBTYPE,set)">[COLOR=yellow][I]$VAR[ListItemTitle][/I][/COLOR]</value>
 	  <value condition="!Container.Content(sets)+String.IsEqual(ListItem.DbType,set)">[COLOR=FF7FAFAF]$VAR[ListItemTitle][/COLOR]</value>
 	  <value>$VAR[ListItemTitle]</value>
@@ -293,7 +293,7 @@
 	<variable name="ListItemTitle">
 
 		<value condition="Container.Content(artists) | Container.Content(albums) | Container.Content(songs)">$INFO[ListItem.Label]</value>
-		<value condition="Container.Content(episodes)|[String.Contains(Container.FolderPath,plugin)+String.IsEmpty(Container.Content)+!String.IsEmpty(ListItem.Title)]">$VAR[Seasonnum]$VAR[episodenum]: $INFO[ListItem.Title]</value>
+		<value condition="String.IsEqual(ListItem.DbType,episode) | Container.Content(episodes)|[String.Contains(Container.FolderPath,plugin)+String.IsEmpty(Container.Content)+!String.IsEmpty(ListItem.Title)]">$VAR[Seasonnum]$VAR[episodenum]$INFO[ListItem.Title,: ]</value>
 
 		<value condition="Container.Content(tvshows)+!String.IsEmpty(ListItem.TVShowTitle)">$INFO[ListItem.TVShowTitle]</value>
 		<value condition="!String.IsEmpty(ListItem.Label)+String.IsEqual(ListItem.DBTYPE,set)">$INFO[ListItem.Label]</value>
@@ -945,6 +945,8 @@
 		<value>$INFO[ListItem.Art(thumb)]</value>
 	</variable>
 	<variable name="ListClearartClearlogoOn">
+	 <!--   <value condition="Control.HasFocus(1999)+!String.IsEmpty(Container(1999).ListItem.Art(clearart))+String.IsEqual(ListItem.DbType,tvshow)">$INFO[Container(1999).ListItem.Art(clearart)]</value> -->
+	 
 		<value condition="Control.HasFocus(2999)+!String.IsEmpty(Container(1999).ListItem.Art(clearart))">$INFO[Container(1999).ListItem.Art(clearart)]</value>
 		<value condition="Control.HasFocus(2999)+!String.IsEmpty(Container(1999).ListItem.Art(clearlogo)) + String.IsEmpty(Container(1999).ListItem.Art(clearart))">$INFO[Container(1999).ListItem.Art(clearlogo)]</value>
 		<value condition="!String.IsEmpty(Window(Home).Property(IconMixSagaClearArt))">$INFO[Window(Home).Property(IconMixSagaClearArt)]</value>

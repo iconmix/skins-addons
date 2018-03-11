@@ -74,6 +74,17 @@ class Main:
                   castingtype=params.get("casttype",None)
                   if castingtype: castingtype = castingtype[0]
                   utils.getCasting(castingtype,Id)   
+               
+               if action == "GETEPISODESKODI":
+                  Id=params.get("id",None)
+                  if Id: Id = Id[0] 
+                  Episodes=utils.GetEpisodesKodi(Id,False)  
+                  if Episodes:
+                      xbmcplugin.addDirectoryItems(int(sys.argv[1]), Episodes)
+                  xbmcplugin.endOfDirectory(int(sys.argv[1])) 
+                  OldTvShowId=self.windowhome.getProperty('IconmixFlagPanelEpisode')
+                  if OldTvShowId!=Id:
+                    self.windowhome.clearProperty('IconmixFlagPanelEpisode')
                   
                              
                if action == "GETARTISTEART":

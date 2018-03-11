@@ -113,7 +113,7 @@
 							<align>left</align>
 							<aligny>center</aligny>
 							
-							<texture>ButtonFO2Wide.png</texture>
+							<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 							<visible>Control.HasFocus(3)</visible>
 						</control>
 						<control type="image">
@@ -192,7 +192,7 @@
 						<control type="image">
 							<align>left</align>
 							<aligny>center</aligny>
-							<texture>ButtonFO2Wide.png</texture>
+							<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
 							
 							<visible>Control.HasFocus(6)</visible>
 						</control>
@@ -241,7 +241,7 @@
 				<textcolor>00FFFFFF</textcolor>
 				<focusedcolor>00FFFFFF</focusedcolor>
 				<texturefocus colordiffuse="FFFFFFFF">buttons/obtenirplus.png</texturefocus>
-				<texturenofocus colordiffuse="FF7F7F7F">buttons/obtenirplus.png</texturenofocus>
+				<texturenofocus colordiffuse="FF7F7F7F">buttons/obtenirplus.png</texturenofocus> -->
 				<align>right</align>
 				<aligny>center</aligny>
 				<onleft condition="!IsEmpty(Container(6).ListItem.Label)">6</onleft>
@@ -259,7 +259,7 @@
 				<textcolor>00FFFFFF</textcolor>
 				<focusedcolor>00FFFFFF</focusedcolor>
 				<texturefocus colordiffuse="FFFFFFFF">buttons/ok.png</texturefocus>
-				<texturenofocus colordiffuse="FF7F7F7F">buttons/ok.png</texturenofocus>
+				<texturenofocus colordiffuse="FF7F7F7F">buttons/ok.png</texturenofocus> -->
 				<align>right</align>
 				<aligny>center</aligny>
 				<onleft condition="!IsEmpty(Container(6).ListItem.Label)">6</onleft>
@@ -279,7 +279,7 @@
 				<textcolor>00FFFFFF</textcolor>
 				<focusedcolor>00FFFFFF</focusedcolor>
 				<texturefocus colordiffuse="FFFFFFFF">buttons/cancel.png</texturefocus>
-				<texturenofocus colordiffuse="FF7F7F7F">buttons/cancel.png</texturenofocus>
+				<texturenofocus colordiffuse="FF7F7F7F">buttons/cancel.png</texturenofocus> -->
 				<align>right</align>
 				<aligny>center</aligny>
 				<onright condition="!IsEmpty(Container(6).ListItem.Label)">6</onright>

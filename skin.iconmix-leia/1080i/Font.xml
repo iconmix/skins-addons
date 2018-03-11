@@ -195,12 +195,12 @@
 		
 		<font>
 			<name>doublon</name>
-			<filename>number.ttf</filename>
+			<filename>compteur.ttf</filename>
 			<size>52</size>
 		</font>
 		<font>
 			<name>itemrole</name>
-			<filename>number.ttf</filename>
+			<filename>compteur.ttf</filename>
 			<size>45</size>
 		</font>
 		<font>
@@ -209,10 +209,47 @@
 		  <size>40</size>
 		</font>
 		<font>
-		  <name>titre50</name>
+		  <name>compteurepisodes</name>
+		  <filename>compteur.ttf</filename>
+		  <size>34</size>
+		</font>
+		<!-- police du titre -->
+		<font>
+		  <name>TitrePolice1</name>
 		  <filename>lyrspin10.ttf</filename>
 		  <size>50</size>
 		</font>
+		<font>
+		  <name>TitrePolice2</name>
+		  <filename>shark.ttf</filename>
+		  <size>50</size>
+		</font>
+		<font>
+		  <name>TitrePolice3</name>
+		  <filename>bascula.ttf</filename>
+		  <size>50</size>
+		</font>
+		<font>
+		  <name>TitrePolice4</name>
+		  <filename>station232.ttf</filename>
+		  <size>50</size>
+		</font>
+		<font>
+		  <name>TitrePolice5</name>
+		  <filename>varsity_regular.ttf</filename>
+		  <size>50</size>
+		</font>
+		<font>
+		  <name>TitrePolice6</name>
+		  <filename>heroes.ttf</filename>
+		  <size>28</size>
+		</font>
+		<font>
+		  <name>TitrePolice7</name>
+		  <filename>heroesw.ttf</filename>
+		  <size>28</size>
+		</font>
+		<!-- ------------------ ---->
 		<font>
 		  <name>debutfin</name>
 		  <filename>lyrspin10.ttf</filename>
@@ -231,9 +268,8 @@
 		<font>
 		  <name>acteurs</name>
 		  <filename>lyrspin10.ttf</filename>
-		  <size>26</size>
-		</font>
-		
+		  <size>22</size>
+		</font>		
 		<font>
 			<name>PlotFont</name>
 			<filename>comic.ttf</filename>

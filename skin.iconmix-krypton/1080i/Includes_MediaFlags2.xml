@@ -315,6 +315,8 @@
 
     </control>
   </include>
+  <!-- videoplayer-->
+ 
   <include name="Horizlist">
     <width>700</width>
     <height>70</height>

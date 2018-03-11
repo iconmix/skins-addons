@@ -1,309 +1,445 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 
-  <include name="commonlistitem2">
-    <param name="Fond" default="FocusLine.png"/>
-    <param name="Ligne" default="VideoInfoLine.png"/>
-    <definition>
-      <!-- List Line Item Divider -->
-      <control type="image">
-        <posx>0</posx>
-        <posy>0</posy>
-        <width>850</width>
-        <height>40</height>
-        <texture>$PARAM[Fond]</texture>
-        <colordiffuse>A02F2F2F</colordiffuse>
-        <visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
-      </control>
-      <control type="image">
-        <posx>38</posx>
-        <posy>38</posy>
-        <width>845</width>
-        <height>2</height>
-        <aligny>center</aligny>
-        <texture>$PARAM[Ligne]</texture>
-        <colordiffuse>FilesDividerDiffuse</colordiffuse>
-      </control>
+    <include name="commonlistitem2">
+        <param name="Fond" default="FocusLine.png"/>
+        <param name="Ligne" default="VideoInfoLine.png"/>
+        <definition>
+            <!-- List Line Item Divider -->
+            <control type="image">
+                <posx>0</posx>
+                <posy>0</posy>
+                <width>850</width>
+                <height>40</height>
+                <texture>$PARAM[Fond]</texture>
+                <colordiffuse>A02F2F2F</colordiffuse>
+                <visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
+            </control>
+            <control type="image">
+                <posx>38</posx>
+                <posy>38</posy>
+                <width>845</width>
+                <height>2</height>
+                <aligny>center</aligny>
+                <texture>$PARAM[Ligne]</texture>
+                <colordiffuse>FilesDividerDiffuse</colordiffuse>
+            </control>
 
-      <!-- Watched Overlay for In-Progress Items in Video Library -->
-      <control type="group">
-        <posx>630</posx>
-      <!-- <posx>5</posx> -->
-      <posy>10</posy>
-      <include content="OverlayProgress">
-        <param name="Hauteur">25</param>
-        <param name="Largeur">120</param>
-        <param name="PositionX">100</param>
-        <param name="PositionY">0</param>
-        <param name="PositionXVU">180</param>
-        <param name="PositionYVU">-6</param>
-      </include>
-    </control>
+            <!-- Watched Overlay for In-Progress Items in Video Library -->
+            <control type="group">
+                <posx>630</posx>
+                <!-- <posx>5</posx> -->
+                <posy>10</posy>
+                <include content="OverlayProgress">
+                    <param name="Hauteur">25</param>
+                    <param name="Largeur">120</param>
+                    <param name="PositionX">100</param>
+                    <param name="PositionY">0</param>
+                    <param name="PositionXVU">180</param>
+                    <param name="PositionYVU">-6</param>
+                </include>
+            </control>
 
 
-    <!-- Addon Progress/state -->
-    <control type="label">
-      <posx>630</posx>
-      <posy>-2</posy>
-      <width>220</width>
-      <height>35</height>
-      <align>right</align>
-      <aligny>center</aligny>
-      <label>$INFO[ListItem.Property(Addon.Status)]</label>
-      <font>METF_InfoText</font>
-      <textcolor>MediaDetailsEpisodes</textcolor>
-      <visible>Window.IsActive(addonbrowser)</visible>
-    </control>
+            <!-- Addon Progress/state -->
+            <control type="label">
+                <posx>630</posx>
+                <posy>-2</posy>
+                <width>220</width>
+                <height>35</height>
+                <align>right</align>
+                <aligny>center</aligny>
+                <label>$INFO[ListItem.Property(Addon.Status)]</label>
+                <font>METF_InfoText</font>
+                <textcolor>MediaDetailsEpisodes</textcolor>
+                <visible>Window.IsActive(addonbrowser)</visible>
+            </control>
 
-    <include content="EpisodesVus">
-      <param name="PositionX">680</param>
+            <include content="EpisodesVus">
+                <param name="PositionX">680</param>
+            </include>
+            <!-- Star Rating -->
+            <control type="group">
+
+                <visible>!Window.IsActive(10025) + !String.Contains(Container.FolderPath,plugin)</visible>
+                <control type="label">
+                    <posx>775</posx>
+                    <posy>-2</posy>
+                    <width>45</width>
+                    <height>35</height>
+                    <align>left</align>
+                    <aligny>center</aligny>
+                    <label>$INFO[ListItem.Rating]</label>
+                    <font>METF_InfoText</font>
+                    <textcolor>TextNF</textcolor>
+                    <visible>!String.IsEmpty(ListItem.Rating)</visible>
+                </control>
+                <control type="image">
+                    <posx>772</posx>
+                    <posy>6</posy>
+                    <width>20</width>
+                    <height>20</height>
+                    <texture>Star.png</texture>
+                    <colordiffuse>FFFFFFFF</colordiffuse>
+                    <visible>!String.IsEmpty(ListItem.Rating)</visible>
+                </control>
+            </control>
+        </definition>
     </include>
-    <!-- Star Rating -->
-    <control type="group">
 
-      <visible>!Window.IsActive(10025) + !String.Contains(Container.FolderPath,plugin)</visible>
-      <control type="label">
-        <posx>775</posx>
-        <posy>-2</posy>
-        <width>45</width>
-        <height>35</height>
-        <align>left</align>
-        <aligny>center</aligny>
-        <label>$INFO[ListItem.Rating]</label>
-        <font>METF_InfoText</font>
-        <textcolor>TextNF</textcolor>
-        <visible>!String.IsEmpty(ListItem.Rating)</visible>
-      </control>
-      <control type="image">
-        <posx>772</posx>
-        <posy>6</posy>
-        <width>20</width>
-        <height>20</height>
-        <texture>Star.png</texture>
-        <colordiffuse>FFFFFFFF</colordiffuse>
-        <visible>!String.IsEmpty(ListItem.Rating)</visible>
-      </control>
-    </control>
-  </definition>
-</include>
-
-<include name="CommonListId">
-  <animation type="Conditional" condition="Window.IsActive(addoninformation)">
-    <effect type="zoom" time="600" center="640,360" start="100" end="50" tween="cubic" easing="out" />
-    <effect type="fade" time="400" start="100" end="0" />
-  </animation>
-
-  <posx>5</posx>
-  <posy>60</posy>
-  <height>715</height>
-  <width>1350</width>
-
-
-  <oninfo condition="Container.Content(actors)|Container.Content(directors)">SetProperty(ActorThumb,$VAR[PosterThumb],Home)</oninfo>
-<!-- <oninfo condition="Container.Content(actors)|Container.Content(directors)">SetFocus(8889)</oninfo> -->
-<oninfo condition="Container.Content(actors)|Container.Content(directors)">SetProperty(IconmixShowInfo,55,Home)</oninfo>
-<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
-<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
-<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
-<!-- <onright>60</onright> -->
-<scrolltime>160</scrolltime>
-<orientation>vertical</orientation>
-<preloaditems>2</preloaditems>
-<aligny>top</aligny>
-<pagecontrol>60</pagecontrol>
-<include>Animation_OpenCloseFade</include>
-<include>Animation_FadedByMenu</include>
-<include>Animation_HiddenByInfo</include>
-<itemlayout width="0" height="40">
-  <include content="commonlistitem2"></include>
-
-  <control type="label">
-    <!--   <include>isWatched</include>
-    <posx>110</posx> -->
-    <left>10</left>
-    <posy>-2</posy>
-    <width>738</width>
-    <height>35</height>
-    <aligny>center</aligny>
-    <align>left</align>
-    <font>exptext</font>
-    <shadowcolor>FF5F5F5F</shadowcolor>
-    <textcolor>white</textcolor>
-    <label>$VAR[ListItemVu]</label>
-    <scroll>false</scroll>
-    <visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
-  </control>
-  <control type="image">
-    <left>20</left>
-    <top>2</top>
-    <height>35</height>
-    <width>119</width>
-    <aspectratio>keep</aspectratio>
-    <texture>buttons/parent.png</texture>
-    <visible>String.IsEqual(ListItem.Label,..)|String.IsEqual(ListItem.Title,..)</visible>
-  </control>
-
-
-</itemlayout>
-<focusedlayout width="0" height="40">
-  <include>ActiveClearArt</include>
-  <control type="image">
-    <posx>0</posx>
-    <width>900</width>
-    <height>40</height>
-    <aligny>center</aligny>
-    <texture>ButtonFO2Wide2.png</texture>
-    <aspectratio>stretch</aspectratio>
-    <colordiffuse>FocusBar</colordiffuse>
-  </control>
-
-  <include content="commonlistitem2">
-    <param name="Fond"></param>
-    <param name="Ligne"></param>
-  </include>
-  <control type="label">
-    <!--   <include>isWatched</include>
-    <posx>110</posx> -->
-    <left>10</left>
-    <posy>-2</posy>
-    <width>738</width>
-    <height>35</height>
-    <aligny>center</aligny>
-    <align>left</align>
-    <font>exptext</font>
-    <shadowcolor>FF5F5F5F</shadowcolor>
-    <textcolor>white</textcolor>
-    <label>$VAR[ListItemVu]</label>
-    <scroll>false</scroll>
-    <visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
-  </control>
-  <control type="image">
-    <left>20</left>
-    <top>2</top>
-    <height>35</height>
-    <width>119</width>
-
-    <aspectratio>keep</aspectratio>
-    <texture>buttons/parent.png</texture>
-    <align>left</align>
-    <visible>String.IsEqual(ListItem.Label,..)|String.IsEqual(ListItem.Title,..)</visible>
-  </control>
-  <!--
-  <control type="image">
-  <posx>0</posx>
-  <posy>0</posy>
-  <width>900</width>
-  <height>40</height>
-  <aligny>center</aligny>
-  <texture>frames/ClassicFrameGlass_Horizontal.png</texture>
-  <aspectratio>stretch</aspectratio>
-  <colordiffuse>FFFFFFFF</colordiffuse>
-  </control>
-  -->
-
-  <!-- Focus Bar -->
-
-
-</focusedlayout>
-</include>
-<include name="Viewtype_List">
-  <control type="group">
-    <visible>Control.IsVisible(55)</visible>
-    <top>40</top>
-    <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
-          <effect type="slide" end="0,-40" time="0"  />
+    <include name="CommonListId">
+        <animation type="Conditional" condition="Window.IsActive(addoninformation)">
+            <effect type="zoom" time="600" center="640,360" start="100" end="50" tween="cubic" easing="out" />
+            <effect type="fade" time="400" start="100" end="0" />
         </animation>
 
-    <control type="list" id="55">
-      <viewtype label="31801">list</viewtype>
-      <include>CommonListId</include>
+        <posx>5</posx>
+        <posy>60</posy>
+        <height>715</height>
+        <width>1350</width>
+
+
+        <oninfo condition="Container.Content(actors)|Container.Content(directors)">SetProperty(ActorThumb,$VAR[PosterThumb],Home)</oninfo>
+        <!-- <oninfo condition="Container.Content(actors)|Container.Content(directors)">SetFocus(8889)</oninfo> -->
+        <oninfo condition="Container.Content(actors)|Container.Content(directors)">SetProperty(IconmixShowInfo,55,Home)</oninfo>
+        <include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
+        <onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
+        <onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
+
+        <!-- <onright>60</onright> -->
+        <scrolltime>160</scrolltime>
+        <orientation>vertical</orientation>
+        <preloaditems>2</preloaditems>
+        <aligny>top</aligny>
+        <pagecontrol>60</pagecontrol>
+        <include>Animation_OpenCloseFade</include>
+        <include>Animation_FadedByMenu</include>
+        <include>Animation_HiddenByInfo</include>
+        <itemlayout width="0" height="40">
+            <include content="commonlistitem2"></include>
+
+            <control type="label">
+                <!--   <include>isWatched</include>
+                <posx>110</posx> -->
+                <left>10</left>
+                <posy>-2</posy>
+                <width>738</width>
+                <height>35</height>
+                <aligny>center</aligny>
+                <align>left</align>
+                <font>exptext</font>
+                <shadowcolor>FF5F5F5F</shadowcolor>
+                <textcolor>white</textcolor>
+                <label>$VAR[ListItemVu]</label>
+                <scroll>false</scroll>
+                <visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
+            </control>
+            <control type="image">
+                <left>20</left>
+                <top>2</top>
+                <height>35</height>
+                <width>119</width>
+                <aspectratio>keep</aspectratio>
+                <texture>buttons/parent.png</texture>
+                <visible>String.IsEqual(ListItem.Label,..)|String.IsEqual(ListItem.Title,..)</visible>
+            </control>
+
+
+        </itemlayout>
+        <focusedlayout width="0" height="40">
+            <include>ActiveClearArt</include>
+            <control type="image">
+                <posx>0</posx>
+                <width>900</width>
+                <height>40</height>
+                <aligny>center</aligny>
+                <texture>ButtonFO2Wide2.png</texture>
+                <aspectratio>stretch</aspectratio>
+                <colordiffuse>FocusBar</colordiffuse>
+            </control>
+
+            <include content="commonlistitem2">
+                <param name="Fond"></param>
+                <param name="Ligne"></param>
+            </include>
+            <control type="label">
+                <!--   <include>isWatched</include>
+                <posx>110</posx> -->
+                <left>10</left>
+                <posy>-2</posy>
+                <width>738</width>
+                <height>35</height>
+                <aligny>center</aligny>
+                <align>left</align>
+                <font>exptext</font>
+                <shadowcolor>FF5F5F5F</shadowcolor>
+                <textcolor>white</textcolor>
+                <label>$VAR[ListItemVu]</label>
+                <scroll>false</scroll>
+                <visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
+            </control>
+            <control type="image">
+                <left>20</left>
+                <top>2</top>
+                <height>35</height>
+                <width>119</width>
+
+                <aspectratio>keep</aspectratio>
+                <texture>buttons/parent.png</texture>
+                <align>left</align>
+                <visible>String.IsEqual(ListItem.Label,..)|String.IsEqual(ListItem.Title,..)</visible>
+            </control>
+
+        </focusedlayout>
+    </include>
+    <include name="Viewtype_List">
+        <control type="group">
+            <visible>Control.IsVisible(55)</visible>
+            <top>40</top>
+            <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
+                <effect type="slide" end="0,-40" time="0"  />
+            </animation>
+
+
+            <control type="list" id="55">
+                <viewtype label="31801">list</viewtype>
+                <!-- <onright>1999</onright> -->
+                <include>CommonListId</include>
+            </control>
+            <!-- Thumbnails -->
+            <control type="group">
+                <left>1050</left>
+                <top>-240</top>
+                <animation type="Conditional" condition="true" reversible="false">
+                    <effect type="rotatey" center="90,0" end="5" time="500" tween="bounce" easy="out"  />
+                </animation>-->
+                <width>500</width>
+                <include>Animation_OpenCloseFade</include>
+                <include>Animation_FadedByMenu</include>
+                <include>Animation_HiddenByInfo</include>
+                <visible>Window.IsActive(pictures) | Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)| Container.Content(directors)| Container.Content(actors)</visible>
+                <control type="image">
+                    <bordersize>30</bordersize>
+                    <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+                    <texture background="true">$INFO[ListItem.Icon]</texture>
+                    <aspectratio scalediffuse="true">keep</aspectratio>
+                    <visible>Window.IsActive(pictures) + !String.IsEmpty(ListItem.Icon)</visible>
+                </control>
+
+                <!-- Movie Fanart Image -->
+                <control type="image">
+                    <bordersize>30</bordersize>
+                    <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+                    <texture background="true" fallback="home_art/movies.jpg">$INFO[ListItem.Art(poster)]</texture>
+                    <aspectratio scalediffuse="true">keep</aspectratio>
+                    <visible>!String.IsEmpty(ListItem.Title) + [Container.Content(movies) | Container.Content(sets)]</visible>
+                </control>
+                <!-- TVShow Fanart Image -->
+                <control type="image">
+
+                    <bordersize>30</bordersize>
+                    <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+                    <texture background="true" fallback="home_art/tvshows.jpg">$INFO[ListItem.Art(poster)]</texture>
+                    <aspectratio scalediffuse="true">keep</aspectratio>
+                    <visible>!String.IsEmpty(ListItem.Title) + [Container.Content(tvshows) | Container.Content(seasons)]</visible>
+                </control>
+                <!-- Episode Image -->
+                <control type="image">
+                    <width>700</width>
+                    <bordersize>30</bordersize>
+                    <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+                    <texture background="true">$INFO[ListItem.Icon]</texture>
+                    <aspectratio scalediffuse="true">keep</aspectratio>
+                    <visible>!String.IsEmpty(ListItem.Title) + Container.Content(episodes)</visible>
+                </control>
+                <control type="image">
+                    <bordersize>30</bordersize>
+                    <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+                    <texture background="true" fallback="DefaultActor.png">$VAR[PosterThumbActeurs]</texture>
+                    <aspectratio scalediffuse="true">keep</aspectratio>
+                    <!-- <texture>$INFO[ListItem.Icon]</texture> -->
+
+                    <visible>Container.Content(actors)|Container.Content(directors)</visible>
+                </control>
+
+                <!-- Season - TV Show Title 
+                <control type="label">
+                    <posx>35</posx>
+                    <posy>430</posy>
+                    <width>600</width>
+                    <height>30</height>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <font>METF_TitleTextLarge</font>
+                    <textcolor>TitleText</textcolor>
+                    <label>$INFO[ListItem.TVShowTitle]</label>
+                    <visible>Container.Content(seasons)</visible>
+                </control>-->
+
+
+                <!-- Picture Date -->
+                <control type="label">
+                    <posx>35</posx>
+                    <posy>459</posy>
+                    <width>600</width>
+                    <height>30</height>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <font>METF_MediaDetailsSmall</font>
+                    <textcolor>MediaDetailsGenre</textcolor>
+                    <label>$INFO[ListItem.PictureDateTime]</label>
+                    <visible>Window.IsActive(pictures) + !String.IsEmpty(ListItem.PictureDateTime)</visible>
+                </control>
+                <!-- Movie Sets
+                <control type="label">
+                <posx>35</posx>
+                <posy>459</posy>
+                <width>600</width>
+                <height>30</height>
+                <align>center</align>
+                <aligny>center</aligny>
+                <font>METF_MediaDetailsSmall</font>
+                <textcolor>MediaDetailsGenre</textcolor>
+                <label>$LOCALIZE[31313]</label>
+                <include>VisibleIfMovieSet</include>
+            </control>-->
+        </control>
+
+        <!-- Sets button -->
+        <control type="button" id="997">
+            <onup>55</onup>
+            <ondown>55</ondown>
+            <onleft>55</onleft>
+            <onright>998</onright>
+            <description>sets</description>
+            <posx>745</posx>
+            <posy>5</posy>
+            <width>32</width>
+            <height>24</height>
+            <label></label>
+            <onclick>ActivateWindow(10025,"videodb://movies/sets/$INFO[ListItem.SetId]/?setid=$INFO[ListItem.SetId]",return)</onclick>
+            <visible>Window.IsActive(10025) + !Container.Content(sets) + !String.IsEmpty(ListItem.Set)</visible>
+        </control>
+
+        <animation type="Conditional" condition="Control.HasFocus(8889)" reversible="true">
+            <effect type="fade" start="100" end="30" time="500"  />
+        </animation>
     </control>
-    <!-- Thumbnails -->
+    <include>showacteurinfo</include>
+    <!-- <include>ListeEpisodes</include> -->
+</include>
+<include name="Viewtype_ListFanart">
     <control type="group">
-      <left>1050</left>
-      <top>-240</top>
-      <animation type="Conditional" condition="true" reversible="false">
-        <effect type="rotatey" center="90,0" end="5" time="500" tween="bounce" easy="out"  />
-      </animation>-->
-      <width>500</width>
-      <include>Animation_OpenCloseFade</include>
-      <include>Animation_FadedByMenu</include>
-      <include>Animation_HiddenByInfo</include>
-      <visible>Window.IsActive(pictures) | Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)| Container.Content(directors)| Container.Content(actors)</visible>
+        <visible>Control.IsVisible(509)</visible>
+        <!-- Browser -->
+        <control type="list" id="509">
+            <viewtype label="31803">list and fanart</viewtype>
+            <include>CommonListId</include>
+        </control>
+        <!-- Thumbnails -->
+        <control type="group">
+            <left>1035</left>
 
-      <control type="image">
+            <width>800</width>
+            <include>Animation_OpenCloseFade</include>
+            <include>Animation_FadedByMenu</include>
+            <include>Animation_HiddenByInfo</include>
+            <visible>Window.IsActive(pictures) | Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)</visible>
 
-        <bordersize>30</bordersize>
-        <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-        <texture background="true">$INFO[ListItem.Icon]</texture>
-        <aspectratio scalediffuse="true">keep</aspectratio>
-        <visible>Window.IsActive(pictures) + !String.IsEmpty(ListItem.Icon)</visible>
-      </control>
+            <control type="image">
 
-      <!-- Movie Fanart Image -->
-      <control type="image">
+                <bordersize>30</bordersize>
+                <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+                <texture background="true">$INFO[ListItem.Icon]</texture>
+                <aspectratio scalediffuse="true">keep</aspectratio>
+                <visible>Window.IsActive(pictures) + !String.IsEmpty(ListItem.Icon)</visible>
+            </control>
+            <!-- Picture Fanart Image (use for thumb if no icon set) -->
+            <control type="image">
 
-        <bordersize>30</bordersize>
-        <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-        <texture background="true" fallback="home_art/movies.jpg">$INFO[ListItem.Art(poster)]</texture>
-        <aspectratio scalediffuse="true">keep</aspectratio>
-        <visible>!String.IsEmpty(ListItem.Title) + [Container.Content(movies) | Container.Content(sets)]</visible>
-      </control>
-      <!-- TVShow Fanart Image -->
-      <control type="image">
+                <bordersize>30</bordersize>
+                <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+                <texture background="true" fallback="home_art/pictures.jpg">$INFO[ListItem.Art(fanart)]</texture>
+                <aspectratio scalediffuse="true">keep</aspectratio>
+                <visible>Window.IsActive(pictures) + String.IsEmpty(ListItem.Icon)</visible>
+            </control>
+            <!-- Movie Fanart Image -->
+            <control type="image">
 
-        <bordersize>30</bordersize>
-        <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-        <texture background="true" fallback="home_art/tvshows.jpg">$INFO[ListItem.Art(poster)]</texture>
-        <aspectratio scalediffuse="true">keep</aspectratio>
-        <visible>!String.IsEmpty(ListItem.Title) + [Container.Content(tvshows) | Container.Content(seasons)]</visible>
-      </control>
-      <!-- Episode Image -->
-      <control type="image">
-        <width>700</width>
-        <bordersize>30</bordersize>
-        <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-        <texture background="true">$INFO[ListItem.Icon]</texture>
-        <aspectratio scalediffuse="true">keep</aspectratio>
-        <visible>!String.IsEmpty(ListItem.Title) + Container.Content(episodes)</visible>
-      </control>
-      <control type="image">
-        <bordersize>30</bordersize>
-        <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-        <texture background="true" fallback="DefaultActor.png">$VAR[PosterThumbActeurs]</texture>
-        <aspectratio scalediffuse="true">keep</aspectratio>
-      <!-- <texture>$INFO[ListItem.Icon]</texture> -->
+                <bordersize>30</bordersize>
+                <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+                <texture background="true" fallback="home_art/movies.jpg">$INFO[ListItem.Art(fanart)]</texture>
+                <aspectratio scalediffuse="true">keep</aspectratio>
+                <visible>!String.IsEmpty(ListItem.Title) + [Container.Content(movies) | Container.Content(sets)]</visible>
+            </control>
+            <!-- TVShow Fanart Image -->
+            <control type="image">
 
-      <visible>Container.Content(actors)|Container.Content(directors)</visible>
-    </control>
+                <bordersize>30</bordersize>
+                <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+                <texture background="true" fallback="home_art/tvshows.jpg">$INFO[ListItem.Property(Fanart_Image)]</texture>
+                <aspectratio scalediffuse="true">keep</aspectratio>
+                <visible>!String.IsEmpty(ListItem.Title) + [Container.Content(tvshows) | Container.Content(seasons)]</visible>
+            </control>
+            <!-- Episode Image -->
+            <control type="image">
 
-    <!-- Season - TV Show Title -->
-    <control type="label">
-      <posx>35</posx>
-      <posy>430</posy>
-      <width>600</width>
-      <height>30</height>
-      <align>center</align>
-      <aligny>center</aligny>
-      <font>METF_TitleTextLarge</font>
-      <textcolor>TitleText</textcolor>
-      <label>$INFO[ListItem.TVShowTitle]</label>
-      <visible>Container.Content(seasons)</visible>
-    </control>
+                <bordersize>30</bordersize>
+                <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+                <texture background="true">$INFO[ListItem.Icon]</texture>
+                <aspectratio scalediffuse="true">keep</aspectratio>
+                <visible>!String.IsEmpty(ListItem.Title) + Container.Content(episodes)</visible>
+            </control>
+            <!-- Image Frame
+            <control type="image">
+            <posx>12</posx>
+            <posy>46</posy>
+            <width>650</width>
+            <height>383</height>
+            <texture>frames/ClassicFrame_FanartMedium.png</texture>
+            <aspectratio scalediffuse="true">scale</aspectratio>
+            <visible>!String.IsEmpty(ListItem.Title)</visible>
+        </control>-->
 
+        <!-- Season - TV Show Title -->
+        <control type="label">
+            <posx>35</posx>
+            <posy>430</posy>
+            <width>600</width>
+            <height>30</height>
+            <align>center</align>
+            <aligny>center</aligny>
+            <font>METF_TitleTextLarge</font>
+            <textcolor>TitleText</textcolor>
+            <label>$INFO[ListItem.TVShowTitle]</label>
+            <visible>Container.Content(seasons)</visible>
+        </control>
 
+        <!-- Episode Air Date
+        <control type="label">
+        <posx>35</posx>
+        <posy>459</posy>
+        <width>600</width>
+        <height>30</height>
+        <align>center</align>
+        <aligny>center</aligny>
+        <font>METF_MediaDetailsSmall</font>
+        <textcolor>MediaDetailsYear</textcolor>
+        <label>$LOCALIZE[20416] $INFO[ListItem.Premiered]</label>
+        <visible>!String.IsEmpty(ListItem.Premiered) + Container.Content(episodes)</visible>
+    </control>-->
     <!-- Picture Date -->
     <control type="label">
-      <posx>35</posx>
-      <posy>459</posy>
-      <width>600</width>
-      <height>30</height>
-      <align>center</align>
-      <aligny>center</aligny>
-      <font>METF_MediaDetailsSmall</font>
-      <textcolor>MediaDetailsGenre</textcolor>
-      <label>$INFO[ListItem.PictureDateTime]</label>
-      <visible>Window.IsActive(pictures) + !String.IsEmpty(ListItem.PictureDateTime)</visible>
+        <posx>35</posx>
+        <posy>459</posy>
+        <width>600</width>
+        <height>30</height>
+        <align>center</align>
+        <aligny>center</aligny>
+        <font>METF_MediaDetailsSmall</font>
+        <textcolor>MediaDetailsGenre</textcolor>
+        <label>$INFO[ListItem.PictureDateTime]</label>
+        <visible>Window.IsActive(pictures) + !String.IsEmpty(ListItem.PictureDateTime)</visible>
     </control>
     <!-- Movie Sets
     <control type="label">
@@ -317,156 +453,6 @@
     <textcolor>MediaDetailsGenre</textcolor>
     <label>$LOCALIZE[31313]</label>
     <include>VisibleIfMovieSet</include>
-  </control>-->
-</control>
-
-<!-- Sets button -->
-<control type="button" id="997">
-  <onup>55</onup>
-  <ondown>55</ondown>
-  <onleft>55</onleft>
-  <onright>998</onright>
-  <description>sets</description>
-  <posx>745</posx>
-  <posy>5</posy>
-  <width>32</width>
-  <height>24</height>
-  <label></label>
-  <onclick>ActivateWindow(10025,"videodb://movies/sets/$INFO[ListItem.SetId]/?setid=$INFO[ListItem.SetId]",return)</onclick>
-  <visible>Window.IsActive(10025) + !Container.Content(sets) + !String.IsEmpty(ListItem.Set)</visible>
-</control>
-
-<animation type="Conditional" condition="Control.HasFocus(8889)" reversible="true">
-  <effect type="fade" start="100" end="30" time="500"  />
-</animation>
-</control>
-<include>showacteurinfo</include>
-</include>
-<include name="Viewtype_ListFanart">
-  <control type="group">
-    <visible>Control.IsVisible(509)</visible>
-    <!-- Browser -->
-    <control type="list" id="509">
-      <viewtype label="31803">list and fanart</viewtype>
-      <include>CommonListId</include>
-    </control>
-    <!-- Thumbnails -->
-    <control type="group">
-      <left>1035</left>
-
-      <width>800</width>
-      <include>Animation_OpenCloseFade</include>
-      <include>Animation_FadedByMenu</include>
-      <include>Animation_HiddenByInfo</include>
-      <visible>Window.IsActive(pictures) | Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)</visible>
-
-      <control type="image">
-
-        <bordersize>30</bordersize>
-        <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-        <texture background="true">$INFO[ListItem.Icon]</texture>
-        <aspectratio scalediffuse="true">keep</aspectratio>
-        <visible>Window.IsActive(pictures) + !String.IsEmpty(ListItem.Icon)</visible>
-      </control>
-      <!-- Picture Fanart Image (use for thumb if no icon set) -->
-      <control type="image">
-
-        <bordersize>30</bordersize>
-        <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-        <texture background="true" fallback="home_art/pictures.jpg">$INFO[ListItem.Art(fanart)]</texture>
-        <aspectratio scalediffuse="true">keep</aspectratio>
-        <visible>Window.IsActive(pictures) + String.IsEmpty(ListItem.Icon)</visible>
-      </control>
-      <!-- Movie Fanart Image -->
-      <control type="image">
-
-        <bordersize>30</bordersize>
-        <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-        <texture background="true" fallback="home_art/movies.jpg">$INFO[ListItem.Art(fanart)]</texture>
-        <aspectratio scalediffuse="true">keep</aspectratio>
-        <visible>!String.IsEmpty(ListItem.Title) + [Container.Content(movies) | Container.Content(sets)]</visible>
-      </control>
-      <!-- TVShow Fanart Image -->
-      <control type="image">
-
-        <bordersize>30</bordersize>
-        <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-        <texture background="true" fallback="home_art/tvshows.jpg">$INFO[ListItem.Property(Fanart_Image)]</texture>
-        <aspectratio scalediffuse="true">keep</aspectratio>
-        <visible>!String.IsEmpty(ListItem.Title) + [Container.Content(tvshows) | Container.Content(seasons)]</visible>
-      </control>
-      <!-- Episode Image -->
-      <control type="image">
-
-        <bordersize>30</bordersize>
-        <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-        <texture background="true">$INFO[ListItem.Icon]</texture>
-        <aspectratio scalediffuse="true">keep</aspectratio>
-        <visible>!String.IsEmpty(ListItem.Title) + Container.Content(episodes)</visible>
-      </control>
-      <!-- Image Frame
-      <control type="image">
-      <posx>12</posx>
-      <posy>46</posy>
-      <width>650</width>
-      <height>383</height>
-      <texture>frames/ClassicFrame_FanartMedium.png</texture>
-      <aspectratio scalediffuse="true">scale</aspectratio>
-      <visible>!String.IsEmpty(ListItem.Title)</visible>
-    </control>-->
-
-    <!-- Season - TV Show Title -->
-    <control type="label">
-      <posx>35</posx>
-      <posy>430</posy>
-      <width>600</width>
-      <height>30</height>
-      <align>center</align>
-      <aligny>center</aligny>
-      <font>METF_TitleTextLarge</font>
-      <textcolor>TitleText</textcolor>
-      <label>$INFO[ListItem.TVShowTitle]</label>
-      <visible>Container.Content(seasons)</visible>
-    </control>
-
-    <!-- Episode Air Date
-    <control type="label">
-    <posx>35</posx>
-    <posy>459</posy>
-    <width>600</width>
-    <height>30</height>
-    <align>center</align>
-    <aligny>center</aligny>
-    <font>METF_MediaDetailsSmall</font>
-    <textcolor>MediaDetailsYear</textcolor>
-    <label>$LOCALIZE[20416] $INFO[ListItem.Premiered]</label>
-    <visible>!String.IsEmpty(ListItem.Premiered) + Container.Content(episodes)</visible>
-  </control>-->
-  <!-- Picture Date -->
-  <control type="label">
-    <posx>35</posx>
-    <posy>459</posy>
-    <width>600</width>
-    <height>30</height>
-    <align>center</align>
-    <aligny>center</aligny>
-    <font>METF_MediaDetailsSmall</font>
-    <textcolor>MediaDetailsGenre</textcolor>
-    <label>$INFO[ListItem.PictureDateTime]</label>
-    <visible>Window.IsActive(pictures) + !String.IsEmpty(ListItem.PictureDateTime)</visible>
-  </control>
-  <!-- Movie Sets
-  <control type="label">
-  <posx>35</posx>
-  <posy>459</posy>
-  <width>600</width>
-  <height>30</height>
-  <align>center</align>
-  <aligny>center</aligny>
-  <font>METF_MediaDetailsSmall</font>
-  <textcolor>MediaDetailsGenre</textcolor>
-  <label>$LOCALIZE[31313]</label>
-  <include>VisibleIfMovieSet</include>
 </control>-->
 </control>
 <!-- Details -->
