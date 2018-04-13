@@ -1405,6 +1405,11 @@ msgctxt "#31734"
 msgid "Animated country flags"
 msgstr ""
 
+
+msgctxt "#31735"
+msgid "Wall"
+msgstr ""
+
 msgctxt "#31736"
 msgid "List"
 msgstr ""
@@ -1866,7 +1871,7 @@ msgid "Random case panel"
 msgstr ""
 
 msgctxt "#31916"
-msgid "Playlist background style"
+msgid "Background style"
 msgstr ""
 
 msgctxt "#31917"

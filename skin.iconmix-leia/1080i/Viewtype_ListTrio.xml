@@ -2,109 +2,199 @@
 <includes>
   <!-- GAUCHE -->
 
-  <include name="commonlistitemtrio">
-				<control type="image">
-					<posx>0</posx>
-					<posy>0</posy>
-					<width>845</width>
-					<height>35</height>
-					<texture>FocusLine.png</texture>
-					<colordiffuse>902F2F2F</colordiffuse>
-				</control>
-				<control type="image">
-					<posx>5</posx>
-					<posy>33</posy>
-					<width>845</width>
-					<height>2</height>
-					<aligny>center</aligny>
-					<texture>VideoInfoLine.png</texture>
-					<colordiffuse>FilesDividerDiffuse</colordiffuse>
-				</control>
-			
-				<control type="group">
-					<posx>5</posx>
-					<posy>10</posy>
-					<include content="OverlayProgress">
-					 <param name="Hauteur">25</param>
-					    <param name="Largeur">100</param>
-					     <param name="PositionY">-3</param>
-					</include>
-				</control>
-			
-				<control type="image">
-					<posx>4</posx>
-					<posy>2</posy>
-					<width>24</width>
-					<height>24</height>
-					<texture>$INFO[ListItem.Overlay]</texture>
-					<colordiffuse>WatchedOverlay</colordiffuse>
-					<visible>!Window.IsActive(10025) + String.IsEqual(ListItem.Overlay,OverlayWatched.png)</visible>
-				</control>
-		
-				<control type="label">
-					<posx>630</posx>
-					<posy>-2</posy>
-					<width>220</width>
-					<height>35</height>
-					<align>right</align>
-					<aligny>center</aligny>
-					<label>$INFO[ListItem.Property(Addon.Status)]</label>
-					<font>METF_InfoText</font>
-					<textcolor>MediaDetailsEpisodes</textcolor>
-					<visible>Window.IsActive(addonbrowser)</visible>
-				</control>
+ 
+  
+  <include name="commonlistitem2Trio">
+    <param name="Fond" default="FocusLine.png"/>
+    <param name="Ligne" default="VideoInfoLine.png"/>
+    <definition>
+      <!-- List Line Item Divider -->
+      <control type="image">
+        <posx>0</posx>
+        <posy>0</posy>
+        <width>650</width>
+        <height>40</height>
+        <texture>$PARAM[Fond]</texture>
+        <colordiffuse>A02F2F2F</colordiffuse>
+        <visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
+      </control>
+      <control type="image">
+        <posx>38</posx>
+        <posy>38</posy>
+        <width>645</width>
+        <height>2</height>
+        <aligny>center</aligny>
+        <texture>$PARAM[Ligne]</texture>
+        <colordiffuse>FilesDividerDiffuse</colordiffuse>
+      </control>
 
-			<control type="group">
-			  <visible>[Container.Content(tvshows)|Container.Content(seasons)] + !String.IsEmpty(ListItem.Property(NumEpisodes))+![!ListItem.IsResumable+ Integer.IsGreater(ListItem.PlayCount,0)+ String.IsEmpty(ListItem.Property(PercentPlayed))]</visible>
-				<control type="label">
-					<posx>2</posx>
-					<width>108</width>
-					<height>36</height>
-					<align>center</align>
-					<aligny>center</aligny>
-					<!-- <label>[B]([COLOR white]$INFO[ListItem.Property(UnWatchedEpisodes)][/COLOR]/$INFO[ListItem.Property(NumEpisodes)])[/B]</label> -->
-					<label>[COLOR lightgrey]$INFO[ListItem.Property(UnWatchedEpisodes)][/COLOR][COLOR white]/[/COLOR]$INFO[ListItem.Property(NumEpisodes)]</label> -->
-					<font>compteurepisodes</font>
-					<textcolor>MediaDetailsEpisodes</textcolor>
-					
-				</control>
-				<control type="image">
-				 <width>108</width>
-					<height>38</height>
-					<top>-3</top>
-					<aligny>center</aligny>
-        
-      <texture>frames/banner_frame2glass.png</texture>
-				</control>
-	</control>
-				
-				<control type="group">
-					
-					<visible>!Window.IsActive(10025) + !String.Contains(Container.FolderPath,plugin)</visible>
-					<control type="label">
-						<posx>775</posx>
-						<posy>-2</posy>
-						<width>45</width>
-						<height>35</height>
-						<align>right</align>
-						<aligny>center</aligny>
-						<label>$INFO[ListItem.Rating]</label>
-						<font>METF_InfoText</font>
-						<textcolor>TextNF</textcolor>
-						<visible>!String.IsEmpty(ListItem.Rating)</visible>
-					</control>
-					<control type="image">
-						<posx>772</posx>
-						<posy>6</posy>
-						<width>20</width>
-						<height>20</height>
-						<texture>Star.png</texture>
-						<colordiffuse>FFFFFFFF</colordiffuse>
-						<visible>!String.IsEmpty(ListItem.Rating)</visible>
-					</control>
-				</control>
-    
+      <!-- Watched Overlay for In-Progress Items in Video Library -->
+      <control type="group">
+        <posx>470</posx>
+      <!-- <posx>5</posx> -->
+      <posy>10</posy>
+      <include content="OverlayProgress">
+        <param name="Hauteur">25</param>
+        <param name="Largeur">120</param>
+        <param name="PositionX">100</param>
+        <param name="PositionY">0</param>
+        <param name="PositionXVU">180</param>
+        <param name="PositionYVU">-6</param>
+      </include>
+    </control>
+
+
+    <!-- Addon Progress/state -->
+    <control type="label">
+      <posx>430</posx>
+      <posy>-2</posy>
+      <width>220</width>
+      <height>35</height>
+      <align>right</align>
+      <aligny>center</aligny>
+      <label>$INFO[ListItem.Property(Addon.Status)]</label>
+      <font>METF_InfoText</font>
+      <textcolor>MediaDetailsEpisodes</textcolor>
+      <visible>Window.IsActive(addonbrowser)</visible>
+    </control>
+
+    <include content="EpisodesVus">
+      <param name="PositionX">530</param>
+      <param name="PositionY">3</param>
+    </include>
+    <!-- Star Rating -->
+    <control type="group">
+
+      <visible>!Window.IsActive(10025) + !String.Contains(Container.FolderPath,plugin)</visible>
+      <control type="label">
+        <posx>575</posx>
+        <posy>-2</posy>
+        <width>45</width>
+        <height>35</height>
+        <align>left</align>
+        <aligny>center</aligny>
+        <label>$INFO[ListItem.Rating]</label>
+        <font>METF_InfoText</font>
+        <textcolor>TextNF</textcolor>
+        <visible>!String.IsEmpty(ListItem.Rating)</visible>
+      </control>
+      <control type="image">
+        <posx>572</posx>
+        <posy>6</posy>
+        <width>20</width>
+        <height>20</height>
+        <texture>Star.png</texture>
+        <colordiffuse>FFFFFFFF</colordiffuse>
+        <visible>!String.IsEmpty(ListItem.Rating)</visible>
+      </control>
+    </control>
+  </definition>
+</include>
+
+<include name="CommonListIdTrio">
+  <animation type="Conditional" condition="Window.IsActive(addoninformation)">
+    <effect type="zoom" time="600" center="640,360" start="100" end="50" tween="cubic" easing="out" />
+    <effect type="fade" time="400" start="100" end="0" />
+  </animation>
+
+  <posx>5</posx>
+  <posy>60</posy>
+  <height>715</height>
+  <width>1350</width>
+
+
+  <oninfo condition="Container.Content(actors)|Container.Content(directors)">SetProperty(ActorThumb,$VAR[PosterThumb],Home)</oninfo>
+<!-- <oninfo condition="Container.Content(actors)|Container.Content(directors)">SetFocus(8889)</oninfo> -->
+<oninfo condition="Container.Content(actors)|Container.Content(directors)">SetProperty(IconmixShowInfo,55,Home)</oninfo>
+<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
+<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
+<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
+
+<!-- <onright>60</onright> -->
+<scrolltime>160</scrolltime>
+<orientation>vertical</orientation>
+<preloaditems>2</preloaditems>
+<aligny>top</aligny>
+<pagecontrol>60</pagecontrol>
+<include>Animation_OpenCloseFade</include>
+<include>Animation_FadedByMenu</include>
+<include>Animation_HiddenByInfo</include>
+<itemlayout width="0" height="40">
+  <include content="commonlistitem2Trio"></include>
+
+  <control type="label">
+   
+    <left>10</left>
+    <posy>-2</posy>
+    <width>638</width>
+    <height>35</height>
+    <aligny>center</aligny>
+    <align>left</align>
+    <font>exptext</font>
+    <shadowcolor>FF5F5F5F</shadowcolor>
+    <textcolor>white</textcolor>
+    <label>$VAR[ListItemVu]</label>
+    <scroll>false</scroll>
+    <visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
+  </control>
+  <control type="image">
+    <left>20</left>
+    <top>2</top>
+    <height>35</height>
+    <width>119</width>
+    <aspectratio>keep</aspectratio>
+    <texture>buttons/parent.png</texture>
+    <visible>String.IsEqual(ListItem.Label,..)|String.IsEqual(ListItem.Title,..)</visible>
+  </control>
+
+
+</itemlayout>
+<focusedlayout width="0" height="40">
+  <include>ActiveClearArt</include>
+  <control type="image">
+    <posx>-1</posx>
+    <width>705</width>
+    <height>42</height>
+    <aligny>center</aligny>
+    <texture>ButtonFO2Wide2.png</texture>
+    <aspectratio>stretch</aspectratio>
+    <colordiffuse>FocusBar</colordiffuse>
+  </control>
+
+  <include content="commonlistitem2Trio">
+    <param name="Fond"></param>
+    <param name="Ligne"></param>
   </include>
+  <control type="label">
+    <!--   <include>isWatched</include>
+    <posx>110</posx> -->
+    <left>10</left>
+    <posy>-2</posy>
+    <width>638</width>
+    <height>35</height>
+    <aligny>center</aligny>
+    <align>left</align>
+    <font>exptext</font>
+    <shadowcolor>FF5F5F5F</shadowcolor>
+    <textcolor>white</textcolor>
+    <label>$VAR[ListItemVu]</label>
+    <scroll>false</scroll>
+    <visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
+  </control>
+  <control type="image">
+    <left>20</left>
+    <top>2</top>
+    <height>35</height>
+    <width>119</width>
+
+    <aspectratio>keep</aspectratio>
+    <texture>buttons/parent.png</texture>
+    <align>left</align>
+    <visible>String.IsEqual(ListItem.Label,..)|String.IsEqual(ListItem.Title,..)</visible>
+  </control>
+
+</focusedlayout>
+</include>
  
 	<include name="Viewtype_ListTrio">
 		<control type="group">
@@ -188,7 +278,7 @@
 			<posx>65</posx>
 			<posy>78</posy>
 			<height>717</height>
-			<width>700</width>
+			<width>1350</width>
 			
 			<onup>557</onup>
 		
@@ -208,11 +298,12 @@
 			<include>Animation_OpenCloseFade</include>
 			<include>Animation_FadedByMenu</include>
 			<include>Animation_HiddenByInfo</include>
+			<include>CommonListIdTrio</include>
+			<!--
 			<itemlayout width="0" height="36">
 			  
 				<include>commonlistitemtrio</include>
 			  
-				<!-- Items in Video Library -->
 				<control type="label">
 				  <include>isWatched</include>
 					<posx>108</posx>
@@ -232,7 +323,6 @@
 			<focusedlayout width="0" height="36">
 				<include>ActiveClearArt</include>
 				<include>commonlistitemtrio</include>
-				<!-- Focus Bar -->
 				<control type="image">
 					<posx>0</posx>
 					<posy>0</posy>
@@ -244,7 +334,6 @@
 				</control>
 				
 			  
-				<!-- Items in Video Library -->
 				<control type="label">
 			
 					<posx>108</posx>
@@ -258,6 +347,7 @@
 					<scroll>false</scroll>
 				</control>
 			</focusedlayout>
+			-->
 		</control>
 		<!-- Thumbnails -->
 		<control type="group">

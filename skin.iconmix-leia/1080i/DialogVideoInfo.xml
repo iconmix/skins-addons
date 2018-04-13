@@ -106,7 +106,8 @@ l            <ondown>2101</ondown>
           </control>
         </control>
         <control type="group" id="2103">
-          
+                   <visible>System.HasAddon(script.iconmixtools)+!Player.HasVideo</visible>
+
           <include>videoinfobuttonfond</include>
            
           <control type="grouplist" id="442">
@@ -193,7 +194,7 @@ l            <ondown>2101</ondown>
               <include>Animation_ButtonFocus</include>
               <onclick condition="Skin.HasSetting(BAfenetre)">Skin.ToggleSetting(BAfenetre)</onclick>
               <onclick>SetFocus(7003,0)</onclick>
-              <onclick>RunScript(script.iconmixtools,trailer=True&dbtype=$INFO[ListItem.DBTYPE]&label=$INFO[ListItem.Label]&year=$INFO[ListItem.Year]&dbid=$INFO[ListItem.DBID]&imdbnumber=$INFO[ListItem.Property(IMDBNumber)]&tmdbnumber=$INFO[ListItem.Property(TMDBNumber)])</onclick>
+              <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
             </control>
              
             <!-- fenetre -->
@@ -215,7 +216,7 @@ l            <ondown>2101</ondown>
               <onfocus>SetProperty(showgenre,,1100)</onfocus>
               <onclick condition="!Skin.HasSetting(BAfenetre)">Skin.ToggleSetting(BAfenetre)</onclick>
               <onclick>SetFocus(7003,0)</onclick>
-              <onclick>RunScript(script.iconmixtools,trailer=True&dbtype=$INFO[ListItem.DBTYPE]&label=$INFO[ListItem.Label]&year=$INFO[ListItem.Year]&dbid=$INFO[ListItem.DBID]&imdbnumber=$INFO[ListItem.Property(IMDBNumber)]&tmdbnumber=$INFO[ListItem.Property(TMDBNumber)])</onclick>
+              <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
 
             </control>
 
@@ -1166,6 +1167,9 @@ l            <ondown>2101</ondown>
 </control>
 <include>GlobalBackgroundVideoInfo</include>
 <control type="group">
+  <animation type="Conditional" condition="true">
+  				<effect type="zoom" center="15,980" start="100" end="75" time="1"  />
+  			</animation>	
   <posy>980</posy>
   <posx>15</posx>
   <include condition="!Skin.HasSetting(Hide_ExtraMediaFlags)">MediaInfoGroup3</include>
@@ -1182,6 +1186,17 @@ l            <ondown>2101</ondown>
 </control>
 <include>PanelActeurs</include>
 <include>DialogVideoInfoRealisateur</include>
+<control type="image">
+        	<animation type="Visible">
+			<effect type="fade" time="100" start="0" end="80" />
+		</animation>
+       <posx>0</posx>
+       <posy>0</posy>
+       <width>1920</width>
+       <height>1080</height>
+       <texture>frames/eau.png</texture>
+     <visible>Player.HasVideo+String.IsEqual(Window(Home).Property(annonceencours),window)</visible> 
+      </control>
 
 
 </controls>

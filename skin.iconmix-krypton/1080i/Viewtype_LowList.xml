@@ -13,8 +13,8 @@
 				<ondown>905</ondown>
 				<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
 
-<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
-<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
+
+
 
 
 				<onright>998</onright>

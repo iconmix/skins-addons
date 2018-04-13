@@ -387,11 +387,12 @@ class Main:
                  Titre=IMDBNUMBER
                if not TMDBID:             
                    TMDBID=utils.get_externalID(IMDBNUMBER,TypeVideo)
-               logMsg("self.TrailerType (%s) : (%s)(%s)(%s)(%s)" %(Titre,IMDBNUMBER,TypeVideo,TMDBID,ContainerID))
-      dialog.notification('IconMixTools', __language__( 32508 )+": [COLOR=Yellow] "+Titre+"[/COLOR]", ADDON_ICON,500)   
+      logMsg("self.TrailerType (%s)(%s) : (%s)(%s)" %(self.TrailerType,Titre,TypeVideo,TMDBID))
+      #dialog.notification('IconMixTools', __language__( 32508 )+": [COLOR=Yellow] "+Titre.encode("utf8")+"[/COLOR]", ADDON_ICON,500)   
+      dialog.notification('IconMixTools', __language__( 32508 ), ADDON_ICON,500)   
       if TMDBID!='' or len(TMDBIDListe)>0:
            xbmc.executebuiltin( "ActivateWindow(busydialog)" )   
-           logMsg("self.TrailerType (%s) : (%s)(%s)(%s)(%s)(%s)" %(self.TrailerType,Titre,TypeVideo,TMDBID,ContainerID,KODIID))
+           #logMsg("self.TrailerType (%s) : (%s)(%s)(%s)(%s)(%s)" %(self.TrailerType,Titre,TypeVideo,TMDBID,ContainerID,KODIID))
            if len(TMDBIDListe)>0:
              #logMsg("SagaType TMDBIDListe %s" %(TMDBIDListe),0)
              #start_time = time.time() 

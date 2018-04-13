@@ -1162,6 +1162,10 @@ msgctxt "#31717"
 msgid "Precip"
 msgstr "Précipitations"
 
+msgctxt "#31735"
+msgid "Wall"
+msgstr "Mur"
+
 msgctxt "#31733"
 msgid "Main menu item list"
 msgstr "Raccourci du menu principal"
@@ -1628,8 +1632,8 @@ msgid "Random case panel"
 msgstr "Pochettes aléatoires jetées"
 
 msgctxt "#31916"
-msgid "Playlist background style"
-msgstr "Style du fond d'écran de la playlist"
+msgid "Background style"
+msgstr "Style du fond d'écran"
 
 msgctxt "#31917"
 msgid "MISSING"

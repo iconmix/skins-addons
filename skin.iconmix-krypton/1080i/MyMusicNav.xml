@@ -4,7 +4,7 @@
 	<onload>Skin.ToggleSetting(SkinHelper.EnableMusicArt)</onload>
 	<onload>SetProperty(IconmixDialogContext,,Home)</onload>
   <onunload>SetProperty(IconmixDialogContext,,Home)</onunload>
-	<views>55,509,905,58,559,511,510,513,514,552,551,906,561</views>
+	<views>55,509,58,559,511,510,513,514,552,551,906,561</views>
 	<defaultcontrol always="true">55</defaultcontrol>
 	<controls>
 		<control type="group">
@@ -23,7 +23,6 @@
     		<include>Viewtype_BannerV</include>			<!-- 513 -->
     		<include>Viewtype_BannerPoster</include>		<!-- 510 -->
     		<include>Viewtype_List</include>
-    		<include>Viewtype_LowList</include>
     		<include>Viewtype_Gallery_Square</include>
     		<include>Viewtype_Panel_Square</include>
     		<include>Viewtype_Poster_Large_Fixed</include>		<!-- 552 -->
@@ -77,7 +76,7 @@
 		<!--------------------------------------------------ARTISTES------------------------------------------------------ -->
 		
   		<include>focusboitiers</include>
-  		<control type="wraplist" id="2998">			
+  		<control type="wraplist" id="2995">			
   				<posx>-2000</posx>
   				<autoscroll time="6000">true</autoscroll>
   			<itemlayout>
@@ -450,12 +449,12 @@
        <posy>0</posy>
        <width>1920</width>
        <height>1080</height>
-       <texture>frames/eau.png</texture>
+       <texture>background.png</texture>
       </control>
     </control>
      
     <include>MenuGeneral</include>
-		<include>AnimationVoletsHorizontaux</include>
+		
 		
 		
 		 <!--	DEBUG --

@@ -25,10 +25,11 @@
   <onunload>ClearProperty(IconmixShowInfo,Home)</onunload>
   <onload>ClearProperty(IconmixDialogContext,Home)</onload>
   <onunload>ClearProperty(IconmixDialogContext,Home)</onunload>
+  
   <onload condition="!String.IsEmpty(Window(Home).property(IconmixFlagPanelEpisode))">SetFocus(1999)</onload>
   <menucontrol>7000</menucontrol>
 
-  <views>55,557,905,906,509,53,57,58,559,555,556,501,551,552,553,554,550,504,511,513,514,510,52,521,56,560,512,584,585,586,587</views>
+  <views>55,557,906,509,53,57,58,559,555,556,501,551,552,553,554,550,504,511,513,514,510,52,521,56,560,512,584,585,586,587</views>
   <defaultcontrol always="true">55</defaultcontrol>
   
   <controls>
@@ -70,7 +71,6 @@
 
         <include>Viewtype_List</include>			<!-- 55 -->
         <include>Viewtype_ListTrio</include>			<!-- 55 -->
-        <include>Viewtype_LowList</include>			<!-- 905 -->
         <include>Viewtype_ListFanart</include>			<!-- 509 -->
         <include>Viewtype_PosterAndFanart</include>		<!-- 550 -->
         <include>Viewtype_Poster_VeryLarge_Fixed</include>		<!-- 555 -->
@@ -119,9 +119,31 @@
           <include condition="!Skin.HasSetting(Hide_ExtraMediaFlags)">MediaInfoGroup2</include>
           <visible>!Window.IsVisible(movieinformation)</visible>
         </control>
+        
         <include>Global_ScrollOffsetLabel</include>
         <include>Global_AddonInfo</include>
         <visible>!Skin.HasSetting(CacheFond)</visible>
+        	<control type="group">
+		  <posy>1105</posy>
+		        <include>VisibleIfNotMovieSet</include>
+		        <visible>!String.IsEmpty(ListItem.FilenameAndPath)+Skin.HasSetting(ShowFilePath)</visible>
+		         <animation reversible="false" type="Conditional" condition="!Container().OnNext+!Container().OnPrevious">
+        <effect type="slide" end="0,-50" time="250" delay="250" />
+      </animation>
+		
+        <control type="label">
+          <top>13</top>
+          <width>1400</width>
+            <align>left</align>
+            <aligny>center</aligny>
+            <scroll>true</scroll>
+            <scrollout>false</scrollout>
+            <font>impactsongs</font>
+            <textcolor>lightgrey</textcolor>
+            <label>$INFO[ListItem.FilenameAndPath]</label>
+          </control>
+          
+     </control>
       </control>
 
       <!----------------------------------------------SAGAS------------------------------------------------------------------ -->
@@ -157,14 +179,9 @@
         <onright condition="!String.IsEqual(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetProperty(ShowFocus,,Home)</onright>
         <onright condition="!String.IsEqual(Window(Home).Property(IconMixVerticalNavigation),horizontal)">SetFocus(55)</onright>
         <onclick>SetProperty(FenetreListeChoix,1,Home)</onclick>
-        <!-- <oninfo>RunScript(script.iconmixtools,showinfo=True&id=$INFO[Container(1999).CurrentItem])</oninfo> 
-        <onclick>RunPlugin(plugin://script.iconmixtools/?action=showinfo)</onclick>-->
-        <oninfo>SetProperty(IconmixShowInfo,1,Home)</oninfo> 
-       <!-- <oninfo>SetFocus(7781)</oninfo>
-        -->
-         <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
-        
-        <onback>SetFocus(55)</onback>
+        <oninfo>SetProperty(IconmixShowInfo,1,Home)</oninfo>        
+         <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>        
+        <onback>55</onback>
         <visible>Integer.IsGreater(Container(1999).NumItems,0)</visible>
       </control>
 
@@ -682,7 +699,7 @@
        <posy>0</posy>
        <width>1920</width>
        <height>1080</height>
-       <texture>frames/eau.png</texture>
+       <texture>background.png</texture>
       </control>
       <include>ListeEpisodes</include>
     </control>
@@ -693,15 +710,15 @@
        	
 			
     
-    <include>AnimationVoletsHorizontaux</include>
+    
     <!--- ------------------------------------------------------------------ ---->
     <!--	DEBUG --
     <control type="button">
-		  <width max="340">auto</width>
+		  <width max="1920">auto</width>
       <height>30</height>
       <left>40</left>
       <posy>940</posy>
-      <label>IconmixDialogContext : $INFO[Window(Home).Property(IconmixFlagPanelEpisode)]/$INFO[Container(1999).ListItem.DbId]/$INFO[Container(1999).Position]</label>
+      <label>$INFO[Container.Content]/$INFO[ListItem.DbType]/$INFO[Window(Home).property(Angle2)]</label>
       <font>exptextacteurs</font>
       <textcolor>FF404040</textcolor>
       <shadowcolor>FF7F7F7F</shadowcolor>

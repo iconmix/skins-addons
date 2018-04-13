@@ -18,14 +18,14 @@
     <controls>
       <control type="multiimage">
         <skinshortcuts>visibility</skinshortcuts>
-        <visible>Control.HasFocus(9000)+String.Contains(Container(9000).ListItem.Property(background),WDF1)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)</visible>
+        <visible>Control.HasFocus(9000)+String.Contains(Container(9000).ListItem.Property(background),WDF1)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)</visible>
         <imagepath background="true">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(fanart)]</imagepath>
         <fadetime>600</fadetime>
 
       </control>
     </controls>
   </other>
-  <other include="widget1Fanart">
+  <other include="widget2Fanart">
     <!-- Widget Style -->
     <condition tag="property" attribute="name|widgetStyle.2">SystemInfo</condition>
     <condition tag="property" attribute="name|widgetStyle.2">WeatherForecast</condition>
@@ -41,7 +41,7 @@
     <controls>
       <control type="multiimage">
         <skinshortcuts>visibility</skinshortcuts>
-        <visible>Control.HasFocus(9000)+String.Contains(Container(9000).ListItem.Property(background),WDF2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)</visible>
+        <visible>Control.HasFocus(9000)+String.Contains(Container(9000).ListItem.Property(background),WDF2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)</visible>
         <imagepath background="true">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(fanart)]</imagepath>
         <fadetime>600</fadetime>
 
@@ -294,18 +294,30 @@
                 <visible>!String.IsEmpty(Container(9000).ListItem.Property(widget.2))+!Container(8012$SKINSHORTCUTS[id]).IsUpdating+Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)</visible>
               </control>
             </control>
-            <control type="fadelabel">
+             <control type="fadelabel">
               <posx>10</posx>
-              <posy>4</posy>
+              <posy>-12</posy>
               <width>895</width>
-              <height>60</height>
+              <height>30</height>
               <align>center</align>
-              <aligny>center</aligny>
               <scroll>true</scroll>
               <scrollspeed>30</scrollspeed>
-              <font>METF_HomeMenu</font>
+              <font>METF_StarRating</font>
               <textcolor>yellow</textcolor>
               <label>$VAR[GlobalWidgetLabel8011$SKINSHORTCUTS[id]]</label>
+            </control>
+            <control type="fadelabel">
+              <left>20</left>
+              <posy>22</posy>
+              <width>855</width>
+              <height>30</height>
+              <align>center</align>
+              <aligny>bottom</aligny>
+              <scroll>true</scroll>
+              <scrollspeed>30</scrollspeed>
+              <font>PlotFont</font>
+              <textcolor>lightgrey</textcolor>
+              <label>$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Plot]</label>
             </control>
           </control>
         </control>
@@ -485,16 +497,28 @@
             </control>
             <control type="fadelabel">
               <posx>10</posx>
-              <posy>4</posy>
+              <posy>-12</posy>
               <width>1500</width>
-              <height>60</height>
+              <height>30</height>
               <align>center</align>
-              <aligny>center</aligny>
               <scroll>true</scroll>
               <scrollspeed>30</scrollspeed>
               <font>METF_StarRating</font>
               <textcolor>yellow</textcolor>
               <label>$VAR[GlobalWidgetLabel8011$SKINSHORTCUTS[id]]</label>
+            </control>
+            <control type="fadelabel">
+              <left>50</left>
+              <posy>22</posy>
+              <width>1400</width>
+              <height>30</height>
+              <align>center</align>
+              <aligny>bottom</aligny>
+              <scroll>true</scroll>
+              <scrollspeed>30</scrollspeed>
+              <font>PlotFont</font>
+              <textcolor>lightgrey</textcolor>
+              <label>$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Plot]</label>
             </control>
           </control>
         </control>
@@ -804,18 +828,30 @@
                 <visible>!String.IsEmpty(Container(9000).ListItem.Property(widget.2))+!Container(8011$SKINSHORTCUTS[id]).IsUpdating+Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)</visible>
               </control>
             </control>
-            <control type="fadelabel">
+             <control type="fadelabel">
               <posx>10</posx>
-              <posy>4</posy>
+              <posy>-12</posy>
               <width>895</width>
-              <height>60</height>
+              <height>30</height>
               <align>center</align>
-              <aligny>center</aligny>
               <scroll>true</scroll>
               <scrollspeed>30</scrollspeed>
-              <font>METF_HomeMenu</font>
+              <font>METF_StarRating</font>
               <textcolor>yellow</textcolor>
               <label>$VAR[GlobalWidgetLabel8021$SKINSHORTCUTS[id]]</label>
+            </control>
+            <control type="fadelabel">
+              <left>20</left>
+              <posy>22</posy>
+              <width>855</width>
+              <height>30</height>
+              <align>center</align>
+              <aligny>bottom</aligny>
+              <scroll>true</scroll>
+              <scrollspeed>30</scrollspeed>
+              <font>PlotFont</font>
+              <textcolor>lightgrey</textcolor>
+              <label>$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Plot]</label>
             </control>
           </control>
         </control>
@@ -994,18 +1030,30 @@
                 <visible>!String.IsEmpty(Container(9000).ListItem.Property(widget))+!Container(8011$SKINSHORTCUTS[id]).IsUpdating+Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)</visible>
               </control>
             </control>
-            <control type="fadelabel">
+          <control type="fadelabel">
               <posx>10</posx>
-              <posy>4</posy>
+              <posy>-12</posy>
               <width>1500</width>
-              <height>60</height>
+              <height>30</height>
               <align>center</align>
-              <aligny>center</aligny>
               <scroll>true</scroll>
               <scrollspeed>30</scrollspeed>
               <font>METF_StarRating</font>
               <textcolor>yellow</textcolor>
               <label>$VAR[GlobalWidgetLabel8021$SKINSHORTCUTS[id]]</label>
+            </control>
+            <control type="fadelabel">
+              <left>50</left>
+              <posy>22</posy>
+              <width>1400</width>
+              <height>30</height>
+              <align>center</align>
+              <aligny>bottom</aligny>
+              <scroll>true</scroll>
+              <scrollspeed>30</scrollspeed>
+              <font>PlotFont</font>
+              <textcolor>lightgrey</textcolor>
+              <label>$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Plot]</label>
             </control>
           </control>
         </control>

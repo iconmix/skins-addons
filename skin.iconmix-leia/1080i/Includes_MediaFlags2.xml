@@ -315,6 +315,8 @@
 
     </control>
   </include>
+  <!-- videoplayer-->
+ 
   <include name="Horizlist">
     <width>700</width>
     <height>70</height>
@@ -459,6 +461,37 @@
 
       </control>
     </control>
+    
+    <control type="group"> <!-- realisateur -->
+      <visible>!Skin.HasSetting(hiderealisateur)+!String.IsEmpty(ListItem.Director)</visible>
+      <width>166</width>
+      <height>70</height>
+      <align>center</align>
+      <control type="image">
+
+        <colordiffuse>MediaFlagDiffuse</colordiffuse>
+        <texture>$VAR[CadreFlag]</texture>
+      </control>
+    <control type="textbox">
+          <font>impactsongs</font>
+          <left>53</left>
+          <width>110</width>
+          <height>60</height>
+          <aligny>center</aligny>
+          <shadowcolor>ff000000</shadowcolor>
+          <label>[COLOR=lightgrey][I]$INFO[ListItem.Director][/I][/COLOR]</label>
+        </control>
+        <control type="image">
+          <left>3</left>
+          <top>10</top>
+          <width>50</width>
+          <height>50</height>
+          <texture>flags/realisateur.png</texture>
+          <aspectratio  scalediffuse="true">keep</aspectratio>
+        </control>
+        
+      </control>
+    
     <control type="group"> <!-- année -->
       <visible>!Skin.HasSetting(hideannee)</visible>
       <visible>!String.IsEmpty(ListItem.Year)</visible>
@@ -1489,6 +1522,35 @@
 
       </control>
     </control>
+     <control type="group"> <!-- realisateur -->
+      <visible>!Skin.HasSetting(hiderealisateur2)+!String.IsEmpty(ListItem.Director)</visible>
+      <width>166</width>
+      <height>70</height>
+      <align>center</align>
+      <control type="image">
+
+        <colordiffuse>MediaFlagDiffuse</colordiffuse>
+        <texture>$VAR[CadreFlag]</texture>
+      </control>
+    <control type="textbox">
+          <font>impactsongs</font>
+          <left>53</left>
+          <width>110</width>
+          <height>60</height>
+          <aligny>center</aligny>
+          <shadowcolor>ff000000</shadowcolor>
+          <label>[COLOR=lightgrey][I]$INFO[ListItem.Director][/I][/COLOR]</label>
+        </control>
+        <control type="image">
+          <left>3</left>
+          <top>10</top>
+          <width>50</width>
+          <height>50</height>
+          <texture>flags/realisateur.png</texture>
+          <aspectratio  scalediffuse="true">keep</aspectratio>
+        </control>
+        
+      </control>
     <control type="group"> <!-- année -->
       <visible>!Skin.HasSetting(hideannee2)</visible>
       <visible>!String.IsEmpty(ListItem.Year)</visible>
@@ -1926,6 +1988,35 @@
 
       </control>
     </control>
+     <control type="group"> <!-- realisateur -->
+      <visible>!Skin.HasSetting(hiderealisateur)</visible>
+      <width>166</width>
+      <height>70</height>
+      <align>center</align>
+      <control type="image">
+
+        <colordiffuse>MediaFlagDiffuse</colordiffuse>
+        <texture>$VAR[CadreFlag]</texture>
+      </control>
+    <control type="textbox">
+          <font>impactsongs</font>
+          <left>53</left>
+          <width>110</width>
+          <height>60</height>
+          <aligny>center</aligny>
+          <shadowcolor>ff000000</shadowcolor>
+          <label>[COLOR=lightgrey][I]$LOCALIZE[20339][/I][/COLOR]</label>
+        </control>
+        <control type="image">
+          <left>3</left>
+          <top>10</top>
+          <width>50</width>
+          <height>50</height>
+          <texture>flags/realisateur.png</texture>
+          <aspectratio  scalediffuse="true">keep</aspectratio>
+        </control>
+        
+      </control>
     <control type="group"> <!-- année -->
       <visible>!Skin.HasSetting(hideannee)</visible>
       <width>156</width>
@@ -2237,6 +2328,36 @@
 
       </control>
     </control>
+    
+      <control type="group"> <!-- realisateur -->
+      <visible>!Skin.HasSetting(hiderealisateur2)</visible>
+      <width>166</width>
+      <height>70</height>
+      <align>center</align>
+      <control type="image">
+
+        <colordiffuse>MediaFlagDiffuse</colordiffuse>
+        <texture>$VAR[CadreFlag]</texture>
+      </control>
+    <control type="textbox">
+          <font>impactsongs</font>
+          <left>53</left>
+          <width>110</width>
+          <height>60</height>
+          <aligny>center</aligny>
+          <shadowcolor>ff000000</shadowcolor>
+          <label>[COLOR=lightgrey][I]$LOCALIZE[20339][/I][/COLOR]</label>
+        </control>
+        <control type="image">
+          <left>3</left>
+          <top>10</top>
+          <width>50</width>
+          <height>50</height>
+          <texture>flags/realisateur.png</texture>
+          <aspectratio  scalediffuse="true">keep</aspectratio>
+        </control>
+        
+      </control>
     <control type="group"> <!-- année -->
       <visible>!Skin.HasSetting(hideannee2)</visible>
       <width>156</width>

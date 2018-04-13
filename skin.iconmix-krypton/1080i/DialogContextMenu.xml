@@ -83,9 +83,10 @@
         
         <onright>Close</onright> 
         <onright>SetProperty(IconmixDialogContext,2,Home)</onright>
-        <onright>Action(Menu,10025)</onright>
-        
-        <onclick>Action(Menu,10025)</onclick>
+        <onright condition="!Container.Content(music)+!Container.Content(song)+!Container.Content(album)+!Container.Content(artist)">Action(Menu,10025)</onright>        
+        <onclick condition="!Container.Content(music)+!Container.Content(song)+!Container.Content(album)+!Container.Content(artist)">Action(Menu,10025)</onclick>
+        <onright condition="Container.Content(music)|Container.Content(song)|Container.Content(album)|Container.Content(artist)">Action(Menu,10502)</onright>        
+        <onclick condition="Container.Content(music)|Container.Content(song)|Container.Content(album)|Container.Content(artist)">Action(Menu,10502)</onclick>
         <include>MonBoutonCommun2</include>
       </control>
  <control type="button" id="2107">        

@@ -14,12 +14,15 @@
       <include>Global_Background</include>
       <control type="image">
         <top>-200</top>
-      <left>1300</left>
-      <width>620</width>
+      <left>1350</left>
+      <width>540</width>
       <bordersize>20</bordersize>
-							<bordertexture border="20" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+			<bordertexture border="20" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
       <texture>$VAR[PreviewSetting]</texture>
       <aspectratio>keep</aspectratio>
+      <animation type="conditional" condition="true" reversible="true">
+          <effect type="rotatey"  center="1600,0" end="10" time="1" />
+        </animation>
     </control>
       <control type="group">
         <include>Animation_FadedByMenu</include>
@@ -183,19 +186,14 @@
             <visible>Container(9000).Hasfocus(1)</visible>
             <posx>0</posx>
             <posy>0</posy>
-            <width>840</width>
+            <width>940</width>
             <height>618</height>
             <itemgap>0</itemgap>
             <scrolltime>0</scrolltime>
 
             <onleft>9000</onleft>
             <onright>9000</onright>
-            <control type="radiobutton" id="101">
-              <include>SettingsLabel</include>
-              <label>$LOCALIZE[31418] $LOCALIZE[31011] [COLOR HelpText]$LOCALIZE[31417][/COLOR]</label>
-              <onclick>Skin.ToggleSetting(HideHelpText)</onclick>
-              <selected>Skin.HasSetting(HideHelpText)</selected>
-            </control>
+           
 
             <control type="radiobutton" id="102">
               <include>SettingsLabel</include>
@@ -218,7 +216,7 @@
             </control>
             <control type="radiobutton" id="100">
               <include>SettingsLabel</include>
-              <label>Show CPU Usage</label>
+              <label>$LOCALIZE[13271]</label>
               <onclick>Skin.ToggleSetting(ShowCpuUsage)</onclick>
               <selected>Skin.HasSetting(ShowCpuUsage)</selected>
             </control>
@@ -268,7 +266,7 @@
             <visible>Container(9000).Hasfocus(2)</visible>
             <posx>0</posx>
             <posy>0</posy>
-            <width>840</width>
+            <width>940</width>
             <height>618</height>
             <itemgap>0</itemgap>
             <scrolltime>0</scrolltime>
@@ -395,7 +393,7 @@
             <visible>Container(9000).Hasfocus(3)</visible>
             <posx>0</posx>
             <posy>0</posy>
-            <width>840</width>
+            <width>940</width>
             <height>618</height>
             <itemgap>0</itemgap>
             <scrolltime>0</scrolltime>
@@ -460,12 +458,7 @@
             </control>
             -->
 
-            <control type="radiobutton" id="515">
-              <include>SettingsLabel</include>
-              <label>$LOCALIZE[32000]</label>
-              <onclick>Skin.ToggleSetting(ActivateAnimation)</onclick>
-              <selected>Skin.HasSetting(ActivateAnimation)</selected>
-            </control>
+            
             <control type="button" id="516">
               <include>SettingsLabel</include>
               <label>$LOCALIZE[32001]</label>
@@ -553,7 +546,7 @@
           <visible>Container(9000).Hasfocus(4)</visible>
           <posx>0</posx>
           <posy>0</posy>
-          <width>840</width>
+          <width>940</width>
           <height>618</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
@@ -631,7 +624,7 @@
           <visible>Container(9000).Hasfocus(5)</visible>
           <posx>0</posx>
           <posy>0</posy>
-          <width>840</width>
+          <width>940</width>
           <height>618</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
@@ -670,7 +663,7 @@
           <visible>Container(9000).Hasfocus(6)</visible>
           <posx>0</posx>
           <posy>0</posy>
-          <width>840</width>
+          <width>940</width>
           <height>618</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
@@ -773,7 +766,7 @@
           <visible>Container(9000).Hasfocus(7)</visible>
           <posx>0</posx>
           <posy>-90</posy>
-          <width>840</width>
+          <width>940</width>
           <height>990</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
@@ -832,7 +825,7 @@
           </control>
 
           <control type="togglebutton" id="806">
-            <width>840</width>
+            <width>940</width>
             <height>35</height>
             <left>50</left>
             <align>left</align>
@@ -998,7 +991,7 @@
           <visible>Container(9000).Hasfocus(8)</visible>
           <posx>0</posx>
           <posy>0</posy>
-          <width>840</width>
+          <width>940</width>
           <height>618</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
@@ -1101,7 +1094,7 @@
           <visible>Container(9000).Hasfocus(11)</visible>
           <posx>0</posx>
           <posy>0</posy>
-          <width>840</width>
+          <width>940</width>
           <height>618</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
@@ -1120,7 +1113,7 @@
           <visible>Container(9000).Hasfocus(9)</visible>
           <posx>0</posx>
           <posy>0</posy>
-          <width>840</width>
+          <width>940</width>
           <height>618</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
@@ -1248,6 +1241,7 @@
       <label>$LOCALIZE[31485]</label>
       <onclick condition="Skin.HasSetting(hideduree)+!Skin.HasSetting(hideduree2)+">Skin.ToggleSetting(hideduree2)</onclick>
       <onclick condition="Skin.HasSetting(hidegenre)+!Skin.HasSetting(hidegenre2)">Skin.ToggleSetting(hidegenre2)</onclick>
+      <onclick condition="Skin.HasSetting(hiderealisateur)+!Skin.HasSetting(hiderealisateur2)">Skin.ToggleSetting(hiderealisateur2)</onclick>
       <onclick condition="Skin.HasSetting(hidestudio)+!Skin.HasSetting(hidestudio2)">Skin.ToggleSetting(hidestudio2)</onclick>
       <onclick condition="Skin.HasSetting(hideannee)+!Skin.HasSetting(hideannee2)">Skin.ToggleSetting(hideannee2)</onclick>
       <onclick condition="Skin.HasSetting(hidenotation)+!Skin.HasSetting(hidenotation2)">Skin.ToggleSetting(hidenotation2)</onclick>
@@ -1257,6 +1251,7 @@
 
       <onclick condition="Skin.HasSetting(hideduree)">Skin.ToggleSetting(hideduree)</onclick>
       <onclick condition="Skin.HasSetting(hidegenre)">Skin.ToggleSetting(hidegenre)</onclick>
+      <onclick condition="Skin.HasSetting(hiderealisateur)">Skin.ToggleSetting(hiderealisateur)</onclick>
       <onclick condition="Skin.HasSetting(hidestudio)">Skin.ToggleSetting(hidestudio)</onclick>
       <onclick condition="Skin.HasSetting(hideannee)">Skin.ToggleSetting(hideannee)</onclick>
       <onclick condition="Skin.HasSetting(hidenotation)">Skin.ToggleSetting(hidenotation)</onclick>
@@ -1357,39 +1352,49 @@
         </control>
         <control type="radiobutton" id="1003">
            <font>METF_DialogLargeBold</font>
-<label>$LOCALIZE[31754]</label>
+           <label>$LOCALIZE[20339]</label>
           <include>BoutonCommunFlags</include>
           <onright>2003</onright>
+          <selected>!Skin.HasSetting(hiderealisateur)</selected>
+          <onclick>Skin.ToggleSetting(hiderealisateur)</onclick>
+          <onclick condition="!Skin.HasSetting(hiderealisateur2)">Skin.ToggleSetting(hiderealisateur2)</onclick>
+
+        </control>
+        <control type="radiobutton" id="1004">
+           <font>METF_DialogLargeBold</font>
+<label>$LOCALIZE[31754]</label>
+          <include>BoutonCommunFlags</include>
+          <onright>2004</onright>
           <selected>!Skin.HasSetting(hideannee)</selected>
           <onclick>Skin.ToggleSetting(hideannee)</onclick>
           <onclick condition="!Skin.HasSetting(hideannee2)">Skin.ToggleSetting(hideannee2)</onclick>
 
         </control>
-        <control type="radiobutton" id="1004">
+        <control type="radiobutton" id="1005">
            <font>METF_DialogLargeBold</font>
 <label>$LOCALIZE[31755]</label>
           <include>BoutonCommunFlags</include>
-          <onright>2004</onright>
+          <onright>2005</onright>
           <selected>!Skin.HasSetting(hidenotation)</selected>
           <onclick>Skin.ToggleSetting(hidenotation)</onclick>
           <onclick condition="!Skin.HasSetting(hidenotation2)">Skin.ToggleSetting(hidenotation2)</onclick>
 
         </control>
-        <control type="radiobutton" id="1005">
+        <control type="radiobutton" id="1006">
            <font>METF_DialogLargeBold</font>
 <label>$LOCALIZE[31768]</label>
           <include>BoutonCommunFlags</include>
-          <onright>2005</onright>
+          <onright>2006</onright>
           <selected>!Skin.HasSetting(hidempaa)</selected>
           <onclick>Skin.ToggleSetting(hidempaa)</onclick>
           <onclick condition="!Skin.HasSetting(hidempaa2)">Skin.ToggleSetting(hidempaa2)</onclick>
 
         </control>
-        <control type="radiobutton" id="1006">
+        <control type="radiobutton" id="1007">
            <font>METF_DialogLargeBold</font>
 <label>$LOCALIZE[31788]</label>
           <include>BoutonCommunFlags</include>
-          <onright>2006</onright>
+          <onright>2007</onright>
           <selected>!Skin.HasSetting(hidesource)</selected>
           <onclick>Skin.ToggleSetting(hidesource)</onclick>
           <onclick condition="!Skin.HasSetting(hidesource2)">Skin.ToggleSetting(hidesource2)</onclick>
@@ -1531,15 +1536,15 @@
           <onclick condition="!Skin.HasSetting(hidestudio)">Skin.ToggleSetting(hidestudio)</onclick>
 
         </control>
-        <control type="radiobutton" id="2003">
+         <control type="radiobutton" id="2003">
           <label></label>
           <include>BoutonCommunFlags2</include>
           <onleft>1003</onleft>
 
 
-          <selected>!Skin.HasSetting(hideannee2)</selected>
-          <onclick>Skin.ToggleSetting(hideannee2)</onclick>
-          <onclick condition="!Skin.HasSetting(hideannee)">Skin.ToggleSetting(hideannee)</onclick>
+          <selected>!Skin.HasSetting(hiderealisateur2)</selected>
+          <onclick>Skin.ToggleSetting(hiderealisateur2)</onclick>
+          <onclick condition="!Skin.HasSetting(hiderealisateur)">Skin.ToggleSetting(hiderealisateur)</onclick>
 
         </control>
         <control type="radiobutton" id="2004">
@@ -1548,9 +1553,9 @@
           <onleft>1004</onleft>
 
 
-          <selected>!Skin.HasSetting(hidenotation2)</selected>
-          <onclick>Skin.ToggleSetting(hidenotation2)</onclick>
-          <onclick condition="!Skin.HasSetting(hidenotation)">Skin.ToggleSetting(hidenotation)</onclick>
+          <selected>!Skin.HasSetting(hideannee2)</selected>
+          <onclick>Skin.ToggleSetting(hideannee2)</onclick>
+          <onclick condition="!Skin.HasSetting(hideannee)">Skin.ToggleSetting(hideannee)</onclick>
 
         </control>
         <control type="radiobutton" id="2005">
@@ -1559,15 +1564,26 @@
           <onleft>1005</onleft>
 
 
-          <selected>!Skin.HasSetting(hidempaa2)</selected>
-          <onclick>Skin.ToggleSetting(hidempaa2)</onclick>
-          <onclick condition="!Skin.HasSetting(hidempaa)">Skin.ToggleSetting(hidempaa)</onclick>
+          <selected>!Skin.HasSetting(hidenotation2)</selected>
+          <onclick>Skin.ToggleSetting(hidenotation2)</onclick>
+          <onclick condition="!Skin.HasSetting(hidenotation)">Skin.ToggleSetting(hidenotation)</onclick>
 
         </control>
         <control type="radiobutton" id="2006">
           <label></label>
           <include>BoutonCommunFlags2</include>
           <onleft>1006</onleft>
+
+
+          <selected>!Skin.HasSetting(hidempaa2)</selected>
+          <onclick>Skin.ToggleSetting(hidempaa2)</onclick>
+          <onclick condition="!Skin.HasSetting(hidempaa)">Skin.ToggleSetting(hidempaa)</onclick>
+
+        </control>
+        <control type="radiobutton" id="2007">
+          <label></label>
+          <include>BoutonCommunFlags2</include>
+          <onleft>1007</onleft>
 
 
           <selected>!Skin.HasSetting(hidesource2)</selected>
@@ -1666,7 +1682,7 @@
 
   <include>Global_MediaOverlay</include>
 <!--<include>Setting_Heading</include>-->
-<include>AnimationVoletsHorizontaux</include>
+
 </control>
 
 </controls>

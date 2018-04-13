@@ -12,12 +12,12 @@
 				<width>1400</width>
 				<ondown>Action(firstpage)</ondown>
 				<onup>Action(lastpage)</onup>
-				<onright>510</onright>
-				<onleft>510</onleft>
+				<onright>7000</onright>
+				<onleft>7000</onleft>
 				<orientation>vertical</orientation>
 				<preloaditems>2</preloaditems>
 				<scrolltime>200</scrolltime>
-				<onfocus>SetProperty(ActeurDirection,no,Home)</onfocus>
+				
 				<include>Animation_OpenCloseFade</include>
 				<include>Animation_FadedByMenu</include>
 				<include>Animation_HiddenByInfo</include>

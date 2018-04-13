@@ -298,8 +298,8 @@
         <width>1800</width>
         <ondown>Action(firstpage)</ondown>
         <onup>Action(lastpage)</onup>
-        <onright>511</onright>
-        <onleft>511</onleft>
+        <onright>7000</onright>
+        <onleft>7000</onleft>
 
         <orientation>vertical</orientation>
         <preloaditems>2</preloaditems>
@@ -308,7 +308,7 @@
         <include>Animation_FadedByMenu</include>
         <include>Animation_HiddenByInfo</include>
         <visible>!Skin.HasSetting(NoViewBanner)</visible>
-        <onfocus>SetProperty(ActeurDirection,no,Home)</onfocus>
+        
         <include>BannerViewCommon_Browser</include>
       </control>
 
@@ -352,9 +352,9 @@
         <width>1800</width>
         <ondown>Action(firstpage)</ondown>
         <onup>Action(lastpage)</onup>
-        <onright>514</onright>
-        <onleft>514</onleft>
-        <onfocus>SetProperty(ActeurDirection,no,Home)</onfocus>
+        <onright>7000</onright>
+        <onleft>7000</onleft>
+        
 
 
 
@@ -409,9 +409,9 @@
         <height>730</height>
         <width>550</width>
         <!--<onright>1999</onright> -->
-        <include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
-        <onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
-        <onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
+        <include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000Inverse</include>
+        
+        
         <ondown>513</ondown>
         <onup>513</onup>
         <pagecontrol>-</pagecontrol>

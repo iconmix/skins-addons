@@ -260,6 +260,8 @@
           <altlabel>13353</altlabel>
 
           <usealttexture>library.isscanningmusic</usealttexture>
+          <onclick>SetProperty(IconmixDialogContext,,Home)</onclick>
+          <onclick>SetFocus(55)</onclick>
 
         </control>
         <control type="togglebutton" id="200">
@@ -272,6 +274,8 @@
           <usealttexture>library.isscanningmusic</usealttexture>
 
           <onclick>CleanLibrary(music)</onclick>
+          <onclick>SetProperty(IconmixDialogContext,,Home)</onclick>
+          <onclick>SetFocus(55)</onclick>
           <visible>!library.isscanningmusic</visible>
         </control>
       </control>
@@ -335,6 +339,7 @@
         <!-- Accéder à la saga -->
         <include>MonBoutonCommun2</include>
         <label>$LOCALIZE[31931]</label>
+        <onclick>SetProperty(IconmixDialogContext,,Home)</onclick>
         <onclick>SetFocus(1999,0)</onclick>
         <visible>String.Contains(ListItem.DBTYPE,set)</visible>
       </control>
@@ -343,6 +348,7 @@
 
         <include>MonBoutonCommun2</include>
         <label>$LOCALIZE[31934]</label>
+        <onclick>SetProperty(IconmixDialogContext,,Home)</onclick>
         <onclick>SetFocus(1999,0)</onclick>
         <visible>Window.IsVisible(10502)+Container.Content(artists)</visible>
       </control>
@@ -351,6 +357,7 @@
 
         <include>MonBoutonCommun2</include>
         <label>$LOCALIZE[31930]</label>
+         <onclick>SetProperty(IconmixDialogContext,,Home)</onclick>
         <onclick>SetFocus(7781,0)</onclick>
         <visible>[String.Contains(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]|[!Skin.HasSetting(HideTvCast)+[String.Contains(ListItem.DBTYPE,episode)|String.Contains(ListItem.DBTYPE,tvshow)]]+Window.IsVisible(10025)</visible>
       </control>
@@ -594,7 +601,6 @@
 
       <onclick>RunScript(script.iconmixtools,setviewmenu=True&id=$INFO[Container(7007).ListItem.Property(viewid)])</onclick>
       <onclick>SetProperty(IconmixDialogContext,,Home)</onclick>
-      <onclick>SetProperty(IconmixDialogContext,,Home)</onclick>
       <onclick>SetFocus(55)</onclick>
       <ondown>Control.Move(7007,1)</ondown>
       <onup>Control.Move(7007,-1)</onup>
@@ -616,6 +622,7 @@
       <onup>7017</onup>
       <ondown>7017</ondown>
       <onclick>RunScript(script.iconmixtools,setviewmenu=True&id=$INFO[ListItem.Property(viewid)])</onclick>
+      <onclick>SetProperty(IconmixDialogContext,,Home)</onclick>
       <orientation>vertical</orientation>
       <itemlayout width="340" height="35">
         <control type="label">
@@ -1088,6 +1095,7 @@
         <itemgap>1</itemgap>
         <onleft>55</onleft>
         <onleft>SetProperty(IconmixDialogContext,,Home)</onleft>
+        <onclick>SetProperty(IconmixDialogContext,,Home)</onclick>
         <onback>Action(firstpage)</onback>
         <onback>SetProperty(IconmixDialogContext,,Home)</onback>
         <onback>55</onback>

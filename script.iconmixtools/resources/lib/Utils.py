@@ -53,11 +53,11 @@ TMDBApiKey="67158e2af1624020e34fd893c881b019"
 ACTION_PREVIOUS_MENU = (9, 10, 92)
 ListePays={"?":"Inconnu","AF":"Afghanistan","AL":"Albania","DZ":"Algeria","AS":"American Samoa","AD":"Andorra","AO":"Angola","AI":"Anguilla","AQ":"Antarctica","AG":"Antigua and Barbuda","AR":"Argentina","AM":"Armenia","AW":"Aruba","AU":"Australia","AT":"Austria","AZ":"Azerbaijan","BS":"Bahamas","BH":"Bahrain","BD":"Bangladesh","BB":"Barbados","BY":"Belarus",
 "BE":"Belgium","BZ":"Belize","BJ":"Benin","BM":"Bermuda","BT":"Bhutan","BO":"Bolivia, Plurinational State of","BA":"Bosnia and Herzegovina","BW":"Botswana","BV":"Bouvet Island","BR":"Brazil","IO":"British Indian Ocean Territory","BN":"Brunei Darussalam","BG":"Bulgaria","BF":"Burkina Faso","BI":"Burundi","KH":"Cambodia","CM":"Cameroon","CA":"Canada","CV":"Cape Verde","KY":"Cayman Islands","CF":"Central African Republic","TD":"Chad",
-"CL":"Chile","CN":"China","CX":"Christmas Island","CC":"Cocos (Keeling) Islands","CO":"Colombia","KM":"Comoros","CG":"Congo","CD":"Congo, the Democratic Republic of the","CK":"Cook Islands","CR":"Costa Rica","CI":"Côte d'Ivoire","HR":"Croatia","CU":"Cuba","CY":"Cyprus","CZ":"Czech Republic","DK":"Denmark","DJ":"Djibouti","DM":"Dominica","DO":"Dominican Republic","EC":"Ecuador","EG":"Egypt","SV":"El Salvador","GQ":"Equatorial Guinea","ER":"Eritrea","EE":"Estonia","ET":"Ethiopia","FK":"Falkland Islands (Malvinas)","FO":"Faroe Islands","FJ":"Fiji","FI":"Finland","FR":"France",
+"CL":"Chile","CN":"China","CX":"Christmas Island","CC":"Cocos (Keeling) Islands","CO":"Colombia","KM":"Comoros","CG":"Congo","CD":"Congo, the Democratic Republic of the","CK":"Cook Islands","CR":"Costa Rica","CI":"CÃ´te d'Ivoire","HR":"Croatia","CU":"Cuba","CY":"Cyprus","CZ":"Czech Republic","DK":"Denmark","DJ":"Djibouti","DM":"Dominica","DO":"Dominican Republic","EC":"Ecuador","EG":"Egypt","SV":"El Salvador","GQ":"Equatorial Guinea","ER":"Eritrea","EE":"Estonia","ET":"Ethiopia","FK":"Falkland Islands (Malvinas)","FO":"Faroe Islands","FJ":"Fiji","FI":"Finland","FR":"France",
 "GF":"French Guiana","PF":"French Polynesia","TF":"French Southern Territories","GA":"Gabon","GM":"Gambia","GE":"Georgia","DE":"Germany","GH":"Ghana","GI":"Gibraltar","GR":"Greece","GL":"Greenland","GD":"Grenada","GP":"Guadeloupe","GU":"Guam","GT":"Guatemala","GG":"Guernsey","GN":"Guinea","GW":"Guinea-Bissau","GY":"Guyana","HT":"Haiti","HM":"Heard Island and McDonald Islands","VA":"Holy See (Vatican City State)","HN":"Honduras","HK":"Hong Kong","HU":"Hungary","IS":"Iceland","IN":"India","ID":"Indonesia","IR":"Iran, Islamic Republic of","IQ":"Iraq","IE":"Ireland","IM":"Isle of Man",
 "IL":"Israel","IT":"Italy","JM":"Jamaica","JP":"Japan","JE":"Jersey","JO":"Jordan","KZ":"Kazakhstan","KE":"Kenya","KI":"Kiribati","KP":"Korea, Democratic People's Republic of","KR":"Korea, Republic of","KW":"Kuwait","KG":"Kyrgyzstan","LA":"Lao People's Democratic Republic","LV":"Latvia","LB":"Lebanon","LS":"Lesotho","LR":"Liberia","LY":"Libyan Arab Jamahiriya","LI":"Liechtenstein","LT":"Lithuania","LU":"Luxembourg","MO":"Macao","MK":"Macedonia, the former Yugoslav Republic of","MG":"Madagascar","MW":"Malawi","MY":"Malaysia","MV":"Maldives","ML":"Mali","MT":"Malta","MH":"Marshall Islands","MQ":"Martinique","MR":"Mauritania","MU":"Mauritius","YT":"Mayotte","MX":"Mexico","FM":"Micronesia, Federated States of","MD":"Moldova, Republic of","MC":"Monaco",
 "MN":"Mongolia","ME":"Montenegro","MS":"Montserrat","MA":"Morocco","MZ":"Mozambique","MM":"Myanmar","NA":"Namibia","NR":"Nauru","NP":"Nepal","NL":"Netherlands","AN":"Netherlands Antilles","NC":"New Caledonia","NZ":"New Zealand","NI":"Nicaragua","NE":"Niger","NG":"Nigeria","NU":"Niue","NF":"Norfolk Island","MP":"Northern Mariana Islands","NO":"Norway","OM":"Oman","PK":"Pakistan","PW":"Palau","PS":"Palestinian Territory, Occupied","PA":"Panama","PG":"Papua New Guinea","PY":"Paraguay","PE":"Peru","PH":"Philippines","PN":"Pitcairn","PL":"Poland","PT":"Portugal","PR":"Puerto Rico",
-"QA":"Qatar","RE":"Réunion","RO":"Romania","RU":"Russian Federation","RW":"Rwanda","BL":"Saint Barthélemy","SH":"Saint Helena, Ascension and Tristan da Cunha","KN":"Saint Kitts and Nevis","LC":"Saint Lucia","MF":"Saint Martin (French part)","PM":"Saint Pierre and Miquelon","VC":"Saint Vincent and the Grenadines","WS":"Samoa","SM":"San Marino","ST":"Sao Tome and Principe","SA":"Saudi Arabia","SN":"Senegal","RS":"Serbia","SC":"Seychelles","SL":"Sierra Leone","SG":"Singapore","SK":"Slovakia","SI":"Slovenia","SB":"Solomon Islands","SO":"Somalia","ZA":"South Africa","GS":"South Georgia and the South Sandwich Islands","ES":"Spain","LK":"Sri Lanka","SD":"Sudan","SR":"Suriname","SJ":"Svalbard and Jan Mayen","SZ":"Swaziland","SE":"Sweden","CH":"Switzerland","SY":"Syrian Arab Republic","TW":"Taiwan, Province of China",
+"QA":"Qatar","RE":"RÃ©union","RO":"Romania","RU":"Russian Federation","RW":"Rwanda","BL":"Saint BarthÃ©lemy","SH":"Saint Helena, Ascension and Tristan da Cunha","KN":"Saint Kitts and Nevis","LC":"Saint Lucia","MF":"Saint Martin (French part)","PM":"Saint Pierre and Miquelon","VC":"Saint Vincent and the Grenadines","WS":"Samoa","SM":"San Marino","ST":"Sao Tome and Principe","SA":"Saudi Arabia","SN":"Senegal","RS":"Serbia","SC":"Seychelles","SL":"Sierra Leone","SG":"Singapore","SK":"Slovakia","SI":"Slovenia","SB":"Solomon Islands","SO":"Somalia","ZA":"South Africa","GS":"South Georgia and the South Sandwich Islands","ES":"Spain","LK":"Sri Lanka","SD":"Sudan","SR":"Suriname","SJ":"Svalbard and Jan Mayen","SZ":"Swaziland","SE":"Sweden","CH":"Switzerland","SY":"Syrian Arab Republic","TW":"Taiwan, Province of China",
 "TJ":"Tajikistan","TZ":"Tanzania, United Republic of","TH":"Thailand","TL":"Timor-Leste","TG":"Togo","TK":"Tokelau","TO":"Tonga","TT":"Trinidad and Tobago","TN":"Tunisia","TR":"Turkey","TM":"Turkmenistan","TC":"Turks and Caicos Islands","TV":"Tuvalu","UG":"Uganda","UA":"Ukraine","AE":"United Arab Emirates","GB":"United Kingdom","US":"United States of America","UM":"United States Minor Outlying Islands","UY":"Uruguay","UZ":"Uzbekistan","VU":"Vanuatu","VE":"Venezuela, Bolivarian Republic of","VN":"Viet Nam","VG":"Virgin Islands, British","VI":"Virgin Islands, U.S.","WF":"Wallis and Futuna","EH":"Western Sahara","YE":"Yemen","ZM":"Zambia","ZW":"Zimbabwe","":"?","00":"?"
 }
 
@@ -155,7 +155,7 @@ class dialog_select_Arts(xbmcgui.WindowXMLDialog):
             self.getControl(9).setHeight(220) 
             
           self.getControl(9).setImage(Image, False)
-        #else : logMsg("IdAction : "+str(idaction),0)    
+        
        
         
 # Action : 3 haut
@@ -166,7 +166,7 @@ class dialog_select_Arts(xbmcgui.WindowXMLDialog):
     def onClick(self, controlID): 
         #logMsg("ControlId :"+str(controlID),0)
                      
-        if controlID>=200 and controlID<=210: #entrée
+        if controlID>=200 and controlID<=210: #entrÃ©e
             item=self.getControl(controlID).getSelectedItem()
             Image=item.getProperty("Icon")
             Label2="Delete"
@@ -307,9 +307,13 @@ def getartworks(IDCollection=None,OriginalArt=None,updateartwork=None,TypeVideo=
                                   
     if TypeVideo=="movie":
        UrlFanartTv="http://webservice.fanart.tv/v3/movies/%s?api_key=769f122ee8aba06f4a513830295f2bc0" %(IDCollection) #infos completes
+       if SETTING("iconmixdebug")=="true":
+        logMsg("UrlFanartTv (%s)" %(UrlFanartTv))
        json_data = requestUrlJson(UrlFanartTv)
-       if not json_data and IDKodiSetouSaisonTv: # on va récupérer tous les artworks des films de la saga également.....
+       if not json_data and IDKodiSetouSaisonTv: # on va rÃ©cupÃ©rer tous les artworks des films de la saga Ã©galement.....
          json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"movies":{"properties": ["imdbnumber"]} }' %(int(IDKodiSetouSaisonTv)))
+         if SETTING("iconmixdebug")=="true":
+            logMsg("UrlFanartTv json_data(%s)" %(json_data))
          if json_result and json_result.get("movies"): 
            allMovies = json_result.get("movies")
            for item in allMovies:
@@ -318,23 +322,13 @@ def getartworks(IDCollection=None,OriginalArt=None,updateartwork=None,TypeVideo=
              
     else:
        UrlFanartTv="http://webservice.fanart.tv/v3/tv/%s?api_key=769f122ee8aba06f4a513830295f2bc0" %(IDCollection) #infos completes
-       json_data = requestUrlJson(UrlFanartTv)      
+       json_data = requestUrlJson(UrlFanartTv) 
+       if SETTING("iconmixdebug")=="true":
+        logMsg("UrlFanartTv (%s)" %(UrlFanartTv))
        TvDbArt=GetArtWorksSerieTVDB(IDCollection)
        if TvDbArt:
           json_data=MergeArtwork(json_data,TvDbArt)
-          """
-          seasonposterTvDb=TvDbArt.get("seasonposter")
-          if seasonposterTvDb:
-            for item in seasonposterTvDb:
-                seasonposter.append(item)
-          seasonbannerTvDb=TvDbArt.get("seasonbanner")
-          if seasonbannerTvDb:
-            for item in seasonbannerTvDb:
-                seasonbanner.append(item)
-          """
-    
-       #json_data=MergeArtwork(json_data,getTVDBartworks(IDCollection,"tvbanner",IDKodiSetouSaisonTv))       
-       #json_data=MergeArtwork(json_data,getTVDBartworks(IDCollection,"tvposter",IDKodiSetouSaisonTv))
+          
        
     if (not json_data or len(json_data)<1) and updateartwork :
       xbmc.executebuiltin( "Dialog.Close(busydialog)" ) 
@@ -520,7 +514,7 @@ def getTVDBData(url=None):
          return zzz.get("data"),Langue
       
   return None,None
-    
+"""    
 def getTVDBartworks(IDShow=None,ArtType=None,Saison=None):
   KeyStr={'series':'tvbanner','poster':'tvposter','fanart':"showbackground","season":"seasonposter","seasonwide":"seasonbanner"}
   #if not TVDBToken:
@@ -550,7 +544,7 @@ def getTVDBartworks(IDShow=None,ArtType=None,Saison=None):
               return {"%s" %(ArtType):ArtWork}
   
   return None
-  
+"""  
 def GetTvDbId(UniqueId=None):
   #uniqueid : {"imdb":"tt5193358","tvdb":"304591","tmdb":"61692"}
   if UniqueId.get("tvdb"):
@@ -605,14 +599,15 @@ def CheckSaga(ItemId=None,Statique=None):
           xbmcplugin.setContent(int(sys.argv[1]), 'movies')
           
        savepath=ADDON_DATA_PATH+"/collections/saga%s" %(ItemId)
-       #json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"movies": {"properties": [ "title","imdbnumber","art" ]} }' %(int(ItemId)))
        json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"properties":["art"],"movies": {"properties":["title","genre","year","rating","userrating","director","trailer","tagline","plot","plotoutline","originaltitle","lastplayed","playcount","writer","studio","mpaa","cast","country","imdbnumber","runtime","set","showlink","streamdetails","top250","votes","fanart","thumbnail","file","sorttitle","resume","setid","dateadded","tag","art"]} }' %(int(ItemId)))
+       if SETTING("iconmixdebug")=="true":
+         logMsg("CheckSaga 1 (%s)" %(json_result))
        if json_result:
          NbKodi=int(json_result.get("limits").get("total"))
          
               #----------------------------BASE TMDB ----------------------------       
        if not xbmcvfs.exists(savepath):
-        #création du fichier de la saga !!!
+        #crÃ©ation du fichier de la saga !!!
          ArrayCollection=getsagaitem(ItemId,1,None,None,json_result,None)
        else : 
         #lecture dans le fichier existant
@@ -693,7 +688,6 @@ def CheckSaga(ItemId=None,Statique=None):
                    ListeItem.append([int(release_date),ItemListe])
        #----------------------------BASE LOCALE ----------------------------
        
-       #json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"movies": {"properties":["title","genre","year","rating","userrating","director","trailer","tagline","plot","plotoutline","originaltitle","lastplayed","playcount","writer","studio","mpaa","cast","country","imdbnumber","runtime","set","showlink","streamdetails","top250","votes","fanart","thumbnail","file","sorttitle","resume","setid","dateadded","tag","art"]} }' %(int(ItemId)))
        for item in json_result.get("movies"): 
           ImdbItem.append(item.get("imdbnumber"))
        Compteur = {}.fromkeys(set(ImdbItem),0)
@@ -718,7 +712,7 @@ def CheckSaga(ItemId=None,Statique=None):
                     ItemListe.addStreamInfo('audio',AudioElement)                   
                     i=i+1
     
-          #pistes vidéos 
+          #pistes vidÃ©os 
           Video=item.get("streamdetails").get("video")
           i=0
           Codec=""
@@ -739,7 +733,8 @@ def CheckSaga(ItemId=None,Statique=None):
                     i=i+1
                     
           ItemListe.setProperty('DBID', str(item.get("movieid")))
-          logMsg("Valeur item.get : (%s)" %(item.get("movieid")))
+          if SETTING("iconmixdebug")=="true":
+              logMsg("CheckSaga Valeur item.get : (%s)" %(item.get("movieid")))
           ItemListe.setProperty('SetId', str(ItemId))
           ItemListe.setProperty('IMDBNumber', str(item.get("imdbnumber")))
           ItemListe.setProperty('TMDBNumber', '')
@@ -792,15 +787,19 @@ def CheckSaga(ItemId=None,Statique=None):
              
           if int(Compteur[item.get("imdbnumber")])>1:
               Compteur[item.get("imdbnumber")]=0
-       
-       if NbKodiValide>0: WINDOW.setProperty('IconMixSaga',str(NbKodiValide))
-       else: WINDOW.clearProperty('IconMixSaga')       
-              
+           
  
 
     #BOUQUET FINAL 
 
-    if NbKodiValide==len(ListeItem): WINDOW.setProperty('IconMixSaga','complet')
+    if NbKodiValide==len(ListeItem) and NbKodiValide>0: 
+       WINDOW.setProperty('IconMixSaga','complet')
+    else:
+       if NbKodiValide>0: 
+          WINDOW.setProperty('IconMixSaga',str(NbKodiValide))
+       else:
+          WINDOW.clearProperty('IconMixSaga') 
+       
     if not Statique:
           xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeItem)
           xbmcplugin.endOfDirectory(handle=int(sys.argv[1]))
@@ -808,7 +807,7 @@ def CheckSaga(ItemId=None,Statique=None):
           ListeItemFinal=[]
           LL=[]          
           LL=sorted(ListeItem)
-          #tri par année
+          #tri par annÃ©e
           cpt=0
           while cpt<len(LL):
                  ListeItemFinal.append(LL[cpt][1])
@@ -849,9 +848,12 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None,js
   check_thumb=None
   check_discart=None  
   
-  #logMsg("getsagaitem : ItemIdxx=%s,ShowBusy=%s,AKodiCollection=%s,ATmdbId=%s" %(ItemIdxx,ShowBusy,AKodiCollection,ATmdbId),0)
+  if SETTING("iconmixdebug")=="true":
+       logMsg("getsagaitem : ItemIdxx=%s,ShowBusy=%s,AKodiCollection=%s,ATmdbId=%s" %(ItemIdxx,ShowBusy,AKodiCollection,ATmdbId),0)
   if ItemIdxx : 
       savepath=ADDON_DATA_PATH+"/collections/saga%s" %(ItemIdxx)
+      if SETTING("iconmixdebug")=="true":
+         logMsg("getsagaitem : savepath (%s)" %(savepath))
       if ShowBusy: xbmc.executebuiltin( "ActivateWindow(busydialog)" ) 
       if not json_result:
         json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"properties":["art"],"movies": {"properties": [ "title","imdbnumber","art" ]} }' %(int(ItemIdxx)))
@@ -908,6 +910,8 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None,js
                    #numero de collection TMDB inconnu
                    query_url = "https://api.themoviedb.org/3/movie/%s?api_key=%s&language=%s&include_adult=true" % (ItemId,TMDBApiKey,KODILANGCODE)
                    json_data = requestUrlJson(query_url)
+                   if SETTING("iconmixdebug")=="true":
+                      logMsg("getsagaitem : collection TMDB inconnu (%s)(%s)" %(query_url,json_data))
                    
                    if json_data:
                       Rspcollection=json_data.get("belongs_to_collection")
@@ -918,14 +922,20 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None,js
                 if IDcollection:
                      query_url = "https://api.themoviedb.org/3/collection/%d?api_key=%s&language=%s&include_adult=true" % (IDcollection,TMDBApiKey,KODILANGCODE)
                      json_data = requestUrlJson(query_url)
+                     if SETTING("iconmixdebug")=="true":
+                      logMsg("getsagaitem : collection TMDB trouvee (%s)(%s)" %(query_url,json_data))
                      
 
                      if json_data:
                          Rspcollection=json_data.get("parts")
                          if json_data.get("poster_path"):
                             PosterCollection="http://image.tmdb.org/t/p/original"+json_data.get("poster_path")
+                         else:
+                            PosterCollection=None
                          if json_data.get("backdrop_path"):
                             FanartCollection="http://image.tmdb.org/t/p/original"+json_data.get("backdrop_path")
+                         else:
+                            FanartCollection=None
 
                          if Rspcollection:
                             NbItemsCollection=len(Rspcollection)
@@ -948,7 +958,8 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None,js
                                               else:
                                                 cpt=cpt+1
                                         
-                                        
+                                        if SETTING("iconmixdebug")=="true":
+                                            logMsg("getsagaitem : check (%s)" %(check)) 
                                         if not zz :
                                            if check.get("title") and check.get("release_date") and check.get("poster_path"):
                                                  ManquantM.append(check)
@@ -958,13 +969,23 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None,js
                                   else:
                                     if NbItemsCollection>0:
                                        NbItemsCollection=NbItemsCollection-1
-                                  
+                            if SETTING("iconmixdebug")=="true":
+                                 logMsg("getsagaitem : Sortie boucle (%s)" %(ManquantM)) 
+                            if SETTING("iconmixdebug")=="true":
+                                 logMsg("getsagaitem : len(KodiCollection) (%s)" %(len(KodiCollection)))
+                                 logMsg("getsagaitem : KodiCollection (%s)" %(KodiCollection))
+                                 logMsg("getsagaitem : IDcollection (%s)" %(IDcollection))
+                                 logMsg("getsagaitem : NbItemsCollection (%s)" %(NbItemsCollection))
+                                 logMsg("getsagaitem : PosterCollection (%s)" %(PosterCollection))
+                                 logMsg("getsagaitem : FanartCollection (%s)" %(FanartCollection))      
                             ArrayCollection["kodi"]=len(KodiCollection)
                             ArrayCollection["kodicollection"]=KodiCollection
                             ArrayCollection["tmdbid"]=IDcollection
                             ArrayCollection["tmdb"]=NbItemsCollection
                             ArrayCollection["poster"]=PosterCollection
                             ArrayCollection["fanart"]=FanartCollection
+                            if SETTING("iconmixdebug")=="true":
+                                 logMsg("getsagaitem : ArrayCollection (%s)" %(ArrayCollection))
                             if IDcollection:
                               xxActuels=ArrayCollection.get("artworks")
                               if Actuels:
@@ -1038,7 +1059,7 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None,js
                      ArrayCollection["artworks"]={}
                      
                      
-                if SETTING("cachesaga")=="false":
+                if SETTING("cachesaga")=="false"  and savepath:
                        erreur=DirStru(savepath)
                        with io.open(savepath, 'w+', encoding='utf8') as outfile:
                            str_ = json.dumps(ArrayCollection,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
@@ -1050,7 +1071,7 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None,js
   return ArrayCollection
   
 
-def UpdateSagas(Une=None,Toutes=None,updateartwork=None):
+def UpdateSagas(Une=None,Toutes=None,updateartwork=None,Initialisation=""):
      ItemId=0
      AllMovies= {}
      NbItems=0
@@ -1060,7 +1081,7 @@ def UpdateSagas(Une=None,Toutes=None,updateartwork=None):
      
      if not Une :
        dp = xbmcgui.DialogProgress()
-       dp.create("IconMixTools",Titre,"")
+       dp.create("IconMixTools"+Initialisation,Titre,"")
        json_result = getJSON('VideoLibrary.GetMovieSets', '{}')
        if json_result: 
           NbItems=len(json_result)
@@ -1196,7 +1217,7 @@ def GetEpisodesKodi(TvShowId=None,Statique=True):
                     ItemListe.addStreamInfo('audio',AudioElement)                   
                     i=i+1
     
-          #pistes vidéos 
+          #pistes vidÃ©os 
           try:
            Video=item.get("streamdetails").get("video")
           except:
@@ -1228,11 +1249,11 @@ def GetEpisodesKodi(TvShowId=None,Statique=True):
 
           Position=int(item.get("resume").get("position"))*100
           Total=int(item.get("resume").get("total"))
-          try:
-               Ordre="%d%d" %(item.get("season"),item.get("episode"))
-          except:
-                Ordre=None
           
+          try:
+               Ordre="%d%s" %(item.get("season"),str(item.get("episode")).zfill(3))
+          except:
+               Ordre=None
           try :
              PercentPlayed=Position/Total
           except:
@@ -1242,6 +1263,7 @@ def GetEpisodesKodi(TvShowId=None,Statique=True):
           
          
           ItemListe.setInfo("dbid", str(item.get("episodeid")))
+          ItemListe.setPath(item.get("file"))
           LabelsEpisodes=GetListItemInfoLabelsJson(item)
           if LabelsEpisodes:            
             ItemListe.setInfo("video", LabelsEpisodes) 
@@ -1249,15 +1271,17 @@ def GetEpisodesKodi(TvShowId=None,Statique=True):
             Saison=int(item.get("season"))
           except:
             Saison=0
-          ListeEpisodes.append([int(Ordre),ItemListe,item.get("file"),Saison,Art.get("season.poster"),str(item.get("episodeid"))])
+          ListeEpisodes.append([Ordre,ItemListe,item.get("file"),Saison,Art.get("season.poster"),str(item.get("episodeid"))])
           
           
       ListeEpisodesFinal=[]
-      LL=[]               
+      LL=[] 
+                     
       LL=sorted(ListeEpisodes, key=lambda x:x[0],reverse=False)     
       cpt=0
       Saison=0
       SaisonTab={}
+      PosterSaison=None
       while cpt<len(LL):
          Saison=str(LL[cpt][3])
          if SaisonTab.get(Saison):
@@ -1267,16 +1291,15 @@ def GetEpisodesKodi(TvShowId=None,Statique=True):
        
          cpt=cpt+1
          
-      #logMsg("Saison : (%s)" %(SaisonTab))
       Saison=0
       cpt=0
       while cpt<len(LL):
         
-             if not Statique:
-                 if LL[cpt][3]!=Saison:
+             if LL[cpt][3]!=Saison:
                   Saison=LL[cpt][3]
                   Complet,NbKodi,PosterSaison=getepisodes(TvShowId,Saison,"tvshow")
                   Item=xbmcgui.ListItem(label=str(NbKodi),label2=str(Saison),path="")
+                  Item.setPath("")
                   if Complet==0:
                     Item.setProperty('Complet', "")
                   else:
@@ -1286,11 +1309,19 @@ def GetEpisodesKodi(TvShowId=None,Statique=True):
                   else:
                     Item.setProperty('PosterSaison', LL[cpt][4])
                   Episodes=0
-                  ListeEpisodesFinal.append(["",Item,False])
-                 if PosterSaison:
+                  if not Statique:
+                 
+                    ListeEpisodesFinal.append(["",Item,False])
+                  else:
+                    ListeEpisodesFinal.append(Item)
+             if PosterSaison:
                      LL[cpt][1].setProperty('PosterSaison', PosterSaison)
-                 else:
-                    LL[cpt][1].setProperty('PosterSaison', LL[cpt][4])
+             else:
+                     LL[cpt][1].setProperty('PosterSaison', LL[cpt][4])
+        
+             
+                  
+             if not Statique:    
                  ListeEpisodesFinal.append([LL[cpt][2],LL[cpt][1],False])
              else:
                  ListeEpisodesFinal.append(LL[cpt][1])
@@ -1324,6 +1355,8 @@ def getepisodes(KodiDbId=None,saisonID=None,DBtype=None):
         
     if DBtype=="episode":
       json_result = getJSON('VideoLibrary.GetEpisodeDetails', '{ "episodeid":%d,"properties": [ "title", "tvshowid","season" ]}' %(int(KodiDbId)))
+      if SETTING("iconmixdebug")=="true":
+         logMsg("getepisodes : GetEPisodeDetails (%s)" %(json_result))
       if json_result and json_result.get("tvshowid"):
          KodiDbId=json_result.get("tvshowid") 
          saisonID=json_result.get("season")
@@ -1332,6 +1365,8 @@ def getepisodes(KodiDbId=None,saisonID=None,DBtype=None):
     
     if KodiDbId:       
          json_result = getJSON('VideoLibrary.GetTVShowDetails', '{ "tvshowid":%d,"properties": [ "title", "uniqueid","episode" ]}' %(int(KodiDbId)))
+         if SETTING("iconmixdebug")=="true":
+           logMsg("getepisodes : GetTVShowDetails (%s)" %(json_result))
          if json_result and json_result.get("uniqueid"):
             UniqueId=GetTvDbId(json_result.get("uniqueid"))
             NbKodi=json_result.get("episode")
@@ -1408,8 +1443,8 @@ def GetArtWorksSerieTVDB(IDShow=None):
   if Donnees:
     #{"Banners": {"Banner": [{"id": "1270021", "BannerPath": "fanart/original/304591-1.jpg", "BannerType": "fanart", "BannerType2": "1280x720", "Colors": null, "Language": "en", "Rating": "10.0000", "RatingCount": "1", "SeriesName": "false", "ThumbnailPath": "_cache/fanart/original/304591-1.jpg", "VignettePath": "fanart/vignette/304591-1.jpg"}, {"id": "1120759", "BannerPath": "fanart/original/304591-2.jpg", "BannerType": "fanart", "BannerType2": "1920x1080", "Colors": null, "Language": "en", "Rating": "8.2000", "RatingCount": "5", "SeriesName": "false", "ThumbnailPath": "_cache/fanart/original/304591-2.jpg", "VignettePath": "fanart/vignette/304591-2.jpg"}, {"id": "1120760", "BannerPath": "fanart/original/304591-3.jpg", "BannerType": "fanart", "BannerType2": "1920x1080", "Colors": null, "Language": "en", "Rating": "5.5000", "RatingCount": "2", "SeriesName": "false", "ThumbnailPath": "_cache/fanart/original/304591-3.jpg", "VignettePath": "fanart/vignette/304591-3.jpg"}, {"id": "1127151", "BannerPath": "fanart/original/304591-5.jpg", "BannerType": "fanart", "BannerType2": "1920x1080", "Colors": null, "Language": "en", "Rating": "5.5000", "RatingCount": "2", "SeriesName": "false", "ThumbnailPath": "_cache/fanart/original/304591-5.jpg", "VignettePath": "fanart/vignette/304591-5.jpg"}, {"id": "1120800", "BannerPath": "fanart/original/304591-4.jpg", "BannerType": "fanart", "BannerType2": "1280x720", "Colors": null, "Language": "en", "Rating": "4.0000", "RatingCount": "3", "SeriesName": "true", "ThumbnailPath": "_cache/fanart/original/304591-4.jpg", "VignettePath": "fanart/vignette/304591-4.jpg"}, {"id": "1270252", "BannerPath": "posters/304591-5.jpg", "BannerType": "poster", "BannerType2": "680x1000", "Language": "en", "Rating": "10.0000", "RatingCount": "1"}, {"id": "1270020", "BannerPath": "posters/304591-4.jpg", "BannerType": "poster", "BannerType2": "680x1000", "Language": "en", "Rating": "10.0000", "RatingCount": "1"}, {"id": "1120761", "BannerPath": "posters/304591-1.jpg", "BannerType": "poster", "BannerType2": "680x1000", "Language": "en", "Rating": "7.0000", "RatingCount": "3"}, {"id": "1142057", "BannerPath": "posters/304591-2.jpg", "BannerType": "poster", "BannerType2": "680x1000", "Language": "en", "Rating": "5.6667", "RatingCount": "3"}, {"id": "1244423", "BannerPath": "posters/304591-3.jpg", "BannerType": "poster", "BannerType2": "680x1000", "Language": "en", "Rating": null, "RatingCount": "0"}, {"id": "1270255", "BannerPath": "seasons/304591-2.jpg", "BannerType": "season", "BannerType2": "season", "Language": "en", "Rating": "10.0000", "RatingCount": "1", "Season": "2"}, {"id": "1270254", "BannerPath": "seasons/304591-1-2.jpg", "BannerType": "season", "BannerType2": "season", "Language": "en", "Rating": "10.0000", "RatingCount": "1", "Season": "1"}, {"id": "1142061", "BannerPath": "seasons/304591-1.jpg", "BannerType": "season", "BannerType2": "season", "Language": "en", "Rating": "5.5000", "RatingCount": "2", "Season": "1"}, {"id": "1123501", "BannerPath": "graphical/304591-g4.jpg", "BannerType": "series", "BannerType2": "graphical", "Language": "en", "Rating": "10.0000", "RatingCount": "1"}, {"id": "1142059", "BannerPath": "graphical/304591-g5.jpg", "BannerType": "series", "BannerType2": "graphical", "Language": "en", "Rating": "10.0000", "RatingCount": "1"}, {"id": "1120799", "BannerPath": "graphical/304591-g3.jpg", "BannerType": "series", "BannerType2": "graphical", "Language": "en", "Rating": "5.5000", "RatingCount": "2"}, {"id": "1120758", "BannerPath": "graphical/304591-g2.jpg", "BannerType": "series", "BannerType2": "graphical", "Language": "en", "Rating": "5.5000", "RatingCount": "2"}, {"id": "1120757", "BannerPath": "graphical/304591-g.jpg", "BannerType": "series", "BannerType2": "graphical", "Language": "en", "Rating": null, "RatingCount": "0"}]}}
     #BannerType : 
-    #<BannerType>fanart</BannerType> de la série
-    #<BannerType>poster</BannerType> de la série
+    #<BannerType>fanart</BannerType> de la sÃ©rie
+    #<BannerType>poster</BannerType> de la sÃ©rie
     #<BannerType>season</BannerType> poster,.... de la saison
     #<BannerType2>season</BannerType2> poster de la saison
     #<BannerType2>seasonwide</BannerType2> banniere de la saison
@@ -1435,9 +1470,9 @@ def GetArtWorksSerieTVDB(IDShow=None):
                 if Type and Type=="series":
                     Type2=Item.get("BannerType2")
                     XX={"id":Item.get("id"),"url":"https://www.thetvdb.com/banners/%s" %(Item.get("BannerPath")),"lang":Item.get("Language")}
-                    if Type2 and Type2=="graphical": #banniere de la série
+                    if Type2 and Type2=="graphical": #banniere de la sÃ©rie
                         tvbanner.append(XX)
-                if Type and Type=="poster": #poster de la série
+                if Type and Type=="poster": #poster de la sÃ©rie
                     XX={"id":Item.get("id"),"url":"https://www.thetvdb.com/banners/%s" %(Item.get("BannerPath")),"lang":Item.get("Language")}
                     tvposter.append(XX)
                     
@@ -1575,7 +1610,28 @@ def UpdateSeries(Une=None,Toutes=None):
             SaisonDetails=GetEpisodeSaison(Une)
             getallepisodes(Une,UniqueId,savepath,NbKodi,1,SaisonDetails)        
             
-  
+def getnextepisode(IdKodi=None,TvDbId=None):
+  DateNext=None
+  if TvDbId:
+     query_url="https://api.betaseries.com/shows/episodes?key=46be59b5b866&thetvdb_id=%s" %(TvDbId)
+     json_data = requestUrlJson(query_url)
+     if json_data:
+      tableaudate=[]
+      compteur=0
+      for item in json_data.get("episodes"):
+        tableaudate.append([item.get("date"),compteur,item.get("title"),item.get("season"),item.get("episode")])
+        compteur=compteur+1
+      LL=[]               
+      LL=sorted(tableaudate, key=lambda x:x[0],reverse=False)  
+      nowX = datetime.datetime.now().date()
+      for item in LL:
+        nowX2 = datetime.datetime.strptime(item[0], '%Y-%m-%d').date()
+        if nowX2>=nowX:
+          logMsg("Date next (%s)" %(nowX2.strftime('%A %d-%m-%Y')))
+          break
+        
+     
+  return DateNext
   
 def getallepisodes(IdKodi=None,TvDbId=None,savepath=None,NbKodi=None,ShowBusy=None,NbKodiSaison=None):
   
@@ -1620,7 +1676,7 @@ def getallepisodes(IdKodi=None,TvDbId=None,savepath=None,NbKodi=None,ShowBusy=No
          if ArtWorkSerie:        
             ArrayCollection["artworks"]=ArtWorkSerie 
          
-       
+         #getnextepisode(None,TvDbId)
          query_url = "https://api.betaseries.com/shows/display?key=46be59b5b866&thetvdb_id=%s" % (TvDbId) 
          json_data = requestUrlJson(query_url)
          
@@ -1631,7 +1687,7 @@ def getallepisodes(IdKodi=None,TvDbId=None,savepath=None,NbKodi=None,ShowBusy=No
                  ArrayCollection["name"]=SaisonTab.get("title")
                  ArrayCollection["imdbid"]=SaisonTab.get("imdb_id")
                  ArrayCollection["sa_id"]=SaisonTab.get("id")
-                 #recupération du pays
+                 #recupÃ©ration du pays
                  qurl="https://api.themoviedb.org/3/find/%s?api_key=%s&language=en-US&external_source=imdb_id&include_adult=true"  % (ArrayCollection["imdbid"],TMDBApiKey)
                  json_data2 = requestUrlJson(qurl)
                  if json_data2:
@@ -1718,7 +1774,7 @@ def getallepisodes(IdKodi=None,TvDbId=None,savepath=None,NbKodi=None,ShowBusy=No
                   
      
                 
-         if SETTING("cacheserie")=="false":        
+         if SETTING("cacheserie")=="false"  and savepath:        
              erreur=DirStru(savepath)
              with io.open(savepath, 'w+', encoding='utf8') as outfile: 
     	                      str_ = json.dumps(ArrayCollection,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
@@ -1733,43 +1789,6 @@ def getallepisodes(IdKodi=None,TvDbId=None,savepath=None,NbKodi=None,ShowBusy=No
 
 
 
-def MergeContainers(Cont1Size=None,Cont2Size=None):
-  windowvideonav = xbmcgui.Window(self,10025)
-  try:
-     Cont1=windowvideonav.getControl(self,2996)  
-  except:
-     Cont1=None
-  try:
-     Cont2=windowvideonav.getControl(self,2997)  
-  except:
-     Cont2=None
- 
-  
-  if Cont1 or Cont2:
-    ListesDest=[]
-    if Cont1:
-        c=0
-        d=Cont1.size()
-        while c<d:
-          ItemListe=Cont1.getListItem(c)
-          if ItemListe:
-            logMsg("-O-"+str(c)+"/"+str(xxx),0)
-          c=c+1
-    if Cont2:  
-        c=0
-        Cont2.reset()
-        d=Cont2.size()
-        while c<d:
-          ItemListe=Cont2.getListItem(c)
-          if ItemListe:
-             logMsg("-O-"+str(c)+"/"+str(xxx),0)
-             #ListesDest.append(["", ItemListe, False])
-          c=c+1
-    
-    xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeDest) 
-  else:
-    logMsg("merging....vide !",0)
-  xbmcplugin.endOfDirectory(int(sys.argv[1])) 
 
 def GetListItemInfoLabelsJson(data=None):
     
@@ -1872,19 +1891,20 @@ def GetListItemInfoLabelsJson(data=None):
     if data.get("movieid"):
       Valeur["dbid"]=int(data.get("movieid"))
       Valeur["mediatype"]="movie"
+    if data.get("tvshowid"):
+      Valeur["dbid"]=int(data.get("tvshowid"))
     if data.get("episodeid"):
       Valeur["dbid"]=int(data.get("episodeid"))
       Valeur["mediatype"]="episode"
       Valeur["episode"]=data.get("episode") if data.get("episode") else None
       Valeur["season"]=data.get("season") if data.get("season") else None
       
-    #logMsg("Valeur : (%s)" %(Valeur["dbid"]))
     return Valeur
   else:
     return None             
 def GetListItemInfoLabels(ContainerID=None):
   if ContainerID:
-    #logMsg("GetLabel (%s)" %(xbmc.getInfoLabel("Container(%d).ListItem.Country" %(ContainerID))))
+    
     return  ({'genre':xbmc.getInfoLabel("Container(%d).ListItem.Genre" %(ContainerID)),
               'country':xbmc.getInfoLabel("Container(%d).ListItem.Country" %(ContainerID)),
               'year':int(xbmc.getInfoLabel("Container(%d).ListItem.Year" %(ContainerID))) if xbmc.getInfoLabel("Container(%d).ListItem.Year" %(ContainerID)) else None,
@@ -1949,7 +1969,6 @@ def CheckItemExtrafanartPath(ItemPath=None,ItemSsRep='extrafanart'):
   
 def getSagaFanartsV2(SagaItemPath=None):
   ListeFanarts=[] 
-  #logMsg("Fanartsaga: %s" %(SagaItemPath),0)
   ListeFanart=None
   if SagaItemPath:
       ItemPath=CheckItemExtrafanartPath(SagaItemPath) 
@@ -2123,7 +2142,6 @@ def getCasting(Castingtypex=None,ItemId=None,Statique=None,MissingId=None):
                        label2x=Test.get("character")
                      ItemListe = xbmcgui.ListItem(label=name,iconImage=imageacteur,label2=label2x)
                      ItemListe.setProperty("DbType","acteurs")
-                     #logMsg("Acteurs : "+str(ItemId)+"/"+str(imageacteur),0)   
                      if not Statique:
                          ListeActeur.append(["",ItemListe,True])
                      else:
@@ -2172,7 +2190,6 @@ def ActeurFilmsTvKODI(ActeurType=None,Acteur=None,Statique=None):
              Titre=Item.get("label")
              if Titre:
                  ItemListe = xbmcgui.ListItem(label=Titre,iconImage=Item.get("art").get("poster"))
-                 #logMsg("Poster : %s" %(Item.get("art").get("poster")),0)
                  ItemListe.setProperty("poster",Item.get("art").get("poster")) 
                  Casting = Item.get("cast")
                  if Casting:
@@ -2218,7 +2235,7 @@ def ActeurFilmsTvKODI(ActeurType=None,Acteur=None,Statique=None):
                             ItemListe.addStreamInfo('audio',AudioElement)                   
                             i=i+1
             
-                  #pistes vidéos 
+                  #pistes vidÃ©os 
                  try:
                    Video=Item.get("streamdetails").get("video")
                  except:
@@ -2249,6 +2266,7 @@ def ActeurFilmsTvKODI(ActeurType=None,Acteur=None,Statique=None):
                    InfoLabels["mediatype"]= TypeVideo
                    #ItemListe.setInfo("video", {"dbid": str(IdVideo),"mediatype": TypeVideo,"title": Titre,"year": Item.get("year"),"trailer":Item.get("trailer"),"plot":Item.get("plot")})
                    ItemListe.setInfo("video", InfoLabels)
+                   ItemListe.setPath(Item.get("file"))
                    if not Statique:
                        ListeVideos.append([Item.get("file"),ItemListe,False])
                    else:
@@ -2267,8 +2285,7 @@ def ActeurFilmsTvKODI(ActeurType=None,Acteur=None,Statique=None):
      ListeItemFinal=[]
      LL=[]               
      LL=sorted(ListeVideos, key=lambda x:x[0],reverse=True)
-     #tri par année
-     #logMsg("LL="+str(LL),0)
+     #tri par annÃ©e
      cpt=0
      while cpt<len(LL):
              ListeItemFinal.append(LL[cpt][1])
@@ -2298,12 +2315,16 @@ def ActeurFilmsTvTMDB(ActeurType=None,Acteur=None,Statique=None):
   if ActeurType and Acteur!="None": 
      
      if Acteur:
+      
         Acteur=Remove_Separator(Acteur)
         ActeurCache["cast"]=[] 
         check=remove_accents(Acteur).encode("utf8","ignore")
-        savepath=ADDON_DATA_PATH+"/%s/%s" %(ActeurType,check.replace(" ", "_"))
+        try:
+          savepath=ADDON_DATA_PATH+"/%s/%s" %(ActeurType,check.replace(" ", "_"))
+        except:
+          savepath=None
         #savepath=ADDON_DATA_PATH+"/%s/%s" %(ActeurType,str(unidecode(Acteur)).replace(" ", "_"))
-        if xbmcvfs.exists(savepath):
+        if savepath and xbmcvfs.exists(savepath):
           with open(savepath) as data_file:
                   json_data = json.load(data_file)
                   ActeurSave=0
@@ -2321,13 +2342,13 @@ def ActeurFilmsTvTMDB(ActeurType=None,Acteur=None,Statique=None):
                       ActeurCache["nom"]=json_data.get("nom")
                       ActeurCache["nomreel"]=json_data.get("nomreel")
                       ActeurCache["id"]=json_data.get("id")
-                      ActeurId=json_data.get("id")
-        else :
-            ActeurId=GetActeurId(Acteur) 
+          ActeurId=json_data.get("id")
+        else:
+          ActeurId=GetActeurId(Acteur) 
         
         #http://api.allocine.fr/rest/v3/filmography?partner=100043982026&code=12302&profile=large&filter=movie&striptags=synopsis%2Csynopsisshort&format=json&sed=20170507&sig=jfS3iVDun%2FywD91uBJ78p1lZlog%3D
 
-        if ActeurId.get("tmdb") and (not xbmcvfs.exists(savepath) or ActeurSave>0):
+        if savepath and ActeurId.get("tmdb") and (not xbmcvfs.exists(savepath) or ActeurSave>0):
             
             query_url = "https://api.themoviedb.org/3/person/%s/combined_credits?api_key=%s&language=%s&include_adult=true" % (ActeurId.get("tmdb"),TMDBApiKey,KODILANGCODE) 
             json_data = requestUrlJson(query_url)
@@ -2424,79 +2445,9 @@ def ActeurFilmsTvTMDB(ActeurType=None,Acteur=None,Statique=None):
                               else :
                                  #ListeRoles.append(ItemListe)
                                  ListeRoles.append([int(Annee),ItemListe])
-                  """             
-                  if ActeurType=='realisateurs' and json_data.get("crew"):             
-                      for item in json_data.get("crew"):
-                         TypeVideo=str(item.get("media_type"))
-                         name=""                     
-                         if TypeVideo=="movie": name=item.get("title")                          
-                         else : 
-                           name=item.get("name")
-                           TypeVideo="tvshow"
-                         if name:
-                           IdFix=item.get("id")
-                           Ajout=1
-                           if IdFix:
-                              if not IdFix in ListeId:
-                                 ListeId.append(IdFix)  
-                                 #logMsg("Id :  "+str(IdFix),0)                                                   
-                              else:
-                                 Ajout=0
-                           if Ajout>0:  
-                                                                                
-                                Poster=item.get("poster_path")
-                                if not Poster: 
-                                   if TypeVideo=="movie": Poster="RolesFilms.png"
-                                   else: Poster="RolesSeries.png"
-                                else: Poster="http://image.tmdb.org/t/p/original"+str(Poster)
-                                Fanart=item.get("backdrop_path")
-                               
-                                
-                                Role=item.get("job")
-                                if not Role:
-                                   Role="?"
-                                ItemListe = xbmcgui.ListItem(label=name,iconImage=Poster,label2=Role)
-                                if Fanart:
-                                   ItemListe.setProperty("fanart","http://image.tmdb.org/t/p/original"+Fanart)
-                                else:
-                                   ItemListe.setProperty("fanart","zz")
-                                if Poster:
-                                   ItemListe.setProperty("poster",Poster)
-                                   ItemListe.setArt({"poster":Poster})
-                                else:
-                                   ItemListe.setProperty("poster","zz")
-                                #logMsg("name (%s) Poster (%s)" %(name,Poster))
-                                try:
-                                  Annee=item.get("release_date").split("-")[0]
-                                except:
-                                  Annee=None
-                                if not Annee:
-                                   try: 
-                                     Annee=item.get("first_air_date").split("-")[0]
-                                   except:
-                                     Annee="0"
-                                if not Annee or Annee=="":
-                                  Annee="0"
-                                ActeurCache["crew"].append(item)
-                                try:
-                       	           ItemPays=item.get("origin_country")[0]
-                       	        except:
-                         	         ItemPays=None
-                                if ItemPays:
-                                  Pays=ListePays.get(ItemPays.upper())
-                                else:
-                                  Pays=None
-                                ItemListe.setProperty("TMDBNumber",str(IdFix))
-                                ItemListe.setProperty("dbtype",TypeVideo)
-                                ItemListe.setInfo("video", {"plot":item.get("overview"),"title": name,"mediatype": TypeVideo,"year": Annee,"originaltitle": item.get("original_title"),"trailer":item.get("id"),"country":Pays})        
-                                if not Statique:
-                                   ListeRoles.append(["",ItemListe,True])
-                                else :
-                                   #ListeRoles.append(ItemListe)
-                                   ListeRoles.append([int(Annee),ItemListe])
-                  """
+                
                             
-                  if ActeurSave>0 and SETTING("cacheacteur")=="false":
+                  if savepath and ActeurSave>0 and SETTING("cacheacteur")=="false"  and savepath:
                         erreur=DirStru(savepath)
                         #ActeurCache["cast"]=json_data.get("cast") 
                         #ActeurCache["crew"]=json_data.get("crew")  
@@ -2518,7 +2469,7 @@ def ActeurFilmsTvTMDB(ActeurType=None,Acteur=None,Statique=None):
      LL=[]          
      #LL=sorted(ListeRoles,reverse=True)
      LL=sorted(ListeRoles, key=lambda x:x[0],reverse=True)
-     #tri par année
+     #tri par annÃ©e
      cpt=0
      while cpt<len(LL):
              ListeItemFinal.append(LL[cpt][1])
@@ -2541,7 +2492,8 @@ def GetActeurId(Acteur):
         except:
           check=Acteur 
         query_url = "https://api.themoviedb.org/3/search/person?api_key=%s&language=%s&query=%s&page=1&include_adult=true" % (TMDBApiKey,KODILANGCODE,urllib.quote(check))
-        #logMsg("Query="+str(query_url),0)
+        if SETTING("iconmixdebug")=="true":
+           logMsg("getacteurid : query_url (%s)" %(query_url))
         json_data = requestUrlJson(query_url)              
         ActeurId["tmdb"]=None        
         if json_data:
@@ -2551,7 +2503,8 @@ def GetActeurId(Acteur):
               for item in allInfo:
                 if not ActeurId["tmdb"]:
                    ActeurId["tmdb"]=str(item.get("id"))
-                   #logMsg("AxteurID="+str(ActeurId["tmdb"]),0)
+                   if SETTING("iconmixdebug")=="true":
+                      logMsg("GetActeurId ActeurTMDBID (%s)" %(str(ActeurId["tmdb"])),0)
                 break
   return ActeurId 
 
@@ -2568,10 +2521,14 @@ def GetActeurInfo(NomActeur,ActeurType="acteurs"):
             ActeurType='acteurs'
   if NomActeur and ActeurType:
     NomActeur=Remove_Separator(NomActeur)
-    check=remove_accents(NomActeur).encode("utf8","ignore")
+    
+    check=remove_accents(try_decode(NomActeur))
     #savepath=ADDON_DATA_PATH+"/%s/%s" %(ActeurType,remove_accents(NomActeur.encode("utf8","ignore").decode("utf8","ignore").replace(" ", "_")))
-    savepath=ADDON_DATA_PATH+"/%s/%s" %(ActeurType,check.replace(" ", "_"))
     #NomActeur=NomActeur.encode("utf8","ignore").decode("utf8","ignore")
+    try:
+          savepath=ADDON_DATA_PATH+"/%s/%s" %(ActeurType,check.replace(" ", "_"))
+    except:
+      savepath=None
     
     if xbmcvfs.exists(savepath):
         with open(savepath) as data_file:
@@ -2610,7 +2567,7 @@ def GetActeurInfo(NomActeur,ActeurType="acteurs"):
               ActeurCache["poster"]=json_data.get("poster")
               ActeurCache["id"]=ActeurId
               ActeurCache["v6"]="ok"
-              if SETTING("cacheacteur")=="false":
+              if SETTING("cacheacteur")=="false" and savepath:
                   erreur=DirStru(savepath)            
                   with io.open(savepath, 'w+', encoding='utf8') as outfile: 
                     str_ = json.dumps(ActeurCache,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
@@ -2759,11 +2716,12 @@ def GetPhotoRealisateur(CheminType="",realisateur=None,HttpUniquement=None):
                         return Poster
                       #Bio=json_data.get("biographie")
           
-          if not Poster:  
+          if not Poster and savepath:  
              Poster="DefaultActor.png" 
              Cache=GetActeurInfo(zig,CheminType)
-             if Cache:
+             if Cache :
                 Poster=Cache.get("poster")
+                
                 
                 if (CheminType=="realisateurs" and SETTING("cacherealisateur")=="false") or (CheminType=="acteurs" and SETTING("cacheacteur")=="false"):
                    query_url=Poster
@@ -2856,7 +2814,7 @@ def Allocine_BandeAnnonce(Titre=None,TypeVideo="movie",Saison=None,Episode=None,
   try:               
     MediaQualite=XQualite[int(SETTING("AllocineMiniQualite"))]
   except:
-    MediaQualite=720 #par défaut 
+    MediaQualite=720 #par dÃ©faut 
   if BAuniquement:
     TypeOk=[31003]
   if Titre:
@@ -2891,9 +2849,7 @@ def Allocine_BandeAnnonce(Titre=None,TypeVideo="movie",Saison=None,Episode=None,
                       if Episode: #episode fourni ?
                          if (("pisode %s" %(Episode)) in MediaTitre) or (not "pisode" in MediaTitre):
                           DataSeries.append(Item)
-                          #logMsg("ajout episode : (%s)" %(MediaTitre))
-                         #else:
-                          #logMsg("rejet episode : (%s)" %(MediaTitre))
+                         
                       else:
                          DataSeries.append(Item)                      
               Data=DataSeries             
@@ -2916,7 +2872,7 @@ def Allocine_BandeAnnonce(Titre=None,TypeVideo="movie",Saison=None,Episode=None,
               Data=DataSeries  
                              
                 
-         #test des données    
+         #test des donnÃ©es    
          if Data:
            ListeTitres=[]
            for Item in Data:
@@ -2954,10 +2910,10 @@ def Allocine_BandeAnnonce(Titre=None,TypeVideo="movie",Saison=None,Episode=None,
                       
                       if (xx["name"].replace("VO","").replace("VF","")) ==tmpmediatitre:
                          if MediaLanguageCode==6001 and xx["LanguageCode"]!=6001:
-                          #même titre mais cette fois en francais !
+                          #mÃªme titre mais cette fois en francais !
                           Remplacer=ListeBandeAnnonce.index(xx)
                          if MediaLanguageCode!=6001 and xx["LanguageCode"]==6001: 
-                          #même titre mais en francais déjà présent !
+                          #mÃªme titre mais en francais dÃ©jÃ  prÃ©sent !
                           MediaVType=0 
                           
                   if BAuniquement and MediaTitre and MediaVType in TypeOk :
@@ -3012,7 +2968,7 @@ def Allocine_BandeAnnonce(Titre=None,TypeVideo="movie",Saison=None,Episode=None,
                             UrlOk=True 
                             break                           
                           
-                        else: #test de l'url pour qualité inférieure...si Ok c'est pas un problème d'URL mais que la qualité demandée n'existe pas....
+                        else: #test de l'url pour qualitÃ© infÃ©rieure...si Ok c'est pas un problÃ¨me d'URL mais que la qualitÃ© demandÃ©e n'existe pas....
                               # donc pas besoin de double check dessous
                           MediaUrl="http://fr.vid.m.%sp.acsta.net" %(QualiteEncode[str(Qualite)])+MediaUrlOrg+"/"+str(MediaId)+"%s_013.mp4" %(MediaEncode[str(Qualite)])
                           if not checkUrl(MediaUrl) and not UrlOk:
@@ -3046,8 +3002,7 @@ def Allocine_BandeAnnonce(Titre=None,TypeVideo="movie",Saison=None,Episode=None,
                              ListeBandeAnnonce[Remplacer]={"typevideo":str(MediaVType),"type":MediaType.encode('utf-8','ignore'),"name":MediaTitre,"key":"Allocine","iso_3166_1":MediaLanguage.upper(),"Language":MediaLanguage,"size":str(Qualite),"id":MediaUrl,"landscape":str(MediaApercu),"LanguageCode":MediaLanguageCode}
                            else:
                             ListeBandeAnnonce.append({"typevideo":str(MediaVType),"type":MediaType.encode('utf-8','ignore'),"name":MediaTitre,"key":"Allocine","iso_3166_1":MediaLanguage.upper(),"Language":MediaLanguage,"size":str(Qualite),"id":MediaUrl,"landscape":str(MediaApercu),"LanguageCode":MediaLanguageCode})
-                  #else:
-                  #  logMsg("Rejet : (%s)(%s)(%s)" %(MediaLanguageCode,Remplacer,CheckTitre))
+                  
   if ListeBandeAnnonce:
     #on range tout ca : d'abord les bandes annonces et par titre....
     ListeBandeAnnonce=sorted(ListeBandeAnnonce,key=operator.itemgetter('typevideo','name','LanguageCode'))
@@ -3108,9 +3063,9 @@ def Allocine_ChercheFilmSerie(KodiTitre=None,TypeVideo="movie",Annee=None):
                         if AllocineAnnee==int(Annee):
                           break
                       #logMsg("Recherche Ok (%s) : %s" %(Annee,Item),0)  
-                      #on a trouvé le bon ! même titre et même année            
+                      #on a trouvÃ© le bon ! mÃªme titre et mÃªme annÃ©e            
                       else:
-                        #pas d'année...croisons les doigts !!! episode de serie ??
+                        #pas d'annÃ©e...croisons les doigts !!! episode de serie ??
                         break     
       return VideoId
       
@@ -3186,7 +3141,10 @@ def Allocine_ChercheActeur(Acteur=None):
         if jsonobject: 
             if(jsonobject.has_key('feed')):
               jsonobject = jsonobject['feed'] 
-              total=int(jsonobject.get("totalResults") )
+              try:
+                 total=int(jsonobject.get("totalResults") )
+              except:
+                 total=0
               if total>0:         
                 for Item in jsonobject.get("person"):                                  
                     ActeurId=str(Item.get("code"))                 
@@ -3247,7 +3205,7 @@ def getTrailer(ID=None,DbType=None,AnnonceUniquement=None,SaisonID=None):
      try:               
       MediaQualite=int(XQualite[int(SETTING("YoutubeMiniQualite"))])
      except:
-      MediaQualite=720 #par défau
+      MediaQualite=720 #par dÃ©fau
      if DbType and ID: 
           #logMsg("getTrailer (%s)(%s)" %(DbType,ID))
           if DbType!="movie":
@@ -3275,7 +3233,7 @@ def getTrailer(ID=None,DbType=None,AnnonceUniquement=None,SaisonID=None):
                     try:               
                       ItemSize=int(Item.get("size"))
                     except:
-                      ItemSize=720 #par défaut
+                      ItemSize=720 #par dÃ©faut
                     try:
                       TypeTrailer=Item.get("type").lower()
                     except:
@@ -3835,6 +3793,8 @@ def setJSON(method,params):
     jsonobject = json.loads(json_response.decode('utf8','replace'))
     return jsonobject
     
+
+    
 # ----------- ---------- MUSIQUE --------- -----------------    
 def remove_text_inside_brackets(text, brackets="()[]"):
     count = [0] * (len(brackets) // 2) # count open/close brackets
@@ -3985,7 +3945,7 @@ def GetMusicFicheArtiste(Artiste=None,ArtisteId=None,Force=None):
    
            
 
-        if SETTING("cachemusic")=="false":
+        if SETTING("cachemusic")=="false"  and savepath:
             erreur=DirStru(savepath) 
             save_data["kodiArtisteId"]=str(ArtisteId)
             with io.open(savepath, 'w+', encoding='utf8') as outfile: 
@@ -4122,7 +4082,7 @@ def GetMusicFicheAlbum(AlbumId=None,Cover=None,GetArtistData=None,PlayerActif=No
             save_data["AlbumCover"]=savepathcover      
   
               
-        if MAJ==1 and SETTING("cachemusic")=="false":
+        if MAJ==1 and SETTING("cachemusic")=="false"  and savepath:
             erreur=DirStru(savepath)             
             save_data["kodiArtisteId"]=str(ArtisteId)
             save_data["Artiste"]=unidecode(Artiste)
@@ -4384,4 +4344,3 @@ def AddToPlayList():
             dialog.notification('IconMixTools', NomPlayList+" : ERROR", "acteurs/arfffff.png", 1000)
             logMsg("%s introuvable " %(str(views_file)),0)  
   
-    

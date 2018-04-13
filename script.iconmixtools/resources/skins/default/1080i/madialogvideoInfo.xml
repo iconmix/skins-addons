@@ -8,6 +8,8 @@
   <onunload>SetProperty(IconMixUpdateActeurs,"",10000)</onunload>
   <onload>SetProperty(showgenre,,1100)</onload>
   <onload>SetProperty(showsaga,,1100)</onload>
+  <onload>SetProperty(IconMixDialogInfo,"1",10000)</onload>
+  <onunload>ClearProperty(IconMixDialogInfo)</onunload>
   <onunload>SetProperty(IconMixDirector,,Home)</onunload>
 
   <controls>
@@ -369,104 +371,21 @@
 
 
 <!-- ----------------------------- ---->
-<control type="button" id="2008"> <!-- realisateur -->
+<!-- realisateur --
+<control type="button" id="2008"> 
 
   <left>-3000</left>
   <label>FUCK</label>
   <onleft>Control.Move(5002,-1)</onleft>
   <onright>Control.Move(5002,1)</onright>
-<!-- <onup condition="!String.IsEmpty(Container(1990).ListItem.Director)">13</onup> -->
 <onup condition="!String.IsEmpty(Container(1990).ListItem.Director)">7777</onup>
 <onup condition="String.IsEmpty(Container(1990).ListItem.Director)">SetFocus(7003)</onup>
 <ondown>SetFocus(7003)</ondown>
 <onclick condition="!Player.HasVideo">RunScript(script.iconmixtools,trailer=True)</onclick>
 <visible>Integer.IsGreater(Container(5002).NumItems,0)</visible>
 </control>
+-->
 
-<!-- Control Button Text -->
-<control type="group">
-  <top>62</top>
-  <visible>ControlGroup(7003).HasFocus</visible>
-  <control type="fadelabel">
-    <description>Play</description>
-    <include>VideoInfoButtonLabel</include>
-    <label>$LOCALIZE[208]</label>
-    <visible>ControlGroup(7003).HasFocus(8)</visible>
-  </control>
-  <control type="fadelabel">
-    <description>Play</description>
-    <include>VideoInfoButtonLabel</include>
-    <label>Liste</label>
-    <visible>ControlGroup(7003).HasFocus(888)</visible>
-  </control>
-  <control type="fadelabel">
-    <description>Play</description>
-    <include>VideoInfoButtonLabel</include>
-    <label>Details</label>
-    <visible>ControlGroup(7003).HasFocus(889)</visible>
-  </control>
-  <control type="fadelabel">
-    <description>Play</description>
-    <include>VideoInfoButtonLabel</include>
-    <label>B.A.</label>
-    <visible>ControlGroup(7003).HasFocus(890)</visible>
-  </control>
-  <control type="fadelabel">
-    <description>Extra Artwork Downloader</description>
-    <include>VideoInfoButtonLabel</include>
-    <label>$LOCALIZE[31126]</label>
-    <visible>ControlGroup(7003).HasFocus(20)</visible>
-  </control>
-
-  <control type="fadelabel">
-    <description>Trailer</description>
-    <include>VideoInfoButtonLabel</include>
-    <label>$LOCALIZE[20410]</label>
-    <visible>ControlGroup(7003).HasFocus(11)</visible>
-  </control>
-  <control type="fadelabel">
-    <description>Choose Art</description>
-    <include>VideoInfoButtonLabel</include>
-    <label>$LOCALIZE[13511]</label>
-    <visible>ControlGroup(7003).HasFocus(10)</visible>
-  </control>
-  <control type="fadelabel">
-    <description>Refresh</description>
-    <include>VideoInfoButtonLabel</include>
-    <label>$LOCALIZE[184]</label>
-    <visible>ControlGroup(7003).HasFocus(6)</visible>
-  </control>
-  <control type="fadelabel">
-    <description>Set rating</description>
-    <include>VideoInfoButtonLabel</include>
-    <label>$LOCALIZE[38023]</label>
-    <visible>ControlGroup(7003).HasFocus(7)</visible>
-  </control>
-  <control type="fadelabel">
-    <description>Set rating</description>
-    <include>VideoInfoButtonLabel</include>
-    <label>$LOCALIZE[15067]</label>
-    <visible>ControlGroup(7003).HasFocus(600)</visible>
-  </control>
-  <control type="fadelabel">
-    <description>Set rating</description>
-    <include>VideoInfoButtonLabel</include>
-    <label>$LOCALIZE[137] $LOCALIZE[20410] </label>
-    <visible>ControlGroup(7003).HasFocus(440)|ControlGroup(7003).HasFocus(442)</visible>
-  </control>
-   <control type="fadelabel">
-    <description>Set rating</description>
-    <include>VideoInfoButtonLabel</include>
-    <label>$LOCALIZE[32015]</label>
-    <visible>ControlGroup(442).HasFocus+ControlGroup(442).HasFocus(1000)</visible>
-  </control>
-  <control type="fadelabel">
-    <description>Set rating</description>
-    <include>VideoInfoButtonLabel</include>
-    <label>$LOCALIZE[31335]</label>
-    <visible>ControlGroup(442).HasFocus+ControlGroup(442).HasFocus(1001)</visible>
-  </control>
-</control>
 
 <!-- Titre et diverses infos -->
 <control type="group">
@@ -506,7 +425,7 @@
   </control>
 
 
-  <!-- telex debug-->
+  <!-- telex debug-
 
   <control type="label">
     <posx>10</posx>
@@ -593,7 +512,7 @@
       <top>5</top>
       <left>-565</left>
       <height>140</height>
-      <texture diffuse="acteurs/frame2.png">$INFO[Window(Home).Property(IconMixDirector)]</texture>
+      <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png" default="DefaultActor.png">$INFO[Window(Home).Property(IconMixDirector)]</texture>
       <aspectratio scalediffuse="true">keep</aspectratio>
     </control>
     <control type="image">
@@ -681,9 +600,9 @@
 
   <control type="textbox"><!-- Plot -->
     <posx>60</posx>
-    <posy>110</posy>
-    <width>720</width>
-    <height>500</height>
+          <posy>90</posy>
+          <width>720</width>
+          <height>500</height>
     <align>left</align>
     <font>PlotFont36</font>
     <textcolor>TextNF</textcolor>
@@ -753,248 +672,7 @@
 
     </control>
   </control>
-  <!-------------------------------------GENRES ET SAGAS------------------------------------------------------------------------->
-  <control type="group" id="5000">
-    <visible>[[!String.IsEmpty(Container(1990).ListItem.Genre)+!String.IsEmpty(Window(1100).Property(showgenre))]|[Integer.IsGreater(Container(5002).NumItems,0)+!String.IsEmpty(Window(1100).Property(showsaga))]]</visible>
-    <animation effect="zoom" center="730,743" start="0" end="100" time="300" >Visible</animation>
-    <animation effect="zoom" center="730,743" start="100" end="0" time="300" >Hidden</animation>
-
-    <posx>60</posx>
-    <posy>612</posy>
-    <width>1250</width>
-    <height>380</height>
-
-    <control type="group">
-      <posx>10</posx>
-      <posy>180</posy>
-      <visible>[Integer.IsGreater(Container(5001).NumItems,0)|Integer.IsGreater(Container(5002).NumItems,0)]</visible>
-      <control type="image">
-        <posx>-70</posx>
-        <width>1380</width>
-        <height>130</height>
-        <texture>frames/submenubar.png</texture>
-        <colordiffuse>FF707070</colordiffuse>
-      </control>
-      <control type="image">
-        <posx>-75</posx>
-        <posy>76</posy>
-        <width>1375</width>
-        <height>68</height>
-        <bordersize>8</bordersize>
-        <bordertexture border="8" colordiffuse="FF707070">landscape.png</bordertexture>
-        <colordiffuse>BackgroundColor</colordiffuse>
-        <texture>frames/fondinfogris.png</texture>
-      </control>
-      <control type="button">
-        <posx>1250</posx>
-        <posy>80</posy>
-        <width>50</width>
-        <height>50</height>
-        <texturefocus colordiffuse="FFFFAAFF">buttons/button_exitFO.png</texturefocus>
-        <texturenofocus colordiffuse="FFFFAAFF">buttons/button_exit.png</texturenofocus>
-        <onclick>SetProperty(showgenre,,1100)</onclick>
-        <onclick>SetFocus(7003)</onclick>
-      </control>
-
-      <control type="label">
-        <posy>110</posy>
-        <width>1230</width>
-        <height>30</height>
-        <textcolor>white</textcolor>
-        <align>right</align>
-        <font>lcdn24</font>
-        <label>$LOCALIZE[32002]</label>
-        <visible>!String.IsEmpty(Window(1100).Property(showgenre))+!Control.HasFocus(5001)</visible>
-      </control>
-      <control type="label">
-        <posy>110</posy>
-        <width>1230</width>
-        <height>30</height>
-        <textcolor>white</textcolor>
-        <align>right</align>
-        <font>lcdn24</font>
-        <label>$LOCALIZE[31909]</label>
-        <visible>!String.IsEmpty(Window(1100).Property(showsaga))+!Control.HasFocus(5002)</visible>
-      </control>
-      <control type="group">
-        <visible>!String.IsEmpty(Window(1100).Property(showgenre))+Control.HasFocus(5001)</visible>
-        <control type="label">
-          <posy>110</posy>
-          <width>1230</width>
-          <height>30</height>
-          <textcolor>white</textcolor>
-          <align>right</align>
-          <font>lcdn24</font>
-          <label>$LOCALIZE[32002] [I]($INFO[Container(5001).CurrentItem]/$INFO[Container(5001).NumItems])[/I]</label>
-        </control>
-        <control type="fadelabel">
-          <posy>80</posy>
-          <width>1230</width>
-          <height>60</height>
-          <align>center</align>
-          <textcolor>yellow</textcolor>
-          <font>chicken36</font>
-          <scrollspeed>30</scrollspeed>
-          <scroll>true</scroll>
-          <label>[I][B]$INFO[Container(5001).Container(1990).ListItem.Label][/B][/I]</label>
-          <shadowcolor>ff000000</shadowcolor>
-        </control>
-      </control>
-      <control type="group">
-        <visible>!String.IsEmpty(Window(1100).Property(showsaga))+Control.HasFocus(2008)</visible>
-        <control type="label">
-          <posy>110</posy>
-          <width>1230</width>
-          <height>30</height>
-          <textcolor>white</textcolor>
-          <align>right</align>
-          <font>lcdn24</font>
-          <label>[I]($INFO[Container(5002).CurrentItem]/$INFO[Container(5002).NumItems])[/I]</label>
-        </control>
-        <control type="fadelabel">
-          <posy>80</posy>
-          <width>1230</width>
-          <height>60</height>
-          <align>center</align>
-          <textcolor>yellow</textcolor>
-          <font>chicken36</font>
-          <scrollspeed>30</scrollspeed>
-          <scroll>true</scroll>
-          <label>[I][B]$INFO[Container(5002).Container(1990).ListItem.Label][/B][/I] $INFO[Container(5002).Container(1990).ListItem.Year,(,)]</label>
-          <shadowcolor>ff000000</shadowcolor>
-        </control>
-      </control>
-    </control>
-
-
-    <!-- GENRES -->
-    <control type="fixedlist" id="5001">
-      <visible>!String.IsEmpty(Container(1990).ListItem.Genre)+!String.IsEmpty(Window(1100).Property(showgenre))</visible>
-      <posy>-10</posy>
-      <posx>25</posx>
-      <width>1200</width>
-      <height>266</height>
-      <onclick>Dialog.Close(all,true)</onclick>
-      <onclick condition="Container(1990).Content(movies)">ActivateWindow(Videos,videodb://movies/genres/$INFO[Container(1990).ListItem.Label2],return)</onclick>
-      <onclick condition="Container(1990).Content(tvshows)">ActivateWindow(Videos,videodb://tvshows/genres/$INFO[Container(1990).ListItem.Label2],return)</onclick>
-      <!--<scrolltime tween="linear">5007</scrolltime>
-      <autoscroll>ControlGroup(7003).HasFocus(5005)|ControlGroup(7003).HasFocus(5006)</autoscroll>-->
-
-      <ondown>SetProperty(showgenre,,1100)</ondown>
-      <ondown>SetProperty(showsaga,,1100)</ondown>
-      <ondown>7003</ondown>
-      <onup>SetProperty(showgenre,,1100)</onup>
-      <ondown>SetProperty(showsaga,,1100)</ondown>
-    <!-- <onup>13</onup> -->
-    <onup>7777</onup>
-    <onback>SetProperty(showgenre,,1100)</onback>
-    <ondown>SetProperty(showsaga,,1100)</ondown>
-    <onback>7003</onback>
-    <movement>5</movement>
-    <orientation>horizontal</orientation>
-    <preloaditems>0</preloaditems>
-
-    <itemlayout width="203" height="280">
-      <control type="group">
-        <control type="image">
-          <width>195</width>
-          <height>240</height>
-          <aspectratio scalediffuse="true"  align="center" aligny="center">keep</aspectratio>
-          <bordersize>2</bordersize>
-          <texture diffuse="showcase_matte.png">$INFO[Container(1990).ListItem.Icon]</texture>
-        </control>
-        <control type="image">
-
-          <top>237</top>
-          <width>195</width>
-          <height>240</height>
-          <aspectratio scalediffuse="true"  align="center" aligny="top">keep</aspectratio>
-          <bordersize>2</bordersize>
-          <texture  flipy="true" diffuse="showcase_matte.png">$INFO[Container(1990).ListItem.Icon]</texture>
-          <colordiffuse>A0FFFFFF</colordiffuse>
-        </control>
-
-        <!--	<animation type="Conditional" condition="true" reversible="false">
-        <effect type="rotatey" center="90,0" end="-15" time="500" tween="bounce" easy="out"  />
-      </animation>-->
-    </control>
-
-  </itemlayout>
-
-  <focusedlayout width="203" height="280">
-    <control type="image">
-      <width>195</width>
-      <height>240</height>
-      <aspectratio scalediffuse="true" align="center" aligny="top">keep</aspectratio>
-      <texture>$INFO[Container(1990).ListItem.Icon]</texture>
-      <bordersize>8</bordersize>
-      <bordertexture border="8">landscape.png</bordertexture>
-      <animation type="Focus" reversible="false">
-        <effect type="zoom" center="90,10" start="98" end="115" time="500" tween="bounce" easy="out"  />
-
-      </animation>
-      <visible>Control.HasFocus(5001)</visible>
-    </control>
-    <control type="image">
-      <width>195</width>
-      <height>240</height>
-      <aspectratio scalediffuse="true"  align="center" aligny="top">keep</aspectratio>
-      <bordersize>2</bordersize>
-      <texture diffuse="showcase_matte.png">$INFO[Container(1990).ListItem.Icon]</texture>
-
-      <visible>!Control.HasFocus(5001)</visible>
-    </control>
-    <control type="image">
-      <top>237</top>
-      <width>195</width>
-      <height>240</height>
-      <aspectratio scalediffuse="true"  align="center" flipy="true" aligny="top">keep</aspectratio>
-      <bordersize>2</bordersize>
-      <texture flipy="true" diffuse="showcase_matte.png">$INFO[Container(1990).ListItem.Icon]</texture>
-      <colordiffuse>A0FFFFFF</colordiffuse>
-      <visible>!Control.HasFocus(5001)</visible>
-    </control>
-  </focusedlayout>
-
-  <content>$VAR[genredialogvideoinfo]</content>
-
-
-</control>
-
-<!-- SAGAS -->
-<control type="fixedlist" id="5002">
-  <visible>Integer.IsGreater(Container(5002).NumItems,0)+!String.IsEmpty(Window(1100).Property(showsaga))</visible>
-  <posy>30</posy>
-  <posx>45</posx>
-  <width>1200</width>
-  <height>266</height>
-
-
-  <ondown>RunScript(script.iconmixtools,trailer=True)</ondown>
-  <onup>SetProperty(showgenre,,1100)</onup>
-  <onup>SetProperty(showsaga,,1100)</onup>
-<!-- <onup>13</onup> -->
-<onup>7777</onup>
-<onback>SetProperty(showgenre,,1100)</onback>
-<onback>SetProperty(showsaga,,1100)</onback>
-<onback>7003</onback>
-<movement>5</movement>
-<orientation>horizontal</orientation>
-<preloaditems>0</preloaditems>
-
-
-<include>VueElementsBoitiersInfo</include>
-<content sortby="year" sortorder="ascending"></content>
-
-<!-- <content>$VAR[contentdvinfo]</content> -->
-
-
-</control>
-
-
-</control>
-
-<!--------------------------------------------------------------------------------------------------------------->
+ <!--------------------------------------------------------------------------------------------------------------->
 
 <!-- Year and Duration -->
 <control type="image">
@@ -1135,6 +813,9 @@
 <control type="group">
   <posy>980</posy>
   <posx>15</posx>
+  <animation type="Conditional" condition="true" reversible="true">
+          <effect type="zoom" center="15,1020" start="100" end="80" time="10" />
+        </animation>
   <control type="group">
     <width>1920</width>
     <align>left</align>
@@ -2207,6 +1888,17 @@
   <onright>7003</onright>
   <onclick>7003</onclick>
 </control>
+<control type="image">
+        	<animation type="Visible">
+			<effect type="fade" time="100" start="0" end="80" />
+		</animation>
+       <posx>0</posx>
+       <posy>0</posy>
+       <width>1920</width>
+       <height>1080</height>
+       <texture>frames/eau.png</texture>
+     <visible>Player.HasVideo+String.IsEqual(Window(Home).Property(annonceencours),window)</visible> 
+      </control>
 </controls>
 
 </window>

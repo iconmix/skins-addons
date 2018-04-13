@@ -75,6 +75,14 @@
         
        
     </category>
+   <category label="DEBUG"><!-- Notation -->
+     <setting label="DEBUG" type="lsep"/>
+     <setting type="sep"/>
+        
+        <setting label="Activer" type="bool" id="iconmixdebug"  default="false"/>
+        
+       
+    </category>
    
    
     

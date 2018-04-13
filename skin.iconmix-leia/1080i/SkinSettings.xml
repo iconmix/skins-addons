@@ -28,7 +28,7 @@
           <description>List</description>
           <posx>0</posx>
           <posy>100</posy>
-          <width>380</width>
+          <width>490</width>
           <height>656</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
@@ -53,17 +53,26 @@
               <label>$INFO[ListItem.Label]</label>
             </control>
           </itemlayout>
-          <focusedlayout height="38" width="380">
-            <control type="image">
-              <posx>0</posx>
-              <posy>0</posy>
-              <width>380</width>
-              <height>38</height>
-              <align>left</align>
-              <aligny>center</aligny>
-              <texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
-              <animation effect="fade" start="100" end="50" condition="!Control.HasFocus(9000)">Conditional</animation>
-            </control>
+          <focusedlayout height="38" width="480" align="right">
+            <control type="grouplist">
+                <width>360</width>
+                <align>right</align>
+                <orientation>horizontal</orientation>
+            <control type="button">
+        <width max="360">auto</width>
+        <height>38</height>
+        <label>$INFO[Container(9000).ListItem.Label]</label>
+        <font>METF_TitleText</font>
+        <textcolor>DialogTextFO</textcolor>
+        <shadowcolor>FF7F7F7F</shadowcolor>
+        <textoffsetx>15</textoffsetx>
+        <texturefocus colordiffuse="AFFFFFFF">buttons/checklarge.png</texturefocus>
+        <texturenofocus colordiffuse="AFFFFFFF">buttons/checklarge.png</texturenofocus> 
+      </control>
+      </control>
+         
+             
+            <!--
             <control type="label">
               <height>35</height>
               <posx>0</posx>
@@ -72,10 +81,32 @@
               <height>38</height>
               <align>right</align>
               <aligny>center</aligny>
-              <label>$INFO[ListItem.Label]</label>
-              <font>METF_TitleTextMedium</font>
+              <label>[CAPITALIZE][B]$INFO[ListItem.Label][/B][/CAPITALIZE]</label>
+              <font>METF_TitleText</font>
               <textcolor>DialogTextFO</textcolor>
               <focusedcolor>BDialogTextFO</focusedcolor>
+            </control>
+             <control type="image">
+            <top>35</top>
+            <left>80</left>
+              <height>60</height>
+              <width>60</width>
+              <texture>buttons/check.png</texture>
+            </control>
+            -->
+            <control type="image">
+                <left>365</left>
+                <width>25</width>
+                <aspectratio>keep</aspectratio>
+                <texture>ArrowRightWd.png</texture>
+                <visible>Control.HasFocus(9000)</visible>
+            </control>
+            <control type="image">
+                <left>365</left>
+                <width>25</width>
+                <aspectratio>keep</aspectratio>
+                <texture>ArrowLeftWd.png</texture>
+                <visible>!Control.HasFocus(9000)</visible>
             </control>
           </focusedlayout>
           <content>
@@ -134,6 +165,15 @@
               <onclick>noop</onclick>
             </item>
           </content>
+        </control>
+        <control type="image">
+            <posx>430</posx>
+            <posy>0</posy>
+            <height>1080</height>
+    <width>10</width>
+    <texture border="2">VideoInfoLine.png</texture>
+    <colordiffuse>SettingsLine</colordiffuse>
+            
         </control>
         <control type="group" id="9010">
           <posx>440</posx>
@@ -1121,9 +1161,17 @@
     <visible>[ControlGroup(7008).HasFocus|ControlGroup(7009).HasFocus|Control.HasFocus(999)|Control.HasFocus(998)]  +Container(9000).Hasfocus(7)</visible>
     <animation effect="fade" start="100" end="50" condition="!ControlGroup(7008).HasFocus+!ControlGroup(7009).HasFocus+!Control.HasFocus(999)+!Control.HasFocus(998)">Conditional</animation>
     <left>-200</left>
-    <posy>850</posy>
+    <posy>860</posy>
     <control type="group">
-
+      <control type="image">
+      <top>-25</top>
+      <left>200</left>
+      <width>1920</width>
+      <height>200</height>
+      <texture>fondflaggris.png</texture>
+       
+      <aspectratio>stretch</aspectratio>
+    </control>
       <control type="grouplist"> <!-- 1ere ligne -->
 
         <height>150</height>
@@ -1132,7 +1180,9 @@
         <orientation>horizontal</orientation>
         <control type="label">
           <width>100</width>
-          <posy>20</posy>
+          <height>80</height>
+          <aligny>center</aligny>
+          <font>METF_DialogLargeBold</font>
           <label>$LOCALIZE[31276] 1:</label>
 
         </control>
@@ -1148,14 +1198,18 @@
         <itemgap>0</itemgap>
         <orientation>horizontal</orientation>
         <control type="label">
-          <posy>20</posy>
           <width>100</width>
+          <height>80</height>
+          <aligny>center</aligny>
+          <font>METF_DialogLargeBold</font>
           <label>$LOCALIZE[31276] 2:</label>
 
         </control>
         <include>mediaflaglinesettings2</include>
       </control>
     </control>
+  
+     
 
   </control>
 
@@ -1194,6 +1248,7 @@
       <label>$LOCALIZE[31485]</label>
       <onclick condition="Skin.HasSetting(hideduree)+!Skin.HasSetting(hideduree2)+">Skin.ToggleSetting(hideduree2)</onclick>
       <onclick condition="Skin.HasSetting(hidegenre)+!Skin.HasSetting(hidegenre2)">Skin.ToggleSetting(hidegenre2)</onclick>
+      <onclick condition="Skin.HasSetting(hiderealisateur)+!Skin.HasSetting(hiderealisateur2)">Skin.ToggleSetting(hiderealisateur2)</onclick>
       <onclick condition="Skin.HasSetting(hidestudio)+!Skin.HasSetting(hidestudio2)">Skin.ToggleSetting(hidestudio2)</onclick>
       <onclick condition="Skin.HasSetting(hideannee)+!Skin.HasSetting(hideannee2)">Skin.ToggleSetting(hideannee2)</onclick>
       <onclick condition="Skin.HasSetting(hidenotation)+!Skin.HasSetting(hidenotation2)">Skin.ToggleSetting(hidenotation2)</onclick>
@@ -1203,6 +1258,7 @@
 
       <onclick condition="Skin.HasSetting(hideduree)">Skin.ToggleSetting(hideduree)</onclick>
       <onclick condition="Skin.HasSetting(hidegenre)">Skin.ToggleSetting(hidegenre)</onclick>
+      <onclick condition="Skin.HasSetting(hiderealisateur)">Skin.ToggleSetting(hiderealisateur)</onclick>
       <onclick condition="Skin.HasSetting(hidestudio)">Skin.ToggleSetting(hidestudio)</onclick>
       <onclick condition="Skin.HasSetting(hideannee)">Skin.ToggleSetting(hideannee)</onclick>
       <onclick condition="Skin.HasSetting(hidenotation)">Skin.ToggleSetting(hidenotation)</onclick>
@@ -1272,7 +1328,8 @@
 
 
         <control type="radiobutton" id="1000">
-          <label>$LOCALIZE[31748]</label>
+           <font>METF_DialogLargeBold</font>
+<label>$LOCALIZE[31748]</label>
           <include>BoutonCommunFlags</include>
           <onright>2000</onright>
           <selected>!Skin.HasSetting(hideduree)</selected>
@@ -1281,7 +1338,8 @@
 
         </control>
         <control type="radiobutton" id="1001">
-          <label>$LOCALIZE[31752]</label>
+           <font>METF_DialogLargeBold</font>
+<label>$LOCALIZE[31752]</label>
           <include>BoutonCommunFlags</include>
           <onright>2001</onright>
           <selected>!Skin.HasSetting(hidegenre)</selected>
@@ -1290,7 +1348,8 @@
 
         </control>
         <control type="radiobutton" id="1002">
-          <label>$LOCALIZE[31776]</label>
+           <font>METF_DialogLargeBold</font>
+<label>$LOCALIZE[31776]</label>
           <include>BoutonCommunFlags</include>
           <onright>2002</onright>
           <selected>!Skin.HasSetting(hidestudio)</selected>
@@ -1299,43 +1358,58 @@
 
         </control>
         <control type="radiobutton" id="1003">
-          <label>$LOCALIZE[31754]</label>
+           <font>METF_DialogLargeBold</font>
+           <label>$LOCALIZE[20339]</label>
           <include>BoutonCommunFlags</include>
           <onright>2003</onright>
+          <selected>!Skin.HasSetting(hiderealisateur)</selected>
+          <onclick>Skin.ToggleSetting(hiderealisateur)</onclick>
+          <onclick condition="!Skin.HasSetting(hiderealisateur2)">Skin.ToggleSetting(hiderealisateur2)</onclick>
+
+        </control>
+        <control type="radiobutton" id="1004">
+           <font>METF_DialogLargeBold</font>
+<label>$LOCALIZE[31754]</label>
+          <include>BoutonCommunFlags</include>
+          <onright>2004</onright>
           <selected>!Skin.HasSetting(hideannee)</selected>
           <onclick>Skin.ToggleSetting(hideannee)</onclick>
           <onclick condition="!Skin.HasSetting(hideannee2)">Skin.ToggleSetting(hideannee2)</onclick>
 
         </control>
-        <control type="radiobutton" id="1004">
-          <label>$LOCALIZE[31755]</label>
+        <control type="radiobutton" id="1005">
+           <font>METF_DialogLargeBold</font>
+<label>$LOCALIZE[31755]</label>
           <include>BoutonCommunFlags</include>
-          <onright>2004</onright>
+          <onright>2005</onright>
           <selected>!Skin.HasSetting(hidenotation)</selected>
           <onclick>Skin.ToggleSetting(hidenotation)</onclick>
           <onclick condition="!Skin.HasSetting(hidenotation2)">Skin.ToggleSetting(hidenotation2)</onclick>
 
         </control>
-        <control type="radiobutton" id="1005">
-          <label>$LOCALIZE[31768]</label>
+        <control type="radiobutton" id="1006">
+           <font>METF_DialogLargeBold</font>
+<label>$LOCALIZE[31768]</label>
           <include>BoutonCommunFlags</include>
-          <onright>2005</onright>
+          <onright>2006</onright>
           <selected>!Skin.HasSetting(hidempaa)</selected>
           <onclick>Skin.ToggleSetting(hidempaa)</onclick>
           <onclick condition="!Skin.HasSetting(hidempaa2)">Skin.ToggleSetting(hidempaa2)</onclick>
 
         </control>
-        <control type="radiobutton" id="1006">
-          <label>$LOCALIZE[31788]</label>
+        <control type="radiobutton" id="1007">
+           <font>METF_DialogLargeBold</font>
+<label>$LOCALIZE[31788]</label>
           <include>BoutonCommunFlags</include>
-          <onright>2006</onright>
+          <onright>2007</onright>
           <selected>!Skin.HasSetting(hidesource)</selected>
           <onclick>Skin.ToggleSetting(hidesource)</onclick>
           <onclick condition="!Skin.HasSetting(hidesource2)">Skin.ToggleSetting(hidesource2)</onclick>
 
         </control>
         <control type="radiobutton" id="1017">
-          <label>$LOCALIZE[31789]</label>
+           <font>METF_DialogLargeBold</font>
+<label>$LOCALIZE[31789]</label>
           <include>BoutonCommunFlags</include>
           <onright>2017</onright>
           <selected>!Skin.HasSetting(hide3d)</selected>
@@ -1345,7 +1419,8 @@
         </control>
 
         <control type="radiobutton" id="1020">
-          <label>$LOCALIZE[31753]</label>
+           <font>METF_DialogLargeBold</font>
+<label>$LOCALIZE[31753]</label>
           <include>BoutonCommunFlags</include>
           <onright>2020</onright>
           <selected>!Skin.HasSetting(hideitemcountry)</selected>
@@ -1354,7 +1429,8 @@
 
         </control>
         <control type="radiobutton" id="1021">
-          <label>$LOCALIZE[31770]</label>
+           <font>METF_DialogLargeBold</font>
+<label>$LOCALIZE[31770]</label>
           <onright>2021</onright>
           <include>BoutonCommunFlags</include>
           <selected>!Skin.HasSetting(hidecodecvideo)</selected>
@@ -1363,7 +1439,8 @@
 
         </control>
         <control type="radiobutton" id="1022">
-          <label>$LOCALIZE[31769]</label>
+           <font>METF_DialogLargeBold</font>
+<label>$LOCALIZE[31769]</label>
           <include>BoutonCommunFlags</include>
           <onright>2022</onright>
           <selected>!Skin.HasSetting(hideresolution)</selected>
@@ -1372,7 +1449,8 @@
 
         </control>
         <control type="radiobutton" id="1023">
-          <label>$LOCALIZE[31771]</label>
+           <font>METF_DialogLargeBold</font>
+<label>$LOCALIZE[31771]</label>
           <onright>2023</onright>
           <include>BoutonCommunFlags</include>
           <selected>!Skin.HasSetting(hideaspect)</selected>
@@ -1381,7 +1459,8 @@
 
         </control>
         <control type="radiobutton" id="1024">
-          <label>$LOCALIZE[31775]</label>
+           <font>METF_DialogLargeBold</font>
+<label>$LOCALIZE[31775]</label>
           <onright>2024</onright>
           <include>BoutonCommunFlags</include>
           <selected>!Skin.HasSetting(hidesoustitres)</selected>
@@ -1390,7 +1469,8 @@
 
         </control>
         <control type="radiobutton" id="1025">
-          <label>$LOCALIZE[31774]</label>
+           <font>METF_DialogLargeBold</font>
+           <label>$LOCALIZE[31774]</label>
           <include>BoutonCommunFlags</include>
           <onright>2025</onright>
           <selected>!Skin.HasSetting(hidelangues)</selected>
@@ -1463,15 +1543,15 @@
           <onclick condition="!Skin.HasSetting(hidestudio)">Skin.ToggleSetting(hidestudio)</onclick>
 
         </control>
-        <control type="radiobutton" id="2003">
+         <control type="radiobutton" id="2003">
           <label></label>
           <include>BoutonCommunFlags2</include>
           <onleft>1003</onleft>
 
 
-          <selected>!Skin.HasSetting(hideannee2)</selected>
-          <onclick>Skin.ToggleSetting(hideannee2)</onclick>
-          <onclick condition="!Skin.HasSetting(hideannee)">Skin.ToggleSetting(hideannee)</onclick>
+          <selected>!Skin.HasSetting(hiderealisateur2)</selected>
+          <onclick>Skin.ToggleSetting(hiderealisateur2)</onclick>
+          <onclick condition="!Skin.HasSetting(hiderealisateur)">Skin.ToggleSetting(hiderealisateur)</onclick>
 
         </control>
         <control type="radiobutton" id="2004">
@@ -1480,9 +1560,9 @@
           <onleft>1004</onleft>
 
 
-          <selected>!Skin.HasSetting(hidenotation2)</selected>
-          <onclick>Skin.ToggleSetting(hidenotation2)</onclick>
-          <onclick condition="!Skin.HasSetting(hidenotation)">Skin.ToggleSetting(hidenotation)</onclick>
+          <selected>!Skin.HasSetting(hideannee2)</selected>
+          <onclick>Skin.ToggleSetting(hideannee2)</onclick>
+          <onclick condition="!Skin.HasSetting(hideannee)">Skin.ToggleSetting(hideannee)</onclick>
 
         </control>
         <control type="radiobutton" id="2005">
@@ -1491,15 +1571,26 @@
           <onleft>1005</onleft>
 
 
-          <selected>!Skin.HasSetting(hidempaa2)</selected>
-          <onclick>Skin.ToggleSetting(hidempaa2)</onclick>
-          <onclick condition="!Skin.HasSetting(hidempaa)">Skin.ToggleSetting(hidempaa)</onclick>
+          <selected>!Skin.HasSetting(hidenotation2)</selected>
+          <onclick>Skin.ToggleSetting(hidenotation2)</onclick>
+          <onclick condition="!Skin.HasSetting(hidenotation)">Skin.ToggleSetting(hidenotation)</onclick>
 
         </control>
         <control type="radiobutton" id="2006">
           <label></label>
           <include>BoutonCommunFlags2</include>
           <onleft>1006</onleft>
+
+
+          <selected>!Skin.HasSetting(hidempaa2)</selected>
+          <onclick>Skin.ToggleSetting(hidempaa2)</onclick>
+          <onclick condition="!Skin.HasSetting(hidempaa)">Skin.ToggleSetting(hidempaa)</onclick>
+
+        </control>
+        <control type="radiobutton" id="2007">
+          <label></label>
+          <include>BoutonCommunFlags2</include>
+          <onleft>1007</onleft>
 
 
           <selected>!Skin.HasSetting(hidesource2)</selected>

@@ -2,6 +2,8 @@
 <window id="502">
 	<onload condition="String.IsEmpty(Window(Home).property(iconmixtoolsbackend))">RunScript(script.iconmixtools,backend=True)</onload>--> 
 	<onload>Skin.ToggleSetting(SkinHelper.EnableMusicArt)</onload>
+	<onload>SetProperty(IconmixDialogContext,,Home)</onload>
+  <onunload>SetProperty(IconmixDialogContext,,Home)</onunload>
 	<views>55,509,905,58,559,511,510,513,514,552,551,906,561</views>
 	<defaultcontrol always="true">55</defaultcontrol>
 	<controls>
@@ -442,8 +444,17 @@
           </animation>
         <include>AffichagePosition</include>      
        </control>
-       <include>MenuGeneral</include>
+       <control type="image">
+        <include>Animation_FadeFond</include>
+       <posx>0</posx>
+       <posy>0</posy>
+       <width>1920</width>
+       <height>1080</height>
+       <texture>frames/eau.png</texture>
+      </control>
     </control>
+     
+    <include>MenuGeneral</include>
 		<include>AnimationVoletsHorizontaux</include>
 		
 		
