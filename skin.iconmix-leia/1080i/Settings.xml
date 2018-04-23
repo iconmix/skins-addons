@@ -269,7 +269,7 @@
 		
 		<include>Global_MediaOverlay</include>
 		<control type="label">
-			<posx>1600</posx>
+			<posx>1550</posx>
 			<posy>1050</posy>
 			<font>lcdsongs</font>
 			<textcolor>yellow</textcolor>

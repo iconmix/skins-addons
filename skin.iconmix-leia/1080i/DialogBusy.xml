@@ -18,14 +18,14 @@
 	    <colordiffuse>7F7F7F7F</colordiffuse>
 	  </control>
 		<control type="group">
-			<posx>540</posx>
-			<posy>120</posy>
+			<posx>885</posx>
+			<posy>615</posy>
 			
 			<control type="image">
 				
-				<width>800</width>
-				<height>800</height>
-				<texture>youtube.gif</texture>
+				<width>260</width>
+				<height>150</height>
+				<texture>sablier.gif</texture>
 				<!--
 				<texture>dialogs/Dialog_BusyIcon.png</texture>
 				<colordiffuse>-</colordiffuse>

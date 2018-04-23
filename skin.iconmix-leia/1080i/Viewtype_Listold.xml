@@ -211,8 +211,8 @@
 			<oninfo condition="Container.Content(actors)|Container.Content(directors)">SetProperty(ActorThumb,$VAR[PosterThumb],Home)</oninfo>
 			<oninfo condition="Container.Content(actors)|Container.Content(directors)">SetFocus(8889)</oninfo>
 			<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
-			<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
-      <onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
+			
+      
 			<!-- <onright>60</onright> -->
 			<scrolltime>160</scrolltime>
 			<orientation>vertical</orientation>

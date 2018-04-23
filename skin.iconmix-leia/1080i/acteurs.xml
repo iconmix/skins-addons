@@ -1593,7 +1593,7 @@
   </control>
 </include>
 <!-- ---------------------------------------------------------------------------------------------- -->
-<include name="Roles">
+<include name="Roles"> 
   <orientation>horizontal</orientation>
   <itemlayout height="380" width="350">
     <control type="group">
@@ -1638,23 +1638,25 @@
         <texture>$INFO[ListItem.Property(poster)]</texture>
         <aspectratio align="center" aligny="center">keep</aspectratio>
       </control>
-      <control type="image">
-        <posy>-10</posy>
-        <left>130</left>
-        <height>50</height>
-        <texture>acteurs/films.png</texture>
-        <aspectratio>keep</aspectratio>
-        <visible>String.IsEqual(ListItem.Property(dbtype),movie)+Control.IsVisible(5055)</visible>
-      </control>
-      <control type="image">
-        <posy>-10</posy>
-        <left>130</left>
-        <height>50</height>
-        <texture>acteurs/series.png</texture>
-        <aspectratio>keep</aspectratio>
-        <visible>!String.IsEqual(ListItem.Property(dbtype),movie)+!Control.IsVisible(5055)</visible>
-      </control>
+      
+      
     </control>
+     <control type="group">
+         <top>308</top>
+         <left>-120</left>
+        <control type="image">
+          <height>50</height>
+          <texture>acteurs/films.png</texture>
+          <aspectratio>keep</aspectratio>
+          <visible>String.IsEqual(ListItem.Property(dbtype),movie)</visible>
+        </control>
+        <control type="image">
+          <height>50</height>
+          <texture>acteurs/series.png</texture>
+          <aspectratio>keep</aspectratio>
+          <visible>!String.IsEqual(ListItem.Property(dbtype),movie)</visible>
+        </control>
+      </control>
 
   </itemlayout>
   <focusedlayout height="380" width="400">
@@ -1690,6 +1692,7 @@
         <textcolor>lightgrey</textcolor>
         <label>[I]$INFO[ListItem.Label2][/I]</label>
       </control>
+      
     </control>
     <control type="group">
       <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7778)|Control.HasFocus(505)">
@@ -1708,6 +1711,24 @@
 
       
     </control>
+    <control type="group">
+       
+        <visible>!Control.HasFocus(7779)+!Control.HasFocus(7778)+!Control.HasFocus(505)</visible>
+        <top>308</top>
+         <left>-120</left>
+        <control type="image">
+          <height>50</height>
+          <texture>acteurs/films.png</texture>
+          <aspectratio>keep</aspectratio>
+          <visible>String.IsEqual(ListItem.Property(dbtype),movie)</visible>
+        </control>
+        <control type="image">
+          <height>50</height>
+          <texture>acteurs/series.png</texture>
+          <aspectratio>keep</aspectratio>
+          <visible>!String.IsEqual(ListItem.Property(dbtype),movie)</visible>
+        </control>
+      </control>
   </focusedlayout>
 </include>
 <!-- ---------------------------------------------------------------------------------------------- -->

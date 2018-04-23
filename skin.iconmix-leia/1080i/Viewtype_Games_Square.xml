@@ -82,8 +82,8 @@
 				<width>1500</width>				
 				<include condition="!Skin.HasSetting(ViewLockdown)">OnUp7000</include>
 
-<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,up,Home)</onfocus>
-<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,down,Home)</onfocus>
+
+
 
 
 				<!-- <ondown>60</ondown> -->

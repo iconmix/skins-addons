@@ -17,9 +17,9 @@
 				 <animation type="Conditional" condition="String.IsEmpty(Window(Home).Property(NextAired.NextDate))">
 				<effect type="slide" start="0,0" end="0,-30" time="1"  />
 			</animation>	
-			-->
 
          <include>MediaInfoGroup2</include>
+         
          <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)+!Skin.HasSetting(ActeursAuCentre)</visible>
 				<include>VisibleIfNotMovieSet</include>
 
@@ -60,10 +60,10 @@
 			</control>
 		<!-- -->
 		<control type="group">
-<posy>2085</posy>
+        <posy>2095</posy>
 		        <include>VisibleIfNotMovieSet</include>
 		         <animation reversible="false" type="Conditional" condition="!Container().OnNext+!Container().OnPrevious">
-        <effect type="slide" end="0,-45" time="500" delay="1000" />
+        <effect type="slide" end="0,-55" time="500" delay="1000" />
       </animation>
 		        <visible>!Skin.HasSetting(Hide_Plot)+!Skin.HasSetting(ShowLargePlot)+!Control.HasFocus(2999)</visible>
 
@@ -95,9 +95,39 @@
 				<scrollout>false</scrollout>
 			</control>
 			
+			
 					
 		</control>	
 		-->	
+		<control type="group">
+		  <posy>2065</posy>
+		        <include>VisibleIfNotMovieSet</include>
+		        <visible>!String.IsEmpty(ListItem.FilenameAndPath)+Skin.HasSetting(ShowFilePath)</visible>
+		         <animation reversible="false" type="Conditional" condition="!Container().OnNext+!Container().OnPrevious">
+        <effect type="slide" end="0,-55" time="500" delay="1000" />
+      </animation>
+		<control type="image">
+          
+				<width>1920</width>
+				<height>30</height>
+          <texture>osd/OSDdialogback.png</texture>
+          <aspectratio>stretch</aspectratio>
+          <colordiffuse>A0F0F0F0</colordiffuse>
+        </control>
+        <control type="label">
+          <top>13</top>
+            <align>left</align>
+            <aligny>center</aligny>
+            <scroll>true</scroll>
+            <scrollout>false</scrollout>
+            <font>impactsongs</font>
+            <textcolor>lightgrey</textcolor>
+            <label>$INFO[ListItem.FilenameAndPath]</label>
+          </control>
+          
+     </control>
+		
+		
 		<control type="group">
 			  <posy>1200</posy>
 			   <include>SpecialPlotBox</include>
@@ -120,9 +150,9 @@
 			</control>
 			<control type="grouplist">
 			  <visible>![Container.Content(episodes)|Container.Content(tvshows)]</visible>
-			  <left>460</left>
-				<width>1010</width>
-				<posy>993</posy>
+			  <left>0</left>
+				<width>1920</width>
+				<posy>991</posy>
 				<height>60</height>
 				<align>center</align>
 				<orientation>horizontal</orientation>

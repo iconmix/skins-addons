@@ -75,6 +75,10 @@
 		<pauseatend>90000</pauseatend>
 	</include>
 	
+	<variable name="AutoCompletionContentVar">
+		<value condition="System.HasAddon(plugin.program.autocompletion) + !System.HasHiddenInput">plugin://plugin.program.autocompletion?info=autocomplete&amp;&amp;id=$INFO[Control.GetLabel(312).index(1)]&amp;&amp;limit=9</value>
+	</variable>
+	
 	<variable name="ListItemVu">
 	  <value condition="[[[String.IsEqual(ListItem.DbType,movie) | String.IsEqual(ListItem.DbType,set)] + !Skin.HasSetting(HideMovieWatchedOverlays)]|[!ListItem.IsFolder+!String.IsEqual(ListItem.DbType,movie) + !String.IsEqual(ListItem.DbType,set)+!String.IsEqual(ListItem.DbType,tvshow) + !String.IsEqual(ListItem.DbType,episode)+ !String.IsEqual(ListItem.DbType,season)]|[[String.IsEqual(ListItem.DbType,tvshow) | String.IsEqual(ListItem.DbType,episode)| String.IsEqual(ListItem.DbType,season)] + !Skin.HasSetting(HideTVWatchedOverlays)]]+!Window.IsActive(502)+!ListItem.IsResumable+ Integer.IsGreater(ListItem.PlayCount,0)+ String.IsEmpty(ListItem.Property(PercentPlayed))">[COLOR=FFFF8C82][I]$VAR[ListItemTitle][/I][/COLOR]</value>
 	  <value condition="ListItem.IsFolder+!String.IsEqual(ListItem.DBTYPE,set)">[COLOR=yellow][I]$VAR[ListItemTitle][/I][/COLOR]</value>
@@ -92,6 +96,7 @@
    <value condition="Container(9000).Hasfocus(2)+ControlGroup(9002).Hasfocus(205)">settings/preview/bobine.jpg</value>
    <value condition="Container(9000).Hasfocus(2)+ControlGroup(9002).Hasfocus(210)">settings/preview/wdfocus.jpg</value>
    <value condition="Container(9000).Hasfocus(2)+ControlGroup(9002).Hasfocus(211)">settings/preview/wdperm.jpg</value>
+   <value condition="Container(9000).Hasfocus(3)+ControlGroup(9007).Hasfocus(508)">settings/preview/anneenotation.png</value>
    <value condition="Container(9000).Hasfocus(7)+ControlGroup(9011).Hasfocus(805)+Skin.HasSetting(ActeursAuCentre)+!Skin.HasSetting(ShowActeursTexte)">settings/preview/acteurscentre.jpg</value>
    <value condition="Container(9000).Hasfocus(7)+ControlGroup(9011).Hasfocus(805)+Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(ShowActeursTexte)">settings/preview/acteurscentretexte.jpg</value>
    <value condition="Container(9000).Hasfocus(7)+ControlGroup(9011).Hasfocus(805)+!Skin.HasSetting(ActeursAuCentre)+!Skin.HasSetting(ShowActeursTexte)">settings/preview/modeexp.jpg</value>   
@@ -379,7 +384,7 @@
 		<value condition="!String.IsEmpty(Window(Home).Property(IconMixExtraFanart))">$INFO[Window(Home).Property(IconMixExtraFanart)]</value>
 		<value condition="Control.IsVisible(1999)+!String.IsEmpty(Container(1999).ListItem.Art(fanart))">$INFO[Container(1999).ListItem.Art(fanart)]</value>
 		
-		<value condition="Integer.IsGreater(Container(2998).NumItems,0)">$INFO[Container(2998).ListItem.Icon]</value>
+		<value condition="Integer.IsGreater(Container(2995).NumItems,0)">$INFO[Container(2995).ListItem.Icon]</value>
 		<value condition="Control.IsVisible(1999)+!String.IsEmpty(Container(1999).ListItem.Property(AlbumFanart))">$INFO[Container(1999).ListItem.Property(AlbumFanart)]</value>
 		<value condition="Control.IsVisible(1999)+!String.IsEmpty(Container(1999).ListItem.Property(ArtistFanart))">$INFO[Container(1999).ListItem.Property(ArtistFanart)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
@@ -432,14 +437,10 @@
 		<value condition="String.Contains(Container(9000).ListItem.Property(widget),RandomSongs)">$INFO[ListItem.Artist] - $INFO[ListItem.Title]</value>
 		<value condition="String.Contains(Container(9000).ListItem.Property(widget),NAired)|String.Contains(Container(9000).ListItem.Property(widgetpath),nextaired)">[I][COLOR=lightblue]$INFO[ListItem.TVShowTitle,,: ][/COLOR][/I]$INFO[ListItem.Label] : ([COLOR=white]$INFO[ListItem.Property(airdate)][/COLOR])</value>
 
-		<!-- fixing the playlists content labels
-		<value condition="String.Contains(Container(9000).ListItem.Property(widget),Playlist) + String.IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[ListItem.Title]$INFO[ListItem.Year, (,)]</value>
-		<value condition="String.Contains(Container(9000).ListItem.Property(widget),Playlist) + !String.Contains(ListItem.Title,ListItem.TVShowTitle) + !String.IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[ListItem.TVShowTitle] - $INFO[ListItem.Season,,x]$INFO[ListItem.Episode,,. ]$INFO[ListItem.Title]</value>
-		-->
+		
 		<value>[I][COLOR=lightblue]$INFO[ListItem.TVShowTitle,,: ][/COLOR][/I]$INFO[ListItem.Label]</value>
 	</variable>
 	<variable name="GlobalWidgetLabel2">
-		<!-- fixing the service.library.data.provider content labels-->
 		<value condition="String.Contains(Container(9000).ListItem.Property(widget.2),RecentlyAddedMovies)|String.Contains(Container(9000).ListItem.Property(widget.2),RandomMovies)|String.Contains(Container(9000).ListItem.Property(widget.2),RecommendedMovies)">$INFO[ListItem.Title]$INFO[ListItem.Year, (,)]</value>
 		<value condition="String.Contains(Container(9000).ListItem.Property(widget.2),RecentlyAddedEpisodes)|String.Contains(Container(9000).ListItem.Property(widget.2),RecommendedEpisodes)|String.Contains(Container(9000).ListItem.Property(widget.2),RandomEpisodes)">$INFO[ListItem.TVShowTitle] - $VAR[Seasonnum]$VAR[episodenum] - $INFO[ListItem.Title]</value>
 		<value condition="String.Contains(Container(9000).ListItem.Property(widget.2),RecentlyAddedAlbums)|String.Contains(Container(9000).ListItem.Property(widget.2),RecommendedAlbums)|String.Contains(Container(9000).ListItem.Property(widget.2),RandomAlbums)">$INFO[ListItem.Artist] - $INFO[ListItem.Title]$INFO[ListItem.Year, (,)]</value>
@@ -517,135 +518,34 @@
 	<variable name="Weather_Icons_Current">
 		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Current.FanartCode)]$VAR[WeatherIconsExt]</value>
 	</variable>
-	<variable name="Weather_Icons_Day0">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Day0.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Day1">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Day1.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Day2">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Day2.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Day3">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Day3.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Day4">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Day4.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Day5">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Day5.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Day6">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Day6.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour1">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.1.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour2">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.2.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour3">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.3.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour4">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.4.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour5">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.5.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour6">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.6.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour7">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.7.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour8">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.8.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour9">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.9.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour10">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.10.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour11">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.11.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour12">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.12.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour13">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.13.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour14">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.14.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour15">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.15.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour16">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.16.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour17">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.17.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour18">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.18.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour19">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.19.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour20">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.20.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour21">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.21.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour22">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.22.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour23">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.23.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour24">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.24.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour25">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.25.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour26">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.26.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour27">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.27.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour28">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.28.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour29">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.29.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour30">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.30.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour31">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.31.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour32">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.32.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour33">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.33.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour34">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.34.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour35">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.35.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
-	<variable name="Weather_Icons_Hour36">
-		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.36.FanartCode)]$VAR[WeatherIconsExt]</value>
-	</variable>
+	<include name="Weather_Icons_Day">
+	  <param name="numero" default="0"/>
+	  <param name="hauteur" default="130" />
+	  <param name="positionY" default="5" />
+	  <definition>
+	    <control type="multiimage">
+						<height>$PARAM[hauteur]</height>
+						<posy>$PARAM[positionY]</posy>
+						<aspectratio align="center">keep</aspectratio>
+						<imagepath>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Day$PARAM[numero].FanartCode)]$VAR[WeatherIconsExt]</imagepath>
+					</control>
+	  </definition>
+	  
+	</include>
+	<include name="Weather_Icons_Hour">
+	  <param name="numero" default="1"/>
+	 
+	  <definition>
+	    
+						<aspectratio align="center">keep</aspectratio>
+						<imagepath>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(Hourly.$PARAM[numero].FanartCode)]$VAR[WeatherIconsExt]</imagepath>
+					
+	  </definition>
+	  
+	</include>
+	
+	
+	
 	<variable name="Weather_Icons_36Hr1">
 		<value>$VAR[WeatherIconsPath]/$INFO[Window(Weather).Property(36Hour.1.FanartCode)]$VAR[WeatherIconsExt]</value>
 	</variable>
@@ -886,12 +786,12 @@
 	  <value condition="String.Contains(Container.FolderPath,musicdb://genre)">$INFO[Container.FolderName]</value>
 	</variable>
 	
-	<variable name="PosterThumb">
+<variable name="PosterThumb">
 	   <value condition="Container.Content(episodes)">$INFO[ListItem.Icon]</value>
 	  <value condition="!String.IsEmpty(ListItem.Property(poster))">$INFO[ListItem.Property(poster)]</value>		
 		<value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(season.poster))">$INFO[ListItem.Art(season.poster)]</value>
-		<value>$INFO[ListItem.Icon]</value>
+		<value condition="!String.Contains(ListItem.Icon,efault)">$INFO[ListItem.Icon]</value>
 	</variable>
 	<variable name="PosterThumbActeurs">
 	  <value condition="!String.IsEmpty(ListItem.Icon)+!String.Contains(ListItem.Icon,Default)+!Window.IsVisible(12003)+[Container.Content(directors)|Container.Content(actors)]">$INFO[ListItem.Icon]</value>	 
@@ -952,7 +852,7 @@
 		<value condition="!String.IsEmpty(Window(Home).Property(IconMixSagaClearArt))">$INFO[Window(Home).Property(IconMixSagaClearArt)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(clearart))">$INFO[ListItem.Art(clearart)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(tvshow.clearart))">$INFO[ListItem.Art(tvshow.clearart)]</value>
-		<value condition="!String.IsEmpty(ListItem.Art(clearlogo)) + String.IsEmpty(ListItem.Art(clearart))">$INFO[ListItem.Art(clearlogo)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(clearlogo))">$INFO[ListItem.Art(clearlogo)]</value>
 		<value>noclearart</value>
 	</variable>
 	<variable name="ListClearartClearlogo">
@@ -1068,6 +968,7 @@
 	</variable>
 	<variable name="BackPlayListStyle">
 		<value condition="String.IsEqual(Window.Property(backgroundplayliststyle),X2)">$LOCALIZE[31915]</value>
+		<value condition="String.IsEqual(Window.Property(backgroundplayliststyle),X3)">$LOCALIZE[31735]</value>
 		<value>$LOCALIZE[31914]</value>
 	</variable>
 	<variable name="WidgetStyleLabelVar">

@@ -132,7 +132,7 @@
           <fadetime>500</fadetime>
           <texture background="true">widgetthumb/playlist$INFO[Container(211).ListItem.Property(backgroundplayliststyle)].jpg</texture>
           <aspectratio>keep</aspectratio>
-          <visible>Control.HasFocus(1008)</visible>
+          <visible>ControlGroup(9000).HasFocus(1008)</visible>
         </control>
         <!-- Thumbnail Label (Home2) -->
         <control type="label" id="904">

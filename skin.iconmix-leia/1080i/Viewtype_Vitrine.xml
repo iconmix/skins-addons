@@ -33,15 +33,15 @@
 			<animation effect="rotatey" center="30" start="0" end="-8" time="500" condition="true">Conditional</animation>
 			
 			<control type="group">
-				<control type="wraplist" id="584">
+				<control type="fixedlist" id="584">
 					<posx>30</posx>
 					<posy>0</posy>
 					<width>3000</width>
 					<height>665</height>
 					<include condition="!Skin.HasSetting(ViewLockdown)">OnUp7000</include>
 
-<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,up,Home)</onfocus>
-<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,down,Home)</onfocus>
+
+
 
 
 					<!-- <ondown>60</ondown> -->
@@ -104,9 +104,10 @@
 									<left>115</left>
 									<width>60</width>
 									<height>35</height>								
-									<texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture>
+									<!-- <texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture> -->
+									<texture fallback="flags/default.png">$INFO[ListItem.VideoResolution,flags/VideoResolution/,.png]</texture>
+									
 									<aspectratio>keep</aspectratio>
-									<colordiffuse>MediaFlagDiffuse</colordiffuse>					
 								</control>	
 								<control type="group">
 									<top>40</top>
@@ -144,6 +145,12 @@
 							
 						</control>
 						<include>AnimationCacheNonSelect</include>
+						 <include content="MediaInfoMini">
+                <param name="PosX">50</param>
+                <param name="PosY">420</param>
+              </include>
+              
+              
 			       <visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
   </control>
   <control type="image">
@@ -253,9 +260,9 @@
 							<left>115</left>
 							<width>60</width>
 							<height>35</height>								
-							<texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture>
+							<!-- <texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture> -->
+									<texture fallback="flags/default.png">$INFO[ListItem.VideoResolution,flags/VideoResolution/,.png]</texture>
 							<aspectratio>keep</aspectratio>
-							<colordiffuse>MediaFlagDiffuse</colordiffuse>					
 						</control>
 						<control type="group">
 							<top>40</top>

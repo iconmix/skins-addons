@@ -33,241 +33,43 @@
 		</animation>
 	</include>
 
-<include name="AnimationVoletsVerticaux">
-	<control type="grouplist">
-		<posx>0</posx>
-		<posy>0</posy>
-		<width>1920</width>
-		<height>1080</height>
-		<orientation>horizontal</orientation>		
-		<control type="image">
-			<height>1080</height>
-			<width>180</width>
-			
-			<aspectratio>keep</aspectratio>
-			<texture>animations/voletvertical.png</texture>
-			<include>Animation_PanelFlipVerticalImpair</include>
-		</control>
-		<control type="image">
-			<height>1080</height>
-			<width>180</width>
-			<aspectratio>keep</aspectratio>
-			<texture>animations/voletvertical.png</texture>
-			<include>Animation_PanelFlipVerticalPair</include>
-		</control>
-		<control type="image">
-			<height>1080</height>
-			<width>180</width>
-			<aspectratio>keep</aspectratio>
-			<texture>animations/voletvertical.png</texture>
-			<include>Animation_PanelFlipVerticalImpair</include>
-		</control>
-		<control type="image">
-			<height>1080</height>
-			<width>180</width>
-			<aspectratio>keep</aspectratio>
-			<texture>animations/voletvertical.png</texture>
-			<include>Animation_PanelFlipVerticalPair</include>
-		</control>
-		<control type="image">
-			<height>1080</height>
-			<width>180</width>
-			<aspectratio>keep</aspectratio>
-			<texture>animations/voletvertical.png</texture>
-			<include>Animation_PanelFlipVerticalImpair</include>
-		</control>
-		<control type="image">
-			<height>1080</height>
-			<width>180</width>
-			<aspectratio>keep</aspectratio>
-			<texture>animations/voletvertical.png</texture>
-			<include>Animation_PanelFlipVerticalPair</include>
-		</control>
-		<control type="image">
-			<height>1080</height>
-			<width>180</width>
-			<aspectratio>keep</aspectratio>
-			<texture>animations/voletvertical.png</texture>
-			<include>Animation_PanelFlipVerticalImpair</include>
-		</control>
-		<control type="image">
-			<height>1080</height>
-			<width>180</width>
-			<aspectratio>keep</aspectratio>
-			<texture>animations/voletvertical.png</texture>
-			<include>Animation_PanelFlipVerticalPair</include>
-		</control>
-		<control type="image">
-			<height>1080</height>
-			<width>180</width>
-			<aspectratio>keep</aspectratio>
-			<texture>animations/voletvertical.png</texture>
-			<include>Animation_PanelFlipVerticalImpair</include>
-		</control>
-		<control type="image">
-			<height>1080</height>
-			<width>180</width>
-			<aspectratio>keep</aspectratio>
-			<texture>animations/voletvertical.png</texture>
-			<include>Animation_PanelFlipVerticalPair</include>
-		</control>
-		<control type="image">
-			<height>1080</height>
-			<width>180</width>
-			<aspectratio>keep</aspectratio>
-			<texture>animations/voletvertical.png</texture>
-			<include>Animation_PanelFlipVerticalImpair</include>
-		</control>
-	
-		
-	</control>
-	
-</include>
-<include name="Animation_PanelFlipVerticalPair">	
-			<visible>!Container().OnNext+!Container().OnPrevious</visible>
-			<animation type="Visible" reversible="false">
-			<effect type="slide" end="0,-1090" time="1000" delay="5" />
-			<!--<effect type="fade" start="100" end="0" time="1000" delay="9100" />	-->	
-		</animation>
-		<animation type="WindowClose" reversible="false">
-			<effect type="slide" end="0,1090" time="1000" delay="5" />
-			<!--<effect type="fade" start="100" end="0" time="1000" delay="9100" />	-->	
-		</animation>
-	</include>
-	<include name="Animation_PanelFlipVerticalImpair">		
-		<visible>!Container().OnNext+!Container().OnPrevious</visible>
-		<animation type="Visible" reversible="false">
-			<effect type="slide" end="0,1090" time="1000" delay="5" />
-			<!--<effect type="fade" start="100" end="0" time="1000" delay="9100" />	-->	
-		</animation>
-		<animation type="WindowClose" reversible="false">
-			<effect type="slide" end="0,-1090" time="1000" delay="5" />
-			<!--<effect type="fade" start="100" end="0" time="1000" delay="9100" />	-->	
-		</animation>
-		
-	</include>
-	
-	
-	<include name="AnimationVoletsHorizontaux">
-		<control type="group">
-			<visible>Skin.HasSetting(ActivateAnimation)</visible>
-	<control type="grouplist">
-		<include>Animation_PanelFlipHorizontalPair</include>
-		<posx>1920</posx>
-		<posy>0</posy>
-		<width>1920</width>
-		<height>1080</height>
-		<itemgap>180</itemgap>
-		<orientation>Vertical</orientation>				
-		<control type="image">
-			<height>180</height>
-			<width>1920</width>				
-			<aspectratio>keep</aspectratio>
-			<texture>animations/voletHorizontal.png</texture>			
-		</control>
-		<control type="image">			
-			<height>180</height>
-			<width>1920</width>			
-			<aspectratio>keep</aspectratio>
-			<texture>animations/voletHorizontal.png</texture>			
-		</control>		
-		<control type="image">			
-			<height>180</height>
-			<width>1920</width>			
-			<aspectratio>keep</aspectratio>
-			<texture>animations/voletHorizontal.png</texture>			
-		</control>	
-	</control>
-		<control type="grouplist">
-		<posx>-1920</posx>
-		<include>Animation_PanelFlipHorizontalImpair</include>
-		<posy>180</posy>
-		<width>1920</width>
-		<height>1080</height>
-		<itemgap>180</itemgap>
-		<orientation>Vertical</orientation>				
-		<control type="image">
-			<height>180</height>
-			<width>1920</width>				
-			<aspectratio>keep</aspectratio>
-			<texture>animations/voletHorizontal.png</texture>			
-		</control>
-		<control type="image">			
-			<height>180</height>
-			<width>1920</width>			
-			<aspectratio>keep</aspectratio>
-			<texture>animations/voletHorizontal.png</texture>			
-		</control>		
-		<control type="image">			
-			<height>180</height>
-			<width>1920</width>			
-			<aspectratio>keep</aspectratio>
-			<texture>animations/voletHorizontal.png</texture>			
-		</control>	
-	</control>
-	</control>
-</include>
-<include name="Animation_PanelFlipHorizontalPair">		
-	<!--	
-			<animation type="WindowOpen" reversible="false">
-			<effect type="slide" end="-1920,0" time="1000" delay="5" />			
-		</animation>	
-		-->
-	<animation type="WindowClose" reversible="false">
-			<effect type="slide" end="-1920,0" time="400" />			
-		</animation>
-	
-	</include>
-	<include name="Animation_PanelFlipHorizontalImpair">		
-	
-		<!--
-		<animation type="WindowOpen" reversible="false">
-			<effect type="slide" end="1920,0" time="1000" delay="5" />
-			
-		</animation>
-		-->
-			<animation type="WindowClose" reversible="false">
-			<effect type="slide" end="1920,0" time="400"  />
-			
-		</animation>
-		
-		
-	</include>
 
+
+
+<include name="Animation_Mainmenu">
+  <!--<animation effect="slide" start="0" end="0,-200" center="auto" time="500" condition="Control.HasFocus(9001)">Conditional</animation>
+		<animation effect="fade" start="100" end="50"  time="500" condition="Control.HasFocus(9001)">Conditional</animation>
+		-->	
+		<animation effect="slide" start="0" end="0,600" center="auto" time="500" condition="[!Control.HasFocus(9000)+!Control.HasFocus(9001)]|[Player.HasAudio + System.IdleTime(8)]">Conditional</animation>
+		<animation effect="slide" start="0" end="0,30" center="auto" time="1" condition="![system.getbool(lookandfeel.enablerssfeeds)]|Skin.HasSetting(RssTop)">Conditional</animation>
+	
+		<animation effect="rotatex" start="0" end="90" center="960,50" time="700" condition="Control.HasFocus(9001)">Conditional</animation>
+  
+</include>
 <include name="Animation_Submenu">
+  <animation effect="slide" start="0" end="0,30" time="1" condition="![system.getbool(lookandfeel.enablerssfeeds)]|Skin.HasSetting(RssTop)">Conditional</animation>
+   <animation effect="rotatex" start="-90" end="0" center="960,90" delay="50" time="700" condition="Control.HasFocus(9001)">Conditional</animation>
+   <animation effect="fade" start="100" end="0"  time="500" condition="!Control.HasFocus(9001)">Conditional</animation> -->
+   <!-- <animation effect="rotatex" start="0" end="-90" center="960,90" time="1" condition="!Control.HasFocus(9001)">Conditional</animation> -->
+  
+  <!--
 		<animation type="Visible" reversible="false">
+		  
 				<effect type="slide" start="0,600" end="0,0" time="1000" tween="cubic" easing="out" />
 				<effect type="fade" start="0" end="100" time="1000" />
-			</animation>
-			
+				
+			</animation>-->
+			 <!--  
 				<animation type="Hidden" reversible="false">
+				 
 				<effect type="slide" start="0,0" end="0,600" time="1000" tween="cubic" easing="out" />
-				<effect type="fade" start="0" end="100" time="1000" />
+				<effect type="fade" start="100" end="0" time="1000" />
+				
 			</animation>
-			
+			-->
 	</include>
 
-<include name="Animation_Rotate">
-	<animation effect="rotatex" end="-360" center="auto" time="3500" loop="true" reversible="false"/>	
-</include>
-<include name="Animation_PanelFlipUp1">
-		<effect type="rotatey" center="auto" end="90" time="440" tween="cubic" easing="in" />
-		<effect type="rotatey" center="auto" start="90" end="-90" time="0" delay="440" />
-		<effect type="fade" end="100" time="0" delay="440" />
-		<effect type="rotatey" center="auto" start="-90" end="0" time="440" delay="440" tween="cubic" />
-	</include>
-	<include name="Animation_PanelFlipUp2">
-		<effect type="rotatex" center="201" end="90" time="440" tween="cubic" easing="in" />
-		<effect type="rotatex" center="201" start="90" end="-90" time="0" delay="440" />
-		<effect type="fade" start="100" end="0" time="0" delay="440" />
-		<effect type="rotatex" center="201" start="-90" end="0" time="440" delay="440" tween="cubic" />
-	</include>
-	<include name="Animation_PanelFlipDown1">
-		<effect type="rotatex" center="201" end="-90" time="440" tween="cubic" easing="in" />
-		<effect type="rotatex" center="201" start="-90" end="90" time="0" delay="440" />
-		<effect type="fade" end="100" time="0" delay="440" />
-		<effect type="rotatex" center="201" start="90" end="0" time="440" delay="440" tween="cubic" />
-	</include>
+
 
 	<!-- Common animations -->
 	<include name="Animation_CommonFade">
@@ -302,56 +104,8 @@
 						<effect type="rotate" end="-360" center="auto" time="2000" delay="0" loop="true" tween="cubic" easing="inout" />
 					</animation>
 	</include>
-	<!-- MADNOX -->
-	<include name="Animation_OpenCloseZoom_New">
-		<animation type="WindowOpen" reversible="false">
-			<effect type="zoom" start="150" end="100" center="960,540" time="480" tween="cubic" />
-			<effect type="fade" end="100" time="80" />
-		</animation>
-		<animation type="WindowClose" reversible="false">
-			<effect type="fade" start="100" end="0" time="240" />
-			<effect type="zoom" start="100" end="130" center="960,540" time="240" tween="cubic" easing="in" />
-		</animation>
-	</include>
-	<include name="Animation_TriPanelRight">
-		<animation type="WindowOpen" reversible="false">
-			<effect type="fade" end="100" time="0" />
-			<effect type="fade" end="100" delay="280" tween="cubic" time="240" />
-			<effect type="slide" start="0,-964" end="0" delay="280" tween="cubic" time="560" />
-		</animation>
-		<animation type="Visible" reversible="false">
-			<effect type="fade" end="100" time="0" />
-			<effect type="fade" end="100" delay="100" tween="cubic" easing="in" time="240" />
-			<effect type="slide" start="0,-964" end="0" delay="100" tween="cubic" time="560" />
-		</animation>
-		<animation type="Hidden" reversible="false">
-			<effect type="fade" start="100" end="0" time="240" tween="sine" />
-		</animation>
-		<animation type="WindowClose" reversible="false">
-			<effect type="slide" end="-964" tween="sine" easing="in" time="200" />
-			<effect type="fade" delay="160" start="100" end="0" time="80" />
-		</animation>
-	</include>
-	<!-- --- -->
-	<include name="Animation_TriPanelRightReverse">
-		<animation type="WindowOpen" reversible="false">
-			<effect type="fade" end="100" time="0" />
-			<effect type="fade" end="100" delay="280" tween="cubic" time="240" />
-			<effect type="slide" start="0,600" end="0,0" delay="280" tween="cubic" time="560" />
-		</animation>
-		<animation type="Visible" reversible="false">
-			<effect type="fade" end="100" time="0" />
-			<effect type="fade" end="100" delay="100" tween="cubic" easing="in" time="240" />
-			<effect type="slide" start="0,600" end="0,0" delay="100" tween="cubic" time="560" />
-		</animation>
-		<animation type="Hidden" reversible="false">
-			<effect type="fade" start="100" end="0" time="240" tween="sine" />
-		</animation>
-		<animation type="WindowClose" reversible="false">
-			<effect type="slide" end="600" tween="sine" easing="in" time="200" />
-			<effect type="fade" delay="160" start="100" end="0" time="80" />
-		</animation>
-	</include>
+	
+	
 	
 	<include name="Animation_ButtonFocus">
 		<animation type="Focus" reversible="false">
@@ -406,19 +160,7 @@
 	  
 	</include>
 	<include name="Animation_FadedByMenu">
-		<!--
-		<animation type="Conditional" condition="![Player.HasVideo+!String.IsEmpty(Window(Home).Property(annonceencours))]+[System.HasModalDialog + !Window.IsActive(musicinformation) + !Window.IsActive(movieinformation) + !Window.IsActive(songinformation) ]|  Window.IsActive(yesnodialog) | Window.IsActive(contentsettings) | Window.IsActive(contextmenu) | Window.IsActive(playercontrols) | Window.IsActive(shutdownmenu) | Window.IsActive(favourites) | Window.IsActive(okdialog) | Window.IsActive(selectdialog) | Window.IsActive(mediafilter) | Window.IsActive(addoninformation) | Window.IsActive(profilesettings) | Window.IsActive(smartplaylisteditor) | Window.IsActive(smartplaylistrule) | Window.IsActive(virtualkeyboard) | Window.IsActive(numericinput) | ControlGroup(7000).HasFocus()| ControlGroup(7002).HasFocus()|ControlGroup(7005).HasFocus()|Control.HasFocus(7017)| ControlGroup(7001).HasFocus()| ControlGroup(7004).HasFocus()|ControlGroup(7008).HasFocus()| ControlGroup(7009).HasFocus()|ControlGroup(7006).HasFocus|Control.HasFocus(998)|Control.HasFocus(999)">
-			<effect type="fade" time="200" start="100" end="50" />
-		</animation>
 		
-		<animation type="Conditional" condition="[Player.HasVideo+!String.IsEmpty(Window(Home).Property(annonceencours))]">
-			<effect type="fade" time="200" start="100" end="50" />
-		</animation>
-	
-		<animation type="Conditional" condition="Window.IsActive(addonsettings) | Window.IsActive(filebrowser) | Window.IsActive(mediasource) | Window.IsActive(peripheralsettings) | Window.IsActive(script-RSS_Editor-rssEditor.xml) | Window.IsActive(script-RSS_Editor-setEditor.xml) | Window.IsActive(custom_DialogFavourites.xml) | Window.IsActive(script-skinshortcuts.xml)">
-			<effect type="fade" time="200" start="100" end="0" />
-		</animation>
-		 -->
 	</include>
 	<include name="Animation_FadeFond">
 	    <animation type="Conditional" condition="![![Player.HasVideo+!String.IsEmpty(Window(Home).Property(annonceencours))]+[System.HasModalDialog + !Window.IsActive(musicinformation) + !Window.IsActive(movieinformation) + !Window.IsActive(songinformation) ]|  Window.IsActive(yesnodialog) | Window.IsActive(contentsettings) | Window.IsActive(contextmenu) | Window.IsActive(playercontrols) | Window.IsActive(shutdownmenu) | Window.IsActive(favourites) | Window.IsActive(okdialog) | Window.IsActive(selectdialog) | Window.IsActive(mediafilter) | Window.IsActive(addoninformation) | Window.IsActive(profilesettings) | Window.IsActive(smartplaylisteditor) | Window.IsActive(smartplaylistrule) | Window.IsActive(virtualkeyboard) | Window.IsActive(numericinput) | ControlGroup(7000).HasFocus()| ControlGroup(7002).HasFocus()|ControlGroup(7005).HasFocus()|Control.HasFocus(7017)| ControlGroup(7001).HasFocus()| ControlGroup(7004).HasFocus()|ControlGroup(7008).HasFocus()| ControlGroup(7009).HasFocus()|ControlGroup(7006).HasFocus|Control.HasFocus(998)|Control.HasFocus(999)]">
@@ -441,43 +183,15 @@
 	
 	
 	
-	<include name="Animation_FadedByMenuExceptions">
-		<animation type="Conditional" condition="Window.IsActive(yesnodialog) | Window.IsActive(contentsettings) | Window.IsActive(contextmenu) | Window.IsActive(playercontrols) | Window.IsActive(shutdownmenu) | Window.IsActive(favourites) | Window.IsActive(okdialog) | Window.IsActive(selectdialog) | Window.IsActive(mediafilter) | Window.IsActive(addoninformation) | Window.IsActive(profilesettings) | Window.IsActive(smartplaylisteditor) | Window.IsActive(smartplaylistrule) | Window.IsActive(virtualkeyboard) | Window.IsActive(numericinput) | ControlGroup(7000).HasFocus()| ControlGroup(7002).HasFocus()|ControlGroup(7005).HasFocus()|Control.HasFocus(7017)| ControlGroup(7008).HasFocus()| ControlGroup(7009).HasFocus()|Control.HasFocus(998)|Control.HasFocus(999)">
-			<effect type="fade" time="200" start="100" end="10" />
-		</animation>
-		<animation type="Conditional" condition="Window.IsActive(addonsettings) | Window.IsActive(filebrowser) | Window.IsActive(mediasource) | Window.IsActive(peripheralsettings) | Window.IsActive(script-RSS_Editor-rssEditor.xml) | Window.IsActive(script-RSS_Editor-setEditor.xml) | Window.IsActive(custom_DialogFavourites.xml)">
-			<effect type="fade" time="200" start="100" end="0" />
-		</animation>
-	</include>
+	
 	<include name="Animation_FadedByOSDSettings">
 		<animation type="Conditional" condition="Window.IsActive(osdvideosettings) | Window.IsActive(osdaudiosettings)">
 			<effect type="fade" time="300" start="100" end="0" />
 		</animation>
 	</include>
-	<include name="Animation_ExitOsd">
-		<animation effect="zoom" center="960,540" start="0" end="100" time="200">WindowOpen</animation>
-		<animation effect="zoom" center="960,540" start="100" end="0" time="200">WindowClose</animation>
-		<animation effect="zoom" center="960,540" start="0" end="100" time="200">Visible</animation>
-		<animation effect="zoom" center="960,540" start="100" end="0" time="200">Hidden</animation>
 	
-	</include>
 	
-	<include name="Animation_ZoomInMenu">
-		<animation type="Visible">
-			<effect delay="200" type="zoom" time="600" center="640,360" start="50" end="100" tween="cubic" easing="out" />
-			<effect delay="200" type="fade" time="600" start="0" end="100" />
-		</animation>
-		<animation type="Hidden">
-			<effect type="fade" time="200" start="100" end="0" />
-		</animation>
-		<animation type="WindowOpen">
-			<effect delay="200" type="zoom" time="600" center="640,360" start="50" end="100" tween="cubic" easing="out" />
-			<effect delay="200" type="fade" time="600" start="0" end="100" />
-		</animation>
-		<animation type="WindowClose">
-			<effect type="fade" time="200" start="100" end="0" />
-		</animation>
-	</include>
+	
 	<include name="Animation_SlideUpFadeOut">
 		<animation type="WindowOpen" reversible="false">
 			<effect type="slide" start="0,100" end="0,0" time="400" tween="cubic" easing="out" />
@@ -517,61 +231,10 @@
 	<include name="Animation_HiddenByInfo">
 		<animation effect="fade" start="100" end="0" time="200" condition="Window.IsActive(musicinformation) | Window.IsActive(movieinformation) | Window.IsActive(songinformation)">Conditional</animation>
 	</include>
-	<include name="Animation_PosterInfoHide">
-		<animation type="Conditional" condition="Window.IsActive(movieinformation)">
-			<effect type="slide" start="0,0" end="-242,0" time="400" tween="cubic" easing="inout" />
-			<effect type="fade" start="100" end="0" />
-		</animation>
-	</include>
-	<include name="Animation_PosterInfoHide2">
-		<animation type="Conditional" condition="Window.IsActive(movieinformation)">
-			<effect type="slide" start="0,0" end="12,0" time="400" tween="cubic" easing="inout" />
-			<effect type="fade" start="100" end="0" />
-		</animation>
-	</include>
-	<include name="Animation_Files_PosterInfoHide">
-		<animation type="Conditional" condition="Window.IsActive(movieinformation)">
-			<effect type="slide" start="0,0" end="-96,-20" time="400" tween="cubic" easing="inout" />
-			<effect type="fade" start="100" end="0" />
-		</animation>
-	</include>
-	<include name="Animation_Files_EpisodeInfoHide">
-		<animation type="Conditional" condition="Window.IsActive(movieinformation)">
-			<effect type="slide" start="0,0" end="-96,-70" time="400" tween="cubic" easing="inout" />
-			<effect type="fade" start="100" end="0" />
-		</animation>
-	</include>
-	<!-- Browser animations -->
-	<include name="Animation_GalleryFloat">
-		<animation effect="slide" end="0,10" time="0" tween="cubic" easing="inout" condition="Container(54).Row(0)">Conditional</animation>
-		<animation effect="slide" end="0,-10" time="0" tween="cubic" easing="inout" condition="Container(54).Row(1)">Conditional</animation>
-	</include>
-	<include name="Animation_GalleryFanartFloat">
-		<animation effect="slide" end="0,10" time="0" tween="cubic" easing="inout" condition="Container(59).Row(0)">Conditional</animation>
-		<animation effect="slide" end="0,-10" time="0" tween="cubic" easing="inout" condition="Container(59).Row(1)">Conditional</animation>
-	</include>
-	<include name="Animation_ListFloat">
-		<animation effect="slide" end="0,160" time="200" condition="Container(53).Row(0)">Conditional</animation>
-		<animation effect="slide" end="0,120" time="200" condition="Container(53).Row(1)">Conditional</animation>
-		<animation effect="slide" end="0,80" time="200" condition="Container(53).Row(2)">Conditional</animation>
-		<animation effect="slide" end="0,40" time="200" condition="Container(53).Row(3)">Conditional</animation>
-		<animation effect="slide" end="0,0" time="200" condition="Container(53).Row(4)">Conditional</animation>
-		<animation effect="slide" end="0,-40" time="200" condition="Container(53).Row(5)">Conditional</animation>
-		<animation effect="slide" end="0,-80" time="200" condition="Container(53).Row(6)">Conditional</animation>
-		<animation effect="slide" end="0,-120" time="200" condition="Container(53).Row(7)">Conditional</animation>
-		<animation effect="slide" end="0,-160" time="200" condition="Container(53).Row(8)">Conditional</animation>
-		<animation effect="slide" end="0,-200" time="200" condition="Container(53).Row(9)">Conditional</animation>
-		<animation effect="slide" end="0,-240" time="200" condition="Container(53).Row(10)">Conditional</animation>
-		<animation effect="slide" end="0,-280" time="200" condition="Container(53).Row(11)">Conditional</animation>
-		<animation effect="slide" end="0,-320" time="200" condition="Container(53).Row(12)">Conditional</animation>
-		<animation effect="slide" end="0,-360" time="200" condition="Container(53).Row(13)">Conditional</animation>
-		<animation effect="slide" end="0,-400" time="200" condition="Container(53).Row(14)">Conditional</animation>
-		<animation effect="slide" end="0,-440" time="200" condition="Container(53).Row(15)">Conditional</animation>
-		<animation effect="slide" end="0,-480" time="200" condition="Container(53).Row(16)">Conditional</animation>
-		<animation effect="slide" end="0,-520" time="200" condition="Container(53).Row(17)">Conditional</animation>
-		<animation effect="slide" end="0,-560" time="200" condition="Container(53).Row(18)">Conditional</animation>
-		<animation effect="slide" end="0,-600" time="200" condition="Container(53).Row(19)">Conditional</animation>
-	</include>
+	
+
+	
+	
 	<!-- Music animations -->
 	<include name="Animation_SpinningCD">
 		<animation type="Conditional" reversible="false" condition="Player.HasAudio">

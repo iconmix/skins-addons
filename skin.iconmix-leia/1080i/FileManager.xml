@@ -228,7 +228,7 @@
 		
 		
 		<include>Global_MediaOverlay</include>
-		<include>AnimationVoletsHorizontaux</include>
+		
 		</control>
 		
 	</controls>

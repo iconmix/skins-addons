@@ -14,12 +14,15 @@
       <include>Global_Background</include>
       <control type="image">
         <top>-200</top>
-      <left>1300</left>
-      <width>620</width>
+      <left>1350</left>
+      <width>540</width>
       <bordersize>20</bordersize>
-							<bordertexture border="20" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+			<bordertexture border="20" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
       <texture>$VAR[PreviewSetting]</texture>
       <aspectratio>keep</aspectratio>
+      <animation type="conditional" condition="true" reversible="true">
+          <effect type="rotatey"  center="1600,0" end="10" time="1" />
+        </animation>
     </control>
       <control type="group">
         <include>Animation_FadedByMenu</include>
@@ -183,19 +186,14 @@
             <visible>Container(9000).Hasfocus(1)</visible>
             <posx>0</posx>
             <posy>0</posy>
-            <width>840</width>
+            <width>940</width>
             <height>618</height>
             <itemgap>0</itemgap>
             <scrolltime>0</scrolltime>
 
             <onleft>9000</onleft>
             <onright>9000</onright>
-            <control type="radiobutton" id="101">
-              <include>SettingsLabel</include>
-              <label>$LOCALIZE[31418] $LOCALIZE[31011] [COLOR HelpText]$LOCALIZE[31417][/COLOR]</label>
-              <onclick>Skin.ToggleSetting(HideHelpText)</onclick>
-              <selected>Skin.HasSetting(HideHelpText)</selected>
-            </control>
+           
 
             <control type="radiobutton" id="102">
               <include>SettingsLabel</include>
@@ -218,7 +216,7 @@
             </control>
             <control type="radiobutton" id="100">
               <include>SettingsLabel</include>
-              <label>Show CPU Usage</label>
+              <label>$LOCALIZE[13271]</label>
               <onclick>Skin.ToggleSetting(ShowCpuUsage)</onclick>
               <selected>Skin.HasSetting(ShowCpuUsage)</selected>
             </control>
@@ -268,7 +266,7 @@
             <visible>Container(9000).Hasfocus(2)</visible>
             <posx>0</posx>
             <posy>0</posy>
-            <width>840</width>
+            <width>940</width>
             <height>618</height>
             <itemgap>0</itemgap>
             <scrolltime>0</scrolltime>
@@ -322,6 +320,7 @@
               <selected>Skin.HasSetting(MenuIconVertical)</selected>
             </control>
             <control type="radiobutton" id="205"> <!-- Menu ICONE Bobine -->
+              <ondown condition="!Control.IsVisible(206)">208</ondown>
               <include>SettingsLabel</include>
               <label>$LOCALIZE[31062] Bobine</label>
               <onclick condition="!Skin.HasSetting(MenuIconBobine)">Skin.ToggleSetting(MenuIconBobine)</onclick>
@@ -332,6 +331,7 @@
               <selected>Skin.HasSetting(MenuIconBobine)</selected>
             </control>
             <control type="radiobutton" id="206">
+              
               <include>SettingsLabel</include>
               <label>$LOCALIZE[31063]</label>
               <onclick>Skin.ToggleSetting(ShowIconLabel)</onclick>
@@ -395,7 +395,7 @@
             <visible>Container(9000).Hasfocus(3)</visible>
             <posx>0</posx>
             <posy>0</posy>
-            <width>840</width>
+            <width>940</width>
             <height>618</height>
             <itemgap>0</itemgap>
             <scrolltime>0</scrolltime>
@@ -433,8 +433,14 @@
               <selected>Skin.HasSetting(ToujoursPositionCompteur)</selected>
               <visible>Skin.HasSetting(PositionCompteur)</visible>
             </control>
+             <control type="radiobutton" id="508">
+              <include>SettingsLabel</include>
+              <label>$LOCALIZE[31327]</label>
+              <onclick>Skin.ToggleSetting(MiniInfos)</onclick>
+              <selected>Skin.HasSetting(MiniInfos)</selected>
+            </control>
 
-            <control type="radiobutton" id="508">
+            <control type="radiobutton" id="509">
               <include>SettingsLabel</include>
               <label>$LOCALIZE[32005]</label>
               <onclick>Skin.ToggleSetting(Show_HeureFin)</onclick>
@@ -447,6 +453,12 @@
               <onclick>Skin.ToggleSetting(Hide_MovieTagline)</onclick>
               <selected>Skin.HasSetting(Hide_MovieTagline)</selected>
             </control>
+             <control type="radiobutton" id="511">
+            <include>SettingsLabel</include>
+            <label>$LOCALIZE[32009]</label>
+            <onclick>Skin.ToggleSetting(ShowFilePath)</onclick>
+            <selected>Skin.HasSetting(ShowFilePath)</selected>
+          </control>
 
             <control type="image" id="512">
               <include>Settings_Line</include>
@@ -460,12 +472,7 @@
             </control>
             -->
 
-            <control type="radiobutton" id="515">
-              <include>SettingsLabel</include>
-              <label>$LOCALIZE[32000]</label>
-              <onclick>Skin.ToggleSetting(ActivateAnimation)</onclick>
-              <selected>Skin.HasSetting(ActivateAnimation)</selected>
-            </control>
+            
             <control type="button" id="516">
               <include>SettingsLabel</include>
               <label>$LOCALIZE[32001]</label>
@@ -553,7 +560,7 @@
           <visible>Container(9000).Hasfocus(4)</visible>
           <posx>0</posx>
           <posy>0</posy>
-          <width>840</width>
+          <width>940</width>
           <height>618</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
@@ -631,7 +638,7 @@
           <visible>Container(9000).Hasfocus(5)</visible>
           <posx>0</posx>
           <posy>0</posy>
-          <width>840</width>
+          <width>940</width>
           <height>618</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
@@ -670,7 +677,7 @@
           <visible>Container(9000).Hasfocus(6)</visible>
           <posx>0</posx>
           <posy>0</posy>
-          <width>840</width>
+          <width>940</width>
           <height>618</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
@@ -773,7 +780,7 @@
           <visible>Container(9000).Hasfocus(7)</visible>
           <posx>0</posx>
           <posy>-90</posy>
-          <width>840</width>
+          <width>940</width>
           <height>990</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
@@ -809,12 +816,7 @@
             <onclick>Skin.ToggleSetting(ShowVideoPlotFullscreen)</onclick>
             <selected>Skin.HasSetting(ShowVideoPlotFullscreen)</selected>
           </control>
-          <control type="radiobutton" id="803">
-            <include>SettingsLabel</include>
-            <label>$LOCALIZE[32009]</label>
-            <onclick>Skin.ToggleSetting(ShowFilePath)</onclick>
-            <selected>Skin.HasSetting(ShowFilePath)</selected>
-          </control>
+         
 
           <control type="button" id="804">
             <include>SettingsLabel</include>
@@ -832,7 +834,7 @@
           </control>
 
           <control type="togglebutton" id="806">
-            <width>840</width>
+            <width>940</width>
             <height>35</height>
             <left>50</left>
             <align>left</align>
@@ -998,7 +1000,7 @@
           <visible>Container(9000).Hasfocus(8)</visible>
           <posx>0</posx>
           <posy>0</posy>
-          <width>840</width>
+          <width>940</width>
           <height>618</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
@@ -1101,7 +1103,7 @@
           <visible>Container(9000).Hasfocus(11)</visible>
           <posx>0</posx>
           <posy>0</posy>
-          <width>840</width>
+          <width>940</width>
           <height>618</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
@@ -1120,7 +1122,7 @@
           <visible>Container(9000).Hasfocus(9)</visible>
           <posx>0</posx>
           <posy>0</posy>
-          <width>840</width>
+          <width>940</width>
           <height>618</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
@@ -1689,7 +1691,7 @@
 
   <include>Global_MediaOverlay</include>
 <!--<include>Setting_Heading</include>-->
-<include>AnimationVoletsHorizontaux</include>
+
 </control>
 
 </controls>

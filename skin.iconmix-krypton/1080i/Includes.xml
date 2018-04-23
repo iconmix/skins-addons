@@ -5749,7 +5749,7 @@
   <include name="OnUp7000Normal">
     <onup condition="!Control.IsVisible(2998)|!String.IsEqual(ListItem.DbType,tvshow)">7000</onup>
     <onup condition="Control.IsVisible(2998)+String.IsEqual(ListItem.DbType,tvshow)">2998</onup>
-    <ondown condition="!Control.IsVisible(54)+!Control.IsVisible(59)+!Control.IsVisible(58)+!Control.IsVisible(559)+Control.IsVisible(1999)+Integer.IsGreater(Container(1999).NumItems,0)">1999</ondown>
+    <ondown condition="!Control.IsVisible(54)+!Control.IsVisible(59)+!Control.IsVisible(58)+!Control.IsVisible(559)+Control.IsVisible(1999)+Integer.IsGreater(Container(1999).NumItems,0)+!String.IsEqual(ListItem.DbType,tvshow)">1999</ondown>
     <ondown condition="!Control.IsVisible(54)+!Control.IsVisible(59)+!Control.IsVisible(58)+!Control.IsVisible(559)+Control.IsVisible(1998)+Integer.IsGreater(Container(1998).NumItems,0)">7781</ondown>
     <!-- <ondown>60</ondown> -->
   </include>
@@ -5757,7 +5757,7 @@
   <include name="OnUp7000Inverse">
     <ondown condition="!Control.IsVisible(2998)|!String.IsEqual(ListItem.DbType,tvshow)">7000</ondown>
     <ondown condition="Control.IsVisible(2998)+String.IsEqual(ListItem.DbType,tvshow)">2998</ondown>
-    <onup condition="!Control.IsVisible(54)+!Control.IsVisible(59)+!Control.IsVisible(58)+!Control.IsVisible(559)+Control.IsVisible(1999)+Integer.IsGreater(Container(1999).NumItems,0)">1999</onup>
+    <onup condition="!Control.IsVisible(54)+!Control.IsVisible(59)+!Control.IsVisible(58)+!Control.IsVisible(559)+Control.IsVisible(1999)+Integer.IsGreater(Container(1999).NumItems,0)+!String.IsEqual(ListItem.DbType,tvshow)">1999</onup>
     <onup condition="!Control.IsVisible(54)+!Control.IsVisible(59)+!Control.IsVisible(58)+!Control.IsVisible(559)+Control.IsVisible(1998)+Integer.IsGreater(Container(1998).NumItems,0)">7781</onup>
     <!-- <onup>60</onup> -->
   </include>
@@ -5775,7 +5775,7 @@
   <include name="OnLeft7000Normal">
     <onleft condition="!Control.IsVisible(2998)|!String.IsEqual(ListItem.DbType,tvshow)">7000</onleft>
     <onleft condition="Control.IsVisible(2998)+String.IsEqual(ListItem.DbType,tvshow)">2998</onleft>
-    <onright condition="!Control.IsVisible(54)+!Control.IsVisible(59)+!Control.IsVisible(58)+!Control.IsVisible(559)+Control.IsVisible(1999)+Integer.IsGreater(Container(1999).NumItems,0)">1999</onright>
+    <onright condition="!Control.IsVisible(54)+!Control.IsVisible(59)+!Control.IsVisible(58)+!Control.IsVisible(559)+Control.IsVisible(1999)+Integer.IsGreater(Container(1999).NumItems,0)+!String.IsEqual(ListItem.DbType,tvshow)">1999</onright>
     <onright condition="!Control.IsVisible(54)+!Control.IsVisible(59)+!Control.IsVisible(58)+!Control.IsVisible(559)+Control.IsVisible(1998)+Integer.IsGreater(Container(1998).NumItems,0)">7781</onright>
     <onright>55</onright>
   </include>
@@ -5783,7 +5783,7 @@
   <include name="OnLeft7000Inverse">
     <onright condition="!Control.IsVisible(2998)|!String.IsEqual(ListItem.DbType,tvshow)">7000</onright>
     <onright condition="Control.IsVisible(2998)+String.IsEqual(ListItem.DbType,tvshow)">2998</onright>
-    <onleft condition="!Control.IsVisible(54)+!Control.IsVisible(59)+!Control.IsVisible(58)+!Control.IsVisible(559)+Control.IsVisible(1999)+Integer.IsGreater(Container(1999).NumItems,0)">1999</onleft>
+    <onleft condition="!Control.IsVisible(54)+!Control.IsVisible(59)+!Control.IsVisible(58)+!Control.IsVisible(559)+Control.IsVisible(1999)+Integer.IsGreater(Container(1999).NumItems,0)+!String.IsEqual(ListItem.DbType,tvshow)">1999</onleft>
     <onleft condition="!Control.IsVisible(54)+!Control.IsVisible(59)+!Control.IsVisible(58)+!Control.IsVisible(559)+Control.IsVisible(1998)+Integer.IsGreater(Container(1998).NumItems,0)">7781</onleft>
     <onleft>55</onleft>
   </include>

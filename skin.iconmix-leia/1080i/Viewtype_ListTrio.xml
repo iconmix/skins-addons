@@ -88,6 +88,10 @@
         <visible>!String.IsEmpty(ListItem.Rating)</visible>
       </control>
     </control>
+     <include content="MediaInfoMini">
+                <param name="PosX">705</param>
+                <param name="PosY">2</param>
+              </include>
   </definition>
 </include>
 
@@ -107,8 +111,8 @@
 <!-- <oninfo condition="Container.Content(actors)|Container.Content(directors)">SetFocus(8889)</oninfo> -->
 <oninfo condition="Container.Content(actors)|Container.Content(directors)">SetProperty(IconmixShowInfo,55,Home)</oninfo>
 <include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
-<onfocus condition="Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,left,Home)</onfocus>
-<onfocus condition="!Skin.HasSetting(CacheFond)">SetProperty(ActeurDirection,right,Home)</onfocus>
+
+
 
 <!-- <onright>60</onright> -->
 <scrolltime>160</scrolltime>
@@ -207,7 +211,7 @@
 					<posx>10</posx>
 			<posy>35</posy>
 			<height>805</height>
-			<width>808</width>
+			<width>928</width>
 					<texture>frames/Menu_Glass2b.png</texture>
 					<colordiffuse>902F2F2F</colordiffuse>
 				</control>
@@ -215,7 +219,7 @@
 						
 		<control type="group">
       <top>-200</top>
-      <posx>1425</posx>
+      <posx>1475</posx>
       <animation effect="fade" start="100" end="0" time="0" condition="Container(557).OnPrevious+Container(557).OnNext" reversible="false">conditional</animation>
      <animation effect="slide" start="0,0" end="0,-245" time="0" condition="Skin.HasSetting(CacheFond)" reversible="false">conditional</animation>
     			<control type="wraplist" id="5555">
@@ -299,55 +303,7 @@
 			<include>Animation_FadedByMenu</include>
 			<include>Animation_HiddenByInfo</include>
 			<include>CommonListIdTrio</include>
-			<!--
-			<itemlayout width="0" height="36">
-			  
-				<include>commonlistitemtrio</include>
-			  
-				<control type="label">
-				  <include>isWatched</include>
-					<posx>108</posx>
-					<width>580</width>
-					<height>35</height>
-					<aligny>center</aligny>
-					<font>exptext</font>
-					<shadowcolor>AA5F5F5F</shadowcolor>
-					<textcolor>white</textcolor>
-					<label>$VAR[ListItemTitle]</label>
-					
-					<scroll>false</scroll>
-				</control>
 			
-				
-			</itemlayout>
-			<focusedlayout width="0" height="36">
-				<include>ActiveClearArt</include>
-				<include>commonlistitemtrio</include>
-				<control type="image">
-					<posx>0</posx>
-					<posy>0</posy>
-					<width>700</width>
-					<height>33</height>
-					<aligny>center</aligny>
-					<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
-					<aspectratio>stretch</aspectratio>
-				</control>
-				
-			  
-				<control type="label">
-			
-					<posx>108</posx>
-					<width>580</width>
-					<height>35</height>
-					<aligny>center</aligny>
-					<font>exptext</font>
-					<shadowcolor>FF5F5F5F</shadowcolor>
-					<textcolor>yellow</textcolor>
-					<label>$VAR[ListItemTitle]</label>
-					<scroll>false</scroll>
-				</control>
-			</focusedlayout>
-			-->
 		</control>
 		<!-- Thumbnails -->
 		<control type="group">
@@ -360,7 +316,7 @@
 			<include>Animation_FadedByMenu</include>
 			<include>Animation_HiddenByInfo</include>
 			<!-- Movie, TVShow and Season Posters -->
-			<posx>770</posx>
+			<posx>880</posx>
 			<posy>-20</posy>
 			<control type="group">
 				<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons)]</visible>

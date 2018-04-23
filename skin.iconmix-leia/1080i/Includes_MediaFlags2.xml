@@ -6,11 +6,7 @@
     <value>flags/flag_frame3.png</value>
     <!-- <value>frames/EpisodeGlassVert.png</value> -->
   </variable>
-  <variable name="chronotoolstexture">
-    <value condition="Skin.HasSetting(Show_HeureFin)+!String.IsEmpty(Window(10000).Property(DurationToolsEnd))">chronotools.png</value>
-    <value>chronotoolssimple.png</value>
-
-  </variable>
+  
 
 
   <variable name="VarFlagSource">
@@ -398,7 +394,7 @@
         <left>11</left>
         <width>110</width>
         <height>70</height>
-        <texture>$VAR[chronotoolstexture]</texture>
+        <texture>chronotools.png</texture>
         <aspectratio>scale</aspectratio>
         <!--  -->
 
@@ -463,7 +459,7 @@
     </control>
     
     <control type="group"> <!-- realisateur -->
-      <visible>!Skin.HasSetting(hiderealisateur)+!String.IsEmpty(ListItem.Director)</visible>
+      <visible>!Skin.HasSetting(hiderealisateur)+!String.IsEmpty(ListItem.Director)+!Window.IsVisible(12003)</visible>
       <width>166</width>
       <height>70</height>
       <align>center</align>
@@ -1456,7 +1452,7 @@
         <left>11</left>
         <width>110</width>
         <height>70</height>
-        <texture>$VAR[chronotoolstexture]</texture>
+        <texture>chronotools.png</texture>
         <aspectratio>scale</aspectratio>
         <!--  -->
 
@@ -1523,7 +1519,7 @@
       </control>
     </control>
      <control type="group"> <!-- realisateur -->
-      <visible>!Skin.HasSetting(hiderealisateur2)+!String.IsEmpty(ListItem.Director)</visible>
+      <visible>!Skin.HasSetting(hiderealisateur2)+!String.IsEmpty(ListItem.Director)+!Window.IsVisible(12003)</visible>
       <width>166</width>
       <height>70</height>
       <align>center</align>
@@ -2656,4 +2652,7 @@
 
 
   </include>
+  
+  
+  
 </includes>
