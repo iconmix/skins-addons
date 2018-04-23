@@ -735,7 +735,8 @@
           <posy>612</posy>
           <width>1250</width>
           <height>380</height>
-
+          
+          <!-- acteurs -->
           <control type="group">
             <posx>10</posx>
             <posy>176</posy>
@@ -771,6 +772,7 @@
           </control>
 
           <control type="grouplist">
+            <visible>Integer.IsGreater(Container(1998).NumItems,0)</visible>
             <width>1250</width>
             <height>380</height>
             <onfocus>SetFocus(7781)</onfocus>
@@ -1118,18 +1120,7 @@
             <animation effect="fade" start="0" end="0" time="0">WindowClose</animation>
           </control>
 
-          <!-- Frame for poster (for Music Videos) -->
-          <control type="image">
-            <posx>-18</posx>
-            <posy>-13</posy>
-            <width>309</width>
-            <height>309</height>
-            <texture>frames/ClassicFrame_Poster.png</texture>
-            <aspectratio scalediffuse="false">stretch</aspectratio>
-            <animation effect="zoom" center="auto" start="40" end="100" time="400" tween="cubic" easing="inout">WindowOpen</animation>
-            <animation effect="fade" start="0" end="0" time="0">WindowClose</animation>
-            <visible>Container.Content(MusicVideos)</visible>
-          </control>
+          
         </control>
 
 

@@ -75,6 +75,10 @@
 		<pauseatend>90000</pauseatend>
 	</include>
 	
+	<variable name="AutoCompletionContentVar">
+		<value condition="System.HasAddon(plugin.program.autocompletion) + !System.HasHiddenInput">plugin://plugin.program.autocompletion?info=autocomplete&amp;&amp;id=$INFO[Control.GetLabel(312).index(1)]&amp;&amp;limit=9</value>
+	</variable>
+	
 	<variable name="ListItemVu">
 	  <value condition="[[[String.IsEqual(ListItem.DbType,movie) | String.IsEqual(ListItem.DbType,set)] + !Skin.HasSetting(HideMovieWatchedOverlays)]|[!ListItem.IsFolder+!String.IsEqual(ListItem.DbType,movie) + !String.IsEqual(ListItem.DbType,set)+!String.IsEqual(ListItem.DbType,tvshow) + !String.IsEqual(ListItem.DbType,episode)+ !String.IsEqual(ListItem.DbType,season)]|[[String.IsEqual(ListItem.DbType,tvshow) | String.IsEqual(ListItem.DbType,episode)| String.IsEqual(ListItem.DbType,season)] + !Skin.HasSetting(HideTVWatchedOverlays)]]+!Window.IsActive(502)+!ListItem.IsResumable+ Integer.IsGreater(ListItem.PlayCount,0)+ String.IsEmpty(ListItem.Property(PercentPlayed))">[COLOR=FFFF8C82][I]$VAR[ListItemTitle][/I][/COLOR]</value>
 	  <value condition="ListItem.IsFolder+!String.IsEqual(ListItem.DBTYPE,set)">[COLOR=yellow][I]$VAR[ListItemTitle][/I][/COLOR]</value>
@@ -92,6 +96,7 @@
    <value condition="Container(9000).Hasfocus(2)+ControlGroup(9002).Hasfocus(205)">settings/preview/bobine.jpg</value>
    <value condition="Container(9000).Hasfocus(2)+ControlGroup(9002).Hasfocus(210)">settings/preview/wdfocus.jpg</value>
    <value condition="Container(9000).Hasfocus(2)+ControlGroup(9002).Hasfocus(211)">settings/preview/wdperm.jpg</value>
+   <value condition="Container(9000).Hasfocus(3)+ControlGroup(9007).Hasfocus(508)">settings/preview/anneenotation.png</value>
    <value condition="Container(9000).Hasfocus(7)+ControlGroup(9011).Hasfocus(805)+Skin.HasSetting(ActeursAuCentre)+!Skin.HasSetting(ShowActeursTexte)">settings/preview/acteurscentre.jpg</value>
    <value condition="Container(9000).Hasfocus(7)+ControlGroup(9011).Hasfocus(805)+Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(ShowActeursTexte)">settings/preview/acteurscentretexte.jpg</value>
    <value condition="Container(9000).Hasfocus(7)+ControlGroup(9011).Hasfocus(805)+!Skin.HasSetting(ActeursAuCentre)+!Skin.HasSetting(ShowActeursTexte)">settings/preview/modeexp.jpg</value>   
@@ -847,7 +852,7 @@
 		<value condition="!String.IsEmpty(Window(Home).Property(IconMixSagaClearArt))">$INFO[Window(Home).Property(IconMixSagaClearArt)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(clearart))">$INFO[ListItem.Art(clearart)]</value>
 		<value condition="!String.IsEmpty(ListItem.Art(tvshow.clearart))">$INFO[ListItem.Art(tvshow.clearart)]</value>
-		<value condition="!String.IsEmpty(ListItem.Art(clearlogo)) + String.IsEmpty(ListItem.Art(clearart))">$INFO[ListItem.Art(clearlogo)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(clearlogo))">$INFO[ListItem.Art(clearlogo)]</value>
 		<value>noclearart</value>
 	</variable>
 	<variable name="ListClearartClearlogo">

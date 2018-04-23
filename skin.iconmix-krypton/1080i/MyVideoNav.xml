@@ -44,19 +44,12 @@
       <fadetime>450</fadetime>
       <visible>[Control.HasFocus(7779)]+[!Player.HasVideo|[Player.HasVideo+!Skin.HasSetting(PlayVideoOverlay)]]</visible>
     </control>
-    <!-- -->
-    
-    -->
+   
     <control type="group">
-      <!-- <include>Animation_FadedByMenu</include>-->
      
       <control type="group">
       <include>Animation_HiddenByInfo</include>
-      <!--
-      <animation type="Conditional"  condition="!Window.IsTopMost(10025)+!Window.IsTopMost(12003)+!Window.IsVisible(10107)" reversible="false">
-        <effect type="fade" end="50"   time="500" delay="500" />
-      </animation>
-      -->
+   
       <control type="group">
         <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7781)" reversible="true">
           <effect type="fade" start="100" end="15" time="500"  />
@@ -231,6 +224,7 @@
           <effect type="slide" end="0,-835" time="0"  />
         </animation>
         <include>Animation_FadedByMenu</include>
+        <visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
         <control type="list" id="1999">
           <onfocus condition="Skin.HasSetting(GenreDetailsAucun)">SetFocus(55)</onfocus>
           <onfocus>SetProperty(IconMixVerticalNavigation,"horizontal",Home)</onfocus>
@@ -429,7 +423,7 @@
         <visible>[[Container.Content(Genres)|Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)]+Control.HasFocus(2999)]|[[String.Contains(Container.FolderPath,videodb://movies/genres)|String.Contains(Container.FolderPath,videodb://tvshows/genres)]+[Container.Content(tvshows)|Container.Content(movies)]]</visible>
         <control type="image">
           <texture>frames/genrestag.png</texture>
-          <visible>!String.Contains(ListItem.Art(clearlogo),http)</visible>
+          <visible>!String.Contains(ListItem.Art(clearlogo),http)|String.Contains(Container.FolderPath,videodb://movies/genres)</visible>
           <aspectratio>stretch</aspectratio>
         </control>
         <control type="group"> <!-- genres -->
@@ -718,7 +712,7 @@
       <height>30</height>
       <left>40</left>
       <posy>940</posy>
-      <label>$INFO[Container.Content]/$INFO[ListItem.DbType]/$INFO[Window(Home).property(Angle2)]</label>
+      <label>$INFO[Container(1999).ListItem.Property(PercentPlayed)]/$INFO[ListItem.PercentPlayed]/$INFO[Container(1999).ListItem.PercentPlayed]</label>
       <font>exptextacteurs</font>
       <textcolor>FF404040</textcolor>
       <shadowcolor>FF7F7F7F</shadowcolor>

@@ -320,6 +320,7 @@
               <selected>Skin.HasSetting(MenuIconVertical)</selected>
             </control>
             <control type="radiobutton" id="205"> <!-- Menu ICONE Bobine -->
+              <ondown condition="!Control.IsVisible(206)">208</ondown>
               <include>SettingsLabel</include>
               <label>$LOCALIZE[31062] Bobine</label>
               <onclick condition="!Skin.HasSetting(MenuIconBobine)">Skin.ToggleSetting(MenuIconBobine)</onclick>
@@ -330,6 +331,7 @@
               <selected>Skin.HasSetting(MenuIconBobine)</selected>
             </control>
             <control type="radiobutton" id="206">
+              
               <include>SettingsLabel</include>
               <label>$LOCALIZE[31063]</label>
               <onclick>Skin.ToggleSetting(ShowIconLabel)</onclick>
@@ -431,8 +433,14 @@
               <selected>Skin.HasSetting(ToujoursPositionCompteur)</selected>
               <visible>Skin.HasSetting(PositionCompteur)</visible>
             </control>
+             <control type="radiobutton" id="508">
+              <include>SettingsLabel</include>
+              <label>$LOCALIZE[31327]</label>
+              <onclick>Skin.ToggleSetting(MiniInfos)</onclick>
+              <selected>Skin.HasSetting(MiniInfos)</selected>
+            </control>
 
-            <control type="radiobutton" id="508">
+            <control type="radiobutton" id="509">
               <include>SettingsLabel</include>
               <label>$LOCALIZE[32005]</label>
               <onclick>Skin.ToggleSetting(Show_HeureFin)</onclick>
@@ -445,6 +453,12 @@
               <onclick>Skin.ToggleSetting(Hide_MovieTagline)</onclick>
               <selected>Skin.HasSetting(Hide_MovieTagline)</selected>
             </control>
+             <control type="radiobutton" id="511">
+            <include>SettingsLabel</include>
+            <label>$LOCALIZE[32009]</label>
+            <onclick>Skin.ToggleSetting(ShowFilePath)</onclick>
+            <selected>Skin.HasSetting(ShowFilePath)</selected>
+          </control>
 
             <control type="image" id="512">
               <include>Settings_Line</include>
@@ -802,12 +816,7 @@
             <onclick>Skin.ToggleSetting(ShowVideoPlotFullscreen)</onclick>
             <selected>Skin.HasSetting(ShowVideoPlotFullscreen)</selected>
           </control>
-          <control type="radiobutton" id="803">
-            <include>SettingsLabel</include>
-            <label>$LOCALIZE[32009]</label>
-            <onclick>Skin.ToggleSetting(ShowFilePath)</onclick>
-            <selected>Skin.HasSetting(ShowFilePath)</selected>
-          </control>
+         
 
           <control type="button" id="804">
             <include>SettingsLabel</include>

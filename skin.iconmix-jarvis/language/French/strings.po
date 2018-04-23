@@ -451,6 +451,10 @@ msgctxt "#31324"
 msgid "Home Options"
 msgstr "Options Accueil"
 
+msgctxt "#31327"
+msgid "Display Year/rating"
+msgstr "Afficher Année/Notation"
+
 msgctxt "#31328"
 msgid "Show Random Items"
 msgstr "Activer Éléments Au Hasard"

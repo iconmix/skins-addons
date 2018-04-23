@@ -30,6 +30,7 @@ ADDON_NAME = ADDON.getAddonInfo('name').decode("utf8")
 ADDON_PATH = ADDON.getAddonInfo('path').decode("utf8")
 ADDON_VERSION = ADDON.getAddonInfo('version').decode("utf8")
 ADDON_DATA_PATH = xbmc.translatePath("special://profile/addon_data/%s" % ADDON_ID).decode("utf8")
+SETTING = ADDON.getSetting
 KODI_VERSION  = int(xbmc.getInfoLabel( "System.BuildVersion" ).split(".")[0])
 ACTION_PREVIOUS_MENU = (9, 10, 92, 216, 247, 257, 275, 61467, 61448)
 
@@ -78,9 +79,12 @@ class Main:
                if action == "GETEPISODESKODI":
                   Id=params.get("id",None)
                   if Id: Id = Id[0] 
-                  Episodes=utils.GetEpisodesKodi(Id,False)  
+                  Episodes,Prochain=utils.GetEpisodesKodi(Id,False)  
                   if Episodes:
                       xbmcplugin.addDirectoryItems(int(sys.argv[1]), Episodes)
+                      self.windowhome.setProperty('IconmixProchainEpisode',str(Prochain))
+                      if SETTING("iconmixdebug")=="true":
+                          logMsg("Plugin  : GetEpisodesKodi (%s)" %(Prochain))
                   xbmcplugin.endOfDirectory(int(sys.argv[1])) 
                   OldTvShowId=self.windowhome.getProperty('IconmixFlagPanelEpisode')
                   if OldTvShowId!=Id:
@@ -396,9 +400,9 @@ class Main:
            if len(TMDBIDListe)>0:
              #logMsg("SagaType TMDBIDListe %s" %(TMDBIDListe),0)
              #start_time = time.time() 
-             if ADDON.getSetting('allocineactif')=="true" :
+             if SETTING('allocineactif')=="true" :
                 self.ListeTrailer=self.ListeTrailer+utils.GetSagaTrailersAllocine(TMDBIDListeAllocine)
-             if ADDON.getSetting('youtubeactif')=="true" :
+             if SETTING('youtubeactif')=="true" :
                 self.ListeTrailer=self.ListeTrailer+utils.GetSagaTrailers(TMDBIDListe) 
              
             
@@ -467,7 +471,7 @@ class Main:
            
     
     def GetAllocineTrailer(self,Titre=None,Annee=None,TypeVideo=None,PanneauActeur=None):
-      if ADDON.getSetting('allocineactif')=="true":
+      if SETTING('allocineactif')=="true":
         start_time = time.time() 
         AllocineBA=None
         #logMsg("recherche Trailer allocine %s/%s/%s/%s" %(Titre,TypeVideo,Annee,PanneauActeur),0)

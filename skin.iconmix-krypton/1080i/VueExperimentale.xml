@@ -150,9 +150,9 @@
 			</control>
 			<control type="grouplist">
 			  <visible>![Container.Content(episodes)|Container.Content(tvshows)]</visible>
-			  <left>460</left>
-				<width>1010</width>
-				<posy>993</posy>
+			  <left>0</left>
+				<width>1920</width>
+				<posy>991</posy>
 				<height>60</height>
 				<align>center</align>
 				<orientation>horizontal</orientation>

@@ -11,7 +11,6 @@
 	<view id="Poster fixe" value="552" languageid="31806"  type="videos,genres,movies,tvshows,musicvideos,seasons,setmovies,sets,albums,artists" />
 	<view id="Poster enroulé vertical" value="553"  languageid="31807"  type="videos,movies,tvshows,musicvideos,seasons,setmovies,sets" />
 	<view id="Poster fixe vertical" value="554" languageid="31808"  type="videos,movies,tvshows,musicvideos,seasons,setmovies,sets" />
-	<view id="Maxi Fanart" value="512"  languageid="31809"  type="movies,tvshows,musicvideos,seasons,setmovies,sets" />
 	<view id="Paysage" value="52" languageid="31810"  type="videos,movies,tvshows,musicvideos,seasons,setmovies,sets,episodes" />
 	<view id="Paysage vertical" value="521" languageid="31824"  type="videos,movies,tvshows,musicvideos,seasons,setmovies,sets,episodes" />
 	<view id="Fanart" value="504"  languageid="31811"  type="movies,tvshows,musicvideos,seasons,setmovies,sets" />

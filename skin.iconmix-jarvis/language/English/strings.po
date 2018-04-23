@@ -589,6 +589,10 @@ msgstr ""
 
 #empty strings from id 31325 to 31327
 
+msgctxt "#31327"
+msgid "Display Year/rating"
+msgstr ""
+
 msgctxt "#31328"
 msgid "Show Random Items"
 msgstr ""

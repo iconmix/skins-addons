@@ -1061,9 +1061,12 @@ def getsagaitem(ItemIdxx=None,ShowBusy=None,AKodiCollection=None,ATmdbId=None,js
                      
                 if SETTING("cachesaga")=="false"  and savepath:
                        erreur=DirStru(savepath)
-                       with io.open(savepath, 'w+', encoding='utf8') as outfile:
+                       try:
+                         with io.open(savepath, 'w+', encoding='utf8',errors='ignore') as outfile:
                            str_ = json.dumps(ArrayCollection,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
                            outfile.write(to_unicode(str_))
+                       except:
+                         logMsg("Erreur getsagaitem io.open (%s)" %(savepath) )
                               
       if ShowBusy: xbmc.executebuiltin( "Dialog.Close(busydialog)" )                           
             
@@ -1265,13 +1268,18 @@ def GetEpisodesKodi(TvShowId=None,Statique=True):
           ItemListe.setInfo("dbid", str(item.get("episodeid")))
           ItemListe.setPath(item.get("file"))
           LabelsEpisodes=GetListItemInfoLabelsJson(item)
-          if LabelsEpisodes:            
+          vu=0
+          if LabelsEpisodes:  
+            try:
+              vu=int(LabelsEpisodes["playcount"]) 
+            except:
+              vu=0         
             ItemListe.setInfo("video", LabelsEpisodes) 
           try:
             Saison=int(item.get("season"))
           except:
             Saison=0
-          ListeEpisodes.append([Ordre,ItemListe,item.get("file"),Saison,Art.get("season.poster"),str(item.get("episodeid"))])
+          ListeEpisodes.append([Ordre,ItemListe,item.get("file"),Saison,Art.get("season.poster"),str(item.get("episodeid")),vu])
           
           
       ListeEpisodesFinal=[]
@@ -1293,6 +1301,8 @@ def GetEpisodesKodi(TvShowId=None,Statique=True):
          
       Saison=0
       cpt=0
+      prochain=0
+      cpt2=0
       while cpt<len(LL):
         
              if LL[cpt][3]!=Saison:
@@ -1300,6 +1310,7 @@ def GetEpisodesKodi(TvShowId=None,Statique=True):
                   Complet,NbKodi,PosterSaison=getepisodes(TvShowId,Saison,"tvshow")
                   Item=xbmcgui.ListItem(label=str(NbKodi),label2=str(Saison),path="")
                   Item.setPath("")
+                  cpt2=cpt2+1
                   if Complet==0:
                     Item.setProperty('Complet', "")
                   else:
@@ -1320,14 +1331,16 @@ def GetEpisodesKodi(TvShowId=None,Statique=True):
                      LL[cpt][1].setProperty('PosterSaison', LL[cpt][4])
         
              
-                  
+             if LL[cpt][6]==0 and prochain==0:
+              prochain=cpt2     
              if not Statique:    
                  ListeEpisodesFinal.append([LL[cpt][2],LL[cpt][1],False])
              else:
                  ListeEpisodesFinal.append(LL[cpt][1])
              #ListeEpisodesFinal.append(LL[cpt][1])
              cpt=cpt+1
-  return ListeEpisodesFinal
+             cpt2=cpt2+1
+  return ListeEpisodesFinal,prochain
 
 def getepisodes(KodiDbId=None,saisonID=None,DBtype=None):
   
@@ -1776,9 +1789,12 @@ def getallepisodes(IdKodi=None,TvDbId=None,savepath=None,NbKodi=None,ShowBusy=No
                 
          if SETTING("cacheserie")=="false"  and savepath:        
              erreur=DirStru(savepath)
-             with io.open(savepath, 'w+', encoding='utf8') as outfile: 
+             try:
+               with io.open(savepath, 'w+', encoding='utf8',errors='ignore') as outfile: 
     	                      str_ = json.dumps(ArrayCollection,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
     	                      outfile.write(to_unicode(str_))
+             except:
+               logMsg("Erreur getallepisodes io.open (%s)" %(savepath) )
          if ShowBusy: xbmc.executebuiltin( "Dialog.Close(busydialog)" )                 
   return ArrayCollection 
 
@@ -1794,6 +1810,7 @@ def GetListItemInfoLabelsJson(data=None):
     
   if data:
     Valeur={}
+#    Valeur["resume"]=data.get("resume")
     
     Valeur["genre"]=data.get("genre")
     if data.get("country"):
@@ -2453,11 +2470,13 @@ def ActeurFilmsTvTMDB(ActeurType=None,Acteur=None,Statique=None):
                         #ActeurCache["crew"]=json_data.get("crew")  
                         
                         if not ActeurCache["nom"]: ActeurCache["nom"]=str(unidecode(Acteur))                         
-                        if not ActeurCache["id"]: ActeurCache["id"]=ActeurId                        
-                        with io.open(savepath, 'w+', encoding='utf8') as outfile: 
-                          str_ = json.dumps(ActeurCache,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
-                          outfile.write(to_unicode(str_)) 
-                       
+                        if not ActeurCache["id"]: ActeurCache["id"]=ActeurId    
+                        try:                    
+                          with io.open(savepath, 'w+', encoding='utf8',errors='ignore') as outfile: 
+                            str_ = json.dumps(ActeurCache,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
+                            outfile.write(to_unicode(str_)) 
+                        except:
+                          logMsg("Erreur ActeurFilmsTvTMDB io.open (%s)" %(savepath) ) 
                           
                   if not Statique:     
                       xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeRoles)
@@ -2568,10 +2587,13 @@ def GetActeurInfo(NomActeur,ActeurType="acteurs"):
               ActeurCache["id"]=ActeurId
               ActeurCache["v6"]="ok"
               if SETTING("cacheacteur")=="false" and savepath:
-                  erreur=DirStru(savepath)            
-                  with io.open(savepath, 'w+', encoding='utf8') as outfile: 
-                    str_ = json.dumps(ActeurCache,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
-                    outfile.write(to_unicode(str_))
+                  erreur=DirStru(savepath) 
+                  try:           
+                    with io.open(savepath, 'w+', encoding='utf8',errors='ignore') as outfile: 
+                      str_ = json.dumps(ActeurCache,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
+                      outfile.write(to_unicode(str_))
+                  except:
+                    logMsg("Erreur GetActeurInfo io.open (%s)" %(savepath) )
   return ActeurCache
 
 def GetActeurInfoMaj(ActeurId,NomActeur):
@@ -3948,9 +3970,12 @@ def GetMusicFicheArtiste(Artiste=None,ArtisteId=None,Force=None):
         if SETTING("cachemusic")=="false"  and savepath:
             erreur=DirStru(savepath) 
             save_data["kodiArtisteId"]=str(ArtisteId)
-            with io.open(savepath, 'w+', encoding='utf8') as outfile: 
-              str_ = json.dumps(save_data,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
-              outfile.write(to_unicode(str_))
+            try:
+              with io.open(savepath, 'w+', encoding='utf8',errors='ignore') as outfile: 
+                str_ = json.dumps(save_data,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
+                outfile.write(to_unicode(str_))
+            except:
+                logMsg("Erreur GetMusicFicheArtiste io.open (%s)" %(savepath) )
     if save_data.get("ArtistBanner"): 
        savepath=ADDON_DATA_PATH+"/music/artiste%s/banner.jpg" %(str(ArtisteId))
        if not xbmcvfs.exists(savepath) or Force:
@@ -4087,10 +4112,12 @@ def GetMusicFicheAlbum(AlbumId=None,Cover=None,GetArtistData=None,PlayerActif=No
             save_data["kodiArtisteId"]=str(ArtisteId)
             save_data["Artiste"]=unidecode(Artiste)
             #save_data["albumsdetails"]=albumIdBrainz
-            with io.open(savepath, 'w+', encoding='utf8') as outfile: 
-              str_ = json.dumps(save_data,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
-              outfile.write(to_unicode(str_)) 
-              
+            try:
+              with io.open(savepath, 'w+', encoding='utf8',errors='ignore') as outfile: 
+                str_ = json.dumps(save_data,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
+                outfile.write(to_unicode(str_)) 
+            except:
+              logMsg("Erreur GetMusicFicheAlbum io.open (%s)" %(savepath) )    
   return save_data,ArtisteData
   
   

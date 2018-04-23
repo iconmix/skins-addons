@@ -62,7 +62,7 @@
             <onright>SetFocus(1999)</onright>
             <onclick>SetFocus(1999)</onclick>
             <onfocus>SetProperty(IconmixDialogContext,,Home)</onfocus>  
-            <visible>String.IsEqual(ListItem.DbType,tvshow)</visible>
+            <visible>String.IsEqual(ListItem.DbType,tvshow)+Integer.IsGreater(Container(1999).NumItems,0)</visible>
           </control>
       
       <control type="button" id="2105"> <!--- informations acteur/realisateur.... -->
@@ -83,10 +83,10 @@
         
         <onright>Close</onright> 
         <onright>SetProperty(IconmixDialogContext,2,Home)</onright>
-        <onright condition="!Container.Content(music)+!Container.Content(song)+!Container.Content(album)+!Container.Content(artist)">Action(Menu,10025)</onright>        
-        <onclick condition="!Container.Content(music)+!Container.Content(song)+!Container.Content(album)+!Container.Content(artist)">Action(Menu,10025)</onclick>
-        <onright condition="Container.Content(music)|Container.Content(song)|Container.Content(album)|Container.Content(artist)">Action(Menu,10502)</onright>        
-        <onclick condition="Container.Content(music)|Container.Content(song)|Container.Content(album)|Container.Content(artist)">Action(Menu,10502)</onclick>
+        <onright condition="!Container.Content(music)+!Container.Content(songs)+!Container.Content(albums)+!Container.Content(artists)">Action(Menu,10025)</onright>        
+        <onclick condition="!Container.Content(music)+!Container.Content(songs)+!Container.Content(albums)+!Container.Content(artists)">Action(Menu,10025)</onclick>
+        <onright condition="Container.Content(music)|Container.Content(songs)|Container.Content(albums)|Container.Content(artists)">Action(Menu,10502)</onright>        
+        <onclick condition="Container.Content(music)|Container.Content(songs)|Container.Content(albums)|Container.Content(artists)">Action(Menu,10502)</onclick>
         <include>MonBoutonCommun2</include>
       </control>
  <control type="button" id="2107">        

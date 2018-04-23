@@ -724,6 +724,8 @@ class MainService:
               else:
                   self.previousitem8889 = ""  
                   self.previousitemMusic = ""
+                  
+                  
                       
                   if xbmc.getCondVisibility("Control.HasFocus(2999)"): #focus sur SAGA
                       CompteurTemps=0
@@ -762,7 +764,22 @@ class MainService:
                           if xbmc.getCondVisibility("!String.IsEmpty(VideoPlayer.TVShowTitle)"):
                              self.DBTYPE="episode"
                           else:
-                             self.DBTYPE="movie"                            
+                             self.DBTYPE="movie" 
+                      if xbmc.getCondVisibility("Control.HasFocus(1999)") and self.DBTYPE=="tvshow":
+                        ActuelID=self.windowhome.getProperty("IconmixFlagPanelEpisode")
+                        try:
+                         Prochain=int(self.windowhome.getProperty('IconmixProchainEpisode'))
+                        except:
+                         Prochain=0
+                        
+                        if Prochain>0 and xbmc.getCondVisibility("Control.HasFocus(1999)"):
+                           #if self.previousProchainID!=ActuelID:
+                           #  xbmc.executebuiltin("Control.SetFocus(1999,%d)"  %(Prochain))
+                           #  self.previousProchainID=ActuelID
+                           #logMsg("Prochain (%d)(%s) (%s)" %(Prochain,self.windowhome.getProperty("IconmixFlagPanelEpisode"),self.previousProchainID))
+                           
+                           xbmc.executebuiltin("Control.SetFocus(1999,%d)"  %(Prochain))
+                           self.windowhome.clearProperty('IconmixProchainEpisode')                           
                        
                       if (self.previousitem != self.selecteditem)  or (self.windowhome.getProperty('IconMixUpdateSagas')=="1"):
                            #Bande-annonce en cours, on stoppe
@@ -959,10 +976,16 @@ class MainService:
                                
                             if MiseAjour=="3":
                                #ACTEURS VideoPlayer
-                               ListeActeurs=self.GetControl(self.windowvideoplayer,1998)
+                               try:
+                                  ListeActeurs=self.GetControl(xbmcgui.Window(12901),1998)
+                               except:
+                                  ListeActeurs
                             if MiseAjour=="4":
                                #ACTEURS VideoPlayer
-                               ListeActeurs=self.GetControl(self.windowvideoplayerinfo,1998)
+                               try:
+                                 ListeActeurs=self.GetControl(xbmcgui.Window(10142),1998)
+                               except:
+                                 ListeActeurs=None
                             #logMsg("acteurs MAJ.... (%s) " %(MiseAjour))
                             #ACTEURS  ------------------------------------------------                                 
                             if ListeActeurs:
@@ -979,8 +1002,10 @@ class MainService:
                                         if ListeActeursInf:
                                             ListeActeursInf.addItem(itemX)  
                                    Realisateur=utils.Remove_Separator(xbmc.getInfoLabel("ListItem.Director").split(" (")[0].decode("utf8"))
+                                   if SETTING("iconmixdebug")=="true":
+                                     logMsg("utils.GetPhotoRealisateur('realisateurs,'realisateur=(%s)) " %(Realisateur))
                         
-                                   self.windowhome.setProperty('IconMixDirector',str(utils.GetPhotoRealisateur('realisateurs',realisateur=Realisateur)))                                                                        
+                                   self.windowhome.setProperty('IconMixDirector',utils.GetPhotoRealisateur('realisateurs',realisateur=Realisateur))                                                                        
                                    ResetDirector=False
                               
                                 
@@ -1023,14 +1048,18 @@ class MainService:
                                      self.display_duration()
                                    else:
                                     self.TvSeason=""
+                                    
+                                       
+                                      
                                     #utils.getepisodes(int(self.selecteditem),None,self.DBTYPE)
                                     #-------------------------- affichage des episodes de la série ------------------
+                                    """
                                     ListeEpisodes=self.GetControl(self.windowvideonav,1999)
                                     if ListeEpisodes and self.selecteditem!=self.precedenttvshow :
                                       self.precedenttvshow=self.selecteditem
                                       try:
                                         #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetEpisodes","params":{"tvshowid":39,"properties":["cast","episode","firstaired","originaltitle","productioncode","rating","ratings","season","seasonid","showtitle","specialsortepisode","specialsortseason","tvshowid","uniqueid","userrating"]},"id":1}
-                                        ListeItemx =utils.GetEpisodesKodi(int(self.selecteditem),True)
+                                        ListeItemx,Prochain =utils.GetEpisodesKodi(int(self.selecteditem),True)
                                       except:
                                         ListeItemx=None
                                       ListeEpisodes.reset()
@@ -1039,7 +1068,7 @@ class MainService:
                                              logMsg("Mainservice : GetEpisodes (%s)" %(self.selecteditem))
                                            ListeEpisodes.addItems(ListeItemx)  
                                     
-                                    
+                                    """
                                     #--------------------------------------------------------------------------------
                                     
                                      
@@ -1071,7 +1100,7 @@ class MainService:
                                     
                                      Recherche=ActeurRealisateur.split(" (")[0].decode("utf8")
                                 
-                                     HttpIcon=str(utils.GetPhotoRealisateur(self.DBTYPE,Recherche))                                          
+                                     HttpIcon=utils.GetPhotoRealisateur(self.DBTYPE,Recherche)                                         
                                      
                                      if HttpIcon:
                                         self.windowhome.setProperty('IconMixDirector',HttpIcon)
@@ -1241,9 +1270,10 @@ class MainService:
       self.windowhome = xbmcgui.Window(10000) # Home.xml 
       self.windowvideonav = xbmcgui.Window(10025) # myvideonav.xml           
       self.windowvideoinf = xbmcgui.Window(12003) # dialogvideoinfo.xml 
-      self.windowvideoplayer = xbmcgui.Window(12901) # videoOSD.xml 
-      self.windowvideoplayerinfo = xbmcgui.Window(10142) # DialogFullScreenInfo.xml
+      #self.windowvideoplayer = xbmcgui.Window(12901) # videoOSD.xml 
+      #self.windowvideoplayerinfo = xbmcgui.Window(10142) # DialogFullScreenInfo.xml
       self.previousitem = ""
+      self.previousProchainID=None
       self.previousitem8889 = ""
       self.previousitem1998 = ""
       self.previousLABEL1999 = ""
@@ -1341,11 +1371,12 @@ class MainService:
                      
                   if xbmc.getCondVisibility("Window.IsVisible(12901)"):
                      #ACTEURS VideoPlayer
-                     ListeRole=self.GetControl(self.windowvideoplayer,5051)
+                     ListeRole=self.GetControl(xbmcgui.Window(12901),5051)
                      
                   if xbmc.getCondVisibility("Window.IsVisible(10142)"):
                      #ACTEURS VideoPlayer
-                     ListeRole=self.GetControl(self.windowvideoplayerinfo,5051)
+                     
+                     ListeRole=self.GetControl(xbmcgui.Window(10142),5051)
                 else:
                   try:
                     win=xbmcgui.Window(xbmcgui.getCurrentWindowDialogId())
@@ -1533,7 +1564,8 @@ class MainService:
             
             Realisateur=utils.Remove_Separator(xbmc.getInfoLabel("Container(%d).ListItem.Director"%(ContainerID)).split(" (")[0].decode("utf8"))
 
-            self.windowhome.setProperty('IconMixDirector',str(utils.GetPhotoRealisateur('realisateurs',realisateur=Realisateur)))
+            #self.windowhome.setProperty('IconMixDirector',str(utils.GetPhotoRealisateur('realisateurs',realisateur=Realisateur)))
+            self.windowhome.setProperty('IconMixDirector',utils.GetPhotoRealisateur('realisateurs',realisateur=Realisateur))
             return (ItemListe) 
       
         logMsg("ItemListe erreur (%s)" %(InfoLabels))

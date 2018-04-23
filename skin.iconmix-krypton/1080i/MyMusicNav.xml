@@ -4,6 +4,8 @@
 	<onload>Skin.ToggleSetting(SkinHelper.EnableMusicArt)</onload>
 	<onload>SetProperty(IconmixDialogContext,,Home)</onload>
   <onunload>SetProperty(IconmixDialogContext,,Home)</onunload>
+    <menucontrol>7000</menucontrol>
+
 	<views>55,509,58,559,511,510,513,514,552,551,906,561</views>
 	<defaultcontrol always="true">55</defaultcontrol>
 	<controls>
@@ -306,7 +308,7 @@
 
     		<include condition="Skin.HasSetting(CacheFondMusic)">vueexperimentalemusic</include>
     		<control type="group">
-    		  <left>60</left>
+    		  <left>1620</left>
               <top>1090</top>
     		     <control type="image">
               

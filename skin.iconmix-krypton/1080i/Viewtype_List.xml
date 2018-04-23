@@ -59,7 +59,7 @@
                 <param name="PositionX">680</param>
                 <param name="PositionY">3</param>
             </include>
-            <!-- Star Rating -->
+            <!-- Star Rating 
             <control type="group">
 
                 <visible>!Window.IsActive(10025) + !String.Contains(Container.FolderPath,plugin)</visible>
@@ -84,7 +84,11 @@
                     <colordiffuse>FFFFFFFF</colordiffuse>
                     <visible>!String.IsEmpty(ListItem.Rating)</visible>
                 </control>
-            </control>
+            </control>-->
+             <include content="MediaInfoMini">
+                <param name="PosX">905</param>
+                <param name="PosY">2</param>
+              </include>
         </definition>
     </include>
 
@@ -200,16 +204,26 @@
             <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
                 <effect type="slide" end="0,-40" time="0"  />
             </animation>
+            
+            <control type="image">
+					<posx>0</posx>
+			<posy>15</posy>
+			<height>805</height>
+			<width>1150</width>
+					<texture>frames/Menu_Glass2b.png</texture>
+					<colordiffuse>902F2F2F</colordiffuse>
+				</control>
 
 
             <control type="list" id="55">
                 <viewtype label="31801">list</viewtype>
+                <left>60</left>
                 <!-- <onright>1999</onright> -->
                 <include>CommonListId</include>
             </control>
             <!-- Thumbnails -->
             <control type="group">
-                <left>1050</left>
+                <left>1150</left>
                 <top>-240</top>
                 <animation type="Visible" reversible="true">
                     <effect type="fade" start="0" end="100" time="800"   />
