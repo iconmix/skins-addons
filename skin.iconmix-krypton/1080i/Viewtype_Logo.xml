@@ -4,7 +4,7 @@
 		<control type="group">
 		<posy>158</posy>
 			<visible>Control.IsVisible(56)</visible>
-			<include>Animation_FadedByMenu</include>
+			
 			<include>Animation_OpenCloseFade</include>
 			<include>Animation_HiddenByInfo</include>
 			
@@ -14,7 +14,7 @@
 				<posy>480</posy>
 				<width>1920</width>
 				<height>170</height>
-				<texture diffuse="shine.png">frames/ClassicFrame_background.png</texture>
+				<texture diffuse="shinex.png">frames/ClassicFrame_background.png</texture>
 				<include>AnimationCacheNonSelect</include>
 			
 				<colordiffuse>90101010</colordiffuse>
@@ -109,7 +109,7 @@
 <include name="Viewtype_LogoV">
 	<control type="group">
 		<visible>Control.IsVisible(560)</visible>
-		<include>Animation_FadedByMenu</include>
+		
 			<include>Animation_OpenCloseFade</include>
 			<include>Animation_HiddenByInfo</include>
 			
@@ -119,7 +119,7 @@
 			<posy>0</posy>
 			<width>330</width>
 			<height>820</height>
-			<texture diffuse="shine.png">frames/ClassicFrame_background.png</texture>
+			<texture diffuse="shinex.png">frames/ClassicFrame_background.png</texture>
 			<include>AnimationCacheNonSelect</include>
 		
 			<colordiffuse>90101010</colordiffuse>

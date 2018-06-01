@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window id="2001">
 	<defaultcontrol>8001</defaultcontrol>
-	<include>Animation_FadedByMenu</include>
+	
 	<include>Animation_CommonFade</include>
 	<include>Animation_OpenCloseFade</include>
 	<controls>
@@ -600,7 +600,7 @@
 		
 			<!-- Artist/Album Image -->
 			<control type="group">
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_CommonFade</include>
 				<include>Animation_OpenCloseFade</include>
 				<control type="image">
@@ -624,7 +624,7 @@
 			</control>
 			<!-- Fanart Image -->
 			<control type="group">
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_CommonFade</include>
 				<include>Animation_OpenCloseFade</include>
 				<control type="image">
@@ -669,7 +669,7 @@
 					<aspectratio>stretch</aspectratio>
 				</control>
 				<control type="grouplist" id="8001">
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_CommonFade</include>
 				<include>Animation_OpenCloseFade</include>
 				<include>VideoInfoButtonText</include>
@@ -741,7 +741,7 @@
 			<control type="group">
 				<posy>-220</posy>
 				<posx>0</posx>
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_CommonFade</include>
 				<include>Animation_OpenCloseFade</include>
 				<control type="label">

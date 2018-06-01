@@ -1,6 +1,7 @@
 <views>
 	<view id="List" value="55" languageid="31801"  type="all"/>
-	<view id="LowList" value="905"  languageid="31802"  type="videos,movies,tvshows,musicvideos,seasons,setmovies,sets,episodes" />
+	<view id="Onglets" value="905"  languageid="31802"  type="videos,movies,tvshows,setmovies,sets,episodes,artists" />
+	<view id="Liste sobre" value="508"  languageid="31800"  type="videos,movies,tvshows,setmovies,sets,episodes" />
 	<view id="List and Fanart" value="509" languageid="31803"  type="movies,tvshows,musicvideos,seasons,setmovies,sets" />
 	<view id="List Trio" value="557" languageid="31834"  type="movies,setmovies,sets,tvshows" />
 	<view id="List Curved" value="906" languageid="31832"  type="all" />

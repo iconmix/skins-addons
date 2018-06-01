@@ -233,6 +233,14 @@ msgctxt "#32615"
 msgid "Stop the current playing for play this trailer ?"
 msgstr ""
 
+msgctxt "#32616"
+msgid "Purge deleted items from local cache"
+msgstr ""
+
+msgctxt "#32617"
+msgid "Overwrite current artworks for it ?"
+msgstr ""
+
 msgctxt "#32700"
 msgid "Poster"
 msgstr ""
@@ -291,5 +299,65 @@ msgid "Show only one language per trailers"
 msgstr ""
 
 
+msgctxt "#32851"
+msgid "Autocompletion"
+msgstr ""
+
+msgctxt "#32852"
+msgid "Autocompletion language"
+msgstr ""
+
+msgctxt "#32853"
+msgid "Fournisseur"
+msgstr "" 
+
+msgctxt "#32854"
+msgid "Sort results by"
+msgstr "" 
+
+msgctxt "#32855"
+msgid "empty "
+msgstr ""
 
 
+msgctxt "#32856"
+msgid "Database"
+msgstr ""
+
+
+msgctxt "#32857"
+msgid "Auto purge orphan TvShows"
+msgstr ""
+
+msgctxt "#32858"
+msgid "Launch purge orphan TvShows"
+msgstr ""
+
+
+msgctxt "#32859"
+msgid "ALL"
+msgstr ""
+
+
+msgctxt "#32860"
+msgid "Orphan TvShows deleted"
+msgstr ""
+
+msgctxt "#32861"
+msgid "no Orphan TvShows found"
+msgstr ""
+
+
+msgctxt "#32862"
+msgid "Ended"
+msgstr ""
+
+
+msgctxt "#32863"
+msgid "Continuing"
+msgstr ""
+
+
+msgctxt "#32864"
+msgid "Unknown"
+msgstr ""

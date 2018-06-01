@@ -2,6 +2,40 @@
  <!-- ------------------------------------OSD---------------------------------------------------------- -->
  <includes>
   <!-- Onscreen Displays -->
+  <include name="ProgressBulle">
+  <control type="button" id="2222">
+    <left>-500</left>
+    <width>100</width>
+        <align>center</align>
+        <height>35</height>
+        <textoffsetx>3</textoffsetx>
+        <textoffsety>2</textoffsety>
+        <!--<label>$INFO[Player.Time]</label>-->
+        <label></label>
+        <font>led18</font>
+        <textcolor>yellow</textcolor>
+        <texturenofocus>osd/osd_progress_script.png</texturenofocus>
+        <visible>Skin.HasSetting(NouveauProgress)</visible>
+
+      </control>
+  
+    <control type="group" id="2223">
+    <left>-2000</left>
+  <width>125</width>
+      <height>35</height>
+   
+    <control type="button" >
+        <align>center</align>
+        <aligny>center</aligny>
+        <height>35</height>
+        <textoffsetx>5</textoffsetx>
+        <label>$INFO[Player.Duration]</label>
+        <font>comic24</font>
+        <texturenofocus>osd/osd_progress_script.png</texturenofocus>
+
+      </control>
+    </control>
+</include>
 <!-- -------------------------------OSD --------------------------------------------------------------- -->
 <include name="OSD_Progress_Bar">
   <control type="group">
@@ -78,11 +112,68 @@
     </control>
     <control type="group">
       <posy>10</posy>
-     
+      <!-- Current position / Total Time -->
+      <control type="grouplist">
+        <posx>270</posx>
+        <posy>623</posy>
+        <width>1000</width>
+        <height>40</height>
+        <orientation>horizontal</orientation>
+        <align>center</align>
+        <itemgap>40</itemgap>
+      <!---->
+      <control type="button"> 
+        <width>235</width>       
+        <font>impact35</font>
+        <texturenofocus>osd/osd_progress_script.png</texturenofocus>
+        <textcolor>yellow</textcolor>        
+        <label>$LOCALIZE[31483]:$VAR[PlayerTime]</label>
+        <visible>!Skin.HasSetting(NouveauProgress)</visible>
+      </control>
+      
+      <control type="button"> 
+        <width>210</width>       
+        <font>impact35</font>
+        <texturenofocus>osd/osd_progress_script.png</texturenofocus>
+        <textcolor>TextNF</textcolor>
+        <label>$LOCALIZE[180]:$VAR[PlayerDuration]</label>
+      </control>
+      <control type="button"> 
+        <width>210</width>       
+        <font>impact35</font>
+        <texturenofocus>osd/osd_progress_script.png</texturenofocus>
+        <textcolor>yellow</textcolor>
+        <label>$LOCALIZE[31484]:$VAR[PlayerTimeRemaining]</label>
+      </control>
+      <control type="button"> 
+        <width>180</width>       
+        <font>impact35</font>
+        <texturenofocus>osd/osd_progress_script.png</texturenofocus>
+        <textcolor>ddc890FF</textcolor>
+        <label>$LOCALIZE[31409]:$VAR[PlayerFinishTime]</label>
+      </control>
+      
+      </control>
       <control type="progress" id="23">
         <description>Progressbar</description>
         <posx>295</posx>
-        <posy>627</posy>
+        <posy>665</posy>
+        <width>960</width>
+        <height>30</height>
+        <info>Player.Progress</info>
+        <reveal>true</reveal>
+        
+      <texturebg>osd/osd_progress_back.png</texturebg>
+      <lefttexture>osd/osd_progress_left4.png</lefttexture>
+      <midtexture>osd/osd_progress_mid4.png</midtexture>
+      <visible>Skin.HasSetting(NouveauProgress)</visible>
+    <overlaytexture></overlaytexture>
+    
+      </control>
+         <control type="progress" id="23">
+        <description>Progressbar</description>
+        <posx>295</posx>
+        <posy>665</posy>
         <width>960</width>
         <height>30</height>
         <info>Player.Progress</info>
@@ -92,31 +183,12 @@
       <lefttexture>osd/osd_progress_left4.png</lefttexture>
       <midtexture>osd/osd_progress_mid4.png</midtexture>
       <righttexture>osd/osd_progress_right4.png</righttexture>
+      <visible>!Skin.HasSetting(NouveauProgress)</visible>
     <overlaytexture></overlaytexture>
     
       </control>
-      <control type="slider" id="87">
-        <description>Seek Slider</description>
-        <posx>295</posx>
-        <posy>627</posy>
-        <width>960</width>
-        <height>20</height>
-        <action>seek</action>
-        <visible>![Window.IsVisible(SliderDialog)]</visible>
-      </control>
-      <!-- Current position / Total Time -->
-      <control type="label">
-        <posx>270</posx>
-        <posy>650</posy>
-        <width>1000</width>
-        <height>40</height>
-        <aligny>center</aligny>
-        <align>center</align>
-        <font>comic24</font>
-        <textcolor>yellow</textcolor>
-        <label>$LOCALIZE[31483]:[I]$INFO[VideoPlayer.Time][/I] - [COLOR=TextNF]$LOCALIZE[180]:[I]$INFO[VideoPlayer.Duration][/I][/COLOR] - $LOCALIZE[31484]:[I]$INFO[Player.TimeRemaining(hh)]h$INFO[Player.TimeRemaining(mm)][/I] - [COLOR=ddc890FF]$LOCALIZE[31409]:[I]$INFO[Player.FinishTime(hh)]h$INFO[Player.FinishTime(mm)][/I][/COLOR]</label>
-
-      </control>
+      <include>ProgressBulle</include>
+      
       <!-- Finish Time -->
       <!-- Chapter Info, Movie Tagline, or Music Video Artist/Album -->
       <control type="fadelabel">
@@ -150,8 +222,6 @@
        <effect type="slide"  start="0,0" end="0,195" time="800" delay="1" reversible="false"/>
      </animation>
     
-      
-
     </control>
     <!-- Movie Poster -->
     <control type="group">
@@ -224,7 +294,7 @@
 </control>
 </include>
 <!-- ---------------------------------------------------------------------------------------------- -->
-<include name="OSD_Progress_Bar3">
+<include name="OSD_SeekBar">
 
   <control type="group">
     <include>Animation_CommonFade</include>
@@ -238,55 +308,78 @@
       <texture>osd/OSDdialogback.png</texture>
       <colordiffuse>OSDBackgroundColor</colordiffuse>
     </control>
-    <control type="group">
-      <left>300</left>
-      <width>1320</width>
+    
     <control type="progress" id="23">
-      <description>Progressbar</description>
-      <posy>37</posy>
-      <height>35</height>
+      <top>36</top>
+      <width>1320</width>
+      <left>240</left>
+      <height>40</height>
       <info>Player.Progress</info>
       <reveal>true</reveal>
       <texturebg>osd/osd_progress_back.png</texturebg>
       <lefttexture>osd/osd_progress_left4.png</lefttexture>
       <midtexture>osd/osd_progress_mid4.png</midtexture>
       <righttexture>osd/osd_progress_right4.png</righttexture>
+      <visible>!Skin.HasSetting(NouveauProgress)</visible>
     <overlaytexture></overlaytexture>
     </control>
-    <control type="slider" id="87">
-      <description>Seek Slider</description>
-      <posy>47</posy>
-      <height>15</height>
-      <action>seek</action>
-      <visible>![Window.IsVisible(SliderDialog)]</visible>
-    </control>
-    <!-- Current position / Total Time -->
-    <control type="label">
-      <posy>33</posy>
-      <left>-300</left>
+    <control type="progress" id="23">
+      <top>36</top>
+      <width>1320</width>
+      <left>240</left>
       <height>40</height>
-      <aligny>center</aligny>
-      <width>270</width>
-      <align>right</align>
-      <font>METF_OSDTime</font>
-      <label>$INFO[VideoPlayer.Time]</label>
-      <textcolor>OSDPlayingDuration</textcolor>
+      <info>Player.Progress</info>
+      <reveal>true</reveal>
+      <texturebg>osd/osd_progress_back.png</texturebg>
+      <lefttexture>osd/osd_progress_left4.png</lefttexture>
+      <midtexture>osd/osd_progress_mid4.png</midtexture>
+      <visible>Skin.HasSetting(NouveauProgress)</visible>
+    <overlaytexture></overlaytexture>
     </control>
-             
-
-   
-    <control type="label">
-      <posy>6</posy>
-      <left>3</left>
-      <height>40</height>
-      <font>debutfin</font>
-      <textcolor>black</textcolor>
-      <align>center</align>
-      <aligny>center</aligny>
-      
-      <label>$VAR[VideoPlayerTitle]</label>
+    <include>ProgressBulle</include>
      
+      
+      <!-- Current position / Total Time -->
+    <control type="button">
+      <left>85</left>
+      <posy>33</posy>
+      <height>40</height>
+      <width>150</width>
+      <texturenofocus>osd/osd_progress_script.png</texturenofocus>
+      <font>impact35</font>
+      <label>$VAR[PlayerTime]</label>
+      <visible>!Skin.HasSetting(NouveauProgress)</visible>
     </control>
+   
+     
+     <control type="button">
+      <height>40</height>
+      <width>280</width>
+      <left>1565</left>
+      <posy>33</posy>
+      <texturenofocus>osd/osd_progress_script.png</texturenofocus>
+      <font>impact35</font>
+      <label>$VAR[PlayerDuration][COLOR=yellow]   [LIGHT] ($LOCALIZE[31409]:$VAR[PlayerFinishTime])[/COLOR][/LIGHT]</label>
+      <visible>!Skin.HasSetting(NouveauProgress)</visible>
+    </control>
+    <control type="button">
+      <height>73</height>
+      <width>150</width>
+      <left>1625</left>
+      <posy>3</posy>
+      <texturenofocus>osd/osd_progress_script.png</texturenofocus>
+      <font>impact35</font>
+      <label>$VAR[PlayerDuration][CR][COLOR=yellow][LIGHT] ($LOCALIZE[31409]:$VAR[PlayerFinishTime])[/COLOR][/LIGHT]</label>
+      <visible>Skin.HasSetting(NouveauProgress)</visible>
+    </control>
+
+    
+             
+<control type="group">
+      <left>300</left>
+      <width>1320</width>
+   
+    
      <control type="label">
       <posy>3</posy>
       <height>40</height>
@@ -294,22 +387,13 @@
       <textcolor>white</textcolor>
       <align>center</align>
       <aligny>center</aligny>
+      <shadowcolor>FF000000</shadowcolor>
       
       <label>$VAR[VideoPlayerTitle]</label>
      
     </control>
     <!-- Finish Time -->
-    <control type="label">
-      <posy>33</posy>
-      <height>40</height>
-      <aligny>center</aligny>
-      <left>1350</left>
-      <width>300</width>
-      <align>left</align>
-      <font>METF_OSDTime</font>
-      <textcolor>OSDPlayingDuration</textcolor>
-      <label>$INFO[VideoPlayer.Duration][COLOR TextNF]   [LIGHT] ($LOCALIZE[31409]:$INFO[Player.FinishTime(hh)]h$INFO[Player.FinishTime(mm)])[/COLOR][/LIGHT]</label>
-    </control>
+   
    </control>
    <control type="image">
       <posx>1600</posx>
@@ -386,8 +470,8 @@
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="OsdHorloge">
   <control type="group">
-    <posy>-900</posy>
-    <posx>450</posx>
+    <posx>1950</posx>
+      <posy>14</posy>
     <animation type="WindowOpen" reversible="false">
       <effect type="slide" end="-450" tween="back" easy="out"  time="800" delay="1000" />
     </animation>
@@ -396,22 +480,19 @@
     </animation>
 
     <control type="image">
-      <top>910</top>
-      <posx>1546</posx>
-      <width>320</width>
-      <height>150</height>
-      <texture background="true" diffuse="showcase_matte.png">frames/ClassicFrame_background.png</texture>
-      <colordiffuse>70202020</colordiffuse>
-    </control>
-    <control type="image">
-      <posx>1546</posx>
-      <posy>910</posy>
-      <width>320</width>
-      <height>150</height>
-      <texture border="10">landscape.png</texture>
-    </control>
+        <left>46</left>
+        <width>320</width>
+        <height>150</height>
+        <texture background="true" diffuse="showcase_matte.png">frames/ClassicFrame_background.png</texture>
+        <colordiffuse>C0202020</colordiffuse>
+      </control>
+      <control type="image">
+        <left>46</left>
+        <width>320</width>
+        <height>150</height>
+        <texture border="10">landscape.png</texture>
+      </control>
     <control type="group">
-      <top>70</top>
       <include>Global_Time</include>
       <include>Global_Weather</include>
     </control>

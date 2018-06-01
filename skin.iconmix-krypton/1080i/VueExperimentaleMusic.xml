@@ -3,7 +3,7 @@
   <include name="vueexperimentalemusic">
     <control type="group"> <!-- vue experimentale -->
 
-      <include>Animation_FadedByMenu</include>
+      
       
     <posy>-990</posy>
     <visible>!String.StartsWith(ListItem.Label,..)</visible>

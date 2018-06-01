@@ -320,6 +320,20 @@
         <ondown>7005</ondown>
         <orientation>vertical</orientation>
       <!-- <include>OptionsMenu</include> -->
+      
+      <control type="togglebutton" id="2003">
+        <!-- VU/NON VU EPISODE-->
+        <altlabel>$LOCALIZE[32022]$LOCALIZE[16101]</altlabel>
+        <usealttexture>!Container(2666).ListItem.IsResumable+ Integer.IsGreater(Container(2666).ListItem.PlayCount,0)+ String.IsEmpty(Container(2666).ListItem.Property(PercentPlayed))</usealttexture>
+
+        <include>MonBoutonCommun2</include>
+        <label>$LOCALIZE[32022]$LOCALIZE[16102]</label>
+        <onclick condition="!Container(2666).ListItem.IsResumable+ Integer.IsGreater(Container(2666).ListItem.PlayCount,0)+ String.IsEmpty(Container(2666).ListItem.Property(PercentPlayed))">RunScript(script.iconmixtools,togglewatchedepisode=True&idepisode=$INFO[Container(2666).ListItem.DBID]&togglewatched=False)</onclick>
+        <onclick condition="Container(2666).ListItem.IsResumable| !Integer.IsGreater(Container(2666).ListItem.PlayCount,0)| !String.IsEmpty(Container(2666).ListItem.Property(PercentPlayed))">RunScript(script.iconmixtools,togglewatchedepisode=True&idepisode=$INFO[Container(2666).ListItem.DBID]&togglewatched=True)</onclick>
+        
+        <onclick>SetFocus(55)</onclick>
+        <visible>String.Contains(ListItem.DBTYPE,tvshow)+!String.IsEmpty(Window(Home).property(IconmixFlagPanelEpisode))+Integer.IsGreater(Window(Home).property(IconmixFlagPanelEpisode),0)</visible>
+      </control>
 
       <!-- Mise a jour  -->
       <control type="button" id="2004">
@@ -387,6 +401,8 @@
         <label>31253</label>
         <visible>String.IsEqual(ListItem.DBTYPE,movie)</visible>
       </control>
+      
+      
 
     </control>
   </control>

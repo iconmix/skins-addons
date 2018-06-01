@@ -489,68 +489,7 @@
   <control type="group" id="9004">
     <animation effect="fade" start="100" end="0" time="0" condition="[ Skin.HasSetting(Home3)] + Control.HasFocus(9001)">conditional</animation>
     <animation effect="fade" start="0" end="100" delay="200" time="200" condition="[ Skin.HasSetting(Home3)] + !Control.HasFocus(9001)">conditional</animation>
-    <!-- debug telex--
-    <control type="group">
-
-    <control type="label">
-    <posx>10</posx>
-    <posy>20</posy>
-    <label>Widget 1:[B]*$INFO[Container(9000).ListItem.Property(submenuVisibility)]*[/B]</label>
-
-    </control>
-    <control type="label">
-    <posx>10</posx>
-    <posy>50</posy>
-    <label>Widget 2:[B]$INFO[Container(9000).ListItem.Property(widget.2)][/B]</label>
-    </control>
-    <control type="label">
-    <posx>10</posx>
-    <posy>80</posy>
-    <label>Type=$INFO[ListItem.Mpaa]</label>
-    </control>
-    <control type="label">
-    <posx>10</posx>
-    <posy>100</posy>
-    <label>Type=$INFO[Window(Home).Property(WD1Actif)]</label>
-    </control>
-    <control type="label">
-    <posx>10</posx>
-    <posy>120</posy>
-    <label>Widget  1 : $VAR[Wd1Visible]</label>
-    </control>
-    <control type="label">
-    <posx>10</posx>
-    <posy>140</posy>
-    <label>Widget 2 : $VAR[Wd2Visible]</label>
-    </control>
-    <control type="label">
-    <posx>10</posx>
-    <posy>160</posy>
-    <label>Liste item : $INFO[Container(9992).NumItems]</label>
-    </control>
-    <control type="label">
-    <posx>10</posx>
-    <posy>180</posy>
-    <label>Wd1 visible: Oui</label>
-    <visible>Control.IsVisible(9022)</visible>
-    </control>
-    <control type="label">
-    <posx>10</posx>
-    <posy>200</posy>
-    <label>Wd2 visible: Oui</label>
-    <visible>Control.IsVisible(9023)</visible>
-    </control>
-    <control type="label">
-    <posx>10</posx>
-    <posy>220</posy>
-    <label>Content TodayShow: $INFO[Window(Home).Property(NextAired.1.Label)]/$INFO[Window(Home).Property(NextAired.1.Library)]/$INFO[Window(Home).Property(NextAired.1.Thumb)]</label>
-
-
-    </control>
-
-    </control>
-    -->
-
+ 
 
     <control type="group">
       <include>widget1</include>
@@ -699,7 +638,7 @@
 <!-- systeminfo widget -->
 <include name="SystemContentList">
   <include>Animation_CommonFadeNoHide</include>
-  <include>Animation_FadedByMenu</include>
+  
   <include>SystemContent</include>
   <width>1250</width>
   <height>250</height>

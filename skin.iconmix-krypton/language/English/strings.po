@@ -49,7 +49,7 @@ msgid "Enable auto scrolling for text that does not fit on-screen"
 msgstr ""
 
 msgctxt "#31006"
-msgid "Shorter delay before auto scrolling"
+msgid "Auto scrolling speed"
 msgstr ""
 
 msgctxt "#31007"
@@ -332,6 +332,16 @@ msgstr ""
 msgctxt "#31143"
 msgid "Memory used"
 msgstr ""
+
+msgctxt "#31144"
+msgid "Disable Episodes Full List"
+msgstr ""
+
+msgctxt "#31145"
+msgid "Disable focus to first unwatched"
+msgstr ""
+
+
 #empty strings from id 31134 to 31158
 
 msgctxt "#31159"
@@ -1210,7 +1220,7 @@ msgid "Position"
 msgstr ""
 
 msgctxt "#31484"
-msgid "Time remaining"
+msgid "Remain"
 msgstr ""
 
 msgctxt "#31485"
@@ -1222,6 +1232,9 @@ msgctxt "#31486"
 msgid "Hide seekbar and Pause message during Video pausing"
 msgstr ""
 
+msgctxt "#31487"
+msgid "Enable Text progress indicator"
+msgstr ""
 
 
 #empty strings from id 31482 to 31599
@@ -1644,12 +1657,25 @@ msgid "Unwatched movies"
 msgstr ""
 
 
+msgctxt "#31793"
+msgid "By title/name"
+msgstr ""
+
+msgctxt "#31794"
+msgid "By categorie"
+msgstr ""
+
+
+msgctxt "#31800"
+msgid "List sober"
+msgstr ""
+
 msgctxt "#31801"
 msgid "List"
 msgstr ""
 
 msgctxt "#31802"
-msgid "LowList"
+msgid "Onglets"
 msgstr ""
 
 msgctxt "#31803"
@@ -2037,4 +2063,31 @@ msgstr ""
 
 msgctxt "#32017"
 msgid "Access to all episodes"
+msgstr ""
+
+msgctxt "#32018"
+msgid "Show very big plot window"
+msgstr ""
+
+msgctxt "#32019"
+msgid "Provider choice"
+msgstr ""
+
+
+msgctxt "#32020"
+msgid "in History"
+msgstr ""
+
+msgctxt "#32021"
+msgid "Show only a button for cast"
+msgstr ""
+
+msgctxt "#32022"
+msgid "Set this episode to "
+msgstr ""
+
+
+
+msgctxt "#32023"
+msgid "Next Aired "
 msgstr ""

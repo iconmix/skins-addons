@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window id="502">
-	<onload condition="String.IsEmpty(Window(Home).property(iconmixtoolsbackend))">RunScript(script.iconmixtools,backend=True)</onload>--> 
-	<onload>Skin.ToggleSetting(SkinHelper.EnableMusicArt)</onload>
+ 
+<!--	<onload condition="String.IsEmpty(Window(Home).property(iconmixtoolsbackend))">RunScript(script.iconmixtools,backend=True)</onload> -->
+	 
+	<onload condition="!Skin.HasSetting(SkinHelper.EnableMusicArt)">Skin.ToggleSetting(SkinHelper.EnableMusicArt)</onload>
 	<onload>SetProperty(IconmixDialogContext,,Home)</onload>
   <onunload>SetProperty(IconmixDialogContext,,Home)</onunload>
+  <onload>Container.Refresh</onload>
     <menucontrol>7000</menucontrol>
 
-	<views>55,509,58,559,511,510,513,514,552,551,906,561</views>
+	<views>55,509,905,58,559,511,510,513,514,552,551,906,561,586</views>
 	<defaultcontrol always="true">55</defaultcontrol>
 	<controls>
 		<control type="group">
@@ -16,7 +19,7 @@
   			<animation type="Conditional" condition="Control.HasFocus(2997)" reversible="true">
   				<effect type="fade" start="100" end="0" time="500"  />
   			</animation>
-  			 <animation type="Conditional" condition="Skin.HasSetting(CacheFondMusic)" reversible="false">
+  			 <animation type="Conditional" condition="Skin.HasSetting(VueExperimentaleMusic)" reversible="false">
             <effect type="slide" end="0,200" time="0"  />
           </animation>
     		<!--	<include>Object_InfoLines</include> -->
@@ -32,9 +35,10 @@
     		<include>Viewtype_ListCurved</include> <!-- 906 -->
     		<include>Viewtype_MusicBox</include> <!-- 906 -->
     		<include>Viewtype_Disc</include> <!-- 586 -->
+    		<include>Viewtype_Onglets</include>         <!-- 905 -->
   		</control>
   		<control type="group">
-        <include>Animation_FadedByMenu</include>
+        
         <control type="image">
           <posx>0</posx>
           <posy>815</posy>
@@ -49,7 +53,7 @@
           <visible>!Window.IsVisible(songinformation)</visible>
         </control>
      
-        <visible>!Skin.HasSetting(CacheFondMusic)</visible>
+        <visible>!Skin.HasSetting(VueExperimentaleMusic)</visible>
       </control>
 		<!-- lecture ou affichage -->
 		
@@ -71,6 +75,7 @@
 				<onclick condition="Container.Content(artists)">PlayMedia($INFO[Container(1994).ListItem.Path],true)</onclick>	
 				<onclick condition="Container.Content(genres)">ActivateWindow(Music,musicdb://artists/$INFO[Container(1999).ListItem.property(DBID)])</onclick>	
 				<!--<onclick>ActivateWindow(Music,musicdb://albums/2/)</onclick>-->
+				 <onback>55</onback>
 				<visible>Integer.IsGreater(Container(1999).NumItems,0)</visible>				
 			</control>
 		
@@ -92,7 +97,7 @@
   			<top>10</top>
   			<visible>!Container.OnNext</visible>
   			<visible>!Container.OnPrevious</visible>
-  			<animation type="Conditional" condition="Skin.HasSetting(CacheFondMusic)" reversible="false">
+  			<animation type="Conditional" condition="Skin.HasSetting(VueExperimentaleMusic)" reversible="false">
             <effect type="slide" end="0,-835" time="0"  />
           </animation>
     		<control type="list" id="1999">			
@@ -132,7 +137,7 @@
   			<top>10</top>
   			<visible>!Container.OnNext</visible>
   			<visible>!Container.OnPrevious</visible>
-  			<animation type="Conditional" condition="Skin.HasSetting(CacheFondMusic)" reversible="false">
+  			<animation type="Conditional" condition="Skin.HasSetting(VueExperimentaleMusic)" reversible="false">
             <effect type="slide" end="0,-835" time="0"  />
           </animation>
     		<control type="list" id="1999">			
@@ -249,12 +254,12 @@
   		</control>
 
   		<control type="list" id="1997">
-  		  <animation type="Conditional" condition="Skin.HasSetting(CacheFondMusic)" reversible="false">
+  		  <animation type="Conditional" condition="Skin.HasSetting(VueExperimentaleMusic)" reversible="false">
             <effect type="slide" end="0,-835" time="0"  />
           </animation>
   			<include>Animation_HiddenByInfo</include>
   			<posx>475</posx>
-  			<posy>923</posy>
+  			<posy>900</posy>
   			<width>970</width>
   			<height>150</height>
   			<align>center</align>
@@ -306,10 +311,10 @@
 				<label>ArtistBanner:$VAR[artistbanner][CR]IconMixDataPath:$INFO[Window(Home).Property(IconMixDataPath)][CR]Duree:$INFO[ListItem.Duration][CR]Dureetools:$INFO[Window(Home).Property(DurationTools)][CR]Fin:$INFO[Window(Home).Property(DurationToolsEnd)][CR]ICON=$INFO[ListItem.Icon][CR]TestProperty=$INFO[ListItem.Property(TestProperty)][CR]DBID=$INFO[ListItem.DBID][CR]DBID1999=$INFO[Container(1999).ListItem.Property(DBID)][CR]COVER999=$INFO[Container(1999).ListItem.Property(AlbumCover)][CR]CD1999=$INFO[Container(1999).ListItem.Property(AlbumCd)][CR]numitems1999:$INFO[Container(1999).NumItems][CR]numitems1994:$INFO[Container(1994).NumItems][CR]path1994:$INFO[Container(1994).ListItem.Path][CR]numitems2998:$INFO[Container(2998).NumItems][CR]Icon1999:$INFO[Container(1999).ListItem.Icon][CR]Title1999:$INFO[Container(1999).ListItem.Title][CR]Label1999:$INFO[Container(1999).ListItem.Label][CR]Title:$INFO[ListItem.Title][CR]Label:$INFO[ListItem.Label][CR]Label2:$INFO[ListItem.Label2][CR]DBType:$INFO[ListItem.DBType][CR]Content:$INFO[Container.Content][CR]Folder:$INFO[Container.FolderPath][CR]Discart=$INFO[Window(Home).Property(SkinHelper.ListItem.Art.DiscArt)][CR]Banner=$INFO[Window(Home).Property(SkinHelper.ListItem.Art.Banner)][CR]ArtisteBanner=$INFO[Window(Home).Property(ArtistBanner)][CR]ArtistLogo=$INFO[Window(Home).Property(ArtistLogo)][CR]AlbumCD=$INFO[Window(Home).Property(AlbumCd)][CR]AlbumCover=$INFO[Window(Home).Property(AlbumCover)][CR]$INFO[ListItem.Icon][CR]$VAR[discartSpinning]</label>
 			</control>-->
 
-    		<include condition="Skin.HasSetting(CacheFondMusic)">vueexperimentalemusic</include>
+    		<include condition="Skin.HasSetting(VueExperimentaleMusic)">vueexperimentalemusic</include>
     		<control type="group">
-    		  <left>1620</left>
-              <top>1090</top>
+    		  <left>1930</left>
+              <top>710</top>
     		     <control type="image">
               
               <width>280</width>
@@ -320,10 +325,10 @@
               <bordertexture>frames/cdart-mask.png</bordertexture>
               <animation type="Visible">
                 <effect type="zoom" center="auto"  end="120" time="200" delay="300"  reversible="false"/>
-                <effect type="slide"   end="0,-300" time="500" delay="300"  reversible="false"/>
+                <effect type="slide"   end="-300,0" time="500" delay="300"  reversible="false"/>
                 <effect type="rotate" center="auto" end="-360" time="1000" delay="300" reversible="false"/>
                 </animation>
-                <visible>!Container.OnNext+!Container.OnPrevious+Container.Content(albums)</visible>
+                <visible>[!Container.OnNext+!Container.OnPrevious+Container.Content(albums)]|Container.Content(songs)</visible>
              <!-- <animation effect="rotate"  center="auto" end="-360" time="1000" delay="2400" condition="System.IdleTime(2)" reversible="false">Conditional</animation> -->
             </control>
             </control>
@@ -344,10 +349,15 @@
       			
       			<control type="group">
         			<control type="image">
-        				<texture>shine.png</texture>
-        				<aspectratio>stretch</aspectratio>
+        				 <top>-10</top>
+          <width>650</width>
+          <texture>frames/genrestag.png</texture>
+          <aspectratio>stretch</aspectratio>
+          <bordersize>8</bordersize>
+          <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
         				
         			</control>
+        			
         			<control type="image">
         			  <left>-50</left>
         			  <height>110</height>
@@ -436,10 +446,10 @@
     		  <include>Global_ScrollOffsetLabel</include>
         <include>Global_AddonInfo</include>
         
-        <visible>!Skin.HasSetting(CacheFondMusic)</visible>
+        <visible>!Skin.HasSetting(VueExperimentaleMusic)</visible>
     	 </control>	
   		 <control type="group">
-          <animation type="Conditional" condition="Skin.HasSetting(CacheFondMusic)" reversible="false">
+          <animation type="Conditional" condition="Skin.HasSetting(VueExperimentaleMusic)" reversible="false">
             <!-- <effect type="slide" end="0,-835" time="0"  /> -->
             <effect type="slide" end="0,205" time="0"  /> -->
           </animation>
@@ -463,7 +473,7 @@
     <control type="label">
       <posy>1000</posy>
       <height>80</height>
-      <label>>>$INFO[Container.Content]/$INFO[Container.FolderPath]--$INFO[Container(1999).ListItem.property(AlbumCover)]-$INFO[Container(1999).NumItems]</label>
+      <label>$INFO[ListItem.Property(Album_Label)]</label>
     </control>
     
     -->

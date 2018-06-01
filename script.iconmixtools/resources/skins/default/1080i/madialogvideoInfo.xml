@@ -841,7 +841,7 @@
         <left>11</left>
         <width>110</width>
         <height>70</height>
-        <texture>$VAR[chronotoolstexture]</texture>
+        <texture>chronotools.png</texture>
         <aspectratio>scale</aspectratio>
         <!--  -->
 

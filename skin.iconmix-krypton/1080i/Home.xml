@@ -21,8 +21,9 @@
     <onload condition="!Skin.HasSetting(hidesoustitres)+!Skin.HasSetting(hidesoustitres2)">Skin.ToggleSetting(hidesoustitres)</onload>
     <onload condition="!Skin.HasSetting(hidelangues)+!Skin.HasSetting(hidelangues2)">Skin.ToggleSetting(hidelangues)</onload>
     <onload>RunScript(script.skinshortcuts,type=buildxml&amp;mainmenuID=9000&amp;levels=2)</onload>
-    <!--<onload>RunScript(script.tv.show.next.aired,backend=True)</onload>-->
+    <!--<onload>RunScript(script.tv.show.next.aired,backend=True)</onload>
     <onload condition="String.IsEmpty(Window(Home).property(iconmixtoolsbackend))">RunScript(script.iconmixtools,backend=True)</onload>
+    -->
     <onload>ClearProperty(Actorbiographie,Home)</onload>
     <onload>ClearProperty(Actornaissance,Home)</onload>
     <onload>ClearProperty(Actordeces,Home)</onload>
@@ -84,7 +85,7 @@
             <headlinecolor>yellow</headlinecolor>
             <textcolor>RSSText</textcolor>
             <include>Animation_OpenCloseFade</include>
-            <include>Animation_FadedByMenu</include>
+            
 
             <visible>system.getbool(lookandfeel.enablerssfeeds)</visible>
         </control>

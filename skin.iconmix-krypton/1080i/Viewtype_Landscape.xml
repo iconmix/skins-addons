@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
-	<include name="CommonH">
+	<include name="CommonLandScape">
 		<posx>5</posx>
 		<posy>36</posy>
 		<width>340</width>
@@ -11,7 +11,7 @@
 	<include name="Viewtype_Landscape">
 		<control type="group">
 			<visible>Control.IsVisible(52)</visible>
-			<include>Animation_FadedByMenu</include>
+			
 				<include>Animation_OpenCloseFade</include>
 				<include>Animation_HiddenByInfo</include>	
 			<!-- Browser -->
@@ -119,7 +119,7 @@
 						
 				
 						<control type="image">
-							<include>CommonH</include>
+							<include>CommonLandScape</include>
 							<texture background="true" diffuse="landscapematteNF.png">$INFO[ListItem.Icon]</texture>
 							<colordiffuse >LandscapeDiffuse</colordiffuse>
 							<aspectratio scalediffuse="true">keep</aspectratio>
@@ -127,13 +127,13 @@
 						</control>
 						<control type="image">
 							<texture background="true" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
-							<include>CommonH</include>
+							<include>CommonLandScape</include>
 							<colordiffuse>LandscapeDiffuse</colordiffuse>
 							<aspectratio scalediffuse="true">stretch</aspectratio>
 							<visible>Container.Content(tvshows)</visible>
 						</control>
 						<control type="image">
-							<include>CommonH</include>
+							<include>CommonLandScape</include>
 							<texture background="true" fallback="home_art/movies.jpg" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
 							<colordiffuse>LandscapeDiffuse</colordiffuse>
 							<aspectratio scalediffuse="true">stretch</aspectratio>
@@ -165,7 +165,7 @@
 							<visible>[Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows)]</visible>
 						</control>
 						<control type="image">
-							<include>CommonH</include>
+							<include>CommonLandScape</include>
 							<texture>landscapeframeNF.png</texture>
 						</control>
 						
@@ -201,7 +201,7 @@
 						</animation>
 				
 					<control type="image">
-						<include>CommonH</include>
+						<include>CommonLandScape</include>
 						<texture background="true" diffuse="landscapematteNF.png">$INFO[ListItem.Icon]</texture>
 						<colordiffuse>FFFFFFFF</colordiffuse>
 						<aspectratio scalediffuse="true">keep</aspectratio>
@@ -209,13 +209,13 @@
 					</control>
 					<control type="image">
 						<texture background="true" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
-						<include>CommonH</include>
+						<include>CommonLandScape</include>
 						<colordiffuse>FFFFFFFF</colordiffuse>
 						<aspectratio scalediffuse="true">stretch</aspectratio>
 						<visible>Container.Content(tvshows)</visible>
 					</control>
 					<control type="image">
-						<include>CommonH</include>
+						<include>CommonLandScape</include>
 						<texture background="true" fallback="home_art/movies.jpg" diffuse="landscapematteNF.png">$VAR[LandscapeFanart]</texture>
 						<colordiffuse>FFFFFFFF</colordiffuse>
 						<aspectratio scalediffuse="true">stretch</aspectratio>
@@ -232,7 +232,7 @@
 						<visible>[Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows)]</visible>
 					</control>				
 					<control type="image">
-						<include>CommonH</include>
+						<include>CommonLandScape</include>
 						<texture>landscapeframeNF.png</texture>
 					</control>
 					
@@ -261,7 +261,7 @@
 	<include name="Viewtype_LandscapeV">
 		<control type="group">
 			<visible>Control.IsVisible(521)</visible>
-			<include>Animation_FadedByMenu</include>
+			
 				<include>Animation_OpenCloseFade</include>
 				<include>Animation_HiddenByInfo</include>	
 			<control type="grouplist">
@@ -352,7 +352,7 @@
 				<scrolltime>200</scrolltime>
 				<preloaditems>2</preloaditems>
 				<pagecontrol>60</pagecontrol>
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_OpenCloseFade</include>
 				<include>Animation_HiddenByInfo</include>				
 				<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes)]</visible>

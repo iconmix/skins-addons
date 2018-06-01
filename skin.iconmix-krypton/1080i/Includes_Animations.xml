@@ -2,8 +2,8 @@
 <includes>
 <!-- telex --->
 
-<include name="slideCacheFond">
-  <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
+<include name="slideVueExperimentale">
+  <animation type="Conditional" condition="Skin.HasSetting(VueExperimentale)" reversible="false">
           <effect type="slide" end="0,-835" time="0"  />
         </animation>
 </include>
@@ -252,8 +252,8 @@
 		<animation effect="rotate" end="360" center="auto" time="700" loop="true" reversible="false" condition="Player.Rewinding8x+Player.HasAudio">Conditional</animation>
 		<animation effect="rotate" end="360" center="auto" time="500" loop="true" reversible="false" condition="Player.Rewinding16x+Player.HasAudio">Conditional</animation>
 		<animation effect="rotate" end="360" center="auto" time="350" loop="true" reversible="false" condition="Player.Rewinding32x+Player.HasAudio">Conditional</animation>
-		
-		<texture fallback="cd.png">$VAR[discartSpinning]</texture>
+	
+		<texture diffuse="platineborddiff.png" fallback="cd.png">$VAR[discartSpinning]</texture>
 		<aspectratio align="bottom">keep</aspectratio>
 	</include>
 </includes>

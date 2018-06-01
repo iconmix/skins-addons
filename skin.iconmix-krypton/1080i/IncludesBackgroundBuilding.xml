@@ -254,6 +254,15 @@
             <texture>frames/cdcasexback.png</texture>
             <aspectratio scalediffuse="true">stretch</aspectratio>
           </control>
+          <control type="image">
+             <left>29</left>
+        <top>6</top>
+        <width>327</width>
+        <height>327</height>
+        <aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
+             <texture background="true">frames/cdcasexupback.png</texture>
+        <bordersize>2</bordersize>
+          </control>
 
 
           <control type="image">
@@ -319,7 +328,7 @@
       <posx>-200</posx>
       <!-- <animation type="Conditional" condition="Container(8080).OnScrollNext|Container(8080).OnScrollPrevious" reversible="true" > -->
       <animation type="Visible" reversible="true">
-        <effect type="fade"  start="5" end="80" time="500"  />
+        <effect type="fade"  start="5" end="95" time="500"  />
 
       </animation>
 
@@ -479,12 +488,12 @@
 
 
   <variable name="backgroundVar">
-    <value condition="!Window.IsVisible(10025)+!Window.IsVisible(502)+!Window.IsVisible(home)">background.jpg</value>
+    <value condition="!Window.IsVisible(10025)+!Window.IsVisible(502)+!Window.IsVisible(home)">background.png</value>
     <value condition="Control.HasFocus(9000)+[String.Contains(Container(9000).ListItem.Property(background),WDF1)|String.Contains(Container(9000).ListItem.Property(background),WDF2)|String.Contains(Container(9000).ListItem.Property(background),WDF3)]"></value>
     <value condition="Integer.IsGreater(Container(8080).NumItems,0)"></value>
     <value condition="Window.IsVisible(Home)+!Control.HasFocus(9000)+!Control.HasFocus(9001)+!String.IsEqual(Container(9000).ListItem.Property(widgetType),weather)+!String.IsEqual(Container(9000).ListItem.Property(widgetType),system)+!String.IsEmpty(Window(Home).Property(WidgetActifFanart))">$INFO[Window(Home).Property(WidgetActifFanart)]</value>
     <value condition="Window.IsVisible(Home)+Control.HasFocus(9001)+!String.IsEmpty(Container(9001).ListItem.Property(background))">$INFO[Container(9001).ListItem.Property(background)]</value>
-    <value condition="Window.IsVisible(Home)+Control.HasFocus(9001)+String.IsEmpty(Container(9001).ListItem.Property(background))">background.jpg</value>
+    <value condition="Window.IsVisible(Home)+Control.HasFocus(9001)+String.IsEmpty(Container(9001).ListItem.Property(background))">background.png</value>
     <value>$INFO[Container(9000).ListItem.Property(background)]</value>
   </variable>
 

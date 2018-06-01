@@ -7,7 +7,7 @@
 		<!-- LEFT PANEL -->
 		<control type="group">
 			<posx>25</posx>
-			<include>Animation_FadedByMenu</include>
+			
 			<include>Animation_OpenCloseFade</include>
 			<posy>-40</posy>
 			<control type="image">
@@ -109,7 +109,7 @@
 		</control>
 		<!-- Right Panel -->
 		<control type="group">
-			<include>Animation_FadedByMenu</include>
+			
 			<include>Animation_OpenCloseFade</include>
 			<posy>-40</posy>
 			<posx>980</posx>

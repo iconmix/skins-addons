@@ -85,7 +85,7 @@
 			<posy>150</posy>
 			<visible>Control.IsVisible(512)</visible>
 			<include>Animation_OpenCloseFade</include>
-			<include>Animation_FadedByMenu</include>
+			
 			<include>Animation_HiddenByInfo</include>
 			<control type="group">
 				<visible>[!Integer.IsGreater(Container(512).NumItems,12) + !system.getbool(filelists.showparentdiritems)] | [!Integer.IsGreater(Container(512).NumItems,11) + system.getbool(filelists.showparentdiritems)]</visible>

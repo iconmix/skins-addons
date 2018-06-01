@@ -10,7 +10,7 @@
 			</animation>
 			<control type="grouplist" id="3">
 				<description>Button Area</description>
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_OpenCloseFade</include>
 				<include>Animation_CommonFadeNoHide</include>
 				<posx>0</posx>
@@ -36,7 +36,7 @@
         </control>
 			<control type="grouplist" id="5">
 				<description>Control Area</description>
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_OpenCloseFade</include>
 				<include>Animation_CommonFadeNoHide</include>
 				<posx>440</posx>

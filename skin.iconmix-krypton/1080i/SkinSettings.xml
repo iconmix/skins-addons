@@ -7,6 +7,7 @@
   <onload condition="[Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuTexteVertical)]">Skin.ToggleSetting(MenuTexteVertical)</onload> <!-- default to Icon menu -->
   <onload condition="[Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuIconVertical)]">Skin.ToggleSetting(MenuIconVertical)</onload> <!-- default to Icon menu -->
   <onload condition="[Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuIconBobine)]">Skin.ToggleSetting(MenuIconBobine)</onload>
+  <onload condition="!String.IsEqual(Skin.String(PlotSpeed),2s)+!String.IsEqual(Skin.String(PlotSpeed),3s)+!String.IsEqual(Skin.String(PlotSpeed),4s)+!String.IsEqual(Skin.String(PlotSpeed),5s)+!Skin.SetString(PlotSpeed,6s)+!String.IsEqual(Skin.String(PlotSpeed),7s)+!String.IsEqual(Skin.String(PlotSpeed),8s)">Skin.SetString(PlotSpeed,4s)</onload>   
 
   <controls>
     
@@ -24,8 +25,10 @@
           <effect type="rotatey"  center="1600,0" end="10" time="1" />
         </animation>
     </control>
+    
+    
       <control type="group">
-        <include>Animation_FadedByMenu</include>
+        
         <include>Animation_OpenCloseFade</include>
         <control type="list" id="9000">
           <description>List</description>
@@ -233,12 +236,14 @@
               <onclick>Skin.ToggleSetting(PlayVideoOverlay)</onclick>
               <selected>Skin.HasSetting(PlayVideoOverlay)</selected>
             </control>
-            <control type="radiobutton" id="108">
+           
+             <!-- <control type="radiobutton" id="108">
               <include>SettingsLabel</include>
               <label>$LOCALIZE[31005]</label>
               <onclick>Skin.ToggleSetting(AutoScroll)</onclick>
               <selected>Skin.HasSetting(AutoScroll)</selected>
             </control>
+          
             <control type="radiobutton" id="109">
               <include>SettingsLabel</include>
               <label>$LOCALIZE[31006]</label>
@@ -247,6 +252,10 @@
               <selected>Skin.HasSetting(AutoScrollFast)</selected>
               <visible>Skin.HasSetting(AutoScroll)</visible>
             </control>
+            -->
+            
+            
+            
             <control type="radiobutton" id="110">
               <include>SettingsLabel</include>
               <label>$LOCALIZE[31336]</label>
@@ -336,7 +345,7 @@
               <label>$LOCALIZE[31063]</label>
               <onclick>Skin.ToggleSetting(ShowIconLabel)</onclick>
               <selected>Skin.HasSetting(ShowIconLabel)</selected>
-              <visible>Skin.HasSetting(MenuIcon)|Skin.HasSetting(MenuIconBobine)|Skin.HasSetting(MenuIconVertical)</visible>
+              <enable>Skin.HasSetting(MenuIcon)|Skin.HasSetting(MenuIconBobine)|Skin.HasSetting(MenuIconVertical)</enable>
               <onclick condition="Skin.HasSetting(MenuTexteVertical)">Skin.ToggleSetting(MenuTexteVertical)</onclick>
             </control>
 
@@ -396,7 +405,7 @@
             <posx>0</posx>
             <posy>0</posy>
             <width>940</width>
-            <height>618</height>
+            <height>780</height>
             <itemgap>0</itemgap>
             <scrolltime>0</scrolltime>
             <onleft>9000</onleft>
@@ -415,62 +424,69 @@
               <label>$LOCALIZE[32003]</label>
               <onclick>Skin.ToggleSetting(ShowLargePlot)</onclick>
               <selected>Skin.HasSetting(ShowLargePlot)</selected>
+              <onclick condition="Skin.HasSetting(ShowVeryLargePlot)">Skin.ToggleSetting(ShowVeryLargePlot)</onclick>
               <visible>!Skin.HasSetting(Hide_Plot)</visible>
             </control>
-
-
-
-            <control type="radiobutton" id="506">
+            <control type="radiobutton" id="505">
+              <include>SettingsLabel</include>
+              <label>$LOCALIZE[32018]</label>
+              <onclick>Skin.ToggleSetting(ShowVeryLargePlot)</onclick>
+              <onclick condition="Skin.HasSetting(ShowLargePlot)">Skin.ToggleSetting(ShowLargePlot)</onclick>
+              <selected>Skin.HasSetting(ShowVeryLargePlot)</selected>
+              <visible>!Skin.HasSetting(Hide_Plot)</visible>
+            </control>
+            <control type="button" id="506">
+              <include>SettingsLabel</include>
+              <label>$LOCALIZE[31006]</label>
+              <label2>$INFO[Skin.String(PlotSpeed)]</label2>
+              <onclick condition="!String.IsEqual(Skin.String(PlotSpeed),2s)+!String.IsEqual(Skin.String(PlotSpeed),3s)+!String.IsEqual(Skin.String(PlotSpeed),4s)+!String.IsEqual(Skin.String(PlotSpeed),5s)">Skin.SetString(PlotSpeed,2s)</onclick>   
+              <onclick condition="String.IsEqual(Skin.String(PlotSpeed),2s)">Skin.SetString(PlotSpeed,3s)</onclick>       
+              <onclick condition="String.IsEqual(Skin.String(PlotSpeed),8s)">Skin.SetString(PlotSpeed,$LOCALIZE[1223])</onclick>
+              <onclick condition="String.IsEqual(Skin.String(PlotSpeed),7s)">Skin.SetString(PlotSpeed,8s)</onclick>
+              <onclick condition="String.IsEqual(Skin.String(PlotSpeed),6s)">Skin.SetString(PlotSpeed,7s)</onclick>
+              <onclick condition="String.IsEqual(Skin.String(PlotSpeed),5s)">Skin.SetString(PlotSpeed,6s)</onclick>
+              <onclick condition="String.IsEqual(Skin.String(PlotSpeed),4s)">Skin.SetString(PlotSpeed,5s)</onclick>
+              <onclick condition="String.IsEqual(Skin.String(PlotSpeed),3s)">Skin.SetString(PlotSpeed,4s)</onclick>
+              <visible>!Skin.HasSetting(Hide_Plot)</visible>
+            </control>
+            <control type="radiobutton" id="507">
               <include>SettingsLabel</include>
               <label>$LOCALIZE[31339]</label>
               <onclick>Skin.ToggleSetting(PositionCompteur)</onclick>
               <selected>Skin.HasSetting(PositionCompteur)</selected>
             </control>
-            <control type="radiobutton" id="507">
+            <control type="radiobutton" id="508">
               <include>SettingsLabel</include>
               <label>$LOCALIZE[31340]</label>
               <onclick>Skin.ToggleSetting(ToujoursPositionCompteur)</onclick>
               <selected>Skin.HasSetting(ToujoursPositionCompteur)</selected>
               <visible>Skin.HasSetting(PositionCompteur)</visible>
             </control>
-             <control type="radiobutton" id="508">
+             <control type="radiobutton" id="509">
               <include>SettingsLabel</include>
               <label>$LOCALIZE[31327]</label>
               <onclick>Skin.ToggleSetting(MiniInfos)</onclick>
               <selected>Skin.HasSetting(MiniInfos)</selected>
             </control>
 
-            <control type="radiobutton" id="509">
-              <include>SettingsLabel</include>
-              <label>$LOCALIZE[32005]</label>
-              <onclick>Skin.ToggleSetting(Show_HeureFin)</onclick>
-              <selected>Skin.HasSetting(Show_HeureFin)</selected>
-            </control>
 
-            <control type="radiobutton" id="510">
+            <control type="radiobutton" id="511">
               <include>SettingsLabel</include>
               <label>$LOCALIZE[31405]</label>
               <onclick>Skin.ToggleSetting(Hide_MovieTagline)</onclick>
               <selected>Skin.HasSetting(Hide_MovieTagline)</selected>
             </control>
-             <control type="radiobutton" id="511">
+             <control type="radiobutton" id="512">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[32009]</label>
             <onclick>Skin.ToggleSetting(ShowFilePath)</onclick>
             <selected>Skin.HasSetting(ShowFilePath)</selected>
           </control>
 
-            <control type="image" id="512">
+            <control type="image" id="513">
               <include>Settings_Line</include>
             </control>
-            <!--
-            <control type="radiobutton" id="513">
-            <include>SettingsLabel</include>
-            <label>$LOCALIZE[31399]</label>
-            <onclick>Skin.ToggleSetting(GlobalFanartLight)</onclick>
-            <selected>Skin.HasSetting(GlobalFanartLight)</selected>
-            </control>
-            -->
+            
 
             
             <control type="button" id="516">
@@ -531,6 +547,12 @@
               <label>$LOCALIZE[31734]</label>
               <onclick>Skin.ToggleSetting(animatedflag)</onclick>
               <selected>Skin.HasSetting(animatedflag)</selected>
+            </control>
+            <control type="radiobutton" id="546">
+              <include>SettingsLabel</include>
+              <label>$LOCALIZE[31487]</label>
+              <onclick>Skin.ToggleSetting(NouveauProgress)</onclick>
+              <selected>Skin.HasSetting(NouveauProgress)</selected>
             </control>
 
           </control>
@@ -781,7 +803,7 @@
           <posx>0</posx>
           <posy>-90</posy>
           <width>940</width>
-          <height>990</height>
+          <height>1060</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
           <onleft>9000</onleft>
@@ -797,11 +819,9 @@
           <control type="radiobutton" id="800">
               <include>SettingsLabel</include>
               <label>$LOCALIZE[31481]</label>
-              <onclick>Skin.ToggleSetting(CacheFond)</onclick>
-              <selected>Skin.HasSetting(CacheFond)</selected>
+              <onclick>Skin.ToggleSetting(VueExperimentale)</onclick>
+              <selected>Skin.HasSetting(VueExperimentale)</selected>
             </control>
-
-          
 
           <control type="radiobutton" id="801">
             <include>SettingsLabel</include>
@@ -830,7 +850,8 @@
             <label>$LOCALIZE[32006]</label>
             <onclick>Skin.ToggleSetting(ActeursAuCentre)</onclick>
             <selected>Skin.HasSetting(ActeursAuCentre)</selected>
-            <visible>Skin.HasSetting(CacheFond)</visible>
+            <visible>Skin.HasSetting(VueExperimentale)</visible>
+            <enable>!Skin.HasSetting(HideCastFocus)</enable>
           </control>
 
           <control type="togglebutton" id="806">
@@ -852,10 +873,19 @@
             <altlabel>$LOCALIZE[32008] >>> $LOCALIZE[32007]</altlabel>
             <usealttexture>!Skin.HasSetting(ShowActeursTexte)</usealttexture>
             <onclick>Skin.ToggleSetting(ShowActeursTexte)</onclick>
+            <enable>!Skin.HasSetting(HideCastFocus)</enable>
+          </control>
+          
+          <control type="radiobutton" id="807">
+            <include>SettingsLabel</include>
+            <label>$LOCALIZE[32021]</label>
+            <onclick>Skin.ToggleSetting(HideCastFocus)</onclick>
+            <enable>Skin.HasSetting(VueExperimentale)</enable>
+            <selected>Skin.HasSetting(HideCastFocus)</selected>
           </control>
 
 
-          <control type="radiobutton" id="807">
+          <control type="radiobutton" id="808">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31335]</label>
             <onclick>Skin.ToggleSetting(BAfenetre)</onclick>
@@ -863,13 +893,13 @@
           </control>
 
 
-          <control type="radiobutton" id="808">
+          <control type="radiobutton" id="809">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31399]</label>
             <onclick>Skin.ToggleSetting(FanartSombre)</onclick>
             <selected>Skin.HasSetting(FanartSombre)</selected>
           </control>
-          <control type="radiobutton" id="809">
+          <control type="radiobutton" id="810">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31486]</label>
             <onclick>Skin.ToggleSetting(CacherPause)</onclick>
@@ -992,6 +1022,19 @@
             <selected>Skin.HasSetting(NoterSerie)</selected>
           </control>
           -->
+           <control type="radiobutton" id="837">
+            <include>SettingsLabel</include>
+            <label>$LOCALIZE[31144]</label>
+            <onclick>Skin.ToggleSetting(DisableTvList)</onclick>
+            <selected>Skin.HasSetting(DisableTvList)</selected>
+          </control>
+           <control type="radiobutton" id="838">
+            <include>SettingsLabel</include>
+            <label>$LOCALIZE[31145]</label>
+            <onclick>Skin.ToggleSetting(DisableFocusTvList)</onclick>
+            <selected>Skin.HasSetting(DisableFocusTvList)</selected>
+            <visible>!Skin.HasSetting(DisableTvList)</visible>
+          </control>
 
         </control>
 
@@ -1009,8 +1052,8 @@
           <control type="radiobutton" id="899">
               <include>SettingsLabel</include>
               <label>$LOCALIZE[31481]</label>
-              <onclick>Skin.ToggleSetting(CacheFondMusic)</onclick>
-              <selected>Skin.HasSetting(CacheFondMusic)</selected>
+              <onclick>Skin.ToggleSetting(VueExperimentaleMusic)</onclick>
+              <selected>Skin.HasSetting(VueExperimentaleMusic)</selected>
             </control>
           
           <control type="image" id="900">
@@ -1041,7 +1084,7 @@
             <onclick>Skin.ToggleSetting(HideVisClock)</onclick>
             <selected>Skin.HasSetting(HideVisClock)</selected>
           </control>
-          <!----------------------------------------------------------------------- -->
+          <!----------------------------------------------------------------------- 
           <control type="radiobutton" id="908">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31433]</label>
@@ -1049,7 +1092,7 @@
             <onclick condition="Skin.HasSetting(VisBgExtraFanart)">Skin.ToggleSetting(VisBgExtraFanart)</onclick>
             <onclick  condition="Skin.HasSetting(VisBgArtistSlideshow)">Skin.ToggleSetting(VisBgArtistSlideshow)</onclick>
             <selected>Skin.HasSetting(VisBgFanart)</selected>
-          </control>
+          </control>-->
           <control type="radiobutton" id="909">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31434]</label>

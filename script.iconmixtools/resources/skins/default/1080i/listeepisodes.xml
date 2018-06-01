@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="window">
+  <defaultcontrol always="true">3</defaultcontrol>
+  <allowoverlay>no</allowoverlay>
+  <coordinates>
+    <system>1</system>
+    <posx>0</posx>
+    <posy>0</posy>
+  </coordinates>
+  <controls>
+
+    <control type="label" id="2667">
+      <include>IsMainMenuVisible</include>
+      <label>MAINMENU!!!!</label>
+      <visible>!String.IsEmpty(Window(Home).property(IconmixFlagPanelEpisode))</visible>
+    </control>
+
+    <!----------------------------------------EPISODES------------------------------------------------------------------------ -->
+    <control type="group">
+      <!----->
+      <control type="image">
+        <width>1920</width>
+        <height>1080</height>
+        <texture>background.png</texture>
+       
+        
+        <animation type="Conditional" condition="true" reversible="true">
+          <effect type="fade" start="0" end="20" time="50"  />
+        </animation>
+      </control>
+      
+    
+
+
+      <control type="group">
+        <top>200</top>
+        <left>400</left>
+        
+        <!--<animation type="Visible" reversible="true">
+          <effect type="slide" start="0,0" end="-1920,0" time="2500"  />
+        </animation>
+        -->
+       
+        <animation type="Conditional" condition="Control.IsVisible(2667)+!String.IsEmpty(Window(Home).property(IconmixFlagPanelEpisode))" reversible="true">
+          <effect type="slide" end="450" time="0"  />
+        </animation>
+ 
+        <!-- poster de la saison -->
+        <control type="image">
+          <visible>!String.IsEmpty(Container(2666).ListItem.Property(PosterSaison))</visible>
+          <top>70</top>
+          <left>60</left>
+          <width>380</width>
+          <height>550</height>
+
+          <animation type="Visible" reversible="true">
+            <effect type="fade" start="0" end="100" time="1000" />
+            <effect type="slide" start="0" end="-390" time="1" />
+            <effect type="rotatey" delay="1100" center="440,0" start="110" end="-20" time="500" tween="bounce" easy="out"  />
+          </animation>
+          
+
+          <bordersize>25</bordersize>
+          <bordertexture border="25" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+          <texture background="true" fallback="" >$INFO[Container(2666).ListItem.Property(PosterSaison)]</texture>
+          <aspectratio scalediffuse="true">keep</aspectratio>
+        </control>
+        <!-- MENU 
+        <control type="button" >
+          <onfocus>SetFocus(2666)</onfocus>
+          <label>^MENU^</label>
+          <top>-50</top>
+          <left>1010</left>
+          <visible>Control.HasFocus(2666)</visible>
+          <animation type="Visible" reversible="false">
+            <effect type="rotate" center="1010,0" end="-90" time="0"  />
+            <effect type="slide" start="0" end="0,50" time="250"  />
+          </animation>
+          <texturefocus colordiffuse="BackgroundColor">ButtonFO2Wide2.png</texturefocus>
+          <texturenofocus colordiffuse="BackgroundColor">ButtonFO2Wide2.png</texturenofocus>
+          <width max="200">auto</width>
+          <height>35</height>
+          <align>left</align>
+          <aligny>center</aligny>
+          <font>PlotFont</font>
+          <textcolor>TextNF</textcolor>
+          <focusedcolor>yellow</focusedcolor>
+          <disabledcolor>TextDisabled</disabledcolor>
+          <textoffsetx>10</textoffsetx>
+        </control>
+-->
+
+        <!-- apercu episode -->
+        <control type="group">
+          <visible>!String.IsEmpty(Container(2666).ListItem.Icon)</visible>
+          <top>50</top>
+          <left>510</left>
+          <animation type="Visible" reversible="true">
+            <effect type="fade" start="0" end="100" time="1000" />
+            <effect type="slide" start="0" end="460" time="1" />
+            <effect type="rotatey" delay="1100" center="510,0" start="-110" end="15" time="500" />
+          </animation>
+          
+
+          <control type="image">
+            <height>500</height>
+            <width>480</width>
+            <bordersize>25</bordersize>
+            <bordertexture border="25" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+            <texture background="true" fallback="background.png">$INFO[Container(2666).ListItem.Icon]</texture>
+            <aspectratio scalediffuse="true">keep</aspectratio>
+
+
+
+
+          </control>
+        </control>
+        <control type="image">
+          <visible>Control.HasFocus(2666)|Control.IsVisible(2667)</visible>
+          <animation type="Visible" reversible="false">
+            <effect type="fade" start="0" end="100" time="1000" />
+            <effect type="slide" start="0,0" end="0,-200" time="800" />
+            <!--<effect type="rotatey" delay="1100" center="510,0" start="-110" end="15" time="500" />-->
+          </animation>
+          <top>-680</top>
+          <left>140</left>
+          <width>755</width>
+          <bordersize>25</bordersize>
+          <bordertexture border="25" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+          <texture background="true" >$VAR[BanniereEpTv]</texture>
+          <aspectratio scalediffuse="true">keep</aspectratio>
+        </control>
+        <!-- liste -->
+        <control type="image">
+          <top>-30</top>
+          <left>30</left>
+          <height>630</height>
+          <width>955</width>
+          <bordersize>25</bordersize>
+          <bordertexture border="25" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+          <texture background="true" >fondjetees.jpg</texture>
+          <aspectratio scalediffuse="true">stretch</aspectratio>
+        </control>
+        <!-- synopsis de l'épisode -->
+       
+        <control type="group">
+          <top>586</top>
+          <left>30</left>
+          <height>210</height>
+          <width>950</width>
+          <visible>!String.IsEmpty(Container(2666).ListItem.Plot)</visible>
+
+          <control type="image">
+            <bordersize>20</bordersize>
+            <bordertexture border="20" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+            <texture background="true">osd/OSDdialogback.png</texture>
+            <aspectratio scalediffuse="true">stretch</aspectratio>
+          </control>
+          <control type="textbox" id="8888" >
+            <pagecontrol>8867</pagecontrol>
+            <width>905</width>
+            <height>90</height>
+            <posx>20</posx>
+            <posy>25</posy>
+            <aligny>top</aligny>
+            <align>center</align>
+            <font>impactsongs</font>
+            <autoscroll delay="5000" time="3500" repeat="10000">Control.HasFocus(2666)|Control.IsVisible(2667)</autoscroll>
+            <label>$INFO[Container(2666).ListItem.Plot]</label>
+            <shadowcolor>FF000000</shadowcolor>
+            <textcolor>white</textcolor>
+          </control>
+
+        </control>
+
+        <!--- infos média -->
+        <control type="group">
+          <top>715</top>
+          <left>-40</left>
+          <visible>String.IsEmpty(Container(2666).ListItem.Label2)</visible>
+          <!-- -->
+          <animation type="Conditional" condition="true" reversible="false">
+            <effect type="zoom" center="470,710" end="70" time="1" />
+          </animation>
+          --->
+          <include>MediaInfoCommunEpisodes</include>
+        </control>
+        
+
+        <control type="fixedlist" id="2666">
+          <left>40</left>        
+          
+          <focusposition>2</focusposition>
+          <movement>11</movement>
+         
+          <!--- lecture ou pas si saison--->
+
+          <posx>5</posx>
+          <posy>0</posy>
+          <height>560</height>
+          <width>1350</width>
+          <content></content>
+          <!-- <content>plugin://script.iconmixtools/?action=getepisodeskodi&id=$INFO[ListItem.DBID]</content> -->
+          <orientation>vertical</orientation>
+          <preloaditems>2</preloaditems>
+          <aligny>top</aligny>
+
+          <itemlayout width="0" height="40">
+            <control type="group">
+
+              <left>40</left>
+              <include content="commonlistitem2">
+                <param name="Fond"></param>
+              </include>
+
+              <control type="label">
+                <!--   <include>isWatched</include>
+                <posx>110</posx> -->
+                <left>10</left>
+                <posy>-2</posy>
+                <width>698</width>
+                <height>35</height>
+                <aligny>center</aligny>
+                <align>left</align>
+                <font>exptext</font>
+                <shadowcolor>FF5F5F5F</shadowcolor>
+                <textcolor>white</textcolor>
+                <label>$VAR[ListItemVu]</label>
+                <scroll>false</scroll>
+                <visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)+String.IsEmpty(ListItem.Label2)</visible>
+              </control>
+
+              <control type="image">
+                <posx>0</posx>
+                <posy>0</posy>
+                <width>810</width>
+                <height>40</height>
+                <texture>FocusLine.png</texture>
+                <colordiffuse>F02F2F2F</colordiffuse>
+                <visible>!String.IsEmpty(ListItem.Label2)</visible>
+              </control>
+              
+              <control type="label">
+
+                <left>10</left>
+                <posy>2</posy>
+                <width>698</width>
+                <height>35</height>
+                <aligny>center</aligny>
+                <align>center</align>
+                <font>exptext</font>
+                <shadowcolor>FF5F5F5F</shadowcolor>
+                <textcolor>yellow</textcolor>
+                <label>[I]$LOCALIZE[31761] $INFO[ListItem.Label2] - [COLOR=lightgrey]($INFO[ListItem.Label]$INFO[ListItem.Property(Complet),/,] $LOCALIZE[20360])[/COLOR][/I] </label>
+                <scroll>false</scroll>
+
+                <visible>!String.IsEmpty(ListItem.Label2)+!String.IsEmpty(ListItem.Property(Complet))</visible>
+              </control>
+              <control type="label">
+
+                <left>10</left>
+                <posy>2</posy>
+                <width>698</width>
+                <height>35</height>
+                <aligny>center</aligny>
+                <align>center</align>
+                <font>exptext</font>
+                <shadowcolor>FF5F5F5F</shadowcolor>
+                <textcolor>yellow</textcolor>
+                <label>[I]$LOCALIZE[31761] $INFO[ListItem.Label2] - [COLOR=lightgrey][I]($LOCALIZE[31898])[/I][/COLOR]</label>
+                <scroll>false</scroll>
+
+                <visible>!String.IsEmpty(ListItem.Label2)+String.IsEmpty(ListItem.Property(Complet))</visible>
+              </control>
+              <control type="image">
+                <posx>0</posx>
+                <posy>0</posy>
+                <width>810</width>
+                <height>40</height>
+                <texture>frames/fondplot.png</texture>
+                <colordiffuse>50FFFFFF</colordiffuse>
+                <visible>!String.IsEmpty(ListItem.Label2)</visible>
+              </control>
+
+
+
+              <control type="image">
+                <left>20</left>
+                <top>2</top>
+                <height>35</height>
+                <width>119</width>
+                <aspectratio>keep</aspectratio>
+                <texture>buttons/parent.png</texture>
+                <visible>String.IsEqual(ListItem.Label,..)|String.IsEqual(ListItem.Title,..)</visible>
+              </control>
+            </control>
+
+
+          </itemlayout>
+          <focusedlayout width="0" height="40">
+
+            <!-- <include>ActiveClearArt</include> -->
+            <control type="image">
+              <posx>5</posx>
+              <width>920</width>
+              <height>40</height>
+              <aligny>center</aligny>
+              <texture>ButtonFO2Wide2.png</texture>
+              <aspectratio>stretch</aspectratio>
+              <colordiffuse>FocusBar</colordiffuse>
+            </control>
+            <control type="group">
+              <left>40</left>
+
+              <include content="commonlistitem2">
+                <param name="Fond"></param>
+                <param name="Ligne"></param>
+              </include>
+              <control type="label">
+               
+                <left>10</left>
+                <posy>-2</posy>
+                <width>698</width>
+                <height>35</height>
+                <aligny>center</aligny>
+                <align>left</align>
+                <font>exptext</font>
+                <shadowcolor>FF5F5F5F</shadowcolor>
+                <textcolor>white</textcolor>
+                <label>$VAR[ListItemVu]</label>
+                <scroll>false</scroll>
+                <visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)+String.IsEmpty(ListItem.Label2)</visible>
+              </control>
+              <control type="label">
+
+                <left>10</left>
+                <posy>2</posy>
+                <width>698</width>
+                <height>35</height>
+                <aligny>center</aligny>
+                <align>center</align>
+                <font>exptext</font>
+                <shadowcolor>FF5F5F5F</shadowcolor>
+                <textcolor>yellow</textcolor>
+                <label>[I]$LOCALIZE[31761] $INFO[ListItem.Label2] - [COLOR=lightgrey]($INFO[ListItem.Label]$INFO[ListItem.Property(Complet),/,] $LOCALIZE[20360])[/COLOR][/I]</label>
+                <scroll>false</scroll>
+
+                <visible>!String.IsEmpty(ListItem.Label2)+!String.IsEmpty(ListItem.Property(Complet))</visible>
+              </control>
+              <control type="label">
+
+                <left>10</left>
+                <posy>2</posy>
+                <width>698</width>
+                <height>35</height>
+                <aligny>center</aligny>
+                <align>center</align>
+                <font>exptext</font>
+                <shadowcolor>FF5F5F5F</shadowcolor>
+                <textcolor>yellow</textcolor>
+                <label>[I]$LOCALIZE[31761] $INFO[ListItem.Label2] - [COLOR=lightgrey][I]($LOCALIZE[31898])[/I][/COLOR]</label>
+                <scroll>false</scroll>
+
+                <visible>!String.IsEmpty(ListItem.Label2)+String.IsEmpty(ListItem.Property(Complet))</visible>
+              </control>
+              <control type="image">
+                <left>20</left>
+                <top>2</top>
+                <height>35</height>
+                <width>119</width>
+                <aspectratio>keep</aspectratio>
+                <texture>buttons/parent.png</texture>
+                <visible>String.IsEqual(ListItem.Label,..)|String.IsEqual(ListItem.Title,..)</visible>
+              </control>
+            </control>
+            <control type="image">
+              <left>5</left>
+              <top>1</top>
+              <height>35</height>
+              <width>35</width>
+              
+              <aspectratio>keep</aspectratio>
+              <texture>buttons/button_playFO.png</texture>
+              <visible>String.IsEmpty(Container(2666).ListItem.Label2)</visible>
+
+            </control>
+          </focusedlayout>
+        </control>
+
+
+      </control>
+    </control>
+
+  </controls>
+</window>

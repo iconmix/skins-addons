@@ -81,7 +81,7 @@
 				<pagecontrol>61</pagecontrol>
 				<preloaditems>2</preloaditems>
 				<include>Animation_OpenCloseFade</include>
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_HiddenByInfo</include>
 				<visible>!Skin.HasSetting(NoViewGallerySquare)</visible>
 				<itemlayout width="255" height="295" condition="!String.Contains(ListItem.DBType,ctor)">

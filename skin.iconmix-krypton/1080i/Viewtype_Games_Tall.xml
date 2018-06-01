@@ -4,7 +4,7 @@
 		<control type="group">
 			<visible>Control.IsVisible(950)</visible>
 			<control type="group">
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_HiddenByInfo</include>
 				<include>Animation_OpenCloseFade</include>
 				<visible>String.Contains(Container.FolderPath,plugin)</visible>
@@ -94,7 +94,7 @@
 				<scrolltime>200</scrolltime>
 				<preloaditems>2</preloaditems>
 				<pagecontrol>60</pagecontrol>
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_OpenCloseFade</include>
 				<include>Animation_HiddenByInfo</include>
 				<visible>!Skin.HasSetting(NoViewGames)</visible>

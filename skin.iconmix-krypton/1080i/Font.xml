@@ -296,9 +296,9 @@
 			<size>24</size>
 		</font>
 		<font>
-			<name>led14</name>
+			<name>led20</name>
 			<filename>led.ttf</filename>
-			<size>18</size>
+			<size>20</size>
 		</font>
 		<font>
 			<name>led18</name>
@@ -376,7 +376,11 @@
 			<filename>comic.ttf</filename>
 			<size>20</size>
 		</font>
-		
+		<font>
+			<name>defaut24</name>
+			<filename>impact.ttf</filename>
+			<size>24</size>
+		</font>
 		<font>
 			<name>comic24</name>
 			<filename>comic.ttf</filename>
@@ -474,8 +478,8 @@
 		</font>
 		<font>
 			<name>METF_Minutes</name>
-			<filename>MET_Myriad.ttf</filename>
-			<size>80</size>
+			<filename>impact.ttf</filename>
+			<size>72</size>
 		</font>
 		<font>
 			<name>METF_FontAMPM</name>

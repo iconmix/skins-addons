@@ -34,8 +34,8 @@
 		<textcolor>TextNF</textcolor>
 		<focusedcolor>DialogTextFO</focusedcolor>
 		<disabledcolor>TextDisabled</disabledcolor>
-		<radiowidth>30</radiowidth>
-		<radioheight>30</radioheight>
+		<radiowidth>40</radiowidth>
+		<radioheight>40</radioheight>
 		<texturenofocus border="2">keyboard/ButtonNF.png</texturenofocus> -->
 		<texturefocus border="5">keyboard/ButtonFO.png</texturefocus>
 		<textureradiofocus>keyboard/RadioButtonFO.png</textureradiofocus>

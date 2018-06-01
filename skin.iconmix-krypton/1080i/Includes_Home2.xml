@@ -132,7 +132,7 @@
   <include name="OsdMusicHome">
     <control type="group" id="9044">
       <visible>Player.HasAudio + System.IdleTime(8)+!Control.HasFocus(9001)</visible>
-      <control type="wraplist" id="2996">
+      <control type="wraplist" id="5555">
         <!-- fanarts iconmix-->
         <posx>-2000</posx>
         <autoscroll time="6000">true</autoscroll>
@@ -295,7 +295,7 @@
         <scrolltime>200</scrolltime>
         <preloaditems>2</preloaditems>
         <include>Animation_OpenCloseFade</include>
-        <include>Animation_FadedByMenu</include>
+        
         <itemlayout width="300" height="120">
 
           <control type="label">
@@ -449,7 +449,7 @@
         <scrolltime>200</scrolltime>
         <preloaditems>2</preloaditems>
         <include>Animation_OpenCloseFade</include>
-        <include>Animation_FadedByMenu</include>
+        
         <itemlayout width="400" height="120">
 
           <control type="label">
@@ -626,7 +626,7 @@
             <scrolltime>200</scrolltime>
             <preloaditems>2</preloaditems>
             <include>Animation_OpenCloseFade</include>
-            <include>Animation_FadedByMenu</include>
+            
             <itemlayout width="350" height="180">
               <control type="group">
                 <animation effect="fade" start="100" end="5"  time="500" condition="Control.HasFocus(9001)">Conditional</animation>
@@ -663,7 +663,8 @@
             </itemlayout>
             <focusedlayout width="350" height="120">
               <control type="group">
-              <animation effect="slide" start="0" end="0,-200" center="auto" time="500" condition="Control.HasFocus(9001)">Conditional</animation>
+              <animation effect="slide" start="0" end="0,-200" center="auto" time="500" tween="cubic" easing="in" condition="Control.HasFocus(9001)">Conditional</animation>
+              
 
               <control type="image">
                 <posy>0</posy>
@@ -684,6 +685,8 @@
                 <align>center</align>
                 <texture flipy="true" diffuse="frames/refletmenufocus.png">$INFO[ListItem.Icon]</texture>
                 <aspectratio scalediffuse="true">stretch</aspectratio>
+                <animation effect="fade" start="0" end="100" time="400" tween="cubic" easing="in" >Visible</animation>
+                <animation effect="fade" start="100" end="0" time="300" tween="cubic" easing="in" >Hidden</animation>
                 <visible>Control.HasFocus(9000)</visible>
               </control>
               <control type="image">
@@ -820,7 +823,7 @@
         <scrolltime>150</scrolltime>
         <preloaditems>2</preloaditems>
         <include>Animation_OpenCloseFade</include>
-        <include>Animation_FadedByMenu</include>
+        
         <itemlayout width="300" height="155">
           <control type="group">
             <visible>Control.HasFocus(9000)</visible>
@@ -1129,7 +1132,7 @@
         <scrolltime>200</scrolltime>
         <preloaditems>2</preloaditems>
         <include>Animation_OpenCloseFade</include>
-        <include>Animation_FadedByMenu</include>
+        
         <itemlayout width="350" height="220">
 
           <control type="label">

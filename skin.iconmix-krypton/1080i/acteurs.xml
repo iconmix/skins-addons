@@ -585,6 +585,36 @@
 <control type="group">
   <visible>!String.IsEqual(ListItem.Label,..)</visible>
   
+  
+   <control type="group">
+        <top>90</top>
+        <left>-210</left>
+        <visible>Skin.HasSetting(VueExperimentale)+Window.IsVisible(10025)+!Window.IsVisible(12003)+Skin.HasSetting(HideCastFocus)+Integer.IsGreater(Container(1998).NumItems,0)+!Control.HasFocus(7779)+!Control.HasFocus(7781)+!Control.HasFocus(2999)</visible>
+       
+        <animation type="Conditional" condition="Skin.HasSetting(HideCastFocus)+!Container.OnNext+!Container.OnPrevious" reversible="true">
+         
+          <effect type="slide" start="0" end="80,0" time="250" delay="250" />
+          
+        </animation>
+        
+        <include>videoinfobuttonfond</include>
+        <control type="image">              
+            <height>80</height>
+            <width>80</width>
+            <left>125</left>
+            <top>7</top>
+            <aspectratio>stretch</aspectratio>
+            <texture>Aicons/acteurs.png</texture>
+              <!-- <texture>$INFO[Container(1998).ListItem.Icon]</texture>-->
+        </control>
+
+              
+        
+      </control>
+        
+        
+        
+  
 
   <control type="group">
     <include>Animation_CacherSiMenu</include>
@@ -592,10 +622,10 @@
     <visible>Integer.IsGreater(Container(1998).NumItems,0)</visible>
     <control type="group"> <!-- ACTEURS DEFILANTS -->
       <visible>!Player.HasVideo|[!Window.IsVisible(12901)+!Window.IsVisible(10142)]</visible>
-      <visible>[[[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[String.IsEqual(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]]+System.HasAddon(script.iconmixtools)+!String.StartsWith(ListItem.Label,..)</visible>
-      <include>Animation_FadedByMenu</include>
+      <visible>[[[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[String.IsEqual(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]|[String.IsEqual(ListItem.DBTYPE,set)+!Skin.HasSetting(HideSagaCast)]]</visible>
+      <visible>!Skin.HasSetting(HideCastFocus)|!Skin.HasSetting(VueExperimentale)</visible>
       <include>Animation_HiddenByInfo</include>
-      <animation type="Conditional" condition="Skin.HasSetting(ShowActeursTexte)+Skin.HasSetting(CacheFond)">
+      <animation type="Conditional" condition="Skin.HasSetting(ShowActeursTexte)+Skin.HasSetting(VueExperimentale)">
         <effect type="slide"  start="0,0" end="0,20" time="1" delay="1" reversible="true"/>
       </animation>
       <animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7781)|Window.IsVisible(movieinformation)|!String.IsEmpty(Window(home).Property(IconmixShowInfo))">
@@ -604,10 +634,10 @@
 
       <top>862</top>
       <left>-480</left>
-      <animation type="Conditional" condition="String.IsEmpty(Window(Home).Property(NextAired.NextDate))+Skin.HasSetting(CacheFond)+Skin.HasSetting(ActeursAuCentre)">
+      <animation type="Conditional" condition="String.IsEmpty(Window(Home).Property(MonNextAired.NextDay))+Skin.HasSetting(VueExperimentale)+Skin.HasSetting(ActeursAuCentre)">
         <effect type="slide"  start="0,0" end="0,-19" time="1" delay="1" reversible="false"/>
       </animation>
-      <animation type="Conditional" condition="Skin.HasSetting(CacheFond)">
+      <animation type="Conditional" condition="Skin.HasSetting(VueExperimentale)">
         <effect type="slide"  start="0,0" end="0,-843" time="1" delay="1" reversible="false"/>
       </animation>
 
@@ -616,11 +646,14 @@
         <effect type="fade"  start="0" end="100" time="100" delay="1" reversible="false"/>
       </animation>
       <control type="group">
+        
+        
         <control type="image"> <!--- CADRE A GAUCHE---->
-          <visible>[!Skin.HasSetting(ActeursAuCentre)|!Skin.HasSetting(CacheFond)]</visible>
-          <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
+          <visible>[!Skin.HasSetting(ActeursAuCentre)|!Skin.HasSetting(VueExperimentale)]</visible>
+          <animation type="Conditional" condition="Skin.HasSetting(VueExperimentale)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
             <effect type="slide"  start="0,0" end="0,-5" time="1" delay="1" reversible="true"/>
           </animation>
+         
           <left>25</left>
           <width>435</width>>
           <height>175</height>
@@ -632,7 +665,8 @@
           <colordiffuse>90FFFFFF</colordiffuse>
         </control>
         <control type="image"> <!--- CADRE AU CENTRE---->
-          <visible>Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(CacheFond)+!Skin.HasSetting(ShowActeursTexte)</visible>
+          <visible>Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(VueExperimentale)+!Skin.HasSetting(ShowActeursTexte)</visible>
+          
           <top>55</top>
           <width>1265</width>
           <left>327</left>
@@ -642,12 +676,12 @@
           <texture background="true">acteurs/fondacteurgauche.png</texture>
           <aspectratio scalediffuse="true">stretch</aspectratio>
           <colordiffuse>90FFFFFF</colordiffuse>
-          <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
+          <animation type="Conditional" condition="Skin.HasSetting(VueExperimentale)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
             <effect type="slide"  start="0,0" end="0,-5" time="1" delay="1" reversible="true"/>
           </animation>
         </control>
         <control type="image"> <!--- CADRE AU CENTRE ET TEXTE---->
-          <visible>Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(CacheFond)+Skin.HasSetting(ShowActeursTexte)</visible>
+          <visible>Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(VueExperimentale)+Skin.HasSetting(ShowActeursTexte)</visible>
           <top>41</top>
 
           <left>772</left>
@@ -658,17 +692,17 @@
           <texture background="true">acteurs/fondacteurgauche.png</texture>
           <aspectratio scalediffuse="true">stretch</aspectratio>
           <colordiffuse>90FFFFFF</colordiffuse>
-          <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
+          <animation type="Conditional" condition="Skin.HasSetting(VueExperimentale)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
             <effect type="slide"  start="0,0" end="0,-5" time="1" delay="1" reversible="true"/>
           </animation>
         </control>
         <!-- photo de l'acteur en mode texte-->
         <control type="image">
           <visible>Skin.HasSetting(ShowActeursTexte)</visible>
-          <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+Skin.HasSetting(ActeursAuCentre)">
+          <animation type="Conditional" condition="Skin.HasSetting(VueExperimentale)+Skin.HasSetting(ActeursAuCentre)">
             <effect type="slide"  start="0,0" end="760,0" time="1" delay="1" reversible="true"/>
           </animation>
-          <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
+          <animation type="Conditional" condition="Skin.HasSetting(VueExperimentale)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
             <effect type="slide"  start="0,0" end="0,-5" time="1" delay="1" reversible="true"/>
           </animation>
           <align>left</align>
@@ -683,44 +717,7 @@
 
       </control>
 
-      <!-- realisateur --
-      <control type="grouplist">
-        <height>50</height>
-        <width>475</width>
-        <align>right</align>
-        <top>180</top>
-        <orientation>horizontal</orientation>
-        <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+Skin.HasSetting(ActeursAuCentre)+!Skin.HasSetting(ShowActeursTexte)">
-          <effect type="slide"  start="0,0" end="1160,0" time="1" delay="1" reversible="true"/>
-        </animation>
-        <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(ShowActeursTexte)">
-          <effect type="slide"  start="0,0" end="760,0" time="1" delay="1" reversible="true"/>
-        </animation>
-        <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
-          <effect type="slide"  start="0,0" end="0,-5" time="1" delay="1" reversible="true"/>
-        </animation>
-
-
-        <visible>!String.IsEmpty(ListItem.Director)</visible>
-
-
-        <control type="label">
-          <font>acteurs</font>
-          <width>auto</width>
-          <height>50</height>
-          <aligny>center</aligny>
-          <shadowcolor>ff000000</shadowcolor>
-          <label>[COLOR=lightgrey][I]$INFO[ListItem.Director][/I][/COLOR]</label>
-        </control>
-        <control type="image" id="5055">
-          <width>50</width>
-          <height>50</height>
-          <texture>flags/realisateur.png</texture>
-          <aspectratio  scalediffuse="true">keep</aspectratio>
-        </control>
-
-      </control>-->
-
+     
     </control>
 
     <include>PanelActeursOsd</include>
@@ -1064,6 +1061,7 @@
 
 
   <control type="button" id="7781"> <!-- controle acteurs -->
+    <visible>[[[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[String.IsEqual(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]|[String.IsEqual(ListItem.DBTYPE,set)+!Skin.HasSetting(HideSagaCast)]]</visible>
     <ondown>7779</ondown>
     <onclick>SetFocus(7779)</onclick>
     <onfocus>SetProperty(ActeurVideoLocal,1,Home)</onfocus>
@@ -1097,152 +1095,155 @@
   <control type="button" id="7779"><!-- controle roles -->
     <include>ControlesRoles</include>
   </control>
-  <control type="fixedlist" id="1998"> <!-- mode photo -->
-    <visible>!Skin.HasSetting(ShowActeursTexte)</visible>
-    <include>Animation_HiddenByInfo</include>
-    <include>Animation_CacherSiMenu</include>
-    <include>Animation_OpenCloseFade</include>
-    <visible>Container.Content(genres)|Container.Content(directors)|Container.Content(actors)|Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(episodes)|Container.Content(seasons)|[Player.HasVideo+!String.IsEmpty(VideoPlayer.DBID)]</visible>
-    <animation type="Conditional" condition="String.Contains(ListItem.DBTYPE,set)|Container.Content(genres)|Container.Content(directors)|Container.Content(actors)|Window.IsVisible(12901)|Window.IsVisible(10142)|Window.IsVisible(movieinformation)|Control.HasFocus(7781)|Control.HasFocus(7779)|Control.HasFocus(2022)|Control.HasFocus(2999)|!String.IsEmpty(Window(home).Property(IconmixShowInfo))">
+  <control type="group">
+    <control type="fixedlist" id="1998"> <!-- mode photo -->
+      <visible>!Skin.HasSetting(ShowActeursTexte)</visible>
+      <include>Animation_HiddenByInfo</include>
+      <include>Animation_CacherSiMenu</include>
+      <include>Animation_OpenCloseFade</include>
+      <visible>Container.Content(genres)|Container.Content(directors)|Container.Content(actors)|Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(episodes)|Container.Content(seasons)|[Player.HasVideo+!String.IsEmpty(VideoPlayer.DBID)]</visible>
+      
+      <animation type="Conditional" condition="String.IsEmpty(Window(Home).Property(MonNextAired.NextDay))+Skin.HasSetting(VueExperimentale)+Skin.HasSetting(ActeursAuCentre)">
+        <effect type="slide"  start="0,0" end="0,-19" time="1" delay="1" reversible="false"/>
+      </animation>
+      <animation type="Conditional" condition="Skin.HasSetting(VueExperimentale)">
+        <effect type="slide"  start="0,0" end="0,-836" time="1" delay="1" reversible="false"/>
+      </animation>
+      <animation type="Conditional" condition="Skin.HasSetting(VueExperimentale)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
+        <effect type="slide"  start="0,0" end="0,-3" time="1" delay="1" reversible="true"/>
+      </animation>
 
-      <effect type="slide"  start="0,0" end="-2000,0" time="1" delay="1" reversible="true"/>
-    </animation>
-    <animation type="Conditional" condition="String.IsEmpty(Window(Home).Property(NextAired.NextDate))+Skin.HasSetting(CacheFond)+Skin.HasSetting(ActeursAuCentre)">
-      <effect type="slide"  start="0,0" end="0,-19" time="1" delay="1" reversible="false"/>
-    </animation>
-    <animation type="Conditional" condition="Skin.HasSetting(CacheFond)">
-      <effect type="slide"  start="0,0" end="0,-836" time="1" delay="1" reversible="false"/>
-    </animation>
-    <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
-      <effect type="slide"  start="0,0" end="0,-3" time="1" delay="1" reversible="true"/>
-    </animation>
+      <include condition="Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(VueExperimentale)">ActeurCenter</include>
+      <include condition="[!Skin.HasSetting(ActeursAuCentre)|!Skin.HasSetting(VueExperimentale)]">ActeurLeft</include>
+      <onfocus>7781</onfocus>
+      <movement>2</movement>
+      <posx>20</posx>
+      <posy>934</posy>
+      <height>200</height>
 
-    <include condition="Skin.HasSetting(ActeursAuCentre)+Skin.HasSetting(CacheFond)">ActeurCenter</include>
-    <include condition="[!Skin.HasSetting(ActeursAuCentre)|!Skin.HasSetting(CacheFond)]">ActeurLeft</include>
-    <onfocus>7781</onfocus>
-    <movement>2</movement>
-    <posx>20</posx>
-    <posy>934</posy>
-    <height>200</height>
+      <itemgap>1</itemgap>
+      <orientation>horizontal</orientation>
+      <autoscroll delay="6000" repeat="5000" time="5000">!Control.HasFocus(7781)+!Control.HasFocus(7779)+!Control.HasFocus(2022)</autoscroll>
+      <pagecontrol>60</pagecontrol>
+      <resetonlabelchange>true</resetonlabelchange>
+      <itemlayout width="75">
+        <control type="image">
+          <height>110</height>
+          <texture  diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[ListItem.Icon]</texture>
+          <aspectratio scalediffuse="true">keep</aspectratio>
+          <colordiffuse>FFAFAFAF</colordiffuse>
+        </control>
 
-    <itemgap>1</itemgap>
-    <orientation>horizontal</orientation>
-    <autoscroll delay="6000" repeat="5000" time="5000">!Control.HasFocus(7781)+!Control.HasFocus(7779)+!Control.HasFocus(2022)</autoscroll>
-    <pagecontrol>60</pagecontrol>
-    <resetonlabelchange>true</resetonlabelchange>
-    <itemlayout width="75">
-      <control type="image">
-        <height>110</height>
-        <texture  diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[ListItem.Icon]</texture>
-        <aspectratio scalediffuse="true">keep</aspectratio>
-        <colordiffuse>FFAFAFAF</colordiffuse>
-      </control>
-
-    </itemlayout>
-    <focusedlayout width="75">
-      <control type="image">
-        <animation type="Conditional" condition="!Skin.HasSetting(ActeursAuCentre)">
-          <effect type="zoom"  center="37,55" start="100" end="120" time="5" delay="1" reversible="true"/>
-        </animation>
-        <height>110</height>
-        <texture  diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[ListItem.Icon]</texture>
-        <aspectratio scalediffuse="true">keep</aspectratio>
-        <colordiffuse>FFFFFFFF</colordiffuse>
-      </control>
-      <control type="button">
-        <width max="340">auto</width>
-        <height>30</height>
-        <left>40</left>
-        <top>90</top>
-        <label>$INFO[Container(1998).ListItem.Label]</label>
-        <font>exptextacteurs</font>
-        <textcolor>FF404040</textcolor>
-        <shadowcolor>FF7F7F7F</shadowcolor>
-        <textoffsetx>15</textoffsetx>
-        <texturefocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturefocus>
-        <texturenofocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturenofocus> 
-      </control>
+      </itemlayout>
+      <focusedlayout width="75">
+        <control type="image">
+          <animation type="Conditional" condition="!Skin.HasSetting(ActeursAuCentre)">
+            <effect type="zoom"  center="37,55" start="100" end="120" time="5" delay="1" reversible="true"/>
+          </animation>
+          <height>110</height>
+          <texture  diffuse="acteurs/frame2.png" fallback="DefaultActor.png">$INFO[ListItem.Icon]</texture>
+          <aspectratio scalediffuse="true">keep</aspectratio>
+          <colordiffuse>FFFFFFFF</colordiffuse>
+        </control>
+        <control type="button">
+          <width max="340">auto</width>
+          <height>30</height>
+          <left>40</left>
+          <top>90</top>
+          <label>$INFO[Container(1998).ListItem.Label]</label>
+          <font>exptextacteurs</font>
+          <textcolor>FF404040</textcolor>
+          <shadowcolor>FF7F7F7F</shadowcolor>
+          <textoffsetx>15</textoffsetx>
+          <texturefocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturefocus>
+          <texturenofocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturenofocus> 
+        </control>
 
 
-    </focusedlayout>
+      </focusedlayout>
 
-  </control>
-  <control type="list" id="1998"> 
-<!-- mode texte-->    
-    <visible>Skin.HasSetting(ShowActeursTexte)</visible>
-     <include>Animation_CacherSiMenu</include>
-    <include>Animation_HiddenByInfo</include>
-    <include>Animation_OpenCloseFade</include>
-    <visible>Container.Content(genres)|Container.Content(directors)|Container.Content(actors)|Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(episodes)|Container.Content(seasons)|[Player.HasVideo+!String.IsEmpty(VideoPlayer.DBID)]</visible>
-    <animation type="Conditional" condition="String.Contains(ListItem.DBTYPE,set)|Container.Content(genres)|Container.Content(directors)|Container.Content(actors)|Window.IsVisible(12901)|Window.IsVisible(10142)|Window.IsVisible(movieinformation)|Control.HasFocus(7781)|Control.HasFocus(7779)|Control.HasFocus(2022)|Control.HasFocus(2999)|!String.IsEmpty(Window(home).Property(IconmixShowInfo))">
+    </control>
+    <!-- mode texte--> 
+    <control type="list" id="1998"> 
+     
+      <visible>Skin.HasSetting(ShowActeursTexte)</visible>
+       <include>Animation_CacherSiMenu</include>
+      <include>Animation_HiddenByInfo</include>
+      <include>Animation_OpenCloseFade</include>
+      <visible>Container.Content(genres)|Container.Content(directors)|Container.Content(actors)|Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)|Container.Content(episodes)|Container.Content(seasons)|[Player.HasVideo+!String.IsEmpty(VideoPlayer.DBID)]</visible>
+      
+      <animation type="Conditional" condition="String.IsEmpty(Window(Home).Property(MonNextAired.NextDay))+Skin.HasSetting(VueExperimentale)+Skin.HasSetting(ActeursAuCentre)">
+        <effect type="slide"  start="0,0" end="0,-19" time="1" delay="1" reversible="false"/>
+      </animation>
+      <animation type="Conditional" condition="Skin.HasSetting(VueExperimentale)">
+        <effect type="slide"  start="0,0" end="0,-836" time="1" delay="1" reversible="false"/>
+      </animation>
 
-      <effect type="slide"  start="0,0" end="-2000,0" time="1" delay="1" reversible="true"/>
-    </animation>
-    <animation type="Conditional" condition="String.IsEmpty(Window(Home).Property(NextAired.NextDate))+Skin.HasSetting(CacheFond)+Skin.HasSetting(ActeursAuCentre)">
-      <effect type="slide"  start="0,0" end="0,-19" time="1" delay="1" reversible="false"/>
-    </animation>
-    <animation type="Conditional" condition="Skin.HasSetting(CacheFond)">
-      <effect type="slide"  start="0,0" end="0,-836" time="1" delay="1" reversible="false"/>
-    </animation>
+      <animation type="Conditional" condition="Skin.HasSetting(VueExperimentale)+Skin.HasSetting(ActeursAuCentre)">
+        <effect type="slide"  start="0,0" end="760,10" time="1" delay="1" reversible="true"/>
+      </animation>
+      <animation type="Conditional" condition="Skin.HasSetting(VueExperimentale)+!Skin.HasSetting(ActeursAuCentre)">
+        <effect type="slide"  start="0,0" end="0,10" time="1" delay="1" reversible="true"/>
+      </animation>
+      <animation type="Conditional" condition="Skin.HasSetting(VueExperimentale)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
+        <effect type="slide"  start="0,0" end="0,-5" time="1" delay="1" reversible="true"/>
+      </animation>
 
-    <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+Skin.HasSetting(ActeursAuCentre)">
-      <effect type="slide"  start="0,0" end="760,10" time="1" delay="1" reversible="true"/>
-    </animation>
-    <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+!Skin.HasSetting(ActeursAuCentre)">
-      <effect type="slide"  start="0,0" end="0,10" time="1" delay="1" reversible="true"/>
-    </animation>
-    <animation type="Conditional" condition="Skin.HasSetting(CacheFond)+[!Skin.HasSetting(ActeursAuCentre)|[Skin.HasSetting(ActeursAuCentre)+!Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)]]">
-      <effect type="slide"  start="0,0" end="0,-5" time="1" delay="1" reversible="true"/>
-    </animation>
+      <onfocus>7781</onfocus>
+      <width>290</width>
+      <movement>3</movement>
+      <posx>8</posx>
+      <posy>926</posy>
+      <height>130</height>
+      <itemgap>1</itemgap>
+      <orientation>vertical</orientation>
+      <autoscroll delay="6000" repeat="5000" time="5000">!Control.HasFocus(7781)+!Control.HasFocus(7779)+!Control.HasFocus(2022)</autoscroll>
+      <pagecontrol>60</pagecontrol>
+      <resetonlabelchange>true</resetonlabelchange>
+      <itemlayout width="290" height="22">
+        <control type="label">
+          <left>3</left>
+          <top>3</top>
+          <align>right</align>
+          <label>$INFO[ListItem.Label]</label>
+          <textcolor>black</textcolor>
+          <font>exptextacteurs</font>
+        </control>
+        <control type="label">
+          <label>$INFO[ListItem.Label]</label>
+          <align>right</align>
+          <textcolor>white</textcolor>
+          <font>exptextacteurs</font>
+        </control>
 
-    <onfocus>7781</onfocus>
-    <width>290</width>
-    <movement>3</movement>
-    <posx>8</posx>
-    <posy>926</posy>
-    <height>130</height>
-    <itemgap>1</itemgap>
-    <orientation>vertical</orientation>
-    <autoscroll delay="6000" repeat="5000" time="5000">!Control.HasFocus(7781)+!Control.HasFocus(7779)+!Control.HasFocus(2022)</autoscroll>
-    <pagecontrol>60</pagecontrol>
-    <resetonlabelchange>true</resetonlabelchange>
-    <itemlayout width="290" height="22">
-      <control type="label">
-        <left>3</left>
-        <top>3</top>
-        <align>right</align>
-        <label>$INFO[ListItem.Label]</label>
-        <textcolor>black</textcolor>
-        <font>exptextacteurs</font>
-      </control>
-      <control type="label">
-        <label>$INFO[ListItem.Label]</label>
-        <align>right</align>
-        <textcolor>white</textcolor>
-        <font>exptextacteurs</font>
-      </control>
+      </itemlayout>
+      <focusedlayout width="290" height="22">
 
-    </itemlayout>
-    <focusedlayout width="290" height="22">
+        <control type="label">
+          <left>3</left>
+          <top>3</top>
+          <align>right</align>
+          <label>$INFO[ListItem.Label]</label>
+          <textcolor>black</textcolor>
+          <font>exptextacteurs</font>
+        </control>
+        <control type="label">
+          <align>right</align>
+          <label>$INFO[ListItem.Label]</label>
+          <textcolor>lightgrey</textcolor>
+          <font>exptextacteurs</font>
+        </control>
 
-      <control type="label">
-        <left>3</left>
-        <top>3</top>
-        <align>right</align>
-        <label>$INFO[ListItem.Label]</label>
-        <textcolor>black</textcolor>
-        <font>exptextacteurs</font>
-      </control>
-      <control type="label">
-        <align>right</align>
-        <label>$INFO[ListItem.Label]</label>
-        <textcolor>lightgrey</textcolor>
-        <font>exptextacteurs</font>
-      </control>
+      </focusedlayout>
 
-    </focusedlayout>
+    </control>
+    <animation type="Conditional" condition="[[String.Contains(ListItem.DBTYPE,tvshow)|String.Contains(ListItem.DBTYPE,episode)]+Skin.HasSetting(HideTvCast)]|[String.Contains(ListItem.DBTYPE,movie)+Skin.HasSetting(HideMovieCast)]|[String.Contains(ListItem.DBTYPE,set)+Skin.HasSetting(HideSagaCast)]|String.Contains(ListItem.DBTYPE,set)|Container.Content(genres)|Container.Content(directors)|Container.Content(actors)|Window.IsVisible(12901)|Window.IsVisible(10142)|Window.IsVisible(movieinformation)|Control.HasFocus(7781)|Control.HasFocus(7779)|Control.HasFocus(2022)|Control.HasFocus(2999)|!String.IsEmpty(Window(home).Property(IconmixShowInfo))|[Skin.HasSetting(HideCastFocus)+Skin.HasSetting(VueExperimentale)]">
 
-  </control>
+        <effect type="slide"  start="0,0" end="-2000,0" time="1" delay="1" reversible="true"/>
+      </animation>
+    
+    </control>
+    -->
 </control>
 </include>
 <!-- --------------------------------------------------------------------------------------------- -->

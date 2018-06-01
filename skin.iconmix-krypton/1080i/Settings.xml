@@ -14,12 +14,12 @@
 			<textcolor>GlobalHeading</textcolor>
 			<label>5</label>
 			<include>Animation_HiddenByInfo</include>
-			<include>Animation_FadedByMenu</include>
+			
 			<include>Animation_OpenCloseFade</include>
 		</control>
 
 		<control type="group">
-			<include>Animation_FadedByMenu</include>
+			
 			<control type="wraplist" id="60">
 				<posx>10</posx>
 				<posy>250</posy>
@@ -268,13 +268,7 @@
 		
 		
 		<include>Global_MediaOverlay</include>
-		<control type="label">
-			<posx>1550</posx>
-			<posy>1050</posy>
-			<font>lcdsongs</font>
-			<textcolor>yellow</textcolor>
-			<label>Version : $INFO[System.AddonVersion(skin.iconmix-krypton)]</label>
-		</control>
+		
 		
 	</controls>
 </window>

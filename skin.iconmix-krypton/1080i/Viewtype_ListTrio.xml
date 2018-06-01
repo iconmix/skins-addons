@@ -121,7 +121,7 @@
 <aligny>top</aligny>
 <pagecontrol>60</pagecontrol>
 <include>Animation_OpenCloseFade</include>
-<include>Animation_FadedByMenu</include>
+
 <include>Animation_HiddenByInfo</include>
 <itemlayout width="0" height="40">
   <include content="commonlistitem2Trio"></include>
@@ -221,7 +221,7 @@
       <top>-200</top>
       <posx>1475</posx>
       <animation effect="fade" start="100" end="0" time="0" condition="Container(557).OnPrevious+Container(557).OnNext" reversible="false">conditional</animation>
-     <animation effect="slide" start="0,0" end="0,-245" time="0" condition="Skin.HasSetting(CacheFond)" reversible="false">conditional</animation>
+     <animation effect="slide" start="0,0" end="0,-245" time="0" condition="Skin.HasSetting(VueExperimentale)" reversible="false">conditional</animation>
     			<control type="wraplist" id="5555">
     			  <visible>String.IsEqual(ListItem.DBTYPE,set)</visible>
     			  <height>1480</height>
@@ -300,7 +300,7 @@
 			<aligny>top</aligny>
 			<pagecontrol>60</pagecontrol>
 			<include>Animation_OpenCloseFade</include>
-			<include>Animation_FadedByMenu</include>
+			
 			<include>Animation_HiddenByInfo</include>
 			<include>CommonListIdTrio</include>
 			
@@ -313,7 +313,7 @@
 				<effect type="fade" time="400" start="100" end="0" />
 			</animation>
 			<include>Animation_OpenCloseFade</include>
-			<include>Animation_FadedByMenu</include>
+			
 			<include>Animation_HiddenByInfo</include>
 			<!-- Movie, TVShow and Season Posters -->
 			<posx>880</posx>
@@ -413,7 +413,7 @@
 				<height>770</height>
 				<fadetime>100</fadetime>
 				<aspectratio align="right" aligny="center">keep</aspectratio>
-				<texture fallback="DefaultMovieGenre.jpg">moviegenres/$INFO[ListItem.Label].jpg</texture>
+				<texture fallback="DefaultMovieGenre.png">moviegenres/$INFO[ListItem.Label].jpg</texture>
 				<visible>Window.IsActive(10025) + !String.Contains(Container.FolderPath,videodb://musicvideos/) + Container.Content(genres)</visible>
 			</control>
 			<control type="image">
@@ -423,7 +423,7 @@
 				<height>770</height>
 				<fadetime>100</fadetime>
 				<aspectratio align="right" aligny="center">keep</aspectratio>
-				<texture fallback="DefaultMusicGenre.jpg">musicgenres/$INFO[ListItem.Label].jpg</texture>
+				<texture fallback="DefaultMusicGenre.png">musicgenres/$INFO[ListItem.Label].jpg</texture>
 				<visible>[Window.IsActive(502) | [Window.IsActive(10025) + String.Contains(Container.FolderPath,videodb://musicvideos/)]] + Container.Content(genres)</visible>
 			</control>
 		</control>

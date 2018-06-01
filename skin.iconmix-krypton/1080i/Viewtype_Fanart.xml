@@ -31,7 +31,7 @@
 						<height>300</height>
 				<bordersize>9</bordersize>
 				<bordertexture border="9" colordiffuse="FFFFFFFF">landscapeinfo.png</bordertexture>
-				<texture fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
+				<texture fallback="DefaultMovieGenre.png">$VAR[VideoMusicGenres]</texture>
 				<aspectratio scalediffuse="false">scale</aspectratio>
 				<visible>String.IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
 			</control>
@@ -73,7 +73,7 @@
 			<control type="image">
 				<width>204</width>
 						<height>300</height>
-				<texture background="true" diffuse="showcase_matte.png" fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
+				<texture background="true" diffuse="showcase_matte.png" fallback="DefaultMovieGenre.png">$VAR[VideoMusicGenres]</texture>
 				<aspectratio scalediffuse="false">scale</aspectratio>
 				<visible>String.IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
 			</control>
@@ -116,7 +116,7 @@
 				<preloaditems>2</preloaditems>
 				-->
 				<pagecontrol>60</pagecontrol>
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_OpenCloseFade</include>
 				<include>Animation_HiddenByInfo</include>
 				<visible>!Skin.HasSetting(NoViewFanart)</visible>

@@ -6,7 +6,7 @@
 		<include>Global_Background</include>		
 		<control type="group">
 			<include>Animation_OpenCloseFade</include>
-			<include>Animation_FadedByMenu</include>
+			
 			
 			<!-- Exit Button -->
 			<control type="button" id="104">

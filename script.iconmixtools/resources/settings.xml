@@ -20,7 +20,6 @@
         <setting id="cachesaga" type="bool" label="32600" default="false" />
         <setting label="32601" type="action" action="RunScript(script.iconmixtools,videcache=True&cache=collections)"/>
         <setting id="updatesagaposter" type="bool" label="32603" default="false" />
-        <setting visible="eq(-1,true)" id="forceupdatesagaposter" type="bool" label="32610" default="false" />
         
     </category>
     <category label="32583"><!-- Series -->
@@ -66,21 +65,35 @@
         <setting label="32801" type="bool" id="allocinefrancais" enable="eq(-4,true)" default="false" />      
        
     </category>
+    
     <category label="32708"><!-- Notation -->
      <setting label="32709" type="lsep"/>
+     <setting type="sep"/>        
+        <setting label="32710" type="bool" id="noterfilm"  default="false"/>
+        <setting label="32711" type="bool" id="noterserie" default="false"/>         
+    </category>
+    
+    <category label="32851"><!-- Autocomplete -->
+      <setting type="sep"/>
+        <setting label="32853" type="select" values="google|youtube|kodi|off" id="autocomplete_provider" default="kodi"/>
+        <setting label="32852" visible="!eq(-1,local)+!eq(-1,bing)" type="select" values="bg|cs|da|de|el|en|es|fi|fr|he|hr|hu|it|ja|ko|nl|no|pl|pt|ru|sl|sv|tr|zh" id="autocomplete_lang" default="fr"/>
+        <setting label="32852" visible="eq(-2,local)" type="select" values="en|de|fr|nl" id="autocomplete_lang_local" default="fr"/>
+        <setting label="Cache" type="bool"  id="autocomplete_cache" default="true"/>
+    </category>
+    
+    <category label="32856"><!-- Purge -->
+     <setting label="32856" type="lsep"/>
      <setting type="sep"/>
         
-        <setting label="32710" type="bool" id="noterfilm"  default="false"/>
-        <setting label="32711" type="bool" id="noterserie" default="false"/>
-        
+        <setting id="autopurge" type="bool" label="32857" default="false" />
+        <setting label="32858" type="action" action="RunScript(script.iconmixtools,purgedatabase=True&purgedatabasemanuel=True)"/>
        
     </category>
-   <category label="DEBUG"><!-- Notation -->
+    
+   <category label="DEBUG"><!-- Debug -->
      <setting label="DEBUG" type="lsep"/>
-     <setting type="sep"/>
-        
-        <setting label="Activer" type="bool" id="iconmixdebug"  default="false"/>
-        
+     <setting type="sep"/>        
+        <setting label="Activer" type="bool" id="iconmixdebug"  default="false"/>       
        
     </category>
    

@@ -66,6 +66,7 @@
         <animation effect="slide"  end="0,-40" delay="150" tween="cubic" time="350" condition="Control.HasFocus(8011$SKINSHORTCUTS[id])+!Container(8011$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
 
         <animation effect="slide" start="0,0" end="-270,0" delay="150" tween="cubic" time="350" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8011$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow))">Conditional</animation>
+        <animation effect="rotatey" center="-90,0" delay="300" start="0" end="65" time="1" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8011$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow))">Conditional</animation>
         <control type="group">
 
           <control type="label">
@@ -143,6 +144,7 @@
         <animation effect="slide" start="0,0" end="-1620,0" delay="150" tween="cubic" time="350" condition="[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))|Control.HasFocus(8011$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)]+!Container(8011$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
         <animation effect="slide"  end="0,-40" delay="150" tween="cubic" time="350" condition="Control.HasFocus(8011$SKINSHORTCUTS[id])+!Container(8011$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
         <animation effect="slide" start="0,0" end="-270,0" delay="150" tween="cubic" time="350" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8011$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow))">Conditional</animation>
+        <animation effect="rotatey" center="-90,0" delay="300" start="0" end="65" time="1" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8011$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow))">Conditional</animation>
         <control type="group">
           <control type="label">
             <posy>8</posy>
@@ -235,6 +237,7 @@
         <animation effect="slide" start="0,0" end="-1620,0" delay="150" tween="cubic" time="350" condition="[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))|Control.HasFocus(8011$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)]+!Container(8011$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
         <animation effect="slide"  end="0,-40" delay="150" tween="cubic" time="350" condition="Control.HasFocus(8011$SKINSHORTCUTS[id])+!Container(8011$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
         <animation effect="slide" start="0,0" end="-270,0" delay="150" tween="cubic" time="350" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8011$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow))">Conditional</animation>
+        <animation effect="rotatey" center="-90,0" delay="300" start="0" end="65" time="1" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8011$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow))">Conditional</animation>
 
         <control type="group">
           <visible>Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)</visible>
@@ -283,32 +286,34 @@
             <posy>260</posy>
             <visible>Control.HasFocus(8011$SKINSHORTCUTS[id])</visible>
             <include>FondWidgetInfo</include>
-            <control type="group">
+
+
+            <control type="image">
               <posy>5</posy>
-              <control type="image">
-                <posx>920</posx>
-                <width>40</width>
-                <height>40</height>
-                <aspectratio>keep</aspectratio>
-                <texture>ArrowRightWD.png</texture>
-                <visible>!String.IsEmpty(Container(9000).ListItem.Property(widget.2))+!Container(8012$SKINSHORTCUTS[id]).IsUpdating+Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)</visible>
-              </control>
+              <posx>920</posx>
+              <width>40</width>
+              <height>40</height>
+              <aspectratio>keep</aspectratio>
+              <texture>ArrowRightWD.png</texture>
+              <visible>!String.IsEmpty(Container(9000).ListItem.Property(widget.2))+!Container(8012$SKINSHORTCUTS[id]).IsUpdating+Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)</visible>
             </control>
-             <control type="fadelabel">
+
+            <control type="fadelabel">
               <posx>10</posx>
-              <posy>-12</posy>
+              <posy>-10</posy>
               <width>895</width>
               <height>30</height>
               <align>center</align>
               <scroll>true</scroll>
               <scrollspeed>30</scrollspeed>
               <font>METF_StarRating</font>
-              <textcolor>yellow</textcolor>
+<shadowcolor>black</shadowcolor>
+              <textcolor>FFFFD966</textcolor>
               <label>$VAR[GlobalWidgetLabel8011$SKINSHORTCUTS[id]]</label>
             </control>
             <control type="fadelabel">
               <left>20</left>
-              <posy>22</posy>
+              <posy>24</posy>
               <width>855</width>
               <height>30</height>
               <align>center</align>
@@ -316,744 +321,9 @@
               <scroll>true</scroll>
               <scrollspeed>30</scrollspeed>
               <font>PlotFont</font>
+<shadowcolor>black</shadowcolor>
               <textcolor>lightgrey</textcolor>
               <label>$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Plot]</label>
-            </control>
-          </control>
-        </control>
-        <!-- Widget -->
-        <control type="group">
-          <top>$SKINSHORTCUTS[top]</top>
-          <control type="group">
-            <posx>-270</posx>
-            <posy>-10</posy>
-            <control type="image">
-              <posy>-8</posy>
-              <width>220</width>
-              <height>260</height>
-              <aspectratio align="center" aligny="center">keep</aspectratio>
-              <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
-              <bordersize>2</bordersize>
-              <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVarList8011$SKINSHORTCUTS[id]]</texture>
-            </control>
-            <control type="image">
-              <posx>830</posx>
-              <width>350</width>
-              <height>300</height>
-              <aspectratio align="center" aligny="center">keep</aspectratio>
-              <texture  diffuse="frames/EpisodeMatte.png">$VAR[HomeWidgetArtList8011$SKINSHORTCUTS[id]]</texture>
-            </control>
-          </control>
-          <control type="list" id="8011$SKINSHORTCUTS[id]">
-            <posx>-70</posx>
-            <posy>0</posy>
-            <width>630</width>
-            <height>240</height>
-            <onright condition="Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget.2),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget.2),SystemInfo)">9023</onright>
-            <onright>9000</onright>
-            <onleft>9000</onleft>
-            <onback>9000</onback>
-            <!-- <autoscroll delay="8000" repeat="10000" time="10000">Skin.HasSetting(AutoRotateWidget)+!Control.HasFocus(8011$SKINSHORTCUTS[id])</autoscroll> -->
-            <autoscroll delay="8000" repeat="10000" time="10000">Skin.HasSetting(AutoRotateWidget)+[Control.HasFocus(9000)|Control.HasFocus(9001)]</autoscroll>
-            <viewtype>list</viewtype>
-            <orientation>vertical</orientation>
-            <top>0</top>
-            <left>0</left>
-            <width>1200</width>
-            <height>255</height>
-            <onunfocus>SetProperty(WidgetActifFanart,,Home)</onunfocus>
-            <orientation>vertical</orientation>
-            <preloaditems>2</preloaditems>
-            <scrolltime >300</scrolltime>
-            <itemlayout width="620" height="30">
-              <control type="label">
-                <posx>10</posx>
-                <posy>-6</posy>
-                <width>620</width>
-                <height>28</height>
-                <align>left</align>
-                <aligny>center</aligny>
-                <scrollout>false</scrollout>
-                <scrollspeed>20</scrollspeed>
-                <font>METF_RecentlyAddedListText</font>
-                <textcolor>yellow</textcolor>
-                <label>$VAR[GlobalWidgetLabel]</label>
-              </control>
-            </itemlayout>
-            <focusedlayout width="550" height="30">
-              <!-- Focus Bar -->
-              <control type="button">
-                <onfocus condition="Control.HasFocus(8011$SKINSHORTCUTS[id])">SetProperty(WidgetActifFanart,$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(fanart)],Home)</onfocus>
-              </control>
-              <control type="image">
-                <posx>0</posx>
-                <posy>-6</posy>
-                <width>620</width>
-                <height>28</height>
-                <aligny>center</aligny>
-                <texture>FocusLine.png</texture>
-                <colordiffuse>FocusBar</colordiffuse>
-                <visible>Control.HasFocus(8011$SKINSHORTCUTS[id])</visible>
-              </control>
-              <control type="label" >
-                <posx>10</posx>
-                <posy>-6</posy>
-                <width>620</width>
-                <height>28</height>
-                <align>left</align>
-                <aligny>center</aligny>
-                <scrollout>false</scrollout>
-                <pauseatend>600</pauseatend>
-                <scrollspeed>20</scrollspeed>
-                <font>METF_RecentlyAddedListText</font>
-                <textcolor>white</textcolor>
-                <label>[B]$VAR[GlobalWidgetLabel][/B]</label>
-              </control>
-            </focusedlayout>
-            <content target="$SKINSHORTCUTS[target]" sortby="$SKINSHORTCUTS[sortby]" sortorder="$SKINSHORTCUTS[sort]">$SKINSHORTCUTS[content]</content>
-          </control>
-        </control>
-
-      </control>
-    </controls>
-  </other>
-
-  <other include="widget1"><!-- Widget Panneau -->
-    <condition tag="property" attribute="name|widget" />
-    <match>all</match>
-    <property name="id" tag="mainmenuid" />
-    <property name="widget" tag="property" attribute="name|widget" />
-    <property name="widgettype" tag="property" attribute="name|widgetType" />
-    <property name="content" tag="property" attribute="name|widgetPath" />
-    <property name="target" tag="property" attribute="name|widgetTarget" />
-    <property name="label" tag="property" attribute="name|widgetName" />
-    <property name="sortby" tag="property" attribute="name|widgetSort" />
-    <property name="sort" tag="property" attribute="name|widgetSortOrder" />
-
-
-    <controls>
-      <control type="group">
-        <skinshortcuts>visibility</skinshortcuts>
-        <animation effect="slide" start="0,0" end="-1920,0" delay="150" tween="cubic" time="350" condition="[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))|Control.HasFocus(8011$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)]+!Container(8011$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
-        <animation effect="slide" end="0,-40" delay="150" tween="cubic" time="350" condition="Control.HasFocus(8011$SKINSHORTCUTS[id])+!Container(8011$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
-        <animation effect="slide" start="0,0" end="-270,0" delay="150" tween="cubic" time="350" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+[!Control.HasFocus(8011$SKINSHORTCUTS[id])|[Control.HasFocus(8011$SKINSHORTCUTS[id])+Container(8011$SKINSHORTCUTS[id]).IsUpdating]]+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow))">Conditional</animation>
-        <control type="group">
-          <visible>Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)</visible>
-          <include>FondWidgetH</include>
-          <control type="label"> <!-- label vertical -->
-            <posx>-268</posx>
-            <posy>-20</posy>
-            <width>250</width>
-            <height>25</height>
-            <align>left</align>
-            <scrollspeed>30</scrollspeed>
-            <scroll>true</scroll>
-            <angle>270</angle>
-            <label>[B]$INFO[Container(9000).ListItem.Property(widgetName)][/B]</label>
-            <visible>!Skin.HasSetting(ShowFullWidgets)+!Control.HasFocus(8011$SKINSHORTCUTS[id])+String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
-            <shadowcolor>ff000000</shadowcolor>
-          </control>
-          <control type="label"> <!-- label horizontal -->
-            <posx>-253</posx>
-            <posy>-70</posy>
-            <width>1770</width>
-            <height>30</height>
-            <textcolor>black</textcolor>
-            <align>center</align>
-            <font>comic36</font>
-            <scrollspeed>30</scrollspeed>
-            <scroll>true</scroll>
-            <label>[B] $INFO[Container(9000).ListItem.Property(widgetName)] [/B]$VAR[HWidgetLabel8011$SKINSHORTCUTS[id]]</label>
-            <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8011$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
-          </control>
-          <control type="label">
-            <posx>-249</posx>
-            <posy>-68</posy>
-            <width>1770</width>
-            <height>30</height>
-            <textcolor>yellow</textcolor>
-            <align>center</align>
-            <font>comic36</font>
-            <scrollspeed>30</scrollspeed>
-            <scroll>true</scroll>
-            <label>[B] $INFO[Container(9000).ListItem.Property(widgetName)] [/B][COLOR=white]$VAR[HWidgetLabel8011$SKINSHORTCUTS[id]][/COLOR]</label>
-            <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8011$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
-          </control>
-          <control type="group">
-            <posx>-150</posx>
-            <posy>260</posy>
-            <visible>Control.HasFocus(8011$SKINSHORTCUTS[id])</visible>
-            <include>FondWidgetInfoH</include>
-            <control type="group">
-              <posy>5</posy>
-              <control type="image">
-                <posx>1540</posx>
-                <width>40</width>
-                <height>40</height>
-                <aspectratio>keep</aspectratio>
-                <texture>ArrowUpWD.png</texture>
-                <visible>!String.IsEmpty(Container(9000).ListItem.Property(widget.2))+!Container(8021$SKINSHORTCUTS[id]).IsUpdating+Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)</visible>
-              </control>
-            </control>
-            <control type="fadelabel">
-              <posx>10</posx>
-              <posy>-12</posy>
-              <width>1500</width>
-              <height>30</height>
-              <align>center</align>
-              <scroll>true</scroll>
-              <scrollspeed>30</scrollspeed>
-              <font>METF_StarRating</font>
-              <textcolor>yellow</textcolor>
-              <label>$VAR[GlobalWidgetLabel8011$SKINSHORTCUTS[id]]</label>
-            </control>
-            <control type="fadelabel">
-              <left>50</left>
-              <posy>22</posy>
-              <width>1400</width>
-              <height>30</height>
-              <align>center</align>
-              <aligny>bottom</aligny>
-              <scroll>true</scroll>
-              <scrollspeed>30</scrollspeed>
-              <font>PlotFont</font>
-              <textcolor>lightgrey</textcolor>
-              <label>$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Plot]</label>
-            </control>
-          </control>
-        </control>
-        <!-- Widget -->
-        <control type="group">
-          <posx>-265</posx>
-          <posy>-10</posy>
-          <control type="group">
-            <control type="image">
-              <posy>-8</posy>
-              <width>220</width>
-              <height>260</height>
-              <aspectratio scalediffuse="true"  align="center" aligny="center">keep</aspectratio>
-              <bordersize>2</bordersize>
-              <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVarList8011$SKINSHORTCUTS[id]]</texture>
-              <visible>[!Control.HasFocus(8011$SKINSHORTCUTS[id])+!Skin.HasSetting(ShowFullWidgets)]+String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
-            </control>
-          </control>
-          <control type="list" id="8011$SKINSHORTCUTS[id]">
-            <width>1800</width>
-            <height>255</height>
-            <ondown>9000</ondown>
-            <onunfocus>SetProperty(WidgetActifFanart,,Home)</onunfocus>
-            <onup condition="Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget.2),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget.2),SystemInfo)">9023</onup>
-            <onup>9000</onup>
-            <onback>9000</onback>
-            <orientation>horizontal</orientation>
-            <preloaditems>0</preloaditems>
-            <autoscroll delay="8000" repeat="10000" time="10000">Skin.HasSetting(AutoRotateWidget)+[Control.HasFocus(9000)|Control.HasFocus(9001)]</autoscroll>
-            <itemlayout width="203" height="255">
-              <control type="image">
-                <width>180</width>
-                <height>240</height>
-                <aspectratio scalediffuse="true"  align="center" aligny="center">keep</aspectratio>
-                <bordersize>2</bordersize>
-                <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVar]</texture>
-                <visible>!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))|Control.HasFocus(8011$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)</visible>
-                <animation type="Conditional" reversible="false" condition="System.IdleTime(1)+Control.HasFocus(8011$SKINSHORTCUTS[id])">
-                  <effect type="zoom" center="90,130" start="100" end="80" time="500" tween="bounce" easy="out"  />
-                </animation>
-              </control>
-            </itemlayout>
-            <focusedlayout width="203" height="255">
-              <control type="button">
-                <onfocus condition="Control.HasFocus(8011$SKINSHORTCUTS[id])">SetProperty(WidgetActifFanart,$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(fanart)],Home)</onfocus>
-              </control>
-              <control type="image">
-                <width>180</width>
-                <height>240</height>
-                <aspectratio scalediffuse="true"  align="center" aligny="center">keep</aspectratio>
-                <bordersize>2</bordersize>
-                <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVar]</texture>
-                <visible>!Control.HasFocus(8011$SKINSHORTCUTS[id])+[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))|Skin.HasSetting(ShowFullWidgets)]</visible>
-              </control>
-              <control type="image">
-                <width>180</width>
-                <height>240</height>
-                <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
-                <texture>$VAR[HomeWidgetPosterVar]</texture>
-                <bordersize>8</bordersize>
-                <bordertexture border="8">landscape.png</bordertexture>
-                <visible>Control.HasFocus(8011$SKINSHORTCUTS[id])</visible>
-                <animation type="Focus" reversible="false">
-                  <effect type="zoom" center="90,130" start="98" end="110" time="500" tween="bounce" easy="out"  />
-                </animation>
-              </control>
-            </focusedlayout>
-            <content target="$SKINSHORTCUTS[target]" sortby="$SKINSHORTCUTS[sortby]" sortorder="$SKINSHORTCUTS[sort]">$SKINSHORTCUTS[content]</content>
-          </control>
-        </control>
-      </control>
-    </controls>
-  </other>
-
-  <!-- ******* WIDGET 2 ******* -->
-
-  <other include="widget2"><!-- Widget SystemInfo -->
-    <condition tag="property" attribute="name|widget.2">SystemInfo</condition>
-    <property name="id" tag="mainmenuid" />
-    <property name="widget" tag="property" attribute="name|widget.2" />
-    <controls>
-      <control type="group">
-        <posx>-310</posx>
-        <posy>-33</posy>
-        <include>FondWidgetMeteo</include>
-        <skinshortcuts>visibility</skinshortcuts>
-        <animation effect="slide" start="0,0" end="-1620,0" delay="150" tween="cubic" time="350" condition="[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Control.HasFocus(8021$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)]+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
-        <animation effect="slide"  end="0,-40" delay="150" tween="cubic" time="350" condition="Control.HasFocus(8021$SKINSHORTCUTS[id])+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
-        <animation effect="slide" start="0,0" end="-270,0" delay="150" tween="cubic" time="350" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH.2)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))">Conditional</animation>
-        <control type="group">
-          <control type="label">
-            <posy>8</posy>
-            <posx>35</posx>
-            <width>250</width>
-            <height>25</height>
-            <align>left</align>
-            <scrollspeed>30</scrollspeed>
-            <scroll>true</scroll>
-            <angle>270</angle>
-            <label>[B]$INFO[Container(9000).ListItem.Property(widgetName.2)][/B]</label>
-            <visible>!Skin.HasSetting(ShowFullWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
-            <shadowcolor>ff000000</shadowcolor>
-          </control>
-          <control type="label">
-            <posy>-35</posy>
-            <width>1370</width>
-            <height>30</height>
-            <textcolor>black</textcolor>
-            <align>center</align>
-            <font>comic36</font>
-            <scrollspeed>30</scrollspeed>
-            <scroll>true</scroll>
-            <label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B]</label>
-            <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
-          </control>
-          <control type="label">
-            <posy>-37</posy>
-            <posx>-3</posx>
-            <width>1370</width>
-            <height>30</height>
-            <textcolor>yellow</textcolor>
-            <align>center</align>
-            <font>comic36</font>
-            <scrollspeed>30</scrollspeed>
-            <scroll>true</scroll>
-            <label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B]</label>
-            <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
-          </control>
-        </control>
-        <control type="group">
-          <control type="list" id="8021$SKINSHORTCUTS[id]">
-            <posy>25</posy>
-            <posx>30</posx>
-            <ondown condition="Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget),SystemInfo)">9022</ondown>
-            <ondown>9000</ondown>
-            <onup>9000</onup>
-            <onleft>8021$SKINSHORTCUTS[id]</onleft>
-            <onright>8021$SKINSHORTCUTS[id]</onright>
-            <description>Widget Lists</description>
-            <include>SystemContentList</include>
-          </control>
-        </control>
-      </control>
-    </controls>
-  </other>
-  <other include="widget2"> <!-- Widget Meteo -->
-    <condition tag="property" attribute="name|widget.2">WeatherForecast</condition>
-    <property name="id" tag="mainmenuid" />
-    <property name="widget" tag="property" attribute="name|widget.2" />
-    <controls>
-      <control type="group">
-        <skinshortcuts>visibility</skinshortcuts>
-        <posx>-310</posx>
-        <posy>-33</posy>
-        <include>FondWidgetMeteo</include>
-        <animation effect="slide" start="0,0" end="-1620,0" delay="150" tween="cubic" time="350" condition="[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Control.HasFocus(8021$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)]+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
-        <animation effect="slide"  end="0,-40" delay="150" tween="cubic" time="350" condition="Control.HasFocus(8021$SKINSHORTCUTS[id])+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
-        <animation effect="slide" start="0,0" end="-270,0" delay="150" tween="cubic" time="350" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH.2)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))">Conditional</animation>
-        <control type="group">
-          <control type="label">
-            <posy>8</posy>
-            <posx>35</posx>
-            <width>250</width>
-            <height>25</height>
-            <align>left</align>
-            <scrollspeed>30</scrollspeed>
-            <scroll>true</scroll>
-            <angle>270</angle>
-            <label>[B]$INFO[Container(9000).ListItem.Property(widgetName.2)][/B]</label>
-            <visible>!Skin.HasSetting(ShowFullWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
-            <shadowcolor>ff000000</shadowcolor>
-          </control>
-          <control type="label">
-            <posy>-35</posy>
-            <width>1370</width>
-            <height>30</height>
-            <textcolor>black</textcolor>
-            <align>center</align>
-            <font>comic36</font>
-            <scrollspeed>30</scrollspeed>
-            <scroll>true</scroll>
-            <label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B]$INFO[Weather.Location,(,)]</label>
-            <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
-          </control>
-          <control type="label">
-            <posy>-37</posy>
-            <posx>-3</posx>
-            <width>1370</width>
-            <height>30</height>
-            <textcolor>yellow</textcolor>
-            <align>center</align>
-            <font>comic36</font>
-            <scrollspeed>30</scrollspeed>
-            <scroll>true</scroll>
-            <label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B][COLOR=green]$INFO[Weather.Location,(,)][/COLOR]</label>
-            <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
-          </control>
-        </control>
-        <!-- meteo -->
-        <control type="group" >
-          <control type="button" id="8021$SKINSHORTCUTS[id]">
-            <onleft>9000</onleft>
-            <onright>9000</onright>
-            <ondown condition="Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget),SystemInfo)">9022</ondown>
-            <ondown>9000</ondown>
-            <onup>9000</onup>
-            <left>1</left>
-            <top>1</top>
-            <width>1</width>
-            <height>1</height>
-            <label>-</label>
-            <onclick>Close</onclick>
-            <onclick>ActivateWindow(weather)</onclick>
-          </control>
-          <control type="image">
-            <posy>50</posy>
-            <posx>550</posx>
-            <width>200</width>
-            <aspectratio align="center" aligny="center">keep</aspectratio>
-            <texture>$INFO[Window(weather).Property(WeatherProviderLogo)]</texture>
-            <colordiffuse>MediaFlagDiffuse</colordiffuse>
-          </control>
-          <control type="grouplist">
-            <include>DetailsMeteo</include>
-          </control>
-        </control>
-      </control>
-    </controls>
-  </other>
-
-
-  <other include="widget2"> <!-- Widget Liste -->
-    <condition tag="property" attribute="name|widgetStyle.2">List</condition>
-    <condition tag="property" attribute="name|widget.2" />
-    <match>all</match>
-    <property name="id" tag="mainmenuid" />
-    <property name="widget" tag="property" attribute="name|widget.2" />
-    <property name="widgettype" tag="property" attribute="name|widgetType.2" />
-    <property name="content" tag="property" attribute="name|widgetPath.2" />
-    <property name="target" tag="property" attribute="name|widgetTarget.2" />
-    <property name="label" tag="property" attribute="name|widgetName.2" />
-    <property name="sortby" tag="property" attribute="name|widgetSort.2" />
-    <property name="sort" tag="property" attribute="name|widgetSortOrder.2" />
-    <property name="top">0</property>
-
-    <controls>
-      <control type="group">
-        <skinshortcuts>visibility</skinshortcuts>
-        <animation effect="slide" start="0,0" end="-1620,0" delay="150" tween="cubic" time="350" condition="[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Control.HasFocus(8021$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)]+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
-        <animation effect="slide"  end="0,-50" delay="150" tween="cubic" time="350" condition="Control.HasFocus(8021$SKINSHORTCUTS[id])+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
-        <animation effect="slide" start="0,0" end="-270,0" delay="150" tween="cubic" time="350" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH.2)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))">Conditional</animation>
-        <control type="group">
-          <visible>Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)</visible>
-          <include>FondWidget</include>
-          <control type="label">
-            <posx>-268</posx>
-            <posy>-20</posy>
-            <width>250</width>
-            <height>25</height>
-            <align>left</align>
-            <scrollspeed>30</scrollspeed>
-            <scroll>true</scroll>
-            <angle>270</angle>
-            <label>[B]$INFO[Container(9000).ListItem.Property(widgetName.2)][/B]</label>
-            <visible>!Skin.HasSetting(ShowFullWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
-            <shadowcolor>ff000000</shadowcolor>
-          </control>
-          <control type="label">
-            <posx>-348</posx>
-            <posy>-70</posy>
-            <width>1370</width>
-            <height>30</height>
-            <textcolor>black</textcolor>
-            <align>center</align>
-            <font>comic36</font>
-            <scrollspeed>30</scrollspeed>
-            <scroll>true</scroll>
-            <label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B]$VAR[HWidgetLabel8021$SKINSHORTCUTS[id]]</label>
-            <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
-          </control>
-          <control type="label">
-            <posx>-344</posx>
-            <posy>-68</posy>
-            <width>1370</width>
-            <height>30</height>
-            <textcolor>yellow</textcolor>
-            <align>center</align>
-            <font>comic36</font>
-            <scrollspeed>30</scrollspeed>
-            <scroll>true</scroll>
-            <label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B][COLOR=white]$VAR[HWidgetLabel8021$SKINSHORTCUTS[id]][/COLOR]</label>
-            <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
-          </control>
-          <control type="group">
-            <posx>-150</posx>
-            <posy>260</posy>
-            <visible>Control.HasFocus(8021$SKINSHORTCUTS[id])</visible>
-            <include>FondWidgetInfo</include>
-            <control type="group">
-              <posy>5</posy>
-              <control type="image">
-                <posx>-45</posx>
-                <width>40</width>
-                <height>40</height>
-                <aspectratio>keep</aspectratio>
-                <texture>ArrowLeftWD.png</texture>
-                <visible>!String.IsEmpty(Container(9000).ListItem.Property(widget.2))+!Container(8011$SKINSHORTCUTS[id]).IsUpdating+Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)</visible>
-              </control>
-            </control>
-             <control type="fadelabel">
-              <posx>10</posx>
-              <posy>-12</posy>
-              <width>895</width>
-              <height>30</height>
-              <align>center</align>
-              <scroll>true</scroll>
-              <scrollspeed>30</scrollspeed>
-              <font>METF_StarRating</font>
-              <textcolor>yellow</textcolor>
-              <label>$VAR[GlobalWidgetLabel8021$SKINSHORTCUTS[id]]</label>
-            </control>
-            <control type="fadelabel">
-              <left>20</left>
-              <posy>22</posy>
-              <width>855</width>
-              <height>30</height>
-              <align>center</align>
-              <aligny>bottom</aligny>
-              <scroll>true</scroll>
-              <scrollspeed>30</scrollspeed>
-              <font>PlotFont</font>
-              <textcolor>lightgrey</textcolor>
-              <label>$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Plot]</label>
-            </control>
-          </control>
-        </control>
-        <!-- Widget -->
-        <control type="group">
-          <top>$SKINSHORTCUTS[top]</top>
-          <control type="group">
-            <posx>-270</posx>
-            <posy>-10</posy>
-            <control type="image">
-              <posy>-8</posy>
-              <width>220</width>
-              <height>260</height>
-              <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
-              <bordersize>2</bordersize>
-              <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVarList8021$SKINSHORTCUTS[id]]</texture>
-            </control>
-            <control type="image">
-              <posx>830</posx>
-              <width>350</width>
-              <height>300</height>
-              <aspectratio align="center" aligny="center">keep</aspectratio>
-              <texture  diffuse="frames/EpisodeMatte.png">$VAR[HomeWidgetArtList8021$SKINSHORTCUTS[id]]</texture>
-            </control>
-          </control>
-          <control type="list" id="8021$SKINSHORTCUTS[id]">
-            <posx>-70</posx>
-            <posy>0</posy>
-            <width>630</width>
-            <height>240</height>
-            <onright>9000</onright>
-            <onunfocus>SetProperty(WidgetActifFanart,,Home)</onunfocus>
-            <onleft condition="Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)">9022</onleft>
-            <onleft>9000</onleft>
-            <onback>9000</onback>
-            <autoscroll delay="8000" repeat="10000" time="10000">Skin.HasSetting(AutoRotateWidget)+[Control.HasFocus(9000)|Control.HasFocus(9001)]</autoscroll>
-            <viewtype>list</viewtype>
-            <orientation>vertical</orientation>
-            <top>0</top>
-            <left>0</left>
-            <width>1200</width>
-            <height>255</height>
-            <orientation>vertical</orientation>
-            <preloaditems>2</preloaditems>
-            <scrolltime >300</scrolltime>
-            <itemlayout width="620" height="30">
-              <control type="label">
-                <posx>10</posx>
-                <posy>-6</posy>
-                <width>620</width>
-                <height>28</height>
-                <align>left</align>
-                <aligny>center</aligny>
-                <scrollout>false</scrollout>
-                <scrollspeed>20</scrollspeed>
-                <font>METF_RecentlyAddedListText</font>
-                <textcolor>yellow</textcolor>
-                <label>$VAR[GlobalWidgetLabel2]</label>
-              </control>
-            </itemlayout>
-            <focusedlayout width="550" height="30">
-              <!-- Focus Bar -->
-              <control type="button">
-                <onfocus condition="Control.HasFocus(8021$SKINSHORTCUTS[id])">SetProperty(WidgetActifFanart,$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(fanart)],Home)</onfocus>
-              </control>
-              <control type="image">
-                <posx>0</posx>
-                <posy>-6</posy>
-                <width>620</width>
-                <height>28</height>
-                <aligny>center</aligny>
-                <texture>FocusLine.png</texture>
-                <colordiffuse>FocusBar</colordiffuse>
-                <visible>Control.HasFocus(8021$SKINSHORTCUTS[id])</visible>
-              </control>
-              <control type="label" >
-                <posx>10</posx>
-                <posy>-6</posy>
-                <width>620</width>
-                <height>28</height>
-                <align>left</align>
-                <aligny>center</aligny>
-                <scrollout>false</scrollout>
-                <pauseatend>600</pauseatend>
-                <scrollspeed>20</scrollspeed>
-                <font>METF_RecentlyAddedListText</font>
-                <textcolor>white</textcolor>
-                <label>[B]$VAR[GlobalWidgetLabel2][/B]</label>
-              </control>
-            </focusedlayout>
-            <content target="$SKINSHORTCUTS[target]" sortby="$SKINSHORTCUTS[sortby]" sortorder="$SKINSHORTCUTS[sort]">$SKINSHORTCUTS[content]</content>
-          </control>
-        </control>
-
-      </control>
-    </controls>
-  </other>
-
-  <other include="widget2"><!-- Widget Panneau -->
-    <condition tag="property" attribute="name|widgetStyle.2">Panel</condition>
-    <condition tag="property" attribute="name|widget.2" />
-    <match>all</match>
-    <property name="id" tag="mainmenuid" />
-    <property name="widget" tag="property" attribute="name|widget.2" />
-    <property name="widgettype" tag="property" attribute="name|widgetType.2" />
-    <property name="content" tag="property" attribute="name|widgetPath.2" />
-    <property name="target" tag="property" attribute="name|widgetTarget.2" />
-    <property name="label" tag="property" attribute="name|widgetName.2" />
-    <property name="sortby" tag="property" attribute="name|widgetSort.2" />
-    <property name="sort" tag="property" attribute="name|widgetSortOrder.2" />
-    <property name="top">0</property>
-
-    <controls>
-      <control type="group">
-        <skinshortcuts>visibility</skinshortcuts>
-
-        <animation effect="slide" start="0,0" end="-1920,0" delay="150" tween="cubic" time="350" condition="[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Control.HasFocus(8021$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)]+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
-        <animation effect="slide"  end="0,-50" delay="150" tween="cubic" time="350" condition="Control.HasFocus(8021$SKINSHORTCUTS[id])+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
-        <animation effect="slide" start="0,0" end="-270,0" delay="150" tween="cubic" time="350" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH.2)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))">Conditional</animation>
-
-        <control type="group">
-          <visible>Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)</visible>
-          <include>FondWidgetH</include>
-          <control type="label">
-            <posx>-268</posx>
-            <posy>-20</posy>
-            <width>250</width>
-            <height>25</height>
-            <align>left</align>
-            <scrollspeed>30</scrollspeed>
-            <scroll>true</scroll>
-            <angle>270</angle>
-            <label>[B]$INFO[Container(9000).ListItem.Property(widgetName.2)][/B]</label>
-            <visible>!Skin.HasSetting(ShowFullWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
-            <shadowcolor>ff000000</shadowcolor>
-          </control>
-          <control type="label"><!-- label horizontal -->
-            <posx>-253</posx>
-            <posy>-70</posy>
-            <width>1770</width>
-            <height>30</height>
-            <textcolor>black</textcolor>
-            <align>center</align>
-            <font>comic36</font>
-            <scrollspeed>30</scrollspeed>
-            <scroll>true</scroll>
-            <label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B]$VAR[HWidgetLabel8021$SKINSHORTCUTS[id]]</label>
-            <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
-          </control>
-          <control type="label">
-            <posx>-249</posx>
-            <posy>-68</posy>
-            <width>1770</width>
-            <height>30</height>
-            <textcolor>yellow</textcolor>
-            <align>center</align>
-            <font>comic36</font>
-            <scrollspeed>30</scrollspeed>
-            <scroll>true</scroll>
-            <label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B][COLOR=white]$VAR[HWidgetLabel8021$SKINSHORTCUTS[id]][/COLOR]</label>
-            <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
-          </control>
-          <control type="group">
-            <posx>-150</posx>
-            <posy>260</posy>
-            <visible>Control.HasFocus(8021$SKINSHORTCUTS[id])</visible>
-            <include>FondWidgetInfoH</include>
-            <control type="group">
-              <posy>5</posy>
-              <control type="image">
-                <posx>-45</posx>
-                <width>40</width>
-                <height>40</height>
-                <aspectratio>keep</aspectratio>
-                <texture>ArrowDownWD.png</texture>
-                <visible>!String.IsEmpty(Container(9000).ListItem.Property(widget))+!Container(8011$SKINSHORTCUTS[id]).IsUpdating+Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)</visible>
-              </control>
-            </control>
-          <control type="fadelabel">
-              <posx>10</posx>
-              <posy>-12</posy>
-              <width>1500</width>
-              <height>30</height>
-              <align>center</align>
-              <scroll>true</scroll>
-              <scrollspeed>30</scrollspeed>
-              <font>METF_StarRating</font>
-              <textcolor>yellow</textcolor>
-              <label>$VAR[GlobalWidgetLabel8021$SKINSHORTCUTS[id]]</label>
-            </control>
-            <control type="fadelabel">
-              <left>50</left>
-              <posy>22</posy>
-              <width>1400</width>
-              <height>30</height>
-              <align>center</align>
-              <aligny>bottom</aligny>
-              <scroll>true</scroll>
-              <scrollspeed>30</scrollspeed>
-              <font>PlotFont</font>
-              <textcolor>lightgrey</textcolor>
-              <label>$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Plot]</label>
             </control>
           </control>
         </control>
@@ -1065,135 +335,1087 @@
             <posy>-10</posy>
             <control type="image">
               <posy>-8</posy>
-              <width>220</width>
-              <height>260</height>
-              <aspectratio scalediffuse="true"  align="center" aligny="center">keep</aspectratio>
-              <bordersize>2</bordersize>
-              <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVarList8021$SKINSHORTCUTS[id]]</texture>
-              <visible>[!Control.HasFocus(8021$SKINSHORTCUTS[id])+!Skin.HasSetting(ShowFullWidgets)]+String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
+              <width>200</width>
+              <height>250</height>
+              <aspectratio align="center" aligny="center">keep</aspectratio>
+              <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
+              <bordersize>6</bordersize>
+              <bordertexture border="6">landscape.png</bordertexture>
+              <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVarList8011$SKINSHORTCUTS[id]]</texture>
+              <fadetime>800</fadetime>
+
+            </control>
+
+            <control type="image">
+              <posx>830</posx>
+              <width>350</width>
+              <height>300</height>
+              <aspectratio align="center" aligny="center">keep</aspectratio>
+              <texture  diffuse="frames/EpisodeMatte.png">$VAR[HomeWidgetArtList8011$SKINSHORTCUTS[id]]</texture>
+            </control>
+            <control type="grouplist">
+              <align>center</align>
+              <orientation>horizontal</orientation>
+
+              <visible>String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(poster))+String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(tvshow.poster))+String.Contains(Container(8011$SKINSHORTCUTS[id]).ListItem.Icon,default)+String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(thumb))+String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(fanart))</visible>
+              <animation type="Conditional" condition="true">
+                <effect type="rotate" center="0,0" end="-45" time="1" />
+              </animation>
+              <width>305</width>
+              <height>40</height>
+
+              <control type="button">
+                <width max="280">auto</width>
+                <height>40</height>
+
+                <align>center</align>
+                <aligny>center</aligny>
+                <font>defaut24</font>
+                <textcolor>black</textcolor>
+                <shadowcolor>white</shadowcolor>
+              <!-- <label>$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Label]</label> -->
+              <label>$VAR[GlobalWidgetLabel8011$SKINSHORTCUTS[id]]</label>
+
+              <shadowcolor>FF000000</shadowcolor>
+              <textoffsetx>5</textoffsetx>
+              <texturenofocus />
+            </control>
+
+          </control>
+        </control>
+        <control type="list" id="8011$SKINSHORTCUTS[id]">
+          <posx>-70</posx>
+          <posy>0</posy>
+          <width>630</width>
+          <height>240</height>
+          <onright condition="Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget.2),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget.2),SystemInfo)">9023</onright>
+          <onright>9000</onright>
+          <onleft>9000</onleft>
+          <onback>9000</onback>
+        <!-- <autoscroll delay="8000" repeat="10000" time="10000">Skin.HasSetting(AutoRotateWidget)+!Control.HasFocus(8011$SKINSHORTCUTS[id])</autoscroll> -->
+        <autoscroll delay="8000" repeat="10000" time="10000">Skin.HasSetting(AutoRotateWidget)+[Control.HasFocus(9000)|Control.HasFocus(9001)]</autoscroll>
+        <viewtype>list</viewtype>
+        <orientation>vertical</orientation>
+        <top>0</top>
+        <left>0</left>
+        <width>1200</width>
+        <height>255</height>
+        <onunfocus>SetProperty(WidgetActifFanart,,Home)</onunfocus>
+        <orientation>vertical</orientation>
+        <preloaditems>2</preloaditems>
+        <scrolltime >300</scrolltime>
+        <itemlayout width="620" height="30">
+          <control type="label">
+            <posx>10</posx>
+            <posy>-6</posy>
+            <width>620</width>
+            <height>28</height>
+            <align>left</align>
+            <aligny>center</aligny>
+            <scrollout>false</scrollout>
+            <scrollspeed>20</scrollspeed>
+            <font>METF_RecentlyAddedListText</font>
+            <textcolor>yellow</textcolor>
+            <label>$VAR[GlobalWidgetLabel]</label>
+          </control>
+        </itemlayout>
+        <focusedlayout width="550" height="30">
+          <!-- Focus Bar -->
+          <control type="button">
+            <onfocus condition="Control.HasFocus(8011$SKINSHORTCUTS[id])">SetProperty(WidgetActifFanart,$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(fanart)],Home)</onfocus>
+          </control>
+          <control type="image">
+            <posx>0</posx>
+            <posy>-6</posy>
+            <width>620</width>
+            <height>28</height>
+            <aligny>center</aligny>
+            <texture>FocusLine.png</texture>
+            <colordiffuse>FocusBar</colordiffuse>
+            <visible>Control.HasFocus(8011$SKINSHORTCUTS[id])</visible>
+          </control>
+          <control type="label" >
+            <posx>10</posx>
+            <posy>-6</posy>
+            <width>620</width>
+            <height>28</height>
+            <align>left</align>
+            <aligny>center</aligny>
+            <scrollout>false</scrollout>
+            <pauseatend>600</pauseatend>
+            <scrollspeed>20</scrollspeed>
+            <font>METF_RecentlyAddedListText</font>
+            <textcolor>white</textcolor>
+            <label>[B]$VAR[GlobalWidgetLabel][/B]</label>
+          </control>
+        </focusedlayout>
+        <content target="$SKINSHORTCUTS[target]" sortby="$SKINSHORTCUTS[sortby]" sortorder="$SKINSHORTCUTS[sort]">$SKINSHORTCUTS[content]</content>
+      </control>
+    </control>
+
+  </control>
+</controls>
+</other>
+
+<other include="widget1"><!-- Widget Panneau -->
+  <condition tag="property" attribute="name|widget" />
+  <match>all</match>
+  <property name="id" tag="mainmenuid" />
+  <property name="widget" tag="property" attribute="name|widget" />
+  <property name="widgettype" tag="property" attribute="name|widgetType" />
+  <property name="content" tag="property" attribute="name|widgetPath" />
+  <property name="target" tag="property" attribute="name|widgetTarget" />
+  <property name="label" tag="property" attribute="name|widgetName" />
+  <property name="sortby" tag="property" attribute="name|widgetSort" />
+  <property name="sort" tag="property" attribute="name|widgetSortOrder" />
+
+
+  <controls>
+    <control type="group">
+      <skinshortcuts>visibility</skinshortcuts>
+      <animation effect="slide" start="0,0" end="-1920,0" delay="150" tween="cubic" time="350" condition="[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))|Control.HasFocus(8011$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)]+!Container(8011$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
+      <animation effect="slide" end="0,-40" delay="150" tween="cubic" time="350" condition="Control.HasFocus(8011$SKINSHORTCUTS[id])+!Container(8011$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
+      <animation effect="slide" start="0,0" end="-270,0" delay="150" tween="cubic" time="350" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+[!Control.HasFocus(8011$SKINSHORTCUTS[id])|[Control.HasFocus(8011$SKINSHORTCUTS[id])+Container(8011$SKINSHORTCUTS[id]).IsUpdating]]+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow))">Conditional</animation>
+      <animation effect="rotatey" center="-90,0" delay="300" start="0" end="65" time="1" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+[!Control.HasFocus(8011$SKINSHORTCUTS[id])|[Control.HasFocus(8011$SKINSHORTCUTS[id])+Container(8011$SKINSHORTCUTS[id]).IsUpdating]]+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow))">Conditional</animation>
+      <control type="group">
+        <visible>Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)</visible>
+        <include>FondWidgetH</include>
+        <control type="label"> <!-- label vertical -->
+          <posx>-268</posx>
+          <posy>-20</posy>
+          <width>250</width>
+          <height>25</height>
+          <align>left</align>
+          <scrollspeed>30</scrollspeed>
+          <scroll>true</scroll>
+          <angle>270</angle>
+          <label>[B]$INFO[Container(9000).ListItem.Property(widgetName)][/B]</label>
+          <visible>!Skin.HasSetting(ShowFullWidgets)+!Control.HasFocus(8011$SKINSHORTCUTS[id])+String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
+          <shadowcolor>ff000000</shadowcolor>
+        </control>
+        <control type="label"> <!-- label horizontal -->
+          <posx>-253</posx>
+          <posy>-70</posy>
+          <width>1770</width>
+          <height>30</height>
+          <textcolor>black</textcolor>
+          <align>center</align>
+          <font>comic36</font>
+          <scrollspeed>30</scrollspeed>
+          <scroll>true</scroll>
+          <label>[B] $INFO[Container(9000).ListItem.Property(widgetName)] [/B]$VAR[HWidgetLabel8011$SKINSHORTCUTS[id]]</label>
+          <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8011$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
+        </control>
+        <control type="label">
+          <posx>-249</posx>
+          <posy>-68</posy>
+          <width>1770</width>
+          <height>30</height>
+          <textcolor>yellow</textcolor>
+          <align>center</align>
+          <font>comic36</font>
+          <scrollspeed>30</scrollspeed>
+          <scroll>true</scroll>
+          <label>[B] $INFO[Container(9000).ListItem.Property(widgetName)] [/B][COLOR=white]$VAR[HWidgetLabel8011$SKINSHORTCUTS[id]][/COLOR]</label>
+          <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8011$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
+        </control>
+        <control type="group">
+          <posx>-150</posx>
+          <posy>260</posy>
+          <visible>Control.HasFocus(8011$SKINSHORTCUTS[id])</visible>
+          <include>FondWidgetInfoH</include>
+          <control type="group">
+            <posy>5</posy>
+            <control type="image">
+              <posx>1540</posx>
+              <width>40</width>
+              <height>40</height>
+              <aspectratio>keep</aspectratio>
+              <texture>ArrowUpWD.png</texture>
+              <visible>!String.IsEmpty(Container(9000).ListItem.Property(widget.2))+!Container(8021$SKINSHORTCUTS[id]).IsUpdating+Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)</visible>
             </control>
           </control>
-          <control type="list" id="8021$SKINSHORTCUTS[id]">
-            <top>-5</top>
-            <left>-265</left>
-            <width>1800</width>
-            <height>255</height>
-            <onunfocus>SetProperty(WidgetActifFanart,,Home)</onunfocus>
-            <ondown condition="Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)">9022</ondown>
-            <ondown>9000</ondown>
-            <onup>9000</onup>
-            <onback>9000</onback>
-            <orientation>horizontal</orientation>
-            <preloaditems>2</preloaditems>
-            <autoscroll delay="8000" repeat="10000" time="10000">Skin.HasSetting(AutoRotateWidget)+[Control.HasFocus(9000)|Control.HasFocus(9001)]</autoscroll>
-            <itemlayout width="203" height="255">
-              <control type="image">
-                <width>180</width>
-                <height>240</height>
-                <aspectratio scalediffuse="true"  align="center" aligny="center">keep</aspectratio>
-                <bordersize>2</bordersize>
-                <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVar]</texture>
-                <animation type="Conditional" reversible="false" condition="System.IdleTime(1)+Control.HasFocus(8021$SKINSHORTCUTS[id])">
-                  <effect type="zoom" center="90,130" start="100" end="80" time="500" tween="bounce" easy="out"  />
-                </animation>
-                <visible>!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Control.HasFocus(8021$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)</visible>
-              </control>
-            </itemlayout>
-            <focusedlayout width="203" height="255">
-              <control type="button">
-                <onfocus condition="Control.HasFocus(8021$SKINSHORTCUTS[id])">SetProperty(WidgetActifFanart,$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(fanart)],Home)</onfocus>
-              </control>
-              <control type="image">
-                <width>180</width>
-                <height>240</height>
-                <aspectratio scalediffuse="true"  align="center" aligny="center">keep</aspectratio>
-                <bordersize>2</bordersize>
-                <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVar]</texture>
-                <visible>!Control.HasFocus(8021$SKINSHORTCUTS[id])+[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Skin.HasSetting(ShowFullWidgets)]</visible>
-              </control>
-              <control type="image">
-                <width>180</width>
-                <height>240</height>
-                <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
-                <texture>$VAR[HomeWidgetPosterVar]</texture>
-                <bordersize>8</bordersize>
-                <bordertexture border="8">landscape.png</bordertexture>
-                <animation type="Focus" reversible="false">
-                  <effect type="zoom" center="90,130" start="98" end="110" time="500" tween="bounce" easy="out"  />
-                </animation>
-                <visible>Control.HasFocus(8021$SKINSHORTCUTS[id])</visible>
-              </control>
-            </focusedlayout>
-            <content target="$SKINSHORTCUTS[target]" sortby="$SKINSHORTCUTS[sortby]" sortorder="$SKINSHORTCUTS[sort]">$SKINSHORTCUTS[content]</content>
+          <control type="fadelabel">
+            <posx>10</posx>
+            <posy>-10</posy>
+            <width>1500</width>
+            <height>30</height>
+            <align>center</align>
+            <scroll>true</scroll>
+            <scrollspeed>30</scrollspeed>
+            <font>METF_StarRating</font>
+<shadowcolor>black</shadowcolor>
+            <textcolor>FFFFD966</textcolor>
+            <label>$VAR[GlobalWidgetLabel8011$SKINSHORTCUTS[id]]</label>
+
+          </control>
+          <control type="fadelabel">
+            <left>20</left>
+            <posy>24</posy>
+            <width>1500</width>
+            <height>30</height>
+            <align>center</align>
+            <aligny>bottom</aligny>
+            <scroll>true</scroll>
+            <scrollspeed>30</scrollspeed>
+            <font>PlotFont</font>
+<shadowcolor>black</shadowcolor>
+            <textcolor>lightgrey</textcolor>
+            <label>$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Plot]</label>
           </control>
         </control>
       </control>
-    </controls>
-  </other>
+      <!-- Widget -->
+      <control type="group">
+        <posx>-265</posx>
+        <posy>-10</posy>
+        <control type="group">
+          <control type="image">
+            <posy>-8</posy>
+            <width>200</width>
+            <height>250</height>
+            <aspectratio scalediffuse="true"  align="center" aligny="center">keep</aspectratio>
+            <bordersize>6</bordersize>
+            <bordertexture border="6">landscape.png</bordertexture>
+            <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVarList8011$SKINSHORTCUTS[id]]</texture>
+            <fadetime>800</fadetime>
+            <visible>!Control.HasFocus(8011$SKINSHORTCUTS[id])+!Skin.HasSetting(ShowFullWidgets)+String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
+          </control>
+          <!-- -->
+          <control type="grouplist">
+            <align>center</align>
+            <orientation>horizontal</orientation>
+            <visible>!Control.HasFocus(8011$SKINSHORTCUTS[id])+!Skin.HasSetting(ShowFullWidgets)+String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
 
-  <!--  VARS -->
-  <other include="WidgetVars">
+            <visible>String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(poster))+String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(tvshow.poster))+String.Contains(Container(8011$SKINSHORTCUTS[id]).ListItem.Icon,default)+String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(thumb))+String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(fanart))</visible>
+            <animation type="Conditional" condition="true">
+              <effect type="rotate" center="0,0" end="-45" time="1" />
+            </animation>
+            <width>305</width>
+            <height>40</height>
 
-    <property name="id" tag="mainmenuid" />
+            <control type="button">
+              <width max="280">auto</width>
+              <height>40</height>
 
-    <variables>
-      <variable name="HWidgetLabel8011$SKINSHORTCUTS[id]">
-        <value condition="Control.HasFocus(8011$SKINSHORTCUTS[id])">[I] ($INFO[Container(8011$SKINSHORTCUTS[id]).CurrentItem]/$INFO[Container(8011$SKINSHORTCUTS[id]).NumItems])[/I]</value>
-      </variable>
-      <variable name="HWidgetLabel8021$SKINSHORTCUTS[id]">
-        <value condition="Control.HasFocus(8021$SKINSHORTCUTS[id])">[I] ($INFO[Container(8021$SKINSHORTCUTS[id]).CurrentItem]/$INFO[Container(8021$SKINSHORTCUTS[id]).NumItems])[/I]</value>
-      </variable>
-      <variable name="GlobalWidgetLabel8011$SKINSHORTCUTS[id]">
-        <value condition="String.Contains(Container(9000).ListItem.Property(widget),RecentlyAddedMovies)
-          |String.Contains(Container(9000).ListItem.Property(widget),RecommendedMovies)
-        |String.Contains(Container(9000).ListItem.Property(widget),RandomMovies)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
-        <value condition="String.Contains(Container(9000).ListItem.Property(widget),RecentlyAddedEpisodes)|String.Contains(Container(9000).ListItem.Property(widget),RandomEpisodes)|String.Contains(Container(9000).ListItem.Property(widget),RecommendedEpisodes)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.TVShowTitle] - $INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Season,S,E]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Episode,,: ]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]</value>
-        <value condition="String.Contains(Container(9000).ListItem.Property(widget),RecentlyAddedAlbums)|String.Contains(Container(9000).ListItem.Property(widget),RandomAlbums)|String.Contains(Container(9000).ListItem.Property(widget),RecommendedAlbums)|String.Contains(Container(9000).ListItem.Property(widget),RandomSongs)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Artist] - $INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
-        <value condition="String.Contains(Container(9000).ListItem.Property(widget),NAired)|String.Contains(Container(9000).ListItem.Property(widgetpath),nextaired)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Label] : ([COLOR=white]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Property(airday)] $INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Property(airdate)][/COLOR])</value>
-        <value condition="String.Contains(Container(9000).ListItem.Property(widget),Playlist) + String.IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
-        <value condition="String.Contains(Container(9000).ListItem.Property(widget),Playlist) + !String.Contains(ListItem.Title,ListItem.TVShowTitle) + !String.IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.TVShowTitle] - $INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Season,S,]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Episode,E,. ]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]</value>
-        <value>$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Label]</value>
-      </variable>
-      <variable name="HomeWidgetPosterVarList8011$SKINSHORTCUTS[id]">
-        <value condition="!String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(poster))">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(poster)]</value>
-        <value condition="!String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(tvshow.poster))">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(tvshow.poster)]</value>
-        <value condition="!String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Icon)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Icon]</value>
-        <value condition="!String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(thumb))">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(thumb)]</value>
-        <value condition="!String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(fanart))">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(fanart)]</value>
-      </variable>
-      <variable name="HomeWidgetArtList8011$SKINSHORTCUTS[id]">
-        <value condition="!String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(clearart))">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(clearart)]</value>
-        <value condition="!String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(clearlogo))">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(clearlogo)]</value>
-      </variable>
-      <variable name="GlobalWidgetLabel8021$SKINSHORTCUTS[id]">
-        <value condition="String.Contains(Container(9000).ListItem.Property(widget.2),RecentlyAddedMovies)|String.Contains(Container(9000).ListItem.Property(widget.2),RecommendedMovies)|String.Contains(Container(9000).ListItem.Property(widget.2),RandomMovies)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
-        <value condition="String.Contains(Container(9000).ListItem.Property(widget.2),RecentlyAddedEpisodes)|String.Contains(Container(9000).ListItem.Property(widget.2),RandomEpisodes)|String.Contains(Container(9000).ListItem.Property(widget.2),RecommendedEpisodes)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.TVShowTitle] - $INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Season,S,E]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Episode,,: ]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]</value>
-        <value condition="String.Contains(Container(9000).ListItem.Property(widget.2),RecentlyAddedAlbums)|String.Contains(Container(9000).ListItem.Property(widget.2),RandomAlbums)|String.Contains(Container(9000).ListItem.Property(widget.2),RecommendedAlbums)|String.Contains(Container(9000).ListItem.Property(widget.2),RandomSongs)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Artist] - $INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
-        <value condition="String.Contains(Container(9000).ListItem.Property(widget.2),NAired)|String.Contains(Container(9000).ListItem.Property(widgetpath.2),nextaired)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Label] : ([COLOR=white]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Property(airday)] $INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Property(airdate)][/COLOR])</value>
-        <value condition="String.Contains(Container(9000).ListItem.Property(widget.2),Playlist) + String.IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
-        <value condition="String.Contains(Container(9000).ListItem.Property(widget.2),Playlist) + !String.Contains(ListItem.Title,ListItem.TVShowTitle) + !String.IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.TVShowTitle] - $INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Season,S,]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Episode,E,. ]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]</value>
-        <value>$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Label]</value>
-      </variable>
-      <variable name="HomeWidgetPosterVarList8021$SKINSHORTCUTS[id]">
-        <value condition="!String.IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.Art(poster))">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(poster)]</value>
-        <value condition="!String.IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.Art(tvshow.poster))">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(tvshow.poster)]</value>
-        <value condition="!String.IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.Icon)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Icon]</value>
-        <value condition="!String.IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.Art(thumb))">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(thumb)]</value>
-        <value condition="!String.IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.Art(fanart))">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(fanart)]</value>
-      </variable>
-      <variable name="HomeWidgetArtList8021$SKINSHORTCUTS[id]">
-        <value condition="!String.IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.Art(clearart))">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(clearart)]</value>
-        <value condition="!String.IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.Art(clearlogo))">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(clearlogo)]</value>
-      </variable>
-      <variable name="Wd1Visible">
-        <value condition="Container(9000).HasFocus($SKINSHORTCUTS[id])+[Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget),SystemInfo)]">9022</value>
-        <value></value>
-      </variable>
-      <variable name="Wd2Visible">
-        <value condition="Container(9000).HasFocus($SKINSHORTCUTS[id])+[Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget.2),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget.2),SystemInfo)]">9023</value>
-        <value></value>
-      </variable>
-    </variables>
-  </other>
+              <align>center</align>
+              <aligny>center</aligny>
+              <font>defaut24</font>
+              <textcolor>black</textcolor>
+              <shadowcolor>white</shadowcolor>
+            <!-- <label>$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Label]</label> -->
+            <label>$VAR[GlobalWidgetLabel8011$SKINSHORTCUTS[id]]</label>
+
+            <shadowcolor>FF000000</shadowcolor>
+            <textoffsetx>5</textoffsetx>
+            <texturenofocus />
+          </control>
+
+
+
+        </control>
+        -->
+      </control>
+      <control type="list" id="8011$SKINSHORTCUTS[id]">
+        <width>1800</width>
+        <height>255</height>
+        <ondown>9000</ondown>
+        <onunfocus>SetProperty(WidgetActifFanart,,Home)</onunfocus>
+        <onup condition="Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget.2),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget.2),SystemInfo)">9023</onup>
+        <onup>9000</onup>
+        <onback>9000</onback>
+        <orientation>horizontal</orientation>
+        <preloaditems>0</preloaditems>
+        <autoscroll delay="8000" repeat="10000" time="10000">Skin.HasSetting(AutoRotateWidget)+[Control.HasFocus(9000)|Control.HasFocus(9001)]</autoscroll>
+        <itemlayout width="203" height="255">
+          <control type="image">
+            <width>180</width>
+            <height>240</height>
+            <aspectratio scalediffuse="true"  align="center" aligny="center">keep</aspectratio>
+            <bordersize>2</bordersize>
+            <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVar]</texture>
+            <visible>!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))|Control.HasFocus(8011$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)</visible>
+            <animation type="Conditional" reversible="false" condition="Control.HasFocus(8011$SKINSHORTCUTS[id])">
+              <effect type="zoom" center="90,130" start="100" end="80" time="500" tween="bounce" easy="out"  />
+            </animation>
+          </control>
+
+          <control type="group">
+            <visible>String.IsEmpty(ListItem.Art(poster))+String.IsEmpty(ListItem.Art(tvshow.poster))+String.Contains(ListItem.Icon,default)+String.IsEmpty(ListItem.Art(thumb))+String.IsEmpty(ListItem.Art(fanart))</visible>
+            <visible>!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))|Control.HasFocus(8011$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)</visible>
+            <animation type="Conditional" reversible="false" condition="Control.HasFocus(8011$SKINSHORTCUTS[id])">
+              <effect type="zoom" center="90,130" start="100" end="80" time="500" tween="bounce" easy="out"  />
+            </animation>
+            <animation type="Conditional" condition="true">
+              <effect type="rotate" center="0,0" end="-45" time="1" />
+            </animation>
+            <width>305</width>
+            <height>40</height>
+            <control type="label">
+              <width max="280">auto</width>
+              <height>40</height>
+
+              <align>center</align>
+              <aligny>center</aligny>
+              <font>defaut24</font>
+              <textcolor>black</textcolor>
+              <shadowcolor>white</shadowcolor>
+              <label>$VAR[GlobalWidgetLabel]</label>
+
+              <shadowcolor>FF000000</shadowcolor>
+              <textoffsetx>5</textoffsetx>
+              <texturenofocus />
+            </control>
+          </control>
+        </itemlayout>
+        <focusedlayout width="203" height="255">
+          <control type="button">
+
+            <onfocus condition="Control.HasFocus(8011$SKINSHORTCUTS[id])">SetProperty(WidgetActifFanart,$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(fanart)],Home)</onfocus>
+          </control>
+          <control type="image">
+            <width>180</width>
+            <height>240</height>
+            <aspectratio scalediffuse="true"  align="center" aligny="center">keep</aspectratio>
+            <bordersize>2</bordersize>
+            <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVar]</texture>
+            <visible>!Control.HasFocus(8011$SKINSHORTCUTS[id])+[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))|Skin.HasSetting(ShowFullWidgets)]</visible>
+
+          </control>
+          <control type="image">
+            <width>180</width>
+            <height>240</height>
+            <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
+            <texture>$VAR[HomeWidgetPosterVar]</texture>
+            <bordersize>8</bordersize>
+            <bordertexture border="8">landscape.png</bordertexture>
+            <visible>Control.HasFocus(8011$SKINSHORTCUTS[id])</visible>
+            <animation type="Focus" reversible="false">
+              <effect type="zoom" center="90,130" start="98" end="110" time="500" tween="bounce" easy="out"  />
+            </animation>
+          </control>
+          <control type="group">
+            <visible>String.IsEmpty(ListItem.Art(poster))+String.IsEmpty(ListItem.Art(tvshow.poster))+String.Contains(ListItem.Icon,default)+String.IsEmpty(ListItem.Art(thumb))+String.IsEmpty(ListItem.Art(fanart))</visible>
+
+            <animation type="Conditional" condition="true">
+              <effect type="rotate" center="0,0" end="-45" time="1" />
+            </animation>
+            <width>280</width>
+            <height>40</height>
+            
+            <control type="label">
+
+              <width>280</width>
+              <align>center</align>
+              <aligny>center</aligny>
+              <font>defaut24</font>
+              <textcolor>black</textcolor>
+              <shadowcolor>white</shadowcolor>
+              <label>$VAR[GlobalWidgetLabel]</label>
+            </control>
+          </control>
+        </focusedlayout>
+        <content target="$SKINSHORTCUTS[target]" sortby="$SKINSHORTCUTS[sortby]" sortorder="$SKINSHORTCUTS[sort]">$SKINSHORTCUTS[content]</content>
+      </control>
+    </control>
+  </control>
+</controls>
+</other>
+
+<!-- ******* WIDGET 2 ******* -->
+
+<other include="widget2"><!-- Widget SystemInfo -->
+  <condition tag="property" attribute="name|widget.2">SystemInfo</condition>
+  <property name="id" tag="mainmenuid" />
+  <property name="widget" tag="property" attribute="name|widget.2" />
+  <controls>
+    <control type="group">
+      <posx>-310</posx>
+      <posy>-33</posy>
+      <include>FondWidgetMeteo</include>
+      <skinshortcuts>visibility</skinshortcuts>
+      <animation effect="slide" start="0,0" end="-1620,0" delay="150" tween="cubic" time="350" condition="[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Control.HasFocus(8021$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)]+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
+      <animation effect="slide"  end="0,-40" delay="150" tween="cubic" time="350" condition="Control.HasFocus(8021$SKINSHORTCUTS[id])+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
+      <animation effect="slide" start="0,0" end="-270,0" delay="150" tween="cubic" time="350" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH.2)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))">Conditional</animation>
+      <animation effect="rotatey" center="-90,0" delay="300" start="0" end="65" time="1" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH.2)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))">Conditional</animation>
+      <control type="group">
+        <control type="label">
+          <posy>8</posy>
+          <posx>35</posx>
+          <width>250</width>
+          <height>25</height>
+          <align>left</align>
+          <scrollspeed>30</scrollspeed>
+          <scroll>true</scroll>
+          <angle>270</angle>
+          <label>[B]$INFO[Container(9000).ListItem.Property(widgetName.2)][/B]</label>
+          <visible>!Skin.HasSetting(ShowFullWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
+          <shadowcolor>ff000000</shadowcolor>
+        </control>
+        <control type="label">
+          <posy>-35</posy>
+          <width>1370</width>
+          <height>30</height>
+          <textcolor>black</textcolor>
+          <align>center</align>
+          <font>comic36</font>
+          <scrollspeed>30</scrollspeed>
+          <scroll>true</scroll>
+          <label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B]</label>
+          <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
+        </control>
+        <control type="label">
+          <posy>-37</posy>
+          <posx>-3</posx>
+          <width>1370</width>
+          <height>30</height>
+          <textcolor>yellow</textcolor>
+          <align>center</align>
+          <font>comic36</font>
+          <scrollspeed>30</scrollspeed>
+          <scroll>true</scroll>
+          <label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B]</label>
+          <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
+        </control>
+      </control>
+      <control type="group">
+        <control type="list" id="8021$SKINSHORTCUTS[id]">
+          <posy>25</posy>
+          <posx>30</posx>
+          <ondown condition="Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget),SystemInfo)">9022</ondown>
+          <ondown>9000</ondown>
+          <onup>9000</onup>
+          <onleft>8021$SKINSHORTCUTS[id]</onleft>
+          <onright>8021$SKINSHORTCUTS[id]</onright>
+          <description>Widget Lists</description>
+          <include>SystemContentList</include>
+        </control>
+      </control>
+    </control>
+  </controls>
+</other>
+<other include="widget2"> <!-- Widget Meteo -->
+  <condition tag="property" attribute="name|widget.2">WeatherForecast</condition>
+  <property name="id" tag="mainmenuid" />
+  <property name="widget" tag="property" attribute="name|widget.2" />
+  <controls>
+    <control type="group">
+      <skinshortcuts>visibility</skinshortcuts>
+      <posx>-310</posx>
+      <posy>-33</posy>
+      <include>FondWidgetMeteo</include>
+      <animation effect="slide" start="0,0" end="-1620,0" delay="150" tween="cubic" time="350" condition="[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Control.HasFocus(8021$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)]+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
+      <animation effect="slide"  end="0,-40" delay="150" tween="cubic" time="350" condition="Control.HasFocus(8021$SKINSHORTCUTS[id])+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
+      <animation effect="slide" start="0,0" end="-270,0" delay="150" tween="cubic" time="350" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH.2)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))">Conditional</animation>
+      <animation effect="rotatey" center="-90,0" delay="300" start="0" end="65" time="1" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH.2)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))">Conditional</animation>
+      <control type="group">
+        <control type="label">
+          <posy>8</posy>
+          <posx>35</posx>
+          <width>250</width>
+          <height>25</height>
+          <align>left</align>
+          <scrollspeed>30</scrollspeed>
+          <scroll>true</scroll>
+          <angle>270</angle>
+          <label>[B]$INFO[Container(9000).ListItem.Property(widgetName.2)][/B]</label>
+          <visible>!Skin.HasSetting(ShowFullWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
+          <shadowcolor>ff000000</shadowcolor>
+        </control>
+        <control type="label">
+          <posy>-35</posy>
+          <width>1370</width>
+          <height>30</height>
+          <textcolor>black</textcolor>
+          <align>center</align>
+          <font>comic36</font>
+          <scrollspeed>30</scrollspeed>
+          <scroll>true</scroll>
+          <label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B]$INFO[Weather.Location,(,)]</label>
+          <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
+        </control>
+        <control type="label">
+          <posy>-37</posy>
+          <posx>-3</posx>
+          <width>1370</width>
+          <height>30</height>
+          <textcolor>yellow</textcolor>
+          <align>center</align>
+          <font>comic36</font>
+          <scrollspeed>30</scrollspeed>
+          <scroll>true</scroll>
+          <label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B][COLOR=green]$INFO[Weather.Location,(,)][/COLOR]</label>
+          <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
+        </control>
+      </control>
+      <!-- meteo -->
+      <control type="group" >
+        <control type="button" id="8021$SKINSHORTCUTS[id]">
+          <onleft>9000</onleft>
+          <onright>9000</onright>
+          <ondown condition="Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget),SystemInfo)">9022</ondown>
+          <ondown>9000</ondown>
+          <onup>9000</onup>
+          <left>1</left>
+          <top>1</top>
+          <width>1</width>
+          <height>1</height>
+          <label>-</label>
+          <onclick>Close</onclick>
+          <onclick>ActivateWindow(weather)</onclick>
+        </control>
+        <control type="image">
+          <posy>50</posy>
+          <posx>550</posx>
+          <width>200</width>
+          <aspectratio align="center" aligny="center">keep</aspectratio>
+          <texture>$INFO[Window(weather).Property(WeatherProviderLogo)]</texture>
+          <colordiffuse>MediaFlagDiffuse</colordiffuse>
+        </control>
+        <control type="grouplist">
+          <include>DetailsMeteo</include>
+        </control>
+      </control>
+    </control>
+  </controls>
+</other>
+
+
+<other include="widget2"> <!-- Widget Liste -->
+  <condition tag="property" attribute="name|widgetStyle.2">List</condition>
+  <condition tag="property" attribute="name|widget.2" />
+  <match>all</match>
+  <property name="id" tag="mainmenuid" />
+  <property name="widget" tag="property" attribute="name|widget.2" />
+  <property name="widgettype" tag="property" attribute="name|widgetType.2" />
+  <property name="content" tag="property" attribute="name|widgetPath.2" />
+  <property name="target" tag="property" attribute="name|widgetTarget.2" />
+  <property name="label" tag="property" attribute="name|widgetName.2" />
+  <property name="sortby" tag="property" attribute="name|widgetSort.2" />
+  <property name="sort" tag="property" attribute="name|widgetSortOrder.2" />
+  <property name="top">0</property>
+
+  <controls>
+    <control type="group">
+      <skinshortcuts>visibility</skinshortcuts>
+      <animation effect="slide" start="0,0" end="-1620,0" delay="150" tween="cubic" time="350" condition="[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Control.HasFocus(8021$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)]+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
+      <animation effect="slide"  end="0,-50" delay="150" tween="cubic" time="350" condition="Control.HasFocus(8021$SKINSHORTCUTS[id])+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
+      <animation effect="slide" start="0,0" end="-270,0" delay="150" tween="cubic" time="350" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH.2)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))">Conditional</animation>
+      <animation effect="rotatey" center="-90,0" delay="300" start="0" end="65" time="1" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH.2)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))">Conditional</animation>
+      <control type="group">
+        <visible>Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)</visible>
+        <include>FondWidget</include>
+        <control type="label">
+          <posx>-268</posx>
+          <posy>-20</posy>
+          <width>250</width>
+          <height>25</height>
+          <align>left</align>
+          <scrollspeed>30</scrollspeed>
+          <scroll>true</scroll>
+          <angle>270</angle>
+          <label>[B]$INFO[Container(9000).ListItem.Property(widgetName.2)][/B]</label>
+          <visible>!Skin.HasSetting(ShowFullWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
+          <shadowcolor>ff000000</shadowcolor>
+        </control>
+        <control type="label">
+          <posx>-348</posx>
+          <posy>-70</posy>
+          <width>1370</width>
+          <height>30</height>
+          <textcolor>black</textcolor>
+          <align>center</align>
+          <font>comic36</font>
+          <scrollspeed>30</scrollspeed>
+          <scroll>true</scroll>
+          <label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B]$VAR[HWidgetLabel8021$SKINSHORTCUTS[id]]</label>
+          <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
+        </control>
+        <control type="label">
+          <posx>-344</posx>
+          <posy>-68</posy>
+          <width>1370</width>
+          <height>30</height>
+          <textcolor>yellow</textcolor>
+          <align>center</align>
+          <font>comic36</font>
+          <scrollspeed>30</scrollspeed>
+          <scroll>true</scroll>
+          <label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B][COLOR=white]$VAR[HWidgetLabel8021$SKINSHORTCUTS[id]][/COLOR]</label>
+          <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
+        </control>
+        <control type="group">
+          <posx>-150</posx>
+          <posy>260</posy>
+          <visible>Control.HasFocus(8021$SKINSHORTCUTS[id])</visible>
+          <include>FondWidgetInfo</include>
+          <control type="group">
+            <posy>5</posy>
+            <control type="image">
+              <posx>-45</posx>
+              <width>40</width>
+              <height>40</height>
+              <aspectratio>keep</aspectratio>
+              <texture>ArrowLeftWD.png</texture>
+              <visible>!String.IsEmpty(Container(9000).ListItem.Property(widget.2))+!Container(8011$SKINSHORTCUTS[id]).IsUpdating+Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)</visible>
+            </control>
+          </control>
+          <control type="fadelabel">
+            <posx>10</posx>
+            <posy>-10</posy>
+            <width>895</width>
+            <height>30</height>
+            <align>center</align>
+            <scroll>true</scroll>
+            <scrollspeed>30</scrollspeed>
+            <font>METF_StarRating</font>
+<shadowcolor>black</shadowcolor>
+            <textcolor>FFFFD966</textcolor>
+            <label>$VAR[GlobalWidgetLabel8021$SKINSHORTCUTS[id]]</label>
+          </control>
+          <control type="fadelabel">
+            <left>20</left>
+            <posy>24</posy>
+            <width>855</width>
+            <height>30</height>
+            <align>center</align>
+            <aligny>bottom</aligny>
+            <scroll>true</scroll>
+            <scrollspeed>30</scrollspeed>
+            <font>PlotFont</font>
+<shadowcolor>black</shadowcolor>
+            <textcolor>lightgrey</textcolor>
+            <label>$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Plot]</label>
+          </control>
+        </control>
+      </control>
+      <!-- Widget -->
+      <control type="group">
+        <top>$SKINSHORTCUTS[top]</top>
+        <control type="group">
+          <posx>-265</posx>
+          <posy>-10</posy>
+          <control type="image">
+            <posy>-8</posy>
+            <width>200</width>
+            <height>250</height>
+            <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
+            <bordersize>6</bordersize>
+            <bordertexture border="6">landscape.png</bordertexture>
+            <fadetime>800</fadetime>
+
+            <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVarList8021$SKINSHORTCUTS[id]]</texture>
+          </control>
+          <control type="image">
+            <posx>830</posx>
+            <width>350</width>
+            <height>300</height>
+            <aspectratio align="center" aligny="center">keep</aspectratio>
+            <texture  diffuse="frames/EpisodeMatte.png">$VAR[HomeWidgetArtList8021$SKINSHORTCUTS[id]]</texture>
+          </control>
+          <control type="grouplist">
+            <align>center</align>
+            <orientation>horizontal</orientation>
+
+            <visible>String.IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.Art(poster))+String.IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.Art(tvshow.poster))+String.Contains(Container(8021$SKINSHORTCUTS[id]).ListItem.Icon,default)+String.IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.Art(thumb))+String.IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.Art(fanart))</visible>
+            <animation type="Conditional" condition="true">
+              <effect type="rotate" center="0,0" end="-45" time="1" />
+            </animation>
+            <width>305</width>
+            <height>40</height>
+
+            <control type="button">
+              <width max="280">auto</width>
+              <height>40</height>
+
+              <align>center</align>
+              <aligny>center</aligny>
+              <font>defaut24</font>
+              <textcolor>black</textcolor>
+              <shadowcolor>white</shadowcolor>
+            <!-- <label>$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Label]</label> -->
+            <label>$VAR[GlobalWidgetLabel8021$SKINSHORTCUTS[id]]</label>
+
+            <shadowcolor>FF000000</shadowcolor>
+            <textoffsetx>5</textoffsetx>
+            <texturenofocus />
+          </control>
+
+        </control>
+      </control>
+      <control type="list" id="8021$SKINSHORTCUTS[id]">
+        <posx>-70</posx>
+        <posy>0</posy>
+        <width>630</width>
+        <height>240</height>
+        <onright>9000</onright>
+        <onunfocus>SetProperty(WidgetActifFanart,,Home)</onunfocus>
+        <onleft condition="Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)">9022</onleft>
+        <onleft>9000</onleft>
+        <onback>9000</onback>
+        <autoscroll delay="8000" repeat="10000" time="10000">Skin.HasSetting(AutoRotateWidget)+[Control.HasFocus(9000)|Control.HasFocus(9001)]</autoscroll>
+        <viewtype>list</viewtype>
+        <orientation>vertical</orientation>
+        <top>0</top>
+        <left>0</left>
+        <width>1200</width>
+        <height>255</height>
+        <orientation>vertical</orientation>
+        <preloaditems>2</preloaditems>
+        <scrolltime >300</scrolltime>
+        <itemlayout width="620" height="30">
+          <control type="label">
+            <posx>10</posx>
+            <posy>-6</posy>
+            <width>620</width>
+            <height>28</height>
+            <align>left</align>
+            <aligny>center</aligny>
+            <scrollout>false</scrollout>
+            <scrollspeed>20</scrollspeed>
+            <font>METF_RecentlyAddedListText</font>
+            <textcolor>yellow</textcolor>
+            <label>$VAR[GlobalWidgetLabel2]</label>
+          </control>
+        </itemlayout>
+        <focusedlayout width="550" height="30">
+          <!-- Focus Bar -->
+          <control type="button">
+            <onfocus condition="Control.HasFocus(8021$SKINSHORTCUTS[id])">SetProperty(WidgetActifFanart,$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(fanart)],Home)</onfocus>
+          </control>
+          <control type="image">
+            <posx>0</posx>
+            <posy>-6</posy>
+            <width>620</width>
+            <height>28</height>
+            <aligny>center</aligny>
+            <texture>FocusLine.png</texture>
+            <colordiffuse>FocusBar</colordiffuse>
+            <visible>Control.HasFocus(8021$SKINSHORTCUTS[id])</visible>
+          </control>
+          <control type="label" >
+            <posx>10</posx>
+            <posy>-6</posy>
+            <width>620</width>
+            <height>28</height>
+            <align>left</align>
+            <aligny>center</aligny>
+            <scrollout>false</scrollout>
+            <pauseatend>600</pauseatend>
+            <scrollspeed>20</scrollspeed>
+            <font>METF_RecentlyAddedListText</font>
+            <textcolor>white</textcolor>
+            <label>[B]$VAR[GlobalWidgetLabel2][/B]</label>
+          </control>
+        </focusedlayout>
+        <content target="$SKINSHORTCUTS[target]" sortby="$SKINSHORTCUTS[sortby]" sortorder="$SKINSHORTCUTS[sort]">$SKINSHORTCUTS[content]</content>
+      </control>
+    </control>
+
+  </control>
+</controls>
+</other>
+
+<other include="widget2"><!-- Widget Panneau -->
+  <condition tag="property" attribute="name|widgetStyle.2">Panel</condition>
+  <condition tag="property" attribute="name|widget.2" />
+  <match>all</match>
+  <property name="id" tag="mainmenuid" />
+  <property name="widget" tag="property" attribute="name|widget.2" />
+  <property name="widgettype" tag="property" attribute="name|widgetType.2" />
+  <property name="content" tag="property" attribute="name|widgetPath.2" />
+  <property name="target" tag="property" attribute="name|widgetTarget.2" />
+  <property name="label" tag="property" attribute="name|widgetName.2" />
+  <property name="sortby" tag="property" attribute="name|widgetSort.2" />
+  <property name="sort" tag="property" attribute="name|widgetSortOrder.2" />
+  <property name="top">0</property>
+
+  <controls>
+    <control type="group">
+      <skinshortcuts>visibility</skinshortcuts>
+
+      <animation effect="slide" start="0,0" end="-1920,0" delay="150" tween="cubic" time="350" condition="[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Control.HasFocus(8021$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)]+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
+      <animation effect="slide"  end="0,-50" delay="150" tween="cubic" time="350" condition="Control.HasFocus(8021$SKINSHORTCUTS[id])+!Container(8021$SKINSHORTCUTS[id]).IsUpdating">Conditional</animation>
+      <animation effect="slide" start="0,0" end="-270,0" delay="150" tween="cubic" time="350" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH.2)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))">Conditional</animation>
+      <animation effect="rotatey" center="-90,0" delay="300" start="0" end="65" time="1" condition="!Skin.HasSetting(ShowFullWidgets)+!Skin.HasSetting(HideUnfocusedWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+ String.IsEmpty(Container(9000).ListItem.Property(widgetShowH.2)) + String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))">Conditional</animation>
+      <control type="group">
+        <visible>Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)</visible>
+        <include>FondWidgetH</include>
+        <control type="label">
+          <posx>-268</posx>
+          <posy>-20</posy>
+          <width>250</width>
+          <height>25</height>
+          <align>left</align>
+          <scrollspeed>30</scrollspeed>
+          <scroll>true</scroll>
+          <angle>270</angle>
+          <label>[B]$INFO[Container(9000).ListItem.Property(widgetName.2)][/B]</label>
+          <visible>!Skin.HasSetting(ShowFullWidgets)+!Control.HasFocus(8021$SKINSHORTCUTS[id])+String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
+          <shadowcolor>ff000000</shadowcolor>
+        </control>
+        <control type="label"><!-- label horizontal -->
+          <posx>-253</posx>
+          <posy>-70</posy>
+          <width>1770</width>
+          <height>30</height>
+          <textcolor>black</textcolor>
+          <align>center</align>
+          <font>comic36</font>
+          <scrollspeed>30</scrollspeed>
+          <scroll>true</scroll>
+          <label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B]$VAR[HWidgetLabel8021$SKINSHORTCUTS[id]]</label>
+          <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
+        </control>
+        <control type="label">
+          <posx>-249</posx>
+          <posy>-68</posy>
+          <width>1770</width>
+          <height>30</height>
+          <textcolor>yellow</textcolor>
+          <align>center</align>
+          <font>comic36</font>
+          <scrollspeed>30</scrollspeed>
+          <scroll>true</scroll>
+          <label>[B] $INFO[Container(9000).ListItem.Property(widgetName.2)] [/B][COLOR=white]$VAR[HWidgetLabel8021$SKINSHORTCUTS[id]][/COLOR]</label>
+          <visible>Skin.HasSetting(ShowFullWidgets)|Control.HasFocus(8021$SKINSHORTCUTS[id])|!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))</visible>
+        </control>
+        <control type="group">
+          <posx>-150</posx>
+          <posy>260</posy>
+          <visible>Control.HasFocus(8021$SKINSHORTCUTS[id])</visible>
+          <include>FondWidgetInfoH</include>
+          <control type="group">
+            <posy>5</posy>
+            <control type="image">
+              <posx>-45</posx>
+              <width>40</width>
+              <height>40</height>
+              <aspectratio>keep</aspectratio>
+              <texture>ArrowDownWD.png</texture>
+              <visible>!String.IsEmpty(Container(9000).ListItem.Property(widget))+!Container(8011$SKINSHORTCUTS[id]).IsUpdating+Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)</visible>
+            </control>
+          </control>
+          <control type="fadelabel">
+            <posx>10</posx>
+            <posy>-10</posy>
+            <width>1500</width>
+            <height>30</height>
+            <align>center</align>
+            <scroll>true</scroll>
+            <scrollspeed>30</scrollspeed>
+            <font>METF_StarRating</font>
+<shadowcolor>black</shadowcolor>
+            <textcolor>FFFFD966</textcolor>
+            <label>$VAR[GlobalWidgetLabel8021$SKINSHORTCUTS[id]]</label>
+          </control>
+          <control type="fadelabel">
+            <left>20</left>
+            <posy>24</posy>
+            <width>1500</width>
+            <height>30</height>
+            <align>center</align>
+            <aligny>bottom</aligny>
+            <scroll>true</scroll>
+            <scrollspeed>30</scrollspeed>
+            <font>PlotFont</font>
+<shadowcolor>black</shadowcolor>
+            <textcolor>lightgrey</textcolor>
+            <label>$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Plot]</label>
+          </control>
+        </control>
+      </control>
+      <!-- Widget -->
+      <control type="group">
+        <top>$SKINSHORTCUTS[top]</top>
+        <control type="group">
+          <posx>-265</posx>
+          <posy>-10</posy>
+          <control type="image">
+            <posy>-8</posy>
+            <width>200</width>
+            <height>250</height>
+            <aspectratio scalediffuse="true"  align="center" aligny="center">keep</aspectratio>
+            <bordersize>6</bordersize>
+            <bordertexture border="6">landscape.png</bordertexture>
+            <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVarList8021$SKINSHORTCUTS[id]]</texture>
+            <fadetime>800</fadetime>
+            <visible>[!Control.HasFocus(8021$SKINSHORTCUTS[id])+!Skin.HasSetting(ShowFullWidgets)]+String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))</visible>
+          </control>
+        </control>
+        <control type="list" id="8021$SKINSHORTCUTS[id]">
+          <top>-5</top>
+          <left>-265</left>
+          <width>1800</width>
+          <height>255</height>
+          <onunfocus>SetProperty(WidgetActifFanart,,Home)</onunfocus>
+          <ondown condition="Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)">9022</ondown>
+          <ondown>9000</ondown>
+          <onup>9000</onup>
+          <onback>9000</onback>
+          <orientation>horizontal</orientation>
+          <preloaditems>2</preloaditems>
+          <autoscroll delay="8000" repeat="10000" time="10000">Skin.HasSetting(AutoRotateWidget)+[Control.HasFocus(9000)|Control.HasFocus(9001)]</autoscroll>
+          <itemlayout width="203" height="255">
+            <control type="image">
+              <width>180</width>
+              <height>240</height>
+              <aspectratio scalediffuse="true"  align="center" aligny="center">keep</aspectratio>
+              <bordersize>2</bordersize>
+              <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVar]</texture>
+              <animation type="Conditional" reversible="false" condition="Control.HasFocus(8021$SKINSHORTCUTS[id])">
+                <effect type="zoom" center="90,130" start="100" end="80" time="500" tween="bounce" easy="out"  />
+              </animation>
+              <visible>!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Control.HasFocus(8021$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)</visible>
+            </control>
+            <control type="group">
+              <visible>String.IsEmpty(ListItem.Art(poster))+String.IsEmpty(ListItem.Art(tvshow.poster))+String.Contains(ListItem.Icon,default)+String.IsEmpty(ListItem.Art(thumb))+String.IsEmpty(ListItem.Art(fanart))</visible>
+              <visible>!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))|Control.HasFocus(8021$SKINSHORTCUTS[id])|Skin.HasSetting(ShowFullWidgets)</visible>
+              <animation type="Conditional" reversible="false" condition="Control.HasFocus(8021$SKINSHORTCUTS[id])">
+                <effect type="zoom" center="90,130" start="100" end="80" time="500" tween="bounce" easy="out"  />
+              </animation>
+              <animation type="Conditional" condition="true">
+                <effect type="rotate" center="0,0" end="-45" time="1" />
+              </animation>
+              <width>280</width>
+              <height>40</height>
+              
+              <control type="label">
+
+                <width>280</width>
+                <align>center</align>
+                <aligny>center</aligny>
+                <font>defaut24</font>
+                <textcolor>black</textcolor>
+                <shadowcolor>white</shadowcolor>
+                <label>$INFO[ListItem.Label]</label>
+              </control>
+            </control>
+          </itemlayout>
+          <focusedlayout width="203" height="255">
+            <control type="button">
+              <onfocus condition="Control.HasFocus(8021$SKINSHORTCUTS[id])">SetProperty(WidgetActifFanart,$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(fanart)],Home)</onfocus>
+            </control>
+            <control type="image">
+              <width>180</width>
+              <height>240</height>
+              <aspectratio scalediffuse="true"  align="center" aligny="center">keep</aspectratio>
+              <bordersize>2</bordersize>
+              <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVar]</texture>
+              <visible>!Control.HasFocus(8021$SKINSHORTCUTS[id])+[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Skin.HasSetting(ShowFullWidgets)]</visible>
+            </control>
+            <control type="image">
+              <width>180</width>
+              <height>240</height>
+              <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
+              <texture>$VAR[HomeWidgetPosterVar]</texture>
+              <bordersize>8</bordersize>
+              <bordertexture border="8">landscape.png</bordertexture>
+              <animation type="Focus" reversible="false">
+                <effect type="zoom" center="90,130" start="98" end="110" time="500" tween="bounce" easy="out"  />
+              </animation>
+              <visible>Control.HasFocus(8021$SKINSHORTCUTS[id])</visible>
+            </control>
+            <control type="group">
+              <visible>String.IsEmpty(ListItem.Art(poster))+String.IsEmpty(ListItem.Art(tvshow.poster))+String.Contains(ListItem.Icon,default)+String.IsEmpty(ListItem.Art(thumb))+String.IsEmpty(ListItem.Art(fanart))</visible>
+
+              <animation type="Conditional" condition="true">
+                <effect type="rotate" center="0,0" end="-45" time="1" />
+              </animation>
+              <width>280</width>
+              <height>40</height>
+              
+              <control type="label">
+
+                <width>280</width>
+                <align>center</align>
+                <aligny>center</aligny>
+                <font>defaut24</font>
+                <textcolor>black</textcolor>
+                <shadowcolor>white</shadowcolor>
+                <label>$INFO[ListItem.Label]</label>
+              </control>
+            </control>
+          </focusedlayout>
+          <content target="$SKINSHORTCUTS[target]" sortby="$SKINSHORTCUTS[sortby]" sortorder="$SKINSHORTCUTS[sort]">$SKINSHORTCUTS[content]</content>
+        </control>
+      </control>
+    </control>
+  </controls>
+</other>
+
+<!--  VARS -->
+<other include="WidgetVars">
+
+  <property name="id" tag="mainmenuid" />
+
+  <variables>
+    <variable name="HWidgetLabel8011$SKINSHORTCUTS[id]">
+      <value condition="Control.HasFocus(8011$SKINSHORTCUTS[id])">[I] ($INFO[Container(8011$SKINSHORTCUTS[id]).CurrentItem]/$INFO[Container(8011$SKINSHORTCUTS[id]).NumItems])[/I]</value>
+    </variable>
+    <variable name="HWidgetLabel8021$SKINSHORTCUTS[id]">
+      <value condition="Control.HasFocus(8021$SKINSHORTCUTS[id])">[I] ($INFO[Container(8021$SKINSHORTCUTS[id]).CurrentItem]/$INFO[Container(8021$SKINSHORTCUTS[id]).NumItems])[/I]</value>
+    </variable>
+    <variable name="GlobalWidgetLabel8011$SKINSHORTCUTS[id]">
+      <value condition="String.Contains(Container(9000).ListItem.Property(widget),RecentlyAddedMovies)
+        |String.Contains(Container(9000).ListItem.Property(widget),RecommendedMovies)
+      |String.Contains(Container(9000).ListItem.Property(widget),RandomMovies)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
+      <value condition="String.Contains(Container(9000).ListItem.Property(widget),RecentlyAddedEpisodes)|String.Contains(Container(9000).ListItem.Property(widget),RandomEpisodes)|String.Contains(Container(9000).ListItem.Property(widget),RecommendedEpisodes)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.TVShowTitle] - $INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Season,S,E]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Episode,,: ]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]</value>
+      <value condition="String.Contains(Container(9000).ListItem.Property(widget),RecentlyAddedAlbums)|String.Contains(Container(9000).ListItem.Property(widget),RandomAlbums)|String.Contains(Container(9000).ListItem.Property(widget),RecommendedAlbums)|String.Contains(Container(9000).ListItem.Property(widget),RandomSongs)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Artist] - $INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
+      <value condition="String.Contains(Container(9000).ListItem.Property(widget),NAired)|String.Contains(Container(9000).ListItem.Property(widgetpath),nextaired)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Label] : ([COLOR=FFA38B42]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Property(airday)] $INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Property(airdate)][/COLOR])</value>
+      <value condition="String.Contains(Container(9000).ListItem.Property(widget),Playlist) + String.IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
+      <value condition="String.Contains(Container(9000).ListItem.Property(widget),Playlist) + !String.Contains(ListItem.Title,ListItem.TVShowTitle) + !String.IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.TVShowTitle] - $INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Season,S,]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Episode,E,. ]$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Title]</value>
+      <value>$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Label]</value>
+    </variable>
+    <variable name="HomeWidgetPosterVarList8011$SKINSHORTCUTS[id]">
+      <value condition="!String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(poster))">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(poster)]</value>
+      <value condition="!String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(tvshow.poster))">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(tvshow.poster)]</value>
+      <value condition="!String.Contains(Container(8011$SKINSHORTCUTS[id]).ListItem.Icon,default)">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Icon]</value>
+      <value condition="!String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(thumb))">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(thumb)]</value>
+      <value condition="!String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(fanart))">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(fanart)]</value>
+      <value condition="String.Contains(Container(8011$SKINSHORTCUTS[id]).ListItem.DbType,album)|String.Contains(Container(8011$SKINSHORTCUTS[id]).ListItem.DbType,song)|String.Contains(Container(8011$SKINSHORTCUTS[id]).ListItem.DbType,artist)|String.Contains(Container(9000).ListItem.Property(widgetTarget),music)">DefaultMusicSongs.png</value>
+      <value condition="String.Contains(Container(8011$SKINSHORTCUTS[id]).ListItem.DbType,episode)|String.Contains(Container(8011$SKINSHORTCUTS[id]).ListItem.DbType,tvshow)">DefaultTVShows.png</value>
+      <value condition="String.Contains(Container(8011$SKINSHORTCUTS[id]).ListItem.DbType,movie)|String.Contains(Container(8011$SKINSHORTCUTS[id]).ListItem.DbType,set)">DefaultMovies.png</value>
+
+    </variable>
+    <variable name="HomeWidgetArtList8011$SKINSHORTCUTS[id]">
+      <value condition="!String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(clearart))">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(clearart)]</value>
+      <value condition="!String.IsEmpty(Container(8011$SKINSHORTCUTS[id]).ListItem.Art(clearlogo))">$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(clearlogo)]</value>
+    </variable>
+    <variable name="GlobalWidgetLabel8021$SKINSHORTCUTS[id]">
+      <value condition="String.Contains(Container(9000).ListItem.Property(widget.2),RecentlyAddedMovies)|String.Contains(Container(9000).ListItem.Property(widget.2),RecommendedMovies)|String.Contains(Container(9000).ListItem.Property(widget.2),RandomMovies)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
+      <value condition="String.Contains(Container(9000).ListItem.Property(widget.2),RecentlyAddedEpisodes)|String.Contains(Container(9000).ListItem.Property(widget.2),RandomEpisodes)|String.Contains(Container(9000).ListItem.Property(widget.2),RecommendedEpisodes)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.TVShowTitle] - $INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Season,S,E]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Episode,,: ]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]</value>
+      <value condition="String.Contains(Container(9000).ListItem.Property(widget.2),RecentlyAddedAlbums)|String.Contains(Container(9000).ListItem.Property(widget.2),RandomAlbums)|String.Contains(Container(9000).ListItem.Property(widget.2),RecommendedAlbums)|String.Contains(Container(9000).ListItem.Property(widget.2),RandomSongs)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Artist] - $INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
+      <value condition="String.Contains(Container(9000).ListItem.Property(widget.2),NAired)|String.Contains(Container(9000).ListItem.Property(widgetpath.2),nextaired)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Label] : ([COLOR=FFA38B42]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Property(airday)] $INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Property(airdate)][/COLOR])</value>
+      <value condition="String.Contains(Container(9000).ListItem.Property(widget.2),Playlist) + String.IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Year, (,)]</value>
+      <value condition="String.Contains(Container(9000).ListItem.Property(widget.2),Playlist) + !String.Contains(ListItem.Title,ListItem.TVShowTitle) + !String.IsEmpty(Container(8000).ListItem.TVShowTitle)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.TVShowTitle] - $INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Season,S,]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Episode,E,. ]$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Title]</value>
+      <value>$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Label]</value>
+    </variable>
+    <variable name="HomeWidgetPosterVarList8021$SKINSHORTCUTS[id]">
+      <value condition="!String.IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.Art(poster))">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(poster)]</value>
+      <value condition="!String.IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.Art(tvshow.poster))">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(tvshow.poster)]</value>
+      <value condition="!String.Contains(Container(8021$SKINSHORTCUTS[id]).ListItem.Icon,default)">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Icon]</value>
+      <value condition="!String.IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.Art(thumb))">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(thumb)]</value>
+      <value condition="!String.IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.Art(fanart))">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(fanart)]</value>
+      <value condition="String.Contains(Container(8021$SKINSHORTCUTS[id]).ListItem.DbType,album)|String.Contains(Container(8021$SKINSHORTCUTS[id]).ListItem.DbType,song)|String.Contains(Container(8021$SKINSHORTCUTS[id]).ListItem.DbType,artist)|String.Contains(Container(9000).ListItem.Property(widgetTarget.2),music)">DefaultMusicSongs.png</value>
+      <value condition="String.Contains(Container(8021$SKINSHORTCUTS[id]).ListItem.DbType,episode)|String.Contains(Container(8021$SKINSHORTCUTS[id]).ListItem.DbType,tvshow)">DefaultTVShows.png</value>
+      <value condition="String.Contains(Container(8021$SKINSHORTCUTS[id]).ListItem.DbType,movie)|String.Contains(Container(8021$SKINSHORTCUTS[id]).ListItem.DbType,set)">DefaultMovies.png</value>
+      <value condition="String.Contains(Container(9000).ListItem.Property(widget.2),music)">DefaultMovies.png</value>
+
+    </variable>
+    <variable name="HomeWidgetArtList8021$SKINSHORTCUTS[id]">
+      <value condition="!String.IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.Art(clearart))">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(clearart)]</value>
+      <value condition="!String.IsEmpty(Container(8021$SKINSHORTCUTS[id]).ListItem.Art(clearlogo))">$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(clearlogo)]</value>
+    </variable>
+    <variable name="Wd1Visible">
+      <value condition="Container(9000).HasFocus($SKINSHORTCUTS[id])+[Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget),SystemInfo)]">9022</value>
+      <value></value>
+    </variable>
+    <variable name="Wd2Visible">
+      <value condition="Container(9000).HasFocus($SKINSHORTCUTS[id])+[Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget.2),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget.2),SystemInfo)]">9023</value>
+      <value></value>
+    </variable>
+  </variables>
+</other>
 
 </template>

@@ -8,7 +8,7 @@
 		<control type="group">
 			<visible>Control.IsVisible(570)</visible>
 			<include>Animation_OpenCloseFade</include>
-			<include>Animation_FadedByMenu</include>
+			
 			<include>Animation_HiddenByInfo</include>
 			<control type="list" id="570">
 				<left>95</left>
@@ -142,7 +142,7 @@
 			</control>
 			<control type="scrollbar" id="998">
 				<include>Animation_OpenCloseFade</include>
-				<include>Animation_FadedByMenu</include>
+				
 				<posx>1270</posx>
 				<posy>128</posy>
 				<width>22</width>

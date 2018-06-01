@@ -27,14 +27,7 @@
 				<width>2000</width>
 				<align>center</align>
 				<include condition="!Skin.HasSetting(ViewLockdown)">OnUp7000</include>
-
-
-
-
-
-		<!--		<!-- <ondown>60</ondown> -->-->
-				
-				<ondown condition="!String.Contains(ListItem.DBTYPE,set)">60</ondown>
+        <ondown condition="!String.Contains(ListItem.DBTYPE,set)">60</ondown>
 				<ondown condition="String.Contains(ListItem.DBTYPE,set)">1999</ondown>
 				
 				<onleft>586</onleft>
@@ -181,7 +174,7 @@
 <include name="Viewtype_DiscV">
 	<control type="group">
 		<visible>Control.IsVisible(587)</visible>
-		<include>Animation_FadedByMenu</include>
+		
 			<include>Animation_OpenCloseFade</include>
 			<include>Animation_HiddenByInfo</include>
 			

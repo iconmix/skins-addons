@@ -45,8 +45,8 @@ msgid "Enable auto scrolling for text that does not fit on-screen"
 msgstr "Défilement des Résumés pour le texte ne s'affichant pas complètement"
 
 msgctxt "#31006"
-msgid "Shorter delay before auto scrolling"
-msgstr "Délai plus court avant le défilement automatique"
+msgid "Auto scrolling speed"
+msgstr "Vitesse du défilement automatique"
 
 msgctxt "#31007"
 msgid "ON"
@@ -82,11 +82,11 @@ msgstr "Agencement d'accueil en texte horizontal"
 
 msgctxt "#31031"
 msgid "Disable Movie Watched flag"
-msgstr "Désactiver l'indicateur de films vus"
+msgstr "Désactiver l'indicateur de progression et films vus"
 
 msgctxt "#31032"
 msgid "Disable TVshows Watched flag"
-msgstr "Désactiver l'indicateur de  séries vues"
+msgstr "Désactiver l'indicateur de progression et séries vues"
 
 
 msgctxt "#31033"
@@ -229,6 +229,15 @@ msgstr "CPU utilisé"
 msgctxt "#31143"
 msgid "Memory used"
 msgstr "Mémoire utilisée"
+
+msgctxt "#31144"
+msgid "Disable Episodes Full List"
+msgstr "Désactiver la liste de tous les épisodes"
+
+msgctxt "#31145"
+msgid "Disable focus to first unwatched"
+msgstr "Désactiver le placement auto sur le premier non-vu"
+
 
 msgctxt "#31159"
 msgid "ffx2"
@@ -1052,8 +1061,8 @@ msgid "Position"
 msgstr "Position"
 
 msgctxt "#31484"
-msgid "Time remaining"
-msgstr "Temps restant"
+msgid "Remain"
+msgstr "Reste"
 
 msgctxt "#31485"
 msgid "!!!Default settings!!!"
@@ -1063,7 +1072,9 @@ msgctxt "#31486"
 msgid "Hide seekbar and Pause message during Video pausing"
 msgstr "Cacher progression et message après 3s durant la pause"
 
-
+msgctxt "#31487"
+msgid "Enable Text progress indicator"
+msgstr "Activer la bulle de progression"
 
 
 msgctxt "#31600"
@@ -1407,14 +1418,26 @@ msgctxt "#31792"
 msgid "Unwatched movies"
 msgstr "Films Non Vus"
 
+msgctxt "#31793"
+msgid "By title/name"
+msgstr "Par titre/nom"
+
+msgctxt "#31794"
+msgid "By categorie"
+msgstr "Par catégorie"
+
+
+msgctxt "#31800"
+msgid "List sober"
+msgstr "Liste Sobre"
 
 msgctxt "#31801"
 msgid "List"
 msgstr "Liste"
 
 msgctxt "#31802"
-msgid "LowList"
-msgstr "Mini Liste"
+msgid "Onglets"
+msgstr "Onglets"
 
 msgctxt "#31803"
 msgid "List and Fanart"
@@ -1794,6 +1817,33 @@ msgstr "Dossier précédent"
 msgctxt "#32017"
 msgid "Access to all episodes"
 msgstr "Accéder à tous les épisodes"
+
+msgctxt "#32018"
+msgid "Show very big plot window"
+msgstr "Afficher le très gros pavé du résumé"
+
+
+msgctxt "#32019"
+msgid "Provider choice"
+msgstr "Fournisseur de Données"
+
+msgctxt "#32020"
+msgid "in History"
+msgstr "Dans l'historique"
+
+
+msgctxt "#32021"
+msgid "Show only a button for cast"
+msgstr "Afficher uniquement un bouton pour les acteurs"
+
+
+msgctxt "#32022"
+msgid "Set this episode to "
+msgstr "Marquer cet épisode "
+
+msgctxt "#32023"
+msgid "Next Aired "
+msgstr "Prochaines diffusions "
 
 
 

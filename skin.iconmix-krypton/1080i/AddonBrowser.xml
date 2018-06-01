@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<window id="40">
+<window id="10040">
 	<views>55,905,58,559</views>
 	<defaultcontrol always="true">55</defaultcontrol>
 	<controls>
 		<include>Global_Background</include>
 		<include>Viewtype_List</include>
-		<include>Viewtype_LowList</include>
 		<include>Viewtype_Gallery_Square</include>
 		<include>Viewtype_Panel_Square</include>
 		<include>Global_ContextFilter</include>
 		<include>SpecialPlotBox</include>
 		<include>Global_ScrollOffsetLabel</include>
 		<!-- Navigation Menu -->
-		<control type="group">
-		    <control type="label">
-				<description>Heading</description>
-				<include>Global_HeadingDetailVars</include>
-				<label>10510</label>
-			</control>
+	<!--	<control type="group">
+		    
 			<include>Animation_NavMenu</include>
 			<include>NavMenuBackground</include>
+			
 			<control type="grouplist" id="7000">
 				<posx>470</posx>
 				<posy>120</posy>
@@ -30,6 +26,7 @@
 				<onright>55</onright>
 				<onup>7000</onup>
 				<ondown>7000</ondown>
+				<onback>55</onback>
 				<orientation>vertical</orientation>
 				<visible allowhiddenfocus="true">ControlGroup(7000).HasFocus</visible>
 				<control type="button" id="2">
@@ -45,7 +42,7 @@
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
 					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
-					<texturenofocus>-</texturenofocus> -->
+					<texturenofocus>-</texturenofocus> 
 					<pulseonselect>false</pulseonselect>
 				</control>
 				<control type="button" id="3">
@@ -61,7 +58,7 @@
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
 					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
-					<texturenofocus>-</texturenofocus> -->
+					<texturenofocus>-</texturenofocus> 
 					<pulseonselect>false</pulseonselect>
 				</control>
 				<control type="togglebutton" id="4">
@@ -77,7 +74,7 @@
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
 					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
-					<texturenofocus>-</texturenofocus> -->
+					<texturenofocus>-</texturenofocus> 
 					<alttexturenofocus border="2">-</alttexturenofocus>
 					<alttexturefocus border="5">ButtonFO2.png</alttexturefocus>
 					<aligny>center</aligny>
@@ -96,7 +93,7 @@
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
 					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
-					<texturenofocus>-</texturenofocus> -->
+					<texturenofocus>-</texturenofocus> 
 				</control>
 				<control type="radiobutton" id="7">
 					<description>Hide foreign</description>
@@ -110,7 +107,7 @@
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
 					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
-					<texturenofocus>-</texturenofocus> -->
+					<texturenofocus>-</texturenofocus> 
 				</control>
 				<control type="radiobutton" id="8">
 					<description>Hide broken</description>
@@ -124,7 +121,7 @@
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
 					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
-					<texturenofocus>-</texturenofocus> -->
+					<texturenofocus>-</texturenofocus>
 				</control>
 				<control type="button" id="9">
 					<description>Check for updates</description>
@@ -139,15 +136,17 @@
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
 					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
-					<texturenofocus>-</texturenofocus> -->
+					<texturenofocus>-</texturenofocus>
 				</control>
 				<include>Nav_NowPlaying</include>
 			</control>
+			
 		</control>
 		
 		
 		
-		<include>Global_MediaOverlay</include>
+		<include>Global_MediaOverlay</include>-->
 		
+
 	</controls>
 </window>

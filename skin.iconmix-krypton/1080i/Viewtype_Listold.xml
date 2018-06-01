@@ -220,7 +220,7 @@
 			<aligny>top</aligny>
 			<pagecontrol>60</pagecontrol>
 			<include>Animation_OpenCloseFade</include>
-			<include>Animation_FadedByMenu</include>
+			
 			<include>Animation_HiddenByInfo</include>
 			<itemlayout width="0" height="35">
 			  <include>commonlistitem2</include>
@@ -290,7 +290,7 @@
 			  
 					<width>500</width>
 				<include>Animation_OpenCloseFade</include>
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_HiddenByInfo</include>
 				<visible>Window.IsActive(pictures) | Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)</visible>
 				
@@ -408,7 +408,7 @@
 			  
 					<width>800</width>
 				<include>Animation_OpenCloseFade</include>
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_HiddenByInfo</include>
 				<visible>Window.IsActive(pictures) | Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)</visible>
 				

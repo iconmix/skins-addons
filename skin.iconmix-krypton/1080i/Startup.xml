@@ -8,6 +8,10 @@
 	<onload condition="!Skin.HasSetting(GenreDetailsDisc)+!Skin.HasSetting(GenreDetailsTexte)+!Skin.HasSetting(GenreDetailsAucun)+!Skin.HasSetting(GenreDetailsClearArt)+!Skin.HasSetting(GenreDetailsBoitier)">Skin.ToggleSetting(GenreDetailsBoitier)</onload>
 	<onload condition="!Skin.HasSetting(directorDisc)+!Skin.HasSetting(directorTexte)+!Skin.HasSetting(directorAucun)+!Skin.HasSetting(directorClearArt)+!Skin.HasSetting(directorBoitier)">Skin.ToggleSetting(directorBoitier)</onload>
 	
+	
+        <onload condition="!Skin.HasSetting(AutoCompleteFilms)+!Skin.HasSetting(AutoCompleteSeries)+!Skin.HasSetting(AutoCompleteActeurs)+!Skin.HasSetting(AutoCompleteRealisateurs)+!Skin.HasSetting(AutoCompleteArtistes)+!Skin.HasSetting(AutoCompleteAlbums)+!Skin.HasSetting(AutoCompleteTous)">Skin.ToggleSetting(AutoCompleteTous)</onload>
+        <onload condition="!Skin.HasSetting(AutoCompletekodi)+!Skin.HasSetting(AutoCompletegoogle)+!Skin.HasSetting(AutoCompleteyoutube)+!Skin.HasSetting(AutoCompleteoff)">Skin.ToggleSetting(AutoCompletekodi)</onload>
+	
 	<onload>SetProperty(WidgetActifFanart,,Home)</onload>
 	<onload>SetProperty(VideoOsdOn,0,Home)</onload>
 

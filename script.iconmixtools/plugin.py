@@ -13,6 +13,9 @@ import unicodedata
 import os
 import xbmc,xbmcgui,xbmcaddon,xbmcplugin
 import random
+import MonAutoCompletion
+import shutil
+
 #containers :
 #1998 : Acteurs
 #1999 : éléments des sagas, des acteurs et réalisateurs, et artistes (musique)
@@ -23,6 +26,7 @@ ADDON = xbmcaddon.Addon()
 __addonid__    = ADDON.getAddonInfo('id')
 __version__    = ADDON.getAddonInfo('version')
 __language__   = ADDON.getLocalizedString
+__skin_string__ = xbmc.getLocalizedString
 __cwd__        = ADDON.getAddonInfo('path')  
 ADDON_ID = ADDON.getAddonInfo('id').decode("utf8")
 ADDON_ICON = ADDON.getAddonInfo('icon').decode("utf8")
@@ -40,6 +44,7 @@ class Main:
         self._init_vars()
         self.ui=None
         self.windowhome.setProperty("IconMixDataPath",ADDON_DATA_PATH)
+        
       
         #get params
         action = None
@@ -47,7 +52,7 @@ class Main:
            params = urlparse.parse_qs(sys.argv[2][1:].decode("utf-8"))
           
            if params: 
-              #logMsg("Plugin : %s" %(params),0)       
+              #logMsg("Appel Plugin : %s" %(params),0)       
               path=params.get("path",None)
               if path: path = path[0]
               limit=params.get("limit",None)
@@ -55,9 +60,13 @@ class Main:
               else: limit = 25
               action=params.get("action",None)
               if action: action = action[0].upper()
+              
           
-           if action:  
+           if action: 
+            
+                            
                if action == "GETGENRE":
+                  
                   genre=params.get("genre",None)
                   if genre: genre = genre[0]  
                  
@@ -67,6 +76,27 @@ class Main:
                   if origtitle: origtitle = origtitle[0]    
                   #if origtitle and genre and genretype:
                   utils.getGenre(genre,genretype,origtitle)  
+                  
+               if action == "WIDGETGETNEXT":
+                  Id=params.get("id",None)
+                  if Id: Id = Id[0] 
+                  Episodes=utils.GetNextEpisodesKodi()  
+                  if Episodes:
+                      xbmcplugin.addDirectoryItems(int(sys.argv[1]), Episodes)
+                      if SETTING("iconmixdebug")=="true":
+                          logMsg("Plugin  : WIDGETGETNEXT (%s)" %(Prochain))
+                  xbmcplugin.endOfDirectory(int(sys.argv[1]))  
+               
+               if action == "GETALLNEXTEPISODES":
+                  Id=params.get("id",None)
+                  if Id: Id = Id[0] 
+                  dbtype=params.get("dbtype",None)
+                  if dbtype: dbtype = dbtype[0] 
+                  Episodes=utils.getallnextepisodes(str(Id),None,str(dbtype),True)  
+                  if Episodes:
+                      xbmcplugin.addDirectoryItems(int(sys.argv[1]), Episodes)                      
+                  xbmcplugin.endOfDirectory(int(sys.argv[1]))  
+               
              
                
                if action == "GETCAST":
@@ -112,6 +142,9 @@ class Main:
                       #logMsg("ListeVues ok (%s)" %(ListeVues))
                       xbmcplugin.addDirectoryItems(int(sys.argv[1]), ListeVues)
                     xbmcplugin.endOfDirectory(int(sys.argv[1])) 
+               return
+               
+               
         except:
           params= {}
         
@@ -119,7 +152,7 @@ class Main:
             params = dict( arg.split( '=' ) for arg in sys.argv[ 1 ].split( '&' ) )
         except:
             params = {}
-            
+        logMsg("Appel Plugin sans action : %s" %(params),0)     
         self.trailer = params.get( 'trailer', False )
         self.trailerTypeVideo=params.get( 'dbtype', None )
         self.trailerTitre=params.get( 'label', None )
@@ -145,11 +178,89 @@ class Main:
         if self.updateacteursinf:
           self.itemidkodi=params.get( 'idkodi', None )
           self.itemidtmdb=params.get( 'idtmb', None )
+        self.togglewatchedepisode = params.get( 'togglewatchedepisode', None )
+        self.itemidkodiepisode=params.get( 'idepisode', None )
+        self.togglewatched=params.get('togglewatched',False)
         self.showinfo = params.get( 'showinfo', False )
+        self.PurgeDatabase =  params.get( 'purgedatabase', False )
+        self.PurgeDatabaseManuel =  params.get( 'purgedatabasemanuel', False )
         
         
+        if self.togglewatchedepisode and self.itemidkodiepisode:
+          #dialog=xbmcgui.Dialog() 
+          self.windowhome.clearProperty('IconmixProchainEpisode')
+          if self.togglewatched=="True":
+           json_result = utils.setJSON('VideoLibrary.SetEpisodeDetails', '{ "episodeid":%d,"resume":{"position":0,"total":0},"playcount":1 }' %(int(self.itemidkodiepisode)))                          
+          else:
+           json_result = utils.setJSON('VideoLibrary.SetEpisodeDetails', '{ "episodeid":%d,"resume":{"position":0,"total":0},"playcount":0 }' %(int(self.itemidkodiepisode)))                          
+          self.windowhome.setProperty('IconMixUpdateEpisodes','1')
+          #dialog.notification('IconMixTools', "TOGGLEEEEEEEEEEEEEEEEEEEEEE (%s)(%s)" %(str(self.itemidkodiepisode),self.togglewatched), ADDON_ICON,500)
         
-        if self.videcache:
+        
+        #purge des series orphelines sans épisodes.....
+        if self.PurgeDatabase and (SETTING("autopurge")=="true" or self.PurgeDatabaseManuel):
+          
+          try:
+           from sqlite3 import dbapi2 as sqlite
+          
+          except:
+              from pysqlite2 import dbapi2 as sqlite
+
+          DB = os.path.join(xbmc.translatePath("special://database"), 'MyVideos107.db')
+          db = sqlite.connect(DB)
+          db.row_factory = lambda c, r: dict([(col[0], r[idx]) for idx, col in enumerate(c.description)])
+          rows = db.execute('SELECT idShow,totalCount FROM tvshowcounts WHERE totalCount is NULL') 
+          items=rows.fetchall()
+          dialog=xbmcgui.Dialog() 
+          Choix=["Toutes"]
+          DelListe=[{"idShow":None,"idPath":None,"path":None}]
+          for item in items:
+            rows = db.execute('SELECT idShow,c00 FROM tvshow WHERE idShow="%s"' %(item["idShow"])) 
+            TvShowItem=rows.fetchone()
+            rows = db.execute('SELECT idShow,idPath FROM tvshowlinkpath WHERE idShow="%s"' %(item["idShow"])) 
+            TvShowLinkPath=rows.fetchone()
+            rows = db.execute('SELECT idPath,strPath FROM path WHERE idPath="%s"' %(TvShowLinkPath["idPath"])) 
+            TvShowPath=rows.fetchone()
+            """
+            logMsg("item (%s)" %(item))
+            logMsg("TvShowItem (%s)"  %(TvShowItem))
+            logMsg("TvShowLinkPath (%s)"  %(TvShowLinkPath))
+            logMsg("TvShowPath (%s)"  %(TvShowPath))
+            """
+            Choix.append("%s=%s" %(TvShowItem["c00"],TvShowPath["strPath"]))
+            DelListe.append({"idShow":item["idShow"],"idPath":TvShowLinkPath["idPath"],"path":TvShowPath["strPath"]})
+            
+          if len(Choix)>1:
+            if self.PurgeDatabaseManuel:
+               ret=dialog.multiselect("Series orphelines", Choix)
+            else:
+               ret=[0]
+            if ret and len(ret)>0:
+              if ret[0]==0:    
+                for item in range(1,len(DelListe)):                
+                  db.execute('DELETE FROM tvshowlinkpath WHERE idShow = "%s"' %(DelListe[item]["idShow"]))
+                  db.execute('DELETE FROM path WHERE idPath = "%s"' %(DelListe[item]["idPath"])) 
+                  db.execute('DELETE FROM tvshow WHERE idShow = "%s"' %(DelListe[item]["idShow"])) 
+                  db.commit() 
+              else:    
+                for item in ret:
+                  db.execute('DELETE FROM tvshowlinkpath WHERE idShow = "%s"' %(DelListe[item]["idShow"]))
+                  db.execute('DELETE FROM path WHERE idPath = "%s"' %(DelListe[item]["idPath"])) 
+                  db.execute('DELETE FROM tvshow WHERE idShow = "%s"' %(DelListe[item]["idShow"])) 
+                  db.commit() 
+              #shutil.rmtree(DelListe[item]["path"])
+              xbmc.executebuiltin('Container.Refresh')
+              dialog.notification('IconMixTools', __language__( 32860 ), ADDON_ICON,500)
+          else:
+            if self.PurgeDatabaseManuel:
+              dialog.notification('IconMixTools', __language__( 32861 ), ADDON_ICON,500)
+              
+              
+          
+          
+       
+        
+        if self.videcache :
            self.quelcache = params.get( 'cache', False )
            dialogC = xbmcgui.Dialog()
            ret=dialogC.yesno("ICONMIXTOOLS CACHE !!!", __language__( 32602 )," ",str(self.quelcache).upper()) #-- Show a dialog 'YES/NO'.
@@ -161,15 +272,17 @@ class Main:
           if not action :
             saga=""   
             #------ lancer mode serveur ----------- 
-            if self.backend and xbmc.getCondVisibility("String.IsEmpty(Window(home).Property(IconMixToolsbackend))"):                
-                MainService.MainService()
+            if self.backend :
+              return
+            # and xbmc.getCondVisibility("String.IsEmpty(Window(home).Property(IconMixToolsbackend))"):                
+            #    MainService.MainService()
             
             #-------------METTRE A JOUR SAGA ou SERIE-------------
             if self.mettreajour:
                 self.MiseAJour()
                     
             #-------------BANDES ANNONCES-------------             
-            if self.trailer :                
+            if self.trailer :  
                 self.GetTrailer()
                     
             #-------------CHOIX DE LA VUE-------------             
@@ -203,9 +316,7 @@ class Main:
                                                          
                 status=""
               
-              
-           
-           
+   
             
            
     
@@ -336,32 +447,33 @@ class Main:
           if self.TrailerType=="videonavsaga":
                #VideoNav
                  TypeVideo="movie"
-               
-              
-                 zz=int(xbmc.getInfoLabel("Container(1999).NumItems"))
-                 #logMsg("SagaType (%s)(%s)" %(zz,xbmc.getInfoLabel("Container(1999).NumItems")),0)
-                 compteur=0
-                 
-                 for compteur in range(0,zz): 
-                   #SagaItem=ListeSaga.getListItem(cpt)
-                   #IMDBID=SagaItem.getProperty(IMDBNumber)
-                   #TMDBID=SagaItem.getProperty(TMDBNumber)
-                   #DBID=SagaItem.getProperty(DBID)
-                   
-                   IMDBID=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Property(IMDBNumber)" %(compteur))
-                   TMDBID=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Property(TMDBNumber)" %(compteur))
-                   DBID=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Property(DBID)" %(compteur))
-                   LABEL=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Label" %(compteur))
-                   YEAR=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Year" %(compteur))
-                   TMDBIDListeAllocine.append({"Titre":LABEL,"Annee":YEAR})
-                   
-                   #logMsg("Allocine (%d)(%s)(%s)(%s)(%s)(%s)" %(compteur,LABEL,YEAR,IMDBID,TMDBID,DBID),0)
-                   if DBID:
-                     if not TMDBID and not IMDBID:
-                         json_result = utils.getJSON('VideoLibrary.GetMovieDetails', '{ "movieid":%d,"properties":["imdbnumber"] }' %(int(DBID)))                         
-                         IMDBID=json_result.get("imdbnumber")                 
-                     if TMDBID or IMDBID:
-                        TMDBIDListe.append({"tmdbid":TMDBID,"imdbid":IMDBID})
+                 nbitem=xbmc.getInfoLabel("Container(1999).NumItems")
+                 #logMsg("NbItems (%s)(%s)" %(nbitem,xbmc.getInfoLabel("Control.GetLabel(3333)")))
+                 if nbitem:
+             
+                     zz=int(nbitem)
+                     compteur=0
+                     
+                     for compteur in range(0,zz): 
+                       #SagaItem=ListeSaga.getListItem(cpt)
+                       #IMDBID=SagaItem.getProperty(IMDBNumber)
+                       #TMDBID=SagaItem.getProperty(TMDBNumber)
+                       #DBID=SagaItem.getProperty(DBID)
+                       
+                       IMDBID=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Property(IMDBNumber)" %(compteur))
+                       TMDBID=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Property(TMDBNumber)" %(compteur))
+                       DBID=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Property(DBID)" %(compteur))
+                       LABEL=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Label" %(compteur))
+                       YEAR=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Year" %(compteur))
+                       TMDBIDListeAllocine.append({"Titre":LABEL,"Annee":YEAR})
+                       
+                       #logMsg("Allocine (%d)(%s)(%s)(%s)(%s)(%s)" %(compteur,LABEL,YEAR,IMDBID,TMDBID,DBID),0)
+                       if DBID:
+                         if not TMDBID and not IMDBID:
+                             json_result = utils.getJSON('VideoLibrary.GetMovieDetails', '{ "movieid":%d,"properties":["imdbnumber"] }' %(int(DBID)))                         
+                             IMDBID=json_result.get("imdbnumber")                 
+                       if TMDBID or IMDBID:
+                            TMDBIDListe.append({"tmdbid":TMDBID,"imdbid":IMDBID})
                    
                    
                  
@@ -391,21 +503,18 @@ class Main:
                  Titre=IMDBNUMBER
                if not TMDBID:             
                    TMDBID=utils.get_externalID(IMDBNUMBER,TypeVideo)
-      logMsg("self.TrailerType (%s)(%s) : (%s)(%s)" %(self.TrailerType,Titre,TypeVideo,TMDBID))
-      #dialog.notification('IconMixTools', __language__( 32508 )+": [COLOR=Yellow] "+Titre.encode("utf8")+"[/COLOR]", ADDON_ICON,500)   
+      #logMsg("self.TrailerType (%s)(%s) : (%s)(%s)" %(self.TrailerType,Titre,TypeVideo,TMDBID))
       dialog.notification('IconMixTools', __language__( 32508 ), ADDON_ICON,500)   
-      if TMDBID!='' or len(TMDBIDListe)>0:
+      if TMDBID!='' or len(TMDBIDListe)>0 or len(TMDBIDListeAllocine)>0:
            xbmc.executebuiltin( "ActivateWindow(busydialog)" )   
            #logMsg("self.TrailerType (%s) : (%s)(%s)(%s)(%s)(%s)" %(self.TrailerType,Titre,TypeVideo,TMDBID,ContainerID,KODIID))
            if len(TMDBIDListe)>0:
-             #logMsg("SagaType TMDBIDListe %s" %(TMDBIDListe),0)
              #start_time = time.time() 
              if SETTING('allocineactif')=="true" :
                 self.ListeTrailer=self.ListeTrailer+utils.GetSagaTrailersAllocine(TMDBIDListeAllocine)
              if SETTING('youtubeactif')=="true" :
                 self.ListeTrailer=self.ListeTrailer+utils.GetSagaTrailers(TMDBIDListe) 
-             
-            
+     
            else:
             
              self.ListeTrailer=utils.getTrailer(TMDBID,TypeVideo,Saison)
@@ -415,17 +524,17 @@ class Main:
            
                 
            if self.TrailerType=="videonav" and KODIID!="": 
-              self.ListeTrailer.append({"id":xbmc.getInfoLabel("Container(1999).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(1999).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(1999).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(1999).ListItem.Art(thumb)")})
+              self.ListeTrailer.append({"id":xbmc.getInfoLabel("Container(1999).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":__skin_string__( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(1999).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(1999).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(1999).ListItem.Art(thumb)")})
            if self.TrailerType=="saga" and KODIID!="": 
-              self.ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5002).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(5002).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(5002).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(5002).ListItem.Art(thumb)")})
+              self.ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5002).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":__skin_string__( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(5002).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(5002).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(5002).ListItem.Art(thumb)")})
            if self.TrailerType=="videoinfo7003" and ContainerID and KODIID!="":
-              self.ListeTrailer.append({"id":xbmc.getInfoLabel("Container(%d).ListItem.FilenameAndPath" %(ContainerID)),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(%d).ListItem.Label" %(ContainerID)).decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(%d).ListItem.VideoResolution" %(ContainerID)),"type":"","landscape":xbmc.getInfoLabel("Container(%d).ListItem.Art(thumb)"%(ContainerID))})
+              self.ListeTrailer.append({"id":xbmc.getInfoLabel("Container(%d).ListItem.FilenameAndPath" %(ContainerID)),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":__skin_string__( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(%d).ListItem.Label" %(ContainerID)).decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(%d).ListItem.VideoResolution" %(ContainerID)),"type":"","landscape":xbmc.getInfoLabel("Container(%d).ListItem.Art(thumb)"%(ContainerID))})
            if self.TrailerType=="videoinfo7003" and not ContainerID and  KODIID!="":
-              self.ListeTrailer.append({"id":xbmc.getInfoLabel("ListItem.FilenameAndPath" ),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("ListItem.Label" ).decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("ListItem.VideoResolution" ),"type":"","landscape":xbmc.getInfoLabel("ListItem.Art(thumb)")})
+              self.ListeTrailer.append({"id":xbmc.getInfoLabel("ListItem.FilenameAndPath" ),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":__skin_string__( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("ListItem.Label" ).decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("ListItem.VideoResolution" ),"type":"","landscape":xbmc.getInfoLabel("ListItem.Art(thumb)")})
            if self.TrailerType=="Roles" and KODIID!="": 
-              self.ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5051).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(5051).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(5051).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(5051).ListItem.Art(thumb)")})
+              self.ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5051).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":__skin_string__( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(5051).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(5051).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(5051).ListItem.Art(thumb)")})
            if self.TrailerType=="realisateur" and KODIID!="": 
-              self.ListeTrailer.append({"id":xbmc.getInfoLabel("ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":xbmc.getLocalizedString( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("ListItem.Art(thumb)")})
+              self.ListeTrailer.append({"id":xbmc.getInfoLabel("ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":__skin_string__( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("ListItem.Art(thumb)")})
            
         
            xbmc.executebuiltin( "Dialog.Close(busydialog)" ) 
@@ -523,13 +632,13 @@ class Main:
              if DBTYPEX!="season": 
                dialog = xbmcgui.Dialog()
                if DBTYPEX=="movie": 
-                Titre=xbmc.getLocalizedString( 342 )
+                Titre=__skin_string__( 342 )
                if DBTYPEX=="set": 
-                Titre=xbmc.getLocalizedString( 20434 )
+                Titre=__skin_string__( 20434 )
                if DBTYPEX=="tvshow": 
-                Titre=xbmc.getLocalizedString( 20343 )
+                Titre=__skin_string__( 20343 )
                if DBTYPEX=="artist": 
-                Titre=xbmc.getLocalizedString( 36917 )
+                Titre=__skin_string__( 36917 )
                 
                if DBTYPEX!="movie":
                  Choix=[__language__( 32502 )+Titre, __language__( 32503 )+Titre]
@@ -582,7 +691,9 @@ class Main:
           self.windowvideoplayer = xbmcgui.Window(12901) # videoOSD.xml 
           self.windowvideoplayerinfo = xbmcgui.Window(10142) # DialogFullScreenInfo.xml
           self.ListeTrailer=[]
-  
+          
+ 
+
 
 if (__name__ == "__main__"):
     Main()

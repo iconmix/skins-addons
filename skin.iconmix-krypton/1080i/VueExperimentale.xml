@@ -3,7 +3,7 @@
 	<include name="vueexperimentale">
 		<control type="group"> <!-- vue experimentale -->
 			<!-- -->
-			<include>Animation_FadedByMenu</include>
+			
 			<animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7781)" reversible="true">
 				<effect type="fade" start="100" end="15" time="500"  />
 			</animation>
@@ -14,13 +14,13 @@
 			<control type="group">
 				<top>125</top>
 				<!-- -->
-				 <animation type="Conditional" condition="String.IsEmpty(Window(Home).Property(NextAired.NextDate))">
+				 <animation type="Conditional" condition="String.IsEmpty(Window(Home).Property(MonNextAired.NextDay))">
 				<effect type="slide" start="0,0" end="0,-30" time="1"  />
 			</animation>	
 
          <include>MediaInfoGroup2</include>
          
-         <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)+!Skin.HasSetting(ActeursAuCentre)</visible>
+         <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)+[!Skin.HasSetting(ActeursAuCentre)|Skin.HasSetting(HideCastFocus)]</visible>
 				<include>VisibleIfNotMovieSet</include>
 
 
@@ -38,13 +38,13 @@
         <animation type="Conditional" condition="true">
   				<effect type="zoom" center="960,2035" start="100" end="65" time="1"  />
   			</animation>	
-  			<animation type="Conditional" condition="!Skin.HasSetting(Hide_Plot)+!Skin.HasSetting(ShowLargePlot)+!Control.HasFocus(2999)">
+  			<animation type="Conditional" condition="!Skin.HasSetting(Hide_Plot)+!Skin.HasSetting(ShowLargePlot)+!Skin.HasSetting(ShowVeryLargePlot)+!Control.HasFocus(2999)">
   				<effect type="slide" start="0,0" end="0,-48" time="1"  />
   			</animation>
 						 
 			
 				 <include>MediaInfoGroupUp</include>
-				 <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)+Skin.HasSetting(ActeursAuCentre)</visible>
+				 <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)+Skin.HasSetting(ActeursAuCentre)+!Skin.HasSetting(HideCastFocus)</visible>
 				<include>VisibleIfNotMovieSet</include>
 				
 
@@ -65,7 +65,7 @@
 		         <animation reversible="false" type="Conditional" condition="!Container().OnNext+!Container().OnPrevious">
         <effect type="slide" end="0,-55" time="500" delay="1000" />
       </animation>
-		        <visible>!Skin.HasSetting(Hide_Plot)+!Skin.HasSetting(ShowLargePlot)+!Control.HasFocus(2999)</visible>
+		        <visible>!Skin.HasSetting(Hide_Plot)+!Skin.HasSetting(ShowLargePlot)+!Skin.HasSetting(ShowVeryLargePlot)+!Control.HasFocus(2999)</visible>
 
 			
 			<control type="image">
@@ -103,8 +103,11 @@
 		  <posy>2065</posy>
 		        <include>VisibleIfNotMovieSet</include>
 		        <visible>!String.IsEmpty(ListItem.FilenameAndPath)+Skin.HasSetting(ShowFilePath)</visible>
-		         <animation reversible="false" type="Conditional" condition="!Container().OnNext+!Container().OnPrevious">
+		         <animation reversible="false" type="Conditional" condition="!Container().OnNext+!Container().OnPrevious+!Skin.HasSetting(Hide_Plot)+!Skin.HasSetting(ShowLargePlot)+!Skin.HasSetting(ShowVeryLargePlot)+!Control.HasFocus(2999)">
         <effect type="slide" end="0,-55" time="500" delay="1000" />
+      </animation>
+      <animation reversible="false" type="Conditional" condition="!Container().OnNext+!Container().OnPrevious+[Skin.HasSetting(Hide_Plot)|Skin.HasSetting(ShowLargePlot)|Skin.HasSetting(ShowVeryLargePlot)|Control.HasFocus(2999)]">
+        <effect type="slide" end="0,-25" time="500" delay="1000" />
       </animation>
 		<control type="image">
           
@@ -131,7 +134,7 @@
 		<control type="group">
 			  <posy>1200</posy>
 			   <include>SpecialPlotBox</include>
-			   <visible>!Skin.HasSetting(Hide_Plot)+Skin.HasSetting(ShowLargePlot)</visible>
+			   <visible>!Skin.HasSetting(Hide_Plot)+[Skin.HasSetting(ShowLargePlot)|Skin.HasSetting(ShowVeryLargePlot)]</visible>
 			</control>
 			
 	

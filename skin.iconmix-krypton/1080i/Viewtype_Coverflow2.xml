@@ -73,7 +73,7 @@
 			<posy>150</posy>
 			<visible>Control.IsVisible(512)</visible>
 			<include>Animation_OpenCloseFade</include>
-			<include>Animation_FadedByMenu</include>
+			
 			<include>Animation_HiddenByInfo</include>
 			
 			<control type="group">
@@ -85,11 +85,6 @@
 					<width>400</width>
 					<height>450</height>
 					<include condition="!Skin.HasSetting(ViewLockdown)">OnUp7000</include>
-
-
-
-
-
 					<!-- <ondown>60</ondown> -->
 					<viewtype label="31809">wrap</viewtype>
 					<pagecontrol>60</pagecontrol>

@@ -51,20 +51,19 @@
           <left>20</left>
       <include>ShowActorDetails</include>
     </control>
+    
 				<control type="grouplist" id="2001"> <!-- button -->
-					<posx>212</posx>
-					<posy>1000</posy>
+					<posx>246</posx>
+					<posy>1010</posy>
 					<width>1050</width>
 					<itemgap>0</itemgap>
+					<align>center</align>
 					<orientation>horizontal</orientation>
 					<onleft>800</onleft>
 					<onright>11</onright>
 					<onup>Close</onup>
 					<ondown condition="!String.IsEmpty(VideoPlayer.DBID)">2022</ondown>
-					<ondown>2001</ondown>
-					
-					
-				
+					<ondown>2001</ondown>				
 					
 					<control type="button" id="11">
   <description>Playlists</description>

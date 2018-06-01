@@ -6,7 +6,7 @@
     <control type="group">
       <posy>158</posy>
       <visible>Control.IsVisible(561)</visible>
-      <include>Animation_FadedByMenu</include>
+      
       <include>Animation_OpenCloseFade</include>
       <include>Animation_HiddenByInfo</include>
 

@@ -111,25 +111,7 @@
 		<background label="Widget 1" condition="String.IsEqual(Window.Property(groupname),mainmenu)" >WDF1.jpg</background>
 		<background label="Widget 2" condition="String.IsEqual(Window.Property(groupname),mainmenu)">WDF2.jpg</background>
 		<background label="31733" condition="String.IsEqual(Window.Property(groupname),mainmenu)">WDF3.jpg</background>
-		<!-- <background label="31735" condition="String.IsEqual(Window.Property(groupname),mainmenu)">WDF4.jpg</background> -->
-	
-<!--	<backgrounddefault defaultID="movies">special://skin/extras/backgrounds/movies.jpg</backgrounddefault>
-	<propertydefault defaultID="movies" property="backgroundName">special://skin/extras/backgrounds/movies.jpg</propertydefault>
-	<backgrounddefault defaultID="tvshows">special://skin/extras/backgrounds/tvshows.jpg</backgrounddefault>
-	<propertydefault defaultID="tvshows" property="backgroundName">special://skin/extras/backgrounds/tvshows.jpg</propertydefault>
-	
-	<backgrounddefault defaultID="music">special://skin/extras/backgrounds/music.jpg</backgrounddefault>
-	<propertydefault defaultID="music" property="backgroundName">special://skin/extras/backgrounds/music.jpg</propertydefault>
-	
-	<backgrounddefault defaultID="musicvideos">$INFO[Window(Home).Property(SkinHelper.AllMusicVideosBackground)]</backgrounddefault>
-	<propertydefault defaultID="musicvideos" property="backgroundName">$ADDON[script.skin.helper.service 32047]</propertydefault>
-	<backgrounddefault defaultID="pictures">$INFO[Window(Home).Property(SkinHelper.PicturesBackground)]</backgrounddefault>
-	<propertydefault defaultID="pictures" property="backgroundName">$ADDON[script.skin.helper.service 32046]</propertydefault>
-	<backgrounddefault defaultID="videos">$INFO[Window(Home).Property(SkinHelper.GlobalFanartBackground)]</backgrounddefault>
-	<propertydefault defaultID="videos" property="backgroundName">$ADDON[script.skin.helper.service 32038]</propertydefault>
-	<backgrounddefault defaultID="weather">resource://resource.images.weatherfanart.multi/$INFO[Window(Weather).Property(Day0.FanartCode)]</backgrounddefault>
-	<backgrounddefault defaultID="livetv">$INFO[Window(Home).Property(SkinHelper.PvrBackground)]</backgrounddefault>
-	-->
+		
 	<!-- Thumbnails (Home2 icons, also specified in shortcuts/mainmenu.DATA.xml) -->
 	<thumbnail label="3D">Aicons/3d.png</thumbnail>
 	<thumbnail label="Acteurs">Aicons/acteurs.png</thumbnail>
@@ -210,34 +192,25 @@
 <property property="widgetSort" label="31755" condition="!String.IsEqual(Container(211).ListItem.Property(widgetTarget),music)">rating</property>
 <property property="widgetSort" label="31756" condition="!String.IsEqual(Container(211).ListItem.Property(widgetTarget),music)">votes</property>
 <property property="widgetSort" label="31757" condition="!String.IsEqual(Container(211).ListItem.Property(widgetTarget),music)">top250</property>
-<!--<property property="widgetSort" label="31758">programcount</property>
-<property property="widgetSort" label="31759">playlistorder</property>-->
+
 <property property="widgetSort" label="31760" condition="String.IsEqual(Container(211).ListItem.Property(widgetTarget),tvshows)">episodenumber</property>
 <property property="widgetSort" label="31761" condition="String.IsEqual(Container(211).ListItem.Property(widgetTarget),tvshows)">season</property>
 <property property="widgetSort" label="31762" condition="String.IsEqual(Container(211).ListItem.Property(widgetTarget),tvshows)">numberofepisodes</property>
 <property property="widgetSort" label="31763" condition="String.IsEqual(Container(211).ListItem.Property(widgetTarget),tvshows)">numberofwatchedepisodes</property>
 <property property="widgetSort" label="31764" condition="String.IsEqual(Container(211).ListItem.Property(widgetTarget),tvshows)">tvshowstatus</property>
 <property property="widgetSort" label="31765" condition="String.IsEqual(Container(211).ListItem.Property(widgetTarget),tvshows)">tvshowtitle</property>
-<!--<property property="widgetSort" label="31766">sorttitle</property>
-<property property="widgetSort" label="31767">productioncode</property>-->
+
 <property property="widgetSort" label="31768" condition="!String.IsEqual(Container(211).ListItem.Property(widgetTarget),music)">mpaa</property>
 <property property="widgetSort" label="31769" condition="!String.IsEqual(Container(211).ListItem.Property(widgetTarget),music)">videoresolution</property>
-<!--<property property="widgetSort" label="31770">videocodec</property>
-<property property="widgetSort" label="31771">videoaspectratio</property>-->
+
 <property property="widgetSort" label="31772">audiochannels</property>
-<!--<property property="widgetSort" label="31773">audiocodec</property>-->
 <property property="widgetSort" label="31774" condition="!String.IsEqual(Container(211).ListItem.Property(widgetTarget),music)">audiolanguage</property>
 <property property="widgetSort" label="31775" condition="!String.IsEqual(Container(211).ListItem.Property(widgetTarget),music)">subtitlelanguage</property>
 <property property="widgetSort" label="31776" condition="!String.IsEqual(Container(211).ListItem.Property(widgetTarget),music)">studio</property>
 <property property="widgetSort" label="31777">dateadded</property>
 <property property="widgetSort" label="31778">lastplayed</property>
 <property property="widgetSort" label="31782">random</property>
-<!--<property property="widgetSort" label="31779">playcount</property>
-<property property="widgetSort" label="31780">listeners</property>
-<property property="widgetSort" label="31781">bitrate</property>
-<property property="widgetSort" label="31783">channel</property>
-<property property="widgetSort" label="31784">channelnumber</property>
-<property property="widgetSort" label="31785">datetaken</property>-->
+
 <property property="widgetSort" label="31786"></property>
 	<!-- Widget Style 2 -->
 		<propertySettings toggle="widgetShow.2" buttonID="2003" title="Widget show" />

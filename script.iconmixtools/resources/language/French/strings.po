@@ -16,6 +16,8 @@ msgstr ""
 "Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+
+
 msgctxt "#32502"
 msgid "Update all "
 msgstr "Mettre à jour toutes les "
@@ -177,7 +179,7 @@ msgstr "Veuillez confirmer la suppression de ce cache"
 
 msgctxt "#32603"
 msgid "Automatic update artworks in Kodi database when updating item"
-msgstr "Mettre à jour automatiquement les images dans la base de Kodi "
+msgstr "Mettre à jour automatiquement les images manquantes dans la base de Kodi "
 
 msgctxt "#32604"
 msgid "Select playlist for "
@@ -229,6 +231,15 @@ msgstr "Illustrations"
 msgctxt "#32615"
 msgid "Stop the current playing for play this trailer ?"
 msgstr "Arrêter la lecture en cours pour lire ce choix ?"
+
+msgctxt "#32616"
+msgid "Purge deleted items from local cache"
+msgstr "Purger les éléments inexistants du cache"
+
+
+msgctxt "#32617"
+msgid "Overwrite current artworks for it ?"
+msgstr "Ecraser les illustrations actuelles ?"
 
 
 msgctxt "#32700"
@@ -289,3 +300,66 @@ msgctxt "#32801"
 msgid "Show only one language per trailers"
 msgstr "Eliminer doublons VO"
 
+
+msgctxt "#32851"
+msgid "Autocompletion"
+msgstr "Aide à la saisie"
+
+msgctxt "#32852"
+msgid "Autocompletion language"
+msgstr "Language"
+
+msgctxt "#32853"
+msgid "Provider"
+msgstr "Fournisseur" 
+
+msgctxt "#32854"
+msgid "Sort results by"
+msgstr "Trier les suggestions par" 
+
+
+msgctxt "#32855"
+msgid "empty "
+msgstr "vide "
+
+
+msgctxt "#32856"
+msgid "Database"
+msgstr "Base de données"
+
+
+msgctxt "#32857"
+msgid "Auto purge orphan TvShows"
+msgstr "Purger automatiquement les séries orphelines"
+
+msgctxt "#32858"
+msgid "Launch purge orphan TvShows"
+msgstr "Lancer la purge des séries orphelines"
+
+msgctxt "#32859"
+msgid "ALL"
+msgstr "TOUTES"
+
+msgctxt "#32860"
+msgid "Orphan TvShows deleted"
+msgstr "Séries Orphelines effacées"
+
+
+msgctxt "#32861"
+msgid "no Orphan TvShows found"
+msgstr "pas de Séries Orphelines trouvées"
+
+
+msgctxt "#32862"
+msgid "Ended"
+msgstr "Terminée"
+
+
+msgctxt "#32863"
+msgid "Continuing"
+msgstr "En cours"
+
+
+msgctxt "#32864"
+msgid "Unknown"
+msgstr "Inconnu"
