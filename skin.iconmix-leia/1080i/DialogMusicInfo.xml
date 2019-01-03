@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window id="2001">
 	<defaultcontrol>8001</defaultcontrol>
-	<include>Animation_FadedByMenu</include>
+	
 	<include>Animation_CommonFade</include>
 	<include>Animation_OpenCloseFade</include>
 	<controls>
@@ -15,8 +15,10 @@
 				<width>1750</width>
 				<height>830</height>
 				<colordiffuse>BackgroundColor</colordiffuse> 
-				<texture>frames/fondinfogris.png</texture>				
-				<aspectratio scalediffuse="false">stretch</aspectratio>				
+				<bordersize>12</bordersize>
+            <bordertexture border="12" colordiffuse="FF707070">landscape.png</bordertexture>
+    <texture>background.png</texture>
+    <aspectratio scalediffuse="false">stretch</aspectratio>				
 			</control>		
 		
 			<!-- All views -->			
@@ -191,8 +193,8 @@
 						<width>650</width>
 						<height>339</height>
 						<font>METF_PlotText</font>
-						<textcolor>TextNF</textcolor>
-						<align>justify</align>
+						<include>FontPlot</include>
+						<align>left</align>
 						<label fallback="161">$INFO[ListItem.Property(Album_Description)]</label>
 						<include condition="!Skin.HasSetting(AutoScrollFast)">AutoScrollLong</include>
 						<include condition="Skin.HasSetting(AutoScrollFast)">AutoScrollLongFast</include>
@@ -422,7 +424,7 @@
 						<posx>50</posx>
 						<posy>138</posy>
 						<width>515</width>
-						<height>339</height>
+						<height>539</height>
 						<font>METF_PlotText</font>
 						<textcolor>TextNF</textcolor>
 						<align>justify</align>
@@ -581,10 +583,10 @@
 						<posx>50</posx>
 						<posy>108</posy>
 						<width>650</width>
-						<height>339</height>
-						<font>METF_PlotText</font>
+						<height>539</height>
+						<include>FontPlot</include>
 						<textcolor>TextNF</textcolor>
-						<align>justify</align>
+						<align>left</align>
 						<label fallback="161">$INFO[ListItem.Property(Artist_Description)]</label>
 						<include condition="!Skin.HasSetting(AutoScrollFast)">AutoScrollLong</include>
 						<include condition="Skin.HasSetting(AutoScrollFast)">AutoScrollLongFast</include>
@@ -600,7 +602,7 @@
 		
 			<!-- Artist/Album Image -->
 			<control type="group">
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_CommonFade</include>
 				<include>Animation_OpenCloseFade</include>
 				<control type="image">
@@ -624,7 +626,7 @@
 			</control>
 			<!-- Fanart Image -->
 			<control type="group">
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_CommonFade</include>
 				<include>Animation_OpenCloseFade</include>
 				<control type="image">
@@ -669,7 +671,7 @@
 					<aspectratio>stretch</aspectratio>
 				</control>
 				<control type="grouplist" id="8001">
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_CommonFade</include>
 				<include>Animation_OpenCloseFade</include>
 				<include>VideoInfoButtonText</include>
@@ -741,7 +743,7 @@
 			<control type="group">
 				<posy>-220</posy>
 				<posx>0</posx>
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_CommonFade</include>
 				<include>Animation_OpenCloseFade</include>
 				<control type="label">

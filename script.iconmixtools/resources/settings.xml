@@ -53,16 +53,23 @@
         <setting label="32800" type="bool" id="annoncetoutes" enable="!eq(-4,0)" default="true"/>
         
         <setting type="sep"/>
+        <setting label="32598" type="lsep" />
+        <setting label="32591" type="enum" id="BAMiniQualite"  default="0" values="720|480|320"/>
+        
+        <setting type="sep" />
         <setting label="32596" type="lsep"/>
-        <setting id="youtubeactif" type="bool" label="32597" default="true" />
-        <setting label="32598" type="enum" id="YotubeMiniQualite" enable="eq(-1,true)" default="0" values="720|480|320"/>
+        <setting id="youtubeactif" type="bool" label="32590" default="true" />        
         <setting type="sep"/>
         <setting label="32595" type="lsep"/>
         <setting id="allocineactif" type="bool" label="32590" default="false" />
-        <setting label="32591" type="enum" id="AllocineMiniQualite" enable="eq(-1,true)" default="0" values="720|480|320"/>
         <setting label="32593" type="bool" id="allocinefirst" enable="eq(-2,true)" default="false" />  
         <setting label="32599" type="bool" id="allocinepasdetrailer" enable="eq(-3,true)" default="true" />  
-        <setting label="32801" type="bool" id="allocinefrancais" enable="eq(-4,true)" default="false" />      
+        <setting label="32801" type="bool" id="allocinefrancais" enable="eq(-4,true)" default="false" />
+        <setting type="sep"/>
+        <setting label="32597" type="lsep"/>
+        <setting id="cineserieactif" type="bool" label="32590" default="false" />
+        <setting label="32599" type="bool" id="cineseriepasdetrailer" enable="eq(-2,true)" default="true" />  
+        <setting label="32801" type="bool" id="cineseriefrancais" enable="eq(-3,true)" default="false" />     
        
     </category>
     

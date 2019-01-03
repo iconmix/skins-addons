@@ -4,7 +4,7 @@
 		<control type="group">
 		<posy>158</posy>
 			<visible>Control.IsVisible(56)</visible>
-			<include>Animation_FadedByMenu</include>
+			
 			<include>Animation_OpenCloseFade</include>
 			<include>Animation_HiddenByInfo</include>
 			
@@ -14,7 +14,7 @@
 				<posy>480</posy>
 				<width>1920</width>
 				<height>170</height>
-				<texture diffuse="shine.png">frames/ClassicFrame_background.png</texture>
+				<texture diffuse="shinex.png">frames/ClassicFrame_background.png</texture>
 				<include>AnimationCacheNonSelect</include>
 			
 				<colordiffuse>90101010</colordiffuse>
@@ -106,103 +106,5 @@
 </control>
 </include>
 
-<include name="Viewtype_LogoV">
-	<control type="group">
-		<visible>Control.IsVisible(560)</visible>
-		<include>Animation_FadedByMenu</include>
-			<include>Animation_OpenCloseFade</include>
-			<include>Animation_HiddenByInfo</include>
-			
-		<!-- Browser -->
-		<control type="image">
-			<posx>10</posx>
-			<posy>0</posy>
-			<width>330</width>
-			<height>820</height>
-			<texture diffuse="shine.png">frames/ClassicFrame_background.png</texture>
-			<include>AnimationCacheNonSelect</include>
-		
-			<colordiffuse>90101010</colordiffuse>
-		</control>
-		<control type="list" id="560">
-			<posx>35</posx>
-			<posy>30</posy>
-			<height>800</height>
-			<width>1900</width>
-			<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
 
-
-
-
-
-			<ondown>560</ondown>
-			<onup>560</onup>
-			<viewtype label="$LOCALIZE[31818]">icon</viewtype>
-			<orientation>vertical</orientation>
-			<focusposition>2</focusposition>
-			<scrolltime>200</scrolltime>
-			<preloaditems>2</preloaditems>
-			<pagecontrol>60</pagecontrol>
-			
-			<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows) |Container.Content(sets)]</visible>
-			<itemlayout width="294" height="200">
-			 
-				<control type="group">
-				   <include>isWatched</include>
-				<control type="image" id="9898">
-					<include>Animation_HiddenByInfo</include>
-					<posx>9</posx>
-					<posy>0</posy>
-					<width>252</width>
-					<height>133</height>
-					<texture background="true">$VAR[ListClearartClearlogo]</texture>
-					<fadetime>200</fadetime>
-					<colordiffuse>LandscapeDiffuse</colordiffuse>
-					<aspectratio aligny="center">keep</aspectratio>
-					<visible>!Skin.HasSetting(LogoViewSingleItem)</visible>
-				</control>
-			
-			
-				<!-- Watched Overlay for In-Progress Items -->
-				<control type="group">
-					<posx>120</posx>
-					<posy>135</posy>
-					<include>OverlayProgress</include>
-				</control>
-				<control type="group">
-				<left>0</left>
-				<top>10</top>
-			<include>ShowTotalTvEp</include>		
-			</control>
-			<include>AnimationCacheNonSelect</include>
-			</control>
-			</itemlayout>
-			<focusedlayout width="318" height="200">
-				<include>ActiveClearArt</include>
-				<control type="image">
-					<posx>9</posx>
-					<posy>0</posy>
-					<width>252</width>
-					<height>133</height>
-					<texture background="true">$VAR[ListClearartClearlogo]</texture>
-					<fadetime>200</fadetime>
-					<aspectratio aligny="center">keep</aspectratio>
-					<animation effect="zoom" center="auto" start="50" end="130" time="400" tween="back" easing="out" condition="!Skin.HasSetting(LogoViewSingleItem)">Focus</animation>
-				</control>
-		
-				
-				<!-- Watched Overlay for In-Progress Items -->
-				<control type="group">
-					<posx>120</posx>
-					<posy>135</posy>
-					<include>OverlayProgress</include>
-				</control>
-			</focusedlayout>
-		</control>
-		<!-- Browser label and flags 
-		
--->
-		<include>ScrollBar_Horizontal</include>
-	</control>
-</include>
 </includes>

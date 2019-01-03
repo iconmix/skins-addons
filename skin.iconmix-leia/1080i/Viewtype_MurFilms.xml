@@ -49,7 +49,7 @@
 				<height>240</height>
 				<bordersize>6</bordersize>
 				<bordertexture border="6" colordiffuse="FFFFFFFF">landscapeinfo.png</bordertexture>
-				<texture fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
+				<texture fallback="DefaultMovieGenre.png">$VAR[VideoMusicGenres]</texture>
 				<aspectratio scalediffuse="false">scale</aspectratio>
 				<visible>String.IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
 			</control>
@@ -98,7 +98,7 @@
 				<width>160</width>
 				<height>240</height>
 
-				<texture background="true" diffuse="showcase_matte.png" fallback="DefaultMovieGenre.jpg">$VAR[VideoMusicGenres]</texture>
+				<texture background="true" diffuse="showcase_matte.png" fallback="DefaultMovieGenre.png">$VAR[VideoMusicGenres]</texture>
 				<aspectratio scalediffuse="false">scale</aspectratio>
 				<visible>String.IsEmpty(ListItem.Title)+Container.Content(genres)</visible>
 			</control>
@@ -112,7 +112,7 @@
   <include name="Viewtype_MurFilms">
     <control type="group">
       <visible>Control.IsVisible(585)</visible>
-      <animation type="Conditional" reversible="false" condition="!Skin.HasSetting(CacheFond)">
+      <animation type="Conditional" reversible="false" condition="!Skin.HasSetting(VueExperimentale)">
               <effect type="slide" end="0,-20" time="200" tween="sine" easing="inout" />
               
             </animation>
@@ -131,7 +131,7 @@
         <preloaditems>2</preloaditems>
         <include>Animation_ZoomInZoomOut</include>
         <include>Animation_HiddenByInfo</include>
-        <include>Animation_FadedByMenu</include>
+        
         <include>Animation_OpenCloseFade</include>
          <animation type="Conditional" reversible="true" condition="Container.Content(episodes)">
               <effect type="slide" end="35,0" time="1" tween="sine" easing="inout" />

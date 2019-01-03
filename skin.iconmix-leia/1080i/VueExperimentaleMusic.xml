@@ -3,7 +3,7 @@
   <include name="vueexperimentalemusic">
     <control type="group"> <!-- vue experimentale -->
 
-      <include>Animation_FadedByMenu</include>
+      
       
     <posy>-990</posy>
     <visible>!String.StartsWith(ListItem.Label,..)</visible>
@@ -18,7 +18,7 @@
       <animation reversible="false" type="Conditional" condition="!Container().OnNext+!Container().OnPrevious">
         <effect type="slide" end="0,-45" time="500" delay="1000" />
       </animation>
-      <visible>!Skin.HasSetting(Hide_Plot)+!Control.HasFocus(2997)</visible>
+      <visible>!Skin.HasSetting(Hide_Plot)+!Control.HasFocus(2997)+!Window.IsVisible(12001)</visible>
 
 
       <control type="image">
@@ -31,22 +31,24 @@
         <visible>!String.IsEmpty(Control.GetLabel(1777))</visible>
       </control>
       <control type="fadelabel" id="1777">
-        <resetonlabelchange>true</resetonlabelchange>
-        <scrollspeed>80</scrollspeed>
-        <pauseatend>1500</pauseatend>
-        <scrollout>false</scrollout>
-        <posy>5</posy>
-        <left>10</left>
-        <width>1900</width>
-        <height>20</height>
-        <aligny>top</aligny>
-        <align>center</align>
-        <font>exptext</font>
-        <textcolor>lightgrey</textcolor>
-        <textoffsetx>1500</textoffsetx>
-        <label>$VAR[PlotBox_Text]</label>
-        <scrollout>false</scrollout>
-      </control>
+			  <height>30</height>
+			  <top>-5</top>
+				<resetonlabelchange>true</resetonlabelchange>
+				<scrollspeed>80</scrollspeed>
+				<pauseatend>1500</pauseatend>
+				<scrollout>false</scrollout>
+				<left>10</left>
+				<width>1900</width>
+				<aligny>top</aligny>
+				<align>center</align>
+				<include>PlotNoDialFont</include>
+				<wrapmultiline>false</wrapmultiline>
+				<textcolor>yellow</textcolor>
+				<textoffsetx>1500</textoffsetx>
+				<label>[UPPERCASE]$VAR[PlotBox_Text][/UPPERCASE]</label>
+				<scrollout>false</scrollout>
+				<shadowcolor>FF000000</shadowcolor>
+			</control>
 
 
     </control>

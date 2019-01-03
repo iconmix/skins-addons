@@ -35,6 +35,7 @@
           <ondown>9000</ondown>
           <onleft>9001</onleft>
           <onright>9001</onright>
+          <onback>9000</onback>
           <orientation>horizontal</orientation>
           <focusposition>2</focusposition>
           <defaultcontrol >1</defaultcontrol>
@@ -285,6 +286,7 @@
         <ondown>9000</ondown>
         <onleft>9001</onleft>
         <onup>9000</onup>
+        
 
 
         <viewtype>list</viewtype>
@@ -374,6 +376,7 @@
         <ondown>9001</ondown>
         <onleft>9000</onleft>
         <onright>9000</onright>
+        <onback>9000</onback>
         <orientation>vertical</orientation>
         <defaultcontrol always="true">1</defaultcontrol>
         <scrolltime tween="sine" easing="out">240</scrolltime>
@@ -408,17 +411,102 @@
   </include>
   <include name="Home2_Texte">
 
+   
+    <!-- Frames for submenus -->
+    <control type="group">
+      <posy>950</posy>
+      <posx>0</posx>
+      <visible allowhiddenfocus="true">Control.HasFocus(9001)|Control.HasFocus(9000)</visible>
+      <include>Animation_Submenu</include>
+
+
+      <!-- <visible>Control.HasFocus(9001)</visible>				 -->
+      <control type="image">
+
+        <width>1920</width>
+        <height>100</height>
+        <texture >taskbar.png</texture>
+        <colordiffuse>BackgroundColor</colordiffuse>
+      </control>
+
+
+      <!-- Submenus -->
+      
+      
+     
+      
+      
+      <control type="fixedlist" id="9001">
+
+        <posx>5</posx>
+        <width>1880</width>
+        <height>80</height>
+        <align>center</align>
+        <onup>9000</onup>
+        <ondown>9000</ondown>
+        <onleft>9001</onleft>
+        <onright>9001</onright>
+        <onback>9000</onback>
+        <orientation>horizontal</orientation>
+         <animation type="Conditional" condition="Integer.IsEqual(Container(9001).NumItems,4)">
+          <effect type="slide" end="160,0" time="1" />
+        </animation>
+         <animation type="Conditional" condition="Integer.IsEqual(Container(9001).NumItems,3)">
+          <effect type="slide" end="360,0" time="1" />
+        </animation>
+        <animation type="Conditional" condition="Integer.IsEqual(Container(9001).NumItems,2)">
+          <effect type="slide" end="560,0" time="1" />
+        </animation>
+        <animation type="Conditional" condition="Integer.IsEqual(Container(9001).NumItems,1)">
+          <effect type="slide" end="760,0" time="1" />
+        </animation>
+        
+        
+        
+        <movement>6</movement>
+        <scrolltime tween="sine" easing="out">240</scrolltime>
+        <itemlayout width="400" height="120">
+
+          <control type="label">
+            <width>300</width>
+            <posy>25</posy>
+            <height>40</height>
+            <align>center</align>
+            <label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+            <font>impact</font>
+            <textcolor>SubmenuText</textcolor>
+          </control>
+        </itemlayout>
+
+        <focusedlayout width="400" height="120">
+          <control type="label">
+            <width>300</width>
+            <posy>25</posy>
+            <height>40</height>
+            <align>center</align>
+            <label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
+            <animation effect="zoom" start="80" end="130" center="auto" time="300" condition="true">Conditional</animation>
+            <font>impact</font>
+            <textcolor>yellow</textcolor>
+          </control>
+        </focusedlayout>
+        <content>
+          <include>skinshortcuts-submenu</include>
+        </content>
+      </control>
+
+    </control> 
     <control type="group">
       <posx>0</posx>
-      <posy>900</posy>
+      <posy>950</posy>
       <include>Animation_Mainmenu</include>
 
       <control type="image">
 
         <width>1920</width>
-        <height>140</height>
-        <texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
-        <colordiffuse>F0101010</colordiffuse>
+        <height>100</height>
+        <texture >taskbar.png</texture>
+        <colordiffuse>BackgroundColor</colordiffuse>
       </control>
 
       <include>OsdMusicHome</include>
@@ -460,6 +548,8 @@
             <label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
             <font>impact</font>
             <textcolor>SubmenuText</textcolor>
+             <animation effect="fade" start="100" end="30"  condition="Control.HasFocus(9001)">Conditional</animation>
+
           </control>
         </itemlayout>
         <focusedlayout width="400" height="120">
@@ -474,7 +564,7 @@
             <textcolor>yellow</textcolor>
           </control>
           <control type="image">
-            <posx>140</posx>
+            <posx>115</posx>
             <posy>10</posy>
             <width>20</width>
             <height>20</height>
@@ -485,8 +575,8 @@
 
           </control>
           <control type="image">
-            <posx>140</posx>
-            <posy>105</posy>
+            <posx>145</posx>
+            <posy>10</posy>
             <width>20</width>
             <height>20</height>
             <texture>ArrowDown.png</texture>
@@ -498,72 +588,6 @@
           <include>skinshortcuts-mainmenu</include>
         </content>
       </control>
-    </control>
-    <!-- Frames for submenus -->
-    <control type="group">
-      <posy>900</posy>
-      <posx>0</posx>
-      <visible allowhiddenfocus="true">![Control.HasFocus(8000) | Control.HasFocus(80001) | Control.HasFocus(8002) | Control.HasFocus(8003)]</visible>
-      <include>Animation_Submenu</include>
-
-
-      <!-- <visible>Control.HasFocus(9001)</visible>				 -->
-      <control type="image">
-
-        <width>1920</width>
-        <height>140</height>
-        <texture diffuse="shine.png">frames/ClassicFrame_Background.png</texture>
-        <colordiffuse>F0101010</colordiffuse>
-      </control>
-
-
-      <!-- Submenus -->
-      <control type="fixedlist" id="9001">
-
-        <posx>5</posx>
-        <posy>20</posy>
-        <width>1880</width>
-        <height>80</height>
-        <align>center</align>
-        <onup>9000</onup>
-        <ondown>9000</ondown>
-        <onleft>9001</onleft>
-        <onright>9001</onright>
-        <orientation>horizontal</orientation>
-        <focusposition>1</focusposition>
-        <defaultcontrol>1</defaultcontrol>
-        <movement>6</movement>
-        <scrolltime tween="sine" easing="out">240</scrolltime>
-        <itemlayout width="400" height="120">
-
-          <control type="label">
-            <width>300</width>
-            <posy>25</posy>
-            <height>40</height>
-            <align>center</align>
-            <label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
-            <font>impact</font>
-            <textcolor>SubmenuText</textcolor>
-          </control>
-        </itemlayout>
-
-        <focusedlayout width="400" height="120">
-          <control type="label">
-            <width>300</width>
-            <posy>25</posy>
-            <height>40</height>
-            <align>center</align>
-            <label>[UPPERCASE]$INFO[ListItem.Label][/UPPERCASE]</label>
-            <animation effect="zoom" start="80" end="130" center="auto" time="300" condition="true">Conditional</animation>
-            <font>impact</font>
-            <textcolor>yellow</textcolor>
-          </control>
-        </focusedlayout>
-        <content>
-          <include>skinshortcuts-submenu</include>
-        </content>
-      </control>
-
     </control>
   </include>
   <!--- ---------------ICONES HORIZONTAUX --------- ---->
@@ -989,6 +1013,7 @@
         <ondown>9000</ondown>
         <onleft>9001</onleft>
         <onright>9001</onright>
+        <onback>9000</onback>
         <orientation>horizontal</orientation>
         <focusposition>2</focusposition>
         <defaultcontrol >1</defaultcontrol>
@@ -1255,6 +1280,7 @@
         <ondown>9001</ondown>
         <onleft>9000</onleft>
         <onright>9000</onright>
+        <onback>9000</onback>
         <orientation>vertical</orientation>
         <defaultcontrol always="true">1</defaultcontrol>
         <scrolltime tween="sine" easing="out">240</scrolltime>

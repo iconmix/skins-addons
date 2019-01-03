@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
-  <defaultcontrol always="true">10</defaultcontrol>
+  <defaultcontrol always="true">211</defaultcontrol>
   <controls>
     <control type="group">
       <include>Animation_OpenCloseFade</include>
@@ -15,16 +15,18 @@
       -->
       <control type="group">
         <posx>1450</posx>
-        <posy>190</posy>
+        <posy>390</posy>
         <!-- Icon and Background backdrop -->
         <control type="image">
-          <left>-30</left>
+          <left>0</left>
           <top>-130</top>
           <width>460</width>
           <height>500</height>
           <texture background="true" >list/listfocus.png</texture>
           <colordiffuse>BackgroundColor</colordiffuse>
         </control>
+        <control type="group">
+          <left>30</left>
         <!-- Thumbnail (Home2 icon) -->
         <control type="image" id="901">
           <left>150</left>
@@ -110,7 +112,19 @@
           <aspectratio>keep</aspectratio>
           <visible>[Control.HasFocus(1001)+String.IsEqual(Container(211).ListItem.Property(widgetStyle),Panel)]|[Control.HasFocus(2001)+String.IsEqual(Container(211).ListItem.Property(widgetStyle.2),Panel)]</visible>
         </control>
-        <control type="image" id="781">
+         <control type="image" id="781">
+          <left>0</left>
+          <top>50</top>
+          <width>400</width>
+          <height>250</height>
+          <timeperimage>15000</timeperimage>
+          <randomize>true</randomize>
+          <fadetime>500</fadetime>
+          <texture background="true">widgetthumb/WidgetPanelLand.jpg</texture>
+          <aspectratio>keep</aspectratio>
+          <visible>[Control.HasFocus(1001)+String.Contains(Container(211).ListItem.Property(widgetStyle),anelland)]|[Control.HasFocus(2001)+String.Contains(Container(211).ListItem.Property(widgetStyle.2),anelland)]</visible>
+        </control>
+        <control type="image" id="782">
           <left>0</left>
           <top>50</top>
           <width>400</width>
@@ -122,7 +136,7 @@
           <aspectratio>keep</aspectratio>
           <visible>[Control.HasFocus(1001)+String.IsEqual(Container(211).ListItem.Property(widgetStyle),List)]|[Control.HasFocus(2001)+String.IsEqual(Container(211).ListItem.Property(widgetStyle.2),List)]</visible>
         </control>
-        <control type="image" id="782">
+        <control type="image" id="783">
           <left>0</left>
           <top>50</top>
           <width>400</width>
@@ -207,7 +221,7 @@
           <label>Widget Style[CR][COLOR=yellow]LIST[/COLOR]</label>
           <visible>Control.IsVisible(781)</visible>
         </control>
-
+</control>
       </control>
 
       <!-- Entete -->
@@ -230,44 +244,7 @@
       </control>
 
       <control type="group">
-        <control type="group">
-            <visible>!ControlGroup(9001).HasFocus</visible>
-        <!-- Move down -->
-        <control type="button" id="304">
-          <left>-10</left>
-          <top>-10</top>
-          <width>1</width>
-          <height>1</height>
-          <onleft>9001</onleft>
-          <onright>303</onright>
-          <onup>noop</onup>
-          <ondown>noop</ondown>
-        </control>
-        <!-- Move up -->
-        <control type="button" id="303">
-          <left>-10</left>
-          <top>-10</top>
-          <width>1</width>
-          <height>1</height>
-          <onleft>304</onleft>
-          <onright>302</onright>
-          <onup>noop</onup>
-          <ondown>noop</ondown>
-        </control>
-        <!-- Remove -->
-        <control type="button" id="302">
-          <left>-10</left>
-          <top>-10</top>
-          <width>1</width>
-          <height>1</height>
-          <onleft>303</onleft>
-          <onright>211</onright>
-          <onup>noop</onup>
-          <ondown>noop</ondown>
-        </control>
-        </control>
-
-        <!-- Left list -->
+         <!-- Left list -->
         <control type="list" id="211">
           <top>65</top>
           <width>420</width>
@@ -275,8 +252,7 @@
           <onleft>302</onleft>
           <onright>9000</onright>
            
-          <onup>9001</onup>
-          <ondown>9001</ondown>
+          
           <scrolltime tween="sine" easing="out">240</scrolltime>
            <animation effect="fade" start="100" end="75" time="0" condition="ControlGroup(9001).HasFocus">Conditional</animation>
           <itemlayout width="425" height="38">
@@ -346,14 +322,39 @@
               <include>Animation_ButtonFocus</include>
               <visible>Control.HasFocus(302)</visible>
             </control>
-           
+             <control type="label">
+              <left>105</left>
+              <width>310</width>
+              <font>METF_SettingsHeadingBig</font>
+              <textcolor>yellow</textcolor>
+              <focusedcolor>yellow</focusedcolor>
+              <align>left</align>
+              <aligny>center</aligny>
+              <label>[B]$INFO[ListItem.Label][/B]</label>
+              <visible>Control.HasFocus(211)</visible>
+              
             </control>
             <control type="label">
               <left>105</left>
               <width>310</width>
               <font>METF_SettingsHeadingBig</font>
-              <textcolor>DialogTextFO</textcolor>
-              <focusedcolor>BDialogTextFO</focusedcolor>
+              <textcolor>yellow</textcolor>
+              <focusedcolor>yellow</focusedcolor>
+              <align>left</align>
+              <aligny>center</aligny>
+              <label>[I][B]$INFO[ListItem.Label][/B][/I]</label>
+              <visible>!Control.HasFocus(211)</visible>
+              
+            </control>
+            </control>
+            <control type="group">
+                 <visible>!Control.HasFocus(211)+!Control.HasFocus(302)+!Control.HasFocus(303)+!Control.HasFocus(304)</visible>
+            <control type="label">
+              <left>105</left>
+              <width>310</width>
+              <font>METF_SettingsHeadingBig</font>
+              <textcolor>white</textcolor>
+              <focusedcolor>yellow</focusedcolor>
               <align>left</align>
               <aligny>center</aligny>
               <label>[B]$INFO[ListItem.Label][/B]</label>
@@ -365,14 +366,54 @@
               <width>350</width>
               <font>METF_TitleTextMedium</font>
               <textcolor>white</textcolor>
+              <focusedcolor>yellow</focusedcolor>
               <align>left</align>
               <aligny>center</aligny>
               <label>$INFO[ListItem.Label]</label>
              <visible>ControlGroup(9001).HasFocus</visible>
             </control> 
+            </control>
             
           </focusedlayout>
         </control>
+        <control type="group">
+            <visible>!ControlGroup(9001).HasFocus</visible>
+        <!-- Move down -->
+        <control type="button" id="304">
+          <left>-10</left>
+          <top>-10</top>
+          <width>1</width>
+          <height>1</height>
+          <onleft>9001</onleft>
+          <onright>303</onright>
+          <onup>211</onup>
+          <ondown>211</ondown>
+        </control>
+        <!-- Move up -->
+        <control type="button" id="303">
+          <left>-10</left>
+          <top>-10</top>
+          <width>1</width>
+          <height>1</height>
+          <onleft>304</onleft>
+          <onright>302</onright>
+          <onup>211</onup>
+          <ondown>211</ondown>
+        </control>
+        <!-- Remove -->
+        <control type="button" id="302">
+          <left>-10</left>
+          <top>-10</top>
+          <width>1</width>
+          <height>1</height>
+          <onleft>303</onleft>
+          <onright>211</onright>
+          <onup>211</onup>
+          <ondown>211</ondown>
+        </control>
+        </control>
+
+       
 
 
 
@@ -385,17 +426,25 @@
           <colordiffuse>SettingsLine</colordiffuse>
 
         </control>
+        <control type="image">
+          <posx>1445</posx>
+          <posy>0</posy>
+          <height>1080</height>
+          <width>10</width>
+          <texture border="2">VideoInfoLine.png</texture>
+          <colordiffuse>SettingsLine</colordiffuse>
+
+        </control>
         <!-- Right grouplist -->
         <control type="grouplist" id="9000">
           <left>435</left>
           <top>70</top>
-          <width>1100</width>
+          <width>1000</width>
           <height>780</height>
           <itemgap>0</itemgap>
           <onleft>211</onleft>
-          <onright>noop</onright>
-          <onup>9001</onup>
-          <ondown>9001</ondown>
+          <onright>9001</onright>
+         
           <orientation>vertical</orientation>
           <usecontrolcoords>true</usecontrolcoords>
           <animation effect="fade" start="100" end="75" time="0" condition="ControlGroup(9001).HasFocus">Conditional</animation>
@@ -498,7 +547,7 @@
             <visible>String.IsEqual(Window.Property(groupname),mainmenu)</visible>
 
             <onclick>SendClick(312)</onclick>
-            <onclick>SendClick(1001)</onclick>
+            <!-- <onclick>SendClick(1001)</onclick> -->
           </control>
           <control type="button" id="1001">
             <description>Change widget style 1</description>
@@ -567,7 +616,7 @@
       <label>$ADDON[script.skinshortcuts 32044] 2</label>
       <label2>[COLOR=yellow]$INFO[Container(211).ListItem.Property(widgetName.2)][/COLOR]</label2>
       <onclick>SetProperty(widgetID,2)</onclick>
-      <onclick>SendClick(2001)</onclick>
+      <!-- <onclick>SendClick(2001)</onclick> -->
       <onclick>SendClick(312)</onclick>
 
 
@@ -629,62 +678,54 @@
         </control>
 
         <!-- Button grouplist -->
-        <control type="image" id="910">
-          <posx>0</posx>
-          <posy>860</posy>
-          <height>10</height>
-          <width>1920</width>
-          <texture border="2">settings_line.png</texture>
-          <colordiffuse>SettingsLine</colordiffuse>
-        </control>
+        
         <control type="grouplist" id="9001">
-          <top>870</top>
-          <left>0</left>
+          <!-- <top>870</top> 
+          <left>0</left>-->
+          <top>65</top>
+          <left>1455</left>
           <height>150</height>
           <align>right</align>
-          <width>370</width>
-          <itemgap>5</itemgap>
-          <onup>211</onup>
-          <onright>9000</onright>
-          <onup>2004</onup>
-          <ondown>211</ondown>
+          <width>470</width>
+          <itemgap>5</itemgap>          
+          <onleft>9000</onleft>
           <orientation>vertical</orientation>
           <!-- Add item -->
           <control type="button" id="10"> <!-- OK Button -->
-            <width max="370">auto</width>
+            <width max="470">auto</width>
             <height>38</height>
             <label>$LOCALIZE[186]</label>
-            <font>METF_TitleText</font>
             <textcolor>FFFFFFFF</textcolor>
             <focusedcolor>DialogTextFO</focusedcolor>
             <shadowcolor>FF7F7F7F</shadowcolor>
-            <textoffsetx>15</textoffsetx>
-            <texturefocus colordiffuse="AFFFFFFF">buttons/checklarge.png</texturefocus>
+            <textoffsetx>10</textoffsetx>
+				<font>impact35</font>						
+				<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
             <texturenofocus colordiffuse="AFFFFFFF"></texturenofocus>
           </control>
           <control type="button" id="301"> <!-- ajouter -->
-            <width max="370">auto</width>
+            <width max="470">auto</width>
             <height>38</height>
             <align>right</align>
             <label>$ADDON[script.skinshortcuts 32000]</label>
-            <font>METF_TitleText</font>
             <textcolor>FFFFFFFF</textcolor>
             <focusedcolor>DialogTextFO</focusedcolor>
             <shadowcolor>FF7F7F7F</shadowcolor>
-            <textoffsetx>15</textoffsetx>
-            <texturefocus colordiffuse="AFFFFFFF">buttons/checklarge.png</texturefocus>
+            <textoffsetx>10</textoffsetx>
+				<font>impact35</font>						
+				<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
             <texturenofocus colordiffuse="AFFFFFFF"></texturenofocus>
           </control>
           <control type="button" id="308"><!-- Reset -->
-            <width max="370">auto</width>
+            <width max="470">auto</width>
             <height>38</height>
             <label>$ADDON[script.skinshortcuts 32028]</label>
-            <font>METF_TitleText</font>
             <textcolor>FFFFFFFF</textcolor>
             <focusedcolor>DialogTextFO</focusedcolor>
             <shadowcolor>FF7F7F7F</shadowcolor>
-            <textoffsetx>15</textoffsetx>
-            <texturefocus colordiffuse="AFFFFFFF">buttons/checklarge.png</texturefocus>
+            <textoffsetx>10</textoffsetx>
+				<font>impact35</font>						
+				<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
             <texturenofocus colordiffuse="AFFFFFFF"></texturenofocus>
           </control>
         </control>

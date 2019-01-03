@@ -81,7 +81,7 @@
 			</control>
 			<control type="scrollbar" id="998">
 				<include>Animation_OpenCloseFade</include>
-				<include>Animation_FadedByMenu</include>
+				
 				<posx>1270</posx>
 				<posy>128</posy>
 				<width>22</width>

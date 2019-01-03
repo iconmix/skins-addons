@@ -15,7 +15,7 @@
 				<top>450</top>
 				<left>-100</left>
 				<width>3000</width>
-				<height>540</height>
+				<height>640</height>
 				<texture background="true" >frames/submenubar.png</texture>
 				<aspectratio scalediffuse="false">stretch</aspectratio>
 				<include>AnimationCacheNonSelect</include>
@@ -26,7 +26,7 @@
 				<animation effect="rotatey" center="0" start="0" end="-8" time="500" condition="true">Conditional</animation>
 		</control>
 		<control type="group">
-			<posy>120</posy>
+			<posy>170</posy>
 			
 			<visible>Control.IsVisible(584)</visible>
 			<!---->
@@ -167,61 +167,55 @@
 						<include>ActiveClearArt</include>
 						
 						<control type="group">
-							
-							<animation type="Focus">
-								<effect type="rotatey" center="30" start="-8" end="8" time="500" reversible="false"/>
-								<effect type="zoom" start="100" end="120" time="500"  reversible="false"/>
-								<effect type="slide"  end="0,50" time="500"  reversible="false"/>
-								
-							</animation>
-							<animation type="UnFocus">
-								<effect type="zoom" start="120" end="100" time="100"  reversible="false"/>
-								<effect type="rotatey" center="30" start="8" end="0" time="100" reversible="false"/>	
-								
-							</animation>
-				<control type="group"> <!-- sorti disque -->
+						  <animation type="Focus">
+						<effect type="slide" start="0,0" end="0,185" time="500" delay="200" reversible="false"/>	
+					</animation>
+					 <animation type="UnFocus">
+						<effect type="slide" end="0,0" start="0,185" time="500" delay="100" reversible="false"/>	
+					</animation>
+						   <include>isWatched</include>
+						       <control type="group"> <!-- sorti disque -->
 				
 					<visible>Control.hasFocus(584)</visible>
+					<left>25</left>
+							<top>150</top>
+							<width>300</width>
+							<height>300</height>
 					<animation type="Focus">
-						<effect type="slide" start="-20" end="220" time="800" delay="1500" reversible="false"/>	
-						<effect type="slide"  start="0" end="-240" time="800" delay="9500" reversible="false"/>
+						<effect type="slide" start="-20" end="260" time="800" delay="1500" reversible="false"/>	
+						<effect type="slide"  start="0" end="-280" time="800" delay="9500" reversible="false"/>
 					</animation>
 					<!--<animation effect="slide" end="-400" time="1" delay="0" reversible="false">UnFocus</animation> -->
 					<animation effect="slide" end="-400" time="1" delay="0" reversible="false" condition="Container.OnNext()|Container.OnPrevious()">Conditional</animation>
 					<control type="group">
 						<visible>!String.Contains(ListItem.DBTYPE,set)|[String.Contains(ListItem.DBTYPE,set)+!String.IsEmpty(ListItem.Art(discart))]</visible>
+						<animation effect="rotate"  center="auto" end="-360" time="1000" delay="1300" reversible="false">Focus</animation>	
 						<control type="image">
-							<left>65</left>
-							<top>180</top>
-							<width>250</width>
-							<height>250</height>
+							
 							<aspectratio>keep</aspectratio>						
 							<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Art(discart)]</texture>				
-							<!-- <animation effect="slide"   end="105" time="800" delay="500" >Focus</animation>	 -->
-							<animation effect="rotate"  center="auto" end="-360" time="1000" delay="1300" reversible="false">Focus</animation>					
+											
 						</control>
 						<control type="image">
-							<left>65</left>
-							<top>180</top>
-							<width>250</width>
-							<height>250</height>	
+							
 							<aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
 							<texture background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
-							<animation effect="rotate"  center="auto" end="-360" time="1000" delay="1300" reversible="false">Focus</animation>			
 							<visible>String.IsEmpty(ListItem.Art(discart))</visible>
 						</control>						
 					</control>
 					
 					
 				
-				</control>
-				
-				<control type="image">
-					<include>commontexture</include>
-					<texture background="true" fallback="DefaultThumb.png">$INFO[ListItem.Art(poster)]</texture>							
-					<aspectratio scalediffuse="false">stretch</aspectratio>
-				</control>
-				<control type="image">
+				</control> 
+						<control type="group">
+						<!--	<animation effect="rotatey" center="150" start="0" end="-35" time="500" condition="true">Conditional</animation>-->
+						
+							<control type="image">
+								<include>commontexture</include>
+								<texture background="true" fallback="DefaultThumb.png">$INFO[ListItem.Art(poster)]</texture>
+								<aspectratio scalediffuse="false">stretch</aspectratio>
+							</control>
+					<control type="image">
 					<top>450</top>
 					<left>3</left>
 					<width>390</width>
@@ -238,7 +232,8 @@
 					<height>33</height>
 				  
 					<animation effect="rotate"  center="3,450" end="90"  condition="true" reversible="false">Conditional</animation>
-				<control type="image">					
+				<control type="image">
+					
 					<texture background="true" fallback="frames/bannerdefaultall.png">$INFO[ListItem.Art(banner)]</texture>							
 					<aspectratio scalediffuse="false">stretch</aspectratio>
 					
@@ -246,32 +241,45 @@
 					<visible>!String.Contains(ListItem.DBTYPE,set)</visible>
 				</control>
 				</control>
-				<control type="image">
-					<top>23</top>		
-					<width>287</width>
-					<height>443</height>
-					<texture background="true">frames/bcover5.png</texture>
-					<aspectratio scalediffuse="false">stretch</aspectratio>
-				</control>
-				<control type="group">								
-						<visible>String.Contains(ListItem.DBTYPE,set) | Container.Content(movies) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
-						<control type="image">
-							<top>27</top>
-							<left>115</left>
-							<width>60</width>
-							<height>35</height>								
-							<!-- <texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture> -->
+							<control type="image">
+								<top>23</top>		
+								<width>287</width>
+								<height>443</height>
+								<texture background="true">frames/bcover5.png</texture>
+								<aspectratio scalediffuse="false">stretch</aspectratio>
+							</control>
+							<control type="group">								
+								<visible>String.Contains(ListItem.DBTYPE,set) | Container.Content(movies) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
+								<control type="image">
+									<top>27</top>
+									<left>115</left>
+									<width>60</width>
+									<height>35</height>								
+									<!-- <texture fallback="flags/default.png">$VAR[MediaFlag_VideoCodec]</texture> -->
 									<texture fallback="flags/default.png">$INFO[ListItem.VideoResolution,flags/VideoResolution/,.png]</texture>
-							<aspectratio>keep</aspectratio>
+									
+									<aspectratio>keep</aspectratio>
+								</control>	
+								<control type="group">
+									<top>40</top>
+									<left>195</left>
+									<include>OverlayProgress</include>
+								</control>								
+							</control>
 						</control>
-						<control type="group">
-							<top>40</top>
-							<left>195</left>
-							<include>OverlayProgress</include>
-						</control>						
-				</control>
-			<visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
+						
+						
+						
+						<include>AnimationCacheNonSelect</include>
+						 <include content="MediaInfoMini">
+                <param name="PosX">50</param>
+                <param name="PosY">420</param>
+              </include>
+         
+              
+			       <visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
   </control>
+  
   <control type="image">
     <left>20</left>
     <top>2</top>
@@ -296,7 +304,6 @@
 				</control>
 			</control>
 			<!--<include>PosterViewCommon_Details</include>-->
-			<include>ScrollBar_Horizontal</include>
 		</control>
 	</include>
 

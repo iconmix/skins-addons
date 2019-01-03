@@ -7,8 +7,9 @@
   <onload condition="[Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuTexteVertical)]">Skin.ToggleSetting(MenuTexteVertical)</onload> <!-- default to Icon menu -->
   <onload condition="[Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuIconVertical)]">Skin.ToggleSetting(MenuIconVertical)</onload> <!-- default to Icon menu -->
   <onload condition="[Skin.HasSetting(MenuIcon)+Skin.HasSetting(MenuIconBobine)]">Skin.ToggleSetting(MenuIconBobine)</onload>
-  <onload condition="!String.IsEqual(Skin.String(PlotSpeed),2s)+!String.IsEqual(Skin.String(PlotSpeed),3s)+!String.IsEqual(Skin.String(PlotSpeed),4s)+!String.IsEqual(Skin.String(PlotSpeed),5s)+!Skin.SetString(PlotSpeed,6s)+!String.IsEqual(Skin.String(PlotSpeed),7s)+!String.IsEqual(Skin.String(PlotSpeed),8s)">Skin.SetString(PlotSpeed,4s)</onload>   
-
+  <onload condition="!String.IsEmpty(Skin.String(PlotSpeed))">Skin.SetString(PlotSpeed,4s)</onload>   
+  <onload condition="String.IsEmpty(Skin.String(BaVolume))">Skin.SetString(BaVolume,70)</onload>
+  <onload condition="String.IsEmpty(Skin.String(BaDelai))">Skin.SetString(BaDelai,0)</onload>
   <controls>
     
     <control type="group">
@@ -541,7 +542,6 @@
             <control type="image" id="544">
               <include>Settings_Line</include>
             </control>
-            <!-- use skinhelper extrafanart ? -->
             <control type="radiobutton" id="545">
               <include>SettingsLabel</include>
               <label>$LOCALIZE[31734]</label>
@@ -581,77 +581,32 @@
         <control type="grouplist" id="9014">
           <visible>Container(9000).Hasfocus(4)</visible>
           <posx>0</posx>
-          <posy>0</posy>
-          <width>940</width>
-          <height>618</height>
+          <posy>-50</posy>
+          <width>300</width>
+          <height>918</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
           <onleft>9000</onleft>
           <onright>9000</onright>
-          <control type="label" id="198">
+ 
+          <control type="button" id="198">
+            <width>300</width>
             <include>SettingsLabel</include>
-            <label>$LOCALIZE[369]</label>
+            <label>$LOCALIZE[369] >>></label>
+            <onright>7100</onright>
+            <onclick>setfocus(7100)</onclick>
           </control>
-          <control type="image" id="199">
-          <include>Settings_Line</include>
-          </control>
-           <control type="radiobutton" id="200">
-            
-            <label>Indiana Jones</label>
-            <height>50</height>
-            <font>TitrePolice1</font>
+          
+          <control type="button" id="199">
+            <width>300</width>
             <include>SettingsLabel</include>
-            <onclick>Skin.SetString(titrepolice,1)</onclick>
-            <selected>String.IsEqual(Skin.String(titrepolice),1)|String.IsEmpty(Skin.String(titrepolice))</selected>
+            <label>$LOCALIZE[207] >>></label>
+            <onright>7101</onright>
+            <onclick>setfocus(7101)</onclick>
           </control>
-          <control type="radiobutton" id="201">
-            <height>50</height>
-            <label>Indiana Jones</label>
-            <font>TitrePolice2</font>
-            <include>SettingsLabel</include>
-            <onclick>Skin.SetString(titrepolice,2)</onclick>
-            <selected>String.IsEqual(Skin.String(titrepolice),2)</selected>
-          </control>
-          <control type="radiobutton" id="202">
-           <height>50</height>
-            <label>Indiana Jones</label>
-            <font>TitrePolice3</font>
-            <include>SettingsLabel</include>
-            <onclick>Skin.SetString(titrepolice,3)</onclick>
-            <selected>String.IsEqual(Skin.String(titrepolice),3)</selected>
-          </control>
-          <control type="radiobutton" id="203">
-            <height>50</height>
-            <label>Indiana Jones</label>
-            <font>TitrePolice4</font>
-            <include>SettingsLabel</include>
-            <onclick>Skin.SetString(titrepolice,4)</onclick>
-            <selected>String.IsEqual(Skin.String(titrepolice),4)</selected>
-          </control>
-          <control type="radiobutton" id="204">
-            <height>50</height>
-            <label>Indiana Jones</label>
-            <font>TitrePolice5</font>
-            <include>SettingsLabel</include>
-            <onclick>Skin.SetString(titrepolice,5)</onclick>
-            <selected>String.IsEqual(Skin.String(titrepolice),5)</selected>
-          </control>
-          <control type="radiobutton" id="205">
-            <height>50</height>
-            <label>Indiana Jones</label>
-            <font>TitrePolice6</font>
-            <include>SettingsLabel</include>
-            <onclick>Skin.SetString(titrepolice,6)</onclick>
-            <selected>String.IsEqual(Skin.String(titrepolice),6)</selected>
-          </control>
-          <control type="radiobutton" id="206">
-            <height>50</height>
-            <label>Indiana Jones</label>
-            <font>TitrePolice7</font>
-            <include>SettingsLabel</include>
-            <onclick>Skin.SetString(titrepolice,7)</onclick>
-            <selected>String.IsEqual(Skin.String(titrepolice),7)</selected>
-          </control>
+         
+          
+           
         </control>
 
 
@@ -797,7 +752,7 @@
         </control>
 
 
-        <!-- Video Settings -->
+        <!---------------------------------------------------- Video Settings ------------------------------------------------------>
         <control type="grouplist" id="9011">
           <visible>Container(9000).Hasfocus(7)</visible>
           <posx>0</posx>
@@ -891,15 +846,45 @@
             <onclick>Skin.ToggleSetting(BAfenetre)</onclick>
             <selected>Skin.HasSetting(BAfenetre)</selected>
           </control>
-
-
+          
           <control type="radiobutton" id="809">
+            <include>SettingsLabel</include>
+            <label>$LOCALIZE[31337]</label>
+            <onclick>Skin.ToggleSetting(NoNetflixBA)</onclick>
+            <selected>Skin.HasSetting(NoNetflixBA)</selected>
+          </control>
+          
+           <control type="button" id="810">
+              <include>SettingsLabel</include>
+              <label>$LOCALIZE[31146]</label>
+              <label2>$INFO[Skin.String(BaDelai)]s</label2>
+              <onclick condition="!String.IsEqual(Skin.String(BaDelai),0)+!String.IsEqual(Skin.String(BaDelai),2)+!String.IsEqual(Skin.String(BaDelai),4)+!String.IsEqual(Skin.String(BaDelai),6)">Skin.SetString(BaDelai,60%)</onclick>   
+              <onclick condition="String.IsEqual(Skin.String(BaDelai),0)">Skin.SetString(BaDelai,2)</onclick>       
+              <onclick condition="String.IsEqual(Skin.String(BaDelai),2)">Skin.SetString(BaDelai,4)</onclick>
+              <onclick condition="String.IsEqual(Skin.String(BaDelai),4)">Skin.SetString(BaDelai,6)</onclick>
+              <onclick condition="String.IsEqual(Skin.String(BaDelai),6)">Skin.SetString(BaDelai,0)</onclick>
+             
+            </control>
+            <control type="button" id="811">
+              <include>SettingsLabel</include>
+              <label>$LOCALIZE[31147]</label>
+              <label2>$INFO[Skin.String(BaVolume)]%</label2>
+              <onclick condition="!String.IsEqual(Skin.String(BaVolume),0)+!String.IsEqual(Skin.String(BaVolume),50)+!String.IsEqual(Skin.String(BaVolume),80)+!String.IsEqual(Skin.String(BaVolume),100)">Skin.SetString(BaVolume,60)</onclick>   
+              <onclick condition="String.IsEqual(Skin.String(BaVolume),0)">Skin.SetString(BaVolume,50)</onclick>       
+              <onclick condition="String.IsEqual(Skin.String(BaVolume),50)">Skin.SetString(BaVolume,70)</onclick>
+              <onclick condition="String.IsEqual(Skin.String(BaVolume),70)">Skin.SetString(BaVolume,100)</onclick>
+              <onclick condition="String.IsEqual(Skin.String(BaVolume),100)">Skin.SetString(BaVolume,0)</onclick>
+             
+            </control>
+
+
+          <control type="radiobutton" id="812">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31399]</label>
             <onclick>Skin.ToggleSetting(FanartSombre)</onclick>
             <selected>Skin.HasSetting(FanartSombre)</selected>
           </control>
-          <control type="radiobutton" id="810">
+          <control type="radiobutton" id="813">
             <include>SettingsLabel</include>
             <label>$LOCALIZE[31486]</label>
             <onclick>Skin.ToggleSetting(CacherPause)</onclick>
@@ -954,12 +939,12 @@
             <onclick>Skin.ToggleSetting(HideSagaCast)</onclick>
             <selected>Skin.HasSetting(HideSagaCast)</selected>
           </control>
-          <!--
+          <!-- -->
            <control type="radiobutton" id="826">
             <include>SettingsLabel</include>
-            <label>$LOCALIZE[32010]</label>
-            <onclick>Skin.ToggleSetting(NoterFilm)</onclick>
-            <selected>Skin.HasSetting(NoterFilm)</selected>
+            <label>$LOCALIZE[31837]</label>
+            <onclick>Skin.ToggleSetting(LogoDiscFilms)</onclick>
+            <selected>Skin.HasSetting(LogoDiscFilms)</selected>
           </control>
           -->
 
@@ -1014,13 +999,14 @@
             <selected>Skin.HasSetting(HideMovieTvCastEmpty)</selected>
             <visible>!Skin.HasSetting(HideMovieCast)|!Skin.HasSetting(HideTvCast)</visible>
           </control>
-          <!--
-          <control type="radiobutton" id="836">
+          <!-- <control type="radiobutton" id="836">
             <include>SettingsLabel</include>
-            <label>$LOCALIZE[32011]</label>
-            <onclick>Skin.ToggleSetting(NoterSerie)</onclick>
-            <selected>Skin.HasSetting(NoterSerie)</selected>
+            <label>Preferer Disque à Logo</label>
+            <onclick>Skin.ToggleSetting(LogoDiscSeries)</onclick>
+            <selected>Skin.HasSetting(LogoDiscSeries)</selected>
           </control>
+         
+          
           -->
            <control type="radiobutton" id="837">
             <include>SettingsLabel</include>
@@ -1528,6 +1514,7 @@
 
 
     </control>
+   
     <control type="group"> <!-- L2 -->
       <posx>1500</posx>
       <posy>170</posy>
@@ -1727,6 +1714,193 @@
   </control>
 
 
+  <control type="group"> <!-- POLICE TITRE -->
+      <posx>800</posx>
+      <posy>40</posy>
+      <control type="image">
+            <posx>-10</posx>
+            <posy>-40</posy>
+            <height>1080</height>
+    <width>10</width>
+    <texture border="2">VideoInfoLine.png</texture>
+    <colordiffuse>SettingsLine</colordiffuse>
+    <visible>ControlGroup(9014).HasFocus|ControlGroup(7100).HasFocus|ControlGroup(7101).HasFocus</visible>
+            
+        </control>
+
+  <control type="grouplist" id="7100">
+       <visible>[ControlGroup(9014).HasFocus+ControlGroup(9014).HasFocus(198)]|ControlGroup(7100).HasFocus</visible>
+        <posx>30</posx>
+        <posy>15</posy>
+        <width>500</width>
+        <height>530</height>
+        <itemgap>1</itemgap>
+        <onleft>9014</onleft>
+        <onback>9014</onback>
+        
+        <orientation>vertical</orientation>
+    
+    
+    
+      <control type="radiobutton" id="200">
+            <width>500</width>
+            <include>ExampleTitre</include>
+            <height>50</height>
+            <font>TitrePolice1</font>
+            <include>SettingsLabel</include>
+            <onclick>Skin.SetString(titrepolice,1)</onclick>
+            <selected>String.IsEqual(Skin.String(titrepolice),1)|String.IsEmpty(Skin.String(titrepolice))</selected>
+          </control>
+          <control type="radiobutton" id="201">
+            <height>50</height>
+            <width>500</width>
+            <include>ExampleTitre</include>
+            <font>TitrePolice2</font>
+            <include>SettingsLabel</include>
+            <onclick>Skin.SetString(titrepolice,2)</onclick>
+            <selected>String.IsEqual(Skin.String(titrepolice),2)</selected>
+          </control>
+          <control type="radiobutton" id="202">
+           <height>50</height>
+           <width>500</width>
+            <include>ExampleTitre</include>
+            <font>TitrePolice3</font>
+            <include>SettingsLabel</include>
+            <onclick>Skin.SetString(titrepolice,3)</onclick>
+            <selected>String.IsEqual(Skin.String(titrepolice),3)</selected>
+          </control>
+          <control type="radiobutton" id="203">
+            <height>50</height>
+            <width>500</width>
+            <include>ExampleTitre</include>
+            <font>TitrePolice4</font>
+            <include>SettingsLabel</include>
+            <onclick>Skin.SetString(titrepolice,4)</onclick>
+            <selected>String.IsEqual(Skin.String(titrepolice),4)</selected>
+          </control>
+          <control type="radiobutton" id="204">
+            <height>50</height>
+            <width>500</width>
+            <include>ExampleTitre</include>
+            <font>TitrePolice5</font>
+            <include>SettingsLabel</include>
+            <onclick>Skin.SetString(titrepolice,5)</onclick>
+            <selected>String.IsEqual(Skin.String(titrepolice),5)</selected>
+          </control>
+          <control type="radiobutton" id="205">
+            <height>50</height>
+            <width>500</width>
+            <include>ExampleTitre</include>
+            <font>TitrePolice6</font>
+            <include>SettingsLabel</include>
+            <onclick>Skin.SetString(titrepolice,6)</onclick>
+            <selected>String.IsEqual(Skin.String(titrepolice),6)</selected>
+          </control>
+          <control type="radiobutton" id="206">
+            <height>50</height>
+            <width>500</width>
+            <include>ExampleTitre</include>
+            <font>TitrePolice7</font>
+            <include>SettingsLabel</include>
+            <onclick>Skin.SetString(titrepolice,7)</onclick>
+            <selected>String.IsEqual(Skin.String(titrepolice),7)</selected>
+          </control>
+          <control type="radiobutton" id="207">
+            <height>50</height>
+            <width>500</width>
+            <include>ExampleTitre</include>
+            <font>TitrePolice8</font>
+            <include>SettingsLabel</include>
+            <onclick>Skin.SetString(titrepolice,8)</onclick>
+            <selected>String.IsEqual(Skin.String(titrepolice),8)</selected>
+          </control>
+  </control>
+  <control type="grouplist" id="7101">
+    <visible>[ControlGroup(9014).HasFocus+ControlGroup(9014).HasFocus(199)]|ControlGroup(7101).HasFocus</visible>
+    <posx>30</posx>
+    <posy>15</posy>
+    <width>800</width>
+    <height>530</height>
+    <itemgap>1</itemgap>
+    <onleft>9014</onleft>
+    <onback>9014</onback>
+    <orientation>vertical</orientation>
+    <control type="radiobutton" id="312">
+      
+      <include>BlaBla</include>
+      <width>800</width>
+<height>50</height>
+      <font>PlotPolice1</font>
+      <include>SettingsLabel</include>
+      <onclick>Skin.SetString(plotpolice,1)</onclick>
+      <selected>String.IsEqual(Skin.String(plotpolice),1)|String.IsEmpty(Skin.String(plotpolice))</selected>
+    </control>
+    <control type="radiobutton" id="301">
+      <width>800</width>
+<height>50</height>
+      <include>BlaBla</include>
+      <font>PlotPolice2</font>
+      <include>SettingsLabel</include>
+      <onclick>Skin.SetString(plotpolice,2)</onclick>
+      <selected>String.IsEqual(Skin.String(plotpolice),2)</selected>
+    </control>
+    <control type="radiobutton" id="302">
+     <width>800</width>
+<height>50</height>
+      <include>BlaBla</include>
+      <font>PlotPolice3</font>
+      <include>SettingsLabel</include>
+      <onclick>Skin.SetString(plotpolice,3)</onclick>
+      <selected>String.IsEqual(Skin.String(plotpolice),3)</selected>
+    </control>
+    <control type="radiobutton" id="303">
+      <width>800</width>
+<height>50</height>
+      <include>BlaBla</include>
+      <font>PlotPolice4</font>
+      <include>SettingsLabel</include>
+      <onclick>Skin.SetString(plotpolice,4)</onclick>
+      <selected>String.IsEqual(Skin.String(plotpolice),4)</selected>
+    </control>
+    <control type="radiobutton" id="304">
+      <width>800</width>
+<height>50</height>
+      <include>BlaBla</include>
+      <font>PlotPolice5</font>
+      <include>SettingsLabel</include>
+      <onclick>Skin.SetString(plotpolice,5)</onclick>
+      <selected>String.IsEqual(Skin.String(plotpolice),5)</selected>
+    </control>
+    <control type="radiobutton" id="305">
+      <width>800</width>
+<height>50</height>
+      <include>BlaBla</include>
+      <font>PlotPolice6</font>
+      <include>SettingsLabel</include>
+      <onclick>Skin.SetString(plotpolice,6)</onclick>
+      <selected>String.IsEqual(Skin.String(plotpolice),6)</selected>
+    </control>
+    <control type="radiobutton" id="306">
+      <width>800</width>
+<height>50</height>
+      <include>BlaBla</include>
+      <font>PlotPolice7</font>
+      <include>SettingsLabel</include>
+      <onclick>Skin.SetString(plotpolice,7)</onclick>
+      <selected>String.IsEqual(Skin.String(plotpolice),7)</selected>
+    </control>
+    <control type="radiobutton" id="307">
+      <width>800</width>
+<height>50</height>
+      <include>BlaBla</include>
+      <font>PlotPolice8</font>
+      <include>SettingsLabel</include>
+      <onclick>Skin.SetString(plotpolice,8)</onclick>
+      <selected>String.IsEqual(Skin.String(plotpolice),8)</selected>
+    </control>
+  </control>
+  
+</control>
 
   <include>Global_ContextFilter</include>
 

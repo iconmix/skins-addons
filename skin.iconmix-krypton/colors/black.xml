@@ -9,8 +9,10 @@
 
 	<!-- Metropolis Default Colors -->
 	<!-- Global Colors -->
-	<color name="BackgroundColor">ff101010</color>
-	<color name="CouleurActeurs">7f101010</color>
+	<color name="BackgroundColor">ff404040</color>
+	<color name="BackgroundColorWidget">90303030</color>
+	<color name="CouleurActeurs">7f404040</color>
+	<color name="CouleurPlotFond">A0F0F0F0</color>
 	<color name="FanartDiffuse">32FFFFFF</color>
 	<color name="FanartDiffuseLight">92FFFFFF</color>			<!-- FanartDiffuse + 0x60 -->
 	<color name="Home2FanartDiffuse">77FFFFFF</color>
@@ -102,7 +104,7 @@
 	<color name="OSDPlayingDuration">ddc89008</color>
 	
 	<!-- Dialogs -->
-	<color name="DialogBackgroundColor">ff101010</color>
+	<color name="DialogBackgroundColor">FF303030</color>
 	<color name="DialogBackgroundColorEau">FF505050</color>
 	<color name="DialogDropdownColor">ff101010</color>			<!-- FF87d1ff -->
 	<color name="DialogProgressBar">FFf8cd22</color>

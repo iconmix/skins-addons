@@ -11,6 +11,7 @@
 	<!-- Metropolis Default Colors -->
 	<!-- Global Colors -->
 	<color name="BackgroundColor">ff3c95c8</color>
+	<color name="BackgroundColorWidget">903c95c8</color>
 	<color name="CouleurActeurs">7f3c95c8</color>
 	<color name="FanartDiffuse">32FFFFFF</color>
 	<color name="FanartDiffuseLight">92FFFFFF</color>			<!-- FanartDiffuse + 0x60 -->

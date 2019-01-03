@@ -11,7 +11,7 @@
       
       <control type="group">
         
-        <posx>1000</posx>
+        <posx>1010</posx>
         <posy>300</posy>
         <control type="group"> <!-- bande annonce en fenetre -->
            <visible>!Player.Caching</visible> 

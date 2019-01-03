@@ -14,7 +14,7 @@
             
         </control>
 		<control type="group">
-			<include>Animation_FadedByMenu</include>
+			
 			<include>Animation_OpenCloseFade</include>
 			<control type="label">
 				<description>Heading</description>

@@ -4,7 +4,7 @@
   <allowoverlay>no</allowoverlay>
   <coordinates>
     <system>1</system>
-    <posx>0</posx>
+    <posx>-30</posx>
     <posy>0</posy>
   </coordinates>
   
@@ -14,7 +14,7 @@
     <control type="group">
       <posx>15</posx>
       <posy>50</posy>
-      <width>1910</width>
+      <width>1970</width>
       <height>780</height>
       <control type="image" id="1000">
         <texture background="true">FondFenetre.png</texture>
@@ -23,16 +23,25 @@
       <control type="group">
         <posx>50</posx>
         <posy>0</posy>
+        
         <!-- aperçus ArtWork -->
         <control type="group">
-          <left>1290</left>
-          <width>500</width>
+          <left>1500</left>
+          <width>340</width>
           <control type="image" id="9">
             <top>280</top>
             <height>220</height>
             <texture></texture>
             <aspectratio align="center" aligny="center">keep</aspectratio>
           </control>
+          <control type="label" id="30">
+          <top>650</top>
+          <height>40</height>
+          <left>130</left>
+          
+          <font>compteur</font>
+          
+        </control>
         </control>
         
         <control type="group"><!-- artworks selectionnés -->
@@ -78,6 +87,12 @@
             <texture></texture>
 
           </control>
+          <control type="image" id="16"> <!-- fanart -->
+            <left>1295</left>
+            <width>200</width>
+            <aspectratio align="center" aligny="center">keep</aspectratio>
+            <texture></texture>
+          </control>
           
           
         </control>
@@ -89,6 +104,11 @@
           <height>580</height>
           <itemgap>210</itemgap>
          <control type="image">              
+          <colordiffuse>BackgroundColor</colordiffuse>          
+          <width>2</width>
+          <texture>LineVertical.png</texture>
+        </control>
+        <control type="image">              
           <colordiffuse>BackgroundColor</colordiffuse>          
           <width>2</width>
           <texture>LineVertical.png</texture>
@@ -177,6 +197,15 @@
             <font>impactsongs</font>
 <textcolor>lightgreen</textcolor>
           </control>
+          
+          <control type="label" id="26"> <!-- Fanart -->
+            <left>1280</left>
+            <width>200</width>
+            <label></label>
+            <align>center</align>
+            <font>impactsongs</font>
+<textcolor>lightgreen</textcolor>
+          </control>
         </control>
 
 
@@ -187,26 +216,18 @@
           <posy>35</posy>         
           <height>76</height>
           <font>impact</font>
-          <textcolor>black</textcolor>
-          <align>center</align>
-          <aligny>top</aligny>
-          <label></label>
-        </control>
-        <control type="label">       
-          <posy>32</posy>
-          <left>-3</left>         
-          <height>76</height>
-          <font>impact</font>
           <textcolor>white</textcolor>
           <align>center</align>
           <aligny>top</aligny>
-          <label>$INFO[Control.GetLabel(1)]</label>
+          <shadowcolor>black</shadowcolor>
+          <label></label>
         </control>
+        
 
    
         <control type="image">
           <top>470</top>
-          <width>1260</width>
+          <width>1470</width>
           <left>25</left>
          <colordiffuse>BackgroundColor</colordiffuse>
           <height>2</height>
@@ -214,7 +235,7 @@
         </control>
         <control type="image">
           <top>155</top>
-          <width>1260</width>
+          <width>1470</width>
           <left>25</left>
          <colordiffuse>BackgroundColor</colordiffuse>
           <height>2</height>
@@ -248,12 +269,15 @@
           <control type="label" id="305">
             <label></label>
           </control>
+          <control type="label" id="306">
+            <label></label>
+          </control>
         </control>
         <control type="list" id="200"> <!-- affiche -->
           <posx>20</posx>
           <posy>160</posy>
           <width>200</width>
-          <height>265</height>
+          <height>295</height>
           <onleft>7</onleft>
           <onright>201</onright>     
                   
@@ -309,7 +333,7 @@
           <posx>230</posx>
           <posy>160</posy>
           <width>200</width>
-          <height>265</height>
+          <height>295</height>
           <onleft>200</onleft>
           <onright>202</onright>
           
@@ -366,7 +390,7 @@
           <posx>440</posx>
           <posy>160</posy>
           <width>200</width>
-          <height>265</height>
+          <height>295</height>
           <onleft>201</onleft>
           <onright>203</onright>
           
@@ -423,7 +447,7 @@
           <posx>650</posx>
           <posy>160</posy>
           <width>200</width>
-          <height>265</height>
+          <height>295</height>
           <onleft>202</onleft>
           <onright>204</onright>
           
@@ -480,7 +504,7 @@
           <posx>860</posx>
           <posy>160</posy>
           <width>200</width>
-          <height>265</height>
+          <height>295</height>
           <onleft>203</onleft>
           <onright>205</onright>
           
@@ -537,9 +561,9 @@
           <posx>1070</posx>
           <posy>160</posy>
           <width>200</width>
-          <height>265</height>
+          <height>295</height>
           <onleft>204</onleft>
-          <onright>5</onright>
+          <onright>206</onright>
           
                   
           <itemlayout height="38" width="205">
@@ -590,11 +614,69 @@
           </focusedlayout>
          
         </control>
+          <control type="list" id="206"><!-- fanarts -->
+          <posx>1280</posx>
+          <posy>160</posy>
+          <width>200</width>
+          <height>295</height>
+          <onleft>205</onleft>
+          <onright>8</onright>
+          
+                  
+          <itemlayout height="38" width="205">
+            <control type="label">
+              
+              <font>impactsongs</font>
+              <width>205</width>
+              <align>center</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+            </control>  
+            
+          </itemlayout>
+          <focusedlayout height="38" width="205">
+            <control type="image">
+              <align>center</align>
+              <aligny>center</aligny>
+              <texture>buttonz/ButtonFocus.png</texture>
+              <left>5</left>
+              <width>205</width>
+              <visible>Control.HasFocus(206)</visible>
+            </control>
+            <control type="label">
+              <textcolor>yellow</textcolor>
+              <font>impactsongs</font>
+              
+              <width>205</width>
+              <align>center</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+            </control>
+            <control type="image"> 
+              <top>3</top>     
+               <left>5</left>      
+              <width>35</width>
+              <height>35</height>              
+              <texture>buttonz/addok.png</texture>
+              <visible>String.IsEqual(Container(206).ListItem.Property(Original),Original)+String.IsEqual(Control.getLabel(306),Delete)</visible>
+            </control>
+            <control type="image">         
+              <width>35</width>
+              <height>35</height>  
+              <top>3</top>
+              <left>5</left>            
+              <texture>buttonz/supcancel.png</texture>
+              <visible>String.IsEqual(Container(206).ListItem.Property(Original),Original)+!String.IsEqual(Control.getLabel(306),Delete)</visible>
+            </control>
+          </focusedlayout>
+         
+        </control>
+     
      
       </control>
       
       <control type="button" id="5"> <!-- OK -->
-        <posx>1840</posx>
+        <posx>1845</posx>
         <posy>35</posy>
         <width>53</width>
         <height>53</height>
@@ -606,7 +688,8 @@
         <texturenofocus colordiffuse="FF7F7F7F">buttonz/addok.png</texturenofocus>
         <align>right</align>
         <aligny>center</aligny>
-        <onleft>205</onleft>
+        <onleft>8</onleft>
+        <ondown>8</ondown>
         <animation type="Conditional" condition="Control.HasFocus(5)" loop="true">
           <effect type="zoom" start="100" end="80"   time="1500" />
         </animation>
@@ -614,7 +697,7 @@
       </control>
 
       <control type="button" id="7"> <!-- CANCEL -->
-        <posx>15</posx>
+        <posx>45</posx>
         <posy>35</posy>
         <width>53</width>
         <height>53</height>
@@ -635,6 +718,32 @@
         </animation>
       </control>
 
+
+      <control type="radiobutton" id="8">
+        <left>1550</left>
+        <top>100</top>
+       <height>90</height>
+       <width>350</width>
+        <textoffsetx>20</textoffsetx>
+        <onright>5</onright>
+        <onleft>206</onleft>
+        <onup>5</onup>
+        <align>left</align>
+        <aligny>center</aligny>
+        <spinwidth>34</spinwidth>
+        <spinheight>34</spinheight>
+        <radiowidth>55</radiowidth>
+        <radioheight>55</radioheight>
+        <textureradiofocus>button_radioF.png</textureradiofocus>
+        <textureradionofocus>button_radioNF.png</textureradionofocus>
+        <textureup>ArrowUpNF.png</textureup>
+        <texturedown>ArrowDownNF.png</texturedown>
+        <textureupfocus>ArrowUpFo.png</textureupfocus>
+        <texturedownfocus>ArrowDownFo.png</texturedownfocus>
+        <font>METF_DialogMediumBold</font>
+        <label></label>
+        <visible>Integer.IsGreater(Container(206).NumItems,1)</visible>
+      </control>
 
 
 

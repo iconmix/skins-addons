@@ -108,7 +108,6 @@
         </control>
         <control type="group" id="2103">
                    <visible>System.HasAddon(script.iconmixtools)+!Player.HasVideo</visible>
-
           
           <include>videoinfobuttonfond</include>
           <control type="grouplist" id="442">
@@ -140,7 +139,9 @@
               <onfocus>SetProperty(showgenre,,1100)</onfocus>
               <onclick condition="!Skin.HasSetting(BAfenetre)">Skin.ToggleSetting(BAfenetre)</onclick>
               <onclick>SetFocus(9999)</onclick>
-              <onclick>RunScript(script.iconmixtools,trailer=True&dbtype=$INFO[Container(1990).ListItem.DBTYPE]&label=$INFO[Container(1990).ListItem.Label]&year=$INFO[Container(1990).ListItem.Year]&dbid=$INFO[Container(1990).ListItem.DBID]&imdbnumber=$INFO[Container(1990).ListItem.Property(IMDBNumber)]&tmdbnumber=$INFO[Container(1990).ListItem.Property(TMDBNumber)])</onclick>
+              <onclick>setProperty(iconmixgettrailer,label:$INFO[Container(1990).ListItem.Title]*dbtype:$INFO[Container(1990).ListItem.DBTYPE]*label:$INFO[Container(1990).ListItem.Label]*year:$INFO[Container(1990).ListItem.Year]*dbid:$INFO[Container(1990).ListItem.DBID]*imdbnumber:$INFO[Container(1990).ListItem.Property(IMDBNumber)]*tmdbnumber:$INFO[Container(1990).ListItem.Property(TMDBNumber)],10000)</onclick>
+              <onclick>Close</onclick>
+<!-- <onclick>RunScript(script.iconmixtools,trailer=True&dbtype=$INFO[Container(1990).ListItem.DBTYPE]&label=$INFO[Container(1990).ListItem.Label]&year=$INFO[Container(1990).ListItem.Year]&dbid=$INFO[Container(1990).ListItem.DBID]&imdbnumber=$INFO[Container(1990).ListItem.Property(IMDBNumber)]&tmdbnumber=$INFO[Container(1990).ListItem.Property(TMDBNumber)])</onclick> -->
 
             </control>
             <control type="button" id="1000">
@@ -160,7 +161,9 @@
               <include>Animation_ButtonFocus</include>
               <onclick condition="Skin.HasSetting(BAfenetre)">Skin.ToggleSetting(BAfenetre)</onclick>
               <onclick>SetFocus(9999)</onclick>
-              <onclick>RunScript(script.iconmixtools,trailer=True&dbtype=$INFO[Container(1990).ListItem.DBTYPE]&label=$INFO[Container(1990).ListItem.Label]&year=$INFO[Container(1990).ListItem.Year]&dbid=$INFO[Container(1990).ListItem.DBID]&imdbnumber=$INFO[Container(1990).ListItem.Property(IMDBNumber)]&tmdbnumber=$INFO[Container(1990).ListItem.Property(TMDBNumber)])</onclick>
+              <onclick>setProperty(iconmixgettrailer,label:$INFO[Container(1990).ListItem.Title]*dbtype:$INFO[Container(1990).ListItem.DBTYPE]*label:$INFO[Container(1990).ListItem.Label]*year:$INFO[Container(1990).ListItem.Year]*dbid:$INFO[Container(1990).ListItem.DBID]*imdbnumber:$INFO[Container(1990).ListItem.Property(IMDBNumber)]*tmdbnumber:$INFO[Container(1990).ListItem.Property(TMDBNumber)],10000)</onclick>
+              <onclick>Close</onclick>
+<!-- <onclick>RunScript(script.iconmixtools,trailer=True&dbtype=$INFO[Container(1990).ListItem.DBTYPE]&label=$INFO[Container(1990).ListItem.Label]&year=$INFO[Container(1990).ListItem.Year]&dbid=$INFO[Container(1990).ListItem.DBID]&imdbnumber=$INFO[Container(1990).ListItem.Property(IMDBNumber)]&tmdbnumber=$INFO[Container(1990).ListItem.Property(TMDBNumber)])</onclick> -->
             </control>
             <!-- fenetre -->
 
@@ -195,7 +198,9 @@
               <include>Animation_ButtonFocus</include>
               <onclick condition="Skin.HasSetting(BAfenetre)">Skin.ToggleSetting(BAfenetre)</onclick>
               <onclick>SetFocus(9999)</onclick>
-              <onclick>RunScript(script.iconmixtools,trailer=True&dbtype=$INFO[Container(1990).ListItem.DBTYPE]&label=$INFO[Container(1990).ListItem.Label]&year=$INFO[Container(1990).ListItem.Year]&dbid=$INFO[Container(1990).ListItem.DBID]&imdbnumber=$INFO[Container(1990).ListItem.Property(IMDBNumber)]&tmdbnumber=$INFO[Container(1990).ListItem.Property(TMDBNumber)])</onclick>
+              <onclick>setProperty(iconmixgettrailer,label:$INFO[Container(1990).ListItem.Title]*dbtype:$INFO[Container(1990).ListItem.DBTYPE]*label:$INFO[Container(1990).ListItem.Label]*year:$INFO[Container(1990).ListItem.Year]*dbid:$INFO[Container(1990).ListItem.DBID]*imdbnumber:$INFO[Container(1990).ListItem.Property(IMDBNumber)]*tmdbnumber:$INFO[Container(1990).ListItem.Property(TMDBNumber)],10000)</onclick>
+              <onclick>Close</onclick>
+<!-- <onclick>RunScript(script.iconmixtools,trailer=True&dbtype=$INFO[Container(1990).ListItem.DBTYPE]&label=$INFO[Container(1990).ListItem.Label]&year=$INFO[Container(1990).ListItem.Year]&dbid=$INFO[Container(1990).ListItem.DBID]&imdbnumber=$INFO[Container(1990).ListItem.Property(IMDBNumber)]&tmdbnumber=$INFO[Container(1990).ListItem.Property(TMDBNumber)])</onclick> -->
             </control>
             <!-- fenetre -->
 
@@ -216,7 +221,9 @@
               <onfocus>SetProperty(showgenre,,1100)</onfocus>
               <onclick condition="!Skin.HasSetting(BAfenetre)">Skin.ToggleSetting(BAfenetre)</onclick>
               <onclick>SetFocus(9999)</onclick>
-              <onclick>RunScript(script.iconmixtools,trailer=True&dbtype=$INFO[Container(1990).ListItem.DBTYPE]&label=$INFO[Container(1990).ListItem.Label]&year=$INFO[Container(1990).ListItem.Year]&dbid=$INFO[Container(1990).ListItem.DBID]&imdbnumber=$INFO[Container(1990).ListItem.Property(IMDBNumber)]&tmdbnumber=$INFO[Container(1990).ListItem.Property(TMDBNumber)])</onclick>
+              <onclick>setProperty(iconmixgettrailer,label:$INFO[Container(1990).ListItem.Title]*dbtype:$INFO[Container(1990).ListItem.DBTYPE]*label:$INFO[Container(1990).ListItem.Label]*year:$INFO[Container(1990).ListItem.Year]*dbid:$INFO[Container(1990).ListItem.DBID]*imdbnumber:$INFO[Container(1990).ListItem.Property(IMDBNumber)]*tmdbnumber:$INFO[Container(1990).ListItem.Property(TMDBNumber)],10000)</onclick>
+              <onclick>Close</onclick>
+<!-- <onclick>RunScript(script.iconmixtools,trailer=True&dbtype=$INFO[Container(1990).ListItem.DBTYPE]&label=$INFO[Container(1990).ListItem.Label]&year=$INFO[Container(1990).ListItem.Year]&dbid=$INFO[Container(1990).ListItem.DBID]&imdbnumber=$INFO[Container(1990).ListItem.Property(IMDBNumber)]&tmdbnumber=$INFO[Container(1990).ListItem.Property(TMDBNumber)])</onclick> -->
 
             </control>
 
@@ -425,13 +432,13 @@
   </control>
 
 
-  <!-- telex debug-
+  <!-- telex debug--
 
   <control type="label">
     <posx>10</posx>
     <posy>700</posy>
     <width>1600</width>
-    <label>Variable:$INFO[Container(1990).ListItem.DBID]/$INFO[Container(1990).ListItem.FileNameandPath]/$INFO[Container(1990).ListItem.property(IMDBNumber)]</label>
+    <label>Variable:$INFO[Window(Home).Property(iconmixgettrailer)]</label>
   </control>
   <control type="label">
     <width max="1000">auto</width>

@@ -27,7 +27,7 @@
       <include>ShowActorDetails</include>
     </control>
       <control type="group">
-        <top>990</top>
+        <top>1010</top>
         <left>250</left>
         <align>center</align>
          <animation type="Conditional" condition="true">

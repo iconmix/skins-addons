@@ -125,11 +125,11 @@ msgid "Trailers for movies/tvshows"
 msgstr ""
 
 msgctxt "#32590"
-msgid "Search Trailers on Allocine (FR)"
+msgid "Activate search"
 msgstr ""
 
 msgctxt "#32591"
-msgid "Minimum quality on Allocine"
+msgid "Minimum quality of trailers"
 msgstr ""
 
 msgctxt "#32592"
@@ -152,13 +152,15 @@ msgctxt "#32596"
 msgid "YOUTUBE Trailers"
 msgstr ""
 
+
 msgctxt "#32597"
-msgid "Search Trailers on Youtube"
+msgid "CINESERIE Trailers"
 msgstr ""
 
 msgctxt "#32598"
-msgid "Minimum quality on Youtube"
+msgid "Trailers quality"
 msgstr ""
+
 
 msgctxt "#32599"
 msgid "Only Trailers and no Teaser for tvshow"
@@ -241,6 +243,12 @@ msgctxt "#32617"
 msgid "Overwrite current artworks for it ?"
 msgstr ""
 
+msgctxt "#32618"
+msgid "Today"
+msgstr ""
+
+
+
 msgctxt "#32700"
 msgid "Poster"
 msgstr ""
@@ -288,6 +296,11 @@ msgstr ""
 
 msgctxt "#32711"
 msgid "Rate tvshow episode after play"
+msgstr ""
+
+
+msgctxt "#32712"
+msgid "Download[CR] the %s Web fanarts[CR]to extrafanart directory"
 msgstr ""
 
 msgctxt "#32800"
@@ -361,3 +374,30 @@ msgstr ""
 msgctxt "#32864"
 msgid "Unknown"
 msgstr ""
+
+msgctxt "#32865"
+msgid "Initialising TV Planning"
+msgstr ""
+
+msgctxt "#32866"
+msgid "All"
+msgstr ""
+
+
+msgctxt "#32867"
+msgid "All Tvshows"
+msgstr ""
+
+msgctxt "#32868"
+msgid "Kodi TvShows"
+msgstr ""
+
+
+msgctxt "#32869"
+msgid "Incoming/Renewing TvShows"
+msgstr ""
+
+msgctxt "#32870"
+msgid "Go to yours episodes"
+msgstr ""
+

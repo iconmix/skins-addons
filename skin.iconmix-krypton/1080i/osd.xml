@@ -132,7 +132,7 @@
       </control>
       
       <control type="button"> 
-        <width>210</width>       
+        <width>220</width>       
         <font>impact35</font>
         <texturenofocus>osd/osd_progress_script.png</texturenofocus>
         <textcolor>TextNF</textcolor>
@@ -157,7 +157,7 @@
       <control type="progress" id="23">
         <description>Progressbar</description>
         <posx>295</posx>
-        <posy>665</posy>
+        <posy>670</posy>
         <width>960</width>
         <height>30</height>
         <info>Player.Progress</info>
@@ -196,8 +196,8 @@
         <posy>593</posy>
         <width>950</width>
         <height>30</height>
-        <font>exptext</font>
-        <textcolor>TextFO</textcolor>
+        <font>debutfin</font>
+        <textcolor>White</textcolor>
         <align>center</align>
         <aligny>center</aligny>
         <scroll>true</scroll>
@@ -324,7 +324,7 @@
     <overlaytexture></overlaytexture>
     </control>
     <control type="progress" id="23">
-      <top>36</top>
+      <top>41</top>
       <width>1320</width>
       <left>240</left>
       <height>40</height>

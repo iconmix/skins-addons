@@ -431,14 +431,15 @@
       </include>
 
     </control>
+<!-- defilement fanart -->
 
-    <control type="image">
-      <!-- defilement fanart -->
-      <visible>!Container(8080).OnNext+Integer.IsGreater(Container(8080).NumItems,0)+!Container(8080).IsUpdating+
+    <control type="image">      
+      <visible>[Control.HasFocus(9000)|Control.HasFocus(9001)]+!Container(8080).OnNext+Integer.IsGreater(Container(8080).NumItems,0)+!Container(8080).IsUpdating+
       [[Control.HasFocus(9001)+String.IsEqual(Container(9001).ListItem.Property(background),Playlist.FanartList)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)]|[!Control.HasFocus(9001)+[String.IsEqual(Container(9000).ListItem.Property(background),Playlist.FanartList)|String.Contains(Container(9000).ListItem.Property(background),WDF1)|String.Contains(Container(9000).ListItem.Property(background),WDF2)|String.Contains(Container(9000).ListItem.Property(background),WDF3)]+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)]]</visible>
       <animation effect="fade" start="10" end="100" time="500" reversible="false" >Visible</animation>
-      <texture>$INFO[Container(8080).ListItem.Art(fanart)]</texture>
+      <texture default="background.png">$INFO[Container(8080).ListItem.Art(fanart)]</texture>
     </control>
+
 
   </include>
   <include name="fanartSpeed0">
@@ -487,11 +488,15 @@
   </include>
 
 
-  <variable name="backgroundVar">
+ <variable name="backgroundVar">
     <value condition="!Window.IsVisible(10025)+!Window.IsVisible(502)+!Window.IsVisible(home)">background.png</value>
-    <value condition="Control.HasFocus(9000)+[String.Contains(Container(9000).ListItem.Property(background),WDF1)|String.Contains(Container(9000).ListItem.Property(background),WDF2)|String.Contains(Container(9000).ListItem.Property(background),WDF3)]"></value>
-    <value condition="Integer.IsGreater(Container(8080).NumItems,0)"></value>
+    
+    <value condition="Control.HasFocus(9000)+[String.Contains(Container(9000).ListItem.Property(background),WDF1)|String.Contains(Container(9000).ListItem.Property(background),WDF2)]">$INFO[Window(Home).Property(iconmixwidgetfanart)]</value>
+        <value condition="Control.HasFocus(9000)+String.Contains(Container(9000).ListItem.Property(background),WDF3)"></value>
+
+    <value condition="[Control.HasFocus(9000)|Control.HasFocus(9001)]+Integer.IsGreater(Container(8080).NumItems,0)"></value>
     <value condition="Window.IsVisible(Home)+!Control.HasFocus(9000)+!Control.HasFocus(9001)+!String.IsEqual(Container(9000).ListItem.Property(widgetType),weather)+!String.IsEqual(Container(9000).ListItem.Property(widgetType),system)+!String.IsEmpty(Window(Home).Property(WidgetActifFanart))">$INFO[Window(Home).Property(WidgetActifFanart)]</value>
+    <value condition="Window.IsVisible(Home)+!Control.HasFocus(9000)+!Control.HasFocus(9001)+!String.IsEqual(Container(9000).ListItem.Property(widgetType),weather)+!String.IsEqual(Container(9000).ListItem.Property(widgetType),system)+String.IsEmpty(Window(Home).Property(WidgetActifFanart))">background.png</value>
     <value condition="Window.IsVisible(Home)+Control.HasFocus(9001)+!String.IsEmpty(Container(9001).ListItem.Property(background))">$INFO[Container(9001).ListItem.Property(background)]</value>
     <value condition="Window.IsVisible(Home)+Control.HasFocus(9001)+String.IsEmpty(Container(9001).ListItem.Property(background))">background.png</value>
     <value>$INFO[Container(9000).ListItem.Property(background)]</value>
@@ -499,11 +504,15 @@
 
   <variable name="backgroundVarPlaylist">
     <value condition="Container(9000).OnNext|Container(9001).OnNext|Container(9000).OnPrevious|Container(9001).OnPrevious"></value>
+    
     <value condition="!Control.HasFocus(9000)+Control.HasFocus(9001)+String.IsEqual(Container(9001).ListItem.Property(background),Playlist.FanartList)">$INFO[Container(9001).ListItem.Property(backgroundPlaylist)]</value>
     <value condition="!Control.HasFocus(9000)+Control.HasFocus(9001)+String.Contains(Container(9001).ListItem.Property(background),WDF1)">$INFO[Container(9001).ListItem.Property(widgetPath)]</value>
     <value condition="!Control.HasFocus(9000)+Control.HasFocus(9001)+String.Contains(Container(9001).ListItem.Property(background),WDF2)">$INFO[Container(9001).ListItem.Property(widgetPath.2)]</value>
+    
 
     <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.IsEqual(Container(9000).ListItem.Property(background),Playlist.FanartList)">$INFO[Container(9000).ListItem.Property(backgroundPlaylist)]</value>
+    <!-- -->
+    <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+[String.Contains(Container(9000).ListItem.Property(background),WDF1)|String.Contains(Container(9000).ListItem.Property(background),WDF2)]+[String.IsEmpty(Container(9000).ListItem.Property(backgroundplayliststyle))|String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X1)]"></value>
     <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.Contains(Container(9000).ListItem.Property(background),WDF1)">$INFO[Container(9000).ListItem.Property(widgetPath)]</value>
     <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.Contains(Container(9000).ListItem.Property(background),WDF2)">$INFO[Container(9000).ListItem.Property(widgetPath.2)]</value>
     <value condition="!Control.HasFocus(9001)+[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+String.Contains(Container(9000).ListItem.Property(list),library:)+String.Contains(Container(9000).ListItem.Property(background),WDF3)">$INFO[Container(9000).ListItem.Property(list)]</value>
@@ -572,11 +581,16 @@
     -->
     <control type="group">
       <visible>[!Player.HasAudio |  [Player.HasAudio+ !Control.IsVisible(9044)]]+[!Player.HasVideo | [Player.HasVideo+!Skin.HasSetting(PlayVideoOverlay)]]</visible>
+      
       <animation effect="fade" end="50" time="500" reversible="false" condition="String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)+Skin.HasSetting(MeteoPleinEcran)">Conditional</animation>
       <include>playlistfond</include>
-          <include>Viewtype_MurHome</include>
+      <control type="group">
+         <!--  <animation effect="fade" end="70" condition="Skin.HasSetting(ShowFullWidgets)" >Conditional</animation> -->
+          <animation effect="fade" start="100" end="70" reversible="true" condition="[Control.HasFocus(9000)|Control.HasFocus(9001)]+[Skin.HasSetting(ShowFullWidgets)|[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))+!String.IsEmpty(Container(9000).ListItem.Property(widget))]|[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))+!String.IsEmpty(Container(9000).ListItem.Property(widget.2))]]" >Conditional</animation> -->
 
-      <include>pochettesjetees</include>
+          <include>Viewtype_MurHome</include>
+          <include>pochettesjetees</include>
+      
 
       <control type="image">
         <include>Dimensions_Fullscreen</include>
@@ -584,15 +598,25 @@
         <visible>!Integer.IsGreater(Container(8080).NumItems,0)+!Window.IsActive(10025)</visible>
         <visible>!Control.HasFocus(9000)|[Control.HasFocus(9000)+!String.Contains(Container(9000).ListItem.Property(background),WDF1)+!String.Contains(Container(9000).ListItem.Property(background),WDF2)+!String.Contains(Container(9000).ListItem.Property(background),WDF3)]</visible>
       </control>
+       <control type="image">
+        <visible>[!Control.HasFocus(9000)+!Control.HasFocus(9001)]|[Control.HasFocus(9000)|String.IsEmpty(Window(Home).Property(WidgetActifFanart))]+[String.Contains(Container(9000).ListItem.Property(background),WDF1)|String.Contains(Container(9000).ListItem.Property(background),WDF2)]+[String.IsEmpty(Container(9000).ListItem.Property(backgroundplayliststyle))|String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X1)]</visible>
+        <posx>0</posx>
+        <width>1920</width>
+        <height>1080</height>
+        <texture background="true" colordiffuse="70FFFFFF" fallback="background.png">$VAR[backgroundVar]</texture>
+        <aspectratio>scale</aspectratio>
+       
+        <animation effect="zoom" start="110" end="130" center="auto" time="12000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(BackgroundAnimation)">Conditional</animation>
+        <animation effect="slide" start="-10,-10" end="10,10" time="8000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(BackgroundAnimation)">Conditional</animation>
+      </control>
 
       <control type="multiimage" id="99004">
-        <visible>!Integer.IsGreater(Container(8080).NumItems,0)|!String.IsEmpty(Window(Home).Property(WidgetActifFanart))</visible>
+        <visible>!Integer.IsGreater(Container(8080).NumItems,0)+[Control.HasFocus(9000)|Control.HasFocus(9001)]</visible>
         <posx>0</posx>
-        <posy>10</posy>
         <width>1920</width>
         <height>1080</height>
         <visible>!Control.HasFocus(9000)|[Control.HasFocus(9000)+!String.Contains(Container(9000).ListItem.Property(background),WDF1)+!String.Contains(Container(9000).ListItem.Property(background),WDF2)+!String.Contains(Container(9000).ListItem.Property(background),WDF3)]</visible>
-        <imagepath background="true" fallback="background.png">$VAR[backgroundVar]</imagepath>
+        <imagepath background="true" colordiffuse="70FFFFFF" fallback="background.png">$VAR[backgroundVar]</imagepath>
         <aspectratio>scale</aspectratio>
         <fadetime>450</fadetime>
         <include condition="Skin.String(BackgroundDiffuseColor) + !Skin.String(BackgroundDiffuseColor, None)">bgColorDiffuse</include>
@@ -602,9 +626,11 @@
         <animation effect="zoom" start="110" end="130" center="auto" time="12000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(BackgroundAnimation)">Conditional</animation>
         <animation effect="slide" start="-10,-10" end="10,10" time="8000" tween="cubic" easing="inout" pulse="true" condition="Skin.HasSetting(BackgroundAnimation)">Conditional</animation>
       </control>
-
+      </control>
+<!--
       <include>skinshortcuts-template-widget1Fanart</include>
       <include>skinshortcuts-template-widget2Fanart</include>
+      -->
     </control>
     <!--		 telex --
     <control type="label">

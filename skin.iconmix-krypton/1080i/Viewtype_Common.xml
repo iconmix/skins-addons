@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 	<include name="VuePosterChoix">
-		
+  <param name="Poster">$VAR[PosterThumb]</param>
+  <definition>
 
 		<!-- pochette -->
 		<control type="group">
@@ -13,7 +14,7 @@
 				<height>412</height>
 				<bordersize>9</bordersize>
 				<bordertexture border="9" colordiffuse="FFFFFFFF">landscapeinfo.png</bordertexture>
-				<texture background="true" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
+				<texture background="true" fallback="DefaultThumb.png">$PARAM[Poster]</texture>
 				<aspectratio scalediffuse="false">scale</aspectratio>
 				<visible>!String.IsEmpty(ListItem.Title)</visible>
 			</control>
@@ -98,7 +99,7 @@
 				<texture>showcase_noshadow.png</texture>
 			</control>
 		</control>
-
+  </definition>
 	</include>
 
 	<include name="VuePosterChoixLarge">
@@ -306,7 +307,7 @@
 	
 	<include name="PosterLargeViewCommon_Browser">
 		<posx>50</posx>
-		<posy>230</posy>
+		<posy>210</posy>
 		<height>600</height>
 		<width>2000</width>
 		<include condition="!Skin.HasSetting(ViewLockdown)">OnUp7000</include>
@@ -319,6 +320,12 @@
 		<include>Animation_FadedByMenu</include>
 		<include>Animation_OpenCloseFade</include>
 		<include>Animation_HiddenByInfo</include>
+		<animation type="Conditional" condition="!Skin.HasSetting(ShowFilePath)+Skin.HasSetting(VueExperimentale)" reversible="false">
+          <effect type="slide" end="0,20" time="0"  />
+     </animation>
+     <animation type="Conditional" condition="!Control.IsVisible(1777)" reversible="false">
+          <effect type="slide" end="0,20" time="0"  />
+     </animation>
 		<itemlayout width="340" height="420">
 			<control type="group">
 				<posx>-10</posx>

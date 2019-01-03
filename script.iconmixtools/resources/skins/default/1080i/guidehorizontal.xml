@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="dialog">
+  <allowoverlay>no</allowoverlay>
+
+  <controls>
+    <control type="group">
+      <left>50</left>
+      <animation effect="slide" start="2000,0" end="0,0" time="250">WindowOpen</animation>
+      <animation effect="slide" start="0,0" end="2000,0" time="250">WindowClose</animation>
+      
+        
+      <control type="image" id="1895">
+        <posx>0</posx>
+        <posy>0</posy>
+        <width>1920</width>
+        <height>1080</height>
+        <!-- <texture fallback="fondjetees.jpg">$INFO[Window(Home).property(IconmixGuideFanart)]</texture> -->
+        <texture fallback="fondjetees.jpg"></texture>
+      </control>
+      <control type="button" id="1899">
+        <label></label>
+      </control>
+      <control type="button" id="1997">
+        <label></label>
+      </control>
+     
+      
+        <!-- aujourd'hui -->
+       <include content="GuideListe">
+          <param name="idliste">1990</param>
+          <param name="idlabel">1800</param>
+          <param name="idnext">1991</param>
+          <param name="idprev">1899</param>
+          <param name="topliste">0</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1991</param>
+          <param name="idlabel">1801</param>
+          <param name="idprev">1990</param>
+          <param name="idnext">1992</param>
+                    <param name="topliste">150</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1992</param>
+          <param name="idlabel">1802</param>
+          <param name="idprev">1991</param>
+          <param name="idnext">1993</param>
+          <param name="topliste">300</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1993</param>
+          <param name="idlabel">1803</param>
+          <param name="idprev">1992</param>
+          <param name="idnext">1994</param>
+          
+          <param name="topliste">450</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1994</param>
+          <param name="idlabel">1804</param>
+          <param name="idprev">1993</param>
+          <param name="idnext">1995</param>
+          <param name="topliste">600</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1995</param>
+          <param name="idlabel">1805</param>
+          <param name="idprev">1994</param>
+          <param name="idnext">1996</param>
+          
+          <param name="topliste">750</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1996</param>
+          <param name="idlabel">1806</param>
+          <param name="idprev">1995</param>
+          <param name="idnext">1997</param>
+          <param name="topliste">900</param>          
+        </include>
+<!--
+    <control type="image">
+  				<top>5</top>
+  				<left>1710</left>
+  				<width>200</width>
+  				<height>200</height>
+  				<texture>$INFO[Window(Home).property(IconmixGuideClearArt)]</texture>
+  				<aspectratio>keep</aspectratio>  				
+  			</control>
+    </control>
+    -->
+    <control type="group">
+      <visible>!Control.IsVisible(1880)</visible>
+      
+    
+    <control type="image" id="1896">
+  				<top>5</top>
+  				<left>1600</left>
+  				<width>300</width>
+  				<height>400</height>
+  				<bordersize>30</bordersize>
+          <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+  				<!-- <texture>$INFO[Window(Home).property(IconmixGuidePoster)]</texture> -->
+  				<texture></texture>
+  				<aspectratio>keep</aspectratio>  				
+  			</control>
+  			<control type="fadelabel" id="1897">
+				<resetonlabelchange>true</resetonlabelchange>
+				<scrollspeed>80</scrollspeed>
+				<pauseatend>3500</pauseatend>
+				<scrollout>false</scrollout>
+				<left>10</left>
+				<top>1055</top>
+				<width>1900</width>
+				<aligny>center</aligny>
+				<align>center</align>
+				<font>exptext</font>
+				<textcolor>yellow</textcolor>
+				<textoffsetx>50</textoffsetx>
+				<label></label>
+				<shadowcolor>FF000000</shadowcolor>
+			</control>
+			</control>
+    </control>
+    
+		
+    <control type="label" id="1880">
+      <left>-4000</left>
+      <visible>String.IsEqual(Window(Home).property(IconmixGuideShowBetaSerieInfo),show)</visible>
+    </control>
+    <control type="group">
+      <posx>460</posx>
+      <posy>330</posy>
+      <animation type="Conditional" condition="!Control.IsVisible(1880)" reversible="false">
+          <effect type="fade" start="100" end="0" time="0" />          
+        </animation>
+      <animation type="Conditional" condition="Control.IsVisible(1880)" reversible="true">
+          <effect type="zoom" center="auto"  start="10" end="100" time="250" />
+        </animation>
+      
+      <control type="image">
+        <width>1000</width>
+        <height>420</height>
+        <bordersize>30</bordersize>
+        <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+        <texture>fondjetees.jpg</texture>
+      </control>
+      <control type="image" id="1886">
+        <!-- poster -->
+        <left>45</left>
+        <top>35</top>
+        <width>200</width>
+        <height>300</height>
+        
+        <aspectratio scalediffuse="true">keep</aspectratio>
+        <texture ></texture>
+        <bordersize>10</bordersize>
+        <bordertexture border="10" colordiffuse="FFFFFFFF">frames/ClassicFrame_Poster3.png</bordertexture>
+      </control>
+      <control type="image" id="1885">
+        <!-- network -->
+        <top>330</top>
+            <left>30</left>
+            <width>90</width>
+            <height>60</height>
+            <aspectratio align="center" aligny="center">keep</aspectratio>
+            <texture></texture>
+          </control>
+          <control type="label" id="1889">
+         
+        <!-- titre -->
+        <top>25</top>
+        <left>250</left>
+        <width>680</width>
+        <height>50</height>
+        <align>center</align>
+        <textcolor>yellow</textcolor>
+        <shadowcolor>FF000000</shadowcolor>
+        <font>impact</font>
+        <label></label>
+      </control>
+         <control type="label" id="1888">
+        <!-- Nb saisons - Nb Episode -- annee -->
+        <top>335</top>
+        <left>250</left>
+        <width>680</width>
+        <aligny>center</aligny>
+        <align>center</align>
+        <height>50</height>
+        <textcolor>FFff9933</textcolor>
+        <shadowcolor>FF000000</shadowcolor>
+        <font>impact35</font>
+        <label></label>
+      </control>
+      
+     
+      <control type="textbox" id="1887">
+            <pagecontrol>8867</pagecontrol>
+            <width>680</width>
+            <height>200</height>
+            <posx>250</posx>
+            <posy>75</posy>
+            <aligny>top</aligny>
+            <align>center</align>
+            <font>impactsongs</font>
+            <autoscroll delay="5000" time="3500" repeat="10000">Control.HasFocus(2998)|Control.IsVisible(2667)</autoscroll>
+            <label>AAAAAAAAAAAAAAAAA</label>
+            <shadowcolor>FF000000</shadowcolor>
+            <textcolor>white</textcolor>
+          </control>
+     
+      
+      
+    </control>
+    	<!-- --
+    <control type="label">
+      <label>$INFO[Control.getLabel(1887)]</label>
+    </control>
+    -->
+  </controls>
+</window>

@@ -78,7 +78,7 @@
 					<disabledcolor>TextDisabled</disabledcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<selectedcolor>DialogTextFO</selectedcolor>
-					<texturefocus>ButtonFO2.png</texturefocus>
+					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
 					<pulseonselect>false</pulseonselect>
 					<label>$LOCALIZE[106]</label>
 					<onleft>11</onleft>
@@ -97,9 +97,9 @@
 					<font>METF_DialogLargeBold</font>
 					<textcolor>TextNF</textcolor>
 					<disabledcolor>TextDisabled</disabledcolor>
-					<focusedcolor>DialogTextFO</focusedcolor>
+					<focusedcolor >DialogTextFO</focusedcolor>
 					<selectedcolor>DialogTextFO</selectedcolor>
-					<texturefocus>ButtonFO2.png</texturefocus>
+					<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
 					<pulseonselect>false</pulseonselect>
 					<label>$LOCALIZE[107]</label>
 					<onleft>10</onleft>
@@ -120,7 +120,7 @@
 					<disabledcolor>TextDisabled</disabledcolor>
 					<focusedcolor>DialogTextFO</focusedcolor>
 					<selectedcolor>DialogTextFO</selectedcolor>
-					<texturefocus>ButtonFO2.png</texturefocus>
+					<texturefocus colordiffuse="FocusBar" >ButtonFO2Wide2.png</texturefocus>
 					<pulseonselect>false</pulseonselect>
 					<label>$LOCALIZE[106]</label>
 					<onleft>10</onleft>

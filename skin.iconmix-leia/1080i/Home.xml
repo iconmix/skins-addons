@@ -21,8 +21,9 @@
     <onload condition="!Skin.HasSetting(hidesoustitres)+!Skin.HasSetting(hidesoustitres2)">Skin.ToggleSetting(hidesoustitres)</onload>
     <onload condition="!Skin.HasSetting(hidelangues)+!Skin.HasSetting(hidelangues2)">Skin.ToggleSetting(hidelangues)</onload>
     <onload>RunScript(script.skinshortcuts,type=buildxml&amp;mainmenuID=9000&amp;levels=2)</onload>
-    <!--<onload>RunScript(script.tv.show.next.aired,backend=True)</onload>-->
+    <!--<onload>RunScript(script.tv.show.next.aired,backend=True)</onload>
     <onload condition="String.IsEmpty(Window(Home).property(iconmixtoolsbackend))">RunScript(script.iconmixtools,backend=True)</onload>
+    -->
     <onload>ClearProperty(Actorbiographie,Home)</onload>
     <onload>ClearProperty(Actornaissance,Home)</onload>
     <onload>ClearProperty(Actordeces,Home)</onload>
@@ -36,6 +37,12 @@
     <controls>
 
         <control type="group">
+          <control type="image">
+            <width>1920</width>
+              <height>1080</height>
+              <texture>frames/fonddiffuseinv.png</texture>
+              <visible>!String.IsEmpty(Window(Home).Property(WidgetActifFanart))</visible>
+          </control>
             <include>GlobalBackground</include>
             <control type="group">
                 <include>HomeDeck</include>
@@ -58,17 +65,16 @@
 
         </control>
         <!-- TELEX DEBUG --
-        <control type="button">
-        <width max="940">auto</width>
-        <height>30</height>
+        <control type="label">
+        <width max="1800">auto</width>
+        <height>100</height>
         <left>40</left>
         <top>90</top>
-        <label>$INFO[Container(8080).NumItems] / $INFO[Container(8080).ListItem.Label]</label>
+        <label>$VAR[backgroundVar][CR]$INFO[Window(Home).Property(WidgetActifFanart)]</label>
         <font>exptextacteurs</font>
         <textcolor>FFFFFFFF</textcolor>
         <shadowcolor>FF7F7F7F</shadowcolor>
-        <textoffsetx>15</textoffsetx>
-        <texturefocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturefocus>
+        
         </control>
         -->
         <control type="rss">
@@ -84,7 +90,7 @@
             <headlinecolor>yellow</headlinecolor>
             <textcolor>RSSText</textcolor>
             <include>Animation_OpenCloseFade</include>
-            <include>Animation_FadedByMenu</include>
+            
 
             <visible>system.getbool(lookandfeel.enablerssfeeds)</visible>
         </control>

@@ -34,7 +34,7 @@
 				<posx>440</posx>
 				<posy>240</posy>
 				<width>940</width>
-				<height>780</height>
+				<height>890</height>
 				<itemgap>0</itemgap>
 				<onleft>10</onleft>
 				<onright>10</onright>
@@ -84,7 +84,7 @@
 				<posx>0</posx>
 				<posy>392</posy>
 				<width>380</width>
-				<height>500</height>
+				<height>560</height>
 				<itemgap>0</itemgap>
 				<scrolltime>0</scrolltime>
 				<onleft>2</onleft>

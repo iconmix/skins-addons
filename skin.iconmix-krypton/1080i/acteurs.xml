@@ -23,7 +23,7 @@
         <colordiffuse>CouleurActeurs</colordiffuse>
         <bordersize>8</bordersize>
         <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
-        <texture>frames/fondinfogris.png</texture>
+        <texture>frames/fondwidget.png</texture>
         <aspectratio scalediffuse="false">stretch</aspectratio>
       </control>
       <control type="image">
@@ -32,7 +32,7 @@
         <colordiffuse>CouleurActeurs</colordiffuse>
         <bordersize>8</bordersize>
         <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
-        <texture>frames/fondinfogris.png</texture>
+        <texture>frames/fondwidget.png</texture>
         <aspectratio scalediffuse="false">stretch</aspectratio>
       </control>
       <control type="grouplist">
@@ -585,35 +585,43 @@
 <control type="group">
   <visible>!String.IsEqual(ListItem.Label,..)</visible>
   
-  
-   <control type="group">
+ 
+      <!-- BOUTON ACTEUR -->
+      <control type="grouplist">
+        <orientation>horizontal</orientation>
+        <width>250</width>
+        <left>-50</left>
         <top>90</top>
-        <left>-210</left>
-        <visible>Skin.HasSetting(VueExperimentale)+Window.IsVisible(10025)+!Window.IsVisible(12003)+Skin.HasSetting(HideCastFocus)+Integer.IsGreater(Container(1998).NumItems,0)+!Control.HasFocus(7779)+!Control.HasFocus(7781)+!Control.HasFocus(2999)</visible>
-       
-        <animation type="Conditional" condition="Skin.HasSetting(HideCastFocus)+!Container.OnNext+!Container.OnPrevious" reversible="true">
-         
-          <effect type="slide" start="0" end="80,0" time="250" delay="250" />
-          
-        </animation>
-        
-        <include>videoinfobuttonfond</include>
-        <control type="image">              
-            <height>80</height>
-            <width>80</width>
-            <left>125</left>
-            <top>7</top>
-            <aspectratio>stretch</aspectratio>
-            <texture>Aicons/acteurs.png</texture>
-              <!-- <texture>$INFO[Container(1998).ListItem.Icon]</texture>-->
+        <height>35</height>
+        <itemgap>0</itemgap>
+        <animation type="Conditional" condition="true" reversible="false">
+          <effect type="rotate" center="-50,90" end="-90" time="0"  />
+          <effect type="slide" start="0,0" end="0,-85" time="250"  />
+        </animation>          
+        <visible>!Control.IsVisible(562)+!Control.IsVisible(563)+Skin.HasSetting(VueExperimentale)+Window.IsVisible(10025)+!Window.IsVisible(12003)+Skin.HasSetting(HideCastFocus)+Integer.IsGreater(Container(1998).NumItems,0)+!Control.HasFocus(7779)+!Control.HasFocus(7781)+!Control.HasFocus(2999)</visible>
+        <control type="image">
+          <bottom>0</bottom>
+          <width>30</width>
+          <height>30</height>
+          <texture>$INFO[Window(Home).Property(IconmixFlecheActeurs)]</texture>
         </control>
-
-              
+        <control type="button">
+          <label>$LOCALIZE[344]</label>          
+          <texturefocus colordiffuse="FocusBar">ButtonFO2mini2.png</texturefocus>
+          <texturenofocus colordiffuse="FocusBar">ButtonFO2mini2.png</texturenofocus>
+          <width max="200">auto</width>          
+          <align>left</align>
+          <aligny>center</aligny>
+          <font>PlotFont</font>
+          <textcolor>TextNF</textcolor>
+          <focusedcolor>yellow</focusedcolor>
+          <disabledcolor>TextDisabled</disabledcolor>
+          <textoffsetx>10</textoffsetx>
+        </control>
         
       </control>
-        
-        
-        
+
+   
   
 
   <control type="group">
@@ -622,6 +630,7 @@
     <visible>Integer.IsGreater(Container(1998).NumItems,0)</visible>
     <control type="group"> <!-- ACTEURS DEFILANTS -->
       <visible>!Player.HasVideo|[!Window.IsVisible(12901)+!Window.IsVisible(10142)]</visible>
+      <visible>!Control.HasFocus(562)+!Control.HasFocus(563)+!Control.HasFocus(2999)</visible>
       <visible>[[[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[String.IsEqual(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]|[String.IsEqual(ListItem.DBTYPE,set)+!Skin.HasSetting(HideSagaCast)]]</visible>
       <visible>!Skin.HasSetting(HideCastFocus)|!Skin.HasSetting(VueExperimentale)</visible>
       <include>Animation_HiddenByInfo</include>
@@ -764,7 +773,7 @@
               <colordiffuse>CouleurActeurs</colordiffuse>
               <bordersize>8</bordersize>
               <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
-              <texture>frames/fondinfogris.png</texture>
+              <texture>frames/fondwidget.png</texture>
               <aspectratio scalediffuse="false">stretch</aspectratio>
             </control>
            
@@ -799,57 +808,41 @@
                 <effect type="slide" end="0,65"   time="500" delay="500" />
               </animation>
               <control type="image"> 
-                <width>600</width>
+                <width>250</width>
                 <top>65</top>
-                <left>450</left>
+                <left>610</left>
                 <height>60</height>
                 <colordiffuse>CouleurActeurs</colordiffuse>
                 <bordersize>8</bordersize>
                 <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
-                <texture>frames/fondinfogris.png</texture>
+                <texture>frames/fondwidget.png</texture>
                 <aspectratio scalediffuse="false">stretch</aspectratio>
               </control>
               <control type="grouplist">
                 <visible>[Control.HasFocus(7779)|Control.HasFocus(7778)|Control.HasFocus(505)]</visible>
                 <orientation>horizontal</orientation>
-                <width>550</width>
-                <left>475</left>
+                <width>200</width>
+                <left>635</left>
                 <top>73</top>
                 <height>40</height>
                 <aligny>center</aligny>
-                 <align>left</align>
+                 <align>center</align>
                 <control type="image">
                   <width>50</width>
                   <aligny>center</aligny>
+                  <height>40</height>
                       <texture>buttons/okba.png</texture>
                       <aspectratio>keep</aspectratio>
                     </control>
+                    
                     <control type="label">
-                      <aligny>center</aligny>
-                      <width>250</width>
-                      <label>$LOCALIZE[31334]</label>
-                      <visible>System.HasAddon(script.iconmixtools)+!Player.HasVideo</visible>
-
-                    </control>
-                    <control type="label">
-                      <visible>System.HasAddon(script.iconmixtools)+Player.HasVideo</visible>
+                      <height>40</height>
+                      <visible>System.HasAddon(script.iconmixtools)</visible>
                       <aligny>center</aligny>
                       <width>250</width>
                       <label>$LOCALIZE[14116]</label>
                     </control>
-                   <control type="image">
-                    <visible>System.HasAddon(script.iconmixtools)+!Player.HasVideo</visible>
-                    <aligny>center</aligny>
-                    <width>50</width>
-                      <texture>info.png</texture>
-                      <aspectratio>keep</aspectratio>
-                    </control>
-                    <control type="label">
-                      <visible>System.HasAddon(script.iconmixtools)+!Player.HasVideo</visible>
-                      <aligny>center</aligny>
-                      <width>250</width>
-                      <label>$LOCALIZE[14116]</label>
-                    </control>
+                    
                 
               </control>
             </control>
@@ -865,7 +858,7 @@
                 <colordiffuse>CouleurActeurs</colordiffuse>
                 <bordersize>8</bordersize>
                 <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
-                <texture>frames/fondinfogris.png</texture>
+                <texture>frames/fondwidget.png</texture>
                 <aspectratio scalediffuse="false">stretch</aspectratio>
               </control>
               <control type="fadelabel">
@@ -896,7 +889,7 @@
             <colordiffuse>CouleurActeurs</colordiffuse>
             <bordersize>8</bordersize>
             <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
-            <texture>frames/fondinfogris.png</texture>
+            <texture>frames/fondwidget.png</texture>
             <aspectratio scalediffuse="false">stretch</aspectratio>
           </control>
 
@@ -1022,7 +1015,7 @@
           <left>225</left>
           <width>1440</width>
           <align>left</align>
-          <font>impact</font>
+          <include>FontTitre</include>
           <label>[COLOR=yellow]$VAR[Is1998][/COLOR]</label>
         </control>
 
@@ -1061,11 +1054,11 @@
 
 
   <control type="button" id="7781"> <!-- controle acteurs -->
-    <visible>[[[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[String.IsEqual(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]|[String.IsEqual(ListItem.DBTYPE,set)+!Skin.HasSetting(HideSagaCast)]]</visible>
+    <visible>[[[Container.Content(tvshows)|String.IsEqual(ListItem.DBTYPE,episode)]+!Skin.HasSetting(HideTvCast)]|[String.IsEqual(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]|[String.IsEqual(ListItem.DBTYPE,set)+!Skin.HasSetting(HideSagaCast)]]|[Player.HasVideo+!String.IsEmpty(VideoPlayer.DBID)]</visible> 
     <ondown>7779</ondown>
     <onclick>SetFocus(7779)</onclick>
     <onfocus>SetProperty(ActeurVideoLocal,1,Home)</onfocus>
-    <onfocus>SetProperty(IconmixTrailer,,Home)</onfocus>
+    <onfocus>ClearProperty(IconmixTrailer,Home)</onfocus>
     <onfocus condition="!String.IsEmpty(Window(Home).Property(ActeurVideoReset))">Action(firstpage)</onfocus>
 
     <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
@@ -1237,13 +1230,13 @@
       </focusedlayout>
 
     </control>
-    <animation type="Conditional" condition="[[String.Contains(ListItem.DBTYPE,tvshow)|String.Contains(ListItem.DBTYPE,episode)]+Skin.HasSetting(HideTvCast)]|[String.Contains(ListItem.DBTYPE,movie)+Skin.HasSetting(HideMovieCast)]|[String.Contains(ListItem.DBTYPE,set)+Skin.HasSetting(HideSagaCast)]|String.Contains(ListItem.DBTYPE,set)|Container.Content(genres)|Container.Content(directors)|Container.Content(actors)|Window.IsVisible(12901)|Window.IsVisible(10142)|Window.IsVisible(movieinformation)|Control.HasFocus(7781)|Control.HasFocus(7779)|Control.HasFocus(2022)|Control.HasFocus(2999)|!String.IsEmpty(Window(home).Property(IconmixShowInfo))|[Skin.HasSetting(HideCastFocus)+Skin.HasSetting(VueExperimentale)]">
+    <animation type="Conditional" condition="Control.HasFocus(562)|Control.HasFocus(563)|[[String.Contains(ListItem.DBTYPE,tvshow)|String.Contains(ListItem.DBTYPE,episode)]+Skin.HasSetting(HideTvCast)]|[String.Contains(ListItem.DBTYPE,movie)+Skin.HasSetting(HideMovieCast)]|[String.Contains(ListItem.DBTYPE,set)+Skin.HasSetting(HideSagaCast)]|String.Contains(ListItem.DBTYPE,set)|Container.Content(genres)|Container.Content(directors)|Container.Content(actors)|Window.IsVisible(12901)|Window.IsVisible(10142)|Window.IsVisible(movieinformation)|Control.HasFocus(7781)|Control.HasFocus(7779)|Control.HasFocus(2022)|Control.HasFocus(2999)|!String.IsEmpty(Window(home).Property(IconmixShowInfo))|[Skin.HasSetting(HideCastFocus)+Skin.HasSetting(VueExperimentale)]">
 
         <effect type="slide"  start="0,0" end="-2000,0" time="1" delay="1" reversible="true"/>
       </animation>
     
     </control>
-    -->
+   
 </control>
 </include>
 <!-- --------------------------------------------------------------------------------------------- -->
@@ -1266,10 +1259,11 @@
 
   <onright>Control.Move(5051,1)</onright>
 
-  <onclick condition="!Player.HasVideo">RunScript(script.iconmixtools,trailer=True)</onclick>
+  <!--<onclick condition="!Player.HasVideo">RunScript(script.iconmixtools,trailer=True)</onclick>
   <onclick condition="!Player.HasVideo">SetProperty(IconmixTrailer,1,Home)</onclick>
   <onclick condition="Player.HasVideo">SetProperty(IconmixShowInfo,2,Home)</onclick>
-  <oninfo>SetProperty(IconmixShowInfo,2,Home)</oninfo> 
+  -->
+  <onclick>SetProperty(IconmixShowInfo,2,Home)</onclick> 
   <onback>SetProperty(ActeurVideoReset,1,Home)</onback>
   <onback>SetProperty(ActeurVideoLocal,1,Home)</onback>
   <!-- <onback>Action(firstpage)</onback> 
@@ -1301,7 +1295,9 @@
 
   <onright>Control.Move(5052,1)</onright>
 
-  <onclick condition="!Player.HasVideo">RunScript(script.iconmixtools,trailer=True)</onclick>
+  <!-- <onclick condition="!Player.HasVideo">RunScript(script.iconmixtools,trailer=True)</onclick> -->
+  <onclick>setProperty(iconmixgettrailer,dbid:$INFO[Container(5052).ListItem.DBID],10000)</onclick>
+
   <onclick condition="!Player.HasVideo">SetProperty(IconmixTrailer,1,Home)</onclick>
 
   <onback>SetProperty(ActeurVideoReset,1,Home)</onback>
@@ -1346,7 +1342,7 @@
         <bordersize>8</bordersize>
         <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
 
-        <texture>frames/fondinfogris.png</texture>
+        <texture>frames/fondwidget.png</texture>
         <aspectratio scalediffuse="false">stretch</aspectratio>
       </control>
       <control type="label"> <!---- vidéo sélectionnée-->
@@ -1384,7 +1380,7 @@
       <colordiffuse>CouleurActeurs</colordiffuse>
       <bordersize>8</bordersize>
       <bordertexture border="8" colordiffuse="FFFFFFFF">landscape.png</bordertexture>
-      <texture>frames/fondinfogris.png</texture>
+      <texture>frames/fondwidget.png</texture>
       <aspectratio scalediffuse="false">stretch</aspectratio>
     </control>
 

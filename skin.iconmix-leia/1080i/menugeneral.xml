@@ -177,6 +177,15 @@
           <onclick>Filter</onclick>
           <visible>Container.CanFilterAdvanced</visible>
         </control>
+        <!--
+        <control type="button" id="2113">
+        <include>MonBoutonCommun2</include>
+        <onfocus>SetProperty(IconmixDialogContext,,Home)</onfocus>
+        <visible>Integer.IsGreater(Container(562).numitems,0)|Integer.IsGreater(Container(563).numitems,0)</visible>
+        <label>Vue NetFlix</label>
+        <onclick>Dialog.Close(all,true)</onclick>
+      </control>
+      -->
       </control>
     </control>
   </include>
@@ -320,6 +329,20 @@
         <ondown>7005</ondown>
         <orientation>vertical</orientation>
       <!-- <include>OptionsMenu</include> -->
+      
+      <control type="togglebutton" id="2003">
+        <!-- VU/NON VU EPISODE-->
+        <altlabel>$LOCALIZE[32022]$LOCALIZE[16101]</altlabel>
+        <usealttexture>!Container(2666).ListItem.IsResumable+ Integer.IsGreater(Container(2666).ListItem.PlayCount,0)+ String.IsEmpty(Container(2666).ListItem.Property(PercentPlayed))</usealttexture>
+
+        <include>MonBoutonCommun2</include>
+        <label>$LOCALIZE[32022]$LOCALIZE[16102]</label>
+        <onclick condition="!Container(2666).ListItem.IsResumable+ Integer.IsGreater(Container(2666).ListItem.PlayCount,0)+ String.IsEmpty(Container(2666).ListItem.Property(PercentPlayed))">RunScript(script.iconmixtools,togglewatchedepisode=True&idepisode=$INFO[Container(2666).ListItem.DBID]&togglewatched=False)</onclick>
+        <onclick condition="Container(2666).ListItem.IsResumable| !Integer.IsGreater(Container(2666).ListItem.PlayCount,0)| !String.IsEmpty(Container(2666).ListItem.Property(PercentPlayed))">RunScript(script.iconmixtools,togglewatchedepisode=True&idepisode=$INFO[Container(2666).ListItem.DBID]&togglewatched=True)</onclick>
+        
+        <onclick>SetFocus(55)</onclick>
+        <visible>String.Contains(ListItem.DBTYPE,tvshow)+!String.IsEmpty(Window(Home).property(IconmixFlagPanelEpisode))+Integer.IsGreater(Window(Home).property(IconmixFlagPanelEpisode),0)</visible>
+      </control>
 
       <!-- Mise a jour  -->
       <control type="button" id="2004">
@@ -380,13 +403,16 @@
         <label>$LOCALIZE[137] $LOCALIZE[20410]</label>
         <onclick>SetProperty(IconmixDialogContext,,Home)</onclick>
         <onclick>SetFocus(55)</onclick>
-        <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
+        <!-- <onclick>RunScript(script.iconmixtools,trailer=True)</onclick> -->
+        <onclick>setProperty(iconmixgettrailer,dbid:$INFO[ListItem.DBID],10000)</onclick>
       </control>
       <control type="button" id="2012"> <!-- playlist -->
         <include>MonBoutonCommun2</include>
         <label>31253</label>
         <visible>String.IsEqual(ListItem.DBTYPE,movie)</visible>
       </control>
+      
+      
 
     </control>
   </control>

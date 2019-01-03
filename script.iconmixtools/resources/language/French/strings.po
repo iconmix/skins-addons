@@ -125,12 +125,12 @@ msgstr "[B]Bande-Annonces Films et Séries[/B]"
 
 
 msgctxt "#32590"
-msgid "Search Trailers on Allocine (FR)"
-msgstr "Chercher sur Allociné (FR)"
+msgid "Activate search"
+msgstr "Activer la recherche"
 
 msgctxt "#32591"
-msgid "Minimum quality on Allocine"
-msgstr "Qualité minimale sur Allociné (FR)"
+msgid "Minimum quality of trailers"
+msgstr "Qualité minimale des vidéos"
 
 msgctxt "#32592"
 msgid "Autoplay trailer in full screen"
@@ -153,12 +153,14 @@ msgid "YOUTUBE Trailers"
 msgstr "[B]Bande-Annonces YOUTUBE[/B]"
 
 msgctxt "#32597"
-msgid "Search Trailers on Youtube"
-msgstr "Chercher sur Youtube"
+msgid "CINESERIE Trailers"
+msgstr "[B]Bande-Annonces CINESERIE[/B]"
 
 msgctxt "#32598"
-msgid "Minimum quality on Youtube"
-msgstr "Qualité minimale sur Youtube"
+msgid "Trailers quality"
+msgstr "Qualité des vidéos"
+
+
 
 msgctxt "#32599"
 msgid "Only Trailers and no Teaser for tvshow"
@@ -242,6 +244,13 @@ msgid "Overwrite current artworks for it ?"
 msgstr "Ecraser les illustrations actuelles ?"
 
 
+msgctxt "#32618"
+msgid "Today"
+msgstr "Aujourd'hui"
+
+
+
+
 msgctxt "#32700"
 msgid "Poster"
 msgstr "Affiche"
@@ -291,6 +300,12 @@ msgstr "Noter le film après lecture"
 msgctxt "#32711"
 msgid "Rate tvshow episode after play"
 msgstr "Noter l'épisode après lecture"
+
+msgctxt "#32712"
+msgid "Download[CR] the %s Web fanarts[CR]to extrafanart directory"
+msgstr "Télécharger [CR]les %s fanarts Web[CR]dans le répertoire Extrafanart"
+
+
 
 msgctxt "#32800"
 msgid "Play all founded trailers"
@@ -363,3 +378,31 @@ msgstr "En cours"
 msgctxt "#32864"
 msgid "Unknown"
 msgstr "Inconnu"
+
+
+msgctxt "#32865"
+msgid "Initialising TV Planning"
+msgstr "Création initiale du Planning des séries"
+
+msgctxt "#32866"
+msgid "All"
+msgstr "Toutes"
+
+
+msgctxt "#32867"
+msgid "All Tvshows"
+msgstr "Toutes les séries"
+
+msgctxt "#32868"
+msgid "Kodi TvShows"
+msgstr "Mes séries"
+
+
+msgctxt "#32869"
+msgid "Incoming/Renewing TvShows"
+msgstr "Séries à venir/Nouvelle saison"
+
+msgctxt "#32870"
+msgid "Go to yours episodes"
+msgstr "Accéder à vos épisodes"
+

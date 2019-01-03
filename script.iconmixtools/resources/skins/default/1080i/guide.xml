@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="dialog">
+  <allowoverlay>no</allowoverlay>
+
+  <controls>
+    <control type="group">
+      <animation effect="slide" start="2000,0" end="0,0" time="250">WindowOpen</animation>
+      <animation effect="slide" start="0,0" end="2000,0" time="250">WindowClose</animation>
+      <control type="image">
+        <posx>0</posx>
+        <posy>0</posy>
+        <width>1920</width>
+        <height>1080</height>
+        <!-- <texture fallback="fondjetees.jpg">$INFO[Window(Home).property(IconmixGuideFanart)]</texture> -->
+        <texture>background.png</texture>
+      </control>
+      
+      <control type="image" id="1895">
+        <posx>0</posx>
+        <posy>0</posy>
+        <width>1920</width>
+        <height>1080</height>
+        <!-- <texture fallback="fondjetees.jpg">$INFO[Window(Home).property(IconmixGuideFanart)]</texture> -->
+        <texture fallback="fondjetees.jpg"></texture>
+        <aspectratio>scale</aspectratio>
+        <animation type="Conditional" condition="!Control.IsVisible(1880)" reversible="false">
+          <effect type="fade" start="100" end="50" time="1" />
+        </animation>
+      </control>
+      <control type="button" id="1899">
+        <label></label>
+      </control>
+      <control type="button" id="1997">
+        <label></label>
+      </control>
+      <!-- menu des calendriers -->
+       <control type="grouplist" id="1877">
+			  <left>0</left>
+			  <top>3</top>
+				<width>1920</width>
+				<itemgap>50</itemgap>
+				
+				<height>45</height>
+				<align>center</align>
+				<orientation>horizontal</orientation>
+				<control type="button" id="1878">		
+				  <ondown>1870</ondown>	
+				 
+			  <width max="600">auto</width>
+			  <align>center</align>
+			  <aligny>center</aligny>			  
+			  <label>Précédent</label>
+				<textcolor>lightgrey</textcolor>
+				<textoffsetx>10</textoffsetx>
+				<focusedcolor>yellow</focusedcolor>
+				<font>impact35</font>			
+				<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+        <texturenofocus colordiffuse="FocusBar">frames/fondtitre2.png</texturenofocus> -->
+			</control>
+			
+			
+			<control type="group">
+      <top>5</top>
+      <left>5</left>
+      <width>700</width>
+      <height>45</height>
+    <control type="image">
+      <top>5</top>
+			  <width>40</width>
+			  <height>40</height>
+			  <texture>ArrowLeftWD.png</texture>
+			  
+			</control>
+			<control type="image">
+			  <left>45</left>
+			  <height>48</height>
+			  <width>555</width>
+			  <texture>frames/banner_frame2glassfond.png</texture>
+			  
+			</control>
+    <control type="image">      
+      <left>60</left>
+      <top>8</top>
+      <height>35</height>
+      
+      <texture>calvide.png</texture>      
+       <width>45</width>
+    </control>
+    <control type="label">
+      <top>10</top>
+      <left>60</left>
+      <width>45</width>
+      <align>center</align>
+      <aligny>center</aligny>
+      <textcolor>black</textcolor>
+      <label>1/2</label>
+      <font>impact35</font>
+      <visible>!String.IsEqual(Window(Home).property(IconmixGuideShowBetaSerieSemaine),2)</visible>      
+    </control>
+    <control type="label">
+      <top>10</top>
+      <left>60</left>
+      <width>45</width>
+      <align>center</align>
+      <aligny>center</aligny>
+      <textcolor>black</textcolor>
+      <label>2/2</label>
+      <font>impact35</font>
+      <visible>String.IsEqual(Window(Home).property(IconmixGuideShowBetaSerieSemaine),2)</visible>      
+    </control>
+    
+      <control type="label" id="1883">	
+       <left>115</left>		  
+			  <width>480</width>
+			  <align>center</align>
+			  <aligny>center</aligny>			  
+			  <label></label>
+				<textcolor>grey</textcolor>
+				<disabledcolor>white</disabledcolor>
+				<textoffsetx>40</textoffsetx>
+				<font>impact35</font>						
+				
+			</control>
+			<control type="image">
+			  <left>45</left>
+			  <height>48</height>
+			  <width>555</width>
+			  <texture>frames/banner_frame2glass.png</texture>
+			  
+			</control>
+    
+      
+			<control type="image">
+			  <left>605</left>
+			  <top>5</top>
+			  <width>40</width>
+			  <height>40</height>
+			  <texture>ArrowRightWD.png</texture>
+			  
+			</control>
+			</control>
+			<control type="button" id="1879">			
+			  <ondown>1870</ondown>				  
+			  <width max="600">auto</width>
+			  <align>center</align>
+			  <aligny>center</aligny>			  
+			  <label>Suivant</label>
+			  <focusedcolor>yellow</focusedcolor>
+				<textcolor>lightgrey</textcolor>
+				<textoffsetx>10</textoffsetx>
+				<font>impact35</font>						
+				<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+        <texturenofocus colordiffuse="FocusBar">frames/fondtitre2.png</texturenofocus> -->
+			</control>
+			</control>	
+        
+     <!-- 1ere semaine -->
+    <control type="group" id="1870">
+        <top>50</top>
+        <left>2000</left>
+        <animation type="Conditional" condition="String.IsEqual(Window(Home).property(IconmixGuideShowBetaSerieSemaine),1)" reversible="false">
+          <effect type="slide" start="0,0" end="-2000,0" time="250" />          
+        </animation>
+        <animation type="Conditional" condition="!String.IsEqual(Window(Home).property(IconmixGuideShowBetaSerieSemaine),1)" reversible="false">
+          <effect type="fade" start="100" end="0" time="250" />          
+        </animation>
+        <control type="image">
+            <top>-2</top>
+            <height>2</height>
+            <texture>VideoInfoLine.png</texture>
+            <colordiffuse>grey</colordiffuse>
+          </control>
+        <!-- aujourd'hui -->
+       <include content="GuideListe">
+          <param name="idliste">1780</param>
+          <param name="idlabel">1800</param>         
+          <param name="leftliste">0</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1781</param>
+          <param name="idlabel">1801</param>
+          <param name="leftliste">274</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1782</param>
+          <param name="idlabel">1802</param>
+          <param name="leftliste">548</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1783</param>
+          <param name="idlabel">1803</param>
+          <param name="leftliste">822</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1784</param>
+          <param name="idlabel">1804</param>
+          <param name="leftliste">1096</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1785</param>
+          <param name="idlabel">1805</param>
+          <param name="leftliste">1370</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1786</param>
+          <param name="idlabel">1806</param>
+          <param name="leftliste">1644</param>         
+        </include>
+
+    
+  
+    </control>
+    <!-- 2eme semaine -->
+    <control type="group" id="1871">
+      <animation type="Conditional" condition="String.IsEqual(Window(Home).property(IconmixGuideShowBetaSerieSemaine),2)" reversible="false">
+          <effect type="slide" start="0,0" end="-2000,0" time="250" />          
+        </animation>
+        <animation type="Conditional" condition="!String.IsEqual(Window(Home).property(IconmixGuideShowBetaSerieSemaine),2)" reversible="false">
+          <effect type="fade" start="100" end="0" time="250" />          
+        </animation>
+      
+        <left>2000</left>
+        <top>50</top>
+        <control type="image">
+            <top>-2</top>
+            <height>2</height>
+            <texture>VideoInfoLine.png</texture>
+            <colordiffuse>grey</colordiffuse>
+          </control>
+        <!-- aujourd'hui -->
+<include content="GuideListe">
+          <param name="idliste">1787</param>
+          <param name="idlabel">1807</param>         
+          <param name="leftliste">0</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1788</param>
+          <param name="idlabel">1808</param>
+          <param name="leftliste">274</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1789</param>
+          <param name="idlabel">1809</param>
+          <param name="leftliste">548</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1790</param>
+          <param name="idlabel">1810</param>
+          <param name="leftliste">822</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1791</param>
+          <param name="idlabel">1811</param>
+          <param name="leftliste">1096</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1792</param>
+          <param name="idlabel">1812</param>
+          <param name="leftliste">1370</param>
+        </include>
+        <include content="GuideListe">
+          <param name="idliste">1793</param>
+          <param name="idlabel">1813</param>
+          <param name="leftliste">1644</param>         
+        </include>
+
+    
+    
+ 
+    </control>
+    
+      <control type="group">
+      <visible>!Control.IsVisible(1880)</visible>
+      
+    <control type="image" id="1894">
+      <width>300</width>
+      <height>100</height>
+      <aspectratio>keep</aspectratio>
+      <texture></texture>
+      
+    </control>
+      
+    <control type="group">
+      <!-- poster -->
+      <top>1000</top>
+  			<!--	<animation type="Conditional" condition="Control.HasFocus(1786)|Control.HasFocus(1793)" reversible="true">
+          <effect type="slide" start="0,0" end="-270,0" time="250" />
+        </animation>
+        
+        <animation type="Conditional" condition="!Control.IsVisible(1881)" reversible="true">
+          <effect type="slide" start="0,0" end="400,0" time="100" />
+        </animation>
+        -->
+        <animation type="Conditional" condition="String.IsEmpty(Control.getLabel(1897))" reversible="false">
+          <effect type="slide" end="0,35" time="0"  />
+     </animation>
+     
+   
+  			<control type="image">
+  				<width>1920</width>
+  				<height>75</height>
+  				<align>center</align> 
+  				 				
+  				<texture flipy="true">frames/genrestagntv2.png</texture>
+  				<colordiffuse>BackgroundColor</colordiffuse>
+  				<aspectratio>stretch</aspectratio>  				
+  			</control>
+  			<control type="label" id="1898">
+  			  <top>10</top>
+  			  <left>510</left>
+      <width>900</width>
+      <scrollout>true</scrollout>
+                <scroll>true</scroll>
+      <height>40</height>
+      <font>impact35</font>
+      <align>center</align>
+      
+     </control> 
+  		</control>
+  			
+  			<!-- PLOT --->
+  			<control type="group">
+  			<width>1920</width>
+				<height>35</height>
+				<top>1045</top>
+				<animation type="Conditional" condition="String.IsEmpty(Control.getLabel(1897))" reversible="false">
+          <effect type="slide" end="0,35" time="0"  />
+     </animation>
+			<control type="image">
+          <texture  colordiffuse="BackgroundColor">osd/OSDdialogback.png</texture>
+          <aspectratio>stretch</aspectratio>
+      </control>
+      
+      
+  			<control type="label" id="1897">
+				<resetonlabelchange>true</resetonlabelchange>
+				<scroll>true</scroll>
+				<scrollspeed>40</scrollspeed>
+				
+				<scrollout>false</scrollout>
+				
+				<height>40</height>
+				<aligny>center</aligny>
+				<align>center</align>
+				<font>exptext</font>
+				<textcolor>grey</textcolor>
+				<textoffsetx>50</textoffsetx>
+				<label></label>
+				<shadowcolor>FF000000</shadowcolor>
+			</control>
+			</control>
+			</control>
+    
+    </control>
+		
+    <control type="label" id="1880">
+      <left>-4000</left>
+      <visible>String.IsEqual(Window(Home).property(IconmixGuideShowBetaSerieInfo),show)</visible>
+    </control>
+    <control type="label" id="1881">
+      <left>-4000</left>
+      
+    </control>
+    <!------------------------------------------ info de la série ----------------------------------------------->
+    <control type="group">
+      <posx>460</posx>
+      <posy>1200</posy>
+      <animation type="Conditional" condition="Control.IsVisible(1880)" reversible="true">
+          <effect type="slide" start="0,0" end="0,-600" time="250" />
+        </animation>
+      
+      <control type="image">
+        <width>1000</width>
+        <height>420</height>
+        <bordersize>30</bordersize>
+        <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+        <texture>fondflaggris.png</texture>
+      </control>
+      <control type="image" id="1886">
+        <!-- poster -->
+        <left>45</left>
+        <top>35</top>
+        <width>200</width>
+        <height>300</height>        
+        <aspectratio scalediffuse="true">keep</aspectratio>
+        <texture></texture>
+        <bordersize>10</bordersize>
+        <bordertexture border="10" colordiffuse="FFFFFFFF">frames/ClassicFrame_Poster3.png</bordertexture>
+      </control>
+      <control type="image" id="1884">
+        <!-- kodi ?? -->
+        <left>930</left>
+        <top>-10</top>
+        <width>70</width>
+        <height>70</height>
+        <texture></texture>
+      </control>
+      <control type="image" id="1885">
+        <!-- network -->
+        <top>330</top>
+            <left>30</left>
+            <width>90</width>
+            <height>60</height>
+            <aspectratio align="center" aligny="center">keep</aspectratio>
+            <texture></texture>
+          </control>
+          <control type="label" id="1882">
+            <!-- nom network -->
+            <font>impact35</font>
+            <top>340</top>
+            <left>30</left>
+            <width>200</width>
+            <height>40</height>
+            <textcolor>black</textcolor>
+            <align>center</align>            
+            <label></label>
+          </control>
+          <control type="label" id="1889">
+         
+        <!-- titre -->
+        <top>25</top>
+        <left>250</left>
+        <width>680</width>
+        <height>50</height>
+        <align>center</align>
+        <textcolor>white</textcolor>
+        <shadowcolor>FF7F7F7F</shadowcolor>
+        <font>impact</font>
+        <label></label>
+      </control>
+         <control type="label" id="1888">
+        <!-- Nb saisons - Nb Episode -- annee -->
+        <top>335</top>
+        <left>250</left>
+        <width>680</width>
+        <aligny>center</aligny>
+        <align>center</align>
+        <height>50</height>
+        <textcolor>black</textcolor>
+        <font>impact35</font>
+        <label></label>
+      </control>
+      <!-- episode final -->
+     
+      <control type="button" id="1890">
+          <top>150</top>
+          <left>15</left>
+          <animation type="Conditional" condition="Skin.HasSetting(VueExperimentale)" reversible="false">
+            <effect type="rotate" center="15,150" end="45" time="1" />
+          </animation>
+          <label>$LOCALIZE[31795]</label>          
+          <texturefocus colordiffuse="FocusBar">frames/genrestag.png</texturefocus>
+          <texturenofocus colordiffuse="FocusBar">frames/genrestag.png</texturenofocus>
+          <width>190</width>  
+          <height>50</height>       
+          <textoffsetx>10</textoffsetx> 
+          <textoffsety>5</textoffsety>
+          <align>center</align>
+          <aligny>center</aligny>
+          <font>impactsongs</font>
+          <textcolor>TextNF</textcolor>
+          <focusedcolor>yellow</focusedcolor>
+          <disabledcolor>TextDisabled</disabledcolor>
+          
+      </control>
+      
+     
+      <control type="textbox" id="1887">
+            <pagecontrol>8867</pagecontrol>
+            <width>680</width>
+            <height>200</height>
+            <posx>250</posx>
+            <posy>75</posy>
+            <aligny>top</aligny>
+            <align>center</align>
+            <font>impact35</font>
+            <autoscroll delay="5000" time="3500" repeat="10000">Control.HasFocus(2998)|Control.IsVisible(2667)</autoscroll>
+            <label>AAAAAAAAAAAAAAAAA</label>
+            <textcolor>FFFFD966</textcolor>
+            
+          </control>
+          <control type="grouplist">
+            <width>1000</width>
+            <align>center</align>
+            <top>395</top>
+            <height>40</height>
+            <orientation>horizontal</orientation>
+          
+     <control type="button" id="1670">
+          <label></label>          
+          <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+          <texturenofocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturenofocus>
+          <width max="600">auto</width>          
+          <align>left</align>
+          <aligny>center</aligny>
+          <font>PlotFont</font>
+          <textcolor>TextNF</textcolor>
+          <focusedcolor>yellow</focusedcolor>
+          <disabledcolor>TextDisabled</disabledcolor>
+          <textoffsetx>10</textoffsetx>
+        </control>
+        </control>
+        
+      
+    </control>
+    	<!-- --
+    <control type="label">
+      <label>$INFO[Window(Home).property(IconmixGuideShowBetaSerieInfo)][CR]$INFO[Window(Home).property(IconmixGuideShowBetaSerieSemaine)][CR]$INFO[Control.getLabel(1700)]</label>
+    </control>
+    -->
+    
+  </controls>
+</window>

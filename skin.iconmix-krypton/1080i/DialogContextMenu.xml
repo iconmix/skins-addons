@@ -95,7 +95,6 @@
         <onfocus>SetProperty(IconmixDialogContext,,Home)</onfocus>
         <include>MonBoutonCommun2</include>
         <label>31253</label>
-
         <visible>String.IsEqual(ListItem.DBTYPE,movie)</visible>
       </control>
       <control type="button" id="2108">
@@ -125,7 +124,7 @@
          <onclick>SetProperty(IconmixDialogContext,,Home)</onclick>
          <onfocus>SetProperty(IconmixDialogContext,,Home)</onfocus>
         <onclick>SetFocus(7781,0)</onclick>
-        <visible>[String.Contains(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]|[!Skin.HasSetting(HideTvCast)+[String.Contains(ListItem.DBTYPE,episode)|String.Contains(ListItem.DBTYPE,tvshow)]]+Window.IsVisible(10025)</visible>
+        <visible>Integer.IsGreater(Container(1998).NumItems,0)+[String.Contains(ListItem.DBTYPE,movie)+!Skin.HasSetting(HideMovieCast)]|[!Skin.HasSetting(HideTvCast)+[String.Contains(ListItem.DBTYPE,episode)|String.Contains(ListItem.DBTYPE,tvshow)]]+Window.IsVisible(10025)</visible>
       </control>
 
 
@@ -135,8 +134,19 @@
         <visible>System.HasAddon(script.iconmixtools)+!Player.HasVideo+ [Container.Content(movies) |Container.Content(tvshows)|Container.Content(seasons)|Container.Content(episodes)]</visible>
         <label>$LOCALIZE[137] $LOCALIZE[20410]</label>
         <onclick>Dialog.Close(all,true)</onclick>
-        <onclick>RunScript(script.iconmixtools,trailer=True)</onclick>
+        <!-- <onclick>RunScript(script.iconmixtools,trailer=True)</onclick> -->
+        <onclick>setProperty(iconmixgettrailer,dbid:$INFO[ListItem.DBID],10000)</onclick>
       </control>
+      <control type="button" id="2112">
+        <include>MonBoutonCommun2</include>
+        <onfocus>SetProperty(IconmixDialogContext,,Home)</onfocus>
+        <visible>System.HasAddon(script.iconmixtools)+!Player.HasVideo+ [Container.Content(tvshows)|Container.Content(seasons)|Container.Content(episodes)]</visible>
+        <label>$LOCALIZE[32024]</label>
+        <onclick>Dialog.Close(all,true)</onclick>
+        <onclick>SetProperty(IconmixShowGuide,1,10000)</onclick>
+      </control>
+       
+       
       <control type="button" id="8">
         <description>Search</description>
         <label>137</label>

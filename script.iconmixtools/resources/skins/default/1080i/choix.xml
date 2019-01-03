@@ -121,6 +121,12 @@
             </control>
             <control type="image">
               <width>80</width>
+              <texture>cineserie.png</texture>
+              <aspectratio>keep</aspectratio>
+              <visible>String.IsEqual(Container(6).ListItem.Property(source),Cineserie)</visible>
+            </control>
+            <control type="image">
+              <width>80</width>
               <texture>youtube.png</texture>
               <aspectratio>keep</aspectratio>
               <visible>String.IsEqual(Container(6).ListItem.Property(source),YouTube)</visible>
@@ -184,6 +190,13 @@
             <control type="image">
               <width>40</width>
               <aligny>center</aligny>
+              <texture>cineserie.png</texture>
+              <aspectratio>keep</aspectratio>
+              <visible>String.IsEqual(ListItem.Property(source),Cineserie)</visible>
+            </control>
+            <control type="image">
+              <width>40</width>
+              <aligny>center</aligny>
               <texture>youtube.png</texture>
               <aspectratio>keep</aspectratio>
               <visible>String.IsEqual(ListItem.Property(source),YouTube)</visible>
@@ -223,6 +236,13 @@
               <texture>allocine.png</texture>
               <aspectratio>keep</aspectratio>
               <visible>String.IsEqual(ListItem.Property(source),Allocine)</visible>
+            </control>
+            <control type="image">
+              <width>40</width>
+              <aligny>center</aligny>
+              <texture>cineserie.png</texture>
+              <aspectratio>keep</aspectratio>
+              <visible>String.IsEqual(ListItem.Property(source),Cineserie)</visible>
             </control>
             <control type="image">
               <width>40</width>

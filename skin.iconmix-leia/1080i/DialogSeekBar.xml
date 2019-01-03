@@ -16,7 +16,7 @@
 		<control type="group">
 			<top>-150</top>
 			<include>OSD_Player_Time</include>			
-				<include>OSD_Progress_Bar3</include> 						
+				<include>OSD_SeekBar</include> 						
 		</control>
 		
 		</control>

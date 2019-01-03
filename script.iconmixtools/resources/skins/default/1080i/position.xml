@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="dialog" >
+	<defaultcontrol always="true">3001</defaultcontrol>
+	
+	
+
+	<controls>
+	  
+	  <control type="grouplist">
+			<posy>1100</posy>
+			<width>1920</width>
+			<height>175</height>
+	    <orientation>horizontal</orientation>
+	    <align>center</align>
+
+	  <control type="group">
+	    <width>500</width>
+	    <animation type="WindowOpen" reversible="false">
+			<effect type="slide" center="auto" start="0,0" end="0,-200" time="400" tween="bounce" easing="out" />
+			<effect type="fade" start="0" end="100" time="400" />
+		</animation>
+		<animation type="WindowClose" reversible="false">
+		  <effect type="slide" center="auto" start="0,-200" end="0,0" time="400" tween="bounce" easing="out" />
+			<effect type="fade" start="100" end="0" time="400" />
+		</animation>
+			
+			
+					
+			<control type="image" id="3300">
+			  <width>500</width>
+			<height>175</height>
+			  <bordersize>10</bordersize>
+          <aspectratio scalediffuse="true">stretch</aspectratio>
+				<texture>cadresetposition.png</texture> -->
+			</control>
+		  <control type="grouplist">
+			  <width>455</width>
+			  <height>90</height>
+			  <left>35</left>
+			  <top>45</top>
+			  <align>left</align>
+			  <orientation>horizontal</orientation>
+			  
+			  <control type="button" id="3000">
+			    <width>100</width>
+			    <height>90</height>
+			    <font>doublon</font>
+			    <label>A1</label>
+			    <aligny>center</aligny>
+			    <texturenofocus>settime.png</texturenofocus>
+			    <texturefocus>settimefocus.png</texturefocus>
+			    <textoffsetx>3</textoffsetx>
+			    
+			  </control>
+			  <control type="label">
+			    <width>35</width>
+			    <height>110</height>
+			    <font>impact</font>
+<aligny>center</aligny>
+			    <label>H</label>
+			    <visible>Control.IsVisible(3000)</visible>
+			  </control>
+			  <control type="button" id="3001">
+			    <width>100</width>
+			    <height>90</height>
+			    <font>doublon</font>
+			    <label>A1</label>
+			    <aligny>center</aligny>
+			    <texturenofocus>settime.png</texturenofocus>
+			    <texturefocus>settimefocus.png</texturefocus>
+			    <textoffsetx>3</textoffsetx>
+			    
+			  </control>
+			  <control type="label">
+			    <width>35</width>
+			    <height>110</height>
+			    <font>impact</font>
+<aligny>center</aligny>
+			    <label>M</label>
+			  </control>
+			  <control type="button" id="3002">
+			    <width>100</width>
+			    <height>90</height>
+			    <font>doublon</font>
+			    <label>A1</label>
+			    <aligny>center</aligny>
+			    <texturenofocus>settime.png</texturenofocus>
+			    <texturefocus>settimefocus.png</texturefocus>
+			    <textoffsetx>3</textoffsetx>
+			    
+			  </control>
+			  <control type="label">
+			    <width>35</width>
+			    <height>110</height>
+			    <font>impact</font>
+<aligny>center</aligny>
+			    <label>S</label>
+			  </control>
+			  
+			  
+			  
+			</control>
+		
+			
+			
+			
+ </control>
+ </control>
+  
+	</controls>
+</window>

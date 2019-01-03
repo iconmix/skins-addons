@@ -19,7 +19,7 @@
 				<scrolltime>200</scrolltime>
 				
 				<include>Animation_OpenCloseFade</include>
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_HiddenByInfo</include>
 				<visible>!Skin.HasSetting(NoViewBannerPoster)</visible>
 				<visible>[Window.IsActive(10025) + Container.Content(tvshows)]|[Window.IsActive(502) + Container.Content(artists)]</visible>

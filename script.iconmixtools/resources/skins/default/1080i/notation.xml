@@ -11,13 +11,23 @@
 			<width>670</width>
 			<height>160</height>
 					
-			<control type="image" id="99">
+			<control type="image">
 			  <bordersize>10</bordersize>
 							<bordertexture border="10" colordiffuse="FFFFFFFF">frameglass.png</bordertexture>
           <aspectratio scalediffuse="true">stretch</aspectratio>
           <colordiffuse>FF7F7F7F</colordiffuse>
 				<texture>fond.png</texture> -->
 				<colordiffuse>BackgroundColor</colordiffuse>
+			</control>
+			<control type="image" id="99">
+			  <bordersize>10</bordersize>
+			  <left>680</left>
+			  <top>-50</top>
+			  <width>200</width>
+			  <height>250</height>
+					<bordertexture border="10" colordiffuse="FFFFFFFF">frameglass.png</bordertexture>
+          <aspectratio scalediffuse="true">keep</aspectratio>
+          <colordiffuse>FF7F7F7F</colordiffuse>
 			</control>
 			<control type="grouplist">
 			  <posx>20</posx>

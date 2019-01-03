@@ -37,6 +37,12 @@
     <controls>
 
         <control type="group">
+          <control type="image">
+            <width>1920</width>
+              <height>1080</height>
+              <texture>frames/fonddiffuseinv.png</texture>
+              <visible>!String.IsEmpty(Window(Home).Property(WidgetActifFanart))</visible>
+          </control>
             <include>GlobalBackground</include>
             <control type="group">
                 <include>HomeDeck</include>
@@ -59,17 +65,16 @@
 
         </control>
         <!-- TELEX DEBUG --
-        <control type="button">
-        <width max="940">auto</width>
-        <height>30</height>
+        <control type="label">
+        <width max="1800">auto</width>
+        <height>100</height>
         <left>40</left>
         <top>90</top>
-        <label>$INFO[Container(8080).NumItems] / $INFO[Container(8080).ListItem.Label]</label>
+        <label>$VAR[backgroundVar][CR]$INFO[Window(Home).Property(WidgetActifFanart)]</label>
         <font>exptextacteurs</font>
         <textcolor>FFFFFFFF</textcolor>
         <shadowcolor>FF7F7F7F</shadowcolor>
-        <textoffsetx>15</textoffsetx>
-        <texturefocus colordiffuse="AFFFFFFF">acteurs/framenombulle.png</texturefocus>
+        
         </control>
         -->
         <control type="rss">

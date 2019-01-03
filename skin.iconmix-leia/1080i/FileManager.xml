@@ -7,44 +7,49 @@
 		<!-- LEFT PANEL -->
 		<control type="group">
 			<posx>25</posx>
-			<include>Animation_FadedByMenu</include>
+			
 			<include>Animation_OpenCloseFade</include>
 			<posy>-40</posy>
 			<control type="image">
 					<posx>-10</posx>
 					<posy>102</posy>
 					<width>930</width>
-					<height>750</height>
+					<height>900</height>
 					<colordiffuse>BackgroundColor</colordiffuse> 
-				<texture>frames/fondinfogris.png</texture>	
+				  <texture>frames/fondinfogris.png</texture>	
 					<bordersize>8</bordersize>
 					<bordertexture border="8">landscape.png</bordertexture>
 				</control>
-			<control type="image">
-				<posx>10</posx>
-				<posy>120</posy>
-				<height>38</height>
-				<width>890</width>
-				<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
-				<animation effect="fade" start="100" end="50" condition="Control.HasFocus(21)">Conditional</animation>
-			</control>
+				
+			
+			
+		
 			<control type="fadelabel" id="101">
 				<posx>20</posx>
 				<posy>120</posy>
 				<width>880</width>
 				<height>38</height>
-				<font>METF_ContextValue</font>
+				<font>impact35</font>
 				<textcolor>yellow</textcolor>
 				<align>left</align>
 				<aligny>center</aligny>
 				<scroll>true</scroll>
+			</control>
+			<control type="image">
+				<posx>-5</posx>
+				<posy>120</posy>
+				<height>38</height>
+				<width>920</width>
+				<texture>frames/banner_frame2glass.png</texture>
+				<!-- <animation effect="fade" start="100" end="50" condition="Control.HasFocus(21)">Conditional</animation> -->
+				<visible>Control.hasFocus(20)</visible>
 			</control>
 			<control type="list" id="20">
 				<viewtype label="31752">list</viewtype>
 				<posx>0</posx>
 				<posy>174</posy>
 				<width>900</width>
-				<height>650</height>
+				<height>800</height>
 				<scrolltime>0</scrolltime>
 				<onright>21</onright>
 				<onup>20</onup>
@@ -55,7 +60,7 @@
 						<width>790</width>
 						<height>38</height>
 						<textcolor>SettingsDetail</textcolor>
-						<font>METF_ContextValue</font>
+						<font>impact35</font>
 						<align>left</align>
 						<aligny>center</aligny>
 						<focusedcolor>ButtonText</focusedcolor>
@@ -66,7 +71,7 @@
 						<width>100</width>
 						<height>38</height>
 						<textcolor>SettingsDetail</textcolor>
-						<font>METF_ContextValue</font>
+						<font>lcdep</font>
 						<align>right</align>
 						<aligny>center</aligny>
 						<focusedcolor>ButtonText</focusedcolor>
@@ -78,16 +83,16 @@
 						<posx>10</posx>
 						<posy>0</posy>
 						<height>38</height>
-						<width>905</width>
+						<width>900</width>
 						<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
-						<animation effect="fade" start="100" end="50" condition="Control.HasFocus(21)">Conditional</animation>
+						<visible>Control.hasFocus(20)</visible>
 					</control>
 					<control type="label">
 						<posx>30</posx>
 						<width>790</width>
 						<height>38</height>
 						<textcolor>ButtonText</textcolor>
-						<font>METF_ContextValue</font>
+						<font>impact35</font>
 						<align>left</align>
 						<aligny>center</aligny>
 						<focusedcolor>ButtonText</focusedcolor>
@@ -98,7 +103,7 @@
 						<width>100</width>
 						<height>38</height>
 						<textcolor>SettingsDetail</textcolor>
-						<font>METF_ContextValue</font>
+						<font>lcdep</font>
 						<align>right</align>
 						<aligny>center</aligny>
 						<focusedcolor>ButtonText</focusedcolor>
@@ -109,7 +114,7 @@
 		</control>
 		<!-- Right Panel -->
 		<control type="group">
-			<include>Animation_FadedByMenu</include>
+			
 			<include>Animation_OpenCloseFade</include>
 			<posy>-40</posy>
 			<posx>980</posx>
@@ -117,37 +122,39 @@
 					<posx>-20</posx>
 					<posy>102</posy>
 					<width>940</width>
-					<height>750</height>
+					<height>900</height>
 					<colordiffuse>BackgroundColor</colordiffuse> 
 				<texture>frames/fondinfogris.png</texture>	
 					<bordersize>8</bordersize>
 					<bordertexture border="8">landscape.png</bordertexture>
 				</control>
-			<control type="image">
-				<posx>10</posx>
-				<posy>120</posy>
-				<height>38</height>
-				<width>890</width>
-				<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
-				<animation effect="fade" start="100" end="50" condition="Control.HasFocus(20)">Conditional</animation>
-			</control>
+			
 			<control type="fadelabel" id="102">
 				<posx>20</posx>
 				<posy>120</posy>
 				<width>880</width>
 				<height>38</height>
-				<font>METF_ContextValue</font>
+				<font>impact35</font>
 				<textcolor>yellow</textcolor>
 				<align>left</align>
 				<aligny>center</aligny>
 				<scroll>true</scroll>
+			</control>
+			<control type="image">
+				<posx>-5</posx>
+				<posy>120</posy>
+				<height>38</height>
+				<width>920</width>
+				<texture>frames/banner_frame2glass.png</texture>
+				<!-- <animation effect="fade" start="100" end="50" condition="Control.HasFocus(21)">Conditional</animation> -->
+				<visible>Control.hasFocus(21)</visible>
 			</control>
 			<control type="list" id="21">
 				<viewtype label="31752">list</viewtype>
 				<posx>0</posx>
 				<posy>174</posy>
 				<width>900</width>
-				<height>650</height>
+				<height>800</height>
 				<scrolltime>0</scrolltime>
 				<onleft>20</onleft>
 				<onup>21</onup>
@@ -158,7 +165,7 @@
 						<width>790</width>
 						<height>38</height>
 						<textcolor>SettingsDetail</textcolor>
-						<font>METF_ContextValue</font>
+						<font>impact35</font>
 						<align>left</align>
 						<aligny>center</aligny>
 						<focusedcolor>ButtonText</focusedcolor>
@@ -169,7 +176,7 @@
 						<width>100</width>
 						<height>38</height>
 						<textcolor>SettingsDetail</textcolor>
-						<font>METF_ContextValue</font>
+						<font>lcdep</font>
 						<align>right</align>
 						<aligny>center</aligny>
 						<focusedcolor>ButtonText</focusedcolor>
@@ -183,14 +190,14 @@
 						<height>38</height>
 						<width>900</width>
 						<texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>
-						<animation effect="fade" start="100" end="50" condition="Control.HasFocus(20)">Conditional</animation>
+						<visible>Control.hasFocus(21)</visible>
 					</control>
 					<control type="label">
 						<posx>20</posx>
 						<width>790</width>
 						<height>38</height>
 						<textcolor>ButtonText</textcolor>
-						<font>METF_ContextValue</font>
+						<font>impact35</font>
 						<align>left</align>
 						<aligny>center</aligny>
 						<focusedcolor>ButtonText</focusedcolor>
@@ -201,7 +208,7 @@
 						<width>100</width>
 						<height>38</height>
 						<textcolor>ButtonText</textcolor>
-						<font>METF_ContextValue</font>
+						<font>lcdep</font>
 						<align>right</align>
 						<aligny>center</aligny>
 						<focusedcolor>ButtonText</focusedcolor>
@@ -210,20 +217,24 @@
 				</focusedlayout>
 			</control>
 		</control>
-		<include>Global_ContextFilter</include>
-		<!-- Heading -->
+		<!-- <include>Global_ContextFilter</include>
+		Heading -->
 		<control type="group">
-			<posx>30</posx>
-			<posy>10</posy>
+			<posx>0</posx>
+			<posy>5</posy>
 			<include>Animation_SlideDownFadeOut</include>
 			<control type="label">
+			  <width>1920</width>
+			  <font>impact</font>
+			  <align>center</align>
 				<label>$LOCALIZE[7]</label>
-				<include>Global_HeadingSectionVars</include>
 			</control>
+			<!--
 			<control type="label">
 				<label>$INFO[listitem.filenameandpath]</label>
 				<include>Global_HeadingDetailVars</include>
 			</control>
+			-->
 		</control>
 		
 		

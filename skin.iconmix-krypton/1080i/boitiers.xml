@@ -99,11 +99,13 @@
 </include>
 
 <!-- ---------------------------------------------------------------------------------------------- -->
+
 <include name="HorizVert">
   <posy>850</posy>
   <posx>25</posx>
   <height>260</height>
-  <width>1920</width>
+  <width>1800</width>
+  
 <align>center</align>
   <movement>9</movement>
   <orientation>horizontal</orientation>
@@ -179,7 +181,7 @@
   <focusedlayout width="180" height="240" condition="!Skin.HasSetting(SagaDetailsClearArt)+!Skin.HasSetting(SagaDetailsDisc)">
     <control type="group">
 
-      <animation type="Conditional" condition="Control.HasFocus(2008)">
+      <animation type="Conditional" condition="Control.HasFocus(2008)|Control.HasFocus(1999)">
 
         <effect type="zoom" center="100" start="100" end="110" time="400" easy="out" tween="bounce" delay="1" reversible="false"/>
 
@@ -271,7 +273,7 @@
 
     <control type="group">
       <posy>15</posy>
-      <animation type="Conditional" condition="Control.HasFocus(1999)">
+      <animation type="Conditional" condition="Control.HasFocus(1999)|Control.HasFocus(2008)">
 
         <effect type="zoom" center="100" start="100" end="110" time="400" easy="out" tween="bounce" delay="1" reversible="false"/>
 
@@ -358,7 +360,7 @@
     <control type="group">
 
 
-      <animation type="Conditional" condition="Control.HasFocus(1999)">
+      <animation type="Conditional" condition="Control.HasFocus(1999)|Control.HasFocus(2008)">
 
         <effect type="zoom" center="100" start="100" end="110" time="400" easy="out" tween="bounce" delay="1" reversible="false"/>
 
@@ -465,7 +467,7 @@
 
   <autoscroll time="6000">!Control.HasFocus(2997)+!Control.HasFocus(2999)+!Control.HasFocus(7781)+!Control.HasFocus(7779)</autoscroll>
   <!-- TEXTE-->
-  <itemlayout width="970" height="30" condition="[Window.IsActive(10025)+[[Skin.HasSetting(GenreDetailsTexte)+Container.Content(Genres)] |[Skin.HasSetting(directorTexte)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(SagaDetailsTexte)+String.IsEqual(ListItem.DBTYPE,set)]]] | [Window.IsActive(502)+[[Skin.HasSetting(MusicGenreTexte)+Container.Content(Genres)]|[Skin.HasSetting(MusicTexte)+!Container.Content(Genres)]]]">
+  <itemlayout width="970" height="30" condition="[!Control.IsVisible(562)+Window.IsActive(10025)+[[Skin.HasSetting(GenreDetailsTexte)+Container.Content(Genres)] |[Skin.HasSetting(directorTexte)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(SagaDetailsTexte)+String.IsEqual(ListItem.DBTYPE,set)]]] | [Window.IsActive(502)+[[Skin.HasSetting(MusicGenreTexte)+Container.Content(Genres)]|[Skin.HasSetting(MusicTexte)+!Container.Content(Genres)]]]">
 
     <control type="label">
       <align>center</align>
@@ -481,7 +483,7 @@
     </control>
 
   </itemlayout>
-  <focusedlayout width="970" height="30" condition="[Window.IsActive(10025)+[[Skin.HasSetting(GenreDetailsTexte)+Container.Content(Genres)] |[Skin.HasSetting(directorTexte)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(SagaDetailsTexte)+String.IsEqual(ListItem.DBTYPE,set)]]] | [Window.IsActive(502)+[[Skin.HasSetting(MusicGenreTexte)+Container.Content(Genres)]|[Skin.HasSetting(MusicTexte)+!Container.Content(Genres)]]]">
+  <focusedlayout width="970" height="30" condition="[!Control.IsVisible(562)+Window.IsActive(10025)+[[Skin.HasSetting(GenreDetailsTexte)+Container.Content(Genres)] |[Skin.HasSetting(directorTexte)+[Container.Content(directors)|Container.Content(actors)]] | [Skin.HasSetting(SagaDetailsTexte)+String.IsEqual(ListItem.DBTYPE,set)]]] | [Window.IsActive(502)+[[Skin.HasSetting(MusicGenreTexte)+Container.Content(Genres)]|[Skin.HasSetting(MusicTexte)+!Container.Content(Genres)]]]">
     <include>boitiersmusicanim</include>
     <control type="group">
 
@@ -810,6 +812,7 @@
       </control>
     </control>
   </focusedlayout>
+  
   <!-- MUSIQUE BOITIERS-->
   <itemlayout width="180" height="240" condition="Window.IsActive(502)+[[Skin.HasSetting(MusicBoitier)+!Container.Content(Genres)]|[Skin.HasSetting(MusicGenreBoitier)+Container.Content(Genres)]]">
     <control type="group">
@@ -1298,10 +1301,39 @@
           <shadowcolor>FF000000</shadowcolor>
           <textcolor>yellow</textcolor>
         </control>
+        
       </control>
 
     </control>
+    <control type="grouplist">
+       <visible>[System.IdleTime(2)|!String.IsEmpty(Window(Home).Property(FenetreListeChoix))]+![Skin.HasSetting(BAFenetre)+Player.HasVideo+String.IsEmpty(VideoPlayer.DBID)]</visible>
+
+        <animation type="Visible" reversible="false">
+          <effect type="fade" start="0" end="100" time="2000" delay="0" />
+
+        </animation>
+   <left>-300</left>
+          <top>560</top>
+          <width>1100</width>
+          <height>80</height>
+          <align>center</align>
+          <orientation>horizontal</orientation>
+  <control type="button">
+          
+          <width max="1010">auto</width>
+          <height>55</height>
+          <include>FontTitre</include>
+          <shadowcolor>FF000000</shadowcolor>
+          <textcolor>FF7FAFAF</textcolor>
+          <textoffsetx>25</textoffsetx>
+			<texturenofocus colordiffuse="CFFFFFFF">frames/fondtitre2.png</texturenofocus>
+          <label>$INFO[Container(1999).ListItem.Label]</label>
+
+        </control>
   </control>
+  </control>
+  
+  
 </include>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="inforole">

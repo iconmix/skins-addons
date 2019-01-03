@@ -206,7 +206,7 @@
 		<font>
 		  <name>compteur</name>
 		  <filename>compteur.ttf</filename>
-		  <size>40</size>
+		  <size>42</size>
 		</font>
 		<font>
 		  <name>compteurepisodes</name>
@@ -249,6 +249,95 @@
 		  <filename>heroesw.ttf</filename>
 		  <size>28</size>
 		</font>
+		<font>
+		  <name>TitrePolice8</name>
+		  <filename>pinkin.ttf</filename>
+		  <size>48</size>
+		</font>
+		<!-- ------------------ ---->
+		<font>
+		  <name>PlotPolice1</name>
+		  <filename>lyrspin10.ttf</filename>
+		  <size>36</size>
+		</font>
+		<font>
+		  <name>PlotPolice2</name>
+		  <filename>shark.ttf</filename>
+		  <size>56</size>
+		</font>
+		<font>
+		  <name>PlotPolice3</name>
+		  <filename>bascula.ttf</filename>
+		  <size>36</size>
+		</font>
+		<font>
+		  <name>PlotPolice4</name>
+		  <filename>lcdn.ttf</filename>
+		  <size>36</size>
+		</font>
+		<font>
+		  <name>PlotPolice5</name>
+		  <filename>varsity_regular.ttf</filename>
+		  <size>36</size>
+		</font>
+		<font>
+		  <name>PlotPolice6</name>
+		  <filename>heroes.ttf</filename>
+		  <size>18</size>
+		</font>
+		<font>
+		  <name>PlotPolice7</name>
+		  <filename>comic.ttf</filename>
+		  <size>36</size>
+		</font>
+		<font>
+		  <name>PlotPolice8</name>
+		  <filename>pinkin.ttf</filename>
+		  <size>34</size>
+		</font>
+		<!-- ------------------ ---->
+		<font>
+		  <name>PlotNoDialPolice1</name>
+		  <filename>lyrspin10.ttf</filename>
+		  <size>36</size>
+		</font>
+		<font>
+		  <name>PlotNoDialPolice2</name>
+		  <filename>shark.ttf</filename>
+		  <size>34</size>
+		</font>
+		<font>
+		  <name>PlotNoDialPolice3</name>
+		  <filename>bascula.ttf</filename>
+		  <size>32</size>
+		</font>
+		<font>
+		  <name>PlotNoDialPolice4</name>
+		  <filename>lcdn.ttf</filename>
+		  <size>28</size>
+		</font>
+		<font>
+		  <name>PlotNoDialPolice5</name>
+		  <filename>varsity_regular.ttf</filename>
+		  <size>30</size>
+		</font>
+		<font>
+		  <name>PlotNoDialPolice6</name>
+		  <filename>heroes.ttf</filename>
+		  <size>16</size>
+		</font>
+		<font>
+		  <name>PlotNoDialPolice7</name>
+		  <filename>comic.ttf</filename>
+		  <size>24</size>
+		</font>
+		<font>
+		  <name>PlotNoDialPolice8</name>
+		  <filename>pinkin.ttf</filename>
+		  <size>30</size>
+		</font>
+		<!-- ------------------ ---->
+	
 		<!-- ------------------ ---->
 		<font>
 		  <name>debutfin</name>
@@ -394,7 +483,7 @@
 		<font>
 			<name>chicken</name>
 			<filename>lcdn.ttf</filename>
-			<size>45</size>
+			<size>40</size>
 		</font>
 		<font>
 			<name>chicken75</name>
@@ -500,6 +589,11 @@
 			<name>METF_StarRating22</name>
 			<filename>MET_LeagueGothic.ttf</filename>
 			<size>36</size>
+		</font>
+		<font>
+			<name>NetFlixPlot</name>
+			<filename>MET_LeagueGothic.ttf</filename>
+			<size>40</size>
 		</font>
 		<font>
 			<name>METF_ArtistPlayer</name>

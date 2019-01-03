@@ -146,7 +146,7 @@
         <visible>!String.IsEqual(ListItem.Label,..)+!String.IsEqual(ListItem.Title,..)</visible>
         <animation reversible="false" effect="zoom" center="auto" start="100" end="135" time="200" tween="bounce" >focus</animation>
         <animation reversible="false" effect="zoom" center="auto" start="135" end="100" time="200" tween="bounce" >unfocus</animation>
-
+        
         <control type="image">
           <posx>12</posx>
           <posy>15</posy>
@@ -305,39 +305,14 @@
         <preloaditems>2</preloaditems>
         <scrolltime>200</scrolltime>
         <include>Animation_OpenCloseFade</include>
-        <include>Animation_FadedByMenu</include>
+        
         <include>Animation_HiddenByInfo</include>
         <visible>!Skin.HasSetting(NoViewBanner)</visible>
         
         <include>BannerViewCommon_Browser</include>
       </control>
 
-      <!-- Arrows -->
-      <control type="group">
-        <include>Animation_OpenCloseFade</include>
-        <include>Animation_FadedByMenu</include>
-        <include>Animation_HiddenByInfo</include>
-        <visible>Window.IsActive(10025)</visible>
-        <control type="image">
-          <posx>10</posx>
-          <posy>280</posy>
-          <width>24</width>
-          <height>24</height>
-          <texture>Arrow2Up.png</texture>
-          <colordiffuse>ArrowDiffuse</colordiffuse>
-          <visible>Container.HasPrevious</visible>
-        </control>
-        <control type="image">
-          <posx>1890</posx>
-          <posy>640</posy>
-          <width>24</width>
-          <height>24</height>
-          <texture>Arrow2Down.png</texture>
-          <colordiffuse>ArrowDiffuse</colordiffuse>
-          <visible>Container.HasNext</visible>
-        </control>
-      </control>
-      <include>ScrollBar_Vertical</include>
+      
     </control>
   </include>
   <include name="Viewtype_BannerWall">
@@ -362,39 +337,15 @@
         <preloaditems>2</preloaditems>
         <scrolltime>200</scrolltime>
         <include>Animation_OpenCloseFade</include>
-        <include>Animation_FadedByMenu</include>
+        
         <include>Animation_HiddenByInfo</include>
         <visible>!Skin.HasSetting(NoViewBanner)</visible>
 
         <include>BannerViewCommon_Browser</include>
       </control>
 
-      <!-- Arrows -->
-      <control type="group">
-        <include>Animation_OpenCloseFade</include>
-        <include>Animation_FadedByMenu</include>
-        <include>Animation_HiddenByInfo</include>
-
-        <control type="image">
-          <posx>10</posx>
-          <posy>-20</posy>
-          <width>24</width>
-          <height>24</height>
-          <texture>Arrow2Up.png</texture>
-          <colordiffuse>ArrowDiffuse</colordiffuse>
-          <visible>Container.HasPrevious</visible>
-        </control>
-        <control type="image">
-          <posx>1890</posx>
-          <posy>740</posy>
-          <width>24</width>
-          <height>24</height>
-          <texture>Arrow2Down.png</texture>
-          <colordiffuse>ArrowDiffuse</colordiffuse>
-          <visible>Container.HasNext</visible>
-        </control>
-      </control>
-      <include>ScrollBar_Vertical</include>
+      <!-- Arrows  -->
+      
     </control>
   </include>
 
@@ -419,30 +370,13 @@
         <preloaditems>2</preloaditems>
         <scrolltime>200</scrolltime>
         <include>Animation_OpenCloseFade</include>
-        <include>Animation_FadedByMenu</include>
+        
         <include>Animation_HiddenByInfo</include>
         <visible>!Skin.HasSetting(NoViewBanner)</visible>
 
         <include>BannerViewCommon_Browser</include>
       </control>
-      <control type="image">
-        <posx>15</posx>
-        <posy>10</posy>
-        <width>24</width>
-        <height>24</height>
-        <texture>Arrow2Up.png</texture>
-        <colordiffuse>ArrowDiffuse</colordiffuse>
-        <visible>Container.HasPrevious</visible>
-      </control>
-      <control type="image">
-        <posx>15</posx>
-        <posy>770</posy>
-        <width>24</width>
-        <height>24</height>
-        <texture>Arrow2Down.png</texture>
-        <colordiffuse>ArrowDiffuse</colordiffuse>
-        <visible>Container.HasNext</visible>
-      </control>
+      
       <!--<include>ListeEpisodes</include> -->
     </control>
   </include>

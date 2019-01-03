@@ -342,6 +342,16 @@ msgid "Disable focus to first unwatched"
 msgstr ""
 
 
+msgctxt "#31146"
+msgid "Delay for Netflixview trailers"
+msgstr "x"
+
+msgctxt "#31147"
+msgid "Volume level for automatic trailers/NetFlix"
+msgstr ""
+
+
+
 #empty strings from id 31134 to 31158
 
 msgctxt "#31159"
@@ -638,7 +648,7 @@ msgid "Enable Kiosk mode"
 msgstr ""
 
 msgctxt "#31337"
-msgid "Disable destructive Shutdown items"
+msgid "Disable Trailers in Netflix views"
 msgstr ""
 
 msgctxt "#31338"
@@ -1140,7 +1150,7 @@ msgid "Games Wide"
 msgstr ""
 
 msgctxt "#31464"
-msgid "Show Plot in Fullscreen Info"
+msgid "Show Plot in Fullscreen Player"
 msgstr ""
 
 msgctxt "#31465"
@@ -1270,7 +1280,9 @@ msgctxt "#31608"
 msgid "Hidden Channels"
 msgstr ""
 
-#empty string with id 31609
+msgctxt "#31609"
+msgid "tvshows planning"
+msgstr ""
 
 msgctxt "#31610"
 msgid "Scheduled Time"
@@ -1278,6 +1290,10 @@ msgstr ""
 
 msgctxt "#31611"
 msgid "PVR Status"
+msgstr ""
+
+msgctxt "#31612"
+msgid "week planning"
 msgstr ""
 
 #empty strings from id 31612 to 31699
@@ -1666,6 +1682,21 @@ msgid "By categorie"
 msgstr ""
 
 
+msgctxt "#31795"
+msgid "Final Episode"
+msgstr ""
+
+
+msgctxt "#31796"
+msgid "Landscape panel"
+msgstr ""
+
+msgctxt "#31797"
+msgid "TvShows in progress"
+msgstr ""
+
+
+
 msgctxt "#31800"
 msgid "List sober"
 msgstr ""
@@ -1809,6 +1840,24 @@ msgstr ""
 msgctxt "#31834"
 msgid "Trio list"
 msgstr ""
+
+msgctxt "#31835"
+msgid "Netflix Poster Theme"
+msgstr ""
+
+msgctxt "#31836"
+msgid "Netflix Landscape Theme"
+msgstr ""
+
+
+msgctxt "#31837"
+msgid "Replace Logo with DiscArt"
+msgstr ""
+
+msgctxt "#31838"
+msgid "Coverflow"
+msgstr ""
+
 
 msgctxt "#31894"
 msgid "Age :"
@@ -1986,8 +2035,12 @@ msgstr ""
 
 
 msgctxt "#31936"
-msgid "Update Movie(s) ArtWorks"
+msgid "ArtWorks by Artwork Downloader"
 msgstr ""
+
+msgctxt "#31937"
+msgid "Update ArtWorks (iconmix)"
+msgstr "Illustrations par IconMix"
 
 
 msgctxt "#32000"
@@ -1999,7 +2052,7 @@ msgid "Fade items not selected after"
 msgstr ""
 
 msgctxt "#32002"
-msgid "Same genre"
+msgid "Access to genre"
 msgstr ""
 
 msgctxt "#32003"
@@ -2086,8 +2139,11 @@ msgctxt "#32022"
 msgid "Set this episode to "
 msgstr ""
 
-
-
 msgctxt "#32023"
 msgid "Next Aired "
+msgstr ""
+
+
+msgctxt "#32024"
+msgid "15 days tvshows planning"
 msgstr ""

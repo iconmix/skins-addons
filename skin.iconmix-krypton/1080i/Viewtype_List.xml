@@ -155,7 +155,7 @@
             <include>ActiveClearArt</include>
             <control type="image">
                 <posx>0</posx>
-                <width>900</width>
+                <width>875</width>
                 <height>40</height>
                 <aligny>center</aligny>
                 <texture>ButtonFO2Wide2.png</texture>
@@ -197,6 +197,9 @@
 
         </focusedlayout>
     </include>
+    <include name="mediainfominiactif">
+      <width>1150</width>
+    </include>
     <include name="Viewtype_List">
         <control type="group">
             <visible>Control.IsVisible(55)</visible>
@@ -209,7 +212,8 @@
 					<posx>0</posx>
 			<posy>15</posy>
 			<height>805</height>
-			<width>1150</width>
+			<include condition="Skin.HasSetting(MiniInfos)">mediainfominiactif</include>
+			<width>1000</width>
 					<texture>frames/Menu_Glass2b.png</texture>
 					<colordiffuse>902F2F2F</colordiffuse>
 				</control>
@@ -230,7 +234,7 @@
                 </animation>
                 <animation type="Conditional" condition="true" reversible="false">
                     <effect type="rotatey" center="90,0" end="5" time="500" tween="bounce" easy="out"  />
-                </animation>-->
+                </animation>
                 
                 <width>500</width>
                 
@@ -263,7 +267,7 @@
                 </control>
                 <!-- Episode Image -->
                 <control type="image">
-                    <width>700</width>
+                    <width>650</width>
                     <bordersize>30</bordersize>
                     <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
                     <texture background="true">$INFO[ListItem.Icon]</texture>
@@ -346,136 +350,5 @@
     <include>showacteurinfo</include>
     <!-- <include>ListeEpisodes</include> -->
 </include>
-<include name="Viewtype_ListFanart">
-    <control type="group">
-        <visible>Control.IsVisible(509)</visible>
-        <!-- Browser -->
-        <control type="list" id="509">
-            <viewtype label="31803">list and fanart</viewtype>
-            <include>CommonListId</include>
-        </control>
-        <!-- Thumbnails -->
-        <control type="group">
-            <left>1035</left>
 
-            <width>800</width>
-            <include>Animation_OpenCloseFade</include>
-            
-            <include>Animation_HiddenByInfo</include>
-            <visible>Window.IsActive(pictures) | Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)</visible>
-
-            <control type="image">
-
-                <bordersize>30</bordersize>
-                <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-                <texture background="true">$INFO[ListItem.Icon]</texture>
-                <aspectratio scalediffuse="true">keep</aspectratio>
-                <visible>Window.IsActive(pictures) + !String.IsEmpty(ListItem.Icon)</visible>
-            </control>
-            <!-- Picture Fanart Image (use for thumb if no icon set) -->
-            <control type="image">
-
-                <bordersize>30</bordersize>
-                <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-                <texture background="true" fallback="home_art/pictures.jpg">$INFO[ListItem.Art(fanart)]</texture>
-                <aspectratio scalediffuse="true">keep</aspectratio>
-                <visible>Window.IsActive(pictures) + String.IsEmpty(ListItem.Icon)</visible>
-            </control>
-            <!-- Movie Fanart Image -->
-            <control type="image">
-
-                <bordersize>30</bordersize>
-                <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-                <texture background="true" fallback="home_art/movies.jpg">$INFO[ListItem.Art(fanart)]</texture>
-                <aspectratio scalediffuse="true">keep</aspectratio>
-                <visible>!String.IsEmpty(ListItem.Title) + [Container.Content(movies) | Container.Content(sets)]</visible>
-            </control>
-            <!-- TVShow Fanart Image -->
-            <control type="image">
-
-                <bordersize>30</bordersize>
-                <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-                <texture background="true" fallback="home_art/tvshows.jpg">$INFO[ListItem.Property(Fanart_Image)]</texture>
-                <aspectratio scalediffuse="true">keep</aspectratio>
-                <visible>!String.IsEmpty(ListItem.Title) + [Container.Content(tvshows) | Container.Content(seasons)]</visible>
-            </control>
-            <!-- Episode Image -->
-            <control type="image">
-
-                <bordersize>30</bordersize>
-                <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-                <texture background="true">$INFO[ListItem.Icon]</texture>
-                <aspectratio scalediffuse="true">keep</aspectratio>
-                <visible>!String.IsEmpty(ListItem.Title) + Container.Content(episodes)</visible>
-            </control>
-            <!-- Image Frame
-            <control type="image">
-            <posx>12</posx>
-            <posy>46</posy>
-            <width>650</width>
-            <height>383</height>
-            <texture>frames/ClassicFrame_FanartMedium.png</texture>
-            <aspectratio scalediffuse="true">scale</aspectratio>
-            <visible>!String.IsEmpty(ListItem.Title)</visible>
-        </control>-->
-
-        <!-- Season - TV Show Title -->
-        <control type="label">
-            <posx>35</posx>
-            <posy>430</posy>
-            <width>600</width>
-            <height>30</height>
-            <align>center</align>
-            <aligny>center</aligny>
-            <font>METF_TitleTextLarge</font>
-            <textcolor>TitleText</textcolor>
-            <label>$INFO[ListItem.TVShowTitle]</label>
-            <visible>Container.Content(seasons)</visible>
-        </control>
-
-        <!-- Episode Air Date
-        <control type="label">
-        <posx>35</posx>
-        <posy>459</posy>
-        <width>600</width>
-        <height>30</height>
-        <align>center</align>
-        <aligny>center</aligny>
-        <font>METF_MediaDetailsSmall</font>
-        <textcolor>MediaDetailsYear</textcolor>
-        <label>$LOCALIZE[20416] $INFO[ListItem.Premiered]</label>
-        <visible>!String.IsEmpty(ListItem.Premiered) + Container.Content(episodes)</visible>
-    </control>-->
-    <!-- Picture Date -->
-    <control type="label">
-        <posx>35</posx>
-        <posy>459</posy>
-        <width>600</width>
-        <height>30</height>
-        <align>center</align>
-        <aligny>center</aligny>
-        <font>METF_MediaDetailsSmall</font>
-        <textcolor>MediaDetailsGenre</textcolor>
-        <label>$INFO[ListItem.PictureDateTime]</label>
-        <visible>Window.IsActive(pictures) + !String.IsEmpty(ListItem.PictureDateTime)</visible>
-    </control>
-    <!-- Movie Sets
-    <control type="label">
-    <posx>35</posx>
-    <posy>459</posy>
-    <width>600</width>
-    <height>30</height>
-    <align>center</align>
-    <aligny>center</aligny>
-    <font>METF_MediaDetailsSmall</font>
-    <textcolor>MediaDetailsGenre</textcolor>
-    <label>$LOCALIZE[31313]</label>
-    <include>VisibleIfMovieSet</include>
-</control>-->
-</control>
-<!-- Details -->
-
-<include>ScrollBar_Vertical</include>
-</control>
-</include>
 </includes>

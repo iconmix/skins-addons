@@ -3,54 +3,120 @@
 	<include name="vueexperimentale">
 		<control type="group"> <!-- vue experimentale -->
 			<!-- -->
-			<include>Animation_FadedByMenu</include>
+			
 			<animation type="Conditional" condition="Control.HasFocus(7779)|Control.HasFocus(7781)" reversible="true">
 				<effect type="fade" start="100" end="15" time="500"  />
 			</animation>
 			<posy>-990</posy> -->
-			<visible>!String.StartsWith(ListItem.Label,..)</visible>
-		
-		<!---->
-			<control type="group">
-				<top>125</top>
-				<!-- -->
-				 <animation type="Conditional" condition="String.IsEmpty(Window(Home).Property(NextAired.NextDate))">
-				<effect type="slide" start="0,0" end="0,-30" time="1"  />
-			</animation>	
-
-         <include>MediaInfoGroup2</include>
-         
-         <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)+!Skin.HasSetting(ActeursAuCentre)</visible>
-				<include>VisibleIfNotMovieSet</include>
-
-
-			</control>
-			
-		
-			
-			
+			<visible>!String.StartsWith(ListItem.Label,..)+!Control.IsVisible(562)+!Control.IsVisible(563)</visible>	
 			
 			<control type="group">
-			  <top>2015</top>
+			  <top>1977</top>
 			  <height>80</height>
 			
 				<!---->
         <animation type="Conditional" condition="true">
-  				<effect type="zoom" center="960,2035" start="100" end="65" time="1"  />
+  				<effect type="zoom" center="700,1985" start="100" end="70" time="1"  />
   			</animation>	
-  			<animation type="Conditional" condition="!Skin.HasSetting(Hide_Plot)+!Skin.HasSetting(ShowLargePlot)+!Control.HasFocus(2999)">
-  				<effect type="slide" start="0,0" end="0,-48" time="1"  />
-  			</animation>
+  			<animation type="Conditional" condition="[!Skin.HasSetting(ShowFilePath)|String.IsEmpty(ListItem.FilenameAndPath)]+[Skin.HasSetting(Hide_Plot)|Skin.HasSetting(ShowLargePlot)|Skin.HasSetting(ShowVeryLargePlot)]" reversible="false">
+              <effect type="slide" end="0,50" time="0"  />
+         </animation>
+  			<animation type="Conditional" condition="[!Skin.HasSetting(ShowFilePath)|String.IsEmpty(ListItem.FilenameAndPath)]|[Skin.HasSetting(Hide_Plot)|Skin.HasSetting(ShowLargePlot)|Skin.HasSetting(ShowVeryLargePlot)]" reversible="false">
+          <effect type="slide" end="0,30" time="0"  />
+         </animation>
+         
 						 
 			
 				 <include>MediaInfoGroupUp</include>
-				 <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)+Skin.HasSetting(ActeursAuCentre)</visible>
+				<!-- <visible>!Skin.HasSetting(Hide_ExtraMediaFlags)+Skin.HasSetting(ActeursAuCentre)+!Skin.HasSetting(HideCastFocus)</visible> -->
 				<include>VisibleIfNotMovieSet</include>
+				<visible>!Skin.HasSetting(Hide_ExtraMediaFlags)</visible>
 				
 
 
 			</control>
-			<control type="group">
+			
+		<!-- PLOT -->
+		<control type="group">
+        <posy>2085</posy>
+		        <include>VisibleIfNotMovieSet</include>
+		         <animation reversible="false" type="Conditional" condition="!Container().OnNext+!Container().OnPrevious">
+        <effect type="slide" end="0,-65" time="500" delay="500" />
+      </animation>
+      <animation type="Conditional" condition="!Skin.HasSetting(ShowFilePath)|String.IsEmpty(ListItem.FilenameAndPath)" reversible="false">
+          <effect type="slide" end="0,25" time="0"  />
+     </animation>
+		        <visible>!Skin.HasSetting(Hide_Plot)+!Skin.HasSetting(ShowLargePlot)+!Skin.HasSetting(ShowVeryLargePlot)+!Control.HasFocus(2999)+!Control.HasFocus(2998)+!Control.HasFocus(2996)+!Control.HasFocus(2666)+!Control.IsVisible(2667)</visible>
+
+			<width>1920</width>
+				<height>25</height>
+			<control type="image">
+          <texture  colordiffuse="OSDBackgroundColor">osd/OSDdialogback.png</texture>
+          <aspectratio>stretch</aspectratio>
+          <visible>!String.IsEmpty(Control.GetLabel(1777))</visible>
+      </control>
+			<control type="fadelabel" id="1777">
+			  <height>30</height>
+			  <top>-5</top>
+				<resetonlabelchange>true</resetonlabelchange>
+				<scrollspeed>80</scrollspeed>
+				<pauseatend>1500</pauseatend>
+				<scrollout>false</scrollout>
+				<left>10</left>
+				<width>1900</width>
+				<aligny>top</aligny>
+				<align>center</align>
+				<include>PlotNoDialFont</include>
+				<wrapmultiline>false</wrapmultiline>
+				<textcolor>yellow</textcolor>
+				<textoffsetx>1500</textoffsetx>
+				<label>[UPPERCASE]$VAR[PlotBox_Text][/UPPERCASE]</label>
+				<scrollout>false</scrollout>
+				<shadowcolor>FF000000</shadowcolor>
+			</control>
+			
+			
+					
+		</control>	
+		<!-- FILEPATH-->	
+		<control type="group">
+		  <posy>2085</posy>
+		        <include>VisibleIfNotMovieSet</include>
+		        <visible>!String.IsEmpty(ListItem.FilenameAndPath)+Skin.HasSetting(ShowFilePath)</visible>
+		         <animation reversible="false" type="Conditional" condition="!Container().OnNext+!Container().OnPrevious+!Control.HasFocus(2999)">
+        <effect type="slide" end="0,-40" time="500" delay="500" />
+      </animation>
+      <width>1920</width>
+				<height>25</height>
+		    <control type="image">
+          <texture colordiffuse="OSDBackgroundColor">osd/OSDdialogback.png</texture>
+          <aspectratio>stretch</aspectratio>
+        </control>
+        <control type="grouplist">
+          <width>1920</width>
+				<height>30</height>
+          <orientation>horizontal</orientation>
+          <align>center</align>
+          <top>-3</top>
+        <control type="image">
+            <width>25</width>
+            <height>25</height>
+            <aspectratio>stretch</aspectratio>
+            <texture>flags/explorer.png</texture>
+          </control>
+        <control type="label">
+          <width>auto</width>
+          
+            <scroll>true</scroll>
+            <scrollout>false</scrollout>
+            <font>METF_HomeMenuSmall</font>
+            <textcolor>lightgrey</textcolor>
+            <label>[I]$INFO[ListItem.FilenameAndPath][/I]</label>
+          </control>
+        </control>
+          
+     </control>
+		<control type="group">
 				<animation type="Conditional" condition="Control.HasFocus(1999)+!String.IsEqual(ListItem.DbType,tvshow)" reversible="false">
 					<effect type="slide" end="-1550,850" time="0"  />
 				</animation>
@@ -58,127 +124,17 @@
 				<left>50</left>
 				<include>ClearLogoArt</include>
 			</control>
-		<!-- -->
-		<control type="group">
-        <posy>2095</posy>
-		        <include>VisibleIfNotMovieSet</include>
-		         <animation reversible="false" type="Conditional" condition="!Container().OnNext+!Container().OnPrevious">
-        <effect type="slide" end="0,-55" time="500" delay="1000" />
-      </animation>
-		        <visible>!Skin.HasSetting(Hide_Plot)+!Skin.HasSetting(ShowLargePlot)+!Control.HasFocus(2999)</visible>
-
-			
-			<control type="image">
-          
-				<width>1920</width>
-				<height>30</height>
-          <texture>osd/OSDdialogback.png</texture>
-          <aspectratio>stretch</aspectratio>
-          <colordiffuse>A0F0F0F0</colordiffuse>
-          <visible>!String.IsEmpty(Control.GetLabel(1777))</visible>
-        </control>
-			<control type="fadelabel" id="1777">
-				<resetonlabelchange>true</resetonlabelchange>
-				<scrollspeed>80</scrollspeed>
-				<pauseatend>1500</pauseatend>
-				<scrollout>false</scrollout>
-				<posy>2</posy>
-				<left>10</left>
-				<width>1900</width>
-				<height>20</height>
-				<aligny>top</aligny>
-				<align>center</align>
-				<font>exptext</font>
-				<textcolor>lightgrey</textcolor>
-				<textoffsetx>1500</textoffsetx>
-				<label>$VAR[PlotBox_Text]</label>
-				<scrollout>false</scrollout>
-			</control>
-			
-			
-					
-		</control>	
-		-->	
-		<control type="group">
-		  <posy>2065</posy>
-		        <include>VisibleIfNotMovieSet</include>
-		        <visible>!String.IsEmpty(ListItem.FilenameAndPath)+Skin.HasSetting(ShowFilePath)</visible>
-		         <animation reversible="false" type="Conditional" condition="!Container().OnNext+!Container().OnPrevious">
-        <effect type="slide" end="0,-55" time="500" delay="1000" />
-      </animation>
-		<control type="image">
-          
-				<width>1920</width>
-				<height>30</height>
-          <texture>osd/OSDdialogback.png</texture>
-          <aspectratio>stretch</aspectratio>
-          <colordiffuse>A0F0F0F0</colordiffuse>
-        </control>
-        <control type="label">
-          <top>13</top>
-            <align>left</align>
-            <aligny>center</aligny>
-            <scroll>true</scroll>
-            <scrollout>false</scrollout>
-            <font>impactsongs</font>
-            <textcolor>lightgrey</textcolor>
-            <label>$INFO[ListItem.FilenameAndPath]</label>
-          </control>
-          
-     </control>
-		
 		
 		<control type="group">
 			  <posy>1200</posy>
 			   <include>SpecialPlotBox</include>
-			   <visible>!Skin.HasSetting(Hide_Plot)+Skin.HasSetting(ShowLargePlot)</visible>
+			   <visible>!Skin.HasSetting(Hide_Plot)+[Skin.HasSetting(ShowLargePlot)|Skin.HasSetting(ShowVeryLargePlot)]</visible>
 			</control>
 			
 	
 			
 
-			<!-- Title -->
-			<control type="label">	
-			  <posy>988</posy>	
-				<visible>Container.Content(tvshows)</visible>
-				<width>1920</width>
-				<height>40</height>				
-				<align>center</align>
-				<include>FontTitre</include>
-			  <label>$VAR[ListItemInfoTitle]</label>
-				<textcolor>white</textcolor>
-			</control>
-			<control type="grouplist">
-			  <visible>![Container.Content(episodes)|Container.Content(tvshows)]</visible>
-			  <left>0</left>
-				<width>1920</width>
-				<posy>991</posy>
-				<height>60</height>
-				<align>center</align>
-				<orientation>horizontal</orientation>
-			
-			<control type="button">
-			  <top>15</top>
-			  
-			  <width>auto</width>
-			  <height>50</height>
-			  <align>center</align>
-			  <aligny>center</aligny>
-			  
-			  <label>$VAR[ListItemInfoTitle]</label>
-				<textcolor>white</textcolor>
-				<textoffsetx>10</textoffsetx>
-				<include>FontTitre</include>
-			
-				<texturefocus colordiffuse="FFFFAAFF">frames/fondtitre2.png</texturefocus>
-        <texturenofocus colordiffuse="FFFFAAFF">frames/fondtitre2.png</texturenofocus> -->
-			</control>	
-				
-			
-			
-			</control>
-			
-			
+		
 			
 
 			<visible>!Window.IsVisible(movieinformation)</visible>

@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 <!-- telex --->
+<include name="AnimationWidget1">
+  <param name="id">0</param>
+  <definition>
+      <animation effect="slide" start="0,0" end="-1920,-260" delay="150" tween="cubic" time="50" condition="Control.HasFocus(8011$PARAM[id])+!Container(8011$PARAM[id]).IsUpdating">Conditional</animation>
+      <animation effect="slide" start="0,0" end="-1920,0" delay="150" tween="cubic" time="50" condition="[!Control.HasFocus(8011$PARAM[id])+!Control.HasFocus(8021$PARAM[id])+[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))|Skin.HasSetting(ShowFullWidgets)]]+!Container(8011$PARAM[id]).IsUpdating">Conditional</animation>
+      <animation effect="slide" start="0,0" end="500,0" delay="0" tween="cubic" time="50" condition="!Skin.HasSetting(ShowFullWidgets)+[!Control.HasFocus(8011$PARAM[id])+!Control.HasFocus(8021$PARAM[id])+[!String.IsEmpty(Container(9000).ListItem.Property(widgetShowH))|Skin.HasSetting(HideUnfocusedWidgets)]]+!Container(8011$PARAM[id]).IsUpdating">Conditional</animation>
 
-<include name="slideCacheFond">
-  <animation type="Conditional" condition="Skin.HasSetting(CacheFond)" reversible="false">
+
+     
+      <animation effect="slide" end="190,95"  time="0"  reversible="true"  condition="Control.HasFocus(8021$PARAM[id])+!String.Contains(Control.getLabel(8031$PARAM[id]),WeatherForecast)">Conditional</animation>
+      <animation effect="slide" end="80,95"  time="0"  reversible="true"  condition="Control.HasFocus(8021$PARAM[id])+String.Contains(Control.getLabel(8031$PARAM[id]),WeatherForecast)">Conditional</animation>
+  </definition>
+</include>
+<include name="AnimationWidget2">
+  <param name="id">0</param>
+  <definition>
+      <animation effect="slide" start="0,0" end="-1920,50" delay="150" tween="cubic" time="50" condition="Control.HasFocus(8021$PARAM[id])+!Container(8021$PARAM[id]).IsUpdating">Conditional</animation>
+      <animation effect="slide" start="0,0" end="-1920,0" delay="150" tween="cubic" time="50" condition="[!Control.HasFocus(8011$PARAM[id])+!Control.HasFocus(8021$PARAM[id])+[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Skin.HasSetting(ShowFullWidgets)]]+!Container(8021$PARAM[id]).IsUpdating">Conditional</animation>
+      <animation effect="slide" start="0,0" end="500,0" delay="0" tween="cubic" time="50" condition="!Skin.HasSetting(ShowFullWidgets)+[!Control.HasFocus(8011$PARAM[id])+!Control.HasFocus(8021$PARAM[id])+[!String.IsEmpty(Container(9000).ListItem.Property(widgetShowH.2))|Skin.HasSetting(HideUnfocusedWidgets)]]+!Container(8011$PARAM[id]).IsUpdating">Conditional</animation>
+
+      <animation effect="slide" end="190,400"  time="0"  reversible="true"  condition="Control.HasFocus(8011$PARAM[id])+!String.Contains(Control.getLabel(8032$PARAM[id]),WeatherForecast)">Conditional</animation>
+      <animation effect="slide" end="80,400"  time="0"  reversible="true"  condition="Control.HasFocus(8011$PARAM[id])+String.Contains(Control.getLabel(8032$PARAM[id]),WeatherForecast)">Conditional</animation>
+  </definition>
+</include>
+
+<include name="slideVueExperimentale">
+  <animation type="Conditional" condition="Skin.HasSetting(VueExperimentale)" reversible="false">
           <effect type="slide" end="0,-835" time="0"  />
         </animation>
 </include>
@@ -37,36 +61,17 @@
 
 
 <include name="Animation_Mainmenu">
-  <!--<animation effect="slide" start="0" end="0,-200" center="auto" time="500" condition="Control.HasFocus(9001)">Conditional</animation>
-		<animation effect="fade" start="100" end="50"  time="500" condition="Control.HasFocus(9001)">Conditional</animation>
-		-->	
+ 
 		<animation effect="slide" start="0" end="0,600" center="auto" time="500" condition="[!Control.HasFocus(9000)+!Control.HasFocus(9001)]|[Player.HasAudio + System.IdleTime(8)]">Conditional</animation>
 		<animation effect="slide" start="0" end="0,30" center="auto" time="1" condition="![system.getbool(lookandfeel.enablerssfeeds)]|Skin.HasSetting(RssTop)">Conditional</animation>
-	
-		<animation effect="rotatex" start="0" end="90" center="960,50" time="700" condition="Control.HasFocus(9001)">Conditional</animation>
+		<animation effect="rotatex" start="0" end="90" center="960,10" time="500" condition="Control.HasFocus(9001)">Conditional</animation>
   
 </include>
 <include name="Animation_Submenu">
+  		<animation effect="slide" start="0" end="0,600" center="auto" time="500" condition="[!Control.HasFocus(9000)+!Control.HasFocus(9001)]|[Player.HasAudio + System.IdleTime(8)]">Conditional</animation>
   <animation effect="slide" start="0" end="0,30" time="1" condition="![system.getbool(lookandfeel.enablerssfeeds)]|Skin.HasSetting(RssTop)">Conditional</animation>
-   <animation effect="rotatex" start="-90" end="0" center="960,90" delay="50" time="700" condition="Control.HasFocus(9001)">Conditional</animation>
-   <animation effect="fade" start="100" end="0"  time="500" condition="!Control.HasFocus(9001)">Conditional</animation> -->
-   <!-- <animation effect="rotatex" start="0" end="-90" center="960,90" time="1" condition="!Control.HasFocus(9001)">Conditional</animation> -->
+   <animation effect="rotatex" start="-90" end="0" center="960,100" time="500" condition="Control.HasFocus(9001)">Conditional</animation>
   
-  <!--
-		<animation type="Visible" reversible="false">
-		  
-				<effect type="slide" start="0,600" end="0,0" time="1000" tween="cubic" easing="out" />
-				<effect type="fade" start="0" end="100" time="1000" />
-				
-			</animation>-->
-			 <!--  
-				<animation type="Hidden" reversible="false">
-				 
-				<effect type="slide" start="0,0" end="0,600" time="1000" tween="cubic" easing="out" />
-				<effect type="fade" start="100" end="0" time="1000" />
-				
-			</animation>
-			-->
 	</include>
 
 
@@ -175,7 +180,7 @@
 			<effect type="fade" time="100" start="0" end="80" />
 		</animation>
 	
-		<animation type="Conditional" condition="Window.IsActive(addonsettings) | Window.IsActive(filebrowser) | Window.IsActive(mediasource) | Window.IsActive(peripheralsettings) | Window.IsActive(script-RSS_Editor-rssEditor.xml) | Window.IsActive(script-RSS_Editor-setEditor.xml) | Window.IsActive(custom_DialogFavourites.xml) | Window.IsActive(script-skinshortcuts.xml)">
+		<animation type="Conditional" condition="Window.IsActive(addonsettings) | Window.IsActive(filebrowser) | Window.IsActive(mediasource) | Window.IsActive(peripheralsettings) | Window.IsActive(script-RSS_Editor-rssEditor.xml) | Window.IsActive(script-RSS_Editor-setEditor.xml) | Window.IsActive(custom_DialogFavourites.xml) | Window.IsActive(script-PARAM.xml)">
 			<effect type="fade" time="100" start="0" end="100" />
 		</animation>
 		 -->
@@ -185,7 +190,7 @@
 	
 	
 	<include name="Animation_FadedByOSDSettings">
-		<animation type="Conditional" condition="Window.IsActive(osdvideosettings) | Window.IsActive(osdaudiosettings)">
+		<animation type="Conditional" condition="Window.IsActive(osdvideosettings) | Window.IsActive(osdaudiosettings) | !String.IsEmpty(Window(Home).property(iconmixtoolsseekosd))">
 			<effect type="fade" time="300" start="100" end="0" />
 		</animation>
 	</include>
@@ -252,8 +257,8 @@
 		<animation effect="rotate" end="360" center="auto" time="700" loop="true" reversible="false" condition="Player.Rewinding8x+Player.HasAudio">Conditional</animation>
 		<animation effect="rotate" end="360" center="auto" time="500" loop="true" reversible="false" condition="Player.Rewinding16x+Player.HasAudio">Conditional</animation>
 		<animation effect="rotate" end="360" center="auto" time="350" loop="true" reversible="false" condition="Player.Rewinding32x+Player.HasAudio">Conditional</animation>
-		
-		<texture fallback="cd.png">$VAR[discartSpinning]</texture>
+	
+		<texture diffuse="platineborddiff.png" fallback="cd.png">$VAR[discartSpinning]</texture>
 		<aspectratio align="bottom">keep</aspectratio>
 	</include>
 </includes>

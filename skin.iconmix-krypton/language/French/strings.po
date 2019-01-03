@@ -238,46 +238,56 @@ msgctxt "#31145"
 msgid "Disable focus to first unwatched"
 msgstr "Désactiver le placement auto sur le premier non-vu"
 
+msgctxt "#31146"
+msgid "Delay for Netflixview trailers"
+msgstr "Délai des bande-annonces dans les vues Netflix"
+
+msgctxt "#31147"
+msgid "Volume level for automatic trailers/NetFlix"
+msgstr "Volume des bandes-annonces automatiques/Netflix"
+
+
+
 
 msgctxt "#31159"
 msgid "ffx2"
-msgstr "ffx2"
+msgstr ">> x2"
 
 msgctxt "#31160"
 msgid "ffx4"
-msgstr "ffx4"
+msgstr ">> x4"
 
 msgctxt "#31161"
 msgid "ffx8"
-msgstr "ffx8"
+msgstr ">> x8"
 
 msgctxt "#31162"
 msgid "ffx16"
-msgstr "ffx16"
+msgstr ">> x16"
 
 msgctxt "#31163"
 msgid "ffx32"
-msgstr "ffx32"
+msgstr ">> x32"
 
 msgctxt "#31164"
 msgid "rwx2"
-msgstr "rwx2"
+msgstr "<< x2"
 
 msgctxt "#31165"
 msgid "rwx4"
-msgstr "rwx4"
+msgstr "<< x4"
 
 msgctxt "#31166"
 msgid "rwx8"
-msgstr "rwx8"
+msgstr "<< x8"
 
 msgctxt "#31167"
 msgid "rwx16"
-msgstr "rwx16"
+msgstr "<< x16"
 
 msgctxt "#31168"
 msgid "rwx32"
-msgstr "rwx32"
+msgstr "<< x32"
 
 msgctxt "#31183"
 msgid "Viewtype"
@@ -486,19 +496,19 @@ msgstr "Activer les Fanarts supplémentaires"
 
 msgctxt "#31334"
 msgid "Trailers"
-msgstr "Bandes-Annonces"
+msgstr "Bandes Annonces"
 
 msgctxt "#31335"
 msgid "Windowed Trailers"
-msgstr "Bandes-Annonces en fenêtre"
+msgstr "Bandes Annonces en fenêtre"
 
 msgctxt "#31336"
 msgid "Enable Kiosk mode"
 msgstr "Activer le mode Kiosque"
 
 msgctxt "#31337"
-msgid "Disable destructive Shutdown items"
-msgstr "Désactiver les options destructrices du menu 'Éteindre'"
+msgid "Disable Trailers in Netflix views"
+msgstr "Désactiver les bandes annonces dans les vues NetFlix"
 
 msgctxt "#31338"
 msgid "Use simple Media Filter"
@@ -842,7 +852,7 @@ msgstr "Activer l'affichage de la Date de Prochaine Diffusion des Séries TV"
 
 msgctxt "#31427"
 msgid "Next Episode"
-msgstr "Prochain Épisode"
+msgstr "A venir"
 
 msgctxt "#31428"
 msgid "TV Guide"
@@ -989,8 +999,8 @@ msgid "Games Wide"
 msgstr "Largeur des jeux"
 
 msgctxt "#31464"
-msgid "Show Plot in Fullscreen Info"
-msgstr "Afficher le Résumé dans les Informations Plein Écran"
+msgid "Show Plot in Fullscreen Player"
+msgstr "Afficher le Résumé lors de la lecture en plein écran"
 
 msgctxt "#31465"
 msgid "Clean Library"
@@ -1101,9 +1111,17 @@ msgctxt "#31608"
 msgid "Hidden Channels"
 msgstr "Chaînes cachées"
 
+msgctxt "#31609"
+msgid "tvshows planning"
+msgstr "Agenda Séries"
+
 msgctxt "#31610"
 msgid "Scheduled Time"
 msgstr "Temps programmé"
+
+msgctxt "#31612"
+msgid "week planning"
+msgstr "Planning semaine"
 
 msgctxt "#31700"
 msgid "7 Day Forecast"
@@ -1268,7 +1286,7 @@ msgstr "Année"
 
 msgctxt "#31755"
 msgid "Rating"
-msgstr "Note"
+msgstr "Noter"
 
 msgctxt "#31756"
 msgid "Votes"
@@ -1426,6 +1444,19 @@ msgctxt "#31794"
 msgid "By categorie"
 msgstr "Par catégorie"
 
+msgctxt "#31795"
+msgid "Final Episode"
+msgstr "Episode Final"
+
+
+msgctxt "#31796"
+msgid "Landscape panel"
+msgstr "Panneau paysage"
+
+msgctxt "#31797"
+msgid "TvShows in progress"
+msgstr "Séries en cours"
+
 
 msgctxt "#31800"
 msgid "List sober"
@@ -1569,6 +1600,19 @@ msgctxt "#31834"
 msgid "Trio list"
 msgstr "Liste Trio"
 
+
+msgctxt "#31835"
+msgid "Netflix Poster Theme"
+msgstr "Netflix Poster"
+
+msgctxt "#31836"
+msgid "Netflix Landscape Theme"
+msgstr "Netflix Paysage"
+
+msgctxt "#31837"
+msgid "Replace Logo with DiscArt"
+msgstr "Afficher DiscArt au lieu du Logo"
+
 msgctxt "#31894"
 msgid "Age :"
 msgstr "Age :"
@@ -1649,6 +1693,7 @@ msgstr "Boitiers"
 msgctxt "#31913"
 msgid "Rounded"
 msgstr "Arrondies"
+
 
 msgctxt "#31914"
 msgid "Fanart slideshow"
@@ -1740,8 +1785,12 @@ msgid "Hide Movieset Casting"
 msgstr "Masquer les acteurs des sagas"
 
 msgctxt "#31936"
-msgid "Update Movie(s) ArtWorks"
-msgstr "Mettre à jour les illustrations"
+msgid "ArtWorks by Artwork Downloader"
+msgstr "Illustrations par Artwork Downloader"
+
+msgctxt "#31937"
+msgid "Update ArtWorks (iconmix)"
+msgstr "Illustrations par IconMix"
 
 msgctxt "#32000"
 msgid "Horizontal panel animation on windows close"
@@ -1752,8 +1801,8 @@ msgid "Fade items not selected after"
 msgstr "Cacher éléments non sélectionnés après"
 
 msgctxt "#32002"
-msgid "Same genre"
-msgstr "Dans le même genre"
+msgid "Access to genre"
+msgstr "Accéder à un genre"
 
 msgctxt "#32003"
 msgid "Show big plot window"
@@ -1808,7 +1857,7 @@ msgstr "Plus d'informations"
 
 msgctxt "#32015"
 msgid "Fullscreen Trailers"
-msgstr "Bandes-Annonces plein écran"
+msgstr "Bandes Annonces plein écran"
 
 msgctxt "#32016"
 msgid "Back"
@@ -1844,6 +1893,11 @@ msgstr "Marquer cet épisode "
 msgctxt "#32023"
 msgid "Next Aired "
 msgstr "Prochaines diffusions "
+
+msgctxt "#32024"
+msgid "15 days tvshows planning"
+msgstr "Agenda séries"
+
 
 
 

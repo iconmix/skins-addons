@@ -22,7 +22,7 @@
 				<pagecontrol>998</pagecontrol>
 				<preloaditems>2</preloaditems>
 				<include>Animation_OpenCloseFade</include>
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_HiddenByInfo</include>
 				<visible>!Skin.HasSetting(NoViewLowList)</visible>
 				<itemlayout width="535" height="35">
@@ -165,7 +165,7 @@
 				<left>100</left>
 				<posy>-80</posy>
 				<include>Animation_OpenCloseFade</include>
-				<include>Animation_FadedByMenu</include>
+				
 				<include>Animation_HiddenByInfo</include>
 
 				<!-- LEFT SIDE OF SCREEN -->

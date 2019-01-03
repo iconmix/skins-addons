@@ -1,5 +1,6 @@
 ﻿# coding: utf-8
 #from __future__ import unicode_literals
+import locale
 import resources.lib.Utils as utils
 from resources.lib.Utils import logMsg
 import resources.lib.pays as pays
@@ -14,6 +15,10 @@ import os
 import xbmc,xbmcgui,xbmcaddon,xbmcplugin,xbmcvfs
 import random
 import MonAutoCompletion
+import youturl
+import zlib
+import threading
+#from multiprocessing import Process
 #containers :
 #1998 : Acteurs
 #1999 : éléments des sagas, des acteurs et réalisateurs, et artistes (musique)
@@ -36,23 +41,33 @@ ADDON_DATA_PATH = xbmc.translatePath("special://profile/addon_data/%s" % ADDON_I
 SETTING = ADDON.getSetting
 KODI_VERSION  = int(xbmc.getInfoLabel( "System.BuildVersion" ).split(".")[0])
 ACTION_PREVIOUS_MENU = (9, 10, 92, 216, 247, 257, 275, 61467, 61448)
-
+__skin_string__ = xbmc.getLocalizedString
 
 
 
 
 class myMonitor(xbmc.Monitor):
   
+  #------------------------------------------------------------------------------------------------------------------
   def __init__(self):
     self.updatesetting()
+    self.ScanFinished=None
+    self.previousitem=None
+    # != self.selecteditem or self.windowhome.getProperty('IconMixUpdateEpisodes')=='1':                    
+    self.precedenttvshow=None
     xbmc.Monitor.__init__(self)
     
+  #------------------------------------------------------------------------------------------------------------------
   def updatesetting(self):
     self.ADDON = xbmcaddon.Addon()
     try:
      self.tempsannonce=int(self.ADDON.getSetting('tempsannonce'))
     except:
-     self.tempsannonce=0 
+     self.tempsannonce=0
+    if self.tempsannonce<=0: 
+      xbmc.executebuiltin('SetProperty(IconmixBAAuto,"OK",10000)')
+    else:
+      xbmc.executebuiltin("ClearProperty(IconmixBAAuto,home)")
     self.annoncefull=self.ADDON.getSetting('annoncefull')
     self.allocinefirst=self.ADDON.getSetting('allocinefirst')
     self.allocineactif=self.ADDON.getSetting('allocineactif')
@@ -64,26 +79,35 @@ class myMonitor(xbmc.Monitor):
     self.annoncetoutes=self.ADDON.getSetting('annoncetoutes')
     xbmc.executebuiltin("SetProperty(AutoCompletionProvider,%s,home)" %xbmc.getInfoLabel("Skin.String(AutoCompleteProvider)"))
   
+  #------------------------------------------------------------------------------------------------------------------
+  def onScanFinished(self,library=None):
+    self.ScanFinished=True
+  
+  #------------------------------------------------------------------------------------------------------------------
+  def onCleanFinished(self,library=None):
+    self.ScanFinished=True
+  
+  #------------------------------------------------------------------------------------------------------------------
   def onSettingsChanged(self):
     self.updatesetting()
-    #logMsg("parametres changes ...: temps=%s,full=%s,first=%s,youtube=%s,annoncefilm=%s,annonceserie=%s" %(self.tempsannonce,self.annoncefull,self.allocinefirst,self.youtubeactif,self.annoncefilm,self.annonceserie),0)
-    
-  #def onNotification(self, sender, method, data):
-  #      logMsg("sender (%s)(%s)" %(sender,method))
-        #if not sender == 'script.module.youtube.dl':
-        #    return
-        #self.processCommand(method.split('.', 1)[-1], self.controller.processCommandData(data))  # Remove the "Other." prefix
+  
+
+#--------------------------------------------------------------------------------------------------
    
 class Player(xbmc.Player):
 
-  def play(self, item='', listitem=None, windowed=False, sublist=None):
+  #------------------------------------------------------------------------------------------------------------------
+  def play(self, item='', listitem=None, windowed=False, sublist=None,VolumeBA=None):
+      self.Volume=VolumeBA
       super(Player, self).play(item, listitem, windowed)  
    
 
+  #------------------------------------------------------------------------------------------------------------------
   def __init__(self):
       self.windowhome = xbmcgui.Window(10000)
       self.windowvideo = xbmcgui.Window(10025)
       self.DureeTotale=None
+      self.Volume=None
       self.PositionLecture=0
       self.ItemID=None      
       self.ItemType=None
@@ -92,9 +116,14 @@ class Player(xbmc.Player):
       self.currentepisode=None
       xbmc.Player.__init__(self,0)
 
+  #------------------------------------------------------------------------------------------------------------------
   def onPlayBackStarted(self):   
       self.PreviousprogressPosition=None   
-      self.PreviousprogressWindow=None  
+      self.PreviousprogressWindow=None
+      logMsg("Volume avant Lecture=%s" %utils.GetVolume())
+      if self.Volume:
+           xbmc.executebuiltin("SetVolume(%d,true)" %self.Volume)
+      
       try:
         self.DureeTotale = int(self.getTotalTime())
       except:
@@ -105,6 +134,7 @@ class Player(xbmc.Player):
         A=None
           
    
+  #------------------------------------------------------------------------------------------------------------------
   def Notation(self):
       Annonce=self.windowhome.getProperty('annonceencours')
       try:
@@ -113,7 +143,6 @@ class Player(xbmc.Player):
         self.DureeLue=0
       if self.DureeTotale and self.DureeLue:
           if ((self.DureeTotale-20)<=self.DureeLue):
-            #logMsg("ARRET DE LECTURE (%s)(%s)(%s)(%s)(%s)(%s)(%s)" %(self.DureeLue,self.DureeTotale,Annonce,self.ItemID,self.ItemType,self.noterfilm,self.noterserie),0)
             if (self.ItemType=="Movie" and self.noterfilm=="false") or (self.ItemType=="Episode" and self.noterserie=="false") :
               self.ItemID=None
             if Annonce!="":
@@ -129,28 +158,36 @@ class Player(xbmc.Player):
       self.ItemNotation=None
       self.ItemType=None       
 
+  #------------------------------------------------------------------------------------------------------------------
   def onPlayBackStopped(self):
-      #logMsg("Arret de lecture")
       self.PreviousprogressPosition=None
       self.PreviousprogressWindow=None
+      logMsg("Volume apres Lecture=%s" %utils.GetVolume())
+      if self.Volume:
+           xbmc.executebuiltin("SetVolume(100)")
+      logMsg("Volume apres retablissement=%s" %utils.GetVolume())
       self.Notation()
       
       
 
+  #------------------------------------------------------------------------------------------------------------------
   def onPlayBackEnded(self):
-      #logMsg("FIN DE LECTURE",0)
       self.PreviousprogressPosition=None
       self.PreviousprogressWindow=None
       self.Notation()
       
+  #------------------------------------------------------------------------------------------------------------------
   def onPlayBackSeekChapter(self):
       try:
         self.checkProgressPlay()
       except:
         A=None
+
+#--------------------------------------------------------------------------------------------------
       
 class dialog_ShowInfo(xbmcgui.WindowXMLDialog):
-    def __init__(self, *args, **kwargs):
+    #------------------------------------------------------------------------------------------------------------------
+  def __init__(self, *args, **kwargs):
         self.windowhome = xbmcgui.Window(10000)
         xbmcgui.WindowXMLDialog.__init__(self)
         self.listitem = kwargs.get('listitem')
@@ -159,7 +196,8 @@ class dialog_ShowInfo(xbmcgui.WindowXMLDialog):
         self.IconmixShowInfo=self.windowhome.getProperty('IconmixShowInfo')
         
 
-    def onInit(self):
+    #------------------------------------------------------------------------------------------------------------------
+  def onInit(self):
         self.Ajour=None
         self.Local=None
         
@@ -192,7 +230,8 @@ class dialog_ShowInfo(xbmcgui.WindowXMLDialog):
         else:
           self.close()
 
-    def onAction(self, action):
+    #------------------------------------------------------------------------------------------------------------------
+  def onAction(self, action):
       # Action : 3 haut
       # Action : 4 bas
       # Action : 2 droite
@@ -211,17 +250,15 @@ class dialog_ShowInfo(xbmcgui.WindowXMLDialog):
           F7778=xbmc.getCondVisibility("Control.HasFocus(7778)") #directors
           F7777=xbmc.getCondVisibility("Control.HasFocus(7777)") or F7778
           if F8889 | F7781 | F7779 |F7777:
-                  CompteurTemps=0
-                  #if (not action in (1,2) and (F7779 or F7778)) or (not F7779 and not F7778):
+                  self.CompteurTemps=0
                   KodiLocal=self.windowhome.getProperty('ActeurVideoLocal')
                   if (action.getId()==4 and (F7779 or F7778) and self.Local!=KodiLocal) or (action in (1,2) and F7781) or not self.Ajour:
                      self.mainservice.CheckActeursRoles(F8889, F7781, F7779,F7777,1)
                      self.Ajour=True                      
                      self.Local=KodiLocal
-                  #logMsg("Action=(%s)-F8889:(%s)  F7781:(%s) F7779:(%s) F7777:(%s) F7778:(%s)- KodiLocal:(%s)" %(action.getId(),F8889, F7781,F7779,xbmc.getCondVisibility("Control.HasFocus(7777)"),xbmc.getCondVisibility("Control.HasFocus(7778)"),KodiLocal))
-        #else: logMsg("Action (%s)" %(action.getId()))
-
-    def onClick(self, controlID):
+ 
+    #------------------------------------------------------------------------------------------------------------------
+  def onClick(self, controlID):
         if controlID == 6 or controlID == 3:             
             Trailer=None
         if controlID==600:
@@ -232,111 +269,644 @@ class dialog_ShowInfo(xbmcgui.WindowXMLDialog):
              self.close()
              xbmc.Player().play(Path)
         if controlID==7777:
-          #logMsg("affiche directeur !!!!")
           self.mainservice.CheckActeursRoles(False, False, False,True,1)
           self.Local=self.windowhome.getProperty('ActeurVideoLocal')
-          #self.Ajour=None
+        
+        
              
             
                 
 
-    def onFocus(self, controlID):
+    #------------------------------------------------------------------------------------------------------------------
+  def onFocus(self, controlID):
         pass
-"""
-class dialog_ListeEpisodes(xbmcgui.WindowXMLDialog):
-    def __init__(self, *args, **kwargs):
-        xbmcgui.WindowXMLDialog.__init__(self)
+
+#--------------------------------------------------------------------------------------------------
+        
+class dialog_ShowGuide(xbmcgui.WindowXMLDialog):
+    #------------------------------------------------------------------------------------------------------------------
+  def __init__(self, *args, **kwargs):
         self.windowhome = xbmcgui.Window(10000)
-        self.listing = kwargs.get('listing')
-        self.Prochain = kwargs.get('Prochain')
+        xbmcgui.WindowXMLDialog.__init__(self)
+        self.calendrier = None #kwargs.get('Calendrier')
+       
+        self.GlobalCalendrier=kwargs.get('GlobalCalendrier')
+        self.retour=None
+        self.IdEncours=None
+        self.ShowBetaSerieInfo=False
+        self.CalendrierMode=1
+        self.NoAction=None
+        self.NoActionP=None
+        #1 : series KODI
+        #0 : toutes
+        #2 : a venir
+              
 
-    def onInit(self):
-        self.img_list = self.getControl(2666)            
-
-        if self.img_list:
-          self.img_list.addItems(self.listing)
-          logMsg("self.Prochain (%s)" %(self.Prochain))
-          if self.Prochain:
-            self.img_list.selectItem(self.Prochain)
-          #for item in self.listing:           
-          #    self.img_list.addItem(item)
-          #self.setFocus(self.img_list)          
-        else:
-          self.close()
-
-    def onAction(self, action):
-      # Action : 3 haut
-      #Action : 4 bas
-      # Action : 2 droite
-      # Action : 1 gauche  
-      # 11 touche "info"   
-      # 6 PageDown
-      #5 PageUp
-      #160 Fin
-      #159 Home
-      #7 entree
-      actionId = action.getId()   
-      if actionId==11 or actionId==1 or actionId in ACTION_PREVIOUS_MENU:  
-          self.windowhome.clearProperty('IconmixFlagPanelEpisode')
-          Chemin = self.img_list.getSelectedItem().getfilename()
-          if len(Chemin)<=0:
-            self.windowhome.setProperty('IconmixFlagPanelEpisode','0')
-          self.close()
-          return None
-      else:  
-          Pos= self.img_list.getSelectedPosition()
-          if actionId==3:
-            Pos=Pos-1
-          if actionId==4:
-            Pos=Pos+1
-          if actionId==5:
-            Pos=Pos-10
-          if actionId==6:
-            Pos=Pos+10
-          if actionId==159:
-            Pos=0
-          if actionId==160:
-            Pos=self.img_list.size()
-          self.img_list.selectItem(Pos)
-          if actionId==7:
-            #LECTURE
-            Chemin = self.img_list.getSelectedItem().getfilename()
-            if len(Chemin)>1:
-              titre=self.img_list.getSelectedItem().getLabel()
-              logMsg("ListeEpisodes -> lecture (%s)(%s)" %(Chemin,titre))
-              self.windowhome.setProperty('IconmixFlagPanelEpisode',titre)
-              xbmc.Player().play(Chemin)
-              self.close()             
-              return True         
+    #------------------------------------------------------------------------------------------------------------------
+  def onInit(self):    
+        self.List=[]
+        self.Container=[]
+        self.IndexContainer=0
+        self.debut=1
+        self.Position=None
+        self.RetourUpdate=None
+        try:
+          self.InfoCtrl=self.getControl(1881)
+          self.InfoCtrl.setVisible(False)
+        except:
+          self.InfoCtrl=None
+        
+        cpt=1780
+        while (cpt<1794):          
+         self.List.append(self.getControl(cpt))
+         cpt=cpt+1
+        self.BACtrl=self.getControl(1670)
+        
+        self.Focus=None
+        
+        
+        self.ChangeCalendrier()        
+        self.windowhome.setProperty("IconmixGuideShowBetaSerieSemaine","%s" %self.debut)
+        
+        
+        
           
-          logMsg("Liste Episodes Action (%s)" %(action.getId()))
-"""          
+    #------------------------------------------------------------------------------------------------------------------
+  def SetHeader(self):
+        id0=self.CalendrierMode-1
+        if id0<0:
+          id0=2
+        id2=self.CalendrierMode+1
+        if id2>2:
+          id2=0    
+      
+        Header=self.getControl(1878)          
+        Header.setLabel(__language__(32867+id0)) 
+        Header=self.getControl(1883)          
+        Header.setLabel(__language__(32867+self.CalendrierMode))
+        Header.setEnabled(False)
+        Header=self.getControl(1879)          
+        Header.setLabel(__language__(32867+id2))
+    #fenetre principale   
+    #1990 à 1996 : les 7 containers des épisodes affichés
+    #1878/1879 : si focus 1879, on passe à la 2ème page etc.... 
+    #1883 : mode actuel
+    #1800 à 1806 : Dates entêtes affichées
+    #1897 : Synopis de l'épisode
+    #1895 : Fanart de fond d'écran
+    #1896 : Poster de la série
+    #1894 : Banniere de la serie
+    
+    #boite info
+    #1888 : Nb saisons/episodes
+    #1887 : Histoire de la série
+    #1889 : Titre de la série
+    #1882 : Nom du studio
+    #1885 : Image du studio
+    #1886 : Poster de la série
+    #1884 : Image logo Kodi si dans Kodi
+    
+    
+        
+          
+    #------------------------------------------------------------------------------------------------------------------
+  def onClick(self, controlID):
+      TvDbId=None
+      if controlID>=1780 and controlID<=1793 :
+        if self.ShowBetaSerieInfo==True:
+          KodiId=None
+          if self.CalendrierMode==1:
+            KodiId=xbmc.getInfoLabel("Container(%d).ListItem.DBID" %controlID)
+          else:
+            TvDbId=xbmc.getInfoLabel("Container(%d).ListItem.Property(tvdbid)" %controlID)
+            if self.GlobalCalendrier[0].get(TvDbId):
+              try:
+               KodiId=self.GlobalCalendrier[0][TvDbId].get("KodiId")
+              except:
+               KodiId=None
+          if KodiId:    
+            self.retour=KodiId              
+            self.windowhome.clearProperty("IconmixGuideShowBetaSerieInfo")
+            self.close()
+          else:
+            if TvDbId:
+              self.GetTrailer(TvDbId,xbmc.getInfoLabel("Container(%d).ListItem.Title" %controlID),self.AnneeActuelle)
+        else:
+         if self.RetourUpdate: 
+           self.ShowBetaSerieInfo=True
+           self.windowhome.setProperty("IconmixGuideShowBetaSerieInfo","show") 
+      
+      #bascule entre calendriers
+      if controlID==1878 or controlID==1879:
+        if controlID==1878:
+          self.CalendrierMode=self.CalendrierMode-1
+          if self.CalendrierMode<0:
+            self.CalendrierMode=2
+        if controlID==1879:
+          self.CalendrierMode=self.CalendrierMode+1
+          if self.CalendrierMode>2:
+            self.CalendrierMode=0
+        self.ChangeCalendrier()
+        
+      
+    #------------------------------------------------------------------------------------------------------------------
+  def ChangeCalendrier(self):
+      if self.CalendrierMode==1:
+        self.calendrier=utils.Diffusion2Semaines(self.GlobalCalendrier)
+      if self.CalendrierMode==0:
+        #self.calendrier=utils.GetCalendrierSemaine()
+        self.calendrier=utils.GetCalendrier2SemaineTvMaze()
+      if self.CalendrierMode==2:
+        #self.calendrier=utils.GetCalendrierSemaine(True)
+        self.calendrier=utils.GetCalendrier2SemaineTvMaze(None,True)
+      
+      #xbmc.sleep(400)
+      self.UpdateContainer()
+           
+      
+      self.SetHeader()
+      if self.IndexContainer>=0:        
+        self.setFocusId(self.Container[self.IndexContainer])
+      else:
+        self.setFocusId(1878)      
+    
+    #------------------------------------------------------------------------------------------------------------------
+  def GetTrailer(self,tvdbid=None,Titre=None,Annee=None):
+      self.unique={"tvdb":tvdbid}
+      xbmc.executebuiltin( "ActivateWindow(busydialog)" )
+      TMDBNUMBER=utils.get_TMDBID(DbType="tvshow",KodiId=None,UniqueId=self.unique)
+      self.ListeTrailer=utils.getTrailer(TMDBNUMBER,"tvshow",None)
+      AllocineBA=utils.Allocine_BandeAnnonce(Titre.lower(),"tvshow",None,None,Annee)
+      if AllocineBA:
+            if not self.ListeTrailer:
+              self.ListeTrailer=[]
+            cpt=len(AllocineBA)-1
+            while cpt>=0:                
+                self.ListeTrailer.insert(0,AllocineBA[cpt])
+                cpt=cpt-1
+      xbmc.executebuiltin( "Dialog.Close(busydialog)" )
+      if len(self.ListeTrailer)>0:
+          ListeNomTrailer=[]
+          Image=""
+          for Item in  self.ListeTrailer:
+               NomTrailer=None                        
+              
+               try:
+                  Image=urllib.unquote(Item.get("landscape").replace("image://",""))
+               except:
+                  Image=""
+                  logMsg("erreur : %s" %(Item),0)                      
+                
+               try: 
+                    NomTrailer=utils.try_decode(Item["name"])+" ["+utils.try_decode(Item["type"])+" - "+str(Item["size"])+"p - "+utils.try_decode(Item["iso_3166_1"]+"]")
+               except:
+                    NomTrailer=utils.try_decode(Item["type"])+' ['+str(Item.get("size"))+'p - '+utils.try_decode(Item["iso_3166_1"])+']'
+                    
+               Elements = xbmcgui.ListItem(label=NomTrailer, iconImage=str(Image),label2="selectionnevue")
+               Elements.setProperty("Icon", Image)
+               Elements.setProperty("Source", Item["key"])
+               ListeNomTrailer.append(Elements)
+                    
+          if len(ListeNomTrailer)>0: 
+                
+                self.ui = dialog_select_UI('choix.xml', ADDON_PATH, 'default','1080i',listing=ListeNomTrailer,trailers=self.ListeTrailer,ItemId=xbmc.getInfoLabel("ListItem.DBID"),Window=True)
+                self.windowhome.setProperty("IconMixTrailer","1")
+                ret=self.ui.doModal()
+                del self.ui                          
+                self.windowhome.clearProperty('IconMixTrailer')
+                  
+                      
+      else: 
+          dialog=xbmcgui.Dialog()
+          dialog.notification('IconMixTools', Titre+": "+__language__( 32506 ), "acteurs/arfffff.png", 500)
+         
+    #------------------------------------------------------------------------------------------------------------------
+  def UpdateContainer(self):
+      indexcontainer=0
+      cpt=0
+      self.IndexContainer=-1
+      self.Container=[]
+      TvDbInit=None
+      self.NoActionP=None
+      
+      for DateItem in self.calendrier:
+          if indexcontainer<14:
+            self.List[indexcontainer].reset()
+            if len(DateItem)>0:
+              self.Container.append(1780+indexcontainer)
+              if self.IndexContainer<0:
+                  self.IndexContainer=0
+                
+              ListeNextEpisodes=[]
+              for Item in DateItem:
+                  #code : S01E02
+                  #title : titre de l'episode
+                  #TitreSerie : titre de la serie
+                 Code=Item.get("next").get("code")
+                 Elements = xbmcgui.ListItem(label=Item.get("next").get("title"), label2=Code)
+                 Elements.setArt({"poster":Item.get("poster"),"banner":Item.get("banner"),"fanart":Item.get("fanart"),"clearart":Item.get("clearart")})
+                 Elements.setProperty("TitreSerie",Item.get("TitreSerie"))
+                 TvDbId=Item.get("tvdbid")
+                 
+                 KodiId=None
+                 
+                 #NetWork="resource://resource.images.studios.white"+str(Item.get("next").get("network")).lower()+".png"
+                 NetWork="resource://resource.images.studios.white/"+str(Item.get("next").get("network")).lower()+".png"
+                 #NetWork=str(Item.get("next").get("network"))+".png"
+                 #NetWork="resource://resource.images.studios.white/nbc.png"
+                 if self.CalendrierMode!=1 and self.GlobalCalendrier[0].get(str(Item.get("tvdbid"))):
+                       NetWork="acteurs/local.png"
+                       KodiId=self.GlobalCalendrier[0].get(str(Item.get("tvdbid"))).get("KodiId")
+                       logMsg("Network kodi (%s)(%s)" %(TvDbId,KodiId))
+                 Elements.setProperty("Network",NetWork)
+                 Elements.setInfo("video", {"dbid": str(Item.get("KodiId")),"mediatype": "tvshow","title": Item.get("TitreSerie"),"plot":Item.get("next").get("description")})
+                 Elements.setProperty("KodiId",str(KodiId))
+                 Elements.setProperty("tvdbid",str(Item.get("tvdbid")))
+                 Elements.setProperty("plot",Item.get("next").get("description"))
+                 try:
+                  
+                   Saison=int(Code.split("E")[0].replace("S",""))
+                   Episode=int(Code.split("E")[1].replace("E",""))
+                   NbEpisodes=int(Item.get("Saisons").get(str(Saison)))
+                   logMsg("Saison (%s) Episode (%s) NbEpisodes (%s)" %(Saison,Episode,NbEpisodes))
+                   if Episode==NbEpisodes:
+                      Elements.setProperty('IsFinal',"   >>"+__skin_string__(31795))
+                   
+                 except:
+                   Saison=None
+                   Episode=None
+                 
+                 
+                 ListeNextEpisodes.append(Elements)
+                 if TvDbId and not TvDbInit:
+                   TvDbInit=TvDbId
+                  
+              self.List[indexcontainer].addItems(ListeNextEpisodes)
+                 
+              indexcontainer=indexcontainer+1
+            else:
+              indexcontainer=indexcontainer+1
+          cpt=cpt+1
+      if TvDbInit:
+         self.UpdateInfoBetaSerie(TvDbInit)
+       
+      loc = locale.getlocale(locale.LC_ALL)
+      locale.setlocale(locale.LC_ALL, xbmc.getLanguage(xbmc.ISO_639_1))
+      for i in range(1800,1814): 
+        Date=(datetime.today() + timedelta(i-1800)).strftime("%A %d/%m/%Y") 
+        if i==1800:
+          Date=__skin_string__(33006)+'[CR][COLOR=yellow][I]'+Date+'[/I][/COLOR]'          
+        self.getControl(i).setLabel(Date)
+      
+      try:  
+        locale.setlocale(locale.LC_ALL, loc)
+      except:
+        i=0
+     
+    #------------------------------------------------------------------------------------------------------------------
+  def UpdatePlot(self):
+          
+           Space="                                                            "
+           self.IdEncours=self.Container[self.IndexContainer]               
+           if self.IdEncours and (self.IdEncours>=1780 and self.IdEncours<=1793):
+             ContainerCtrl=self.getControl(self.IdEncours)    
+             ItemSelect=ContainerCtrl.getSelectedItem()
+             PlotLabel=self.getControl(1897)
+             PlotLabel.setLabel("")
+             Description=ItemSelect.getProperty('plot')
+             logMsg("description (%s)" %Description)
+              
+             
+             if len(Description)>1:
+               if len(Description)>130:
+                Description=Space+Description
+               PlotLabel.setLabel(Description.replace("\n"," ").replace("<p>","").replace("</p>",""))
+             
+             TitreEpisodeCtrl=self.getControl(1898)
+             TitreEpisodeCtrl.setLabel("[COLOR=yellow]"+xbmc.getInfoLabel("Container(%s).ListItem.Title" %(self.IdEncours))+" [/COLOR] ("+xbmc.getInfoLabel("Container(%s).ListItem.Label2" %(self.IdEncours))+") : [COLOR=FFFFD966]"+xbmc.getInfoLabel("Container(%s).ListItem.Label" %(self.IdEncours))+"[/COLOR]")
             
+                 
+    #------------------------------------------------------------------------------------------------------------------
+  def WaitScroll(self):
+      cpt=0
+      self.NoActionP=True
+      self.NoAction=None
+      while cpt<3 and not self.NoAction:
+        xbmc.sleep(300)
+        cpt=cpt+1
+       
+      if not self.NoAction:
+          self.RetourUpdate=self.UpdateInfoBetaSerie()
+      self.NoActionP=None  
+      
+           
+           
+           
+    #------------------------------------------------------------------------------------------------------------------
+  def UpdateInfoBetaSerie(self,MyTvDbId=None):
+         Retour=None
+         zz=None
+         Banner=""
+         Poster=""
+         Fanart=None
+         self.IdEncours=self.Container[self.IndexContainer] 
+         ContainerCtrl=self.getControl(self.IdEncours)    
+         ItemSelect=ContainerCtrl.getSelectedItem()          
+         if not self.Position:
+          self.Position=0
+         if self.IdEncours and (self.IdEncours>=1780 and self.IdEncours<=1793):
+           Fanart=xbmc.getInfoLabel("Container(%s).ListItem.Art(fanart)" %(self.IdEncours))
+           Poster=xbmc.getInfoLabel("Container(%s).ListItem.Art(poster)" %(self.IdEncours))
+           Code=xbmc.getInfoLabel("Container(%s).ListItem.Label2" %(self.IdEncours))
+           FinalCtrl=self.getControl(1890)
+           FinalCtrl.setVisible(False)
+           try:
+             Saison=int(Code.split("E")[0].replace("S",""))
+             Episode=int(Code.split("E")[1].replace("E",""))
+           except:
+              Saison=None
+              Episode=None
+           
+           if MyTvDbId:
+             TvDbId=MyTvDbId
+           else: 
+             TvDbId=ItemSelect.getProperty('tvdbid')
+           KodiCtrl=self.getControl(1884)
+           try:
+              zz=int(ItemSelect.getProperty('KodiId'))
+              KodiCtrl.setImage("acteurs/local.png")
+           except:
+              KodiCtrl.setImage("") 
+           Network=ItemSelect.getProperty("network")             
+           if zz or self.CalendrierMode==1 :
+             self.BACtrl.setLabel(__language__(32870))
+           else:   
+             self.BACtrl.setLabel(__language__(32508))
+
+           if TvDbId :    
+             
+                 if MyTvDbId:
+                    TvDbId=MyTvDbId
+                 else: 
+                    ContainerCtrl=self.getControl(self.IdEncours)    
+                    ItemSelect=ContainerCtrl.getSelectedItem()
+                    TvDbId=ItemSelect.getProperty('tvdbid')
+                    
+                 try:
+                  TvDbId=int(TvDbId)
+                 except:
+                  TvDbId=None
+                 if TvDbId and TvDbId!=None:
+                   query_url = "https://api.betaseries.com/shows/display?key=46be59b5b866&thetvdb_id=%s" % (TvDbId) 
+                   json_data = utils.requestUrlJson(query_url)
+                   if json_data:
+                       DetailsSerie=json_data.get("show")
+                       if DetailsSerie:
+                           Titre=DetailsSerie.get("title")
+                           if not Network:
+                             Network=DetailsSerie.get("network")                 
+                           Status=DetailsSerie.get("status")
+                           NbSaisons=DetailsSerie.get("seasons")
+                           NbEpisodes=DetailsSerie.get("episodes")
+                           SeasonDetails=DetailsSerie.get("seasons_details")
+                           for saisonN in SeasonDetails:
+                             if int(saisonN.get("number"))==Saison:
+                              if int(saisonN.get("episodes"))==Episode:
+                                FinalCtrl.setVisible(True)
+                                break
+                           
+                            
+                           
+                           
+                           Annee=DetailsSerie.get("creation")
+                           self.AnneeActuelle=Annee
+                           Description=DetailsSerie.get("description")
+                           Images=DetailsSerie.get("images")
+                           if Images:
+                              if not Poster or Poster=="":                                
+                                Poster=Images.get("poster")
+                              Banner=Images.get("banner")
+                              if not Fanart or Fanart=="":
+                                logMsg("Fanart (%s) (%s)" %(Fanart,Images.get("show")))
+                                Fanart=Images.get("show")
+                         
+                           Retour=True
+                   else:
+                    UniqueId={"tvdb":str(TvDbId)}
+                    TMDBID=utils.get_TMDBID("tvshow",None,UniqueId)
+                    if TMDBID:
+                      query_url = "%stv/%s?api_key=67158e2af1624020e34fd893c881b019&language=en" % (utils.BaseUrlTMDB,TMDBID)
+                      json_data = utils.requestUrlJson(query_url)
+                      if json_data:
+                        Annee=json_data.get("first_air_date").split("-")[0]
+                        Titre=json_data.get("name")
+                        NbEpisodes=json_data.get("number_of_episodes")
+                        NbSaisons=json_data.get("number_of_seasons")
+                        try:
+                          NetWork=json_data.get("networks")[0].get("name")
+                        except:
+                          NetWork=""
+                        Description=json_data.get("overview")
+                        Fanart=json_data.get("backdrop_path")
+                        Poster=json_data.get("poster_path")
+                        if Fanart:
+                           Fanart="http://image.tmdb.org/t/p/original"+Fanart
+                        if Poster:
+                          Poster="http://image.tmdb.org/t/p/original"+Poster
+                        Retour=True  
+                          
+                        
+                    
+                   if Retour==True:
+                           NbEpSaCtrl=self.getControl(1888) 
+                           NbEpSaCtrl.setLabel("%s %s / %s %s / %s: %s" %(NbSaisons,__skin_string__(36905),NbEpisodes,__skin_string__(36907),__skin_string__(20416),Annee))   
+                           
+                           PlotLabel=self.getControl(1887)
+                           if not Description:
+                            Description=""
+                           PlotLabel.setText(Description.replace("\n"," ")) 
+                           TitreCtrl=self.getControl(1889)
+                           TitreCtrl.setLabel(Titre)                          
+                           TNetworkCtrl=self.getControl(1882)
+                           NetWorkCtrl=self.getControl(1885) 
+                           if not xbmcvfs.exists(Network) and not xbmcvfs.exists("resource://resource.images.studios.white%s.png" %Network):
+                            NetWorkCtrl.setImage("")
+                            TNetworkCtrl.setLabel(Network)
+                           else:
+                            TNetworkCtrl.setLabel("")
+                            try:
+                               if "resource:" in Network:
+                                 NetWorkCtrl.setImage(Network)
+                               else:
+                                 NetWorkCtrl.setImage("resource://resource.images.studios.white%s.png" %Network)
+                            except:
+                              NetWorkCtrl.setImage("") 
+                   
+             
+           PosterCtrl=self.getControl(1886)
+           if not Poster:
+              Poster="DefaultTVShows.png"
+           PosterCtrl.setImage(Poster)
+           FanartCtrl=self.getControl(1895)
+           if not Fanart:
+            Fanart=""
+           FanartCtrl.setImage(Fanart)
+           logMsg("--->(%s),(%s),(%s)" %(Banner,Fanart,Poster)) 
+         else:
+           logMsg("(%s) self.IdEncours and (self.IdEncours>=1780 and self.IdEncours<=1793)" %self.IdEncours)
+         self.RetourUpdate=Retour
+        
+         if self.RetourUpdate:
+          self.InfoCtrl.setVisible(True)
+         else:
+          self.InfoCtrl.setVisible(False)
+        
+         return Retour  
+           
+
+    #------------------------------------------------------------------------------------------------------------------
+  def onAction(self, action):
+      # 3 haut
+      # 4 bas
+      # 2 droite
+      # 1 gauche  
+      # 5 PagePrec
+      # 6 PageSuiv
+      # 11 touche "info" 
+      # 163 : "m"
+      # 117 : "c"
+      #159 Home
+      #160 End
+      
+     
+      if action in ACTION_PREVIOUS_MENU: 
+        if self.ShowBetaSerieInfo==False:
+          self.windowhome.clearProperty("IconmixGuideShowBetaSerieInfo")
+          self.close()
+        else:
+          self.ShowBetaSerieInfo=False
+          self.windowhome.clearProperty("IconmixGuideShowBetaSerieInfo")
+      else:
+        CodeAction=action.getId()
+        logMsg("actionid perm (%s)" %CodeAction)
+        try:
+          currentfocus=int(xbmc.getInfoLabel("System.CurrentControlID"))
+        except:
+          currentfocus=0
+        if (currentfocus>=1780 and currentfocus<=1793):
+        
+          if CodeAction in (1,2,3,4,5,6,159,160):
+            self.NoAction=None
+           
+            self.IdEncours=self.Container[self.IndexContainer]               
+            if self.IdEncours and (self.IdEncours>=1780 and self.IdEncours<=1793):
+              self.Position=int(xbmc.getInfoLabel("Container(%s).Position" %self.IdEncours))
+              if CodeAction==2: #droite
+                self.IndexContainer=self.IndexContainer+1
+                if self.IndexContainer>=len(self.Container):
+                  self.IndexContainer=0            
+                
+                #ContainerCtrl=self.getControl()
+                xbmc.executebuiltin("Control.SetFocus(%s,%s)" %(self.Container[self.IndexContainer],self.Position))
+                #xbmc.sleep(500)
+                  
+              if CodeAction==1: #gauche
+                self.IndexContainer=self.IndexContainer-1
+                if self.IndexContainer<0:
+                  self.IndexContainer=len(self.Container)-1            
+                
+                xbmc.executebuiltin("Control.SetFocus(%s,%s)" %(self.Container[self.IndexContainer],self.Position))
+                        
+              #logMsg("Action (%s)" %action.getId())           
+              
+              
+
+              self.UpdatePlot()
+              if not self.NoActionP:
+                 self.NoAction=True
+                 self.WaitScroll()
+                 self.NoAction=None
+          else:
+            logMsg("actionid (%s)" %CodeAction)    
+              
+          if CodeAction==11: # and self.RetourUpdate:
+            #info betaserie
+            if self.ShowBetaSerieInfo!=True:
+              self.RetourUpdate=self.UpdateInfoBetaSerie()                         
+              if self.RetourUpdate==True:
+                self.ShowBetaSerieInfo=True
+                self.windowhome.setProperty("IconmixGuideShowBetaSerieInfo","show")
+              else:
+                #dialog=xbmcgui.Dialog()
+                #dialog.notification('IconMixTools', __language__( 32584 ), "acteurs/arfffff.png", 1500)                               
+                self.ShowBetaSerieInfo=False
+                self.windowhome.clearProperty("IconmixGuideShowBetaSerieInfo")
+            else:
+              self.ShowBetaSerieInfo=False
+              self.windowhome.clearProperty("IconmixGuideShowBetaSerieInfo")
+        if currentfocus==1878 or currentfocus==1879  :
+          if CodeAction==2 or CodeAction==1:
+            if currentfocus==1878:
+              self.setFocusId(1879)
+            else:
+              self.setFocusId(1878)
+   
+   
+    #------------------------------------------------------------------------------------------------------------------
+  def onFocus(self, controlID):
+        self.Focus=controlID       
+        
+        if controlID>=1780 and controlID<=1793:
+          if controlID>=1780 and controlID<=1786:
+              self.windowhome.setProperty("IconmixGuideShowBetaSerieSemaine","1" )
+              #self.UpdateContainer(self.debut)
+              
+          
+          if controlID>=1787 and controlID<=1793:
+              self.windowhome.setProperty("IconmixGuideShowBetaSerieSemaine","2" )
+              #self.UpdateContainer(self.debut) 
+          logMsg("OnFocus %s" %controlID)
+          #self.UpdateInfoBetaSerie()     
+          self.UpdatePlot()
+          if not self.NoActionP:
+                 self.WaitScroll()
+        
+          
+       
+        
+#--------------------------------------------------------------------------------------------------            
           
 class dialog_select_UI(xbmcgui.WindowXMLDialog):
-    def __init__(self, *args, **kwargs):
+    #------------------------------------------------------------------------------------------------------------------
+  def __init__(self, *args, **kwargs):
         xbmcgui.WindowXMLDialog.__init__(self)
         self.listing = kwargs.get('listing')
         self.ListeTrailer = kwargs.get('trailers')
         self.ItemId = kwargs.get('ItemId')
         self.kodi_player = Player()
+        self.BAF=kwargs.get('Window')
 
-    def onInit(self):
+    #------------------------------------------------------------------------------------------------------------------
+  def onInit(self):
         self.img_list = self.getControl(6)            
 
         if self.img_list:
           for item in self.listing:           
               self.img_list.addItem(item)
           self.setFocus(self.img_list)
-          self.BAF=0
-          if xbmc.getCondVisibility("Skin.HasSetting(BAfenetre)"):
+          if not self.BAF:
+            self.BAF=0
+            if xbmc.getCondVisibility("Skin.HasSetting(BAfenetre)"):
+              self.BAF=1
+          else:
             self.BAF=1
         else:
           self.close()
 
-    def onAction(self, action):
+    #------------------------------------------------------------------------------------------------------------------
+  def onAction(self, action):
       # Action : 3 haut
-      #Action : 4 bas
+      # Action : 4 bas
       # Action : 2 droite
       # Action : 1 gauche  
       # 11 touche "info"      
@@ -347,7 +917,8 @@ class dialog_select_UI(xbmcgui.WindowXMLDialog):
           self.close()
       
 
-    def onClick(self, controlID):
+    #------------------------------------------------------------------------------------------------------------------
+  def onClick(self, controlID):
         if controlID == 6 or controlID == 3: 
             ret = self.img_list.getSelectedPosition()
             titre=self.img_list.getSelectedItem().getLabel()
@@ -358,6 +929,17 @@ class dialog_select_UI(xbmcgui.WindowXMLDialog):
             self.Windowed=True
             try:
               Trailer=self.ListeTrailer[ret]["id"]
+              
+              if "cineserie" in Trailer:
+                #logMsg("Traduction de lien %s" %Trailer)
+                Trailer=utils.BACineSeriesGetVideo(Trailer,self.ListeTrailer[ret].get("size"))
+              
+              if "youtube" in Trailer:
+                idyoutube=Trailer.split('video_id=')[1]
+                if idyoutube:
+                  urlyoutube=youturl.getyoutubeurl(idyoutube)
+                  Trailer=urlyoutube
+              
             except:
               Trailer=None
                  
@@ -380,23 +962,26 @@ class dialog_select_UI(xbmcgui.WindowXMLDialog):
                 Elements = xbmcgui.ListItem(label=titre, iconImage=self.img_list.getSelectedItem().getProperty("Icon"))
                 Elements.setInfo("video", {"title": titre,"mediatype": "movie"})
                 Elements.setArt({"poster":self.img_list.getSelectedItem().getProperty("Icon")})
-                if SETTING("iconmixdebug")=="true":                      
-                  logMsg("dialog_select_UI : Lecture (%s) (%s)" %(Trailer,self.Windowed))
-                self.kodi_player.play(Trailer,listitem=Elements,windowed=self.Windowed)
+                self.kodi_player.play(Trailer,listitem=Elements,windowed=self.Windowed,VolumeBA=100)
                 
 
-    def onFocus(self, controlID):
+    #------------------------------------------------------------------------------------------------------------------
+  def onFocus(self, controlID):
         pass
+ 
+#-------------------------------------------------------------------------------------------------- 
         
 class dialog_Notation(xbmcgui.WindowXMLDialog):
-    def __init__(self, *args, **kwargs):
+    #------------------------------------------------------------------------------------------------------------------
+  def __init__(self, *args, **kwargs):
         self.DBID = kwargs.get('dbid')
         self.ItemNotation = None
         self.ItemType=kwargs.get('TypeVideo')
         xbmcgui.WindowXMLDialog.__init__(self)
         
         
-    def onInit(self):
+    #------------------------------------------------------------------------------------------------------------------
+  def onInit(self):
        
         self.img_list = self.getControl(6)            
         if self.img_list:
@@ -407,9 +992,10 @@ class dialog_Notation(xbmcgui.WindowXMLDialog):
             Elements = xbmcgui.ListItem(label=str(Compteur))            
             self.img_list.addItem(Elements)
             Compteur=Compteur+1
+          logMsg("NOTATION")
           
           try:
-               json_result = utils.getJSON('VideoLibrary.Get%sDetails' %(self.ItemType), '{ "%sid":%s,"properties":["userrating"] }' %(self.ItemType.lower(),self.DBID))
+               json_result = utils.getJSON('VideoLibrary.Get%sDetails' %(self.ItemType), '{ "%sid":%s,"properties":["userrating","art"] }' %(self.ItemType.lower(),self.DBID))
           except:
                logMsg("VideoLibrary.Get%sDetails : %s impossible = " %(self.ItemType,self.DBID) ,0 )
                
@@ -418,6 +1004,11 @@ class dialog_Notation(xbmcgui.WindowXMLDialog):
               self.ItemNotation=int(json_result.get("userrating"))
              except:
               self.ItemNotation=0
+             try:
+              logMsg("IMAGE NOTATION=%s" %json_result.get("art").get("poster"))
+              self.getControl(99).setImage(json_result.get("art").get("poster"))
+             except:
+              self.ItemPoster=None
              
           try:
            self.setFocus(self.img_list)
@@ -430,7 +1021,8 @@ class dialog_Notation(xbmcgui.WindowXMLDialog):
         else:
           self.close()
 
-    def onAction(self, action):
+    #------------------------------------------------------------------------------------------------------------------
+  def onAction(self, action):
       # Action : 3 haut
       #Action : 4 bas
       # Action : 2 droite
@@ -440,7 +1032,8 @@ class dialog_Notation(xbmcgui.WindowXMLDialog):
       #else:  logMsg("Action : %s" %(action.getId()),0)
 
 
-    def onClick(self, controlID):
+    #------------------------------------------------------------------------------------------------------------------
+  def onClick(self, controlID):
         if controlID == 6: 
             ret = self.img_list.getSelectedPosition()
             if ret>=0:
@@ -452,17 +1045,176 @@ class dialog_Notation(xbmcgui.WindowXMLDialog):
             self.close()
            
 
-    def onFocus(self, controlID):
+    #------------------------------------------------------------------------------------------------------------------
+  def onFocus(self, controlID):
         pass
+
+#--------------------------------------------------------------------------------------------------
+
+class dialog_SelectPosition(xbmcgui.WindowXMLDialog):
+    #------------------------------------------------------------------------------------------------------------------
+  def __init__(self, *args, **kwargs):
+        self.DBID = kwargs.get('dbid')
+        xbmcgui.Window(10000).setProperty('iconmixtoolsseekosd','1')
+        xbmcgui.WindowXMLDialog.__init__(self)
+     
+     
+    #------------------------------------------------------------------------------------------------------------------
+  def SecToHMS(self,Temps=None)   :
+      if Temps:
+        Temps=int(Temps)
+        H=Temps//3600
+        Mr=Temps%3600
         
+        M=Mr//60
+        
+        S=Mr%60
+        return str(H) if H>9 else '0'+str(H),str(M) if M>9 else '0'+str(M),str(S) if S>9 else '0'+str(S)
+      else:
+         return None,None,None
+    
+    #------------------------------------------------------------------------------------------------------------------
+  def HMSToSec(self,H=None,M=None,S=None):
+      Temps=(int(H)*3600)+(int(M)*60)+int(S)
+      return Temps
+    
+       
+    #------------------------------------------------------------------------------------------------------------------
+  def onInit(self):
+        if not xbmc.getCondVisibility("Player.Paused"):
+          xbmc.Player().pause()
+        PlayerTime=xbmc.Player().getTime()
+        self.PlayerMaxTime=xbmc.Player().getTotalTime()
+        H,M,S=self.SecToHMS(self.PlayerMaxTime)
+        self.H,self.M,self.S=self.SecToHMS(PlayerTime)
+        self.PH,self.PM,self.PS=self.SecToHMS(PlayerTime)
+        self.getControl(3000).setLabel(self.H)
+        self.getControl(3001).setLabel(self.M)
+        self.getControl(3002).setLabel(self.S)
+        logMsg("self.PH (%s)" %H)
+        if H=="00":
+          self.getControl(3000).setVisible(False)
+          self.getControl(3300).setWidth(325)
+
+    #------------------------------------------------------------------------------------------------------------------
+  def Max60(self,Compteur=None):
+      
+        if Compteur>59:
+          Compteur=Compteur-60
+        if Compteur<0:
+          Compteur=60-abs(Compteur)
+          
+          
+        if Compteur>9:
+          return str(Compteur)
+        else:
+          return '0'+str(Compteur)  
+          
+    #------------------------------------------------------------------------------------------------------------------
+  def Max24(self,Compteur=None):
+      
+        if Compteur>23:
+          Compteur=Compteur-24
+        if Compteur<0:
+          Compteur=24-abs(Compteur)
+        if Compteur>9:
+          return str(Compteur)
+        else:
+          return '0'+str(Compteur)
+
+    #------------------------------------------------------------------------------------------------------------------
+  def onAction(self, action):
+      # Action : 3 haut
+      #Action : 4 bas
+      # Action : 2 droite
+      # Action : 1 gauche 
+      # ACTION_PAGE_DOWN = 6
+      # ACTION_PAGE_UP = 5
+      #ACTION_FIRST_PAGE = 159
+      #ACTION_LAST_PAGE = 160
+      BoutonVal={"3000":self.getControl(3000).getLabel(),"3001":self.getControl(3001).getLabel(),"3002":self.getControl(3002).getLabel()}
+      if action in ACTION_PREVIOUS_MENU or not xbmc.Player().isPlayingVideo(): 
+          TempsActuel=self.HMSToSec(self.PH,self.PM,self.PS)
+          if xbmc.Player().isPlayingVideo():
+            xbmc.Player().seekTime(TempsActuel)  
+            if xbmc.getCondVisibility("Player.Paused"):
+              xbmc.Player().pause()
+          xbmcgui.Window(10000).clearProperty('iconmixtoolsseekosd')      
+          self.close()
+      Bouton=self.getFocusId()
+      
+      ActionId=action.getId()
+      
+      
+      if ActionId in (3,4,5,6,159,160):
+        Avance=0
+        if ActionId==3:
+          Avance=int(self.getControl(Bouton).getLabel())+1
+        if ActionId==4:
+          Avance=int(self.getControl(Bouton).getLabel())-1
+        if ActionId==5 and Bouton!=3000:
+          Avance=int(self.getControl(Bouton).getLabel())+10
+        if ActionId==6 and Bouton!=3000:
+          Avance=int(self.getControl(Bouton).getLabel())-10
+        if Bouton!=3000:
+          BoutonVal[str(Bouton)]=self.Max60(Avance)
+        else:
+          BoutonVal[str(Bouton)]=self.Max24(Avance)
+        if ActionId==159:
+          BoutonVal={"3000":"00","3001":"00","3002":"00"}
+        if ActionId==160:
+          H,M,S=self.SecToHMS(self.PlayerMaxTime)
+          BoutonVal={"3000":H,"3001":M,"3002":S}
+        
+        TempsActuel=self.HMSToSec(BoutonVal["3000"],BoutonVal["3001"],BoutonVal["3002"])
+        if TempsActuel<=self.PlayerMaxTime:
+          
+          self.getControl(3000).setLabel(BoutonVal["3000"])
+          self.getControl(3001).setLabel(BoutonVal["3001"])
+          self.getControl(3002).setLabel(BoutonVal["3002"])
+          xbmc.Player().seekTime(TempsActuel)
+          
+      if ActionId in (1,2):
+        if ActionId==2:
+          Bouton=Bouton+1
+          if Bouton>3002:
+            Bouton=3000
+        if ActionId==1:
+          Bouton=Bouton-1
+          if Bouton<3000:
+            Bouton=3002
+        self.setFocusId(Bouton)
+          
+        
+      
+      #logMsg("Bouton (%s) Action : (%s)" %(Bouton,ActionId),0)
+
+
+    #------------------------------------------------------------------------------------------------------------------
+  def onClick(self, controlID):
+        TempsActuel=self.HMSToSec(self.H,self.M,self.S)
+        if TempsActuel<=self.PlayerMaxTime:
+          #logMsg("SEEK (%d)" %(TempsActuel))
+          if xbmc.getCondVisibility("Player.Paused"):
+             xbmc.Player().pause()
+          xbmcgui.Window(10000).clearProperty('iconmixtoolsseekosd')   
+          self.close()
+           
+#--------------------------------------------------------------------------------------------------
+        
+
 class dialog_BandeAnnonce(xbmcgui.WindowXMLDialog):
-    def __init__(self, *args, **kwargs):
+    #------------------------------------------------------------------------------------------------------------------
+  def __init__(self, *args, **kwargs):
         self.PlayList = kwargs.get('PlayListItem')
+        self.VolumeBA = kwargs.get('VolumeBA')
+        
         self.kodi_player = Player()
         xbmcgui.WindowXMLDialog.__init__(self) 
         self.Lecture()         
    
-    def onAction(self, action):
+    #------------------------------------------------------------------------------------------------------------------
+  def onAction(self, action):
       if action.getId()==2:
         #prochain
         self.kodi_player.playnext()
@@ -477,16 +1229,18 @@ class dialog_BandeAnnonce(xbmcgui.WindowXMLDialog):
           self.close()   
  
     
-    def Lecture(self):       
+    #------------------------------------------------------------------------------------------------------------------
+  def Lecture(self):       
       if self.kodi_player and self.PlayList:         
-        self.kodi_player.play(self.PlayList, windowed=True, sublist=None)        
+        self.kodi_player.play(self.PlayList,VolumeBA=self.VolumeBA, windowed=True, sublist=None)        
       else:
         xbmcgui.Window(10000).clearProperty('annonceencours')
         xbmcgui.Window(10000).clearProperty('IconMixTrailer')
         self.close()
  
-        
+#--------------------------------------------------------------------------------------------------        
 
+#------------------------------------------------------------------------------------------------------------------
 def in_hours_and_min(minutes_string):
     try:
         full_minutes = int(minutes_string)
@@ -498,9 +1252,10 @@ def in_hours_and_min(minutes_string):
 
 class MainService:
   
-    def __init__(self):         
+    #------------------------------------------------------------------------------------------------------------------
+  def __init__(self):         
       
-      CompteurTemps=0
+      self.CompteurTemps=0
       
       TvSe="o"
       TvSh="o"
@@ -509,42 +1264,65 @@ class MainService:
       self._start_time = time.time()
       self.RandomTime=0
       self.Recherche=None
+      self.SelectedItemPath=None
       self.AutoCompletionProvider=None
       self.windowhome.setProperty("AutoCompletionProvider",SETTING("autocomplete_provider"))
       self.ListeEpisodes=None
+      self.GlobalAnnonces=[]
+      self.GlobalAnnoncesThread=[]
+      self.HomeMenuItem=None
+      self.IdWidgetContainer=None
+      self.IdWidgetContainerPos=None
+      lGlobalAnnonces=0
+      lGlobalAnnoncesThread=0
+     
+      if xbmcvfs.exists(ADDON_DATA_PATH+"/series/planningnextV2"):
+        os.remove(ADDON_DATA_PATH+"/series/planningnextV2")
+        
       
+      if self.windowhome:
+         cpt=0
+         while cpt<50:
+            if self.windowhome.getProperty('MonNextAired.Actif')!='oui':
+              self.GlobalCalendrier=utils.Charge_Calendrier()
+              cpt=50
+            else:
+              xbmc.sleep(500)
+            cpt=cpt+1
       
+      utils.GetCalendrier2SemaineTvMaze(None)
       
       logMsg('Version : %s - Chemin : %s - Service en cours..' %(ADDON_VERSION,ADDON_PATH),0)
       
-      #xbmcgui.Dialog().notification('IconMixTools',"[COLOR=Yellow] Service en cours..[/COLOR]", ADDON_ICON,300) 
       
       while not self.kodimonitor.abortRequested(): # and xbmc.getCondVisibility("!String.IsEmpty(Window(home).Property(IconMixToolsbackend))"): 
+        
+          if self.kodimonitor.ScanFinished:
+            self.kodimonitor.ScanFinished=None
+            self.windowhome.setProperty('IconMixUpdateEpisodes','1')
+            
           self.windowhome.clearProperty("IconMixToolsbackend")
           
           #-------------------------- 
           self.CheckListeVues()
+          self.GetTrailer()
                       
           #recherche
           self.AutoRecherche()
           #-------------------------- MUSIQUE EN LECTURE---------------------------------
           self.LectureMusique() 
-              
           #-------------------------- #VUES MUSIQUES ------------------------------------------
           self.DetailsVuesMusique()
-            
-        
           #-------------------------- FILMS/SERIES/ACTEURS --------------------------
           self.ShowIconmixInfo()
+          self.ShowIconmixGuide()
           
           if not self.windowhome.getProperty('annonceencours')=="full" and (self.windowhome.getProperty('IconMixTrailer')!="1") and (self.windowhome.getProperty('IconmixShowInfo')=="1" or xbmc.getCondVisibility("Window.IsVisible(10025)") or xbmc.getCondVisibility("Window.IsVisible(12901)") or xbmc.getCondVisibility("Window.IsVisible(10142)") or xbmc.getCondVisibility("Window.IsVisible(12003)")) and not xbmc.getCondVisibility("Container.Scrolling") and not xbmc.getCondVisibility("Window.IsVisible(12000)"):
               
               MiseAjour=""
               TMDBNUMBER=None
               
-              #if xbmc.getCondVisibility("Control.HasFocus(2998)"):
-              # self.UpdateListeEpisodes()
-              
+             
               F8889=xbmc.getCondVisibility("Control.HasFocus(8889)")
               F7781=xbmc.getCondVisibility("Control.HasFocus(7781)")
               F7779=xbmc.getCondVisibility("Control.HasFocus(7779)") or xbmc.getCondVisibility("Control.HasFocus(5051)")
@@ -553,7 +1331,7 @@ class MainService:
               #-------------------------- ACTEURS : Roles/Bio---------------------------------
                   
               if F8889 | F7781 | F7779 |F7777:
-                CompteurTemps=0
+                self.CompteurTemps=0
                 self.CheckActeursRoles(F8889, F7781, F7779,F7777)                                
               #-------------------------- FILMS/SERIES ---------------------------------   
               else:
@@ -562,7 +1340,7 @@ class MainService:
                   
                       
                   if xbmc.getCondVisibility("Control.HasFocus(2999)"): #
-                      CompteurTemps=0
+                      self.CompteurTemps=0
                       self.LABEL1999=xbmc.getInfoLabel("Container(1999).ListItem.Label")
                       TMDBNUMBER=xbmc.getInfoLabel("Container(1999).ListItem.property(TMDBNUMBER)")
                       if not TMDBNUMBER :
@@ -577,19 +1355,10 @@ class MainService:
                                       
                   else : 
                       if not xbmc.getCondVisibility("Window.IsVisible(12901)") and  not xbmc.getCondVisibility("Window.IsVisible(10142)"):
-                          """
-                          selected=xbmc.getInfoLabel("ListItem.DBID")
-                          xbmc.sleep(500)
-                          selectedconfirm=xbmc.getInfoLabel("ListItem.DBID")
-                          if selected==selectedconfirm:                            
-                            self.selecteditem = selected
-                            self.DBTYPE=xbmc.getInfoLabel("ListItem.DBTYPE")
-                            self.previousitemPlayer=""
-                            self.PlayerActiveID=None
-                          """
-                                                    
+                                        
                           self.selecteditem = xbmc.getInfoLabel("ListItem.DBID")
                           self.DBTYPE=xbmc.getInfoLabel("ListItem.DBTYPE")
+                          
                           self.previousitemPlayer=""
                           self.PlayerActiveID=None
                           
@@ -611,8 +1380,8 @@ class MainService:
                              self.DBTYPE="episode"
                           else:
                              self.DBTYPE="movie" 
-                      if self.selecteditem:  
-                             
+                      if self.selecteditem:   
+                        self.SelectedItemPath=None        
                               
                         #Liste episodes       
                         if (xbmc.getCondVisibility("Control.HasFocus(2666)") or xbmc.getCondVisibility("Control.HasFocus(2998)")) and self.DBTYPE=="tvshow" and not xbmc.getCondVisibility("Skin.HasSetting(DisableTvList)") and not xbmc.getCondVisibility("Skin.HasSetting(DisableFocusTvList)"):
@@ -627,20 +1396,26 @@ class MainService:
                              self.windowhome.clearProperty('IconmixProchainEpisode')
                            
                                                                       
-                       
+                        
                         if (self.previousitem != self.selecteditem)  or (self.windowhome.getProperty('IconMixUpdateSagas')=="1") or self.windowhome.getProperty('IconMixUpdateEpisodes')=='1': 
                              #Bande-annonce en cours, on stoppe
-                             #logMsg("self.previousitem (%s) self.selecteditem (%s)" %(self.previousitem,self.selecteditem))
-                             if self.kodi_player and self.kodi_player.isPlayingVideo() and self.windowhome.getProperty('annonceencours'):
+                             if self.DBTYPE=="tvshow" or self.DBTYPE=="movie":
+                                if self.DBTYPE=="movie":
+                                  KodiTitre=xbmc.getInfoLabel("ListItem.Label").lower()
+                                else:
+                                  KodiTitre=xbmc.getInfoLabel("ListItem.TVShowTitle").lower()
+                                Annee=xbmc.getInfoLabel("ListItem.Year")
+                                utils.Annonces(self.selecteditem,self.DBTYPE,KodiTitre,Annee,self.GlobalAnnonces,self.GlobalAnnoncesThread,None).start()
+                              
+                             if self.kodi_player and self.kodi_player.isPlayingVideo() and (self.windowhome.getProperty('annonceencours') or self.AnnonceNetflix):
+                                self.AnnonceNetflix=None
                                 self.kodi_player.stop()
                                 self.windowhome.clearProperty('annonceencours')
                              if self.selecteditem!=self.windowhome.getProperty('BAprecedenteInf'):
                                 self.windowhome.clearProperty('BAprecedenteInf')
                              #--------------------------------------
-                             if SETTING("iconmixdebug")=="true":
-                              logMsg("Accept (%s)" %(self.selecteditem))   
                              self.previousitem = self.selecteditem
-                             CompteurTemps=0
+                             self.CompteurTemps=0
                              self.PreviousBAnnonce=0
                              MiseAjour="1"
                              
@@ -656,23 +1431,30 @@ class MainService:
                                  
                              if xbmc.getCondVisibility("Window.IsVisible(12003)") :#videoinfo
                                   MiseAjour="2" 
-                                  
+                               
                              self.windowhome.clearProperty('IconMixUpdateSagas')
+                             
                              if self.previousitem != self.selecteditem or self.windowhome.getProperty('IconMixUpdateEpisodes')=='1':                    
-                              self.precedenttvshow=None
-                              self.windowhome.clearProperty('IconMixUpdateEpisodes')
-                              logMsg("self.precedenttvshow=None1")
+                                self.windowhome.clearProperty('IconMixUpdateEpisodes')
+                             
                              
                         else:                          
                             
                           #---------------------------- BANDE ANNONCE AUTOMATIQUE-------------------------------------
                          self.BandeAnnonceAutomatique()
-                               
+                      else:
+                        if self.SelectedItemPath!=xbmc.getInfoLabel("ListItem.FolderPath"):
+                          self.SelectedItemPath=xbmc.getInfoLabel("ListItem.FolderPath")
+                          self.duration = xbmc.getInfoLabel("ListItem.Duration") 
+                          self.display_duration(self.selecteditem,self.DBTYPE)         
                               
                           
                                           
                   if not self.selecteditem :
                       self.windowhome.clearProperty('IconMixExtraFanart')
+                      utils.ClearNextEpisode()
+                      self.precedenttvshow=None
+                      self.previousitem=None
                       
                   if MiseAjour!="" : #liste des acteurs
                       self.windowhome.setProperty('IconMixUpdating','1')                     
@@ -684,14 +1466,20 @@ class MainService:
                       self.windowhome.clearProperty("ItemCountry2")
                       self.windowhome.clearProperty("ItemCountry3")
                       self.windowhome.clearProperty("ItemCountry4")
-                      if self.DBTYPE!="tvshow" and self.DBTYPE!="episode":
-                          utils.ClearNextEpisode() 
+                      if self.DBTYPE!="tvshow" and self.DBTYPE!="episode" and self.DBTYPE!="season":
+                          utils.ClearNextEpisode()
+                          self.windowhome.clearProperty('IconMixTvStatus')
+                          self.windowhome.clearProperty('IconMixTvNetwork')
+                          self.windowhome.clearProperty('IconMixTvCharacter') 
                       
                       #ACTEURS ELEMENT DE SAGA ------------------------------------------------ 
                       if xbmc.getCondVisibility("Control.HasFocus(2999)"):
                           if self.selecteditem > -1 and not str(self.selecteditem)=="":                          
                             if self.DBTYPEOK:
-                                  ListeActeurs=self.GetControl(self.windowvideonav,1998)
+                                  try:
+                                     ListeActeurs=self.GetControl(self.windowvideonav,1998)
+                                  except:
+                                    ListeActeurs=None
                                  
                                                                   
                                   if ListeActeurs:
@@ -706,7 +1494,7 @@ class MainService:
                               
                                   self.windowhome.setProperty('IconMixExtraFanart',extrafanart)   
                                   self.duration = xbmc.getInfoLabel("Container(1999).ListItem.Duration") 
-                                  self.display_duration()
+                                  self.display_duration(self.selecteditem,self.DBTYPE)
                       
                       else:
                         #liste des acteurs 'normaux'
@@ -721,10 +1509,14 @@ class MainService:
                             ListeItemx=[]
                             ResetDirector=True  
                             ListeActeursInf=None 
-                            
+                            self.duration = xbmc.getInfoLabel("ListItem.Duration") 
+                            self.display_duration(self.selecteditem,self.DBTYPE)
                             if MiseAjour=="1":
                                #ACTEURS VIDEONAV
-                               ListeActeurs=self.GetControl(self.windowvideonav,1998)
+                               try:
+                                 ListeActeurs=self.GetControl(self.windowvideonav,1998)
+                               except:
+                                 ListeActeurs=None
                                
                             if MiseAjour=="2":
                                #ACTEURS VIDEOINFO
@@ -739,14 +1531,11 @@ class MainService:
                                  if self.ListeDiffusion:
                                    self.ListeDiffusion.reset()
                                    
-                                   self.Episodes=utils.getallnextepisodes(self.selecteditem,None,self.DBTYPE)
-                                   #ListeDiffusion.addItems(Episodes)
+                                   self.Episodes=utils.getallnextepisodes(self.selecteditem,None,self.DBTYPE,self.GlobalCalendrier)
                                    if self.Episodes:
                                       self.ListeDiffusion.addItems(self.Episodes)
-                                      #self.ListeDiffusion.setStaticContent(self.Episodes)
                                    else:
                                       self.Episodes=[]
-                                      #self.ListeDiffusion.setStaticContent(self.Episodes)
                                       self.ListeDiffusion.addItems(self.Episodes)
                                  #ListeActeursInf=self.GetControl(self.windowvideoinf,5007)
                                  
@@ -779,23 +1568,28 @@ class MainService:
                                             ListeActeursInf.addItem(itemX)  
                                    Realisateur=utils.Remove_Separator(xbmc.getInfoLabel("ListItem.Director").split(" (")[0].decode("utf8"))
                                    if Realisateur:
-                                     if SETTING("iconmixdebug")=="true":
-                                       logMsg("utils.GetPhotoRealisateur('realisateurs',realisateur=(%s)) " %(Realisateur))
-                          
                                      self.windowhome.setProperty('IconMixDirector',utils.GetPhotoRealisateur('realisateurs',realisateur=Realisateur))                                                                        
                                    ResetDirector=False
                               
                                 
                             #FENETRE MYVIDEONAV (10025) ------------------------------------------------
-                            #if not xbmc.getCondVisibility("Window.IsVisible(12901)") and not xbmc.getCondVisibility("Window.IsVisible(12005)") and not xbmc.getCondVisibility("Window.IsVisible(10142)") : #pas en lecture visible
                             if xbmc.getCondVisibility("Window.IsVisible(10025)"):
                               
                                 #mise à jour saga (videonav ou videoinfo)
-                                if (self.DBTYPE=="set" or MiseAjour=="2") : 
+                                try:
+                                  ListeFanarts=self.GetControl(self.windowvideonav,5555) 
+                                  ListeFanarts.reset()
+                                except:
+                                  ListeFanarts=None
+                                
+                                
+                                if (self.DBTYPE=="set" or MiseAjour=="2") :
+                                  self.windowhome.setProperty('IconMixUpdate1999',"on") 
                                   if not MiseAjour=="2":
-                                     ListeSaga=self.GetControl(self.windowvideonav,1999)
-                                     ListeFanarts=self.GetControl(self.windowvideonav,5555)  
-                                     SetID=self.selecteditem
+                                   
+                                    ListeSaga=self.GetControl(self.windowvideonav,1999)
+                                    ListeFanarts=self.GetControl(self.windowvideonav,5555) 
+                                    SetID=self.selecteditem
                                   else:
                                      ListeSaga=self.GetControl(self.windowvideoinf,1999)
                                      ListeFanarts=None
@@ -803,7 +1597,6 @@ class MainService:
                                      
                                   if ListeSaga and SetID:
                                     
-                                    NbItems=ListeSaga.size()
                                     FileTab=[]
                                     
                                     try:
@@ -814,6 +1607,7 @@ class MainService:
                                     except:
                                       ListeItemx=None
                                     ListeSaga.reset()
+                                   
                                     if ListeItemx:
                                          ListeSaga.addItems(ListeItemx)      
                                          if FileTab and ListeFanarts:
@@ -822,41 +1616,31 @@ class MainService:
                                                Liste=utils.getSagaFanartsV2(index)
                                                if Liste:                                                
                                                   ListeFanarts.addItems(Liste)
+                                  self.windowhome.clearProperty('IconMixUpdate1999') 
                                   
-                                if self.DBTYPEOK or self.DBTYPE=="tvshow":
-                                   #if self.DBTYPE=="episode" or self.DBTYPE=="tvshow":
-                                   #  utils.getnextepisode(self.selecteditem,None,self.DBTYPE)  
+                                if self.DBTYPEOK or self.DBTYPE=="tvshow" or self.DBTYPE=="season":
                                    
                                    self.windowhome.setProperty('IconMixExtraFanart',utils.CheckItemExtrafanartPath(xbmc.getInfoLabel("ListItem.Path")))
-                                   if self.DBTYPE!="tvshow":       
-                                     self.duration = xbmc.getInfoLabel("ListItem.Duration") 
-                                     self.display_duration()
+                                   if self.DBTYPE!="tvshow" and self.DBTYPE!="season":
+                                     if self.DBTYPE=="episode":                                      
+                                        utils.getnextepisode(self.selecteditem,None,self.DBTYPE,self.GlobalCalendrier,self.precedenttvshow)       
                                    else:
                                       self.TvSeason=""
                                       if self.selecteditem!=self.precedenttvshow:
-                                        
+                                       
                                         #-------------------------- affichage des episodes de la série ------------------
-                                        #--- modif --
-
-                                        if SETTING("iconmixdebug")=="true":
-                                          logMsg("UpdateListeEpisodes Actuelle(%s) Precedente(%s)" %(self.selecteditem,self.precedenttvshow)) 
-                                        #utils.getepisodes(self.selecteditem,None,self.DBTYPE)
                                         if not xbmc.getCondVisibility("Skin.HasSetting(DisableTvList)"):
+                                          utils.getnextepisode(self.selecteditem,None,self.DBTYPE,self.GlobalCalendrier,self.precedenttvshow)
                                           self.UpdateListeEpisodes()
-                                          utils.getnextepisode(self.selecteditem,None,self.DBTYPE) 
+                                           
                                         else :
-                                          utils.getepisodes(self.selecteditem,None,self.DBTYPE)  
-                                        """
-                                        if not xbmc.getCondVisibility("Skin.HasSetting(DisableTvList)"):
-                                          self.ListeEpisodes,self.Prochain =utils.GetEpisodesKodi(self.selecteditem,True)
-                                        
-                                        else:
-                                          utils.getepisodes(self.selecteditem,None,self.DBTYPE)  
-                                        """
-                                        #-----
-                                    #ListItem.PlayCount
+                                          utils.getepisodes(self.selecteditem,None,self.DBTYPE)
+                                          self.precedenttvshow=self.selecteditem  
+                                     
                                     #--------------------------------------------------------------------------------
-                                   
+                                if not xbmc.getCondVisibility("Skin.HasSetting(CheckSeries)"):
+                                      self.windowhome.clearProperty('IconMixTv')
+                                      self.windowhome.clearProperty('IconMixTvKodi')   
                                      
                                 if self.DBTYPE=="episode" and xbmc.getCondVisibility("Skin.HasSetting(CheckSeries)"):
                                      TvSh=xbmc.getInfoLabel("ListItem.TVShowTitle") 
@@ -866,7 +1650,8 @@ class MainService:
                                        if TvSe!=self.TvSeason or TvSh!=self.TvShow : 
                                          self.windowhome.clearProperty('IconMixTv')
                                          self.windowhome.clearProperty('IconMixTvKodi')        
-                                         self.EpSa,self.EpSaKodi,Poster=utils.getepisodes(int(TvId),int(TvSe),self.DBTYPE)                                           
+                                         self.EpSa,self.EpSaKodi,Poster=utils.getepisodes(int(TvId),int(TvSe),self.DBTYPE)  
+                                         logMsg("utils.getepisodes(%s %d-%d-%s) = (%s)(%s)" %(TvSh,int(TvId),int(TvSe),self.DBTYPE,self.EpSa,self.EpSaKodi))                                         
                                          if self.EpSa>=0:                                     
                                            self.windowhome.setProperty('IconMixTv',str(self.EpSa)) 
                                            self.windowhome.setProperty('IconMixTvKodi',str(self.EpSaKodi))                                      
@@ -914,8 +1699,8 @@ class MainService:
                                       self.windowhome.clearProperty('IconMixActorIcon')                                      
                                     if ResetDirector:
                                         self.windowhome.clearProperty('IconMixDirector')
-                                self.duration = xbmc.getInfoLabel("ListItem.Duration") 
-                                self.display_duration()
+                                #self.duration = xbmc.getInfoLabel("ListItem.Duration") 
+                                #self.display_duration()
                             else : 
                               self.windowhome.clearProperty('IconMixTv')
                               self.windowhome.clearProperty('IconMixTvKodi') 
@@ -924,6 +1709,7 @@ class MainService:
                               self.TvSeason=""        
                         else :                            
                            self.windowhome.clearProperty('IconMixTv')
+                             
                            self.TvShow=""
                            self.TvSeason=""
                            try:
@@ -934,21 +1720,46 @@ class MainService:
                             ListeActeurs.reset()
                   self.windowhome.clearProperty('IconMixUpdating') 
           else:
+            if xbmc.getCondVisibility("Window.IsVisible(10000)"):
+              try:
+                tt=xbmc.getInfoLabel( "Container(9000).ListItem.Property(background)")
+                widgetback=int(tt.replace("WDF","").replace(".jpg",""))
+                if widgetback>2:
+                  widgetback=None
+              except:
+                widgetback=None
+              if widgetback:
+                HomeItem=xbmc.getInfoLabel( "Container(9000).CurrentItem" )
+                if self.HomeMenuItem!=HomeItem:                  
+                  self.HomeMenuItem=HomeItem                                   
+                  self.IdWidgetContainerPos=None
+                else:
+                  HomeItemPos=xbmc.getInfoLabel( "Container(80%s1%s).CurrentItem" %(widgetback,HomeItem)) 
+                  self.IdWidgetContainer=None
+                  if self.IdWidgetContainerPos!=HomeItemPos:
+                    self.IdWidgetContainerPos=HomeItemPos
+                    fanartwd=xbmc.getInfoLabel("$INFO[Container(80%s1%s).ListItem.Art(fanart)]"%(widgetback,HomeItem )) 
+                    self.windowhome.setProperty("iconmixwidgetfanart",fanartwd)  
+               
+                
+            
             if self.kodi_player:
               #arret si lecture mais fenetre VideoNav pas visible
-              if self.kodi_player.isPlayingVideo() and not xbmc.getCondVisibility("Window.IsVisible(10025)") and self.windowhome.getProperty('annonceencours')!="":
-                if not xbmc.getCondVisibility("Window.IsActive(12005)"): 
-                   self.kodi_player.stop()                   
+              if self.kodi_player.isPlayingVideo() and not xbmc.getCondVisibility("Window.IsVisible(10025)")  and ((self.windowhome.getProperty('annonceencours')!="" and self.windowhome.getProperty('annonceencours')!="full") or self.AnnonceNetflix):
+                if not xbmc.getCondVisibility("Window.IsActive(12005)") and (not xbmc.getCondVisibility("Window.IsVisible(10000)") or self.AnnonceNetflix): 
+                   self.kodi_player.stop() 
+                   self.NetFlixBA=[]
+                   self.AnnonceNetflix=None
                    self.windowhome.clearProperty('annonceencours')
                    
           #arret si lecture en plein écran mais fenetre videofullscreen pas visible
-          if  self.kodi_player.isPlayingVideo() and not xbmc.getCondVisibility("Window.IsActive(12005)")  and self.windowhome.getProperty('annonceencours')=="full":
+          if  self.kodi_player.isPlayingVideo() and not xbmc.getCondVisibility("Window.IsActive(12005)")  and (self.windowhome.getProperty('annonceencours')=="full" and not self.AnnonceNetflix):
                  xbmc.sleep(2000)
-                 if not xbmc.getCondVisibility("Window.IsActive(12005)"):
-                   CompteurTemps=0 
+                 if not xbmc.getCondVisibility("Window.IsActive(12005)") and (not xbmc.getCondVisibility("Window.IsVisible(10000)") or self.AnnonceNetflix):
+                   self.CompteurTemps=0 
+                   self.AnnonceNetflix=None
                    self.kodi_player.stop()                   
                    self.windowhome.clearProperty('annonceencours')
-          
           #lecture d'un film,serie,...etc..de Kodi pas la bande annonce donc recuperation des infos pour la notation en fin de lecture       
           if  self.kodi_player.isPlayingVideo() and self.windowhome.getProperty('annonceencours')=="":
                 self.kodi_player.PositionLecture=self.kodi_player.getTime() 
@@ -966,14 +1777,14 @@ class MainService:
             A=None               
                
           if not xbmc.getCondVisibility("Player.HasMedia"):
-             CompteurTemps=CompteurTemps+400              
+             self.CompteurTemps=self.CompteurTemps+400              
           else:
-             CompteurTemps=0
+             self.CompteurTemps=0
              if xbmc.getCondVisibility("Window.IsVisible(12901)") or  xbmc.getCondVisibility("Window.IsVisible(12005)") or  xbmc.getCondVisibility("Window.IsVisible(10142)"):
-               #self.precedenttvshow=None
-               #logMsg("self.precedenttvshow=None2")
+               self.precedenttvshow=None
+               logMsg("self.precedenttvshow=None Lecture")
                self.windowhome.clearProperty('IconmixProchainEpisode') 
-          if xbmc.getCondVisibility("Window.IsActive(10000)"):
+          if xbmc.getCondVisibility("Window.IsActive(10000)") and not xbmc.getCondVisibility("Window.IsVisible(12003)"):
               self.RandomTime=self.RandomTime+400
               if self.precedenttvshow:
                 self.precedenttvshow=None
@@ -993,47 +1804,327 @@ class MainService:
                
                self.RandomTime=0 
           
+          #debug
+          if len(self.GlobalAnnonces)>0:
+            if len(self.GlobalAnnonces[0])!=lGlobalAnnonces:
+              lGlobalAnnonces=len(self.GlobalAnnonces[0])
+              #logMsg("self.GlobalAnnonces (%d) - %s" %(lGlobalAnnonces,self.GlobalAnnonces))
+              
+          if len(self.GlobalAnnoncesThread)!=lGlobalAnnoncesThread:
+            lGlobalAnnoncesThread=len(self.GlobalAnnoncesThread)
+            logMsg("self.GlobalAnnoncesThread (%d) - %s" %(lGlobalAnnoncesThread,self.GlobalAnnoncesThread))
+          
           self.windowhome.setProperty("IconMixToolsbackend","en cours")
           xbmc.sleep(400)
+          
             
       logMsg('Arret en cours...', 0)
-      
+      logMsg("sauvegarde calendrier")
+      utils.SaveBandeAnnoncesFull(self.GlobalAnnonces)
+      utils.Sauvegarde_Calendrier(self.GlobalCalendrier)
       del self.kodi_player
       del self.kodimonitor
       self.windowhome.clearProperty("IconMixToolsbackend")
-      """
-      try:
-        os.remove(ADDON_DATA_PATH+"/series/planningnext")
-      except:
-        logMsg("impossible de supprimer %s" %(ADDON_DATA_PATH+"/series/planningnext"))
-      """
-      try:
-        #le purgatoire !!!
-        os.remove(ADDON_PATH+"/resources/lib/utils.pyo")
-        os.remove(ADDON_PATH+"/resources/lib/MonAutoCompletion.pyo")
-        os.remove(ADDON_PATH+"/resources/lib/xml2json.pyo")
-        os.remove(ADDON_PATH+"/resources/lib/mainservice.pyo")
-        os.remove(ADDON_PATH+"/resources/lib/pays.pyo")
-        os.remove(ADDON_PATH+"/resources/lib/__init__.pyo")
-        logMsg("Purgatoire fini !!!")
-      except:
-        logMsg("impossible de supprimer %s" %(ADDON_PATH+"/resources/lib/*.pyo"))
-      
+            
       logMsg("Astalavista baby ;)")  
-    """  
-    def UpdateListeEpisodesTEST(self):
-        if not self.ListeEpisodes:
-         self.ListeEpisodes,self.Prochain =utils.GetEpisodesKodi(self.selecteditem,True)
-        if self.ListeEpisodes:
-          self.windowhome.setProperty('IconmixProchainEpisode',str(self.Prochain))
-          self.dialog_ListeEpisodes = dialog_ListeEpisodes('listeepisodes.xml', ADDON_PATH, 'default','1080i',listing=self.ListeEpisodes,Prochain=self.Prochain)
-          ret=self.dialog_ListeEpisodes.doModal()
-          del self.dialog_ListeEpisodes  
-          if not ret:
-            xbmc.executebuiltin("SetFocus(55)")                        
-    """
+  
+  def GetTrailer(self,commande=None):
+      #xbmc.executebuiltin( "ActivateWindow(busydialog)" )
+      if not commande:
+         commande=self.windowhome.getProperty("iconmixgettrailer")
+         
       
-    def UpdateListeEpisodes(self):
+      self.windowhome.clearProperty("iconmixgettrailer")
+      itemcommande={}
+      if commande:
+        commande=commande.split('*')
+        for item in commande:
+          print item
+          itemcommande[str(item.split(":")[0])]=item.split(":")[1] 
+        
+      else:
+        return
+        
+      "dbtype:xxx,label:xxx,year:xxx,dbid:xxx,imdbnumber:xxx,tmdbnumer:xxx"
+      trailerTypeVideo=itemcommande.get('dbtype')
+      trailerTitre=itemcommande.get('label')
+      trailerAnnee=itemcommande.get('year')
+      trailerKODIID=itemcommande.get('dbid')
+      trailerIMDBID=itemcommande.get('imdbnumber')
+      trailerTMDBID=itemcommande.get('tmdbnumber')
+      
+      self.windowhome.setProperty('FenetreListeChoix','1')
+      dialog=xbmcgui.Dialog()                
+      TrailerType=""
+      ListeTrailer=[]
+      ContainerID=None
+      Saison=None
+      TMDBID='' 
+      TMDBIDListe=[]
+      PanneauActeur=None 
+      TMDBIDListeAllocine=[]
+      SAGAITEMID=[]
+      TrailerType=""     
+      
+      if trailerTitre:
+          TypeVideo=trailerTypeVideo
+          PanneauActeur=True
+          Titre=trailerTitre
+          Annee=trailerAnnee
+          KODIID=trailerKODIID
+          IMDBID=trailerIMDBID
+          TMDBID=trailerTMDBID
+          TrailerType="dialogplus"
+          if not TMDBID:
+                   #TMDBID=utils.get_externalID(IMDBID,TypeVideo) 
+                   TMDBID=utils.get_TMDBID(TypeVideo,KODIID,None)
+      else:    
+          TypeVideo=xbmc.getInfoLabel("ListItem.DBType")
+          Annee=xbmc.getInfoLabel("ListItem.Year")
+          Titre=xbmc.getInfoLabel("ListItem.Label").decode('utf-8','ignore')
+          Saison=None 
+          if self.windowhome.getProperty('IconmixShowInfo')=="1":
+            ContainerID=1990
+          else:
+             if self.windowhome.getProperty('IconmixShowInfo')=="2":
+               if not xbmc.getCondVisibility("ControlGroup(7003).HasFocus"):
+                  ContainerID=5051
+               else:
+                  ContainerID=1990
+             else:
+                  ContainerID=None
+          
+          if TypeVideo=="episode":     
+                Saison=str(xbmc.getInfoLabel("ListItem.Season"))                      
+             
+          
+          if TypeVideo=="set":
+            TrailerType="videonavsaga"
+         
+          
+          if xbmc.getCondVisibility("Control.HasFocus(7779)"):
+              PanneauActeur=True
+              TypeVideo=xbmc.getInfoLabel("Container(5051).ListItem.Property(dbtype)")
+              Titre=xbmc.getInfoLabel("Container(5051).ListItem.Label").decode('utf-8','ignore')
+              Annee=xbmc.getInfoLabel("Container(5051).ListItem.Year")
+              KODIID=xbmc.getInfoLabel("Container(5051).ListItem.DBID")
+              TrailerType="Roles"
+          
+          if xbmc.getCondVisibility("Control.HasFocus(2999)"): #myvideonav elements (saga,acteurs,realisateurs)
+              TypeVideo=xbmc.getInfoLabel("Container(1999).ListItem.DBType")
+              Titre=xbmc.getInfoLabel("Container(1999).ListItem.Label").decode('utf-8','ignore')
+              Annee=xbmc.getInfoLabel("Container(1999).ListItem.Year")
+              TrailerType="videonav"
+              
+          if xbmc.getCondVisibility("Control.HasFocus(2008)"): #dialogvideoinfo
+              TypeVideo='movie'
+              Titre=xbmc.getInfoLabel("Container(5002).ListItem.Label").decode('utf-8','ignore')
+              Annee=xbmc.getInfoLabel("Container(5002).ListItem.Year")
+              TrailerType="saga"
+          if xbmc.getCondVisibility("ControlGroup(442).HasFocus"): #dialogvideoinfo cherche trailer
+              #logMsg("ContainerID (%s)" %(ContainerID))
+              TypeVideo=xbmc.getInfoLabel("Container(%d).ListItem.DBTYPE" %(ContainerID)) if ContainerID else xbmc.getInfoLabel("ListItem.DBTYPE")
+              Titre=xbmc.getInfoLabel("Container(%d).ListItem.Label" %(ContainerID)) if ContainerID else xbmc.getInfoLabel("ListItem.Label")
+              Titre=Titre.decode('utf-8','ignore')
+              Annee=xbmc.getInfoLabel("Container(%d).ListItem.Year" %(ContainerID)) if ContainerID else xbmc.getInfoLabel("ListItem.Year")
+              TrailerType="videoinfo7003"
+          if xbmc.getCondVisibility("Control.HasFocus(7778)"): #dialogvideoinfo realisateur
+              TypeVideo=xbmc.getInfoLabel("Container(5052).ListItem.DBTYPE" )
+              Titre=xbmc.getInfoLabel("Container(5052).ListItem.Label" )
+              Titre=Titre.decode('utf-8','ignore')
+              Annee=xbmc.getInfoLabel("Container(5052).ListItem.Year" )    
+              TrailerType="realisateur"
+
+           
+           
+          if TrailerType=="Roles" :
+               #acteurs  
+               IMDBID=xbmc.getInfoLabel("Container(5051).ListItem.Property(IMDBNumber)")
+               TMDBID=xbmc.getInfoLabel("Container(5051).ListItem.Property(TMDBNumber)")
+               KODIID=xbmc.getInfoLabel("Container(5051).ListItem.DBID")
+               if not TMDBID:
+                   #TMDBID=utils.get_externalID(IMDBID,TypeVideo)
+                   TMDBID=utils.get_TMDBID(TypeVideo,KODIID,None)
+                   
+                 
+                 
+          if TrailerType=="realisateur" :
+               #realisateur
+               IMDBID=xbmc.getInfoLabel("Container(5052).ListItem.Property(IMDBNumber)")
+               TMDBID=xbmc.getInfoLabel("Container(5052).ListItem.Property(TMDBNumber)")
+               KODIID=xbmc.getInfoLabel("Container(5052).ListItem.DBID")
+               PanneauActeur=True
+               if not TMDBID:
+                     #TMDBID=utils.get_externalID(IMDBID,TypeVideo)
+                     TMDBID=utils.get_TMDBID(TypeVideo,KODIID,None)
+                  
+          if TrailerType=="videonav":
+               #VideoNav
+               IMDBID=xbmc.getInfoLabel("Container(1999).ListItem.Property(IMDBNumber)")
+               TMDBID=xbmc.getInfoLabel("Container(1999).ListItem.Property(TMDBNumber)")
+               KODIID=xbmc.getInfoLabel("Container(1999).ListItem.DBID")
+               if not TMDBID and not IMDBID:
+                   json_result = utils.getJSON('VideoLibrary.Get%sDetails' %(TypeVideo), '{ "%sid":%d,"properties":["imdbnumber"] }' %(TypeVideo,int(xbmc.getInfoLabel("Container(1999).ListItem.DBID"))))                         
+                   IMDBID=json_result.get("imdbnumber")                 
+               if TMDBID=='' and IMDBID:
+                   #TMDBID=utils.get_externalID(IMDBID,TypeVideo)
+                   TMDBID=utils.get_TMDBID(TypeVideo,KODIID,None)
+                   
+          if TrailerType=="videonavsaga":
+               #VideoNav
+                 TypeVideo="movie"
+                 nbitem=xbmc.getInfoLabel("Container(1999).NumItems")
+                 #logMsg("NbItems (%s)(%s)" %(nbitem,xbmc.getInfoLabel("Control.GetLabel(3333)")))
+                 if nbitem:
+             
+                     zz=int(nbitem)
+                     compteur=0
+                     
+                     for compteur in range(0,zz): 
+                       #SagaItem=ListeSaga.getListItem(cpt)
+                       #IMDBID=SagaItem.getProperty(IMDBNumber)
+                       #TMDBID=SagaItem.getProperty(TMDBNumber)
+                       #DBID=SagaItem.getProperty(DBID)
+                       
+                       IMDBID=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Property(IMDBNumber)" %(compteur))
+                       TMDBID=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Property(TMDBNumber)" %(compteur))
+                       DBID=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Property(DBID)" %(compteur))
+                       LABEL=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Label" %(compteur))
+                       YEAR=xbmc.getInfoLabel("Container(1999).ListItemAbsolute(%d).Year" %(compteur))
+                       if DBID:
+                        SAGAITEMID.append(DBID)                       
+                       TMDBIDListeAllocine.append({"Titre":LABEL,"Annee":YEAR,"kodiid":DBID})
+                       
+                       #logMsg("Allocine (%d)(%s)(%s)(%s)(%s)(%s)" %(compteur,LABEL,YEAR,IMDBID,TMDBID,DBID),0)
+                       if DBID:
+                         if not TMDBID and not IMDBID:
+                             json_result = utils.getJSON('VideoLibrary.GetMovieDetails', '{ "movieid":%d,"properties":["imdbnumber"] }' %(int(DBID)))                         
+                             IMDBID=json_result.get("imdbnumber")                 
+                       if TMDBID or IMDBID:
+                            TMDBIDListe.append({"tmdbid":TMDBID,"imdbid":IMDBID,"kodiid":DBID})
+                   
+                   
+                 
+                   
+          if TrailerType=="saga" :
+               #SAGA
+               IMDBID=xbmc.getInfoLabel("Container(5002).ListItem.Property(IMDBNumber)")
+               TMDBID=xbmc.getInfoLabel("Container(5002).ListItem.Property(TMDBNumber)")
+               KODIID=xbmc.getInfoLabel("Container(5002).ListItem.DBID")
+               if not TMDBID and not IMDBID:
+                   json_result = utils.getJSON('VideoLibrary.GetMovieDetails', '{ "movieid":%d,"properties":["imdbnumber"] }' %(int(xbmc.getInfoLabel("Container(5002).ListItem.DBID"))))                         
+                   IMDBID=json_result.get("imdbnumber")
+               
+               else: 
+                 if not TMDBID:
+                    TMDBID=utils.get_TMDBID('movie',KODIID,None)
+                   #TMDBID=utils.get_externalID(IMDBID,'movie')
+             
+          
+          if TrailerType=="videoinfo7003" or TrailerType=="":
+               #acteurs videoinfo   
+               KODIID=xbmc.getInfoLabel("Container(%d).ListItem.DBID" %(ContainerID)) if ContainerID else xbmc.getInfoLabel("ListItem.DBID")
+               TMDBID=xbmc.getInfoLabel("Container(%d).ListItem.Property(TMDBNumber)" %(ContainerID)) if ContainerID else xbmc.getInfoLabel("ListItem.Property(TMDBNumber)")
+               if TypeVideo!="episode":
+                 IMDBNUMBER=xbmc.getInfoLabel("Container(%d).ListItem.IMDBNumber" %(ContainerID)) if ContainerID else xbmc.getInfoLabel("ListItem.IMDBNumber")
+               else:
+                 IMDBNUMBER=xbmc.getInfoLabel("Container(%d).ListItem.TVShowTitle" %(ContainerID)) if ContainerID else xbmc.getInfoLabel("ListItem.TVShowTitle")
+                 Titre=IMDBNUMBER
+               if not TMDBID:             
+                   #TMDBID=utils.get_externalID(IMDBNUMBER,TypeVideo)
+                   TMDBID=utils.get_TMDBID(TypeVideo,KODIID,None)
+               #logMsg("KODIID=(%s) TMDBID=(%s) IMDBNUMBER=(%s)" %(KODIID,TMDBID,IMDBNUMBER))
+      #logMsg("TrailerType (%s)(%s) : (%s)(%s)" %(TrailerType,Titre,TypeVideo,TMDBID))
+      #dialog.notification('IconMixTools', __language__( 32508 ), ADDON_ICON,500) 
+        
+      if TMDBID!='' or len(TMDBIDListe)>0 or len(TMDBIDListeAllocine)>0:
+           xbmc.executebuiltin( "ActivateWindow(busydialog)" )   
+           #logMsg("TrailerType (%s) : (%s)(%s)(%s)(%s)(%s)" %(TrailerType,Titre,TypeVideo,TMDBID,ContainerID,KODIID))
+           if len(TMDBIDListe)>0:
+             #start_time = time.time() 
+             
+             
+             if SETTING('allocineactif')=="true" :
+                ListeTrailer=ListeTrailer+utils.GetSagaTrailersAllocine(TMDBIDListeAllocine)
+             if SETTING('youtubeactif')=="true" :
+                ListeTrailer=ListeTrailer+utils.GetSagaTrailers(TMDBIDListe) 
+             
+             
+     
+           else:
+             if TypeVideo=="tvshow":
+                Saison=None                                        
+             else:
+                Saison=str(xbmc.getInfoLabel("ListItem.Season"))
+                
+             if TypeVideo=="episode"  :
+                Episode=str(xbmc.getInfoLabel("ListItem.Episode"))
+                Annee=None
+             else:
+                Episode=None
+              
+             if trailerTitre:
+               ListeTrailer=utils.GetAllBandesAnnonces(None,KODIID,TypeVideo,Titre,Annee,Saison,Episode,TMDBID)
+             else:
+               ListeTrailer=utils.GetAllBandesAnnonces(self.GlobalAnnonces,KODIID,TypeVideo,Titre,Annee,Saison,Episode,TMDBID)
+             
+                
+           if TrailerType=="videonav" and KODIID!="": 
+              ListeTrailer.append({"id":xbmc.getInfoLabel("Container(1999).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":__skin_string__( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(1999).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(1999).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(1999).ListItem.Art(thumb)")})
+           if TrailerType=="saga" and KODIID!="": 
+              ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5002).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":__skin_string__( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(5002).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(5002).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(5002).ListItem.Art(thumb)")})
+           if TrailerType=="videoinfo7003" and ContainerID and KODIID!="":
+              ListeTrailer.append({"id":xbmc.getInfoLabel("Container(%d).ListItem.FilenameAndPath" %(ContainerID)),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":__skin_string__( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(%d).ListItem.Label" %(ContainerID)).decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(%d).ListItem.VideoResolution" %(ContainerID)),"type":"","landscape":xbmc.getInfoLabel("Container(%d).ListItem.Art(thumb)"%(ContainerID))})
+           if TrailerType=="videoinfo7003" and not ContainerID and  KODIID!="":
+              ListeTrailer.append({"id":xbmc.getInfoLabel("ListItem.FilenameAndPath" ),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":__skin_string__( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("ListItem.Label" ).decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("ListItem.VideoResolution" ),"type":"","landscape":xbmc.getInfoLabel("ListItem.Art(thumb)")})
+           if TrailerType=="Roles" and KODIID!="": 
+              ListeTrailer.append({"id":xbmc.getInfoLabel("Container(5051).ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":__skin_string__( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("Container(5051).ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("Container(5051).ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("Container(5051).ListItem.Art(thumb)")})
+           if TrailerType=="realisateur" and KODIID!="": 
+              ListeTrailer.append({"id":xbmc.getInfoLabel("ListItem.FilenameAndPath"),"position":"0","iso_639_1":"","iso_3166_1":"","key":"KODI","name":__skin_string__( 208 )+"[I]"+"[COLOR=LightGrey] "+xbmc.getInfoLabel("ListItem.Label").decode("utf8")+" [/I][/COLOR]","site":"YouTube","size":xbmc.getInfoLabel("ListItem.VideoResolution"),"type":"","landscape":xbmc.getInfoLabel("ListItem.Art(thumb)")})
+           
+        
+           xbmc.executebuiltin( "Dialog.Close(busydialog)" ) 
+      if len(ListeTrailer)>0:
+          ListeNomTrailer=[]
+          Image=""
+          for Item in  ListeTrailer:
+               NomTrailer=None                        
+              
+               try:
+                  Image=urllib.unquote(Item.get("landscape").replace("image://",""))
+               except:
+                  Image=""
+                  logMsg("erreur : %s" %(Item),0)                      
+                
+               try: 
+                    NomTrailer=utils.try_decode(Item["name"])+" ["+utils.try_decode(Item["type"])+" - "+str(Item["size"])+"p - "+utils.try_decode(Item["iso_3166_1"]+"]")
+               except:
+                    NomTrailer=utils.try_decode(Item["type"])+' ['+str(Item.get("size"))+'p - '+utils.try_decode(Item["iso_3166_1"])+']'
+                    
+               Elements = xbmcgui.ListItem(label=NomTrailer, iconImage=str(Image),label2="selectionnevue")
+               Elements.setProperty("Icon", Image)
+               Elements.setProperty("Source", Item["key"])
+               ListeNomTrailer.append(Elements)
+                    
+          if len(ListeNomTrailer)>0: 
+                
+                ui = dialog_select_UI('choix.xml', ADDON_PATH, 'default','1080i',listing=ListeNomTrailer,trailers=ListeTrailer,ItemId=xbmc.getInfoLabel("ListItem.DBID"),Window=None)
+                self.windowhome.setProperty("IconMixTrailer","1")
+                ret=ui.doModal()
+                del ui                          
+                self.windowhome.clearProperty('IconMixTrailer')
+                  
+                      
+      else: 
+          # 
+          dialog=xbmcgui.Dialog()
+          dialog.notification('IconMixTools', Titre+": "+__language__( 32506 ), "acteurs/arfffff.png", 500)
+      self.windowhome.setProperty('FenetreListeChoix','')
+      #retour au focus précédent
+      retour={"":2008,"videonav":2999,"realisateur":7778,"videoinfo7003":7003,"dialogplus":7003,"videonavsaga":2008,"Roles":7779}
+      xbmc.executebuiltin("SetFocus(%d)" %(retour[TrailerType]))      
+    #------------------------------------------------------------------------------------------------------------------
+  def UpdateListeEpisodes(self):
       try:
         self.Window = xbmcgui.Window(10025)
       except:
@@ -1049,7 +2140,7 @@ class MainService:
             self.precedenttvshow=self.selecteditem
             try:
               #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetEpisodes","params":{"tvshowid":39,"properties":["cast","episode","firstaired","originaltitle","productioncode","rating","ratings","season","seasonid","showtitle","specialsortepisode","specialsortseason","tvshowid","uniqueid","userrating"]},"id":1}
-              self.ListeItemx,self.Prochain =utils.GetEpisodesKodi(self.selecteditem,True)                                              
+              self.ListeItemx,self.Prochain =utils.GetEpisodesKodi(self.selecteditem,True,self.DBTYPE)                                              
             except:
               self.ListeItemx=None
             self.ListeEpisodes.reset()
@@ -1062,21 +2153,23 @@ class MainService:
                  self.windowhome.setProperty('IconmixProchainEpisode',str(self.Prochain))
             else:
               logMsg("Liste épisodes Vides !!!")
-              #self.ListeEpisodes.setStaticContent([])
       else:
         logMsg("xbmc.Window(10025) vide")      
     
     
-    def CheckListeVues(self):
+    #------------------------------------------------------------------------------------------------------------------
+  def CheckListeVues(self):
       try:
-        CurrentWindow=xbmcgui.getCurrentWindowId()
+        self.CurrentWindowID=xbmcgui.getCurrentWindowId()
+        current_view = xbmc.getInfoLabel("Container.Viewmode").decode("utf-8")
       except:
-        CurrentWindow=None
+        self.CurrentWindowID=None
         self.previousContentListeVues=None
         self.previousWindowListeVues=None
-      if self.previousWindowListeVues!=CurrentWindow:
+      if self.previousWindowListeVues!=self.CurrentWindowID or self.previousWindowModeVues!=current_view:
         #la fenetre n'est plus la même ...on recharge la liste des vues....
-        self.previousWindowListeVues=CurrentWindow
+        self.previousWindowListeVues=self.CurrentWindowID
+        self.previousWindowModeVues=current_view
         self.previousContentListeVues=None
         #mise à jour des listes de vues
         if xbmc.getCondVisibility("Control.IsVisible(7000)"):
@@ -1086,12 +2179,12 @@ class MainService:
              #logMsg("listedevuesContent !!(%s)!!" %(self.previousContentListeVues))            
              
              try:
-              CurrentWindow=xbmcgui.getCurrentWindowId()
+              self.CurrentWindowID=xbmcgui.getCurrentWindowId()
              except:
-              CurrentWindow=None
+              self.CurrentWindowID=None
               self.previousContentListeVues=None
              try:
-              CurrentWindow=xbmcgui.Window(CurrentWindow)
+              CurrentWindow=xbmcgui.Window(self.CurrentWindowID)
              except:
               CurrentWindow=None
              if CurrentWindow:
@@ -1106,16 +2199,15 @@ class MainService:
                  content_type = utils.VueActuelle()
                  if not content_type:
                         content_type = "files"
-                 current_view = xbmc.getInfoLabel("Container.Viewmode").decode("utf-8")
                   
                  ListeVues=utils.ModeVuesMenu(content_type, current_view)
                  if ListeVues:
-                    #logMsg("listedevues OK !!(%s)(%s)(%s)!!" %(content_type,current_view,ListeVues))
                     ControlList.addItems(ListeVues)
     
-    def LectureMusique(self):
+    #------------------------------------------------------------------------------------------------------------------
+  def LectureMusique(self):
       if xbmc.getCondVisibility("Player.HasAudio"):
-        CompteurTemps=0
+        self.CompteurTemps=0
         self.selecteditemAlbumPlayer = xbmc.getInfoLabel("MusicPlayer.Album")
         self.windowmusicvisID=None
         self.windowmusicvis=None
@@ -1164,9 +2256,10 @@ class MainService:
           except:
                logMsg("Probleme : AlbumData,ArtisteData=utils.GetMusicFicheAlbum(None,None,1,1)",0) 
     
-    def DetailsVuesMusique(self):
+    #------------------------------------------------------------------------------------------------------------------
+  def DetailsVuesMusique(self):
        if xbmc.getCondVisibility("Window.IsVisible(10502)"):
-          CompteurTemps=0
+          self.CompteurTemps=0
           ContainerGenre=0
           self.selecteditemMusic = xbmc.getInfoLabel("ListItem.DBID")
           LabelMusic = xbmc.getInfoLabel("ListItem.Label")
@@ -1240,7 +2333,7 @@ class MainService:
                    self.windowhome.clearProperty('DurationTools')                   
                    self.windowhome.clearProperty('DurationToolsEnd')
                    self.duration = xbmc.getInfoLabel("ListItem.Duration") 
-                   self.display_duration() 
+                   self.display_duration(self.selecteditem,self.DBTYPE) 
                      
                    if AlbumData:
                        self.windowhome.setProperty("AlbumCover",AlbumData.get("AlbumCover"))
@@ -1265,8 +2358,23 @@ class MainService:
                       self.SetArtisteHomeVar(ArtisteData)  
                except:
                    logMsg("Probleme : AlbumData,ArtisteData=utils.GetMusicFicheAlbum(self.selecteditemMusic,Cover,None)",0)  
+    
+    #------------------------------------------------------------------------------------------------------------------
+  def ShowIconmixGuide(self):
+      IconmixShowGuide=self.windowhome.getProperty('IconmixShowGuide')
+      if IconmixShowGuide=="1"or IconmixShowGuide=="2":
+        self.windowhome.clearProperty('IconmixShowGuide')
+        #calendrier des series de KODI sur 15 jours
+        self.ui = dialog_ShowGuide('guide.xml', ADDON_PATH, 'default','1080i',GlobalCalendrier=self.GlobalCalendrier,mainservice=self)
+        self.ui.doModal()
+        retour=self.ui.retour
+        del self.ui  
+        if retour:
+          xbmc.executebuiltin('ActivateWindow(10025,"videodb://tvshows/titles/%s",return)' %(retour)) 
+        
                    
-    def ShowIconmixInfo(self):
+    #------------------------------------------------------------------------------------------------------------------
+  def ShowIconmixInfo(self):
       IconmixShowInfo=self.windowhome.getProperty('IconmixShowInfo')
       if IconmixShowInfo=="55":
         self.windowhome.clearProperty('IconmixShowInfo')
@@ -1304,6 +2412,7 @@ class MainService:
       if IconmixShowInfo=="1" or IconmixShowInfo=="2" :
         
         DBKODI=None
+        
         if IconmixShowInfo=="1":
           ContainerID=1999
           ContainerRetour=1999
@@ -1313,9 +2422,9 @@ class MainService:
           TypeInfo=xbmc.getInfoLabel("Container(1998).ListItem.Property(DbType)")
           ContainerID=5051
           ContainerRetour=7779
-          DBKODI=xbmc.getInfoLabel("Container(%d).ListItem.Property(DBID)" %(ContainerID) )
-          DBTYPE=xbmc.getInfoLabel("Container(%d).ListItem.DbType" %(ContainerID) )
-          TMDBNUMBER=xbmc.getInfoLabel("Container(%d).ListItem.Property(TMDBNUMBER)" %(ContainerID) )
+        DBKODI=xbmc.getInfoLabel("Container(%d).ListItem.Property(DBID)" %(ContainerID) )
+        DBTYPE=xbmc.getInfoLabel("Container(%d).ListItem.DbType" %(ContainerID) )
+        TMDBNUMBER=xbmc.getInfoLabel("Container(%d).ListItem.Property(TMDBNUMBER)" %(ContainerID) )
         
         ItemListe=self.CreationItemInfo(DBKODI ,TMDBNUMBER,ContainerID )           
         if ItemListe:
@@ -1330,18 +2439,21 @@ class MainService:
                     cpt=cpt+1
               if IconmixShowInfo=="2":
                 ListeActeursInf=utils.getCasting(DBTYPE,DBKODI,1,TMDBNUMBER) 
+              
+              
                   
              
               self.windowhome.setProperty('IconMixExtraFanart',utils.CheckItemExtrafanartPath(xbmc.getInfoLabel("Container(%d).ListItem.Path" %(ContainerID) )))   
               self.duration = xbmc.getInfoLabel("Container(%d).ListItem.Duration" %(ContainerID) ) 
-              self.display_duration(ContainerID)
+              self.display_duration(DBKODI,DBTYPE)
               self.ui = dialog_ShowInfo('madialogvideoInfo.xml', ADDON_PATH, 'default','1080i',listitem=ItemListe,acteurs=ListeActeursInf,mainservice=self)
               ret=self.ui.doModal()
               del self.ui                          
         self.windowhome.clearProperty('IconmixShowInfo')
         xbmc.executebuiltin("SetFocus(%d)" %(ContainerID))
     
-    def AutoRecherche(self):
+    #------------------------------------------------------------------------------------------------------------------
+  def AutoRecherche(self):
       if xbmc.getCondVisibility("Control.IsVisible(9010)") and xbmc.getCondVisibility("Control.IsVisible(312)"):
         if self.windowhome.getProperty("AutoCompletionShowItem"):
           path=self.windowhome.getProperty("AutoCompletionShowItem")
@@ -1356,9 +2468,10 @@ class MainService:
                 return None
             window.setFocusId(312)
             MyEdit.setText(id)
+            xbmc.executebuiltin("SendClick(10103,32)")
+            xbmc.executebuiltin("SendClick(10103,8)")
           else:
-            if SETTING("iconmixdebug")=="true":
-              logMsg("fuck showitem (%s)(%s)" %(path,xbmc.getInfoLabel("Container(9010).ListItem.property(ItemID)")))
+            logMsg("fuck showitem (%s)(%s)" %(path,xbmc.getInfoLabel("Container(9010).ListItem.property(ItemID)")))
             try:
              path=path.lower()
              dbid=int(xbmc.getInfoLabel("Container(9010).ListItem.property(ItemID)")) if not "addon" in path else 1
@@ -1456,108 +2569,112 @@ class MainService:
           else:
             Action=""                  
             self.start_info_actions("autocomplete", self.Recherche,limit,self.AutoCompletionProvider,basetype)
-                   
-    def BandeAnnonceAutomatique(self):
-       if int(self.kodimonitor.tempsannonce)>0 and xbmc.getCondVisibility("Window.IsActive(10025)") and not xbmc.getCondVisibility("Window.IsActive(12003)") and not xbmc.getCondVisibility("System.HasModalDialog"):
+            
+    #------------------------------------------------------------------------------------------------------------------               
+    #------------------------------------------------------------------------------------------------------------------
+  def BandeAnnonceAutomatique(self):
+       ListeTrailer=None
+       NetflixView=xbmc.getCondVisibility("Control.IsVisible(562)|Control.IsVisible(563)")
+       if not xbmc.Player().isPlaying() and (int(self.kodimonitor.tempsannonce)>0 or NetflixView==True) and xbmc.getCondVisibility("Window.IsActive(10025)") and not xbmc.getCondVisibility("Window.IsActive(12003)") and not xbmc.getCondVisibility("System.HasModalDialog"):
           self.PreviousBAnnonce=self.windowhome.getProperty('BAprecedenteInf')
           
-          LeType=xbmc.getInfoLabel("ListItem.DBTYPE")
-          #logMsg("CompteurTemps: %s self.tempsannonce: %s -%s" %(CompteurTemps,self.tempsannonce,LeType),0)
-          if CompteurTemps>(int(self.kodimonitor.tempsannonce)*1000) and not xbmc.Player().isPlaying() and ((LeType=="movie" and self.kodimonitor.annoncefilm=="true") or (LeType=="tvshow" and self.kodimonitor.annonceserie=="true")) and self.PreviousBAnnonce!=self.selecteditem :
-            #logMsg("Annonce (%s)(%s)(%s)" %(LeType,self.kodimonitor.annoncefilm,self.kodimonitor.annonceserie),0) 
+          #if ((self.selecteditem in self.NetFlixBA) or (int(self.kodimonitor.tempsannonce)>0)):
+          if (int(self.kodimonitor.tempsannonce)>0) or xbmc.getCondVisibility("Skin.HasSetting(NoNetflixBA)"):
+            NetflixView=None
+          else:
+            LeType=xbmc.getInfoLabel("ListItem.DBTYPE")
+            try:
+              delaiBA=int(xbmc.getInfoLabel("Skin.String(BaDelai)"))*1000
+            except:
+              delaiBA=0
+            #logMsg("self.CompteurTemps: %s self.tempsannonce: %s -%s" %(self.CompteurTemps,self.tempsannonce,LeType),0)
+          if (((int(self.kodimonitor.tempsannonce)>0) and (self.CompteurTemps>(int(self.kodimonitor.tempsannonce)*1000)))or (NetflixView and self.CompteurTemps>delaiBA)) and ((LeType=="movie" and self.kodimonitor.annoncefilm=="true") or (LeType=="tvshow" and self.kodimonitor.annonceserie=="true")) and self.PreviousBAnnonce!=self.selecteditem :
+            logMsg("DELAIBA %d-%d" %(self.CompteurTemps,delaiBA))
+            try:
+              VolumeBA=int(xbmc.getInfoLabel("Skin.String(BaVolume)"))
+            except:
+              VolumeBA=100
+            KodiTrailer=xbmc.getInfoLabel("ListItem.Trailer")
+            KODIID=xbmc.getInfoLabel("ListItem.DBID")
             if self.buttonFullScreen:
                    del self.buttonFullScreen
                    self.buttonFullScreen=None
             AllocineBA=None
-            ListeTrailer=[]
-            CompteurTemps=0
+           
+            
             #start_time = time.time()
             self.PreviousBAnnonce=self.selecteditem
-            xbmc.executebuiltin("SetProperty(BAprecedenteInf,%s,home)" %(self.selecteditem))
-            #-------- KODI --------
-            KodiTrailer=xbmc.getInfoLabel("ListItem.Trailer")
-            if KodiTrailer:
-              try:
-                #KodiTrailer=KodiTrailer.split("videoid=")[1]
-                if "youtube" in KodiTrailer:
-                   Origine="youtube"
-                else:
-                   Origine=""
-                KodiTrailer=KodiTrailer.replace("plugin://plugin.video.youtube/?action=play_video&videoid=","plugin://plugin.video.youtube/play/?video_id=")
-                ListeTrailer.insert(0,{"id":KodiTrailer,"position":"0","iso_639_1":"","iso_3166_1":"","key":Origine,"name":"ooo","site":"YouTube","size":"","type":"","landscape":""})     
-              except:
-                KodiTrailer=None
-                
-            
-            
-            
-            #-------- ALLOCINE --------
-            if self.kodimonitor.allocineactif=="true" and (not KodiTrailer or self.kodimonitor.allocinefirst or self.kodimonitor.annoncetoutes=="true"):
-              Annee=xbmc.getInfoLabel("ListItem.Year")
-              if LeType=="movie":
-                AllocineBA=utils.Allocine_BandeAnnonce(xbmc.getInfoLabel("ListItem.Label").lower(),LeType,None,None,Annee)
-              else:
-                Episode=None                                  
-                if LeType=="tvshow":
-                  Saison=None                                                              
-                  AllocineBA=utils.Allocine_BandeAnnonce(xbmc.getInfoLabel("ListItem.TVShowTitle").lower(),LeType,Saison,Episode,Annee)
-              if AllocineBA:
-                 cpt=len(AllocineBA)-1
-                 while cpt>=0:                                  
-                   ListeTrailer.insert(0,AllocineBA[cpt])  
-                   cpt=cpt-1
-                   
-                 #logMsg("BA Allocine (%s)" %(AllocineBA[0]),0)                                   
-              #interval = time.time() - start_time 
-              #logMsg("Allcoine duree de la recherche (%s)" %(str(interval)),0) 
+            self.NetFlixBA.append(self.selecteditem)
+            self.windowhome.setProperty("BAprecedenteInf",str(self.selecteditem))
+            if LeType=="movie":
+              KodiTitre=xbmc.getInfoLabel("ListItem.Label").lower()
+            else:
+              KodiTitre=xbmc.getInfoLabel("ListItem.TVShowTitle").lower()
+            Annee=xbmc.getInfoLabel("ListItem.Year")
+            if not NetflixView or not KodiTrailer:
+              logMsg("ListeTrailer  (%s)" %KODIID)
+              ListeTrailer=utils.GetAllBandesAnnonces(self.GlobalAnnonces,KODIID,LeType,KodiTitre,Annee,None,None,None) 
+            else:
+              #-------- KODI --------
               
-            #-------- YOUTUBE chez TMDB--------
-            if not AllocineBA or self.kodimonitor.annoncetoutes=="true":
-              #youtube 
-              TMDBID=''
-              IMDBNUMBER=xbmc.getInfoLabel("ListItem.IMDBNumber")
-              TMDBID=utils.get_externalID(IMDBNUMBER,LeType)                                              
-              if TMDBID!='' :                    
-                  TMDBTrailer=utils.getTrailer(TMDBID,LeType)
-                  if TMDBTrailer: 
-                    cpt=len(TMDBTrailer)-1
-                    while cpt>=0:                                  
-                       ListeTrailer.append(TMDBTrailer[cpt])  
-                       cpt=cpt-1
-                    #ListeTrailer.insert(0,TMDBTrailer[0])
-                    #logMsg("BA TMDB (%s)" %(TMDBTrailer[0]),0)                                                                                                     
-            
-            #interval = time.time() - start_time 
-            #logMsg("duree de la recherche (%s)" %(str(interval)),0) 
+              if KodiTrailer:
+                try:
+                  #KodiTrailer=KodiTrailer.split("videoid=")[1]
+                  logMsg("TRAILER DE KODI")
+                  if "youtube" in KodiTrailer:
+                     Origine="youtube"
+                  else:
+                     Origine=""
+                  KodiTrailer=KodiTrailer.replace("plugin://plugin.video.youtube/?action=play_video&videoid=","plugin://plugin.video.youtube/play/?video_id=")
+                  ListeTrailer=[{"id":KodiTrailer,"position":"0","iso_639_1":"","iso_3166_1":"","key":Origine,"name":"ooo","site":"YouTube","size":"","type":"","landscape":""}]    
+                except:
+                  ListeTrailer=None
+    
             if ListeTrailer:
+             
+              
               PlayListBA=xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
               PlayListBA.clear()
-              if self.kodimonitor.annoncetoutes=="false":
-                 ListeTrailer=[ListeTrailer[0]]  
-              #logMsg("Trailers (%s) : %s" %(len(ListeTrailer),ListeTrailer),0)  
+              
               ListeId=[]                           
               for Item in ListeTrailer:  
                  if not  Item["id"] in ListeId:                               
                    Elements = xbmcgui.ListItem(label=utils.try_decode(Item.get("name"))+" ["+utils.try_decode(Item.get("type"))+" - "+str(Item.get("size"))+"p - "+utils.try_decode(Item.get("iso_3166_1"))+"]")
                    Elements.setInfo("video", {"title": utils.try_decode(Item.get("name"))+" ("+utils.try_decode(Item.get("type"))+" - "+str(Item.get("size"))+"p - "+utils.try_decode(Item.get("iso_3166_1"))+") ","mediatype": "movie"})
                    Elements.setArt({"poster":Item["landscape"]})
-                   PlayListBA.add(Item["id"],Elements) 
-                   ListeId.append(Item["id"])
-                                               
-              
-              if not self.kodimonitor.annoncefull or self.kodimonitor.annoncefull=="false":
-                self.ui = dialog_BandeAnnonce('annonce.xml', ADDON_PATH, 'default','1080i',PlayListItem=PlayListBA)                          
-                self.ui.doModal()
-                del self.ui
-                del PlayListBA
-                self.windowhome.clearProperty('annonceencours')
+                   if "cineserie" in Item["id"]:
+                     Item["id"]=utils.BACineSeriesGetVideo(Item["id"],Item.get("size"))
+                   if "youtube" in Item["id"]:
+                    idyoutube=Item["id"].split('video_id=')[1]
+                    if idyoutube:
+                      urlyoutube=youturl.getyoutubeurl(idyoutube)
+                      if urlyoutube:
+                        Item["id"]=urlyoutube
+                   if Item["id"]:
+                    PlayListBA.add(Item["id"],Elements) 
+                    ListeId.append(Item["id"])
+                   if xbmc.getCondVisibility("Control.IsVisible(562)|Control.IsVisible(563)"):
+                    break
+                                                
+              if NetflixView==True:
+                self.AnnonceNetflix=True
+                self.kodi_player.play(PlayListBA,windowed=True,VolumeBA=VolumeBA) 
+                
               else:
-                self.windowhome.setProperty('annonceencours','full')
-                if self.kodi_player:                              
-                 self.kodi_player.play(PlayListBA,windowed=False)                                
-                                 
-        
-    def checkProgressPlay(self):
+                if not self.kodimonitor.annoncefull or self.kodimonitor.annoncefull=="false":
+                  self.ui = dialog_BandeAnnonce('annonce.xml', ADDON_PATH, 'default','1080i',PlayListItem=PlayListBA,VolumeBA=VolumeBA)                          
+                  self.ui.doModal()
+                  del self.ui
+                  del PlayListBA
+                  self.windowhome.clearProperty('annonceencours')
+                else:
+                  self.windowhome.setProperty('annonceencours','full')
+                  if self.kodi_player:                              
+                   self.kodi_player.play(PlayListBA,VolumeBA=VolumeBA,windowed=False)                                
+            self.CompteurTemps=0                   
+    #------------------------------------------------------------------------------------------------------------------    
+    #------------------------------------------------------------------------------------------------------------------
+  def checkProgressPlay(self):
       
       if  self.kodi_player.isPlaying() and self.windowhome.getProperty('annonceencours')=="" and xbmc.getCondVisibility("Skin.HasSetting(NouveauProgress)"):    
         Window=None
@@ -1622,7 +2739,8 @@ class MainService:
             self.PreviousprogressWindow=None     
                 
   
-    def vide_artiste(self):
+    #------------------------------------------------------------------------------------------------------------------
+  def vide_artiste(self):
         self.windowhome.clearProperty("ArtistBio")
         self.windowhome.clearProperty("ArtistThumb")
         self.windowhome.clearProperty("ArtistLogo")
@@ -1631,13 +2749,15 @@ class MainService:
         self.windowhome.clearProperty("ArtistFanart2")
         self.windowhome.clearProperty("ArtistFanart3") 
         
-    def vide_album(self):
+    #------------------------------------------------------------------------------------------------------------------
+  def vide_album(self):
        self.windowhome.clearProperty("AlbumCover")
        self.windowhome.clearProperty("AlbumBack")
        self.windowhome.clearProperty("AlbumCd")
        self.windowhome.clearProperty("AlbumInfo")
        
-    def vide_artisteplayer(self):
+    #------------------------------------------------------------------------------------------------------------------
+  def vide_artisteplayer(self):
         self.windowhome.clearProperty("ArtistBioPlayer")
         self.windowhome.clearProperty("ArtistThumbPlayer")
         self.windowhome.clearProperty("ArtistLogoPlayer")
@@ -1646,26 +2766,28 @@ class MainService:
         self.windowhome.clearProperty("ArtistFanart2Player")
         self.windowhome.clearProperty("ArtistFanart3Player") 
         
-    def vide_albumplayer(self):
+    #------------------------------------------------------------------------------------------------------------------
+  def vide_albumplayer(self):
        self.windowhome.clearProperty("AlbumCoverPlayer")
        self.windowhome.clearProperty("AlbumBackPlayer")
        self.windowhome.clearProperty("AlbumCdPlayer")
        self.windowhome.clearProperty("AlbumInfoPlayer")
            
 
-    def display_duration(self,ContainerID=None):
+    #------------------------------------------------------------------------------------------------------------------
+  def display_duration(self,DBKODI=None,DBTYPE=None):
        
         xxx="null"
         
         #self.windowhome.setProperty('ItemUniqueGenre',xbmc.getInfoLabel( "ListItem.Genre" ).replace(" /",", "))
-        
-        if self.DBTYPE=="movie":
-          pays.ConversionPays("movie",ContainerID)
-       
-        if self.duration :
+        logMsg("self.duration (%s)" %(self.duration))
+        #if self.DBTYPE=="movie":
+        #  pays.ConversionPays("movie",ContainerID)
+        duree=utils.GetDuration(DBKODI,DBTYPE)
+        if duree :
         #else :
-         if self.duration.find(':')!=-1: #KODI LEIA
-            TT=self.duration.rsplit(':')
+         if duree.find(':')!=-1: #KODI LEIA
+            TT=duree.rsplit(':')
             XX=0
             if len(TT)==3:
               XX=XX+int(TT[0])*60
@@ -1673,24 +2795,25 @@ class MainService:
             if len(TT)==2:
               XX=int(TT[0])
             if len(TT)>1:
-             self.duration=str(XX)
+             duree=str(XX)
         
-         if self.duration.find(':')==-1:
-            readable_duration = in_hours_and_min(self.duration)
+         if duree.find(':')==-1:
+            readable_duration = in_hours_and_min(duree)
             self.windowhome.setProperty('DurationTools', readable_duration)
-            if int(self.duration)>0:
+            if int(duree)>0:
               now = datetime.now()
-              now_plus_10 = now + timedelta(minutes = int(self.duration))
+              now_plus_10 = now + timedelta(minutes = int(duree))
               xxx = format(now_plus_10, '%Hh%M')
               self.windowhome.setProperty('DurationToolsEnd', xxx)
             else:
               self.windowhome.clearProperty('DurationToolsEnd')
               self.windowhome.clearProperty('DurationTools')
          else:
-           self.windowhome.setProperty('DurationTools', self.duration)
+           self.windowhome.setProperty('DurationTools', duree)
              
              
-    def _init_vars(self):
+    #------------------------------------------------------------------------------------------------------------------
+  def _init_vars(self):
       self.windowhome = xbmcgui.Window(10000) # Home.xml 
       self.windowvideonav = xbmcgui.Window(10025) # myvideonav.xml           
       self.windowvideoinf = xbmcgui.Window(12003) # dialogvideoinfo.xml 
@@ -1700,6 +2823,7 @@ class MainService:
       except:
         self.windowvideoplayerinfo = None
       self.previousitem = ""
+      self.AnnonceNetflix=None
       self.previousProchainID=None
       self.previousitem8889 = ""
       self.previousitem1998 = ""
@@ -1709,6 +2833,7 @@ class MainService:
       self.previousitemPlayer= ""
       self.previousContentListeVues= ""
       self.previousWindowListeVues=""
+      self.previousWindowModeVues=""
       self.previousContainer=""
       self.PreviousWindowActiveID= ""
       self.PreviousPlayerActiveID= ""
@@ -1745,18 +2870,11 @@ class MainService:
       self.buttonFullScreen=None
       self.PreviousprogressPosition=None
       self.PreviousprogressWindow=None
-      #query_url="https://api.betaseries.com/planning/general?key=46be59b5b866&before=1"
-      """
-      try:
-        os.remove(ADDON_DATA_PATH+"/series/planningnext")
-      except:
-        logMsg("impossible de supprimer %s" %(ADDON_DATA_PATH+"/series/planningnext"))
+      self.NetFlixBA=[]
       
-      if not xbmc.getCondVisibility("Skin.HasSetting(DisableTvList)") and not xbmcvfs.exists(ADDON_DATA_PATH+"/series/planningnext"):
-         utils.updategetnextepisode()
-      """     
         
-    def GetControl(self,Window=None,Id=None):
+    #------------------------------------------------------------------------------------------------------------------
+  def GetControl(self,Window=None,Id=None):
       ControlId=None
       
       if Window:
@@ -1771,7 +2889,8 @@ class MainService:
     
     
           
-    def CheckActeursRoles(self,F8889=None, F7781=None, F7779=None,F7777=None,IconmixShowInfo=None,ActeurRealisateur="acteurs"):
+    #------------------------------------------------------------------------------------------------------------------
+  def CheckActeursRoles(self,F8889=None, F7781=None, F7779=None,F7777=None,IconmixShowInfo=None,ActeurRealisateur="acteurs"):
       #7779 : roles
       #7781 : acteurs
       #8889 : bio
@@ -1779,7 +2898,7 @@ class MainService:
       #logMsg("CheckActeursRoles (%s) : F8889 (%s) ,  F7781 (%s) ,  F7779 (%s) , F7777 (%s)" %(xbmc.getInfoLabel("Container(1998).ListItem.Label"),F8889 , F7781 , F7779 ,F7777))
       ListeRole=None
       if F8889 | F7781 | F7779 |F7777:
-          CompteurTemps=0
+          self.CompteurTemps=0
           if not F8889: #si pas bio
               
               if not F7777:
@@ -1947,7 +3066,8 @@ class MainService:
                                if not IconmixShowInfo:
                                   xbmc.executebuiltin("SetFocus(55)")          
           
-    def SetArtisteHomeVar(self,ArtisteData=None):
+    #------------------------------------------------------------------------------------------------------------------
+  def SetArtisteHomeVar(self,ArtisteData=None):
       if ArtisteData:
         self.windowhome.setProperty("ArtistBio",ArtisteData.get("ArtistBio"))
         self.windowhome.setProperty("ArtistThumb",ArtisteData.get("ArtistThumb"))
@@ -1957,7 +3077,8 @@ class MainService:
         self.windowhome.setProperty("ArtistFanart2",ArtisteData.get("ArtistFanart2"))
         self.windowhome.setProperty("ArtistFanart3",ArtisteData.get("ArtistFanart3")) 
         
-    def CreationItemInfo(self,DbIdItem=None,TmdbNumber=None,ContainerID=None)  :
+    #------------------------------------------------------------------------------------------------------------------
+  def CreationItemInfo(self,DbIdItem=None,TmdbNumber=None,ContainerID=None)  :
       if ContainerID:
         InfoLabels=utils.GetListItemInfoLabels(ContainerID)
         
@@ -2017,7 +3138,8 @@ class MainService:
         logMsg("ItemListe erreur (%s)" %(InfoLabels))
       return None 
       
-    def start_info_actions(self,action,id=None,limit=50,provider=None,basetype=None):
+    #------------------------------------------------------------------------------------------------------------------
+  def start_info_actions(self,action,id=None,limit=50,provider=None,basetype=None):
         if action == 'autocomplete':
             listitems = MonAutoCompletion.get_autocomplete_items(id,limit,provider, basetype,self.PurgeCache)
             self.PurgeCache=None
@@ -2033,13 +3155,16 @@ class MainService:
                 return None
             window.setFocusId(312)
            
-            MyEdit.setText(id)
+            MyEdit.setText(str(id))
+            xbmc.executebuiltin("SendClick(10103,32)")
+            xbmc.executebuiltin("SendClick(10103,8)")
             
             return None
             # xbmc.executebuiltin("SendClick(103,32)")
         
         
-    def resetPropositions(self,Items=[]):
+    #------------------------------------------------------------------------------------------------------------------
+  def resetPropositions(self,Items=[]):
         try:
           window = xbmcgui.Window(10103) #dialogkeyboard.xml
         except:
@@ -2069,7 +3194,8 @@ class MainService:
                 MyPropositionsCompteur.setPosition(35,Hauteur+195)
       
 
-    def pass_list_to_skin(self,data=[],  limit=False,basetype=None,provider=None):
+    #------------------------------------------------------------------------------------------------------------------
+  def pass_list_to_skin(self,data=[],  limit=False,basetype=None,provider=None):
       
       
         
@@ -2085,7 +3211,8 @@ class MainService:
             
 
 
-    def create_listitems(self,data=None,basetype=None):
+    #------------------------------------------------------------------------------------------------------------------
+  def create_listitems(self,data=None,basetype=None):
         if not data:
             return []
         itemlist = []
@@ -2118,13 +3245,15 @@ class MainService:
         return itemlist
 
 
-    def resolve_url(self,handle):
+    #------------------------------------------------------------------------------------------------------------------
+  def resolve_url(self,handle):
         if handle:
             xbmcplugin.setResolvedUrl(handle=int(handle),
                                       succeeded=False,
                                       listitem=xbmcgui.ListItem())           
  #-----------------------------------------------
-def GetControlW(Id=None,IdWindow=None):
+#------------------------------------------------------------------------------------------------------------------
+  def GetControlW(Id=None,IdWindow=None):
       ControlId=None
       
       try:
@@ -2138,4 +3267,4 @@ def GetControlW(Id=None,IdWindow=None):
           except:
                ControlId=None
       logMsg("ControlId %s" %(ControlId))
-      return ControlId
+      return

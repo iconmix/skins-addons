@@ -2,8 +2,8 @@
 <includes>
   <!-- GAUCHE -->
 
- 
-  
+
+
   <include name="commonlistitem2Trio">
     <param name="Fond" default="FocusLine.png"/>
     <param name="Ligne" default="VideoInfoLine.png"/>
@@ -88,10 +88,10 @@
         <visible>!String.IsEmpty(ListItem.Rating)</visible>
       </control>
     </control>
-     <include content="MediaInfoMini">
-                <param name="PosX">705</param>
-                <param name="PosY">2</param>
-              </include>
+    <include content="MediaInfoMini">
+      <param name="PosX">705</param>
+      <param name="PosY">2</param>
+    </include>
   </definition>
 </include>
 
@@ -121,13 +121,13 @@
 <aligny>top</aligny>
 <pagecontrol>60</pagecontrol>
 <include>Animation_OpenCloseFade</include>
-<include>Animation_FadedByMenu</include>
+
 <include>Animation_HiddenByInfo</include>
 <itemlayout width="0" height="40">
   <include content="commonlistitem2Trio"></include>
 
   <control type="label">
-   
+
     <left>10</left>
     <posy>-2</posy>
     <width>638</width>
@@ -199,237 +199,245 @@
 
 </focusedlayout>
 </include>
+<include name="mediainfominiactiftrio">
+  <width>928</width>
+  <posx>1435</posx>
+</include>
+<include name="Viewtype_ListTrio">
+  <control type="group">
+    <left>-20</left>
+    <top>0</top>
+    <visible>Control.IsVisible(557)</visible>
+
+   <!-- fond de la liste -->
+    <control type="image">
+      <posx>10</posx>
+      <posy>15</posy>
+      <height>805</height>
+      <include condition="Skin.HasSetting(MiniInfos)">mediainfominiactiftrio</include>
+      <width>828</width>
+      <texture>frames/Menu_Glass2b.png</texture>
+      <colordiffuse>902F2F2F</colordiffuse>
+    </control>
+    <!--- Liste --->
+   <control type="list" id="557">
+    <animation type="Conditional" condition="Window.IsActive(addoninformation)">
+      <effect type="zoom" time="600" center="640,360" start="100" end="50" tween="cubic" easing="out" />
+      <effect type="fade" time="400" start="100" end="0" />
+    </animation>
+
+
+    <posx>65</posx>
+    <posy>58</posy>
+    <height>717</height>
+    <width>1350</width>
+
+    <onup>557</onup>
+
+    <ondown>557</ondown>
+
+
+    <oninfo condition="Container.Content(actors)|Container.Content(directors)">SetProperty(ActorThumb,$VAR[PosterThumb],Home)</oninfo>
+    <oninfo condition="Container.Content(actors)|Container.Content(directors)">SetFocus(8889)</oninfo>
+    <include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
+  <!-- <onright>60</onright> -->
+  <scrolltime>160</scrolltime>
+  <viewtype label="31834">trio list</viewtype>
+  <orientation>vertical</orientation>
+  <preloaditems>2</preloaditems>
+  <aligny>top</aligny>
+  <pagecontrol>60</pagecontrol>
+  <include>Animation_OpenCloseFade</include>
+
+  <include>Animation_HiddenByInfo</include>
+  <include>CommonListIdTrio</include>
+
+</control>
+
+
+   
  
-	<include name="Viewtype_ListTrio">
-		<control type="group">
-		  <left>-20</left>
-		  <top>0</top>
-			<visible>Control.IsVisible(557)</visible>
-			
-			
-		<control type="image">
-					<posx>10</posx>
-			<posy>35</posy>
-			<height>805</height>
-			<width>928</width>
-					<texture>frames/Menu_Glass2b.png</texture>
-					<colordiffuse>902F2F2F</colordiffuse>
-				</control>
-		
-						
-		<control type="group">
-      <top>-200</top>
-      <posx>1475</posx>
+<!-- Thumbnails -->
+ <control type="group">
+      <posy>-220</posy>
+
+      <include condition="Skin.HasSetting(MiniInfos)">mediainfominiactiftrio</include>
+      <posx>1395</posx>
       <animation effect="fade" start="100" end="0" time="0" condition="Container(557).OnPrevious+Container(557).OnNext" reversible="false">conditional</animation>
-     <animation effect="slide" start="0,0" end="0,-245" time="0" condition="Skin.HasSetting(CacheFond)" reversible="false">conditional</animation>
-    			<control type="wraplist" id="5555">
-    			  <visible>String.IsEqual(ListItem.DBTYPE,set)</visible>
-    			  <height>1480</height>
-    			  <scrolltime tween="linear" easing="in">8500</scrolltime>
-    			  <autoscroll>True</autoscroll>    			  
-    			  <itemgap>20</itemgap>
-    			  <itemlayout width="520" height="300">
-    			    <control type="image">
-    			      <bordersize>30</bordersize>
-							<bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-    			      <texture>$INFO[ListItem.Property(fanart)]</texture>
-    			      <aspectratio scalediffuse="false">keep</aspectratio>
-    			    </control>
-    			  </itemlayout>
-    			  <focusedlayout width="520" height="300">
-    			    <control type="image">
-    			      <bordersize>30</bordersize>
-							<bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-    			      <texture>$INFO[ListItem.Property(fanart)]</texture>
-    			      <aspectratio scalediffuse="false">keep</aspectratio>
-    			    </control>
-    			  </focusedlayout>
-    		  
-				</control> 
-					<control type="wraplist" id="5554">
-    			  <visible>!String.IsEqual(ListItem.DBTYPE,set)</visible>
-    			  <height>1480</height>
-    			  <scrolltime tween="linear" easing="inout">8500</scrolltime>
-    			  <autoscroll>True</autoscroll>
-    			  <content target="Pictures">$VAR[GlobalFanart]</content>
-    			  <itemgap>20</itemgap>
-    			  <itemlayout width="520" height="300">
-    			    <control type="image">
-    			      <bordersize>30</bordersize>
-							<bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-    			      <texture>$INFO[ListItem.Icon]</texture>
-    			      <aspectratio scalediffuse="false">keep</aspectratio>
-    			    </control>
-    			  </itemlayout>
-    			  <focusedlayout width="520" height="300">
-    			    <control type="image">
-    			      <bordersize>30</bordersize>
-							<bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-    			      <texture>$INFO[ListItem.Icon]</texture>
-    			      <aspectratio scalediffuse="false">keep</aspectratio>
-    			    </control>
-    			  </focusedlayout>
-    		  
-				</control>
-		</control>		
-		<control type="list" id="557">
-			<animation type="Conditional" condition="Window.IsActive(addoninformation)">
-				<effect type="zoom" time="600" center="640,360" start="100" end="50" tween="cubic" easing="out" />
-				<effect type="fade" time="400" start="100" end="0" />
-			</animation>
+     <!--  <animation effect="slide" start="0,0" end="0,-245" time="0" condition="Skin.HasSetting(VueExperimentale)" reversible="false">conditional</animation> -->
+      <!-- fanarts saga -->
+      <control type="wraplist" id="5555">
+        <visible>String.IsEqual(ListItem.DBTYPE,set)</visible>
+        <height>1480</height>
+        <scrolltime tween="linear" easing="in">8500</scrolltime>
+        <autoscroll>True</autoscroll>
+        <itemgap>20</itemgap>
+        <itemlayout width="520" height="300">
+          <control type="image">
+            <bordersize>30</bordersize>
+            <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+            <texture>$INFO[ListItem.Property(fanart)]</texture>
+            <aspectratio scalediffuse="false">keep</aspectratio>
+          </control>
+        </itemlayout>
+        <focusedlayout width="520" height="300">
+          <control type="image">
+            <bordersize>30</bordersize>
+            <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+            <texture>$INFO[ListItem.Property(fanart)]</texture>
+            <aspectratio scalediffuse="false">keep</aspectratio>
+          </control>
+        </focusedlayout>
 
+      </control>
+      <!--- fanarts non saga -->
+      <control type="wraplist" id="5554">
+        <visible>!String.IsEqual(ListItem.DBTYPE,set)</visible>
+        <height>1480</height>
+        <scrolltime tween="linear" easing="inout">8500</scrolltime>
+        <autoscroll>True</autoscroll>
+        <content target="Pictures">$VAR[GlobalFanart]</content>
+        <itemgap>20</itemgap>
+        <itemlayout width="520" height="300">
+          <control type="image">
+            <bordersize>30</bordersize>
+            <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+            <texture>$INFO[ListItem.Icon]</texture>
+            <aspectratio scalediffuse="false">keep</aspectratio>
+          </control>
+        </itemlayout>
+        <focusedlayout width="520" height="300">
+          <control type="image">
+            <bordersize>30</bordersize>
+            <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+            <texture>$INFO[ListItem.Icon]</texture>
+            <aspectratio scalediffuse="false">keep</aspectratio>
+          </control>
+        </focusedlayout>
 
-			<posx>65</posx>
-			<posy>78</posy>
-			<height>717</height>
-			<width>1350</width>
-			
-			<onup>557</onup>
-		
-			<ondown>557</ondown>
-		
-			
-			<oninfo condition="Container.Content(actors)|Container.Content(directors)">SetProperty(ActorThumb,$VAR[PosterThumb],Home)</oninfo>
-			<oninfo condition="Container.Content(actors)|Container.Content(directors)">SetFocus(8889)</oninfo>
-			<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
-			<!-- <onright>60</onright> -->
-			<scrolltime>160</scrolltime>
-			<viewtype label="31834">trio list</viewtype>
-			<orientation>vertical</orientation>
-			<preloaditems>2</preloaditems>
-			<aligny>top</aligny>
-			<pagecontrol>60</pagecontrol>
-			<include>Animation_OpenCloseFade</include>
-			<include>Animation_FadedByMenu</include>
-			<include>Animation_HiddenByInfo</include>
-			<include>CommonListIdTrio</include>
-			
-		</control>
-		<!-- Thumbnails -->
-		<control type="group">
+      </control>
+      <control type="group">
 
-			<animation type="Conditional" condition="Window.IsActive(addoninformation)">
-				<effect type="zoom" time="600" center="640,360" start="100" end="50" tween="cubic" easing="out" />
-				<effect type="fade" time="400" start="100" end="0" />
-			</animation>
-			<include>Animation_OpenCloseFade</include>
-			<include>Animation_FadedByMenu</include>
-			<include>Animation_HiddenByInfo</include>
-			<!-- Movie, TVShow and Season Posters -->
-			<posx>880</posx>
-			<posy>-20</posy>
-			<control type="group">
-				<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons)]</visible>
-				<posx>20</posx>
-				<posy>65</posy>
-				<control type="image">
-					<posx>17</posx>
-					<posy>15</posy>
-					<width>550</width>
-					<height>770</height>
-					<fadetime>100</fadetime>
-					<texture background="true" diffuse="postermatte.png">$INFO[ListItem.Icon]</texture>
-					<aspectratio scalediffuse="false">keep</aspectratio>
-					<visible>IsEmpty(ListItem.Title)</visible>
-				</control>
-				<control type="image">
-					<posx>17</posx>
-					<posy>15</posy>
-					<width>550</width>
-					<height>770</height>
-					<fadetime>100</fadetime>
-					<bordersize>35</bordersize>
-					<bordertexture border="35" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-					<texture background="true" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
-					<aspectratio scalediffuse="false">stretch</aspectratio>
-					<visible>!IsEmpty(ListItem.Title)</visible>
-				</control>
-			
-			</control>
-			<!-- Episode Posters -->
-			<control type="group">
-				<visible>Window.IsActive(10025) + Container.Content(episodes)</visible>
-				<posx>25</posx>
-				<posy>45</posy>
-				<control type="image">
-					<posx>22</posx>
-					<posy>112</posy>
-					<width>493</width>
-					<height>465</height>
-					<fadetime>100</fadetime>
-					<texture background="true" diffuse="episodematte.png">$INFO[ListItem.Icon]</texture>
-					<aspectratio scalediffuse="false">keep</aspectratio>
-					<visible>IsEmpty(ListItem.Title) | String.Contains(ListItem.Icon,default)</visible>
-				</control>
-				<control type="image">
-					<posx>22</posx>
-					<posy>162</posy>
-					<width>493</width>
-					<height>365</height>
-					<fadetime>100</fadetime>
-					<texture background="true">$INFO[ListItem.Icon]</texture>
-					<aspectratio scalediffuse="false">scale</aspectratio>
-					<visible>!IsEmpty(ListItem.Title) + !String.Contains(ListItem.Icon,default)</visible>
-				</control>
+        <animation type="Conditional" condition="Window.IsActive(addoninformation)">
+          <effect type="fade" time="400" start="100" end="0" />
+        </animation>
+        <include>Animation_OpenCloseFade</include>
+        <include>Animation_HiddenByInfo</include>
+        <!-- Movie, TVShow and Season Posters -->
+        <left>-550</left>
+        <top>240</top>
+        <control type="group">
+          <visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons)]</visible>
+          <posx>20</posx>
+          <control type="image">
+            <posx>17</posx>
+            <posy>15</posy>
+            <width>550</width>
+            <height>770</height>
+            <fadetime>100</fadetime>
+            <texture background="true" diffuse="postermatte.png">$INFO[ListItem.Icon]</texture>
+            <aspectratio scalediffuse="false">keep</aspectratio>
+            <visible>String.IsEmpty(ListItem.Title)</visible>
+          </control>
+          <control type="image">
+            <posx>17</posx>
+            <posy>15</posy>
+            <width>550</width>
+            <height>770</height>
+            <fadetime>100</fadetime>
+            <bordersize>35</bordersize>
+            <bordertexture border="35" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+            <texture background="true" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
+            <aspectratio scalediffuse="false">stretch</aspectratio>
+            <visible>!String.IsEmpty(ListItem.Title)</visible>
+          </control>
 
-				<control type="image">
-					<posx>-10</posx>
-					<posy>124</posy>
-					<width>554</width>
-					<height>443</height>
-					<texture>frames/ClassicFrame_FanartSmall.png</texture>
-					<fadetime>100</fadetime>
-					<visible>!IsEmpty(ListItem.Title) + !String.Contains(ListItem.Icon,default)</visible>
-				</control>
-			</control>
-			<!-- Images for All Items NOT in Video Library -->
-			<control type="image">
-			  <posx>37</posx>
-				<posy>45</posy>
-				<width>550</width>
-				<height>770</height>
-				<bordersize>30</bordersize>
-							<bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-					<texture background="true" fallback="home_art/movies.jpg">$VAR[PosterThumbActeurs]</texture>
-					<aspectratio scalediffuse="true">keep</aspectratio>
-				<!-- <texture>$INFO[ListItem.Icon]</texture> -->
-				
-				<visible>Container.Content(actors)|Container.Content(directors)</visible>
-			</control>
-			<control type="image">
-				<posx>37</posx>
-				<posy>45</posy>
-				<width>550</width>
-				<height>770</height>
-				<fadetime>100</fadetime>
-				<aspectratio align="center" aligny="center">keep</aspectratio>
-				<texture fallback="DefaultFolder.png">resource://resource.images.studios.white/$INFO[ListItem.Label].png</texture>
-				<visible>Window.IsActive(10025) + !String.Contains(Container.FolderPath,videodb://musicvideos/) + Container.Content(studios)</visible>
-			</control>
-			<control type="image">
-				<posx>37</posx>
-				<posy>45</posy>
-				<width>550</width>
-				<height>770</height>
-				<fadetime>100</fadetime>
-				<aspectratio align="right" aligny="center">keep</aspectratio>
-				<texture fallback="DefaultMovieGenre.jpg">moviegenres/$INFO[ListItem.Label].jpg</texture>
-				<visible>Window.IsActive(10025) + !String.Contains(Container.FolderPath,videodb://musicvideos/) + Container.Content(genres)</visible>
-			</control>
-			<control type="image">
-				<posx>37</posx>
-				<posy>45</posy>
-				<width>550</width>
-				<height>770</height>
-				<fadetime>100</fadetime>
-				<aspectratio align="right" aligny="center">keep</aspectratio>
-				<texture fallback="DefaultMusicGenre.jpg">musicgenres/$INFO[ListItem.Label].jpg</texture>
-				<visible>[Window.IsActive(502) | [Window.IsActive(10025) + String.Contains(Container.FolderPath,videodb://musicvideos/)]] + Container.Content(genres)</visible>
-			</control>
-		</control>
+        </control>
+        <!-- Episode Posters -->
+        <control type="group">
+          <visible>Window.IsActive(10025) + Container.Content(episodes)</visible>
+          <posx>25</posx>
+          <posy>45</posy>
+          <control type="image">
+            <posx>22</posx>
+            <posy>112</posy>
+            <width>493</width>
+            <height>465</height>
+            <fadetime>100</fadetime>
+            <texture background="true" diffuse="episodematte.png">$INFO[ListItem.Icon]</texture>
+            <aspectratio scalediffuse="false">keep</aspectratio>
+            <visible>String.IsEmpty(ListItem.Title) | String.Contains(ListItem.Icon,default)</visible>
+          </control>
+          <control type="image">
+            <posx>22</posx>
+            <posy>162</posy>
+            <width>493</width>
+            <height>365</height>
+            <fadetime>100</fadetime>
+            <texture background="true">$INFO[ListItem.Icon]</texture>
+            <aspectratio scalediffuse="false">scale</aspectratio>
+            <visible>!String.IsEmpty(ListItem.Title) + !String.Contains(ListItem.Icon,default)</visible>
+          </control>
 
-		<include>showacteurinfo</include>
-	</control>
-	
+          <control type="image">
+            <posx>-10</posx>
+            <posy>124</posy>
+            <width>554</width>
+            <height>443</height>
+            <texture>frames/ClassicFrame_FanartSmall.png</texture>
+            <fadetime>100</fadetime>
+            <visible>!String.IsEmpty(ListItem.Title) + !String.Contains(ListItem.Icon,default)</visible>
+          </control>
+        </control>
+        <!-- Images for All Items NOT in Video Library -->
+        <control type="image">
+          <posx>37</posx>
+          <posy>45</posy>
+          <width>550</width>
+          <height>770</height>
+          <bordersize>30</bordersize>
+          <bordertexture border="30" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+          <texture background="true" fallback="home_art/movies.jpg">$VAR[PosterThumbActeurs]</texture>
+          <aspectratio scalediffuse="true">keep</aspectratio>
+        <!-- <texture>$INFO[ListItem.Icon]</texture> -->
+
+        <visible>Container.Content(actors)|Container.Content(directors)</visible>
+      </control>
+      <control type="image">
+        <posx>37</posx>
+        <posy>45</posy>
+        <width>550</width>
+        <height>770</height>
+        <fadetime>100</fadetime>
+        <aspectratio align="center" aligny="center">keep</aspectratio>
+        <texture fallback="DefaultFolder.png">resource://resource.images.studios.white/$INFO[ListItem.Label].png</texture>
+        <visible>Window.IsActive(10025) + !String.Contains(Container.FolderPath,videodb://musicvideos/) + Container.Content(studios)</visible>
+      </control>
+      <control type="image">
+        <posx>37</posx>
+        <posy>45</posy>
+        <width>550</width>
+        <height>770</height>
+        <fadetime>100</fadetime>
+        <aspectratio align="right" aligny="center">keep</aspectratio>
+        <texture fallback="DefaultMovieGenre.png">moviegenres/$INFO[ListItem.Label].jpg</texture>
+        <visible>Window.IsActive(10025) + !String.Contains(Container.FolderPath,videodb://musicvideos/) + Container.Content(genres)</visible>
+      </control>
+      <control type="image">
+        <posx>37</posx>
+        <posy>45</posy>
+        <width>550</width>
+        <height>770</height>
+        <fadetime>100</fadetime>
+        <aspectratio align="right" aligny="center">keep</aspectratio>
+        <texture fallback="DefaultMusicGenre.png">musicgenres/$INFO[ListItem.Label].jpg</texture>
+        <visible>[Window.IsActive(502) | [Window.IsActive(10025) + String.Contains(Container.FolderPath,videodb://musicvideos/)]] + Container.Content(genres)</visible>
+      </control>
+    </control>
+  </control>
+
+<include>showacteurinfo</include>
+</control>
+
 </include>
 </includes>
