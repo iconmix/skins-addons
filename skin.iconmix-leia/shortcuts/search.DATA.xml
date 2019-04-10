@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<shortcuts>
+	<shortcut>
+		<label>344</label>
+		<label2>32009</label2>
+		<icon>DefaultProgram.png</icon>
+		<action>VideoLibrary.Search</action>
+	</shortcut>
+	
+</shortcuts>
