@@ -78,8 +78,8 @@
 				<textureradiofocus>keyboard/RadioButtonFO.png</textureradiofocus>
 				<textureradionofocus>keyboard/RadioButtonNF.png</textureradionofocus>
 				-->
-				<textureradiofocus>keyboard/RadiobuttonFO.png</textureradiofocus>
-				<textureradionofocus>keyboard/RadiobuttonNF.png</textureradionofocus>
+				<textureradiofocus>keyboard/RadioButtonFO.png</textureradiofocus>
+				<textureradionofocus>keyboard/RadioButtonNF.png</textureradionofocus>
 				<textoffsetx>20</textoffsetx>
 				<pulseonselect>false</pulseonselect>
 			</control>

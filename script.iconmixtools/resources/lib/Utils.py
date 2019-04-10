@@ -412,6 +412,7 @@ def DownloadAllExtraFanart(chemin=None,Allfanart=None,OnlyCheck=None):
 def getartworks(IDCollection=None,OriginalArt=None,updateartwork=None,TypeVideo="movie",IDKodiSetouSaisonTv=None,forceupdateartwork=None,FanartPath=None,Title=None)   :
                                             
   ArtWorks={}
+  Allfanart=[]
   json_data2=None
   chemin=None
   
@@ -448,7 +449,7 @@ def getartworks(IDCollection=None,OriginalArt=None,updateartwork=None,TypeVideo=
       if AllfanartCheck:
         Allfanart=AllfanartCheck[:]
       else:
-        AllFanart=[]
+        Allfanart=[]
       
       i=1
       try:
@@ -1353,10 +1354,10 @@ def UpdateSagas(Une=None,Toutes=None,updateartwork=None,Initialisation=""):
      Titre=""
      
      forceupdateartwork=None
-     if not updateartwork:
-             dialogC = xbmcgui.Dialog()
-             ret=dialogC.yesno(__language__(32582), __language__(32617 )," ","") #-- Show a dialog 'YES/NO'.
-             if ret>0:
+     if not updateartwork and SETTING("updatesagaposter")=="true":
+             #dialogC = xbmcgui.Dialog() 
+             #ret=dialogC.yesno(__language__(32582), __language__(32617 )," ","") #-- Show a dialog 'YES/NO'.
+             #if ret>0:
                forceupdateartwork=True
      if not Une :
        dp = xbmcgui.DialogProgress()
@@ -1424,14 +1425,15 @@ def GetEpisodesKodi(TvShowId=None,Statique=True,DbType=None):
                 Art["poster"]=Art["thumb"]
               else:
                 Art["poster"]="DefaultThumb.png"
-              try:
-                ItemListe.setProperty('PosterSaison', Art.get("season.poster"))
-              except:
-                i=0
+              
           else:
              Art={"poster":"DefaultThumb.png"}            
       
           ItemListe = xbmcgui.ListItem(label=item.get("title"),iconImage=Art[u"poster"],path=item.get("file"))
+          try:
+            ItemListe.setProperty('PosterSaison', Art.get("season.poster"))
+          except:
+            i=0
           ItemListe.setArt(Art)          
           
            #pistes audios tele
@@ -1721,6 +1723,7 @@ def getepisodes(IdKodi=None,saisonID=None,DBtype=None,Local=None):
                        if Saisons:
                           NbSaisons=len(Saisons)
                           SaisonsCompletes=0
+                          SaisonsInCompletes=0
                           cpt=1
                           while cpt<=NbSaisons:
                             itemSaisons=Saisons.get(str(cpt))
@@ -1732,16 +1735,27 @@ def getepisodes(IdKodi=None,saisonID=None,DBtype=None,Local=None):
                                 NbEpisodes=1
                                 NbEpisodesKodi=0
                               logMsg("Saison (%s) NbEpisodes (%s) NbEpisodesKodi (%s)" %(cpt,NbEpisodes,NbEpisodesKodi)) 
-                              #if NbEpisodes==NbEpisodesKodi:
-                              if NbEpisodesKodi!=0:
+                              if NbEpisodes<=NbEpisodesKodi:
                                 SaisonsCompletes=SaisonsCompletes+1
+                              else:
+                                SaisonsInCompletes=SaisonsInCompletes+1
                             cpt=cpt+1
-                          logMsg("[GetEpisodes] Saisons (%s) (%s)-(%s)" %(SaisonsCompletes,NbSaisons,Saisons))    
+                          
+                          ColorSaisons="FFFFFFFF"
+                          if SaisonsCompletes==NbSaisons:
+                            ColorSaisons="FF00FF00"
+                          elif SaisonsInCompletes>=SaisonsCompletes:
+                            ColorSaisons="FF00FFFF"
+                          else:
+                            ColorSaisons="FFFFFFFF"
+                          logMsg("[GetEpisodes] Saisons (%s) (%s)-(%s)" %(SaisonsCompletes,NbSaisons,SaisonsInCompletes))
+                            
+                              
                           if SaisonsCompletes>=0:
                             #if SaisonsCompletes>=NbSaisons:
                             #   WindowHome.setProperty('IconMixTvSaisons',__language__(32866))
                             #else:
-                            WindowHome.setProperty('IconMixTvSaisons','[COLOR=FFFFFFFF]%s[/COLOR]/%s'%(SaisonsCompletes,NbSaisons))
+                            WindowHome.setProperty('IconMixTvSaisons','[COLOR=%s]%s[/COLOR]/%s'%(ColorSaisons,SaisonsCompletes,NbSaisons))
                           
                      WindowHome.setProperty('ItemCountry1',ArrayCollection.get("pays"))
                      
@@ -2171,7 +2185,7 @@ def GetNextEpisodesKodi() :
                        TMDBNUMBER=get_TMDBID(DbType="tvshow",KodiId=None,UniqueId=Unique)
                        query_url="%stv/%s/season/%d/episode/%d?api_key=%s&language=en" %(BaseUrlTMDB,TMDBNUMBER,Saison,Episode,TMDBApiKey) #infos completes        
                        json_data = requestUrlJson(query_url)
-                       logMsg("Queryurl (%s) : jsondata (%s)" %(query_url,json_data))
+                       #logMsg("Queryurl (%s) : jsondata (%s)" %(query_url,json_data))
                        if json_data:
                         #Name=json_data.get("name")
                         Plot=json_data.get("overview")
@@ -2274,7 +2288,7 @@ def GetProgress(VideoType=None):
         except:
            PercentPlayed=""
         Elements.setProperty('PercentPlayed', str(PercentPlayed))    
-        Liste.append(["",Elements,True])    
+        Liste.append([Item.get("file"),Elements,True])    
   
   
   return Liste
@@ -2688,6 +2702,7 @@ def updategetnextepisode(KodiIdUnique=None,GlobalCalendrier=None):
             if dp.iscanceled(): break
           
           TvDbId=GetTvDbId(itemtvshow.get("uniqueid"),itemtvshow.get("tvshowid"))
+          logMsg("IDKODI (%s) : TVDBID (%s)" %(KodiId,TvDbId))
           
           if TvDbId:
             if Calendrier.get(str(TvDbId)):#serie deja dans le planning ?
@@ -2708,7 +2723,9 @@ def updategetnextepisode(KodiIdUnique=None,GlobalCalendrier=None):
                       Calendrier[str(TvDbId)]["Saisons"]=Saisons
                       
                       if KodiIdUnique:
-                        RetourUnique={"episodes":Calendrier[str(TvDbId)]}                      
+                        
+                        RetourUnique={"episodes":Calendrier[str(TvDbId)]}  
+                        logMsg("RetourUnique (%s)" %RetourUnique)                    
                       # return xx #alors pas besoin d'aller plus loin
             else:
               logMsg("serie pas dans le calendrier TvDbId : (%s) (%s)" %(TvDbId,Calendrier))
@@ -2805,60 +2822,62 @@ def getnextepisode(IdKodi=None,TvDbId=None,DbType=None,GlobalCalendrier=None,Pre
           network=None
         
          
-      if not ItemOk or not status or not network: 
-        logMsg("updateget status network")
+      if not ItemOk : #or not status or not network: 
+        
         ItemOk=updategetnextepisode(IdKodi,GlobalCalendrier)
-        
-        
-                
+        logMsg("updateget status network (%s)" %ItemOk)
+               
               
       if ItemOk: 
-              DetailsEp=ItemOk.get("episodes")
-              for item in DetailsEp: 
+        DetailsEp=ItemOk.get("episodes")
+        for item in DetailsEp: 
+          try:
+            NextTitle=item["title"]
+          except:
+            NextTitle=None
+          if NextTitle:
+            try:
+              DateNext=str(item["date"])
+            except:
+              DateNext=None
+            logMsg("DATENEXT [%s]" %DateNext)
+            if DateNext:
+              NextDate = datetime.date(int(DateNext[0:4]),int(DateNext[5:7]),int(DateNext[8:10]))
+              logMsg("(%s)-(%s)" %(DateNext,NextDate)) 
+              if Aujourdhui<=NextDate:
+                locale.setlocale(locale.LC_ALL,'')
+                NextDay=NextDate.strftime('%A %d/%m/%Y')
+                
+                if Aujourdhui==NextDate :
+                  NextDay=__language__(32618)
+                
+                
                 try:
-                  NextTitle=item["title"]
+                  windowhome = xbmcgui.Window(10000)  
                 except:
-                  NextTitle=None
-                if NextTitle:
+                  windowhome=None               
+                if windowhome:
+                  Code=item["code"]
+                 
+                  windowhome.setProperty('MonNextAired.NextDay',NextDay)                      
+                  windowhome.setProperty('MonNextAired.NextEpisode',Code)
                   try:
-                    DateNext=str(item["date"])
-                  except:
-                    DateNext=None
-                  if DateNext:
-                    NextDate = datetime.date(int(DateNext[0:4]),int(DateNext[5:7]),int(DateNext[8:10]))
+                     Saison=int(Code.split("E")[0].replace("S",""))
+                     Episode=int(Code.split("E")[1].replace("E",""))
+                     NbEpisodes=int(ItemOk.get("Saisons").get(str(Saison)))
+                     logMsg("Saison (%s) Episode (%s) NbEpisodes (%s)" %(Saison,Episode,NbEpisodes))
+                     if Episode==NbEpisodes:
+                        #NextTitle=NextTitle+" FINAL !!!"
+                        windowhome.setProperty('MonNextAired.IsFinal',"   >>"+__skin_string__(31795))
                      
-                    if Aujourdhui<=NextDate:
-                      locale.setlocale(locale.LC_ALL,'')
-                      NextDay=NextDate.strftime('%A %d/%m/%Y')
-                      
-                      if Aujourdhui==NextDate :
-                        NextDay=__language__(32618)
-                      
-                      
-                      try:
-                        windowhome = xbmcgui.Window(10000)  
-                      except:
-                        windowhome=None               
-                      if windowhome:
-                        Code=item["code"]
-                       
-                        windowhome.setProperty('MonNextAired.NextDay',NextDay)                      
-                        windowhome.setProperty('MonNextAired.NextEpisode',Code)
-                        try:
-                           Saison=int(Code.split("E")[0].replace("S",""))
-                           Episode=int(Code.split("E")[1].replace("E",""))
-                           NbEpisodes=int(ItemOk.get("Saisons").get(str(Saison)))
-                           logMsg("Saison (%s) Episode (%s) NbEpisodes (%s)" %(Saison,Episode,NbEpisodes))
-                           if Episode==NbEpisodes:
-                              #NextTitle=NextTitle+" FINAL !!!"
-                              windowhome.setProperty('MonNextAired.IsFinal',"   >>"+__skin_string__(31795))
-                           
-                        except:
-                           Saison=None
-                           Episode=None
-                        
-                        windowhome.setProperty('MonNextAired.NextTitle',NextTitle)   
-                      break
+                  except:
+                     Saison=None
+                     Episode=None
+                  
+                  windowhome.setProperty('MonNextAired.NextTitle',NextTitle)   
+                break
+              else:
+                logMsg("Date inferieure")
       
          
   
@@ -2900,7 +2919,7 @@ def getallnextepisodes(IdKodi=None,TvDbId=None,DbType=None,GlobalCalendrier=None
         network=None
       
        
-    if not ItemOk or not status or not network: 
+    if not ItemOk: # or not status: #or not network: 
       ItemOk=updategetnextepisode(IdKodi,Calendrier)
       
               
@@ -3184,7 +3203,15 @@ def GetDuration(DBID=None,DBTYPE=None):
       return str(datetime.timedelta(seconds=int(json_result.get("runtime"))))
   return None
 
-
+def stringTOarray(data=None):
+  
+  if data:
+    if len(data)==1:
+      retour=data[0]
+    else:
+      retour=data
+  return retour
+    
 
 def GetListItemInfoLabelsJson(data=None):
     
@@ -3195,13 +3222,7 @@ def GetListItemInfoLabelsJson(data=None):
     Valeur["genre"]=data.get("genre")
     if data.get("country"):
       Country=[]
-      if len(data.get("country"))>1:
-        for xx in data.get("country"):
-          Country.append(xx)
-      else:
-        Country=data.get("country")[0]
-     
-      Valeur["country"]=Country
+      Valeur["country"]=stringTOarray(data.get("country"))
     Valeur["year"]=int(data.get("year")) if data.get("year") else None
     if not Valeur["year"]:
         if data.get("firstaired"):
@@ -3226,19 +3247,18 @@ def GetListItemInfoLabelsJson(data=None):
     if data.get("cast"):
       Casting=[]
       CastingRole=[]
-      for xx in data.get("cast"):
-        Casting.append(xx["name"])
-        CastingRole.append((xx["name"],xx["role"]))      
+      try:
+        for xx in data.get("cast"):
+          if xx.get("name"):
+            Casting.append(xx["name"])
+            CastingRole.append((xx["name"],xx["role"]))
+      except:
+        Casting.append(data.get("cast"))      
       Valeur["castandrole"]=CastingRole
       Valeur["cast"]=Casting
     if data.get("director"):
-      director=[]
-      if len(data.get("director"))>1:
-        for xx in data.get("director"):
-          director.append(xx)
-      else:
-        director=data.get("director")[0]
-      Valeur["director"]=director
+      Valeur["director"]=stringTOarray(data.get("director"))
+      logMsg("director %s" %Valeur["director"])
     
     
     Valeur["mpaa"]=data.get("mpaa")
@@ -3248,22 +3268,11 @@ def GetListItemInfoLabelsJson(data=None):
     Valeur["originaltitle"]=data.get("originaltitle")
     Valeur["duration"]=int(data.get("duration")) if data.get("duration") else None
     if data.get("studio"):
-      studio=[]
-      if len(data.get("studio"))>1:
-        for xx in data.get("studio"):
-          studio.append(xx)
-      else:
-        studio=data.get("studio")[0]
-      Valeur["studio"]=studio
+      
+      Valeur["studio"]=stringTOarray(data.get("studio"))
     Valeur["tagline"]=data.get("tagline")
-    if data.get("writer"):
-      writer=[]
-      if len(data.get("writer"))>1:
-        for xx in data.get("writer"):
-          writer.append(xx)
-      else:
-        writer=data.get("writer")[0]
-      Valeur["writer"]=writer
+    if data.get("writer"):      
+      Valeur["writer"]=stringTOarray(data.get("writer"))
     Valeur["tvshowtitle"]=data.get("showtitle")
     Valeur["premiered"]=data.get("premiered")
     Valeur["status"]=data.get("status")
@@ -3271,13 +3280,8 @@ def GetListItemInfoLabelsJson(data=None):
     Valeur["firstaired"]=data.get("firstaired")
     Valeur["imdbnumber"]=data.get("imdbnumber")
     if data.get("credits"):
-      credits=[]
-      if len(data.get("credits"))>1:
-        for xx in data.get("credits"):
-          credits.append(xx)
-      else:
-        credits=data.get("credits")[0]
-      Valeur["credits"]=credits
+      
+      Valeur["credits"]=stringTOarray(data.get("credits"))
     Valeur["lastplayed"]=data.get("lastplayed")
     Valeur["votes"]=data.get("votes")
     Valeur["path"]=data.get("file")
@@ -3288,19 +3292,72 @@ def GetListItemInfoLabelsJson(data=None):
     if data.get("movieid"):
       Valeur["dbid"]=int(data.get("movieid"))
       Valeur["mediatype"]="movie"
-    if data.get("tvshowid"):
-      Valeur["dbid"]=int(data.get("tvshowid"))
-    if data.get("episodeid"):
+    
+    elif data.get("episodeid"):
       Valeur["dbid"]=int(data.get("episodeid"))
       Valeur["mediatype"]="episode"
       Valeur["episode"]=data.get("episode") if data.get("episode") else None
       Valeur["season"]=data.get("season") if data.get("season") else None
+    elif data.get("tvshowid"):
+      Valeur["dbid"]=int(data.get("tvshowid"))
+      Valeur["mediatype"]="tvshow"
+      
+    #elif data.get("dbid"):
+    #  Valeur["dbid"]=int(data.get("dbid"))
       
     return Valeur
   else:
-    return None             
+    return None       
+          
 def GetListItemInfoLabels(ContainerID=None):
   if ContainerID:
+    #pistes audios
+    streamdetails={}
+    audios=[]
+    videos=[{ 'language':"",'codec': xbmc.getInfoLabel("Container(%d).ListItem.VideoCodec"%(ContainerID)), 'height' : xbmc.getInfoLabel("Container(%d).ListItem.VideoResolution"%(ContainerID)),'aspect':xbmc.getInfoLabel("Container(%d).ListItem.VideoAspect"%(ContainerID)),'duration': xbmc.getInfoLabel("Container(%d).ListItem.Duration"%(ContainerID))}]
+    subtitles=[]
+    uniqueid={}
+    imdb=xbmc.getInfoLabel("Container(%d).ListItem.IMDBNumber" %(ContainerID))
+    tmdb=xbmc.getInfoLabel("Container(%d).ListItem.Property(TMDBNumber)"%(ContainerID))
+    if imdb:
+      uniqueid["imdb"]=imdb
+    if tmdb:
+      uniqueid["tmdb"]=tmdb
+      
+    Art={}
+    Art["thumb"]=xbmc.getInfoLabel("Container(%d).ListItem.Art(thumb)"%(ContainerID))
+    Art["poster"]=xbmc.getInfoLabel("Container(%d).ListItem.Art(poster)"%(ContainerID))
+    Art["banner"]=xbmc.getInfoLabel("Container(%d).ListItem.Art(banner)"%(ContainerID))
+    Art["fanart"]=xbmc.getInfoLabel("Container(%d).ListItem.Art(fanart)"%(ContainerID))
+    Art["clearart"]=xbmc.getInfoLabel("Container(%d).ListItem.Art(clearart)"%(ContainerID))
+    Art["clearlogo"]=xbmc.getInfoLabel("Container(%d).ListItem.Art(clearlogo)"%(ContainerID))
+    Art["landscape"]=xbmc.getInfoLabel("Container(%d).ListItem.Art(landscape)"%(ContainerID))
+    Art["icon"]=xbmc.getInfoLabel("Container(%d).ListItem.Art(icon)"%(ContainerID))  
+    
+    
+    
+    for i in range(1,4):          
+        Language=xbmc.getInfoLabel("Container(%d).ListItem.Property(AudioLanguage.%d)" %(ContainerID,i))
+        Channel=xbmc.getInfoLabel("Container(%d).ListItem.Property(AudioChannels.%d)" %(ContainerID,i))
+        Codec=xbmc.getInfoLabel("Container(%d).ListItem.Property(AudioCodec.%d)" %(ContainerID,i)) 
+        if Language:
+           channel={}
+           audios.append({'codec':Codec,'language':Language,'channels':Channel})            
+        else:
+          break
+     #sous-titres     
+    for i in range(1,4):          
+        Language=xbmc.getInfoLabel("Container(%d).ListItem.Property(SubtitleLanguage.%d)" %(ContainerID,i))              
+        if Language:
+          subtitles.append({'language':Language})          
+        else:
+          break          
+    streamdetails["audio"]=audios
+    streamdetails["video"]=videos
+    streamdetails["subtitle"]=subtitles
+    dbtype=xbmc.getInfoLabel("Container(%d).ListItem.DBType" %(ContainerID))+'id'
+    
+    
     
     return  ({'genre':xbmc.getInfoLabel("Container(%d).ListItem.Genre" %(ContainerID)),
               'country':xbmc.getInfoLabel("Container(%d).ListItem.Country" %(ContainerID)),
@@ -3341,7 +3398,15 @@ def GetListItemInfoLabels(ContainerID=None):
               'trailer':xbmc.getInfoLabel("Container(%d).ListItem.Trailer" %(ContainerID)),
               'dateadded':xbmc.getInfoLabel("Container(%d).ListItem.DateAdded" %(ContainerID)),
               'mediatype':xbmc.getInfoLabel("Container(%d).ListItem.DBTYPE" %(ContainerID)),
-              'dbid':int(xbmc.getInfoLabel("Container(%d).ListItem.DBID" %(ContainerID)))  if xbmc.getInfoLabel("Container(%d).ListItem.DBID" %(ContainerID)) else None})    
+              'streamdetails':streamdetails,
+              'title':xbmc.getInfoLabel("Container(%d).ListItem.Label" %(ContainerID)),
+              'file':xbmc.getInfoLabel("Container(%d).ListItem.FileNameAndPath"%(ContainerID)),
+              'uniqueid':uniqueid,  
+              'art':Art,
+              'dbtype':dbtype,
+              'dbid':int(xbmc.getInfoLabel("Container(%d).ListItem.DBID" %(ContainerID)))  if xbmc.getInfoLabel("Container(%d).ListItem.DBID" %(ContainerID)) else None,
+              '%s' %dbtype:int(xbmc.getInfoLabel("Container(%d).ListItem.DBID" %(ContainerID)))  if xbmc.getInfoLabel("Container(%d).ListItem.DBID" %(ContainerID)) else None  
+                })    
 
 
 def CheckItemExtrafanartPath(ItemPath=None,ItemSsRep='extrafanart'):
@@ -3362,7 +3427,28 @@ def CheckItemExtrafanartPath(ItemPath=None,ItemSsRep='extrafanart'):
  
   return ""  
 
-
+def getMovieTvFanarts(KodiID=None,VideoType=None):
+  ListeFanarts=[]
+  if KodiID and VideoType:
+    ID=get_uniqueid(KodiID,VideoType)  
+    if ID:
+      if "movie" in VideoType.lower():
+         url="http://webservice.fanart.tv/v3/movies/%s?api_key=769f122ee8aba06f4a513830295f2bc0" %(ID) #infos completes
+      else:
+         url="http://webservice.fanart.tv/v3/tv/%s?api_key=769f122ee8aba06f4a513830295f2bc0" %(ID) #infos completes
+      json_data = requestUrlJson(url)
+      if json_data:
+        ListeFanart=json_data.get("moviebackground")
+        if ListeFanart:    
+          for Item in ListeFanart:                        
+                 ItemListe=xbmcgui.ListItem(label="extrafanart",iconImage=Item.get("url"))
+                 ItemListe.setProperty("fanart",Item.get("url"))
+                 #ItemListe.setInfo("pictures", {"title": "extrafanart","picturepath": Item}) 
+                 ListeFanarts.append(ItemListe)
+  return ListeFanarts 
+        
+       
+    
   
 def getSagaFanartsV2(SagaItemPath=None):
   ListeFanarts=[] 
@@ -3372,8 +3458,7 @@ def getSagaFanartsV2(SagaItemPath=None):
       if ItemPath!="":
         ListeFanart=get_filepaths(ItemPath)
       if ListeFanart:    
-        for Item in ListeFanart:
-            
+        for Item in ListeFanart:            
             if Item.endswith('.jpg') or Item.endswith('.jpeg') or Item.endswith('.png'):
                ItemListe=xbmcgui.ListItem(label="extrafanart",iconImage=Item)
                ItemListe.setProperty("fanart",Item)
@@ -3652,7 +3737,6 @@ def ActeurFilmsTvKODI(ActeurType=None,Acteur=None,Statique=None):
                             ItemListe.setProperty('SubtitleLanguage.%d' %(i), SubtitleElement.get("language"))  
                             ItemListe.addStreamInfo('subtitle',SubtitleElement)                   
                             i=i+1
-                            
                  InfoLabels=GetListItemInfoLabelsJson(Item)
                  if InfoLabels:
                    InfoLabels["mediatype"]= TypeVideo
@@ -4005,15 +4089,24 @@ def GetActeurInfoMaj(ActeurId,NomActeur):
           #on recherche sur tmdb dans la langue de KODI
             query_url = "%sperson/%s?api_key=%s&language=%s&include_adult=true" % (BaseUrlTMDB,ActeurId.get("tmdb"),TMDBApiKey,KODILANGCODE) 
             json_datatmdb = requestUrlJson(query_url) 
+        try:
+          biobio=json_data.get("biography")
+        except:
+          biobio=None
+        try:
+          biobio2=json_datatmdb.get("biography")
+        except:
+          biobio2=None
+        
             
-        if not json_data or (not json_data.get("biography") and not json_datatmdb.get("biography")):   
+        if not json_data or (not biobio and not biobio2):   
               #pas de biographie dans la langue de KODI alors on cherche en Anglais......
               query_url = "%sperson/%s?api_key=%s&language=EN&include_adult=true" % (BaseUrlTMDB,ActeurId.get("tmdb"),TMDBApiKey) 
               json_datatmdb = requestUrlJson(query_url)
           
        
     if json_data or json_datatmdb: 
-          if json_data.get("biography"):
+          if json_data and json_data.get("biography"):
              ActeurCache["biographie"]=json_data.get("biography")
           else:
              if not json_datatmdb:
@@ -4021,7 +4114,7 @@ def GetActeurInfoMaj(ActeurId,NomActeur):
              else:
               ActeurCache["biographie"]=json_datatmdb.get("biography")
              
-          if json_data.get("birthday"):
+          if json_data and json_data.get("birthday"):
              ActeurCache["naissance"]=json_data.get("birthday")
           else:
              if not json_datatmdb:
@@ -4029,7 +4122,7 @@ def GetActeurInfoMaj(ActeurId,NomActeur):
              else:
               ActeurCache["naissance"]=json_datatmdb.get("birthday")
              
-          if json_data.get("deathday"):
+          if json_data and json_data.get("deathday"):
              ActeurCache["deces"]=json_data.get("deathday")
           else:
              if not json_datatmdb:
@@ -4037,7 +4130,7 @@ def GetActeurInfoMaj(ActeurId,NomActeur):
              else:
               ActeurCache["deces"]=json_datatmdb.get("deathday")
              
-          if json_data.get("place_of_birth"):
+          if json_data and json_data.get("place_of_birth"):
              ActeurCache["lieunaissance"]=json_data.get("place_of_birth")
           else:
              if not json_datatmdb:
@@ -4045,7 +4138,7 @@ def GetActeurInfoMaj(ActeurId,NomActeur):
              else:
               ActeurCache["lieunaissance"]=json_datatmdb.get("place_of_birth")
              
-          if json_data.get("name"):
+          if json_data and json_data.get("name"):
              ActeurCache["nom"]=json_data.get("name")
           else:
              if not json_datatmdb:
@@ -4053,7 +4146,7 @@ def GetActeurInfoMaj(ActeurId,NomActeur):
              else:
               ActeurCache["nom"]=json_datatmdb.get("name")
              
-          if json_data.get("realName"):
+          if json_data and json_data.get("realName"):
              ActeurCache["nomreel"]=json_data.get("realName")
           else:
              if not json_datatmdb:
@@ -4065,7 +4158,7 @@ def GetActeurInfoMaj(ActeurId,NomActeur):
           #"picture":{"name":"Photo Matthew Vaughn","path":"/pictures/15/01/15/17/40/151965.jpg","href":"http://fr.web.img2.acsta.net/pictures/15/01/15/17/40/151965.jpg"}
           
           
-          if json_data.get("poster"):
+          if json_data and json_data.get("poster"):
              ActeurCache["poster"]=json_data.get("poster")
           else:
              if not json_datatmdb:
@@ -4241,15 +4334,17 @@ def SaveBandeAnnoncesFull(ListeTrailer=None):
 def init_bande_annonces():
   
   savepath=ADDON_DATA_PATH+"/bandeannonces/annonces"
+  ziparchive=savepath+'.zip'
   try:
-    zf = zipfile.ZipFile(savepath+'.zip')
+    zf = zipfile.ZipFile(ziparchive)
   except:
     zf=None
   if zf:
     try:            
         zf.extract("annonces",ADDON_DATA_PATH+"/bandeannonces/")         
     except KeyError:
-        logMsg('ERROR: Did not find %s in zip file' %ziparchive )       
+        logMsg('ERROR: Did not find %s in zip file' %ziparchive )
+    zf.close()       
   
   if xbmcvfs.exists(savepath):                  
     #lecture dans le fichier existant
@@ -4285,6 +4380,7 @@ def GetBandeAnnonces(GlobalAnnonces,BAID,KodiTitre,Annee):
             if SETTING("allocineactif")=="true":
               try: 
                 ListeTrailer=ListeTrailer+data.get("Allocine")
+                             
                 LenTrailer[0]=1
               except:
                 LenTrailer[0]=-1
@@ -4539,7 +4635,7 @@ def BACineSeries(Titre=None,typevideo=None,Annee=None,Saison=None)  :
           
     if data:
           Liste=data.split('<h2 class="post-box-title">')
-          logMsg("LEN ITEM CINSERIES %d" %len(Liste))
+          #logMsg("LEN ITEM CINSERIES %d" %len(Liste))
           if len(Liste)>1:
             for item in Liste[1:]:
               #logMsg("ITEM CINSERIES %s" %item)
@@ -4560,8 +4656,12 @@ def BACineSeries(Titre=None,typevideo=None,Annee=None,Saison=None)  :
             data=getCineseries(item.get("url"))
             
             if data:
-              ItemAnnee=data.split('-date\/')[1].split('\/","')[0]
-              logMsg("CineLinkAnnee : %s - %s" %(ItemAnnee,Annee))
+              try:
+               ItemAnnee=data.split('-date/')[1].split('/","')[0]
+               logMsg("CineLinkAnnee : %s - %s" %(ItemAnnee,Annee))
+              except:
+               ItemAnnee=None
+               logMsg("CineLink sans annee : %s" %(data))
               if ItemAnnee==Annee:
                 linky=data.split('<div class="containerkowe">')[1]
                 #allowfullscreen data-rocket-lazyload="fitvidscompatible" data-lazy-src="//videos.cineserie.com/player/index/98079/3/18"></iframe><nosc
@@ -5151,7 +5251,9 @@ def getRuntime(ItemId=None,TypeID=None):
 """
 def get_uniqueid(ItemId=None,DbType=None):
   #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetMovieDetails","params":{"movieid":221,"properties":["imdbnumber","uniqueid"]},"id":"1"}    
-  json_result = getJSON('VideoLibrary.GetMovieDetails', '{ "movieid":%d,"properties":["uniqueid"] }' %(int(ItemId)))
+  if not "movie" in DbType.lower():
+    DbType="tvshow"
+  json_result = getJSON('VideoLibrary.Get%sDetails' %DbType, '{ "%sid":%d,"properties":["uniqueid"] }' %(DbType,int(ItemId)))
   if json_result:
     UniqueId=json_result.get("uniqueid")
     if UniqueId:
@@ -5230,7 +5332,7 @@ def get_TMDBID(DbType=None,KodiId=None,UniqueId=None):
        
    if externalXX:
      query_url = "%sfind/%s?api_key=%s&language=%s&external_source=%s&include_adult=true" % (BaseUrlTMDB,ItemId,TMDBApiKey,KODILANGCODE,externalXX) 
-     logMsg("get_TMDBID(%s)" %query_url)    
+     #logMsg("get_TMDBID(%s)" %query_url)    
      json_data = requestUrlJson(query_url)
      ItemIdR=str(ItemId) 
      if json_data:
@@ -5340,12 +5442,13 @@ def GetModeVues(content_type=None):
                 label = xbmc.getLocalizedString(int(view.attributes['languageid'].nodeValue))
                 
                 viewid = view.attributes['value'].nodeValue
-                mediatypes = view.attributes['type'].nodeValue.lower().split(",")
-                if (("all" in mediatypes or content_type.lower() in mediatypes) and
-                    (not "!" + content_type.lower() in mediatypes)):
-                    image = "special://skin/extras/viewthumbs/%s.jpg" % viewid
-                    
-                    ListeVues.append([label,viewid,mediatypes,image])
+                if not xbmc.getCondVisibility("Skin.HasSetting(hide%s)" %viewid):
+                  mediatypes = view.attributes['type'].nodeValue.lower().split(",")
+                  if (("all" in mediatypes or content_type.lower() in mediatypes) and
+                      (not "!" + content_type.lower() in mediatypes)):
+                      image = "special://skin/extras/viewthumbs/%s.jpg" % viewid
+                      
+                      ListeVues.append([label,viewid,mediatypes,image])
                     
             ListeVuesTriee=sorted(ListeVues, key=lambda x:x[0],reverse=False)
             reindex=None
@@ -5638,6 +5741,7 @@ def logMsg(msg, level = 0):
             xbmc.log("IconMixTools addon --> " + msg, level=xbmc.LOGNOTICE)
 
 def GetCache(search_str=None,Cache=None):
+   version="1.1"
    if Cache:
      if SETTING("autocomplete_cache")=="true":
        if xbmcvfs.exists(Cache):
@@ -5645,7 +5749,7 @@ def GetCache(search_str=None,Cache=None):
               ArrayCollection = json.load(data_file)
               data_file.close()
               try:
-                if search_str:
+                if search_str and ArrayCollection.get("version")==version:
                   Liste=[]
                   recherche=search_str.lower()
                   for item in ArrayCollection.get("resultats"):
@@ -5653,41 +5757,46 @@ def GetCache(search_str=None,Cache=None):
                       Liste.append(item)
                   return Liste
                 else:
-                  return ArrayCollection.get("resultats")
+                  if ArrayCollection.get("version")==version:
+                   return ArrayCollection.get("resultats")
+                  else:
+                   os.remove(Cache)
+                   return []
+                    
               except:
                 return []
      if search_str:
           MaxItems=50
           if "films" in Cache:
             logMsg("ICI : %s,%s" %(Cache,search_str))
-            return getJSON("VideoLibrary.GetMovies", '{"limits":{"end":%d},"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["setid"]}' %(MaxItems,"title",search_str))
+            return getJSON("VideoLibrary.GetMovies", '{"limits":{"end":%d},"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["setid","art","plot"]}' %(MaxItems,"title",search_str))
 
           if "tvshows"  in Cache:
-            return getJSON("VideoLibrary.GetTvShows", '{"limits":{"end":%d},"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["episode"]}' %(MaxItems,"title",search_str))
+            return getJSON("VideoLibrary.GetTvShows", '{"limits":{"end":%d},"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["episode,"art","plot""]}' %(MaxItems,"title",search_str))
            
              
           if "episodes"  in Cache:
-            return getJSON("VideoLibrary.GetEpisodes", '{"limits":{"end":%d},"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["tvshowid"]}' %(MaxItems,"title",search_str))
+            return getJSON("VideoLibrary.GetEpisodes", '{"limits":{"end":%d},"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["tvshowid","art","plot","season","showtitle"]}' %(MaxItems,"title",search_str))
 
           if "acteurs"  in Cache:
-            return getJSON("Files.GetDirectory", '{"directory":"videodb://movies/actors"}')
+            return getJSON("Files.GetDirectory", '{"directory":"videodb://movies/actors","properties":["art"]}')
             ListeActors=[]
             if json_result:
               for item in json_result:
-                 ListeActors.append({"actormovieid":item.get("id"),"label":item["label"]}) 
+                 ListeActors.append({"actormovieid":item.get("id"),"label":item["label"],"art":item["art"]}) 
                 
-            json_result = getJSON("Files.GetDirectory", '{"directory":"videodb://tvshows/actors"}')
+            json_result = getJSON("Files.GetDirectory", '{"directory":"videodb://tvshows/actors","properties":["art"]}')
             if json_result:
               for item in json_result:
-                ListeActors.append({"actortvshowid":item.get("id"),"label":item["label"]})
+                ListeActors.append({"actortvshowid":item.get("id"),"label":item["label"],"art":item["art"]})
             return ListeActors  
           
           if "realisateurs"  in Cache:
-            json_result = getJSON("Files.GetDirectory", '{"directory":"videodb://movies/directors"}')
+            json_result = getJSON("Files.GetDirectory", '{"directory":"videodb://movies/directors","properties":["art"]}')
             Listedirectors=[]
             if json_result:          
               for item in json_result:
-                  Listedirectors.append({"directormovieid":item.get("id"),"label":item["label"]})
+                  Listedirectors.append({"directormovieid":item.get("id"),"label":item["label"],"art":item["art"]})
             """
             json_result = getJSON("Files.GetDirectory", '{"directory":"videodb://tvshows/directors"}')
             if json_result:
@@ -5697,19 +5806,19 @@ def GetCache(search_str=None,Cache=None):
             return Listedirectors 
             
           if "addons"  in Cache:
-            json_result = getJSON("Addons.GetAddons", '{"properties":["name"]}')
+            json_result = getJSON("Addons.GetAddons", '{"properties":["name","description"]}')
             Listeaddons=[]
             if json_result:          
               for item in json_result:
-                  Listeaddons.append({"addonid":item.get("id"),"label":item["name"],"type":item["type"]})
+                  Listeaddons.append({"addonid":item.get("id"),"label":item["name"],"type":item["type"],"plot":item["description"]})
             return Listeaddons        
           
           if "artistes"  in Cache:
-            return getJSON("AudioLibrary.GetArtists", '{"limits":{"end":%d},"filter":{"field":"%s","operator":"contains","value":"%s"}}' %(MaxItems,"artist",search_str))
+            return getJSON("AudioLibrary.GetArtists", '{"limits":{"end":%d},"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["thumbnail","description"]}' %(MaxItems,"artist",search_str))
 
 
           if "albums"  in Cache:
-            return getJSON("AudioLibrary.GetAlbums", '{"limits":{"end":%d},"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["artistid"]}' %(MaxItems,"album",search_str))
+            return getJSON("AudioLibrary.GetAlbums", '{"limits":{"end":%d},"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["artistid","thumbnail","description"]}' %(MaxItems,"album",search_str))
 
    return {}
 
@@ -5990,7 +6099,7 @@ def GetMusicFicheAlbum(AlbumId=None,Cover=None,GetArtistData=None,PlayerActif=No
               save_data["ArtBrainzId"]=Details.get("ArtBrainzId")
               save_data["AlbumCover"]=Details.get("AlbumCover")
               save_data["AlbumBack"]=Details.get("AlbumBack")
-              save_data["AlbumCd"]=Details.get("AlbumCd")
+              save_data["AlbumCd"]=urllib.unquote(Details.get("AlbumCd"))
               save_data["AlbumInfo"]=Details.get("AlbumInfo")
               save_data["AlbumStudio"]=Details.get("AlbumStudio")
               
@@ -6040,7 +6149,18 @@ def GetMusicFicheAlbum(AlbumId=None,Cover=None,GetArtistData=None,PlayerActif=No
                 str_ = json.dumps(save_data,indent=4, sort_keys=True,separators=(',', ':'), ensure_ascii=False)
                 outfile.write(to_unicode(str_)) 
             except:
-              logMsg("Erreur GetMusicFicheAlbum io.open (%s)" %(savepath) )    
+              logMsg("Erreur GetMusicFicheAlbum io.open (%s)" %(savepath) )
+              
+              
+        for key, value in save_data.items():
+          try:
+            acd=urllib.unquote(value)
+            if acd[len(acd)-1]=='/':
+              acd=acd.split('/')[0]
+              save_data[key]=acd
+          except:
+            i=None
+         
   return save_data,ArtisteData
   
   

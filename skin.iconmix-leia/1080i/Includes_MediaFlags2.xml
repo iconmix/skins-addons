@@ -959,7 +959,7 @@
         <align>center</align>
         <font>exptext</font>
         <textcolor>MediaDetailsEpisodes</textcolor>
-        <label>$LOCALIZE[33054]:</label>
+        <label>$LOCALIZE[33054]</label>
       </control>
       <control type="label">
         <top>27</top>
@@ -1148,7 +1148,7 @@
         <align>center</align>
         <font>exptext</font>
         <textcolor>MediaDetailsEpisodes</textcolor>
-        <label>$LOCALIZE[33054]:</label>
+        <label>$LOCALIZE[33054]</label>
       </control>
       <control type="label">
         <top>27</top>
@@ -2140,6 +2140,27 @@
         <height>100</height>
         <width>2200</width>
         <align>center</align>
+        <itemgap>1</itemgap>
+        <orientation>horizontal</orientation>
+        <include>mediaflagline1</include>
+        <include>mediaflagline2</include>
+      </control>
+    </control>
+
+  </include>
+  <include name="MediaInfoGroupUp2">
+    <control type="group">
+      
+      <align>center</align>
+      
+      <include>Animation_CommonFade</include>
+
+      <visible>!String.Contains(Container.FolderPath,plugin)</visible>
+      <visible>!String.StartsWith(ListItem.Label,..)+[Container.Content(files) |Container.Content(movies)| Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons)  | Container.Content(MusicVideos)]</visible>
+      <include>VisibleIfNotMovieSet</include>
+      <control type="grouplist"> <!-- 1ere ligne-->
+        <!-- <posx>500</posx> -->
+        
         <itemgap>1</itemgap>
         <orientation>horizontal</orientation>
         <include>mediaflagline1</include>

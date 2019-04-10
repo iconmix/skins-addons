@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 <!-- telex --->
+<include name="Vue900">
+  <animation type="Conditional" condition="Control.HasFocus(900)" reversible="false">
+          <effect type="fade" end="0" time="0"  />
+          </animation>
+</include>
 <include name="AnimationWidget1">
   <param name="id">0</param>
   <definition>

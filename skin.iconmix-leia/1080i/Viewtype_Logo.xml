@@ -46,7 +46,7 @@
 				<pagecontrol>60</pagecontrol>
 				
 				
-				<visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows) |Container.Content(sets) ]</visible>
+				<!-- <visible>Window.IsActive(10025) + [Container.Content(movies) | Container.Content(tvshows) |Container.Content(sets) ]</visible>-->
 				<itemlayout width="400" height="194">
 				  
 					<control type="group">

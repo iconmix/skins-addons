@@ -59,9 +59,9 @@
  
 	<include name="Viewtype_Gallery_Square">
 		<control type="group">
-			<visible>Control.IsVisible(58)</visible>
+			<visible>Control.IsVisible(558)</visible>
 			<!-- Browser -->
-			<control type="panel" id="58">
+			<control type="panel" id="558">
 				<viewtype label="$LOCALIZE[31822]">icon</viewtype>
 				<posx>25</posx>
 				<posy>10</posy>
@@ -69,14 +69,9 @@
 				<height>810</height>
 				<scrolltime>200</scrolltime>
 				<orientation>vertical</orientation>
-				<onup>58</onup>
-				<ondown>58</ondown>
+				<onup>558</onup>
+				<ondown>558</ondown>
 				<include condition="!Skin.HasSetting(ViewLockdown)">OnLeft7000</include>
-
-
-
-
-
 				<onright>61</onright>
 				<pagecontrol>61</pagecontrol>
 				<preloaditems>2</preloaditems>

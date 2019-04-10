@@ -57,6 +57,7 @@
         <onclick>Close</onclick>
       </control>
       <control type="group" id="78500">
+        <visible>!Control.HasFocus(9010)</visible>
         <centerleft>50%</centerleft>
         <bottom>0</bottom>
         <height>480</height>
@@ -524,6 +525,7 @@
   <height>460</height>
   <centerleft>90%</centerleft>
   <itemgap>5</itemgap>
+  <visible>!Control.HasFocus(9010)</visible>
   <onup condition="Integer.IsGreater(Container(9010).NumItems,0)">9010</onup>
   <onup>312</onup>
   <ondown>95200</ondown>
@@ -565,6 +567,7 @@
   <animation type="Conditional"  condition="ControlGroup(9012).HasFocus|ControlGroup(9013).HasFocus" reversible="true">
     <effect type="fade" start="100" end="50"   time="200"  />
   </animation>
+  
 
 <control type="group">
   <visible>Integer.IsGreater(Container(9010).NumItems,0)+!Container(9010).IsUpdating</visible>
@@ -605,12 +608,74 @@
   </control>
   </control>
  
-  <control type="button" id="9014">
+  <control type="button" id="9024">
     <!-- appel indirect d'affichage de l'item sélectionné -->
       <onfocus>SetProperty(AutoCompletionShowItem,$INFO[Container(9010).ListItem.FolderPath],Home)</onfocus>
     <onfocus>SetFocus(9010)</onfocus>
   </control>
+  <control type="button" id="9014">
+    <!-- appel indirect d'affichage de l'item sélectionné -->
+      <onfocus>SetProperty(AutoCompletionShowItem,$INFO[Container(9010).ListItem.DBID,plugin://script.iconmixtools/?action=showinfoitem&id=,],Home)</onfocus>
+    <onfocus>SetFocus(9010)</onfocus>
+  </control>
  <!-- recherche dans base KODI -->
+ <control type="label">      
+		  <width max="1920">auto</width>
+      <height>40</height>
+      <left>85</left>
+      <bottom>330</bottom>
+      <label>[COLOR=black]$INFO[Container(9010).ListItem.Label2,, : ][/COLOR]$INFO[Container(9010).ListItem.Label]</label>
+      <textcolor>yellow</textcolor>
+      <include>FontTitre</include>
+      <shadowcolor>FF7F7F7F</shadowcolor>
+      <visible>Control.HasFocus(9010)</visible>
+		</control>
+		<control type="image">
+				  <width>80</width>
+				  <height>80</height>
+				  <texture>$INFO[Container(9010).ListItem.Icon]</texture>
+				  <visible>Control.HasFocus(9010)</visible>
+				  <bottom>330</bottom>
+				  <left>5</left>
+				  
+          <aspectratio scalediffuse="true">keep</aspectratio>
+				  
+				</control>
+ <control type="image">
+				  <width>240</width>
+				  <height>320</height>
+				  <texture>$INFO[Container(9010).ListItem.Art(poster)]</texture>
+				  <visible>Control.HasFocus(9010)</visible>
+				  <bottom>0</bottom>
+				  <bordersize>25</bordersize>
+          <bordertexture border="25" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+          <aspectratio scalediffuse="true">keep</aspectratio>
+				  
+				</control>
+	<control type="textbox">      
+		  <width>1500</width>
+      <height>250</height>
+      <include>FontPlot</include>
+      <include>SpecialPlotBoxScroll</include>
+      <left>250</left>
+      <label>$INFO[Container(9010).ListItem.Plot]</label>
+      <textcolor>black</textcolor>
+      <shadowcolor>FFFFFFFF</shadowcolor>
+      <bottom>5</bottom>
+      <visible>Control.HasFocus(9010)</visible>
+		</control>
+		<!-- debug --
+ <control type="label">      
+		  <width max="1920">auto</width>
+      <height>90</height>
+      <left>40</left>
+      <posy>10</posy>
+      <label>$INFO[Container(9010).ListItem.FolderPath]/$INFO[Container(9010).ListItem.DBID]/$INFO[Container(9010).ListItem.DBTYPE]/$INFO[Container(9010).ListItem.Art(poster)]/$INFO[Container(9010).ListItem.Plot]</label>
+      <textcolor>white</textcolor>
+      <shadowcolor>FF7F7F7F</shadowcolor>
+      <visible>Control.HasFocus(9010)</visible>
+		</control>
+		-->
   <control type="panel" id="9010">
     <visible>String.IsEqual(Skin.String(AutoCompleteProvider),kodi)</visible>
     <left>65</left>
@@ -620,8 +685,9 @@
     <scrolltime tween="cubic" easing="out">500</scrolltime>
     <orientation>vertical</orientation>
     <onleft>9012</onleft>
-    
-     <onclick>SetFocus(9014)</onclick>     
+     <onclick>SetFocus(9014)</onclick>
+     <oninfo>SetFocus(9024)</oninfo>   
+       
  
     <onup>312</onup>
     <ondown>105</ondown>

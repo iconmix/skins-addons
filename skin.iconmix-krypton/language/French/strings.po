@@ -246,7 +246,9 @@ msgctxt "#31147"
 msgid "Volume level for automatic trailers/NetFlix"
 msgstr "Volume des bandes-annonces automatiques/Netflix"
 
-
+msgctxt "#31148"
+msgid "Activate/Deactivate views"
+msgstr "Activer/Desactiver les vues"
 
 
 msgctxt "#31159"
@@ -290,8 +292,8 @@ msgid "rwx32"
 msgstr "<< x32"
 
 msgctxt "#31183"
-msgid "Viewtype"
-msgstr "Type de Vue"
+msgid "View active"
+msgstr "Vues actives"
 
 msgctxt "#31207"
 msgid "Current"
@@ -1537,8 +1539,9 @@ msgid "Logo vertical"
 msgstr ""
 
 msgctxt "#31819"
-msgid "Wheel"
-msgstr "Roulette"
+msgid "Detailed list"
+msgstr "Liste détaillée"
+
 
 msgctxt "#31820"
 msgid "Gallery"
@@ -1557,8 +1560,8 @@ msgid "Panel Square"
 msgstr "Vignettes"
 
 msgctxt "#31824"
-msgid "Landscape Vertical"
-msgstr "Paysage Vertical"
+msgid "Music Box"
+msgstr "Music Box"
 
 msgctxt "#31825"
 msgid "3D reflect"
@@ -1864,8 +1867,8 @@ msgid "Back"
 msgstr "Dossier précédent"
 
 msgctxt "#32017"
-msgid "Access to all episodes"
-msgstr "Accéder à tous les épisodes"
+msgid "Access to directory"
+msgstr "Accéder au dossier"
 
 msgctxt "#32018"
 msgid "Show very big plot window"

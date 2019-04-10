@@ -123,18 +123,26 @@
 						<texturenofocus>osd/osd_button_stop_nf.png</texturenofocus> 
 						<onclick>PlayerControl(stop)</onclick>
 					</control>
-					<control type="togglebutton" id="4">
+					<control type="button" id="4">
   <description>Play</description>
 						<include>Animation_ButtonFocus</include>
 						<height>80</height>
 						<width>80</width>
 						<texturefocus>osd/osd_button_pause_fo.png</texturefocus>
 						<texturenofocus>osd/osd_button_pause_nf.png</texturenofocus> 
-						<usealttexture>Player.Paused | Player.Forwarding | Player.Rewinding</usealttexture>
-						<alttexturefocus>osd/osd_button_play_fo.png</alttexturefocus>
-						<alttexturenofocus>osd/osd_button_play_nf.png</alttexturenofocus>
-						<disabledcolor>-</disabledcolor>
-						<colordiffuse>-</colordiffuse>
+						<visible>!Player.Paused +!Player.Forwarding+!Player.Rewinding</visible>						
+						<onclick>PlayerControl(play)</onclick>
+					</control>
+					<control type="button" id="4">
+  <description>Play</description>
+						<include>Animation_ButtonFocus</include>
+						<height>80</height>
+						<width>80</width>
+						
+						<visible>Player.Paused | Player.Forwarding | Player.Rewinding</visible>
+						<texturefocus>osd/osd_button_play_fo.png</texturefocus>
+						<texturenofocus>osd/osd_button_play_nf.png</texturenofocus>
+						
 						<onclick>PlayerControl(play)</onclick>
 					</control>
 					<control type="button" id="6">

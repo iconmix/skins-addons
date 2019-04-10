@@ -583,17 +583,21 @@
 
           </control>
         </control>
-
-        <control type="image">
+        <control type="group">
           <top>-150</top>
           <left>0</left>
           <width>360</width>
           <height>450</height>
+          <visible>Control.HasFocus(8011$SKINSHORTCUTS[id])</visible>
+        <control type="image">
+          
           <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
           <bordersize>22</bordersize>
           <bordertexture border="22" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
           <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVarList8011$SKINSHORTCUTS[id]]</texture>
-          <visible>Control.HasFocus(8011$SKINSHORTCUTS[id])</visible>
+          
+        </control>
+        
         </control>
         <control type="grouplist">
           <top>20</top>
@@ -648,31 +652,30 @@
         </control>
 
 
-        <control type="list" id="8011$SKINSHORTCUTS[id]">
+         <control type="list" id="8011$SKINSHORTCUTS[id]">
           <left>360</left>
           <top>-120</top>
-          <width>630</width>
+          <width>830</width>
           <height>390</height>
-          <onright condition="Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)|String.Contains(Control.getLabel(8032$SKINSHORTCUTS[id]),WeatherForecast)">9023</onright>
-          <onleft condition="Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)|String.Contains(Control.getLabel(8032$SKINSHORTCUTS[id]),WeatherForecast)">9023</onleft>
+          <onright condition="Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget.2),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget.2),SystemInfo)">9023</onright>
+          <onleft condition="Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget.2),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget.2),SystemInfo)">9023</onleft>
+          <onleft condition="!Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)+!String.IsEqual(Container(9000).ListItem.Property(widget.2),WeatherForecast)+!String.IsEqual(Container(9000).ListItem.Property(widget.2),SystemInfo)">9000</onleft>
+
 
           <animation type="Conditional" condition="!Control.HasFocus(8011$SKINSHORTCUTS[id])">
             <effect type="slide" start="0,0" end="2000,0" time="1" />
           </animation>
           <onunfocus>SetProperty(WidgetActifFanart,,Home)</onunfocus>
-
           <onback>9000</onback>
           <autoscroll delay="8000" repeat="10000" time="10000">Skin.HasSetting(AutoRotateWidget)+[Control.HasFocus(9000)|Control.HasFocus(9001)]</autoscroll>
           <viewtype>list</viewtype>
           <orientation>vertical</orientation>
           <preloaditems>2</preloaditems>
           <scrolltime >300</scrolltime>
-          <itemlayout condition="Control.HasFocus(8011$SKINSHORTCUTS[id])" width="620" height="30">
-
-
+          <itemlayout width="820" height="30">
             <control type="label">
-              <left>6</left>
-              <width>620</width>
+              <left>76</left>
+              <width>740</width>
               <height>28</height>
               <align>left</align>
               <aligny>center</aligny>
@@ -680,27 +683,33 @@
               <scrollspeed>20</scrollspeed>
               <font>impact35</font>
               <textcolor>yellow</textcolor>
-              <label>$VAR[GlobalWidgetLabel2]</label>
+              <label>$VAR[GlobalWidgetLabel]</label>
             </control>
+            <include content="OverlayProgress">
+              <param name="Hauteur">20</param>
+              <param name="Largeur">70</param>
+              <param name="PositionY">5</param>
+              <param name="PositionX">3</param>
+               <param name="PositionYVU">5</param>
+                <param name="PositionXVU">3</param>
+            </include>
           </itemlayout>
-          <focusedlayout  condition="Control.HasFocus(8011$SKINSHORTCUTS[id])" width="550" height="30">
+          <focusedlayout width="820" height="30">
             <!-- Focus Bar -->
             <control type="button">
               <onfocus condition="Control.HasFocus(8011$SKINSHORTCUTS[id])">SetProperty(WidgetActifFanart,$INFO[Container(8011$SKINSHORTCUTS[id]).ListItem.Art(fanart)],Home)</onfocus>
             </control>
-
+            
             <control type="image">
-              <width>620</width>
-              <height>28</height>
+              <height>30</height>
+              
               <aligny>center</aligny>
-              <texture>FocusLine.png</texture>
-              <colordiffuse>FocusBar</colordiffuse>
+              <texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>   
               <visible>Control.HasFocus(8011$SKINSHORTCUTS[id])</visible>
             </control>
-
             <control type="label" >
-              <left>6</left>
-              <width>620</width>
+              <left>76</left>
+              <width>740</width>
               <height>28</height>
               <align>left</align>
               <aligny>center</aligny>
@@ -709,12 +718,23 @@
               <scrollspeed>20</scrollspeed>
               <font>impact35</font>
               <textcolor>white</textcolor>
-              <label>$VAR[GlobalWidgetLabel2]</label>
+              <label>$VAR[GlobalWidgetLabel]</label>
             </control>
-          </focusedlayout>
+            <include content="OverlayProgressWidget">
+              <param name="ContainerID">8011$SKINSHORTCUTS[id]</param>
+              <param name="OffsetID"></param>
+              <param name="Hauteur">20</param>
+              <param name="Largeur">70</param>
+              <param name="PositionY">5</param>
+              <param name="PositionX">3</param>
+               <param name="PositionYVU">5</param>
+                <param name="PositionXVU">3</param>
 
+            </include>
+          </focusedlayout>
           <content target="$SKINSHORTCUTS[target]" sortby="$SKINSHORTCUTS[sortby]" sortorder="$SKINSHORTCUTS[sort]">$SKINSHORTCUTS[content]</content>
         </control>
+       
         <!--- nom widget -->
         <control type="group">
           <left>-285</left>
@@ -791,9 +811,11 @@
           <onunfocus>SetProperty(WidgetActifFanart,,Home)</onunfocus>
           <onup condition="Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget.2),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget.2),SystemInfo)">9023</onup>
           <ondown condition="Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget.2),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget.2),SystemInfo)">9023</ondown>
+          <ondown condition="!Integer.IsGreater(Container(8021$SKINSHORTCUTS[id]).NumItems,0)+!String.IsEqual(Container(9000).ListItem.Property(widget.2),WeatherForecast)+!String.IsEqual(Container(9000).ListItem.Property(widget.2),SystemInfo)">9000</ondown>
           <animation effect="slide" end="0,40" condition="String.Contains(Control.getLabel(8041$SKINSHORTCUTS[id]),land)">Conditional</animation>
 
           <onback>9000</onback>
+          
           <align>center</align>
           <orientation>horizontal</orientation>
           <preloaditems>0</preloaditems>
@@ -839,11 +861,15 @@
                 <texturenofocus />
               </control>
             </control>
-            <control type="group">
-              <left>20</left>
-              <top>260</top>
-              <include>OverlayProgress</include>
-            </control>
+            <include content="OverlayProgress">
+                 <param name="Hauteur">20</param>
+                <param name="Largeur">70</param>
+                <param name="PositionY">260</param>
+                <param name="PositionX">20</param>
+                 <param name="PositionYVU">260</param>
+                <param name="PositionXVU">20</param>
+
+              </include>
           </itemlayout>
           <focusedlayout width="225" height="300" condition="!String.Contains(Control.getLabel(8041$SKINSHORTCUTS[id]),land)+!String.Contains(Control.getLabel(8031$SKINSHORTCUTS[id]),music)+!String.Contains(Control.getLabel(8031$SKINSHORTCUTS[id]),addons)">
             <control type="button">
@@ -887,18 +913,18 @@
                 <label>$VAR[GlobalWidgetLabel]</label>
               </control>
             </control>
-            <control type="group">
-              <left>20</left>
-              <top>260</top>
+           
               <include content="OverlayProgressWidget">
                 <param name="ContainerID">8011$SKINSHORTCUTS[id]</param>
                 <param name="OffsetID"></param>
                 <param name="Hauteur">20</param>
                 <param name="Largeur">70</param>
-                <param name="PositionY">0</param>
+                <param name="PositionY">260</param>
+                <param name="PositionX">20</param>
+                 <param name="PositionYVU">260</param>
+                <param name="PositionXVU">20</param>
 
               </include>
-            </control>
           </control>
         </focusedlayout>
 
@@ -949,11 +975,15 @@
               <texturenofocus />
             </control>
           </control>
-          <control type="group">
-            <left>120</left>
-            <top>190</top>
-            <include>OverlayProgress</include>
-          </control>
+         <include content="OverlayProgress">
+                 <param name="Hauteur">20</param>
+                <param name="Largeur">70</param>
+                <param name="PositionY">210</param>
+                <param name="PositionX">120</param>
+                 <param name="PositionYVU">210</param>
+                <param name="PositionXVU">120</param>
+
+              </include>
         </itemlayout>
         <focusedlayout width="345" height="230" condition="String.Contains(Control.getLabel(8041$SKINSHORTCUTS[id]),land)+!String.Contains(Control.getLabel(8031$SKINSHORTCUTS[id]),music)+!String.Contains(Control.getLabel(8031$SKINSHORTCUTS[id]),addons)">
           <control type="button">
@@ -1004,18 +1034,20 @@
               <label>$VAR[GlobalWidgetLabel]</label>
             </control>
           </control>
-          <control type="group">
-            <left>120</left>
-            <top>190</top>
+          
             <include content="OverlayProgressWidget">
               <param name="ContainerID">8011$SKINSHORTCUTS[id]</param>
               <param name="OffsetID"></param>
               <param name="Hauteur">20</param>
-              <param name="Largeur">70</param>
-              <param name="PositionY">0</param>
+              <param name="Largeur">70</param>              
+                <param name="PositionY">210</param>
+                <param name="PositionX">120</param>
+                 <param name="PositionYVU">210</param>
+                <param name="PositionXVU">120</param>
+               
+
 
             </include>
-          </control>
         </control>
       </focusedlayout>
 
@@ -1262,7 +1294,7 @@
           <top>20</top>
           <height>290</height>
           <left>220</left>
-          <width>370</width>
+          <width>480</width>
           <visible>!Control.HasFocus(8021$SKINSHORTCUTS[id])</visible>
 
           <include content="commonwidgetitemliste">
@@ -1316,10 +1348,11 @@
         <control type="list" id="8021$SKINSHORTCUTS[id]">
           <left>360</left>
           <top>-120</top>
-          <width>630</width>
+          <width>830</width>
           <height>390</height>
           <onright condition="Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget),SystemInfo)">9022</onright>
           <onleft condition="Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget),SystemInfo)">9022</onleft>
+          <onleft condition="!Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)+!String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)+!String.IsEqual(Container(9000).ListItem.Property(widget),SystemInfo)">9000</onleft>
 
 
           <animation type="Conditional" condition="!Control.HasFocus(8021$SKINSHORTCUTS[id])">
@@ -1332,10 +1365,10 @@
           <orientation>vertical</orientation>
           <preloaditems>2</preloaditems>
           <scrolltime >300</scrolltime>
-          <itemlayout width="620" height="30">
+          <itemlayout width="820" height="30">
             <control type="label">
-              <left>6</left>
-              <width>620</width>
+              <left>76</left>
+              <width>740</width>
               <height>28</height>
               <align>left</align>
               <aligny>center</aligny>
@@ -1345,23 +1378,31 @@
               <textcolor>yellow</textcolor>
               <label>$VAR[GlobalWidgetLabel2]</label>
             </control>
+            <include content="OverlayProgress">
+              <param name="Hauteur">20</param>
+              <param name="Largeur">70</param>
+              <param name="PositionY">5</param>
+              <param name="PositionX">3</param>
+               <param name="PositionYVU">5</param>
+                <param name="PositionXVU">3</param>
+            </include>
           </itemlayout>
-          <focusedlayout width="550" height="30">
+          <focusedlayout width="820" height="30">
             <!-- Focus Bar -->
             <control type="button">
               <onfocus condition="Control.HasFocus(8021$SKINSHORTCUTS[id])">SetProperty(WidgetActifFanart,$INFO[Container(8021$SKINSHORTCUTS[id]).ListItem.Art(fanart)],Home)</onfocus>
             </control>
+            
             <control type="image">
-              <width>620</width>
-              <height>28</height>
+              <height>30</height>
+              
               <aligny>center</aligny>
-              <texture>FocusLine.png</texture>
-              <colordiffuse>FocusBar</colordiffuse>
+              <texture colordiffuse="FocusBar">ButtonFO2Wide2.png</texture>   
               <visible>Control.HasFocus(8021$SKINSHORTCUTS[id])</visible>
             </control>
             <control type="label" >
-              <left>6</left>
-              <width>620</width>
+              <left>76</left>
+              <width>740</width>
               <height>28</height>
               <align>left</align>
               <aligny>center</aligny>
@@ -1372,6 +1413,17 @@
               <textcolor>white</textcolor>
               <label>$VAR[GlobalWidgetLabel2]</label>
             </control>
+            <include content="OverlayProgressWidget">
+              <param name="ContainerID">8021$SKINSHORTCUTS[id]</param>
+              <param name="OffsetID"></param>
+              <param name="Hauteur">20</param>
+              <param name="Largeur">70</param>
+              <param name="PositionY">5</param>
+              <param name="PositionX">3</param>
+               <param name="PositionYVU">5</param>
+                <param name="PositionXVU">3</param>
+
+            </include>
           </focusedlayout>
           <content target="$SKINSHORTCUTS[target]" sortby="$SKINSHORTCUTS[sortby]" sortorder="$SKINSHORTCUTS[sort]">$SKINSHORTCUTS[content]</content>
         </control>
@@ -1452,6 +1504,7 @@
           <onunfocus>SetProperty(WidgetActifFanart,,Home)</onunfocus>
           <onup condition="Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget),SystemInfo)">9022</onup>
           <ondown condition="Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)|String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)|String.IsEqual(Container(9000).ListItem.Property(widget),SystemInfo)">9022</ondown>
+          <ondown condition="!Integer.IsGreater(Container(8011$SKINSHORTCUTS[id]).NumItems,0)+!String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)+!String.IsEqual(Container(9000).ListItem.Property(widget),SystemInfo)">9000</ondown>
           <onback>9000</onback>
           <align>center</align>
           <orientation>horizontal</orientation>
@@ -1497,11 +1550,15 @@
                 <texturenofocus />
               </control>
             </control>
-            <control type="group">
-              <left>20</left>
-              <top>260</top>
-              <include>OverlayProgress</include>
-            </control>
+              <include content="OverlayProgress">
+                 <param name="Hauteur">20</param>
+                <param name="Largeur">70</param>
+                <param name="PositionY">260</param>
+                <param name="PositionX">20</param>
+                 <param name="PositionYVU">260</param>
+                <param name="PositionXVU">20</param>
+
+              </include>
           </itemlayout>
           <focusedlayout width="225" height="300" condition="!String.Contains(Control.getLabel(8042$SKINSHORTCUTS[id]),land)+!String.Contains(Control.getLabel(8032$SKINSHORTCUTS[id]),music)+!String.Contains(Control.getLabel(8032$SKINSHORTCUTS[id]),addons)">
             <control type="button">
@@ -1541,18 +1598,21 @@
                   <label>$VAR[GlobalWidgetLabel]</label>
                 </control>
               </control>
-              <control type="group">
-                <left>20</left>
-                <top>260</top>
+             
                 <include content="OverlayProgressWidget">
                   <param name="ContainerID">8021$SKINSHORTCUTS[id]</param>
                   <param name="OffsetID"></param>
                   <param name="Hauteur">20</param>
                   <param name="Largeur">70</param>
-                  <param name="PositionY">0</param>
+       
+                <param name="PositionY">260</param>
+                <param name="PositionX">20</param>
+                 <param name="PositionYVU">260</param>
+                <param name="PositionXVU">20</param>
+
+             
 
                 </include>
-              </control>
             </control>
           </focusedlayout>
 
@@ -1602,11 +1662,15 @@
                 <texturenofocus />
               </control>
               </control>
-              <control type="group">
-                <left>20</left>
-                <top>260</top>
-                <include>OverlayProgress</include>
-              </control>
+                <include content="OverlayProgress">
+                 <param name="Hauteur">20</param>
+                <param name="Largeur">70</param>
+                <param name="PositionY">260</param>
+                <param name="PositionX">20</param>
+                 <param name="PositionYVU">260</param>
+                <param name="PositionXVU">20</param>
+
+              </include>
           </itemlayout>
           <focusedlayout width="345" height="230" condition="String.Contains(Control.getLabel(8042$SKINSHORTCUTS[id]),land)+!String.Contains(Control.getLabel(8032$SKINSHORTCUTS[id]),music)+!String.Contains(Control.getLabel(8032$SKINSHORTCUTS[id]),addons)">
             <control type="button">
@@ -1653,18 +1717,21 @@
                   <label>$VAR[GlobalWidgetLabel]</label>
                 </control>
               </control>
-              <control type="group">
-                <left>20</left>
-                <top>260</top>
+            
                 <include content="OverlayProgressWidget">
                   <param name="ContainerID">8021$SKINSHORTCUTS[id]</param>
                   <param name="OffsetID"></param>
                   <param name="Hauteur">20</param>
                   <param name="Largeur">70</param>
-                  <param name="PositionY">0</param>
+   
+                <param name="PositionY">260</param>
+                <param name="PositionX">20</param>
+                 <param name="PositionYVU">260</param>
+                <param name="PositionXVU">20</param>
+
+             
 
                 </include>
-              </control>
             </control>
           </focusedlayout>
 

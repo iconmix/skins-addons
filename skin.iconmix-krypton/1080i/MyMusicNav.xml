@@ -9,7 +9,7 @@
   <onload>Container.Refresh</onload>
     <menucontrol>7000</menucontrol>
 
-	<views>55,509,905,58,559,511,510,513,514,552,551,906,561,586</views>
+	<views>55,509,905,558,559,511,510,513,514,552,551,906,561,586,56,900</views>
 	<defaultcontrol always="true">55</defaultcontrol>
 	<controls>
 		<control type="group">
@@ -23,19 +23,22 @@
             <effect type="slide" end="0,200" time="0"  />
           </animation>
     		<!--	<include>Object_InfoLines</include> -->
-    		<include>Viewtype_Banner</include>			<!-- 511 -->
-    		<include>Viewtype_BannerWall</include>			<!-- 514 -->
-    		<include>Viewtype_BannerV</include>			<!-- 513 -->
-    		<include>Viewtype_BannerPoster</include>		<!-- 510 -->
-    		<include>Viewtype_List</include>
-    		<include>Viewtype_Gallery_Square</include>
-    		<include>Viewtype_Panel_Square</include>
-    		<include>Viewtype_Poster_Large_Fixed</include>		<!-- 552 -->
-    		<include>Viewtype_Poster_Large_Wrap</include>		<!-- 551 -->
-    		<include>Viewtype_ListCurved</include> <!-- 906 -->
-    		<include>Viewtype_MusicBox</include> <!-- 906 -->
-    		<include>Viewtype_Disc</include> <!-- 586 -->
-    		<include>Viewtype_Onglets</include>         <!-- 905 -->
+    		<include condition="!Skin.HasSetting(hide511)">Viewtype_Banner</include>			<!-- 511 -->
+    		<include condition="!Skin.HasSetting(hide514)">Viewtype_BannerWall</include>			<!-- 514 -->
+    		<include condition="!Skin.HasSetting(hide513)">Viewtype_BannerV</include>			<!-- 513 -->
+    		<include condition="!Skin.HasSetting(hide510)">Viewtype_BannerPoster</include>		<!-- 510 -->
+    		<include condition="!Skin.HasSetting(hide55)">Viewtype_List</include> <!-- 55 -->
+    		<include condition="!Skin.HasSetting(hide58)">Viewtype_Gallery_Square</include>  <!-- 58 -->
+    		<include condition="!Skin.HasSetting(hide559)">Viewtype_Panel_Square</include> <!-- 559 -->
+    		<include condition="!Skin.HasSetting(hide552)">Viewtype_Poster_Large_Fixed</include>		<!-- 552 -->
+    		<include condition="!Skin.HasSetting(hide551)">Viewtype_Poster_Large_Wrap</include>		<!-- 551 -->
+    		<include condition="!Skin.HasSetting(hide906)">Viewtype_ListCurved</include> <!-- 906 -->
+    		<include condition="!Skin.HasSetting(hide561)">Viewtype_MusicBox</include> <!-- 561 -->
+    		<include condition="!Skin.HasSetting(hide586)">Viewtype_Disc</include> <!-- 586 -->
+    		<include condition="!Skin.HasSetting(hide905)">Viewtype_Onglets</include>         <!-- 905 -->
+    		<include condition="!Skin.HasSetting(hide56)">Viewtype_Logo</include> <!-- 56 -->
+    		<include condition="!Skin.HasSetting(hide558)">Viewtype_Gallery_Square</include> <!-- 558 -->
+    		<include condition="!Skin.HasSetting(hide900)">Viewtype_ListeDetails</include>                     <!-- 900 -->
   		</control>
   		<control type="group">
         
@@ -112,6 +115,7 @@
     			<include>VueElementsBoitiers</include>	
     			<visible>!Skin.HasSetting(MusicTexte)</visible>
     			<visible>Container.Content(artists)</visible>
+    			<include>Vue900</include>
     			
     		</control>
     		<control type="list" id="1999">			
@@ -149,6 +153,7 @@
     			<movement>9</movement>
     			<description>Widget Lists</description>
     			<include>HorizVert</include>
+    			<include>Vue900</include>
     			<!-- <content>musicdb://genres/$INFO[ListItem.DBID]</content>			-->			
     			<include>VueElementsBoitiers</include>	
     			<visible>!Skin.HasSetting(MusicGenreTexte)+!String.IsEmpty(ListItem.DBID)</visible>
@@ -265,7 +270,7 @@
   			<align>center</align>
   			<autoscroll time="2500">true</autoscroll>
   			<itemgap>0</itemgap>
-  			<visible>Container.Content(albums)</visible>
+  			<visible>Container.Content(albums)+!Control.IsVisible(900)</visible>
   			<orientation>vertical</orientation>
   			<itemlayout width="970" height="30">    
   				<control type="label">
@@ -313,6 +318,7 @@
 
     		<include condition="Skin.HasSetting(VueExperimentaleMusic)">vueexperimentalemusic</include>
     		<control type="group">
+    		  <visible>!Control.IsVisible(900)</visible>
     		  <left>1930</left>
               <top>710</top>
     		     <control type="image">
@@ -336,6 +342,7 @@
     				
     		<control type="group">
     		    			<posy>-80</posy>
+    		    			<!-- <visible>!Control.IsVisible(900)</visible> -->
       			<posx>1600</posx>
 
           <control type="group">
@@ -469,11 +476,12 @@
 		
 		
 		
-		 <!--	DEBUG --
+		 <!--	DEBUG ---
     <control type="label">
-      <posy>1000</posy>
+      <posy>500</posy>
       <height>80</height>
-      <label>$INFO[ListItem.Property(Album_Label)]</label>
+      
+      <label>*****$INFO[ListItem.Property(Album_Label)]/$INFO[Container(1999).ListItem.Property(AlbumCd)]</label>
     </control>
     
     -->

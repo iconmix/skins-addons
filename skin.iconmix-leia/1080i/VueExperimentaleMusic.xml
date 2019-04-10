@@ -18,7 +18,7 @@
       <animation reversible="false" type="Conditional" condition="!Container().OnNext+!Container().OnPrevious">
         <effect type="slide" end="0,-45" time="500" delay="1000" />
       </animation>
-      <visible>!Skin.HasSetting(Hide_Plot)+!Control.HasFocus(2997)+!Window.IsVisible(12001)</visible>
+      <visible>!Skin.HasSetting(Hide_Plot)+!Control.HasFocus(2997)+!Window.IsVisible(12001)+!Control.IsVisible(900)</visible>
 
 
       <control type="image">
@@ -55,7 +55,7 @@
     <control type="group">
       <posy>1200</posy>
       <include>SpecialPlotBox</include>
-      <visible>!Skin.HasSetting(Hide_Plot)+Skin.HasSetting(ShowLargePlot)</visible>
+      <visible>!Skin.HasSetting(Hide_Plot)+Skin.HasSetting(ShowLargePlot)+!Control.IsVisible(900)</visible>
     </control>
 
 
@@ -63,7 +63,7 @@
 
    
   <control type="grouplist">
-    <visible>![Container.Content(episodes)|Container.Content(tvshows)]</visible>
+    <visible>![Container.Content(episodes)|Container.Content(tvshows)]+!Control.IsVisible(900)</visible>
     <left>0</left>
     <width>1920</width>
     <posy>993</posy>
@@ -78,7 +78,6 @@
       <height>50</height>
       <align>center</align>
       <aligny>center</aligny>
-
       <label>$VAR[ListItemInfoTitle]</label>
       <textcolor>white</textcolor>
       <textoffsetx>10</textoffsetx>

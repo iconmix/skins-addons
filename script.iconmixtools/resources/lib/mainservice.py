@@ -16,7 +16,6 @@ import xbmc,xbmcgui,xbmcaddon,xbmcplugin,xbmcvfs
 import random
 import MonAutoCompletion
 import youturl
-import zlib
 import threading
 #from multiprocessing import Process
 #containers :
@@ -82,6 +81,7 @@ class myMonitor(xbmc.Monitor):
   #------------------------------------------------------------------------------------------------------------------
   def onScanFinished(self,library=None):
     self.ScanFinished=True
+    
   
   #------------------------------------------------------------------------------------------------------------------
   def onCleanFinished(self,library=None):
@@ -188,6 +188,8 @@ class Player(xbmc.Player):
 class dialog_ShowInfo(xbmcgui.WindowXMLDialog):
     #------------------------------------------------------------------------------------------------------------------
   def __init__(self, *args, **kwargs):
+        self.retourpath=None
+        self.dontshow=True
         self.windowhome = xbmcgui.Window(10000)
         xbmcgui.WindowXMLDialog.__init__(self)
         self.listitem = kwargs.get('listitem')
@@ -209,6 +211,8 @@ class dialog_ShowInfo(xbmcgui.WindowXMLDialog):
           if not image:
             image=self.listitem.getArt("poster")
           if not image:
+            image=self.listitem.getArt("thumb")
+          if not image:
             image=self.listitem.getArt("icon")
           if not image: 
             image="DefaultThumb.png"
@@ -217,6 +221,8 @@ class dialog_ShowInfo(xbmcgui.WindowXMLDialog):
           extrafanart=xbmcgui.Window(10000).getProperty('IconMixExtraFanart')
           if not extrafanart:
             extrafanart=self.listitem.getArt("fanart")
+            if not extrafanart:
+              extrafanart=self.listitem.getArt("tvshow.fanart")
             if extrafanart:
               xbmcgui.Window(10000).setProperty('IconMixExtraFanart',extrafanart)
           self.ListeActeurs=self.getControl(1998)
@@ -264,16 +270,27 @@ class dialog_ShowInfo(xbmcgui.WindowXMLDialog):
         if controlID==600:
           self.close()
         if controlID==8: #play
-          Path=xbmc.getInfoLabel("Container(1990).ListItem.FileNameandPath")
-          if len(Path)>3:
+          Path=self.listitem.getPath()
+          if len(Path)>3: 
              self.close()
+             xbmc.executebuiltin("Dialog.Close(all,True])")
              xbmc.Player().play(Path)
         if controlID==7777:
           self.mainservice.CheckActeursRoles(False, False, False,True,1)
           self.Local=self.windowhome.getProperty('ActeurVideoLocal')
-        
-        
-             
+        if controlID==500:
+          self.dontshow=None          
+          self.close()          
+        if controlID==1000 or controlID==1001 :
+          mtitle=xbmc.getInfoLabel("Container(1990).ListItem.Title")
+          dbtype=xbmc.getInfoLabel("Container(1990).ListItem.DBTYPE")
+          label=xbmc.getInfoLabel("Container(1990).ListItem.Label")
+          year=xbmc.getInfoLabel("Container(1990).ListItem.Year")
+          dbid=xbmc.getInfoLabel("Container(1990).ListItem.DBID")
+          imdbnumber=xbmc.getInfoLabel("Container(1990).ListItem.Property(IMDBNumber)")
+          tmdbnumber=xbmc.getInfoLabel("Container(1990).ListItem.Property(TMDBNumber)")
+          Commande='label:%s*dbtype:%s*label:%s*year:%s*dbid:%s*imdbnumber:%s*tmdbnumber:%s' %(mtitle,dbtype,label,year,dbid,imdbnumber,tmdbnumber)
+          self.mainservice.GetTrailer(Commande)         
             
                 
 
@@ -1266,6 +1283,7 @@ class MainService:
       self.Recherche=None
       self.SelectedItemPath=None
       self.AutoCompletionProvider=None
+      MonAutoCompletion.InitKodiSearch()
       self.windowhome.setProperty("AutoCompletionProvider",SETTING("autocomplete_provider"))
       self.ListeEpisodes=None
       self.GlobalAnnonces=[]
@@ -1275,6 +1293,7 @@ class MainService:
       self.IdWidgetContainerPos=None
       lGlobalAnnonces=0
       lGlobalAnnoncesThread=0
+      self.firstidduration=None
      
       if xbmcvfs.exists(ADDON_DATA_PATH+"/series/planningnextV2"):
         os.remove(ADDON_DATA_PATH+"/series/planningnextV2")
@@ -1300,6 +1319,7 @@ class MainService:
           if self.kodimonitor.ScanFinished:
             self.kodimonitor.ScanFinished=None
             self.windowhome.setProperty('IconMixUpdateEpisodes','1')
+            self.previousitem=None
             
           self.windowhome.clearProperty("IconMixToolsbackend")
           
@@ -1316,6 +1336,7 @@ class MainService:
           #-------------------------- FILMS/SERIES/ACTEURS --------------------------
           self.ShowIconmixInfo()
           self.ShowIconmixGuide()
+          #self.getAllDuration()
           
           if not self.windowhome.getProperty('annonceencours')=="full" and (self.windowhome.getProperty('IconMixTrailer')!="1") and (self.windowhome.getProperty('IconmixShowInfo')=="1" or xbmc.getCondVisibility("Window.IsVisible(10025)") or xbmc.getCondVisibility("Window.IsVisible(12901)") or xbmc.getCondVisibility("Window.IsVisible(10142)") or xbmc.getCondVisibility("Window.IsVisible(12003)")) and not xbmc.getCondVisibility("Container.Scrolling") and not xbmc.getCondVisibility("Window.IsVisible(12000)"):
               
@@ -1616,7 +1637,11 @@ class MainService:
                                                Liste=utils.getSagaFanartsV2(index)
                                                if Liste:                                                
                                                   ListeFanarts.addItems(Liste)
-                                  self.windowhome.clearProperty('IconMixUpdate1999') 
+                                  self.windowhome.clearProperty('IconMixUpdate1999')
+                                #elif ListeFanarts and (self.DBTYPE=="tvshow" or self.DBTYPE=="movie"):                                  
+                                #  Liste=utils.getMovieTvFanarts(self.selecteditem,self.DBTYPE)
+                                #  if Liste:                                                
+                                #     ListeFanarts.addItems(Liste) 
                                   
                                 if self.DBTYPEOK or self.DBTYPE=="tvshow" or self.DBTYPE=="season":
                                    
@@ -1828,6 +1853,26 @@ class MainService:
             
       logMsg("Astalavista baby ;)")  
   
+  def getAllDuration(self):
+    if xbmc.getCondVisibility("Window.IsVisible(10025)"):
+      id=xbmc.getInfoLabel("Container.ListItem(0).DBID")
+      if id and id!=self.firstidduration:
+        i=0
+        self.firstidduration=id
+        idcont=int(xbmc.getInfoLabel("System.CurrentControlID"))
+        
+        containeractif=xbmcgui.Window(10025).getControl(idcont) 
+        
+        #if containeractif:
+        monlistitem=containeractif.getSelectedItem()
+        logMsg("CONTAINER ACTIF = %s / %s" %(idcont,containeractif))
+        label=monlistitem.getLabel()
+        logMsg("-----> %s / %s" %(monlistitem,label))
+        # self.windowhome.clearProperty('IconmixProchainEpisode')
+        # self.firstidduration
+    else:
+      self.firstidduration=None
+  
   def GetTrailer(self,commande=None):
       #xbmc.executebuiltin( "ActivateWindow(busydialog)" )
       if not commande:
@@ -1839,13 +1884,13 @@ class MainService:
       if commande:
         commande=commande.split('*')
         for item in commande:
-          print item
+          
           itemcommande[str(item.split(":")[0])]=item.split(":")[1] 
         
       else:
         return
         
-      "dbtype:xxx,label:xxx,year:xxx,dbid:xxx,imdbnumber:xxx,tmdbnumer:xxx"
+      
       trailerTypeVideo=itemcommande.get('dbtype')
       trailerTitre=itemcommande.get('label')
       trailerAnnee=itemcommande.get('year')
@@ -2161,6 +2206,8 @@ class MainService:
   def CheckListeVues(self):
       try:
         self.CurrentWindowID=xbmcgui.getCurrentWindowId()
+        #self.windowhome.setProperty("currentWID",str(xbmcgui.getCurrentWindowId()))
+        #self.windowhome.setProperty("currentDID",str(xbmcgui.getCurrentWindowDialogId()))
         current_view = xbmc.getInfoLabel("Container.Viewmode").decode("utf-8")
       except:
         self.CurrentWindowID=None
@@ -2229,6 +2276,7 @@ class MainService:
                    if AlbumData.get("AlbumBack"): self.windowhome.setProperty("AlbumBackPlayer",AlbumData.get("AlbumBack"))
                    if AlbumData.get("AlbumCd"):
                       self.windowhome.setProperty("AlbumCdPlayer",AlbumData.get("AlbumCd"))
+                      
                    
                    if AlbumData.get("AlbumInfo"): self.windowhome.setProperty("AlbumInfoPlayer",AlbumData.get("AlbumInfo"))
                if ArtisteData:
@@ -2340,6 +2388,7 @@ class MainService:
                        self.windowhome.setProperty("AlbumBack",AlbumData.get("AlbumBack"))
                        if AlbumData.get("AlbumCd"):
                           self.windowhome.setProperty("AlbumCd",AlbumData.get("AlbumCd"))
+                          
                        else:
                           self.windowhome.setProperty("AlbumCd","")
                        self.windowhome.setProperty("AlbumInfo",AlbumData.get("AlbumInfo"))
@@ -2398,10 +2447,11 @@ class MainService:
               else:
                  Photo=xbmc.getInfoLabel("Container(%d).ListItem.Icon" %(ContainerIDActor))
               Acteur = xbmcgui.ListItem(label=NomActeur)
-              Acteur.setIconImage(Photo)
-              Acteur.setProperty("DbType",dbtypeinfo)
+              
               #Acteur=self.CreationItemInfo(None,None,55)
               if Acteur:
+                Acteur.setIconImage(Photo)
+                Acteur.setProperty("DbType",dbtypeinfo)
                 self.ListeActeurs.reset()              
                 self.ListeActeurs.addItem(Acteur)
                 self.windowhome.setProperty('ActeurVideoLocal','1')
@@ -2457,6 +2507,7 @@ class MainService:
       if xbmc.getCondVisibility("Control.IsVisible(9010)") and xbmc.getCondVisibility("Control.IsVisible(312)"):
         if self.windowhome.getProperty("AutoCompletionShowItem"):
           path=self.windowhome.getProperty("AutoCompletionShowItem")
+          self.windowhome.clearProperty("AutoCompletionShowItem")
           if "selectautocomplete" in path:
             
             try:
@@ -2470,77 +2521,106 @@ class MainService:
             MyEdit.setText(id)
             xbmc.executebuiltin("SendClick(10103,32)")
             xbmc.executebuiltin("SendClick(10103,8)")
-          else:
-            logMsg("fuck showitem (%s)(%s)" %(path,xbmc.getInfoLabel("Container(9010).ListItem.property(ItemID)")))
-            try:
-             path=path.lower()
-             dbid=int(xbmc.getInfoLabel("Container(9010).ListItem.property(ItemID)")) if not "addon" in path else 1
-             
-            except:
-              logMsg("fuck showitem (%s)(%s)" %(path,xbmc.getInfoLabel("Container(9010).ListItem.property(ItemID)"))) 
-              path=None
-            if path and not "addon:" in path:
-              if "musicdb" in path:
-                windowid=10502                    
-              else:
-                windowid=10025
-              #xbmc.executebuiltin('Dialog.Close(all,true)')
-              xbmc.executebuiltin('SendClick(,301)')
-             
-              xbmc.executebuiltin('ActivateWindow(%d,%s,return)' %(windowid,path)) 
-              if windowid!=10146:            
-                xbmc.executebuiltin('Container.Update(%s)' %path)
-                actuelpath=xbmc.getInfoLabel("Container.FolderPath").lower()
-                compteur=0
-                while (path!=actuelpath or xbmc.getCondVisibility("Container.IsUpdating")) and compteur<80:                
-                    xbmc.sleep(20)
-                    actuelpath=xbmc.getInfoLabel("Container.FolderPath").lower()
-                    compteur=compteur+1
-                if compteur>=80:
-                  logMsg("arffffff (%s)-(%s)-(%s)" %(path,xbmc.getInfoLabel("ListItem.FolderPath").lower(),xbmc.getInfoLabel("Container.FolderPath")))
-                
-                try:
-                  windowobj=xbmcgui.Window(int(windowid))
-                except:
-                  windowobj=None
-                  logMsg("err1")
-                
-                try:
-                  currentlistid=windowobj.getFocusId()
-                  
-                except:
-                  currentlistid=None
-                  logMsg("err2 (%s)" %currentlistid)
+          else:            
+            DBKODI=int(xbmc.getInfoLabel("Container(9010).ListItem.DBID"))
+            if "showinfoitem" in path:
+              logMsg("Appel INFO")
+              path=xbmc.getInfoLabel("Container(9010).ListItem.FolderPath")
+              DBKODI=int(xbmc.getInfoLabel("Container(9010).ListItem.DBID"))
+              DbType=xbmc.getInfoLabel("Container(9010).ListItem.DBTYPE")
+              ItemListe=self.CreationItemInfo(DBKODI ,None,None,DbType )
+              dontshow=None           
+              if ItemListe:
+                    logMsg("Itemliste.path (%s)" %(ItemListe.getPath()))
+                    ListeActeursInf=utils.getCasting(DbType,DBKODI,1,None)
+                    self.windowhome.setProperty('IconMixExtraFanart',utils.CheckItemExtrafanartPath(xbmc.getInfoLabel("Container(9010).ListItem.Path" )))   
+                    self.duration = xbmc.getInfoLabel("Container(9010).ListItem.Duration" ) 
+                    self.display_duration(DBKODI,DbType)
+                    self.ui = dialog_ShowInfo('madialogvideoInfo.xml', ADDON_PATH, 'default','1080i',listitem=ItemListe,acteurs=ListeActeursInf,mainservice=self)
+                    self.ui.doModal()
+                    dontshow=self.ui.dontshow
+                   
+                    del self.ui
+                                 
+            if path and not "showinfoitem" in path and not dontshow:
+              logMsg("GO showitem (%s)(%s)" %(path,xbmc.getInfoLabel("Container(9010).ListItem.property(ItemID)")))
+              try:
+               path=path.lower()
+               dbid=DBKODI if not "addon" in path else 1
                
-                try:
-                  ActuelNbItems=int(xbmc.getInfoLabel("Container.NumItems"))
-                except:
-                  ActuelNbItems=None
-                  logMsg("err3 (%s)" %xbmc.getInfoLabel("Container.NumItems"))
+              except:
+                logMsg("fuck showitem (%s)(%s)" %(path,xbmc.getInfoLabel("Container(9010).ListItem.DBID"))) 
+                path=None
+              if path and not "addon:" in path:
+                if "musicdb" in path:
+                  windowid=10502                    
+                else:
+                  windowid=10025
+                #xbmc.executebuiltin('Dialog.Close(all,true)')
+                xbmc.executebuiltin('SendClick(,301)')
+               
+                xbmc.executebuiltin('ActivateWindow(%d,%s,return)' %(windowid,path)) 
+                if windowid!=10146:            
+                  xbmc.executebuiltin('Container.Update(%s)' %path)
+                  actuelpath=xbmc.getInfoLabel("Container.FolderPath").lower()
+                  compteur=0
+                  while (path!=actuelpath or xbmc.getCondVisibility("Container.IsUpdating")) and compteur<80:                
+                      xbmc.sleep(20)
+                      actuelpath=xbmc.getInfoLabel("Container.FolderPath").lower()
+                      compteur=compteur+1
+                  if compteur>=80:
+                    logMsg("arffffff (%s)-(%s)-(%s)" %(path,xbmc.getInfoLabel("ListItem.FolderPath").lower(),xbmc.getInfoLabel("Container.FolderPath")))
                   
-                if ActuelNbItems:   
-                  cpt=1
-                  ItemFocus=0
-                  while cpt<=ActuelNbItems:
-                    try:
-                      ITEMDBID=int(xbmc.getInfoLabel("Container.ListItemAbsolute(%d).DBID" %(cpt)) )
-                    except:
-                      ITEMDBID=None
-                    if ITEMDBID==dbid:
-                      ItemFocus=cpt
-                      break 
-                    cpt=cpt+1
-                  xbmc.executebuiltin("Action(FirstPage)")
-                  xbmc.executebuiltin("Control.SetFocus(%d,%d)" %(currentlistid,ItemFocus))
-            elif "addon:" in path:
-              path=path.replace("addon:","")
-              Action=""                  
-              self.start_info_actions("selectautocomplete", path)
-              xbmc.executebuiltin('SendClick(,300)')
-              
+                  try:
+                    windowobj=xbmcgui.Window(int(windowid))
+                  except:
+                    windowobj=None
+                    logMsg("err1")
+                  
+                  try:
+                    currentlistid=windowobj.getFocusId()
+                    
+                  except:
+                    currentlistid=None
+                    logMsg("err2 (%s)" %currentlistid)
                  
-          
-          self.windowhome.clearProperty("AutoCompletionShowItem")
+                  try:
+                    ActuelNbItems=int(xbmc.getInfoLabel("Container.NumItems"))
+                  except:
+                    ActuelNbItems=None
+                    logMsg("err3 (%s)" %xbmc.getInfoLabel("Container.NumItems"))
+                  logMsg("CurrentID=%s , %s" %(currentlistid,windowobj.getFocus()))  
+                  if ActuelNbItems:   
+                    cpt=0
+                    ItemFocus=0
+                    while cpt<=ActuelNbItems:
+                      try:
+                        ITEMDBID=int(xbmc.getInfoLabel("Container(%d).ListItemAbsolute(%d).DBID" %(currentlistid,cpt)) )    
+                        
+                      except:
+                        ITEMDBID=None
+                      #logMsg("FOCUS cherche : %s/%s/%d" %(dbid,ITEMDBID,cpt ))
+                      if ITEMDBID==dbid:
+                        ItemFocus=cpt
+                        #logMsg("FOCUS : %s" %ItemFocus )
+                        break 
+                      cpt=cpt+1
+                    #xbmc.executebuiltin("Action(FirstPage)")
+                    windowobj.getFocus().selectItem(ItemFocus)
+                    #xbmc.executebuiltin("Control.SetFocus(%d,%d,True)" %(currentlistid,ItemFocus))
+              elif "addon:" in path:
+                path=path.replace("addon:","")
+                Action=""                  
+                self.start_info_actions("selectautocomplete", path)
+                xbmc.executebuiltin('SendClick(,300)')
+              self.windowhome.clearProperty("AutoCompletionShowItem")
+              return     
+            try:
+              xbmcgui.Window(10103).setFocusId(9010)
+              return
+            except:
+              return
+           
         Edit312=xbmc.getInfoLabel("Control.GetLabel(312).index(1)")
         if Edit312!=self.Recherche or self.AutoCompletionProvider!=self.windowhome.getProperty("AutoCompletionProvider"):
           self.Recherche=Edit312
@@ -3078,65 +3158,125 @@ class MainService:
         self.windowhome.setProperty("ArtistFanart3",ArtisteData.get("ArtistFanart3")) 
         
     #------------------------------------------------------------------------------------------------------------------
-  def CreationItemInfo(self,DbIdItem=None,TmdbNumber=None,ContainerID=None)  :
-      if ContainerID:
-        InfoLabels=utils.GetListItemInfoLabels(ContainerID)
-        
+       #------------------------------------------------------------------------------------------------------------------
+  def CreationItemInfo(self,DbIdItem=None,TmdbNumber=None,ContainerID=None,DbType=None)  :
+      InfoLabels=None
+      if not ContainerID and DbType:        
+        if "movie" in DbType:
+           properties='"properties":["title","genre","year","rating","userrating","director","trailer","tagline","plot","plotoutline","originaltitle","lastplayed","playcount","writer","studio","mpaa","cast","country","imdbnumber","uniqueid","runtime","set","showlink","streamdetails","top250","votes","fanart","thumbnail","file","sorttitle","resume","setid","dateadded","tag","art"]'
+           InfoLabels = utils.getJSON('VideoLibrary.GetMovieDetails', '{ "movieid":%d,%s}' %(int(DbIdItem),properties))
+           logMsg("INFOS : %s" %InfoLabels)
+        elif "tvshow" in DbType:
+           properties='"properties":["title","genre","year","rating","userrating","plot","originaltitle","lastplayed","playcount","studio","mpaa","cast","imdbnumber","uniqueid","runtime","votes","fanart","thumbnail","file","sorttitle","dateadded","tag","art"]'
+           InfoLabels = utils.getJSON('VideoLibrary.GetTvShowDetails', '{ "tvshowid":%d,%s}' %(int(DbIdItem),properties))
+        elif "episode" in DbType:
+           properties='"properties":["showtitle","title", "rating", "userrating", "director", "plot", "originaltitle", "lastplayed", "playcount", "writer", "cast", "uniqueid", "runtime", "streamdetails", "votes", "fanart", "thumbnail", "file", "resume", "dateadded", "art"]'           
+           InfoLabels = utils.getJSON('VideoLibrary.GetEpisodeDetails', '{ "episodeid":%d,%s}' %(int(DbIdItem),properties))
+        elif "album" in DbType:
+           properties='"properties":["dateadded","genre","fanart","thumbnail","albumlabel","compilation","description","mood","playcount","releasetype","style","theme","type","artist","artistid","displayartist","genreid","musicbrainzalbumartistid","musicbrainzalbumid","rating","title","userrating","votes","year"]'           
+           InfoLabels = utils.getJSON('AudioLibrary.GetAlbumDetails', '{ "albumid":%d,%s}' %(int(DbIdItem),properties))
+           InfoLabels["file"]="musicdb://albums/"
+        elif "artist" in DbType:
+           properties='"properties":["born","compilationartist","description","died","disbanded","formed","instrument","isalbumartist","mood","musicbrainzartistid","roles","songgenres","style","yearsactive","genre","fanart","thumbnail"]'           
+           InfoLabels = utils.getJSON('AudioLibrary.GetArtistDetails', '{ "artistid":%d,%s}' %(int(DbIdItem),properties))
+           InfoLabels["file"]="musicdb://artists/"
         if InfoLabels:
-            Titre=xbmc.getInfoLabel("Container(%d).ListItem.Label" %(ContainerID))
-            Path=xbmc.getInfoLabel("Container(%d).ListItem.FileNameAndPath"%(ContainerID))
-            ItemListe = xbmcgui.ListItem(label=Titre,path=Path)
-            IMDBNumber=xbmc.getInfoLabel("Container(%d).ListItem.IMDBNumber"%(ContainerID))
-            TMDBNumber=xbmc.getInfoLabel("Container(%d).ListItem.Property(TMDBNumber)"%(ContainerID))
+          InfoLabels["path"]=InfoLabels.get("file")
+      elif ContainerID:
+        InfoLabels=utils.GetListItemInfoLabels(ContainerID)
+        DbType=InfoLabels.get('dbtype')
+        
+      if DbType:
+        DbType=DbType.replace("id","")
+      if InfoLabels and InfoLabels.get("path"):
+           
+          Titre=InfoLabels.get("title")         
+          Path=InfoLabels.get("path")
+          IsMedia="1" if len(os.path.splitext(Path)[1])>0 else None
+          
+          ItemListe = xbmcgui.ListItem(label=Titre,label2=IsMedia,path=Path)
+          UniqueId=InfoLabels.get("uniqueid")
+          if UniqueId:
+            IMDBNumber=UniqueId.get("imdb")
+            TMDBNumber=UniqueId.get("tmdb")
+            ItemListe.setProperty('TMDBNumber', TMDBNumber)
+            ItemListe.setProperty('IMDBNumber', IMDBNumber)
+          else:
+            ItemListe.setProperty('TMDBNumber', '')
+            ItemListe.setProperty('IMDBNumber', '')
             
-            #pistes audios
-            for i in range(1,4):          
-                Language=xbmc.getInfoLabel("Container(%d).ListItem.Property(AudioLanguage.%d)" %(ContainerID,i))
-                Channel=xbmc.getInfoLabel("Container(%d).ListItem.Property(AudioChannels.%d)" %(ContainerID,i))
-                Codec=xbmc.getInfoLabel("Container(%d).ListItem.Property(AudioCodec.%d)" %(ContainerID,i)) 
+          #pistes audios
+          streamdetails=InfoLabels.get("streamdetails")
+          if streamdetails:
+            audios=streamdetails.get("audio")
+            i=1              
+            for Item in audios:       
+                # {"channels":6,"codec":"dca","language":"fre"}  
+                Language=Item.get("language")
+                Channel=Item.get("channels")
+                Codec=Item.get("codec")
                 if Language:
                    ItemListe.addStreamInfo('audio',{'codec':Codec,'language':Language,'channels':Channel}) 
                    ItemListe.setProperty("AudioCodec.%d" %(i),Codec)
-                   ItemListe.setProperty("AudioChannels.%d" %(i),Channel)
+                   ItemListe.setProperty("AudioChannels.%d" %(i),str(Channel))
                    ItemListe.setProperty("AudioLanguage.%d" %(i),Language)
+                   #logMsg("Audiolanguage(%d) : %s" %(i,Language))
+                   i=i+1
                 else:
                   break
             #pistes vidéos   
-            infovideo={ 'codec': xbmc.getInfoLabel("Container(%d).ListItem.VideoCodec"%(ContainerID)), 'height' : xbmc.getInfoLabel("Container(%d).ListItem.VideoResolution"%(ContainerID)),'aspect':xbmc.getInfoLabel("Container(%d).ListItem.VideoAspect"%(ContainerID)),'duration': xbmc.getInfoLabel("Container(%d).ListItem.Duration"%(ContainerID))}
-            ItemListe.addStreamInfo('video', infovideo)
-            #ConversionPays(DBTYPE=None,ContainerID=None)
+            videos=streamdetails.get("video")
+            ItemListe.addStreamInfo('video', videos)
+           
             #sous-titres     
-            for i in range(1,4):          
-                Language=xbmc.getInfoLabel("Container(%d).ListItem.Property(SubtitleLanguage.%d)" %(ContainerID,i))              
+            subtitles=streamdetails.get("subtitle")
+            i=1
+            #[{"language":"fre"}]
+            for item in subtitles:          
+                Language=item.get("language")              
                 if Language:
                   ItemListe.addStreamInfo('subtitle',{'language':Language}) 
                   ItemListe.setProperty("SubtitleLanguage.%d" %(i),Language)
+                  i=i+1
                 else:
-                  break                  
-            thumb=xbmc.getInfoLabel("Container(%d).ListItem.Art(thumb)"%(ContainerID))
-            poster=xbmc.getInfoLabel("Container(%d).ListItem.Art(poster)"%(ContainerID))
-            banner=xbmc.getInfoLabel("Container(%d).ListItem.Art(banner)"%(ContainerID))
-            fanart=xbmc.getInfoLabel("Container(%d).ListItem.Art(fanart)"%(ContainerID))
-            clearart=xbmc.getInfoLabel("Container(%d).ListItem.Art(clearart)"%(ContainerID))
-            clearlogo=xbmc.getInfoLabel("Container(%d).ListItem.Art(clearlogo)"%(ContainerID))
-            landscape=xbmc.getInfoLabel("Container(%d).ListItem.Art(landscape)"%(ContainerID))
-            icon=xbmc.getInfoLabel("Container(%d).ListItem.Art(icon)"%(ContainerID))             
+                  break
+                  
+          Art=InfoLabels.get("art")                  
+          if Art:
+            poster=Art.get("poster")
+            icon=InfoLabels.get("icon")             
             ItemListe.setProperty("poster",poster) 
-            ItemListe.setProperty('TMDBNumber', TMDBNumber)
-            ItemListe.setProperty('IMDBNumber', IMDBNumber)
-            ItemListe.setArt({'thumb':thumb,'poster':poster,'banner':fanart,'fanart':fanart,'clearart':clearart,'clearlogo':clearlogo,'landscape':landscape,'icon':icon})
+            ItemListe.setArt(Art)
             ItemListe.setIconImage(icon) 
-            if xbmc.getInfoLabel("Container(%d).ListItem.DBType" %(ContainerID))!="director":
-               ItemListe.setInfo("video", InfoLabels)
-            
-            Realisateur=utils.Remove_Separator(xbmc.getInfoLabel("Container(%d).ListItem.Director"%(ContainerID)).split(" (")[0].decode("utf8"))
-
-            #self.windowhome.setProperty('IconMixDirector',str(utils.GetPhotoRealisateur('realisateurs',realisateur=Realisateur)))
-            self.windowhome.setProperty('IconMixDirector',utils.GetPhotoRealisateur('realisateurs',realisateur=Realisateur))
-            return (ItemListe) 
-      
-        logMsg("ItemListe erreur (%s)" %(InfoLabels))
+          
+          
+          if not "director" in DbType:
+             logMsg("INFOSLABELS=%s" %InfoLabels)
+             INFOS=utils.GetListItemInfoLabelsJson(InfoLabels)
+             #logMsg("INFOS=%s" %INFOS)
+             INFOS["mediatype"]=DbType
+             ItemListe.setInfo("video", INFOS)
+             
+             logMsg("ItemListe INFOS (%s)" %(INFOS))
+             
+             
+          MyDirector=InfoLabels.get("director")
+          Director=""
+          try:
+            for Item in MyDirector:
+              Director=Director+','+Item
+          except:
+            Director=MyDirector
+          if Director:
+             Realisateur=utils.Remove_Separator(Director).split(" (")[0].decode("utf8")         
+             self.windowhome.setProperty('IconMixDirector',utils.GetPhotoRealisateur('realisateurs',realisateur=Realisateur))
+          else:
+            self.windowhome.clearProperty('IconMixDirector')
+          return (ItemListe) 
+    
+      logMsg("ItemListe erreur (%s)" %(InfoLabels))
       return None 
+     
       
     #------------------------------------------------------------------------------------------------------------------
   def start_info_actions(self,action,id=None,limit=50,provider=None,basetype=None):
@@ -3196,9 +3336,7 @@ class MainService:
 
     #------------------------------------------------------------------------------------------------------------------
   def pass_list_to_skin(self,data=[],  limit=False,basetype=None,provider=None):
-      
-      
-        
+
         items=[]
         if data and limit and int(limit) < len(data) and not provider =="kodi":
             data = data[:int(limit)]
@@ -3213,6 +3351,47 @@ class MainService:
 
     #------------------------------------------------------------------------------------------------------------------
   def create_listitems(self,data=None,basetype=None):
+        if not data:
+            return []
+        itemlist = []
+        cpt=0
+        for item in data:
+            #listitem = xbmcgui.ListItem('%s' % (str(cpt)))
+            listitem=xbmcgui.ListItem(label=item.get("label"))
+            listitem.setLabel2(item.get("showtitle"))
+            label=item.get("label")
+            path=item.get("path")
+            dbid=item.get("dbid")
+            dbtype=item.get("dbtype")
+            icon=item.get("icon")
+            winid=item.get("winid")
+            Art=item.get("art")
+            if Art:
+              Art["thumb"]=icon
+            plot=item.get("plot")
+            path=unicode(item.get("path"))
+            search_string=item.get("search_string")            
+            listitem.setLabel(label)
+            if search_string:                
+                    path = "plugin://script.iconmixtools/?action=selectautocomplete&id=%s" % search_string            
+            listitem.setProperty('ItemID', str(dbid) if dbid else None)
+            listitem.setProperty('dbtype', dbtype)
+            listitem.setProperty('winid', str(winid))
+            #telex
+                            
+            listitem.setProperty("index", str(cpt))
+            if "movie" in dbtype: dbtype="movie"
+            if "tvshow" in dbtype: dbtype="tvshow"
+            listitem.setInfo("video", {"dbid": int(dbid),"title": label,"mediatype": dbtype,"plot":plot,"path":path}) 
+            listitem.setPath(path=path)
+            listitem.setArt(Art)
+            
+            listitem.setIconImage(icon)
+            itemlist.append(listitem)
+            cpt=cpt+1
+        return itemlist
+   #------------------------------------------------------------------------------------------------------------------
+  def create_listitemsORG(self,data=None,basetype=None):
         if not data:
             return []
         itemlist = []

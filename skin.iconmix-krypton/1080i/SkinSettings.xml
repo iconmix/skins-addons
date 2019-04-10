@@ -10,6 +10,7 @@
   <onload condition="!String.IsEmpty(Skin.String(PlotSpeed))">Skin.SetString(PlotSpeed,4s)</onload>   
   <onload condition="String.IsEmpty(Skin.String(BaVolume))">Skin.SetString(BaVolume,70)</onload>
   <onload condition="String.IsEmpty(Skin.String(BaDelai))">Skin.SetString(BaDelai,0)</onload>
+  <onload>SetProperty(IconmixViewId,"",10000)</onload>
   <controls>
     
     <control type="group">
@@ -133,6 +134,11 @@
               <label>$LOCALIZE[31001]</label>
               <onclick>noop</onclick>
             </item>
+            <item id="15">
+              <description>activer vues</description>
+              <label>$LOCALIZE[31183]</label>
+              <onclick>noop</onclick>
+            </item>
 
             <!-- --->
             <item id="4">
@@ -171,6 +177,7 @@
               <label>$LOCALIZE[31004]</label>
               <onclick>noop</onclick>
             </item>
+            
           </content>
         </control>
         <control type="image">
@@ -556,27 +563,127 @@
             </control>
 
           </control>
-          <!-- View Types --
-          <control type="grouplist" id="9005">
-          <visible>Container(9000).Hasfocus(5)</visible>
+          <!-- Vues actives -->
+          <control type="group">
+            <visible>Container(9000).Hasfocus(15)</visible>
+            <control type="label">
+            <top>-100</top>
+            <align>center</align>
+            <include>FontTitre</include>
+            <label>$LOCALIZE[31148]</label>
+          </control>
+          
+          <control type="grouplist" id="9015">
+          
+          <onfocus>SetProperty(IconmixViewId,"",10000)</onfocus>
+          <onunfocus>SetProperty(IconmixViewId,"",10000)</onunfocus>
           <posx>0</posx>
           <posy>0</posy>
-          <width>840</width>
-          <height>618</height>
+          <width>940</width>
+          <height>1018</height>
           <itemgap>0</itemgap>
           <scrolltime>0</scrolltime>
           <onleft>9000</onleft>
           <onright>9000</onright>
+          
 
-          <control type="radiobutton" id="601">
-          <description>Low List</description>
-          <include>SettingsLabel</include>
-          <label>$LOCALIZE[31441] $LOCALIZE[418] $LOCALIZE[535]</label>
-          <onclick>Skin.ToggleSetting(NoViewLowList)</onclick>
-          <selected>Skin.HasSetting(NoViewLowList)</selected>
-          </control>
+          <include content="HideView">
+            <param name="vueid">906</param>
+            <param name="languageid">31832</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">900</param>
+            <param name="languageid">31819</param>
+          </include>
+          
+          <include content="HideView">
+            <param name="vueid">555</param>
+            <param name="languageid">31829</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">556</param>
+            <param name="languageid">31830</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">551</param>
+            <param name="languageid">31805</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">552</param>
+            <param name="languageid">31806</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">553</param>
+            <param name="languageid">31807</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">554</param>
+            <param name="languageid">31808</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">52</param>
+            <param name="languageid">31810</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">504</param>
+            <param name="languageid">31811</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">511</param>
+            <param name="languageid">31812</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">514</param>
+            <param name="languageid">31831</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">513</param>
+            <param name="languageid">31813</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">510</param>
+            <param name="languageid">31814</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">56</param>
+            <param name="languageid">31817</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">562</param>
+            <param name="languageid">31835</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">563</param>
+            <param name="languageid">31836</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">58</param>
+            <param name="languageid">31822</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">559</param>
+            <param name="languageid">31823</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">584</param>
+            <param name="languageid">31825</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">585</param>
+            <param name="languageid">31826</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">586</param>
+            <param name="languageid">31827</param>
+          </include>
+          <include content="HideView">
+            <param name="vueid">561</param>
+            <param name="languageid">31824</param>
+          </include>
+          
 
         </control>-->
+        </control>
         <!-- Polices Settings -->
         <control type="grouplist" id="9014">
           <visible>Container(9000).Hasfocus(4)</visible>
@@ -1252,7 +1359,7 @@
       <posx>1295</posx>
       <posy>5</posy>
       <width>580</width>
-      <height>750</height>
+      <height>770</height>
       <texture>frames/Menu_Glass2b.png</texture>
       <colordiffuse>DialogBackgroundColor</colordiffuse>
     </control>
@@ -1345,7 +1452,7 @@
         <posx>30</posx>
         <posy>15</posy>
         <width>320</width>
-        <height>530</height>
+        <height>550</height>
         <itemgap>1</itemgap>
         <onleft>9011</onleft>
         <onback>9011</onback>
@@ -1524,7 +1631,7 @@
         <posx>230</posx>
         <posy>15</posy>
         <width>490</width>
-        <height>530</height>
+        <height>550</height>
         <itemgap>1</itemgap>
         <onleft>setfocus(7008)</onleft>
         <onright>7009</onright>

@@ -459,7 +459,7 @@
         <include>Animation_ButtonFocus</include>
         <onclick>Close</onclick>
         <ondown>2100</ondown>
-        <onup>2110</onup>
+        <onup>2109</onup>
       </control>
     </control>
 
@@ -533,8 +533,9 @@
 
     <include>Animation_CommonFade</include>
     <include>Animation_OpenCloseFade</include>
-    <!-- Title -->
-    <control type="fadelabel">
+    <!-- Title 
+<control type="fadelabel">
+        <left>50</left>
       <posy>20</posy>
       <width>1550</width>
       <height>30</height>
@@ -546,25 +547,31 @@
       <scrollspeed>20</scrollspeed>
       <include>FontTitre</include>
       <textcolor>TextNF</textcolor>
-      <label>$INFO[ListItem.Title]</label>
-      <visible>!Container.Content(episodes)</visible>
+      <label>$VAR[ListItemTitle]</label>
     </control>
-    <control type="fadelabel">
-      <posy>20</posy>
-      <width>1550</width>
-      <height>30</height>
-      <aligny>center</aligny>
-      <align>center</align>
-      <shadowcolor>ff000000</shadowcolor>
-      <scrollout>false</scrollout>
-      <pauseatend>200</pauseatend>
-      <scrollspeed>20</scrollspeed>
-      <include>FontTitre</include>
-      <textcolor>TextNF</textcolor>
-      <label>[COLOR=yellow][I]$INFO[ListItem.TVShowTitle,,:][/I][/COLOR] $INFO[ListItem.Title]</label>
-      <visible>Container.Content(episodes)</visible>
-    </control>
-
+-->
+<control type="grouplist">
+  <left>50</left>
+  <top>4</top>
+<width>1550</width>
+<align>center</align>
+<orientation>horizontal</orientation>
+<control type="button">
+  
+<width max="1550" min="600">auto</width>
+            <height>85</height>                       
+            <texturefocus colordiffuse="BackgroundColor">frames/bandeautitre.png</texturefocus>
+            <texturenofocus colordiffuse="BackgroundColor">frames/bandeautitre.png</texturenofocus>                   
+          <align>center</align>
+          <aligny>center</aligny>
+          <include>FontTitre</include>
+      <label>$VAR[ListItemTitle]</label>
+          <focusedcolor></focusedcolor>
+          <disabledcolor>TextDisabled</disabledcolor>
+          <textoffsetx>25</textoffsetx>
+          <textoffsety>8</textoffsety>
+</control>
+</control>
 
     <!-- telex debug --
 
@@ -695,7 +702,7 @@
     <!----------------------------------------------------------------------------------------------------->
 
 
-    <!-- realisateur -->
+    <!-- realisateur --
     <control type="group">
       <animation effect="zoom"  center="1387,534" end="115" tween="cubic" time="500" condition="Control.HasFocus(13)|Control.HasFocus(7777)" >Conditional</animation>
 
@@ -741,7 +748,6 @@
         <ondown condition="Integer.IsGreater(Container(1999).NumItems,0)+!String.IsEmpty(Window(12003).Property(showsaga))">setFocus(1999)</ondown>
         <ondown condition="Integer.IsGreater(Container(5001).NumItems,0)+!String.IsEmpty(Window(12003).Property(showgenre))">setFocus(5001)</ondown>
         <ondown condition="String.IsEmpty(Window(12003).Property(showsaga))+String.IsEmpty(Window(12003).Property(showgenre))">setFocus(7781)</ondown>
-      <!--  <ondown>Dialog.Close(all,true)</ondown> -->
       <onclick>SetFocus(7778)</onclick>
       <left>120</left>
       <width>380</width>
@@ -758,7 +764,8 @@
 
     <visible> !String.IsEmpty(ListItem.Director)</visible>
   </control>
-
+  -->
+ 
   <!------------------------------- emplacement de la vidéo ----------------------------------------->
   <control type="group">
     <posy>927</posy>
@@ -799,7 +806,33 @@
 
 
 </control>
+<!-- poster et fanart-->
+<control type="group">
+  <posx>35</posx>
+  <posy>115</posy>
+  <control type="group">
 
+    <include>Animation_CommonFade</include>
+    <include>Animation_OpenCloseFade</include>
+    <!-- Default Poster Image -->
+    <control type="image">
+      <width>360</width>
+      <height>500</height>
+      <texture background="true" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
+      <aspectratio align="center" aligny="center">keep</aspectratio>
+      <bordersize>20</bordersize>
+                <bordertexture border="20" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+      <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
+      <animation effect="zoom" center="auto" start="40" end="100" time="400" tween="cubic" easing="inout">WindowOpen</animation>
+      <animation effect="fade" start="0" end="0" time="0">WindowClose</animation>
+    </control>
+
+
+  </control>
+
+
+</control>
+<include>GlobalBackgroundVideoInfo</include>
 
 <control type="group">
   <posx>360</posx>
@@ -811,15 +844,15 @@
   <control type="textbox">
 
     <posx>60</posx>
-    <posy>90</posy>
-    <width>720</width>
+    <posy>120</posy>
+    <width>1250</width>
     <height>500</height>
     <align>left</align>
     <include>FontPlot</include>
+    <shadowcolor>ff000000</shadowcolor>
     <textcolor>TextNF</textcolor>
     <label fallback="161">$INFO[ListItem.Plot]</label>
-    <include condition="!Skin.HasSetting(AutoScrollFast)">AutoScrollLong</include>
-    <include condition="Skin.HasSetting(AutoScrollFast)">AutoScrollLongFast</include>
+    <include>SpecialPlotBoxScroll</include>
   </control>
   <!--- acteurs --->
   <control type="group">
@@ -867,6 +900,7 @@
     </control>
 
     <control type="grouplist">
+      <visible>String.IsEmpty(ListItem.Director)</visible>
       <visible>Integer.IsGreater(Container(1998).NumItems,0)</visible>
       <width>1250</width>
       <height>380</height>
@@ -882,9 +916,102 @@
         <param name="Width2">250</param>
         <param name="reflet">True</param>
       </include>
-
+    </control>
+    <control type="grouplist">
+      <visible>!String.IsEmpty(ListItem.Director)</visible>
+      <visible>Integer.IsGreater(Container(1998).NumItems,0)</visible>
+      <width>1000</width>
+      <height>380</height>
+      <onfocus>SetFocus(7781)</onfocus>
+      <ondown>7003</ondown>
+      <orientation>horizontal</orientation>
+      <include content="PPActeurs">
+        <param name="ItemId">0</param>
+        <param name="Width1">250</param>
+        <param name="reflet">True</param>
+      </include>
+      <include content="PPActeursListe">
+        <param name="Width2">250</param>
+        <param name="reflet">True</param>
+      </include>
     </control>
   </control>
+    <!-- realisateur -->
+  <control type="group">
+      <visible>!String.IsEmpty(ListItem.Director)</visible>
+      <animation effect="zoom"  center="1255,622" end="115" tween="cubic" time="500" condition="Control.HasFocus(13)|Control.HasFocus(7777)" >Conditional</animation>
+      <posy>622</posy>
+      <posx>1130</posx>
+      <control type="image">
+          <top>5</top>
+          <left>30</left>          
+          <width>175</width>
+          <height>220</height>
+        <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png" default="DefaultActor.png">$INFO[Window(Home).Property(IconMixDirector)]</texture>
+        <aspectratio scalediffuse="true">keep</aspectratio>
+      </control>
+      <control type="image">
+          <description>Actor image</description>
+          <top>220</top>
+          <left>30</left> 
+          <align>center</align>
+          <width>175</width>
+          <height>220</height>
+          <texture flipy="true" diffuse="acteurs/reflect_poster2.png" fallback="DefaultActor.png" default="DefaultActor.png">$INFO[Window(Home).Property(IconMixDirector)]</texture>
+        <aspectratio scalediffuse="true">keep</aspectratio>
+      </control>
+      <control type="image">
+        <top>150</top>
+        <left>-290</left>
+        <height>100</height>
+        <texture>flags/realisateur.png</texture>
+        <aspectratio scalediffuse="true">keep</aspectratio>
+      </control>
+      <control type="image">
+        <left>40</left>
+        <top>45</top>
+        <animation type="Conditional" loop="true" condition="true">
+          <effect type="fade"  start="100" end="0"  time="1500" delay="1000" reversible="false"/>
+        </animation>
+        <height>25</height>
+        <texture>buttons/okba.png</texture>
+        
+        <aspectratio>keep</aspectratio>
+        <visible>Control.hasFocus(7777)</visible>
+      </control>
+      <control type="button" id="7778">
+        <include>ControlesRealisateur</include>
+      </control>
+      <control type="button" id="7777">
+        <top>250</top>
+        <onleft condition="Integer.IsGreater(Container(1999).NumItems,0)+!String.IsEmpty(Window(12003).Property(showsaga))">setFocus(1999)</onleft>
+        <onleft condition="!String.IsEmpty(Window(12003).Property(showgenre))">setFocus(5001)</onleft>
+        <onleft condition="String.IsEmpty(Window(12003).Property(showsaga))+String.IsEmpty(Window(12003).Property(showgenre))">setFocus(7781)</onleft>
+
+        <onright>7003</onright>
+        <onup>7003</onup>
+        <onback>7003</onback>
+        <ondown condition="Integer.IsGreater(Container(1999).NumItems,0)+!String.IsEmpty(Window(12003).Property(showsaga))">setFocus(1999)</ondown>
+        <ondown condition="Integer.IsGreater(Container(5001).NumItems,0)+!String.IsEmpty(Window(12003).Property(showgenre))">setFocus(5001)</ondown>
+        <ondown condition="String.IsEmpty(Window(12003).Property(showsaga))+String.IsEmpty(Window(12003).Property(showgenre))">setFocus(7781)</ondown>
+        <onclick>SetFocus(7778)</onclick>
+        <left>5</left>
+        <width>240</width>
+        <height>88</height>
+        <align>center</align>
+        <aligny>top</aligny>
+        <scroll>true</scroll>
+        <scrollout>false</scrollout>
+        <font>impact35</font>
+        <textcolor>FFFFFFFF</textcolor>
+        <focusedcolor>green</focusedcolor>
+        <label>$INFO[ListItem.Director]</label>
+      </control>
+  </control>
+-->
+    
+ 
+
   <!-------------------------------------GENRES ET SAGAS------------------------------------------------------------------------->
   <control type="group" id="5000">
     <!-- +!String.IsEmpty(Window(12003).Property(showgenre)) -->
@@ -1207,40 +1334,16 @@
 </control>
 
 
-<!-- poster et fanart-->
-<control type="group">
-  <posx>35</posx>
-  <posy>115</posy>
-  <control type="group">
 
-    <include>Animation_CommonFade</include>
-    <include>Animation_OpenCloseFade</include>
-    <!-- Default Poster Image -->
-    <control type="image">
-      <width>360</width>
-      <height>500</height>
-      <texture background="true" fallback="DefaultThumb.png">$VAR[PosterThumb]</texture>
-      <aspectratio align="center" aligny="center">keep</aspectratio>
-      <bordersize>20</bordersize>
-                <bordertexture border="20" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
-      <aspectratio scalediffuse="true" align="center" aligny="center">keep</aspectratio>
-      <animation effect="zoom" center="auto" start="40" end="100" time="400" tween="cubic" easing="inout">WindowOpen</animation>
-      <animation effect="fade" start="0" end="0" time="0">WindowClose</animation>
-    </control>
-
-
-  </control>
-
-
-</control>
-<include>GlobalBackgroundVideoInfo</include>
 <control type="group">
   <posy>980</posy>
   <posx>15</posx>
+  <width>1750</width>
   <animation type="Conditional" condition="true" reversible="true">
-    <effect type="zoom" center="15,1020" start="100" end="80" time="10" />
+    <effect type="zoom" center="890,1020" start="100" end="80" time="10" />
   </animation>
-  <include condition="!Skin.HasSetting(Hide_ExtraMediaFlags)">MediaInfoGroup3</include>
+    <include>MediaInfoGroupUp</include>
+
 </control>
 </control>
 

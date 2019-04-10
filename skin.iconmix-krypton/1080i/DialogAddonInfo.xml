@@ -16,13 +16,13 @@
 			</animation>
 			<control type="group">
 				<control type="label">
-					<posx>460</posx>
+					<posx>60</posx>
 					<posy>0</posy>
-					<width>790</width>
+					<width>850</width>
 					<height>38</height>
 					<font>METF_TitleTextLarge</font>
 					<textcolor>SettingsTitle</textcolor>
-					<align>left</align>
+					<align>center</align>
 					<aligny>center</aligny>
 					<label>$INFO[ListItem.AddonName]</label>
 				</control>
@@ -99,18 +99,19 @@
 				<control type="label">
 					<posx>460</posx>
 					<posy>228</posy>
-					<width>790</width>
+					<width>450</width>
 					<height>38</height>
 					<font>METF_ContextValue</font>
 					<textcolor>SettingsDetail</textcolor>
 					<align>left</align>
 					<aligny>center</aligny>
+					<scroll>true</scroll>>
 					<label>[UPPERCASE]$LOCALIZE[20037]:[/UPPERCASE] $INFO[ListItem.AddonSummary]</label>
 				</control>
 				<control type="label">
 					<posx>460</posx>
 					<posy>266</posy>
-					<width>790</width>
+					<width>450</width>
 					<height>38</height>
 					<font>METF_ContextValue</font>
 					<textcolor>SettingsDetail</textcolor>
@@ -122,7 +123,7 @@
 				<control type="label">
 					<posx>460</posx>
 					<posy>304</posy>
-					<width>790</width>
+					<width>450</width>
 					<height>38</height>
 					<font>METF_ContextValue</font>
 					<textcolor>SettingsDetail</textcolor>
@@ -135,8 +136,8 @@
 					<description>Textarea</description>
 					<posx>460</posx>
 					<posy>342</posy>
-					<width>790</width>
-					<height>120</height>
+					<width>450</width>
+					<height>220</height>
 					<font>METF_ContextValue</font>
 					<textcolor>SettingsDetail</textcolor>
 					<align>left</align>
@@ -179,6 +180,7 @@
 				</focusedlayout>
 			</control>
 			<control type="group" id="9000">
+			  <left>60</left>
 				<control type="button" id="6">
 					<description>Enable</description>
 					<include>SettingsLabelLeft</include>

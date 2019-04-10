@@ -24,6 +24,9 @@
   			<animation type="Conditional" condition="[!Skin.HasSetting(ShowFilePath)|String.IsEmpty(ListItem.FilenameAndPath)]|[Skin.HasSetting(Hide_Plot)|Skin.HasSetting(ShowLargePlot)|Skin.HasSetting(ShowVeryLargePlot)]" reversible="false">
           <effect type="slide" end="0,30" time="0"  />
          </animation>
+         <animation type="Conditional" condition="Control.IsVisible(900)" reversible="false">
+          <effect type="slide" end="0,30" time="0"  />
+         </animation>
          
 						 
 			
@@ -40,6 +43,7 @@
 		<control type="group">
         <posy>2085</posy>
 		        <include>VisibleIfNotMovieSet</include>
+		        <visible>!Control.IsVisible(900)</visible>
 		         <animation reversible="false" type="Conditional" condition="!Container().OnNext+!Container().OnPrevious">
         <effect type="slide" end="0,-65" time="500" delay="500" />
       </animation>

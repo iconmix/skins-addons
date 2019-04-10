@@ -77,35 +77,6 @@
 	<include name="FadelabelPauseAtEnd90">
 		<pauseatend>90000</pauseatend>
 	</include>
-	<variable name="WidgetFanart1">
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,1)">$INFO[Container(80111).ListItem.Art(fanart)]</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,2)">$INFO[Container(80112).ListItem.Art(fanart)]</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,3)">$INFO[Container(80113).ListItem.Art(fanart)]</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,4)">$INFO[Container(80114).ListItem.Art(fanart)]</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,5)">$INFO[Container(80115).ListItem.Art(fanart)]</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,6)">$INFO[Container(80116).ListItem.Art(fanart)]</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,7)">$INFO[Container(80117).ListItem.Art(fanart)]</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,8)">$INFO[Container(80118).ListItem.Art(fanart)]</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,9)">$INFO[Container(80119).ListItem.Art(fanart)]</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,10)">$INFO[Container(80110).ListItem.Art(fanart)]</value>
-	  
-	</variable>
-	<variable name="IdWidget1">
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,1)">80111</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,2)">80112</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,3)">80113</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,4)">80114</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,5)">80115</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,6)">80116</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,7)">80117</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,8)">80118</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,9)">80119</value>
-	  <value condition="Integer.IsEqual(Container(9000).CurrentItem,10)">80110</value>
-	  
-	</variable>
-	<variable name="IdWidget2">
-	  <value>$INFO[Container(9000).CurrentItem,8021]</value>
-	</variable>
 	
   <variable name="CheckSaison">
     <value condition="Integer.IsGreater(Window(Home).Property(IconMixTv),0)">$INFO[Window(Home).Property(IconMixTvKodi),]$INFO[Window(Home).Property(IconMixTv),/,] $LOCALIZE[20360]</value>
@@ -184,6 +155,7 @@
    <value condition="Container(9000).Hasfocus(7)+ControlGroup(9011).Hasfocus+ControlGroup(9011).Hasfocus(813)+!skin.HasSetting(CacherPause)">settings/preview/pauseok.jpg</value>
    <value condition="Container(9000).Hasfocus(7)+ControlGroup(9011).Hasfocus+ControlGroup(9011).Hasfocus(826)+Skin.HasSetting(LogoDiscFilms)">settings/preview/discart.jpg</value>
    <value condition="Container(9000).Hasfocus(7)+ControlGroup(9011).Hasfocus+ControlGroup(9011).Hasfocus(826)+!Skin.HasSetting(LogoDiscFilms)">settings/preview/logoart.jpg</value>
+   <value condition="!String.IsEmpy(Window(10000).Property(IconmixViewId))+ControlGroup(9015).Hasfocus">$INFO[Window(10000).Property(IconmixViewId)]</value>
    <!--<value condition="Container(9000).Hasfocus(7)+ControlGroup(9011).Hasfocus+ControlGroup(9011).Hasfocus(836)+Skin.HasSetting(LogoDiscSeries)">settings/preview/discart.jpg</value>
    <value condition="Container(9000).Hasfocus(7)+ControlGroup(9011).Hasfocus+ControlGroup(9011).Hasfocus(836)+!Skin.HasSetting(LogoDiscSeries)">settings/preview/logoart.jpg</value>
    -->
@@ -381,8 +353,9 @@
 
 		<value condition="Container.Content(artists) | Container.Content(albums) | Container.Content(songs)">$INFO[ListItem.Label]</value>
 		<value condition="String.IsEqual(ListItem.DbType,episode) | Container.Content(episodes)|[String.Contains(Container.FolderPath,plugin)+String.IsEmpty(Container.Content)+!String.IsEmpty(ListItem.Title)]">$VAR[Seasonnum]$VAR[episodenum]$INFO[ListItem.Title,: ]</value>
+		
 
-		<value condition="Container.Content(tvshows)+!String.IsEmpty(ListItem.TVShowTitle)">$INFO[ListItem.TVShowTitle]</value>
+		<value condition="String.IsEqual(ListItem.DbType,tvshow)+!String.IsEmpty(ListItem.TVShowTitle)">$INFO[ListItem.TVShowTitle]</value>
 		<value condition="!String.IsEmpty(ListItem.Label)+String.IsEqual(ListItem.DBTYPE,set)">$INFO[ListItem.Label]</value>
 		<value condition="!String.IsEmpty(ListItem.Label)">$INFO[ListItem.Label]</value>
 		<value condition="!String.IsEmpty(ListItem.Title)">$INFO[ListItem.Title]</value>
@@ -612,7 +585,7 @@
 	<variable name="Weather_Fanart">
 		<!-- + Skin.HasSetting(DynamicWeather) -->
 		<value condition="!Skin.String(CustomWeather.path,) + !Skin.HasSetting(CustomWeather.multi)">$INFO[Skin.String(CustomWeather.path)]$INFO[Window(Weather).Property(Current.FanartCode)]$INFO[Skin.String(CustomWeather.ext)]</value>
-		<value condition="!Skin.String(CustomWeather.path,) + Skin.HasSetting(CustomWeather.multi)">$INFO[Skin.String(CustomWeather.path)]$INFO[Window(Weather).Property(Current.FanartCode)]</value>
+		<value condition="!Skin.String(CustomWeather.path,) + Skin.HasSetting(CustomWeather.multi)">$INFO[Skin.String(CustomWeather.path)]$INFO[Window(2600).Property(Current.FanartCode)]</value>
 		<value>special://skin/extras/backgrounds/weather.jpg</value>
 	</variable>
 	<variable name="WeatherIconsPath">
@@ -711,10 +684,12 @@
 		<value condition="Container.Content(Movies) +  !String.IsEmpty(ListItem.PlotOutline)">$INFO[ListItem.PlotOutline]</value>
 		<value condition="Container.Content(Seasons)">$INFO[Container.ShowPlot]</value>
 		<!-- Music -->
+		
 		<value condition="[Container.Content(Albums)|[Control.HasFocus(1999)+[Container.Content(Artists)|Container.Content(genres)]]]+!String.IsEmpty(Container(1999).ListItem.Property(AlbumInfo))">$INFO[Container(1999).ListItem.Property(AlbumInfo)]</value>
 		<value condition="[Container.Content(Albums)|[Control.HasFocus(1999)+[Container.Content(Artists)|Container.Content(genres)]]]+!String.IsEmpty(Window(Home).Property(AlbumInfo))">$INFO[Window(Home).Property(AlbumInfo)]</value>
-		<value condition="!Control.HasFocus(1999)+Container.Content(Artists)+!String.IsEmpty(Window(Home).Property(ArtistBio))">$INFO[Window(Home).Property(ArtistBio)]</value>
-		<value condition="!String.IsEmpty(ListItem.Property(Artist_Description)) + String.IsEmpty(ListItem.Property(Album_Description))">$INFO[ListItem.Property(Artist_Description)]</value>
+		
+		<!-- <value condition="!Control.HasFocus(1999)+Container.Content(Artists)+!String.IsEmpty(Window(Home).Property(ArtistBio))">$INFO[Window(Home).Property(ArtistBio)]</value> -->
+		<value condition="!String.IsEmpty(ListItem.Property(Artist_Description)) + String.Contains(ListItem.DBTYPE,artist)">$INFO[ListItem.Property(Artist_Description)]</value>
 		<value condition="!String.IsEmpty(ListItem.Property(Album_Description))">$INFO[ListItem.Property(Album_Description)]</value>
 
 		<!-- Addons -->
@@ -1016,6 +991,7 @@
 	
 	 <value condition="Player.HasAudio+!Window.IsActive(502)+!String.IsEmpty(Window(Home).Property(AlbumCdPlayer))">$INFO[Window(Home).Property(AlbumCdPlayer)]</value>
 	 <value condition="Player.HasAudio+!Window.IsActive(502)+!String.IsEmpty(Window(Home).Property(ArtistLogoPlayer))">$INFO[Window(Home).Property(ArtistLogoPlayer)]</value>
+	 <value condition="Player.HasAudio+!Window.IsActive(502)+!String.IsEmpty(MusicPlayer.Property(Fanart_Image))">$INFO[MusicPlayer.Property(Fanart_Image)]</value>
 	 <value condition="Player.HasAudio+!Window.IsActive(502)">cd.png</value>
 	 <value condition="Control.HasFocus(2997)+!String.IsEmpty(Container(1999).ListItem.Property(AlbumCd))">$INFO[Container(1999).ListItem.Property(AlbumCd)]</value>
 	 <value condition="!String.IsEmpty(ListItem.Property(AlbumCd))">$INFO[ListItem.Property(AlbumCd)]</value>

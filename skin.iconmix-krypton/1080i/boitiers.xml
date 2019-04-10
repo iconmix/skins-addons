@@ -38,7 +38,7 @@
         <width>127</width>
         <height>127</height>
         <aspectratio scalediffuse="true" aligny="center">stretch</aspectratio>
-        <texture background="true" diffuse="frames/cdart-mask.png">$VAR[discartSpinning]</texture>
+        <texture fallback="cdorg.png" background="true" diffuse="frames/cdart-mask.png">$VAR[discartSpinning]</texture>
         <bordersize>2</bordersize>
         <bordertexture>frames/cdart-mask.png</bordertexture>
         <animation effect="rotate"  center="auto" end="-360" time="1000" delay="2400" condition="System.IdleTime(2)" reversible="false">Conditional</animation>
@@ -885,7 +885,7 @@
         <texture fallback="cd.png" background="true" diffuse="frames/cdart-mask.png">$INFO[ListItem.Icon]</texture>
         <bordersize>2</bordersize>
         <bordertexture>frames/cdart-mask.png</bordertexture>
-        <visible>String.IsEmpty(ListItem.Art(discart))</visible>
+        <visible>String.IsEmpty(ListItem.Property(AlbumCd))</visible>
       </control>
 
       <control type="image">
@@ -899,7 +899,7 @@
         <bordertexture>frames/cdart-mask.png</bordertexture>
       </control>
     </control>
-
+    
   </itemlayout>
   <focusedlayout width="200" height="240" condition="Window.IsActive(502)+[Skin.HasSetting(MusicDiscArt)+!Container.Content(Genres)]">
     <control type="group">

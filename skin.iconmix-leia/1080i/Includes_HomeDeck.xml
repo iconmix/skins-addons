@@ -138,17 +138,22 @@
 
     <!-- Heading Labels at very top of screen -->
     <control type="group">
-      <posx>30</posx>
-      <posy>10</posy>
-      <control type="label">
-        <label>$INFO[Weather.Location]</label>
-        <include>Global_HeadingSectionVars</include>
-      </control>
-      <control type="label">
-        <label>$LOCALIZE[31208] $INFO[Window(weather).Property(Updated)]</label>
-        <include>Global_HeadingDetailVars</include>
-      </control>
-    </control>
+			<posx>30</posx>
+			<posy>10</posy>
+			<control type="label">
+				<label>$INFO[Weather.Location]</label>
+				<include>FontTitre</include>
+				<align>center</align>
+				<width>1300</width>
+			</control>
+			<control type="label">
+				<label>$LOCALIZE[31208] $INFO[Window.Property(Updated)]</label>
+				<font>impactsongs</font>			
+				<align>right</align>
+				<width>500</width>
+				<left>1300</left>
+			</control>
+		</control>
 
   </control>
 </include>

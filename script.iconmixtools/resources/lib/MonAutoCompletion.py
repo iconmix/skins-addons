@@ -72,6 +72,12 @@ def get_autocomplete_items(search_str, limit=50, providerchoice=None,basetype=No
              provider = GoogleProvider(limit=limit)
     provider.limit = limit
     return provider.get_predictions(search_str)
+    
+def InitKodiSearch():
+  provider=BaseTypeDictProvider(limit=50,basetype="videos",Purge=None)
+  provider.showprogress=False
+  provider.create_cache()
+    
 
 
 class BaseProvider(object):
@@ -197,6 +203,7 @@ class BaseTypeDictProvider(BaseProvider):
         self.basetype = kwargs.get("basetype", None)
         self.listitems = []
         self.Data={}
+        self.showprogress=True
         self.PurgeCache = kwargs.get("Purge", None)
         super(BaseTypeDictProvider, self).__init__(*args, **kwargs)
         
@@ -214,14 +221,31 @@ class BaseTypeDictProvider(BaseProvider):
       return True
       
     def dpupdate(self,compteur=100,label="cache"):
-      Titre="Creation du cache...."
-      if not self.dp:
-        self.dp = xbmcgui.DialogProgress()
-        self.dp.create("IconMixTools",Titre,"")
-      self.dp.update(compteur,Titre,label)
+      if self.showprogress==True:
+        Titre="Creation du cache...."
+        if not self.dp:
+          self.dp = xbmcgui.DialogProgress()
+          self.dp.create("IconMixTools",Titre,"")
+        self.dp.update(compteur,Titre,label)
+    
+    def checkcachetime(self, path):
+      try:
+         st = xbmcvfs.Stat(path)
+         cachemodified = st.st_mtime()
+         now = time.time()
+         unjour = now - 60*60*24 # Number of seconds in two days
+         if cachemodified < unjour:
+            logMsg("fichier (%s) a mettre a jour")
+            return True
+            
+      except:
+        if not xbmcvfs.exists(path):
+          return True 
+      return False
         
         
     def create_cache(self):
+        self.version="1.1"
         updateActorMovie=None
         updateActorTvShow=None
         updateDirectorMovie=None
@@ -229,98 +253,105 @@ class BaseTypeDictProvider(BaseProvider):
         Titre=None
         self.dp=None
         
-        
         self.GlobalCache=utils.GetCache(None,cache_path+"total")
-        if self.check_update(WINDOW.getProperty("Movies.count"),"films") or not xbmcvfs.exists(cache_path+"films") or self.PurgeCache:
+        if len(self.GlobalCache)<1:
+          logMsg("GCHACHE %s" %(self.GlobalCache))
+          self.PurgeCache=True
+          self.GlobalCache={}
+          
+        self.Data["version"]=self.version
+        if (self.check_update(WINDOW.getProperty("Movies.count"),"films") and self.checkcachetime(cache_path+"films") ) or self.PurgeCache or not xbmcvfs.exists(cache_path+"films"):
           self.dpupdate(0,"Films")
-          json_result = utils.getJSON("VideoLibrary.GetMovies", '{"properties":["setid"]}')
+          json_result = utils.getJSON("VideoLibrary.GetMovies", '{"properties":["setid","art","plot"]}')
           self.Data["resultats"]=json_result
           utils.SaveFile(cache_path+"films",self.Data)
           self.GlobalCache["films"]=self.Data.get("total")
-          updateActorMovie=True
+          #updateActorMovie=True
 
 
-        if self.check_update(WINDOW.getProperty("TVShows.count"),"tvshows") or not xbmcvfs.exists(cache_path+"tvshows") or self.PurgeCache:
+        if (self.check_update(WINDOW.getProperty("TVShows.count"),"tvshows") and self.checkcachetime(cache_path+"tvshows") ) or self.PurgeCache or not xbmcvfs.exists(cache_path+"tvshows"):
           self.dpupdate(16,"tvshows")
-          json_result = utils.getJSON("VideoLibrary.GetTvShows", '{"properties":["episode"]}' )        
+          json_result = utils.getJSON("VideoLibrary.GetTvShows", '{"properties":["episode","art","plot"]}' )        
           self.Data["resultats"]=json_result
           utils.SaveFile(cache_path+"tvshows",self.Data)
           self.GlobalCache["tvshows"]=self.Data.get("total")
-          updateActorTvShow=True
+          #updateActorTvShow=True
 
 
         
-        if self.check_update(WINDOW.getProperty("Episodes.count"),"episodes") or not xbmcvfs.exists(cache_path+"episodes") or self.PurgeCache:
+        if (self.check_update(WINDOW.getProperty("Episodes.count"),"episodes") and self.checkcachetime(cache_path+"episodes") ) or self.PurgeCache or not xbmcvfs.exists(cache_path+"episodes"):
           self.dpupdate(32,"Episodes")
-          json_result = utils.getJSON("VideoLibrary.GetEpisodes", '{"properties":["tvshowid"]}' )
+          json_result = utils.getJSON("VideoLibrary.GetEpisodes", '{"properties":["tvshowid","art","plot","season","showtitle"]}' )
           self.Data["resultats"]=json_result
           utils.SaveFile(cache_path+"episodes",self.Data)
           self.GlobalCache["episodes"]=self.Data.get("total")
 
         ListeActors=[]
-        if updateActorMovie or not xbmcvfs.exists(cache_path+"acteurs") or self.PurgeCache:
+        
+        if (updateActorMovie and self.checkcachetime(cache_path+"acteurs") ) or self.PurgeCache or not xbmcvfs.exists(cache_path+"acteurs"):
           self.dpupdate(48,"Acteurs")
-          json_result = utils.getJSON("Files.GetDirectory", '{"directory":"videodb://movies/actors"}')
+          json_result = utils.getJSON("Files.GetDirectory", '{"directory":"videodb://movies/actors","properties":["art"]}')
           
           if json_result:
             for item in json_result:
-               ListeActors.append({"actormovieid":item.get("id"),"label":item["label"]}) 
+               ListeActors.append({"actormovieid":item.get("id"),"label":item["label"],"art":item["art"]}) 
             self.GlobalCache["actormovie"]=len(ListeActors)
                            
-        if updateActorTvShow or not xbmcvfs.exists(cache_path+"acteurs") or self.PurgeCache: 
+        if (updateActorTvShow and self.checkcachetime(cache_path+"acteurs") ) or self.PurgeCache or not xbmcvfs.exists(cache_path+"acteurs"): 
           self.dpupdate(58,"Acteurs")   
-          json_result = utils.getJSON("Files.GetDirectory", '{"directory":"videodb://tvshows/actors"}')
+          json_result = utils.getJSON("Files.GetDirectory", '{"directory":"videodb://tvshows/actors","properties":["art"]}')
           if json_result:
             for item in json_result:
-              ListeActors.append({"actortvshowid":item.get("id"),"label":item["label"]})
+              ListeActors.append({"actortvshowid":item.get("id"),"label":item["label"],"art":item["art"]})
             self.GlobalCache["actortv"]=len(ListeActors)
           self.Data["resultats"]=ListeActors
           utils.SaveFile(cache_path+"acteurs",self.Data) 
         Listedirectors=[]   
-        if updateActorMovie or not xbmcvfs.exists(cache_path+"realisateurs") or self.PurgeCache:
+        if (updateActorMovie and self.checkcachetime(cache_path+"realisateurs") ) or self.PurgeCache or not xbmcvfs.exists(cache_path+"realisateurs"):
           self.dpupdate(64,"Realisateurs")    
-          json_result = utils.getJSON("Files.GetDirectory", '{"directory":"videodb://movies/directors"}')
+          json_result = utils.getJSON("Files.GetDirectory", '{"directory":"videodb://movies/directors","properties":["art"]}')
           
           if json_result:          
             for item in json_result:
-                Listedirectors.append({"directormovieid":item.get("id"),"label":item["label"]})
+                Listedirectors.append({"directormovieid":item.get("id"),"label":item["label"],"art":item["art"]})
             self.GlobalCache["directormovie"]=len(Listedirectors)
             
-        if updateActorTvShow or not xbmcvfs.exists(cache_path+"realisateurs") or self.PurgeCache:  
-          json_result = utils.getJSON("Files.GetDirectory", '{"directory":"videodb://tvshows/directors"}')
+        if (updateActorTvShow and self.checkcachetime(cache_path+"realisateurs") ) or self.PurgeCache or not xbmcvfs.exists(cache_path+"realisateurs"):  
+          json_result = utils.getJSON("Files.GetDirectory", '{"directory":"videodb://tvshows/directors","properties":["art"]}')
           if json_result:
             for item in json_result:
-                Listedirectors.append({"directortvshowid":item.get("id"),"label":item["label"]})
+                Listedirectors.append({"directortvshowid":item.get("id"),"label":item["label"],"art":item["art"]})
             self.GlobalCache["directortv"]=len(Listedirectors)
           self.Data["resultats"]=Listedirectors
           utils.SaveFile(cache_path+"realisateurs",self.Data)  
         
-        if self.check_update(WINDOW.getProperty("Music.Artistscount"),"artistes") or not xbmcvfs.exists(cache_path+"artistes") or self.PurgeCache:
+        if (self.check_update(WINDOW.getProperty("Music.Artistscount"),"artistes") and self.checkcachetime(cache_path+"artistes") ) or self.PurgeCache or not xbmcvfs.exists(cache_path+"artistes"):
           self.dpupdate(80,"Artistes")
-          json_result = utils.getJSON("AudioLibrary.GetArtists", '{}' )
+          json_result = utils.getJSON("AudioLibrary.GetArtists", '{"properties":["thumbnail","description"]}' )
           self.Data["resultats"]=json_result
           utils.SaveFile(cache_path+"artistes",self.Data)
           self.GlobalCache["artistes"]=self.Data.get("total")
 
-        if self.check_update(WINDOW.getProperty("Music.Albumscount"),"albums") or not xbmcvfs.exists(cache_path+"albums") or self.PurgeCache:
+        if (self.check_update(WINDOW.getProperty("Music.Albumscount"),"albums") and self.checkcachetime(cache_path+"albums") ) or self.PurgeCache or not xbmcvfs.exists(cache_path+"albums"):
           self.dpupdate(96,"Albums")
-          json_result = utils.getJSON("AudioLibrary.GetAlbums", '{"properties":["artistid"]}' )
+          json_result = utils.getJSON("AudioLibrary.GetAlbums", '{"properties":["artistid","thumbnail","description"]}' )
           self.Data["resultats"]=json_result
           utils.SaveFile(cache_path+"albums",self.Data)
           self.GlobalCache["albums"]=self.Data.get("total")
           
-        if (xbmc.getCondVisibility("Window.IsVisible(10040)") and not xbmcvfs.exists(cache_path+"addons")) or self.PurgeCache:
+        if (xbmc.getCondVisibility("Window.IsVisible(10040)") and not xbmcvfs.exists(cache_path+"addons")) or self.PurgeCache or not xbmcvfs.exists(cache_path+"addons"):
           self.dpupdate(99,"Addons")
-          json_result = utils.getJSON("Addons.GetAddons", '{"properties":["name"]}')
+          json_result = utils.getJSON("Addons.GetAddons", '{"properties":["name","description"]}')
           Listeaddons=[]
           if json_result:          
               for item in json_result:
-                  Listeaddons.append({"addonid":item.get("addonid"),"label":item["name"],"type":item["type"]})
+                  Listeaddons.append({"addonid":item.get("addonid"),"label":item["name"],"type":item["type"],"plot":item["description"]})
           self.Data["resultats"]=Listeaddons
           utils.SaveFile(cache_path+"addons",self.Data)
           self.GlobalCache["addons"]=len(Listeaddons)
         
-        GlobalSave={}
+        GlobalSave={"version":self.version}
+        
         GlobalSave["resultats"]=self.GlobalCache        
         utils.SaveFile(cache_path+"total",GlobalSave)
         self.PurgeCache=None
@@ -351,15 +382,12 @@ class BaseTypeDictProvider(BaseProvider):
             if SETTING("autocomplete_cache")=="true":
               if not self.PurgeCache:
                 self.create_cache()
-          #logMsg("basetype (%s)" %self.basetype)
-          #if self.basetype=="videos" or RecherchePartout:
-          
+         
             if not xbmc.getCondVisibility("Window.IsVisible(10040)"):
 
               if RecherchePartout or xbmc.getCondVisibility("Skin.HasSetting(AutoCompleteFilms)"):
                 json_result=utils.GetCache(search_str,cache_path+"films")
-                if json_result:
-                  
+                if json_result:                  
                     self.createlistitems(json_result,"movie")
               if RecherchePartout or xbmc.getCondVisibility("Skin.HasSetting(AutoCompletetvshows)"):
                 json_result=utils.GetCache(search_str,cache_path+"tvshows")
@@ -387,18 +415,7 @@ class BaseTypeDictProvider(BaseProvider):
                   if len(ListeActorsTvShow)>0:
                     self.createlistitems(ListeActorsTvShow,"actortvshow")
                     
-                #json_result = utils.getJSON("Files.GetDirectory", '{"directory":"videodb://tvshows/actors"}')
-                """
-                json_result=utils.GetCache("")
-                if json_result:
-                  ListeActors=[]
-                  recherche=search_str.lower()
-                  for item in json_result:
-                    if recherche in item["label"].lower():
-                      ListeActors.append({"actortvshowid":item.get("id"),"label":item["label"]})
-                  if len(ListeActors)>0:
-                    self.createlistitems(ListeActors,"actortvshow")
-                """
+                
                     
               if RecherchePartout or xbmc.getCondVisibility("Skin.HasSetting(AutoCompleteRealisateurs)"):
                 #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"Files.GetDirectory","params":{"directory":"videodb://movies/directors","limits":{"end":4}},"id":1}
@@ -412,21 +429,7 @@ class BaseTypeDictProvider(BaseProvider):
                   if len(Listedirectors)>0:
                     self.createlistitems(Listedirectors,"directormovie")
                     
-                #json_result = utils.getJSON("Files.GetDirectory", '{"directory":"videodb://tvshows/directors"}')
-                """
-                json_result=utils.GetCache(search_str,cache_path+"realisateurs")
-                if json_result:
-                  Listedirectors=[]
-                  recherche=search_str.lower()
-                  for item in json_result:
-                    if recherche in item["label"].lower():
-                      Listedirectors.append({"directortvshowid":item.get("id"),"label":item["label"]})
-                  if len(Listedirectors)>0:
-                    self.createlistitems(Listedirectors,"directortvshow")
-                """
-            #if self.basetype=="music" or RecherchePartout: 
-              #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"AudioLibrary.GetArtists","params":{"limits":{"end":2},"filter":{"field":"artist","operator":"contains","value":"madon"}},"id":"1"}     
-              #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"AudioLibrary.GetAlbums","params":{"limits":{"end":2},"filter":{"field":"album","operator":"contains","value":"Fear"}},"id":"1"}
+                
               if RecherchePartout or xbmc.getCondVisibility("Skin.HasSetting(AutoCompleteArtistes)"):
                 json_result=utils.GetCache(search_str,cache_path+"artistes")
                 if json_result:
@@ -441,18 +444,12 @@ class BaseTypeDictProvider(BaseProvider):
                     self.createlistitems(json_result,"addon")
                   
               
-        #logMsg("Items (%s)" %self.listitems)
         LL=[] 
-        #if (SETTING("autocomplete_tri")=="titre" or xbmc.getCondVisibility("Skin.HasSetting(AutoCompleteTriTitre)"))  and not xbmc.getCondVisibility("Skin.HasSetting(AutoCompleteTriCategorie)"):
         if xbmc.getCondVisibility("Skin.HasSetting(AutoCompleteTriTitre)"):
-          #LL=sorted(self.listitems,key=operator.itemgetter('label'))
           LL=sorted(self.listitems, key = lambda x: (x['label']))
-          #logMsg("tri par titre")
         else:
-          #LL=sorted(self.listitems,key=operator.itemgetter('dbtype'))
           LL=sorted(self.listitems, key = lambda x: (x['dbtype'],x['label']))
           
-          #logMsg("tri par categorie")
                      
         return LL            
           
@@ -460,23 +457,29 @@ class BaseTypeDictProvider(BaseProvider):
       
       if Donnees:
              for Item in Donnees:
-               Titre=Item.get("label")
-               try:
-                
+               
+               try:                
                 DBID=Item.get("%sid" %DbType)
                except:
                 DBID=None
                Path=None
                Icon=None
                if DBID:
-                
+                  Titre=Item.get("label")
+                  Plot=Item.get("plot")
+                  Art=Item.get("art")
                   if DbType=="artist":
                     Path="musicdb://artists/"
                     Icon="flags/keytype/artist.png"
+                    Art={"poster":Item.get("thumbnail")}
+                    Plot=Item.get("description")
                     WinId=10502
                   if DbType=="album":
                     Path="musicdb://artists/%s/" %(Item.get("artistid")[0])
                     Icon="flags/keytype/album.png"
+                    Art={"poster":Item.get("thumbnail")}
+                    Plot=Item.get("description")
+                    logMsg("PLOT ALBUM %s" %Plot)
                     WinId=10502
                   if DbType=="movie":
                     try:
@@ -492,7 +495,9 @@ class BaseTypeDictProvider(BaseProvider):
                   if DbType=="actormovie":
                     Path="videodb://movies/actors/" 
                     Icon="flags/keytype/actor.png"
+                    Art={"poster":Item.get("thumb")}
                     WinId=10025
+                    logMsg("Art : %s" %Art)
                   if DbType=="directormovie":
                     Path="videodb://movies/directors/" 
                     Icon="flags/keytype/director.png"
@@ -510,27 +515,45 @@ class BaseTypeDictProvider(BaseProvider):
                   if DbType=="actortvshow":
                     Path="videodb://tvshows/actors/" 
                     Icon="flags/keytype/actor.png"
+                    Art={"poster":Item.get("thumb")}
                     WinId=10025
                   if DbType=="directortvshow":
                     Path="videodb://tvshows/directors/" 
                     Icon="flags/keytype/director.png"
                     WinId=10025
                   if DbType=="episode":
-                    Path="videodb://tvshows/titles/%d/" %(Item.get("tvshowid"))
+                    
+                    Saison=Item.get("season")
+                    if not Saison:
+                      Path="videodb://tvshows/titles/%d/" %(Item.get("tvshowid"))
+                    else:
+                      Path="videodb://tvshows/titles/%d/%d" %(Item.get("tvshowid"),Saison)
+                      Art["poster"]=Art.get("season.poster")
                     Icon="flags/keytype/episode.png"
+                    Art=self.transformArt(Art)
                     WinId=10025
                   if DbType=="addon":
                     Path="addon:"+Titre #"addons://user/%s/" %(DBID)
                     Icon="flags/keytype/addon.png"
                     WinId=10146
+                    Plot=Item.get("description")
                 
                if Titre:
-                 li = {"label": Titre,"dbid":DBID,"dbtype":DbType,"path":Path,"icon":Icon,"winid":WinId}
+                 li = {"label": Titre,"dbid":DBID,"dbtype":DbType,"path":Path,"icon":Icon,"winid":WinId,"art":Art,"plot":Plot,"showtitle":Item.get("showtitle")}
                  self.listitems.append(li)
                
   
 
-
+    def transformArt(self,Art={}):
+        NewArt={}
+        for key, value in Art.items():
+          if not value:
+              continue
+          if "tvshow." in key.lower():
+              NewArt[key.replace("tvshow.","")]=value
+          else:
+              NewArt[key]=value
+        return NewArt
 
 def get_JSON_response(url="", cache_days=7.0, folder=False, headers=False):
     """

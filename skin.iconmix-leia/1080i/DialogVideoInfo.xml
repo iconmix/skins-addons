@@ -459,7 +459,7 @@
         <include>Animation_ButtonFocus</include>
         <onclick>Close</onclick>
         <ondown>2100</ondown>
-        <onup>2110</onup>
+        <onup>2109</onup>
       </control>
     </control>
 

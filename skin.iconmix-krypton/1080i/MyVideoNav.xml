@@ -30,7 +30,7 @@
  
   <menucontrol>7000</menucontrol>
 
-  <views>55,557,508,905,906,53,57,58,559,555,501,552,554,511,512,513,514,510,52,56,512,584,585,586,562,563</views>
+  <views>55,557,508,905,906,53,57,558,559,555,501,552,554,511,512,513,514,510,52,56,512,584,585,586,562,563,900</views>
   <defaultcontrol always="true">55</defaultcontrol>
   
   <controls>
@@ -62,28 +62,29 @@
         <!--<include>Viewtype_LogoV</include>			 560 -->
         <!--<include>Viewtype_DiscV</include>			 587 -->
         
-        <include>Viewtype_List</include>			                    <!-- 55 -->
-        <include>Viewtype_ListSobre</include>			                <!-- 508 -->
-        <include>Viewtype_ListTrio</include>			                <!-- 55 -->
-        <include>Viewtype_Onglets</include>                       <!-- 905 -->
-        <include>Viewtype_Poster_VeryLarge_Fixed</include>		    <!-- 555 -->
-        <include>Viewtype_Poster_Large_Fixed</include>		        <!-- 552 -->
-        <include>Viewtype_Poster_Large_FixedVertical</include>		<!-- 554 -->
-        <include>Viewtype_Landscape</include>			                <!-- 52 -->
-        <include>Viewtype_Banner</include>			                  <!-- 511 -->
-        <include>Viewtype_BannerWall</include>			              <!-- 514 -->
-        <include>Viewtype_BannerV</include>			                  <!-- 513 -->
-        <include>Viewtype_BannerPoster</include>		              <!-- 510 -->
-        <include>Viewtype_Gallery_Square</include>		            <!-- 58 -->
-        <include>Viewtype_Panel_Square</include>		              <!-- 559 -->
-        <include>Viewtype_Logo</include>			                    <!-- 56 -->        
-        <include>Viewtype_Netflix_Poster</include>                <!-- 562 -->
-        <include>Viewtype_Netflix_Paysage</include>               <!-- 563 -->
-        <include>ViewType_Vitrine</include>			                  <!-- 584 -->
-        <include>Viewtype_MurFilms</include>		                  <!-- 585 -->
-        <include>Viewtype_Disc</include>			                    <!-- 586 -->        
-        <include>Viewtype_ListCurved</include>                    <!-- 906 -->
-        <include>Viewtype_Coverflow</include>                     <!-- 512 -->
+        <include condition="!Skin.HasSetting(hide55)">Viewtype_List</include>			                    <!-- 55 -->
+        <include condition="!Skin.HasSetting(hide508)">Viewtype_ListSobre</include>			                <!-- 508 -->
+        <include condition="!Skin.HasSetting(hide557)">Viewtype_ListTrio</include>			                <!-- 557 -->
+        <include condition="!Skin.HasSetting(hide905)">Viewtype_Onglets</include>                       <!-- 905 -->
+        <include condition="!Skin.HasSetting(hide555)">Viewtype_Poster_VeryLarge_Fixed</include>		    <!-- 555 -->
+        <include condition="!Skin.HasSetting(hide552)">Viewtype_Poster_Large_Fixed</include>		        <!-- 552 -->
+        <include condition="!Skin.HasSetting(hide554)">Viewtype_Poster_Large_FixedVertical</include>		<!-- 554 -->
+        <include condition="!Skin.HasSetting(hide52)">Viewtype_Landscape</include>			                <!-- 52 -->
+        <include condition="!Skin.HasSetting(hide511)">Viewtype_Banner</include>			                  <!-- 511 -->
+        <include condition="!Skin.HasSetting(hide514)">Viewtype_BannerWall</include>			              <!-- 514 -->
+        <include condition="!Skin.HasSetting(hide513)">Viewtype_BannerV</include>			                  <!-- 513 -->
+        <include condition="!Skin.HasSetting(hide510)">Viewtype_BannerPoster</include>		              <!-- 510 -->
+        <include condition="!Skin.HasSetting(hide558)">Viewtype_Gallery_Square</include>		            <!-- 558 -->
+        <include condition="!Skin.HasSetting(hide559)">Viewtype_Panel_Square</include>		              <!-- 559 -->
+        <include condition="!Skin.HasSetting(hide56)">Viewtype_Logo</include>			                    <!-- 56 -->        
+        <include condition="!Skin.HasSetting(hide562)">Viewtype_Netflix_Poster</include>                <!-- 562 -->
+        <include condition="!Skin.HasSetting(hide563)">Viewtype_Netflix_Paysage</include>               <!-- 563 -->
+        <include condition="!Skin.HasSetting(hide584)">ViewType_Vitrine</include>			                  <!-- 584 -->
+        <include condition="!Skin.HasSetting(hide585)">Viewtype_MurFilms</include>		                  <!-- 585 -->
+        <include condition="!Skin.HasSetting(hide586)">Viewtype_Disc</include>			                    <!-- 586 -->        
+        <include condition="!Skin.HasSetting(hide906)">Viewtype_ListCurved</include>                    <!-- 906 -->
+        <include condition="!Skin.HasSetting(hide512)">Viewtype_Coverflow</include>                     <!-- 512 -->
+        <include condition="!Skin.HasSetting(hide900)">Viewtype_ListeDetails</include>                     <!-- 900 -->
        
       </control>
 
@@ -110,7 +111,7 @@
         
         <include>Global_ScrollOffsetLabel</include>
         <include>Global_AddonInfo</include>
-        <visible>!Skin.HasSetting(VueExperimentale)+!Control.IsVisible(562)+!Control.IsVisible(563)</visible>
+        <visible>!Skin.HasSetting(VueExperimentale)+!Control.IsVisible(562)+!Control.IsVisible(563)+!Control.IsVisible(900)</visible>
         	<control type="group">
 		  <posy>1105</posy>
 		        <include>VisibleIfNotMovieSet</include>
@@ -217,8 +218,12 @@
           <include>HorizVert</include>
           <include>VueElementsBoitiers</include>
           <visible>!Skin.HasSetting(SagaDetailsTexte)</visible>
+          <include>Vue900</include>
           <include>VisibleIfMovieSet</include>
         </control>
+       
+        
+        
         <control type="list" id="1999">
           <onfocus condition="Skin.HasSetting(SagaDetailsAucun)">SetFocus(55)</onfocus>
           <onfocus>SetProperty(IconMixVerticalNavigation,"vertical",Home)</onfocus>
@@ -244,6 +249,7 @@
           <content sortby="name" sortorder="ascending">$INFO[Container.FolderPath]$INFO[ListItem.DBID]</content>
           <include>HorizVert</include>
           <include>VueElementsBoitiers</include>
+          <include>Vue900</include>
           <visible>!Skin.HasSetting(GenreDetailsTexte)</visible>
           <visible>Container.Content(genres)</visible>
         </control>
@@ -272,6 +278,7 @@
           <onfocus>SetProperty(IconMixVerticalNavigation,"horizontal",Home)</onfocus>
           <onfocus>Action(FirstPage)</onfocus>
           <onfocus>SetFocus(2999)</onfocus>
+          <include>Vue900</include>
           
           <include>HorizVert</include>
           <include>VueElementsBoitiers</include>
@@ -293,43 +300,7 @@
         </control>
       </control>
       
-      <!----------------------------------------EPISODES------------------------------------------------------------------------ --
-      <control type="group">
-        <top>-15</top>
-        <visible>!String.IsEmpty(ListItem.DBID)</visible>
-        <animation type="Conditional" condition="Skin.HasSetting(VueExperimentale)" reversible="false">
-          <effect type="slide" end="0,-820" time="0"  />
-        </animation>
-        
-        <control type="list" id="1999">
-          <onfocus condition="Skin.HasSetting(directorAucun)">SetFocus(55)</onfocus>
-          <onfocus>SetProperty(IconMixVerticalNavigation,"horizontal",Home)</onfocus>
-          <onfocus>Action(FirstPage)</onfocus>
-          <onfocus>SetFocus(2999)</onfocus>
-          
-          <include>HorizVert</include>
-          <include>VueElementsBoitiers</include>
-          <visible>!Skin.HasSetting(directorTexte)</visible>
-          <visible>Container.Content(tvshows)</visible>
-        </control>
-        <control type="list" id="1999">
-          <onfocus condition="Skin.HasSetting(directorAucun)">SetFocus(55)</onfocus>
-          <onfocus>SetProperty(IconMixVerticalNavigation,"vertical",Home)</onfocus>
-          <onfocus>Action(FirstPage)</onfocus>
-          <onfocus>SetFocus(2999)</onfocus>
-          
-          <width>1920</width>
-          <height>177</height>
-          <include>VertHoriz</include>
-          <include>VueElementsBoitiers</include>
-          <visible>Skin.HasSetting(directorTexte)</visible>
-          <visible>Container.Content(tvshows)</visible>
-        </control>
-      </control>
-
-      <!---------------------------------------------------------------------------------------------------------------- -->
-       
-
+    
       
 
       <!-- bandeau séries --->

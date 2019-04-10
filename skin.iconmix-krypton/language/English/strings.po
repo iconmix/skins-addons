@@ -350,6 +350,10 @@ msgctxt "#31147"
 msgid "Volume level for automatic trailers/NetFlix"
 msgstr ""
 
+msgctxt "#31148"
+msgid "Activate/Deactivate views"
+msgstr ""
+
 
 
 #empty strings from id 31134 to 31158
@@ -397,7 +401,7 @@ msgstr ""
 #empty strings from id 31169 to 31182
 
 msgctxt "#31183"
-msgid "Viewtype"
+msgid "View active"
 msgstr ""
 
 #empty strings from id 31184 to 31206
@@ -1776,7 +1780,7 @@ msgid "Logo vertical"
 msgstr ""
 
 msgctxt "#31819"
-msgid "Wheel"
+msgid "Detailed list"
 msgstr ""
 
 msgctxt "#31820"
@@ -1796,7 +1800,7 @@ msgid "Panel Square"
 msgstr ""
 
 msgctxt "#31824"
-msgid "Landscape Vertical"
+msgid "Music Box"
 msgstr ""
 
 msgctxt "#31825"
@@ -2115,7 +2119,7 @@ msgstr ""
 
 
 msgctxt "#32017"
-msgid "Access to all episodes"
+msgid "Access to directory"
 msgstr ""
 
 msgctxt "#32018"

@@ -592,7 +592,7 @@
 </include>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <variable name="cheminapercu">
-  <value condition="String.Contains(Container.FolderPath,musicdb://)">music</value>
+ <!--  <value condition="String.Contains(Container.FolderPath,musicdb://)">music</value> -->
   <value></value>
 </variable>
 <include name="ChoixVues"> <!-- choix details id="7007" + 1010 à 1014 -->
@@ -1138,15 +1138,16 @@
           <onclick>SetProperty(IconmixShowInfo,55,Home)</onclick>
           <visible>Container.Content(actors)|Container.Content(directors)</visible>
         </control>
+        <control type="button" id="1100"> <!-- Options de vues-->
+          <include>MonBoutonCommun</include>
+          <label>$LOCALIZE[31001]</label>
+        </control>
         <control type="button" id="1101"> <!--- films/sagas/tvshows.... -->
           <include>MonBoutonCommun</include>
           <label>$VAR[TitreContent]</label>
           <include>CorrectType</include>
         </control>
-        <control type="button" id="1100"> <!-- Options de vues-->
-          <include>MonBoutonCommun</include>
-          <label>$LOCALIZE[31001]</label>
-        </control>
+        
 
         <control type="button" id="1102"> <!-- mediatheque-->
           <include>MonBoutonCommun</include>

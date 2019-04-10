@@ -3,7 +3,16 @@
 	<defaultcontrol always="true">50</defaultcontrol>
 	<controls>
 		<control type="group">
-		<include>Global_Background</include>
+		<control type="multiimage">
+    <include>Dimensions_Fullscreen</include>
+    <imagepath background="true">$VAR[Weather_Fanart]</imagepath>
+    <fadetime>450</fadetime>
+        
+        <include>delayfanartinc</include>
+        
+        <loop>yes</loop>
+    <colordiffuse>BackgroundColor</colordiffuse>
+  </control>
 		<control type="button" id="50">
 			<imagepathfocus>-</imagepathfocus>
 			<imagepathnofocus>-</imagepathnofocus>
@@ -209,16 +218,21 @@
 			<posy>10</posy>
 			<control type="label">
 				<label>$INFO[Weather.Location]</label>
-				<include>Global_HeadingSectionVars</include>
+				<include>FontTitre</include>
+				<align>center</align>
+				<width>1300</width>
 			</control>
 			<control type="label">
 				<label>$LOCALIZE[31208] $INFO[Window.Property(Updated)]</label>
-				<include>Global_HeadingDetailVars</include>
+				<font>impactsongs</font>			
+				<align>right</align>
+				<width>500</width>
+				<left>1300</left>
 			</control>
 		</control>
 	
 		
 		</control>
-		
+   	
 	</controls>
 </window>

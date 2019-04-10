@@ -176,7 +176,16 @@
   						<aspectratio scalediffuse="true">stretch</aspectratio>
   						<visible>!String.Contains(ListItem.Icon,default)+[Container.Content(episodes)|Container.Content(albums)]</visible>
   					</control>
-					
+  					<control type="image">
+  						<posx>1290</posx>
+  						<posy>-18</posy>
+  						<width>370</width>
+  						<height>208</height>
+  						<fadetime>100</fadetime>
+  						<texture background="true" diffuse="frames/curvedframe.png">$INFO[ListItem.Icon]</texture>
+  						<aspectratio scalediffuse="true">stretch</aspectratio>
+  					<visible>!String.IsEmpty(ListItem.Icon)+!Container.Content(actors)+!Container.Content(directors)+ !Container.Content(episodes)+!Container.Content(tvshows)+!Container.Content(seasons)+!Container.Content(movies)+!Container.Content(sets)+!Window.IsActive(pictures)</visible>
+					 </control>
   					<control type="image">
   						<posx>1290</posx>
   						<posy>-18</posy>
