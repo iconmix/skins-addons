@@ -154,13 +154,62 @@
       </control>
        
        
-      <control type="button" id="8">
+      <control type="button" id="2113">
         <description>Search</description>
         <label>137</label>
         <onfocus>SetProperty(IconmixDialogContext,,Home)</onfocus>
         <include>MonBoutonCommun2</include>
         <onclick>VideoLibrary.Search</onclick>
       </control>
+    
+        <control type="togglebutton" id="2114"> <!-- MISE A JOUR LIBRAIRIE-->
+          <description>Update Library</description>
+          <width>440</width>
+          <include>MonBoutonCommun</include>
+          <label>653</label>
+          <altlabel>13353</altlabel>
+          <usealttexture>library.isscanningvideo</usealttexture>
+          <onclick>UpdateLibrary(video)</onclick>
+          <onclick>SetFocus(55)</onclick>
+          <visible>Window.IsVisible(10025)</visible>
+        </control>
+        <control type="togglebutton" id="2115"> <!-- PURGE LIBRAIRIE-->
+          <description>Clean Library</description>
+          <width>440</width>
+          <include>MonBoutonCommun</include>
+          <label>700</label>
+          <usealttexture>library.isscanningvideo</usealttexture>
+          <onclick>CleanLibrary(video)</onclick>
+          <onclick>SetProperty(IconmixDialogContext,,Home)</onclick>
+          <onclick>SetFocus(55)</onclick>
+          <visible>Window.IsVisible(10025)+!library.isscanningvideo</visible>
+        </control>
+      
+        
+        
+        
+        <control type="togglebutton" id="2116">
+          <description>Update Library</description>
+          <width>440</width>
+          <include>MonBoutonCommun</include>
+          <label>653</label>
+          <altlabel>13353</altlabel>
+          <usealttexture>library.isscanningmusic</usealttexture>
+           <onclick>UpdateLibrary(music)</onclick>
+          <onclick>SetFocus(55)</onclick>
+          <visible>Window.IsVisible(10502)</visible>
+        </control>
+        <control type="togglebutton" id="2117">
+          <width>440</width>
+          <description>Clean Library</description>
+          <include>MonBoutonCommun</include>
+          <label>700</label>
+          <usealttexture>library.isscanningmusic</usealttexture>
+          <onclick>CleanLibrary(music)</onclick>
+          <onclick>SetFocus(55)</onclick>
+          <visible>Window.IsVisible(10502)+!library.isscanningmusic</visible>
+        </control>
+      
 
     </control>
     <control type="button" id="1000">

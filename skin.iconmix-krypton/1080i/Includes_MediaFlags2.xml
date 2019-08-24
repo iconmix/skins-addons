@@ -140,30 +140,29 @@
       <control type="image">
         <top>3</top>
         <include>MediaFlagsVarsSquare</include>
-        
-
         <texture>flags/notation/notefilm.png</texture>
         <aspectratio>stretch</aspectratio>
         <visible>String.IsEqual($PARAM[contid]ListItem.DBTYPE,movie)|String.IsEqual($PARAM[contid]ListItem.DBTYPE,set)</visible>
       </control>
       <control type="image">
         <include>MediaFlagsVarsSquare</include>
-        
-
         <texture>flags/notation/notetv.png</texture>
         <aspectratio>stretch</aspectratio>
         <visible>String.IsEqual($PARAM[contid]ListItem.DBTYPE,tvshow)|String.IsEqual($PARAM[contid]ListItem.DBTYPE,episode)</visible>
       </control>
       <control type="label">
+        <visible>[!Skin.HasSetting(PreferUserRating) + !String.IsEmpty($PARAM[contid]ListItem.Rating)] | [Skin.HasSetting(PreferUserRating) + String.IsEmpty($PARAM[contid]ListItem.UserRating)]</visible>
         <posy>9</posy>
         <include>MediaFlagsVarsSquare</include>
         <align>center</align>
         <aligny>center</aligny>
-        <label>$VAR[StarRating]</label>
+        <label>$INFO[$PARAM[contid]ListItem.Rating]</label>
         <textcolor>blue</textcolor>
         <font>METF_StarRating</font>
         <angle>5</angle>
       </control>
+      
+      
 
 
     </control>
@@ -584,7 +583,7 @@
 
 <control type="group"> 
 
-      <visible>String.Contains($PARAM[contid]ListItem.DbType,tvshow)</visible>
+      <visible>String.Contains($PARAM[contid]ListItem.DbType,tvshow)+[!String.IsEmpty(Window(Home).Property(IconMixTvSaisons))|!String.IsEmpty($PARAM[contid]ListItem.Property(TotalSeasons))]</visible>
       <width>156</width>
       <height>70</height>
       <include>CadreFlag</include>
@@ -609,7 +608,7 @@
     </control>
     <control type="group"> 
 
-      <visible>String.IsEmpty(Window(Home).Property(IconMixTvSaisons))+!String.IsEmpty($PARAM[contid]ListItem.Property(TotalSeasons)) + String.Contains($PARAM[contid]ListItem.DbType,tvshow)</visible>
+      <visible>String.IsEmpty(Window(Home).Property(IconMixTvSaisons))+!String.IsEmpty($PARAM[contid]ListItem.Property(TotalSeasons))</visible>
       
       <control type="label">
       <aligny>center</aligny>
@@ -1120,15 +1119,17 @@
         <visible>String.IsEqual($PARAM[contid]ListItem.DBTYPE,tvshow)|String.IsEqual($PARAM[contid]ListItem.DBTYPE,episode)</visible>
       </control>
       <control type="label">
+        <visible>[!Skin.HasSetting(PreferUserRating) + !String.IsEmpty($PARAM[contid]ListItem.Rating)] | [Skin.HasSetting(PreferUserRating) + String.IsEmpty($PARAM[contid]ListItem.UserRating)]</visible>
         <posy>9</posy>
         <include>MediaFlagsVarsSquare</include>
         <align>center</align>
         <aligny>center</aligny>
-        <label>$VAR[StarRating]</label>
+        <label>$INFO[$PARAM[contid]ListItem.Rating]</label>
         <textcolor>blue</textcolor>
         <font>METF_StarRating</font>
         <angle>5</angle>
       </control>
+      
 
 
     </control>

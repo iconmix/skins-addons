@@ -167,6 +167,7 @@
     <!-- <posx>2250</posx> -->
     <posy>600</posy>
     <include>skinshortcuts-template-widget1</include>
+    <animation effect="fade" start="100" end="50" time="500" condition="Control.HasFocus(9001)">Conditional</animation>
   </control>
   <control type="group">
     <include>MeteoPleinEcran</include>
@@ -180,6 +181,7 @@
     <!-- <posx>2250</posx> -->
     <posy>300</posy>
     <include>skinshortcuts-template-widget2</include>
+    <animation effect="fade" start="100" end="50" time="500" condition="Control.HasFocus(9001)">Conditional</animation>
   </control>
 </include>
 

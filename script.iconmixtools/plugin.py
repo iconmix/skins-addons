@@ -19,6 +19,7 @@ import shutil
 #containers :
 #1998 : Acteurs
 #1999 : éléments des sagas, des acteurs et réalisateurs, et artistes (musique)
+#5001 : liste de genres
 
 
 # Script constantes
@@ -105,7 +106,10 @@ class Main:
                   if Id: Id = Id[0] 
                   genretype=params.get("genretype",None)
                   if genretype: genretype = genretype[0]
-                  utils.getGenreListe(Id,genretype)
+                  Liste=utils.getGenreListe(Id,genretype)
+                  if Liste:                      
+                      xbmcplugin.addDirectoryItems(int(sys.argv[1]), Liste)
+                  xbmcplugin.endOfDirectory(int(sys.argv[1])) 
             
               
                   

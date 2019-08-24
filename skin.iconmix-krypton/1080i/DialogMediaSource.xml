@@ -10,7 +10,7 @@
 	</coordinates>
 	<controls>
 		<control type="group">
-			 <include>Global_Background</include>
+			<include>Global_Background</include>
        <control type="image">
             <posx>415</posx>
             <posy>0</posy>
@@ -55,7 +55,7 @@
 				<height>190</height>
 				<onup>12</onup>
 				<ondown>12</ondown>
-				<onleft>9000</onleft>
+				<onleft>11</onleft>
 				<onright>noop</onright>
 				<scrolltime>0</scrolltime>
 				<itemlayout height="38">
@@ -115,7 +115,7 @@
 				<posx>440</posx>
 				<posy>342</posy>
 				<onup>10</onup>
-				<onleft>9000</onleft>
+				<onleft>11</onleft>
 				<onright>noop</onright>
 				<ondown>10</ondown>
 				<width>840</width>
@@ -128,12 +128,19 @@
 				<texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
 				<disabledcolor>TextDisabled</disabledcolor>
 			</control>
-			<control type="group" id="9000">
+			<control type="grouplist">
+        <left>200</left>
+        <top>180</top>
+        <align>left</align>
+        <aligny>top</aligny>
+        <orientation>vertical</orientation>
+        <itemgap>10</itemgap>
+        <width>200</width>
+        <height>350</height>
 				<control type="button" id="11">
 					<description>Browse</description>
-					<posx>0</posx>
-					<posy>114</posy>
-					<include>SettingsLabel2</include>
+					<width>200</width>
+					<include>SettingsLabelLeftMini</include>
 					<label>1024</label>
 					<onleft>noop</onleft>
 					<onright>10</onright>
@@ -142,9 +149,8 @@
 				</control>
 				<control type="button" id="13">
 					<description>Add Path</description>
-					<posx>0</posx>
-					<posy>152</posy>
-					<include>SettingsLabel2</include>
+					<width>200</width>
+					<include>SettingsLabelLeftMini</include>
 					<label>15019</label>
 					<onleft>noop</onleft>
 					<onright>10</onright>
@@ -153,9 +159,8 @@
 				</control>
 				<control type="button" id="14">
 					<description>Remove Path</description>
-					<posx>0</posx>
-					<posy>190</posy>
-					<include>SettingsLabel2</include>
+					<width>200</width>
+					<include>SettingsLabelLeftMini</include>
 					<label>1210</label>
 					<onleft>noop</onleft>
 					<onright>10</onright>
@@ -164,9 +169,8 @@
 				</control>
 				<control type="button" id="20">
 					<description>Set Content</description>
-					<posx>0</posx>
-					<posy>228</posy>
-					<include>SettingsLabel2</include>
+					<width>200</width>
+					<include>SettingsLabelLeftMini</include>
 					<label>20333</label>
 					<onleft>noop</onleft>
 					<onright>10</onright>
@@ -175,9 +179,8 @@
 				</control>
 				<control type="button" id="19">
 					<description>Cancel</description>
-					<posx>0</posx>
-					<posy>266</posy>
-					<include>SettingsLabel2</include>
+					<width>200</width>
+					<include>SettingsLabelLeftMini</include>
 					<label>222</label>
 					<onleft>noop</onleft>
 					<onright>10</onright>
@@ -186,9 +189,8 @@
 				</control>
 				<control type="button" id="18">
 					<description>Ok</description>
-					<posx>0</posx>
-					<posy>304</posy>
-					<include>SettingsLabel2</include>
+					<width>200</width>
+					<include>SettingsLabelLeftMini</include>
 					<label>186</label>
 					<onleft>noop</onleft>
 					<onright>10</onright>

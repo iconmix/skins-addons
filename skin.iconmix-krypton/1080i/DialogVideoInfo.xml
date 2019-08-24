@@ -7,11 +7,11 @@
   <onload>SetProperty(IconMixUpdateSagas,"1",10000)</onload>
   <onload>SetProperty(IconMixAide,"",10000)</onload>
   <onload>SetProperty(IconMixArt,"",10000)</onload>
-  
-
   <onunload>SetProperty(IconMixUpdateActeurs,"",10000)</onunload>
   <onload>SetProperty(showgenre,,12003)</onload>
   <onload>SetProperty(showsaga,,12003)</onload>
+   <onunload>SetProperty(showgenre,,12003)</onunload>
+  <onunload>SetProperty(showsaga,,12003)</onunload>
   
   
   <onunload>SetProperty(IconMixDirector,,Home)</onunload>
@@ -289,6 +289,7 @@
        <!-- Artwork Downloader Button + Choose Art -->
         <control type="group" id="2105">
         <!--   <visible>System.HasAddon(script.iconmixtools)+!Player.HasVideo</visible> -->
+        
 
 
         <include>videoinfobuttonfond</include>
@@ -579,7 +580,7 @@
     <posx>10</posx>
     <posy>700</posy>
     <width>1600</width>
-    <label>Variable:$INFO[ListItem.DBID]/$INFO[Window(12003).Property(showsaga)]/$INFO[Window(12003).Property(showgenre)]</label>
+    <label>Variable:$INFO[ListItem.DBID]**************$INFO[ListItem.Rating]</label>
     </control>
     <control type="button">
     <width max="1890">auto</width>
@@ -857,8 +858,8 @@
   <!--- acteurs --->
   <control type="group">
     <visible>!ControlGroup(7003).HasFocus(5005)+!ControlGroup(7003).HasFocus(5006)+!Control.HasFocus(5001)+!Control.HasFocus(1999)+String.IsEmpty(Window(12003).Property(showgenre))+String.IsEmpty(Window(12003).Property(showsaga))</visible>
-    <animation effect="zoom" center="730,743" start="0" end="100" time="300" >Visible</animation>
-    <animation effect="zoom" center="730,743" start="100" end="0" time="300" >Hidden</animation>
+   <animation effect="fade" start="0" end="100" time="300" >Visible</animation>
+    <animation effect="fade" start="100" end="0" time="300" >Hidden</animation>
     <posx>60</posx>
     <posy>612</posy>
     <width>1250</width>
@@ -936,79 +937,7 @@
       </include>
     </control>
   </control>
-    <!-- realisateur -->
-  <control type="group">
-      <visible>!String.IsEmpty(ListItem.Director)</visible>
-      <animation effect="zoom"  center="1255,622" end="115" tween="cubic" time="500" condition="Control.HasFocus(13)|Control.HasFocus(7777)" >Conditional</animation>
-      <posy>622</posy>
-      <posx>1130</posx>
-      <control type="image">
-          <top>5</top>
-          <left>30</left>          
-          <width>175</width>
-          <height>220</height>
-        <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png" default="DefaultActor.png">$INFO[Window(Home).Property(IconMixDirector)]</texture>
-        <aspectratio scalediffuse="true">keep</aspectratio>
-      </control>
-      <control type="image">
-          <description>Actor image</description>
-          <top>220</top>
-          <left>30</left> 
-          <align>center</align>
-          <width>175</width>
-          <height>220</height>
-          <texture flipy="true" diffuse="acteurs/reflect_poster2.png" fallback="DefaultActor.png" default="DefaultActor.png">$INFO[Window(Home).Property(IconMixDirector)]</texture>
-        <aspectratio scalediffuse="true">keep</aspectratio>
-      </control>
-      <control type="image">
-        <top>150</top>
-        <left>-290</left>
-        <height>100</height>
-        <texture>flags/realisateur.png</texture>
-        <aspectratio scalediffuse="true">keep</aspectratio>
-      </control>
-      <control type="image">
-        <left>40</left>
-        <top>45</top>
-        <animation type="Conditional" loop="true" condition="true">
-          <effect type="fade"  start="100" end="0"  time="1500" delay="1000" reversible="false"/>
-        </animation>
-        <height>25</height>
-        <texture>buttons/okba.png</texture>
-        
-        <aspectratio>keep</aspectratio>
-        <visible>Control.hasFocus(7777)</visible>
-      </control>
-      <control type="button" id="7778">
-        <include>ControlesRealisateur</include>
-      </control>
-      <control type="button" id="7777">
-        <top>250</top>
-        <onleft condition="Integer.IsGreater(Container(1999).NumItems,0)+!String.IsEmpty(Window(12003).Property(showsaga))">setFocus(1999)</onleft>
-        <onleft condition="!String.IsEmpty(Window(12003).Property(showgenre))">setFocus(5001)</onleft>
-        <onleft condition="String.IsEmpty(Window(12003).Property(showsaga))+String.IsEmpty(Window(12003).Property(showgenre))">setFocus(7781)</onleft>
-
-        <onright>7003</onright>
-        <onup>7003</onup>
-        <onback>7003</onback>
-        <ondown condition="Integer.IsGreater(Container(1999).NumItems,0)+!String.IsEmpty(Window(12003).Property(showsaga))">setFocus(1999)</ondown>
-        <ondown condition="Integer.IsGreater(Container(5001).NumItems,0)+!String.IsEmpty(Window(12003).Property(showgenre))">setFocus(5001)</ondown>
-        <ondown condition="String.IsEmpty(Window(12003).Property(showsaga))+String.IsEmpty(Window(12003).Property(showgenre))">setFocus(7781)</ondown>
-        <onclick>SetFocus(7778)</onclick>
-        <left>5</left>
-        <width>240</width>
-        <height>88</height>
-        <align>center</align>
-        <aligny>top</aligny>
-        <scroll>true</scroll>
-        <scrollout>false</scrollout>
-        <font>impact35</font>
-        <textcolor>FFFFFFFF</textcolor>
-        <focusedcolor>green</focusedcolor>
-        <label>$INFO[ListItem.Director]</label>
-      </control>
-  </control>
--->
+  
     
  
 
@@ -1016,8 +945,8 @@
   <control type="group" id="5000">
     <!-- +!String.IsEmpty(Window(12003).Property(showgenre)) -->
     <visible>System.HasAddon(script.iconmixtools)+[[!String.IsEmpty(ListItem.Genre)]|[!String.IsEmpty(Window(12003).Property(showsaga))]]</visible>
-    <animation effect="zoom" center="730,743" start="0" end="100" time="300" >Visible</animation>
-    <animation effect="zoom" center="730,743" start="100" end="0" time="300" >Hidden</animation>
+    <animation effect="fade" start="0" end="100" time="300" >Visible</animation>
+    <animation effect="fade" start="100" end="0" time="300" >Hidden</animation>
 
     <posx>60</posx>
     <posy>612</posy>
@@ -1026,7 +955,7 @@
 
     <control type="group">
       <posx>10</posx>
-      <posy>180</posy>
+      <posy>176</posy>
       <visible>[[Integer.IsGreater(Container(5001).NumItems,0)+!String.IsEmpty(Window(12003).Property(showgenre))]|[Integer.IsGreater(Container(1999).NumItems,0)+!String.IsEmpty(Window(12003).Property(showsaga))]]</visible>
       <control type="image">
         <posx>-70</posx>
@@ -1265,7 +1194,81 @@
 </control>
 
 <!--------------------------------------------------------------------------------------------------------------->
+  <!-- realisateur -->
+  <control type="group">
+      <visible>!String.IsEmpty(ListItem.Director)+!Control.HasFocus(5005)+!Control.HasFocus(5006)</visible>
+      <animation effect="zoom"  center="1255,622" end="115" tween="cubic" time="500" condition="Control.HasFocus(13)|Control.HasFocus(7777)" >Conditional</animation>
+      <animation effect="fade" start="0" end="100" time="300" >Visible</animation>
+    <animation effect="fade" start="100" end="0" time="300" >Hidden</animation>
+      <posy>622</posy>
+      <posx>1130</posx>
+      <control type="image">
+          <top>5</top>
+          <left>30</left>          
+          <width>175</width>
+          <height>220</height>
+        <texture diffuse="acteurs/frame2.png" fallback="DefaultActor.png" default="DefaultActor.png">$INFO[Window(Home).Property(IconMixDirector)]</texture>
+        <aspectratio scalediffuse="true">keep</aspectratio>
+      </control>
+      <control type="image">
+          <description>Actor image</description>
+          <top>220</top>
+          <left>30</left> 
+          <align>center</align>
+          <width>175</width>
+          <height>220</height>
+          <texture flipy="true" diffuse="acteurs/reflect_poster2.png" fallback="DefaultActor.png" default="DefaultActor.png">$INFO[Window(Home).Property(IconMixDirector)]</texture>
+        <aspectratio scalediffuse="true">keep</aspectratio>
+      </control>
+      <control type="image">
+        <top>150</top>
+        <left>-290</left>
+        <height>100</height>
+        <texture>flags/realisateur.png</texture>
+        <aspectratio scalediffuse="true">keep</aspectratio>
+      </control>
+      <control type="image">
+        <left>40</left>
+        <top>45</top>
+        <animation type="Conditional" loop="true" condition="true">
+          <effect type="fade"  start="100" end="0"  time="1500" delay="1000" reversible="false"/>
+        </animation>
+        <height>25</height>
+        <texture>buttons/okba.png</texture>
+        
+        <aspectratio>keep</aspectratio>
+        <visible>Control.hasFocus(7777)</visible>
+      </control>
+      <control type="button" id="7778">
+        <include>ControlesRealisateur</include>
+      </control>
+      <control type="button" id="7777">
+        <top>250</top>
+        <onleft condition="Integer.IsGreater(Container(1999).NumItems,0)+!String.IsEmpty(Window(12003).Property(showsaga))">setFocus(1999)</onleft>
+        <onleft condition="!String.IsEmpty(Window(12003).Property(showgenre))">setFocus(5001)</onleft>
+        <onleft condition="String.IsEmpty(Window(12003).Property(showsaga))+String.IsEmpty(Window(12003).Property(showgenre))">setFocus(7781)</onleft>
 
+        <onright>7003</onright>
+        <onup>7003</onup>
+        <onback>7003</onback>
+        <ondown condition="Integer.IsGreater(Container(1999).NumItems,0)+!String.IsEmpty(Window(12003).Property(showsaga))">setFocus(1999)</ondown>
+        <ondown condition="Integer.IsGreater(Container(5001).NumItems,0)+!String.IsEmpty(Window(12003).Property(showgenre))">setFocus(5001)</ondown>
+        <ondown condition="String.IsEmpty(Window(12003).Property(showsaga))+String.IsEmpty(Window(12003).Property(showgenre))">setFocus(7781)</ondown>
+        <onclick>SetFocus(7778)</onclick>
+        <left>5</left>
+        <width>240</width>
+        <height>88</height>
+        <align>center</align>
+        <aligny>top</aligny>
+        <scroll>true</scroll>
+        <scrollout>false</scrollout>
+        <font>impact35</font>
+        <textcolor>FFFFFFFF</textcolor>
+        <focusedcolor>green</focusedcolor>
+        <label>$INFO[ListItem.Director]</label>
+      </control>
+  </control>
+-->
 <!-- Year and Duration -->
 <control type="image">
   <posx>1290</posx>

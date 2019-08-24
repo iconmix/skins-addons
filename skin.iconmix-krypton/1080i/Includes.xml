@@ -251,6 +251,20 @@
             <posy>350</posy>
 
             <control type="fadelabel">
+              <posx>13</posx>
+              <posy>-23</posy>
+              <width>1685</width>
+              <height>30</height>
+              <align>left</align>
+              <scroll>true</scroll>
+              <scrollspeed>30</scrollspeed>
+              <include>FontTitre</include>
+              <textcolor>black</textcolor>
+              <shadowcolor>black</shadowcolor>
+              <label>$VAR[GlobalWidgetLabel8011$PARAM[id]]</label>
+
+            </control>
+            <control type="fadelabel">
               <posx>10</posx>
               <posy>-25</posy>
               <width>1685</width>
@@ -266,7 +280,7 @@
             </control>
              <control type="grouplist">
             <animation type="Conditional" condition="true">
-  				<effect type="zoom" center="0,25" start="100" end="55" time="1"  />
+  				<effect type="zoom" center="0,25" start="100" end="85" time="1"  />
   			</animation>
             <posy>25</posy>
             
@@ -279,7 +293,7 @@
           </control>
             <control type="textbox">
               <left>10</left>
-              <posy>64</posy>
+              <posy>84</posy>
               <width>1685</width>
               <height>240</height>
               <align>center</align>
@@ -368,6 +382,19 @@
             <posy>350</posy>
 
             <control type="fadelabel">
+              <posx>13</posx>
+              <posy>-23</posy>
+              <width>1685</width>
+              <height>30</height>
+              <align>left</align>
+              <scroll>true</scroll>
+              <scrollspeed>30</scrollspeed>
+              <include>FontTitre</include>
+              <textcolor>black</textcolor>
+              <shadowcolor>black</shadowcolor>
+              <label>$VAR[GlobalWidgetLabel8021$PARAM[id]]</label>
+            </control>
+            <control type="fadelabel">
               <posx>10</posx>
               <posy>-25</posy>
               <width>1685</width>
@@ -379,11 +406,10 @@
               <textcolor>white</textcolor>
               <shadowcolor>black</shadowcolor>
               <label>$VAR[GlobalWidgetLabel8021$PARAM[id]]</label>
-
             </control>
              <control type="grouplist">
             <animation type="Conditional" condition="true">
-  				<effect type="zoom" center="0,25" start="100" end="55" time="1"  />
+  				<effect type="zoom" center="0,25" start="100" end="85" time="1"  />
   			</animation>
             <posy>25</posy>
             
@@ -391,12 +417,12 @@
             <width>1920</width>
             <orientation>horizontal</orientation>            
             <include content="mediaflaglinewidget">
-              <param name="ContID">8011$PARAM[id]</param>
+              <param name="ContID">8021$PARAM[id]</param>
             </include>          
           </control>
             <control type="textbox">
               <left>10</left>
-              <posy>64</posy>
+              <posy>84</posy>
               <width>1685</width>
               <height>280</height>
               <align>center</align>
@@ -7746,8 +7772,8 @@
           <disabledcolor>TextDisabled</disabledcolor>
           <textoffsetx>15</textoffsetx>
           <textoffsety>5</textoffsety>
-          <animation type="Conditional" condition="[Control.HasFocus(5001)|!String.IsEmpty(Window(12003).Property(showgenre))]" reversible="false">
-        <effect type="fade"  end="30" time="10" />
+          <animation type="Conditional" condition="[Control.HasFocus(5001)|!String.IsEmpty(Window(12003).Property(showgenre))|!String.IsEmpty(Window(10000).Property(showgenre))]" reversible="false">
+        <effect type="fade"  end="5" time="10" />
       </animation>
 </include>
 
@@ -8525,8 +8551,11 @@
   <pulseonselect>false</pulseonselect>
 </include>
 <include name="VideoInfoButton2">
-  <onleft condition="!String.IsEmpty(Container(1990).ListItem.Director)">7777</onleft>
-  <onleft condition="String.IsEmpty(Container(1990).ListItem.Director)+!Container(1998).IsUpdating">7781</onleft>
+  <onleft condition="Integer.IsGreater(Container(5051).NumItems,0)+!String.IsEmpty(Window(10000).Property(showgenre))+System.HasAddon(script.iconmixtools)+Control.HasFocus(5005)">5001</onleft>
+   <onleft condition="Integer.IsGreater(Container(1999).NumItems,0)+!String.IsEmpty(Window(10000).Property(showsaga))+System.HasAddon(script.iconmixtools)+Control.HasFocus(5006)">1999</onleft>
+        
+  <onleft condition="String.IsEmpty(Window(10000).Property(showgenre))+String.IsEmpty(Window(10000).Property(showsaga))+!String.IsEmpty(Container(1990).ListItem.Director)">7777</onleft>
+  <onleft condition="String.IsEmpty(Window(10000).Property(showgenre))+String.IsEmpty(Window(10000).Property(showsaga))+String.IsEmpty(Container(1990).ListItem.Director)+!Container(1998).IsUpdating">7781</onleft>
   <label></label>
   <altlabel>-</altlabel>
   <height>80</height>
@@ -8701,7 +8730,7 @@
 </include>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="SettingsLabelLeft">
-  <width>380</width>
+  <width max="370">auto</width>
   <height>38</height>
   <align>right</align>
   <aligny>center</aligny>
@@ -8719,6 +8748,29 @@
   <focusedcolor>DialogTextFO</focusedcolor>
   <selectedcolor>TextFO</selectedcolor>
   <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+  <texturenofocus>-</texturenofocus> -->
+  <disabledcolor>TextDisabled</disabledcolor>
+  <pulseonselect>false</pulseonselect>
+</include>
+<include name="SettingsLabelLeftMini">
+  <width max="200">auto</width>
+  <height>38</height>
+  <align>center</align>
+  <aligny>center</aligny>
+  <textoffsetx>20</textoffsetx>
+  <radiowidth>55</radiowidth>
+  <radioheight>55</radioheight>
+  <textureradiofocus>button_radioF.png</textureradiofocus>
+  <textureradionofocus>button_radioNF.png</textureradionofocus>
+  <textureup>ArrowUpNF.png</textureup>
+  <texturedown>ArrowDownNF.png</texturedown>
+  <textureupfocus>ArrowUpFo.png</textureupfocus>
+  <texturedownfocus>ArrowDownFo.png</texturedownfocus>
+  <font>METF_TitleTextMedium</font>
+  <textcolor>SettingsDetail</textcolor>
+  <focusedcolor>DialogTextFO</focusedcolor>
+  <selectedcolor>TextFO</selectedcolor>
+  <texturefocus colordiffuse="FocusBar">ButtonFO2mini2.png</texturefocus>
   <texturenofocus>-</texturenofocus> -->
   <disabledcolor>TextDisabled</disabledcolor>
   <pulseonselect>false</pulseonselect>

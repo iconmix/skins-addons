@@ -428,14 +428,31 @@
         </animation>
         <visible>[[Container.Content(Genres)|Container.Content(movies)|Container.Content(sets)|Container.Content(tvshows)]+Control.HasFocus(2999)]|[[String.Contains(Container.FolderPath,videodb://movies/genres)|String.Contains(Container.FolderPath,videodb://tvshows/genres)]+[Container.Content(tvshows)|Container.Content(movies)]]</visible>
         <control type="image">
+          <left>-20</left>
+          <width>740</width>
           <texture>frames/genrestag.png</texture>
           <visible>!String.Contains(ListItem.Art(clearlogo),http)|String.Contains(Container.FolderPath,videodb://movies/genres)</visible>
           <aspectratio>stretch</aspectratio>
         </control>
+        <control type="image">
+          <visible>String.Contains(Container.FolderPath,videodb://movies/genres)</visible>
+          <left>600</left>
+          <top>-40</top>
+          <texture>defaultfilms.png</texture>
+          <width>60</width>
+          <aspectratio>keep</aspectratio>
+        </control>
+         <control type="image">
+          <visible>String.Contains(Container.FolderPath,videodb://tvshows/genres)</visible>
+           <left>600</left>
+          <top>-40</top>
+          <texture>DefaultTVShows.png</texture>
+          <width>60</width>
+          <aspectratio>keep</aspectratio>
+        </control>
         <control type="group"> <!-- genres -->
           <visible>[!String.Contains(Container.FolderPath,videodb://movies/genres)+!String.Contains(Container.FolderPath,videodb://tvshows/genres)]|Container.Content(genres)|Control.HasFocus(2999)</visible>
           <control type="group"> <!-- en vue experimentale -->
-            <left>30</left>
             <visible>Skin.HasSetting(VueExperimentale)</visible>
             <control type="group">
               <visible>String.IsEmpty(ListItem.Art(clearlogo))</visible>
@@ -495,7 +512,7 @@
                 <align>center</align>
                 <font>impact</font>
                 <textcolor>white</textcolor>
-                <label>$INFO[ListItem.Label]</label>
+                <label>BB$INFO[ListItem.Label]</label>
                 <scroll>true</scroll>
                 <scrollout>true</scrollout>
               </control>
@@ -516,8 +533,8 @@
         <control type="group"> <!-- pas genres ni focus(2999)-->
           <visible>!Container.Content(Genres)+[String.Contains(Container.FolderPath,videodb://movies/genres)|String.Contains(Container.FolderPath,videodb://tvshows/genres)]+!Control.HasFocus(2999)</visible>
           <control type="fadelabel">
-            <width>390</width>
-            <posx>50</posx>
+            <width>550</width>
+                <posx>40</posx>
             <posy>12</posy>
             <aligny>center</aligny>
             <align>center</align>
@@ -528,8 +545,8 @@
             <scroll>true</scroll>
           </control>
           <control type="fadelabel">
-            <width>390</width>
-            <posx>53</posx>
+            <width>550</width>
+                <posx>43</posx>
             <aligny>center</aligny>
             <align>center</align>
             <font>impact</font>
@@ -721,7 +738,7 @@
       <height>90</height>
       <left>40</left>
       <posy>10</posy>
-      <label>$INFO[Skin.String(Plotpolice)]/$INFO[Listitem.Year]/$INFO[Listitem.premiered]/$INFO[ListItem.OriginalTitle]</label>
+      <label>$INFO[Container.FolderPath]/$INFO[Listitem.Year]/$INFO[Listitem.premiered]/$INFO[ListItem.OriginalTitle]</label>
       <textcolor>white</textcolor>
       <shadowcolor>FF7F7F7F</shadowcolor>
 		</control>

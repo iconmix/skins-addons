@@ -895,7 +895,7 @@
           <control type="group">
             <animation effect="zoom" end="118" center="auto" time="150" condition="Control.HasFocus(9000)" reversible="true">Focus</animation>
             <animation effect="slide" start="0" end="0,-200" center="auto" time="500" condition="Control.HasFocus(9001)">Conditional</animation>
-            <animation effect="fade" start="100" end="70" time="500" condition="Control.HasFocus(9001)">Conditional</animation>
+            <animation effect="fade" start="100" end="50" time="500" condition="Control.HasFocus(9001)">Conditional</animation>
             <control type="image">
               <width>300</width>
               <height>155</height>

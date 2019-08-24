@@ -8,7 +8,7 @@ import xbmc,xbmcgui,xbmcaddon,xbmcplugin
 
 
 
-def ConversionPays(DBTYPE=None,ContainerID=None):
+def ConversionPays(VidPlayer=None,ContainerID=None):
   Traduction={"ile de l’ascension":"ascension island",
     "andorre":"andorra",
     "emirats arabes unis":"united arab emirates",
@@ -265,26 +265,34 @@ def ConversionPays(DBTYPE=None,ContainerID=None):
     "zambie":"zambia",
     "zimbabwe":"zimbabwe"}
       
+  windowhome=xbmcgui.Window(10000)
+  windowhome.clearProperty('ItemCountry1')
+  windowhome.clearProperty("ItemCountry2")
+  windowhome.clearProperty("ItemCountry3")
+  windowhome.clearProperty("ItemCountry4")
+  if VidPlayer:
+     CountryList=xbmc.getInfoLabel( "VideoPlayer.Country" ).replace("/",",")
     
-  if DBTYPE=="movie":
-    if ContainerID:  
-       CountryList=xbmc.getInfoLabel( "Container(%d).ListItem.Country" %(ContainerID) ).replace("/",",")
-    else:
-       CountryList=xbmc.getInfoLabel( "ListItem.Country" ).replace("/",",")
-    xbmcgui.Window(10000).clearProperty('ItemCountry1')
-    if CountryList:
-      CountryList=CountryList.split(",")
-      if not CountryList:
-        if ContainerID:
-          CountryList.append(xbmc.getInfoLabel( "Container(%d).ListItem.Country" %(ContainerID)))
-        else:
-          CountryList.append(xbmc.getInfoLabel( "ListItem.Country" ))
-      idx=1
-      for country in CountryList:
-         Pays=country.strip()
-         TradFrEn=Traduction.get(country.strip().lower())
-         if TradFrEn:
-           Pays=TradFrEn
-         xbmcgui.Window(10000).setProperty('ItemCountry%d' %(idx),Pays)
-         idx=idx+1
-   
+  elif ContainerID:  
+     CountryList=xbmc.getInfoLabel( "Container(%d).ListItem.Country" %(ContainerID) ).replace("/",",")
+  else:
+     CountryList=xbmc.getInfoLabel( "ListItem.Country" ).replace("/",",")
+  
+  if CountryList:
+    CountryList=CountryList.split(",")
+    if not CountryList:
+      if VidPlayer:
+        CountryList=xbmc.getInfoLabel( "VideoPlayer.Country" )    
+      elif ContainerID:
+        CountryList.append(xbmc.getInfoLabel( "Container(%d).ListItem.Country" %(ContainerID)))
+      else:
+        CountryList.append(xbmc.getInfoLabel( "ListItem.Country" ))
+    idx=1
+    for country in CountryList:
+       Pays=country.strip()
+       TradFrEn=Traduction.get(country.strip().lower())
+       if TradFrEn:
+         Pays=TradFrEn
+       windowhome.setProperty('ItemCountry%d' %(idx),Pays)
+       idx=idx+1
+ 

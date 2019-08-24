@@ -125,15 +125,21 @@
 				<label>$LOCALIZE[16028]</label>
 				<visible>!Control.HasFocus(17)</visible>
 			</control>
+			<control type="grouplist">
+        <left>250</left>
+        <top>180</top>
+        <align>left</align>
+        <aligny>top</aligny>
+        <orientation>vertical</orientation>
+        <itemgap>10</itemgap>
+        <width>200</width>
+        <height>350</height>
 			<control type="button" id="20">
 				<description>Browse Button</description>
-				<posx>440</posx>
-				<posy>348</posy>
-				<width>840</width>
-				<height>38</height>
-				<textcolor>yellow</textcolor>
-<align>right</align>
-<include>SettingsLabel</include>
+				
+				
+<width>200</width>
+<include>SettingsLabelLeftMini</include>
 				<label>$LOCALIZE[1024]</label>
 				<onup>17</onup>
 				<onleft>18</onleft>
@@ -142,9 +148,9 @@
 			</control>
 			<control type="button" id="19">
 				<description>Cancel</description>
-				<posx>0</posx>
-				<posy>234</posy>
-				<include>SettingsLabelLeft</include>
+			
+				<width>200</width>
+<include>SettingsLabelLeftMini</include>
 				<label>$LOCALIZE[222]</label>
 				<onleft>noop</onleft>
 				<onright>15</onright>
@@ -153,14 +159,15 @@
 			</control>
 			<control type="button" id="18">
 				<description>Ok</description>
-				<posx>0</posx>
-				<posy>272</posy>
-				<include>SettingsLabelLeft</include>
+				
+				<width>200</width>
+<include>SettingsLabelLeft</include>
 				<label>$LOCALIZE[186]</label>
 				<onleft>noop</onleft>
 				<onright>15</onright>
 				<onup>19</onup>
 				<ondown>19</ondown>
+			</control>
 			</control>
 			
 		</control>

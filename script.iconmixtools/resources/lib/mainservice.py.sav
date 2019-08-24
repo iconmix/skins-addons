@@ -1329,11 +1329,11 @@ class MainService:
       
       utils.GetCalendrier2SemaineTvMaze(None)
       
-      logMsg('Version : %s - Chemin : %s - Service en cours..' %(ADDON_VERSION,ADDON_PATH),0)
-      
+      if "skin.iconmix" in xbmc.getSkinDir():
+        logMsg('Version : %s - Chemin : %s - Service en cours..' %(ADDON_VERSION,ADDON_PATH),0)
       
       while not self.kodimonitor.abortRequested(): # and xbmc.getCondVisibility("!String.IsEmpty(Window(home).Property(IconMixToolsbackend))"): 
-        
+        if "skin.iconmix" in xbmc.getSkinDir():
           if self.kodimonitor.ScanFinished:
             self.kodimonitor.ScanFinished=None
             self.windowhome.setProperty('IconMixUpdateEpisodes','1')
@@ -1675,7 +1675,12 @@ class MainService:
                                    else:
                                       self.TvSeason=""
                                       if self.selecteditem!=self.precedenttvshow:
-                                       
+                                        song=utils.getTvshowSongs(TvshowName=None,selecteditem=self.selecteditem,DBTYPE=self.DBTYPE)
+                                        if song:
+                                          self.windowhome.setProperty('FileExist',str(song[0]))
+                                        else:
+                                          
+                                          self.windowhome.clearProperty('FileExist')
                                         #-------------------------- affichage des episodes de la série ------------------
                                         if not xbmc.getCondVisibility("Skin.HasSetting(DisableTvList)"):
                                           utils.getnextepisode(self.selecteditem,None,self.DBTYPE,self.GlobalCalendrier,self.precedenttvshow)
@@ -1864,7 +1869,8 @@ class MainService:
           
           self.windowhome.setProperty("IconMixToolsbackend","en cours")
           xbmc.sleep(400)
-          
+        else:
+         xbmc.sleep(4000)   
             
       logMsg('Arret en cours...', 0)
       logMsg("sauvegarde calendrier")
@@ -3389,43 +3395,38 @@ class MainService:
         cpt=0
         for item in data:
             #listitem = xbmcgui.ListItem('%s' % (str(cpt)))
+            listitem=xbmcgui.ListItem(label=item.get("label"))
+            listitem.setLabel2(item.get("showtitle"))
+            label=item.get("label")
+            path=item.get("path")
+            dbid=item.get("dbid")
             dbtype=item.get("dbtype")
-            if dbtype:
-                listitem=xbmcgui.ListItem(label=item.get("label"))
-                listitem.setLabel2(item.get("showtitle"))
-                label=item.get("label")
-                path=item.get("path")
-                dbid=item.get("dbid")
-                
-                icon=item.get("icon")
-                winid=item.get("winid")
-                Art=item.get("art")
-                if Art:
-                  Art["thumb"]=icon
-                plot=item.get("plot")
-                path=unicode(item.get("path"))
-                search_string=item.get("search_string")            
-                listitem.setLabel(label)
-                if search_string:                
-                        path = "plugin://script.iconmixtools/?action=selectautocomplete&id=%s" % search_string            
-                listitem.setProperty('ItemID', str(dbid) if dbid else None)
-                listitem.setProperty('dbtype', dbtype)
-                listitem.setProperty('winid', str(winid))
-                #telex
-                                
-                listitem.setProperty("index", str(cpt))
-                if "movie" in dbtype: 
-                  listitem.setInfo("video", {"dbid": int(dbid),"title": label,"mediatype": "movie","plot":plot,"path":path}) 
-                if "tvshow" in dbtype: 
-                  listitem.setInfo("video", {"dbid": int(dbid),"title": label,"mediatype": "tvshow","plot":plot,"path":path}) 
-                
-                
-                listitem.setPath(path=path)
-                listitem.setArt(Art)
-                
-                listitem.setIconImage(icon)
-                itemlist.append(listitem)
-                cpt=cpt+1
+            icon=item.get("icon")
+            winid=item.get("winid")
+            Art=item.get("art")
+            if Art:
+              Art["thumb"]=icon
+            plot=item.get("plot")
+            path=unicode(item.get("path"))
+            search_string=item.get("search_string")            
+            listitem.setLabel(label)
+            if search_string:                
+                    path = "plugin://script.iconmixtools/?action=selectautocomplete&id=%s" % search_string            
+            listitem.setProperty('ItemID', str(dbid) if dbid else None)
+            listitem.setProperty('dbtype', dbtype)
+            listitem.setProperty('winid', str(winid))
+            #telex
+                            
+            listitem.setProperty("index", str(cpt))
+            if "movie" in dbtype: dbtype="movie"
+            if "tvshow" in dbtype: dbtype="tvshow"
+            listitem.setInfo("video", {"dbid": int(dbid),"title": label,"mediatype": dbtype,"plot":plot,"path":path}) 
+            listitem.setPath(path=path)
+            listitem.setArt(Art)
+            
+            listitem.setIconImage(icon)
+            itemlist.append(listitem)
+            cpt=cpt+1
         return itemlist
    #------------------------------------------------------------------------------------------------------------------
   def create_listitemsORG(self,data=None,basetype=None):
