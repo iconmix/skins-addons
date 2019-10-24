@@ -183,31 +183,142 @@
         </control>
       </control>
 </include>
+<!--- affichage acces prochain widget -->
+<include name="CommonNextWidget">
+  <param name="id">0</param>
+  <param name="id2">0</param>
+  <param name="titre"></param>
+  <param name="haut">175</param>
+  <param name="orientation">Left</param>
+  <param name="orientation2">Right</param>
+
+  <definition>
+
+    
 
 
+    <control type="group">
+      <visible>Control.HasFocus($PARAM[id])+Integer.IsGreater(Container($PARAM[id2]).NumItems,0)</visible>
+      <left>4402</left>
+      <top>$PARAM[haut]</top>
+      <animation type="Conditional" condition="true">
+        <effect type="slide" start="0,0" end="-172,0" time="0" />
+      </animation>
+
+      <control type="button">
+        <include>CommonWidgetName</include>
+        <label>$INFO[Container(9000).ListItem.Property($PARAM[titre])]</label>
+
+      </control>
+      <control type="group">
+        <left>-50</left>
+        <top>205</top>
+        <animation type="Conditional" loop="true" condition="true">
+          <effect type="fade"  start="10" end="100"  time="1000" delay="1000" reversible="false"/>
+        </animation>
+        <control type="image">
+          <width>40</width>
+          <height>40</height>
+          <aspectratio>keep</aspectratio>
+          <texture>Arrow$PARAM[orientation2]WD.png</texture>
+        </control>
+
+        <control type="image">
+          <top>40</top>
+          <width>40</width>
+          <height>40</height>
+          <aspectratio>keep</aspectratio>
+          <texture>Arrow$PARAM[orientation]WD.png</texture>
+        </control>
+      </control>
+    </control>
+  </definition>
+</include>
+
+<include name="CommonWidgetApercu">
+  <param name="id">0</param>
+  <param name="id2">0</param>
+  <param name="titre"></param>
+  <param name="exttest"></param>
+  <param name="exttest2"></param>
+  <param name="titre2"></param>
+  <param name="haut">175</param>
+  <param name="orientation">Left</param>
+  <param name="orientation2">Right</param>
+ 
+  <definition>
+  <!--- nom widget -->
   
+  <include content="CommonNextWidget">
+    <param name="id">$PARAM[id]</param>
+  <param name="id2">$PARAM[id2]</param>
+  <param name="titre">$PARAM[titre2]</param>  
+  <param name="haut">$PARAM[haut]</param>
+  <param name="orientation">$PARAM[orientation]</param>
+  <param name="orientation2">$PARAM[orientation2]</param>
+  </include>
+      
+      <control type="group">
+        <left>2340</left>
+        <control type="group">
+        <visible>Integer.IsGreater(Container($PARAM[id]).NumItems,0)+!Control.HasFocus($PARAM[id])</visible>
+        <control type="button">
+          <onfocus>setFocus($PARAM[id])</onfocus>
+          <include>CommonWidgetName</include>
+          <label>$INFO[Container(9000).ListItem.Property($PARAM[titre])]</label>
+          <animation type="Conditional" condition="Control.HasFocus($PARAM[id2])">
+            <effect type="slide" end="0,205" time="1" />
+          </animation>         
+        </control>
+      </control>
+      <!-- apercu -->
+      <control type="label" id="$PARAM[id]1">
+        <left>-6000</left>        
+        <label>$PARAM[exttest]</label>
+      </control>
+      <control type="label" id="$PARAM[id]2">
+        <left>-6000</left>        
+        <label>$PARAM[exttest2]</label>
+      </control>
+      <control type="group">
+        <visible>!Control.HasFocus($PARAM[id2])+!Control.HasFocus($PARAM[id])+!Skin.HasSetting(ShowFullWidgets)+String.IsEmpty(Control.GetLabel($PARAM[id]1))+String.IsEmpty(Control.GetLabel($PARAM[id]2))</visible>
+        <top>-5</top>
+        <control type="image">
+          <width>345</width>
+          <height>300</height>
+          <aspectratio scalediffuse="true" align="left" aligny="center">keep</aspectratio>
+          <bordersize>20</bordersize>
+          <bordertexture border="20" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+          <fadetime>800</fadetime>
+          <texture diffuse="showcase_matte.png">$VAR[HomeWidgetPosterVarList$PARAM[id]]</texture>
+        </control>
+      </control>
+      </control>
+  </definition>
+</include>
+
 
 <include name="CommonWidgetName">
-  <top>8</top>
-          <left>220</left>
-          <width>285</width>
-          <height>25</height>
-          <align>center</align>
-          <textcolor>yellow</textcolor>
-          <scrollspeed>30</scrollspeed>
-          <font>lcdep</font>
-          <scroll>true</scroll>
-          <textoffsetx>15</textoffsetx>
-          <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
-          <texturenofocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturenofocus>
-          <shadowcolor>black</shadowcolor>
-          <animation type="Conditional" condition="true">
-          <effect type="rotate" center="220,8" end="-90" time="1" />
-          </animation>
+  <top>0</top>
+  <left>10</left>
+  <width>285</width>
+  <height>25</height>
+  <align>center</align>
+  <textcolor>yellow</textcolor>
+  <scrollspeed>30</scrollspeed>
+  <font>lcdep</font>
+  <scroll>true</scroll>
+  <textoffsetx>15</textoffsetx>
+  <texturefocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturefocus>
+  <texturenofocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturenofocus>
+  <shadowcolor>black</shadowcolor>
+  <animation type="Conditional" condition="true">
+    <effect type="rotate" center="10,0" end="-90" time="1" />
+  </animation>
 </include>
 <include name="CommonWidgetNameSystem">
   <top>8</top>
-          <left>220</left>
+          <left>10</left>
           <width>285</width>
           <height>25</height>
           <align>center</align>
@@ -220,9 +331,11 @@
           <texturenofocus colordiffuse="FocusBar">ButtonFO2Wide2.png</texturenofocus>
           <shadowcolor>black</shadowcolor>
           <animation type="Conditional" condition="true">
-          <effect type="rotate" center="220,8" end="-90" time="1" />
+          <effect type="rotate" center="10,8" end="-90" time="1" />
           </animation>
 </include>
+
+
 
 <include name="HideView">
   <param name="vueid">0</param>
@@ -238,14 +351,15 @@
   </definition>
   </include>
 
-<include name="Widget1PlotInfo">
+<include name="WidgetPlotInfo">
   <param name="id">0</param>
-  <param name="orientation">Left</param>
-  <param name="orientation2">Right</param>
+  <param name="id2">0</param>
+  <param name="titre"></param>
+  
   <definition>
   <!-- Affichage Plot,etc .... -->
         <control type="group">
-          <visible>Integer.IsGreater(Container(8011$PARAM[id]).NumItems,0)+Control.HasFocus(8011$PARAM[id])</visible>
+          <visible>Integer.IsGreater(Container($PARAM[id]).NumItems,0)+Control.HasFocus($PARAM[id])</visible>
 
           <control type="group">
             <posy>350</posy>
@@ -261,8 +375,7 @@
               <include>FontTitre</include>
               <textcolor>black</textcolor>
               <shadowcolor>black</shadowcolor>
-              <label>$VAR[GlobalWidgetLabel8011$PARAM[id]]</label>
-
+              <label>$VAR[GlobalWidgetLabel$PARAM[id]]</label>
             </control>
             <control type="fadelabel">
               <posx>10</posx>
@@ -275,20 +388,18 @@
               <include>FontTitre</include>
               <textcolor>white</textcolor>
               <shadowcolor>black</shadowcolor>
-              <label>$VAR[GlobalWidgetLabel8011$PARAM[id]]</label>
-
+              <label>$VAR[GlobalWidgetLabel$PARAM[id]]</label>
             </control>
              <control type="grouplist">
             <animation type="Conditional" condition="true">
   				<effect type="zoom" center="0,25" start="100" end="85" time="1"  />
   			</animation>
-            <posy>25</posy>
-            
+            <posy>25</posy>            
             <align>left</align>
             <width>1920</width>
             <orientation>horizontal</orientation>            
             <include content="mediaflaglinewidget">
-              <param name="ContID">8011$PARAM[id]</param>
+              <param name="ContID">$PARAM[id]</param>
             </include>          
           </control>
             <control type="textbox">
@@ -302,12 +413,8 @@
               <include>FontPlot</include>
               <textcolor>FFFFD966</textcolor>
               <shadowcolor>black</shadowcolor>
-              <label>$INFO[Container(8011$PARAM[id]).ListItem.Plot]$INFO[Container(8011$PARAM[id]).ListItem.Property(Album_Description)]$INFO[Container(8011$PARAM[id]).ListItem.Property(Artist_Description)]$INFO[Container(8011$PARAM[id]).ListItem.AddonSummary]</label>
+              <label>$INFO[Container($PARAM[id]).ListItem.Plot]$INFO[Container($PARAM[id]).ListItem.Property(Album_Description)]$INFO[Container($PARAM[id]).ListItem.Property(Artist_Description)]$INFO[Container($PARAM[id]).ListItem.AddonSummary]</label>
             </control>
-            
-          
-          
-         
 </control>
 
           <control type="grouplist">
@@ -317,218 +424,54 @@
             <align>center</align>
             <orientation>horizontal</orientation>
             <height>50</height>
-            <visible>Control.HasFocus(8011$PARAM[id])</visible>
+            <visible>Control.HasFocus($PARAM[id])</visible>
             <control type="button">
               <width max="1600">auto</width>
               <textoffsetx>55</textoffsetx>
               <textoffsety>12</textoffsety>
               <texturefocus>frames/widgetname.png</texturefocus>
               <texturenofocus>frames/widgetname.png</texturenofocus>
-
-
               <textcolor>yellow</textcolor>
               <align>center</align>
               <font>impact35</font>
-
-              <label>$INFO[Container(9000).ListItem.Property(widgetName)] [COLOR=white]$VAR[HWidgetLabel8011$PARAM[id]][/COLOR]</label>
-             
+              <label>$INFO[Container(9000).ListItem.Property($PARAM[titre])] [COLOR=white]$VAR[HWidgetLabel$PARAM[id]][/COLOR]</label>             
             </control>
-             
-
           </control>
         </control>
-      <!--- affichage acces prochain widget -->
-        <control type="group">
-          <top>640</top>
-          <left>1740</left>
-          <animation type="Conditional" loop="true" condition="true">
-                <effect type="fade"  start="10" end="100"  time="1000" delay="1000" reversible="false"/>
-              </animation> 
-          <visible>Control.HasFocus(8011$PARAM[id])+Integer.IsGreater(Container(8021$PARAM[id]).NumItems,0)</visible>                   
-      <control type="image">              
-              <width>40</width>
-              <height>40</height>
-              <aspectratio>keep</aspectratio>
-              <texture>Arrow$PARAM[orientation]WD.png</texture>  
-               
-              
-            </control>
-            <control type="label">
-              <left>36</left>
-              <font>compteur</font>
-              
-              <number>2</number>
-            </control>
-            <control type="image">
-              <left>60</left>
-              <width>40</width>
-              <height>40</height>
-              <aspectratio>keep</aspectratio>
-              <texture>Arrow$PARAM[orientation2]WD.png</texture>  
-              
-            </control>
-            </control>
-            </definition>
+      
+  </definition>
 </include>
-<include name="Widget2PlotInfo">
-  <param name="id">0</param>
-  <param name="orientation">Left</param>
-  <param name="orientation2">Right</param>
+
+
+<include name="DefaultDialogButton">
+  <param name="width">300</param>
+  <param name="height">100</param>
+  <param name="wrapmultiline">false</param>
+  <param name="font">impact</param>
+  <param name="onclick"></param>
+  <param name="visible">true</param>
   <definition>
-    <control type="group">
-          <visible>Integer.IsGreater(Container(8021$PARAM[id]).NumItems,0)+Control.HasFocus(8021$PARAM[id])</visible>
-
-          <control type="group">
-            <posy>350</posy>
-
-            <control type="fadelabel">
-              <posx>13</posx>
-              <posy>-23</posy>
-              <width>1685</width>
-              <height>30</height>
-              <align>left</align>
-              <scroll>true</scroll>
-              <scrollspeed>30</scrollspeed>
-              <include>FontTitre</include>
-              <textcolor>black</textcolor>
-              <shadowcolor>black</shadowcolor>
-              <label>$VAR[GlobalWidgetLabel8021$PARAM[id]]</label>
-            </control>
-            <control type="fadelabel">
-              <posx>10</posx>
-              <posy>-25</posy>
-              <width>1685</width>
-              <height>30</height>
-              <align>left</align>
-              <scroll>true</scroll>
-              <scrollspeed>30</scrollspeed>
-              <include>FontTitre</include>
-              <textcolor>white</textcolor>
-              <shadowcolor>black</shadowcolor>
-              <label>$VAR[GlobalWidgetLabel8021$PARAM[id]]</label>
-            </control>
-             <control type="grouplist">
-            <animation type="Conditional" condition="true">
-  				<effect type="zoom" center="0,25" start="100" end="85" time="1"  />
-  			</animation>
-            <posy>25</posy>
-            
-            <align>left</align>
-            <width>1920</width>
-            <orientation>horizontal</orientation>            
-            <include content="mediaflaglinewidget">
-              <param name="ContID">8021$PARAM[id]</param>
-            </include>          
-          </control>
-            <control type="textbox">
-              <left>10</left>
-              <posy>84</posy>
-              <width>1685</width>
-              <height>280</height>
-              <align>center</align>
-              <aligny>bottom</aligny>
-              <include>SpecialPlotBoxScroll</include>
-              <include>FontPlot</include>
-              <textcolor>FFFFD966</textcolor>
-              <shadowcolor>black</shadowcolor>
-              <label>$INFO[Container(8021$PARAM[id]).ListItem.Plot]$INFO[Container(8021$PARAM[id]).ListItem.Property(Album_Description)]$INFO[Container(8021$PARAM[id]).ListItem.Property(Artist_Description)]$INFO[Container(8021$PARAM[id]).ListItem.AddonSummary]</label>
-
-            </control>
-            
-          </control>
-
-
-          <control type="grouplist">
-            <top>675</top>
-            <left>-100</left>
-            <width>1920</width>
-            <align>center</align>
-            <orientation>horizontal</orientation>
-            <height>50</height>
-           <visible>Control.HasFocus(8021$PARAM[id])</visible>
-            <control type="button">
-              <width max="1600">auto</width>
-              <textoffsetx>55</textoffsetx>
-<textoffsety>12</textoffsety>
-              <texturefocus>frames/widgetname.png</texturefocus>
-              <texturenofocus>frames/widgetname.png</texturenofocus>
-
-
-              <textcolor>yellow</textcolor>
-              <align>center</align>
-              <font>impact35</font>
-
-              <label>$INFO[Container(9000).ListItem.Property(widgetName.2)] [COLOR=white]$VAR[HWidgetLabel8021$PARAM[id]][/COLOR]</label>
-              
-            </control>
-        
-
-          </control>
-        </control>
-        <!--- affichage acces prochain widget -->
-        <control type="group">
-          <top>640</top>
-          <left>1740</left>
-          <animation type="Conditional" loop="true" condition="true">
-                <effect type="fade"  start="10" end="100"  time="1000" delay="1000" reversible="false"/>
-              </animation> 
-          <visible>Control.HasFocus(8021$PARAM[id])+Integer.IsGreater(Container(8011$PARAM[id]).NumItems,0)</visible>                   
-      <control type="image">              
-              <width>40</width>
-              <height>40</height>
-              <aspectratio>keep</aspectratio>
-              <texture>Arrow$PARAM[orientation]WD.png</texture>  
-               
-              
-            </control>
-             <control type="label">
-              <left>36</left>
-              <font>compteur</font>
-              
-              <number>1</number>
-            </control>
-            <control type="image">
-              <left>60</left>
-              <width>40</width>
-              <height>40</height>
-              <aspectratio>keep</aspectratio>
-              <texture>Arrow$PARAM[orientation2]WD.png</texture>  
-              
-            </control>
-            </control>
-            </definition>
+    <control type="button" id="$PARAM[id]">
+      <width>$PARAM[width]</width>
+      <height>$PARAM[height]</height>
+      <label>$PARAM[label]</label>
+      <font>$PARAM[font]</font>
+      <textoffsetx>20</textoffsetx>
+      <onclick>$PARAM[onclick]</onclick>
+      <wrapmultiline>$PARAM[wrapmultiline]</wrapmultiline>
+      <align>center</align>
+      <texturefocus border="40" >buttons/keyfo.png</texturefocus>
+      <texturenofocus border="40">buttons/keylarge.png</texturenofocus>
+      <visible>$PARAM[visible]</visible>
+      <focusedcolor>black</focusedcolor>
+      <textcolor>white</textcolor>
+    </control>
+  </definition>
 </include>
 
-  <include name="DefaultDialogButton">
-    <param name="width">300</param>
-    <param name="height">100</param>
-    <param name="wrapmultiline">false</param>
-    <param name="font">impact</param>
-    <param name="onclick"></param>
-    <param name="visible">true</param>
-    <definition>
-      <control type="button" id="$PARAM[id]">
-        <width>$PARAM[width]</width>
-        <height>$PARAM[height]</height>
-        <label>$PARAM[label]</label>
-        <font>$PARAM[font]</font>
-        <textoffsetx>20</textoffsetx>
-        <onclick>$PARAM[onclick]</onclick>
-        <wrapmultiline>$PARAM[wrapmultiline]</wrapmultiline>
-        <align>center</align>
-        <texturefocus border="40" >buttons/keyfo.png</texturefocus>
-        <texturenofocus border="40">buttons/keylarge.png</texturenofocus>
-        <visible>$PARAM[visible]</visible>
-        <focusedcolor>black</focusedcolor>
-        <textcolor>white</textcolor>
-      </control>
-    </definition>
-  </include>
-
-  <include name="KeyboardButton">
-    <width>80</width>
-    <height>80</height>
-  <!-- <textoffsety>27</textoffsety> -->
+<include name="KeyboardButton">
+  <width>70</width>
+  <height>70</height>
   <texturefocus >buttons/keyfo.png</texturefocus>
   <texturenofocus >buttons/key.png</texturenofocus>
   <align>center</align>
@@ -6888,7 +6831,7 @@
     <posy>0</posy>
     <width>1920</width>
     <height>1080</height>
-    <visible>[!Window.IsVisible(10000)+!Window.IsVisible(10025)+!Window.IsVisible(visualisation)]|Window.IsVisible(10040)|Window.IsVisible(10126)|Window.IsVisible(10129)</visible>
+    <visible>[!Window.IsVisible(10000)+!Window.IsVisible(10025)+!Window.IsVisible(visualisation)]|Window.IsVisible(10140)|Window.IsVisible(10129)|Window.IsVisible(10040)|Window.IsVisible(10126)|Window.IsVisible(10129)</visible>
 
     <control type="image">
 
@@ -6904,6 +6847,7 @@
       <colordiffuse>FF9F9F9F</colordiffuse>
     </control>
 </control>
+
 
 </include>
 
@@ -6986,7 +6930,7 @@
       <align>left</align>
       <font>lcdep</font>
       <textcolor>yellow</textcolor>
-      <label>$INFO[Container($PARAM[ContainerID]).ListItem($PARAM[OffsetID]).Label]</label>    
+      <label>$INFO[Container($PARAM[ContainerID]).ListItem($PARAM[OffsetID]).Label]$INFO[Container($PARAM[ContainerID]).ListItem($PARAM[OffsetID]).Label2]</label>    
     </control>
   </control>
   </definition>
@@ -8422,7 +8366,6 @@
 
     <include>Animation_OpenCloseFade</include>
     <include>Animation_HiddenByInfo</include>
-    <!-- Total height of this grouplist should not exceed the height of PlotBox (small) or it will overlap the overlays! -->
     <control type="grouplist">
       <visible>Window.IsActive(pictures)</visible>
       <posx>300</posx>
@@ -8509,7 +8452,7 @@
 
 <!-- Video Info Screen Buttons and Text -->
 <!-- ---------------------------------------------------------------------------------------------- -->
-<include name="VideoInfoButtonText">  
+<include name="VideoInfoButtonText">
   <posx>1760</posx>
   <posy>10</posy>
   <width>100</width>
@@ -8552,8 +8495,8 @@
 </include>
 <include name="VideoInfoButton2">
   <onleft condition="Integer.IsGreater(Container(5051).NumItems,0)+!String.IsEmpty(Window(10000).Property(showgenre))+System.HasAddon(script.iconmixtools)+Control.HasFocus(5005)">5001</onleft>
-   <onleft condition="Integer.IsGreater(Container(1999).NumItems,0)+!String.IsEmpty(Window(10000).Property(showsaga))+System.HasAddon(script.iconmixtools)+Control.HasFocus(5006)">1999</onleft>
-        
+  <onleft condition="Integer.IsGreater(Container(1999).NumItems,0)+!String.IsEmpty(Window(10000).Property(showsaga))+System.HasAddon(script.iconmixtools)+Control.HasFocus(5006)">1999</onleft>
+
   <onleft condition="String.IsEmpty(Window(10000).Property(showgenre))+String.IsEmpty(Window(10000).Property(showsaga))+!String.IsEmpty(Container(1990).ListItem.Director)">7777</onleft>
   <onleft condition="String.IsEmpty(Window(10000).Property(showgenre))+String.IsEmpty(Window(10000).Property(showsaga))+String.IsEmpty(Container(1990).ListItem.Director)+!Container(1998).IsUpdating">7781</onleft>
   <label></label>
@@ -9047,57 +8990,57 @@
 <!-- telex--->
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="NextTracksPlaylist_Content">
-<!-- <include>PlaylistBackGround</include> -->
-<control type="grouplist">
-  <posx>1400</posx>
-  <posy>480</posy>
-  <control type="label" id="1">
-    <include>commonNextTracksPlaylist_Content</include>
-    <label>$INFO[MusicPlayer.Offset(1).Title]</label>
-    <visible>!String.IsEmpty(MusicPlayer.Offset(1).Title)</visible>
-  </control>
-  <control type="label">
-    <include>commonNextTracksPlaylist_Content</include>
-    <label>$INFO[MusicPlayer.Offset(2).Title]</label>
-    <visible>!String.IsEmpty(MusicPlayer.Offset(2).Title)</visible>
-  </control>
-  <control type="label">
-    <include>commonNextTracksPlaylist_Content</include>
-    <label>$INFO[MusicPlayer.Offset(3).Title]</label>
-    <visible>!String.IsEmpty(MusicPlayer.Offset(3).Title)</visible>
-  </control>
-  <control type="label">
-    <include>commonNextTracksPlaylist_Content</include>
-    <label>$INFO[MusicPlayer.Offset(4).Title]</label>
-    <visible>!String.IsEmpty(MusicPlayer.Offset(4).Title)</visible>
-  </control>
-  <control type="label">
-    <include>commonNextTracksPlaylist_Content</include>
-    <label>$INFO[MusicPlayer.Offset(5).Title]</label>
-    <visible>!String.IsEmpty(MusicPlayer.Offset(5).Title)</visible>
-  </control>
-  <control type="label">
-    <include>commonNextTracksPlaylist_Content</include>
-    <label>$INFO[MusicPlayer.Offset(6).Title]</label>
-    <visible>!String.IsEmpty(MusicPlayer.Offset(6).Title)</visible>
-  </control>
+  <!-- <include>PlaylistBackGround</include> -->
+  <control type="grouplist">
+    <posx>1400</posx>
+    <posy>480</posy>
+    <control type="label" id="1">
+      <include>commonNextTracksPlaylist_Content</include>
+      <label>$INFO[MusicPlayer.Offset(1).Title]</label>
+      <visible>!String.IsEmpty(MusicPlayer.Offset(1).Title)</visible>
+    </control>
+    <control type="label">
+      <include>commonNextTracksPlaylist_Content</include>
+      <label>$INFO[MusicPlayer.Offset(2).Title]</label>
+      <visible>!String.IsEmpty(MusicPlayer.Offset(2).Title)</visible>
+    </control>
+    <control type="label">
+      <include>commonNextTracksPlaylist_Content</include>
+      <label>$INFO[MusicPlayer.Offset(3).Title]</label>
+      <visible>!String.IsEmpty(MusicPlayer.Offset(3).Title)</visible>
+    </control>
+    <control type="label">
+      <include>commonNextTracksPlaylist_Content</include>
+      <label>$INFO[MusicPlayer.Offset(4).Title]</label>
+      <visible>!String.IsEmpty(MusicPlayer.Offset(4).Title)</visible>
+    </control>
+    <control type="label">
+      <include>commonNextTracksPlaylist_Content</include>
+      <label>$INFO[MusicPlayer.Offset(5).Title]</label>
+      <visible>!String.IsEmpty(MusicPlayer.Offset(5).Title)</visible>
+    </control>
+    <control type="label">
+      <include>commonNextTracksPlaylist_Content</include>
+      <label>$INFO[MusicPlayer.Offset(6).Title]</label>
+      <visible>!String.IsEmpty(MusicPlayer.Offset(6).Title)</visible>
+    </control>
 
-  <control type="label">
-    <include>commonNextTracksPlaylist_Content</include>
-    <label>$INFO[MusicPlayer.Offset(7).Title]</label>
-    <visible>!String.IsEmpty(MusicPlayer.Offset(7).Title)</visible>
+    <control type="label">
+      <include>commonNextTracksPlaylist_Content</include>
+      <label>$INFO[MusicPlayer.Offset(7).Title]</label>
+      <visible>!String.IsEmpty(MusicPlayer.Offset(7).Title)</visible>
+    </control>
+    <control type="label">
+      <include>commonNextTracksPlaylist_Content</include>
+      <label>$INFO[MusicPlayer.Offset(8).Title]</label>
+      <visible>!String.IsEmpty(MusicPlayer.Offset(8).Title)</visible>
+    </control>
+    <control type="label">
+      <include>commonNextTracksPlaylist_Content</include>
+      <label>$INFO[MusicPlayer.Offset(9).Title]</label>
+      <visible>!String.IsEmpty(MusicPlayer.Offset(9).Title)</visible>
+    </control>
   </control>
-  <control type="label">
-    <include>commonNextTracksPlaylist_Content</include>
-    <label>$INFO[MusicPlayer.Offset(8).Title]</label>
-    <visible>!String.IsEmpty(MusicPlayer.Offset(8).Title)</visible>
-  </control>
-  <control type="label">
-    <include>commonNextTracksPlaylist_Content</include>
-    <label>$INFO[MusicPlayer.Offset(9).Title]</label>
-    <visible>!String.IsEmpty(MusicPlayer.Offset(9).Title)</visible>
-  </control>
-</control>
 </include>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <include name="ActiveClearArt">

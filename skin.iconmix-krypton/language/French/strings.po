@@ -351,6 +351,11 @@ msgctxt "#31221"
 msgid "IconMixTools script settings"
 msgstr "Paramétrage du script IconMixTools"
 
+msgctxt "#31222"
+msgid "IconMixTools verification"
+msgstr "Vérifications par IconMixTools"
+
+
 msgctxt "#31244"
 msgid "Playing"
 msgstr "Lecture"
@@ -1459,6 +1464,10 @@ msgctxt "#31797"
 msgid "TvShows in progress"
 msgstr "Séries en cours"
 
+msgctxt "#31798"
+msgid "TvShows New or Updated"
+msgstr "Nouvelles séries"
+
 
 msgctxt "#31800"
 msgid "List sober"
@@ -1794,6 +1803,10 @@ msgstr "Illustrations par Artwork Downloader"
 msgctxt "#31937"
 msgid "Update ArtWorks (iconmix)"
 msgstr "Illustrations par IconMix"
+
+msgctxt "#31938"
+msgid "flaps"
+msgstr "Volets"
 
 msgctxt "#32000"
 msgid "Horizontal panel animation on windows close"

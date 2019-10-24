@@ -111,8 +111,9 @@
 	  <value condition="String.IsEqual(Skin.String(AutoCompleteProvider),google)">flags/keytype/google-icon.png</value>
 	  <value condition="String.IsEqual(Skin.String(AutoCompleteProvider),youtube)">flags/keytype/youtube-icon.png</value>
 	  <value condition="String.IsEqual(Skin.String(AutoCompleteProvider),historique)">flags/keytype/historique-icon.png</value>
-	  <value condition="String.IsEqual(Skin.String(AutoCompleteProvider),bing)">flags/keytype/bing-icon.png</value>
+	  <value condition="String.IsEqual(Skin.String(AutoCompleteProvider),allocine)">flags/keytype/allocine-icon.png</value>
 	  <value condition="String.IsEqual(Skin.String(AutoCompleteProvider),kodi)">flags/keytype/kodi-icon.png</value>
+	  <value condition="String.IsEqual(Skin.String(AutoCompleteProvider),tmdb)">flags/keytype/tmdb-icon.png</value>
 	  <value>flags/keytype/off-icon.png</value>
 	  
 	</variable>
@@ -495,6 +496,7 @@
 		<value condition="String.Contains(Container(9000).ListItem.Property(widget),RecentlyAddedAlbums)|String.Contains(Container(9000).ListItem.Property(widget),RecommendedAlbums)|String.Contains(Container(9000).ListItem.Property(widget),RandomAlbums)">$INFO[ListItem.Artist] - $INFO[ListItem.Title]$INFO[ListItem.Year, (,)]</value>
 		<value condition="String.Contains(Container(9000).ListItem.Property(widget),RandomSongs)">$INFO[ListItem.Artist] - $INFO[ListItem.Title]</value>
 		<value condition="String.Contains(Container(9000).ListItem.Property(widget),NAired)|String.Contains(Container(9000).ListItem.Property(widgetpath),nextaired)">[I][COLOR=lightblue]$INFO[ListItem.TVShowTitle,,: ][/COLOR][/I]$INFO[ListItem.Label] : ([COLOR=white]$INFO[ListItem.Property(airdate)][/COLOR])</value>
+		<value condition="String.Contains(Container(9000).ListItem.Property(widget),ITVUpdated)">$INFO[ListItem.Label]$INFO[ListItem.Label2]</value>
 
 		
 		<value condition="String.Contains(ListItem.DbType,tvshow)">$INFO[ListItem.Label]</value>
@@ -506,6 +508,7 @@
 		<value condition="String.Contains(Container(9000).ListItem.Property(widget.2),RecentlyAddedAlbums)|String.Contains(Container(9000).ListItem.Property(widget.2),RecommendedAlbums)|String.Contains(Container(9000).ListItem.Property(widget.2),RandomAlbums)">$INFO[ListItem.Artist] - $INFO[ListItem.Title]$INFO[ListItem.Year, (,)]</value>
 		<value condition="String.Contains(Container(9000).ListItem.Property(widget.2),RandomSongs)">$INFO[ListItem.Artist] - $INFO[ListItem.Title]</value>
 		<value condition="String.Contains(Container(9000).ListItem.Property(widget.2),NAired)|String.Contains(Container(9000).ListItem.Property(widgetpath.2),nextaired)">[I][COLOR=lightblue]$INFO[ListItem.TVShowTitle,,: ][/COLOR][/I]$INFO[ListItem.Label] : ([COLOR=white]$INFO[ListItem.Property(airdate)][/COLOR])</value>
+		<value condition="String.Contains(Container(9000).ListItem.Property(widget.2),ITVUpdated)">$INFO[ListItem.Label]$INFO[ListItem.Label2]</value>
 
 		<value condition="String.Contains(ListItem.DbType,tvshow)">$INFO[ListItem.Label]</value>
 		<value condition="!String.Contains(ListItem.DbType,tvshow)">[I][COLOR=lightblue]$INFO[ListItem.TVShowTitle,,: ][/COLOR][/I]$INFO[ListItem.Label]</value>
@@ -535,6 +538,7 @@
 	</variable>
 	<variable name="HomeWidgetPosterVarLand">
 	  <value condition="!String.IsEmpty(ListItem.Art(landscape))">$INFO[ListItem.Art(landscape)]</value>
+	  <!-- <value condition="!String.IsEmpty(ListItem.Art(banner))">$INFO[ListItem.Art(banner)]</value> -->
 	  
 	  <value condition="!String.IsEmpty(ListItem.Art(thumb))">$INFO[ListItem.Art(thumb)]</value>
 	  <value condition="!String.IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
@@ -1046,6 +1050,7 @@
 	<variable name="BackPlayListStyle">
 		<value condition="String.IsEqual(Window.Property(backgroundplayliststyle),X2)">$LOCALIZE[31915]</value>
 		<value condition="String.IsEqual(Window.Property(backgroundplayliststyle),X3)">$LOCALIZE[31735]</value>
+		<value condition="String.IsEqual(Window.Property(backgroundplayliststyle),X4)">$LOCALIZE[31938]</value>
 		<value>$LOCALIZE[31914]</value>
 	</variable>
 	<variable name="WidgetStyleLabelVar">

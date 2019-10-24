@@ -83,7 +83,7 @@
         <texture>frames/Menu_Glass2b.png</texture>
         <colordiffuse>DialogBackgroundColor</colordiffuse>
       </control>
-      >
+      
       <visible>[Control.HasFocus(7017)|ControlGroup(7001).HasFocus|ControlGroup(7000).HasFocus(1100)]</visible>
       <animation type="Visible" reversible="true">
         <effect type="slide" start="-550" end="0" time="250"/>

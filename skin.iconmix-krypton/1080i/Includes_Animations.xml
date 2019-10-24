@@ -9,25 +9,15 @@
 <include name="AnimationWidget1">
   <param name="id">0</param>
   <definition>
-      <animation effect="slide" start="0,0" end="-1920,-260" delay="150" tween="cubic" time="50" condition="Control.HasFocus(8011$PARAM[id])+!Container(8011$PARAM[id]).IsUpdating">Conditional</animation>
-      <animation effect="slide" start="0,0" end="-1920,0" delay="150" tween="cubic" time="50" condition="[!Control.HasFocus(8011$PARAM[id])+!Control.HasFocus(8021$PARAM[id])+[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow))|Skin.HasSetting(ShowFullWidgets)]]+!Container(8011$PARAM[id]).IsUpdating">Conditional</animation>
-      <animation effect="slide" start="0,0" end="500,0" delay="0" tween="cubic" time="50" condition="!Skin.HasSetting(ShowFullWidgets)+[!Control.HasFocus(8011$PARAM[id])+!Control.HasFocus(8021$PARAM[id])+[!String.IsEmpty(Container(9000).ListItem.Property(widgetShowH))|Skin.HasSetting(HideUnfocusedWidgets)]]+!Container(8011$PARAM[id]).IsUpdating">Conditional</animation>
-
-
-     
-      <animation effect="slide" end="190,95"  time="0"  reversible="true"  condition="Control.HasFocus(8021$PARAM[id])+!String.Contains(Control.getLabel(8031$PARAM[id]),WeatherForecast)">Conditional</animation>
-      <animation effect="slide" end="80,95"  time="0"  reversible="true"  condition="Control.HasFocus(8021$PARAM[id])+String.Contains(Control.getLabel(8031$PARAM[id]),WeatherForecast)">Conditional</animation>
+      <animation effect="slide" start="0,0" end="2410,-260" delay="150" tween="cubic" time="50" condition="Control.HasFocus(8011$PARAM[id])+!Container(8011$PARAM[id]).IsUpdating">Conditional</animation>     
+      
   </definition>
 </include>
 <include name="AnimationWidget2">
   <param name="id">0</param>
   <definition>
-      <animation effect="slide" start="0,0" end="-1920,50" delay="150" tween="cubic" time="50" condition="Control.HasFocus(8021$PARAM[id])+!Container(8021$PARAM[id]).IsUpdating">Conditional</animation>
-      <animation effect="slide" start="0,0" end="-1920,0" delay="150" tween="cubic" time="50" condition="[!Control.HasFocus(8011$PARAM[id])+!Control.HasFocus(8021$PARAM[id])+[!String.IsEmpty(Container(9000).ListItem.Property(widgetShow.2))|Skin.HasSetting(ShowFullWidgets)]]+!Container(8021$PARAM[id]).IsUpdating">Conditional</animation>
-      <animation effect="slide" start="0,0" end="500,0" delay="0" tween="cubic" time="50" condition="!Skin.HasSetting(ShowFullWidgets)+[!Control.HasFocus(8011$PARAM[id])+!Control.HasFocus(8021$PARAM[id])+[!String.IsEmpty(Container(9000).ListItem.Property(widgetShowH.2))|Skin.HasSetting(HideUnfocusedWidgets)]]+!Container(8011$PARAM[id]).IsUpdating">Conditional</animation>
-
-      <animation effect="slide" end="190,400"  time="0"  reversible="true"  condition="Control.HasFocus(8011$PARAM[id])+!String.Contains(Control.getLabel(8032$PARAM[id]),WeatherForecast)">Conditional</animation>
-      <animation effect="slide" end="80,400"  time="0"  reversible="true"  condition="Control.HasFocus(8011$PARAM[id])+String.Contains(Control.getLabel(8032$PARAM[id]),WeatherForecast)">Conditional</animation>
+      <animation effect="slide" start="0,0" end="2410,50" delay="150" tween="cubic" time="50" condition="Control.HasFocus(8021$PARAM[id])+!Container(8021$PARAM[id]).IsUpdating">Conditional</animation>
+     
   </definition>
 </include>
 

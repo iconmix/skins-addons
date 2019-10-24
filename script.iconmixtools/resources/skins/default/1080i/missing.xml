@@ -1,0 +1,1186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<window type="dialog">
+  <defaultcontrol always="true">3</defaultcontrol>
+  <controls>
+    <control type="image">
+      <bordersize>12</bordersize>
+      <bordertexture border="12" colordiffuse="FF707070">landscape.png</bordertexture>
+      <colordiffuse>BackgroundColor</colordiffuse>
+      <texture>background.png</texture>
+      <aspectratio scalediffuse="false">stretch</aspectratio>
+      <width>1920</width>
+      <height>1080</height>
+    </control>
+    <control type="group"> <!-- inexistant dans Kodi -->
+      <width>1920</width>
+      <height>1080</height>
+      <control type="group">
+        <posx>0</posx>
+        <posy>0</posy>
+        <animation effect="fade" start="100" end="10" time="400" condition="!Control.HasFocus(6)">Conditional</animation>
+        <control type="label" id="1">
+          <description>Line 1</description>
+          <posx>20</posx>
+          <posy>20</posy>
+          <width>900</width>
+          <height>76</height>
+          <font>lcdnsub</font>
+          <textcolor>white</textcolor>
+          <align>center</align>
+          <aligny>center</aligny>
+        </control>
+        <control type="label">
+          <posx>1600</posx>
+          <posy>23</posy>
+          <width>300</width>
+          <height>76</height>
+          <font>compteur</font>
+          <textcolor>lightgreen</textcolor>
+          <align>right</align>
+          <aligny>center</aligny>
+          <label>[COLOR=yellow]$INFO[Container(6).CurrentItem,(,/]$INFO[Container(6).NumItems,,)][/COLOR]</label>
+        </control>
+        
+        <control type="list" id="6">
+          <posx>6</posx>
+          <posy>140</posy>
+          <width>1900</width>
+          <height>900</height>
+          <onright>8</onright>
+          <onup>6</onup>
+          <ondown>6</ondown>
+
+
+          <itemlayout height="45" width="1900">
+
+            <control type="label">
+              <left>10</left>
+              <font>impact35</font>
+              <textcolor>yellow</textcolor>
+              <width>120</width>
+              <align>right</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label2]</label>
+              <animation effect="fade" start="100" end="30" time="0" condition="Control.HasFocus(18)">Conditional</animation>
+            </control>
+            <control type="label">
+              <left>140</left>
+              <font>impact35</font>
+              <width>1750</width>
+              <align>left</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+              <animation effect="fade" start="100" end="30" time="0" condition="Control.HasFocus(18)">Conditional</animation>
+            </control>
+            <control type="image">
+              <top>-2</top>
+              <height>2</height>
+              <texture>VideoInfoLine.png</texture>
+              <colordiffuse>grey</colordiffuse>
+            </control>
+          </itemlayout>
+          <focusedlayout height="45" width="1900">
+            <control type="image">
+              <align>left</align>
+              <aligny>center</aligny>
+              <texture>buttonz/ButtonFocus.png</texture>
+              <left>15</left>
+              <width>1915</width>
+              <visible>Control.HasFocus(6)</visible>
+            </control>
+
+            <control type="image">
+              <top>-2</top>
+              <height>3</height>
+              <texture>VideoInfoLine.png</texture>
+              <colordiffuse>grey</colordiffuse>
+            </control>
+
+            <control type="label">
+              <left>10</left>
+              <font>impact35</font>
+              <width>120</width>
+              <align>right</align>
+              <aligny>center</aligny>
+              <textcolor>yellow</textcolor>
+              <label>$INFO[ListItem.Label2]</label>
+            </control>
+            <control type="label">
+              <left>140</left>
+              <font>impact35</font>
+              <width>1750</width>
+              <align>left</align>
+              <aligny>center</aligny>
+              <label>[I]$INFO[ListItem.Label][/I]</label>
+            </control>
+          </focusedlayout>
+        </control>
+
+      </control>
+    </control>
+    <control type="group"> <!-- liste des manquants -->
+      <posx>1000</posx>
+      <posy>50</posy>
+      <width>850</width>
+      <height>1000</height>
+      <animation type="Conditional" condition="Control.HasFocus(8)" reversible="false">
+        <effect type="slide" start="2620" end="0" time="300"  />
+        <effect type="fade" start="0" end="100" time="400"  />
+      </animation>
+      <animation effect="fade" start="100" end="0" time="0" condition="!Control.HasFocus(8)">Conditional</animation>
+      <control type="image">
+
+        <bordersize>12</bordersize>
+        <bordertexture border="12" colordiffuse="FF707070">landscape.png</bordertexture>
+        <colordiffuse>BackgroundColor</colordiffuse>
+        <texture>background.png</texture>
+        <aspectratio scalediffuse="false">stretch</aspectratio>
+      </control>
+      <control type="list" id="8">
+        <top>25</top>
+        <left>25</left>
+        <width>800</width>
+        <height>950</height>
+        <onleft>6</onleft>
+        <onright>6</onright>
+
+        <align>left</align>
+        <orientation>vertical</orientation>
+        <onup>8</onup>
+        <ondown>8</ondown>
+
+        <itemlayout height="200">
+
+          <control type="image">
+            <width>240</width>
+            <left>-50</left>
+            <bordersize>12</bordersize>
+            <bordertexture border="12" colordiffuse="FF707070">landscape.png</bordertexture>
+            <texture>$INFO[ListItem.Art(poster)]</texture>
+            <aspectratio>keep</aspectratio>
+          </control>
+
+          <control type="label">
+            <left>100</left>
+            <font>impact35</font>
+            <textcolor>yellow</textcolor>
+            <width>120</width>
+            <align>right</align>
+            <aligny>center</aligny>
+            <label>$INFO[ListItem.Year]</label>
+          </control>
+          <control type="label">
+            <left>230</left>
+            <font>impact35</font>
+            <width>650</width>
+            <align>left</align>
+            <aligny>center</aligny>
+            <label>$INFO[ListItem.Label]</label>
+          </control>
+          <control type="image">
+            <top>-2</top>
+            <height>2</height>
+            <texture>VideoInfoLine.png</texture>
+            <colordiffuse>grey</colordiffuse>
+          </control>
+        </itemlayout>
+        <focusedlayout height="200">
+          <control type="image">
+
+            <texture>buttonz/ButtonFocus.png</texture>
+            <left>0</left>
+            <width>800</width>
+            <visible>Control.HasFocus(8)</visible>
+          </control>
+          <control type="image">
+            <left>-50</left>
+            <aligny>center</aligny>
+            <width>240</width>
+            <texture>$INFO[ListItem.Art(poster)]</texture>
+            <aspectratio>keep</aspectratio>
+            <bordersize>12</bordersize>
+            <bordertexture border="12" colordiffuse="FF707070">landscape.png</bordertexture>
+          </control>
+
+          <control type="image">
+            <top>-2</top>
+            <height>3</height>
+            <texture>VideoInfoLine.png</texture>
+            <colordiffuse>grey</colordiffuse>
+          </control>
+
+          <control type="label">
+            <left>100</left>
+            <font>impact35</font>
+            <width>120</width>
+            <align>right</align>
+            <aligny>center</aligny>
+            <textcolor>yellow</textcolor>
+            <label>$INFO[ListItem.Year]</label>
+          </control>
+          <control type="label">
+            <left>230</left>
+            <font>impact35</font>
+            <width>650</width>
+            <align>left</align>
+            <aligny>center</aligny>
+            <label>[I]$INFO[ListItem.Label][/I]</label>
+          </control>
+        </focusedlayout>
+      </control>
+    </control>
+
+    <control type="group">  <!-- infos détaillées -->
+      <posy>50</posy>
+      <left>20</left>
+      <width>950</width>
+      <height>1000</height>
+      <visible>Integer.IsGreater(Container(8).NumItems,0)</visible>
+      <animation type="Conditional" condition="Control.HasFocus(8)" reversible="false">
+        <effect type="slide" start="-1000" end="0" time="300"  />
+        <effect type="fade" start="0" end="100" time="400"  />
+      </animation>
+      <animation effect="fade" start="100" end="0" time="0" condition="!Control.HasFocus(8)">Conditional</animation>
+      <control type="image">
+        <bordersize>12</bordersize>
+        <bordertexture border="12" colordiffuse="FF707070">landscape.png</bordertexture>
+        <colordiffuse>BackgroundColor</colordiffuse>
+        <texture>background.png</texture>
+        <aspectratio scalediffuse="false">stretch</aspectratio>
+      </control>
+      <control type="grouplist">
+        <left>25</left>
+        <top>25</top>
+        <height>950</height>
+        <width>900</width>
+        <align>center</align>
+        <control type="textbox">
+          <align>center</align>
+          <height>100</height>
+          <width>900</width>
+          <include>FontTitre</include>
+          <label>$INFO[Container(8).ListItem.Label]</label>
+          <textcolor>yellow</textcolor>
+
+        </control>
+        <control type="label">
+          <align>center</align>
+          <height>60</height>
+          <width>900</width>
+          <include>FontTitre</include>
+          <label>($INFO[Container(8).ListItem.Label2])</label>
+          <textcolor>white</textcolor>
+        </control>
+        <control type="image">
+          <height>400</height>
+          <width>900</width>
+          <bordersize>20</bordersize>
+          <bordertexture border="20" colordiffuse="FFFFFFFF">frames/Menu_Glass2b.png</bordertexture>
+          <texture>$INFO[Container(8).ListItem.Art(poster)]</texture>
+          <aspectratio>keep</aspectratio>
+          <bordersize>4</bordersize>
+        </control>
+        <control type="textbox">
+
+          <height>350</height>
+          <align>left</align>
+          <include>FontPlot</include>
+          <shadowcolor>ff000000</shadowcolor>
+          <textcolor>TextNF</textcolor>
+          <label>$INFO[Container(8).ListItem.Plot]</label>
+          <include>SpecialPlotBoxScroll</include>
+        </control>
+        <control type="textbox">
+
+          <height>50</height>
+          <align>center</align>
+          <font>METF_InfoTextLarger</font>
+          <textcolor>MediaDetailsEpisodes</textcolor>
+          <shadowcolor>ff000000</shadowcolor>
+
+          <label>$INFO[Container(8).ListItem.Genre]</label>
+        </control>
+      </control>
+    </control>
+   
+    <control type="group" id="222"> <!-- doublons -->
+      <animation effect="fade" start="100" end="0" time="400" condition="!Control.HasFocus(9)+!Control.HasFocus(18)">Conditional</animation>
+      <animation type="Conditional" condition="Control.HasFocus(9)" reversible="false">
+        <effect type="slide" start="2000" end="0" time="300"  />
+        <effect type="fade" start="0" end="100" time="400"  />
+      </animation>
+      <left>50</left>
+      <top>150</top>
+      <control type="image">
+        <left>-10</left>
+        <bordersize>12</bordersize>
+        <bordertexture border="12" colordiffuse="FF707070">landscape.png</bordertexture>
+        <colordiffuse>BackgroundColor</colordiffuse>
+        <texture>background.png</texture>
+        <aspectratio scalediffuse="false">stretch</aspectratio>
+        <width>1830</width>
+        <height>700</height>
+      </control>
+      <control type="group">
+        <width>1820</width>
+        <height>700</height>
+        <control type="group">
+          <posx>0</posx>
+          <posy>0</posy>
+          <control type="label" id="91">
+            <description>Line 1</description>
+            <posx>20</posx>
+            <posy>20</posy>
+            <width>900</width>
+            <height>76</height>
+            <font>lcdnsub</font>
+            <textcolor>white</textcolor>
+            <align>center</align>
+            <aligny>center</aligny>
+          </control>
+
+
+          <control type="label">
+            <posx>1500</posx>
+            <posy>23</posy>
+            <width>300</width>
+            <height>76</height>
+            <font>compteur</font>
+            <textcolor>lightgreen</textcolor>
+            <align>right</align>
+            <aligny>center</aligny>
+            <label>[COLOR=yellow]$INFO[Container(9).CurrentItem,(,/]$INFO[Container(9).NumItems,,)][/COLOR]</label>
+          </control>
+
+          <control type="list" id="9">
+            <left>6</left>
+            <top>140</top>
+            <width>1800</width>
+            <height>500</height>
+            
+            <onup>9</onup>
+            <ondown>9</ondown>
+
+
+            <itemlayout height="120" width="1800">
+              <control type="group">
+                <animation effect="fade" start="100" end="30" time="400" condition="Control.HasFocus(18)">Conditional</animation>
+              
+
+              <control type="label">
+                <left>10</left>
+                <font>impact35</font>
+                <textcolor>yellow</textcolor>
+                <label>$INFO[ListItem.FileNameandPath]</label>
+              </control>
+              <control type="group">
+                <top>50</top>
+                <height>50</height>
+                <left>10</left>
+                <!-- duree --->
+                <control type="group">
+                  <width>156</width>
+                  <control type="image">
+                    <top>-10</top>
+                    <height>40</height>
+                    <width>40</width>
+                    <texture>duree.png</texture>
+                    <aspectratio>keep</aspectratio>
+                  </control>
+                  <control type="image">
+                    <top>20</top>
+                    <width>40</width>
+                    <height>40</height>
+                    <texture>hdd.png</texture>
+                    <aspectratio>keep</aspectratio>
+                  </control>
+
+
+                  <control type="label">
+                    <top>0</top>
+                    <left>45</left>
+                    <align>center</align>
+                    <label>[B]$INFO[ListItem.Property(duree)][/B]</label>
+                  </control>
+                  <control type="label">
+                    <left>45</left>
+                    <top>30</top>
+                    <align>center</align>
+                    <label>[B]$INFO[ListItem.Property(taille)][/B]</label>
+                  </control>
+                </control>
+                <!-- video codec --->
+                <control type="group">
+                  <left>156</left>
+                  <visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
+                  <width>156</width>
+                  <control type="image">
+                    <texture fallback="flags/default.png">$INFO[ListItem.VideoCodec,flags/VideoCodec/,.png]</texture>
+                    <aspectratio>keep</aspectratio>
+
+                  </control>
+
+                </control>
+                <!-- video resolution --->
+                <control type="group">
+                  <left>312</left>
+                  <visible>!String.IsEmpty(ListItem.VideoResolution)</visible>
+                  <width>156</width>
+
+
+                  <control type="image">
+                    <texture fallback="flags/default.png">$INFO[ListItem.VideoResolution,flags/VideoResolution/,.png]</texture>
+                    <aspectratio>keep</aspectratio>
+
+                  </control>
+
+
+                </control>
+                <!-- video aspect --->
+                <control type="group">
+                  <left>468</left>
+                  <visible>!String.IsEmpty(ListItem.VideoAspect)</visible>
+                  <width>156</width>
+
+
+                  <control type="image">
+
+
+                    <texture fallback="flags/VideoAspect/default.png">$INFO[ListItem.VideoAspect,flags/VideoAspect/,.png]</texture>
+                    <aspectratio>keep</aspectratio>
+
+                  </control>
+
+
+                </control>
+                <!-- audio -->
+                <control type="group">
+                  <width>300</width>
+                  <left>780</left>
+                  <control type="group">
+                    <width>60</width>
+                    <height>65</height>
+                    <left>20</left>
+                    <top>-1</top>
+
+                    <control type="image">
+                      <left>0</left>
+                      <width>60</width>
+                      <height>30</height>
+                      <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.1)].png</texture>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <include>fond_audio_channels</include>
+                    <control type="image">
+                      <left>30</left>
+                      <top>10</top>
+                      <width>22</width>
+                      <height>18</height>
+                      <texture background="true" >$INFO[ListItem.Property(AudioChannels.1),flags/AudioChannels/,chOverlay.png]</texture>
+                      <aspectratio>scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>0</left>
+                      <top>40</top>
+                      <width>60</width>
+                      <height>30</height>
+
+                      <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.1),flags/AudioCodec/,.png]</texture>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+
+                  </control>
+
+                  <control type="group">
+                    <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
+                    <width>60</width>
+                    <height>65</height>
+                    <left>85</left>
+                    <top>-1</top>
+                    <control type="image">
+                      <left>0</left>
+                      <width>60</width>
+                      <height>30</height>
+
+                      <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.2)].png</texture>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <include>fond_audio_channels</include>
+                    <control type="image">
+                      <left>30</left>
+                      <top>10</top>
+                      <width>22</width>
+                      <height>18</height>
+                      <texture background="true" >$INFO[ListItem.Property(AudioChannels.2),flags/AudioChannels/,chOverlay.png]</texture>
+                      <aspectratio>scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>0</left>
+                      <top>40</top>
+                      <width>60</width>
+                      <height>30</height>
+
+                      <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.2),flags/AudioCodec/,.png]</texture>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                  </control>
+
+                  <control type="group">
+                    <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.3))</visible>
+                    <width>60</width>
+                    <height>65</height>
+                    <left>155</left>
+                    <top>-1</top>
+                    <control type="image">
+                      <left>0</left>
+                      <width>60</width>
+                      <height>30</height>
+
+                      <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.3)].png</texture>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <include>fond_audio_channels</include>
+                    <control type="image">
+                      <left>30</left>
+                      <top>10</top>
+                      <width>22</width>
+                      <height>18</height>
+                      <texture background="true" >$INFO[ListItem.Property(AudioChannels.3),flags/AudioChannels/,chOverlay.png]</texture>
+                      <aspectratio>scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>0</left>
+                      <top>40</top>
+                      <width>60</width>
+                      <height>30</height>
+
+                      <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.3),flags/AudioCodec/,.png]</texture>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                  </control>
+
+                  <control type="group">
+                    <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
+                    <width>60</width>
+                    <height>65</height>
+                    <top>-1</top>
+                    <left>225</left>
+                    <control type="image">
+                      <left>0</left>
+                      <width>60</width>
+                      <height>30</height>
+
+                    <texture fallback="flags/defaultsound.png" background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.4)].png</texture>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <include>fond_audio_channels</include>
+                    <control type="image">
+                      <left>30</left>
+                      <top>10</top>
+                      <width>22</width>
+                      <height>18</height>
+                      <texture background="true" >$INFO[ListItem.Property(AudioChannels.4),flags/AudioChannels/,chOverlay.png]</texture>
+                      <aspectratio>scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>0</left>
+                      <top>40</top>
+                      <width>60</width>
+                      <height>30</height>
+
+                      <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.4),flags/AudioCodec/,.png]</texture>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                  </control>
+
+                </control>
+                <control type="group">
+                  <left>624</left>
+
+                  <width>156</width>
+                  <visible>String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
+
+                  <control type="image">
+                    <left>20</left>
+
+                    <texture background="true" >nost.png</texture>
+                    <visible>String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
+                    <aspectratio aligny="center" scalediffuse="true">keep</aspectratio>
+                  </control>
+                </control>
+                <control type="group">
+                  <left>624</left>
+
+                  <width>156</width>
+                  <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
+
+                  <control type="image">
+                    <visible>String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
+                    <left>20</left>
+
+                    <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.1)].png</texture>
+                    <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
+                    <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                  </control>
+                  <control type="image">
+                    <visible>String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
+                    <left>20</left>
+
+                    <texture background="true" >flags/cc.png</texture>
+                    <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
+                    <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                  </control>
+                  <control type="group">
+                    <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
+                    <control type="image">
+                      <left>18</left>
+                      <top>8</top>
+                      <width>60</width>
+                      <height>30</height>
+                      <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.1)].png</texture>
+                      <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>18</left>
+                      <top>8</top>
+                      <width>60</width>
+                      <height>30</height>
+                      <texture background="true" >flags/cc.png</texture>
+                      <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>82</left>
+                      <width>60</width>
+                      <top>8</top>
+                      <height>30</height>
+                      <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.2)].png</texture>
+                      <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>82</left>
+                      <width>60</width>
+                      <top>8</top>
+                      <height>30</height>
+                      <texture background="true" >flags/cc.png</texture>
+                      <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>18</left>
+                      <top>36</top>
+                      <width>60</width>
+                      <height>30</height>
+                      <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.3)].png</texture>
+                      <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.3))</visible>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>18</left>
+                      <top>36</top>
+                      <width>60</width>
+                      <height>30</height>
+                      <texture background="true" >flags/cc.png</texture>
+                      <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.3))</visible>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>82</left>
+                      <top>36</top>
+                      <width>60</width>
+                      <height>30</height>
+                      <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.4)].png</texture>
+                      <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.4))</visible>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>82</left>
+                      <top>36</top>
+                      <width>60</width>
+                      <height>30</height>
+                      <texture background="true" >flags/cc.png</texture>
+                      <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.4))</visible>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                  </control>
+
+                </control>
+
+
+              </control>
+              <control type="image">
+                <top>-2</top>
+                <height>5</height>
+                <texture>VideoInfoLine.png</texture>
+                <colordiffuse>grey</colordiffuse>
+              </control>
+              </control>
+            </itemlayout>
+            <focusedlayout height="120" width="1800">
+              <control type="image">
+                <align>left</align>
+                <texture>buttonz/ButtonFocus.png</texture>
+                <visible>Control.HasFocus(9)</visible>
+              </control>
+
+              <control type="image">
+                <top>-2</top>
+                <height>5</height>
+                <texture>VideoInfoLine.png</texture>
+                <colordiffuse>grey</colordiffuse>
+              </control>
+
+              <control type="label">
+                <left>10</left>
+                <font>impact35</font>
+                <textcolor>yellow</textcolor>
+                <label>$INFO[ListItem.FileNameandPath]</label>
+              </control>
+              <control type="group">
+                <top>50</top>
+                <height>50</height>
+                <left>10</left>
+                <!-- duree --->
+                <control type="group">
+                  <width>156</width>
+                  <control type="image">
+                    <top>-10</top>
+                    <height>40</height>
+                    <width>40</width>
+                    <texture>duree.png</texture>
+                    <aspectratio>keep</aspectratio>
+                  </control>
+                  <control type="image">
+                    <top>20</top>
+                    <width>40</width>
+                    <height>40</height>
+                    <texture>hdd.png</texture>
+                    <aspectratio>keep</aspectratio>
+                  </control>
+
+
+                  <control type="label">
+                    <top>0</top>
+                    <left>45</left>
+                    <align>center</align>
+                    <label>[B]$INFO[ListItem.Property(duree)][/B]</label>
+                  </control>
+                  <control type="label">
+                    <left>45</left>
+                    <top>30</top>
+                    <align>center</align>
+                    <label>[B]$INFO[ListItem.Property(taille)][/B]</label>
+                  </control>
+                </control>
+                <!-- video codec --->
+                <control type="group">
+                  <left>156</left>
+                  <visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
+                  <width>156</width>
+                  <control type="image">
+                    <texture fallback="flags/default.png">$INFO[ListItem.VideoCodec,flags/VideoCodec/,.png]</texture>
+                    <aspectratio>keep</aspectratio>
+
+                  </control>
+
+                </control>
+                <!-- video resolution --->
+                <control type="group">
+                  <left>312</left>
+                  <visible>!String.IsEmpty(ListItem.VideoResolution)</visible>
+                  <width>156</width>
+
+
+                  <control type="image">
+                    <texture fallback="flags/default.png">$INFO[ListItem.VideoResolution,flags/VideoResolution/,.png]</texture>
+                    <aspectratio>keep</aspectratio>
+
+                  </control>
+
+
+                </control>
+                <!-- video aspect --->
+                <control type="group">
+                  <left>468</left>
+                  <visible>!String.IsEmpty(ListItem.VideoAspect)</visible>
+                  <width>156</width>
+
+
+                  <control type="image">
+
+
+                    <texture fallback="flags/VideoAspect/default.png">$INFO[ListItem.VideoAspect,flags/VideoAspect/,.png]</texture>
+                    <aspectratio>keep</aspectratio>
+
+                  </control>
+
+
+                </control>
+                <!-- audio -->
+                <control type="group">
+                  <width>300</width>
+                  <left>780</left>
+                  <control type="group">
+                    <width>60</width>
+                    <height>65</height>
+                    <left>20</left>
+                    <top>-1</top>
+
+                    <control type="image">
+                      <left>0</left>
+                      <width>60</width>
+                      <height>30</height>
+                      <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.1)].png</texture>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <include>fond_audio_channels</include>
+                    <control type="image">
+                      <left>30</left>
+                      <top>10</top>
+                      <width>22</width>
+                      <height>18</height>
+                      <texture background="true" >$INFO[ListItem.Property(AudioChannels.1),flags/AudioChannels/,chOverlay.png]</texture>
+                      <aspectratio>scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>0</left>
+                      <top>40</top>
+                      <width>60</width>
+                      <height>30</height>
+
+                      <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.1),flags/AudioCodec/,.png]</texture>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+
+                  </control>
+
+                  <control type="group">
+                    <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.2))</visible>
+                    <width>60</width>
+                    <height>65</height>
+                    <left>85</left>
+                    <top>-1</top>
+                    <control type="image">
+                      <left>0</left>
+                      <width>60</width>
+                      <height>30</height>
+
+                      <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.2)].png</texture>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <include>fond_audio_channels</include>
+                    <control type="image">
+                      <left>30</left>
+                      <top>10</top>
+                      <width>22</width>
+                      <height>18</height>
+                      <texture background="true" >$INFO[ListItem.Property(AudioChannels.2),flags/AudioChannels/,chOverlay.png]</texture>
+                      <aspectratio>scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>0</left>
+                      <top>40</top>
+                      <width>60</width>
+                      <height>30</height>
+
+                      <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.2),flags/AudioCodec/,.png]</texture>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                  </control>
+
+                  <control type="group">
+                    <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.3))</visible>
+                    <width>60</width>
+                    <height>65</height>
+                    <left>155</left>
+                    <top>-1</top>
+                    <control type="image">
+                      <left>0</left>
+                      <width>60</width>
+                      <height>30</height>
+
+                      <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.3)].png</texture>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <include>fond_audio_channels</include>
+                    <control type="image">
+                      <left>30</left>
+                      <top>10</top>
+                      <width>22</width>
+                      <height>18</height>
+                      <texture background="true" >$INFO[ListItem.Property(AudioChannels.3),flags/AudioChannels/,chOverlay.png]</texture>
+                      <aspectratio>scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>0</left>
+                      <top>40</top>
+                      <width>60</width>
+                      <height>30</height>
+
+                      <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.3),flags/AudioCodec/,.png]</texture>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                  </control>
+
+                  <control type="group">
+                    <visible>!String.IsEmpty(ListItem.Property(AudioLanguage.4))</visible>
+                    <width>60</width>
+                    <height>65</height>
+                    <top>-1</top>
+                    <left>225</left>
+                    <control type="image">
+                      <left>0</left>
+                      <width>60</width>
+                      <height>30</height>
+
+                      <texture fallback="flags/defaultsound.png" background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(AudioLanguage.4)].png</texture>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <include>fond_audio_channels</include>
+                    <control type="image">
+                      <left>30</left>
+                      <top>10</top>
+                      <width>22</width>
+                      <height>18</height>
+                      <texture background="true" >$INFO[ListItem.Property(AudioChannels.4),flags/AudioChannels/,chOverlay.png]</texture>
+                      <aspectratio>scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>0</left>
+                      <top>40</top>
+                      <width>60</width>
+                      <height>30</height>
+
+                      <texture fallback="flags/defaultsound.png">$INFO[ListItem.Property(AudioCodec.4),flags/AudioCodec/,.png]</texture>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                  </control>
+
+                </control>
+                <control type="group">
+                  <left>624</left>
+
+                  <width>156</width>
+                  <visible>String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
+
+                  <control type="image">
+                    <left>20</left>
+
+                    <texture background="true" >nost.png</texture>
+                    <visible>String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
+                    <aspectratio aligny="center" scalediffuse="true">keep</aspectratio>
+                  </control>
+                </control>
+                <control type="group">
+                  <left>624</left>
+
+                  <width>156</width>
+                  <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
+
+                  <control type="image">
+                    <visible>String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
+                    <left>20</left>
+
+                    <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.1)].png</texture>
+                    <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
+                    <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                  </control>
+                  <control type="image">
+                    <visible>String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
+                    <left>20</left>
+
+                    <texture background="true" >flags/cc.png</texture>
+                    <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
+                    <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                  </control>
+                  <control type="group">
+                    <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
+                    <control type="image">
+                      <left>18</left>
+                      <top>8</top>
+                      <width>60</width>
+                      <height>30</height>
+                      <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.1)].png</texture>
+                      <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>18</left>
+                      <top>8</top>
+                      <width>60</width>
+                      <height>30</height>
+                      <texture background="true" >flags/cc.png</texture>
+                      <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.1))</visible>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>82</left>
+                      <width>60</width>
+                      <top>8</top>
+                      <height>30</height>
+                      <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.2)].png</texture>
+                      <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>82</left>
+                      <width>60</width>
+                      <top>8</top>
+                      <height>30</height>
+                      <texture background="true" >flags/cc.png</texture>
+                      <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.2))</visible>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>18</left>
+                      <top>36</top>
+                      <width>60</width>
+                      <height>30</height>
+                      <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.3)].png</texture>
+                      <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.3))</visible>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>18</left>
+                      <top>36</top>
+                      <width>60</width>
+                      <height>30</height>
+                      <texture background="true" >flags/cc.png</texture>
+                      <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.3))</visible>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>82</left>
+                      <top>36</top>
+                      <width>60</width>
+                      <height>30</height>
+                      <texture background="true" >resource://resource.images.languageflags.colour/$INFO[ListItem.Property(SubtitleLanguage.4)].png</texture>
+                      <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.4))</visible>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                    <control type="image">
+                      <left>82</left>
+                      <top>36</top>
+                      <width>60</width>
+                      <height>30</height>
+                      <texture background="true" >flags/cc.png</texture>
+                      <visible>!String.IsEmpty(ListItem.Property(SubtitleLanguage.4))</visible>
+                      <aspectratio aligny="center" scalediffuse="true">scale</aspectratio>
+                    </control>
+                  </control>
+
+                </control>
+
+
+              </control>
+            </focusedlayout>
+          </control>
+
+        </control>
+      </control>
+    </control>
+    <control type="label" id="2">
+      <posx>0</posx>
+      <posy>0</posy>
+      <visible>Control.HasFocus(8)</visible>
+      <align>center</align>
+      <height>50</height>
+      <width>1920</width>
+      <include>FontTitre</include>
+
+      <textcolor>white</textcolor>
+    </control>
+ <control type="group">  <!-- dialog supprimer,renommer -->
+      <top>250</top>
+      <left>200</left>
+      <width>1520</width>
+      <height>200</height>
+      <animation type="Conditional" condition="Control.HasFocus(18)" reversible="false">
+        <effect type="slide" start="0,-1000" end="0" time="300" />
+        <effect type="fade" start="0" end="100" time="200"  />
+      </animation>
+      <animation effect="fade" start="100" end="0" time="0" condition="!Control.HasFocus(18)">Conditional</animation>
+      <control type="image">
+      <bordersize>12</bordersize>
+      <bordertexture border="12" colordiffuse="FF707070">landscape.png</bordertexture>
+      <colordiffuse>BackgroundColor</colordiffuse>
+      <texture>background.png</texture>
+      <aspectratio scalediffuse="false">stretch</aspectratio>
+      </control>
+      <control type="label" id="181">
+        <scrollspeed>30</scrollspeed>
+          
+          <scroll>true</scroll>
+            <description>Line 1</description>
+            <left>10</left>
+            <top>10</top>
+            <width>1500</width>
+            <height>40</height>
+            <font>impact35</font>
+            <textcolor>yellow</textcolor>
+            <align>center</align>
+            <aligny>center</aligny>
+          </control>
+      <control type="list" id="18">
+        <left>10</left>
+        <top>50</top>
+        <width>1500</width>
+        <height>120</height>
+        
+        <align>left</align>
+        <orientation>vertical</orientation>
+        <onup>8</onup>
+        <ondown>8</ondown>
+        <animation effect="fade" start="100" end="0" time="0" condition="!Control.HasFocus(18)">Conditional</animation>
+        <itemlayout height="40" width="1500">
+          <control type="image">
+            <width>40</width>
+            <left>-50</left>
+            <texture></texture>
+          </control>
+          <control type="label">
+            <left>50</left>
+            <font>impact35</font>
+            <align>center</align>
+            <aligny>center</aligny>
+            <label>$INFO[ListItem.Label]</label>
+          </control>
+          <control type="image">
+            <top>-2</top>
+            <height>2</height>
+            <texture>VideoInfoLine.png</texture>
+            <colordiffuse>grey</colordiffuse>
+          </control>
+        </itemlayout>
+        <focusedlayout height="40" width="1500">
+          <control type="image">
+
+            <texture>buttonz/ButtonFocus.png</texture>
+            <left>0</left>
+            <width>1500</width>
+            <visible>Control.HasFocus(18)</visible>
+          </control>
+
+          <control type="label">
+            <left>50</left>
+            
+            <font>impact35</font>
+            <align>center</align>
+            <aligny>center</aligny>
+            <label>$INFO[ListItem.Label]</label>
+          </control>
+          <control type="image">
+            <top>-2</top>
+            <height>2</height>
+            <texture>VideoInfoLine.png</texture>
+            <colordiffuse>grey</colordiffuse>
+          </control>
+        </focusedlayout>
+
+      </control>
+    </control>
+  </controls>
+</window>

@@ -1273,16 +1273,6 @@ class dialog_BandeAnnonce(xbmcgui.WindowXMLDialog):
  
 #--------------------------------------------------------------------------------------------------        
 
-#------------------------------------------------------------------------------------------------------------------
-def in_hours_and_min(minutes_string):
-    try:
-        full_minutes = int(minutes_string)
-        minutes = full_minutes % 60
-        hours   = full_minutes // 60
-        return str(hours) + 'h' + str(minutes).zfill(2)
-    except:
-        return ''
-
 class MainService:
   
     #------------------------------------------------------------------------------------------------------------------
@@ -1308,9 +1298,10 @@ class MainService:
       self.IdWidgetContainer=None
       self.IdWidgetContainerPos=None
       lGlobalAnnonces=0
+      self.AllocineIDPrec=None
       lGlobalAnnoncesThread=0
       self.firstidduration=None
-      
+      #utils.GetMissingMovies()
       #logMsg("GlobalGenre %s" %utils.GetTMDBGenres())
        
       if xbmcvfs.exists(ADDON_DATA_PATH+"/series/planningnextV2"):
@@ -1497,6 +1488,10 @@ class MainService:
                       utils.ClearNextEpisode()
                       self.precedenttvshow=None
                       self.previousitem=None
+                      self.windowhome.clearProperty("ItemCountry1")
+                      self.windowhome.clearProperty("ItemCountry2")
+                      self.windowhome.clearProperty("ItemCountry3")
+                      self.windowhome.clearProperty("ItemCountry4")
                       
                   if MiseAjour!="" : #liste des acteurs
                       self.windowhome.setProperty('IconMixUpdating','1')                     
@@ -2536,12 +2531,37 @@ class MainService:
     
     #------------------------------------------------------------------------------------------------------------------
   def AutoRecherche(self):
-      if xbmc.getCondVisibility("Control.IsVisible(9010)") and xbmc.getCondVisibility("Control.IsVisible(312)"):
+      #if xbmc.getCondVisibility("Control.IsVisible(9010)") and xbmc.getCondVisibility("Control.IsVisible(312)"):
+        """ 
+        if xbmc.getCondVisibility("Control.HasFocus(9010)"):
+          self.AllocineID=xbmc.getInfoLabel("Container(9010).ListItem.Property(AllocineID)")
+          if self.AllocineID and self.AllocineID!="None" and self.AllocineID!=self.AllocineIDPrec:
+            self.AllocineIDPrec=self.AllocineID
+            try:
+              window = xbmcgui.Window(10103) #dialogkeyboard.xml
+              window.getControl(9099).setText("")
+            except:
+              return
+            details=utils.Allocine_Details(IdCode=self.AllocineID ,TypeVideo="movie")            
+            if details:
+              
+              try:             
+                synopsys=details.get("movie").get("synopsisShort")              
+              except:
+                synopsys=None                
+              if synopsys:
+                try:
+                  window = xbmcgui.Window(10103) #dialogkeyboard.xml
+                  window.getControl(9099).setText(synopsys)
+                except:
+                  return
+        else:
+          AllocineIDPrec=None
+        """
         if self.windowhome.getProperty("AutoCompletionShowItem"):
           path=self.windowhome.getProperty("AutoCompletionShowItem")
           self.windowhome.clearProperty("AutoCompletionShowItem")
           if "selectautocomplete" in path:
-            
             try:
                 id=path.split("id=")[1]
                 window = xbmcgui.Window(10103) #dialogkeyboard.xml
@@ -2658,8 +2678,7 @@ class MainService:
           self.Recherche=Edit312
           
           limit=50
-          self.PurgeCache=None
-        
+          self.PurgeCache=None        
           self.AutoCompletionProvider=None
           if xbmc.getCondVisibility("String.Contains(ListItem.DbType,artist) | String.Contains(ListItem.DbType,album) | String.Contains(ListItem.DbType,song)"):
             basetype="music"
@@ -2681,7 +2700,135 @@ class MainService:
           else:
             Action=""                  
             self.start_info_actions("autocomplete", self.Recherche,limit,self.AutoCompletionProvider,basetype)
+       #------------------------------------------------------------------------------------------------------------------
+  def start_info_actions(self,action,id=None,limit=50,provider=None,basetype=None):
+        if action == 'autocomplete':
+            listitems = MonAutoCompletion.get_autocomplete_items(id,limit,provider, basetype,self.PurgeCache)
+            self.PurgeCache=None
+            self.pass_list_to_skin(listitems,limit,basetype,provider)
+        
+        elif action == 'selectautocomplete':
+            #self.resolve_url(handle)
+            try:
+                window = xbmcgui.Window(10103) #dialogkeyboard.xml
+                MyEdit=window.getControl(312) #edit
+            except:
+                logMsg("autocompletion failed (%s) " % id, level=logMsgNOTICE)
+                return None
+            window.setFocusId(312)
+           
+            MyEdit.setText(str(id))
+            xbmc.executebuiltin("SendClick(10103,32)")
+            xbmc.executebuiltin("SendClick(10103,8)")
             
+            return None
+            # xbmc.executebuiltin("SendClick(103,32)")
+        
+        
+    #------------------------------------------------------------------------------------------------------------------
+  def resetPropositions(self,Items=[]):
+        try:
+          window = xbmcgui.Window(10103) #dialogkeyboard.xml
+        except:
+          window=None
+        if window:
+          try:
+            MyPropositions=window.getControl(9010) #edit
+            MyPropositionsFond=window.getControl(9015) #image
+            MyPropositionsCompteur=window.getControl(9016) #Compteur
+          except:
+            MyPropositions=None
+            MyPropositionsFond=None
+            MyPropositionsCompteur=None
+          
+          
+          if MyPropositions and MyPropositionsFond:
+            MyPropositions.reset()            
+            MyPropositions.setStaticContent(Items)
+            #MyPropositions.addItems(Items)
+            if len(Items)>0 and MyPropositionsFond and xbmc.getInfoLabel("Skin.String(AutoCompleteProvider)")=="kodi":
+              Hauteur=(44*((len(Items)//4)+1))
+              if Hauteur>400:
+                Hauteur=400
+              MyPropositionsFond.setHeight(15+Hauteur)
+              
+              if MyPropositionsCompteur:
+                MyPropositionsCompteur.setPosition(35,Hauteur+195)
+      
+
+    #------------------------------------------------------------------------------------------------------------------
+  def pass_list_to_skin(self,data=[],  limit=False,basetype=None,provider=None):
+
+        items=[]
+        if data and limit and int(limit) < len(data) and not provider =="kodi":
+            data = data[:int(limit)]
+        
+        
+        items = self.create_listitems(data,basetype)
+        #items = [(i.getProperty("path"), i, bool(i.getProperty("directory"))) for i in items]
+        self.resetPropositions(items)
+            
+            
+
+
+    #------------------------------------------------------------------------------------------------------------------
+  def create_listitems(self,data=None,basetype=None):
+        if not data:
+            return []
+        itemlist = []
+        cpt=0
+        for item in data:
+            #listitem = xbmcgui.ListItem('%s' % (str(cpt)))
+            
+            listitem=xbmcgui.ListItem(label=item.get("label"))
+            search_string=item.get("search_string")
+            path=unicode(item.get("path"))
+            if search_string:                
+                  path = "plugin://script.iconmixtools/?action=selectautocomplete&id=%s" % search_string
+            dbtype=item.get("dbtype")
+            label=item.get("label")
+            Art=item.get("art")
+            icon=item.get("icon")
+            dbid=item.get("dbid")
+            listitem.setProperty('ItemID', str(dbid) if dbid else search_string)
+            listitem.setProperty('AllocineID',"%s" %item.get("allocineid") )
+            
+            listitem.setLabel2(item.get("showtitle"))
+            winid=item.get("winid")
+            plot=item.get("plot")
+            listitem.setLabel(label)
+            listitem.setProperty('dbtype', dbtype)
+            listitem.setProperty('winid', str(winid))
+            listitem.setPath(path=path)
+            
+                #telex                                
+            listitem.setProperty("index", str(cpt))
+            if not dbtype:
+              #plot=""
+              logMsg("PATH=%s" %path)
+              listitem.setInfo("video", {"title": label,"mediatype": "movie","plot":plot,"path":path,"year":item.get("year")}) 
+            elif "movie" in dbtype:
+              icon="flags/keytype/movie.png" 
+              listitem.setInfo("video", {"dbid": int(dbid) if dbid else None,"title": label,"mediatype": "movie","plot":plot,"path":path,"year":item.get("year")}) 
+            elif "tvshow" in dbtype: 
+              icon="flags/keytype/tv.png"
+              listitem.setInfo("video", {"dbid": int(dbid)  if dbid else None,"title": label,"mediatype": "tvshow","plot":plot,"path":path,"year":item.get("year")}) 
+            listitem.setIconImage(icon)
+            if Art:              
+                  Art["thumb"]=icon
+                  listitem.setArt(Art)
+            
+            itemlist.append(listitem)
+            cpt=cpt+1
+        return itemlist
+  
+    #------------------------------------------------------------------------------------------------------------------
+  def resolve_url(self,handle):
+        if handle:
+            xbmcplugin.setResolvedUrl(handle=int(handle),
+                                      succeeded=False,
+                                      listitem=xbmcgui.ListItem())           
+ #-----------------------------------------------        
     #------------------------------------------------------------------------------------------------------------------               
     #------------------------------------------------------------------------------------------------------------------
   def BandeAnnonceAutomatique(self):
@@ -2893,9 +3040,11 @@ class MainService:
         
         #self.windowhome.setProperty('ItemUniqueGenre',xbmc.getInfoLabel( "ListItem.Genre" ).replace(" /",", "))
         logMsg("self.duration (%s)" %(self.duration))
+        duree=self.duration
         #if self.DBTYPE=="movie":
         #  pays.ConversionPays("movie",ContainerID)
-        duree=utils.GetDuration(DBKODI,DBTYPE)
+        if not duree:
+          duree=utils.GetDuration(DBKODI,DBTYPE)
         if duree :
         #else :
          if duree.find(':')!=-1: #KODI LEIA
@@ -2910,7 +3059,7 @@ class MainService:
              duree=str(XX)
         
          if duree.find(':')==-1:
-            readable_duration = in_hours_and_min(duree)
+            readable_duration = utils.in_hours_and_min(duree)
             self.windowhome.setProperty('DurationTools', readable_duration)
             if int(duree)>0:
               now = datetime.now()
@@ -2922,7 +3071,9 @@ class MainService:
               self.windowhome.clearProperty('DurationTools')
          else:
            self.windowhome.setProperty('DurationTools', duree)
-             
+        else:
+           self.windowhome.clearProperty('DurationToolsEnd')
+           self.windowhome.clearProperty('DurationTools')    
              
     #------------------------------------------------------------------------------------------------------------------
   def _init_vars(self):
@@ -3310,164 +3461,7 @@ class MainService:
       return None 
      
       
-    #------------------------------------------------------------------------------------------------------------------
-  def start_info_actions(self,action,id=None,limit=50,provider=None,basetype=None):
-        if action == 'autocomplete':
-            listitems = MonAutoCompletion.get_autocomplete_items(id,limit,provider, basetype,self.PurgeCache)
-            self.PurgeCache=None
-            self.pass_list_to_skin(listitems,limit,basetype,provider)
-        
-        elif action == 'selectautocomplete':
-            #self.resolve_url(handle)
-            try:
-                window = xbmcgui.Window(10103) #dialogkeyboard.xml
-                MyEdit=window.getControl(312) #edit
-            except:
-                logMsg("autocompletion failed (%s) " % id, level=logMsgNOTICE)
-                return None
-            window.setFocusId(312)
-           
-            MyEdit.setText(str(id))
-            xbmc.executebuiltin("SendClick(10103,32)")
-            xbmc.executebuiltin("SendClick(10103,8)")
-            
-            return None
-            # xbmc.executebuiltin("SendClick(103,32)")
-        
-        
-    #------------------------------------------------------------------------------------------------------------------
-  def resetPropositions(self,Items=[]):
-        try:
-          window = xbmcgui.Window(10103) #dialogkeyboard.xml
-        except:
-          window=None
-        if window:
-          try:
-            MyPropositions=window.getControl(9010) #edit
-            MyPropositionsFond=window.getControl(9015) #image
-            MyPropositionsCompteur=window.getControl(9016) #Compteur
-          except:
-            MyPropositions=None
-            MyPropositionsFond=None
-            MyPropositionsCompteur=None
-          
-          
-          if MyPropositions and MyPropositionsFond:
-            MyPropositions.reset()            
-            MyPropositions.setStaticContent(Items)
-            #MyPropositions.addItems(Items)
-            if len(Items)>0 and MyPropositionsFond and xbmc.getInfoLabel("Skin.String(AutoCompleteProvider)")=="kodi":
-              Hauteur=(44*((len(Items)//4)+1))
-              if Hauteur>400:
-                Hauteur=400
-              MyPropositionsFond.setHeight(15+Hauteur)
-              
-              if MyPropositionsCompteur:
-                MyPropositionsCompteur.setPosition(35,Hauteur+195)
-      
-
-    #------------------------------------------------------------------------------------------------------------------
-  def pass_list_to_skin(self,data=[],  limit=False,basetype=None,provider=None):
-
-        items=[]
-        if data and limit and int(limit) < len(data) and not provider =="kodi":
-            data = data[:int(limit)]
-        
-        
-        items = self.create_listitems(data,basetype)
-        #items = [(i.getProperty("path"), i, bool(i.getProperty("directory"))) for i in items]
-        self.resetPropositions(items)
-            
-            
-
-
-    #------------------------------------------------------------------------------------------------------------------
-  def create_listitems(self,data=None,basetype=None):
-        if not data:
-            return []
-        itemlist = []
-        cpt=0
-        for item in data:
-            #listitem = xbmcgui.ListItem('%s' % (str(cpt)))
-            dbtype=item.get("dbtype")
-            if dbtype:
-                listitem=xbmcgui.ListItem(label=item.get("label"))
-                listitem.setLabel2(item.get("showtitle"))
-                label=item.get("label")
-                path=item.get("path")
-                dbid=item.get("dbid")
-                
-                icon=item.get("icon")
-                winid=item.get("winid")
-                Art=item.get("art")
-                if Art:
-                  Art["thumb"]=icon
-                plot=item.get("plot")
-                path=unicode(item.get("path"))
-                search_string=item.get("search_string")            
-                listitem.setLabel(label)
-                if search_string:                
-                        path = "plugin://script.iconmixtools/?action=selectautocomplete&id=%s" % search_string            
-                listitem.setProperty('ItemID', str(dbid) if dbid else None)
-                listitem.setProperty('dbtype', dbtype)
-                listitem.setProperty('winid', str(winid))
-                #telex
-                                
-                listitem.setProperty("index", str(cpt))
-                if "movie" in dbtype: 
-                  listitem.setInfo("video", {"dbid": int(dbid),"title": label,"mediatype": "movie","plot":plot,"path":path}) 
-                if "tvshow" in dbtype: 
-                  listitem.setInfo("video", {"dbid": int(dbid),"title": label,"mediatype": "tvshow","plot":plot,"path":path}) 
-                
-                
-                listitem.setPath(path=path)
-                listitem.setArt(Art)
-                
-                listitem.setIconImage(icon)
-                itemlist.append(listitem)
-                cpt=cpt+1
-        return itemlist
-   #------------------------------------------------------------------------------------------------------------------
-  def create_listitemsORG(self,data=None,basetype=None):
-        if not data:
-            return []
-        itemlist = []
-        for (count, result) in enumerate(data):
-            listitem = xbmcgui.ListItem('%s' % (str(count)))
-            for (key, value) in result.iteritems():
-                if not value:
-                    continue
-                value = unicode(value)
-                if key.lower() in ["label"]:
-                    listitem.setLabel(value)
-                elif key.lower() in ["search_string"]:                
-                    path = "plugin://script.iconmixtools/?action=selectautocomplete&id=%s" % value
-                    listitem.setPath(path=path)
-                    listitem.setProperty('path', path)
-                elif key.lower() in ["path"]:
-                    listitem.setPath(path=value)
-                    listitem.setProperty('path', value)
-                elif key.lower() in ["dbid"]:                
-                    listitem.setProperty('ItemID', value)
-                elif key.lower() in ["dbtype"]:                
-                    listitem.setProperty('dbtype', value)
-                elif key.lower() in ["winid"]:                
-                    listitem.setProperty('winid', str(value))
-                    
-                elif key.lower() in ["icon"]:                
-                    listitem.setIconImage(value)
-            listitem.setProperty("index", str(count))
-            itemlist.append(listitem)
-        return itemlist
-
-
-    #------------------------------------------------------------------------------------------------------------------
-  def resolve_url(self,handle):
-        if handle:
-            xbmcplugin.setResolvedUrl(handle=int(handle),
-                                      succeeded=False,
-                                      listitem=xbmcgui.ListItem())           
- #-----------------------------------------------
+ 
 #------------------------------------------------------------------------------------------------------------------
   def GetControlW(Id=None,IdWindow=None):
       ControlId=None

@@ -161,9 +161,9 @@
 <!-- -------------------------Widget 1-------------------------------->
 
 <include name="widget1">
-  <control type="group" id="9022">
+  <control type="group" id="9022"> 
     <visible>[[String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)+!Skin.HasSetting(MeteoPleinEcran)]|!String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)]+!String.IsEmpty(Container(9000).ListItem.Property(widget))</visible>
-    <posx>1990</posx>
+    <posx>-2320</posx>
     <!-- <posx>2250</posx> -->
     <posy>600</posy>
     <include>skinshortcuts-template-widget1</include>
@@ -177,7 +177,7 @@
 <include name="widget2">
   <control type="group" id="9023">
     <visible>[[String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)+!Skin.HasSetting(MeteoPleinEcran)]|!String.IsEqual(Container(9000).ListItem.Property(widget),WeatherForecast)]+!String.IsEmpty(Container(9000).ListItem.Property(widget.2))</visible>
-    <posx>1990</posx>
+    <posx>-2320</posx>
     <!-- <posx>2250</posx> -->
     <posy>300</posy>
     <include>skinshortcuts-template-widget2</include>

@@ -464,6 +464,9 @@ msgctxt "#31221"
 msgid "IconMixTools script settings"
 msgstr ""
 
+msgctxt "#31222"
+msgid "IconMixTools verification"
+msgstr ""
 
 #empty strings from id 31221 to 31243
 
@@ -1699,6 +1702,9 @@ msgctxt "#31797"
 msgid "TvShows in progress"
 msgstr ""
 
+msgctxt "#31798"
+msgid "TvShows New or Updated"
+msgstr ""
 
 
 msgctxt "#31800"
@@ -2044,8 +2050,12 @@ msgstr ""
 
 msgctxt "#31937"
 msgid "Update ArtWorks (iconmix)"
-msgstr "Illustrations par IconMix"
+msgstr ""
 
+
+msgctxt "#31938"
+msgid "flaps"
+msgstr ""
 
 msgctxt "#32000"
 msgid "Horizontal panel animation on windows close"

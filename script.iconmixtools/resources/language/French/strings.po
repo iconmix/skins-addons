@@ -249,8 +249,6 @@ msgid "Today"
 msgstr "Aujourd'hui"
 
 
-
-
 msgctxt "#32700"
 msgid "Poster"
 msgstr "Affiche"
@@ -405,4 +403,72 @@ msgstr "Séries à venir/Nouvelle saison"
 msgctxt "#32870"
 msgid "Go to yours episodes"
 msgstr "Accéder à vos épisodes"
+
+msgctxt "#32871"
+msgid "Missing videos in KODI DATABASE"
+msgstr "Vidéos non reconnues dans la base de KODI"
+
+
+msgctxt "#32872"
+msgid "Attention ! Could not be reverse !"
+msgstr "Attention ! Suppression définitive !"
+
+
+msgctxt "#32873"
+msgid "Do you confirm deleting ?"
+msgstr "Comfirmez-vous la suppression ?"
+
+msgctxt "#32875"
+msgid "Missing in "
+msgstr "Manquants dans "
+
+msgctxt "#32876"
+msgid "Uncomplete Movie collection "
+msgstr "Sagas incomplètes "
+
+msgctxt "#32877"
+msgid "Do you confirm renaming ?"
+msgstr "Comfirmez-vous le renommage ?"
+
+msgctxt "#32878"
+msgid "Successfully achevied"
+msgstr "Opération achevée avec succès"
+
+msgctxt "#32879"
+msgid "Check in progress..."
+msgstr "Vérification en cours..."
+
+msgctxt "#32880"
+msgid "No elements found..."
+msgstr "Aucun éléments trouvés..."
+
+
+msgctxt "#32881"
+msgid "Please now, clean and update library"
+msgstr "Désirez-vous nettoyer et mettre à jour de la librairie maintenant ?\n(fortement conseillé)"
+
+msgctxt "#32882"
+msgid "File target already exist !"
+msgstr "Fichier de destination déjà existant !"
+
+
+msgctxt "#32883"
+msgid "Some delete and rename operations executed."
+msgstr "Des suppressions et/ou renommages ont été effectués."
+
+msgctxt "#32884"
+msgid "duplicates"
+msgstr "doublons"
+
+msgctxt "#32885"
+msgid "Including incoming elements ? "
+msgstr "Inclure les prochaines sorties ?"
+
+msgctxt "#32886"
+msgid "Prohibited chars detected !!!"
+msgstr "Caractères interdits détectés !!!"
+
+msgctxt "#32887"
+msgid "Replace prohibited chars by a point ? "
+msgstr "Remplacer les caractères interdits par un point ?"
 

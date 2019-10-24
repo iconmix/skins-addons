@@ -42,8 +42,12 @@ def get_autocomplete_items(search_str, limit=50, providerchoice=None,basetype=No
           provider = GoogleProvider(youtube=True, limit=limit)
       elif providerchoice == "google":
           provider = GoogleProvider(limit=limit)
-      elif providerchoice == "bing":
-          provider = BingProvider(limit=limit)
+      elif providerchoice == "allocine":
+          provider = AllocineProvider(limit=limit)
+      elif providerchoice == "tmdb":
+          provider = TMDBProvider(limit=limit)
+      #elif providerchoice == "bing":
+      #    provider = BingProvider(limit=limit)
       #elif providerchoice == "historique":
       #    provider = LocalDictProvider(limit=limit)
       elif providerchoice == "kodi":
@@ -60,8 +64,10 @@ def get_autocomplete_items(search_str, limit=50, providerchoice=None,basetype=No
           provider = GoogleProvider(youtube=True, limit=limit)
       elif AutoCompleteProvider == "google":
           provider = GoogleProvider(limit=limit)
-      elif AutoCompleteProvider == "bing":
-          provider = BingProvider(limit=limit)
+      elif providerchoice == "allocine":
+          provider = AllocineProvider(limit=limit)
+      elif providerchoice == "tmdb":
+          provider = TMDBProvider(limit=limit)
       #elif AutoCompleteProvider == "historique":
       #    provider = LocalDictProvider(limit=limit)
       else:
@@ -69,7 +75,7 @@ def get_autocomplete_items(search_str, limit=50, providerchoice=None,basetype=No
           if basetype:
              provider = BaseTypeDictProvider(limit=limit,basetype=basetype,Purge=PurgeCache)
           else:
-             provider = GoogleProvider(limit=limit)
+             provider = AllocineProvider(limit=limit)
     provider.limit = limit
     return provider.get_predictions(search_str)
     
@@ -89,12 +95,15 @@ class BaseProvider(object):
         pass
 
     def prep_search_str(self, text):
+      try:
         if type(text) != unicode:
             text = text.decode('utf-8')
         for chr in text:
             if ord(chr) >= 1488 and ord(chr) <= 1514:
                 return text[::-1]
+      except:
         return text
+      return text
 
     def get_prediction_listitems(self, search_str):
         for item in self.get_predictions(search_str):
@@ -138,6 +147,144 @@ class GoogleProvider(BaseProvider):
         else:
             return result[1]
 
+class TMDBProvider(BaseProvider):
+
+    def __init__(self, *args, **kwargs):
+        super(TMDBProvider, self).__init__(*args, **kwargs)
+
+    def get_predictions(self, search_str):
+        """
+        get dict list with autocomplete labels from google
+        """
+        if not search_str:
+            return []
+        items = []
+        logMsg("Recherche de  : %s" %search_str)
+        #https://api.themoviedb.org/3/search/movie?api_key=67158e2af1624020e34fd893c881b019&query=terminator&language=fr
+        query_url="https://api.themoviedb.org/3/search/movie?api_key=%s&query=%s&language=%s" %(utils.TMDBApiKey,search_str,utils.KODILANGCODE)
+        try:
+          result = utils.requestUrlJson(query_url).get("results")
+          for item in result:
+            item["dbtype"]="movie"
+        except:
+          result=[]
+        query_url="https://api.themoviedb.org/3/search/tv?api_key=%s&query=%s&language=%s" %(utils.TMDBApiKey,search_str,utils.KODILANGCODE)
+        try:
+          result2 = utils.requestUrlJson(query_url).get("results")
+          for item in result2:
+            item["dbtype"]="tvshow"
+            item["title"]=item["name"] if item.get("name") else None
+            item["release_date"]=item.get("first_air_date") if item.get("first_air_date") else "????-??-??"
+        except:
+          result2=[]
+        result=result+result2
+        #logMsg("Results : %s" %result)
+        if result:
+          result=result
+          i=0
+          if len(result)>0:
+            try:
+              resultat=sorted(result,key=operator.itemgetter('release_date'),reverse=True)
+            except:
+              resultat=result 
+          else:
+            resultat=[]
+          for item in resultat:
+              try:
+                poster=item.get("poster_path")
+                if poster:
+                  poster="http://image.tmdb.org/t/p/original"+poster
+              except:
+                poster=None
+              try:
+               releasedate=item.get("release_date")
+               year=releasedate.split('-')[0]
+               datex=releasedate.split('-')
+               releasedate="%s/%s/%s" %(datex[2],datex[1],datex[0])
+               
+              except:                
+                 year="????"
+                 releasedate=year
+              if item.get("title") : 
+                li = {"label": item.get("title"),
+                       "year": year,
+                       "art":{"poster":poster},
+                       "showtitle":releasedate,
+                        "plot":item.get("overview"),
+                       "allocineid":item.get("id"),
+                        "dbtype":item.get("dbtype"),
+                       "search_string": self.prep_search_str(item.get("title"))}
+                items.append(li)
+                if i >= self.limit:
+                    break
+                else:
+                  i=i+1
+          #logMsg("RESULTAT ITEMS: %s" %items)
+        return items
+
+   
+
+class AllocineProvider(BaseProvider):
+
+    def __init__(self, *args, **kwargs):
+        super(AllocineProvider, self).__init__(*args, **kwargs)
+
+    def get_predictions(self, search_str):
+        """
+        get dict list with autocomplete labels from google
+        """
+        if not search_str:
+            return []
+        items = []
+        result = self.fetch_data(search_str)
+        i=0
+        if len(result)>0:
+          try:
+            resultat=sorted(result,key=operator.itemgetter('productionYear'),reverse=True)
+          except:
+            resultat=result 
+        else:
+          resultat=[]
+        for item in resultat:
+            try:
+              poster=item.get("poster").get("href")
+            except:
+              poster=None
+            try:
+             releasedate=item.get("release").get("releaseDate")
+             year=releasedate.split('-')[0]
+             datex=releasedate.split('-')
+             releasedate="%s/%s/%s" %(datex[2],datex[1],datex[0])
+             
+            except:
+              try:
+               year=str(item.get("productionYear"))
+               releasedate=year
+              except:
+                year=""
+                releasedate=year
+            li = {"label": item.get("originalTitle"),
+                   "year": year,
+                   "art":{"poster":poster},
+                   "showtitle":releasedate,
+                   "allocineid":item.get("code"),
+                    "plot":"",
+                   "search_string": self.prep_search_str(item.get("originalTitle"))}
+            items.append(li)
+            if i >= self.limit:
+                break
+            else:
+              i=i+1
+        #logMsg("RESULTAT ITEMS: %s" %items)
+        return items
+
+    def fetch_data(self, search_str):
+        resultat = utils.getAllocineMissing(search_str)
+                
+        if not resultat or len(resultat) <= 1:
+            return []
+        else:
+            return resultat
 
 class BingProvider(BaseProvider):
 
@@ -405,11 +552,14 @@ class BaseTypeDictProvider(BaseProvider):
                   ListeActorsTvShow=[]
                   recherche=search_str.lower()
                   for item in json_result:
-                    if recherche in item["label"].lower():
-                      if item.get("actormovieid"):
-                        ListeActorsMovie.append({"actormovieid":item.get("actormovieid"),"label":item["label"]})
-                      if item.get("actortvshowid"):
-                        ListeActorsTvShow.append({"actortvshowid":item.get("actortvshowid"),"label":item["label"]})
+                    try:
+                      if recherche in item["label"].lower():
+                        if item.get("actormovieid"):
+                          ListeActorsMovie.append({"actormovieid":item.get("actormovieid"),"label":item["label"]})
+                        if item.get("actortvshowid"):
+                          ListeActorsTvShow.append({"actortvshowid":item.get("actortvshowid"),"label":item["label"]})
+                    except:
+                        i=0
                   if len(ListeActorsMovie)>0:
                     self.createlistitems(ListeActorsMovie,"actormovie")
                   if len(ListeActorsTvShow)>0:
@@ -424,8 +574,11 @@ class BaseTypeDictProvider(BaseProvider):
                   Listedirectors=[]
                   recherche=search_str.lower()
                   for item in json_result:
-                    if recherche in item["label"].lower():
-                      Listedirectors.append({"directormovieid":item.get("directormovieid"),"label":item["label"]})
+                    try:
+                      if recherche in item["label"].lower():
+                        Listedirectors.append({"directormovieid":item.get("directormovieid"),"label":item["label"]})
+                    except:
+                      i=0
                   if len(Listedirectors)>0:
                     self.createlistitems(Listedirectors,"directormovie")
                     

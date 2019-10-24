@@ -158,7 +158,7 @@
         <top>$PARAM[PY]</top>
         <left>$PARAM[PX]</left>
           
-        
+        <!-- -----------------------VIDEOS---------------------------- ---->
         <control type="group">
            <animation type="Conditional" condition="true" reversible="false">
             <effect type="rotate" center="auto" start="$PARAM[End]" end="$PARAM[End]" time="0" />          
@@ -236,7 +236,7 @@
           </control>
 
         </control>
-        <!-- --------------------------------------------------------- ---->
+        <!-- -----------------------MUSIQUE---------------------------- ---->
         <control type="group">
         <animation type="Conditional" condition="true" reversible="false">
             <effect type="rotate" center="auto" start="$PARAM[End]" end="$PARAM[End]" time="0" />          
@@ -436,13 +436,156 @@
 
     <control type="image">      
       <visible>[Control.HasFocus(9000)|Control.HasFocus(9001)]+!Container(8080).OnNext+Integer.IsGreater(Container(8080).NumItems,0)+!Container(8080).IsUpdating+
-      [[Control.HasFocus(9001)+String.IsEqual(Container(9001).ListItem.Property(background),Playlist.FanartList)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)]|[!Control.HasFocus(9001)+[String.IsEqual(Container(9000).ListItem.Property(background),Playlist.FanartList)|String.Contains(Container(9000).ListItem.Property(background),WDF1)|String.Contains(Container(9000).ListItem.Property(background),WDF2)|String.Contains(Container(9000).ListItem.Property(background),WDF3)]+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)]]</visible>
+      [[Control.HasFocus(9001)+String.IsEqual(Container(9001).ListItem.Property(background),Playlist.FanartList)+String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X1)]|[!Control.HasFocus(9001)+[String.IsEqual(Container(9000).ListItem.Property(background),Playlist.FanartList)|String.Contains(Container(9000).ListItem.Property(background),WDF1)|String.Contains(Container(9000).ListItem.Property(background),WDF2)|String.Contains(Container(9000).ListItem.Property(background),WDF3)]+String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X1)]]</visible>
       <animation effect="fade" start="10" end="100" time="500" reversible="false" >Visible</animation>
       <texture default="background.png">$INFO[Container(8080).ListItem.Art(fanart)]</texture>
     </control>
 
 
   </include>
+  <include name="animrideau">
+    <param name="leftx" default="0" />
+    <param name="delai" default="0" /> 
+    <param name="id" default="0" />  
+    <definition>
+     <control type="image">
+        <width>320</width>
+        <height>1080</height>
+        <left>-2000</left>
+        <bordersize>1</bordersize>
+        <aspectratio>scale</aspectratio>        
+          <animation type="Conditional" condition="!Container(8080).OnNext+!Container(8080).OnPrevious" reversible="false">
+           <effect type="slide" start="0,0" end=$PARAM[leftx]  tween="linear" easing="inout" time=$PARAM[delai]/>
+         </animation>
+          <animation type="Hidden" reversible="false">
+           <effect type="fade" start="100" end="0"  time="250"/>
+         </animation>
+        <texture>$INFO[Container(8080).ListItem($PARAM[id]).Icon]</texture>
+      </control>
+     </definition>     
+  </include>
+  <!--
+  <include name="animrideau2">
+    <param name="leftx" default="0" />
+    <param name="delai" default="0" /> 
+    <param name="id" default="0" />  
+    <definition>
+     <control type="image">
+        <width>320</width>
+        <height>1080</height>
+        <left>$PARAM[leftx]</left>
+        <bordersize>1</bordersize>
+        <aspectratio>scale</aspectratio>        
+          <animation type="Conditional" condition="!Container(8080).OnNext+!Container(8080).OnPrevious" reversible="false">
+            <effect type="slide" end="-160" />
+           <effect type="rotatey" center="960,0" start="90" end="0"  tween="linear" easing="inout" time="500"/>
+         </animation>
+          <animation type="Hidden" reversible="false">
+           <effect type="fade" start="100" end="0"  time="250"/>
+         </animation>
+        <texture>$INFO[Container(8080).ListItem($PARAM[id]).Icon]</texture>
+      </control>
+     </definition>     
+  </include>
+  -->
+  <include name="rideaupochettes">
+  <!-- -->
+  <control type="group">
+   
+
+    <visible>Integer.IsGreater(Container(8080).NumItems,0)+!Container(8080).IsUpdating+
+      [[Control.HasFocus(9001)+String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X4)]|
+    [Control.HasFocus(9000)+String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X4)]]</visible>
+
+    <control type="group">
+      
+           
+        
+          <include content="animrideau"> 
+          <param name="leftx">3600</param>
+          <param name="id">5</param>
+          <param name="delai">1250</param>
+          </include>
+          <include content="animrideau"> 
+          <param name="leftx">3280</param>
+          <param name="id">4</param>
+          <param name="delai">1000</param>
+          </include>
+          <include content="animrideau"> 
+          <param name="leftx">2960</param>
+          <param name="id">3</param>
+          <param name="delai">750</param>
+          </include>
+          <include content="animrideau"> 
+          <param name="leftx">2640</param>
+          <param name="id">2</param>
+          <param name="delai">500</param>
+          </include>
+            <include content="animrideau"> 
+          <param name="leftx">2320</param>
+          <param name="id">1</param>
+          <param name="delai">250</param>
+          </include>
+        
+         <include content="animrideau"> 
+          <param name="leftx">2000</param>
+          <param name="id">0</param>
+          <param name="delai">0</param>
+          </include>
+        
+         
+        
+        
+        
+
+    </control>
+ <!-- <control type="group">
+      
+           
+        
+          <include content="animrideau"> 
+          <param name="leftx">1760</param>
+          <param name="id">5</param>
+          <param name="delai">1250</param>
+          </include>
+          <include content="animrideau"> 
+          <param name="leftx">1440</param>
+          <param name="id">4</param>
+          <param name="delai">1000</param>
+          </include>
+          <include content="animrideau"> 
+          <param name="leftx">1120</param>
+          <param name="id">3</param>
+          <param name="delai">750</param>
+          </include>
+          <include content="animrideau"> 
+          <param name="leftx">800</param>
+          <param name="id">2</param>
+          <param name="delai">500</param>
+          </include>
+            <include content="animrideau"> 
+          <param name="leftx">480</param>
+          <param name="id">1</param>
+          <param name="delai">250</param>
+          </include>
+        
+         <include content="animrideau"> 
+          <param name="leftx">160</param>
+          <param name="id">0</param>
+          <param name="delai">0</param>
+          </include>
+        
+         
+        
+        
+        
+
+    </control>-->
+
+  </control>
+
+
+</include>
   <include name="fanartSpeed0">
     <timeperimage>10000</timeperimage>
     <autoscroll>false</autoscroll>
@@ -530,7 +673,8 @@
       <width>1920</width>
       <height>1080</height>
       <texture>fondjetees.jpg</texture>
-      <visible>[Control.HasFocus(9001)+[String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)|String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)]+!Container(9001).OnNext+!Container(9001).OnPrevious]|[Control.HasFocus(9000)+[String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)|String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)]+!Container(9000).OnNext+!Container(9000).OnPrevious]</visible>
+      <colordiffuse>BackgroundColor</colordiffuse>
+      <visible>[Control.HasFocus(9001)+[String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)|String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)|String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X4)]+!Container(9001).OnNext+!Container(9001).OnPrevious]|[Control.HasFocus(9000)+[String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)|String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)|String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X4)]+!Container(9000).OnNext+!Container(9000).OnPrevious]</visible>
     </control>
 
     <control type="wraplist" id="8080">
@@ -546,29 +690,29 @@
 
 <include name="ScrollFanart">
   <autoscroll time="5000" delay="500" repeat="5000">
-    [Control.HasFocus(9001)+[!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)]]|
-    [Control.HasFocus(9000)+[!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)]]
+    [Control.HasFocus(9001)+[!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X4)]]|
+    [Control.HasFocus(9000)+[!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X4)]]
     +skin.string(RandomFanartDelay, 5)</autoscroll>
-      <autoscroll time="6000" delay="500" repeat="6000">[Control.HasFocus(9001)+[!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)]]|
-    [Control.HasFocus(9000)+[!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)]]
+      <autoscroll time="6000" delay="500" repeat="6000">[Control.HasFocus(9001)+[!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X4)]]|
+    [Control.HasFocus(9000)+[!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X4)]]
     +skin.string(RandomFanartDelay, 6)</autoscroll>
-      <autoscroll time="8000" delay="500" repeat="8000">[Control.HasFocus(9001)+[!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)]]|
-    [Control.HasFocus(9000)+[!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)]]
+      <autoscroll time="8000" delay="500" repeat="8000">[Control.HasFocus(9001)+[!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X4)]]|
+    [Control.HasFocus(9000)+[!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X4)]]
     +skin.string(RandomFanartDelay, 8)</autoscroll>
-      <autoscroll time="10000" delay="500" repeat="10000">[Control.HasFocus(9001)+[!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)]]|
-    [Control.HasFocus(9000)+[!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)]]
+      <autoscroll time="10000" delay="500" repeat="10000">[Control.HasFocus(9001)+[!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X4)]]|
+    [Control.HasFocus(9000)+[!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X4)]]
     +skin.string(RandomFanartDelay, 10)</autoscroll>
-      <autoscroll time="15000" delay="500" repeat="15000">[Control.HasFocus(9001)+[!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)]]|
-    [Control.HasFocus(9000)+[!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)]]
+      <autoscroll time="15000" delay="500" repeat="15000">[Control.HasFocus(9001)+[!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X4)]]|
+    [Control.HasFocus(9000)+[!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X4)]]
     +skin.string(RandomFanartDelay, 15)</autoscroll>
-      <autoscroll time="20000" delay="500" repeat="20000">[Control.HasFocus(9001)+[!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)]]|
-    [Control.HasFocus(9000)+[!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)]]
+      <autoscroll time="20000" delay="500" repeat="20000">[Control.HasFocus(9001)+[!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X4)]]|
+    [Control.HasFocus(9000)+[!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X4)]]
     +skin.string(RandomFanartDelay, 20)</autoscroll>
-      <autoscroll time="30000" delay="500" repeat="30000">[Control.HasFocus(9001)+[!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)]]|
-    [Control.HasFocus(9000)+[!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)]]
+      <autoscroll time="30000" delay="500" repeat="30000">[Control.HasFocus(9001)+[!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X4)]]|
+    [Control.HasFocus(9000)+[!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X4)]]
     +skin.string(RandomFanartDelay, 30)</autoscroll>
-      <autoscroll time="60000" delay="500" repeat="60000">[Control.HasFocus(9001)+[!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)]]|
-    [Control.HasFocus(9000)+[!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)]]
+      <autoscroll time="60000" delay="500" repeat="60000">[Control.HasFocus(9001)+[!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9001).ListItem.Property(backgroundplayliststyle),X4)]]|
+    [Control.HasFocus(9000)+[!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X3)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X2)+!String.IsEqual(Container(9000).ListItem.Property(backgroundplayliststyle),X4)]]
     +skin.string(RandomFanartDelay, 60)</autoscroll>
 </include>
 
@@ -591,11 +735,12 @@
 
           <include>Viewtype_MurHome</include>
           <include>pochettesjetees</include>
+          <include>rideaupochettes</include>
       
 
       <control type="image">
         <include>Dimensions_Fullscreen</include>
-        <texture background="true">$INFO[Skin.String(CustomBackground)]</texture>
+        <texture background="true" colordiffuse="70FFFFFF" fallback="background.png">$INFO[Skin.String(CustomBackground)]</texture>
         <visible>!Integer.IsGreater(Container(8080).NumItems,0)+!Window.IsActive(10025)</visible>
         <visible>!Control.HasFocus(9000)|[Control.HasFocus(9000)+!String.Contains(Container(9000).ListItem.Property(background),WDF1)+!String.Contains(Container(9000).ListItem.Property(background),WDF2)+!String.Contains(Container(9000).ListItem.Property(background),WDF3)]</visible>
       </control>
@@ -617,7 +762,7 @@
         <width>1920</width>
         <height>1080</height>
         <visible>!Control.HasFocus(9000)|[Control.HasFocus(9000)+!String.Contains(Container(9000).ListItem.Property(background),WDF1)+!String.Contains(Container(9000).ListItem.Property(background),WDF2)+!String.Contains(Container(9000).ListItem.Property(background),WDF3)]</visible>
-        <imagepath background="true" colordiffuse="FFFFFFFF" fallback="background.png">$VAR[backgroundVar]</imagepath>
+        <imagepath background="true" colordiffuse="70FFFFFF" fallback="background.png">$VAR[backgroundVar]</imagepath>
         <aspectratio>keep</aspectratio>
         <fadetime>450</fadetime>
         

@@ -84,7 +84,8 @@ class Main:
                         else:
                           xbmc.sleep(500)
                         cpt=cpt+1
-               if action == "ICONMIXMOVIEPROGRESS":                  
+               if action == "ICONMIXMOVIEPROGRESS":  
+                          logMsg("ICONMIXMOVIEPROGRESS")                
                           Liste=utils.GetProgress("movie")  
                           if Liste:
                               xbmcplugin.addDirectoryItems(int(sys.argv[1]), Liste)
@@ -99,7 +100,12 @@ class Main:
                           Liste=utils.GetProgress("episode")  
                           if Liste:
                               xbmcplugin.addDirectoryItems(int(sys.argv[1]), Liste)
-                          xbmcplugin.endOfDirectory(int(sys.argv[1]))   
+                          xbmcplugin.endOfDirectory(int(sys.argv[1])) 
+               if action == "ICONMIXTVSHOWUPDATED":                  
+                          Liste=utils.GetUpdatedTvShow()  
+                          if Liste:
+                              xbmcplugin.addDirectoryItems(int(sys.argv[1]), Liste)
+                          xbmcplugin.endOfDirectory(int(sys.argv[1]))     
                   
                if action == "GETGENRELIST":
                   Id=params.get("id",None)
@@ -134,6 +140,7 @@ class Main:
           self.idview=params.get( 'id', None )
           
         self.videcache = params.get( 'videcache', False )
+        self.checkdatabase = params.get( 'checkdatabase', False )
         self.addplaylist = params.get( 'addplaylist', False )
         self.supplaylist = params.get( 'supplaylist', False )
         self.updateallmusic = params.get( 'updateallmusic', False )
@@ -155,6 +162,16 @@ class Main:
         self.PurgeDatabaseManuel =  params.get( 'purgedatabasemanuel', False )
         
         self.Positionnement = params.get( 'position', None )
+        
+        if self.checkdatabase:
+          dialog = xbmcgui.Dialog()
+          ret = dialog.select("ICONMIXTOOLS", [__skin_string__(33052)+" "+__language__(32871),__skin_string__(33052)+" "+__language__(32876),__skin_string__(33052)+" "+__language__(32884)])
+          if ret==0:
+             utils.GetMissingMovies()
+          if ret==1:   
+             utils.GetMissingSagaMovies()
+          if ret==2:   
+             utils.GetDoublons()
         
         if self.Positionnement :
          

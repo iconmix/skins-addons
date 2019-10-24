@@ -22,7 +22,8 @@
 	<widget  target="tvshows" type="video" icon="buttons/button_calendrierFO.png" condition="System.HasAddon(script.iconmixtools)" label="Iconmix Prochaines diffusions" path="plugin://script.iconmixtools/?action=iconmixnextaired">IAired</widget>
 	<widget  target="tvshows" type="video" label="31797" condition="System.HasAddon(script.iconmixtools)"  path="plugin://script.iconmixtools/?action=iconmixtvprogress">ITVProgress</widget>
 	<widget  target="movies" type="video" label="31790" condition="System.HasAddon(script.iconmixtools)"  path="plugin://script.iconmixtools/?action=iconmixmovieprogress">IMOVIEProgress</widget>
-	<widget  target="movies" type="video" label="31791" condition="System.HasAddon(script.iconmixtools)"  path="plugin://script.iconmixtools/?action=iconmixepisodeprogress">IEPISODEProgress</widget>
+	<widget  target="tvshows" type="video" label="31791" condition="System.HasAddon(script.iconmixtools)"  path="plugin://script.iconmixtools/?action=iconmixepisodeprogress">IEPISODEProgress</widget>
+		<widget  target="tvshows" type="video" label="31798" condition="System.HasAddon(script.iconmixtools)"  path="plugin://script.iconmixtools/?action=iconmixtvshowupdated">ITVUpdated</widget>
 
 	<widget  target="tvshows" type="video" icon="logos/tsna-logo.png" condition="System.HasAddon(script.tv.show.next.aired)" label="Tv Shows Next Aired" path="plugin://script.skin.helper.widgets/?action=nextaired&amp;mediatype=episodes&amp;reload=$INFO[Window(Home).Property(widgetreload2)]">NAired</widget>
 	<widget  target="tvshows" type="video" icon="logos/tsna-logo.png" condition="System.HasAddon(script.tv.show.next.aired)" label="UnAired Episodes" path="plugin://script.skin.helper.widgets/?action=unaired&amp;mediatype=episodes&amp;reload=$INFO[Window(Home).Property(widgetreload2)] ">NAired</widget>
@@ -159,6 +160,7 @@
 	<property property="backgroundplayliststyle" label="31914">X1</property>
 	<property property="backgroundplayliststyle" label="31915">X2</property>
 	<property property="backgroundplayliststyle" label="31735">X3</property>
+	<property property="backgroundplayliststyle" label="31938">X4</property>
 	<propertydefault property="backgroundplayliststyle">X2</propertydefault>
 	<!-- Widget Style 1 -->
 	

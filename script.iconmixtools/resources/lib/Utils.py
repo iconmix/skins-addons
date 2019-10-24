@@ -2,7 +2,7 @@
 # coding: utf-8
 #from __future__ import unicode_literals
 import xbmcplugin, xbmcgui, xbmc, xbmcaddon, xbmcvfs
-import os,sys,io,shutil
+import os,sys,io,shutil,math
 import urllib2, urllib
 import httplib
 import datetime
@@ -103,6 +103,7 @@ class dialog_select_Arts(xbmcgui.WindowXMLDialog):
         self.Actuels = kwargs.get('actuels')
         self.Extrafanart = kwargs.get('extrafanart')
         self.Title = kwargs.get('Title')
+        logMsg("Mise a jour saga : %s " %self.Title)
         
         
 
@@ -700,6 +701,10 @@ def updatetvartwork(ItemIdxx=None,Unique=True,Saison=None,forceupdateartwork=Non
               except:
                 logMsg("VideoLibrary.SetTvShowDetails : %s impossible = " %(ItemIdxx) + str(MJSAGA),0 )                
 
+#---------------------------------------------------------------------------------
+#kyradb.com
+#curl -i -H "Application/json" -H "Content-type: application/json" -H "Userkey: 7f3901b6c1b80db9" -H "Apikey: 797ab1952413f73102e366e83fea5db9" "https://www.kyradb.com/api10/movie/tmdbid/206647/images/animated"
+
 #--------------------------------------------TVDB---------------------------------------------
 def getTVDBToken():
   request = urllib2.Request(
@@ -754,37 +759,7 @@ def getTVDBData(url=None):
          return zzz.get("data"),Langue
       
   return None,None
-"""    
-def getTVDBartworks(IDShow=None,ArtType=None,Saison=None):
-  KeyStr={'series':'tvbanner','poster':'tvposter','fanart':"showbackground","season":"seasonposter","seasonwide":"seasonbanner"}
-  #if not TVDBToken:
-  if ArtType and IDShow:
-      TypeArtWork=None
-      for xx in KeyStr:
-        if KeyStr.get(xx)==ArtType:
-          TypeArtWork=xx
-          break
-      if TypeArtWork:       
-          if 'tt' in str(IDShow):
-             Data,Langue=getTVDBData('https://api.thetvdb.com/search/series?imdbId=%s' %(IDShow))
-             if Data:
-               IDShow=Data[0].get("id")
-             else:
-               IDShow=None
-          
-          if IDShow:  
-            QueryUrl='https://api.thetvdb.com/series/%s/images/query?keyType=%s' %(IDShow,TypeArtWork)
-            if Saison:
-              QueryUrl=QueryUrl+"&subKey=%d" %(Saison)   
-            Data,Langue=getTVDBData(QueryUrl)
-            if Data:
-              ArtWork=[]    
-              for item in Data:
-                ArtWork.append({"url":"https://www.thetvdb.com/banners/%s" %item.get("fileName"),"lang":Langue})
-              return {"%s" %(ArtType):ArtWork}
-  
-  return None
-"""  
+
 def GetTvDbId(UniqueId=None,TvShowId=None):
   #uniqueid : {"imdb":"tt5193358","tvdb":"304591","tmdb":"61692"}
   if UniqueId:
@@ -1151,6 +1126,10 @@ def getsagaitem(KODISET_ID=None,ShowBusy=None,KodiCollection=None,TMDB_ID=None,j
         json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"properties":["art"],"movies": {"properties": [ "title","imdbnumber","uniqueid","art" ]} }' %(int(KODISET_ID)))
         
       if json_result and json_result.get("movies"): 
+        try:
+          titlesaga=json_result.get("label")          
+        except:
+          titlesaga=""
         KodiMovies = json_result.get("movies")
         allArt=json_result.get("art")
         if allArt:
@@ -1201,10 +1180,13 @@ def getsagaitem(KODISET_ID=None,ShowBusy=None,KodiCollection=None,TMDB_ID=None,j
             data_file.close()  
             
       if ItemId:
+                
                 if not TMDB_ID:
                    #numero de collection TMDB inconnu
                    query_url = "%smovie/%s?api_key=%s&language=%s&include_adult=true" % (BaseUrlTMDB,ItemId,TMDBApiKey,KODILANGCODE)
                    json_data = requestUrlJson(query_url)
+                   logMsg("query_url = %s" %query_url)
+                   logMsg("json_data = %s" %json_data)
                    try:
                      IDcollection=json_data.get("belongs_to_collection").get("id")
                    except:
@@ -1216,7 +1198,9 @@ def getsagaitem(KODISET_ID=None,ShowBusy=None,KodiCollection=None,TMDB_ID=None,j
                 if IDcollection:
                      query_url = "%scollection/%d?api_key=%s&language=%s&include_adult=true" % (BaseUrlTMDB,IDcollection,TMDBApiKey,KODILANGCODE)
                      json_data = requestUrlJson(query_url)
-                     
+                     #logMsg("Title saga = %s" %titlesaga)
+                     #logMsg("query_url2 = %s" %query_url)
+                     #logMsg("json_data2 = %s" %json_data)
 
                      if json_data:
                          TmdbCollection=json_data.get("parts")
@@ -1273,7 +1257,7 @@ def getsagaitem(KODISET_ID=None,ShowBusy=None,KodiCollection=None,TMDB_ID=None,j
                                     xxActuels[key]=Actuels.get(key)
                                 #xxActuels.update(Actuels)
                               Kupdateartwork=updateartwork                                  
-                              ArtWorks,updateartwork=getartworks(IDcollection,xxActuels,updateartwork,"movie",KODISET_ID,forceupdateartwork)
+                              ArtWorks,updateartwork=getartworks(IDcollection,xxActuels,updateartwork,"movie",KODISET_ID,forceupdateartwork,Title=titlesaga)
                             else:
                               if Actuels:
                                 ArtWorks=Actuels
@@ -1283,7 +1267,7 @@ def getsagaitem(KODISET_ID=None,ShowBusy=None,KodiCollection=None,TMDB_ID=None,j
                             else:
                               if KodiCollection[0]:
                                 updateartwork=Kupdateartwork
-                                ArtWorks,updateartwork=getartworks(KodiCollection[0][1],Actuels,updateartwork,"movie",None,forceupdateartwork)
+                                ArtWorks,updateartwork=getartworks(KodiCollection[0][1],Actuels,updateartwork,"movie",None,forceupdateartwork,Title=titlesaga)
                             if ArtWorks:   
                               if PosterCollection and not ArtWorks.get("poster"):   
                                  ArtWorks["poster"]=PosterCollection
@@ -1390,7 +1374,7 @@ def UpdateSagas(Une=None,Toutes=None,updateartwork=None,Initialisation=""):
             if dp.iscanceled(): break
        dp.close()  
      else :      
-          
+          logMsg("getsagaitem %s,%s,%s" %(str(Une),updateartwork,forceupdateartwork))
           getsagaitem(str(Une),1,None,None,None,updateartwork,forceupdateartwork)        
             
      
@@ -2296,7 +2280,83 @@ def GetProgress(VideoType=None):
   
   return Liste
     
+def GetUpdatedTvShow():
+  Liste=[]
+  #json_result = getJSON("VideoLibrary.GetRecentlyAddedEpisodes", '{"properties":["showtitle","tvshowid"]}')
+  
+  dateadded="%s" %(datetime.date.today() - datetime.timedelta(30))
+  logMsg("recherche date = %s" %dateadded)
+  json_result = getJSON("VideoLibrary.GetEpisodes",'{"filter":{"field":"dateadded","operator":"greaterthan","value":"%s"},"limits":{"start":0,"end":100},"properties":["uniqueid","tvshowid"]}' %dateadded)
 
+  #logMsg("GetUpdatedTvShow %s" %json_result)
+  liste=[]
+  if json_result:
+     for Item in json_result:
+        liste.append(Item.get("tvshowid"))
+     if len(liste)>0:
+        liste=list(dict.fromkeys(liste))
+        #logMsg("LISTE : %s" %liste)
+        for element in liste:
+            Item = getJSON("VideoLibrary.GetTVShowDetails", '{"tvshowid":%d,"properties":["art", "cast", "dateadded", "watchedepisodes","episode", "fanart", "file", "genre", "imdbnumber", "lastplayed", "mpaa", "originaltitle", "playcount", "plot", "rating", "ratings", "runtime", "season", "sorttitle", "studio", "tag", "thumbnail", "title", "uniqueid", "userrating", "votes", "year"]}' %(int(element)))
+            #logMsg("Element (%s) : %s" %(int(element),Item))
+            if Item:
+              try:
+                logMsg("(%s)(%s)" %(Item.get("watchedepisodes"),Item.get("episode")))
+                whatched=int(Item.get("watchedepisodes"))+1
+                episodes=int(Item.get("episode"))+1
+                if whatched>=episodes:
+                  whatched=None
+              except:
+                whatched=None
+              """
+              try:
+                UniqueId=Item.get("uniqueid").get("tmdbid")
+              except:
+                UniqueId=None
+              if UniqueId:
+                savepath=ADDON_DATA_PATH+"/series/tv%s" %(UniqueId)
+              """  
+                
+
+              if whatched:
+                
+                Titre=Item.get("title")
+                try:
+                  Poster=Item.get("art").get("poster").replace("image://","")
+                except:
+                  Poster=None
+                try:
+                  Banner=Item.get("art").get("banner").replace("image://","")
+                except:
+                  Banner=None
+                try:
+                  Fanart=Item.get("art").get("fanart").replace("image://","")
+                except:
+                  Fanart=None
+                try:
+                  clearart=Item.get("art").get("clearart").replace("image://","")
+                except:
+                  clearart=None
+                try:
+                  nbepisodes="[COLOR=white] (%s %s)[/COLOR]" %(str(episodes-1),__skin_string__(20360) if int(Item.get("episode"))>1 else __skin_string__(20359))
+                except:
+                  nbepisodes=""
+                Elements = xbmcgui.ListItem(label=Titre,label2=nbepisodes)
+                Elements.setArt({"poster":Poster,"banner":Banner,"fanart":Fanart,"clearart":clearart})
+                Elements.setIconImage(Poster) 
+                KodiId=element
+                Elements.setInfo("video", {"dbid": str(KodiId),"mediatype": "tvshow","title": Titre,"plot":Item.get("plot")})
+                Elements.setProperty("KodiId",str(KodiId))
+                #pistes audios tele
+                
+                
+                
+                PercentPlayed=""
+                Elements.setProperty('PercentPlayed', str(PercentPlayed))    
+                Liste.append([Item.get("file"),Elements,True])    
+  
+  
+  return Liste
               
 """        
 def CalendrierTRAKTV():
@@ -3445,8 +3505,30 @@ def getMovieTvFanarts(KodiID=None,VideoType=None):
                  ListeFanarts.append(ItemListe)
   return ListeFanarts 
         
-       
-    
+#------------------------------------------------------------------------------------------------------------------
+def in_hours_and_min(minutes_string):
+    try:
+        full_minutes = int(minutes_string)
+        minutes = full_minutes % 60
+        hours   = full_minutes // 60
+        return str(hours) + 'h' + str(minutes).zfill(2)
+    except:
+        return ''
+        
+#------------------------------------------------------------------------------------------------------------------
+def in_hours_and_min_and_seconds(duree_string):
+    try:
+        full_minutes = int(duree_string)
+        hours   = full_minutes // 3600        
+        minutes = (full_minutes % 3600) // 60
+        seconds = (full_minutes % 3600) % 60
+        
+        return str(hours) + 'h' + str(minutes).zfill(2)+ 'm' + str(seconds).zfill(2)
+    except:
+        return ''
+
+#--------------------------------------------------------------------------------------------------   
+
   
 def getSagaFanartsV2(SagaItemPath=None):
   ListeFanarts=[] 
@@ -4626,90 +4708,7 @@ def BACineSeriesGetVideo(url=None,MQualite=None):
          
   return URLRetour
  
-def BACineSeries2(Titre=None,typevideo=None,Annee=None,Saison=None)  :
-  TrailerLink=[]
-  XQualite=[720,480,320]
-  try:               
-    MediaQualite=XQualite[int(SETTING("BAMiniQualite"))]
-  except:
-    MediaQualite=720 #par défaut
-  
-  if Titre: 
-    #TitreUrl=Titre+" bande annonce"
-    TitreUrl=Titre
-    if typevideo!="tvshow":
-        typevideo="eb_movie"
-        
-    else:
-        typevideo="eb_serie"
-        if Saison:
-          TitreUrl=TitreUrl+" season %s" %(Saison) 
-         
-    
-    data=getCineseries("https://www.cineserie.com/search/%s/?post_type=eb_video&post-category=%s" %(TitreUrl.replace(" ","+").lower(),typevideo))
-    CineLink=[]
-    h= HTMLParser.HTMLParser()
-          
-    if data:
-          Liste=data.split('" class="tie-video video-popup"')
-          for item in Liste:
-            try:            
-               videotype=(item.split('<span>')[1].split('</span')[0]) .lower()
-            except:
-               videotype=""
-            if "nnonce" in videotype or "teaser" in videotype:
-              try:
-               Name=item.split('data-title="')[1].split('"')[0]
-              except:
-               Name=""
-              if Name.lower()==Titre.lower():
-                link=item.rsplit('href="')[1].split('">')[0]
-                if 'https://www.cineserie.com' in link:
-                  titreba=item.rsplit('href="')[1].split('">')[1].split('</a>')[0]
-                  titreba=h.unescape(titreba)
-                  if titreba.endswith('VO'):
-                    langue='VO'
-                  else:
-                    langue='VF'              
-                  if (typevideo!="eb_serie") or (typevideo=="eb_serie" and ('season' in titreba.lower() or not Saison) and not 'episode' in titreba.lower()):
-                    CineLink.append({"url":link,"titre":titreba,"langue":langue})
-                  if len(CineLink)>5:
-                      break
-          CineVideoLink=[]
-          for item in CineLink:
-            data=getCineseries(item.get("url"))
-            
-            if data:
-              ItemAnnee=data.split('-date\/')[1].split('\/","')[0]
-              logMsg("CineLinkAnnee : %s - %s" %(ItemAnnee,Annee))
-              if ItemAnnee==Annee:
-                linky=data.split('<div class="containerkowe">')[1]
-                #allowfullscreen data-rocket-lazyload="fitvidscompatible" data-lazy-src="//videos.cineserie.com/player/index/98079/3/18"></iframe><nosc
-                #link=linky.split("//")[1].split('" class="videokowe')[0]
-                link=linky.split('src="//videos.cineserie.com/player/')[1].split('"')[0]
-                CineVideoLink.append({"url":"https://videos.cineserie.com/player/"+link,"titre":item.get("titre"),"langue":item.get("langue")})
-                
-          for item in CineVideoLink:
-            data=getCineseries(item.get("url"))
-            if data:
-              linkarray=data.split('{"sources":[')[1]
-              newlinkjson='{'+data.split('vc.player_setup = {')[1].rsplit('};')[0].replace('\/','/')+'}'
-              datajson=json.loads(newlinkjson)
-              linkjson=datajson.get("playlist")[0].get('sources')
-              titre=item.get("titre")
-              vignette=datajson.get("playlist")[0].get('image')
-              if linkjson:
-                for itemx in linkjson:
-                  label=itemx.get('label')
-                  try:
-                    qualite=int(label.replace('p',''))
-                  except:
-                    qualite=0
-                  if qualite>=MediaQualite :
-                    TrailerLink.append({"key":"Cineserie","typevideo":"trailer","type":"Bande-annonce","name":titre.replace('Bande-annonce','').replace(' VO','').replace(' VF',''),"key":"Cineserie","iso_3166_1":item.get("langue"),"size":str(qualite),"id":item.get("url"),"landscape":str(vignette)})
-                    break
-    
-    return TrailerLink 
+
     
 def BACineSeries(Titre=None,typevideo=None,Annee=None,Saison=None)  :
   TrailerLink=[]
@@ -4768,8 +4767,11 @@ def BACineSeries(Titre=None,typevideo=None,Annee=None,Saison=None)  :
                 linky=data.split('<div class="containerkowe">')[1]
                 #allowfullscreen data-rocket-lazyload="fitvidscompatible" data-lazy-src="//videos.cineserie.com/player/index/98079/3/18"></iframe><nosc
                 #link=linky.split("//")[1].split('" class="videokowe')[0]
-                link=linky.split('src="//videos.cineserie.com/player/')[1].split('"')[0]
-                CineVideoLink.append({"url":"https://videos.cineserie.com/player/"+link,"titre":item.get("titre"),"langue":item.get("langue")})
+                try:
+                 link=linky.split('src="//videos.cineserie.com/player/')[1].split('"')[0]
+                 CineVideoLink.append({"url":"https://videos.cineserie.com/player/"+link,"titre":item.get("titre"),"langue":item.get("langue")})
+                except:
+                  i=0
                 
           for item in CineVideoLink:
             data=getCineseries(item.get("url"))
@@ -4807,6 +4809,20 @@ def Allocine_Acteur(IdActeur=None):
         response = Allocine_request('person', params)
         
         return response
+
+def Allocine_Details(IdCode=None,TypeVideo="movie"):
+      response=None
+      if IdCode:
+        params = {}
+        params['format'] = 'json'
+        params['partner'] = Allocinepartner_key
+        params['profile'] = 'small'
+        params['code'] = str(IdCode)
+        params['filter']=TypeVideo
+
+        response = json.loads(Allocine_request(TypeVideo, params))
+        
+      return response
 
 
 def Allocine_request(method=None, params=None):
@@ -4861,6 +4877,8 @@ def GetSagaTrailersAllocine(Liste=None):
              ListeTrailer.append(Item)
          cpt=cpt+1
      return ListeTrailer 
+     
+
      
 def Allocine_BandeAnnonce(Titre=None,TypeVideo="movie",Saison=None,Episode=None,Annee=None,BAuniquement=None):
   ListeBandeAnnonce=[]
@@ -5369,7 +5387,7 @@ def get_uniqueid(ItemId=None,DbType=None):
        if TMDBNumber:
         return TMDBNumber
   return None
-    
+"""    
 def get_TMDBIDtest(ItemId=None,ismovie=None,ItemSource=None):
    ItemIdR=""
   
@@ -5393,7 +5411,7 @@ def get_TMDBIDtest(ItemId=None,ismovie=None,ItemSource=None):
      #logMsg("json_data (%s)(%s)" %(ItemId,json_data))
      
    return str(ItemIdR)
-   
+"""   
 def get_TMDBID(DbType=None,KodiId=None,UniqueId=None):
    externalXX=None
    ItemIdR=None
@@ -5881,7 +5899,7 @@ def GetCache(search_str=None,Cache=None):
             return getJSON("VideoLibrary.GetEpisodes", '{"limits":{"end":%d},"filter":{"field":"%s","operator":"contains","value":"%s"},"properties":["tvshowid","art","plot","season","showtitle"]}' %(MaxItems,"title",search_str))
 
           if "acteurs"  in Cache:
-            return getJSON("Files.GetDirectory", '{"directory":"videodb://movies/actors","properties":["art"]}')
+            json_result=getJSON("Files.GetDirectory", '{"directory":"videodb://movies/actors","properties":["art"]}')
             ListeActors=[]
             if json_result:
               for item in json_result:
@@ -5948,7 +5966,627 @@ def setJSON(method,params):
     return jsonobject
     
 
+def convert_size(size_bytes):
+   if size_bytes == 0:
+       return "0B"
+   size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
+   i = int(math.floor(math.log(size_bytes, 1024)))
+   p = math.pow(1024, i)
+   s = round(size_bytes / p, 2)
+   return "%s %s" % (s, size_name[i])
     
+class dialog_missings(xbmcgui.WindowXMLDialog):
+    #------------------------------------------------------------------------------------------------------------------
+  def __init__(self, *args, **kwargs):
+        xbmcgui.WindowXMLDialog.__init__(self)
+        self.listing = kwargs.get('listing')
+        self.header=kwargs.get('header')
+        self.sagamissing = kwargs.get('missings')
+        self.doublons = kwargs.get('doublons')
+        self.tmdbgenre=GetTMDBGenres()
+        self.checkdatabase=False
+        self.cleandatabase=False
+        
+
+    #------------------------------------------------------------------------------------------------------------------
+  def onInit(self):
+        listechoix=[__skin_string__(222),__skin_string__(117),__skin_string__(118)]
+        
+        self.img_list = self.getControl(6)
+        menuchoix=self.getControl(18)
+        if menuchoix:
+          for item in listechoix:
+              Elements = xbmcgui.ListItem(label=item)           
+              menuchoix.addItem(Elements)
+          
+        
+        
+        self.actuelfocus=6            
+
+        if self.img_list:
+          for item in self.listing:           
+              self.img_list.addItem(item)
+          self.setFocus(self.img_list)
+        self.Titre = self.getControl(1)
+        if self.Titre:
+          
+            self.Titre.setLabel(self.header)
+          
+          
+        else:
+          self.onferme()
+
+    #------------------------------------------------------------------------------------------------------------------
+  def onAction(self, action):
+      # Action : 3 haut
+      # Action : 4 bas
+      # Action : 2 droite
+      # Action : 1 gauche  
+      # 11 touche "info" 
+      # 7 : Entree
+      # 117 : context menu
+           
+      #if action in ACTION_PREVIOUS_MENU and self.actuelfocus==6:        
+      #    self.onferme()
+      #else: 
+        idaction=action.getId()
+        #logMsg("IDACTION = %s" %idaction)
+        if idaction in ACTION_PREVIOUS_MENU:
+          if self.actuelfocus==6:
+            self.onferme()
+          else:
+            self.setFocusId(6)
+           
+        
+             
+        
+ 
+      
+
+    #------------------------------------------------------------------------------------------------------------------
+  def onClick(self, controlID):
+            if controlID==6:
+               if self.sagamissing:
+                 
+                 self.img_list2 = self.getControl(8)
+                 
+                 idx=self.img_list.getSelectedPosition()+1
+                 self.img_list2.reset() 
+                 if self.img_list2 and idx:                   
+                   for item in self.sagamissing[idx-1]:
+                      
+                      DateSortie=item.get("release_date")
+                      Elements = xbmcgui.ListItem(label=item.get("title"), label2=DateSortie[8:10]+"/"+DateSortie[5:7]+"/"+DateSortie[0:4]) 
+                      Poster=item.get("poster_path")
+                      if Poster:
+                        Elements.setArt({"poster":"http://image.tmdb.org/t/p/original"+Poster})
+                      Genre=item.get("genre_ids")                          
+                      listegenre=""
+                      if Genre:
+                        for IGenre in Genre:
+                          #listegenre.append(tmdbgenre.get(str(IGenre )))
+                          if listegenre!="":
+                            listegenre=listegenre+','
+                          listegenre=listegenre+self.tmdbgenre.get(str(IGenre ))
+                      Elements.setInfo("video", {"title": item.get("title"),"mediatype": "movie","genre":listegenre,"year": item.get("release_date"),"plot": item.get("overview"),"originaltitle": item.get("originaltitle")})  
+                      self.img_list2.addItem(Elements)
+                   
+                 self.setFocusId(8)
+               
+               elif self.doublons:
+                 self.getControl(222).setVisible(True)
+                 self.img_list2 = self.getControl(9)
+                 self.titredoublons = self.getControl(91)                 
+                 
+                 idx=self.img_list.getSelectedPosition()+1
+                 self.img_list2.reset()  
+                 if self.img_list2 and idx:
+                   for item in self.doublons[idx-1]:                      
+                      titredoublon=item.get("title")
+                      Elements = xbmcgui.ListItem(label=item.get("title"),path=item.get("file"))
+                       #pistes audios 
+                      duree=item.get("runtime")
+                      readable_duration = in_hours_and_min_and_seconds(duree)
+                      Elements.setProperty('duree',readable_duration)
+                      Elements.setProperty('fichier',item.get("file"))
+                      logMsg("item.get(file) : %s" %item.get("file"))
+                      Elements.setProperty("taille",convert_size(xbmcvfs.Stat(item.get("file")).st_size()))
+                      Audio=item.get("streamdetails").get("audio")
+                      i=1
+                      if Audio:               
+                           for AudioElement in Audio:
+                                Elements.setProperty('AudioLanguage.%d' %(i), AudioElement.get("language"))
+                                Elements.setProperty('AudioChannels.%d' %(i), str(AudioElement.get("channels")))
+                                Elements.setProperty('AudioCodec.%d' %(i), AudioElement.get("codec")) 
+                                Elements.addStreamInfo('audio',AudioElement)                   
+                                i=i+1
+                
+                      #pistes vidéos 
+                      Video=item.get("streamdetails").get("video")
+                      i=0
+                      Codec=""
+                      if Video:
+                        #{"aspect":2.3975000381469726563,"codec":"h264","duration":5584,"height":800,"language":"eng","stereomode":"","width":1918}
+                        for VideoItem in Video:
+                           Elements.setProperty('VideoCodec', VideoItem.get("codec")) 
+                           Elements.addStreamInfo('video',VideoItem)
+                           
+                      #sous-titres     
+                      Subtitles=item.get("streamdetails").get("subtitle")
+                      i=1
+                      
+                      if Subtitles:
+                           for SubtitleElement in Subtitles:
+                                Elements.setProperty('SubtitleLanguage.%d' %(i), SubtitleElement.get("language"))  
+                                Elements.addStreamInfo('subtitle',SubtitleElement)                   
+                                i=i+1
+                       
+                      LabelsDoublons=GetListItemInfoLabelsJson(item)
+          
+                      if LabelsDoublons:            
+                        Elements.setInfo("video", LabelsDoublons)  
+                      self.img_list2.addItem(Elements)
+                 self.titredoublons.setLabel(titredoublon)  
+                 self.setFocusId(9)
+               else:
+                 self.fichierpath = self.getControl(181)
+                 self.getControl(222).setVisible(False)
+                 self.fichierpath.setLabel(self.img_list.getSelectedItem().getLabel())
+                 self.setFocusId(18)
+            
+            if controlID==9:
+              self.fichierpath = self.getControl(181)
+              self.fichierpath.setLabel(self.img_list2.getSelectedItem().getPath())
+              
+              self.setFocusId(18)
+                 
+            if controlID==18:
+              ret=self.getControl(18).getSelectedPosition()
+              
+              if self.doublons:
+                  fichier=self.img_list2.getSelectedItem().getPath() 
+              elif not self.sagamissing :
+                  fichier=self.img_list.getSelectedItem().getLabel() 
+              
+                  
+              if self.doublons:
+                retfocus=9
+              else:  
+                retfocus=6 
+              if ret==1:
+                dialogC = xbmcgui.Dialog()
+                retx= dialogC.yesno("ICONMIXTOOLS", fichier,__language__( 32872 ), __language__( 32873 )) #-- Show a dialog 'YES/NO'.
+                self.setFocusId(retfocus)
+                if retx==1:
+                  success=xbmcvfs.delete(fichier)
+                  if success:
+                    if self.doublons:
+                      
+                      idx2=self.img_list2.getSelectedPosition()+1
+                      idx=self.img_list.getSelectedPosition()+1
+                      if idx and idx2:
+                            del self.doublons[idx-1][idx2-1]
+                      self.img_list2.removeItem(self.img_list2.getSelectedPosition())
+                      try:
+                        nbdoublons=int(self.img_list.getSelectedItem().getLabel2().split('X')[1])
+                      except:
+                        nbdoublons=None
+                      if nbdoublons:
+                        nbdoublons=nbdoublons-1
+                        if nbdoublons>1:
+                          self.img_list.getSelectedItem().setLabel2("X%d" %nbdoublons)
+                        else:
+                          self.img_list.removeItem(self.img_list.getSelectedPosition())
+                          del self.doublons[idx-1]
+                          if len(self.doublons)<1:
+                            self.onferme()
+                            #fin car plus de doublons
+                          retfocus=6
+                      
+                      self.checkdatabase=True
+                      self.cleandatabase=True
+                    else:
+                      self.img_list.removeItem(self.img_list.getSelectedPosition()) 
+                    dialog=xbmcgui.Dialog()
+                    dialog.notification('IconMixTools',__language__(32878) , ADDON_ICON,200)
+                  else:
+                    
+                    dialog=xbmcgui.Dialog()
+                    dialog.notification('IconMixTools',__skin_string__(16205) , ADDON_ICON,200)
+        
+              
+              if ret==2:
+                #renommage
+                #interdit=['\\','/',':','*','?','"','<','>','|']
+                interdit=['*','?','<','>','|']
+                #regex = (?i)[s]\d\d[e] .sxxe ou .SxxExx.....
+                checkextension=['.mkv','.avi','.mp4','.mpeg','.mpg']
+                actuel=xbmc.getInfoLabel("Skin.String(AutoCompleteProvider)")
+                xbmc.executebuiltin('Skin.SetString(AutoCompleteProvider,off)',True)
+                directory,nomfichier=os.path.split(fichier)
+                extension='.'+nomfichier.rsplit('.',1)[1]
+                if extension.lower() in checkextension:
+                  textdefault=nomfichier.rsplit('.',1)[0]
+                else:
+                  textdefault=nomfichier
+                logMsg("nom de fichier %s - %s -%s" %(directory,nomfichier,extension))
+                kb=xbmc.Keyboard(line='', heading='RENOMMER', hidden=False)
+                kb.setDefault(fichier) #.replace('.',' '))
+                kb.setHeading('RENOMMER\n%s' %nomfichier)
+                kb.doModal()
+                xbmc.executebuiltin('Skin.SetString(AutoCompleteProvider,%s)' %actuel,True)
+                self.setFocusId(retfocus)
+                if kb.isConfirmed():
+                  destination = kb.getText()
+                  acthung=None
+                  if destination and len(destination)>1:
+                    """
+                    for checkext in checkextension:
+                      if checkext in destination:
+                        extension=checkext
+                        break
+                        
+                    if not extension in destination:
+                      destination=destination+extension
+                    """
+                    for nochar in interdit:
+                      if nochar in destination:
+                        acthung=True
+                        break
+                    if acthung:
+                      dialog = xbmcgui.Dialog()
+                      retx= dialog.yesno("ICONMIXTOOLS", __language__( 32886 ), "",__language__( 32887 )) #-- Show a dialog 'YES/NO'.
+                      if retx==1:
+                        acthung=None
+                        for nochar in interdit:
+                          destination=destination.replace(nochar,'.')
+                          
+                    if not acthung:  
+                      dialog = xbmcgui.Dialog()
+                      #retx = dialog.select("ICONMIXTOOLS\n%s\n%s" %(nomfichier,newname), [__skin_string__(106),__skin_string__(107)])
+                      
+                      retx= dialog.yesno("ICONMIXTOOLS", __language__( 32877 ), "de %s" %nomfichier,"en %s" %destination) #-- Show a dialog 'YES/NO'.
+                      self.setFocusId(retfocus)
+                      """
+                      ld=directory[:-1]
+                      if ld!='/' and ld!='\\':
+                        directory=directory+'/'                      
+                      
+                      newname=directory+destination
+                      """
+                      newname=destination
+                      if retx==1:
+                        if xbmcvfs.exists(newname):
+                          dialog=xbmcgui.Dialog()
+                          retx=dialog.yesno('IconMixTools',__language__(32882),__skin_string__(38310))
+                          if retx==1:
+                            success=xbmcvfs.delete(newname)
+                            if not success:
+                              retx==0
+                        if retx==1:
+                            success=xbmcvfs.rename(fichier,newname)  
+                            if success:
+                              if self.doublons:
+                                self.img_list2.getSelectedItem().setLabel(newname)
+                              else:
+                                self.img_list.getSelectedItem().setLabel(newname)
+                              dialog=xbmcgui.Dialog()
+                              dialog.notification('IconMixTools',__language__(32878) , ADDON_ICON,200)
+                              self.checkdatabase=True
+                              self.cleandatabase=True
+                            else:
+                              dialog=xbmcgui.Dialog()
+                              dialog.notification('IconMixTools',__skin_string__(16203) , ADDON_ICON,200)
+                      
+              self.setFocusId(retfocus)
+                  
+      #------------------------------------------------------------------------------------------------------------------
+  def onferme(self):
+    if self.checkdatabase==True:
+      dialogC = xbmcgui.Dialog()
+      retx= dialogC.yesno("ICONMIXTOOLS",__language__(32883), __language__( 32881 )) #-- Show a dialog 'YES/NO'
+      if retx==1:
+        xbmc.executebuiltin('CleanLibrary(video)',True)
+        xbmc.executebuiltin('UpdateLibrary(video)',True)
+    self.close()
+  
+  def onFocus(self, controlID):
+        self.actuelfocus=controlID
+        if controlID == 8 : 
+           try:
+              self.Titre = self.getControl(2)
+              self.ItemLabel = self.getControl(6).getSelectedItem().getLabel() 
+           except:
+              self.Titre=None
+           if self.Titre:
+              self.Titre.setLabel("[COLOR=red]%s[/COLOR]%s" %(__language__(32875),self.ItemLabel.decode("utf8")))
+           
+                        
+
+#------------------------------------------------------------------------------------------------------------------
+
+
+            
+def GetDoublons(): 
+  ListeMoviesID=[]
+  doublons=[]
+  ListeElements=[]
+  ListeElementsDoublons=[] 
+  #http://127.0.0.1:8080/jsonrpc?request={"jsonrpc":"2.0","method":"VideoLibrary.GetMovies","params":{"properties":["uniqueid"]},"id":1}
+  logMsg("recherche doublons...")
+  jsonkodi=getJSON("VideoLibrary.GetMovies",'{"properties":["imdbnumber"]}')
+  if jsonkodi:
+    
+    for item in jsonkodi:
+      ListeMoviesID.append({"imdb":item.get("imdbnumber"),"kodiid":item.get("movieid")})
+    LL=[]
+    LL=sorted(ListeMoviesID,reverse=False)
+    #logMsg("LL = %s" %LL)  
+    i=0
+    while (i<len(LL)):     
+      imdb=LL[i].get("imdb")
+      item=[LL[i].get("kodiid")]
+      i=i+1
+      while (i<len(LL)) and imdb==LL[i].get("imdb"):
+        item.append(LL[i].get("kodiid"))
+        i=i+1  
+      if len(item)>1:
+        doublons.append(item)
+  #logMsg("Doublons = %s" %doublons)
+  if len(doublons)>0:
+    for item in doublons:
+      doublontab=[]
+      for itemdoublon in item:
+        json_result = getJSON('VideoLibrary.GetMovieDetails', '{ "movieid":%d,"properties":["title","genre","year","rating","userrating","director","trailer","tagline","plot","plotoutline","originaltitle","uniqueid","runtime","set","showlink","streamdetails","thumbnail","file","sorttitle","setid","dateadded","tag","art"] }' %(int(itemdoublon)))
+        if json_result:
+          doublontab.append(json_result)
+      if len(doublontab)>0:
+        Elements = xbmcgui.ListItem(label=doublontab[0].get("label"), label2="X%d" %(len(doublontab)))
+        ListeElements.append(Elements)
+        ListeElementsDoublons.append(doublontab)  
+  
+  if len(ListeElements)>0:
+    ui = dialog_missings('missing.xml', ADDON_PATH, 'default','1080i',listing=ListeElements,doublons=ListeElementsDoublons,header=__language__(32884))                
+    ret=ui.doModal()
+    del ui  
+  else:
+   dialog=xbmcgui.Dialog()
+   dialog.notification('IconMixTools',__language__(32880) , ADDON_ICON,200)    
+  
+
+
+def get_files(path):
+    dirs, files = xbmcvfs.listdir(path)
+    for filex in files:
+        tmp=filex        
+        #full_path = os.path.join(path, tmp.decode("utf8"))
+        if '/' in path:
+           full_path = path+'/'+tmp.decode("utf8")
+        elif '\\' in path:
+           full_path = path+'\\'+tmp.decode("utf8")
+        else:
+           full_path = path+'/'+tmp.decode("utf8")
+        yield full_path
+
+def get_directories(path):
+    dirs, files = xbmcvfs.listdir(path)
+    for directory in dirs:
+        tmp=directory
+        #logMsg(directory)
+        if '/' in path:
+           full_path = path+'/'+tmp.decode("utf8")
+        elif '\\' in path:
+           full_path = path+'\\'+tmp.decode("utf8")
+        else:
+           full_path = path+'/'+tmp.decode("utf8")
+        yield full_path
+
+def get_files_recursive(directory):
+    for filex in get_files(directory):
+        yield filex
+    for subdirectory in get_directories(directory):
+        for filex in get_files_recursive(subdirectory): # here the recursive call
+            yield filex       
+            
+  
+       
+def GetMissingMovies():
+   logMsg("Missing movies....") 
+   checkextension=['.mkv','.avi','.mp4','.mpeg','.mpg']
+
+
+     
+   sourcesdata=getJSON("Files.GetSources", '{ "media":"video"}')
+   if sourcesdata:
+      resultmissing=[]          
+      scankodi=[]
+      
+      dp = xbmcgui.DialogProgress()
+      dp.create("IconMixTools",__language__( 32509 ),"") 
+      jsonkodi=getJSON("VideoLibrary.GetEpisodes",'{"properties":["file"]}')
+      jsonkodi2=getJSON("VideoLibrary.GetMovies",'{"properties":["file"]}')
+      if jsonkodi:
+        for item in jsonkodi:
+          scankodi.append(item.get('file').lower())
+      if jsonkodi2:
+        for item in jsonkodi2:
+          scankodi.append(item.get('file').lower())
+      #logMsg("Resultat kodi : %s\n----------------------------------------------------------------------------------" %(str(scankodi))) 
+      sourcedata=[]
+      for source in sourcesdata:
+        linktmp=source.get('file')
+        if linktmp:
+          if not 'multipath://' in linktmp:
+            link=[linktmp]
+          else:
+            linktmp=linktmp.replace('multipath://','')
+            link=linktmp.split('/')
+          if link:            
+            for linkidx in link:
+              if len(linkidx)>1:
+                sourcedata.append((urllib.unquote(linkidx))[:-1]) 
+      #logMsg("sourcesdata = %s" %sourcedata)    
+      sourcesdata=sourcedata
+      NbItems=len(sourcesdata)
+      Compteur=0       
+      for source in sourcesdata:
+        Progres=(Compteur*100)/NbItems
+        Compteur=Compteur+1
+        if dp: dp.update(Progres,__language__(32879),"(%d/%d)[CR]%s" %(Compteur,NbItems,source))
+        if source:              
+                resultscan=[]
+                for filex in get_files_recursive(source):
+                  for check in checkextension:
+                     if check in filex: 
+                       resultscan.append(filex.lower())
+                       if not filex.lower() in scankodi:
+                         resultmissing.append(filex.lower())
+                       break  
+                
+                #logMsg("Resultat scan : (%s) %s\n----------------------------------------------------------------------------------" %(source,str(resultscan)))
+                
+                
+                #for item in resultscan:
+                #  if not item in scankodi:
+                #    resultmissing.append(item)
+      if dp: 
+          dp.close()              
+      #logMsg("Resultat missing : %s\n----------------------------------------------------------------------------------" %str(resultmissing)) 
+      if len(resultmissing)>1:
+         ListeElements=[]
+         for item in resultmissing:
+          Elements = xbmcgui.ListItem(label=item, label2=convert_size(xbmcvfs.Stat(item).st_size()))
+          ListeElements.append(Elements)        
+         ui = dialog_missings('missing.xml', ADDON_PATH, 'default','1080i',listing=ListeElements,header=__language__(32871))                
+         ret=ui.doModal()
+         del ui                              
+      else:
+         dialog=xbmcgui.Dialog()
+         dialog.notification('IconMixTools',__language__(32880) , ADDON_ICON,200)
+
+def getAllocineMissing(KodiTitre=None,TypeVideo="movie"):
+  if KodiTitre:
+        KodiTitre=KodiTitre.split("(",1)[0].replace(":"," ")
+        params = {}
+        params['count'] = 50
+        params['format'] = 'json'
+        params['filter'] = TypeVideo
+        params['partner'] = Allocinepartner_key
+        try:
+          params['q'] = KodiTitre #unicodedata.normalize('NFKD', Acteur.split("(")[0]).encode('ascii','xmlcharrefreplace')
+        except:
+          return VideoId
+        response = Allocine_request('search', params)
+        try:          
+          jsonobject=json.loads(response)
+        except:
+          jsonobject={}
+        resultat=None  
+        #logMsg("JSONOBJET: (%s) %s" %(KodiTitre,jsonobject) )
+        if jsonobject.has_key('feed'):
+            #logMsg("FEED:%s" %jsonobject['feed'])
+            tmp=jsonobject['feed']            
+            if tmp.has_key('movie'):
+              #logMsg("MOVIE:%s" %tmp['movie'])
+              resultat=tmp['movie']
+        return resultat
+        """
+        {u'feed': {u'count': 50, u'movie': [
+        
+        {u'code': 146552, u'poster': {u'path': u'/pictures/19/08/30/11/17/5199565.jpg', u'href': u'http://fr.web.img3.acsta.net/pictures/19/08/30/11/17/5199565.jpg'}, u'originalTitle': u'Terminator: Dark Fate', u'productionYear': 2019, u'castingShort': {u'directors': u'Tim Miller', u'actors': u'Arnold Schwarzenegger, Linda Hamilton, Mackenzie Davis, Gabriel Luna, Natalia Reyes'}, u'release': {u'releaseDate': u'2019-10-23'}, u'link': [{u'href': u'http://www.allocine.fr/film/fichefilm_gen_cfilm=146552.html', u'rel': u'aco:web'}]},
+
+        {u'code': 309, u'title': u'Terminator', u'movieCertificate': {u'certificate': {u'code': 14001, u'$': u'Interdit aux moins de 12 ans'}}, u'poster': {u'path': u'/medias/nmedia/18/35/91/09/19255618.jpg', u'href': u'http://fr.web.img3.acsta.net/medias/nmedia/18/35/91/09/19255618.jpg'}, u'originalTitle': u'The Terminator', u'statistics': {u'pressRating': 4, u'userRating': 4.05851}, u'productionYear': 1984, u'castingShort': {u'directors': u'James Cameron', u'actors': u'Arnold Schwarzenegger, Michael Biehn, Linda Hamilton, Lance Henriksen, Paul Winfield'}, u'release': {u'releaseDate': u'1985-04-24'}, u'link': [{u'href': u'http://www.allocine.fr/film/fichefilm_gen_cfilm=309.html', u'rel': u'aco:web'}]},
+        """
+
+               
+def GetMissingSagaMovies():
+   Compteur=0
+   ListeElements=[]
+   ListeElementsMissing=[]
+   logMsg("Missing saga movies....")
+   getAllocineMissing("independence.day.resurgence.2016.french.720p.bluray.x264-venue2.sample.mkv".replace(".","%20"))
+   json_result=getJSON("VideoLibrary.GetMovieSets",'{"properties":["title"]}')  
+   if json_result:
+     dialogC = xbmcgui.Dialog()
+     includenext= dialogC.yesno("ICONMIXTOOLS", "","", __language__( 32885 )) #-- Show a dialog 'YES/NO'
+     #"release_date":"1967-12-20"
+     nowX = datetime.datetime.now().date()
+     jsonkodi=sorted(json_result,key=operator.itemgetter('title'))  
+     
+
+     NbItems=len(jsonkodi)
+     dp = xbmcgui.DialogProgress()
+     dp.create("IconMixTools",__language__( 32509 ),"") 
+     for item in jsonkodi:
+        Progres=(Compteur*100)/NbItems
+        Compteur=Compteur+1
+        if dp: dp.update(Progres,__language__(32879),"(%d/%d)[CR]%s" %(Compteur,NbItems,item.get("label")))
+        SetID=item.get("setid")
+        json_result = getJSON('VideoLibrary.GetMovieSetDetails', '{ "setid":%d,"movies": {"properties":["title"]} }' %(int(SetID)))
+        if json_result:
+          savepath=ADDON_DATA_PATH+"/collections/saga%s" %(SetID)
+          NbKodi=int(json_result.get("limits").get("total"))
+          try:
+            with open(savepath) as data_file:
+              SetTab = json.load(data_file)
+              data_file.close()
+            if SetTab:         
+              NbKodiSave=int(SetTab.get("kodi"))
+              if NbKodi!=NbKodiSave:
+              #difference alors mise a jour forcee
+                SetTab=None
+            
+          except:
+            SetTab=None
+          
+        
+        #logMsg('or SetTab.get("saga") (%s) !=json_result.get("title") (%s)' %(SetTab.get("saga"),json_result.get("label")) )
+        
+        if not SetTab or (SetTab.get("saga")!=json_result.get("label")):
+          #création du fichier de la saga !!!
+           logMsg("création du fichier de la saga !!!")
+           SetTab=getsagaitem(SetID,None,None,None,None,None)     
+          
+        if SetTab:         
+        #SetTab =getsagaitem(KODISET_ID=SetID)
+        #if SetTab :
+          NbManquant=int(SetTab.get("manquant"))
+          NbKodi=int(SetTab.get("kodi"))
+          if NbManquant>0:
+            Missing=SetTab.get("missing")   
+            #logMsg("[GetMissingSagaMovies (%s)] : Filetab (%s)" %(SetID,Missing))
+            
+            
+            if not includenext:
+              MissingTmp=[]
+              for itemmiss in Missing:
+                today=itemmiss.get("release_date")    
+                if today:
+                    nowX2 = datetime.datetime(int(today[0:4]),int(today[5:7]),int(today[8:10]),0,0).date()
+                else :
+                    nowX2=nowX  
+                if nowX2<=nowX : 
+                  MissingTmp.append(itemmiss)
+              Missing=MissingTmp
+            NbManquant=len(Missing)
+            if NbManquant>0:
+              MissingTmp=sorted(Missing,key=operator.itemgetter('release_date')) 
+              Missing=MissingTmp
+              Elements = xbmcgui.ListItem(label=item.get("label"), label2="%s/%s" %(NbManquant,NbManquant+NbKodi))
+              ListeElements.append(Elements)    
+              ListeElementsMissing.append(Missing)
+                 
+     if dp: 
+          dp.close()
+          
+     if len(ListeElements)>0:
+        
+         ui = dialog_missings('missing.xml', ADDON_PATH, 'default','1080i',listing=ListeElements,missings=ListeElementsMissing,header=__language__(32876))                
+         ret=ui.doModal()
+         del ui
+     else:
+       dialog=xbmcgui.Dialog()
+       dialog.notification('IconMixTools',__language__(32880) , ADDON_ICON,200)     
 # ----------- ---------- MUSIQUE --------- -----------------    
 def remove_text_inside_brackets(text, brackets="()[]"):
     count = [0] * (len(brackets) // 2) # count open/close brackets

@@ -209,6 +209,15 @@
           <onclick>SetFocus(55)</onclick>
           <visible>Window.IsVisible(10502)+!library.isscanningmusic</visible>
         </control>
+        <control type="button" id="2118">
+        <!-- Accéder outils -->
+
+        <include>MonBoutonCommun2</include>
+        <label>$LOCALIZE[31222]</label>
+         <onclick>SetProperty(IconmixDialogContext,,Home)</onclick>
+         <onfocus>SetProperty(IconmixDialogContext,,Home)</onfocus>
+        <onclick>RunScript(script.iconmixtools,checkdatabase=True)</onclick>
+      </control>
       
 
     </control>

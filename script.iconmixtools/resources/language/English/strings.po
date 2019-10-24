@@ -401,3 +401,71 @@ msgctxt "#32870"
 msgid "Go to yours episodes"
 msgstr ""
 
+
+msgctxt "#32871"
+msgid "Missing videos in KODI DATABASE"
+msgstr ""
+
+msgctxt "#32872"
+msgid "Attention ! Could not be reverse !"
+msgstr ""
+
+msgctxt "#32873"
+msgid "Do you confirm deleting ?"
+msgstr ""
+
+
+msgctxt "#32875"
+msgid "Missing in "
+msgstr ""
+
+msgctxt "#32876"
+msgid "Uncomplete Movie collection "
+msgstr ""
+
+
+msgctxt "#32877"
+msgid "Do you confirm renaming ?"
+msgstr ""
+
+
+msgctxt "#32878"
+msgid "Successfully achevied"
+msgstr ""
+
+msgctxt "#32879"
+msgid "Check in progress..."
+msgstr ""
+
+msgctxt "#32880"
+msgid "No elements found..."
+msgstr ""
+
+msgctxt "#32881"
+msgid "Please now, clean and update library"
+msgstr ""
+
+msgctxt "#32882"
+msgid "File target already exist !"
+msgstr "
+
+msgctxt "#32883"
+msgid "Some delete and rename operations executed."
+msgstr ""
+
+msgctxt "#32884"
+msgid "duplicates"
+msgstr ""
+
+msgctxt "#32885"
+msgid "Including incoming elements ? "
+msgstr ""
+
+
+msgctxt "#32886"
+msgid "Prohibited chars detected !!!"
+msgstr ""
+
+msgctxt "#32887"
+msgid "Replace prohibited chars by a point ? "
+msgstr ""
